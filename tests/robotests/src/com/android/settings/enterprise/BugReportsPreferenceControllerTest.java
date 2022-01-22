@@ -22,13 +22,13 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.Date;
-import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class BugReportsPreferenceControllerTest
-    extends AdminActionPreferenceControllerTestBase {
+        extends AdminActionPreferenceControllerTestBase {
 
     @Override
     public void setUp() {
@@ -39,7 +39,7 @@ public class BugReportsPreferenceControllerTest
     @Override
     public void setDate(Date date) {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getLastBugReportRequestTime())
-            .thenReturn(date);
+                .thenReturn(date);
     }
 
     @Test

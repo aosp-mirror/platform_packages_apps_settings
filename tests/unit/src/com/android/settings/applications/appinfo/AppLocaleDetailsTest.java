@@ -53,7 +53,6 @@ public class AppLocaleDetailsTest {
 
     private Context mContext;
     private LocaleList mSystemLocales;
-    private Locale mSimLocale;
     private LocaleList mAppLocale;
     private String[] mAssetLocales;
 
@@ -69,7 +68,8 @@ public class AppLocaleDetailsTest {
         when(mContext.getSystemService(LocaleManager.class)).thenReturn(mLocaleManager);
 
         setupInitialLocales("en",
-                "uk",
+                "tw",
+                "jp",
                 "en, uk, jp, ne",
                 new String[]{"en", "ne", "ms", "pa"});
     }
@@ -88,6 +88,8 @@ public class AppLocaleDetailsTest {
     @Test
     @UiThreadTest
     public void handleAllLocalesData_1stLocaleOfSuggestedLocaleListIsAppLocale() {
+        Locale simCountryLocale = new Locale("zh", "TW");
+        Locale networkCountryLocale = new Locale("ja", "JP");
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
@@ -95,25 +97,17 @@ public class AppLocaleDetailsTest {
 
         Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
         assertTrue(locale.equals(mAppLocale.get(0)));
+        assertTrue(helper.getSuggestedLocales().contains(simCountryLocale));
+        assertTrue(helper.getSuggestedLocales().contains(networkCountryLocale));
     }
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_2ndLocaleOfSuggestedLocaleListIsSimLocale() {
-        DummyAppLocaleDetailsHelper helper =
-                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
-
-        helper.handleAllLocalesData();
-
-        Locale locale = Iterables.get(helper.getSuggestedLocales(), 1);
-        assertTrue(locale.equals(mSimLocale));
-    }
-
-    @Test
-    @UiThreadTest
-    public void handleAllLocalesData_withoutAppLocale_1stLocaleOfSuggestedLocaleListIsSimLocal() {
+    public void handleAllLocalesData_withoutAppLocale_1stSuggestedLocaleIsSimCountryLocale() {
+        Locale simCountryLocale = new Locale("zh", "TW");
         setupInitialLocales("",
-                "uk",
+                "tw",
+                "",
                 "en, uk, jp, ne",
                 new String[]{"en", "ne", "ms", "pa"});
         DummyAppLocaleDetailsHelper helper =
@@ -122,13 +116,34 @@ public class AppLocaleDetailsTest {
         helper.handleAllLocalesData();
 
         Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
-        assertTrue(locale.equals(mSimLocale));
+        assertTrue(locale.equals(simCountryLocale));
+        assertFalse(helper.getSuggestedLocales().contains(mAppLocale.get(0)));
     }
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_noAppAndSimLocale_1stLocaleIsFirstOneInSystemLocales() {
+    public void handleAllLocalesData_withoutAppLocale_1stSuggestedLocaleIsNetworkCountryLocale() {
+        Locale networkCountryLocale = new Locale("en", "GB");
         setupInitialLocales("",
+                "",
+                "gb",
+                "en, uk, jp, ne",
+                new String[]{"en", "ne", "ms", "pa"});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+
+        helper.handleAllLocalesData();
+
+        Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
+        assertTrue(locale.equals(networkCountryLocale));
+        assertFalse(helper.getSuggestedLocales().contains(mAppLocale.get(0)));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_noAppAndSimNetworkLocale_1stLocaleIsFirstOneInSystemLocales() {
+        setupInitialLocales("",
+                "",
                 "",
                 "en, uk, jp, ne",
                 new String[]{"en", "ne", "ms", "pa"});
@@ -175,25 +190,34 @@ public class AppLocaleDetailsTest {
     /**
      * Sets the initial Locale data
      *
-     * @param appLocale     Application locale, it shall be a language tag.
-     *                      example: "en"
-     * @param simLocale     SIM carrier locale, it shall be a language tag.
-     *                      example: "en"
-     * @param systemLocales System locales, a locale list by a multiple language tags with comma.
-     *                      example: "en, uk, jp"
-     * @param assetLocales  Asset locales, a locale list by a multiple language tags with String
-     *                      array.
-     *                      example: new String[] {"en", "ne", "ms", "pa"}
+     * @param appLocale      Application locale, it shall be a language tag.
+     *                       example: "en"
+     *
+     * @param simCountry     The ISO-3166-1 alpha-2 country code equivalent for the SIM
+     *                       provider's country code.
+     *                       example: "us"
+     *
+     * @param networkCountry The ISO-3166-1 alpha-2 country code equivalent of the MCC
+     *                       (Mobile Country Code) of the current registered operato
+     *                       or the cell nearby.
+     *                       example: "us"
+     *
+     * @param systemLocales  System locales, a locale list by a multiple language tags with comma.
+     *                       example: "en, uk, jp"
+     * @param assetLocales   Asset locales, a locale list by a multiple language tags with String
+     *                       array.
+     *                       example: new String[] {"en", "ne", "ms", "pa"}
      */
     private void setupInitialLocales(String appLocale,
-            String simLocale,
+            String simCountry,
+            String networkCountry,
             String systemLocales,
             String[] assetLocales) {
         mAppLocale = LocaleList.forLanguageTags(appLocale);
-        mSimLocale = Locale.forLanguageTag(simLocale);
         mSystemLocales = LocaleList.forLanguageTags(systemLocales);
         mAssetLocales = assetLocales;
-        when(mTelephonyManager.getSimLocale()).thenReturn(simLocale.isEmpty() ? null : mSimLocale);
+        when(mTelephonyManager.getSimCountryIso()).thenReturn(simCountry);
+        when(mTelephonyManager.getNetworkCountryIso()).thenReturn(networkCountry);
         when(mLocaleManager.getApplicationLocales(anyString())).thenReturn(mAppLocale);
     }
 

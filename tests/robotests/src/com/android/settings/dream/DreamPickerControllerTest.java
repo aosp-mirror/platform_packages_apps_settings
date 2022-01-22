@@ -48,7 +48,6 @@ import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
 public class DreamPickerControllerTest {
-    private DreamPickerController mController;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
     private Context mContext;
@@ -63,31 +62,36 @@ public class DreamPickerControllerTest {
 
         mPreference = new LayoutPreference(mContext, R.layout.dream_picker_layout);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
+    }
 
-        mController = new DreamPickerController(
+    private DreamPickerController buildController() {
+        final DreamPickerController controller = new DreamPickerController(
                 mContext,
                 /* preferenceKey= */ "test",
                 mBackend);
-
-        mController.displayPreference(mScreen);
+        controller.displayPreference(mScreen);
+        return controller;
     }
 
     @Test
     public void isDisabledIfNoDreamsAvailable() {
         when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(0));
-        assertThat(mController.isAvailable()).isFalse();
+        final DreamPickerController controller = buildController();
+        assertThat(controller.isAvailable()).isFalse();
     }
 
     @Test
     public void isEnabledIfDreamsAvailable() {
         when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(new DreamInfo()));
-        assertThat(mController.isAvailable()).isTrue();
+        final DreamPickerController controller = buildController();
+        assertThat(controller.isAvailable()).isTrue();
     }
 
     @Test
     public void testDreamDisplayedInList() {
         when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(new DreamInfo()));
-        mController.updateState(mPreference);
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
 
         RecyclerView view = mPreference.findViewById(R.id.dream_list);
         assertThat(view.getAdapter().getItemCount()).isEqualTo(1);
@@ -100,7 +104,8 @@ public class DreamPickerControllerTest {
         mockDreamInfo.isActive = true;
 
         when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mockDreamInfo));
-        mController.updateState(mPreference);
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
 
         Button view = mPreference.findViewById(R.id.preview_button);
         view.performClick();

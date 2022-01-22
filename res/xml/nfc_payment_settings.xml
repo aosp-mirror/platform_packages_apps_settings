@@ -19,16 +19,17 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/nfc_payment_settings_title">
 
-    <com.android.settings.nfc.NfcPaymentPreference
-        android:key="nfc_payment"
-        android:title="@string/nfc_payment_default"
-        android:dialogTitle="@string/nfc_payment_pay_with"
-        android:widgetLayout="@layout/preference_widget_gear"
-        settings:controller="com.android.settings.nfc.NfcPaymentPreferenceController"/>
+    <com.android.settings.widget.GearPreference
+        android:key="nfc_payment_app"
+        android:title="@string/nfc_default_payment_settings_title"
+        android:fragment="com.android.settings.nfc.DefaultPaymentSettings"/>
 
-    <DropDownPreference
+    <ListPreference
         android:key="nfc_foreground"
         android:title="@string/nfc_payment_use_default"
-        settings:controller="com.android.settings.nfc.NfcForegroundPreferenceController"/>
+        android:dialogTitle="@string/nfc_payment_use_default_dialog"
+        settings:controller="com.android.settings.nfc.NfcForegroundPreferenceController"
+        android:entries="@array/nfc_payment_favor"
+        android:entryValues="@array/nfc_payment_favor_values" />
 
 </PreferenceScreen>

@@ -573,4 +573,14 @@
 
     <!-- Whether to give option to add restricted profiles -->
     <bool name="config_offer_restricted_profiles">false</bool>
+
+    <!-- An array of packages for which Applications whose per-app locale cannot be changed. -->
+    <string-array name="config_disallowed_app_localeChange_packages" translatable="false">
+        <!--
+        <item>com.example.package.first</item>
+        <item>com.example.package.second</item>
+        <item>...</item>
+        -->
+    </string-array>
+
 </resources>

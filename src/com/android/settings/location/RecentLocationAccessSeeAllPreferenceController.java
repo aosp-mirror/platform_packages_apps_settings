@@ -20,6 +20,7 @@ import static com.android.settings.location.RecentLocationAccessPreferenceContro
 
 import android.content.Context;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -43,6 +44,8 @@ public class RecentLocationAccessSeeAllPreferenceController
 
     public RecentLocationAccessSeeAllPreferenceController(Context context, String key) {
         super(context, key);
+        mShowSystem = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
         mRecentLocationAccesses = RecentAppOpsAccess.createForLocation(context);
     }
 
