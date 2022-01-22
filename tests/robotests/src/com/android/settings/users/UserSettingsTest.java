@@ -664,6 +664,7 @@ public class UserSettingsTest {
     public void onPreferenceClick_addSupervisedUserClicked_startIntentWithAction() {
         final String intentPackage = "testPackage";
         final String intentAction = UserManager.ACTION_CREATE_SUPERVISED_USER;
+        final int intentFlags = Intent.FLAG_ACTIVITY_NEW_TASK;
         final int metricsAction = SettingsEnums.ACTION_USER_SUPERVISED_ADD;
         try {
             setConfigSupervisedUserCreationPackage(intentPackage);
@@ -676,6 +677,7 @@ public class UserSettingsTest {
             verify(mFragment).startActivity(captor.capture());
             assertThat(captor.getValue().getPackage()).isEqualTo(intentPackage);
             assertThat(captor.getValue().getAction()).isEqualTo(intentAction);
+            assertThat(captor.getValue().getFlags() & intentFlags).isGreaterThan(0);
 
             verify(mMetricsFeatureProvider).action(any(), eq(metricsAction));
         } finally {

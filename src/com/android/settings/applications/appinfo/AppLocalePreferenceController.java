@@ -20,20 +20,23 @@ import android.content.Context;
 import android.util.FeatureFlagUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.AppLocaleUtil;
 
 /**
  * A controller to update current locale information of application.
  */
 public class AppLocalePreferenceController extends AppInfoPreferenceControllerBase {
+    private static final String TAG = AppLocalePreferenceController.class.getSimpleName();
+
     public AppLocalePreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return FeatureFlagUtils
-                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION)
-                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        boolean isFeatureOn = FeatureFlagUtils
+                .isEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION);
+        return isFeatureOn && canDisplayLocaleUi() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -44,5 +47,9 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
     @Override
     public CharSequence getSummary() {
         return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry().info.packageName);
+    }
+
+    boolean canDisplayLocaleUi() {
+        return AppLocaleUtil.canDisplayLocaleUi(mContext, mParent.getAppEntry());
     }
 }

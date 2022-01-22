@@ -18,8 +18,6 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.content.Context;
 import android.util.FeatureFlagUtils;
 
@@ -37,20 +35,27 @@ import org.mockito.MockitoAnnotations;
 public class AppLocalePreferenceControllerTest {
 
     private Context mContext;
+    private boolean mCanDisplayLocaleUi;
     private AppLocalePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
 
-        mController = spy(new AppLocalePreferenceController(mContext, "test_key"));
+        mController = new AppLocalePreferenceController(mContext, "test_key") {
+            @Override
+            boolean canDisplayLocaleUi() {
+                return mCanDisplayLocaleUi;
+            }
+        };
         FeatureFlagUtils
                 .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, true);
     }
 
     @Test
-    public void getAvailabilityStatus_featureFlagOff_shouldReturnUnavailable() {
+    public void getAvailabilityStatus_canShowUiButFeatureFlagOff_shouldReturnUnavailable() {
+        mCanDisplayLocaleUi = true;
         FeatureFlagUtils
                 .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, false);
 
@@ -59,8 +64,28 @@ public class AppLocalePreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_featureFlagOn_shouldReturnAvailable() {
+    public void getAvailabilityStatus_canShowUiAndFeatureFlagOn_shouldReturnAvailable() {
+        mCanDisplayLocaleUi = true;
+
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_featureFlagOnButCanNotShowUi_shouldReturnUnavailable() {
+        mCanDisplayLocaleUi = false;
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_featureFlagOffAndCanNotShowUi_shouldReturnUnavailable() {
+        mCanDisplayLocaleUi = false;
+        FeatureFlagUtils
+                .setEnabled(mContext, FeatureFlagUtils.SETTINGS_APP_LANGUAGE_SELECTION, false);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 }

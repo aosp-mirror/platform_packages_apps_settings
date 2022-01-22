@@ -17,6 +17,7 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,7 +37,6 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
 
     private static final int MENU_SHOW_SYSTEM = Menu.FIRST + 1;
     private static final int MENU_HIDE_SYSTEM = Menu.FIRST + 2;
-    private static final String EXTRA_SHOW_SYSTEM = "show_system";
 
     private boolean mShowSystem = false;
     private MenuItem mShowSystemMenu;
@@ -58,18 +58,8 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
-        }
-        if (mController != null) {
-            mController.setShowSystem(mShowSystem);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
+        mShowSystem = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
     }
 
     @Override
@@ -88,6 +78,8 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
             case MENU_SHOW_SYSTEM:
             case MENU_HIDE_SYSTEM:
                 mShowSystem = menuItem.getItemId() == MENU_SHOW_SYSTEM;
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, mShowSystem ? 1 : 0);
                 updateMenu();
                 if (mController != null) {
                     mController.setShowSystem(mShowSystem);
