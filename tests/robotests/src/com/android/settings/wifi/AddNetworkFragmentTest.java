@@ -18,16 +18,21 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.view.View;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -44,37 +49,36 @@ public class AddNetworkFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        Context context = spy(ApplicationProvider.getApplicationContext());
+        when(context.getSystemService(Context.WIFI_SERVICE)).thenReturn(mock(WifiManager.class));
+
         mAddNetworkFragment = spy(new AddNetworkFragment());
+        when(mAddNetworkFragment.getContext()).thenReturn(context);
         FragmentController.setupFragment(mAddNetworkFragment);
     }
 
     @Test
-    @Ignore
     public void getMetricsCategory_shouldReturnAddNetwork() {
         assertThat(mAddNetworkFragment.getMetricsCategory()).isEqualTo(
                 MetricsEvent.SETTINGS_WIFI_ADD_NETWORK);
     }
 
     @Test
-    @Ignore
     public void getMode_shouldBeModeConnected() {
         assertThat(mAddNetworkFragment.getMode()).isEqualTo(WifiConfigUiBase2.MODE_CONNECT);
     }
 
     @Test
-    @Ignore
     public void launchFragment_shouldShowSubmitButton() {
         assertThat(mAddNetworkFragment.getSubmitButton()).isNotNull();
     }
 
     @Test
-    @Ignore
     public void launchFragment_shouldShowCancelButton() {
         assertThat(mAddNetworkFragment.getCancelButton()).isNotNull();
     }
 
     @Test
-    @Ignore
     public void onClickSubmitButton_shouldHandleSubmitAction() {
         View submitButton = mAddNetworkFragment.getView().findViewById(
                 AddNetworkFragment.SUBMIT_BUTTON_ID);
@@ -85,7 +89,6 @@ public class AddNetworkFragmentTest {
     }
 
     @Test
-    @Ignore
     public void onClickCancelButton_shouldHandleCancelAction() {
         View cancelButton = mAddNetworkFragment.getView().findViewById(
                 AddNetworkFragment.CANCEL_BUTTON_ID);
@@ -96,7 +99,6 @@ public class AddNetworkFragmentTest {
     }
 
     @Test
-    @Ignore
     public void dispatchSubmit_shouldHandleSubmitAction() {
         mAddNetworkFragment.dispatchSubmit();
 
