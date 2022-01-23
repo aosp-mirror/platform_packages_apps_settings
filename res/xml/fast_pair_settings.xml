@@ -21,4 +21,8 @@
     android:title="@string/fast_pair_settings"
     settings:keywords="@string/keywords_fast_pair">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="fast_pair_scan_switch"
+        android:title="@string/fast_pair_main_switch_title" />
+
 </PreferenceScreen>
