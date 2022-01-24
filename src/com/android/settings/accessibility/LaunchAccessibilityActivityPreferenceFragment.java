@@ -115,6 +115,16 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     }
 
     @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do not call super. We don't want to see the "Help & feedback" option on this page so as
         // not to confuse users who think they might be able to send feedback about a specific

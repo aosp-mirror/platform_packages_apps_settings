@@ -22,6 +22,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -179,6 +180,16 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
     }
 
     @Override

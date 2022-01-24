@@ -22,6 +22,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
@@ -129,6 +130,16 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
     }
 
     @Override

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
@@ -167,6 +168,16 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
     }
 
     @Override
