@@ -496,6 +496,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         showQuickSettingsTooltipIfNeeded();
     }
 
+    @Override
+    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
+        super.callOnAlertDialogCheckboxClicked(dialog, which);
+        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
+    }
+
     void onDialogButtonFromShortcutClicked(View view) {
         final int viewId = view.getId();
         if (viewId == R.id.permission_enable_allow_button) {

@@ -235,4 +235,11 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         dialog.dismiss();
         showQuickSettingsTooltipIfNeeded();
     }
+
+
+    @Override
+    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
+        super.callOnAlertDialogCheckboxClicked(dialog, which);
+        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
+    }
 }

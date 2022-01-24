@@ -799,6 +799,19 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     /**
+     * Shows the quick settings tooltip if the quick settings service and the shortcut are assigned.
+     * The tooltip only shows once.
+     *
+     * @param shortcutType The shortcut type.
+     */
+    protected void showQuickSettingsTooltipIfNeeded(@UserShortcutType int shortcutType) {
+        if (shortcutType == AccessibilityUtil.UserShortcutType.EMPTY) {
+            return;
+        }
+        showQuickSettingsTooltipIfNeeded();
+    }
+
+    /**
      * Shows the quick settings tooltip if the quick settings service is assigned. The tooltip only
      * shows once.
      */
