@@ -171,11 +171,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     intent.setAction(action);
                 }
                 // Register the rule for injected apps.
-                ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
-                        mContext,
-                        new ComponentName(tile.getPackageName(), tile.getComponentName()),
-                        action,
-                        true /* clearTop */);
+                if (fragment instanceof TopLevelSettings) {
+                    ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                            mContext,
+                            new ComponentName(tile.getPackageName(), tile.getComponentName()),
+                            action,
+                            true /* clearTop */);
+                }
                 pref.setOnPreferenceClickListener(preference -> {
                     TopLevelHighlightMixin highlightMixin = null;
                     if (fragment instanceof TopLevelSettings
@@ -441,11 +443,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
         mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
-
-        //TODO(b/201970810): Add test cases.
-        if (tile.isNewTask(mContext)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
             activity.startActivity(intent);
