@@ -21,6 +21,15 @@
     android:title="@string/vision_settings_title">
 
     <Preference
+        android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard"
+        android:icon="@drawable/ic_adaptive_font_download"
+        android:key="text_reading_options"
+        android:persistent="false"
+        android:title="@string/accessibility_text_reading_options_title"
+        settings:isPreferenceVisible="false"
+        settings:keywords="text_reading_options" />
+
+    <Preference
         android:key="font_size_preference"
         android:icon="@drawable/ic_font_size"
         android:summary="@string/short_summary_font_size"
