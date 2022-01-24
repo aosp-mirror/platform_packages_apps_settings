@@ -123,7 +123,11 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
 
     @Override
     CharSequence getTileName() {
-        return null;
+        final ComponentName componentName = getTileComponentName();
+        if (componentName == null) {
+            return null;
+        }
+        return loadTileLabel(getPrefContext(), componentName);
     }
 
     @Override

@@ -25,7 +25,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.icu.text.CaseMap;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.quicksettings.TileService;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -842,5 +845,21 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);
         mNeedsQSTooltipReshow = false;
+    }
+
+    /** Returns user visible name of the tile by given {@link ComponentName}. */
+    protected CharSequence loadTileLabel(Context context, ComponentName componentName) {
+        final PackageManager packageManager = context.getPackageManager();
+        final Intent queryIntent = new Intent(TileService.ACTION_QS_TILE);
+        final List<ResolveInfo> resolveInfos =
+                packageManager.queryIntentServices(queryIntent, PackageManager.GET_META_DATA);
+        for (ResolveInfo info : resolveInfos) {
+            final ServiceInfo serviceInfo = info.serviceInfo;
+            if (TextUtils.equals(componentName.getPackageName(), serviceInfo.packageName)
+                    && TextUtils.equals(componentName.getClassName(), serviceInfo.name)) {
+                return serviceInfo.loadLabel(packageManager);
+            }
+        }
+        return null;
     }
 }
