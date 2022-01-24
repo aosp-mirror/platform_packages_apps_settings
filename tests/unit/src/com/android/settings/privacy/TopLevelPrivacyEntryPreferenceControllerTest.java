@@ -18,20 +18,22 @@ package com.android.settings.privacy;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
-import android.provider.DeviceConfig;
-import android.provider.Settings;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
+import android.content.Context;
+
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.safetycenter.SafetyCenterStatus;
+import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.security.TopLevelSecurityEntryPreferenceController;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class TopLevelPrivacyEntryPreferenceControllerTest {
@@ -41,30 +43,21 @@ public class TopLevelPrivacyEntryPreferenceControllerTest {
     private TopLevelPrivacyEntryPreferenceController mTopLevelPrivacyEntryPreferenceController;
 
     @Mock
-    private Context mContext;
+    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
 
     @Before
     public void setUp() {
-        DeviceConfig.resetToDefaults(Settings.RESET_MODE_PACKAGE_DEFAULTS,
-                DeviceConfig.NAMESPACE_PRIVACY);
+        MockitoAnnotations.initMocks(this);
+        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
 
         mTopLevelPrivacyEntryPreferenceController =
-                new TopLevelPrivacyEntryPreferenceController(mContext, PREFERENCE_KEY);
-    }
-
-    @After
-    public void tearDown() {
-        DeviceConfig.resetToDefaults(Settings.RESET_MODE_PACKAGE_DEFAULTS,
-                DeviceConfig.NAMESPACE_PRIVACY);
+                new TopLevelPrivacyEntryPreferenceController(
+                        ApplicationProvider.getApplicationContext(), PREFERENCE_KEY);
     }
 
     @Test
     public void getAvailabilityStatus_whenSafetyCenterEnabled_returnsUnavailable() {
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_PRIVACY,
-                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
-                /* value = */ Boolean.toString(true),
-                /* makeDefault = */ false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
 
         assertThat(mTopLevelPrivacyEntryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(TopLevelSecurityEntryPreferenceController.CONDITIONALLY_UNAVAILABLE);
@@ -72,11 +65,7 @@ public class TopLevelPrivacyEntryPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_whenSafetyCenterDisabled_returnsAvailable() {
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_PRIVACY,
-                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
-                /* value = */ Boolean.toString(false),
-                /* makeDefault = */ false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
 
         assertThat(mTopLevelPrivacyEntryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(TopLevelSecurityEntryPreferenceController.AVAILABLE);

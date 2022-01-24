@@ -18,17 +18,18 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
-import android.provider.DeviceConfig;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.safetycenter.SafetyCenterStatus;
+import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -36,6 +37,8 @@ import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class SecurityAdvancedSettingsTest {
@@ -47,16 +50,22 @@ public class SecurityAdvancedSettingsTest {
     private Context mContext;
     private SecurityAdvancedSettings mSecurityAdvancedSettings;
 
+    @Mock
+    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+
     @Before
     @UiThreadTest
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
 
+        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
         mContext = ApplicationProvider.getApplicationContext();
 
-        mSecurityAdvancedSettings = new SecurityAdvancedSettings();
+        mSecurityAdvancedSettings = spy(new SecurityAdvancedSettings());
+        when(mSecurityAdvancedSettings.getContext()).thenReturn(mContext);
     }
 
     @Test
@@ -67,7 +76,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenSafetyCenterIsEnabled_returnsSecurity() {
-        setSafetyCenterEnabled(true);
+        when(mSafetyCenterStatusHolder.isEnabled(any())).thenReturn(true);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
                 .isEqualTo(CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
@@ -75,7 +84,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenAlternativeFragmentPresented_returnsAlternative() {
-        setSafetyCenterEnabled(false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
         setupAlternativeFragment(true, ALTERNATIVE_CATEGORY_KEY);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
@@ -84,7 +93,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenNoAlternativeFragmentPresented_returnsLegacy() {
-        setSafetyCenterEnabled(false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
         setupAlternativeFragment(false, null);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
@@ -93,14 +102,6 @@ public class SecurityAdvancedSettingsTest {
 
     private int getXmlResId(String resName) {
         return ResourcesUtils.getResourcesId(mContext, "xml", resName);
-    }
-
-    private void setSafetyCenterEnabled(boolean isEnabled) {
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_PRIVACY,
-                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
-                /* value = */ Boolean.toString(isEnabled),
-                /* makeDefault = */ false);
     }
 
     private void setupAlternativeFragment(boolean hasAlternativeFragment,
