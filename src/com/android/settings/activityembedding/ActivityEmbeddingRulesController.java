@@ -96,7 +96,7 @@ public class ActivityEmbeddingRulesController {
                 clearTop,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(context),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(context),
-                ActivityEmbeddingUtils.SPLIT_RATIO,
+                ActivityEmbeddingUtils.getSplitRatio(context),
                 LayoutDirection.LOCALE));
     }
 
@@ -202,7 +202,7 @@ public class ActivityEmbeddingRulesController {
                 SplitRule.FINISH_ADJACENT,
                 ActivityEmbeddingUtils.getMinCurrentScreenSplitWidthPx(mContext),
                 ActivityEmbeddingUtils.getMinSmallestScreenSplitWidthPx(mContext),
-                ActivityEmbeddingUtils.SPLIT_RATIO,
+                ActivityEmbeddingUtils.getSplitRatio(mContext),
                 LayoutDirection.LOCALE);
 
         mSplitController.registerRule(placeholderRule);
