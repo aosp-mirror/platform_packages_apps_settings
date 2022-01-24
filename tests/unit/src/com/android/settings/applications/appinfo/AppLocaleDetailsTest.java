@@ -55,6 +55,7 @@ public class AppLocaleDetailsTest {
     private LocaleList mSystemLocales;
     private LocaleList mAppLocale;
     private String[] mAssetLocales;
+    private LocaleList mPackageLocales;
 
     @Before
     @UiThreadTest
@@ -67,11 +68,13 @@ public class AppLocaleDetailsTest {
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(LocaleManager.class)).thenReturn(mLocaleManager);
 
-        setupInitialLocales("en",
-                "tw",
-                "jp",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+        setupInitialLocales(
+                /* appLocale= */ "en",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "jp",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "pa, cn, tw, en",
+                /* assetLocales= */ new String[]{"en", "ne", "ms", "pa"});
     }
 
     @Test
@@ -105,11 +108,13 @@ public class AppLocaleDetailsTest {
     @UiThreadTest
     public void handleAllLocalesData_withoutAppLocale_1stSuggestedLocaleIsSimCountryLocale() {
         Locale simCountryLocale = new Locale("zh", "TW");
-        setupInitialLocales("",
-                "tw",
-                "",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
@@ -124,11 +129,13 @@ public class AppLocaleDetailsTest {
     @UiThreadTest
     public void handleAllLocalesData_withoutAppLocale_1stSuggestedLocaleIsNetworkCountryLocale() {
         Locale networkCountryLocale = new Locale("en", "GB");
-        setupInitialLocales("",
-                "",
-                "gb",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "gb",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
@@ -142,11 +149,32 @@ public class AppLocaleDetailsTest {
     @Test
     @UiThreadTest
     public void handleAllLocalesData_noAppAndSimNetworkLocale_1stLocaleIsFirstOneInSystemLocales() {
-        setupInitialLocales("",
-                "",
-                "",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+
+        helper.handleAllLocalesData();
+
+        Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
+        assertTrue(locale.equals(mSystemLocales.get(0)));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_hasPackageAndSystemLocales_1stLocaleIs1stOneInSystemLocales() {
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "pa, cn, tw, en",
+                /* assetLocales= */ new String[]{});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
@@ -204,6 +232,11 @@ public class AppLocaleDetailsTest {
      *
      * @param systemLocales  System locales, a locale list by a multiple language tags with comma.
      *                       example: "en, uk, jp"
+     *
+     * @param packageLocales PackageManager locales, a locale list by a multiple language tags with
+     *                       comma.
+     *                       example: "en, uk, jp"
+     *
      * @param assetLocales   Asset locales, a locale list by a multiple language tags with String
      *                       array.
      *                       example: new String[] {"en", "ne", "ms", "pa"}
@@ -212,10 +245,12 @@ public class AppLocaleDetailsTest {
             String simCountry,
             String networkCountry,
             String systemLocales,
+            String packageLocales,
             String[] assetLocales) {
         mAppLocale = LocaleList.forLanguageTags(appLocale);
         mSystemLocales = LocaleList.forLanguageTags(systemLocales);
         mAssetLocales = assetLocales;
+        mPackageLocales = LocaleList.forLanguageTags(packageLocales);
         when(mTelephonyManager.getSimCountryIso()).thenReturn(simCountry);
         when(mTelephonyManager.getNetworkCountryIso()).thenReturn(networkCountry);
         when(mLocaleManager.getApplicationLocales(anyString())).thenReturn(mAppLocale);
@@ -237,6 +272,10 @@ public class AppLocaleDetailsTest {
         LocaleList getCurrentSystemLocales() {
             return mSystemLocales;
         }
-    }
 
+        @Override
+        LocaleList getPackageLocales() {
+            return mPackageLocales;
+        }
+    }
 }
