@@ -26,8 +26,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -126,18 +124,10 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
         View content = LayoutInflater.from(getContext()).inflate(
                 R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
-        TextView dialogMessage = content.findViewById(R.id.msg);
+        TextView dialogMessage = content != null ? content.findViewById(R.id.msg) : null;
         if (!TextUtils.isEmpty(message) && dialogMessage != null) {
             dialogMessage.setText(message);
-        }
-
-        final ListView lvItems = content.findViewById(R.id.carrier_list);
-        if (lvItems != null) {
-            lvItems.setVisibility(View.GONE);
-        }
-        final LinearLayout infoOutline = content.findViewById(R.id.info_outline_layout);
-        if (infoOutline != null) {
-            infoOutline.setVisibility(View.GONE);
+            dialogMessage.setVisibility(View.VISIBLE);
         }
         dialog.setView(content);
 
