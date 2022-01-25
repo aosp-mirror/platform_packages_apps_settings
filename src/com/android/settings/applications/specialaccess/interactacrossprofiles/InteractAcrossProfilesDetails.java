@@ -17,9 +17,13 @@ package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_DATA;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_PERMISSIONS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_APPS_SHARE_PERMISSIONS_AND_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECT_APPS_DIALOG_SUMMARY;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECT_APPS_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.HOW_TO_DISCONNECT_APPS;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ONLY_CONNECT_TRUSTED_APPS;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
 import static android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS;
@@ -46,6 +50,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.stats.devicepolicy.DevicePolicyEnums;
 import android.util.IconDrawableFactory;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,9 +77,11 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             "interact_across_profiles_extra_summary";
     public static final String EXTRA_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args";
     public static final String INTENT_KEY = "intent";
+    private static final String TAG = "InteractAcrossProfilesDetails";
 
     private Context mContext;
     private CrossProfileApps mCrossProfileApps;
+    private DevicePolicyManager mDevicePolicyManager;
     private UserManager mUserManager;
     private RestrictedSwitchPreference mSwitchPref;
     private LayoutPreference mHeader;
@@ -94,6 +101,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         mContext = getContext();
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
+        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mUserManager = mContext.getSystemService(UserManager.class);
         mPackageManager = mContext.getPackageManager();
 
@@ -106,6 +114,18 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         mInstallAppIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
 
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
+
+        replaceEnterpriseStringSummary("interact_across_profiles_summary_1",
+                CONNECTED_APPS_SHARE_PERMISSIONS_AND_DATA,
+                R.string.interact_across_profiles_summary_1);
+        replaceEnterpriseStringSummary("interact_across_profiles_summary_2",
+                ONLY_CONNECT_TRUSTED_APPS,
+                R.string.interact_across_profiles_summary_2);
+        replaceEnterpriseStringSummary("interact_across_profiles_extra_summary",
+                HOW_TO_DISCONNECT_APPS,
+                R.string.interact_across_profiles_summary_3);
+
+
         mSwitchPref = findPreference(INTERACT_ACROSS_PROFILES_SETTINGS_SWITCH);
         mSwitchPref.setOnPreferenceClickListener(this);
 
@@ -125,6 +145,19 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         styleActionBar();
         maybeShowExtraSummary();
         logPageLaunchMetrics();
+    }
+
+    private void replaceEnterpriseStringSummary(
+            String preferenceKey, String overrideKey, int resource) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference == null) {
+            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
+            return;
+        }
+
+        preference.setSummary(
+                mDevicePolicyManager.getString(overrideKey,
+                        () -> getString(resource)));
     }
 
     private void maybeShowExtraSummary() {
@@ -264,7 +297,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         final TextView dialogTitle = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_title);
         dialogTitle.setText(mDpm.getString(CONNECT_APPS_DIALOG_TITLE, () ->
-                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel)));
+                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel),
+                mAppLabel));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(
@@ -279,6 +313,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
                         R.string.interact_across_profiles_consent_dialog_permissions_summary,
                         mAppLabel),
                 mAppLabel));
+
+        final TextView dialogSummary =
+                dialogView.findViewById(R.id.interact_across_profiles_consent_dialog_summary);
+        dialogSummary.setText(mDpm.getString(CONNECT_APPS_DIALOG_SUMMARY,
+                () -> getString(
+                        R.string.interact_across_profiles_consent_dialog_summary)));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogView)

@@ -16,9 +16,17 @@
 
 package com.android.settings.security;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_FOR_WORK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_DEVICE_INFO;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DEVICE_ADMIN_APPS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SECURITY_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_UNIFY_LOCKS_SUMMARY;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.combination.CombinedBiometricProfileStatusPreferenceController;
@@ -52,6 +60,27 @@ public class SecurityAdvancedSettings extends DashboardFragment {
     /** Used in case of old Security settings when SafetyCenter is disabled */
     private static final String CATEGORY_SECURITY_LEGACY_ADVANCED_SETTINGS =
             "com.android.settings.category.ia.legacy_advanced_security";
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("unlock_set_or_change_profile",
+                WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE,
+                R.string.unlock_set_unlock_launch_picker_title_profile);
+        replaceEnterpriseStringSummary("unification",
+                WORK_PROFILE_UNIFY_LOCKS_SUMMARY,
+                R.string.lock_settings_profile_unification_summary);
+        replaceEnterpriseStringTitle("fingerprint_settings_profile",
+                FINGERPRINT_FOR_WORK,
+                R.string.security_settings_work_fingerprint_preference_title);
+        replaceEnterpriseStringTitle("manage_device_admin",
+                MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
+        replaceEnterpriseStringTitle("security_category_profile",
+                WORK_PROFILE_SECURITY_TITLE, R.string.lock_settings_profile_title);
+        replaceEnterpriseStringTitle("enterprise_privacy", MANAGED_DEVICE_INFO,
+                R.string.enterprise_privacy_settings);
+
+    }
 
     @Override
     public int getMetricsCategory() {
