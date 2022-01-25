@@ -410,6 +410,7 @@
 
         <activity
             android:name=".wifi.WifiPickerActivity"
+            android:permission="android.permission.CHANGE_WIFI_STATE"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
