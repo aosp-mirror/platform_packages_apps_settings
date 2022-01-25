@@ -41,7 +41,6 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -75,12 +74,11 @@ public class ContextualCardsFragmentTest {
     }
 
     @Test
-    @Ignore
     public void onStart_shouldRegisterBothReceivers() {
         mFragment.onStart();
 
         verify(mActivity).registerReceiver(eq(mFragment.mKeyEventReceiver),
-                any(IntentFilter.class));
+                any(IntentFilter.class), eq(Context.RECEIVER_EXPORTED));
         verify(mActivity).registerReceiver(eq(mFragment.mScreenOffReceiver),
                 any(IntentFilter.class));
     }

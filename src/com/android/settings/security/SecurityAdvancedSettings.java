@@ -26,7 +26,7 @@ import com.android.settings.biometrics.face.FaceProfileStatusPreferenceControlle
 import com.android.settings.biometrics.fingerprint.FingerprintProfileStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.safetycenter.SafetyCenterStatus;
+import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -60,11 +60,14 @@ public class SecurityAdvancedSettings extends DashboardFragment {
 
     @Override
     public String getCategoryKey() {
-        if (SafetyCenterStatus.isEnabled()) {
+        final Context context = getContext();
+        if (context == null) {
+            return CATEGORY_SECURITY_LEGACY_ADVANCED_SETTINGS;
+        } else if (SafetyCenterStatusHolder.get().isEnabled(context)) {
             return CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS;
         } else {
             final SecuritySettingsFeatureProvider securitySettingsFeatureProvider =
-                    FeatureFactory.getFactory(getContext())
+                    FeatureFactory.getFactory(context)
                             .getSecuritySettingsFeatureProvider();
 
             if (securitySettingsFeatureProvider.hasAlternativeSecuritySettingsFragment()) {

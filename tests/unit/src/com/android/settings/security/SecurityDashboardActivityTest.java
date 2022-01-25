@@ -25,22 +25,22 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.content.Intent;
-import android.provider.DeviceConfig;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
-import com.android.settings.safetycenter.SafetyCenterStatus;
+import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
@@ -52,13 +52,16 @@ public class SecurityDashboardActivityTest {
     private Settings.SecurityDashboardActivity mActivity;
     private Intent mDefaultIntent;
 
+    @Mock
+    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
-        DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
-                DeviceConfig.NAMESPACE_PRIVACY);
+        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
+
         mDefaultIntent = new Intent();
         mDefaultIntent.setAction(android.provider.Settings.ACTION_SECURITY_SETTINGS);
         mDefaultIntent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
@@ -77,12 +80,6 @@ public class SecurityDashboardActivityTest {
             }
         });
         doNothing().when(mActivity).startActivity(any(Intent.class));
-    }
-
-    @After
-    public void tearDown() {
-        DeviceConfig.resetToDefaults(android.provider.Settings.RESET_MODE_PACKAGE_DEFAULTS,
-                DeviceConfig.NAMESPACE_PRIVACY);
     }
 
     @Test
@@ -125,11 +122,7 @@ public class SecurityDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_PRIVACY,
-                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
-                /* value = */ Boolean.toString(true),
-                /* makeDefault = */ false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         mActivity.handleSafetyCenterRedirection();
@@ -140,11 +133,7 @@ public class SecurityDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterDisabled_doesntRedirectToSafetyCenter() {
-        DeviceConfig.setProperty(
-                DeviceConfig.NAMESPACE_PRIVACY,
-                SafetyCenterStatus.SAFETY_CENTER_IS_ENABLED,
-                /* value = */ Boolean.toString(false),
-                /* makeDefault = */ false);
+        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
 
         mActivity.handleSafetyCenterRedirection();
 
