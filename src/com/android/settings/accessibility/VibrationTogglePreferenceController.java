@@ -45,12 +45,12 @@ public abstract class VibrationTogglePreferenceController extends TogglePreferen
 
     @Override
     public void onStart() {
-        mSettingsContentObserver.register(mContext.getContentResolver());
+        mSettingsContentObserver.register(mContext);
     }
 
     @Override
     public void onStop() {
-        mSettingsContentObserver.unregister(mContext.getContentResolver());
+        mSettingsContentObserver.unregister(mContext);
     }
 
     @Override
@@ -66,6 +66,7 @@ public abstract class VibrationTogglePreferenceController extends TogglePreferen
         super.updateState(preference);
         if (preference != null) {
             preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+            preference.setSummary(mPreferenceConfig.getSummary());
         }
     }
 

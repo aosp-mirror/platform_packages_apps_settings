@@ -70,6 +70,7 @@ public class VibrationRampingRingerTogglePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
+        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
         mController = new VibrationRampingRingerTogglePreferenceController(mContext,
                 PREFERENCE_KEY, mDeviceConfigProvider);
         mLifecycle.addObserver(mController);
