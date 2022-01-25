@@ -1951,7 +1951,6 @@
             android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.title"
                 android:resource="@string/vision_settings_suggestion_title" />
@@ -1959,6 +1958,29 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettingsForSetupWizard" />
+        </activity-alias>
+
+        <activity-alias
+            android:name=".TextReadingForSetupWizardActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_font_download"
+            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <!-- TODO(b/1352717): Consider replacing it with another category, temporarily
+                using an older one to avoid side problems. -->
+                <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.android.settings.title"
+                android:resource="@string/accessibility_text_reading_options_title" />
+            <meta-data
+                android:name="com.android.settings.icon_tintable"
+                android:value="true" />
+            <meta-data
+                android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard" />
         </activity-alias>
 
         <activity
