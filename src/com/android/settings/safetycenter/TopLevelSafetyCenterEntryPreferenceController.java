@@ -37,7 +37,7 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        if (SafetyCenterStatus.isEnabled()) {
+        if (SafetyCenterStatusHolder.get().isEnabled(mContext)) {
             return AVAILABLE;
         }
         return CONDITIONALLY_UNAVAILABLE;
