@@ -368,6 +368,7 @@ public class AccessibilitySettingsTest {
 
     private void setMockAccessibilityShortcutInfo(AccessibilityShortcutInfo mockInfo) {
         final ActivityInfo activityInfo = Mockito.mock(ActivityInfo.class);
+        activityInfo.applicationInfo = new ApplicationInfo();
         when(mockInfo.getActivityInfo()).thenReturn(activityInfo);
         when(activityInfo.loadLabel(any())).thenReturn(DEFAULT_LABEL);
         when(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY);

@@ -4632,6 +4632,8 @@
     <string name="clear_user_data_text">Clear storage</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
+    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted settings from lock screen title -->
+    <string name="app_restricted_settings_lockscreen_title">Unlock restricted settings</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
@@ -12004,6 +12006,10 @@
     <string name="do_disclosure_learn_more_separator">" "</string>
     <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=2416766240581561009] -->
     <string name="learn_more">Learn more</string>
+    <!--Title for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=50] -->
+    <string name="blocked_by_restricted_settings_title">Restricted Settings</string>
+    <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=100] -->
+    <string name="blocked_by_restricted_settings_content">For your security, this setting is currently unavailable.</string>
 
     <!-- Financed device Privacy --> <skip />
 
@@ -12247,6 +12253,9 @@
 
     <!-- Help URI, prevent ringing gesture [DO NOT TRANSLATE] -->
     <string name="help_uri_prevent_ringing_gesture" translatable="false"></string>
+
+    <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
+    <string name="help_url_action_disabled_by_restricted_settings" translatable="false"></string>
 
     <!-- Title label for Priority mode suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title" translatable="false">Update Priority mode</string>

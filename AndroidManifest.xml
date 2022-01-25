@@ -3618,6 +3618,18 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ActionDisabledByAppOpsDialog"
+                  android:theme="@style/Theme.AlertDialog"
+                  android:taskAffinity="com.android.settings.appops"
+                  android:excludeFromRecents="true"
+                  android:exported="false"
+                  android:launchMode="singleTop">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SHOW_RESTRICTED_SETTING_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name="Settings$ManageExternalStorageActivity"
             android:exported="true"
