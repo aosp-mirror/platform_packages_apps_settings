@@ -58,12 +58,12 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
 
     @Override
     public void onStart() {
-        mSettingsContentObserver.register(mContext.getContentResolver());
+        mSettingsContentObserver.register(mContext);
     }
 
     @Override
     public void onStop() {
-        mSettingsContentObserver.unregister(mContext.getContentResolver());
+        mSettingsContentObserver.unregister(mContext);
     }
 
     @Override
@@ -72,6 +72,7 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
         final SeekBarPreference preference = screen.findPreference(getPreferenceKey());
         mSettingsContentObserver.onDisplayPreference(this, preference);
         preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
+        preference.setSummaryProvider(unused -> mPreferenceConfig.getSummary());
         // TODO: remove setContinuousUpdates and replace with a different way to play the haptic
         // preview without relying on the setting being propagated to the service.
         preference.setContinuousUpdates(true);

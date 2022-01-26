@@ -32,6 +32,12 @@ public class NotificationVibrationIntensityPreferenceController
             super(context, Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
                     VibrationAttributes.USAGE_NOTIFICATION);
         }
+
+        @Override
+        public boolean isRestrictedByRingerModeSilent() {
+            // Notifications never vibrate when the phone is in silent mode.
+            return true;
+        }
     }
 
     public NotificationVibrationIntensityPreferenceController(Context context,
