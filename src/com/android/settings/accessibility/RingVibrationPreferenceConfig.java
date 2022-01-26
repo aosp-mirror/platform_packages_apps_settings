@@ -36,6 +36,12 @@ public class RingVibrationPreferenceConfig extends VibrationPreferenceConfig {
     }
 
     @Override
+    public boolean isRestrictedByRingerModeSilent() {
+        // Incoming calls never vibrate when the phone is in silent mode.
+        return true;
+    }
+
+    @Override
     public int readIntensity() {
         final int vibrateWhenRinging = Settings.System.getInt(mContentResolver,
                 Settings.System.VIBRATE_WHEN_RINGING, ON);

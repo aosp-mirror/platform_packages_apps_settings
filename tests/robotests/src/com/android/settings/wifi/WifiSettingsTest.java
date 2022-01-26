@@ -60,7 +60,6 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -71,7 +70,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class WifiSettingsTest {
 
     private static final int NUM_NETWORKS = 4;
@@ -94,6 +92,7 @@ public class WifiSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mock(UserManager.class));
 
         mWifiSettings = spy(new WifiSettings());
         doReturn(mContext).when(mWifiSettings).getContext();
