@@ -246,7 +246,6 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = ShadowStrictMode.class)
     public void onBindSlice_backgroundThread_shouldOverrideStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
