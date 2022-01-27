@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -37,6 +38,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import androidx.annotation.XmlRes;
 import androidx.appcompat.app.AlertDialog;
@@ -58,6 +60,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 /** Tests for {@link ToggleFeaturePreferenceFragment} */
@@ -68,6 +72,12 @@ public class ToggleFeaturePreferenceFragmentTest {
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
+    private static final String PLACEHOLDER_TILE_CLASS_NAME =
+            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
+    private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
+            PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
+    private static final String PLACEHOLDER_TILE_NAME =
+            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
@@ -211,7 +221,7 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     @Test
     @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_assignToVariable() {
+    public void restoreValueFromSavedInstanceState_assignShortcutTypeToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
@@ -232,6 +242,55 @@ public class ToggleFeaturePreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onPreferenceToggledOnDisabledService_notShowTooltipView() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+
+        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ false);
+
+        assertThat(getLatestPopupWindow()).isNull();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onPreferenceToggledOnEnabledService_showTooltipView() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+
+        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+
+        assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onPreferenceToggledOnEnabledService_tooltipViewShown_notShowTooltipView() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        getLatestPopupWindow().dismiss();
+
+        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+
+        assertThat(getLatestPopupWindow().isShowing()).isFalse();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void restoreValueFromSavedInstanceState_showTooltipView() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        mFragment.onPreferenceToggled(mFragment.KEY_USE_SERVICE_PREFERENCE, /* enabled= */ true);
+        assertThat(getLatestPopupWindow().isShowing()).isTrue();
+
+        final Bundle savedInstanceState = new Bundle();
+        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
+        mFragment.onCreate(savedInstanceState);
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+        mFragment.onViewCreated(mFragment.getView(), savedInstanceState);
+        mFragment.onAttach(mContext);
+
+        assertThat(getLatestPopupWindow().isShowing()).isTrue();
     }
 
     @Test
@@ -258,12 +317,14 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     private void callEmptyOnClicked(DialogInterface dialog, int which) {}
 
+    private static PopupWindow getLatestPopupWindow() {
+        final ShadowApplication shadowApplication =
+                Shadow.extract(ApplicationProvider.getApplicationContext());
+        return shadowApplication.getLatestPopupWindow();
+    }
+
     public static class TestToggleFeaturePreferenceFragment
             extends ToggleFeaturePreferenceFragment {
-
-        @Override
-        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        }
 
         @Override
         public int getMetricsCategory() {
@@ -273,6 +334,16 @@ public class ToggleFeaturePreferenceFragmentTest {
         @Override
         int getUserShortcutTypes() {
             return 0;
+        }
+
+        @Override
+        ComponentName getTileComponentName() {
+            return PLACEHOLDER_TILE_COMPONENT_NAME;
+        }
+
+        @Override
+        CharSequence getTileName() {
+            return PLACEHOLDER_TILE_NAME;
         }
 
         @Override
@@ -306,5 +377,9 @@ public class ToggleFeaturePreferenceFragmentTest {
             // UI related function, do nothing in tests
         }
 
+        @Override
+        public View getView() {
+            return mock(View.class);
+        }
     }
 }
