@@ -21,6 +21,10 @@
     android:persistent="false"
     android:title="@string/accessibility_text_reading_options_title">
 
+    <com.android.settings.accessibility.TextReadingPreviewPreference
+        android:key="preview"
+        android:selectable="false"/>
+
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="font_size"
         android:selectable="false"
