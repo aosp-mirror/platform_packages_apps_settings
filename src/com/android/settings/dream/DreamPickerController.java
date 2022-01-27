@@ -31,6 +31,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
+import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
@@ -44,11 +45,10 @@ public class DreamPickerController extends BasePreferenceController {
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private final List<DreamBackend.DreamInfo> mDreamInfos;
-    private final Drawable mActiveDrawable;
+    private final List<DreamInfo> mDreamInfos;
     private Button mPreviewButton;
     @Nullable
-    private DreamBackend.DreamInfo mActiveDream;
+    private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
 
     public DreamPickerController(Context context) {
@@ -59,7 +59,7 @@ public class DreamPickerController extends BasePreferenceController {
         super(context, KEY);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
-        mActiveDrawable = context.getDrawable(R.drawable.ic_dream_check_circle);
+        mActiveDream = getActiveDreamInfo(mDreamInfos);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
@@ -77,8 +77,6 @@ public class DreamPickerController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mActiveDream = getActiveDreamInfo();
-
         mAdapter = new DreamAdapter(mDreamInfos.stream()
                 .map(DreamItem::new)
                 .collect(Collectors.toList()));
@@ -86,6 +84,7 @@ public class DreamPickerController extends BasePreferenceController {
         final RecyclerView recyclerView =
                 ((LayoutPreference) preference).findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
 
         mPreviewButton = ((LayoutPreference) preference).findViewById(R.id.preview_button);
@@ -101,8 +100,8 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     @Nullable
-    private DreamBackend.DreamInfo getActiveDreamInfo() {
-        return mDreamInfos
+    private static DreamInfo getActiveDreamInfo(List<DreamInfo> dreamInfos) {
+        return dreamInfos
                 .stream()
                 .filter(d -> d.isActive)
                 .findFirst()
@@ -110,9 +109,9 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     private class DreamItem implements IDreamItem {
-        DreamBackend.DreamInfo mDreamInfo;
+        DreamInfo mDreamInfo;
 
-        DreamItem(DreamBackend.DreamInfo dreamInfo) {
+        DreamItem(DreamInfo dreamInfo) {
             mDreamInfo = dreamInfo;
         }
 
@@ -123,14 +122,13 @@ public class DreamPickerController extends BasePreferenceController {
 
         @Override
         public Drawable getIcon() {
-            return isActive() ? mActiveDrawable : mDreamInfo.icon;
+            return mDreamInfo.icon;
         }
 
         @Override
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            mAdapter.notifyDataSetChanged();
             updatePreviewButtonState();
             mMetricsFeatureProvider.action(
                     mContext,
