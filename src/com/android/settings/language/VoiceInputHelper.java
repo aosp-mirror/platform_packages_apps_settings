@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.assist;
+package com.android.settings.language;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -39,40 +39,46 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/** Helper class of the Voice Input setting. */
 public final class VoiceInputHelper {
     static final String TAG = "VoiceInputHelper";
     final Context mContext;
 
     final List<ResolveInfo> mAvailableRecognition;
 
-    // TODO: Remove this superclass as we only have 1 class now (RecognizerInfo).
-    static public class BaseInfo implements Comparable {
-        public final ServiceInfo service;
-        public final ComponentName componentName;
-        public final String key;
-        public final ComponentName settings;
-        public final CharSequence label;
-        public final String labelStr;
-        public final CharSequence appLabel;
+    /**
+     * Base info of the Voice Input provider.
+     *
+     * TODO: Remove this superclass as we only have 1 class now (RecognizerInfo).
+     */
+    public static class BaseInfo implements Comparable<BaseInfo> {
+        public final ServiceInfo mService;
+        public final ComponentName mComponentName;
+        public final String mKey;
+        public final ComponentName mSettings;
+        public final CharSequence mLabel;
+        public final String mLabelStr;
+        public final CharSequence mAppLabel;
 
-        public BaseInfo(PackageManager pm, ServiceInfo _service, String _settings) {
-            service = _service;
-            componentName = new ComponentName(_service.packageName, _service.name);
-            key = componentName.flattenToShortString();
-            settings = _settings != null
-                    ? new ComponentName(_service.packageName, _settings) : null;
-            label = _service.loadLabel(pm);
-            labelStr = label.toString();
-            appLabel = _service.applicationInfo.loadLabel(pm);
+        public BaseInfo(PackageManager pm, ServiceInfo service, String settings) {
+            mService = service;
+            mComponentName = new ComponentName(service.packageName, service.name);
+            mKey = mComponentName.flattenToShortString();
+            mSettings = settings != null
+                    ? new ComponentName(service.packageName, settings) : null;
+            mLabel = service.loadLabel(pm);
+            mLabelStr = mLabel.toString();
+            mAppLabel = service.applicationInfo.loadLabel(pm);
         }
 
         @Override
-        public int compareTo(Object another) {
-            return labelStr.compareTo(((BaseInfo) another).labelStr);
+        public int compareTo(BaseInfo another) {
+            return mLabelStr.compareTo(another.mLabelStr);
         }
     }
 
-    static public class RecognizerInfo extends BaseInfo {
+    /** Info of the speech recognizer (i.e. recognition service). */
+    public static class RecognizerInfo extends BaseInfo {
         public final boolean mSelectableAsDefault;
 
         public RecognizerInfo(PackageManager pm,
@@ -96,6 +102,7 @@ public final class VoiceInputHelper {
                 PackageManager.GET_META_DATA);
     }
 
+    /** Draws the UI of the Voice Input picker page. */
     public void buildUi() {
         // Get the currently selected recognizer from the secure setting.
         String currentSetting = Settings.Secure.getString(
@@ -120,8 +127,8 @@ public final class VoiceInputHelper {
             try (XmlResourceParser parser = si.loadXmlMetaData(mContext.getPackageManager(),
                     RecognitionService.SERVICE_META_DATA)) {
                 if (parser == null) {
-                    throw new XmlPullParserException("No " + RecognitionService.SERVICE_META_DATA +
-                            " meta-data for " + si.packageName);
+                    throw new XmlPullParserException("No " + RecognitionService.SERVICE_META_DATA
+                            + " meta-data for " + si.packageName);
                 }
 
                 Resources res = mContext.getPackageManager().getResourcesForApplication(
@@ -132,6 +139,7 @@ public final class VoiceInputHelper {
                 int type;
                 while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                         && type != XmlPullParser.START_TAG) {
+                    // Intentionally do nothing.
                 }
 
                 String nodeName = parser.getName();

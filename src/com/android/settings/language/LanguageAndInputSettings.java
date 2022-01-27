@@ -44,8 +44,9 @@ public class LanguageAndInputSettings extends DashboardFragment {
     private static final String TAG = "LangAndInputSettings";
 
     private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
+    private static final String KEY_SPEECH_CATEGORY = "speech_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
-    private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
+    private static final String KEY_POINTER_CATEGORY = "pointer_category";
 
     @Override
     public int getMetricsCategory() {
@@ -98,15 +99,22 @@ public class LanguageAndInputSettings extends DashboardFragment {
                 Arrays.asList(virtualKeyboardPreferenceController,
                         physicalKeyboardPreferenceController)));
 
-        // Pointer and Tts
+        // Speech
+        final DefaultVoiceInputPreferenceController defaultVoiceInputPreferenceController =
+                new DefaultVoiceInputPreferenceController(context, lifecycle);
         final TtsPreferenceController ttsPreferenceController =
                 new TtsPreferenceController(context, KEY_TEXT_TO_SPEECH);
+        controllers.add(defaultVoiceInputPreferenceController);
         controllers.add(ttsPreferenceController);
+        controllers.add(new PreferenceCategoryController(context,
+                KEY_SPEECH_CATEGORY).setChildren(
+                Arrays.asList(defaultVoiceInputPreferenceController, ttsPreferenceController)));
+
+        // Pointer
         final PointerSpeedController pointerController = new PointerSpeedController(context);
         controllers.add(pointerController);
         controllers.add(new PreferenceCategoryController(context,
-                KEY_POINTER_AND_TTS_CATEGORY).setChildren(
-                Arrays.asList(pointerController, ttsPreferenceController)));
+                KEY_POINTER_CATEGORY).setChildren(Arrays.asList(pointerController)));
 
         // Input Assistance
         controllers.add(new SpellCheckerPreferenceController(context));
