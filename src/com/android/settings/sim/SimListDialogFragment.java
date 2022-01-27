@@ -19,7 +19,6 @@ package com.android.settings.sim;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -28,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,12 +47,10 @@ import java.util.List;
  * Shows a dialog consisting of a list of SIMs (aka subscriptions), possibly including an additional
  * entry indicating "ask me every time".
  */
-public class SimListDialogFragment extends SimDialogFragment implements
-        DialogInterface.OnClickListener {
+public class SimListDialogFragment extends SimDialogFragment {
     private static final String TAG = "SimListDialogFragment";
     protected static final String KEY_INCLUDE_ASK_EVERY_TIME = "include_ask_every_time";
     protected static final String KEY_SHOW_CANCEL_ITEM = "show_cancel_item";
-    private static final int LIST_VIEW_DIVIDER_LINE_WEIGHT = 2;
 
     protected SelectSubscriptionAdapter mAdapter;
     @VisibleForTesting
@@ -79,21 +77,35 @@ public class SimListDialogFragment extends SimDialogFragment implements
         TextView titleTextView = titleView.findViewById(R.id.title);
         titleTextView.setText(getContext().getString(getTitleResId()));
         builder.setCustomTitle(titleTextView);
-
         mAdapter = new SelectSubscriptionAdapter(builder.getContext(), mSubscriptions);
-        setAdapter(builder);
 
         final AlertDialog dialog = builder.create();
-        ListView listView = dialog.getListView();
-        if (listView != null) {
-            listView.setDividerHeight(LIST_VIEW_DIVIDER_LINE_WEIGHT);
+
+        View content = LayoutInflater.from(getContext()).inflate(
+                R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
+
+        final ListView lvItems = content != null ? content.findViewById(R.id.carrier_list) : null;
+        if (lvItems != null) {
+            setAdapter(lvItems);
+            lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    onClick(position);
+                }
+            });
         }
+
+        dialog.setView(content);
         updateDialog();
+
         return dialog;
     }
 
-    @Override
-    public void onClick(DialogInterface dialog, int selectionIndex) {
+    /**
+     * If the user click the item at the list, then it sends the callback.
+     * @param selectionIndex the index of item in the list.
+     */
+    public void onClick(int selectionIndex) {
         if (selectionIndex >= 0 && selectionIndex < mSubscriptions.size()) {
             int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
             final SubscriptionInfo subscription = mSubscriptions.get(selectionIndex);
@@ -143,14 +155,15 @@ public class SimListDialogFragment extends SimDialogFragment implements
         if (currentSubscriptions.equals(mSubscriptions)) {
             return;
         }
+
         mSubscriptions.clear();
         mSubscriptions.addAll(currentSubscriptions);
         mAdapter.notifyDataSetChanged();
     }
 
     @VisibleForTesting
-    void setAdapter(AlertDialog.Builder builder) {
-        builder.setAdapter(mAdapter, this);
+    void setAdapter(ListView lvItems) {
+        lvItems.setAdapter(mAdapter);
     }
 
     @Override
