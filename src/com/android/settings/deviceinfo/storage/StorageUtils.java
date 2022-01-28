@@ -199,7 +199,7 @@ public class StorageUtils {
         }
     }
 
-    /* Shows information about system storage. */
+    /** Shows information about system storage. */
     public static class SystemInfoFragment extends InstrumentedDialogFragment {
         /** Shows the fragment. */
         public static void show(Fragment parent) {
@@ -223,5 +223,12 @@ public class StorageUtils {
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }
+    }
+
+    /** Gets a summary which has a byte size information. */
+    public static String getStorageSummary(Context context, int resId, long bytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
+                bytes, Formatter.FLAG_SHORTER);
+        return context.getString(resId, result.value, result.units);
     }
 }
