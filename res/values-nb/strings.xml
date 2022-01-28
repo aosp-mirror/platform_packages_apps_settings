@@ -317,11 +317,9 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Sikkerhet"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Kryptering og legitimasjon"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefonen er kryptert"</string>
-    <!-- no translation found for not_encrypted_summary (2251945842585788254) -->
-    <skip />
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefonen er ikke kryptert"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Enheten er kryptert"</string>
-    <!-- no translation found for not_encrypted_summary (2374263654698719382) -->
-    <skip />
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Enheten er ikke kryptert"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Låseskjerm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Dette skal vises"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Posisjon, skjermlås, SIM-kort-lås"</string>
@@ -507,6 +505,10 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din, for eksempel når du logger på apper"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
+    <!-- no translation found for security_settings_udfps_tip_fingerprint_help (7580784640741217494) -->
+    <skip />
+    <!-- no translation found for security_settings_udfps_side_fingerprint_help (2567232481013195191) -->
+    <skip />
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Vil du hoppe over fingeravtrykk-oppsett?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valgt å bruke fingeravtrykket ditt som én måte å låse opp telefonen din på. Hvis du hopper over konfigureringen nå, må du fullføre den senere. Konfigureringen tar bare et par minutter."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet"</string>
@@ -584,14 +586,10 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Da kan du ikke bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din i apper."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Da kan du ikke bruke fingeravtrykket til å låse opp jobbprofilen din, autorisere kjøp eller logge på jobbapper."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, fjern"</string>
-    <!-- no translation found for encryption_settings_title (2848716008695618360) -->
-    <skip />
-    <!-- no translation found for encrypt_title (6518642273119816435) -->
-    <skip />
-    <!-- no translation found for encrypt_title (7337365190988321100) -->
-    <skip />
-    <!-- no translation found for encrypted_summary (545623487587251207) -->
-    <skip />
+    <string name="encryption_settings_title" msgid="2848716008695618360">"Kryptering"</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Krypter nettbrettet"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Krypter telefonen"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Kryptert"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Sikre telefonen din"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Angi en skjermlås for å beskytte nettbrettet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Angi en skjermlås for å beskytte enheten"</string>
@@ -1070,8 +1068,7 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Bruk systemsertifikat"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ikke oppgi"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ikke godkjenn"</string>
-    <!-- no translation found for wifi_trust_on_first_use (7488431582505858774) -->
-    <skip />
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Trust on First Use"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Nettverksnavnet er for langt."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Du må angi et domene."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Sertifikat er påkrevd."</string>
@@ -1415,7 +1412,6 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"For å kontrollere hva som skjer når telefonen er plassert i dokken og/eller i hvilemodus, slå på skjermspareren."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Starttidspunkt"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Aktiv skjermsparer"</string>
-    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Start nå"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Innstillinger"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktiver enheten med løftebevegelser"</string>
@@ -2276,6 +2272,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Finn ut mer om innstillinger for teksting"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Forstørring"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Forstørringssnarvei"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Følg skriving"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"Forstørringsområdet følger teksten automatisk mens du skriver"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Om forstørring"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Finn ut mer om forstørring"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Forstørringstype"</string>
@@ -2297,7 +2295,12 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Forstørr med snarvei"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Forstørr med snarvei og trippeltrykk"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Om <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_text_reading_options_title (4684613866595056574) -->
+    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"Tekst- og leseinnstillinger"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
     <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Alternativer"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom inn på skjermen"</string>
@@ -2405,17 +2408,21 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Lengre"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tid for autoklikk"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrering og fysiske tilbakemeldinger"</string>
-    <!-- no translation found for accessibility_vibration_settings_summary (3690308537483465527) -->
-    <skip />
+    <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Kontroller vibrasjonsstyrken for forskjellig bruk"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Anrop"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Varsler og alarmer"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktiv haptisk teknologi"</string>
+    <!-- no translation found for accessibility_vibration_primary_switch_title (6162579254864450592) -->
+    <skip />
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Alarmvibrering"</string>
+    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Medievibrering"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Ringevibrering"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Varselvibrering"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Tilbakemelding ved berøring"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Bruk <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Åpne <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for accessibility_service_quick_settings_tooltips_content (4033381225041886637) -->
+    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"Sveip ned for å slå <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> på eller av raskt i hurtiginnstillingene."</string>
+    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
     <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Bruk fargekorrigering"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Snarvei til fargekorrigering"</string>
@@ -2559,6 +2566,10 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hørselshemmet, hørselstap"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hørselshemmet, hørselstap, teksting, fjernskriver, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <string name="fast_pair_settings" msgid="3308819519080016185">"Rask sammenkobling"</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Registrer Bluetooth-enheter m. rask sammenkobling i nærheten."</string>
+    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
+    <skip />
     <string name="print_settings" msgid="8519810615863882491">"Utskrift"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Av"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3347,12 +3358,29 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Velg appene som skal installeres"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Installer tilgjengelige apper"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Kontaktløs betaling"</string>
+    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
+    <skip />
+    <!-- no translation found for nfc_more_details (1700713533074275233) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
+    <skip />
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Slik fungerer det"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Betal med telefonen i butikker"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Standardapp for betaling"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Ikke angitt"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="788899906312142803">"Bruk standard"</string>
+    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
+    <skip />
+    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
+    <skip />
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Alltid"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Unntatt når en annen betalingsapp er åpen"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"I kontaktløse terminaler betaler du med:"</string>
@@ -3578,17 +3606,21 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"skjerm, låsetid, tidsavbrudd, låseskjerm"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"minne, buffer, data, slett, fjern, frigjør, lagringsplass"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"tilkoblet, enhet, hodetelefoner, trådløs, koble til, øreplugger, musikk, media"</string>
+    <string name="keywords_fast_pair" msgid="5422942398816611159">"tilkoblinger, øreplugger, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"bakgrunn, tema, rutenett, tilpass, gi personlig preg"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikon, utheving, farge"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"standard, assistent"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"betaling, standard"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"innkommende varsel"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB-internettdeling, Bluetooth-internettdeling, Wi-Fi-sone"</string>
+    <!-- no translation found for keywords_accessibility_vibration_primary_switch (730692154347231253) -->
+    <skip />
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptisk, vibrer, skjerm, følsomhet"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptisk, vibrer, telefon, anrop, følsomhet, ring"</string>
-    <!-- no translation found for keywords_ramping_ringer_vibration (3678966746742257366) -->
-    <skip />
-    <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptisk, vibrer, følsomhet"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"haptisk, vibrer, telefon, anrop, ring, gradvis"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"haptisk, vibrer, følsomhet, varsel"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"haptisk, vibrer, følsomhet, alarm"</string>
+    <string name="keywords_media_vibration" msgid="723896490102792327">"haptisk, vibrer, følsomhet, medier"</string>
     <string name="keywords_vibration" msgid="670455132028025952">"haptisk, vibrer, vibrering"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"batterisparing, festet, vedvarende, strømsparing, batteri"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutine, tidsplan, batterisparing, strømsparing, batteri, automatisk, prosent"</string>
@@ -5382,6 +5414,10 @@
     <string name="content_capture" msgid="868372905432812238">"Appinnhold"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Tillater at apper sender innhold til Android-systemet"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Samle inn minnedump fra systemet"</string>
+    <!-- no translation found for reboot_with_mte_title (9167242803901899693) -->
+    <skip />
+    <!-- no translation found for reboot_with_mte_message (1024288615073985828) -->
+    <skip />
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Samler inn minnedump fra systemet"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Kunne ikke samle inn minnedump for systemet"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Samle automatisk inn minnedumper fra systemet"</string>
@@ -5427,8 +5463,7 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Gi tilgang til Wallet fra låseskjermen og hurtiginnstillingene"</string>
-    <!-- no translation found for lockscreen_privacy_qr_code_scanner_setting_toggle (4284186474146767523) -->
-    <skip />
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Vis QR-skanneren"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Gi tilgang til QR-skanneren fra låseskjermen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhetsstyring"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få tilgang til kontroller når enheten er låst"</string>
@@ -5510,8 +5545,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vil du slå av mobildata?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Du får ikke tilgang til data eller internett via <xliff:g id="CARRIER">%s</xliff:g>. Internett er bare tilgjengelig via Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"operatøren din"</string>
-    <!-- no translation found for not_allowed_by_ent (1958611623122304411) -->
-    <skip />
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Ikke tillatt av organisasjonen din"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Utilgjengelig fordi sengetidsmodus er på"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Tilbakestilling av viktighet for varsler er fullført."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apper"</string>
@@ -5624,4 +5658,8 @@
     <item msgid="588427840913221601">"Prosesstilstand"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Bekreft"</string>
+    <!-- no translation found for dream_preview_button_title (1498088020579092512) -->
+    <skip />
+    <!-- no translation found for customize_button_title (1110284655990203359) -->
+    <skip />
 </resources>
