@@ -18,22 +18,23 @@ package com.android.settings.dream;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dream.DreamPickerAdapter.OnItemClickListener;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Controller for the dream picker where the user can select a screensaver.
@@ -44,32 +45,11 @@ public class DreamPickerController extends BasePreferenceController {
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final List<DreamBackend.DreamInfo> mDreamInfos;
+    private final Drawable mActiveDrawable;
     private Button mPreviewButton;
     @Nullable
     private DreamBackend.DreamInfo mActiveDream;
-
-    private final OnItemClickListener mItemClickListener =
-            new OnItemClickListener() {
-                @Override
-                public void onItemClicked(DreamBackend.DreamInfo dreamInfo) {
-                    mActiveDream = dreamInfo;
-                    mMetricsFeatureProvider.action(
-                            mContext,
-                            SettingsEnums.ACTION_DREAM_SELECT_TYPE,
-                            mActiveDream == null ? null
-                                    : mActiveDream.componentName.flattenToString());
-                    mBackend.setActiveDream(
-                            mActiveDream == null ? null : mActiveDream.componentName);
-                    updatePreviewButtonState();
-                }
-            };
-
-    private final OnItemClickListener mCustomizeListener = new OnItemClickListener() {
-        @Override
-        public void onItemClicked(DreamBackend.DreamInfo dreamInfo) {
-            mBackend.launchSettings(mContext, dreamInfo);
-        }
-    };
+    private DreamAdapter mAdapter;
 
     public DreamPickerController(Context context, String preferenceKey) {
         this(context, preferenceKey, DreamBackend.getInstance(context));
@@ -79,6 +59,7 @@ public class DreamPickerController extends BasePreferenceController {
         super(context, preferenceKey);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
+        mActiveDrawable = context.getDrawable(R.drawable.ic_dream_check_circle);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
@@ -98,15 +79,17 @@ public class DreamPickerController extends BasePreferenceController {
 
         mActiveDream = getActiveDreamInfo();
 
-        final DreamPickerAdapter adapter =
-                new DreamPickerAdapter(mDreamInfos, mItemClickListener, mCustomizeListener);
+        mAdapter = new DreamAdapter(mDreamInfos.stream()
+                .map(DreamItem::new)
+                .collect(Collectors.toList()));
 
         final RecyclerView recyclerView =
                 ((LayoutPreference) preference).findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(mAdapter);
 
         mPreviewButton = ((LayoutPreference) preference).findViewById(R.id.preview_button);
+        mPreviewButton.setVisibility(View.VISIBLE);
         mPreviewButton.setOnClickListener(v -> mBackend.preview(mActiveDream));
         updatePreviewButtonState();
     }
@@ -126,23 +109,56 @@ public class DreamPickerController extends BasePreferenceController {
                 .orElse(null);
     }
 
-    /** Grid layout manager that calculates the number of columns for the screen size. */
-    private static final class AutoFitGridLayoutManager extends GridLayoutManager {
-        private final float mColumnWidth;
+    private class DreamItem implements IDreamItem {
+        DreamBackend.DreamInfo mDreamInfo;
 
-        AutoFitGridLayoutManager(Context context) {
-            super(context, /* spanCount= */ 1);
-            this.mColumnWidth = context
-                    .getResources()
-                    .getDimensionPixelSize(R.dimen.dream_item_min_column_width);
+        DreamItem(DreamBackend.DreamInfo dreamInfo) {
+            mDreamInfo = dreamInfo;
         }
 
         @Override
-        public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-            final int totalSpace = getWidth() - getPaddingRight() - getPaddingLeft();
-            final int spanCount = Math.max(1, (int) (totalSpace / mColumnWidth));
-            setSpanCount(spanCount);
-            super.onLayoutChildren(recycler, state);
+        public CharSequence getTitle() {
+            return mDreamInfo.caption;
+        }
+
+        @Override
+        public Drawable getIcon() {
+            return isActive() ? mActiveDrawable : mDreamInfo.icon;
+        }
+
+        @Override
+        public void onItemClicked() {
+            mActiveDream = mDreamInfo;
+            mBackend.setActiveDream(mDreamInfo.componentName);
+            mAdapter.notifyDataSetChanged();
+            updatePreviewButtonState();
+            mMetricsFeatureProvider.action(
+                    mContext,
+                    SettingsEnums.ACTION_DREAM_SELECT_TYPE,
+                    mDreamInfo.componentName.flattenToString());
+        }
+
+        @Override
+        public void onCustomizeClicked() {
+            mBackend.launchSettings(mContext, mDreamInfo);
+        }
+
+        @Override
+        public Drawable getPreviewImage() {
+            return mDreamInfo.previewImage;
+        }
+
+        @Override
+        public boolean isActive() {
+            if (mActiveDream == null) {
+                return false;
+            }
+            return mDreamInfo.componentName.equals(mActiveDream.componentName);
+        }
+
+        @Override
+        public boolean allowCustomization() {
+            return isActive() && mDreamInfo.settingsComponentName != null;
         }
     }
 }
