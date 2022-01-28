@@ -27,6 +27,7 @@ import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,16 +44,17 @@ import java.util.List;
 
 /**
  * The fragment for on-screen keyboard settings which used to display user installed IMEs.
- *
- * TODO(b/207452897): Add test for AvailableVirtualKeyboardFragment
  */
 @SearchIndexable
-public final class AvailableVirtualKeyboardFragment extends DashboardFragment
+public class AvailableVirtualKeyboardFragment extends DashboardFragment
         implements InputMethodPreference.OnSavePreferenceListener {
     private static final String TAG = "AvailableVirtualKeyboardFragment";
 
-    private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
-    private InputMethodSettingValuesWrapper mInputMethodSettingValues;
+    @VisibleForTesting
+    final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
+
+    @VisibleForTesting
+    InputMethodSettingValuesWrapper mInputMethodSettingValues;
     private Context mUserAwareContext;
     private int mUserId;
 
@@ -118,7 +120,8 @@ public final class AvailableVirtualKeyboardFragment extends DashboardFragment
         return SettingsEnums.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
-    private void updateInputMethodPreferenceViews() {
+    @VisibleForTesting
+    void updateInputMethodPreferenceViews() {
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
         // Clear existing "InputMethodPreference"s
         mInputMethodPreferenceList.clear();

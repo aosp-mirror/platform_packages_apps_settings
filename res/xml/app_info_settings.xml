@@ -42,6 +42,12 @@
         settings:controller="com.android.settings.applications.appinfo.AppSettingPreferenceController" />
 
     <Preference
+        android:key="all_services_settings"
+        android:title="@string/app_info_all_services_label"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.applications.appinfo.AppAllServicesPreferenceController" />
+
+    <Preference
         android:key="notification_settings"
         android:title="@string/notifications_label"
         settings:controller="com.android.settings.applications.appinfo.AppNotificationPreferenceController" />
