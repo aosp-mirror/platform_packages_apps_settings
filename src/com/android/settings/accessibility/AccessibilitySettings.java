@@ -20,6 +20,7 @@ import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIU
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
+import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -198,6 +199,12 @@ public class AccessibilitySettings extends DashboardFragment {
         initializeAllPreferences();
         updateAllPreferences();
         registerContentMonitors();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAllPreferences();
     }
 
     @Override
@@ -506,11 +513,13 @@ public class AccessibilitySettings extends DashboardFragment {
         private final Context mContext;
         private final DevicePolicyManager mDpm;
         private final PackageManager mPm;
+        private final AppOpsManager mAppOps;
 
         RestrictedPreferenceHelper(Context context) {
             mContext = context;
             mDpm = context.getSystemService(DevicePolicyManager.class);
             mPm = context.getPackageManager();
+            mAppOps = context.getSystemService(AppOpsManager.class);
         }
 
         /**
@@ -553,14 +562,11 @@ public class AccessibilitySettings extends DashboardFragment {
                 }
 
                 final RestrictedPreference preference = createRestrictedPreference(key, title,
-                        summary, icon, fragment);
+                        summary, icon, fragment, packageName,
+                        resolveInfo.serviceInfo.applicationInfo.uid);
 
-                // permittedServices null means all accessibility services are allowed.
-                final boolean serviceAllowed =
-                        permittedServices == null || permittedServices.contains(packageName);
+                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
 
-                setRestrictedPreferenceEnabled(preference, packageName, serviceAllowed,
-                        serviceEnabled);
                 final String prefKey = preference.getKey();
                 final int imageRes = info.getAnimatedImageRes();
                 final CharSequence description = getServiceDescription(mContext, info,
@@ -614,16 +620,11 @@ public class AccessibilitySettings extends DashboardFragment {
                 }
 
                 final RestrictedPreference preference = createRestrictedPreference(key, title,
-                        summary, icon, fragment);
-
-                final String packageName = componentName.getPackageName();
-                // permittedServices null means all accessibility services are allowed.
-                final boolean serviceAllowed =
-                        permittedServices == null || permittedServices.contains(packageName);
+                        summary, icon, fragment, componentName.getPackageName(),
+                        activityInfo.applicationInfo.uid);
                 final boolean serviceEnabled = enabledServices.contains(componentName);
 
-                setRestrictedPreferenceEnabled(preference, packageName, serviceAllowed,
-                        serviceEnabled);
+                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
 
                 final String prefKey = preference.getKey();
                 final String description = info.loadDescription(mPm);
@@ -633,7 +634,7 @@ public class AccessibilitySettings extends DashboardFragment {
 
                 putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
                         componentName);
-                putSettingsExtras(preference, packageName, settingsClassName);
+                putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
 
                 preferenceList.add(preference);
             }
@@ -659,8 +660,9 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private RestrictedPreference createRestrictedPreference(String key, CharSequence title,
-                CharSequence summary, Drawable icon, String fragment) {
-            final RestrictedPreference preference = new RestrictedPreference(mContext);
+                CharSequence summary, Drawable icon, String fragment, String packageName, int uid) {
+            final RestrictedPreference preference = new RestrictedPreference(mContext, packageName,
+                    uid);
 
             preference.setKey(key);
             preference.setTitle(title);
@@ -675,16 +677,37 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private void setRestrictedPreferenceEnabled(RestrictedPreference preference,
-                String packageName, boolean serviceAllowed, boolean serviceEnabled) {
+                final List<String> permittedServices, boolean serviceEnabled) {
+            // permittedServices null means all accessibility services are allowed.
+            boolean serviceAllowed = permittedServices == null || permittedServices.contains(
+                    preference.getPackageName());
+            boolean appOpsAllowed;
+            if (serviceAllowed) {
+                try {
+                    final int mode = mAppOps.noteOpNoThrow(
+                            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+                            preference.getUid(), preference.getPackageName());
+                    appOpsAllowed = mode == AppOpsManager.MODE_ALLOWED;
+                    serviceAllowed = appOpsAllowed;
+                } catch (Exception e) {
+                    // Allow service in case if app ops is not available in testing.
+                    appOpsAllowed = true;
+                }
+            } else {
+                appOpsAllowed = false;
+            }
             if (serviceAllowed || serviceEnabled) {
                 preference.setEnabled(true);
             } else {
                 // Disable accessibility service that are not permitted.
                 final EnforcedAdmin admin =
                         RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
-                                mContext, packageName, UserHandle.myUserId());
+                                mContext, preference.getPackageName(), UserHandle.myUserId());
+
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
+                } else if (!appOpsAllowed) {
+                    preference.setDisabledByAppOps(true);
                 } else {
                     preference.setEnabled(false);
                 }

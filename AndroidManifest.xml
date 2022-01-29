@@ -412,6 +412,7 @@
 
         <activity
             android:name=".wifi.WifiPickerActivity"
+            android:permission="android.permission.CHANGE_WIFI_STATE"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
@@ -3615,6 +3616,18 @@
                 android:launchMode="singleTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SHOW_ADMIN_SUPPORT_DETAILS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ActionDisabledByAppOpsDialog"
+                  android:theme="@style/Theme.AlertDialog"
+                  android:taskAffinity="com.android.settings.appops"
+                  android:excludeFromRecents="true"
+                  android:exported="false"
+                  android:launchMode="singleTop">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SHOW_RESTRICTED_SETTING_DIALOG" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -23,6 +23,7 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -396,6 +397,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     int getUserShortcutTypes() {
         return getUserShortcutTypeFromSettings(getPrefContext());
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
     }
 
     @Override

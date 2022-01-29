@@ -26,10 +26,10 @@ import static org.mockito.Mockito.spy;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.TrafficStats;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.DataUnit;
 
 import androidx.preference.SwitchPreference;
 
@@ -128,7 +128,7 @@ public class DataUsagePreferenceControllerTest {
     public void updateState_shouldUseIECUnit() {
         final DataUsageController.DataUsageInfo usageInfo =
                 new DataUsageController.DataUsageInfo();
-        usageInfo.usageLevel = TrafficStats.MB_IN_BYTES;
+        usageInfo.usageLevel = DataUnit.MEBIBYTES.toBytes(1);
         doReturn(usageInfo).when(mController).getDataUsageInfo(any());
 
         mController.updateState(mPreference);

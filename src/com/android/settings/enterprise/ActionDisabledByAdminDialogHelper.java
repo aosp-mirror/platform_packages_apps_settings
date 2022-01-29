@@ -62,7 +62,7 @@ public final class ActionDisabledByAdminDialogHelper {
     public ActionDisabledByAdminDialogHelper(Activity activity, String restriction) {
         mActivity = activity;
         mDialogView = (ViewGroup) LayoutInflater.from(mActivity).inflate(
-                R.layout.admin_support_details_dialog, null);
+                R.layout.support_details_dialog, null);
         mActionDisabledByAdminController = ActionDisabledByAdminControllerFactory
                 .createInstance(mActivity, restriction,
                         new DeviceAdminStringProviderImpl(mActivity),

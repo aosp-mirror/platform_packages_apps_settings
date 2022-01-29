@@ -153,7 +153,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         when(mDisplay.getBrightnessInfo()).thenReturn(
                 new BrightnessInfo(0.1f, 0.0f, 1.0f, BrightnessInfo.HIGH_BRIGHTNESS_MODE_OFF,
-                    0.5f));
+                    0.5f, BrightnessInfo.BRIGHTNESS_MAX_REASON_NONE));
 
         mController.updateState(mPreference);
 
@@ -168,7 +168,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         when(mDisplay.getBrightnessInfo()).thenReturn(
                 new BrightnessInfo(0.5f, 0.0f, 1.0f, BrightnessInfo.HIGH_BRIGHTNESS_MODE_OFF,
-                    0.5f));
+                    0.5f, BrightnessInfo.BRIGHTNESS_MAX_REASON_NONE));
 
         mController.updateState(mPreference);
 

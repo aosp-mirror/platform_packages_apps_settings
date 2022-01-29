@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 // ToDo: to do the refactor for renaming
 public class UiccSlotUtil {
@@ -172,6 +173,28 @@ public class UiccSlotUtil {
 
         Log.i(TAG, "The SimSlotMapping: " + newUiccSlotMappings);
         performSwitchToSlot(telMgr, newUiccSlotMappings, context);
+    }
+
+    /**
+     * @param context the application context.
+     * @return the esim slot. If the value is -1, there is not the esim.
+     */
+    public static int getEsimSlotId(Context context) {
+        TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
+        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        int firstEsimSlot = IntStream.range(0, slotInfos.size())
+                .filter(
+                        index -> {
+                            UiccSlotInfo slotInfo = slotInfos.get(index);
+                            if (slotInfo == null) {
+                                return false;
+                            }
+                            return !slotInfo.isRemovable();
+                        })
+                .findFirst().orElse(-1);
+
+        Log.i(TAG, "firstEsimSlot: " + firstEsimSlot);
+        return firstEsimSlot;
     }
 
     private static boolean isTargetSlotActive(Collection<UiccSlotMapping> uiccSlotMappings,
