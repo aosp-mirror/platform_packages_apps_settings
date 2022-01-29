@@ -3077,6 +3077,8 @@
     <string name="dark_ui_auto_mode_auto">Turns on from sunset to sunrise</string>
     <!-- Dark UI screen, setting option value for Dark theme to turn on/off automatically according to a user defined schedule. [CHAR LIMIT=32] -->
     <string name="dark_ui_auto_mode_custom">Turns on at custom time</string>
+    <!-- Dark UI screen, setting option value for Dark theme to turn on/off automatically according to a user bedtime schedule. [CHAR LIMIT=40] -->
+    <string name="dark_ui_auto_mode_custom_bedtime">Turns on at bedtime</string>
     <!-- Dark UI screen, setting option name controlling the current activation status. [CHAR LIMIT=30] -->
     <string name="dark_ui_status_title">Status</string>
     <!-- Display settings screen, summary of Dark UI when off and will *never* turn on automatically. [CHAR LIMIT=NONE] -->
@@ -3085,18 +3087,27 @@
     <string name="dark_ui_summary_off_auto_mode_auto">Will turn on automatically at sunset</string>
         <!-- Display settings screen, summary format of night display when off and will turn on automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_off_auto_mode_custom">Will turn on automatically at <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when off and will turn on automatically at bedtime. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_off_auto_mode_custom_bedtime">Will turn on automatically at bedtime</string>
     <!-- Display settings screen, summary of Dark UI when on and will *never* turn off automatically. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_never">Will never turn off automatically</string>
     <!-- Display settings screen, summary of Dark UI when on and will turn off automatically at sunrise. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_auto">Will turn off automatically at sunrise</string>
     <!-- Display settings screen, summary format of night display when on and will turn off automatically at a user defined time. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_summary_on_auto_mode_custom">Will turn off automatically at <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
+    <!-- Display settings screen, summary of Dark UI when on and will turn off automatically after bedtime. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_summary_on_auto_mode_custom_bedtime">Will turn off automatically after bedtime</string>
     <!-- Display settings screen, activation button action for custom schedule [CHAR LIMIT=40] -->
     <string name="dark_ui_activation_on_custom">Turn on until <xliff:g name="time" example="6 AM">%1$s</xliff:g></string>
     <!-- Display settings screen, deactivation button action for custom schedule [CHAR LIMIT=40] -->
     <string name="dark_ui_activation_off_custom">Turn off until <xliff:g name="time" example="10 PM">%1$s</xliff:g></string>
     <!-- Dark theme screen, description of Dark theme feature. [CHAR LIMIT=NONE] -->
     <string name="dark_ui_text">Dark theme uses a black background to help keep battery alive longer on some screens. Dark theme schedules wait to turn on until your screen is off.</string>
+    <!-- Dark UI screen footer summary text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_bedtime_footer_summary">Dark theme is currently following your Bedtime mode schedule</string>
+    <!-- Dark UI screen footer action text shown when the when Dark theme turns on/off automatically according to a user bedtime schedule. [CHAR LIMIT=NONE] -->
+    <string name="dark_ui_bedtime_footer_action">Bedtime mode settings</string>
+
 
     <!-- Sound & display settings screen, setting option name to change screen timeout -->
     <string name="screen_timeout">Screen timeout</string>
@@ -4630,6 +4641,8 @@
     <string name="clear_user_data_text">Clear storage</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
+    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted settings from lock screen title -->
+    <string name="app_restricted_settings_lockscreen_title">Unlock restricted settings</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
@@ -12002,6 +12015,10 @@
     <string name="do_disclosure_learn_more_separator">" "</string>
     <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=2416766240581561009] -->
     <string name="learn_more">Learn more</string>
+    <!--Title for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=50] -->
+    <string name="blocked_by_restricted_settings_title">Restricted Settings</string>
+    <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=100] -->
+    <string name="blocked_by_restricted_settings_content">For your security, this setting is currently unavailable.</string>
 
     <!-- Financed device Privacy --> <skip />
 
@@ -12245,6 +12262,9 @@
 
     <!-- Help URI, prevent ringing gesture [DO NOT TRANSLATE] -->
     <string name="help_uri_prevent_ringing_gesture" translatable="false"></string>
+
+    <!-- Help URI, action disabled by restricted settings [DO NOT TRANSLATE] -->
+    <string name="help_url_action_disabled_by_restricted_settings" translatable="false"></string>
 
     <!-- Title label for Priority mode suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="zen_suggestion_title" translatable="false">Update Priority mode</string>
@@ -13108,7 +13128,7 @@
     <string name="capture_system_heap_dump_title">Capture system heap dump</string>
     <!-- Title for the button to reboot with MTE enabled. [CHAR LIMIT=NONE] -->
     <string name="reboot_with_mte_title">Reboot with MTE</string>
-    <string name="reboot_with_mte_message">This wil reboot and allow to experiment with Memory Tagging Extensions (MTE). This may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
+    <string name="reboot_with_mte_message">System will reboot and allow to experiment with Memory Tagging Extension (MTE). MTE may negatively impact system performance and stability. Will be reset on next subsequent reboot.</string>
     <!-- Toast that is shown when the user initiates capturing a heap dump for the system server. [CHAR LIMIT=NONE] -->
     <string name="capturing_system_heap_dump_message">Capturing system heap dump</string>
     <!-- Toast that is shown if there's an error capturing the user initiated heap dump. [CHAR LIMIT=NONE] -->
@@ -13813,4 +13833,17 @@
     <string name="dream_preview_button_title">Preview screensaver</string>
     <!-- Button to customize the screensaver [CHAR LIMIT=20] -->
     <string name="customize_button_title">Customize</string>
+
+    <!-- Dialog body text used to explain a reboot is required after enabling freeform support for
+    it to work [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable freeform
+    support.</string>
+    <!-- Dialog body text used to explain a reboot is required after forcing desktop mode on
+    secondary dislays. [CHAR LIMIT=none] -->
+    <string name="reboot_dialog_force_desktop_mode">A reboot is required to force desktop mode on
+    secondary displays.</string>
+    <!-- Text on the dialog button to reboot the device now [CHAR LIMIT=50] -->
+    <string name="reboot_dialog_reboot_now">Reboot now</string>
+    <!-- Text on the dialog button to reboot the device later [CHAR LIMIT=50] -->
+    <string name="reboot_dialog_reboot_later">Reboot later</string>
 </resources>

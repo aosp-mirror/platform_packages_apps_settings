@@ -242,6 +242,16 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return null;
+    }
+
+    @Override
     protected void updateSwitchBarToggleSwitch() {
         final boolean checked = isAccessibilityServiceEnabled();
         if (mToggleServiceSwitchPreference.isChecked() == checked) {
