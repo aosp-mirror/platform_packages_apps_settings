@@ -24,8 +24,9 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.SystemProperties;
 
 import androidx.preference.ListPreference;
@@ -52,7 +53,10 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
   @Spy
   private Context mSpyContext = RuntimeEnvironment.application;
   @Spy
-  private Resources mSpyResources = RuntimeEnvironment.application.getResources();
+  private BluetoothManager mBluetoothManager =
+      mSpyContext.getSystemService(BluetoothManager.class);
+  @Spy
+  private BluetoothAdapter mBluetoothAdapter = mBluetoothManager.getAdapter();
 
   private ListPreference mPreference;
   private BluetoothMaxConnectedAudioDevicesPreferenceController mController;
@@ -63,15 +67,16 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
   @Before
   public void setup() {
     MockitoAnnotations.initMocks(this);
-    doReturn(mSpyResources).when(mSpyContext).getResources();
+    doReturn(mBluetoothManager).when(mSpyContext).getSystemService(BluetoothManager.class);
+    doReturn(mBluetoothAdapter).when(mBluetoothManager).getAdapter();
     // Get XML values without mock
     // Setup test list preference using XML values
     mPreference = new ListPreference(mSpyContext);
     mPreference.setEntries(R.array.bluetooth_max_connected_audio_devices);
     mPreference.setEntryValues(R.array.bluetooth_max_connected_audio_devices_values);
     // Stub default max connected audio devices to a test controlled value
-    doReturn(TEST_MAX_CONNECTED_AUDIO_DEVICES).when(mSpyResources).getInteger(
-        com.android.internal.R.integer.config_bluetooth_max_connected_audio_devices);
+    doReturn(TEST_MAX_CONNECTED_AUDIO_DEVICES).when(mBluetoothAdapter)
+        .getMaxConnectedAudioDevices();
     // Init the actual controller
     mController = new BluetoothMaxConnectedAudioDevicesPreferenceController(mSpyContext);
     // Construct preference in the controller via a mocked preference screen object
