@@ -17,6 +17,18 @@
 package com.android.settings.applications.specialaccess.deviceadmin;
 
 import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACTIVATE_DEVICE_ADMIN_APP;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACTIVATE_THIS_DEVICE_ADMIN_APP;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACTIVE_DEVICE_ADMIN_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_ADMIN_POLICIES_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.NEW_DEVICE_ADMIN_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.NEW_DEVICE_ADMIN_WARNING_SIMPLIFIED;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_AND_UNINSTALL_DEVICE_ADMIN;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_DEVICE_ADMIN;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_WORK_PROFILE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_PROFILE_OWNER_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.USER_ADMIN_POLICIES_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_ADMIN_POLICIES_WARNING;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -318,7 +330,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
             // Build and show the simplified dialog
             final Dialog dialog = new AlertDialog.Builder(this)
-                    .setTitle(getText(R.string.profile_owner_add_title_simplified))
+                    .setTitle(mDPM.getString(SET_PROFILE_OWNER_DIALOG_TITLE,
+                            () -> getString(R.string.profile_owner_add_title_simplified)))
                     .setView(R.layout.profile_owner_add)
                     .setPositiveButton(R.string.allow, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -339,8 +352,10 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             mAddMsg = dialog.findViewById(R.id.add_msg_simplified);
             mAddMsg.setText(mAddMsgText);
             mAdminWarning = dialog.findViewById(R.id.admin_warning_simplified);
-            mAdminWarning.setText(getString(R.string.device_admin_warning_simplified,
-                    mProfileOwnerName));
+            mAdminWarning.setText(
+                    mDPM.getString(NEW_DEVICE_ADMIN_WARNING_SIMPLIFIED, () ->
+                    getString(R.string.device_admin_warning_simplified,
+                    mProfileOwnerName), mProfileOwnerName));
             return;
         }
         setContentView(R.layout.device_admin_add);
@@ -655,8 +670,10 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             final boolean isManagedProfile = isManagedProfile(mDeviceAdmin);
             if (isProfileOwner && isManagedProfile) {
                 // Profile owner in a managed profile, user can remove profile to disable admin.
-                mAdminWarning.setText(R.string.admin_profile_owner_message);
-                mActionButton.setText(R.string.remove_managed_profile_label);
+                mAdminWarning.setText(mDPM.getString(WORK_PROFILE_ADMIN_POLICIES_WARNING,
+                        () -> getString(R.string.admin_profile_owner_message)));
+                mActionButton.setText(mDPM.getString(REMOVE_WORK_PROFILE,
+                        () -> getString(R.string.remove_managed_profile_label)));
 
                 final EnforcedAdmin admin = getAdminEnforcingCantRemoveProfile();
                 final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
@@ -670,27 +687,33 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                 // Profile owner in a user or device owner, user can't disable admin.
                 if (isProfileOwner) {
                     // Show profile owner in a user description.
-                    mAdminWarning.setText(R.string.admin_profile_owner_user_message);
+                    mAdminWarning.setText(mDPM.getString(USER_ADMIN_POLICIES_WARNING,
+                            () -> getString(R.string.admin_profile_owner_user_message)));
                 } else {
                     // Show device owner description.
                     if (isFinancedDevice()) {
                         mAdminWarning.setText(R.string.admin_financed_message);
                     } else {
-                        mAdminWarning.setText(R.string.admin_device_owner_message);
+                        mAdminWarning.setText(mDPM.getString(DEVICE_ADMIN_POLICIES_WARNING,
+                                () -> getString(R.string.admin_device_owner_message)));
                     }
                 }
-                mActionButton.setText(R.string.remove_device_admin);
+                mActionButton.setText(mDPM.getString(REMOVE_DEVICE_ADMIN,
+                        () -> getString(R.string.remove_device_admin)));
                 mActionButton.setEnabled(false);
             } else {
                 addDeviceAdminPolicies(false /* showDescription */);
-                mAdminWarning.setText(getString(R.string.device_admin_status,
-                        mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(
-                        getPackageManager())));
+                CharSequence label = mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(
+                        getPackageManager());
+                mAdminWarning.setText(mDPM.getString(ACTIVE_DEVICE_ADMIN_WARNING,
+                        () -> getString(R.string.device_admin_status, label), label));
                 setTitle(R.string.active_device_admin_msg);
                 if (mUninstalling) {
-                    mActionButton.setText(R.string.remove_and_uninstall_device_admin);
+                    mActionButton.setText(mDPM.getString(REMOVE_AND_UNINSTALL_DEVICE_ADMIN,
+                            () -> getString(R.string.remove_and_uninstall_device_admin)));
                 } else {
-                    mActionButton.setText(R.string.remove_device_admin);
+                    mActionButton.setText(mDPM.getString(REMOVE_DEVICE_ADMIN,
+                            () -> getString(R.string.remove_device_admin)));
                 }
             }
             CharSequence supportMessage = mDPM.getLongSupportMessageForUser(
@@ -703,10 +726,16 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
             }
         } else {
             addDeviceAdminPolicies(true /* showDescription */);
-            mAdminWarning.setText(getString(R.string.device_admin_warning,
-                    mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
-            setTitle(getText(R.string.add_device_admin_msg));
-            mActionButton.setText(getText(R.string.add_device_admin));
+            CharSequence label = mDeviceAdmin.getActivityInfo()
+                    .applicationInfo.loadLabel(getPackageManager());
+            mAdminWarning.setText(
+                    mDPM.getString(NEW_DEVICE_ADMIN_WARNING, () ->
+                    getString(R.string.device_admin_warning, label
+                    ), label));
+            setTitle(mDPM.getString(ACTIVATE_DEVICE_ADMIN_APP,
+                    () -> getString(R.string.add_device_admin_msg)));
+            mActionButton.setText(mDPM.getString(ACTIVATE_THIS_DEVICE_ADMIN_APP,
+                    () -> getString(R.string.add_device_admin)));
             if (isAdminUninstallable()) {
                 mUninstallButton.setVisibility(View.VISIBLE);
             }

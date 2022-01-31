@@ -289,7 +289,8 @@ public class EntityHeaderController {
             @Override
             public void onClick(View v) {
                 AppInfoBase.startAppInfoFragment(
-                        AppInfoDashboardFragment.class, R.string.application_info_label,
+                        AppInfoDashboardFragment.class,
+                        mActivity.getString(R.string.application_info_label),
                         mPackageName, mUid, mFragment, 0 /* request */,
                         mMetricsCategory);
             }

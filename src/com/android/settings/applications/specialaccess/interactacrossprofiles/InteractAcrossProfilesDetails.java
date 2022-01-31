@@ -15,6 +15,11 @@
  */
 package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_PERMISSIONS;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECT_APPS_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_AWARE;
 import static android.content.pm.PackageManager.MATCH_DIRECT_BOOT_UNAWARE;
 import static android.provider.Settings.ACTION_MANAGE_CROSS_PROFILE_ACCESS;
@@ -258,16 +263,22 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         final TextView dialogTitle = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_title);
-        dialogTitle.setText(
-                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel));
+        dialogTitle.setText(mDpm.getString(CONNECT_APPS_DIALOG_TITLE, () ->
+                getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel)));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
-        appDataSummary.setText(getString(
-                R.string.interact_across_profiles_consent_dialog_app_data_summary, mAppLabel));
+        appDataSummary.setText(
+                mDpm.getString(APP_CAN_ACCESS_PERSONAL_DATA,
+                        () -> getString(
+                                R.string.interact_across_profiles_consent_dialog_app_data_summary,
+                                mAppLabel), mAppLabel));
 
         final TextView permissionsSummary = dialogView.findViewById(R.id.permissions_summary);
-        permissionsSummary.setText(getString(
-                R.string.interact_across_profiles_consent_dialog_permissions_summary, mAppLabel));
+        permissionsSummary.setText(mDpm.getString(APP_CAN_ACCESS_PERSONAL_PERMISSIONS,
+                () -> getString(
+                        R.string.interact_across_profiles_consent_dialog_permissions_summary,
+                        mAppLabel),
+                mAppLabel));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(dialogView)
@@ -393,9 +404,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return false;
         }
         if (!mInstalledInPersonal) {
-            mInstallBanner.setTitle(getString(
-                    R.string.interact_across_profiles_install_personal_app_title,
-                    mAppLabel));
+            mInstallBanner.setTitle(
+                    mDpm.getString(INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT,
+                            () -> getString(
+                                    R.string.interact_across_profiles_install_personal_app_title,
+                                    mAppLabel),
+                            mAppLabel));
             if (mInstallAppIntent != null) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
@@ -404,9 +418,12 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
             return true;
         }
         if (!mInstalledInWork) {
-            mInstallBanner.setTitle(getString(
-                    R.string.interact_across_profiles_install_work_app_title,
-                    mAppLabel));
+            mInstallBanner.setTitle(
+                    mDpm.getString(INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT,
+                            () -> getString(
+                                    R.string.interact_across_profiles_install_work_app_title,
+                                    mAppLabel),
+                            mAppLabel));
             if (mInstallAppIntent != null) {
                 mInstallBanner.setSummary(
                         R.string.interact_across_profiles_install_app_summary);
