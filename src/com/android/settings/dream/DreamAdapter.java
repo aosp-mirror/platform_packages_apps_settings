@@ -64,7 +64,14 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
          */
         public void bindView(IDreamItem item) {
             mTitleView.setText(item.getTitle());
-            mPreviewView.setImageDrawable(item.getPreviewImage());
+
+            final Drawable previewImage = item.getPreviewImage();
+            if (previewImage != null) {
+                mPreviewView.setVisibility(View.VISIBLE);
+                mPreviewView.setImageDrawable(previewImage);
+            } else {
+                mPreviewView.setVisibility(View.GONE);
+            }
 
             final Drawable icon = item.getIcon();
             if (icon instanceof VectorDrawable) {
