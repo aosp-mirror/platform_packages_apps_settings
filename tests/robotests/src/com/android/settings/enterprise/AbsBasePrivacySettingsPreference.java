@@ -84,18 +84,6 @@ public abstract class AbsBasePrivacySettingsPreference {
 
     protected void verifyFinancedPreferenceControllers(
             List<AbstractPreferenceController> controllers) {
-        assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(6);
-        int position = 0;
-        assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(
-                SecurityLogsPreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(
-                EnterpriseInstalledPackagesPreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(
-                PreferenceCategoryController.class);
-        assertThat(controllers.get(position)).isInstanceOf(
-                FailedPasswordWipeCurrentUserPreferenceController.class);
+        assertThat(controllers).isEmpty();
     }
 }
