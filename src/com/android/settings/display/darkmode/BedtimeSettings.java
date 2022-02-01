@@ -16,19 +16,17 @@
 
 package com.android.settings.display.darkmode;
 
+import static android.provider.Settings.ACTION_BEDTIME_SETTINGS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 /** Manages Digital Wellbeing bedtime settings' intents. */
 public final class BedtimeSettings {
-    @VisibleForTesting
-    public static final String ACTION_BEDTIME_SETTINGS = "android.settings.BEDTIME_SETTINGS";
-
     private final Context mContext;
     private final PackageManager mPackageManager;
     private final String mWellbeingPackage;
