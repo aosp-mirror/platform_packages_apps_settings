@@ -60,8 +60,8 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
                 "zen_mode_people_calls"));
         controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
                 "zen_mode_people_messages"));
-        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
-                fragmentManager));
+        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
+                R.string.zen_mode_people_footer));
         return controllers;
     }
 

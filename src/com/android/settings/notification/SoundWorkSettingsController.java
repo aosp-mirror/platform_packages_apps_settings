@@ -16,8 +16,13 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_MESSAGE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_ACTIVE_SUMMARY;
+
 import android.annotation.UserIdInt;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -252,11 +257,16 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
     private void enableWorkSyncSettings() {
         mWorkUsePersonalSounds.setChecked(true);
 
+        String summary = mContext.getSystemService(DevicePolicyManager.class).getString(
+                WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_ACTIVE_SUMMARY,
+                () -> mContext.getString(R.string.work_sound_same_as_personal)
+        );
+
         if (mWorkPhoneRingtonePreference != null) {
-            mWorkPhoneRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
+            mWorkPhoneRingtonePreference.setSummary(summary);
         }
-        mWorkNotificationRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
-        mWorkAlarmRingtonePreference.setSummary(R.string.work_sound_same_as_personal);
+        mWorkNotificationRingtonePreference.setSummary(summary);
+        mWorkAlarmRingtonePreference.setSummary(summary);
     }
 
     private void disableWorkSync() {
@@ -339,9 +349,18 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            Context context = getActivity().getApplicationContext();
+            DevicePolicyManager devicePolicyManager =
+                    context.getSystemService(DevicePolicyManager.class);
+
             return new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.work_sync_dialog_title)
-                    .setMessage(R.string.work_sync_dialog_message)
+                    .setTitle(devicePolicyManager.getString(
+                            ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_TITLE,
+                            () -> context.getString(R.string.work_sync_dialog_title)))
+                    .setMessage(devicePolicyManager.getString(
+                            ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_MESSAGE,
+                            () -> context.getString(R.string.work_sync_dialog_message)))
                     .setPositiveButton(R.string.work_sync_dialog_yes,
                             SoundWorkSettingsController.UnifyWorkDialogFragment.this)
                     .setNegativeButton(android.R.string.no, /* listener= */ null)

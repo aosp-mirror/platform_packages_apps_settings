@@ -649,8 +649,8 @@ public class ManageApplications extends InstrumentedFragment
     }
 
     private void startAppInfoFragment(Class<?> fragment, int titleRes) {
-        AppInfoBase.startAppInfoFragment(fragment, titleRes, mCurrentPkgName, mCurrentUid, this,
-                INSTALLED_APP_DETAILS, getMetricsCategory());
+        AppInfoBase.startAppInfoFragment(fragment, getString(titleRes), mCurrentPkgName,
+                mCurrentUid, this, INSTALLED_APP_DETAILS, getMetricsCategory());
     }
 
     @Override

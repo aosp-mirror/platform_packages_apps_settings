@@ -25,11 +25,14 @@ interface IDreamItem {
 
     void onItemClicked();
 
-    void onCustomizeClicked();
+    default void onCustomizeClicked() {
+    }
 
     Drawable getPreviewImage();
 
     boolean isActive();
 
-    boolean allowCustomization();
+    default boolean allowCustomization() {
+        return false;
+    }
 }

@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * Controller for the dream picker where the user can select a screensaver.
  */
 public class DreamPickerController extends BasePreferenceController {
-    public static final String KEY = "dream_picker";
+    private static final String KEY = "dream_picker";
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -51,12 +51,12 @@ public class DreamPickerController extends BasePreferenceController {
     private DreamBackend.DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
 
-    public DreamPickerController(Context context, String preferenceKey) {
-        this(context, preferenceKey, DreamBackend.getInstance(context));
+    public DreamPickerController(Context context) {
+        this(context, DreamBackend.getInstance(context));
     }
 
-    public DreamPickerController(Context context, String preferenceKey, DreamBackend backend) {
-        super(context, preferenceKey);
+    public DreamPickerController(Context context, DreamBackend backend) {
+        super(context, KEY);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
         mActiveDrawable = context.getDrawable(R.drawable.ic_dream_check_circle);
