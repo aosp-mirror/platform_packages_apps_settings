@@ -16,7 +16,11 @@
 
 package com.android.settings.users;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_MESSAGE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_TITLE;
+
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -52,17 +56,20 @@ public final class UserDialogs {
     public static Dialog createRemoveDialog(Context context, int removingUserId,
             DialogInterface.OnClickListener onConfirmListener) {
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
         UserInfo userInfo = um.getUserInfo(removingUserId);
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setPositiveButton(R.string.user_delete_button, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null);
         if (userInfo.isManagedProfile()) {
-            builder.setTitle(R.string.work_profile_confirm_remove_title);
+            builder.setTitle(dpm.getString(WORK_PROFILE_CONFIRM_REMOVE_TITLE,
+                    () -> context.getString(R.string.work_profile_confirm_remove_title)));
             View view = createRemoveManagedUserDialogView(context, removingUserId);
             if (view != null) {
                 builder.setView(view);
             } else {
-                builder.setMessage(R.string.work_profile_confirm_remove_message);
+                builder.setMessage(dpm.getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+                        () -> context.getString(R.string.work_profile_confirm_remove_message)));
             }
         } else if (UserHandle.myUserId() == removingUserId) {
             builder.setTitle(R.string.user_confirm_remove_self_title);

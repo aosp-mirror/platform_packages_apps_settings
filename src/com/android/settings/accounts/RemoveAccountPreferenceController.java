@@ -15,12 +15,15 @@
  */
 package com.android.settings.accounts;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -213,7 +216,9 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
 
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.remove_account_label)
-                    .setMessage(R.string.remove_account_failed)
+                    .setMessage(getContext().getSystemService(DevicePolicyManager.class)
+                            .getString(REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION,
+                                    () -> getString(R.string.remove_account_failed)))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }

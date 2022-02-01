@@ -16,9 +16,12 @@
 
 package com.android.settings.bugreporthandler;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_PROFILE_APP_SUBTEXT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_APP_SUBTEXT;
 import static android.provider.Settings.ACTION_BUGREPORT_HANDLER_SETTINGS;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -189,10 +192,15 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
             return "";
         }
         final UserInfo userInfo = mUserManager.getUserInfo(handlerUser);
+        DevicePolicyManager devicePolicyManager =
+                context.getSystemService(DevicePolicyManager.class);
+
         if (userInfo != null && userInfo.isManagedProfile()) {
-            return context.getString(R.string.work_profile_app_subtext);
+            return devicePolicyManager.getString(WORK_PROFILE_APP_SUBTEXT,
+                    () -> context.getString(R.string.work_profile_app_subtext));
         }
-        return context.getString(R.string.personal_profile_app_subtext);
+        return devicePolicyManager.getString(PERSONAL_PROFILE_APP_SUBTEXT,
+                () -> context.getString(R.string.personal_profile_app_subtext));
     }
 
     private static class BugreportHandlerAppInfo extends DefaultAppInfo {

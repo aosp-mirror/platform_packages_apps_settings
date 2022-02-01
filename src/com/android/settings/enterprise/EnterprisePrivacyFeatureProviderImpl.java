@@ -16,6 +16,9 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_MANAGED_WITHOUT_NAME;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_MANAGED_WITH_NAME;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -95,10 +98,12 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         final SpannableStringBuilder disclosure = new SpannableStringBuilder();
         final CharSequence organizationName = mDpm.getDeviceOwnerOrganizationName();
         if (organizationName != null) {
-            disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
-                    organizationName));
+            disclosure.append(mDpm.getString(DEVICE_MANAGED_WITH_NAME,
+                    () -> mResources.getString(R.string.do_disclosure_with_name,
+                    organizationName), organizationName));
         } else {
-            disclosure.append(mResources.getString(R.string.do_disclosure_generic));
+            disclosure.append(mDpm.getString(DEVICE_MANAGED_WITHOUT_NAME,
+                    () -> mResources.getString(R.string.do_disclosure_generic)));
         }
         return disclosure;
     }
