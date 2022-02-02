@@ -39,11 +39,12 @@ import java.util.List;
  */
 class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
+    private int mLastSelectedPos = -1;
 
     /**
      * View holder for each {@link IDreamItem}.
      */
-    private static class DreamViewHolder extends RecyclerView.ViewHolder {
+    private class DreamViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mIconView;
         private final TextView mTitleView;
         private final ImageView mPreviewView;
@@ -62,7 +63,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         /**
          * Bind the view at the given position, populating the view with the provided data.
          */
-        public void bindView(IDreamItem item) {
+        public void bindView(IDreamItem item, int position) {
             mTitleView.setText(item.getTitle());
 
             final Drawable previewImage = item.getPreviewImage();
@@ -73,20 +74,32 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 mPreviewView.setVisibility(View.GONE);
             }
 
-            final Drawable icon = item.getIcon();
+            final Drawable icon = item.isActive()
+                    ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
+                    : item.getIcon();
             if (icon instanceof VectorDrawable) {
                 icon.setTint(Utils.getColorAttrDefaultColor(mContext,
                         com.android.internal.R.attr.colorAccentPrimaryVariant));
             }
             mIconView.setImageDrawable(icon);
-            if (item.allowCustomization()) {
-                mCustomizeButton.setVisibility(View.VISIBLE);
-                mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+
+            if (item.isActive()) {
+                mLastSelectedPos = position;
+                itemView.setSelected(true);
             } else {
-                mCustomizeButton.setVisibility(View.GONE);
+                itemView.setSelected(false);
             }
-            itemView.setOnClickListener(v -> item.onItemClicked());
-            itemView.setActivated(item.isActive());
+
+            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+            mCustomizeButton.setVisibility(item.allowCustomization() ? View.VISIBLE : View.GONE);
+
+            itemView.setOnClickListener(v -> {
+                item.onItemClicked();
+                if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
+                    notifyItemChanged(mLastSelectedPos);
+                }
+                notifyItemChanged(position);
+            });
         }
     }
 
@@ -104,7 +117,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ((DreamViewHolder) viewHolder).bindView(mItemList.get(i));
+        ((DreamViewHolder) viewHolder).bindView(mItemList.get(i), i);
     }
 
     @Override
