@@ -65,7 +65,9 @@ public class AddSupervisedUserActivity extends Activity {
     }
 
     private void createUser() {
-        final NewUserRequest request = new NewUserRequest.Builder().build();
+        final NewUserRequest request = new NewUserRequest.Builder()
+                .setName(getString(R.string.user_new_user_name))
+                .build();
 
         final AlertDialog pleaseWaitDialog = new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.creating_new_user_dialog_message))
