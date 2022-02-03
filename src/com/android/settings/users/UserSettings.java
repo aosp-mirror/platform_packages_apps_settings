@@ -118,6 +118,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
+    private static final String KEY_TIMEOUT_TO_USER_ZERO = "timeout_to_user_zero_preference";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -185,6 +186,7 @@ public class UserSettings extends SettingsPreferenceFragment
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
+    private TimeoutToUserZeroPreferenceController mTimeoutToUserZeroPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
     private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -264,9 +266,13 @@ public class UserSettings extends SettingsPreferenceFragment
         mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
                 KEY_MULTIUSER_TOP_INTRO);
 
+        mTimeoutToUserZeroPreferenceController = new TimeoutToUserZeroPreferenceController(activity,
+                KEY_TIMEOUT_TO_USER_ZERO);
+
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
+        mTimeoutToUserZeroPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -327,6 +333,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        mTimeoutToUserZeroPreferenceController.updateState(screen.findPreference(
+                mTimeoutToUserZeroPreferenceController.getPreferenceKey()));
 
         if (mShouldUpdateUserList) {
             updateUI();
