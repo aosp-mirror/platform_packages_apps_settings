@@ -37,9 +37,7 @@ public class DreamComplicationPickerController extends BasePreferenceController 
     private static final String KEY = "dream_complication_picker";
 
     private final DreamBackend mBackend;
-    private final Drawable mEnabledDrawable;
     private final Set<Integer> mSupportedComplications;
-    private DreamAdapter mAdapter;
 
     private class ComplicationItem implements IDreamItem {
         private final int mComplicationType;
@@ -58,14 +56,13 @@ public class DreamComplicationPickerController extends BasePreferenceController 
         @Override
         public Drawable getIcon() {
             // TODO(b/215703483): add icon for each complication
-            return mEnabled ? mEnabledDrawable : null;
+            return null;
         }
 
         @Override
         public void onItemClicked() {
             mEnabled = !mEnabled;
             mBackend.setComplicationEnabled(mComplicationType, mEnabled);
-            mAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -84,7 +81,6 @@ public class DreamComplicationPickerController extends BasePreferenceController 
         super(context, KEY);
         mBackend = DreamBackend.getInstance(context);
         mSupportedComplications = mBackend.getSupportedComplications();
-        mEnabledDrawable = context.getDrawable(R.drawable.ic_dream_check_circle);
     }
 
     @Override
@@ -102,7 +98,7 @@ public class DreamComplicationPickerController extends BasePreferenceController 
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mAdapter = new DreamAdapter(mSupportedComplications.stream()
+        DreamAdapter adapter = new DreamAdapter(mSupportedComplications.stream()
                 .map(ComplicationItem::new)
                 .collect(Collectors.toList()));
 
@@ -110,7 +106,8 @@ public class DreamComplicationPickerController extends BasePreferenceController 
         if (pref != null) {
             final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
             recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
-            recyclerView.setAdapter(mAdapter);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(adapter);
         }
     }
 }
