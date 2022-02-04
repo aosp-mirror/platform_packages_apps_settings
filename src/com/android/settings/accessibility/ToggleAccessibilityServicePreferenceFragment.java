@@ -168,9 +168,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         switch (dialogId) {
-            case DialogEnums.ENABLE_WARNING_FROM_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+            case DialogEnums.ENABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
                     return null;
                 }
@@ -178,10 +178,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromEnableToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE:
                 if (info == null) {
                     return null;
                 }
@@ -189,10 +187,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
                 if (info == null) {
                     return null;
                 }
@@ -200,23 +196,24 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
                     return null;
                 }
                 mWarningDialog = AccessibilityServiceWarning
                         .createDisableDialog(getPrefContext(), info,
                                 this::onDialogButtonFromDisableToggleClicked);
-                break;
-            }
-            default: {
-                mWarningDialog = super.onCreateDialog(dialogId);
-            }
+                return mWarningDialog;
+            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                final Dialog dialog = AccessibilityGestureNavigationTutorial
+                        .createAccessibilityTutorialDialog(getPrefContext(),
+                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
+                dialog.setCanceledOnTouchOutside(false);
+                return dialog;
+            default:
+                return super.onCreateDialog(dialogId);
         }
-        return mWarningDialog;
     }
 
     @Override
@@ -486,6 +483,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setChecked(false);
 
         mWarningDialog.dismiss();
+    }
+
+    /**
+     * This method will be invoked when a button in the tutorial dialog is clicked.
+     *
+     * @param dialog The dialog that received the click
+     * @param which  The button that was clicked
+     */
+    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
+        dialog.dismiss();
+        showQuickSettingsTooltipIfNeeded();
     }
 
     void onDialogButtonFromShortcutClicked(View view) {
