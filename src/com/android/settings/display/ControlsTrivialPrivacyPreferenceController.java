@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,28 +17,23 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.UserHandle;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 
 /**
- * Preference for showing/hiding sensitive device controls content while the device is locked.
- *
- * Note that ControlsTrivialPrivacyPreferenceController depends on the preferenceKey
- * of this controller.
+ * Preference for requiring authorization to use home controls for certain devices.
  */
-public class ControlsPrivacyPreferenceController extends TogglePreferenceController {
+public class ControlsTrivialPrivacyPreferenceController extends TogglePreferenceController {
 
-    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_CONTROLS;
+    private static final String SETTING_KEY = Settings.Secure.LOCKSCREEN_ALLOW_TRIVIAL_CONTROLS;
+    private static final String DEPENDENCY_SETTING_KEY = Settings.Secure.LOCKSCREEN_SHOW_CONTROLS;
 
-    public ControlsPrivacyPreferenceController(Context context, String preferenceKey) {
+    public ControlsTrivialPrivacyPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
     }
 
@@ -55,15 +50,7 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
 
     @Override
     public CharSequence getSummary() {
-        final int res = isSecure() ? R.string.lockscreen_privacy_controls_summary :
-                R.string.lockscreen_privacy_not_secure;
-        return mContext.getText(res);
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        // hide if lockscreen isn't secure for this user
-        return isEnabled() && isSecure() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+        return mContext.getText(R.string.lockscreen_trivial_controls_summary);
     }
 
     @Override
@@ -78,19 +65,20 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
         return R.string.menu_key_display;
     }
 
-    private boolean isEnabled() {
-        return isControlsAvailable();
+    @Override
+    public int getAvailabilityStatus() {
+        return showDeviceControlsSettingsEnabled() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 
-    private boolean isSecure() {
-        final LockPatternUtils utils = FeatureFactory.getFactory(mContext)
-                .getSecurityFeatureProvider()
-                .getLockPatternUtils(mContext);
-        final int userId = UserHandle.myUserId();
-        return utils.isSecure(userId);
+    private boolean showDeviceControlsSettingsEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(), DEPENDENCY_SETTING_KEY, 0)
+                != 0;
     }
 
-    private boolean isControlsAvailable() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CONTROLS);
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        Preference currentPreference = screen.findPreference(getPreferenceKey());
+        currentPreference.setDependency("lockscreen_privacy_controls_switch");
     }
 }
