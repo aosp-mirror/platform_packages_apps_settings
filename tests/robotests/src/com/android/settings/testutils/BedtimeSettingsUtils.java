@@ -16,7 +16,7 @@
 
 package com.android.settings.testutils;
 
-import static com.android.settings.display.darkmode.BedtimeSettings.ACTION_BEDTIME_SETTINGS;
+import static android.provider.Settings.ACTION_BEDTIME_SETTINGS;
 
 import static org.robolectric.Shadows.shadowOf;
 
