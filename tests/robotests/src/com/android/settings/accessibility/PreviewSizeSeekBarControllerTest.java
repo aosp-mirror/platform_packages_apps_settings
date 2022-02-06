@@ -82,4 +82,17 @@ public class PreviewSizeSeekBarControllerTest {
 
         verify(mSeekBarPreference).setProgress(mFontSizeData.getInitialIndex());
     }
+
+    @Test
+    public void resetToDefaultState_matchResult() {
+        final int defaultProgress =
+                mFontSizeData.getValues().indexOf(mFontSizeData.getDefaultValue());
+        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mSeekBarPreference);
+
+        mSeekBarController.displayPreference(mPreferenceScreen);
+        mSeekBarPreference.setProgress(defaultProgress + 1);
+        mSeekBarController.resetState();
+
+        assertThat(mSeekBarPreference.getProgress()).isEqualTo(defaultProgress);
+    }
 }

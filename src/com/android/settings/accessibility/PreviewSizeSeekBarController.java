@@ -29,10 +29,12 @@ import com.android.settings.widget.LabeledSeekBarPreference;
  * The controller of {@link LabeledSeekBarPreference} that listens to display size and font size
  * settings changes and updates preview size threshold smoothly.
  */
-class PreviewSizeSeekBarController extends BasePreferenceController {
+class PreviewSizeSeekBarController extends BasePreferenceController implements
+        TextReadingResetController.ResetStateListener {
     private final PreviewSizeData<? extends Number> mSizeData;
     private boolean mSeekByTouch;
     private ProgressInteractionListener mInteractionListener;
+    private LabeledSeekBarPreference mSeekBarPreference;
 
     private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
@@ -81,13 +83,17 @@ class PreviewSizeSeekBarController extends BasePreferenceController {
 
         final int dataSize = mSizeData.getValues().size();
         final int initialIndex = mSizeData.getInitialIndex();
-        final LabeledSeekBarPreference seekBarPreference =
-                screen.findPreference(getPreferenceKey());
+        mSeekBarPreference = screen.findPreference(getPreferenceKey());
+        mSeekBarPreference.setMax(dataSize - 1);
+        mSeekBarPreference.setProgress(initialIndex);
+        mSeekBarPreference.setContinuousUpdates(true);
+        mSeekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
+    }
 
-        seekBarPreference.setMax(dataSize - 1);
-        seekBarPreference.setProgress(initialIndex);
-        seekBarPreference.setContinuousUpdates(true);
-        seekBarPreference.setOnSeekBarChangeListener(mSeekBarChangeListener);
+    @Override
+    public void resetState() {
+        final int defaultProgress = mSizeData.getValues().indexOf(mSizeData.getDefaultValue());
+        mSeekBarPreference.setProgress(defaultProgress);
     }
 
     /**

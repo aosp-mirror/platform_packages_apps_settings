@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
@@ -27,6 +29,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Accessibility settings for adjusting the system features which are related to the reading. For
@@ -38,6 +41,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String FONT_SIZE_KEY = "font_size";
     private static final String DISPLAY_SIZE_KEY = "display_size";
     private static final String PREVIEW_KEY = "preview";
+    private static final String RESET_KEY = "reset";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -73,6 +77,13 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 context, DISPLAY_SIZE_KEY, displaySizeData);
         displaySizeController.setInteractionListener(previewController);
         controllers.add(displaySizeController);
+
+        final List<ResetStateListener> resetStateListeners =
+                controllers.stream().filter(c -> c instanceof ResetStateListener).map(
+                        c -> (ResetStateListener) c).collect(Collectors.toList());
+        final TextReadingResetController resetController =
+                new TextReadingResetController(context, RESET_KEY, resetStateListeners);
+        controllers.add(resetController);
 
         return controllers;
     }
