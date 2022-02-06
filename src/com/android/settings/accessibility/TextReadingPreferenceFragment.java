@@ -43,6 +43,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String PREVIEW_KEY = "preview";
     private static final String RESET_KEY = "reset";
     private static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
+    private static final String HIGHT_TEXT_CONTRAST_KEY = "toggle_high_text_contrast_preference";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -82,6 +83,10 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         final FontWeightAdjustmentPreferenceController fontWeightController =
                 new FontWeightAdjustmentPreferenceController(context, BOLD_TEXT_KEY);
         controllers.add(fontWeightController);
+
+        final HighTextContrastPreferenceController highTextContrastController =
+                new HighTextContrastPreferenceController(context, HIGHT_TEXT_CONTRAST_KEY);
+        controllers.add(highTextContrastController);
 
         final List<ResetStateListener> resetStateListeners =
                 controllers.stream().filter(c -> c instanceof ResetStateListener).map(
