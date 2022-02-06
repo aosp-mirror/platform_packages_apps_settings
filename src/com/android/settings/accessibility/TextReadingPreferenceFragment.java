@@ -42,6 +42,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String DISPLAY_SIZE_KEY = "display_size";
     private static final String PREVIEW_KEY = "preview";
     private static final String RESET_KEY = "reset";
+    private static final String BOLD_TEXT_KEY = "toggle_force_bold_text";
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -77,6 +78,10 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 context, DISPLAY_SIZE_KEY, displaySizeData);
         displaySizeController.setInteractionListener(previewController);
         controllers.add(displaySizeController);
+
+        final FontWeightAdjustmentPreferenceController fontWeightController =
+                new FontWeightAdjustmentPreferenceController(context, BOLD_TEXT_KEY);
+        controllers.add(fontWeightController);
 
         final List<ResetStateListener> resetStateListeners =
                 controllers.stream().filter(c -> c instanceof ResetStateListener).map(
