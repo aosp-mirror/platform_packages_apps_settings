@@ -392,6 +392,11 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             mHtmlDescription = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_HTML_DESCRIPTION);
         }
+
+        // Intro.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_INTRO)) {
+            mTopIntroTitle = arguments.getCharSequence(AccessibilitySettings.EXTRA_INTRO);
+        }
     }
 
     /** Customizes the order by preference key. */
