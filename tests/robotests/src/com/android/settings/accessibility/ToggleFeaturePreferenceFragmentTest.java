@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -81,6 +82,7 @@ public class ToggleFeaturePreferenceFragmentTest {
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
+    private static final String DEFAULT_TOP_INTRO = "default top intro";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
             Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS;
@@ -291,6 +293,23 @@ public class ToggleFeaturePreferenceFragmentTest {
         mFragment.onAttach(mContext);
 
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
+    }
+
+    @Test
+    public void initTopIntroPreference_hasTopIntroTitle_shouldSetAsExpectedValue() {
+        mFragment.mTopIntroTitle = DEFAULT_TOP_INTRO;
+        mFragment.initTopIntroPreference();
+
+        TopIntroPreference topIntroPreference =
+                (TopIntroPreference) mFragment.getPreferenceScreen().getPreference(/* index= */ 0);
+        assertThat(topIntroPreference.getTitle().toString()).isEqualTo(DEFAULT_TOP_INTRO);
+    }
+
+    @Test
+    public void initTopIntroPreference_topIntroTitleIsNull_shouldNotAdded() {
+        mFragment.initTopIntroPreference();
+
+        assertThat(mFragment.getPreferenceScreen().getPreferenceCount()).isEqualTo(0);
     }
 
     @Test

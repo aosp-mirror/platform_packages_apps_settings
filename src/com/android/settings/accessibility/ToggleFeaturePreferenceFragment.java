@@ -63,6 +63,7 @@ import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -92,8 +93,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected Uri mImageUri;
     private CharSequence mDescription;
     protected CharSequence mHtmlDescription;
+    protected CharSequence mTopIntroTitle;
 
     private static final String DRAWABLE_FOLDER = "drawable";
+    protected static final String KEY_TOP_INTRO_PREFERENCE = "top_intro";
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
     protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
@@ -182,6 +185,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         // Need to be called as early as possible. Protected variables will be assigned here.
         onProcessArguments(getArguments());
 
+        initTopIntroPreference();
         initAnimatedImagePreference();
         initToggleServiceSwitchPreference();
         initGeneralCategory();
@@ -393,6 +397,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
+        lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
         lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_GENERAL_CATEGORY);
@@ -459,6 +464,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         illustrationPreference.setKey(KEY_ANIMATED_IMAGE);
 
         getPreferenceScreen().addPreference(illustrationPreference);
+    }
+
+    @VisibleForTesting
+    void initTopIntroPreference() {
+        if (TextUtils.isEmpty(mTopIntroTitle)) {
+            return;
+        }
+        final TopIntroPreference topIntroPreference = new TopIntroPreference(getPrefContext());
+        topIntroPreference.setKey(KEY_TOP_INTRO_PREFERENCE);
+        topIntroPreference.setTitle(mTopIntroTitle);
+        getPreferenceScreen().addPreference(topIntroPreference);
     }
 
     private void initToggleServiceSwitchPreference() {
