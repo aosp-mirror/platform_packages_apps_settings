@@ -140,7 +140,7 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
             // allowed by organization. Doing so will allow the user to disable the input method and
             // remain complaint with the organization's policy. Once disabled, the input method
             // cannot be re-enabled because it is not in the permitted list.
-            final boolean isAllowedByOrganization = permittedList.isEmpty()
+            final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName())
                     || enabledImis.contains(imi);
             final InputMethodPreference pref = new InputMethodPreference(prefContext, imi,
