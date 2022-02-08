@@ -68,16 +68,35 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
-        if (profileType == ProfileSelectFragment.ProfileType.WORK) {
-            final UserManager userManager = UserManager.get(context);
-            final UserHandle workUser = Utils.getManagedProfile(userManager);
-            // get work userId
-            mUserId = Utils.getManagedProfileId(userManager, UserHandle.myUserId());
-            mUserAwareContext = context.createContextAsUser(workUser, 0);
-        } else {
-            mUserId = UserHandle.myUserId();
-            mUserAwareContext = context;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        final int currentUserId = UserHandle.myUserId();
+        final int newUserId;
+        final Context newUserAwareContext;
+        switch (profileType) {
+            case ProfileSelectFragment.ProfileType.WORK: {
+                final UserHandle workUser;
+                if (currentUserId == UserHandle.MIN_SECONDARY_USER_ID) {
+                    newUserId = currentUserId;
+                    workUser = UserHandle.of(currentUserId);
+                } else {
+                    newUserId = Utils.getManagedProfileId(userManager, currentUserId);
+                    workUser = Utils.getManagedProfile(userManager);
+                }
+                newUserAwareContext = context.createContextAsUser(workUser, 0);
+                break;
+            }
+            case ProfileSelectFragment.ProfileType.PERSONAL: {
+                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
+                newUserId = primaryUser.getIdentifier();
+                newUserAwareContext = context.createContextAsUser(primaryUser, 0);
+                break;
+            }
+            default:
+                newUserId = currentUserId;
+                newUserAwareContext = context;
         }
+        mUserId = newUserId;
+        mUserAwareContext = newUserAwareContext;
     }
 
     @Override
