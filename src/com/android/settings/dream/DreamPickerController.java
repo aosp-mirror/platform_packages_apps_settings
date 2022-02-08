@@ -19,8 +19,6 @@ package com.android.settings.dream;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -46,7 +44,6 @@ public class DreamPickerController extends BasePreferenceController {
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final List<DreamInfo> mDreamInfos;
-    private Button mPreviewButton;
     @Nullable
     private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
@@ -86,17 +83,6 @@ public class DreamPickerController extends BasePreferenceController {
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
-
-        mPreviewButton = ((LayoutPreference) preference).findViewById(R.id.preview_button);
-        mPreviewButton.setVisibility(View.VISIBLE);
-        mPreviewButton.setOnClickListener(v -> mBackend.preview(mActiveDream));
-        updatePreviewButtonState();
-    }
-
-    private void updatePreviewButtonState() {
-        final boolean hasDream = mActiveDream != null;
-        mPreviewButton.setClickable(hasDream);
-        mPreviewButton.setEnabled(hasDream);
     }
 
     @Nullable
@@ -129,7 +115,6 @@ public class DreamPickerController extends BasePreferenceController {
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            updatePreviewButtonState();
             mMetricsFeatureProvider.action(
                     mContext,
                     SettingsEnums.ACTION_DREAM_SELECT_TYPE,
