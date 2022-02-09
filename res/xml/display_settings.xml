@@ -117,6 +117,13 @@
             settings:keywords="@string/keywords_auto_rotate"
             settings:controller="com.android.settings.display.DeviceStateAutoRotateOverviewController"/>
 
+        <Preference
+            android:key="screen_resolution"
+            android:title="@string/screen_resolution_title"
+            android:fragment="com.android.settings.display.ScreenResolutionFragment"
+            settings:keywords="@string/keywords_screen_resolution"
+            settings:controller="com.android.settings.display.ScreenResolutionController"/>
+
         <SwitchPreference
             android:key="display_white_balance"
             android:title="@string/display_white_balance_title"
