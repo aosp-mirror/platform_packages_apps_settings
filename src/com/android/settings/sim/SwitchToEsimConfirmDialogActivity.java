@@ -23,6 +23,7 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
+import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.network.telephony.AlertDialogFragment;
 import com.android.settings.network.telephony.ConfirmDialogFragment;
 import com.android.settings.network.telephony.SubscriptionActionDialogActivity;
@@ -110,7 +111,8 @@ public class SwitchToEsimConfirmDialogActivity extends SubscriptionActionDialogA
             return;
         }
         Log.i(TAG, "User confirmed to switch to embedded slot.");
-        mSwitchToEuiccSubscriptionSidecar.run(mSubToEnabled.getSubscriptionId());
+        mSwitchToEuiccSubscriptionSidecar.run(mSubToEnabled.getSubscriptionId(),
+                UiccSlotUtil.INVALID_PORT_ID, null);
         showProgressDialog(
                 getString(
                         R.string.sim_action_switch_sub_dialog_progress,

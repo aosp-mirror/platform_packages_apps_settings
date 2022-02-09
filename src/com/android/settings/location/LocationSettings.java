@@ -63,6 +63,7 @@ public class LocationSettings extends DashboardFragment implements
 
     private LocationSwitchBarController mSwitchBarController;
     private LocationEnabler mLocationEnabler;
+    private RecentLocationAccessPreferenceController mController;
 
     @Override
     public int getMetricsCategory() {
@@ -86,10 +87,19 @@ public class LocationSettings extends DashboardFragment implements
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(RecentLocationAccessPreferenceController.class).init(this);
+        mController = use(RecentLocationAccessPreferenceController.class);
+        mController.init(this);
         use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
         use(LocationSettingsFooterPreferenceController.class).init(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mController != null) {
+            mController.clearPreferenceList();
+        }
     }
 
     @Override
