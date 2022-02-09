@@ -127,6 +127,15 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     }
 
     /**
+     * Clears the list of apps which recently accessed location from the screen.
+     */
+    public void clearPreferenceList() {
+        if (mCategoryRecentLocationRequests != null) {
+            mCategoryRecentLocationRequests.removeAll();
+        }
+    }
+
+    /**
      * Initialize {@link ProfileSelectFragment.ProfileType} of the controller
      *
      * @param type {@link ProfileSelectFragment.ProfileType} of the controller.

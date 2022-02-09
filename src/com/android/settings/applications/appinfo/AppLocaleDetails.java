@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 import android.app.Activity;
+import android.app.LocaleConfig;
 import android.app.LocaleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -289,12 +290,18 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
 
         @VisibleForTesting
         void handleSupportedLocales() {
-            //TODO Waiting for PackageManager api
-            String[] languages = getAssetSystemLocales();
-
-            for (String language : languages) {
-                mSupportedLocales.add(Locale.forLanguageTag(language));
+            LocaleList localeList = getPackageLocales();
+            if (localeList == null) {
+                String[] languages = getAssetSystemLocales();
+                for (String language : languages) {
+                    mSupportedLocales.add(Locale.forLanguageTag(language));
+                }
+            } else {
+                for (int i = 0; i < localeList.size(); i++) {
+                    mSupportedLocales.add(localeList.get(i));
+                }
             }
+
             if (mSuggestedLocales != null || !mSuggestedLocales.isEmpty()) {
                 mSupportedLocales.removeAll(mSuggestedLocales);
             }
@@ -349,9 +356,23 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
                         packageManager.getPackageInfo(mPackageName, PackageManager.MATCH_ALL)
                                 .applicationInfo).getAssets().getNonSystemLocales();
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "Can not found the package name : " + e);
+                Log.w(TAG, "Can not found the package name : " + mPackageName + " / " + e);
             }
             return new String[0];
+        }
+
+        @VisibleForTesting
+        LocaleList getPackageLocales() {
+            try {
+                LocaleConfig localeConfig =
+                        new LocaleConfig(mContext.createPackageContext(mPackageName, 0));
+                if (localeConfig.getStatus() == LocaleConfig.STATUS_SUCCESS) {
+                    return localeConfig.getSupportedLocales();
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w(TAG, "Can not found the package name : " + mPackageName + " / " + e);
+            }
+            return null;
         }
     }
 }
