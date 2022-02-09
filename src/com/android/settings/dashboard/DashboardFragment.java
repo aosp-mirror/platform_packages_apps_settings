@@ -16,6 +16,7 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -79,6 +80,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private List<String> mSuppressInjectedTileKeys;
+    private DevicePolicyManager mDevicePolicyManager;
 
     @Override
     public void onAttach(Context context) {
@@ -148,6 +150,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         // Set ComparisonCallback so we get better animation when list changes.
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
@@ -565,5 +568,31 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mRegisteredObservers.remove(observer);
             resolver.unregisterContentObserver(observer);
         });
+    }
+
+    protected void replaceEnterpriseStringTitle(
+            String preferenceKey, String overrideKey, int resource) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference == null) {
+            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
+            return;
+        }
+
+        preference.setTitle(
+                mDevicePolicyManager.getString(overrideKey,
+                        () -> getString(resource)));
+    }
+
+    protected void replaceEnterpriseStringSummary(
+            String preferenceKey, String overrideKey, int resource) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference == null) {
+            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
+            return;
+        }
+
+        preference.setSummary(
+                mDevicePolicyManager.getString(overrideKey,
+                        () -> getString(resource)));
     }
 }
