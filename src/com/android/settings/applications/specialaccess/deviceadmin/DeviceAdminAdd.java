@@ -309,11 +309,13 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
                 return;
             }
 
-            // othewise, only the defined default supervision profile owner can be set after user
-            // setup.
+            // otherwise, only the defined default supervision profile owner or holder of
+            // supersvision role can be set after user setup.
             final String supervisor = getString(
                     com.android.internal.R.string.config_defaultSupervisionProfileOwnerComponent);
-            if (TextUtils.isEmpty(supervisor)) {
+            final String supervisionRolePackage = getString(
+                    com.android.internal.R.string.config_systemSupervision);
+            if (TextUtils.isEmpty(supervisor) && TextUtils.isEmpty(supervisionRolePackage)) {
                 Log.w(TAG, "Unable to set profile owner post-setup, no default supervisor"
                         + "profile owner defined");
                 finish();
@@ -322,7 +324,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
 
             final ComponentName supervisorComponent = ComponentName.unflattenFromString(
                     supervisor);
-            if (supervisorComponent == null || who.compareTo(supervisorComponent) != 0) {
+            if (!who.equals(supervisorComponent)
+                    && !who.getPackageName().equals(supervisionRolePackage)) {
                 Log.w(TAG, "Unable to set non-default profile owner post-setup " + who);
                 finish();
                 return;
