@@ -17,6 +17,7 @@
 package com.android.settings.testutils;
 
 import static android.provider.Settings.ACTION_BEDTIME_SETTINGS;
+import static android.util.FeatureFlagUtils.SETTINGS_APP_ALLOW_DARK_THEME_ACTIVATION_AT_BEDTIME;
 
 import static org.robolectric.Shadows.shadowOf;
 
@@ -25,6 +26,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
+import android.util.FeatureFlagUtils;
 
 /** A helper class for installing bedtime settings activity. */
 public final class BedtimeSettingsUtils {
@@ -35,6 +37,8 @@ public final class BedtimeSettingsUtils {
     }
 
     public void installBedtimeSettings(String wellbeingPackage, boolean enabled) {
+        FeatureFlagUtils.setEnabled(mContext, SETTINGS_APP_ALLOW_DARK_THEME_ACTIVATION_AT_BEDTIME,
+                true /* enabled */);
         Intent bedtimeSettingsIntent = new Intent(ACTION_BEDTIME_SETTINGS)
                 .setPackage(wellbeingPackage);
         ResolveInfo bedtimeResolveInfo = new ResolveInfo();
