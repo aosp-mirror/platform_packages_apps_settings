@@ -439,7 +439,6 @@ public class AppDataUsageTest {
         assertThat(mFragment.mTemplate.getMatchRule())
                 .isEqualTo(NetworkTemplate.MATCH_WIFI);
         assertTrue(mFragment.mTemplate.getSubscriberIds().isEmpty());
-        assertThat(mFragment.mTemplate.getNetworkId())
-                .isEqualTo(NetworkTemplate.WIFI_NETWORKID_ALL);
+        assertTrue(mFragment.mTemplate.getWifiNetworkKeys().isEmpty());
     }
 }
