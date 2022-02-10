@@ -55,6 +55,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -144,6 +145,7 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    @Ignore
     public void onPrepareOptionsMenu_setUpdateMenuVisible_byDefaultForSystemApps_shouldBeTrue() {
         Menu menu = onPrepareOptionsMenuTestsSetup();
         mFragment.onPrepareOptionsMenu(menu);
@@ -153,6 +155,7 @@ public final class AppInfoDashboardFragmentTest {
 
     @Test
     @Config(qualifiers = "mcc999")
+    @Ignore
     public void onPrepareOptionsMenu_setUpdateMenuVisible_ifDisabledByDevice_shouldBeFalse() {
         Menu menu = onPrepareOptionsMenuTestsSetup();
         mFragment.onPrepareOptionsMenu(menu);
