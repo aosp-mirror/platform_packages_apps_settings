@@ -27,6 +27,8 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_AN
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_DEVICE_ADMIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_WORK_PROFILE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_PROFILE_OWNER_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_PROFILE_OWNER_POSTSETUP_WARNING;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.UNINSTALL_DEVICE_ADMIN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.USER_ADMIN_POLICIES_WARNING;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_ADMIN_POLICIES_WARNING;
 
@@ -365,6 +367,10 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
         mProfileOwnerWarning = (TextView) findViewById(R.id.profile_owner_warning);
 
+        mProfileOwnerWarning.setText(
+                mDPM.getString(SET_PROFILE_OWNER_POSTSETUP_WARNING,
+                        () -> getString(R.string.adding_profile_owner_warning)));
+
         mAddMsg = (TextView)findViewById(R.id.add_msg);
         mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
         final View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -410,6 +416,8 @@ public class DeviceAdminAdd extends CollapsingToolbarBaseActivity {
         });
 
         mUninstallButton = (Button) findViewById(R.id.uninstall_button);
+        mUninstallButton.setText(mDPM.getString(UNINSTALL_DEVICE_ADMIN,
+                () -> getString(R.string.uninstall_device_admin)));
         mUninstallButton.setFilterTouchesWhenObscured(true);
         mUninstallButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

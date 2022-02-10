@@ -18,6 +18,7 @@ package com.android.settings.users;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_MESSAGE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_REMOVE_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_MANAGED_BY;
 
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -89,6 +90,8 @@ public final class UserDialogs {
      */
     private static View createRemoveManagedUserDialogView(Context context, int userId) {
         PackageManager packageManager = context.getPackageManager();
+        DevicePolicyManager devicePolicyManager =
+                context.getSystemService(DevicePolicyManager.class);
         ApplicationInfo mdmApplicationInfo = Utils.getAdminApplicationInfo(context, userId);
         if (mdmApplicationInfo == null) {
             return null;
@@ -101,6 +104,16 @@ public final class UserDialogs {
                 (ImageView) view.findViewById(R.id.delete_managed_profile_mdm_icon_view);
         Drawable badgedApplicationIcon = packageManager.getApplicationIcon(mdmApplicationInfo);
         imageView.setImageDrawable(badgedApplicationIcon);
+
+        TextView openingParagraph = (TextView)
+                view.findViewById(R.id.delete_managed_profile_opening_paragraph);
+        openingParagraph.setText(devicePolicyManager.getString(WORK_PROFILE_MANAGED_BY,
+                () -> context.getString(
+                        R.string.opening_paragraph_delete_profile_unknown_company)));
+        TextView closingParagraph = (TextView)
+                view.findViewById(R.id.delete_managed_profile_closing_paragraph);
+        closingParagraph.setText(devicePolicyManager.getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+                () -> context.getString(R.string.work_profile_confirm_remove_message)));
 
         CharSequence appLabel = packageManager.getApplicationLabel(mdmApplicationInfo);
         CharSequence badgedAppLabel = packageManager.getUserBadgedLabel(appLabel,

@@ -221,6 +221,13 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
+
+        final String tileServiceClassName = info.getTileServiceClassName();
+        if (!TextUtils.isEmpty(tileServiceClassName)) {
+            extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
+                    new ComponentName(packageName, tileServiceClassName).flattenToString());
+        }
+
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 

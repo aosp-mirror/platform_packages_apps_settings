@@ -16,9 +16,12 @@
 
 package com.android.settings.language;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_KEYBOARDS_AND_TOOLS;
+
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,6 +71,14 @@ public class LanguageAndInputSettings extends DashboardFragment {
             return;
         }
         activity.setTitle(R.string.language_settings);
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("language_and_input_for_work_category",
+                WORK_PROFILE_KEYBOARDS_AND_TOOLS,
+                R.string.language_and_input_for_work_category_title);
     }
 
     @Override
