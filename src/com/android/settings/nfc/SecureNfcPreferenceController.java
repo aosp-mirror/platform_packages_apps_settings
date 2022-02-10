@@ -29,6 +29,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class SecureNfcPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
+    public static final String KEY_SECURENFC_SETTINGS = "nfc_secure_settings";
     private final NfcAdapter mNfcAdapter;
     private SecureNfcEnabler mSecureNfcEnabler;
 
