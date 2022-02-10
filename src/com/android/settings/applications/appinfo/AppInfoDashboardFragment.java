@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -238,6 +240,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         startListeningToPackageRemove();
 
         setHasOptionsMenu(true);
+        replaceEnterpriseStringTitle("interact_across_profiles",
+                CONNECTED_WORK_AND_PERSONAL_APPS_TITLE, R.string.interact_across_profiles_title);
     }
 
     @Override
