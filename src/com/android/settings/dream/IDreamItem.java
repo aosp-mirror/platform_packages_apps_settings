@@ -18,7 +18,10 @@ package com.android.settings.dream;
 
 import android.graphics.drawable.Drawable;
 
-interface IDreamItem {
+/**
+ * Interface representing a dream item to be displayed.
+ */
+public interface IDreamItem {
     CharSequence getTitle();
 
     Drawable getIcon();
