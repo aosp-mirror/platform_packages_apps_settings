@@ -88,7 +88,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
 
     @Override
     protected void onClick() {
-        if (mDataUsageState.isDataSaverDenylisted) {
+        if (mDataUsageState != null && mDataUsageState.isDataSaverDenylisted) {
             // app is denylisted, launch App Data Usage screen
             AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
                     R.string.data_usage_app_summary_title,
