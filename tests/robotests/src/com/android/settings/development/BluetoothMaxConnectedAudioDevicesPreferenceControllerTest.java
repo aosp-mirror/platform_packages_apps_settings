@@ -24,9 +24,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+
 import android.os.SystemProperties;
 
 import androidx.preference.ListPreference;
@@ -46,17 +47,12 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
 
-  private static final int TEST_MAX_CONNECTED_AUDIO_DEVICES = 3;
+  private static int TEST_MAX_CONNECTED_AUDIO_DEVICES = 5;
 
   @Mock
   private PreferenceScreen mPreferenceScreen;
   @Spy
   private Context mSpyContext = RuntimeEnvironment.application;
-  @Spy
-  private BluetoothManager mBluetoothManager =
-      mSpyContext.getSystemService(BluetoothManager.class);
-  @Spy
-  private BluetoothAdapter mBluetoothAdapter = mBluetoothManager.getAdapter();
 
   private ListPreference mPreference;
   private BluetoothMaxConnectedAudioDevicesPreferenceController mController;
@@ -67,16 +63,19 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
   @Before
   public void setup() {
     MockitoAnnotations.initMocks(this);
-    doReturn(mBluetoothManager).when(mSpyContext).getSystemService(BluetoothManager.class);
-    doReturn(mBluetoothAdapter).when(mBluetoothManager).getAdapter();
     // Get XML values without mock
     // Setup test list preference using XML values
     mPreference = new ListPreference(mSpyContext);
     mPreference.setEntries(R.array.bluetooth_max_connected_audio_devices);
     mPreference.setEntryValues(R.array.bluetooth_max_connected_audio_devices_values);
-    // Stub default max connected audio devices to a test controlled value
-    doReturn(TEST_MAX_CONNECTED_AUDIO_DEVICES).when(mBluetoothAdapter)
-        .getMaxConnectedAudioDevices();
+    // Retrieve default max connected audio devices to a test controlled value
+    try {
+      Resources res = mSpyContext.getPackageManager().getResourcesForApplication("com.android.bluetooth");
+      TEST_MAX_CONNECTED_AUDIO_DEVICES = res.getInteger(res.getIdentifier("config_bluetooth_max_connected_audio_devices", "integer", "com.android.bluetooth"));
+    } catch (PackageManager.NameNotFoundException e) {
+      e.printStackTrace();
+    }
+
     // Init the actual controller
     mController = new BluetoothMaxConnectedAudioDevicesPreferenceController(mSpyContext);
     // Construct preference in the controller via a mocked preference screen object

@@ -34,7 +34,7 @@ public class FingerprintErrorDialog extends BiometricErrorDialog {
         final CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
         final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId);
         final FragmentManager fragmentManager = host.getSupportFragmentManager();
-        if (!fragmentManager.isDestroyed()) {
+        if (!fragmentManager.isDestroyed()  && !fragmentManager.isStateSaved()) {
             dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
         }
     }
