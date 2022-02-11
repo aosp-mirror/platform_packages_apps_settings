@@ -70,6 +70,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (previewImage != null) {
                 mPreviewView.setVisibility(View.VISIBLE);
                 mPreviewView.setImageDrawable(previewImage);
+                mPreviewView.setClipToOutline(true);
             } else {
                 mPreviewView.setVisibility(View.GONE);
             }
