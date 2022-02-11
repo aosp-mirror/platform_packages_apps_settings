@@ -737,7 +737,8 @@ public class UserSettings extends SettingsPreferenceFragment
                     if (newUserIcon != userIcon) {
                         ThreadUtils.postOnBackgroundThread(() ->
                                 mUserManager.setUserIcon(user.id,
-                                        UserIcons.convertToBitmap(newUserIcon)));
+                                        UserIcons.convertToBitmapAtUserIconSize(
+                                                activity.getResources(), newUserIcon)));
                         mMePreference.setIcon(newUserIcon);
                     }
 
@@ -891,7 +892,9 @@ public class UserSettings extends SettingsPreferenceFragment
                 if (newUserIcon == null) {
                     newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
                 }
-                mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
+                mUserManager.setUserIcon(
+                        user.id, UserIcons.convertToBitmapAtUserIconSize(
+                                getResources(), newUserIcon));
 
                 if (mUserType == USER_TYPE_USER) {
                     mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
@@ -1315,7 +1318,7 @@ public class UserSettings extends SettingsPreferenceFragment
         // Try finding the corresponding bitmap in the dark bitmap cache
         bitmap = sDarkDefaultUserBitmapCache.get(userId);
         if (bitmap == null) {
-            bitmap = UserIcons.convertToBitmap(
+            bitmap = UserIcons.convertToBitmapAtUserIconSize(resources,
                     UserIcons.getDefaultUserIcon(resources, userId, false));
             // Save it to cache
             sDarkDefaultUserBitmapCache.put(userId, bitmap);
