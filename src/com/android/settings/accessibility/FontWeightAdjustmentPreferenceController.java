@@ -24,7 +24,8 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for displaying all text in bold. */
-public class FontWeightAdjustmentPreferenceController extends TogglePreferenceController {
+public class FontWeightAdjustmentPreferenceController extends TogglePreferenceController implements
+        TextReadingResetController.ResetStateListener {
     static final int BOLD_TEXT_ADJUSTMENT =
             FontStyle.FONT_WEIGHT_BOLD - FontStyle.FONT_WEIGHT_NORMAL;
 
@@ -52,5 +53,10 @@ public class FontWeightAdjustmentPreferenceController extends TogglePreferenceCo
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
+    }
+
+    @Override
+    public void resetState() {
+        setChecked(false);
     }
 }

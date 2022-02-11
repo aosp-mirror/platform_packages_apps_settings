@@ -32,8 +32,9 @@ import com.android.settings.widget.DotsPageIndicator;
 /**
  * A {@link Preference} that could show the preview related to the text and reading options.
  */
-final class TextReadingPreviewPreference extends Preference {
+public class TextReadingPreviewPreference extends Preference {
     private int mCurrentItem;
+    private int mLastLayerIndex;
     private PreviewPagerAdapter mPreviewAdapter;
 
     TextReadingPreviewPreference(Context context) {
@@ -41,7 +42,7 @@ final class TextReadingPreviewPreference extends Preference {
         init();
     }
 
-    TextReadingPreviewPreference(Context context, AttributeSet attrs) {
+    public TextReadingPreviewPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -119,5 +120,17 @@ final class TextReadingPreviewPreference extends Preference {
 
     private void init() {
         setLayoutResource(R.layout.accessibility_text_reading_preview);
+    }
+
+    void notifyPreviewPagerChanged(int pagerIndex) {
+        Preconditions.checkNotNull(mPreviewAdapter,
+                "Preview adapter is null, you should init the preview adapter first");
+
+        if (pagerIndex != mLastLayerIndex) {
+            mPreviewAdapter.setPreviewLayer(pagerIndex, mLastLayerIndex, getCurrentItem(),
+                    /* animate= */ false);
+        }
+
+        mLastLayerIndex = pagerIndex;
     }
 }
