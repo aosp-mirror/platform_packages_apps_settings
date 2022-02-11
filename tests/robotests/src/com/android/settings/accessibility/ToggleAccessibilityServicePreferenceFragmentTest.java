@@ -83,9 +83,8 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    public void getTileName_noTileServiceAssigned_noMatchString() {
-        final CharSequence tileName = mFragment.getTileName();
-        assertThat(tileName.toString()).isEqualTo("");
+    public void getTileName_noTileServiceAssigned_returnNull() {
+        assertThat(mFragment.getTileName()).isNull();
     }
 
     @Test
