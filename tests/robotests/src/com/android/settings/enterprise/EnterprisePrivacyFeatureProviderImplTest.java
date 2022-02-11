@@ -50,6 +50,7 @@ import com.android.settings.R;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
@@ -139,6 +140,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
     }
 
     @Test
+    @Ignore
     public void testGetDeviceOwnerDisclosure() {
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(null);
         assertThat(mProvider.getDeviceOwnerDisclosure()).isNull();
