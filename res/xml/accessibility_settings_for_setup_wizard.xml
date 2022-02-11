@@ -21,26 +21,25 @@
     android:title="@string/vision_settings_title">
 
     <Preference
-        android:fragment="com.android.settings.display.FontSizePreferenceFragmentForSetupWizard"
         android:key="font_size_preference"
         android:icon="@drawable/ic_font_size"
         android:summary="@string/short_summary_font_size"
-        android:title="@string/title_font_size"/>
+        android:title="@string/title_font_size"
+        settings:controller="com.android.settings.accessibility.FontSizePreferenceController" />
 
     <com.android.settings.display.ScreenZoomPreference
-        android:fragment="com.android.settings.display.ScreenZoomPreferenceFragmentForSetupWizard"
         android:key="force_density_preference"
         android:icon="@drawable/ic_screen_zoom"
         android:summary="@string/screen_zoom_short_summary"
-        android:title="@string/screen_zoom_title"/>
+        android:title="@string/screen_zoom_title"
+        settings:controller="com.android.settings.accessibility.ScreenSizePreferenceController" />
 
     <Preference
-        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
         android:key="screen_magnification_preference"
         android:icon="@drawable/ic_accessibility_magnification"
         android:summary="@string/accessibility_preference_magnification_summary"
-        android:title="@string/accessibility_screen_magnification_title"
-        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
+        android:title="@string/accessibility_screen_magnification_title" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"

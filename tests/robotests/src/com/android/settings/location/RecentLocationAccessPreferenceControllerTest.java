@@ -18,12 +18,10 @@ package com.android.settings.location;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -34,7 +32,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
-import com.android.settingslib.location.RecentLocationAccesses;
+import com.android.settingslib.applications.RecentAppOpsAccess;
 
 import org.junit.After;
 import org.junit.Before;
@@ -48,7 +46,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowDeviceConfig.class})
@@ -61,7 +58,7 @@ public class RecentLocationAccessPreferenceControllerTest {
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
-    private RecentLocationAccesses mRecentLocationApps;
+    private RecentAppOpsAccess mRecentLocationApps;
 
     private Context mContext;
     private RecentLocationAccessPreferenceController mController;
@@ -109,18 +106,5 @@ public class RecentLocationAccessPreferenceControllerTest {
         assertThat(details.getText()).isEqualTo(
                 mContext.getText(R.string.location_recent_location_access_view_details));
         assertThat(details.hasOnClickListeners()).isTrue();
-    }
-
-    private List<RecentLocationAccesses.Access> createMockAccesses(int count) {
-        final List<RecentLocationAccesses.Access> accesses = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            final Drawable icon = mock(Drawable.class);
-            // Add mock accesses
-            final RecentLocationAccesses.Access access = new RecentLocationAccesses.Access(
-                    "packageName", android.os.Process.myUserHandle(), icon,
-                    "appTitle" + i, "appSummary" + i, 1000 - i);
-            accesses.add(access);
-        }
-        return accesses;
     }
 }

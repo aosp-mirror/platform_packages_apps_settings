@@ -21,13 +21,18 @@ import static com.android.settings.password.ChooseLockPattern.RESULT_FINISHED;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -89,6 +94,16 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
         if (mGkPwHandle == 0L && !mConfirmCredential) {
             mConfirmCredential = true;
             launchChooseOrConfirmLock();
+        }
+
+        final Preference unlockPhonePreference = findPreference(getUnlockPhonePreferenceKey());
+        if (unlockPhonePreference != null) {
+            unlockPhonePreference.setSummary(getUseAnyBiometricSummary());
+        }
+
+        final Preference useInAppsPreference = findPreference(getUseInAppsPreferenceKey());
+        if (useInAppsPreference != null) {
+            useInAppsPreference.setSummary(getUseClass2BiometricSummary());
         }
     }
 
@@ -185,6 +200,16 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
      */
     public abstract String getFingerprintPreferenceKey();
 
+    /**
+     * @return The preference key of the "Unlock your phone" setting toggle.
+     */
+    public abstract String getUnlockPhonePreferenceKey();
+
+    /**
+     * @return The preference key of the "Verify it's you in apps" setting toggle.
+     */
+    public abstract String getUseInAppsPreferenceKey();
+
     private void launchChooseOrConfirmLock() {
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(getActivity(), this)
@@ -212,6 +237,61 @@ public abstract class BiometricsSettingsBase extends DashboardFragment {
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
             }
             startActivityForResult(intent, CHOOSE_LOCK_REQUEST);
+        }
+    }
+
+    @NonNull
+    private String getUseAnyBiometricSummary() {
+        boolean isFaceAllowed = mFaceManager != null && mFaceManager.isHardwareDetected();
+        boolean isFingerprintAllowed =
+                mFingerprintManager != null && mFingerprintManager.isHardwareDetected();
+
+        @StringRes final int resId = getUseBiometricSummaryRes(isFaceAllowed, isFingerprintAllowed);
+        return resId == 0 ? "" : getString(resId);
+    }
+
+    @NonNull
+    private String getUseClass2BiometricSummary() {
+        boolean isFaceAllowed = false;
+        if (mFaceManager != null) {
+            for (final FaceSensorPropertiesInternal sensorProps
+                    : mFaceManager.getSensorPropertiesInternal()) {
+                if (sensorProps.sensorStrength == SensorProperties.STRENGTH_WEAK
+                        || sensorProps.sensorStrength == SensorProperties.STRENGTH_STRONG) {
+                    isFaceAllowed = true;
+                    break;
+                }
+            }
+        }
+
+        boolean isFingerprintAllowed = false;
+        if (mFingerprintManager != null) {
+            for (final FingerprintSensorPropertiesInternal sensorProps
+                    : mFingerprintManager.getSensorPropertiesInternal()) {
+                if (sensorProps.sensorStrength == SensorProperties.STRENGTH_WEAK
+                        || sensorProps.sensorStrength == SensorProperties.STRENGTH_STRONG) {
+                    isFingerprintAllowed = true;
+                    break;
+                }
+            }
+        }
+
+        @StringRes final int resId = getUseBiometricSummaryRes(isFaceAllowed, isFingerprintAllowed);
+        return resId == 0 ? "" : getString(resId);
+    }
+
+    @StringRes
+    private static int getUseBiometricSummaryRes(boolean isFaceAllowed,
+            boolean isFingerprintAllowed) {
+
+        if (isFaceAllowed && isFingerprintAllowed) {
+            return R.string.biometric_settings_use_face_or_fingerprint_preference_summary;
+        } else if (isFaceAllowed) {
+            return R.string.biometric_settings_use_face_preference_summary;
+        } else if (isFingerprintAllowed) {
+            return R.string.biometric_settings_use_fingerprint_preference_summary;
+        } else {
+            return 0;
         }
     }
 }
