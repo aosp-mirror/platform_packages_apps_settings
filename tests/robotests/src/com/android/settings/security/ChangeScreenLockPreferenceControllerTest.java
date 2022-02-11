@@ -40,6 +40,7 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.GearPreference;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -50,6 +51,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
+@Ignore
 public class ChangeScreenLockPreferenceControllerTest {
 
     @Mock
