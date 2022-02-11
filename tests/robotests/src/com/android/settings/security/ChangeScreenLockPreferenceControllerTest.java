@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.GearPreference;
@@ -53,6 +55,8 @@ import org.robolectric.annotation.Config;
 @Config(shadows = ShadowUtils.class)
 @Ignore
 public class ChangeScreenLockPreferenceControllerTest {
+
+    private static final int METRICS_CATEGORY = 1;
 
     @Mock
     private LockPatternUtils mLockPatternUtils;
@@ -80,7 +84,9 @@ public class ChangeScreenLockPreferenceControllerTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
-        mController = new ChangeScreenLockPreferenceController(mContext, null  /* Host */ );
+        final SettingsPreferenceFragment host = mock(SettingsPreferenceFragment.class);
+        when(host.getMetricsCategory()).thenReturn(METRICS_CATEGORY);
+        mController = new ChangeScreenLockPreferenceController(mContext, host);
     }
 
     @Test
