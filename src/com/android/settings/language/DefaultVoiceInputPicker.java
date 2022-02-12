@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.assist;
+package com.android.settings.language;
 
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -31,6 +31,7 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Controls the Voice Input setting. */
 public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
     private VoiceInputHelper mHelper;
@@ -76,7 +77,7 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     @Override
     protected boolean setDefaultKey(String value) {
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
-            if (TextUtils.equals(value, info.key)) {
+            if (TextUtils.equals(value, info.mKey)) {
                 Settings.Secure.putString(getContext().getContentResolver(),
                         Settings.Secure.VOICE_RECOGNITION_SERVICE, value);
                 return true;
@@ -85,35 +86,38 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
         return true;
     }
 
+    /** Gets the current recognition service component. */
     public static ComponentName getCurrentService(VoiceInputHelper helper) {
         return helper.mCurrentRecognizer;
     }
 
+    /** Stores the info of the Voice Input provider. */
     public static class VoiceInputDefaultAppInfo extends DefaultAppInfo {
 
         public VoiceInputHelper.BaseInfo mInfo;
 
         public VoiceInputDefaultAppInfo(Context context, PackageManager pm, int userId,
                 VoiceInputHelper.BaseInfo info, boolean enabled) {
-            super(context, pm, userId, info.componentName, null /* summary */, enabled);
+            super(context, pm, userId, info.mComponentName, null /* summary */, enabled);
             mInfo = info;
         }
 
         @Override
         public String getKey() {
-            return mInfo.key;
+            return mInfo.mKey;
         }
 
         @Override
         public CharSequence loadLabel() {
-            return mInfo.label;
+            return mInfo.mLabel;
         }
 
+        /** Gets the setting intent. */
         public Intent getSettingIntent() {
-            if (mInfo.settings == null) {
+            if (mInfo.mSettings == null) {
                 return null;
             }
-            return new Intent(Intent.ACTION_MAIN).setComponent(mInfo.settings);
+            return new Intent(Intent.ACTION_MAIN).setComponent(mInfo.mSettings);
         }
     }
 }
