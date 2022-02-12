@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.assist;
+package com.android.settings.language;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
@@ -33,8 +32,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-import java.util.List;
-
+/** Controller of the Voice Input preference. */
 public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
@@ -95,7 +93,7 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
         }
 
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
-            if (TextUtils.equals(defaultKey, info.key)) {
+            if (TextUtils.equals(defaultKey, info.mKey)) {
                 return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mContext,
                         mPackageManager, mUserId, info, true /* enabled */);
             }

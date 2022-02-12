@@ -4341,6 +4341,13 @@
                        android:value="true" />
         </activity>
 
+        <receiver android:name=".safetycenter.SafetySourceBroadcastReceiver"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.safetycenter.action.REFRESH_SAFETY_SOURCES"/>
+            </intent-filter>
+        </receiver>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
