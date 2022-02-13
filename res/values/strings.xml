@@ -5509,6 +5509,10 @@
     <string name="accessibility_service_quick_settings_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
     <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="default">Adjust how colors display on your phone</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet">Adjust how colors display on your tablet</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
     <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
@@ -5588,22 +5592,20 @@
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
-    <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
-    <string name="daltonizer_type">Correction mode</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_title">Red-green</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_title">Tritanomaly</string>
+    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
     <!-- Title shown for grayscale [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_grayscale_title">Grayscale</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Green weak, deuteranomaly</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_protanomaly_summary">Red weak, protanomaly</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
+    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
 
     <!-- Title for the accessibility preference of the Extra Dim/Reduce Brightness feature that dims your screen. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
