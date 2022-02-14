@@ -82,6 +82,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
+        mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
