@@ -44,11 +44,11 @@
             android:title="@string/accessibility_text_reading_options_title" />
 
         <Preference
-            android:fragment="com.android.settings.accessibility.TextAndDisplayFragment"
-            android:key="text_and_display_preference_screen"
-            android:icon="@drawable/ic_text_and_display"
+            android:fragment="com.android.settings.accessibility.ColorAndMotionFragment"
+            android:key="color_and_motion"
+            android:icon="@drawable/ic_color_and_motion"
             android:persistent="false"
-            android:title="@string/accessibility_text_and_display_title"
+            android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
 
         <com.android.settingslib.PrimarySwitchPreference
