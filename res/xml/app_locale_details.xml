@@ -28,7 +28,14 @@
 
     <PreferenceCategory
         android:key="category_key_suggested_languages"
-        android:title="@string/suggested_app_locales_title" />
+        android:title="@string/suggested_app_locales_title" >
+
+        <com.android.settingslib.widget.RadioButtonPreference
+            android:key="system_default_locale"
+            android:title="@string/preference_of_system_locale_title"
+            android:order="-10000"/>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="category_key_all_languages"
