@@ -234,6 +234,9 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
 
+        final CharSequence intro = info.loadIntro(getActivity().getPackageManager());
+        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
+
         // We will log nonA11yTool status from PolicyWarningUIController; others none.
         extras.putLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING,
                 getActivity().getIntent().getLongExtra(
