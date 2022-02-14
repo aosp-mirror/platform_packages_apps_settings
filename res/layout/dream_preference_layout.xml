@@ -39,6 +39,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageView
+            android:id="@+id/preview_placeholder"
+            android:layout_width="@dimen/dream_preview_placeholder_width"
+            android:layout_height="0dp"
+            android:src="@drawable/dream_default_preview_icon"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="@+id/preview"
+            app:layout_constraintBottom_toBottomOf="@+id/preview"
+            app:layout_constraintStart_toStartOf="@+id/preview"
+            app:layout_constraintEnd_toEndOf="@+id/preview"/>
+
         <Button
             android:id="@+id/customize_button"
             style="@style/ActionPrimaryButton"

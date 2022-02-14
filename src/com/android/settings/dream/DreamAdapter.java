@@ -48,6 +48,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private final ImageView mIconView;
         private final TextView mTitleView;
         private final ImageView mPreviewView;
+        private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
         private final Context mContext;
 
@@ -55,6 +56,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(view);
             mContext = context;
             mPreviewView = view.findViewById(R.id.preview);
+            mPreviewPlaceholderView = view.findViewById(R.id.preview_placeholder);
             mIconView = view.findViewById(R.id.icon);
             mTitleView = view.findViewById(R.id.title_text);
             mCustomizeButton = view.findViewById(R.id.customize_button);
@@ -68,11 +70,9 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             final Drawable previewImage = item.getPreviewImage();
             if (previewImage != null) {
-                mPreviewView.setVisibility(View.VISIBLE);
                 mPreviewView.setImageDrawable(previewImage);
                 mPreviewView.setClipToOutline(true);
-            } else {
-                mPreviewView.setVisibility(View.GONE);
+                mPreviewPlaceholderView.setVisibility(View.GONE);
             }
 
             final Drawable icon = item.isActive()
