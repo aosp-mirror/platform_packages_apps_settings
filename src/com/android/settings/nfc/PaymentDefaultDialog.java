@@ -58,7 +58,11 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         ComponentName component = intent.getParcelableExtra(
                 CardEmulation.EXTRA_SERVICE_COMPONENT);
         String category = intent.getStringExtra(CardEmulation.EXTRA_CATEGORY);
-        int userId = intent.getIntExtra(CardEmulation.EXTRA_USERID, UserHandle.myUserId());
+        UserHandle userHandle = intent.getParcelableExtra(Intent.EXTRA_USER);
+        if (userHandle == null) {
+            userHandle = UserHandle.CURRENT;
+        }
+        int userId = userHandle.getIdentifier();
 
         setResult(RESULT_CANCELED);
         if (!buildDialog(component, category, userId)) {
