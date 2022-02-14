@@ -94,6 +94,7 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
+    static final String EXTRA_INTRO = "intro";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
@@ -570,14 +571,15 @@ public class AccessibilitySettings extends DashboardFragment {
 
                 final String prefKey = preference.getKey();
                 final int imageRes = info.getAnimatedImageRes();
+                final CharSequence intro = info.loadIntro(mPm);
                 final CharSequence description = getServiceDescription(mContext, info,
                         serviceEnabled);
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
                 final String tileServiceClassName = info.getTileServiceClassName();
 
-                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
-                        componentName);
+                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
+                        htmlDescription, componentName);
                 putServiceExtras(preference, resolveInfo, serviceEnabled);
                 putSettingsExtras(preference, packageName, settingsClassName);
                 putTileServiceExtras(preference, packageName, tileServiceClassName);
@@ -630,14 +632,15 @@ public class AccessibilitySettings extends DashboardFragment {
                 setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
 
                 final String prefKey = preference.getKey();
+                final CharSequence intro = info.loadIntro(mPm);
                 final String description = info.loadDescription(mPm);
                 final int imageRes = info.getAnimatedImageRes();
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
                 final String tileServiceClassName = info.getTileServiceClassName();
 
-                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
-                        componentName);
+                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
+                        htmlDescription, componentName);
                 putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
                 putTileServiceExtras(preference, componentName.getPackageName(),
                         tileServiceClassName);
@@ -722,11 +725,12 @@ public class AccessibilitySettings extends DashboardFragment {
 
         /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
         private void putBasicExtras(RestrictedPreference preference, String prefKey,
-                CharSequence title, CharSequence summary, int imageRes, String htmlDescription,
-                ComponentName componentName) {
+                CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
+                String htmlDescription, ComponentName componentName) {
             final Bundle extras = preference.getExtras();
             extras.putString(EXTRA_PREFERENCE_KEY, prefKey);
             extras.putCharSequence(EXTRA_TITLE, title);
+            extras.putCharSequence(EXTRA_INTRO, intro);
             extras.putCharSequence(EXTRA_SUMMARY, summary);
             extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
             extras.putInt(EXTRA_ANIMATED_IMAGE_RES, imageRes);
