@@ -99,20 +99,6 @@ public class ForgetDeviceDialogFragmentTest {
     }
 
     @Test
-    public void createDialog_untetheredDevice_showUntetheredMessage() {
-        when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
-                .thenReturn("true".getBytes());
-
-        FragmentController.setupFragment(mFragment, FragmentActivity.class,
-                0 /* containerViewId */, null /* bundle */);
-        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
-
-        assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.bluetooth_untethered_unpair_dialog_body, DEVICE_NAME));
-    }
-
-    @Test
     public void createDialog_normalDevice_showNormalMessage() {
         when(mBluetoothDevice.getMetadata(BluetoothDevice.METADATA_IS_UNTETHERED_HEADSET))
                 .thenReturn("false".getBytes());

@@ -227,17 +227,17 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public boolean showWorkPolicyInfo() {
+    public boolean showWorkPolicyInfo(Context activityContext) {
         Intent intent = getWorkPolicyInfoIntentDO();
         if (intent != null) {
-            mContext.startActivity(intent);
+            activityContext.startActivity(intent);
             return true;
         }
 
         intent = getWorkPolicyInfoIntentPO();
         final UserInfo userInfo = getManagedProfileUserInfo();
         if (intent != null && userInfo != null) {
-            mContext.startActivityAsUser(intent, userInfo.getUserHandle());
+            activityContext.startActivityAsUser(intent, userInfo.getUserHandle());
             return true;
         }
 
@@ -305,8 +305,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Device Owner's package
         final Intent intent =
                 new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        .setPackage(ownerComponent.getPackageName());
         final List<ResolveInfo> activities = mPm.queryIntentActivities(intent, 0);
         if (activities.size() != 0) {
             return intent;
@@ -329,8 +328,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Profile Owner's package
         final Intent intent =
                 new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        .setPackage(ownerComponent.getPackageName());
         final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, userId);
         if (activities.size() != 0) {
             return intent;

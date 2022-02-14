@@ -21,6 +21,7 @@ import static android.provider.Settings.Secure.MEDIA_CONTROLS_RECOMMENDATION;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -49,5 +50,10 @@ public class MediaControlsRecommendationController extends TogglePreferenceContr
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_sound;
     }
 }

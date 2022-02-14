@@ -293,6 +293,18 @@ public class RedactNotificationPreferenceControllerTest {
     }
 
     @Test
+    public void isChecked_admin() {
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
+                1, 0);
+
+        ShadowRestrictedLockUtilsInternal.setKeyguardDisabledFeatures(
+                KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
     public void setChecked_false() throws Exception {
         Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,

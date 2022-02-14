@@ -19,12 +19,16 @@ package com.android.settings.biometrics.face;
 import static android.provider.Settings.Secure.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION;
 
 import android.content.Context;
+import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorProperties;
 import android.provider.Settings;
 
 import androidx.preference.Preference;
 
 import com.android.settings.Utils;
+
+import java.util.List;
 
 /**
  * Preference controller giving the user an option to always require confirmation.
@@ -75,6 +79,14 @@ public class FaceSettingsConfirmPreferenceController extends FaceSettingsPrefere
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        List<FaceSensorProperties> properties = mFaceManager.getSensorProperties();
+        // If a sensor is convenience, it is possible that it becomes weak or strong with
+        // an update. For this reason, the sensor is conditionally unavailable.
+        if (!properties.isEmpty()
+                && properties.get(0).getSensorStrength() == SensorProperties.STRENGTH_CONVENIENCE) {
+            return CONDITIONALLY_UNAVAILABLE;
+        } else {
+            return AVAILABLE;
+        }
     }
 }
