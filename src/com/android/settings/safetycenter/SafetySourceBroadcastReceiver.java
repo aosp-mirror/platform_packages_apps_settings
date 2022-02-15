@@ -33,15 +33,17 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        ImmutableList<String> sourceIds =
-                ImmutableList.copyOf(intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS));
+        String[] sourceIdsExtra = intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
+        if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
+            ImmutableList<String> sourceIds = ImmutableList.copyOf(sourceIdsExtra);
 
-        if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
-            LockScreenSafetySource.sendSafetyData(context);
-        }
+            if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
+                LockScreenSafetySource.sendSafetyData(context);
+            }
 
-        if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
-            BiometricsSafetySource.sendSafetyData(context);
+            if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
+                BiometricsSafetySource.sendSafetyData(context);
+            }
         }
     }
 }
