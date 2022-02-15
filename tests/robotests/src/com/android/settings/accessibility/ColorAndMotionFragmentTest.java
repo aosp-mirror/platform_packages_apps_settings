@@ -32,17 +32,17 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class TextAndDisplayFragmentTest {
+public class ColorAndMotionFragmentTest {
 
     private Context mContext = ApplicationProvider.getApplicationContext();
 
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = TextAndDisplayFragment.SEARCH_INDEX_DATA_PROVIDER
+        final List<String> niks = ColorAndMotionFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
         final List<String> keys =
                 XmlTestUtils.getKeysFromPreferenceXml(mContext,
-                        R.xml.accessibility_text_and_display);
+                        R.xml.accessibility_color_and_motion);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
