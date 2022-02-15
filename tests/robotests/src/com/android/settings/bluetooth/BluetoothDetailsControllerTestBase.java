@@ -155,6 +155,7 @@ public abstract class BluetoothDetailsControllerTestBase {
         mDevice = mBluetoothAdapter.getRemoteDevice(config.getAddress());
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
         when(mCachedDevice.getAddress()).thenReturn(config.getAddress());
+        when(mCachedDevice.getIdentityAddress()).thenReturn(config.getAddress());
     }
 
     /**
