@@ -143,6 +143,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED,
                 1);
 
+        mSwitchBar = new SettingsMainSwitchBar(mContext);
         mController =
                 new AutomaticStorageManagerSwitchBarController(
                         mContext,

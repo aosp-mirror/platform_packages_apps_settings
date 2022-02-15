@@ -69,7 +69,7 @@ public class BluetoothCodecDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return index;
         }
-        final BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
+        final BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             Log.d(TAG, "Unable to get selectable index. No Active Bluetooth device");
             return index;
@@ -93,7 +93,7 @@ public class BluetoothCodecDialogPreferenceController extends
         int codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
         switch (index) {
             case 0:
-                final BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
+                final BluetoothDevice activeDevice = getA2dpActiveDevice();
                 codecTypeValue = getHighestCodec(mBluetoothA2dp, activeDevice,
                         getSelectableConfigs(activeDevice));
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;

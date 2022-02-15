@@ -52,7 +52,6 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
@@ -141,22 +140,6 @@ public class AccessibilitySettingsTest {
                 AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
         assertThat(indexableRawList).isNull();
-    }
-
-    @Test
-    @Config(shadows = {ShadowDeviceConfig.class})
-    public void isRampingRingerEnabled_settingsFlagOn_Enabled() {
-        Settings.System.putInt(
-                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, ON);
-        assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    @Config(shadows = {ShadowDeviceConfig.class})
-    public void isRampingRingerEnabled_settingsFlagOff_Disabled() {
-        Settings.System.putInt(
-                mContext.getContentResolver(), Settings.System.APPLY_RAMPING_RINGER, OFF);
-        assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 
     @Test
@@ -298,10 +281,10 @@ public class AccessibilitySettingsTest {
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
                 anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
                 Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity, atLeast(1)).registerReceiver(any(PackageMonitor.class), captor.capture(),
                 isNull(), any());
         intentFilter = captor.getAllValues().get(/* first time */ 0);
@@ -318,7 +301,8 @@ public class AccessibilitySettingsTest {
 
         mFragment.onDestroy();
 
-        verify(mContentResolver).unregisterContentObserver(any(SettingsContentObserver.class));
+        verify(mContentResolver).unregisterContentObserver(
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
 
     }
@@ -384,6 +368,7 @@ public class AccessibilitySettingsTest {
 
     private void setMockAccessibilityShortcutInfo(AccessibilityShortcutInfo mockInfo) {
         final ActivityInfo activityInfo = Mockito.mock(ActivityInfo.class);
+        activityInfo.applicationInfo = new ApplicationInfo();
         when(mockInfo.getActivityInfo()).thenReturn(activityInfo);
         when(activityInfo.loadLabel(any())).thenReturn(DEFAULT_LABEL);
         when(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY);

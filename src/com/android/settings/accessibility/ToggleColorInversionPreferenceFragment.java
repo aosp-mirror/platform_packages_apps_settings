@@ -17,15 +17,16 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_TILE_COMPONENT_NAME;
 import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logAccessibilityServiceEnabled;
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +42,6 @@ import java.util.List;
 public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePreferenceFragment {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
-    private final Handler mHandler = new Handler();
-    private SettingsContentObserver mSettingsContentObserver;
 
     @Override
     public int getMetricsCategory() {
@@ -51,6 +50,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        super.onPreferenceToggled(preferenceKey, enabled);
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
@@ -82,22 +82,25 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
+        mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))
                 .build();
-        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
-        enableServiceFeatureKeys.add(ENABLED);
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, enableServiceFeatureKeys) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updateSwitchBarToggleSwitch();
-            }
-        };
-
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
         return view;
+    }
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> enableServiceFeatureKeys = new ArrayList<>(/* initialCapacity= */ 1);
+        enableServiceFeatureKeys.add(ENABLED);
+        contentObserver.registerKeysToObserverCallback(enableServiceFeatureKeys,
+                key -> updateSwitchBarToggleSwitch());
     }
 
     private void updateFooterPreference() {
@@ -114,12 +117,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     public void onResume() {
         super.onResume();
         updateSwitchBarToggleSwitch();
-        mSettingsContentObserver.register(getContentResolver());
     }
 
     @Override
     public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
         super.onPause();
     }
 
@@ -132,6 +133,16 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return COLOR_INVERSION_TILE_COMPONENT_NAME;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        return getText(R.string.accessibility_display_inversion_preference_title);
     }
 
     @Override

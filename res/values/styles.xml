@@ -198,10 +198,6 @@
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
 
-    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Material.NoActionBar">
-        <item name="android:background">#ff000000</item>
-    </style>
-
     <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
@@ -279,14 +275,6 @@
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
-    </style>
-
-    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.DeviceDefault">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:background">@null</item>
-        <item name="android:textCursorDrawable">@null</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
@@ -742,6 +730,12 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="AccessibilityTextReadingPreviewTitle"
+        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:padding">6dp</item>
+    </style>
+
     <style name="Widget.PopupWindow.Settings"
            parent="@android:style/Widget.DeviceDefault.PopupWindow">
         <item name="android:clipToPadding">true</item>
@@ -925,5 +919,48 @@
     <style name="TextAppearance.AdminDialogMessage"
            parent="@*android:style/TextAppearance.DeviceDefault">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="TextAppearance.SimConfirmDialogList" parent="@style/TextAppearance.DialogMessage"/>
+
+    <style name="TextAppearance.SimConfirmDialogList.Summary">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="SimConfirmDialog.OutlineButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">20sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:background">@drawable/sim_confirm_dialog_btn_outline</item>
+    </style>
+
+    <style name="SimConfirmDialog.ButtonBarStyle" parent="@android:style/Widget.Material.ButtonBar">
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+    <style name="DreamCardStyle">
+        <item name="android:layout_marginBottom">@dimen/dream_preference_margin_bottom</item>
+        <item name="android:layout_marginStart">@dimen/dream_preference_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/dream_preference_margin_horizontal</item>
+        <item name="cardBackgroundColor">@color/dream_card_color_state_list</item>
+        <item name="cardCornerRadius">@dimen/dream_item_corner_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="rippleColor">?android:attr/colorControlHighlight</item>
+        <item name="contentPadding">@dimen/dream_item_content_padding</item>
+    </style>
+
+    <style name="DreamPickerBackgroundStyle">
+        <item name="android:layout_marginBottom">48dp</item>
+        <item name="android:layout_marginStart">@dimen/dream_picker_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/dream_picker_margin_horizontal</item>
+        <item name="cardBackgroundColor">?androidprv:attr/colorSurface</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="contentPadding">32dp</item>
     </style>
 </resources>

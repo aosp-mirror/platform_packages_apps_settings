@@ -105,7 +105,8 @@ public class InternetResetHelper implements LifecycleObserver,
     /** @OnLifecycleEvent(Lifecycle.Event.ON_RESUME) */
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
-        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
+        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     /** @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE) */

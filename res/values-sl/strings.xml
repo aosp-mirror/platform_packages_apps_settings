@@ -209,6 +209,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Jeziki"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Odstrani"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Dodaj jezik"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Jezik"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Želeni jezik"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Jeziki aplikacije"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Nastavite jezik za posamezno aplikacijo."</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"Jezik aplikacije"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Predlagani jeziki"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Vsi jeziki"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Aplikacija je privzeto nastavljena na jezik <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> in ne podpira več jezikov."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Želite odstraniti izbrane jezike?</item>
       <item quantity="two">Želite odstraniti izbrane jezike?</item>
@@ -315,9 +323,9 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Varnost"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Šifriranje in poverilnice"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefon je šifriran"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Telefon ni šifriran"</string>
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefon ni šifriran"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Naprava je šifrirana"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Naprava ni šifrirana"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Naprava ni šifrirana"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Zaklenjen zaslon"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Kaj naj bo prikazano"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Nastavi Mojo lokacijo, odklepanje zaslona, zaklepanje kartice SIM, zaklepanje shrambe poverilnic"</string>
@@ -326,6 +334,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ni na voljo"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Stanje varnosti"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Zaklepanje zaslona, Poišči mojo napravo, varnost aplikacij"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Varnost in zasebnost"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Dovoljenja, zaklepanje zaslona, varnost aplikacij"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Obraz je dodan"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Za nastavitev obraza se dotaknite."</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Odklepanje z obrazom"</string>
@@ -398,9 +408,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Z obrazom odklenite telefon ali preverite pristnost, na primer ob prijavi v aplikacije ali za odobritev nakupa.\n\nUpoštevajte:\nNaenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.\n\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nVaš telefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Z obrazom odklenite telefon ali preverite pristnost, na primer ob prijavi v aplikacije ali za odobritev nakupa.\n\nUpoštevajte:\nNaenkrat je lahko nastavljen le en obraz. Če želite dodati nov obraz, morate obstoječega izbrisati.\n\nČe pogledate proti telefonu, ga boste morda nenamerno odklenili.\n\nTelefon lahko odklene tudi nekdo drug, če ga podrži pred vašim obrazom – celo kadar imate oči zaprte.\n\nPrav tako lahko telefon odklene nekdo, ki vam je zelo podoben, na primer vaš enojajčni dvojček."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Želite izbrisati model obraza?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Model obraza bo trajno in varno izbrisan. Po izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti kodo PIN, vzorec ali geslo."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Želite izbrisati model obraza?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Model obraza bo trajno in varno izbrisan.\n\nKo bo izbrisan, boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti prstni odtis, kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Model obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona ali preverjanje pristnosti v aplikacijah morali uporabiti kodo PIN, vzorec ali geslo."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Model obraza bo trajno in varno izbrisan.\n\nPo izbrisu boste za odklepanje telefona morali uporabiti kodo PIN, vzorec ali geslo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Za odklepanje telefona uporabite obraz"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Prstni odtis"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Prstni odtis za službo"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotaknite se tipala"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Prst položite na tipalo in ga dvignite, ko začutite vibriranje."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Prst držite na tipalu, dokler ne začutite vibriranja."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Držite prst plosko na tipalu, dokler ne začutite vibriranja."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Dotik in pridržanje tipala prstnih odtisov"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Dvignite in se spet dotaknite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Še enkrat"</string>
@@ -497,7 +506,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Še naprej privzdigujte prst, da dodate različne dele prstnega odtisa."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Dotaknite se in pridržite vsakič, ko se ikona prstnega odtisa premakne. Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Na tipalo položite konico prsta."</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Nazadnje na tipalo položite robove prsta."</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Nazadnje na tipalo položite robove prsta"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tako bo sistem lahko zajel večji del prstnega odtisa."</string>
     <!-- String.format failed for translation -->
@@ -506,6 +515,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Prstni odtis je dodan"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Zdaj lahko s prstnim odtisom odklenete telefon ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Pozneje"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Dvignite in se spet dotaknite"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Želite preskočiti nast. prstnega odtisa?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Za odklepanja telefona ste izbrali možnost prstnega odtisa. Če zdaj preskočite, boste to morali nastaviti pozneje. Nastavitev traja samo približno eno minuto."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Koda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
@@ -569,6 +580,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Možnost zaklepanja zaslona je onemogočena. Če želite izvedeti več, se obrnite na skrbnika organizacije. "<annotation id="admin_details">"Več podrobnosti"</annotation>\n\n"Prstni odtis lahko še naprej uporabljate za potrjevanje nakupov in dostop do aplikacij. "<annotation id="url">"Več o tem"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Dvignite prst in se znova dotaknite tipala."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Tipala prstnih odtisov ni mogoče uporabiti. Obiščite ponudnika popravil."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Dodatne nastavitve"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Zaklepanje delovnega profila, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock in drugo"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Dodatne nastavitve"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Dodate lahko do toliko prstnih odtisov: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste največje dovoljeno število prstnih odtisov"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Prstnih odtisov ni več mogoče dodati"</string>
@@ -579,37 +594,10 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Za odklepanje telefona ali potrditev identitete v aplikacijah ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Za odklepanje delovnega profila, odobritev nakupov ali prijavo v delovne aplikacije ne boste mogli uporabljati prstnega odtisa."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Da, odstrani"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Šifriranje"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Šifriraj tablični računalnik"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Šifriranje telefona"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Šifrirano"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju tabličnega računalnika ob vsakem vklopu odkleniti zaslon, če boste želeli tablični računalnik dešifrirati. Edini drugi način dešifriranja tabličnega računalnika je, da ga ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo baterija napolnjena, tablični računalnik pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Šifrirate lahko račune, nastavitve, prenesene aplikacije in njihove podatke, predstavnosti in druge datoteke. Če ste nastavili zaklepanje zaslona (z vzorcem, številsko kodo PIN ali geslom), boste morali po šifriranju telefona ob vsakem vklopu odkleniti zaslon, če boste želeli telefon dešifrirati. Edini drugi način dešifriranja je, da telefon ponastavite na tovarniške nastavitve, s čemer izbrišete vse podatke.\n\nŠifriranje traja najmanj eno uro. Ko začnete šifriranje, naj bo baterija napolnjena, telefon pa naj bo med celotnim postopkom priklopljen na električno omrežje. Če postopek prekinete, boste izgubili nekatere ali vse podatke."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Šifriraj tablični računalnik"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Šifriraj telefon"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Napolnite baterijo in poskusite znova."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Priključite polnilnik in poskusite znova."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Ni kode PIN ali gesla za zaklepanje zaslona"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Preden lahko začnete s šifriranjem, morate nastaviti kodo PIN ali geslo za zaklepanje zaslona."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Želite šifrirati?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Šifriranja ne morete razveljaviti ali prekiniti, ker lahko izgubite podatke. Šifriranje traja eno uro ali več in v tem času se bo tablični računalnik večkrat znova zagnal."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Šifriranja ne morete razveljaviti ali prekiniti, ker lahko izgubite podatke. Šifriranje traja eno uro ali več in v tem času se bo telefon večkrat znova zagnal."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Šifriranje"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Počakajte, tablični računalnik se šifrira. Dokončano: <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Počakajte, telefon se šifrira. Dokončano: <xliff:g id="PERCENT">^1</xliff:g>%."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Počakajte, poteka šifriranje tabličnega računalnika. Preostane še: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Počakajte, poteka šifriranje telefona. Preostane še: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Če želite odkleniti tablični računalnik, ga izklopite in nato vklopite."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Če želite odkleniti telefon, ga izklopite in nato vklopite."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Opozorilo: Podatki v napravi bodo izbrisani po še toliko neuspešnih poskusih odklepanja: <xliff:g id="COUNT">^1</xliff:g>."</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Vnesite geslo"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Šifriranje ni uspelo"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Šifriranje je bilo prekinjeno in ga ni mogoče končati, zato podatki v tabličnem računalniku niso več dostopni. \n\nČe želite tablični računalnik spet uporabljati, ga morate ponastaviti na tovarniške nastavitve. Ko ga po ponastavitvi spet nastavite, boste lahko obnovili vse podatke, ki so bili varnostno kopirani v račun Google."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Šifriranje je bilo prekinjeno in ga ni mogoče končati, zato podatki v telefonu niso več dostopni. \n\nČe želite telefon ponovno uporabljati, ga morate ponastaviti na tovarniške nastavitve. Ko ga po ponastavitvi ponovno nastavite, boste lahko obnovili vse podatke, ki so bili varnostno kopirani v račun Google."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Dešifriranje ni uspelo"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Vnesli ste pravilno geslo, vendar so podatki poškodovani. \n\nČe želite še naprej uporabljati tablični računalnik, ga morate ponastaviti na tovarniške nastavitve. Ko boste po ponastavitvi nastavljali tablični računalnik, boste lahko obnovili morebitne podatke, ki so bili varnostno kopirani v račun Google."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Vnesli ste pravilno geslo, vendar so podatki poškodovani. \n\nČe želite še naprej uporabljati telefon, ga morate ponastaviti na tovarniške nastavitve. Ko boste po ponastavitvi nastavljali telefon, boste lahko obnovili morebitne podatke, ki so bili varnostno kopirani v račun Google."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Preklopite način vnosa"</string>
+    <string name="encryption_settings_title" msgid="2848716008695618360">"Šifriranje"</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Šifriraj tablični računalnik"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Šifriraj telefon"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Šifrirano"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Zaščitite telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Nastavite zaklepanje zaslona, da zaščitite tablico"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Nastavite zaklepanje zaslona, da zaščitite napravo"</string>
@@ -1114,6 +1102,7 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Uporabi sistemska potrdila"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne posreduj"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne preverjaj"</string>
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Zaupaj ob prvi uporabi"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Ime omrežja je predolgo."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Določiti morate domeno."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Potrdilo je obvezno."</string>
@@ -1275,8 +1264,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Klic prek omrežja Wi-Fi. Če izgubite povezavo Wi-Fi, bo klic končan."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Ko je vklopljeno klicanje prek omrežja Wi-Fi, lahko telefon preusmeri klice prek omrežij Wi-Fi ali omrežja operaterja na podlagi vaše nastavitve in moči signala. Pred vklopom te funkcije pri operaterju preverite cene in druge podrobnosti.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Naslov za nujne primere"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Uporabljen je kot vaš naslov, ko opravite klic v sili prek Wi‑Fi-ja"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Preberite več"</annotation>" o funkcijah zasebnega strežnika DNS."</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Vklopljeno"</string>
@@ -1959,15 +1947,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Nastavitev kode PIN za službo"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Nastavite vzorec"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Nastavitev vzorca za službo"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Za večjo varnost nastavite geslo za odklepanje telefona"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Za večjo varnost nastavite kodo PIN za odklepanje telefona"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Za večjo varnost nastavite vzorec za odklepanje telefona"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Za večjo varnost nastavite geslo za odklepanje tabličnega računalnika"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Za večjo varnost nastavite kodo PIN za odklepanje tabličnega računalnika"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Za večjo varnost nastavite vzorec za odklepanje tabličnega računalnika"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Za večjo varnost nastavite geslo za odklepanje naprave"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Za večjo varnost nastavite kodo PIN za odklepanje naprave"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Za večjo varnost nastavite vzorec za odklepanje naprave"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Nastavite geslo za prstni odtis"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Nastavite vzorec za prstni odtis"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Zaradi varnosti nastavite kodo PIN."</string>
@@ -2341,6 +2320,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Preberite več o nastavitvah podnapisov."</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Povečava"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Bližnjica za povečavo"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Sledi vnašanju"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"Območje povečave samodejno sledi besedilu med vnašanjem."</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"O povečavi"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Preberite več o povečavi."</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Način povečave"</string>
@@ -2362,6 +2343,13 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Povečanje z bližnjico"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Povečanje z bližnjico in trikratnim dotikom"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"O funkciji »<xliff:g id="SERVICE">%1$s</xliff:g>«"</string>
+    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"Možnosti besedila in branja"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Možnosti"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Povečava zaslona"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Če želite povečati, se trikrat dotaknite"</string>
@@ -2467,12 +2455,22 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Krajše"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Daljše"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Čas za samodejni klik"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Moč vibriranja in odziva na dotik"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibriranje pri obvestilih"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibriranje in odziv na dotik"</string>
+    <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Nastavitev moči vibriranja za različne uporabe"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Klici"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Obvestila in alarmi"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivni odziv na dotik"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Uporaba vibriranja in odziva na dotik"</string>
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibriranje alarma"</string>
+    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibriranje predstavnosti"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibriranje pri zvonjenju"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibriranje pri obvestilih"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odziv na dotik"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Uporabi storitev <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Odpiranje aplikacije <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
+    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"Povlecite navzdol za hiter vklop ali izklop aplikacije <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> v hitrih nastavitvah."</string>
+    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Uporabi popravljanje barv"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Bližnjica za popravljanje barv"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"O popravljanju barv"</string>
@@ -2554,15 +2552,6 @@
       <item quantity="few"><xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> sekunde</item>
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> sekund</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Zvonjenje: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, obvestilo: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, dotik: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Vibriranje za zvonjenje in obvestila je izklopljeno"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Vibriranje za zvonjenje in obvestila je nastavljeno na šibko"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Vibriranje za zvonjenje in obvestila je nastavljeno na srednje"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Vibriranje za zvonjenje in obvestila je nastavljeno na močno"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Izklop"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Šibko"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Srednje"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Močno"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Nastavitve"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Vklopljeno"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Izklopljeno"</string>
@@ -2599,11 +2588,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Ali storitvi »<xliff:g id="SERVICE">%1$s</xliff:g>« dovolite popoln nadzor nad svojo napravo?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> mora:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Ker aplikacija zakriva zahtevo za dovoljenje, z nastavitvami ni mogoče preveriti vašega odziva."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Če vklopite storitev <xliff:g id="SERVICE">%1$s</xliff:g>, vaša naprava ne bo uporabljala zaklepanja zaslona za izboljšanje šifriranja podatkov."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Vaša naprava ne bo uporabljala zaklepanja zaslona za izboljšanje šifriranja podatkov, ker ste vklopili storitev za ljudi s posebnimi potrebami."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Ker vklop storitve <xliff:g id="SERVICE">%1$s</xliff:g> vpliva na šifriranje podatkov, morate potrditi vzorec."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Ker vklop storitve <xliff:g id="SERVICE">%1$s</xliff:g> vpliva na šifriranje podatkov, morate potrditi kodo PIN."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Ker vklop storitve <xliff:g id="SERVICE">%1$s</xliff:g> vpliva na šifriranje podatkov, morate potrditi geslo."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> zahteva popoln nadzor nad to napravo. Storitev lahko prebere zaslon in deluje v imenu uporabnikov s posebnimi potrebami. Ta raven nadzora za večino aplikacij ni primerna."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Popoln nadzor je ustrezen za aplikacije, ki vam pomagajo pri funkcijah za ljudi s posebnimi potrebami, vendar ne za večino aplikacij."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ogledovanje in upravljanje zaslona"</string>
@@ -2639,6 +2623,10 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"naglušnost, izguba sluha"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"naglušnost, izguba sluha, podnapisi, teleprinter, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <string name="fast_pair_settings" msgid="3308819519080016185">"Hitra seznanitev"</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Zaznavanje naprav Bluetooth v bližini za hitro seznanitev."</string>
+    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
+    <skip />
     <string name="print_settings" msgid="8519810615863882491">"Tiskanje"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Izklopljeno"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3190,14 +3178,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Skrbnik ne dovoli te spremembe"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Ročna sinhronizacija ni mogoča"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Sinhronizacija za ta element je trenutno onemogočena. Če želite spremeniti nastavitev, vklopite podatke v ozadju in samodejno sinhronizacijo."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Če želite zagnati Android, vnesite geslo"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Če želite zagnati Android, vnesite PIN"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Če želite zagnati Android, narišite vzorec"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Napačen vzorec"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Napačno geslo"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Napačna koda PIN"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Preverjanje ..."</string>
-    <string name="starting_android" msgid="6694154070215356186">"Zagon Androida ..."</string>
     <string name="delete" msgid="8330605554706263775">"Izbriši"</string>
     <string name="misc_files" msgid="6598066985800749585">"Razne datoteke"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"izbrano: <xliff:g id="NUMBER">%1$d</xliff:g> od <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3293,8 +3273,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Omejen prenos podatkov"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Z neomejenim prenosom podatkov"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Operaterjeve meritve porabe podatkov so morda drugačne kot v napravi."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Klic v sili"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Nazaj na klic"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Ime"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Vrsta"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Naslov strežnika"</string>
@@ -3330,8 +3308,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Povezovanje z <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Prekinitev povezave s tem omrežjem VPN?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Prekini povezavo"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Različica"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Pozabi omrežje VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Želite zamenjati obstoječe omrežje VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Ali želite, da je omrežje VPN stalno vklopljeno?"</string>
@@ -3468,12 +3445,29 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Izberite aplikacije za namestitev"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Namestitev razpoložljivih aplikacij"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Brezstična plačila"</string>
+    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
+    <skip />
+    <!-- no translation found for nfc_more_details (1700713533074275233) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
+    <skip />
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Kako deluje"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Plačujte v trgovinah s telefonom"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Privzeta aplikacija za plačevanje"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Ni nastavljeno"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="788899906312142803">"Uporabi privzeto aplikacijo"</string>
+    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
+    <skip />
+    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
+    <skip />
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Vedno"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Razen ko je odprta druga aplikacija za plačevanje"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"Na brezstičnem terminalu plačaj z aplikacijo:"</string>
@@ -3561,9 +3555,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Prenos podatkov v mob. omr. ni na voljo"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Dotaknite se, če želite izbrati SIM za prenos podatkov"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Vedno uporabi to možnost za klice"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Izbira kartice SIM za prenos podatkov"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Izberite kartico SIM za mobilne podatke"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Izberite kartico SIM za sporočila SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Preklop podatkovne kartice SIM. Lahko traja kakšno minuto …"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Uporaba kartice <xliff:g id="NEW_SIM">%1$s</xliff:g> za mobilne podatke?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Če preklopite na kartico <xliff:g id="NEW_SIM">%1$s</xliff:g>, kartica <xliff:g id="OLD_SIM">%2$s</xliff:g> ne bo več uporabljena za prenos podatkov v mobilnem omrežju."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Uporabi kartico <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Klicanje z …"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Izberite kartico SIM"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3625,7 +3622,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, omrežna povezava, internet, brezžično, podatki, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Obvestilo za Wi‑Fi, obvestilo za wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"prenesena količina podatkov"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Onemogočanje vibriranja, dotik, tipkovnica"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Uporaba 24-urne oblike"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Prenos"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Za odpiranje uporabi"</string>
@@ -3699,21 +3695,28 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"zaslon, čas zaklepanja, časovna omejitev, zaklenjen zaslon"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"pomnilnik, predpomnilnik, podatki, izbrisati, počistiti, sprostiti, prostor"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"povezano, naprava, slušalke, slušalke z mikrofonom, zvočnik, brezžično, seznaniti, seznanitev, ušesne slušalke, glasba, predstavnost"</string>
+    <string name="keywords_fast_pair" msgid="5422942398816611159">"seznanitev, ušesne slušalke, bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"ozadje, tema, mreža, prilagajanje po meri, osebno prilagajanje, individualno prilagajanje"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikona, poudarek, barva"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"privzeto, pomočnik"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"plačilo, plačevanje, privzeto"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"dohodno obvestilo"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"povezava z internetom prek mobilnega telefona prek kabla USB, povezava z internetom prek mobilnega telefona prek povezave Bluetooth, dostopna točka wifi"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"haptično, odziv na dotik, vibriranje, vibrirati"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptično, vibriranje, zaslon, občutljivost"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"haptično, vibriranje, telefon, klic, občutljivost, zvonjenje"</string>
-    <string name="keywords_notification_vibration" msgid="9162262178415439951">"haptično, vibriranje, občutljivost"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"haptično, vibriranje, telefon, klic, zvonjenje, postopno"</string>
+    <string name="keywords_notification_vibration" msgid="2620799301276142183">"haptično, vibriranje, občutljivost, obvestilo"</string>
+    <string name="keywords_alarm_vibration" msgid="4833220371621521817">"haptično, vibriranje, občutljivost, alarm"</string>
+    <string name="keywords_media_vibration" msgid="723896490102792327">"haptično, vibriranje, občutljivost, predstavnost"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"haptično, odziv na dotik, vibriranje, vibrirati"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"varčevanje z energijo baterije, lepljivo, trajno, varčevanje z energijo, baterija"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"rutina, vsakodnevni opravek, razpored, urnik, varčevanje z energijo baterije, varčevanje z energijo, baterija, samodejno, odstotek, delež"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, napredno klicanje, klicanje 4g"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, napredno klicanje, klicanje 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodajanje jezika, dodajte jezik"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"velikost besedila, velika pisava, velike črke, veliko besedilo, slabovidnost, povečaj besedilo, povečevalnik pisave, povečanje pisave"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"stalno vklopljen zaslon"</string>
     <string name="default_sound" msgid="6604374495015245195">"Privzeti zvok"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Glasnost zvonjenja in obvestil na <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Glasnost, vibriranje, ne moti"</string>
@@ -3743,8 +3746,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvoki in vibriranje ob polnjenju"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Zvok ob odlaganju v nosilec"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Zvoki dotikov"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibriranje ob dotiku"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Odziv z vibriranjem ob dotiku, pritisku tipk in drugem"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Zvočnik nosilca je vklopljen"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Vsi zvoki"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Samo zvoki predstavnosti"</string>
@@ -3910,7 +3911,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Če vklopite oblačke za to aplikacijo, bodo vklopljeni tudi za napravo.\n\nTo vpliva na druge aplikacije ali pogovore, v katerih je prikaz v oblačkih že omogočen."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Vklopi"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Prekliči"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Vklopljeno/pogovori so lahko prikazani kot lebdeče ikone."</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Omogoči aplikacijam, da prikažejo oblačke"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Nekateri pogovori bodo prikazani kot lebdeče ikone nad drugimi aplikacijami."</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Vsi pogovori so lahko prikazani v oblačkih"</string>
@@ -5469,12 +5470,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Želite vklopiti kartico SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Želite preklopiti na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Želite preklopiti na uporabo kartice SIM?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Želite preklopiti na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Hkrati je lahko aktivna samo ena kartica SIM.\n\nČe preklopite na operaterja <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, ne boste preklicali storitve operaterja <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Hkrati je lahko aktivna samo ena prenesena kartica SIM.\n\nČe preklopite na operaterja <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, ne boste preklicali storitve operaterja <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Hkrati je lahko aktivna samo ena kartica SIM.\n\nČe preklopite, ne boste preklicali storitve operaterja <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Hkrati lahko uporabljate dve kartici SIM. Če želite preklopiti na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, izklopite drugo kartico SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Preklopi na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Izklop operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Z izklopom kartice SIM ne prekličete storitve operaterja"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Povezovanje z omrežjem …"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Preklapljanje na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Preklapljanje na operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g> za klice in sporočila …"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Operaterja ni mogoče preklopiti"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Operaterja ni mogoče preklopiti zaradi napake."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Želite izklopiti storitev operaterja <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5585,6 +5590,8 @@
     <string name="content_capture" msgid="868372905432812238">"Vsebina aplikacije"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Aplikacijam dovoli pošiljanje vsebine v sistem Android."</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Zajemi sistemski izvoz kopice"</string>
+    <string name="reboot_with_mte_title" msgid="9167242803901899693">"Znova zaženi z razširitvami MTE"</string>
+    <string name="reboot_with_mte_message" msgid="1024288615073985828">"To bo sprožilo vnovični zagon in omogočilo preizkušanje razširitev MTE (razširitev za označevanje pomnilnika). To lahko negativno vpliva na učinkovitost delovanja in stabilnost sistema. Bo ponastavljeno pri naslednjem vnovičnem zagonu."</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Zajemanje sistemskega izvoza kopice"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Sistemskega izvoza kopice ni bilo mogoče zajeti"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Samodejni zajem sistemskih izvozov kopic"</string>
@@ -5630,8 +5637,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dolgo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Prikaži denarnico"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Dovolite dostop do denarnice prek zaklenjenega zaslona in hitrih nastavitev."</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"Prikaži optični bralnik kod QR"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Dovoli dostop do optičnega bralnika kod QR pri zaklenjenem zaslonu"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Pokaži optični bralnik kod QR"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Dovolite dostop do optičnega bralnika kod QR na zaklenjenem zaslonu."</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Prikaži kontrolnike naprave"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Dostopajte do kontrolnikov pri zaklenjenem zaslonu."</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Prikaz ure v dveh vrsticah, ko je na voljo"</string>
@@ -5712,6 +5719,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Želite izklopiti prenos podatkov v mobilnih omrežjih?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Prek omrežja <xliff:g id="CARRIER">%s</xliff:g> ne boste imeli dostopa do podatkovne povezave ali interneta. Internet bo na voljo samo prek povezave Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"vašega operaterja"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Organizacija tega ne dovoljuje."</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Ni na voljo, ker je vklopljen način za spanje"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Ponastavitev pomembnosti obvestil je dokončana."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
@@ -5746,7 +5754,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Uporaba prilagod. varčevanja z energijo baterije"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Uporabi prilagodljivo svetlost"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Uporaba klicanja prek Wi‑Fi-ja"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Uporabi ohranjevalnik zaslona"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Prikaz vseh aplikacij"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Pametno posredovanje"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Pametno posredovanje je omogočeno."</string>
@@ -5761,7 +5768,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Manjka telefonska številka."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"V redu"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"Omogočenje 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"Uporaba mobilnih internetnih povezav 2G. Za klice v sili se vedno vklopi povezava 2G."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G je manj varen, vendar lahko izboljša kakovost povezave na nekaterih lokacijah. Povezava 2G je vedno dovoljena za klice v sili."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Operater <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> zahteva razpoložljivo povezavo 2G"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Pokaži dostop do odložišča"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Pokaži sporočilo, ko aplikacije dostopijo do besedila, slik ali drugih vsebin, ki ste jih kopirali."</string>
     <string name="all_apps" msgid="3054120149509114789">"Vse aplikacije"</string>
@@ -5824,4 +5832,6 @@
     <item msgid="588427840913221601">"Stanje procesa"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Potrdi"</string>
+    <string name="dream_preview_button_title" msgid="1498088020579092512">"Predogled ohranjevalnika zaslona"</string>
+    <string name="customize_button_title" msgid="1110284655990203359">"Prilagodi"</string>
 </resources>

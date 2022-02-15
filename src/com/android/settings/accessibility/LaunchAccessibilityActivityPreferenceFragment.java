@@ -20,9 +20,11 @@ import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logA
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -51,6 +53,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     private static final String TAG = "LaunchA11yActivity";
     private static final String EMPTY_STRING = "";
     protected static final String KEY_LAUNCH_PREFERENCE = "launch_preference";
+    private ComponentName mTileComponentName;
 
     @Override
     public int getMetricsCategory() {
@@ -106,12 +109,47 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
                 AccessibilitySettings.EXTRA_SETTINGS_TITLE);
         mSettingsIntent = TextUtils.isEmpty(settingsTitle) ? null : getSettingsIntent(arguments);
         mSettingsTitle = (mSettingsIntent == null) ? null : settingsTitle;
+
+        // Tile service.
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME)) {
+            final String tileServiceComponentName = arguments.getString(
+                    AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME);
+            mTileComponentName = ComponentName.unflattenFromString(tileServiceComponentName);
+        }
     }
 
     @Override
     int getUserShortcutTypes() {
         return AccessibilityUtil.getUserShortcutTypesFromSettings(getPrefContext(),
                 mComponentName);
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return mTileComponentName;
+    }
+
+    @Override
+    CharSequence getTileName() {
+        final ComponentName componentName = getTileComponentName();
+        if (componentName == null) {
+            return null;
+        }
+        return loadTileLabel(getPrefContext(), componentName);
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        switch (dialogId) {
+            case AccessibilityDialogUtils.DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
+                final Dialog dialog = AccessibilityGestureNavigationTutorial
+                        .createAccessibilityTutorialDialog(getPrefContext(),
+                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
+                dialog.setCanceledOnTouchOutside(false);
+                return dialog;
+            default:
+                return super.onCreateDialog(dialogId);
+        }
     }
 
     @Override
@@ -197,5 +235,23 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         return settingsIntent;
+    }
+
+    /**
+     * This method will be invoked when a button in the tutorial dialog is clicked.
+     *
+     * @param dialog The dialog that received the click
+     * @param which  The button that was clicked
+     */
+    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
+        dialog.dismiss();
+        showQuickSettingsTooltipIfNeeded();
+    }
+
+
+    @Override
+    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
+        super.callOnAlertDialogCheckboxClicked(dialog, which);
+        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
     }
 }

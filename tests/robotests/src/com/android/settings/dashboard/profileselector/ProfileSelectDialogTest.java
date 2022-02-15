@@ -43,8 +43,8 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public class ProfileSelectDialogTest {
 
-    private static final UserHandle NORMAL_USER = UserHandle.of(1111);
-    private static final UserHandle REMOVED_USER = UserHandle.of(2222);
+    private static final UserHandle NORMAL_USER = new UserHandle(1111);
+    private static final UserHandle REMOVED_USER = new UserHandle(2222);
 
     @Mock
     private Context mContext;

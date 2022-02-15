@@ -100,7 +100,10 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
         extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                 R.string.accessibility_screen_magnification_gestures_title);
 
-        String summary =  context.getString(R.string.accessibility_screen_magnification_summary);
+        String intro = context.getString(R.string.accessibility_screen_magnification_intro_text);
+        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
+
+        String summary = context.getString(R.string.accessibility_screen_magnification_summary);
         final Object[] numberArguments = {1, 2, 3, 4, 5};
         summary = MessageFormat.format(summary, numberArguments);
         extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);

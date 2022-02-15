@@ -123,6 +123,13 @@ public class NotificationBackend {
             } catch (RemoteException e) {
                 Log.w(TAG, "Error calling NMS", e);
             }
+            // The permission system cannot make role permissions 'fixed', so check for these
+            // roles explicitly
+            List<String> roles = rm.getHeldRolesFromController(app.packageName);
+            if (roles.contains(RoleManager.ROLE_DIALER)
+                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+                row.systemApp = row.lockedImportance = true;
+            }
         } else {
             row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
             List<String> roles = rm.getHeldRolesFromController(app.packageName);
@@ -351,6 +358,15 @@ public class NotificationBackend {
              sINM.setInvalidMsgAppDemoted(pkg, uid, isDemoted);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public boolean hasSentValidBubble(String pkg, int uid) {
+        try {
+            return sINM.hasSentValidBubble(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
         }
     }
 

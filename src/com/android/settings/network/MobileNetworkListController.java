@@ -16,6 +16,8 @@
 
 package com.android.settings.network;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
@@ -34,7 +36,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -137,7 +138,8 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
                 } else {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                    final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
+                    intent.setPackage(SETTINGS_PACKAGE_NAME);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
                     mContext.startActivity(intent);
                 }

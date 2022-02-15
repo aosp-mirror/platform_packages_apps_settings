@@ -215,6 +215,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         }
     }
 
+    @Override
+    protected boolean shouldSkipForInitialSUW() {
+        return true;
+    }
+
     /**
      * Long-pressing a developer options quick settings tile will by default (see
      * QS_TILE_PREFERENCES in the manifest) take you to the developer options page.
@@ -472,6 +477,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BugReportPreferenceController(context));
         controllers.add(new BugReportHandlerPreferenceController(context));
         controllers.add(new SystemServerHeapDumpPreferenceController(context));
+        controllers.add(new RebootWithMtePreferenceController(context, fragment));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
@@ -547,8 +553,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
-        controllers.add(new FreeformWindowsPreferenceController(context));
-        controllers.add(new DesktopModePreferenceController(context));
+        controllers.add(new FreeformWindowsPreferenceController(context, fragment));
+        controllers.add(new DesktopModePreferenceController(context, fragment));
         controllers.add(new NonResizableMultiWindowPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         controllers.add(new EnableGnssRawMeasFullTrackingPreferenceController(context));

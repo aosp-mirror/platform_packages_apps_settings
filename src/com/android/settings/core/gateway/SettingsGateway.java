@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
@@ -42,6 +43,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AlarmsAndRemindersDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.ManageExternalStorageDetails;
@@ -147,8 +149,8 @@ import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
-import com.android.settings.security.CryptKeeperSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
+import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.sound.MediaControlsSettings;
@@ -214,12 +216,14 @@ public class SettingsGateway {
             PrivacyDashboardFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
+            SecurityAdvancedSettings.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
             AccessibilityDetailsSettingsFragment.class.getName(),
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
+            TextReadingPreferenceFragmentForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
@@ -243,7 +247,6 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             SystemNavigationGestureSettings.class.getName(),
-            CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
@@ -331,7 +334,8 @@ public class SettingsGateway {
             MediaManagementAppsDetails.class.getName(),
             AutoBrightnessSettings.class.getName(),
             OneHandedSettings.class.getName(),
-            MobileNetworkSettings.class.getName()
+            MobileNetworkSettings.class.getName(),
+            AppLocaleDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

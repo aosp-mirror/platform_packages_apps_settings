@@ -162,6 +162,7 @@
         android:icon="@drawable/ic_settings_emergency"
         android:order="-20"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
+        settings:isPreferenceVisible="@bool/config_show_emergency_settings"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
 
     <com.android.settings.widget.HomepagePreference

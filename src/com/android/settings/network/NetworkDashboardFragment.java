@@ -118,9 +118,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             controllers.add(internetPreferenceController);
         }
         controllers.add(privateDnsPreferenceController);
-        if (Utils.isProviderModelEnabled(context)) {
-            controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
-        }
+        controllers.add(new NetworkProviderCallsSmsController(context, lifecycle));
         return controllers;
     }
 
@@ -155,20 +153,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.network_and_internet) {
-
-                @Override
-                // TODO(b/167474581): Should remove this method when Provider Model finished.
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    if (Utils.isProviderModelEnabled(context)) {
-                        final SearchIndexableResource sir = new SearchIndexableResource(context);
-                        sir.xmlResId = R.xml.network_provider_internet;
-                        return Arrays.asList(sir);
-                    }
-                    return super.getXmlResourcesToIndex(context, enabled);
-                }
-
+            new BaseSearchIndexProvider(R.xml.network_provider_internet) {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {

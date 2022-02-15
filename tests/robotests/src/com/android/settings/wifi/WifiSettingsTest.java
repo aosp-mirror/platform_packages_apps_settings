@@ -43,7 +43,6 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -93,6 +92,7 @@ public class WifiSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mock(UserManager.class));
 
         mWifiSettings = spy(new WifiSettings());
         doReturn(mContext).when(mWifiSettings).getContext();

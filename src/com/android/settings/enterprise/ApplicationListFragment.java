@@ -19,6 +19,7 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -41,6 +42,11 @@ public abstract class ApplicationListFragment extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
     }
 
     @Override

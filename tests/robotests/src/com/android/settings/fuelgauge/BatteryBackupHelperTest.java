@@ -383,6 +383,8 @@ public final class BatteryBackupHelperTest {
                         AppOpsManager.OP_RUN_ANY_IN_BACKGROUND,
                         applicationInfo2.uid,
                         applicationInfo2.packageName);
+        mBatteryBackupHelper.mTestApplicationInfoList =
+                Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3);
     }
 
     @Implements(UserHandle.class)

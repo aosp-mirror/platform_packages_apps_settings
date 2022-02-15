@@ -39,12 +39,13 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.Settings.MobileNetworkActivity;
+import com.android.settings.network.helper.SubscriptionAnnotation;
+import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -209,108 +210,6 @@ public class MobileNetworkSummaryControllerTest {
                 MobileNetworkActivity.class.getName());
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
-    }
-
-    @Test
-    @Ignore
-    public void getSummary_twoSubscriptions_correctSummaryAndFragment() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("2 SIMs");
-        assertThat(mPreference.getFragment()).isEqualTo(MobileNetworkListFragment.class.getName());
-    }
-
-    @Test
-    @Ignore
-    public void getSummaryAfterUpdate_twoSubscriptionsBecomesOne_correctSummaryAndFragment() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        when(sub1.getDisplayName()).thenReturn("sub1");
-        when(sub2.getDisplayName()).thenReturn("sub2");
-
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("2 SIMs");
-        assertThat(mPreference.getFragment()).isEqualTo(MobileNetworkListFragment.class.getName());
-
-        // Simulate sub2 having disappeared - the end result should change to be the same as
-        // if there were just one subscription.
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));
-        mController.onSubscriptionsChanged();
-        assertThat(mController.getSummary()).isEqualTo("sub1");
-        assertThat(mPreference.getFragment()).isNull();
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mContext).startActivity(intentCaptor.capture());
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
-                MobileNetworkActivity.class.getName());
-    }
-
-    @Test
-    @Ignore
-    public void getSummaryAfterUpdate_oneSubscriptionBecomesTwo_correctSummaryAndFragment() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        when(sub1.getDisplayName()).thenReturn("sub1");
-        when(sub2.getDisplayName()).thenReturn("sub2");
-
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(sub1));
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1));
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("sub1");
-        assertThat(mPreference.getFragment()).isNull();
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        doNothing().when(mContext).startActivity(intentCaptor.capture());
-        mPreference.getOnPreferenceClickListener().onPreferenceClick(mPreference);
-        assertThat(intentCaptor.getValue().getComponent().getClassName()).isEqualTo(
-                MobileNetworkActivity.class.getName());
-
-        // Simulate sub2 appearing in the list of subscriptions and check the results.
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("2 SIMs");
-        assertThat(mPreference.getFragment()).isEqualTo(MobileNetworkListFragment.class.getName());
-    }
-
-    @Test
-    @Ignore
-    public void getSummary_providerModel_Enabled() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        when(sub1.getDisplayName()).thenReturn("sub1");
-        when(sub2.getDisplayName()).thenReturn("sub2");
-
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("sub1, sub2");
-
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("2 SIMs");
     }
 
     @Test

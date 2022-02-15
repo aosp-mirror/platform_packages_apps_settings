@@ -58,9 +58,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
-            getActivity().setTitle(R.string.network_and_internet_preferences_title);
-        }
+        getActivity().setTitle(R.string.network_and_internet_preferences_title);
 
         mCertinstallerPreference = findPreference(KEY_INSTALL_CREDENTIALS);
         if (mCertinstallerPreference != null) {

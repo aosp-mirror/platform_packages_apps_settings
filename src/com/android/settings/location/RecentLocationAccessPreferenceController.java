@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.icu.text.RelativeDateTimeFormatter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -85,11 +86,17 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        mCategoryRecentLocationRequests.removeAll();
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentAppOpsAccess.Access> recentLocationAccesses = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
-        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(
-                /* showSystemApps= */ false)) {
+        final boolean showSystem = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
+        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(showSystem)) {
             if (isRequestMatchesProfileType(userManager, access, mType)) {
                 recentLocationAccesses.add(access);
                 if (recentLocationAccesses.size() == MAX_APPS) {
@@ -117,6 +124,15 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     public void onLocationModeChanged(int mode, boolean restricted) {
         boolean enabled = mLocationEnabler.isEnabled(mode);
         mCategoryRecentLocationRequests.setVisible(enabled);
+    }
+
+    /**
+     * Clears the list of apps which recently accessed location from the screen.
+     */
+    public void clearPreferenceList() {
+        if (mCategoryRecentLocationRequests != null) {
+            mCategoryRecentLocationRequests.removeAll();
+        }
     }
 
     /**

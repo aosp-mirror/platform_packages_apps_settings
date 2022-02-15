@@ -105,6 +105,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     private Intent mIntent;
     private NetworkDetailsTracker mNetworkDetailsTracker;
     private HandlerThread mWorkerThread;
+    private WifiManager mWifiManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,22 +151,12 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
     @Override
     protected void onStart() {
         super.onStart();
-        if (mDialog2 != null || mDialog != null) {
+        if (mDialog2 != null || mDialog != null || !hasWifiManager()) {
             return;
         }
 
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SuwAlertDialogThemeCompat_DayNight :
-                    R.style.SuwAlertDialogThemeCompat_Light;
-            if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
-                        mNetworkDetailsTracker.getWifiEntry(),
-                        WifiConfigUiBase2.MODE_CONNECT, targetStyle);
-            } else {
-                mDialog = WifiDialog.createModal(this, this, mAccessPoint,
-                        WifiConfigUiBase.MODE_CONNECT, targetStyle);
-            }
+            createDialogWithSuwTheme();
         } else {
             if (mIsWifiTrackerLib) {
                 mDialog2 = WifiDialog2.createModal(this, this,
@@ -177,11 +168,30 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         if (mIsWifiTrackerLib) {
-            mDialog2.show();
-            mDialog2.setOnDismissListener(this);
+            if (mDialog2 != null) {
+                mDialog2.show();
+                mDialog2.setOnDismissListener(this);
+            }
         } else {
-            mDialog.show();
-            mDialog.setOnDismissListener(this);
+            if (mDialog != null) {
+                mDialog.show();
+                mDialog.setOnDismissListener(this);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    protected void createDialogWithSuwTheme() {
+        final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                ? R.style.SuwAlertDialogThemeCompat_DayNight :
+                R.style.SuwAlertDialogThemeCompat_Light;
+        if (mIsWifiTrackerLib) {
+            mDialog2 = WifiDialog2.createModal(this, this,
+                    mNetworkDetailsTracker.getWifiEntry(),
+                    WifiConfigUiBase2.MODE_CONNECT, targetStyle);
+        } else {
+            mDialog = WifiDialog.createModal(this, this, mAccessPoint,
+                    WifiConfigUiBase.MODE_CONNECT, targetStyle);
         }
     }
 
@@ -221,21 +231,21 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onForget(WifiDialog dialog) {
-        final WifiManager wifiManager = getSystemService(WifiManager.class);
+        if (!hasWifiManager()) return;
         final AccessPoint accessPoint = dialog.getController().getAccessPoint();
         if (accessPoint != null) {
             if (!accessPoint.isSaved()) {
                 if (accessPoint.getNetworkInfo() != null &&
                         accessPoint.getNetworkInfo().getState() != NetworkInfo.State.DISCONNECTED) {
                     // Network is active but has no network ID - must be ephemeral.
-                    wifiManager.disableEphemeralNetwork(
+                    mWifiManager.disableEphemeralNetwork(
                             AccessPoint.convertToQuotedString(accessPoint.getSsidStr()));
                 } else {
                     // Should not happen, but a monkey seems to trigger it
                     Log.e(TAG, "Failed to forget invalid network " + accessPoint.getConfig());
                 }
             } else {
-                wifiManager.forget(accessPoint.getConfig().networkId, null /* listener */);
+                mWifiManager.forget(accessPoint.getConfig().networkId, null /* listener */);
             }
         }
 
@@ -251,6 +261,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onSubmit(WifiDialog2 dialog) {
+        if (!hasWifiManager()) return;
         final WifiEntry wifiEntry = dialog.getController().getWifiEntry();
         final WifiConfiguration config = dialog.getController().getConfig();
 
@@ -258,7 +269,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             if (config == null && wifiEntry != null && wifiEntry.canConnect()) {
                 wifiEntry.connect(null /* callback */);
             } else {
-                getSystemService(WifiManager.class).connect(config, null /* listener */);
+                mWifiManager.connect(config, null /* listener */);
             }
         }
 
@@ -269,22 +280,22 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onSubmit(WifiDialog dialog) {
+        if (!hasWifiManager()) return;
         final WifiConfiguration config = dialog.getController().getConfig();
         final AccessPoint accessPoint = dialog.getController().getAccessPoint();
-        final WifiManager wifiManager = getSystemService(WifiManager.class);
 
         if (getIntent().getBooleanExtra(KEY_CONNECT_FOR_CALLER, true)) {
             if (config == null) {
                 if (accessPoint != null && accessPoint.isSaved()) {
-                    wifiManager.connect(accessPoint.getConfig(), null /* listener */);
+                    mWifiManager.connect(accessPoint.getConfig(), null /* listener */);
                 }
             } else {
-                wifiManager.save(config, null /* listener */);
+                mWifiManager.save(config, null /* listener */);
                 if (accessPoint != null) {
                     // accessPoint is null for "Add network"
                     NetworkInfo networkInfo = accessPoint.getNetworkInfo();
                     if (networkInfo == null || !networkInfo.isConnected()) {
-                        wifiManager.connect(config, null /* listener */);
+                        mWifiManager.connect(config, null /* listener */);
                     }
                 }
             }
@@ -348,6 +359,12 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             }
             finish();
         }
+    }
+
+    private boolean hasWifiManager() {
+        if (mWifiManager != null) return true;
+        mWifiManager = getSystemService(WifiManager.class);
+        return (mWifiManager != null);
     }
 
     protected boolean hasPermissionForResult() {

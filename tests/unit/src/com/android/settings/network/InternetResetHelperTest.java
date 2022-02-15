@@ -121,7 +121,8 @@ public class InternetResetHelperTest {
     public void onResume_registerReceiver() {
         mInternetResetHelper.onResume();
 
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
+                any(int.class));
     }
 
     @Test

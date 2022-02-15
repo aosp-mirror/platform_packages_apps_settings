@@ -26,7 +26,6 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -37,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Settings.MobileNetworkActivity;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.ActiveSubscriptionsListener;
@@ -118,15 +118,19 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        Intent intent = getIntent();
-        if (intent != null) {
-            mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
-                    MobileNetworkUtils.getSearchableSubscriptionId(context));
-            Log.i(LOG_TAG, "display subId from intent: " + mSubId);
+        if (getArguments() == null) {
+            Intent intent = getIntent();
+            if (intent != null) {
+                mSubId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                        MobileNetworkUtils.getSearchableSubscriptionId(context));
+                Log.d(LOG_TAG, "display subId from intent: " + mSubId);
+            } else {
+                Log.d(LOG_TAG, "intent is null, can not get the subId from intent.");
+            }
         } else {
             mSubId = getArguments().getInt(Settings.EXTRA_SUB_ID,
                     MobileNetworkUtils.getSearchableSubscriptionId(context));
-            Log.i(LOG_TAG, "display subId from getArguments(): " + mSubId);
+            Log.d(LOG_TAG, "display subId from getArguments(): " + mSubId);
         }
 
         if (!SubscriptionManager.isValidSubscriptionId(mSubId)) {
@@ -273,6 +277,11 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         }
         mActiveSubscriptionsListenerCount++;
         if (mActiveSubscriptionsListenerCount != 1) {
+            return;
+        }
+
+        if (SubscriptionUtil.getSubscriptionOrDefault(getContext(), mSubId) == null) {
+            finishFragment();
             return;
         }
 

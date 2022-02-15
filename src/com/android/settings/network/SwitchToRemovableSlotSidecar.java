@@ -31,8 +31,7 @@ import com.android.settings.network.telephony.EuiccOperationSidecar;
  */
 public class SwitchToRemovableSlotSidecar extends EuiccOperationSidecar
         implements SidecarFragment.Listener {
-
-    private static final String TAG = "DisableSubscriptionAndSwitchSlotSidecar";
+    private static final String TAG = "SwitchRemovableSidecar";
     private static final String ACTION_DISABLE_SUBSCRIPTION_AND_SWITCH_SLOT =
             "disable_subscription_and_switch_slot_sidecar";
 
@@ -82,29 +81,6 @@ public class SwitchToRemovableSlotSidecar extends EuiccOperationSidecar
     }
 
     /**
-     * Starts switching to the removable slot. It disables the active eSIM profile before switching
-     * if there is one.
-     *
-     * @param physicalSlotId removable physical SIM slot ID.
-     */
-    // ToDo: delete this api and refactor the related code.
-    public void run(int physicalSlotId) {
-        mPhysicalSlotId = physicalSlotId;
-        SubscriptionManager subscriptionManager =
-                getContext().getSystemService(SubscriptionManager.class);
-        if (SubscriptionUtil.getActiveSubscriptions(subscriptionManager).stream()
-                .anyMatch(SubscriptionInfo::isEmbedded)) {
-            // In SS mode, the esim is active, then inactivate the esim.
-            Log.i(TAG, "There is an active eSIM profile. Disable the profile first.");
-            // Use INVALID_SUBSCRIPTION_ID to disable the only active profile.
-            mSwitchToSubscriptionSidecar.run(SubscriptionManager.INVALID_SUBSCRIPTION_ID, 0, null);
-        } else {
-            Log.i(TAG, "There is no active eSIM profiles. Start to switch to removable slot.");
-            mSwitchSlotSidecar.runSwitchToRemovableSlot(mPhysicalSlotId, null);
-        }
-    }
-
-    /**
      * Starts switching to the removable slot.
      *
      * @param physicalSlotId removable physical SIM slot ID.
@@ -115,9 +91,25 @@ public class SwitchToRemovableSlotSidecar extends EuiccOperationSidecar
     public void run(int physicalSlotId, SubscriptionInfo removedSubInfo) {
         mPhysicalSlotId = physicalSlotId;
         mRemovedSubInfo = removedSubInfo;
-
-        Log.i(TAG, "Start to switch to removable slot.");
-        mSwitchSlotSidecar.runSwitchToRemovableSlot(mPhysicalSlotId, mRemovedSubInfo);
+        SubscriptionManager subscriptionManager =
+                getContext().getSystemService(SubscriptionManager.class);
+        if (!mTelephonyManager.isMultiSimEnabled()
+                && SubscriptionUtil.getActiveSubscriptions(subscriptionManager).stream().anyMatch(
+                SubscriptionInfo::isEmbedded)) {
+            // In SS mode, the esim is active, then inactivate the esim.
+            Log.i(TAG, "There is an active eSIM profile. Disable the profile first.");
+            // Use INVALID_SUBSCRIPTION_ID to disable the only active profile.
+            mSwitchToSubscriptionSidecar.run(SubscriptionManager.INVALID_SUBSCRIPTION_ID, 0, null);
+        } else if (mTelephonyManager.isMultiSimEnabled() && mRemovedSubInfo != null) {
+            // In DSDS mode+MEP, if the replaced esim is active, then it should be disabled esim
+            // profile before changing SimSlotMapping process.
+            // Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
+            mSwitchToSubscriptionSidecar.run(SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                    mRemovedSubInfo.getPortIndex(), null);
+        } else {
+            Log.i(TAG, "Start to switch to removable slot.");
+            mSwitchSlotSidecar.runSwitchToRemovableSlot(mPhysicalSlotId, mRemovedSubInfo);
+        }
     }
 
     private void onSwitchToSubscriptionSidecarStateChange() {

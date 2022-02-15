@@ -16,10 +16,7 @@
 
 package com.android.settings.activityembedding;
 
-import android.app.Activity;
-import android.app.ActivityTaskManager;
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
@@ -27,9 +24,10 @@ import android.util.TypedValue;
 
 import androidx.window.embedding.SplitController;
 
+import com.android.settings.R;
+
 /** An util class collecting all common methods for the embedding activity features. */
 public class ActivityEmbeddingUtils {
-    public static final float SPLIT_RATIO = 0.5f;
     // The smallest value of current width of the window when the split should be used.
     private static final float MIN_CURRENT_SCREEN_SPLIT_WIDTH_DP = 720f;
     // The smallest value of the smallest-width (sw) of the window in any rotation when
@@ -54,6 +52,14 @@ public class ActivityEmbeddingUtils {
                 TypedValue.COMPLEX_UNIT_DIP, MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP, dm);
     }
 
+    /**
+     * Get the ratio to use when splitting windows. This should be a float which describes
+     * the percentage of the screen which the first window should occupy.
+     */
+    public static float getSplitRatio(Context context) {
+        return context.getResources().getFloat(R.dimen.config_activity_embed_split_ratio);
+    }
+
     /** Whether to support embedding activity feature. */
     public static boolean isEmbeddingActivityEnabled(Context context) {
         final boolean isFlagEnabled = FeatureFlagUtils.isEnabled(context,
@@ -64,14 +70,5 @@ public class ActivityEmbeddingUtils {
         Log.d(TAG, "isSplitSupported = " + isSplitSupported);
 
         return isFlagEnabled && isSplitSupported;
-    }
-
-    /** Whether the screen meets two-pane resolution. */
-    public static boolean isTwoPaneResolution(Activity activity) {
-        final Rect currentTaskBounds =
-                ActivityTaskManager.getInstance().getTaskBounds(activity.getTaskId());
-
-        return currentTaskBounds.width() >= getMinCurrentScreenSplitWidthPx(activity)
-                && currentTaskBounds.height() >= getMinSmallestScreenSplitWidthPx(activity);
     }
 }

@@ -18,6 +18,8 @@ package com.android.settings.network.telephony;
 
 import static android.app.slice.Slice.EXTRA_TOGGLE_STATE;
 
+import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
+
 import android.annotation.ColorInt;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -27,6 +29,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -142,7 +145,8 @@ public class MobileDataSlice implements CustomSliceable {
 
     @Override
     public Intent getIntent() {
-        return new Intent(mContext, MobileNetworkActivity.class);
+        return new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS).setPackage(
+                SETTINGS_PACKAGE_NAME);
     }
 
     @Override

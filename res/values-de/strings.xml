@@ -207,6 +207,14 @@
     <string name="language_picker_title" msgid="4271307478263345133">"Sprachen"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"Entfernen"</string>
     <string name="add_a_language" msgid="2126220398077503271">"Sprache hinzufügen"</string>
+    <string name="app_locale_preference_title" msgid="5513627099300360232">"Sprache"</string>
+    <string name="locale_picker_category_title" msgid="6212064706962721255">"Bevorzugte Sprache"</string>
+    <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App-Sprachen"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Sprache für jede App festlegen"</string>
+    <string name="app_locale_picker_title" msgid="8423365003726200684">"App-Sprache"</string>
+    <string name="suggested_app_locales_title" msgid="8898358282377369405">"Vorgeschlagene Sprachen"</string>
+    <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle Sprachen"</string>
+    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Die App ist standardmäßig in <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> und unterstützt nicht mehrere Sprachen."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ausgewählte Sprachen entfernen?</item>
       <item quantity="one">Ausgewählte Sprache entfernen?</item>
@@ -309,9 +317,9 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Sicherheit"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Verschlüsselung und Anmeldedaten"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Smartphone verschlüsselt"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Smartphone nicht verschlüsselt"</string>
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Smartphone nicht verschlüsselt"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Gerät verschlüsselt"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Gerät nicht verschlüsselt"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Gerät nicht verschlüsselt"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Sperrbildschirm"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Anzeige"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Meinen Standort, Display-Entsperrung, SIM-Kartensperre und Sperre für Anmeldedatenspeicher festlegen"</string>
@@ -320,6 +328,8 @@
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Nicht verfügbar"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Sicherheitsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Displaysperre, „Mein Gerät finden“, App-Sicherheit"</string>
+    <string name="safety_center_title" msgid="7732397372178774777">"Sicherheit &amp; Datenschutz"</string>
+    <string name="safety_center_summary" msgid="4297140049215322727">"Berechtigungen, Displaysperre, App-Sicherheit"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesichtsentsperrung"</string>
@@ -392,9 +402,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Du kannst dein Gesicht zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Du kannst dein Gesicht zum Entsperren deines Smartphones oder zur Authentifizierung in Apps verwenden, beispielsweise um dich anzumelden oder um Käufe zu autorisieren.\n\nHinweis:\nEs kann immer nur jeweils ein Gesicht eingerichtet sein. Wenn du ein anderes hinzufügen möchtest, lösche zuerst das aktuelle.\n\nEs kann passieren, dass das Smartphone unbeabsichtigt entsperrt wird, wenn du auf das Gerät blickst.\n\nEine andere Person kann dein Smartphone dadurch entsperren, dass sie es vor dein Gesicht hält, auch wenn deine Augen geschlossen sind.\n\nDein Smartphone kann eventuell auch von jemandem entsperrt werden, der dir sehr ähnlich sieht, beispielsweise von einem eineiigen Zwilling."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Gesichtsmodell löschen?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht. Nach dem Entfernen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren und dich in Apps zu authentifizieren."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Gesichtsmodell löschen?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Entfernen benötigst du deinen Fingerabdruck, deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren und dich in Apps zu authentifizieren."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Löschen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren und dich in Apps zu authentifizieren."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Dein Gesichtsmodell wird dauerhaft und sicher gelöscht.\n\nNach dem Löschen benötigst du deine PIN, dein Muster oder dein Passwort, um dein Smartphone zu entsperren."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerabdruck"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerabdruck-Einstellungen für die Arbeit"</string>
@@ -481,7 +490,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Löschen"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Sensor berühren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Lege deinen Finger auf den Sensor und hebe ihn an, wenn du eine Vibration spürst."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Lege deinen Finger so lange auf den Sensor, bis du eine Vibration spürst"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Lege deinen Finger so lange auf den Sensor, bis du eine Vibration spürst"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Fingerabdrucksensor gedrückt halten"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Anheben und erneut berühren"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Noch mal"</string>
@@ -489,7 +498,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lege den Finger immer wieder in leicht geänderter Position auf, bis der Abdruck vollständig erfasst ist."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Leg deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Dadurch kann dein Fingerabdruck besser erfasst werden."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg deine Fingerkuppe auf den Sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Roll den Finger zu beiden Seiten"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Roll den Finger zu beiden Seiten"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Halte nacheinander beide Seiten der Fingerkuppe auf den Sensor"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dadurch kann dein Fingerabdruck besser erfasst werden"</string>
     <!-- String.format failed for translation -->
@@ -498,6 +507,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerabdruck hinzugefügt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Du kannst deinen Fingerabdruck jetzt zum Entsperren deines Smartphones oder zum Bestätigen deiner Identität verwenden, etwa wenn du dich in Apps anmeldest"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Hebe den Finger an und lege ihn dann noch mal auf den Sensor"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Halte nacheinander beide Seiten der Fingerkuppe einen Moment lang auf den Sensor"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Fingerabdruck-Einrichtung überspringen?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du hast festgelegt, dass du unter anderem deinen Fingerabdruck zum Entsperren deines Smartphones verwenden möchtest. Wenn du diesen Schritt jetzt überspringst, musst du die Einrichtung zu einem späteren Zeitpunkt vornehmen. Die Einrichtung dauert nur ca. eine Minute."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Eine PIN schützt das Tablet, falls es verloren geht oder gestohlen wird"</string>
@@ -561,6 +572,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Der Fingerabdrucksensor kann nicht verwendet werden. Suche einen Reparaturdienstleister auf."</string>
+    <string name="security_advanced_settings" msgid="1750030247647385675">"Erweiterte Einstellungen"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Arbeitsprofilsperre, Smart Lock"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock und weitere Einstellungen"</string>
+    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Erweiterte Einstellungen"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -571,37 +586,10 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Smartphone zu entsperren oder deine Identität in Apps zu bestätigen."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Du kannst deinen Fingerabdruck dann nicht mehr verwenden, um dein Arbeitsprofil zu entsperren, Käufe zu autorisieren oder dich in geschäftlichen Apps anzumelden."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ja, entfernen"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Verschlüsselung"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Tablet verschlüsseln"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Smartphone verschlüsseln"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Verschlüsselt"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Du kannst deine Konten, Einstellungen, heruntergeladenen Apps und die zugehörigen Daten, Medienelemente und andere Dateien verschlüsseln. Nachdem du dein Tablet verschlüsselt hast, musst du, sofern du eine Displaysperre eingerichtet hast (also ein Muster, eine numerische PIN oder ein Passwort), bei jedem Einschalten des Tablets das Display entsperren, um das Tablet zu entschlüsseln. Der einzige andere Weg zur Entschlüsselung ist das Zurücksetzen auf die Werkseinstellungen. Hierdurch werden alle deine Daten gelöscht.\n\nDie Verschlüsselung dauert mindestens eine Stunde. Bei Beginn muss der Akku aufgeladen sein und das Tablet muss sich während des gesamten Vorgangs im Netzbetrieb befinden. Wenn du den Vorgang unterbrichst, gehen einige oder alle deine Daten verloren."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Du kannst deine Konten, Einstellungen, heruntergeladenen Apps und die zugehörigen Daten, Medienelemente und andere Dateien verschlüsseln. Nachdem du dein Smartphone verschlüsselt hast, musst du, sofern du eine Displaysperre eingerichtet hast (also ein Muster, eine numerische PIN oder ein Passwort), bei jedem Einschalten des Smartphones das Display entsperren, um das Smartphone zu entschlüsseln. Der einzige andere Weg zur Entschlüsselung ist das Zurücksetzen auf die Werkseinstellungen. Hierdurch werden alle deine Daten gelöscht.\n\nDie Verschlüsselung dauert mindestens eine Stunde. Bei Beginn muss der Akku aufgeladen sein und das Smartphone muss sich während des gesamten Vorgangs im Netzbetrieb befinden. Wenn du den Vorgang unterbrichst, gehen einige oder alle deine Daten verloren."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Tablet verschlüsseln"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Smartphone verschlüsseln"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Lade den Akku auf und versuche es noch einmal."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Schließe dein Ladegerät an und versuche es noch einmal."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Keine PIN oder kein Passwort für Displaysperre"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Du musst eine PIN oder ein Passwort für die Displaysperre festlegen, bevor du die Verschlüsselung starten kannst."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Verschlüsseln?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Dieser Vorgang ist nicht umkehrbar und jede Unterbrechung ist mit einem Datenverlust verbunden. Die Verschlüsselung dauert mindestens eine Stunde. In dieser Zeit wird das Tablet mehrfach neu gestartet."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Dieser Vorgang ist nicht umkehrbar und jede Unterbrechung ist mit einem Datenverlust verbunden. Die Verschlüsselung dauert mindestens eine Stunde. In dieser Zeit wird das Telefon mehrfach neu gestartet."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Verschlüsselung"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Bitte warte, während dein Tablet verschlüsselt wird. Zu <xliff:g id="PERCENT">^1</xliff:g> % abgeschlossen."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Bitte warte, während dein Telefon verschlüsselt wird. Zu <xliff:g id="PERCENT">^1</xliff:g> % abgeschlossen."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Dein Tablet wird verschlüsselt. Bitte warte noch <xliff:g id="DURATION">^1</xliff:g>."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Dein Telefon wird verschlüsselt. Bitte warte noch <xliff:g id="DURATION">^1</xliff:g>."</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Schalte dein Tablet aus und wieder ein, um es zu entsperren."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Schalte dein Telefon aus und wieder ein, um es zu entsperren."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Achtung: Sollten die nächsten <xliff:g id="COUNT">^1</xliff:g> Versuche, das Gerät zu entsperren, fehlschlagen, werden die Gerätedaten gelöscht!"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Passwort eingeben"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Verschlüsselung fehlgeschlagen"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Daher ist der Zugriff auf die Daten auf deinem Tablet nicht mehr möglich. \n\nDamit du dein Tablet wieder verwenden kannst, musst du es auf die Werkseinstellungen zurücksetzen. Wenn du dein Tablet nach dem Zurücksetzen wieder einrichtest, kannst du gegebenenfalls Daten, die gesichert wurden, in deinem Google-Konto wiederherstellen."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Daher ist der Zugriff auf die Daten auf deinem Telefon nicht mehr möglich. \n\nDamit du dein Telefon wieder verwenden kannst, musst du es auf die Werkseinstellungen zurücksetzen. Wenn du dein Telefon nach dem Zurücksetzen wieder einrichtest, kannst du gegebenenfalls Daten, die gesichert wurden, in deinem Google-Konto wiederherstellen."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Fehler bei der Verschlüsselung"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Das von dir eingegebene Passwort ist korrekt, aber deine Daten sind beschädigt. \n\nDamit du dein Tablet weiterhin verwenden kannst, musst du es auf die Werkseinstellungen zurücksetzen. Nach dem Zurücksetzen auf die Werkseinstellungen kannst du beim Einrichten deines Tablets die Daten wiederherstellen, die du in deinem Google-Konto gesichert hattest."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Das von dir eingegebene Passwort ist korrekt, aber deine Daten sind beschädigt. \n\nDamit du dein Smartphone weiterhin verwenden kannst, musst du es auf die Werkseinstellungen zurücksetzen. Nach dem Zurücksetzen auf die Werkseinstellungen kannst du beim Einrichten deines Smartphones die Daten wiederherstellen, die du in deinem Google-Konto gesichert hattest."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Eingabemethode wechseln"</string>
+    <string name="encryption_settings_title" msgid="2848716008695618360">"Verschlüsselung"</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tablet verschlüsseln"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Smartphone verschlüsseln"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Verschlüsselt"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Smartphone schützen"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Displaysperre einrichten, um das Tablet zu schützen"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Displaysperre einrichten, um das Gerät zu schützen"</string>
@@ -1081,6 +1069,7 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Systemzertifikate verwenden"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Nicht bereitstellen"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Nicht validieren"</string>
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Bei der ersten Verwendung als vertrauenswürdig einstufen"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Der Netzwerkname ist zu lang."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Angabe einer Domain erforderlich."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Zertifikat erforderlich."</string>
@@ -1236,8 +1225,7 @@
     <string name="wifi_calling_mode_wifi_only_summary" msgid="3155660680014892641">"Anruf über WLAN. Bei Abbruch der WLAN-Verbindung endet der Anruf."</string>
     <string name="wifi_calling_off_explanation" msgid="6295526820826322895">"Wenn die Option „WLAN-Telefonie“ aktiviert ist, kann dein Smartphone abhängig von deiner Einstellung und von der Signalstärke Anrufe über WLANs oder über das Netz deines Mobilfunkanbieters übertragen. Bevor du diese Funktion aktivierst, solltest du dich bei deinem Mobilfunkanbieter nach den hierfür anfallenden Gebühren und anderen Voraussetzungen erkundigen.<xliff:g id="ADDITIONAL_TEXT">%1$s</xliff:g>"</string>
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
-    <!-- no translation found for emergency_address_title (8102786488994263815) -->
-    <skip />
+    <string name="emergency_address_title" msgid="8102786488994263815">"Notfalladresse"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Wird als dein Standort verwendet, wenn du einen Notruf über WLAN tätigst"</string>
     <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"Weitere Informationen zu privaten DNS-Funktionen"</annotation></string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"An"</string>
@@ -1916,15 +1904,6 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"PIN für Arbeitsprofil festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Muster festlegen"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Muster für Arbeitsprofil festlegen"</string>
-    <string name="lockpassword_choose_password_description" product="phone" msgid="5577129054698844787">"Für zusätzliche Sicherheit ein Passwort zum Entsperren des Smartphones einrichten"</string>
-    <string name="lockpassword_choose_pin_description" product="phone" msgid="6918551978526104693">"Für zusätzliche Sicherheit eine PIN zum Entsperren des Smartphones einrichten"</string>
-    <string name="lockpattern_choose_pattern_description" product="phone" msgid="9192075941504119893">"Für zusätzliche Sicherheit ein Muster zum Entsperren des Smartphones einrichten"</string>
-    <string name="lockpassword_choose_password_description" product="tablet" msgid="8643302878337665976">"Für zusätzliche Sicherheit ein Passwort zum Entsperren des Tablets einrichten"</string>
-    <string name="lockpassword_choose_pin_description" product="tablet" msgid="4655253942098525998">"Für zusätzliche Sicherheit eine PIN zum Entsperren des Tablets einrichten"</string>
-    <string name="lockpattern_choose_pattern_description" product="tablet" msgid="6921239531465577215">"Für zusätzliche Sicherheit ein Muster zum Entsperren des Tablets einrichten"</string>
-    <string name="lockpassword_choose_password_description" product="default" msgid="5003299048956319434">"Für zusätzliche Sicherheit ein Passwort zum Entsperren des Geräts einrichten"</string>
-    <string name="lockpassword_choose_pin_description" product="default" msgid="4979785114465985543">"Für zusätzliche Sicherheit eine PIN zum Entsperren des Geräts einrichten"</string>
-    <string name="lockpattern_choose_pattern_description" product="default" msgid="3226044648785762351">"Für zusätzliche Sicherheit ein Muster zum Entsperren des Geräts einrichten"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Für Fingerabdruck Passwort festlegen"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Für Fingerabdruck Muster festlegen"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Richte zur Sicherheit eine PIN ein"</string>
@@ -2277,7 +2256,7 @@
     <string name="captions_category_title" msgid="574490148949400274">"Untertitel"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Allgemein"</string>
-    <string name="display_category_title" msgid="6638191682294461408">"Bildschirm"</string>
+    <string name="display_category_title" msgid="6638191682294461408">"Display"</string>
     <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Text und Anzeige"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Bildschirm dunkler machen"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Interaktionssteuerung"</string>
@@ -2294,6 +2273,10 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Weitere Informationen zu den Einstellungen für Untertitel"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Vergrößerung"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Kurzbefehl für Vergrößerung"</string>
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_title (494025442124701045) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_follow_typing_summary (5616263345412748821) -->
+    <skip />
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Über die Vergrößerung"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Weitere Informationen zur Vergrößerung"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Art der Vergrößerung"</string>
@@ -2315,6 +2298,13 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Mit Tastenkombination vergrößern"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Mit Tastenkombination und 3-mal Tippen vergrößern"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Die Bedienungshilfe „<xliff:g id="SERVICE">%1$s</xliff:g>“"</string>
+    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"Text- und Leseoptionen"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Optionen"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Auf dem Bildschirm heranzoomen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Zum Zoomen dreimal tippen"</string>
@@ -2420,12 +2410,24 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Kürzer"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Länger"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Zeit vor automatischem Klick"</string>
-    <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"Vibration &amp; Stärke des haptischen Feedbacks"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration bei Benachrichtigungseingang"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration und haptisches Feedback"</string>
+    <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Vibrationsstärke für verschiedene Anwendungsfälle anpassen"</string>
+    <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Anrufe"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Benachrichtigungen und Wecker"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktive Haptik"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Vibration &amp; haptisches Feedback verwenden"</string>
+    <!-- no translation found for accessibility_alarm_vibration_title (4661294337828522745) -->
+    <skip />
+    <!-- no translation found for accessibility_media_vibration_title (1372073715403945428) -->
+    <skip />
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibration bei Klingeln"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibration bei Benachrichtigungseingang"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Haptisches Feedback"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> verwenden"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> öffnen"</string>
+    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"Wische nach unten, um <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> in den Schnelleinstellungen schnell ein- oder auszuschalten"</string>
+    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
+    <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Farbkorrektur aktivieren"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Kurzbefehl für Farbkorrektur"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Über die Farbkorrektur"</string>
@@ -2497,15 +2499,6 @@
       <item quantity="other"><xliff:g id="CLICK_DELAY_LABEL_2">%1$s</xliff:g> Sekunden</item>
       <item quantity="one"><xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> Sekunde</item>
     </plurals>
-    <string name="accessibility_vibration_summary" msgid="27904038683405084">"Klingeln: <xliff:g id="SUMMARY_RING">%1$s</xliff:g>, Benachrichtigung: <xliff:g id="SUMMARY_NOTIFICATION">%2$s</xliff:g>, Berührung: <xliff:g id="SUMMARY_TOUCH">%3$s</xliff:g>"</string>
-    <string name="accessibility_vibration_summary_off" msgid="7776105450117095736">"Vibration bei Klingeln und Benachrichtigungseingang auf \"Aus\" eingestellt"</string>
-    <string name="accessibility_vibration_summary_low" msgid="6482721005400340317">"Vibration bei Klingeln und Benachrichtigungseingang auf \"Gering\" eingestellt"</string>
-    <string name="accessibility_vibration_summary_medium" msgid="2348889320548746469">"Vibration bei Klingeln und Benachrichtigungseingang auf \"Mittel\" eingestellt"</string>
-    <string name="accessibility_vibration_summary_high" msgid="1764693979030913712">"Vibration bei Klingeln und Benachrichtigungseingang auf \"Stark\" eingestellt"</string>
-    <string name="accessibility_vibration_intensity_off" msgid="972159695404061944">"Aus"</string>
-    <string name="accessibility_vibration_intensity_low" msgid="6311161118835287335">"Gering"</string>
-    <string name="accessibility_vibration_intensity_medium" msgid="1734058611879392797">"Mittel"</string>
-    <string name="accessibility_vibration_intensity_high" msgid="5982896399775212514">"Stark"</string>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Einstellungen"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"An"</string>
     <string name="accessibility_feature_state_off" msgid="169119895905460512">"Aus"</string>
@@ -2542,11 +2535,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"<xliff:g id="SERVICE">%1$s</xliff:g> die vollständige Kontrolle über dein Gerät geben?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> muss:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Deine Eingabe wird von \"Einstellungen\" nicht erkannt, weil die Berechtigungsanfrage von einer App verdeckt wird."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Wenn du <xliff:g id="SERVICE">%1$s</xliff:g> aktivierst, verwendet dein Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Da du eine Bedienungshilfe aktiviert hast, verwendet dein Gerät nicht die Displaysperre, um die Datenverschlüsselung zu verbessern."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Da die Aktivierung von <xliff:g id="SERVICE">%1$s</xliff:g> Auswirkungen auf die Datenverschlüsselung hat, musst du dein Muster bestätigen."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Da die Aktivierung von <xliff:g id="SERVICE">%1$s</xliff:g> Auswirkungen auf die Datenverschlüsselung hat, musst du deine PIN bestätigen."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Da die Aktivierung von <xliff:g id="SERVICE">%1$s</xliff:g> Auswirkungen auf die Datenverschlüsselung hat, musst du dein Passwort bestätigen."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> fordert eine volle Kontrolle für dieses Gerät an. Der Dienst kann den Bildschirm lesen und im Namen von Nutzern mit Bedarf an Bedienungshilfen handeln. Dieses Maß an Kontrolle ist für die meisten Apps ungeeignet."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Die vollständige Kontrolle sollte nur für Apps aktiviert werden, die dir Zugang zu App-Funktionen erleichtern. Das ist in der Regel nur ein kleiner Teil der Apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Bildschirm aufrufen und steuern"</string>
@@ -2582,6 +2570,12 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"Schwerhörigkeit, Hörverlust"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"Schwerhörigkeit, Hörverlust, Untertitel, Fernschreiber, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
+    <!-- no translation found for fast_pair_settings (3308819519080016185) -->
+    <skip />
+    <!-- no translation found for fast_pair_settings_summary (1786567691058982987) -->
+    <skip />
+    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
+    <skip />
     <string name="print_settings" msgid="8519810615863882491">"Drucken"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Aus"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3003,7 +2997,7 @@
     <string name="request_manage_credentials_dont_allow" msgid="3630610197644877809">"Nicht zulassen"</string>
     <string name="request_manage_credentials_allow" msgid="4910940118408348245">"Zulassen"</string>
     <string name="request_manage_credentials_more" msgid="6101210283534101582">"Mehr anzeigen"</string>
-    <string name="certificate_management_app" msgid="8086699498358080826">"Zertifikatsver&amp;shy;waltungs-App"</string>
+    <string name="certificate_management_app" msgid="8086699498358080826">"Zertifikatsver­waltungs-App"</string>
     <string name="no_certificate_management_app" msgid="3025739370424406717">"Keine"</string>
     <string name="certificate_management_app_description" msgid="8507306554200869005">"Mit Zertifikaten wird deine Identität überprüft, wenn du die folgenden Apps und URLs verwendest"</string>
     <string name="uninstall_certs_credential_management_app" msgid="4945883254446077354">"Zertifikate deinstallieren"</string>
@@ -3111,14 +3105,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Dein Administrator lässt diese Änderung nicht zu"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Manuelle Synchronisierung nicht möglich"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Die Synchronisierung hierfür ist deaktiviert. Zur Änderung dieser Einstellung aktiviere vorübergehend die Hintergrunddaten und die automatische Synchronisierung."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Gib dein Passwort ein, um Android zu starten."</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Gib deine PIN ein, um Android zu starten."</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Zeichne dein Muster, um Android zu starten."</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Falsches Muster"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Falsches Passwort"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Falsche PIN"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Wird überprüft…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Android wird gestartet..."</string>
     <string name="delete" msgid="8330605554706263775">"Löschen"</string>
     <string name="misc_files" msgid="6598066985800749585">"Sonstige Dateien"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"<xliff:g id="NUMBER">%1$d</xliff:g> von <xliff:g id="TOTAL">%2$d</xliff:g> ausgewählt"</string>
@@ -3214,8 +3200,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Kostenpflichtig"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Nicht kostenpflichtig"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Dein Mobilfunkanbieter berechnet die Datennutzung eventuell anders als das Gerät."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Notruf"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Zurück zum Anruf"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Name"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Typ"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Serveradresse"</string>
@@ -3251,8 +3235,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Mit <xliff:g id="PROFILE">%s</xliff:g> verbinden"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Verbindung zu diesem VPN trennen?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Verbindung trennen"</string>
-    <!-- no translation found for vpn_version (6344167191984400976) -->
-    <skip />
+    <string name="vpn_version" msgid="6344167191984400976">"Version"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN entfernen"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Aktuelles VPN ersetzen?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Durchgehend aktives VPN aktivieren?"</string>
@@ -3381,12 +3364,29 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Apps zum Installieren auswählen"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Verfügbare Apps installieren"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Kontaktloses Bezahlen"</string>
+    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
+    <skip />
+    <!-- no translation found for nfc_more_details (1700713533074275233) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
+    <skip />
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
+    <skip />
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Funktionsweise"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Mit deinem Smartphone in Geschäften bezahlen"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Standard-App für Zahlungen"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Nicht festgelegt"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="788899906312142803">"Standard-App verwenden"</string>
+    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
+    <skip />
+    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
+    <skip />
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Immer"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Außer wenn eine andere Zahlungs-App geöffnet ist"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"An einem Terminal für kontaktloses Bezahlen folgende App nutzen:"</string>
@@ -3474,9 +3474,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Keine mobilen Daten verfügbar"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tippen, um Daten-SIM auszuwählen"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Diese SIM für alle Anrufe verwenden"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"SIM-Karte für Daten auswählen"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"SIM für mobile Daten auswählen"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SIM-Karte für SMS auswählen"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Daten-SIM wird gewechselt. Dies kann bis zu einer Minute dauern…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"<xliff:g id="NEW_SIM">%1$s</xliff:g> für mobile Daten nutzen?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"Wenn du zu <xliff:g id="NEW_SIM">%1$s</xliff:g> wechselst, wird <xliff:g id="OLD_SIM">%2$s</xliff:g> nicht mehr für mobile Daten verwendet."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> verwenden"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Anrufen mit"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"SIM-Karte auswählen"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM-Karte <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3536,7 +3539,6 @@
     <string name="keywords_wifi" msgid="8156528242318351490">"wlan, wi-fi, netzwerkverbindung, internet, kabellos, daten, wifi, wi-fi, w-lan"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN-Benachrichtigung, WLAN-Benachrichtigung"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"Datennutzung"</string>
-    <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Vibration abschalten, tippen, Tastatur"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-Stunden-Format verwenden"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Download"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Öffnen mit"</string>
@@ -3610,21 +3612,32 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"display, sperrzeit, timeout, lockscreen, bildschirm, zeitlimit, automatisch ausschalten"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"Speicher, Cache, Daten, löschen, entfernen, frei machen, Platz"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"verbunden, gerät, kopfhörer, headset, lautsprecher, drahtlos, koppeln, ohrhörer, musik, medien"</string>
+    <!-- no translation found for keywords_fast_pair (5422942398816611159) -->
+    <skip />
     <string name="keywords_wallpaper" msgid="7332890404629446192">"Hintergrund, Design, Raster, anpassen, personalisieren"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"Symbol, Akzentfarbe"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"standard, assistent"</string>
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"zahlung, standard"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"eingehende Benachrichtigung"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"usb tethering, bluetooth tethering, wlan hotspot, wifi hotspot"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"Haptik, haptisches Feedback, vibrieren, Vibration"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"haptik, vibrieren, display, empfindlichkeit"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"Haptik, vibrieren, Smartphone, Anruf, Empfindlichkeit, klingeln"</string>
-    <string name="keywords_notification_vibration" msgid="9162262178415439951">"Haptik, vibrieren, Empfindlichkeit"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"Haptik, vibrieren, Smartphone, Anruf, klingeln lassen, schrittweise"</string>
+    <!-- no translation found for keywords_notification_vibration (2620799301276142183) -->
+    <skip />
+    <!-- no translation found for keywords_alarm_vibration (4833220371621521817) -->
+    <skip />
+    <!-- no translation found for keywords_media_vibration (723896490102792327) -->
+    <skip />
+    <string name="keywords_vibration" msgid="670455132028025952">"Haptik, vibrieren, Vibration"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"Energiesparmodus, fixiert, nichtflüchtig, Stromsparfunktion, Akku"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"ablauf, zeitplan, energiesparmodus, stromsparfunktion, akku, automatisch, prozent"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, erweiterte Anruffunktionen, 4G-Anrufe"</string>
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5g, VoNR, erweiterte Anruffunktionen, 5G-Anrufe"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"Sprache hinzufügen, eine Sprache hinzufügen"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"Textgröße, Großdruck, Großschrift, großer Text, eingeschränktes Sehvermögen, Text vergrößern, Textvergrößerung"</string>
+    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"Always-On-Display"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardton"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Lautstärke bei Klingeln und Benachrichtigungseingang auf <xliff:g id="PERCENTAGE">%1$s</xliff:g> %% eingestellt"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lautstärke, Vibration, Bitte nicht stören"</string>
@@ -3654,8 +3667,6 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Töne und Vibration beim Aufladen"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Docking-Sounds"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Töne bei Berührung"</string>
-    <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibration bei Berührung"</string>
-    <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptisches Feedback beim Tippen, bei der Tastaturnutzung und mehr"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dock-Lautsprecherwiedergabe"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Alle Audioquellen"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Nur Medien-Audio"</string>
@@ -3808,7 +3819,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Schlummerfunktion für Benachrichtigungen zulassen"</string>
     <string name="hide_silent_icons_title" msgid="5951392023601167577">"Bei stummen Benachrichtigungen keine Symbole anzeigen"</string>
     <string name="hide_silent_icons_summary" msgid="623763437631637232">"Bei stummen Benachrichtigungen werden in der Statusleiste keine Symbole angezeigt"</string>
-    <string name="notification_badging_title" msgid="5469616894819568917">"Benachrichtigungspunkt auf App-Symbol"</string>
+    <string name="notification_badging_title" msgid="5469616894819568917">"Benachrich­ti­gungs­punkt auf App-Symbol"</string>
     <string name="notification_people_strip_title" msgid="1185857822541001139">"Leiste mit den neuesten Unterhaltungen anzeigen"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bubbles"</string>
     <string name="bubbles_feature_education" msgid="4088275802688887634">"Bestimmte Benachrichtigungen und Inhalte können als \"Bubbles\" angezeigt werden. Tippe auf die Bubble, um sie zu öffnen. Wenn du sie wieder schließen möchtest, ziehe sie an den unteren Bildschirmrand."</string>
@@ -3824,11 +3835,11 @@
     <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"An / Unterhaltungen können als unverankerte Symbole angezeigt werden"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Zulassen, dass Apps Bubbles anzeigen"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Einige Unterhaltungen erscheinen als unverankerte Symbole über anderen Apps"</string>
-    <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle Unterhaltungen können als Bubble angezeigt werden"</string>
-    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Ausgewählte Unterhaltungen können als Bubble angezeigt werden"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Unterhaltungen können nicht als Bubble angezeigt werden"</string>
+    <string name="bubble_app_setting_all" msgid="312524752846978277">"Alle Unterhaltungen können als Bubble erscheinen"</string>
+    <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Ausgewählte Unter­hal­tun­gen können als Bubble erscheinen"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Unterhaltungen können nicht als Bubble erscheinen"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Unterhaltungen"</string>
-    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alle Unterhaltungen können als Bubble angezeigt werden, außer"</string>
+    <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Alle Unterhaltungen können als Bubble erscheinen, außer"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Bubbles für diese Unterhaltung deaktivieren"</string>
     <string name="bubble_app_setting_bubble_conversation" msgid="1461981680982964285">"Bubbles für diese Unterhaltung aktivieren"</string>
     <string name="swipe_direction_title" msgid="4260320464727178413">"Aktionen beim Wischen"</string>
@@ -3852,7 +3863,7 @@
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Wenn das Arbeitsprofil gesperrt ist"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Benachrichtigungen auf Sperrbildschirm"</string>
     <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Lautlose und Standardunterhaltungen anzeigen"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Lautlose und Standardunterhaltungen anzeigen"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Alle Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Lautlose Unterhaltungen und Benachrichtigungen verbergen"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Keine Benachrichtigungen anzeigen"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Vertrauliche Benachrichtigungen"</string>
@@ -4048,7 +4059,7 @@
     <string name="app_notification_block_summary" msgid="1804611676339341551">"Diese Benachrichtigungen nie anzeigen"</string>
     <string name="notification_content_block_title" msgid="6689085826061361351">"Benachrichtigungen anzeigen"</string>
     <string name="notification_content_block_summary" msgid="329171999992248925">"Benachrichtigungen nie in der Leiste oder auf Peripheriegeräten anzeigen"</string>
-    <string name="notification_badge_title" msgid="6854537463548411313">"App-Benachrichtigungspunkt erlauben"</string>
+    <string name="notification_badge_title" msgid="6854537463548411313">"App-Benach­rich­ti­gungs­punkt erlauben"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"App-Benachrichtigungs­punkt anzeigen"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"„Bitte nicht stören“ ignorieren"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Diese Benachrichtigungen dürfen auch dann gemeldet werden, wenn „Bitte nicht stören“ aktiviert ist"</string>
@@ -4856,7 +4867,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Neue Startbildschirmtaste ausprobieren"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Neue Touch-Geste zum Wechseln von Apps aktivieren"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sicherheit und Notfälle"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Notfall-SOS, medizinische Informationen, Warnungen"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"Notfall-SOS, medizinische Informationen, Benachrichtigungen"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Bedienung über Gesten"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Öffne den Startbildschirm, indem du vom unteren Bildschirmrand nach oben wischst. Wenn du zwischen Apps wechseln möchtest, wische von unten nach oben, halte den Finger gedrückt und lass ihn dann los. Wenn du zurückgehen möchtest, wische vom linken oder vom rechten Rand nach innen."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Bedienung über 3 Schaltflächen"</string>
@@ -5125,7 +5136,7 @@
     <string name="my_device_info_account_preference_title" msgid="9197139254007133175">"Konto"</string>
     <string name="my_device_info_device_name_preference_title" msgid="8053298498727237971">"Gerätename"</string>
     <string name="my_device_info_basic_info_category_title" msgid="381963187269356548">"Allgemeine Informationen"</string>
-    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Rechtliche und regulatorische Informationen"</string>
+    <string name="my_device_info_legal_category_title" msgid="7732792841537995127">"Rechtliche Informationen"</string>
     <string name="my_device_info_device_details_category_title" msgid="4848438695638348680">"Gerätedetails"</string>
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Geräte-IDs"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"WLAN-Steuerung"</string>
@@ -5296,12 +5307,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM aktivieren?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> wechseln?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM-Karte wechseln?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> verwenden?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Es kann immer nur eine SIM-Karte aktiv sein.\n\nDein Mobilfunkvertrag bei <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> wird nicht gekündigt, wenn du zu <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> wechselst."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Es kann immer nur eine heruntergeladene SIM-Karte aktiv sein.\n\nDein Mobilfunkvertrag bei <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> wird nicht gekündigt, wenn du zu <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> wechselst."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Es kann immer nur eine SIM-Karte aktiv sein.\n\nDein Mobilfunkvertrag bei <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> wird nicht gekündigt, wenn du die SIM-Karte wechselst."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Du kannst 2 SIMs gleichzeitig verwenden. Wenn du <xliff:g id="CARRIER_NAME">%1$s</xliff:g> verwenden möchtest, musst du eine andere SIM deaktivieren."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> wechseln"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktivieren"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Wenn du eine SIM deaktivierst, wird dein Mobilfunkvertrag nicht gekündigt"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Verbindung zum Mobilfunknetz wird hergestellt…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Wechsel zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Für Anrufe und Nachrichten wird zu <xliff:g id="CARRIER_NAME">%1$s</xliff:g> gewechselt…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Mobilfunkanbieter kann nicht gewechselt werden"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Der Mobilfunkanbieter kann aufgrund eines Fehlers nicht gewechselt werden."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktivieren?"</string>
@@ -5408,6 +5423,8 @@
     <string name="content_capture" msgid="868372905432812238">"App-Inhalte"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Apps erlauben, Inhalte an das Android-System zu senden"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"System-Heap-Dump erfassen"</string>
+    <string name="reboot_with_mte_title" msgid="9167242803901899693">"Mit MTE neu starten"</string>
+    <string name="reboot_with_mte_message" msgid="1024288615073985828">"Dadurch wird das System neu gestartet und Memory Tagging Extensions (MTE) kann getestet werden. Das kann die Leistung und Stabilität des Systems beeinträchtigen. Diese Einstellung wird beim nächsten Neustart zurückgesetzt."</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"System-Heap-Dump wird erfasst"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"System-Heap-Dump konnte nicht erfasst werden"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"System-Heap-Dumps automatisch erfassen"</string>
@@ -5453,8 +5470,8 @@
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Lang"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Geldbörse anzeigen"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Zugriff auf Geldbörse aus Sperrbildschirm und Schnelleinstellungen erlauben"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="1314577678356895256">"QR-Code-Scanner anzeigen"</string>
-    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="4577409244972250235">"Zugriff auf QR-Code-Scanner vom Sperrbildschirm aus zulassen"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR-Scanner anzeigen"</string>
+    <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Zugriff auf QR-Scanner vom Sperrbildschirm aus zulassen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Gerätesteuerung anzeigen"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Zugriffssteuerung bei Sperre"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Uhr in zwei Zeilen anzeigen, wenn verfügbar"</string>
@@ -5535,6 +5552,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Mobile Daten deaktivieren?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Du kannst dann nicht mehr über <xliff:g id="CARRIER">%s</xliff:g> auf mobile Daten und das Internet zugreifen. Letzteres ist nur noch über WLAN möglich."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"deinen Mobilfunkanbieter"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Von deinem Unternehmen nicht zugelassen"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nicht verfügbar, weil der Modus „Schlafenszeit“ aktiviert ist"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Die Wichtigkeit von Benachrichtigungen wurde zurückgesetzt."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
@@ -5569,7 +5587,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Intelligenten Akku verwenden"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Automatische Helligkeit verwenden"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"WLAN-Telefonie verwenden"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Bildschirmschoner verwenden"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Alle Apps anzeigen"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Intelligente Weiterleitung"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Intelligente Weiterleitung aktiviert"</string>
@@ -5584,7 +5601,8 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Telefonnummer fehlt."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"2G zulassen"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"2G-Mobilfunkverbindungen verwenden. Für Notrufe ist 2G immer aktiviert."</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ist weniger sicher, bietet aber an manchen Standorten eine bessere Verbindung. Für Notrufe ist 2G immer zugelassen."</string>
+    <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Für <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> muss 2G verfügbar sein"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Zugriff auf Zwischenablage anzeigen"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Eine Meldung wird angezeigt, wenn Apps auf Text, Bilder oder andere Inhalte zugreifen, die du kopiert hast"</string>
     <string name="all_apps" msgid="3054120149509114789">"Alle Apps"</string>
@@ -5647,4 +5665,6 @@
     <item msgid="588427840913221601">"Verarbeitungsstatus"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Bestätigen"</string>
+    <string name="dream_preview_button_title" msgid="1498088020579092512">"Vorschau des Bildschirmschoners anzeigen"</string>
+    <string name="customize_button_title" msgid="1110284655990203359">"Anpassen"</string>
 </resources>

@@ -114,6 +114,30 @@ public class NotificationBackendTest {
     }
 
     @Test
+    public void testMarkAppRow_fixedPermission_withRole() throws Exception {
+        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
+
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        pi.applicationInfo.uid = 123;
+
+        List<String> roles = new ArrayList<>();
+        roles.add(RoleManager.ROLE_DIALER);
+        RoleManager rm = mock(RoleManager.class);
+        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
+        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), rm, pi);
+
+        assertTrue(appRow.systemApp);
+        assertTrue(appRow.lockedImportance);
+    }
+
+    @Test
     public void testMarkAppRow_fixedPermission() throws Exception {
         Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
                 Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);

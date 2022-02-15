@@ -20,6 +20,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.LocaleManager;
@@ -32,7 +33,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.google.common.collect.Iterables;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,8 +41,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
+/**
+ * Unittest for ApplocaleDetails
+ * TODO Need to add a unittest for the UI preference component.
+ */
 @RunWith(AndroidJUnit4.class)
 public class AppLocaleDetailsTest {
     private static final String APP_PACKAGE_NAME = "app_package_name";
@@ -52,10 +59,10 @@ public class AppLocaleDetailsTest {
     private LocaleManager mLocaleManager;
 
     private Context mContext;
-    private LocaleList mSystemLocales;
-    private Locale mSimLocale;
+    private Collection<Locale> mSystemLocales;
     private LocaleList mAppLocale;
     private String[] mAssetLocales;
+    private LocaleList mPackageLocales;
 
     @Before
     @UiThreadTest
@@ -68,10 +75,49 @@ public class AppLocaleDetailsTest {
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(LocaleManager.class)).thenReturn(mLocaleManager);
 
-        setupInitialLocales("en",
-                "uk",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+        setupInitialLocales(
+                /* appLocale= */ "en-gb",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "jp",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "pa, cn, zh-tw, en-gb, ja-jp",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "zh-tw", "ja-jp"});
+    }
+
+    @Test
+    @UiThreadTest
+    public void onRadioButtonClicked_setCurrentLocaleToSystem() {
+        AppLocaleDetails appLocaleDetails = new AppLocaleDetails() {
+            @Override
+            void refreshUiInternal() {}
+        };
+        DummyAppLocaleDetailsHelper helper =
+                spy(new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME));
+        appLocaleDetails.mAppLocaleDetailsHelper = helper;
+        RadioButtonPreference pref = new RadioButtonPreference(mContext);
+        pref.setKey(AppLocaleDetails.KEY_SYSTEM_DEFAULT_LOCALE);
+
+        appLocaleDetails.onRadioButtonClicked(pref);
+
+        verify(helper).setAppDefaultLocale(LocaleList.forLanguageTags(""));
+    }
+
+    @Test
+    @UiThreadTest
+    public void onRadioButtonClicked_setCurrentLocaleForUserSelected() {
+        AppLocaleDetails appLocaleDetails = new AppLocaleDetails() {
+            @Override
+            void refreshUiInternal() {}
+        };
+        DummyAppLocaleDetailsHelper helper =
+                spy(new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME));
+        appLocaleDetails.mAppLocaleDetailsHelper = helper;
+        RadioButtonPreference pref = new RadioButtonPreference(mContext);
+        pref.setKey("en");
+
+        appLocaleDetails.onRadioButtonClicked(pref);
+
+        verify(helper).setAppDefaultLocale("en");
     }
 
     @Test
@@ -87,58 +133,166 @@ public class AppLocaleDetailsTest {
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_1stLocaleOfSuggestedLocaleListIsAppLocale() {
+    public void handleAllLocalesData_1stLocaleIsAppLocaleAndHasSimAndNetwork() {
+        Locale simCountryLocale = new Locale("zh", "TW");
+        Locale networkCountryLocale = new Locale("ja", "JP");
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
         helper.handleAllLocalesData();
 
-        Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
         assertTrue(locale.equals(mAppLocale.get(0)));
+        assertTrue(suggestedLocales.contains(simCountryLocale));
+        assertTrue(suggestedLocales.contains(networkCountryLocale));
     }
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_2ndLocaleOfSuggestedLocaleListIsSimLocale() {
+    public void
+            handleAllLocalesData_noAppAndNoSupportedSimLocale_1stSuggestedLocaleIsAssetLocale() {
+        Locale firstAssetLocale = new Locale("en", "GB");
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "ja-jp"});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
         helper.handleAllLocalesData();
 
-        Locale locale = Iterables.get(helper.getSuggestedLocales(), 1);
-        assertTrue(locale.equals(mSimLocale));
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
+        assertTrue(locale.equals(firstAssetLocale));
     }
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_withoutAppLocale_1stLocaleOfSuggestedLocaleListIsSimLocal() {
-        setupInitialLocales("",
-                "uk",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+    public void handleAllLocalesData_noAppButHasSupportedSimLocale_1stSuggestedLocaleIsSim() {
+        Locale simLocale = new Locale("zh", "tw");
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "ja-jp", "zh-tw"});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
         helper.handleAllLocalesData();
 
-        Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
-        assertTrue(locale.equals(mSimLocale));
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
+        assertTrue(locale.equals(simLocale));
     }
 
     @Test
     @UiThreadTest
-    public void handleAllLocalesData_noAppAndSimLocale_1stLocaleIsFirstOneInSystemLocales() {
-        setupInitialLocales("",
-                "",
-                "en, uk, jp, ne",
-                new String[]{"en", "ne", "ms", "pa"});
+    public void
+            handleAllLocalesData_noAppButHasSupportedNetworkLocale_1stSuggestedLocaleIsNetwork() {
+        Locale networkLocale = new Locale("ja", "JP");
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "jp",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "ja-jp"});
         DummyAppLocaleDetailsHelper helper =
                 new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
 
         helper.handleAllLocalesData();
 
-        Locale locale = Iterables.get(helper.getSuggestedLocales(), 0);
-        assertTrue(locale.equals(mSystemLocales.get(0)));
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
+        assertTrue(locale.equals(networkLocale));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_noAppSimOrNetworkLocale_suggestedLocalesHasSystemLocale() {
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "zh-tw", "ja-jp"});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+        helper.handleAllLocalesData();
+
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        assertTrue(suggestedLocales.contains(Locale.forLanguageTag("ne")));
+        // ru language is not present in the asset locales
+        assertFalse(suggestedLocales.contains(Locale.forLanguageTag("ru")));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_noAppButHasSimAndNetworkLocale_1stLocaleIsSimLocale() {
+        Locale simCountryLocale = new Locale("zh", "TW");
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "tw",
+                /* networkCountry= */ "jp",
+                /* systemLocales= */ "en-gb, ru, ja-jp, ne, zh-tw",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{"en-gb", "ne", "ms", "pa", "zh-tw", "ja-jp"});
+
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+        helper.handleAllLocalesData();
+
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
+        assertTrue(locale.equals(simCountryLocale));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_noSupportedLocale_noSuggestedLocales() {
+        Locale networkCountryLocale = new Locale("en", "GB");
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "gb",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "",
+                /* assetLocales= */ new String[]{});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+
+        helper.handleAllLocalesData();
+
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        assertTrue(suggestedLocales.size() == 0);
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_hasPackageAndSystemLocales_1stLocaleIs1stOneInSystemLocales() {
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en, uk, jp, ne",
+                /* packageLocales= */ "pa, cn, tw, en",
+                /* assetLocales= */ new String[]{});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+
+        helper.handleAllLocalesData();
+
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        Locale locale = suggestedLocales.iterator().next();
+        Locale systemLocale = mSystemLocales.iterator().next();
+        assertTrue(locale.equals(systemLocale));
     }
 
     @Test
@@ -152,32 +306,76 @@ public class AppLocaleDetailsTest {
         assertFalse(helper.getSupportedLocales().isEmpty());
     }
 
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_compareLocale() {
+        //Use LocaleList.matchScore() to compare two locales.
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("en-US"),
+                Locale.forLanguageTag("en-CA")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-CN"),
+                Locale.forLanguageTag("zh")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-CN"),
+                Locale.forLanguageTag("zh-Hans")));
+        assertTrue(DummyAppLocaleDetailsHelper.compareLocale(Locale.forLanguageTag("zh-TW"),
+                Locale.forLanguageTag("zh-Hant")));
+
+        //Use Locale.equals() to compare two locales.
+        assertFalse(Locale.forLanguageTag("en-US").equals(Locale.forLanguageTag("en-CA")));
+        assertFalse(Locale.forLanguageTag("zh-CN").equals(Locale.forLanguageTag("zh")));
+        assertFalse(Locale.forLanguageTag("zh-CN").equals(Locale.forLanguageTag("zh-Hans")));
+        assertFalse(Locale.forLanguageTag("zh-TW").equals(Locale.forLanguageTag("zh-Hant")));
+    }
+
     /**
      * Sets the initial Locale data
      *
-     * @param appLocale     Application locale, it shall be a language tag.
-     *                      example: "en"
-     * @param simLocale     SIM carrier locale, it shall be a language tag.
-     *                      example: "en"
-     * @param systemLocales System locales, a locale list by a multiple language tags with comma.
-     *                      example: "en, uk, jp"
-     * @param assetLocales  Asset locales, a locale list by a multiple language tags with String
-     *                      array.
-     *                      example: new String[] {"en", "ne", "ms", "pa"}
+     * @param appLocale      Application locale, it shall be a language tag.
+     *                       example: "en"
+     *
+     * @param simCountry     The ISO-3166-1 alpha-2 country code equivalent for the SIM
+     *                       provider's country code.
+     *                       example: "us"
+     *
+     * @param networkCountry The ISO-3166-1 alpha-2 country code equivalent of the MCC
+     *                       (Mobile Country Code) of the current registered operato
+     *                       or the cell nearby.
+     *                       example: "us"
+     *
+     * @param systemLocales  System locales, a locale list by a multiple language tags with comma.
+     *                       example: "en, uk, jp"
+     *
+     * @param packageLocales PackageManager locales, a locale list by a multiple language tags with
+     *                       comma.
+     *                       example: "en, uk, jp"
+     *
+     * @param assetLocales   Asset locales, a locale list by a multiple language tags with String
+     *                       array.
+     *                       example: new String[] {"en", "ne", "ms", "pa"}
      */
     private void setupInitialLocales(String appLocale,
-            String simLocale,
+            String simCountry,
+            String networkCountry,
             String systemLocales,
+            String packageLocales,
             String[] assetLocales) {
         mAppLocale = LocaleList.forLanguageTags(appLocale);
-        mSimLocale = Locale.forLanguageTag(simLocale);
-        mSystemLocales = LocaleList.forLanguageTags(systemLocales);
+        // forLanguageTags does not filter space to the input string. If there is any space included
+        // in string, this will make locale fail to generate.
+        systemLocales = systemLocales.replaceAll("\\s+", "");
+        LocaleList listOfSystemLocales = LocaleList.forLanguageTags(systemLocales);
+        mSystemLocales = new ArrayList<>();
+        for (int i = 0; i < listOfSystemLocales.size(); i++) {
+            mSystemLocales.add(listOfSystemLocales.get(i));
+        }
         mAssetLocales = assetLocales;
-        when(mTelephonyManager.getSimLocale()).thenReturn(simLocale.isEmpty() ? null : mSimLocale);
+        packageLocales = packageLocales.replaceAll("\\s+", "");
+        mPackageLocales = LocaleList.forLanguageTags(packageLocales);
+        when(mTelephonyManager.getSimCountryIso()).thenReturn(simCountry);
+        when(mTelephonyManager.getNetworkCountryIso()).thenReturn(networkCountry);
         when(mLocaleManager.getApplicationLocales(anyString())).thenReturn(mAppLocale);
     }
 
-    private class DummyAppLocaleDetailsHelper
+    public class DummyAppLocaleDetailsHelper
             extends AppLocaleDetails.AppLocaleDetailsHelper {
 
         DummyAppLocaleDetailsHelper(Context context, String packageName) {
@@ -185,14 +383,18 @@ public class AppLocaleDetailsTest {
         }
 
         @Override
-        String[] getAssetSystemLocales() {
+        String[] getAssetLocales() {
             return mAssetLocales;
         }
 
         @Override
-        LocaleList getCurrentSystemLocales() {
+        Collection<Locale> getCurrentSystemLocales() {
             return mSystemLocales;
         }
-    }
 
+        @Override
+        LocaleList getPackageLocales() {
+            return mPackageLocales;
+        }
+    }
 }

@@ -68,6 +68,9 @@ public final class BatteryBackupHelper implements BackupHelper {
     static final String KEY_OPTIMIZATION_LIST = "optimization_mode_list";
 
     @VisibleForTesting
+    List<ApplicationInfo> mTestApplicationInfoList = null;
+
+    @VisibleForTesting
     PowerAllowlistBackend mPowerAllowlistBackend;
     @VisibleForTesting
     IDeviceIdleController mIDeviceIdleController;
@@ -267,6 +270,9 @@ public final class BatteryBackupHelper implements BackupHelper {
     }
 
     private List<ApplicationInfo> getInstalledApplications() {
+        if (mTestApplicationInfoList != null) {
+            return mTestApplicationInfoList;
+        }
         final List<ApplicationInfo> applications = new ArrayList<>();
         final UserManager um = mContext.getSystemService(UserManager.class);
         for (UserInfo userInfo : um.getProfiles(UserHandle.myUserId())) {

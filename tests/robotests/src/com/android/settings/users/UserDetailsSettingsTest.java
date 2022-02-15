@@ -62,7 +62,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -89,6 +88,7 @@ public class UserDetailsSettingsTest {
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
+    private static final String KEY_APP_COPYING = "app_copying";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
 
@@ -105,6 +105,8 @@ public class UserDetailsSettingsTest {
     private Preference mRemoveUserPref;
     @Mock
     private Preference mAppAndContentAccessPref;
+    @Mock
+    private Preference mAppCopyingPref;
 
     private FragmentActivity mActivity;
     private Context mContext;
@@ -145,6 +147,7 @@ public class UserDetailsSettingsTest {
         doReturn(mRemoveUserPref).when(mFragment).findPreference(KEY_REMOVE_USER);
         doReturn(mAppAndContentAccessPref)
                 .when(mFragment).findPreference(KEY_APP_AND_CONTENT_ACCESS);
+        doReturn(mAppCopyingPref).when(mFragment).findPreference(KEY_APP_COPYING);
     }
 
     @After
@@ -163,7 +166,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_userSelected_shouldSetupSwitchPref() {
         setupSelectedUser();
         doReturn("Switch to " + mUserInfo.name)
@@ -179,7 +181,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_guestSelected_shouldSetupSwitchPref() {
         setupSelectedGuest();
         doReturn("Switch to " + mUserInfo.name)
@@ -195,7 +196,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_userSelected_shouldNotShowAppAndContentPref() {
         setupSelectedUser();
 
@@ -205,7 +205,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_guestSelected_shouldNotShowAppAndContentPref() {
         setupSelectedGuest();
 
@@ -259,7 +258,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminWithTelephony_shouldShowPhonePreference() {
         setupSelectedUser();
         doReturn(true).when(mTelephonyManager).isVoiceCapable();
@@ -272,7 +270,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminNoTelephony_shouldNotShowPhonePreference() {
         setupSelectedUser();
         doReturn(false).when(mTelephonyManager).isVoiceCapable();
@@ -306,7 +303,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminSelectsSecondaryUser_shouldShowRemovePreference() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -319,7 +315,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminSelectsNewRestrictedUser_shouldOpenAppContentScreen() {
         setupSelectedRestrictedUser();
         mUserManager.setIsAdminUser(true);
@@ -342,7 +337,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminSelectsRestrictedUser_shouldSetupPreferences() {
         setupSelectedRestrictedUser();
         mUserManager.setIsAdminUser(true);
@@ -361,7 +355,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminSelectsExistingRestrictedUser_shouldNotStartAppAndContentAccess() {
         setupSelectedRestrictedUser();
         mUserManager.setIsAdminUser(true);
@@ -373,7 +366,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_adminSelectsGuest_shouldShowRemovePreference() {
         setupSelectedGuest();
         mUserManager.setIsAdminUser(true);
@@ -396,7 +388,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_disallowRemoveUserRestriction_shouldNotShowRemovePreference() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -408,7 +399,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_userHasCallRestriction_shouldSetPhoneSwitchUnChecked() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -421,7 +411,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_noCallRestriction_shouldSetPhoneSwitchChecked() {
         setupSelectedUser();
         mUserManager.setIsAdminUser(true);
@@ -432,7 +421,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_guestSelected_noCallRestriction_shouldSetPhonePreference() {
         setupSelectedGuest();
         mUserManager.setIsAdminUser(true);
@@ -444,7 +432,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_guestSelected_callRestriction_shouldSetPhonePreference() {
         setupSelectedGuest();
         mUserManager.setIsAdminUser(true);
@@ -457,7 +444,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_switchUserDisallowed_shouldSetAdminDisabledOnSwitchPreference() {
         setupSelectedUser();
         mUserCapabilities.mDisallowSwitchUser = true;
@@ -473,7 +459,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    @Ignore
     public void initialize_switchUserAllowed_shouldSetSwitchPreferenceEnabled() {
         setupSelectedUser();
         mUserCapabilities.mDisallowSwitchUser = false;
