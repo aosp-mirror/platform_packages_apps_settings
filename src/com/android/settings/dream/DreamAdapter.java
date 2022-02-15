@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * RecyclerView adapter which displays list of items for the user to select.
  */
-class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
     private int mLastSelectedPos = -1;
 
@@ -103,7 +103,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    DreamAdapter(List<IDreamItem> itemList) {
+    public DreamAdapter(List<IDreamItem> itemList) {
         mItemList = itemList;
     }
 
