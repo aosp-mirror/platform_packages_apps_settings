@@ -24,12 +24,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
-import android.util.DataUnit;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
@@ -389,8 +389,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
                 attributedSize -= otherData.duplicateCodeSize;
             }
 
-            final long systemSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
-                    mUsedBytes - attributedSize);
+            final long systemSize = Math.max(TrafficStats.GB_IN_BYTES, mUsedBytes - attributedSize);
             mSystemPreference.setStorageSize(systemSize, mTotalSize);
         }
 

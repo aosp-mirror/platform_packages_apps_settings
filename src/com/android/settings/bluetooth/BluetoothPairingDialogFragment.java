@@ -344,9 +344,6 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
             pairingViewContent.setVisibility(View.VISIBLE);
             pairingViewContent.setText(mPairingController.getPairingContent());
         }
-        final TextView messagePairingSet = (TextView) view.findViewById(R.id.pairing_group_message);
-        messagePairingSet.setVisibility(mPairingController.isCoordinatedSetMemberDevice()
-                ? View.VISIBLE : View.GONE);
         return view;
     }
 

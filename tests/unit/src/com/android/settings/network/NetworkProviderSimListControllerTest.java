@@ -16,14 +16,10 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.google.common.truth.Truth.assertThat;
-
 import static androidx.lifecycle.Lifecycle.Event;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -174,6 +170,7 @@ public class NetworkProviderSimListControllerTest {
         assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
     }
 
+
     @Test
     @UiThreadTest
     public void getSummary_inactivePSim() {
@@ -228,20 +225,6 @@ public class NetworkProviderSimListControllerTest {
                 .append(defaultCall);
 
         assertTrue(TextUtils.equals(mController.getSummary(SUB_ID_1, DISPLAY_NAME_1), summary));
-    }
-
-    @Test
-    @UiThreadTest
-    public void getAvailablePhysicalSubscription_withTwoPhysicalSims_returnTwo() {
-        final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
-        when(info1.isEmbedded()).thenReturn(false);
-        final SubscriptionInfo info2 = mock(SubscriptionInfo.class);
-        when(info2.isEmbedded()).thenReturn(false);
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                Arrays.asList(info1,  info2));
-        displayPreferenceWithLifecycle();
-
-        assertThat(mController.getAvailablePhysicalSubscription().size()).isEqualTo(2);
     }
 
 }

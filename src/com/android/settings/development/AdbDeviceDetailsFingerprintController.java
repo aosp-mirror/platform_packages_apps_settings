@@ -73,7 +73,7 @@ public class AdbDeviceDetailsFingerprintController extends AbstractPreferenceCon
         final CharSequence titleFormat = mContext.getText(
                 R.string.adb_device_fingerprint_title_format);
         mFingerprintPref.setTitle(String.format(
-                titleFormat.toString(), mPairedDevice.guid));
+                titleFormat.toString(), mPairedDevice.getGuid()));
         mFingerprintCategory.addPreference(mFingerprintPref);
     }
 }

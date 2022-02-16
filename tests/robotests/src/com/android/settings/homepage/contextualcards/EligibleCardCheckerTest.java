@@ -35,7 +35,6 @@ import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.wifi.slice.ContextualWifiSlice;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -58,7 +57,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    @Ignore
     public void isSliceToggleable_cardWithToggle_returnTrue() {
         final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
         final Slice slice = wifiSlice.getSlice();
@@ -67,7 +65,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    @Ignore
     public void isCardEligibleToDisplay_toggleSlice_hasInlineActionShouldBeTrue() {
         final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
         final Slice slice = wifiSlice.getSlice();
@@ -118,7 +115,6 @@ public class EligibleCardCheckerTest {
     }
 
     @Test
-    @Ignore
     public void isCardEligibleToDisplay_sliceNotNull_cacheSliceToCard() {
         final ContextualWifiSlice wifiSlice = new ContextualWifiSlice(mContext);
         final Slice slice = wifiSlice.getSlice();
