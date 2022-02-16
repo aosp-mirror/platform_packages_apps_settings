@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import java.util.ArrayList;
@@ -50,7 +51,9 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
@@ -82,6 +85,7 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
         mComponentName = COLOR_INVERSION_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_inversion_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_inversion_preference_subtitle);
+        mTopIntroTitle = getText(R.string.accessibility_display_inversion_preference_intro_text);
         mImageUri = new Uri.Builder().scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                 .authority(getPrefContext().getPackageName())
                 .appendPath(String.valueOf(R.raw.accessibility_color_inversion_banner))

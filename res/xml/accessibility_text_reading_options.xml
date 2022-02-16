@@ -33,7 +33,8 @@
         settings:iconEnd="@drawable/ic_add_24dp"
         settings:iconEndContentDescription="@string/font_size_make_larger_desc"
         settings:iconStart="@drawable/ic_remove_24dp"
-        settings:iconStartContentDescription="@string/font_size_make_smaller_desc"/>
+        settings:iconStartContentDescription="@string/font_size_make_smaller_desc"
+        settings:keywords="@string/keywords_font_size" />
 
     <com.android.settings.widget.LabeledSeekBarPreference
         android:key="display_size"
@@ -43,7 +44,8 @@
         settings:iconEnd="@drawable/ic_add_24dp"
         settings:iconEndContentDescription="@string/screen_zoom_make_larger_desc"
         settings:iconStart="@drawable/ic_remove_24dp"
-        settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"/>
+        settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
+        settings:keywords="@string/keywords_display_size" />
 
     <SwitchPreference
         android:key="toggle_force_bold_text"
@@ -54,6 +56,7 @@
     <SwitchPreference
         android:key="toggle_high_text_contrast_preference"
         android:persistent="false"
+        android:summary="@string/accessibility_toggle_high_text_contrast_preference_summary"
         android:title="@string/accessibility_toggle_high_text_contrast_preference_title" />
 
     <com.android.settingslib.widget.LayoutPreference

@@ -491,6 +491,12 @@
     <!-- Category for the app's locale picker activity. [CHAR LIMIT=50]-->
     <string name="all_supported_app_locales_title">All languages</string>
 
+    <!-- Title for preference of the system default locale. [CHAR LIMIT=50]-->
+    <string name="preference_of_system_locale_title">System language</string>
+
+    <!-- Summary for preference of the system default locale. [CHAR LIMIT=50]-->
+    <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
+
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
     <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
@@ -597,7 +603,7 @@
     <string name="date_and_time_settings_title_setup_wizard">Set date and time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone, &amp; formats</string>
-    <!-- Date & time setting screen setting switch title: whether the system clock (UTC time) should be determined automatically [CHAR LIMIT=100] -->
+    <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
     <string name="zone_auto_title">Set time zone automatically</string>
@@ -5150,8 +5156,8 @@
     <string name="general_category_title">General</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
-    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
-    <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
+    <string name="accessibility_color_and_motion_title">Color and motion</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -5248,9 +5254,11 @@
     <string name="accessibility_screen_magnification_short_summary">Tap 3 times to zoom</string>
     <!-- Short summary for nav bar Magnification. Tells the user that this feature allows the user to magnify the screen using a button in the nav bar -->
     <string name="accessibility_screen_magnification_navbar_short_summary">Tap a button to zoom</string>
+    <!-- Intro for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
+    <string name="accessibility_screen_magnification_intro_text">Quickly zoom in on the screen to make content larger</string>
     <!-- Summary for the accessibility preference screen to enable screen magnification gestures. [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_summary">
-        <![CDATA[Quickly zoom in on the screen to make content larger.<br/><br/>
+        <![CDATA[
         <b>To zoom in:</b><br/>
         {0,number,integer}. Use shortcut to start magnification<br/>
         {1,number,integer}. Tap the screen<br/>
@@ -5258,10 +5266,11 @@
         {3,number,integer}. Pinch with 2 fingers to adjust zoom<br/>
         {4,number,integer}. Use shortcut to stop magnification<br/><br/>
         <b>To zoom in temporarily:</b><br/>
-        {0,number,integer}. Use shortcut to start magnification<br/>
-        {1,number,integer}. Touch & hold anywhere on the screen<br/>
-        {2,number,integer}. Drag finger to move around screen<br/>
-        {3,number,integer}. Lift finger to stop magnification
+        {0,number,integer}. Make sure your magnification type is set to full screen<br/>
+        {1,number,integer}. Use shortcut to start magnification<br/>
+        {2,number,integer}. Touch & hold anywhere on the screen<br/>
+        {3,number,integer}. Drag finger to move around screen<br/>
+        {4,number,integer}. Lift finger to stop magnification
         ]]>
     </string>
     <!-- Summary for the accessibility preference screen to enable screen magnification via the nav bar. [CHAR LIMIT=none] -->
@@ -5386,6 +5395,8 @@
     <string name="accessibility_button_high_label">Non-transparent</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
+    <!-- Summary for the accessibility preference to high contrast text. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_toggle_high_text_contrast_preference_summary">Change text color to black or white. Maximizes contrast with the background.</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title">Auto
         update screen magnification</string>
@@ -5428,7 +5439,9 @@
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_control_timeout_preference_summary">Choose how long to show messages that ask you to take action, but are visible only temporarily.\n\nNot all apps support this setting.</string>
+    <string name="accessibility_control_timeout_preference_summary">This timing preference isn\u2019t supported by all apps</string>
+    <!-- Intro text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_preference_intro_text">Choose how long to show temporary messages that ask you to take action</string>
 
     <!-- Title for accessibility preference to choose long-press delay i.e. timeout before it is detected. [CHAR LIMIT=35] -->
     <string name="accessibility_long_press_timeout_preference_title">Touch &amp; hold delay</string>
@@ -5438,14 +5451,15 @@
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
     <!-- Title for accessibility shortcut preference for color inversion. [CHAR LIMIT=60] -->
     <string name="accessibility_display_inversion_shortcut_title">Color inversion shortcut</string>
+    <!-- Intro for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_display_inversion_preference_intro_text">Color inversion turns light screens dark. It also turns dark screens light.</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">
-        <![CDATA[Color inversion turns light screens dark.<br/><br/>
-        Note:
+        <![CDATA[<b>Keep in mind</b><br/>
         <ol>
-            <li>\u00a0Color inversion also turns dark screens light.</li>
-            <li>\u00a0Colors will change in media and images.</li>
-            <li>\u00a0Dark theme can be used to display a dark background. Dark theme works with supported apps. Color inversion works on all apps.</li>
+            <li>\u00a0Colors will change in media and images</li>
+            <li>\u00a0Color inversion works on all apps</li>
+            <li>\u00a0To display a dark background, Dark theme can be used instead</li>
         </ol>
         ]]>
     </string>
@@ -5455,10 +5469,12 @@
     <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
     <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_footer_learn_more_content_description">Learn more about autoclick (dwell timing)</string>
-    <!-- Footer text to explain what autoclick does -->
-    <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
+    <!-- Intro text to explain what autoclick does. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_intro_text">You can set a connected mouse to click automatically when the cursor stops moving for a certain amount of time</string>
+    <!-- Footer text to explain what autoclick does. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_description">Autoclick can be helpful if clicking the mouse is difficult</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
-    <string name="accessibility_autoclick_default_title">Off</string>
+    <string name="accessibility_autoclick_default_title">Autoclick off</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its short level. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_short_title">Short</string>
     <!-- Option summary text for the auto click delay 0.2 seconds radio button. [CHAR LIMIT=35] -->
@@ -5507,10 +5523,16 @@
     <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to show quick settings tooltips for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_auto_added_qs_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
     <!-- Used in the accessibility service settings to show quick settings tooltips. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_quick_settings_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <string name="accessibility_service_qs_tooltips_content">You can add a shortcut to <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> by editing quick settings</string>
     <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="default">Adjust how colors display on your phone</string>
+    <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet">Adjust how colors display on your tablet</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
     <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
@@ -5590,22 +5612,20 @@
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
-    <!-- Title for the preference to configure the type of color space correction to apply. [CHAR LIMIT=NONE] -->
-    <string name="daltonizer_type">Correction mode</string>
     <!-- Title shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_title">Deuteranomaly</string>
+    <string name="daltonizer_mode_deuteranomaly_title">Red-green</string>
     <!-- Title shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_title">Protanomaly</string>
+    <string name="daltonizer_mode_protanomaly_title">Red-green</string>
     <!-- Title shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_title">Tritanomaly</string>
+    <string name="daltonizer_mode_tritanomaly_title">Blue-yellow</string>
     <!-- Title shown for grayscale [CHAR LIMIT=45] -->
     <string name="daltonizer_mode_grayscale_title">Grayscale</string>
     <!-- Summary shown for deuteranomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_deuteranomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_deuteranomaly_summary">Green weak, deuteranomaly</string>
     <!-- Summary shown for protanomaly (red-green color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_protanomaly_summary">Red-green</string>
+    <string name="daltonizer_mode_protanomaly_summary">Red weak, protanomaly</string>
     <!-- Summary shown for tritanomaly (blue-yellow color blindness) [CHAR LIMIT=45] -->
-    <string name="daltonizer_mode_tritanomaly_summary">Blue-yellow</string>
+    <string name="daltonizer_mode_tritanomaly_summary">Tritanomaly</string>
 
     <!-- Title for the accessibility preference of the Extra Dim/Reduce Brightness feature that dims your screen. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
@@ -5619,10 +5639,11 @@
     <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_summary" product="tablet">Dim screen beyond your tablet\u2019s minimum brightness</string>
+    <!-- Intro that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
+    <string name="reduce_bright_colors_preference_intro_text">Make your screen dimmer so it\u2019s more comfortable to read</string>
     <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_subtitle" product="default">
-        <![CDATA[Make your screen dimmer so it\u2019s more comfortable to read.<br/><br/>
-        This can be helpful when:
+        <![CDATA[Extra dim can be helpful when:
         <ol>
             <li>\u00a0Your phone\u2019s default minimum brightness is still too bright</li>
             <li>\u00a0You\u2019re using your phone in dark situations, like at night or in a dark room before bed</li>
@@ -5631,8 +5652,7 @@
     </string>
     <!-- Subtitle that describes Reduce Brightness. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_subtitle" product="tablet">
-        <![CDATA[Make your screen darker so it\u2019s more comfortable to read.<br/><br/>
-        This can be helpful when:
+        <![CDATA[Extra dim can be helpful when:
         <ol>
             <li>\u00a0Your tablet\u2019s default minimum brightness is still too bright</li>
             <li>\u00a0You\u2019re using your tablet in dark situations, like at night or in a dark room before bed</li>
@@ -7657,8 +7677,8 @@
     <string name="nfc_default_payment_workapp_confirmation_message_title">To make a payment using a work app:</string>
     <!-- Text string in the dialog [CHAR LIMIT=60] -->
     <string name="nfc_default_payment_workapp_confirmation_message_1">work profile must be turned on.</string>
-    <!-- Text string in the dialog [CHAR LIMIT=60] -->
-    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work profile lock if you have one.</string>
+    <!-- Text string in the dialog [CHAR LIMIT=80] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work PIN, pattern, or password if you have one.</string>
 
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
@@ -13887,11 +13907,13 @@
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
-    <string name="dream_preview_button_title">Preview screensaver</string>
+    <string name="dream_preview_button_title">Preview</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_picker_category">Choose an image</string>
-    <!-- The title of the category to show for the screensaver overlay selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_complications_picker_category">Choose more options</string>
+    <string name="dream_picker_category">Choose a screen saver</string>
+    <!-- The title of the toggle which enables/disables overlays on top of the screen saver [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_title">Show additional information</string>
+    <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_summary">Display time, date and weather on the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->

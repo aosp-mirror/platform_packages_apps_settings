@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.ShortcutPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -64,7 +65,7 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
         mainSwitchPreference.addOnSwitchChangeListener((switchView, isChecked) -> {
             switchView.setChecked(isChecked);
             if (isChecked) {
-                showQuickSettingsTooltipIfNeeded();
+                showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
             }
         });
     }

@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -51,7 +52,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String KEY_PREVIEW = "daltonizer_preview";
-    private static final String KEY_CATEGORY_MODE = "daltonizer_mode_category";
+    private static final String KEY_DEUTERANOMALY = "daltonizer_mode_deuteranomaly";
+    private static final String KEY_PROTANOMALY = "daltonizer_mode_protanomaly";
+    private static final String KEY_TRITANOMEALY = "daltonizer_mode_tritanomaly";
+    private static final String KEY_GRAYSCALE = "daltonizer_mode_grayscale";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
@@ -82,6 +86,7 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
         mComponentName = DALTONIZER_COMPONENT_NAME;
         mPackageName = getText(R.string.accessibility_display_daltonizer_preference_title);
         mHtmlDescription = getText(R.string.accessibility_display_daltonizer_preference_subtitle);
+        mTopIntroTitle = getText(R.string.accessibility_daltonizer_about_intro_text);
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         updateFooterPreference();
         return view;
@@ -111,9 +116,13 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
+        lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_PREVIEW);
         lists.add(KEY_USE_SERVICE_PREFERENCE);
-        lists.add(KEY_CATEGORY_MODE);
+        lists.add(KEY_DEUTERANOMALY);
+        lists.add(KEY_PROTANOMALY);
+        lists.add(KEY_TRITANOMEALY);
+        lists.add(KEY_GRAYSCALE);
         lists.add(KEY_GENERAL_CATEGORY);
         lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
         return lists;
@@ -157,7 +166,9 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }

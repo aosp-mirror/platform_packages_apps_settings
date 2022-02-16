@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * RecyclerView adapter which displays list of items for the user to select.
  */
-class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
     private int mLastSelectedPos = -1;
 
@@ -48,6 +48,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private final ImageView mIconView;
         private final TextView mTitleView;
         private final ImageView mPreviewView;
+        private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
         private final Context mContext;
 
@@ -55,6 +56,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(view);
             mContext = context;
             mPreviewView = view.findViewById(R.id.preview);
+            mPreviewPlaceholderView = view.findViewById(R.id.preview_placeholder);
             mIconView = view.findViewById(R.id.icon);
             mTitleView = view.findViewById(R.id.title_text);
             mCustomizeButton = view.findViewById(R.id.customize_button);
@@ -68,10 +70,9 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             final Drawable previewImage = item.getPreviewImage();
             if (previewImage != null) {
-                mPreviewView.setVisibility(View.VISIBLE);
                 mPreviewView.setImageDrawable(previewImage);
-            } else {
-                mPreviewView.setVisibility(View.GONE);
+                mPreviewView.setClipToOutline(true);
+                mPreviewPlaceholderView.setVisibility(View.GONE);
             }
 
             final Drawable icon = item.isActive()
@@ -103,7 +104,7 @@ class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    DreamAdapter(List<IDreamItem> itemList) {
+    public DreamAdapter(List<IDreamItem> itemList) {
         mItemList = itemList;
     }
 
