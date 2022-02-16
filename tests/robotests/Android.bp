@@ -37,6 +37,7 @@ android_app {
         "com.google.android.material_material",
         "setupcompat",
         "setupdesign",
+        "androidx-constraintlayout_constraintlayout-solver",
         "androidx.lifecycle_lifecycle-runtime",
         "androidx.lifecycle_lifecycle-extensions",
         "androidx.test.core",
@@ -49,7 +50,6 @@ android_app {
         "contextualcards",
         "settings-logtags",
         "zxing-core-1.7",
-        "windowExtLib",
     ],
 
     aaptflags: ["--extra-packages com.android.settings"],
@@ -59,10 +59,6 @@ android_app {
         "ims-common",
     ],
     uses_libs: ["org.apache.http.legacy"],
-    optional_uses_libs: [
-        "androidx.window.extensions",
-        "androidx.window.sidecar",
-    ],
 }
 
 //############################################################

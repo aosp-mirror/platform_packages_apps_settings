@@ -74,12 +74,12 @@ public class WifiCallingSettingsForSubTest {
 
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
     private static final String BUTTON_WFC_ROAMING_MODE = "wifi_calling_roaming_mode";
-    private static final String PREFERENCE_NO_OPTIONS_DESC = "no_options_description";
     private static final String TEST_EMERGENCY_ADDRESS_CARRIER_APP =
             "com.android.settings/.wifi.calling.TestEmergencyAddressCarrierApp";
 
     private TestFragment mFragment;
     private Context mContext;
+    private TextView mEmptyView;
     private final PersistableBundle mBundle = new PersistableBundle();
 
     private MockWifiCallingQueryImsState mQueryImsState;
@@ -99,8 +99,6 @@ public class WifiCallingSettingsForSubTest {
     private SettingsActivity mActivity;
     @Mock
     private View mView;
-    @Mock
-    private LinkifyDescriptionPreference mDescriptionView;
     @Mock
     private ListWithEntrySummaryPreference mButtonWfcMode;
     @Mock
@@ -128,9 +126,11 @@ public class WifiCallingSettingsForSubTest {
         doReturn(mock(ListWithEntrySummaryPreference.class)).when(mFragment).findPreference(any());
         doReturn(mButtonWfcMode).when(mFragment).findPreference(BUTTON_WFC_MODE);
         doReturn(mButtonWfcRoamingMode).when(mFragment).findPreference(BUTTON_WFC_ROAMING_MODE);
-        doReturn(mDescriptionView).when(mFragment).findPreference(PREFERENCE_NO_OPTIONS_DESC);
         doNothing().when(mFragment).finish();
         doReturn(mView).when(mFragment).getView();
+
+        mEmptyView = new TextView(mContext);
+        doReturn(mEmptyView).when(mView).findViewById(android.R.id.empty);
 
         mSwitchBar = new SettingsMainSwitchBar(mContext);
         doReturn(mSwitchBar).when(mView).findViewById(R.id.switch_bar);
@@ -211,7 +211,8 @@ public class WifiCallingSettingsForSubTest {
         mFragment.onResume();
 
         // Check that WFC roaming preference is shown.
-        verify(mButtonWfcRoamingMode, times(1)).setVisible(true);
+        verify(mPreferenceScreen, times(1)).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, never()).removePreference(mButtonWfcRoamingMode);
     }
 
     @Test
@@ -224,7 +225,8 @@ public class WifiCallingSettingsForSubTest {
         mFragment.onResume();
 
         // Check that WFC roaming preference is hidden.
-        verify(mButtonWfcRoamingMode, times(1)).setVisible(false);
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
     }
 
     @Test
@@ -237,7 +239,8 @@ public class WifiCallingSettingsForSubTest {
         mFragment.onResume();
 
         // Check that WFC roaming preference is hidden.
-        verify(mButtonWfcRoamingMode, times(1)).setVisible(false);
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
     }
 
     @Test
@@ -250,7 +253,8 @@ public class WifiCallingSettingsForSubTest {
         mFragment.onResume();
 
         // Check that WFC roaming preference is hidden.
-        verify(mButtonWfcRoamingMode, times(1)).setVisible(false);
+        verify(mPreferenceScreen, never()).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen, times(1)).removePreference(mButtonWfcRoamingMode);
     }
 
     @Test
@@ -328,9 +332,9 @@ public class WifiCallingSettingsForSubTest {
                 Activity.RESULT_OK, null);
 
         // Check the WFC preferences is added.
-        verify(mButtonWfcMode).setVisible(true);
-        verify(mButtonWfcRoamingMode).setVisible(true);
-        verify(mUpdateAddress).setVisible(true);
+        verify(mPreferenceScreen).addPreference(mButtonWfcMode);
+        verify(mPreferenceScreen).addPreference(mButtonWfcRoamingMode);
+        verify(mPreferenceScreen).addPreference(mUpdateAddress);
         // Check the WFC enable request.
         verify(mImsMmTelManager).setVoWiFiSettingEnabled(true);
     }

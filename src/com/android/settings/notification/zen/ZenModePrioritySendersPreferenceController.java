@@ -19,53 +19,80 @@ package com.android.settings.notification.zen;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
 
-import static com.android.settings.notification.zen.ZenPrioritySendersHelper.UNKNOWN;
-
+import android.app.NotificationManager;
 import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.provider.Contacts;
+import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.notification.NotificationBackend;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Common preference controller functionality for zen mode priority senders preferences for both
- * messages and calls.
+ * Common preference controller functionality shared by
+ * ZenModePriorityMessagesPreferenceController and ZenModePriorityCallsPreferenceController.
  *
- * These controllers handle the settings regarding which priority senders that are allowed to
- * bypass DND for calls or messages, which may be one the following values: starred contacts, all
- * contacts, priority conversations (for messages only), anyone, or no one.
- *
- * Most of the functionality is handled by ZenPrioritySendersHelper, so that it can also be shared
- * with settings controllers for custom rules. This class handles the parts of the behavior where
- * settings must be written to the relevant backends, as that's where this class diverges from
- * custom rules.
+ * This includes the options to choose the priority senders that are allowed to bypass DND for
+ * calls or messages. This can be one of four values: starred contacts, all contacts, anyone, or
+ * no one.
  */
 public class ZenModePrioritySendersPreferenceController
         extends AbstractZenModePreferenceController {
+    @VisibleForTesting static final String KEY_ANY = "senders_anyone";
+    @VisibleForTesting static final String KEY_CONTACTS = "senders_contacts";
+    @VisibleForTesting static final String KEY_STARRED = "senders_starred_contacts";
+    @VisibleForTesting static final String KEY_NONE = "senders_none";
+
+    private static final Intent ALL_CONTACTS_INTENT =
+            new Intent(Contacts.Intents.UI.LIST_DEFAULT);
+    private static final Intent STARRED_CONTACTS_INTENT =
+            new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION);
+    private static final Intent FALLBACK_INTENT = new Intent(Intent.ACTION_MAIN);
+
+    private final PackageManager mPackageManager;
     private final boolean mIsMessages; // if this is false, then this preference is for calls
 
     private PreferenceCategory mPreferenceCategory;
-    private ZenPrioritySendersHelper mHelper;
+    private List<RadioButtonPreference> mRadioButtonPreferences = new ArrayList<>();
 
     public ZenModePrioritySendersPreferenceController(Context context, String key,
-            Lifecycle lifecycle, boolean isMessages, NotificationBackend notificationBackend) {
+            Lifecycle lifecycle, boolean isMessages) {
         super(context, key, lifecycle);
         mIsMessages = isMessages;
 
-        mHelper = new ZenPrioritySendersHelper(
-                context, isMessages, mBackend, notificationBackend, mSelectorClickListener);
+        mPackageManager = mContext.getPackageManager();
+        if (!FALLBACK_INTENT.hasCategory(Intent.CATEGORY_APP_CONTACTS)) {
+            FALLBACK_INTENT.addCategory(Intent.CATEGORY_APP_CONTACTS);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPreferenceCategory = screen.findPreference(getPreferenceKey());
-        mHelper.displayPreference(mPreferenceCategory);
+        if (mPreferenceCategory.findPreference(KEY_ANY) == null) {
+            makeRadioPreference(KEY_STARRED,
+                    com.android.settings.R.string.zen_mode_from_starred);
+            makeRadioPreference(KEY_CONTACTS,
+                    com.android.settings.R.string.zen_mode_from_contacts);
+            makeRadioPreference(KEY_ANY,
+                    com.android.settings.R.string.zen_mode_from_anyone);
+            makeRadioPreference(KEY_NONE,
+                    mIsMessages
+                            ? com.android.settings.R.string.zen_mode_none_messages
+                            : com.android.settings.R.string.zen_mode_none_calls);
+            updateSummaries();
+        }
+
         super.displayPreference(screen);
     }
 
@@ -81,37 +108,53 @@ public class ZenModePrioritySendersPreferenceController
 
     @Override
     public void updateState(Preference preference) {
-        final int currContactsSetting = getPrioritySenders();
-        final int currConversationsSetting = getPriorityConversationSenders();
-        mHelper.updateState(currContactsSetting, currConversationsSetting);
+        final int currSetting = getPrioritySenders();
+
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+            pref.setChecked(keyToSetting(pref.getKey()) == currSetting);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mIsMessages) {
-            updateChannelCounts();
-        }
-        mHelper.updateSummaries();
+        updateSummaries();
     }
 
-    private void updateChannelCounts() {
-        // Load conversations
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... unused) {
-                mHelper.updateChannelCounts();
-                return null;
-            }
+    private void updateSummaries() {
+        for (RadioButtonPreference pref : mRadioButtonPreferences) {
+            pref.setSummary(getSummary(pref.getKey()));
+        }
+    }
 
-            @Override
-            protected void onPostExecute(Void unused) {
-                if (mContext == null) {
-                    return;
-                }
-                updateState(mPreferenceCategory);
-            }
-        }.execute();
+    private static int keyToSetting(String key) {
+        switch (key) {
+            case KEY_STARRED:
+                return NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
+            case KEY_CONTACTS:
+                return NotificationManager.Policy.PRIORITY_SENDERS_CONTACTS;
+            case KEY_ANY:
+                return NotificationManager.Policy.PRIORITY_SENDERS_ANY;
+            case KEY_NONE:
+            default:
+                return ZenModeBackend.SOURCE_NONE;
+        }
+    }
+
+    private String getSummary(String key) {
+        switch (key) {
+            case KEY_STARRED:
+                return mBackend.getStarredContactsSummary(mContext);
+            case KEY_CONTACTS:
+                return mBackend.getContactsNumberSummary(mContext);
+            case KEY_ANY:
+                return mContext.getResources().getString(mIsMessages
+                                ? R.string.zen_mode_all_messages_summary
+                                : R.string.zen_mode_all_calls_summary);
+            case KEY_NONE:
+            default:
+                return null;
+        }
     }
 
     private int getPrioritySenders() {
@@ -122,34 +165,72 @@ public class ZenModePrioritySendersPreferenceController
         }
     }
 
-    private int getPriorityConversationSenders() {
-        if (mIsMessages) {
-            return mBackend.getPriorityConversationSenders();
+    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(mPreferenceCategory.getContext());
+        pref.setKey(key);
+        pref.setTitle(titleId);
+        pref.setOnClickListener(mRadioButtonClickListener);
+
+        View.OnClickListener widgetClickListener = getWidgetClickListener(key);
+        if (widgetClickListener != null) {
+            pref.setExtraWidgetOnClickListener(widgetClickListener);
         }
-        return UNKNOWN;
+
+        mPreferenceCategory.addPreference(pref);
+        mRadioButtonPreferences.add(pref);
+        return pref;
     }
 
-    @VisibleForTesting
-    SelectorWithWidgetPreference.OnClickListener mSelectorClickListener =
-            new SelectorWithWidgetPreference.OnClickListener() {
+    private RadioButtonPreference.OnClickListener mRadioButtonClickListener =
+            new RadioButtonPreference.OnClickListener() {
         @Override
-        public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
-            // The settingsToSaveOnClick function takes whether or not the preference is a
-            // checkbox into account to determine whether this selection is checked or unchecked.
-            final int[] settingsToSave = mHelper.settingsToSaveOnClick(preference,
-                    getPrioritySenders(), getPriorityConversationSenders());
-            final int prioritySendersSetting = settingsToSave[0];
-            final int priorityConvosSetting = settingsToSave[1];
-
-            if (prioritySendersSetting != UNKNOWN) {
+        public void onRadioButtonClicked(RadioButtonPreference preference) {
+            int selectedSetting = keyToSetting(preference.getKey());
+            if (selectedSetting != getPrioritySenders()) {
                 mBackend.saveSenders(
                         mIsMessages ? PRIORITY_CATEGORY_MESSAGES : PRIORITY_CATEGORY_CALLS,
-                        prioritySendersSetting);
-            }
-
-            if (mIsMessages && priorityConvosSetting != UNKNOWN) {
-                mBackend.saveConversationSenders(priorityConvosSetting);
+                        selectedSetting);
             }
         }
     };
+
+    private View.OnClickListener getWidgetClickListener(String key) {
+        if (!KEY_CONTACTS.equals(key) && !KEY_STARRED.equals(key)) {
+            return null;
+        }
+
+        if (KEY_STARRED.equals(key) && !isStarredIntentValid()) {
+            return null;
+        }
+
+        if (KEY_CONTACTS.equals(key) && !isContactsIntentValid()) {
+            return null;
+        }
+
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (KEY_STARRED.equals(key)
+                        && STARRED_CONTACTS_INTENT.resolveActivity(mPackageManager) != null) {
+                    mContext.startActivity(STARRED_CONTACTS_INTENT);
+                } else if (KEY_CONTACTS.equals(key)
+                        && ALL_CONTACTS_INTENT.resolveActivity(mPackageManager) != null) {
+                    mContext.startActivity(ALL_CONTACTS_INTENT);
+                } else {
+                    mContext.startActivity(FALLBACK_INTENT);
+                }
+            }
+        };
+    }
+
+    private boolean isStarredIntentValid() {
+        return STARRED_CONTACTS_INTENT.resolveActivity(mPackageManager) != null
+                || FALLBACK_INTENT.resolveActivity(mPackageManager) != null;
+    }
+
+    private boolean isContactsIntentValid() {
+        return ALL_CONTACTS_INTENT.resolveActivity(mPackageManager) != null
+                || FALLBACK_INTENT.resolveActivity(mPackageManager) != null;
+    }
 }

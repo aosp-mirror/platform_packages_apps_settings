@@ -31,7 +31,6 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -45,20 +44,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.utils.AnnotationSpan;
-
-import com.airbnb.lottie.LottieAnimationView;
-import com.airbnb.lottie.LottieDrawable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -69,7 +63,6 @@ import java.util.List;
  * Utility class for creating the edit dialog.
  */
 public class AccessibilityDialogUtils {
-    private static final String TAG = "AccessibilityDialogUtils";
 
     /** Denotes the dialog emuns for show dialog. */
     @Retention(RetentionPolicy.SOURCE)
@@ -178,23 +171,6 @@ public class AccessibilityDialogUtils {
                 positiveBtnListener, /* negativeBtnListener= */ null);
         setScrollIndicators(contentView);
         return alertDialog;
-    }
-
-    /**
-     * Updates the software shortcut in edit shortcut dialog.
-     *
-     * @param context A valid context
-     * @param editShortcutDialog Need to be a type of edit shortcut dialog
-     * @return True if the update is successful
-     */
-    public static boolean updateSoftwareShortcutInDialog(Context context,
-            Dialog editShortcutDialog) {
-        final View container = editShortcutDialog.findViewById(R.id.container_layout);
-        if (container != null) {
-            initSoftwareShortcut(context, container);
-            return true;
-        }
-        return false;
     }
 
     private static AlertDialog createDialog(Context context, int dialogType,
@@ -339,22 +315,9 @@ public class AccessibilityDialogUtils {
     }
 
     private static void setupShortcutWidget(View view, CharSequence titleText,
-            CharSequence summaryText, @DrawableRes int imageResId) {
-        setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
-        setupShortcutWidgetWithImageResource(view, imageResId);
-    }
-
-    private static void setupShortcutWidgetWithImageRawResource(View view, CharSequence titleText,
-            CharSequence summaryText, @RawRes int imageRawResId) {
-        setupShortcutWidgetWithTitleAndSummary(view, titleText, summaryText);
-        setupShortcutWidgetWithImageRawResource(view, imageRawResId);
-    }
-
-    private static void setupShortcutWidgetWithTitleAndSummary(View view, CharSequence titleText,
-            CharSequence summaryText) {
+            CharSequence summaryText, int imageResId) {
         final CheckBox checkBox = view.findViewById(R.id.checkbox);
         checkBox.setText(titleText);
-
         final TextView summary = view.findViewById(R.id.summary);
         if (TextUtils.isEmpty(summaryText)) {
             summary.setVisibility(View.GONE);
@@ -363,23 +326,8 @@ public class AccessibilityDialogUtils {
             summary.setMovementMethod(LinkMovementMethod.getInstance());
             summary.setFocusable(false);
         }
-    }
-
-    private static void setupShortcutWidgetWithImageResource(View view,
-            @DrawableRes int imageResId) {
-        final ImageView imageView = view.findViewById(R.id.image);
-        imageView.setImageResource(imageResId);
-    }
-
-    private static void setupShortcutWidgetWithImageRawResource(View view,
-            @RawRes int imageRawResId) {
-        final LottieAnimationView lottieView = view.findViewById(R.id.image);
-        lottieView.setFailureListener(
-                result -> Log.w(TAG, "Invalid image raw resource id: " + imageRawResId,
-                        result));
-        lottieView.setAnimation(imageRawResId);
-        lottieView.setRepeatCount(LottieDrawable.INFINITE);
-        lottieView.playAnimation();
+        final ImageView image = view.findViewById(R.id.image);
+        image.setImageResource(imageResId);
     }
 
     private static void initSoftwareShortcutForSUW(Context context, View view) {
@@ -396,11 +344,12 @@ public class AccessibilityDialogUtils {
 
     private static void initSoftwareShortcut(Context context, View view) {
         final View dialogView = view.findViewById(R.id.software_shortcut);
+        final CharSequence title = context.getText(
+                R.string.accessibility_shortcut_edit_dialog_title_software);
         final TextView summary = dialogView.findViewById(R.id.summary);
         final int lineHeight = summary.getLineHeight();
 
-        setupShortcutWidget(dialogView,
-                retrieveTitle(context),
+        setupShortcutWidget(dialogView, title,
                 retrieveSoftwareShortcutSummary(context, lineHeight),
                 retrieveSoftwareShortcutImageResId(context));
     }
@@ -413,6 +362,7 @@ public class AccessibilityDialogUtils {
                 R.string.accessibility_shortcut_edit_dialog_summary_hardware);
         setupShortcutWidget(dialogView, title, summary,
                 R.drawable.accessibility_shortcut_type_hardware);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initMagnifyShortcut(Context context, View view) {
@@ -425,8 +375,9 @@ public class AccessibilityDialogUtils {
         final Object[] arguments = {3};
         summary = MessageFormat.format(summary, arguments);
 
-        setupShortcutWidgetWithImageRawResource(dialogView, title, summary,
-                R.raw.accessibility_shortcut_type_triple_tap);
+        setupShortcutWidget(dialogView, title, summary,
+                R.drawable.accessibility_shortcut_type_triple_tap);
+        // TODO(b/142531156): Use vector drawable instead of temporal png file to avoid distorted.
     }
 
     private static void initAdvancedWidget(View view) {
@@ -447,49 +398,20 @@ public class AccessibilityDialogUtils {
         return sb;
     }
 
-    private static CharSequence retrieveTitle(Context context) {
-        int resId;
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_dialog_title_software;
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = R.string.accessibility_shortcut_edit_dialog_title_software_by_gesture;
-        } else {
-            resId = R.string.accessibility_shortcut_edit_dialog_title_software;
-        }
-        return context.getText(resId);
-    }
-
     private static CharSequence retrieveSoftwareShortcutSummary(Context context, int lineHeight) {
         final SpannableStringBuilder sb = new SpannableStringBuilder();
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            sb.append(getCustomizeAccessibilityButtonLink(context));
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.string.accessibility_shortcut_edit_dialog_summary_software_gesture_talkback
-                    : R.string.accessibility_shortcut_edit_dialog_summary_software_gesture;
-            sb.append(context.getText(resId));
-            sb.append("\n\n");
-            sb.append(getCustomizeAccessibilityButtonLink(context));
-        } else {
+        if (!AccessibilityUtil.isFloatingMenuEnabled(context)) {
             sb.append(getSummaryStringWithIcon(context, lineHeight));
             sb.append("\n\n");
-            sb.append(getCustomizeAccessibilityButtonLink(context));
         }
+        sb.append(getCustomizeAccessibilityButtonLink(context));
         return sb;
     }
 
     private static int retrieveSoftwareShortcutImageResId(Context context) {
-        int resId;
-        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
-            resId = R.drawable.accessibility_shortcut_type_software_floating;
-        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
-            resId = AccessibilityUtil.isTouchExploreEnabled(context)
-                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
-                    : R.drawable.accessibility_shortcut_type_software_gesture;
-        } else {
-            resId = R.drawable.accessibility_shortcut_type_software;
-        }
-        return resId;
+        return AccessibilityUtil.isFloatingMenuEnabled(context)
+                ? R.drawable.accessibility_shortcut_type_software_floating
+                : R.drawable.accessibility_shortcut_type_software;
     }
 
     private static CharSequence getCustomizeAccessibilityButtonLink(Context context) {
@@ -500,6 +422,7 @@ public class AccessibilityDialogUtils {
                 .launch();
         final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
                 AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
+
         return AnnotationSpan.linkify(context.getText(
                 R.string.accessibility_shortcut_edit_dialog_summary_software_floating), linkInfo);
     }

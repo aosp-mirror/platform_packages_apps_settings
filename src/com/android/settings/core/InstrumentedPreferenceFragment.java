@@ -158,7 +158,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
             switch (newState) {
                 case RecyclerView.SCROLL_STATE_DRAGGING:
                     final Configuration.Builder builder =
-                            Configuration.Builder.withView(CUJ_SETTINGS_PAGE_SCROLL, recyclerView)
+                            new Configuration.Builder(CUJ_SETTINGS_PAGE_SCROLL)
+                                    .setView(recyclerView)
                                     .setTag(mClassName);
                     mMonitor.begin(builder);
                     break;

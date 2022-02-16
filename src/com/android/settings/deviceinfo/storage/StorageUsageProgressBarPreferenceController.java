@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -112,10 +113,16 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
             return;
         }
         mIsUpdateStateFromSelectedStorageEntry = false;
-        mUsageProgressBarPreference.setUsageSummary(StorageUtils.getStorageSummary(
-                mContext, R.string.storage_usage_summary, mUsedBytes));
-        mUsageProgressBarPreference.setTotalSummary(StorageUtils.getStorageSummary(
-                mContext, R.string.storage_total_summary, mTotalBytes));
+        mUsageProgressBarPreference.setUsageSummary(
+                getStorageSummary(R.string.storage_usage_summary, mUsedBytes));
+        mUsageProgressBarPreference.setTotalSummary(
+                getStorageSummary(R.string.storage_total_summary, mTotalBytes));
         mUsageProgressBarPreference.setPercent(mUsedBytes, mTotalBytes);
+    }
+
+    private String getStorageSummary(int resId, long bytes) {
+        final Formatter.BytesResult result = Formatter.formatBytes(mContext.getResources(),
+                bytes, Formatter.FLAG_SHORTER);
+        return mContext.getString(resId, result.value, result.units);
     }
 }

@@ -14,9 +14,11 @@
 
 package com.android.settings.datausage;
 
-import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
-import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
+import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
+import static android.net.TrafficStats.UID_REMOVED;
+import static android.net.TrafficStats.UID_TETHERING;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -37,6 +39,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -88,6 +91,7 @@ public class DataUsageList extends DataUsageBaseFragment
     private static final String KEY_APPS_GROUP = "apps_group";
     private static final String KEY_TEMPLATE = "template";
     private static final String KEY_APP = "app";
+    private static final String KEY_FIELDS = "fields";
 
     @VisibleForTesting
     static final int LOADER_CHART_DATA = 2;
@@ -138,7 +142,12 @@ public class DataUsageList extends DataUsageBaseFragment
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
 
-        final Preference unnecessaryWarningPreference = findPreference("operator_warning");
+        // TODO(b/167474581): This is a temporary solution to hide unnecessary warning
+        //  preference, when the provider model is completed, the following code should be removed.
+        final Preference unnecessaryWarningPreference =
+                FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)
+                        ? findPreference("operator_warning")
+                        : findPreference("non_carrier_data_usage_warning");
         if (unnecessaryWarningPreference != null) {
             unnecessaryWarningPreference.setVisible(false);
         }
@@ -295,6 +304,7 @@ public class DataUsageList extends DataUsageBaseFragment
         final Bundle args = new Bundle();
         args.putParcelable(KEY_TEMPLATE, template);
         args.putParcelable(KEY_APP, null);
+        args.putInt(KEY_FIELDS, FIELD_RX_BYTES | FIELD_TX_BYTES);
         return args;
     }
 

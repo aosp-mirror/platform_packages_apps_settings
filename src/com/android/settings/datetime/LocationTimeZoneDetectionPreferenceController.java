@@ -118,12 +118,6 @@ public class LocationTimeZoneDetectionPreferenceController
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        // not needed since it's not sliceable
-        return NO_RES;
-    }
-
-    @Override
     public int getAvailabilityStatus() {
         TimeZoneCapabilities timeZoneCapabilities =
                 getTimeZoneCapabilitiesAndConfig(/* forceRefresh= */ false).getCapabilities();

@@ -16,8 +16,7 @@
 
 package com.android.settings.panel;
 
-import static android.app.slice.Slice.HINT_ERROR;
-import static android.app.slice.SliceItem.FORMAT_SLICE;
+import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -32,7 +31,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.slice.Slice;
-import androidx.slice.SliceItem;
 import androidx.slice.widget.SliceView;
 
 import com.android.settings.R;
@@ -115,6 +113,8 @@ public class PanelSlicesAdapter
     public class SliceRowViewHolder extends RecyclerView.ViewHolder
             implements DividerItemDecoration.DividedViewHolder {
 
+        private boolean mDividerAllowedAbove = true;
+
         @VisibleForTesting
         final SliceView sliceView;
         @VisibleForTesting
@@ -137,10 +137,8 @@ public class PanelSlicesAdapter
 
             // Do not show the divider above media devices switcher slice per request
             final Slice slice = sliceLiveData.getValue();
-
-            // Hides slice which reports with error hint or not contain any slice sub-item.
-            if (slice == null || !isValidSlice(slice)) {
-                sliceView.setVisibility(View.GONE);
+            if (slice == null || slice.getUri().equals(MEDIA_OUTPUT_INDICATOR_SLICE_URI)) {
+                mDividerAllowedAbove = false;
             }
 
             // Log Panel interaction
@@ -158,26 +156,14 @@ public class PanelSlicesAdapter
             );
         }
 
-        private boolean isValidSlice(Slice slice) {
-            if (slice.getHints().contains(HINT_ERROR)) {
-                return false;
-            }
-            for (SliceItem item : slice.getItems()) {
-                if (item.getFormat().equals(FORMAT_SLICE)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         @Override
         public boolean isDividerAllowedAbove() {
-            return false;
+            return mDividerAllowedAbove;
         }
 
         @Override
         public boolean isDividerAllowedBelow() {
-            return false;
+            return true;
         }
     }
 }

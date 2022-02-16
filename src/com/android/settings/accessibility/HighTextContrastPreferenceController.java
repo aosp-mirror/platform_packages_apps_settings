@@ -19,14 +19,9 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
-/**
- * PreferenceController for displaying all text in high contrast style.
- */
-public class HighTextContrastPreferenceController extends TogglePreferenceController implements
-        TextReadingResetController.ResetStateListener {
+public class HighTextContrastPreferenceController extends TogglePreferenceController {
 
     public HighTextContrastPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -47,15 +42,5 @@ public class HighTextContrastPreferenceController extends TogglePreferenceContro
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, (isChecked ? 1 : 0));
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accessibility;
-    }
-
-    @Override
-    public void resetState() {
-        setChecked(false);
     }
 }

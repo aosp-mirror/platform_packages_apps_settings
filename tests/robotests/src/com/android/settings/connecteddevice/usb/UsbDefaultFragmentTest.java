@@ -183,7 +183,7 @@ public class UsbDefaultFragmentTest {
 
     @Test
     public void onTetheringStarted_currentFunctionsIsRndis_setsRndisAsDefaultUsbFunctions() {
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+        mFragment.mCurrentFunctions = UsbManager.FUNCTION_RNDIS;
 
         mFragment.mOnStartTetheringCallback.onTetheringStarted();
 
@@ -192,7 +192,7 @@ public class UsbDefaultFragmentTest {
 
     @Test
     public void onTetheringStarted_currentFunctionsIsNcm_setsNcmAsDefaultUsbFunctions() {
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NCM);
+        mFragment.mCurrentFunctions = UsbManager.FUNCTION_NCM;
 
         mFragment.mOnStartTetheringCallback.onTetheringStarted();
 
