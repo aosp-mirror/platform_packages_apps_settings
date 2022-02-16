@@ -5156,8 +5156,8 @@
     <string name="general_category_title">General</string>
     <!-- Title for the accessibility preference category of display services and settings. [CHAR LIMIT=50] -->
     <string name="display_category_title">Display</string>
-    <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
-    <string name="accessibility_text_and_display_title">Text and display</string>
+    <!-- Title for the accessibility color and motion page. [CHAR LIMIT=50] -->
+    <string name="accessibility_color_and_motion_title">Color and motion</string>
     <!-- Title for the accessibility text options page. [CHAR LIMIT=50] -->
     <string name="accessibility_turn_screen_darker_title">Turn screen darker</string>
     <!-- Title for the accessibility preference category of interaction control services and settings. [CHAR LIMIT=50] -->
@@ -5523,8 +5523,10 @@
     <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
+    <!-- Used in the accessibility service settings to show quick settings tooltips for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_service_auto_added_qs_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
     <!-- Used in the accessibility service settings to show quick settings tooltips. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_service_quick_settings_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <string name="accessibility_service_qs_tooltips_content">You can add a shortcut to <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> by editing quick settings</string>
     <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
     <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
@@ -7675,8 +7677,8 @@
     <string name="nfc_default_payment_workapp_confirmation_message_title">To make a payment using a work app:</string>
     <!-- Text string in the dialog [CHAR LIMIT=60] -->
     <string name="nfc_default_payment_workapp_confirmation_message_1">work profile must be turned on.</string>
-    <!-- Text string in the dialog [CHAR LIMIT=60] -->
-    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work profile lock if you have one.</string>
+    <!-- Text string in the dialog [CHAR LIMIT=80] -->
+    <string name="nfc_default_payment_workapp_confirmation_message_2">you\u2019ll need to enter your work PIN, pattern, or password if you have one.</string>
 
     <!-- Caption for button linking to a page explaining how Tap and Pay works-->
     <string name="nfc_payment_how_it_works">How it works</string>
@@ -13905,11 +13907,13 @@
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
-    <string name="dream_preview_button_title">Preview screensaver</string>
+    <string name="dream_preview_button_title">Preview screen saver</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_picker_category">Choose an image</string>
-    <!-- The title of the category to show for the screensaver overlay selector in settings [CHAR LIMIT=none] -->
-    <string name="dream_complications_picker_category">Choose more options</string>
+    <string name="dream_picker_category">Choose a background</string>
+    <!-- The title of the toggle which enables/disables overlays on top of the screen saver [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_title">Show additional information</string>
+    <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
+    <string name="dream_complications_toggle_summary">Display data time, date and weather on the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->

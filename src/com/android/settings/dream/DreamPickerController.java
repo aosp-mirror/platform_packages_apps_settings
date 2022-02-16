@@ -21,7 +21,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
-import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -71,16 +71,21 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
 
         mAdapter = new DreamAdapter(mDreamInfos.stream()
                 .map(DreamItem::new)
                 .collect(Collectors.toList()));
 
-        final RecyclerView recyclerView =
-                ((LayoutPreference) preference).findViewById(R.id.dream_list);
+        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        if (pref == null) {
+            return;
+        }
+        final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
+        recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
     }
