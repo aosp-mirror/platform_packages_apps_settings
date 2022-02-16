@@ -16,11 +16,7 @@
 
 package com.android.settings.security;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_UNIFY_LOCKS_DETAIL;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_UNIFY_LOCKS_NONCOMPLIANT;
-
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -57,16 +53,10 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final SecuritySettings parentFragment = ((SecuritySettings) getParentFragment());
         final boolean compliant = getArguments().getBoolean(EXTRA_COMPLIANT);
-
-        String overrideMessageId = compliant ? WORK_PROFILE_UNIFY_LOCKS_DETAIL
-                : WORK_PROFILE_UNIFY_LOCKS_NONCOMPLIANT;
-        int defaultMessageId = compliant ? R.string.lock_settings_profile_unification_dialog_body
-                : R.string.lock_settings_profile_unification_dialog_uncompliant_body;
-
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.lock_settings_profile_unification_dialog_title)
-                .setMessage(getContext().getSystemService(DevicePolicyManager.class)
-                        .getString(overrideMessageId, () -> getString(defaultMessageId)))
+                .setMessage(compliant ? R.string.lock_settings_profile_unification_dialog_body
+                        : R.string.lock_settings_profile_unification_dialog_uncompliant_body)
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                                 : R.string

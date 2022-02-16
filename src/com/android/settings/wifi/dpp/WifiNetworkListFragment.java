@@ -21,6 +21,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wifi.AddNetworkFragment;
-import com.android.settings.wifi.WifiEntryPreference;
+import com.android.settingslib.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -148,6 +149,7 @@ public class WifiNetworkListFragment extends SettingsPreferenceFragment implemen
         mSavedNetworkTracker = new SavedNetworkTracker(getSettingsLifecycle(), context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
+                context.getSystemService(NetworkScoreManager.class),
                 new Handler(Looper.getMainLooper()),
                 mWorkerThread.getThreadHandler(),
                 elapsedRealtimeClock,
