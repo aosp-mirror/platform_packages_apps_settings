@@ -25,7 +25,6 @@ import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.SystemClock;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
@@ -43,7 +42,6 @@ import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
 public class BatteryInfo {
-    private static final String TAG = "BatteryInfo";
 
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
@@ -157,23 +155,10 @@ public class BatteryInfo {
                 if (batteryUsageStats != null) {
                     stats = batteryUsageStats;
                 } else {
-                    try {
-                        stats = context.getSystemService(BatteryStatsManager.class)
-                                .getBatteryUsageStats();
-                    } catch (RuntimeException e) {
-                        Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
-                        // Use default BatteryUsageStats.
-                        stats = new BatteryUsageStats.Builder(new String[0]).build();
-                    }
+                    stats = context.getSystemService(BatteryStatsManager.class)
+                            .getBatteryUsageStats();
                 }
-                final BatteryInfo batteryInfo =
-                        getBatteryInfo(context, stats, shortString);
-                try {
-                    stats.close();
-                } catch (Exception e) {
-                    Log.e(TAG, "BatteryUsageStats.close() failed", e);
-                }
-                return batteryInfo;
+                return getBatteryInfo(context, stats, shortString);
             }
 
             @Override

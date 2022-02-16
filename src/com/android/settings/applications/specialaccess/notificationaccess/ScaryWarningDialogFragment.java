@@ -18,15 +18,8 @@ package com.android.settings.applications.specialaccess.notificationaccess;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -62,49 +55,25 @@ public class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
                 .getString(KEY_COMPONENT));
         NotificationAccessDetails parent = (NotificationAccessDetails) getTargetFragment();
 
-        return new AlertDialog.Builder(getContext())
-                .setView(getDialogView(getContext(), label, parent, cn))
-                .setCancelable(true)
-                .create();
-    }
-
-    private View getDialogView(Context context, CharSequence label,
-            NotificationAccessDetails parent, ComponentName cn) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(
-                Context.LAYOUT_INFLATER_SERVICE);
-
-        View content = inflater.inflate(R.layout.enable_nls_dialog_content, null);
-
-        Drawable icon = null;
-        try {
-            icon = context.getPackageManager().getApplicationIcon(cn.getPackageName());
-        } catch (PackageManager.NameNotFoundException e) {
-        }
-
-        ImageView appIcon = content.findViewById(R.id.app_icon);
-        if (icon != null) {
-            appIcon.setImageDrawable(icon);
-        } else {
-            appIcon.setVisibility(View.GONE);
-        }
-
-        final String title = context.getResources().getString(
+        final String title = getResources().getString(
                 R.string.notification_listener_security_warning_title, label);
-        ((TextView) content.findViewById(R.id.title)).setText(title);
-
-        final String prompt = context.getResources().getString(
-                R.string.nls_warning_prompt, label);
-        ((TextView) content.findViewById(R.id.prompt)).setText(prompt);
-
-        Button allowButton = content.findViewById(R.id.allow_button);
-        allowButton.setOnClickListener((view) -> {
-            parent.enable(cn);
-            dismiss();
-        });
-        Button denyButton = content.findViewById(R.id.deny_button);
-        denyButton.setOnClickListener((view) -> {
-            dismiss();
-        });
-        return content;
+        final String summary = getResources().getString(
+                R.string.notification_listener_security_warning_summary, label);
+        return new AlertDialog.Builder(getContext())
+                .setMessage(summary)
+                .setTitle(title)
+                .setCancelable(true)
+                .setPositiveButton(R.string.allow,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                parent.enable(cn);
+                            }
+                        })
+                .setNegativeButton(R.string.deny,
+                        (dialog, id) -> {
+                            // pass
+                        })
+                .create();
     }
 }

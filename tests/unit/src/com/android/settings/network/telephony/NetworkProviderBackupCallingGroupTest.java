@@ -28,7 +28,10 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.util.FeatureFlagUtils;
+import android.util.Log;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -36,7 +39,8 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
+import com.android.settings.network.CarrierWifiTogglePreferenceController;
+import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -61,7 +65,7 @@ public class NetworkProviderBackupCallingGroupTest {
     @Mock
     private PreferenceGroup mPreferenceGroup;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private Lifecycle mLifecycle;
     @Mock
@@ -108,12 +112,11 @@ public class NetworkProviderBackupCallingGroupTest {
         when(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(
                 mSubscriptionInfoList);
 
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         mCarrierConfig = new PersistableBundle();
-        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID_1);
+        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID_1);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
                 true);
-        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID_2);
+        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID_2);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_CARRIER_CROSS_SIM_IMS_AVAILABLE_BOOL,
                 true);
 
@@ -150,6 +153,7 @@ public class NetworkProviderBackupCallingGroupTest {
     @Test
     public void
     shouldShowBackupCallingForSub_crossSimDisabled_returnFalse() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
         doReturn(false).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
                 mContext, SUB_ID_1);
 
@@ -159,6 +163,7 @@ public class NetworkProviderBackupCallingGroupTest {
 
     @Test
     public void shouldBackupCallingForSub_crossSimEnabled_returnTrue() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
         doReturn(true).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
                 mContext, SUB_ID_1);
 

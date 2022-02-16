@@ -15,26 +15,24 @@
 
 package com.android.settings.display.darkmode;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-
 import androidx.preference.Preference;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 public class DarkModeCustomPreferenceControllerTest {
@@ -71,87 +69,23 @@ public class DarkModeCustomPreferenceControllerTest {
     }
 
     @Test
-    public void nightMode_manualOn_hidePreference() {
+    public void nightMode_customOff_hidePreference() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
-
         mController.refreshSummary(mPreference);
-
         verify(mPreference).setVisible(eq(false));
-    }
-
-    @Test
-    public void nightMode_manualOff_hidePreference() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_NO);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
-
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
-    }
-
-
-    @Test
-    public void nightMode_customOn_showPreference() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
-
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(true));
     }
 
     @Test
     public void nightMode_customOff_showPreference() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
-
         mController.refreshSummary(mPreference);
-
         verify(mPreference).setVisible(eq(true));
     }
 
     @Test
-    public void nightMode_customBedtimeOn_hidePreference() {
+    public void nightMode_customOff_setSummaryNotNull() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        when(mService.getNightModeCustomType())
-                .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
-
         mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
-    }
-
-    @Test
-    public void nightMode_customBedtimeOff_hidePreference() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        when(mService.getNightModeCustomType())
-                .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
-
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
-    }
-
-    @Test
-    public void nightMode_customOn_setSummaryTo10Am() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
-
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setSummary(eq("10:00 AM"));
-    }
-
-    @Test
-    public void nightMode_customOff_setSummaryTo10Am() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
-
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setSummary(eq("10:00 AM"));
+        verify(mPreference).setSummary(eq(mFormat.of(null)));
     }
 }

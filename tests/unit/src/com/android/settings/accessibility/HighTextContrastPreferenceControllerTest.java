@@ -31,9 +31,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/**
- * Tests for {@link HighTextContrastPreferenceController}.
- */
 @RunWith(AndroidJUnit4.class)
 public class HighTextContrastPreferenceControllerTest {
 
@@ -92,16 +89,6 @@ public class HighTextContrastPreferenceControllerTest {
     @Test
     public void setChecked_setFalse_shouldDisableTextContrast() {
         mController.setChecked(false);
-
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, UNKNOWN)).isEqualTo(OFF);
-    }
-
-    @Test
-    public void resetState_shouldDisableTextContrast() {
-        mController.setChecked(true);
-
-        mController.resetState();
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, UNKNOWN)).isEqualTo(OFF);

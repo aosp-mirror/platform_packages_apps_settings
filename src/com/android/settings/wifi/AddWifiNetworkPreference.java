@@ -26,10 +26,8 @@ import androidx.annotation.DrawableRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 /**
  * The Preference for users to add Wi-Fi networks in WifiSettings
@@ -39,8 +37,6 @@ public class AddWifiNetworkPreference extends Preference {
     private static final String TAG = "AddWifiNetworkPreference";
 
     private final Drawable mScanIconDrawable;
-    @VisibleForTesting
-    boolean mIsAddWifiConfigAllow;
 
     public AddWifiNetworkPreference(Context context) {
         super(context);
@@ -51,8 +47,6 @@ public class AddWifiNetworkPreference extends Preference {
         setTitle(R.string.wifi_add_network);
 
         mScanIconDrawable = getDrawable(R.drawable.ic_scan_24dp);
-        mIsAddWifiConfigAllow = WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(context);
-        updatePreferenceForRestriction();
     }
 
     @Override
@@ -65,7 +59,7 @@ public class AddWifiNetworkPreference extends Preference {
                 getContext().getString(R.string.wifi_dpp_scan_qr_code));
         scanButton.setOnClickListener(view -> {
             getContext().startActivity(
-                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(getContext(), /* ssid */ null));
+                WifiDppUtils.getEnrolleeQrCodeScannerIntent(/* ssid */ null));
         });
     }
 
@@ -78,13 +72,5 @@ public class AddWifiNetworkPreference extends Preference {
             Log.e(TAG, "Resource does not exist: " + iconResId);
         }
         return buttonIcon;
-    }
-
-    @VisibleForTesting
-    void updatePreferenceForRestriction() {
-        if (!mIsAddWifiConfigAllow) {
-            setEnabled(false);
-            setSummary(R.string.not_allowed_by_ent);
-        }
     }
 }

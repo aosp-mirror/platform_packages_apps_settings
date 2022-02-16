@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.android.settings"
-          coreApp="true"
-          android:sharedUserId="android.uid.system">
+        xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+        package="com.android.settings"
+        coreApp="true"
+        android:sharedUserId="android.uid.system">
 
-    <original-package android:name="com.android.settings"/>
+    <original-package android:name="com.android.settings" />
 
     <uses-permission android:name="android.permission.REQUEST_NETWORK_SCORES" />
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
@@ -24,7 +25,6 @@
     <uses-permission android:name="android.permission.HARDWARE_TEST" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.QUERY_AUDIO_STATE" />
     <uses-permission android:name="android.permission.MASTER_CLEAR" />
     <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
@@ -82,7 +82,6 @@
     <uses-permission android:name="android.permission.OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.MANAGE_USER_OEM_UNLOCK_STATE" />
     <uses-permission android:name="android.permission.OVERRIDE_WIFI_CONFIG" />
-    <uses-permission android:name="android.permission.RESTART_WIFI_SUBSYSTEM" />
     <uses-permission android:name="android.permission.MANAGE_FINGERPRINT" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC_INTERNAL" />
@@ -108,18 +107,8 @@
     <uses-permission android:name="android.permission.READ_DREAM_STATE" />
     <uses-permission android:name="android.permission.READ_DREAM_SUPPRESSION" />
     <uses-permission android:name="android.permission.MANAGE_APP_HIBERNATION" />
-    <uses-permission android:name="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK" />
-    <uses-permission android:name="android.permission.ALLOW_PLACE_IN_MULTI_PANE_SETTINGS" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.READ_APP_SPECIFIC_LOCALES" />
-    <uses-permission android:name="android.permission.QUERY_ADMIN_POLICY" />
-    <uses-permission android:name="android.permission.READ_SAFETY_CENTER_STATUS" />
-    <uses-permission android:name="android.permission.SEND_SAFETY_CENTER_UPDATE" />
-    <uses-permission android:name="android.permission.START_VIEW_APP_FEATURES" />
 
-    <application
-            android:name=".SettingsApplication"
-            android:label="@string/settings_label"
+    <application android:label="@string/settings_label"
             android:icon="@drawable/ic_launcher_settings"
             android:theme="@style/Theme.Settings"
             android:hardwareAccelerated="true"
@@ -132,15 +121,15 @@
             android:appComponentFactory="androidx.core.app.CoreComponentFactory">
 
         <uses-library android:name="org.apache.http.legacy" />
-
         <!-- Settings -->
+
         <activity android:name=".homepage.SettingsHomepageActivity"
                   android:label="@string/settings_label_launcher"
                   android:theme="@style/Theme.Settings.Home"
                   android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask"
                   android:exported="true"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
+                  android:configChanges="keyboard|keyboardHidden">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -149,34 +138,18 @@
                        android:value="true" />
         </activity>
 
-        <!-- Activity for launching deep link page in 2-pane. -->
-        <activity android:name=".homepage.DeepLinkHomepageActivity"
-                  android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
-                  android:taskAffinity=""
-                  android:launchMode="singleTask"
+        <activity android:name=".network.telephony.MobileNetworkActivity"
+                  android:label="@string/network_settings_title"
                   android:exported="true"
-                  android:enabled="false"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout"
-                  android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
-            <intent-filter>
-                <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
+                  android:launchMode="singleTask">
+            <intent-filter android:priority="1">
+                <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
+                <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
+                <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
+                <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
+                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
-                  android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
-                  android:taskAffinity=""
-                  android:launchMode="singleTask"
-                  android:exported="false"
-                  android:excludeFromRecents="true"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
         </activity>
 
         <!-- Alias for launcher activity only, as this belongs to each profile. -->
@@ -236,28 +209,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.network.NetworkDashboardFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".Settings$MobileNetworkActivity"
-            android:label="@string/network_settings_title"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleInstance"
-            android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.telephony.MobileNetworkSettings"/>
-            <intent-filter android:priority="1">
-                <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
-                <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
-                <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
-                <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
-                <action android:name="android.settings.MMS_MESSAGE_SETTING" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".Settings$MobileNetworkListActivity"
@@ -270,8 +223,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.MobileNetworkListFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -287,8 +238,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -314,16 +263,6 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".search.SearchStateReceiver"
-                  android:exported="true"
-                  android:enabled="false"
-                  android:permission="android.permission.READ_SEARCH_INDEXABLES">
-            <intent-filter>
-                <action android:name="com.android.settings.SEARCH_START"/>
-                <action android:name="com.android.settings.SEARCH_EXIT"/>
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name="Settings$WifiSettingsActivity"
             android:label="@string/wifi_settings"
@@ -331,88 +270,41 @@
             android:exported="true"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_SETTINGS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.NetworkProviderSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true"/>
-        </activity>
-
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias
-            android:name="Settings$WifiSettings2Activity"
-            android:targetActivity="Settings$WifiSettingsActivity"
-            android:label="@string/wifi_settings"
-            android:icon="@drawable/ic_homepage_network"
-            android:exported="true">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.NetworkProviderSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true"/>
-        </activity-alias>
-
-        <activity
-            android:name="Settings$NetworkProviderSettingsActivity"
-            android:label="@string/provider_internet_settings"
-            android:icon="@drawable/ic_homepage_network"
-            android:exported="true"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.NETWORK_PROVIDER_SETTINGS"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.settings.WIFI_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter android:priority="1">
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.android.settings.SHORTCUT"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.network.NetworkProviderSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true"/>
-        </activity>
-
-        <activity
-            android:name="Settings$NetworkSelectActivity"
-            android:label="@string/choose_network_title"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.network.telephony.NetworkSelectSettings" />
+                android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
         <activity
-            android:name="Settings$WifiDetailsSettingsActivity"
-            android:label="@string/wifi_details_title"
+            android:name="Settings$NetworkProviderSettingsActivity"
+            android:label="@string/network_dashboard_title"
             android:icon="@drawable/ic_homepage_network"
             android:exported="true"
-            android:permission="android.permission.CHANGE_WIFI_STATE"
             android:configChanges="orientation|keyboardHidden|screenSize">
-            <!-- The intent action is only public to OEM, because a special library is required. -->
             <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_DETAILS_SETTINGS" />
+                <action android:name="android.settings.NETWORK_PROVIDER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data
-                android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.wifi.details.WifiNetworkDetailsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_network"/>
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.network.NetworkProviderSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
 
         <activity
             android:name=".wifi.WifiPickerActivity"
-            android:permission="android.permission.CHANGE_WIFI_STATE"
             android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
@@ -420,19 +312,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity android:name=".Settings$AdaptiveBrightnessActivity"
-            android:label="@string/auto_brightness_title"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.settings.ADAPTIVE_BRIGHTNESS_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.display.AutoBrightnessSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_display"/>
         </activity>
 
         <activity
@@ -452,8 +331,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.ConfigureWifiSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -470,8 +347,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.savedaccesspoints.SavedAccessPointsWifiSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -485,8 +360,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wifi.WifiInfo" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity android:name=".wifi.WifiConfigInfo"
@@ -507,8 +380,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wifi.WifiAPITest" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity android:name=".wifi.WifiStatusTest"
@@ -543,6 +414,7 @@
 
         <activity android:name="Settings$ApnSettingsActivity"
                 android:label="@string/apn_settings"
+                android:launchMode="singleTask"
                 android:exported="true"
                 android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter android:priority="1">
@@ -558,8 +430,6 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.apn.ApnSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -574,8 +444,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity-alias>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -586,8 +454,6 @@
                         android:clearTaskOnLaunch="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity-alias>
 
         <activity android:name="Settings$AssistGestureSettingsActivity"
@@ -600,8 +466,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.gestures.AssistGestureSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name="Settings$FaceSettingsActivity"
@@ -614,8 +478,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.biometrics.face.FaceSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name="Settings$FingerprintSettingsActivity"
@@ -628,8 +490,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.fingerprint.FingerprintSettings$FingerprintSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
@@ -637,8 +497,6 @@
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name="Settings$CombinedBiometricProfileSettingsActivity"
@@ -646,8 +504,6 @@
                   android:exported="false">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricProfileSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
@@ -679,12 +535,12 @@
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity android:name=".network.telephony.DeleteEuiccSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
-                  android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
+                  android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name="Settings$TetherSettingsActivity"
@@ -699,8 +555,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TetherSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -718,8 +572,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.tether.WifiTetherSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
 
@@ -731,8 +583,6 @@
                   android:targetActivity="Settings$TetherSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TetherSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity-alias>
 
         <activity android:name="Settings$WifiP2pSettingsActivity"
@@ -744,8 +594,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.p2p.WifiP2pSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -764,8 +612,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.vpn2.VpnSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -780,8 +626,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.datausage.DataSaverSummary" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -801,8 +645,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datetime.DateTimeSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -823,8 +665,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.localepicker.LocaleListEditor" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -834,19 +674,6 @@
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:exported="false"
                   android:theme="@style/Theme.LocalePickerWithRegionActivity">
-        </activity>
-
-        <activity
-            android:name=".Settings$AppLocalePickerActivity"
-            android:label="@string/app_locale_picker_title"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.settings.APP_LOCALE_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </activity>
 
         <activity
@@ -861,8 +688,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.language.LanguageAndInputSettings"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true"/>
         </activity>
@@ -876,8 +701,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity
@@ -890,8 +713,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.assist.ManageAssist" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name="Settings$KeyboardLayoutPickerActivity"
@@ -900,8 +721,6 @@
             android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.KeyboardLayoutPickerFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name="Settings$PhysicalKeyboardActivity"
@@ -914,8 +733,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.PhysicalKeyboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -926,8 +743,6 @@
                 android:targetActivity="Settings$LanguageAndInputSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.language.LanguageAndInputSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity-alias>
 
         <activity
@@ -941,8 +756,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.SpellCheckersSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name=".inputmethod.InputMethodAndSubtypeEnablerActivity"
@@ -975,8 +788,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.inputmethod.UserDictionaryList" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name=".inputmethod.UserDictionaryAddWordActivity"
@@ -1012,8 +823,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.zen.ZenModeSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1067,8 +876,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.zen.ZenModeAutomationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1079,8 +886,6 @@
                   android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_wallpaper"/>
         </activity>
 
         <activity android:name=".wallpaper.WallpaperSuggestionActivity"
@@ -1136,8 +941,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.zen.ZenModeScheduleRuleSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1151,8 +954,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.zen.ZenModeEventRuleSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1173,8 +974,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.DisplaySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1194,8 +993,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.display.SmartAutoRotatePreferenceFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
         </activity>
 
         <activity
@@ -1214,8 +1011,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.display.NightDisplaySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1235,8 +1030,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.display.darkmode.DarkModeSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1260,8 +1053,6 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.display.NightDisplaySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
         </activity>
 
         <activity android:name=".Settings$MyDeviceInfoActivity"
@@ -1279,8 +1070,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_about_device"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1295,25 +1084,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.security.LockscreenDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".Settings$BlueToothPairingActivity"
-            android:label="@string/bluetooth_pairing_page_title"
-            android:permission="android.permission.BLUETOOTH_SCAN"
-            android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.BLUETOOTH_PAIRING_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.bluetooth.BluetoothPairingDetail" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1340,8 +1110,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deviceinfo.legal.ModuleLicensesDashboard" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_about_device"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1362,8 +1130,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1375,8 +1141,6 @@
                         android:targetActivity="Settings$ManageApplicationsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity
@@ -1389,8 +1153,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.managedomainurls.ManageDomainUrls" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name="Settings$AppMemoryUsageActivity"
@@ -1403,8 +1165,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.ProcessStatsUi" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -1417,8 +1177,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1469,8 +1227,6 @@
                 android:targetActivity="Settings$ManageApplicationsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity-alias>
 
         <!-- Provide direct entry into manage apps showing storage usage for apps.
@@ -1481,8 +1237,6 @@
                 android:targetActivity="Settings$ManageApplicationsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <!-- Still need a top-level activity for showing app details.  Aliasing
@@ -1529,8 +1283,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1552,8 +1304,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1568,8 +1318,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.history.NotificationStation" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -1614,8 +1362,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.location.LocationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_location"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1631,29 +1377,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.location.LocationServices" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_location"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity
-            android:name="Settings$WifiScanningSettingsActivity"
-            android:label="@string/location_scanning_wifi_always_scanning_title"
-            android:icon="@drawable/ic_homepage_location"
-            android:exported="true"
-            android:permission="android.permission.CHANGE_WIFI_STATE"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.WIFI_SCANNING_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.location.WifiScanningFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_location"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
         </activity>
 
         <activity
@@ -1674,23 +1399,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.security.SecuritySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity
-            android:name="Settings$SecurityAdvancedSettings"
-            android:label="@string/security_advanced_settings"
-            android:exported="true"
-            android:icon="@drawable/ic_settings_security">
-            <intent-filter android:priority="1">
-                <action android:name="com.android.settings.security.SECURITY_ADVANCED_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.security.SecurityAdvancedSettings" />
         </activity>
 
         <activity android:name="MonitoringCertInfoActivity"
@@ -1716,8 +1426,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.TrustedCredentialsSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1734,8 +1442,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.backup.PrivacySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_privacy"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1754,18 +1460,9 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.privacy.PrivacyDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_privacy"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
-
-        <activity android:name=".development.tare.TareHomePage"
-                  android:label="@string/tare_settings"
-                  android:exported="false" />
-
-        <activity android:name=".development.tare.DropdownActivity"
-                  android:exported="false" />
 
         <activity android:name="SetFullBackupPassword"
                   android:label="@string/local_backup_password_title"
@@ -1808,8 +1505,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -1819,8 +1514,6 @@
                 android:targetActivity="Settings$DeviceAdminSettingsActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity-alias>
 
         <activity android:name=".applications.specialaccess.deviceadmin.DeviceAdminAdd"
@@ -1855,8 +1548,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -1873,8 +1564,6 @@
             <meta-data
                 android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.UsageAccessDetails"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name="Settings$IccLockSettingsActivity"
@@ -1887,8 +1576,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.IccLockSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_security"/>
         </activity>
 
         <activity
@@ -1907,8 +1594,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1924,8 +1609,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilityDetailsSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1951,6 +1634,7 @@
             android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.title"
                 android:resource="@string/vision_settings_suggestion_title" />
@@ -1959,34 +1643,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.AccessibilitySettingsForSetupWizard" />
         </activity-alias>
-
-        <activity-alias
-            android:name=".TextReadingForSetupWizardActivity"
-            android:exported="true"
-            android:icon="@drawable/ic_font_download"
-            android:targetActivity=".accessibility.AccessibilitySettingsForSetupWizardActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <!-- TODO(b/1352717): Consider replacing it with another category, temporarily
-                using an older one to avoid side problems. -->
-                <category android:name="com.android.settings.suggested.category.DISPLAY_SETTINGS" />
-            </intent-filter>
-
-            <meta-data
-                android:name="com.android.settings.title"
-                android:resource="@string/accessibility_text_reading_options_suggestion_title" />
-            <meta-data
-                android:name="com.android.settings.icon_tintable"
-                android:value="true" />
-            <meta-data
-                android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard" />
-        </activity-alias>
-
-        <activity
-            android:name=".accessibility.AccessibilityScreenSizeForSetupWizardActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Settings"
-            android:exported="false"/>
 
         <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"
@@ -2002,8 +1658,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2022,30 +1676,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <activity
-            android:name="Settings$AccessibilityInversionSettingsActivity"
-            android:exported="true"
-            android:label="@string/accessibility_display_inversion_preference_title">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.COLOR_INVERSION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.accessibility.ToggleColorInversionPreferenceFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                android:value="@string/menu_key_accessibility"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity
@@ -2058,11 +1690,14 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.CaptionPropertiesFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
+
+        <activity
+            android:name=".SettingsTutorialDialogWrapperActivity"
+            android:theme="@style/Theme.AlertDialog"
+            android:exported="false"/>
 
         <activity
             android:name="Settings$TextToSpeechSettingsActivity"
@@ -2074,8 +1709,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.tts.TextToSpeechSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accessibility"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2090,8 +1723,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.enterprise.EnterprisePrivacySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_privacy"/>
         </activity>
 
         <!-- Lock screen settings -->
@@ -2168,13 +1799,8 @@
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
-            android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.settings.FACE_ENROLL"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
@@ -2189,7 +1815,8 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.BiometricHandoffActivity"
-                  android:exported="false"/>
+                  android:exported="false"
+                  android:screenOrientation="portrait"/>
 
         <!-- Must not be exported -->
         <activity android:name=".biometrics.BiometricEnrollActivity$InternalActivity"
@@ -2383,8 +2010,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.StorageDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_storage"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2403,8 +2028,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.PublicVolumeSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_storage"/>
         </activity>
 
         <activity
@@ -2414,8 +2037,6 @@
             android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.PrivateVolumeForget" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_storage"/>
         </activity>
 
         <!-- Exported for SystemUI to launch into -->
@@ -2472,8 +2093,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.apn.ApnEditor" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -2500,8 +2119,6 @@
                        android:resource="@drawable/ic_settings_development" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -2538,8 +2155,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name="Settings$PrintJobSettingsActivity"
@@ -2552,14 +2167,10 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.print.PrintJobSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name=".development.AppPicker"
                   android:label="@string/select_application" />
-
-        <activity android:name=".development.AdbQrCodeActivity" />
 
         <activity android:name=".development.DSULoader"
                   android:label="Select DSU Package"
@@ -2574,10 +2185,7 @@
                   android:label="@string/accessor_info_title" />
 
         <activity android:name="Settings$WebViewAppPickerActivity"
-                  android:label="@string/select_webview_provider_dialog_title">
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-        </activity>
+                  android:label="@string/select_webview_provider_dialog_title" />
 
         <activity android:name="Settings$BugReportHandlerPickerActivity"
             android:label="@string/bug_report_handler_title"
@@ -2591,8 +2199,6 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bugreporthandler.BugReportHandlerPicker" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
@@ -2637,8 +2243,6 @@
                   android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.connecteddevice.usb.UsbDetailsFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name=".RemoteBugreportActivity"
@@ -2665,7 +2269,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
-                <action android:name="android.bluetooth.action.CSIS_SET_MEMBER_AVAILABLE"/>
             </intent-filter>
         </receiver>
 
@@ -2713,8 +2316,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.nfc.AndroidBeam" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2730,8 +2331,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wfd.WifiDisplaySettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
         </activity>
 
         <activity android:name="Settings$TestingSettingsActivity" android:label="@string/testing">
@@ -2794,8 +2393,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_battery"/>
         </activity>
 
         <activity
@@ -2809,8 +2406,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_battery"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2836,8 +2431,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accounts.AccountSyncSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -2852,8 +2445,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accounts.ManagedProfileSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accounts"/>
         </activity>
 
         <activity
@@ -2874,8 +2465,25 @@
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.ChooseAccountFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accounts"/>
+        </activity>
+
+        <activity android:name=".CryptKeeper"
+                  androidprv:systemUserOnly="true"
+                  android:immersive="true"
+                  android:launchMode="singleTop"
+                  android:excludeFromRecents="true"
+                  android:theme="@style/Theme.CryptKeeper"
+                  android:configChanges="mnc|mcc|keyboard|keyboardHidden|uiMode"
+                  android:windowSoftInputMode="adjustResize"
+                  android:screenOrientation="nosensor"
+                  android:taskAffinity="com.android.settings.CryptKeeper"
+                  android:exported="true"
+                  android:process=":CryptKeeper">
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <!-- Triggered when user-selected home app isn't encryption aware -->
@@ -2893,6 +2501,30 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".CryptKeeper$FadeToBlack"
+            android:immersive="true"
+            android:launchMode="singleTop"
+            android:theme="@style/CryptKeeperBlankTheme"
+        />
+
+        <activity android:name=".CryptKeeperConfirm$Blank"
+            android:immersive="true"
+            android:launchMode="singleTop"
+            android:theme="@style/CryptKeeperBlankTheme"
+        />
+
+        <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
+        <activity android:name="Settings$CryptKeeperSettingsActivity"
+                android:exported="true"
+                android:label="@string/crypt_keeper_encrypt_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.app.action.START_ENCRYPTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.security.CryptKeeperSettings" />
+        </activity>
+
         <activity
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
@@ -2908,8 +2540,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
         <activity
             android:name="Settings$MobileDataUsageListActivity"
@@ -2921,8 +2551,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.datausage.DataUsageList" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity
@@ -2936,28 +2564,8 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.dream.DreamSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_display"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <activity android:name=".dream.DreamSetupActivity"
-                  android:exported="true"
-                  android:immersive="true"
-                  android:theme="@style/SudThemeGlif.DayNight"
-                  android:icon="@drawable/ic_settings_display">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.android.settings.suggested.category.SCREEN_SAVER"/>
-            </intent-filter>
-            <meta-data android:name="com.android.settings.is_supported"
-                       android:resource="@bool/dream_setup_supported"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/dream_setup_title"/>
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/dream_setup_description"/>
-            <meta-data android:name="com.android.settings.icon_tintable" android:value="true"/>
         </activity>
 
         <activity
@@ -2981,17 +2589,8 @@
                        android:resource="@drawable/ic_settings_multiuser" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.users.UserSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".users.AddSupervisedUserActivity"
-            android:label="@*android:string/supervised_user_creation_label"
-            android:icon="@drawable/ic_settings_multiuser"
-            android:exported="true">
         </activity>
 
         <activity
@@ -3009,8 +2608,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.nfc.PaymentSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3043,8 +2640,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.NotificationAccessSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -3057,8 +2652,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.notificationaccess.NotificationAccessDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -3071,8 +2664,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.ConfigureNotificationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -3085,8 +2676,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3103,8 +2692,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3118,8 +2705,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3132,8 +2717,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name="Settings$AppInteractAcrossProfilesSettingsActivity"
@@ -3146,8 +2729,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.interactacrossprofiles.InteractAcrossProfilesDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3162,8 +2743,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -3176,8 +2755,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.zen.ZenAccessSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <activity
@@ -3194,8 +2771,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.ConfigureNotificationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3210,8 +2785,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.ConversationListSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3226,8 +2799,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.AppBubbleNotificationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3241,8 +2812,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3262,8 +2831,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.SoundSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_sound"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -3279,8 +2846,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <!-- Show application-level notification settings (app passed in as extras) -->
@@ -3292,8 +2857,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.notification.app.AppNotificationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <!-- Show channel-level notification settings (channel passed in as extras) -->
@@ -3309,8 +2872,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.app.ChannelNotificationSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
         </activity>
 
         <!-- Show Manual (from settings item) -->
@@ -3404,10 +2965,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-            The Wi-Fi result data will only be returned from WifiDialogActivity if the calling
-            package has ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION permission. (see b/185126813)
-        -->
         <activity
             android:name=".wifi.WifiDialogActivity"
             android:label=""
@@ -3443,7 +3000,7 @@
 
         <activity
             android:name=".sim.SimDialogActivity"
-            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"
+            android:theme="@style/Theme.AlertDialog"
             android:label="@string/sim_settings_title"
             android:launchMode="singleTop"
             android:exported="true"
@@ -3463,7 +3020,6 @@
         <activity
             android:name="Settings$WifiCallingSettingsActivity"
             android:exported="true"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|smallestScreenSize|screenLayout"
             android:label="@string/wifi_calling_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -3473,8 +3029,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wifi.calling.WifiCallingSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3489,8 +3043,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wifi.calling.WifiCallingSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
             <meta-data android:name="com.android.settings.dismiss"
                 android:value="10,14,30" />
             <meta-data android:name="com.android.settings.title"
@@ -3535,8 +3087,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3553,8 +3103,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.DrawOverlayDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3567,8 +3115,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3584,8 +3130,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.WriteSettingsDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3598,8 +3142,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3615,8 +3157,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.AlarmsAndRemindersDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3629,8 +3169,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3645,8 +3183,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.ExternalSourcesDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity android:name=".enterprise.ActionDisabledByAdminDialog"
@@ -3661,18 +3197,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActionDisabledByAppOpsDialog"
-                  android:theme="@style/Theme.AlertDialog"
-                  android:taskAffinity="com.android.settings.appops"
-                  android:excludeFromRecents="true"
-                  android:exported="false"
-                  android:launchMode="singleTop">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.SHOW_RESTRICTED_SETTING_DIALOG" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity
             android:name="Settings$ManageExternalStorageActivity"
             android:exported="true"
@@ -3683,8 +3207,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_storage"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3700,8 +3222,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.ManageExternalStorageDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3714,8 +3234,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.manageapplications.ManageApplications" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3731,8 +3249,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.appinfo.MediaManagementAppsDetails" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <!-- Keep compatibility with old WebView-picker implementation -->
@@ -3749,8 +3265,6 @@
                 android:value="true" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.webview.WebViewAppPicker" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity-alias>
 
         <provider
@@ -3789,8 +3303,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_storage"/>
         </activity>
 
         <!-- Show app-level advanced power usage details (app passed in as extras) -->
@@ -3814,8 +3326,6 @@
             android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.AppDashboardFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -3833,8 +3343,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.accounts.AccountDashboardFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_accounts"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -3850,8 +3358,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.system.SystemDashboardFragment"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name=".support.SupportDashboardActivity"
@@ -3987,7 +3493,7 @@
             android:theme="@style/Transparent"
             android:permission="android.permission.DUMP"
             android:excludeFromRecents="true"
-            android:enabled="@*android:bool/config_settingsHelpLinksEnabled" />
+            android:enabled="@bool/config_has_help" />
 
         <activity android:name=".applications.autofill.AutofillPickerActivity"
                 android:excludeFromRecents="true"
@@ -4021,8 +3527,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -4037,8 +3541,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.bluetooth.BluetoothDeviceDetailsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
@@ -4179,8 +3681,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.wifi.calling.WifiCallingDisclaimerFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_network"/>
         </activity>
 
         <activity android:name="Settings$BatterySaverScheduleSettingsActivity"
@@ -4192,8 +3692,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.batterysaver.BatterySaverScheduleSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_battery"/>
         </activity>
 
         <activity android:name="Settings$PowerMenuSettingsActivity"
@@ -4205,8 +3703,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.gestures.PowerMenuSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity
@@ -4224,42 +3720,19 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.gestures.GestureNavigationSettingsFragment" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <activity
-            android:name="Settings$ButtonNavigationSettingsActivity"
-            android:label="Button Navigation Settings"
-            android:exported="true"
-            android:enabled="true">
-            <intent-filter android:priority="32">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="com.android.settings.BUTTON_NAVIGATION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.ButtonNavigationSettingsFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
 
         <activity android:name="Settings$MediaControlsSettingsActivity"
                   android:exported="true"
-                  android:label="@string/media_controls_title">
+                  android:label="@strings/media_controls_title">
             <intent-filter>
                 <action android:name="android.settings.ACTION_MEDIA_CONTROLS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.sound.MediaControlsSettings" />
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_sound"/>
         </activity>
 
         <receiver
@@ -4268,7 +3741,7 @@
             android:permission="android.permission.BLUETOOTH_CONNECT">
             <intent-filter>
                 <action android:name="com.android.settings.action.LAUNCH_BLUETOOTH_PAIRING"/>
-            </intent-filter>
+            </intent-filter>/>
         </receiver>
 
         <receiver
@@ -4306,14 +3779,14 @@
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <activity
             android:name=".sim.DsdsDialogActivity"
             android:exported="false"
             android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"/>
+            android:theme="@*android:style/Theme.DeviceDefault.Dialog.Alert.DayNight" />
 
         <service android:name=".sim.SimNotificationService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -4334,8 +3807,6 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.MainClear"/>
-            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_system"/>
         </activity>
 
         <activity android:name="Settings$FactoryResetConfirmActivity"
@@ -4343,32 +3814,6 @@
                   android:exported="false"
                   android:theme="@style/SudThemeGlif.Light">
         </activity>
-
-        <activity
-            android:name="Settings$OneHandedSettingsActivity"
-            android:label="@string/one_handed_title"
-            android:exported="true"
-            android:enabled="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.action.ONE_HANDED_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="1">
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                   android:value="com.android.settings.gestures.OneHandedSettings"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                       android:value="true" />
-        </activity>
-
-        <receiver android:name=".safetycenter.SafetySourceBroadcastReceiver"
-                  android:exported="true">
-            <intent-filter>
-                <action android:name="android.safetycenter.action.REFRESH_SAFETY_SOURCES"/>
-            </intent-filter>
-        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

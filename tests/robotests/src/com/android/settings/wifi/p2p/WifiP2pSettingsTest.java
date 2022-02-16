@@ -67,7 +67,7 @@ public class WifiP2pSettingsTest {
 
     private Context mContext;
     private FragmentActivity mActivity;
-    private TestWifiP2pSettings mFragment;
+    private WifiP2pSettings mFragment;
 
     @Mock
     public WifiP2pManager mWifiP2pManager;
@@ -85,10 +85,8 @@ public class WifiP2pSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        TestWifiP2pSettings.sMockWifiP2pManager = mWifiP2pManager;
-
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
-        mFragment = new TestWifiP2pSettings();
+        mFragment = new WifiP2pSettings();
         mFragment.mWifiP2pManager = mWifiP2pManager;
         doReturn(mChannel).when(mWifiP2pManager).initialize(any(), any(), any());
         FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
@@ -541,14 +539,5 @@ public class WifiP2pSettingsTest {
         wifiP2pDevice.deviceAddress = "testAddress";
         wifiP2pDevice.deviceName = "testName";
         mWifiP2pPeer.device = wifiP2pDevice;
-    }
-
-    public static class TestWifiP2pSettings extends WifiP2pSettings {
-        static WifiP2pManager sMockWifiP2pManager;
-        @Override
-        protected Object getSystemService(final String name) {
-            if (Context.WIFI_P2P_SERVICE.equals(name)) return sMockWifiP2pManager;
-            return getActivity().getSystemService(name);
-        }
     }
 }

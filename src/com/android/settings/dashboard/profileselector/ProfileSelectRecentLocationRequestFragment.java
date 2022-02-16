@@ -20,7 +20,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
 import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 
 /**
@@ -43,10 +42,5 @@ public class ProfileSelectRecentLocationRequestFragment extends ProfileSelectFra
                 personalFragment, //0
                 workFragment
         };
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.location_recent_requests_header;
     }
 }

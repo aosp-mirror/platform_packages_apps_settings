@@ -20,7 +20,6 @@ import static com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIU
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
-import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -31,6 +30,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -94,16 +94,13 @@ public class AccessibilitySettings extends DashboardFragment {
     static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
-    static final String EXTRA_INTRO = "intro";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
     static final String EXTRA_SETTINGS_COMPONENT_NAME = "settings_component_name";
-    static final String EXTRA_TILE_SERVICE_COMPONENT_NAME = "tile_service_component_name";
     static final String EXTRA_VIDEO_RAW_RESOURCE_ID = "video_resource";
     static final String EXTRA_LAUNCHED_FROM_SUW = "from_suw";
     static final String EXTRA_ANIMATED_IMAGE_RES = "animated_image_res";
     static final String EXTRA_HTML_DESCRIPTION = "html_description";
-    static final String EXTRA_TIME_FOR_LOGGING = "start_time_to_log_a11y_tool";
 
     // Timeout before we update the services if packages are added/removed
     // since the AccessibilityManagerService has to do that processing first
@@ -149,7 +146,7 @@ public class AccessibilitySettings extends DashboardFragment {
     };
 
     @VisibleForTesting
-    final AccessibilitySettingsContentObserver mSettingsContentObserver;
+    final SettingsContentObserver mSettingsContentObserver;
 
     private final Map<String, PreferenceCategory> mCategoryToPrefCategoryMap =
             new ArrayMap<>();
@@ -173,9 +170,12 @@ public class AccessibilitySettings extends DashboardFragment {
         // Observe changes from accessibility selection menu
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
         shortcutFeatureKeys.add(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
-        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
-        mSettingsContentObserver.registerKeysToObserverCallback(shortcutFeatureKeys,
-                key -> onContentChanged());
+        mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                onContentChanged();
+            }
+        };
     }
 
     @Override
@@ -201,12 +201,6 @@ public class AccessibilitySettings extends DashboardFragment {
         initializeAllPreferences();
         updateAllPreferences();
         registerContentMonitors();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateAllPreferences();
     }
 
     @Override
@@ -297,6 +291,11 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         return info.loadDescription(context.getPackageManager());
+    }
+
+    static boolean isRampingRingerEnabled(final Context context) {
+        return Settings.Global.getInt(
+                context.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, 0) == 1;
     }
 
     @VisibleForTesting
@@ -515,13 +514,11 @@ public class AccessibilitySettings extends DashboardFragment {
         private final Context mContext;
         private final DevicePolicyManager mDpm;
         private final PackageManager mPm;
-        private final AppOpsManager mAppOps;
 
         RestrictedPreferenceHelper(Context context) {
             mContext = context;
             mDpm = context.getSystemService(DevicePolicyManager.class);
             mPm = context.getPackageManager();
-            mAppOps = context.getSystemService(AppOpsManager.class);
         }
 
         /**
@@ -564,25 +561,25 @@ public class AccessibilitySettings extends DashboardFragment {
                 }
 
                 final RestrictedPreference preference = createRestrictedPreference(key, title,
-                        summary, icon, fragment, packageName,
-                        resolveInfo.serviceInfo.applicationInfo.uid);
+                        summary, icon, fragment);
 
-                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
+                // permittedServices null means all accessibility services are allowed.
+                final boolean serviceAllowed =
+                        permittedServices == null || permittedServices.contains(packageName);
 
+                setRestrictedPreferenceEnabled(preference, packageName, serviceAllowed,
+                        serviceEnabled);
                 final String prefKey = preference.getKey();
                 final int imageRes = info.getAnimatedImageRes();
-                final CharSequence intro = info.loadIntro(mPm);
                 final CharSequence description = getServiceDescription(mContext, info,
                         serviceEnabled);
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
-                final String tileServiceClassName = info.getTileServiceClassName();
 
-                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                        htmlDescription, componentName);
+                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
+                        componentName);
                 putServiceExtras(preference, resolveInfo, serviceEnabled);
                 putSettingsExtras(preference, packageName, settingsClassName);
-                putTileServiceExtras(preference, packageName, tileServiceClassName);
 
                 preferenceList.add(preference);
             }
@@ -625,25 +622,26 @@ public class AccessibilitySettings extends DashboardFragment {
                 }
 
                 final RestrictedPreference preference = createRestrictedPreference(key, title,
-                        summary, icon, fragment, componentName.getPackageName(),
-                        activityInfo.applicationInfo.uid);
+                        summary, icon, fragment);
+
+                final String packageName = componentName.getPackageName();
+                // permittedServices null means all accessibility services are allowed.
+                final boolean serviceAllowed =
+                        permittedServices == null || permittedServices.contains(packageName);
                 final boolean serviceEnabled = enabledServices.contains(componentName);
 
-                setRestrictedPreferenceEnabled(preference, permittedServices, serviceEnabled);
+                setRestrictedPreferenceEnabled(preference, packageName, serviceAllowed,
+                        serviceEnabled);
 
                 final String prefKey = preference.getKey();
-                final CharSequence intro = info.loadIntro(mPm);
                 final String description = info.loadDescription(mPm);
                 final int imageRes = info.getAnimatedImageRes();
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
-                final String tileServiceClassName = info.getTileServiceClassName();
 
-                putBasicExtras(preference, prefKey, title, intro, description, imageRes,
-                        htmlDescription, componentName);
-                putSettingsExtras(preference, componentName.getPackageName(), settingsClassName);
-                putTileServiceExtras(preference, componentName.getPackageName(),
-                        tileServiceClassName);
+                putBasicExtras(preference, prefKey, title, description, imageRes, htmlDescription,
+                        componentName);
+                putSettingsExtras(preference, packageName, settingsClassName);
 
                 preferenceList.add(preference);
             }
@@ -669,9 +667,8 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private RestrictedPreference createRestrictedPreference(String key, CharSequence title,
-                CharSequence summary, Drawable icon, String fragment, String packageName, int uid) {
-            final RestrictedPreference preference = new RestrictedPreference(mContext, packageName,
-                    uid);
+                CharSequence summary, Drawable icon, String fragment) {
+            final RestrictedPreference preference = new RestrictedPreference(mContext);
 
             preference.setKey(key);
             preference.setTitle(title);
@@ -686,37 +683,16 @@ public class AccessibilitySettings extends DashboardFragment {
         }
 
         private void setRestrictedPreferenceEnabled(RestrictedPreference preference,
-                final List<String> permittedServices, boolean serviceEnabled) {
-            // permittedServices null means all accessibility services are allowed.
-            boolean serviceAllowed = permittedServices == null || permittedServices.contains(
-                    preference.getPackageName());
-            boolean appOpsAllowed;
-            if (serviceAllowed) {
-                try {
-                    final int mode = mAppOps.noteOpNoThrow(
-                            AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
-                            preference.getUid(), preference.getPackageName());
-                    appOpsAllowed = mode == AppOpsManager.MODE_ALLOWED;
-                    serviceAllowed = appOpsAllowed;
-                } catch (Exception e) {
-                    // Allow service in case if app ops is not available in testing.
-                    appOpsAllowed = true;
-                }
-            } else {
-                appOpsAllowed = false;
-            }
+                String packageName, boolean serviceAllowed, boolean serviceEnabled) {
             if (serviceAllowed || serviceEnabled) {
                 preference.setEnabled(true);
             } else {
                 // Disable accessibility service that are not permitted.
                 final EnforcedAdmin admin =
                         RestrictedLockUtilsInternal.checkIfAccessibilityServiceDisallowed(
-                                mContext, preference.getPackageName(), UserHandle.myUserId());
-
+                                mContext, packageName, UserHandle.myUserId());
                 if (admin != null) {
                     preference.setDisabledByAdmin(admin);
-                } else if (!appOpsAllowed) {
-                    preference.setDisabledByAppOps(true);
                 } else {
                     preference.setEnabled(false);
                 }
@@ -725,12 +701,11 @@ public class AccessibilitySettings extends DashboardFragment {
 
         /** Puts the basic extras into {@link RestrictedPreference}'s getExtras(). */
         private void putBasicExtras(RestrictedPreference preference, String prefKey,
-                CharSequence title, CharSequence intro, CharSequence summary, int imageRes,
-                String htmlDescription, ComponentName componentName) {
+                CharSequence title, CharSequence summary, int imageRes, String htmlDescription,
+                ComponentName componentName) {
             final Bundle extras = preference.getExtras();
             extras.putString(EXTRA_PREFERENCE_KEY, prefKey);
             extras.putCharSequence(EXTRA_TITLE, title);
-            extras.putCharSequence(EXTRA_INTRO, intro);
             extras.putCharSequence(EXTRA_SUMMARY, summary);
             extras.putParcelable(EXTRA_COMPONENT_NAME, componentName);
             extras.putInt(EXTRA_ANIMATED_IMAGE_RES, imageRes);
@@ -740,11 +715,7 @@ public class AccessibilitySettings extends DashboardFragment {
         /**
          * Puts the service extras into {@link RestrictedPreference}'s getExtras().
          *
-         * <p><b>Note:</b> Called by {@link AccessibilityServiceInfo}.</p>
-         *
-         * @param preference The preference we are configuring.
-         * @param resolveInfo The service resolve info.
-         * @param serviceEnabled Whether the accessibility service is enabled.
+         * Called by {@link AccessibilityServiceInfo} for now.
          */
         private void putServiceExtras(RestrictedPreference preference, ResolveInfo resolveInfo,
                 Boolean serviceEnabled) {
@@ -757,12 +728,7 @@ public class AccessibilitySettings extends DashboardFragment {
         /**
          * Puts the settings extras into {@link RestrictedPreference}'s getExtras().
          *
-         * <p><b>Note:</b> Called when settings UI is needed.</p>
-         *
-         * @param preference The preference we are configuring.
-         * @param packageName Package of accessibility feature.
-         * @param settingsClassName The component name of an activity that allows the user to modify
-         *                          the settings for this accessibility feature.
+         * Called when settings UI is needed.
          */
         private void putSettingsExtras(RestrictedPreference preference, String packageName,
                 String settingsClassName) {
@@ -773,28 +739,6 @@ public class AccessibilitySettings extends DashboardFragment {
                         mContext.getText(R.string.accessibility_menu_item_settings).toString());
                 extras.putString(EXTRA_SETTINGS_COMPONENT_NAME,
                         new ComponentName(packageName, settingsClassName).flattenToString());
-            }
-        }
-
-        /**
-         * Puts the information about a particular application
-         * {@link android.service.quicksettings.TileService} into {@link RestrictedPreference}'s
-         * getExtras().
-         *
-         * <p><b>Note:</b> Called when a tooltip of
-         * {@link android.service.quicksettings.TileService} is needed.</p>
-         *
-         * @param preference The preference we are configuring.
-         * @param packageName Package of accessibility feature.
-         * @param tileServiceClassName The component name of tileService is associated with this
-         *                             accessibility feature.
-         */
-        private void putTileServiceExtras(RestrictedPreference preference, String packageName,
-                String tileServiceClassName) {
-            final Bundle extras = preference.getExtras();
-            if (!TextUtils.isEmpty(tileServiceClassName)) {
-                extras.putString(EXTRA_TILE_SERVICE_COMPONENT_NAME,
-                        new ComponentName(packageName, tileServiceClassName).flattenToString());
             }
         }
     }
