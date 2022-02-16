@@ -121,11 +121,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_network;
-    }
-
-    @Override
     public void onStart() {
         if (isAvailable()) {
             mAirplaneModeEnabler.start();

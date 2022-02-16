@@ -54,6 +54,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
     private static final String KEY_WIFI_TETHER_SCREEN = "wifi_tether_settings_screen";
+    private static final int EXPANDED_CHILD_COUNT_DEFAULT = 3;
 
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_NAME = "wifi_tether_network_name";
@@ -147,8 +148,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         }
         final Context context = getContext();
         if (context != null) {
-            context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER,
-                    Context.RECEIVER_EXPORTED_UNAUDITED);
+            context.registerReceiver(mTetherChangeReceiver, TETHER_STATE_CHANGE_FILTER);
         }
     }
 
@@ -204,6 +204,10 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
             mSwitchBarController.stopTether();
         }
         mWifiManager.setSoftApConfiguration(config);
+
+        if (context instanceof WifiTetherSecurityPreferenceController) {
+            reConfigInitialExpandedChildCount();
+        }
     }
 
     private SoftApConfiguration buildNewConfig() {
@@ -281,6 +285,13 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     startTether();
                 }
             }
+        }
+    }
+
+    private void reConfigInitialExpandedChildCount() {
+        final PreferenceGroup screen = getPreferenceScreen();
+        if (screen != null) {
+            screen.setInitialExpandedChildrenCount(getInitialExpandedChildCount());
         }
     }
 }

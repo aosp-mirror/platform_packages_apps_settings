@@ -89,12 +89,6 @@ public class BubbleNotificationPreferenceController extends
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        // not needed since it's not sliceable
-        return NO_RES;
-    }
-
-    @Override
     public boolean isChecked() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;

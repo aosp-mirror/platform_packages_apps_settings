@@ -91,10 +91,4 @@ public class BiometricSettingsAppPreferenceController extends TogglePreferenceCo
     public final boolean isSliceable() {
         return false;
     }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        // not needed since it's not sliceable
-        return NO_RES;
-    }
 }

@@ -15,6 +15,7 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import android.net.INetworkStatsService;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public abstract class DataUsageBaseFragment extends DashboardFragment {
 
         services.mNetworkService = INetworkManagementService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
+        services.mStatsService = INetworkStatsService.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         services.mPolicyManager = (NetworkPolicyManager) context
                 .getSystemService(Context.NETWORK_POLICY_SERVICE);
 

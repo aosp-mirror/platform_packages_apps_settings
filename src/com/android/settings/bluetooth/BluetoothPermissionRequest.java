@@ -147,13 +147,15 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         title = context.getString(
                                 R.string.bluetooth_sim_card_access_notification_title);
                         message = context.getString(
-                                R.string.bluetooth_sim_card_access_notification_content);
+                                R.string.bluetooth_sim_card_access_notification_content,
+                                deviceAlias, deviceAlias);
                         break;
                     default:
                         title = context.getString(
                                 R.string.bluetooth_connect_access_notification_title);
                         message = context.getString(
-                                R.string.bluetooth_connect_access_notification_content);
+                                R.string.bluetooth_connect_access_notification_content,
+                                deviceAlias, deviceAlias);
                         break;
                 }
                 NotificationManager notificationManager =
