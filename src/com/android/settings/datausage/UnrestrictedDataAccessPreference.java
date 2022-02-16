@@ -48,7 +48,6 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
             ApplicationsState applicationsState, DataSaverBackend dataSaverBackend,
             DashboardFragment parentFragment) {
         super(context);
-        setWidgetLayoutResource(R.layout.restricted_switch_widget);
         mHelper = new RestrictedPreferenceHelper(context, this, null);
         mEntry = entry;
         mDataUsageState = (AppStateDataUsageBridge.DataUsageState) mEntry.extraInfo;
@@ -131,10 +130,6 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         super.onBindViewHolder(holder);
 
         mHelper.onBindViewHolder(holder);
-        holder.findViewById(R.id.restricted_icon).setVisibility(
-                disabledByAdmin ? View.VISIBLE : View.GONE);
-        holder.findViewById(android.R.id.switch_widget).setVisibility(
-                disabledByAdmin ? View.GONE : View.VISIBLE);
     }
 
     @Override

@@ -80,6 +80,16 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     @Test
+    public void sendSafetyData_whenSafetyCenterIsEnabled_withNullSourceIds_sendsNoData() {
+        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent = new Intent();
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+
+        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+    }
+
+    @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNoSourceIds_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});

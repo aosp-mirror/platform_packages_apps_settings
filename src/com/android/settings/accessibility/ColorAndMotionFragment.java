@@ -30,11 +30,11 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-/** Accessibility settings for text and display. */
+/** Accessibility settings for color and motion. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class TextAndDisplayFragment extends DashboardFragment {
+public class ColorAndMotionFragment extends DashboardFragment {
 
-    private static final String TAG = "TextAndDisplayFragment";
+    private static final String TAG = "ColorAndMotionFragment";
 
     private static final String CATEGORY_EXPERIMENTAL = "experimental_category";
 
@@ -49,7 +49,7 @@ public class TextAndDisplayFragment extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.ACCESSIBILITY_TEXT_AND_DISPLAY;
+        return SettingsEnums.ACCESSIBILITY_COLOR_AND_MOTION;
     }
 
 
@@ -62,7 +62,7 @@ public class TextAndDisplayFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_text_and_display;
+        return R.xml.accessibility_color_and_motion;
     }
 
     @Override
@@ -104,5 +104,5 @@ public class TextAndDisplayFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_text_and_display);
+            new BaseSearchIndexProvider(R.xml.accessibility_color_and_motion);
 }
