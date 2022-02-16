@@ -19,7 +19,6 @@ package com.android.settings.network;
 import android.annotation.IntDef;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.telephony.SubscriptionInfo;
 import android.util.Log;
 
 import com.android.settings.AsyncTaskSidecar;
@@ -42,14 +41,11 @@ public class SwitchSlotSidecar
     })
     private @interface Command {
         int SWITCH_TO_REMOVABLE_SIM = 0;
-        int SWITCH_TO_EUICC_SIM = 1;
     }
 
     static class Param {
         @Command int command;
         int slotId;
-        int port;
-        SubscriptionInfo removedSubInfo;
     }
 
     static class Result {
@@ -69,24 +65,13 @@ public class SwitchSlotSidecar
     }
 
     /** Starts switching to the removable slot. */
-    public void runSwitchToRemovableSlot(int id, SubscriptionInfo removedSubInfo) {
+    public void runSwitchToRemovableSlot(int id) {
         Param param = new Param();
         param.command = Command.SWITCH_TO_REMOVABLE_SIM;
         param.slotId = id;
-        param.removedSubInfo = removedSubInfo;
-        param.port = 0;
         super.run(param);
     }
 
-    /** Starts switching to the removable slot. */
-    public void runSwitchToEuiccSlot(int id, int port, SubscriptionInfo removedSubInfo) {
-        Param param = new Param();
-        param.command = Command.SWITCH_TO_EUICC_SIM;
-        param.slotId = id;
-        param.removedSubInfo = removedSubInfo;
-        param.port = port;
-        super.run(param);
-    }
     /**
      * Returns the exception thrown during the execution of a command. Will be null in any state
      * other than {@link State#SUCCESS}, and may be null in that state if there was not an error.
@@ -106,14 +91,7 @@ public class SwitchSlotSidecar
         try {
             switch (param.command) {
                 case Command.SWITCH_TO_REMOVABLE_SIM:
-                    Log.i(TAG, "Start to switch to removable slot.");
-                    UiccSlotUtil.switchToRemovableSlot(getContext(), param.slotId,
-                            param.removedSubInfo);
-                    break;
-                case Command.SWITCH_TO_EUICC_SIM:
-                    Log.i(TAG, "Start to switch to euicc slot.");
-                    UiccSlotUtil.switchToEuiccSlot(getContext(), param.slotId, param.port,
-                            param.removedSubInfo);
+                    UiccSlotUtil.switchToRemovableSlot(param.slotId, getContext());
                     break;
                 default:
                     Log.e(TAG, "Wrong command.");

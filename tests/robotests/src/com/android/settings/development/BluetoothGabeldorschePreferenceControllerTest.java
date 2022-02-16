@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,7 +59,6 @@ public class BluetoothGabeldorschePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onPreferenceChanged_settingEnabled_shouldTurnOnBluetoothGabeldorsche() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
@@ -71,7 +69,6 @@ public class BluetoothGabeldorschePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onPreferenceChanged_settingDisabled_shouldTurnOffBluetoothGabeldorsche() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
@@ -82,7 +79,6 @@ public class BluetoothGabeldorschePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
                 CURRENT_GD_FLAG, "true", false /* makeDefault */);
@@ -93,7 +89,6 @@ public class BluetoothGabeldorschePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
         DeviceConfig.setProperty(DeviceConfig.NAMESPACE_BLUETOOTH,
                 CURRENT_GD_FLAG, "false", false /* makeDefault */);
@@ -104,7 +99,6 @@ public class BluetoothGabeldorschePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
 

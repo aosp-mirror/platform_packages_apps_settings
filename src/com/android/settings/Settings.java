@@ -16,24 +16,16 @@
 
 package com.android.settings;
 
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
-import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
-import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
 
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -91,16 +83,13 @@ public class Settings extends SettingsActivity {
     }
 
     public static class VpnSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for Data saver settings. */
-    public static class DataSaverSummaryActivity extends SettingsActivity { /* empty */ }
+    public static class DataSaverSummaryActivity extends SettingsActivity{ /* empty */ }
     public static class DateTimeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrivateVolumeForgetActivity extends SettingsActivity { /* empty */ }
     public static class PublicVolumeSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class WifiSettings2Activity extends SettingsActivity { /* empty */ }
     public static class NetworkProviderSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class NetworkSelectActivity extends SettingsActivity { /* empty */ }
-    /** Activity for the Wi-Fi network details settings. */
-    public static class WifiDetailsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
@@ -108,8 +97,6 @@ public class Settings extends SettingsActivity {
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
-    /** Activity for the App locale details settings. */
-    public static class AppLocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -132,35 +119,16 @@ public class Settings extends SettingsActivity {
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityContrastSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityDaltonizerSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for lockscreen settings. */
+    /**
+     * Activity for lockscreen settings.
+     */
     public static class LockScreenSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for bluetooth pairing settings. */
-    public static class BlueToothPairingActivity extends SettingsActivity { /* empty */ }
-    /** Activity for Reduce Bright Colors. */
+    /**
+     * Activity for Reduce Bright Colors.
+     */
     public static class ReduceBrightColorsSettingsActivity extends SettingsActivity { /* empty */ }
     /** Activity for the security dashboard. */
     public static class SecurityDashboardActivity extends SettingsActivity {
-
-        private static final String TAG = "SecurityDashboardActivity";
-
-        @Override
-        protected void onCreate(Bundle savedState) {
-            super.onCreate(savedState);
-            handleSafetyCenterRedirection();
-        }
-
-        /** Redirects to SafetyCenter if enabled. */
-        @VisibleForTesting
-        public void handleSafetyCenterRedirection() {
-            if (SafetyCenterStatusHolder.get().isEnabled(this)) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
-                    finish();
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, "Unable to open safety center", e);
-                }
-            }
-        }
 
         /** Whether the given fragment is allowed. */
         @VisibleForTesting
@@ -192,37 +160,11 @@ public class Settings extends SettingsActivity {
             return alternativeFragmentClassname;
         }
     }
-    /** Activity for the Advanced security settings. */
-    public static class SecurityAdvancedSettings extends SettingsActivity { /* empty */ }
     public static class UsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppUsageAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ScanningSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class WifiScanningSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity for the privacy dashboard. */
-    public static class PrivacyDashboardActivity extends SettingsActivity {
-
-        private static final String TAG = "PrivacyDashboardActivity";
-
-        @Override
-        protected void onCreate(Bundle savedState) {
-            super.onCreate(savedState);
-            handleSafetyCenterRedirection();
-        }
-
-        /** Redirects to SafetyCenter if enabled. */
-        @VisibleForTesting
-        public void handleSafetyCenterRedirection() {
-            if (SafetyCenterStatusHolder.get().isEnabled(this)) {
-                try {
-                    startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
-                    finish();
-                } catch (ActivityNotFoundException e) {
-                    Log.e(TAG, "Unable to open safety center", e);
-                }
-            }
-        }
-    }
+    public static class PrivacyDashboardActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
@@ -255,6 +197,7 @@ public class Settings extends SettingsActivity {
     public static class BatterySaverScheduleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
+    public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
@@ -300,8 +243,6 @@ public class Settings extends SettingsActivity {
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
     public static class GestureNavigationSettingsActivity extends SettingsActivity { /* empty */ }
-    /** Activity to manage 2-/3-button navigation configuration. */
-    public static class ButtonNavigationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class InteractAcrossProfilesSettingsActivity extends SettingsActivity {
         /* empty */
     }
@@ -359,52 +300,6 @@ public class Settings extends SettingsActivity {
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
-    public static class MobileNetworkActivity extends SettingsActivity {
-
-        public static final String EXTRA_MMS_MESSAGE = "mms_message";
-        public static final String EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
-                "show_capability_discovery_opt_in";
-
-        @Override
-        public Intent getIntent() {
-            final Intent intent = new Intent(super.getIntent());
-            int subId = intent.getIntExtra(android.provider.Settings.EXTRA_SUB_ID,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            SubscriptionInfo subInfo = SubscriptionUtil.getSubscriptionOrDefault(
-                    getApplicationContext(), subId);
-            CharSequence title = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    subInfo, getApplicationContext());
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
-            intent.putExtra(android.provider.Settings.EXTRA_SUB_ID, subId);
-            if (android.provider.Settings.ACTION_MMS_MESSAGE_SETTING.equals(intent.getAction())) {
-                // highlight "mms_message" preference.
-                intent.putExtra(EXTRA_FRAGMENT_ARG_KEY, EXTRA_MMS_MESSAGE);
-            }
-
-            if (doesIntentContainOptInAction(intent)) {
-                intent.putExtra(EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN,
-                        maybeShowContactDiscoveryDialog(subId));
-            }
-
-            return intent;
-        }
-
-        private boolean maybeShowContactDiscoveryDialog(int subId) {
-            // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
-            // associated dialog only if the opt-in has not been granted yet.
-            return MobileNetworkUtils.isContactDiscoveryVisible(getApplicationContext(), subId)
-                    // has the user already enabled this configuration?
-                    && !MobileNetworkUtils.isContactDiscoveryEnabled(
-                            getApplicationContext(), subId);
-        }
-
-        public static boolean doesIntentContainOptInAction(Intent intent) {
-            String intentAction = (intent != null ? intent.getAction() : null);
-            return TextUtils.equals(intentAction,
-                    ImsRcsManager.ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN);
-        }
-    }
-
     /**
      * Activity for BugReportHandlerPicker.
      */
@@ -427,11 +322,4 @@ public class Settings extends SettingsActivity {
      * Activity for AppDashboard.
      */
     public static class AppDashboardActivity extends SettingsActivity {}
-
-    public static class AdaptiveBrightnessActivity extends SettingsActivity { /* empty */ }
-
-    /**
-     * Activity for OneHandedSettings
-     */
-    public static class OneHandedSettingsActivity extends SettingsActivity { /* empty */ }
 }

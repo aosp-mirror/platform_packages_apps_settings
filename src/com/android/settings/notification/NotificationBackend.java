@@ -20,7 +20,6 @@ import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
-import static android.os.UserHandle.USER_SYSTEM;
 
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
@@ -45,7 +44,6 @@ import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
@@ -54,7 +52,6 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.util.CollectionUtils;
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -115,32 +112,15 @@ public class NotificationBackend {
 
     void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
             AppRow row) {
-        if (Settings.Secure.getIntForUser(context.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 0, USER_SYSTEM) != 0) {
-            try {
-                row.systemApp = row.lockedImportance =
-                        sINM.isPermissionFixed(app.packageName, row.userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Error calling NMS", e);
-            }
-            // The permission system cannot make role permissions 'fixed', so check for these
-            // roles explicitly
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = row.lockedImportance = true;
-            }
-        } else {
-            row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = true;
-            }
-            final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
-            markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
+        row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
+        List<String> roles = rm.getHeldRolesFromController(app.packageName);
+        if (roles.contains(RoleManager.ROLE_DIALER)
+                || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+            row.systemApp = true;
         }
+        final String[] nonBlockablePkgs = context.getResources().getStringArray(
+                com.android.internal.R.array.config_nonBlockableNotificationPackages);
+        markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
     }
 
     @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
@@ -167,9 +147,7 @@ public class NotificationBackend {
         StringBuilder sb = new StringBuilder();
 
         try {
-            List<String> associatedMacAddrs = CollectionUtils.mapNotNull(
-                    cdm.getAssociations(pkg, userId),
-                    a -> a.isSelfManaged() ? null : a.getDeviceMacAddress().toString());
+            List<String> associatedMacAddrs = cdm.getAssociations(pkg, userId);
             if (associatedMacAddrs != null) {
                 for (String assocMac : associatedMacAddrs) {
                     final Collection<CachedBluetoothDevice> cachedDevices =
@@ -361,15 +339,6 @@ public class NotificationBackend {
         }
     }
 
-    public boolean hasSentValidBubble(String pkg, int uid) {
-        try {
-            return sINM.hasSentValidBubble(pkg, uid);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
     /**
      * Returns all notification channels associated with the package and uid that will bypass DND
      */
@@ -429,6 +398,24 @@ public class NotificationBackend {
     public int getChannelCount(String pkg, int uid) {
         try {
             return sINM.getNumNotificationChannelsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
+    public int getNumAppsBypassingDnd(int uid) {
+        try {
+            return sINM.getAppsBypassingDndCount(uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
+    public int getBlockedAppCount() {
+        try {
+            return sINM.getBlockedAppCount(UserHandle.myUserId());
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return 0;
@@ -682,11 +669,6 @@ public class NotificationBackend {
             Log.w(TAG, "Error calling NoMan", e);
         }
         return false;
-    }
-
-    @VisibleForTesting
-    void setNm(INotificationManager inm) {
-        sINM = inm;
     }
 
     /**

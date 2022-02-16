@@ -68,11 +68,6 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
-    }
-
-    @Override
     public boolean isChecked() {
         return getConfig().alwaysOnEnabled(MY_USER);
     }

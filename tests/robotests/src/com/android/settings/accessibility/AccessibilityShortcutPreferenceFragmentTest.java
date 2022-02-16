@@ -16,14 +16,11 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
-import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,14 +30,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -54,11 +46,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
-import org.robolectric.shadows.ShadowApplication;
 
 /** Tests for {@link AccessibilityShortcutPreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
@@ -66,12 +55,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
     private static final String PLACEHOLDER_PACKAGE_NAME = "com.placeholder.example";
     private static final String PLACEHOLDER_CLASS_NAME = PLACEHOLDER_PACKAGE_NAME + ".placeholder";
-    private static final String PLACEHOLDER_TILE_CLASS_NAME =
-            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
-    private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
-            PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
@@ -94,7 +79,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
-        when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
         mScreen = spy(new PreferenceScreen(mContext, null));
         when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
@@ -105,9 +89,10 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
         // Compare to default UserShortcutType
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.SOFTWARE);
     }
 
     @Test
@@ -118,21 +103,25 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.SOFTWARE
+                | AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
     public void updateShortcutPreferenceData_hasValueInSharedPreference_assignToVariable() {
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(),
+                AccessibilityUtil.UserShortcutType.HARDWARE);
 
         putUserShortcutTypeIntoSharedPreference(mContext, hardwareShortcut);
         mFragment.updateShortcutPreferenceData();
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
@@ -150,7 +139,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.EMPTY);
+        assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.EMPTY);
     }
 
     @Test
@@ -163,7 +152,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
                 null);
         final PreferredShortcut hardwareShortcut = new PreferredShortcut(
-                PLACEHOLDER_COMPONENT_NAME.flattenToString(), UserShortcutType.HARDWARE);
+                PLACEHOLDER_COMPONENT_NAME.flattenToString(),
+                AccessibilityUtil.UserShortcutType.HARDWARE);
         mFragment.mShortcutPreference = shortcutPreference;
 
         PreferredShortcuts.saveUserShortcutType(mContext, hardwareShortcut);
@@ -171,12 +161,12 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.setupEditShortcutDialog(dialog);
 
         final int checkboxValue = mFragment.getShortcutTypeCheckBoxValue();
-        assertThat(checkboxValue).isEqualTo(UserShortcutType.HARDWARE);
+        assertThat(checkboxValue).isEqualTo(AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
     @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_assignShortcutTypeToVariable() {
+    public void restoreValueFromSavedInstanceState_assignToVariable() {
         mContext.setTheme(R.style.Theme_AppCompat);
         final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
                 mContext, AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC,
@@ -188,41 +178,26 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         mFragment.mShortcutPreference = shortcutPreference;
 
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
-                UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
-        mFragment.onAttach(mContext);
+                AccessibilityUtil.UserShortcutType.SOFTWARE
+                        | AccessibilityUtil.UserShortcutType.HARDWARE);
         mFragment.onCreate(savedInstanceState);
+        mFragment.onAttach(mContext);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
         mFragment.saveNonEmptyUserShortcutType(value);
 
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
-                mFragment.getComponentName().flattenToString(), UserShortcutType.SOFTWARE);
-        assertThat(expectedType).isEqualTo(UserShortcutType.SOFTWARE | UserShortcutType.HARDWARE);
+                mFragment.getComponentName().flattenToString(),
+                AccessibilityUtil.UserShortcutType.SOFTWARE);
+        assertThat(expectedType).isEqualTo(
+                AccessibilityUtil.UserShortcutType.SOFTWARE
+                        | AccessibilityUtil.UserShortcutType.HARDWARE);
     }
 
     @Test
-    @Config(shadows = ShadowFragment.class)
-    public void restoreValueFromSavedInstanceState_showTooltipView() {
-        mContext.setTheme(R.style.Theme_AppCompat);
-        mFragment.showQuickSettingsTooltipIfNeeded();
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-
-        final Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, /* value= */ true);
-        mFragment.onAttach(mContext);
-        mFragment.onCreate(savedInstanceState);
-        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
-        mFragment.onViewCreated(mFragment.getView(), savedInstanceState);
-
-        assertThat(getLatestPopupWindow().isShowing()).isTrue();
-    }
-
-    @Test
-    @Config(shadows = ShadowFragment.class)
     public void showGeneralCategory_shouldInitCategory() {
         final Bundle savedInstanceState = new Bundle();
         when(mFragment.showGeneralCategory()).thenReturn(true);
-        mFragment.onAttach(mContext);
         mFragment.onCreate(savedInstanceState);
 
         verify(mFragment).initGeneralCategory();
@@ -244,26 +219,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         PreferredShortcuts.saveUserShortcutType(context, shortcut);
     }
 
-    private static PopupWindow getLatestPopupWindow() {
-        final ShadowApplication shadowApplication =
-                Shadow.extract(ApplicationProvider.getApplicationContext());
-        return shadowApplication.getLatestPopupWindow();
-    }
-
     public static class TestAccessibilityShortcutPreferenceFragment
             extends AccessibilityShortcutPreferenceFragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return mock(View.class);
-        }
-
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            // do nothing
-        }
-
         @Override
         protected ComponentName getComponentName() {
             return PLACEHOLDER_COMPONENT_NAME;
@@ -271,16 +228,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
 
         @Override
         protected CharSequence getLabelName() {
-            return PLACEHOLDER_PACKAGE_NAME;
-        }
-
-        @Override
-        protected ComponentName getTileComponentName() {
-            return PLACEHOLDER_TILE_COMPONENT_NAME;
-        }
-
-        @Override
-        protected CharSequence getTileName() {
             return PLACEHOLDER_PACKAGE_NAME;
         }
 
@@ -313,11 +260,6 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         @Override
         protected String getLogTag() {
             return null;
-        }
-
-        @Override
-        public View getView() {
-            return mock(View.class);
         }
     };
 }
