@@ -185,7 +185,7 @@ public class ZenModeBypassingAppsPreferenceControllerTest {
         // only channel bypassing DND is a conversation (which will be showed on the
         // conversations page instead of the apps page)
         assertThat(mController.mPreference.isEnabled()).isTrue();
-        assertThat(mController.getSummary().contains("None")).isTrue();
+        assertThat(mController.getSummary().contains("No apps")).isTrue();
     }
 
     @Test
@@ -246,7 +246,7 @@ public class ZenModeBypassingAppsPreferenceControllerTest {
 
         // THEN the preference is enabled and summary is updated
         assertThat(mController.mPreference.isEnabled()).isTrue();
-        assertThat(mController.getSummary().contains("None")).isTrue();
+        assertThat(mController.getSummary().contains("No apps")).isTrue();
     }
 
     @Test

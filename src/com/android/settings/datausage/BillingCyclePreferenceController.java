@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import android.net.INetworkStatsService;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.INetworkManagementService;
@@ -50,6 +51,8 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
         TemplatePreference.NetworkServices services = new TemplatePreference.NetworkServices();
         services.mNetworkService = INetworkManagementService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
+        services.mStatsService = INetworkStatsService.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         services.mPolicyManager = mContext.getSystemService(NetworkPolicyManager.class);
         services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
         services.mTelephonyManager = mContext.getSystemService(TelephonyManager.class);

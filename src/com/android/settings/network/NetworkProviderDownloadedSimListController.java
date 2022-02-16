@@ -36,6 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -127,7 +128,9 @@ public class NetworkProviderDownloadedSimListController extends
             pref.setSummary(getSummary(subId));
 
             pref.setOnPreferenceClickListener(clickedPref -> {
-                MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
+                final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                mContext.startActivity(intent);
                 return true;
             });
             mPreferences.put(subId, pref);

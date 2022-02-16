@@ -88,14 +88,9 @@ public class LocationSlice implements CustomSliceable {
         final Uri contentUri = new Uri.Builder().appendPath(KEY_LOCATION).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 LocationSettings.class.getName(), KEY_LOCATION, screenTitle,
-                SettingsEnums.LOCATION, this)
+                SettingsEnums.LOCATION)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_location;
     }
 
     private PendingIntent getPrimaryAction() {

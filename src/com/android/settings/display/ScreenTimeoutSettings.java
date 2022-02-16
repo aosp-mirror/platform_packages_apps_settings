@@ -16,7 +16,6 @@
 
 package com.android.settings.display;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.OTHER_OPTIONS_DISABLED_BY_ADMIN;
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
@@ -54,7 +53,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -85,8 +84,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
             mAdaptiveSleepController.updatePreference();
         }
     };
-
-    private DevicePolicyManager mDevicePolicyManager;
 
     @VisibleForTesting
     Context mContext;
@@ -119,7 +116,6 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mInitialEntries = getResources().getStringArray(R.array.screen_timeout_entries);
         mInitialValues = getResources().getStringArray(R.array.screen_timeout_values);
         mAdaptiveSleepController = new AdaptiveSleepPreferenceController(context);
@@ -185,8 +181,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         }
 
         for (CandidateInfo info : candidateList) {
-            SelectorWithWidgetPreference pref =
-                    new SelectorWithWidgetPreference(getPrefContext());
+            RadioButtonPreference pref =
+                    new RadioButtonPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             screen.addPreference(pref);
         }
@@ -196,8 +192,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (!candidateList.isEmpty() && (selectedTimeout > maxTimeout)) {
             // The selected time out value is longer than the max timeout allowed by the admin.
             // Select the largest value from the list by default.
-            final SelectorWithWidgetPreference preferenceWithLargestTimeout =
-                    (SelectorWithWidgetPreference) screen.getPreference(candidateList.size() - 1);
+            final RadioButtonPreference preferenceWithLargestTimeout =
+                    (RadioButtonPreference) screen.getPreference(candidateList.size() - 1);
             preferenceWithLargestTimeout.setChecked(true);
         }
 
@@ -223,9 +219,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     @VisibleForTesting
     void setupDisabledFooterPreference() {
-        final String textDisabledByAdmin = mDevicePolicyManager.getString(
-                OTHER_OPTIONS_DISABLED_BY_ADMIN, () -> getResources().getString(
-                        R.string.admin_disabled_other_options));
+        final String textDisabledByAdmin = getResources().getString(
+                R.string.admin_disabled_other_options);
         final String textMoreDetails = getResources().getString(R.string.admin_more_details);
 
         final SpannableString spannableString = new SpannableString(

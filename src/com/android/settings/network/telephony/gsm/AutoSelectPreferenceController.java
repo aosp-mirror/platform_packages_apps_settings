@@ -20,8 +20,9 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import android.app.ProgressDialog;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.os.Looper;
@@ -42,9 +43,10 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.AllowedNetworkTypesListener;
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -149,26 +151,25 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
             setAutomaticSelectionMode();
+            return false;
         } else {
-            if (mSwitchPreference != null) {
-                Intent intent = new Intent();
-                intent.setClassName("com.android.settings",
-                        "com.android.settings.Settings$NetworkSelectActivity");
-                intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
-                mSwitchPreference.setIntent(intent);
-            }
+            final Bundle bundle = new Bundle();
+            bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
+            new SubSettingLauncher(mContext)
+                    .setDestination(NetworkSelectSettings.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.MOBILE_NETWORK_SELECT)
+                    .setTitleRes(R.string.choose_network_title)
+                    .setArguments(bundle)
+                    .launch();
+            return false;
         }
-        return false;
     }
 
     @VisibleForTesting
     Future setAutomaticSelectionMode() {
         final long startMillis = SystemClock.elapsedRealtime();
         showAutoSelectProgressBar();
-        if (mSwitchPreference != null) {
-            mSwitchPreference.setIntent(null);
-            mSwitchPreference.setEnabled(false);
-        }
+        mSwitchPreference.setEnabled(false);
         return ThreadUtils.postOnBackgroundThread(() -> {
             // set network selection mode in background
             mTelephonyManager.setNetworkSelectionModeAutomatic();
@@ -192,8 +193,8 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        final PersistableBundle carrierConfig =
-                CarrierConfigCache.getInstance(mContext).getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mContext.getSystemService(
+                CarrierConfigManager.class).getConfigForSubId(mSubId);
         mOnlyAutoSelectInHome = carrierConfig != null
                 ? carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)

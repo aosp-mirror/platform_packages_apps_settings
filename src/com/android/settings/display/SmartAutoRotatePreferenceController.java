@@ -22,7 +22,6 @@ import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 import static com.android.settings.display.SmartAutoRotateController.hasSufficientPermission;
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
-import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +30,6 @@ import android.hardware.SensorPrivacyManager;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -39,9 +37,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -49,10 +45,12 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * SmartAutoRotatePreferenceController provides auto rotate summary in display settings
  */
-public class SmartAutoRotatePreferenceController extends TogglePreferenceController
+public class SmartAutoRotatePreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
+    private Preference mPreference;
+
     private final SensorPrivacyManager mPrivacyManager;
     private final PowerManager mPowerManager;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -62,16 +60,12 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
         }
     };
 
-    private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
-    private Preference mPreference;
-
     public SmartAutoRotatePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mPrivacyManager = SensorPrivacyManager.getInstance(context);
         mPrivacyManager
                 .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> refreshSummary(mPreference));
         mPowerManager = context.getSystemService(PowerManager.class);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -81,30 +75,9 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
     }
 
     @Override
-    public boolean isSliceable() {
-        return TextUtils.equals(getPreferenceKey(), "auto_rotate");
-    }
-
-    @Override
-    public boolean isPublicSlice() {
-        return true;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
-    }
-
-    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        refreshSummary(mPreference);
     }
 
     @Override
@@ -116,7 +89,7 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
                 @Override
                 public void onChange() {
                     if (mPreference != null) {
-                        updateState(mPreference);
+                        refreshSummary(mPreference);
                     }
                 }
             };
@@ -146,20 +119,6 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
     @VisibleForTesting
     boolean isPowerSaveMode() {
         return mPowerManager.isPowerSaveMode();
-    }
-
-    @Override
-    public boolean isChecked() {
-        return !RotationPolicy.isRotationLocked(mContext);
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        final boolean isLocked = !isChecked;
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
-                isLocked);
-        RotationPolicy.setRotationLock(mContext, isLocked);
-        return true;
     }
 
     @Override

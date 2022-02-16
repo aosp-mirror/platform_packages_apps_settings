@@ -52,7 +52,7 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             mPreference.setEnabled(false);
             return;
         }
-        final BluetoothDevice activeDevice = getA2dpActiveDevice();
+        final BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
         if (activeDevice == null) {
             Log.e(TAG, "Active device is null. To disable HD audio button");
             mPreference.setEnabled(false);
@@ -84,7 +84,7 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
         final int prefValue = enabled
                 ? BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED
                 : BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED;
-        BluetoothDevice activeDevice = getA2dpActiveDevice();
+        BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
         if (activeDevice == null) {
             mPreference.setEnabled(false);
             return true;

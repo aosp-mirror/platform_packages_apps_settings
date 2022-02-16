@@ -18,78 +18,27 @@ package com.android.settings.wifi.addappnetworks;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.annotation.Nullable;
-import android.app.IActivityManager;
-import android.os.RemoteException;
+import static org.robolectric.Shadows.shadowOf;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class AddAppNetworksActivityTest {
 
-    @Mock
-    private IActivityManager mIActivityManager;
-
-    private AddAppNetworksActivity mActivity;
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mActivity = Robolectric.buildActivity(AddAppNetworksActivity.class).create().get();
-        mActivity.mActivityManager = mIActivityManager;
-        mActivity.mIsAddWifiConfigAllow = true;
-    }
-
     @Test
-    public void getCallingAppPackageName_nullPackageName_returnNotNull() {
-        fakeCallingPackage("com.android.settings");
+    public void startActivity_withPackageName_bundleShouldHaveRightPackageName() {
+        final String packageName = RuntimeEnvironment.application.getPackageName();
+        final AddAppNetworksActivity activity =
+                Robolectric.buildActivity(AddAppNetworksActivity.class).create().get();
+        shadowOf(activity).setCallingPackage(packageName);
 
-        assertThat(mActivity.getCallingAppPackageName()).isNotNull();
-    }
+        activity.showAddNetworksFragment();
 
-    @Test
-    public void getCallingAppPackageName_withPackageName_returnNull()  {
-        fakeCallingPackage(null);
-
-        assertThat(mActivity.getCallingAppPackageName()).isNull();
-    }
-
-    @Test
-    public void showAddNetworksFragment_nullPackageName_returnFalse()  {
-        fakeCallingPackage(null);
-
-        assertThat(mActivity.showAddNetworksFragment()).isFalse();
-    }
-
-    @Test
-    public void showAddNetworksFragment_withPackageName_returnTrue()  {
-        fakeCallingPackage("com.android.settings");
-
-        assertThat(mActivity.showAddNetworksFragment()).isTrue();
-    }
-
-    @Test
-    public void showAddNetworksFragment_isAddWifiConfigNotAllow_returnFalse() {
-        mActivity.mIsAddWifiConfigAllow = false;
-
-        assertThat(mActivity.showAddNetworksFragment()).isFalse();
-    }
-
-    private void fakeCallingPackage(@Nullable String packageName) {
-        try {
-            when(mIActivityManager.getLaunchedFromPackage(any())).thenReturn(packageName);
-        } catch (RemoteException e) {
-            // Do nothing.
-        }
+        assertThat(activity.mBundle.getString(AddAppNetworksActivity.KEY_CALLING_PACKAGE_NAME))
+                .isEqualTo(packageName);
     }
 }

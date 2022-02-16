@@ -17,14 +17,12 @@
 package com.android.settings.biometrics.face;
 
 import static android.app.Activity.RESULT_OK;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_SETTINGS_FOR_WORK_TITLE;
 
 import static com.android.settings.biometrics.BiometricEnrollBase.CONFIRM_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.ENROLL_REQUEST;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_FINISHED;
 import static com.android.settings.biometrics.BiometricEnrollBase.RESULT_TIMEOUT;
 
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +66,6 @@ public class FaceSettings extends DashboardFragment {
 
     private UserManager mUserManager;
     private FaceManager mFaceManager;
-    private DevicePolicyManager mDevicePolicyManager;
     private int mUserId;
     private int mSensorId;
     private long mChallenge;
@@ -151,7 +148,6 @@ public class FaceSettings extends DashboardFragment {
 
         mUserManager = context.getSystemService(UserManager.class);
         mFaceManager = context.getSystemService(FaceManager.class);
-        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
         mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
         mSensorId = getIntent().getIntExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, -1);
         mChallenge = getIntent().getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, 0L);
@@ -161,10 +157,8 @@ public class FaceSettings extends DashboardFragment {
         mFaceFeatureProvider = FeatureFactory.getFactory(getContext()).getFaceFeatureProvider();
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
-            getActivity().setTitle(
-                    mDevicePolicyManager.getString(FACE_SETTINGS_FOR_WORK_TITLE, () ->
-                    getActivity().getResources().getString(
-                    R.string.security_settings_face_profile_preference_title)));
+            getActivity().setTitle(getActivity().getResources().getString(
+                    R.string.security_settings_face_profile_preference_title));
         }
 
         mLockscreenController = Utils.isMultipleBiometricsSupported(context)

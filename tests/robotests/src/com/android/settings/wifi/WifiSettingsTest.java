@@ -43,6 +43,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.View;
 
@@ -56,6 +57,7 @@ import com.android.settings.R;
 import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -92,7 +94,6 @@ public class WifiSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mock(UserManager.class));
 
         mWifiSettings = spy(new WifiSettings());
         doReturn(mContext).when(mWifiSettings).getContext();
@@ -105,7 +106,7 @@ public class WifiSettingsTest {
         mWifiSettings.mConfigureWifiSettingsPreference = new Preference(mContext);
         mWifiSettings.mWifiPickerTracker = mMockWifiPickerTracker;
         mWifiSettings.mWifiManager = mWifiManager;
-        mWifiSettings.IS_ENABLED_PROVIDER_MODEL = false;
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test
