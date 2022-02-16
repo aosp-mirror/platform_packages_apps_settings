@@ -206,12 +206,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createDisableDialog(getPrefContext(), info,
                                 this::onDialogButtonFromDisableToggleClicked);
                 return mWarningDialog;
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                final Dialog dialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -494,23 +488,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setChecked(false);
 
         mWarningDialog.dismiss();
-    }
-
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        showQuickSettingsTooltipIfNeeded();
-    }
-
-    @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        super.callOnAlertDialogCheckboxClicked(dialog, which);
-        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
     }
 
     void onDialogButtonFromShortcutClicked(View view) {

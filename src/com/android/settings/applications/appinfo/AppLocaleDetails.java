@@ -38,8 +38,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 
-import com.android.internal.app.LocalePicker;
-import com.android.internal.app.LocalePicker.LocaleInfo;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
@@ -48,11 +46,8 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.widget.LayoutPreference;
 import com.android.settingslib.widget.RadioButtonPreference;
 
-import com.google.common.collect.Iterables;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -66,13 +61,17 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
     private static final String CATEGORY_KEY_ALL_LANGUAGES =
             "category_key_all_languages";
     private static final String KEY_APP_DESCRIPTION = "app_locale_description";
+    @VisibleForTesting
+    static final String KEY_SYSTEM_DEFAULT_LOCALE = "system_default_locale";
 
     private boolean mCreated = false;
-    private AppLocaleDetailsHelper mAppLocaleDetailsHelper;
+    @VisibleForTesting
+    AppLocaleDetailsHelper mAppLocaleDetailsHelper;
 
     private PreferenceGroup mGroupOfSuggestedLocales;
     private PreferenceGroup mGroupOfSupportedLocales;
     private LayoutPreference mPrefOfDescription;
+    private RadioButtonPreference mDefaultPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +84,10 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         mGroupOfSupportedLocales =
                 getPreferenceScreen().findPreference(CATEGORY_KEY_ALL_LANGUAGES);
         mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
+
+        mDefaultPreference = (RadioButtonPreference) getPreferenceScreen()
+                .findPreference(KEY_SYSTEM_DEFAULT_LOCALE);
+        mDefaultPreference.setOnClickListener(this);
     }
 
     // Override here so we don't have an empty screen
@@ -104,30 +107,43 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         // Update Locales first, before refresh ui.
         mAppLocaleDetailsHelper.handleAllLocalesData();
         super.onResume();
+        mDefaultPreference.setSummary(Locale.getDefault().getDisplayName(Locale.getDefault()));
     }
 
     @Override
     protected boolean refreshUi() {
+        refreshUiInternal();
+        return true;
+    }
+
+    @VisibleForTesting
+    void refreshUiInternal() {
         if (mAppLocaleDetailsHelper.getSupportedLocales().isEmpty()) {
             Log.d(TAG, "No supported language.");
             mGroupOfSuggestedLocales.setVisible(false);
             mGroupOfSupportedLocales.setVisible(false);
             mPrefOfDescription.setVisible(true);
             TextView description = (TextView) mPrefOfDescription.findViewById(R.id.description);
-            Locale locale = mAppLocaleDetailsHelper.getCurrentSystemLocales().get(0);
             description.setText(getContext().getString(R.string.no_multiple_language_supported,
-                    locale.getDisplayName(locale)));
-            return true;
+                    Locale.getDefault().getDisplayName(Locale.getDefault())));
+            return;
         }
-
-        mGroupOfSuggestedLocales.removeAll();
-        mGroupOfSupportedLocales.removeAll();
+        resetLocalePreferences();
         Locale appLocale = AppLocaleDetailsHelper.getAppDefaultLocale(getContext(), mPackageName);
+        // Sets up default locale preference.
+        mGroupOfSuggestedLocales.addPreference(mDefaultPreference);
+        mDefaultPreference.setChecked(appLocale == null);
+        // Sets up suggested locales of per app.
         setLanguagesPreference(mGroupOfSuggestedLocales,
                 mAppLocaleDetailsHelper.getSuggestedLocales(), appLocale);
+        // Sets up supported locales of per app.
         setLanguagesPreference(mGroupOfSupportedLocales,
                 mAppLocaleDetailsHelper.getSupportedLocales(), appLocale);
-        return true;
+    }
+
+    private void resetLocalePreferences() {
+        mGroupOfSuggestedLocales.removeAll();
+        mGroupOfSupportedLocales.removeAll();
     }
 
     @Override
@@ -142,7 +158,12 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
 
     @Override
     public void onRadioButtonClicked(RadioButtonPreference pref) {
-        mAppLocaleDetailsHelper.setAppDefaultLocale(pref.getKey());
+        String key = pref.getKey();
+        if (KEY_SYSTEM_DEFAULT_LOCALE.equals(key)) {
+            mAppLocaleDetailsHelper.setAppDefaultLocale(LocaleList.forLanguageTags(""));
+        } else {
+            mAppLocaleDetailsHelper.setAppDefaultLocale(key);
+        }
         refreshUi();
     }
 
@@ -180,7 +201,13 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
     public static CharSequence getSummary(Context context, String packageName) {
         Locale appLocale =
                 AppLocaleDetailsHelper.getAppDefaultLocale(context, packageName);
-        return appLocale == null ? "" : appLocale.getDisplayName(appLocale);
+        if (appLocale == null) {
+            Locale systemLocale = Locale.getDefault();
+            return context.getString(R.string.preference_of_system_locale_summary,
+                    systemLocale.getDisplayName(systemLocale));
+        } else {
+            return appLocale.getDisplayName(appLocale);
+        }
     }
 
     private void setLanguagesPreference(PreferenceGroup group,
@@ -190,9 +217,15 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         }
 
         for (Locale locale : locales) {
+            if (locale == null) {
+                continue;
+            }
+
             RadioButtonPreference pref = new RadioButtonPreference(getContext());
             pref.setTitle(locale.getDisplayName(locale));
             pref.setKey(locale.toLanguageTag());
+            // Will never be checked if appLocale is null
+            // aka if there is no per-app locale
             pref.setChecked(locale.equals(appLocale));
             pref.setOnClickListener(this);
             group.addPreference(pref);
@@ -206,14 +239,17 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         private TelephonyManager mTelephonyManager;
         private LocaleManager mLocaleManager;
 
-        private Collection<Locale> mSuggestedLocales = new ArrayList<>();
-        private Collection<Locale> mSupportedLocales = new ArrayList<>();
+        private Collection<Locale> mProcessedSuggestedLocales = new ArrayList<>();
+        private Collection<Locale> mProcessedSupportedLocales = new ArrayList<>();
+
+        private Collection<Locale> mAppSupportedLocales = new ArrayList<>();
 
         AppLocaleDetailsHelper(Context context, String packageName) {
             mContext = context;
             mPackageName = packageName;
             mTelephonyManager = context.getSystemService(TelephonyManager.class);
             mLocaleManager = context.getSystemService(LocaleManager.class);
+            mAppSupportedLocales = getAppSupportedLocales();
         }
 
         /** Handle suggested and supported locales for UI display. */
@@ -225,49 +261,47 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
 
         /** Gets suggested locales in the app. */
         public Collection<Locale> getSuggestedLocales() {
-            return mSuggestedLocales;
+            return mProcessedSuggestedLocales;
         }
 
         /** Gets supported locales in the app. */
         public Collection<Locale> getSupportedLocales() {
-            return mSupportedLocales;
+            return mProcessedSupportedLocales;
         }
 
         @VisibleForTesting
         void handleSuggestedLocales() {
-            LocaleList currentSystemLocales = getCurrentSystemLocales();
             Locale appLocale = getAppDefaultLocale(mContext, mPackageName);
+            // 1st locale in suggested languages group.
+            for (Locale supportedlocale : mAppSupportedLocales) {
+                if (compareLocale(supportedlocale, appLocale)) {
+                    mProcessedSuggestedLocales.add(appLocale);
+                    break;
+                }
+            }
+
+            // 2nd and 3rd locale in suggested languages group.
             String simCountry = mTelephonyManager.getSimCountryIso().toUpperCase(Locale.US);
             String networkCountry = mTelephonyManager.getNetworkCountryIso().toUpperCase(Locale.US);
-            // 1st locale in suggested languages group.
-            if (appLocale != null) {
-                mSuggestedLocales.add(appLocale);
-            }
-            // 2nd locale in suggested languages group.
-            final List<LocaleInfo> localeInfos = LocalePicker.getAllAssetLocales(mContext, false);
-            for (LocaleInfo localeInfo : localeInfos) {
-                Locale locale = localeInfo.getLocale();
-                String localeCountry = locale.getCountry().toUpperCase(Locale.US);
-                if (!compareLocale(locale, appLocale)
+            mAppSupportedLocales.forEach(supportedlocale -> {
+                String localeCountry = supportedlocale.getCountry().toUpperCase(Locale.US);
+                if (!compareLocale(supportedlocale, appLocale)
                         && isCountrySuggestedLocale(localeCountry, simCountry, networkCountry)) {
-                    mSuggestedLocales.add(locale);
+                    mProcessedSuggestedLocales.add(supportedlocale);
                 }
-            }
+            });
+
             // Other locales in suggested languages group.
-            for (int i = 0; i < currentSystemLocales.size(); i++) {
-                Locale locale = currentSystemLocales.get(i);
-                boolean isInSuggestedLocales = false;
-                for (int j = 0; j < mSuggestedLocales.size(); j++) {
-                    Locale suggestedLocale = Iterables.get(mSuggestedLocales, j);
-                    if (compareLocale(locale, suggestedLocale)) {
-                        isInSuggestedLocales = true;
-                        break;
+            Collection<Locale> supportedSystemLocales = new ArrayList<>();
+            getCurrentSystemLocales().forEach(systemLocale -> {
+                mAppSupportedLocales.forEach(supportedLocale -> {
+                    if (compareLocale(systemLocale, supportedLocale)) {
+                        supportedSystemLocales.add(supportedLocale);
                     }
-                }
-                if (!isInSuggestedLocales) {
-                    mSuggestedLocales.add(locale);
-                }
-            }
+                });
+            });
+            supportedSystemLocales.removeAll(mProcessedSuggestedLocales);
+            mProcessedSuggestedLocales.addAll(supportedSystemLocales);
         }
 
         @VisibleForTesting
@@ -290,26 +324,34 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
 
         @VisibleForTesting
         void handleSupportedLocales() {
-            LocaleList localeList = getPackageLocales();
-            if (localeList == null) {
-                String[] languages = getAssetSystemLocales();
-                for (String language : languages) {
-                    mSupportedLocales.add(Locale.forLanguageTag(language));
-                }
-            } else {
-                for (int i = 0; i < localeList.size(); i++) {
-                    mSupportedLocales.add(localeList.get(i));
-                }
-            }
+            mProcessedSupportedLocales.addAll(mAppSupportedLocales);
 
-            if (mSuggestedLocales != null || !mSuggestedLocales.isEmpty()) {
-                mSupportedLocales.removeAll(mSuggestedLocales);
+            if (mProcessedSuggestedLocales != null || !mProcessedSuggestedLocales.isEmpty()) {
+                mProcessedSuggestedLocales.retainAll(mProcessedSupportedLocales);
+                mProcessedSupportedLocales.removeAll(mProcessedSuggestedLocales);
             }
         }
 
         private void clearLocalesData() {
-            mSuggestedLocales.clear();
-            mSupportedLocales.clear();
+            mProcessedSuggestedLocales.clear();
+            mProcessedSupportedLocales.clear();
+        }
+
+        private Collection<Locale> getAppSupportedLocales() {
+            Collection<Locale> appSupportedLocales = new ArrayList<>();
+            LocaleList localeList = getPackageLocales();
+
+            if (localeList != null && localeList.size() > 0) {
+                for (int i = 0; i < localeList.size(); i++) {
+                    appSupportedLocales.add(localeList.get(i));
+                }
+            } else {
+                String[] languages = getAssetLocales();
+                for (String language : languages) {
+                    appSupportedLocales.add(Locale.forLanguageTag(language));
+                }
+            }
+            return appSupportedLocales;
         }
 
         /** Gets per app's default locale */
@@ -317,8 +359,8 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
             LocaleManager localeManager = context.getSystemService(LocaleManager.class);
             try {
                 LocaleList localeList = (localeManager == null)
-                        ? new LocaleList() : localeManager.getApplicationLocales(packageName);
-                return localeList.isEmpty() ? null : localeList.get(0);
+                        ? null : localeManager.getApplicationLocales(packageName);
+                return localeList == null ? null : localeList.get(0);
             } catch (IllegalArgumentException e) {
                 Log.w(TAG, "package name : " + packageName + " is not correct. " + e);
             }
@@ -344,12 +386,17 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         }
 
         @VisibleForTesting
-        LocaleList getCurrentSystemLocales() {
-            return Resources.getSystem().getConfiguration().getLocales();
+        Collection<Locale> getCurrentSystemLocales() {
+            LocaleList localeList = Resources.getSystem().getConfiguration().getLocales();
+            Collection<Locale> systemLocales = new ArrayList<>();
+            for (int i = 0; i < localeList.size(); i++) {
+                systemLocales.add(localeList.get(i));
+            }
+            return systemLocales;
         }
 
         @VisibleForTesting
-        String[] getAssetSystemLocales() {
+        String[] getAssetLocales() {
             try {
                 PackageManager packageManager = mContext.getPackageManager();
                 return packageManager.getResourcesForApplication(

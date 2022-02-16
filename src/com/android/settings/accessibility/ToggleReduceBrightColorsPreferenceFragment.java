@@ -36,6 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -68,6 +69,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         mComponentName = REDUCE_BRIGHT_COLORS_COMPONENT_NAME;
         mPackageName = getText(R.string.reduce_bright_colors_preference_title);
         mHtmlDescription = getText(R.string.reduce_bright_colors_preference_subtitle);
+        mTopIntroTitle = getText(R.string.reduce_bright_colors_preference_intro_text);
         mRbcIntensityPreferenceController =
                 new ReduceBrightColorsIntensityPreferenceController(getContext(), KEY_INTENSITY);
         mRbcPersistencePreferenceController =
@@ -146,7 +148,9 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         mColorDisplayManager.setReduceBrightColorsActivated(enabled);
     }
