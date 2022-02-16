@@ -40,8 +40,7 @@ public class BatteryDiffEntry {
     // Caches app label and icon to improve loading performance.
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
     // Whether a specific item is valid to launch restriction page?
-    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
-    public static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
+    static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
 
     /** A comparator for {@link BatteryDiffEntry} based on consumed percentage. */
     public static final Comparator<BatteryDiffEntry> COMPARATOR =
@@ -113,9 +112,7 @@ public class BatteryDiffEntry {
     /** Gets the app icon {@link Drawable} for this entry. */
     public Drawable getAppIcon() {
         loadLabelAndIcon();
-        return mAppIcon != null && mAppIcon.getConstantState() != null
-                ? mAppIcon.getConstantState().newDrawable()
-                : null;
+        return mAppIcon;
     }
 
     /** Gets the app icon id for this entry. */
@@ -342,16 +339,15 @@ public class BatteryDiffEntry {
         return builder.toString();
     }
 
-    /** Clears app icon and label cache data. */
-    public static void clearCache() {
+    static void clearCache() {
         sResourceCache.clear();
         sValidForRestriction.clear();
     }
 
     private Drawable getBadgeIconForUser(Drawable icon) {
         final int userId = UserHandle.getUserId((int) mBatteryHistEntry.mUid);
-        return userId == UserHandle.USER_OWNER ? icon :
-            mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
+        final UserHandle userHandle = new UserHandle(userId);
+        return mUserManager.getBadgedIconForUser(icon, userHandle);
     }
 
     private static boolean isSystemUid(int uid) {

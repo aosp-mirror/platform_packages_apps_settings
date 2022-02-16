@@ -19,12 +19,14 @@ package com.android.settings.network.telephony.gsm;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -33,8 +35,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
 /**
@@ -98,12 +102,6 @@ public class OpenNetworkSelectPagePreferenceController extends
         super.updateState(preference);
         preference.setEnabled(mTelephonyManager.getNetworkSelectionMode()
                 != TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                "com.android.settings.Settings$NetworkSelectActivity");
-        intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
-        preference.setIntent(intent);
     }
 
     @Override
@@ -114,6 +112,23 @@ public class OpenNetworkSelectPagePreferenceController extends
         } else {
             return mContext.getString(R.string.network_disconnected);
         }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            final Bundle bundle = new Bundle();
+            bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
+            new SubSettingLauncher(mContext)
+                    .setDestination(NetworkSelectSettings.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.MOBILE_NETWORK_SELECT)
+                    .setTitleRes(R.string.choose_network_title)
+                    .setArguments(bundle)
+                    .launch();
+            return true;
+        }
+
+        return false;
     }
 
     public OpenNetworkSelectPagePreferenceController init(Lifecycle lifecycle, int subId) {

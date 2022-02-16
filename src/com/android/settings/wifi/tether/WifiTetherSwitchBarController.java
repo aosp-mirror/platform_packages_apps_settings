@@ -83,8 +83,7 @@ public class WifiTetherSwitchBarController implements
     public void onStart() {
         mDataSaverBackend.addListener(this);
         mSwitch.setOnClickListener(this);
-        mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER);
     }
 
     @Override

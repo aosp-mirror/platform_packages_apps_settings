@@ -20,7 +20,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
 import com.android.settings.location.LocationServices;
 import com.android.settings.location.LocationServicesForWork;
 
@@ -44,10 +43,5 @@ public class ProfileSelectLocationServicesFragment extends ProfileSelectFragment
                 personalFragment, // 0
                 workFragment
         };
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.location_services_header;
     }
 }

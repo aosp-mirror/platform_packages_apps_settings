@@ -79,20 +79,18 @@ public final class PasswordUtils extends com.android.settingslib.Utils {
     }
 
     /** Crashes the calling application and provides it with {@code message}. */
-    public static void crashCallingApplication(IBinder activityToken, String message,
-            int exceptionTypeId) {
+    public static void crashCallingApplication(IBinder activityToken, String message) {
         IActivityManager am = ActivityManager.getService();
         try {
             int uid = am.getLaunchedFromUid(activityToken);
             int userId = UserHandle.getUserId(uid);
-            am.crashApplicationWithType(
+            am.crashApplication(
                     uid,
                     /* initialPid= */ -1,
                     getCallingAppPackageName(activityToken),
                     userId,
                     message,
-                    false,
-                    exceptionTypeId);
+                    false);
         } catch (RemoteException e) {
             Log.v(TAG, "Could not talk to activity manager.", e);
         }

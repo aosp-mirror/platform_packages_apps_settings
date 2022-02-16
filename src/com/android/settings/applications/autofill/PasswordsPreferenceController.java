@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.autofill;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.service.autofill.AutofillService.EXTRA_RESULT;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
@@ -134,8 +133,7 @@ public class PasswordsPreferenceController extends BasePreferenceController
                         new Intent(Intent.ACTION_MAIN)
                                 .setClassName(
                                         serviceInfo.packageName,
-                                        service.getPasswordsActivity())
-                                .setFlags(FLAG_ACTIVITY_NEW_TASK);
+                                        service.getPasswordsActivity());
                 prefContext.startActivityAsUser(intent, UserHandle.of(user));
                 return true;
             });

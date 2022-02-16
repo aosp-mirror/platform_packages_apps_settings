@@ -24,10 +24,4 @@ public interface SecuritySettingsFeatureProvider {
 
     /** Returns the alternative SecuritySettings fragment name if available. */
     String getAlternativeSecuritySettingsFragmentClassname();
-
-    /**
-     * Returns the category of SecurityAdvancedSettings fragment for the alternative
-     * SecuritySettings if available.
-     */
-    String getAlternativeAdvancedSettingsCategoryKey();
 }

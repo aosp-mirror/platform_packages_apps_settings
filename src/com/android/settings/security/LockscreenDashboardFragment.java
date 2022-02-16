@@ -16,13 +16,9 @@
 
 package com.android.settings.security;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCKED_NOTIFICATION_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -77,16 +73,6 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        replaceEnterpriseStringTitle("security_setting_lock_screen_notif_work",
-                WORK_PROFILE_LOCKED_NOTIFICATION_TITLE,
-                R.string.locked_work_profile_notification_title);
-        replaceEnterpriseStringTitle("security_setting_lock_screen_notif_work_header",
-                WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER, R.string.profile_section_header);
     }
 
     @Override

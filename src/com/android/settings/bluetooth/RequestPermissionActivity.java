@@ -16,13 +16,10 @@
 
 package com.android.settings.bluetooth;
 
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 import android.annotation.NonNull;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothStatusCodes;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,7 +39,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
 
-import java.time.Duration;
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is
@@ -264,26 +261,22 @@ public class RequestPermissionActivity extends Activity implements
         if (mRequest == REQUEST_ENABLE || mRequest == REQUEST_DISABLE) {
             // BT toggled. Done
             returnCode = RESULT_OK;
-        } else {
-            mBluetoothAdapter.setDiscoverableTimeout(Duration.ofSeconds(mTimeout));
-            if (mBluetoothAdapter.setScanMode(
-                    BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE)
-                    == BluetoothStatusCodes.SUCCESS) {
-                // If already in discoverable mode, this will extend the timeout.
-                long endTime = System.currentTimeMillis() + (long) mTimeout * 1000;
-                LocalBluetoothPreferences.persistDiscoverableEndTimestamp(
-                        this, endTime);
-                if (0 < mTimeout) {
-                    BluetoothDiscoverableTimeoutReceiver.setDiscoverableAlarm(this, endTime);
-                }
-                returnCode = mTimeout;
-                // Activity.RESULT_FIRST_USER should be 1
-                if (returnCode < RESULT_FIRST_USER) {
-                    returnCode = RESULT_FIRST_USER;
-                }
-            } else {
-                returnCode = RESULT_CANCELED;
+        } else if (mBluetoothAdapter.setScanMode(
+                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
+            // If already in discoverable mode, this will extend the timeout.
+            long endTime = System.currentTimeMillis() + (long) mTimeout * 1000;
+            LocalBluetoothPreferences.persistDiscoverableEndTimestamp(
+                    this, endTime);
+            if (0 < mTimeout) {
+               BluetoothDiscoverableTimeoutReceiver.setDiscoverableAlarm(this, endTime);
             }
+            returnCode = mTimeout;
+            // Activity.RESULT_FIRST_USER should be 1
+            if (returnCode < RESULT_FIRST_USER) {
+                returnCode = RESULT_FIRST_USER;
+            }
+        } else {
+            returnCode = RESULT_CANCELED;
         }
 
         if (mDialog != null) {

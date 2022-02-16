@@ -24,7 +24,6 @@ import android.telecom.TelecomManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -60,8 +59,6 @@ public class SimDialogActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addSystemFlags(
-                WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         showOrUpdateDialog();
     }
 
@@ -95,16 +92,15 @@ public class SimDialogActivity extends FragmentActivity {
     private SimDialogFragment createFragment(int dialogType) {
         switch (dialogType) {
             case DATA_PICK:
-                return getDataPickDialogFramgent();
+                return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_data,
+                        false /* includeAskEveryTime */);
             case CALLS_PICK:
                 return CallsSimListDialogFragment.newInstance(dialogType,
                         R.string.select_sim_for_calls,
-                        true /* includeAskEveryTime */,
-                        false /* isCancelItemShowed */);
+                        true /* includeAskEveryTime */);
             case SMS_PICK:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
-                        true /* includeAskEveryTime */,
-                        false /* isCancelItemShowed */);
+                        true /* includeAskEveryTime */);
             case PREFERRED_PICK:
                 if (!getIntent().hasExtra(PREFERRED_SIM)) {
                     throw new IllegalArgumentException("Missing required extra " + PREFERRED_SIM);
@@ -112,21 +108,10 @@ public class SimDialogActivity extends FragmentActivity {
                 return PreferredSimDialogFragment.newInstance();
             case SMS_PICK_FOR_MESSAGE:
                 return SimListDialogFragment.newInstance(dialogType, R.string.select_sim_for_sms,
-                        false /* includeAskEveryTime */,
-                        false /* isCancelItemShowed */);
+                        false /* includeAskEveryTime */);
             default:
                 throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");
         }
-    }
-
-    private SimDialogFragment getDataPickDialogFramgent() {
-        if (SubscriptionManager.getDefaultDataSubscriptionId()
-                == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            return SimListDialogFragment.newInstance(DATA_PICK, R.string.select_sim_for_data,
-                    false /* includeAskEveryTime */,
-                    true /* isCancelItemShowed */);
-        }
-        return SelectSpecificDataSimDialogFragment.newInstance();
     }
 
     public void onSubscriptionSelected(int dialogType, int subId) {
@@ -172,10 +157,8 @@ public class SimDialogActivity extends FragmentActivity {
         final TelephonyManager telephonyManager = getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
         subscriptionManager.setDefaultDataSubId(subId);
-        if (subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            telephonyManager.setDataEnabled(true);
-            Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
-        }
+        telephonyManager.setDataEnabled(true);
+        Toast.makeText(this, R.string.data_switch_started, Toast.LENGTH_LONG).show();
     }
 
     private void setDefaultCallsSubId(final int subId) {

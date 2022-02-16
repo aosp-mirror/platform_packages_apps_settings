@@ -27,7 +27,6 @@ import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -59,7 +58,7 @@ public class NfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference = (MainSwitchPreference) screen.findPreference(getPreferenceKey());
         mPreference.addOnSwitchChangeListener(this);
         mNfcEnabler = new NfcEnabler(mContext, mPreference);
     }
@@ -102,11 +101,6 @@ public class NfcPreferenceController extends TogglePreferenceController
     @Override
     public boolean isPublicSlice() {
         return true;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_connected_devices;
     }
 
     @Override

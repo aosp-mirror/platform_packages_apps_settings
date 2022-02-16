@@ -19,7 +19,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -209,8 +208,7 @@ public class BluetoothEnablerTest {
     public void bluetoothTurnsOff_switchTurnsOff() {
         // Start up with bluetooth turned on. The switch should get turned on.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
-        when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class),
-                eq(Context.RECEIVER_EXPORTED_UNAUDITED))).thenReturn(null);
+        when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
         mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_ON);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);
@@ -234,8 +232,7 @@ public class BluetoothEnablerTest {
     public void bluetoothTurnsOn_switchTurnsOn() {
         // Start up with bluetooth turned on. The switch should be left off.
         ArgumentCaptor<BroadcastReceiver> captor = ArgumentCaptor.forClass(BroadcastReceiver.class);
-        when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class),
-                eq(Context.RECEIVER_EXPORTED_UNAUDITED))).thenReturn(null);
+        when(mContext.registerReceiver(captor.capture(), any(IntentFilter.class))).thenReturn(null);
         mShadowBluetoothAdapter.setState(BluetoothAdapter.STATE_OFF);
         verify(mSwitchController, never()).setChecked(anyBoolean());
         mBluetoothEnabler.resume(mContext);

@@ -16,7 +16,6 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -40,7 +39,7 @@ import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settings.core.CategoryMixin.CategoryListener;
 import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -80,7 +79,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private List<String> mSuppressInjectedTileKeys;
-    private DevicePolicyManager mDevicePolicyManager;
 
     @Override
     public void onAttach(Context context) {
@@ -150,7 +148,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
         // Set ComparisonCallback so we get better animation when list changes.
         getPreferenceManager().setPreferenceComparisonCallback(
                 new PreferenceManager.SimplePreferenceComparisonCallback());
@@ -499,15 +496,15 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (mDashboardTilePrefKeys.containsKey(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(), this,
-                        forceRoundedIcons, preference, tile, key,
+                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
+                        forceRoundedIcons, getMetricsCategory(), preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = createPreference(tile);
                 final List<DynamicDataObserver> observers =
                         mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
-                                this, forceRoundedIcons, pref, tile, key,
+                                forceRoundedIcons, getMetricsCategory(), pref, tile, key,
                                 mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 registerDynamicDataObservers(observers);
@@ -532,7 +529,8 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         mBlockerController.countDown(controller.getPreferenceKey());
     }
 
-    protected Preference createPreference(Tile tile) {
+    @VisibleForTesting
+    Preference createPreference(Tile tile) {
         return tile instanceof ProviderTile
                 ? new SwitchPreference(getPrefContext())
                 : tile.hasSwitch()
@@ -568,31 +566,5 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mRegisteredObservers.remove(observer);
             resolver.unregisterContentObserver(observer);
         });
-    }
-
-    protected void replaceEnterpriseStringTitle(
-            String preferenceKey, String overrideKey, int resource) {
-        Preference preference = findPreference(preferenceKey);
-        if (preference == null) {
-            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
-            return;
-        }
-
-        preference.setTitle(
-                mDevicePolicyManager.getString(overrideKey,
-                        () -> getString(resource)));
-    }
-
-    protected void replaceEnterpriseStringSummary(
-            String preferenceKey, String overrideKey, int resource) {
-        Preference preference = findPreference(preferenceKey);
-        if (preference == null) {
-            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
-            return;
-        }
-
-        preference.setSummary(
-                mDevicePolicyManager.getString(overrideKey,
-                        () -> getString(resource)));
     }
 }

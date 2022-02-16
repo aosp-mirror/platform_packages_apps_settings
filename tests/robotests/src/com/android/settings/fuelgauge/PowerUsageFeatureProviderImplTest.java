@@ -24,8 +24,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Process;
 
+import com.android.internal.os.BatterySipper;
+
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -47,6 +48,8 @@ public class PowerUsageFeatureProviderImplTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
+    private BatterySipper mBatterySipper;
+    @Mock
     private PackageManager mPackageManager;
     private PowerUsageFeatureProviderImpl mPowerFeatureProvider;
 
@@ -60,44 +63,71 @@ public class PowerUsageFeatureProviderImplTest {
         when(mPackageManager.getPackagesForUid(UID_MEDIA)).thenReturn(PACKAGES_MEDIA);
         when(mPackageManager.getPackagesForUid(UID_SYSTEMUI)).thenReturn(PACKAGES_SYSTEMUI);
         mPowerFeatureProvider.mPackageManager = mPackageManager;
+        mBatterySipper.uidObj = new FakeUid(UID_OTHER);
     }
 
     @Test
     public void testIsTypeSystem_uidRoot_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(Process.ROOT_UID, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(Process.ROOT_UID);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
     public void testIsTypeSystem_uidSystem_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(Process.SYSTEM_UID, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(Process.SYSTEM_UID);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
     public void testIsTypeSystem_uidMedia_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(Process.MEDIA_UID, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(Process.MEDIA_UID);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
-    @Ignore
     public void testIsTypeSystem_appCalendar_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(UID_CALENDAR, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(UID_CALENDAR);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
-    @Ignore
     public void testIsTypeSystem_appMedia_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(UID_MEDIA, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(UID_MEDIA);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
-    @Ignore
     public void testIsTypeSystem_appSystemUi_returnTrue() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(UID_SYSTEMUI, null)).isTrue();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(UID_SYSTEMUI);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isTrue();
     }
 
     @Test
     public void testIsTypeSystem_uidOther_returnFalse() {
-        assertThat(mPowerFeatureProvider.isTypeSystem(UID_OTHER, null)).isFalse();
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        when(mBatterySipper.getUid()).thenReturn(UID_OTHER);
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testIsTypeSystem_uidObjNull_returnFalse() {
+        mBatterySipper.drainType = BatterySipper.DrainType.APP;
+        mBatterySipper.uidObj = null;
+
+        assertThat(mPowerFeatureProvider.isTypeSystem(mBatterySipper)).isFalse();
     }
 
     @Test
@@ -124,15 +154,5 @@ public class PowerUsageFeatureProviderImplTest {
                 com.android.internal.R.bool.config_smart_battery_available)).thenReturn(false);
 
         assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
-    }
-
-    @Test
-    public void testIsAdaptiveChargingSupported_returnFalse() {
-        assertThat(mPowerFeatureProvider.isAdaptiveChargingSupported()).isFalse();
-    }
-
-    @Test
-    public void testGetResumeChargeIntent_returnNull() {
-        assertThat(mPowerFeatureProvider.getResumeChargeIntent()).isNull();
     }
 }

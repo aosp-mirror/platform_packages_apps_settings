@@ -118,8 +118,7 @@ public class WifiEnabler implements SwitchWidgetController.OnSwitchChangeListene
     public void resume(Context context) {
         mContext = context;
         // Wi-Fi state is sticky, so just let the receiver update UI
-        mContext.registerReceiver(mReceiver, mIntentFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mReceiver, mIntentFilter);
         if (!mListeningToOnSwitchChange) {
             mSwitchWidget.startListening();
             mListeningToOnSwitchChange = true;

@@ -182,8 +182,7 @@ public class InternetUpdater implements AirplaneModeEnabler.OnAirplaneModeChange
     public void onResume() {
         mAirplaneModeEnabler.start();
         mConnectivityManager.registerDefaultNetworkCallback(mNetworkCallback);
-        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
     }
 
     /** @OnLifecycleEvent(ON_PAUSE) */
