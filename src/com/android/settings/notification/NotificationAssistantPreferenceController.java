@@ -24,7 +24,6 @@ import android.provider.Settings;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -72,11 +71,6 @@ public class NotificationAssistantPreferenceController extends TogglePreferenceC
             setNotificationAssistantGranted(null);
             return true;
         }
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_notifications;
     }
 
     protected void setNotificationAssistantGranted(ComponentName cn) {

@@ -16,9 +16,6 @@
 
 package com.android.settings.slices;
 
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
-
-import static com.android.settings.SettingsActivity.EXTRA_IS_FROM_SLICE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
@@ -205,15 +202,8 @@ public class SliceBuilderUtils {
     }
 
     public static Intent buildSearchResultPageIntent(Context context, String className, String key,
-            String screenTitle, int sourceMetricsCategory, int highlightMenuRes) {
+            String screenTitle, int sourceMetricsCategory) {
         final Bundle args = new Bundle();
-        String highlightMenuKey = null;
-        if (highlightMenuRes != 0) {
-            highlightMenuKey = context.getString(highlightMenuRes);
-            if (TextUtils.isEmpty(highlightMenuKey)) {
-                Log.w(TAG, "Invalid menu key res from: " + screenTitle);
-            }
-        }
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
         final Intent searchDestination = new SubSettingLauncher(context)
                 .setDestination(className)
@@ -221,24 +211,12 @@ public class SliceBuilderUtils {
                 .setTitleText(screenTitle)
                 .setSourceMetricsCategory(sourceMetricsCategory)
                 .toIntent();
-        searchDestination
-                .putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
-                .putExtra(EXTRA_IS_FROM_SLICE, true)
-                .putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY, highlightMenuKey)
+        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
                 .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
                 .setComponent(null);
         searchDestination.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         return searchDestination;
-    }
-
-    /**
-     * Build a search result page intent for {@link CustomSliceable}
-     */
-    public static Intent buildSearchResultPageIntent(Context context, String className, String key,
-            String screenTitle, int sourceMetricsCategory, CustomSliceable sliceable) {
-        return buildSearchResultPageIntent(context, className, key, screenTitle,
-                sourceMetricsCategory, sliceable.getSliceHighlightMenuRes());
     }
 
     public static Intent getContentIntent(Context context, SliceData sliceData) {
@@ -247,7 +225,7 @@ public class SliceBuilderUtils {
                 : sliceData.getScreenTitle().toString();
         final Intent intent = buildSearchResultPageIntent(context,
                 sliceData.getFragmentClassName(), sliceData.getKey(),
-                screenTitle, 0 /* TODO */, sliceData.getHighlightMenuRes());
+                screenTitle, 0 /* TODO */);
         intent.setClassName(context.getPackageName(), SubSettings.class.getName());
         intent.setData(contentUri);
         return intent;

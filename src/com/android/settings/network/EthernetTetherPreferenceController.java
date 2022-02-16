@@ -48,12 +48,13 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        mEthernetListener = (iface, isAvailable) -> updateState(mPreference);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        // Executor will execute to post the updateState event to a new handler which is created
-        // from the main looper when the {@link EthernetManager.Listener.onAvailabilityChanged}
-        // is triggerd.
-        mEthernetManager.addListener(mEthernetListener, r -> handler.post(r));
+        mEthernetListener = new EthernetManager.Listener() {
+            @Override
+            public void onAvailabilityChanged(String iface, boolean isAvailable) {
+                new Handler(Looper.getMainLooper()).post(() -> updateState(mPreference));
+            }
+        };
+        mEthernetManager.addListener(mEthernetListener);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

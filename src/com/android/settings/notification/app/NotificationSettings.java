@@ -270,9 +270,6 @@ abstract public class NotificationSettings extends DashboardFragment {
         String conversationId = intent != null
                 ? intent.getStringExtra(Settings.EXTRA_CONVERSATION_ID) : null;
         mChannel = mBackend.getChannel(mPkg, mUid, channelId, conversationId);
-        if (mChannel == null) {
-            mBackend.getChannel(mPkg, mUid, channelId, null);
-        }
     }
 
     private void loadConversation() {
@@ -337,10 +334,10 @@ abstract public class NotificationSettings extends DashboardFragment {
                 }
                 continue;
             }
+            // TODO(78660939): This should actually start a new task
             mAppRow.settingsIntent = intent
                     .setPackage(null)
-                    .setClassName(activityInfo.packageName, activityInfo.name)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    .setClassName(activityInfo.packageName, activityInfo.name);
             if (mChannel != null) {
                 mAppRow.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
             }

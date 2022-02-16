@@ -37,13 +37,15 @@ public class WorkPolicyInfoPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return mEnterpriseProvider.hasWorkPolicyInfo() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mEnterpriseProvider.hasWorkPolicyInfo()
+                ? AVAILABLE_UNSEARCHABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(getPreferenceKey(), preference.getKey())) {
-            mEnterpriseProvider.showWorkPolicyInfo(preference.getContext());
+            mEnterpriseProvider.showWorkPolicyInfo();
             return true;
         }
         return false;
