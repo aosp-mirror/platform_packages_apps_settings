@@ -36,6 +36,7 @@ import android.os.UserManager;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 
 /**
@@ -67,15 +68,17 @@ final class SetNewPasswordController {
     public static SetNewPasswordController create(Context context, Ui ui, Intent intent,
             IBinder activityToken) {
         // Trying to figure out which user is setting new password. If it is
-        // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD, it is the current user to set
-        // new password. Otherwise, it is the user who starts this activity
-        // setting new password.
-        final int userId;
+        // ACTION_SET_NEW_PARENT_PROFILE_PASSWORD or the calling user is not allowed to set
+        // separate profile challenge, it is the current user to set new password. Otherwise,
+        // it is the user who starts this activity setting new password.
+        int userId = ActivityManager.getCurrentUser();
         if (ACTION_SET_NEW_PASSWORD.equals(intent.getAction())) {
-            userId = Utils.getSecureTargetUser(activityToken,
+            final int callingUserId = Utils.getSecureTargetUser(activityToken,
                     UserManager.get(context), null, intent.getExtras()).getIdentifier();
-        } else {
-            userId = ActivityManager.getCurrentUser();
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
+            if (lockPatternUtils.isSeparateProfileChallengeAllowed(callingUserId)) {
+                userId = callingUserId;
+            }
         }
         // Create a wrapper of FingerprintManager for testing, see IFingerPrintManager for details.
         final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);

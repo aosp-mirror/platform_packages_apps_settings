@@ -35,7 +35,6 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
@@ -65,7 +64,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
     protected HandlerThread mWorkerThread;
 
     protected final WifiManager mWifiManager;
-    protected final CarrierConfigCache mCarrierConfigCache;
+    protected final CarrierConfigManager mCarrierConfigManager;
 
     public WifiPickerTrackerHelper(@NonNull Lifecycle lifecycle, @NonNull Context context,
             @Nullable WifiPickerTracker.WifiPickerTrackerCallback listener) {
@@ -89,7 +88,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
                 listener);
 
         mWifiManager = context.getSystemService(WifiManager.class);
-        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
     }
 
     /** @OnLifecycleEvent(ON_DESTROY) */
@@ -105,7 +104,7 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
 
     /** Return the enabled/disabled state of the carrier network provision */
     public boolean isCarrierNetworkProvisionEnabled(int subId) {
-        final PersistableBundle config = mCarrierConfigCache.getConfigForSubId(subId);
+        final PersistableBundle config = mCarrierConfigManager.getConfigForSubId(subId);
         if (config == null) {
             Log.e(TAG, "Could not get carrier config, subId:" + subId);
             return false;

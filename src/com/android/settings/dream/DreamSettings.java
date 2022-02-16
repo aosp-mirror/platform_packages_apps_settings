@@ -23,25 +23,18 @@ import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @SearchIndexable
@@ -52,7 +45,6 @@ public class DreamSettings extends DashboardFragment {
     static final String WHILE_DOCKED_ONLY = "while_docked_only";
     static final String EITHER_CHARGING_OR_DOCKED = "either_charging_or_docked";
     static final String NEVER_DREAM = "never";
-    private static final String COMPLICATIONS_CATEGORY_KEY = "dream_complication_category";
 
     @WhenToDream
     static int getSettingFromPrefKey(String key) {
@@ -138,34 +130,8 @@ public class DreamSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final DreamComplicationPickerController complicationPickerController =
-                new DreamComplicationPickerController(context);
-
-        controllers.add(complicationPickerController);
         controllers.add(new WhenToDreamPreferenceController(context));
-        controllers.add(new DreamPickerController(context));
-        controllers.add(new PreferenceCategoryController(context, COMPLICATIONS_CATEGORY_KEY)
-                .setChildren(Collections.singletonList(complicationPickerController)));
         return controllers;
-    }
-
-    @Override
-    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-            Bundle bundle) {
-
-        final ViewGroup root = getActivity().findViewById(android.R.id.content);
-        final Button previewButton = (Button) getActivity().getLayoutInflater().inflate(
-                R.layout.dream_preview_button, root, false);
-        root.addView(previewButton);
-
-        final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
-        previewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
-
-        final RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
-        previewButton.post(() -> {
-            recyclerView.setPadding(0, 0, 0, previewButton.getMeasuredHeight());
-        });
-        return recyclerView;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER

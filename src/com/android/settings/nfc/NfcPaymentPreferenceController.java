@@ -20,7 +20,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
-import android.os.UserManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,10 +127,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
     public CharSequence getSummary() {
         final PaymentAppInfo defaultApp = mPaymentBackend.getDefaultApp();
         if (defaultApp != null) {
-            UserManager um = mContext.createContextAsUser(
-                    defaultApp.userHandle, /*flags=*/0).getSystemService(UserManager.class);
-
-            return defaultApp.label + " (" + um.getUserName() + ")";
+            return defaultApp.label;
         } else {
             return mContext.getText(R.string.nfc_payment_default_not_set);
         }
@@ -222,15 +218,12 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
             }
 
             // Prevent checked callback getting called on recycled views
-            UserManager um = mContext.createContextAsUser(
-                    appInfo.userHandle, /*flags=*/0).getSystemService(UserManager.class);
-
             holder.radioButton.setOnCheckedChangeListener(null);
             holder.radioButton.setChecked(appInfo.isDefault);
-            holder.radioButton.setContentDescription(appInfo.label + " (" + um.getUserName() + ")");
+            holder.radioButton.setContentDescription(appInfo.label);
             holder.radioButton.setOnCheckedChangeListener(this);
             holder.radioButton.setTag(appInfo);
-            holder.radioButton.setText(appInfo.label + " (" + um.getUserName() + ")");
+            holder.radioButton.setText(appInfo.label);
             return convertView;
         }
 
@@ -252,8 +245,7 @@ public class NfcPaymentPreferenceController extends BasePreferenceController imp
 
         private void makeDefault(PaymentAppInfo appInfo) {
             if (!appInfo.isDefault) {
-                mPaymentBackend.setDefaultPaymentApp(appInfo.componentName,
-                        appInfo.userHandle.getIdentifier());
+                mPaymentBackend.setDefaultPaymentApp(appInfo.componentName);
             }
             final Dialog dialog = mPreference.getDialog();
             if (dialog != null) {

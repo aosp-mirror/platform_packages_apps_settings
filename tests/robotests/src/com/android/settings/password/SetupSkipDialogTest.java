@@ -26,7 +26,6 @@ import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -75,7 +74,6 @@ public class SetupSkipDialogTest {
     }
 
     @Test
-    @Ignore
     public void dialogMessage_whenSkipPinSetupForFace_shouldShownCorrectly() {
         SetupSkipDialog setupSkipDialog =
                 SetupSkipDialog.newInstance(true, false, false, false, true, false);

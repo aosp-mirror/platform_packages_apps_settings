@@ -52,8 +52,7 @@ public class AlwaysDiscoverable extends BroadcastReceiver {
         if (mStarted) {
             return;
         }
-        mContext.registerReceiver(this, mIntentFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(this, mIntentFilter);
         mStarted = true;
         if (mBluetoothAdapter.getScanMode()
                 != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {

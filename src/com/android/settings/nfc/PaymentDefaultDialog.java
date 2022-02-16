@@ -21,14 +21,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.cardemulation.CardEmulation;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
-import com.android.settings.nfc.PaymentBackend.PaymentInfo;
 
 import java.util.List;
 
@@ -41,7 +39,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
     private static final int PAYMENT_APP_MAX_CAPTION_LENGTH = 40;
 
     private PaymentBackend mBackend;
-    private PaymentInfo mNewDefault;
+    private ComponentName mNewDefault;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +56,9 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         ComponentName component = intent.getParcelableExtra(
                 CardEmulation.EXTRA_SERVICE_COMPONENT);
         String category = intent.getStringExtra(CardEmulation.EXTRA_CATEGORY);
-        int userId = intent.getIntExtra(CardEmulation.EXTRA_USERID, UserHandle.myUserId());
 
         setResult(RESULT_CANCELED);
-        if (!buildDialog(component, category, userId)) {
+        if (!buildDialog(component, category)) {
             finish();
         }
 
@@ -71,7 +68,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case BUTTON_POSITIVE:
-                mBackend.setDefaultPaymentApp(mNewDefault.componentName, mNewDefault.userId);
+                mBackend.setDefaultPaymentApp(mNewDefault);
                 setResult(RESULT_OK);
                 break;
             case BUTTON_NEGATIVE:
@@ -79,7 +76,7 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         }
     }
 
-    private boolean buildDialog(ComponentName component, String category, int userId) {
+    private boolean buildDialog(ComponentName component, String category) {
         if (component == null || category == null) {
             Log.e(TAG, "Component or category are null");
             return false;
@@ -96,12 +93,10 @@ public final class PaymentDefaultDialog extends AlertActivity implements
 
         List<PaymentAppInfo> services = mBackend.getPaymentAppInfos();
         for (PaymentAppInfo service : services) {
-            // check if userId matches
-            if (component.equals(service.componentName)
-                    && service.userHandle.getIdentifier() == userId) {
+            if (component.equals(service.componentName)) {
                 requestedPaymentApp = service;
             }
-            if (service.isDefault && service.userHandle.getIdentifier() == userId) {
+            if (service.isDefault) {
                 defaultPaymentApp = service;
             }
         }
@@ -112,17 +107,13 @@ public final class PaymentDefaultDialog extends AlertActivity implements
         }
 
         // Get current mode and default component
-        PaymentInfo defaultComponent = mBackend.getDefaultPaymentApp();
-        if (defaultComponent != null && defaultComponent.componentName.equals(component)
-                && defaultComponent.userId == userId) {
+        ComponentName defaultComponent = mBackend.getDefaultPaymentApp();
+        if (defaultComponent != null && defaultComponent.equals(component)) {
             Log.e(TAG, "Component " + component + " is already default.");
             return false;
         }
 
-        mNewDefault = new PaymentInfo();
-        mNewDefault.componentName = component;
-        mNewDefault.userId = userId;
-
+        mNewDefault = component;
         // Compose dialog; get
         final AlertController.AlertParams p = mAlertParams;
         if (defaultPaymentApp == null) {

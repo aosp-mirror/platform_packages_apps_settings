@@ -45,10 +45,6 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
-
-        <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -146,7 +142,7 @@
         <Preference android:key="clear_adb_keys"
                     android:title="@string/clear_adb_keys" />
 
-        <com.android.settingslib.PrimarySwitchPreference
+        <com.android.settings.widget.PrimarySwitchPreference
             android:fragment="com.android.settings.development.WirelessDebuggingFragment"
             android:key="toggle_adb_wireless"
             android:title="@string/enable_adb_wireless"
@@ -283,9 +279,9 @@
             android:summary="@string/wifi_scan_throttling_summary" />
 
         <SwitchPreference
-            android:key="wifi_non_persistent_mac_randomization"
-            android:title="@string/wifi_non_persistent_mac_randomization"
-            android:summary="@string/wifi_non_persistent_mac_randomization_summary" />
+            android:key="wifi_enhanced_mac_randomization"
+            android:title="@string/wifi_enhanced_mac_randomization"
+            android:summary="@string/wifi_enhanced_mac_randomization_summary" />
 
         <SwitchPreference
             android:key="mobile_data_always_on"
@@ -385,11 +381,6 @@
             android:dialogTitle="@string/bluetooth_max_connected_audio_devices_dialog_title"
             android:entries="@array/bluetooth_max_connected_audio_devices"
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
-
-        <SwitchPreference
-            android:key="nfc_stack_debuglog_enabled"
-            android:title="@string/nfc_stack_debuglog_title"
-            android:summary="@string/nfc_stack_debuglog_summary" />
 
     </PreferenceCategory>
 
@@ -609,14 +600,6 @@
             android:key="inactive_apps"
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
-
-        <Preference
-            android:key="tare"
-            android:title="@string/tare_title" >
-            <intent
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.development.tare.TareHomePage" />
-        </Preference>
 
         <SwitchPreference
             android:key="force_allow_on_external"
