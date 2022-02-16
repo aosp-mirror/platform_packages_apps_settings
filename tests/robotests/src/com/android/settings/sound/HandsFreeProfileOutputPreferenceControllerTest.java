@@ -129,7 +129,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
 
-        mBluetoothManager = new BluetoothManager(mContext);
+        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
 
         mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));
