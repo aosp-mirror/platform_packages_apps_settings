@@ -37,7 +37,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
@@ -61,7 +60,7 @@ public class WifiPickerTrackerHelperTest {
     @Mock
     public WifiManager mWifiManager;
     @Mock
-    public CarrierConfigCache mCarrierConfigCache;
+    public CarrierConfigManager mCarrierConfigManager;
     @Mock
     public WifiPickerTracker mWifiPickerTracker;
     @Mock
@@ -78,9 +77,10 @@ public class WifiPickerTrackerHelperTest {
     public void setUp() {
         final Context context = spy(ApplicationProvider.getApplicationContext());
         when(context.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(context.getSystemService(CarrierConfigManager.class))
+                .thenReturn(mCarrierConfigManager);
         mCarrierConfig = new PersistableBundle();
-        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
-        CarrierConfigCache.setTestInstance(context, mCarrierConfigCache);
+        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.wifiTrackerLibProvider
@@ -108,7 +108,7 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void isCarrierNetworkProvisionEnabled_getNullConfig_returnFalse() {
-        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(null);
+        doReturn(null).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(SUB_ID)).isFalse();
     }

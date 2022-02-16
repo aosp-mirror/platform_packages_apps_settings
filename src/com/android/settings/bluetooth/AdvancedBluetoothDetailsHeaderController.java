@@ -103,10 +103,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             new BluetoothAdapter.OnMetadataChangedListener() {
                 @Override
                 public void onMetadataChanged(BluetoothDevice device, int key, byte[] value) {
-                    if (DEBUG) {
-                        Log.d(TAG, String.format("Metadata updated in Device %s: %d = %s.", device,
-                                key, value == null ? null : new String(value)));
-                    }
+                    Log.i(TAG, String.format("Metadata updated in Device %s: %d = %s.", device, key,
+                            value == null ? null : new String(value)));
                     refresh();
                 }
             };

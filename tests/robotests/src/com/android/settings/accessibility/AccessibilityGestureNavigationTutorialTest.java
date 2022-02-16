@@ -22,41 +22,26 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
-
 import android.content.Context;
-import android.content.DialogInterface;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 /** Tests for {@link AccessibilityGestureNavigationTutorial}. */
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityGestureNavigationTutorialTest {
 
-    @Rule
-    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
-
-    @Mock
-    private DialogInterface.OnClickListener mMockOnClickListener;
-
-    private final Context mContext = ApplicationProvider.getApplicationContext();
+    private Context mContext;
     private int mShortcutTypes;
 
     @Before
     public void setUp() {
-        mContext.setTheme(R.style.Theme_AppCompat);
+        mContext = RuntimeEnvironment.application;
         mShortcutTypes = /* initial */ 0;
     }
 
@@ -100,29 +85,5 @@ public final class AccessibilityGestureNavigationTutorialTest {
         assertThat(createShortcutTutorialPages(mContext,
                 mShortcutTypes)).hasSize(/* expectedSize= */ 2);
         assertThat(alertDialog).isNotNull();
-    }
-
-    @Test
-    public void performClickOnNegativeButton_turnOnSoftwareShortcut_dismiss() {
-        mShortcutTypes |= UserShortcutType.SOFTWARE;
-        final AlertDialog alertDialog =
-                createAccessibilityTutorialDialog(mContext, mShortcutTypes);
-        alertDialog.show();
-
-        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
-
-        assertThat(alertDialog.isShowing()).isFalse();
-    }
-
-    @Test
-    public void performClickOnNegativeButton_turnOnSoftwareShortcut_callOnClickListener() {
-        mShortcutTypes |= UserShortcutType.SOFTWARE;
-        final AlertDialog alertDialog =
-                createAccessibilityTutorialDialog(mContext, mShortcutTypes, mMockOnClickListener);
-        alertDialog.show();
-
-        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
-
-        verify(mMockOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_NEGATIVE);
     }
 }

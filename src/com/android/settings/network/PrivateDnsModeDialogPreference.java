@@ -189,8 +189,6 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         if (linkInfo.isActionable()) {
             helpTextView.setText(AnnotationSpan.linkify(
                     context.getText(R.string.private_dns_help_message), linkInfo));
-        } else {
-            helpTextView.setText("");
         }
     }
 

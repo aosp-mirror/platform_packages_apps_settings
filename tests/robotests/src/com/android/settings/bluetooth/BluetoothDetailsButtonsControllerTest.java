@@ -35,7 +35,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.settings.R;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -43,7 +42,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
     private ActionButtonsPreference mButtonsPref;

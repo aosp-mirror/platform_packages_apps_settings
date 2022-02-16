@@ -64,10 +64,7 @@ public class BatteryManagerPreferenceController extends BasePreferenceController
             preference.setSummary(mContext.getResources().getQuantityString(
                     R.plurals.battery_manager_app_restricted, num, num));
         } else {
-            preference.setSummary(
-                    mPowerUsageFeatureProvider.isAdaptiveChargingSupported()
-                            ? R.string.battery_manager_summary
-                            : R.string.battery_manager_summary_unsupported);
+            preference.setSummary(R.string.battery_manager_summary);
         }
     }
 }
