@@ -14,9 +14,6 @@
 
 package com.android.settings.enterprise;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.ADMIN_ACTION_NONE;
-
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.text.format.DateUtils;
 
@@ -46,15 +43,9 @@ public abstract class AdminActionPreferenceControllerBase extends
     public void updateState(Preference preference) {
         final Date timestamp = getAdminActionTimestamp();
         preference.setSummary(timestamp == null ?
-                getEnterprisePrivacyNone() :
+                mContext.getString(R.string.enterprise_privacy_none) :
                 DateUtils.formatDateTime(mContext, timestamp.getTime(),
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE));
-    }
-
-    private String getEnterprisePrivacyNone() {
-        return mContext.getSystemService(DevicePolicyManager.class)
-                .getString(ADMIN_ACTION_NONE,
-                        () -> mContext.getString(R.string.enterprise_privacy_none));
     }
 
     @Override

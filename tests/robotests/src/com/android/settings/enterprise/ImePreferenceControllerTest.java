@@ -28,7 +28,6 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -59,7 +58,6 @@ public class ImePreferenceControllerTest {
     }
 
     @Test
-    @Ignore
     public void testUpdateState() {
         final Preference preference = new Preference(mContext, null, 0, 0);
 

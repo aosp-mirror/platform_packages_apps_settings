@@ -134,7 +134,7 @@ public class SimStatusDialogController implements LifecycleObserver {
                         }
                         if (SubscriptionManager.isValidSubscriptionId(nextSubId)) {
                             mTelephonyManager =
-                                    getTelephonyManager().createForSubscriptionId(nextSubId);
+                                    mTelephonyManager.createForSubscriptionId(nextSubId);
                             registerImsRegistrationCallback(nextSubId);
                         }
                     }
@@ -228,11 +228,6 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
     }
 
-    @VisibleForTesting
-    public TelephonyManager getTelephonyManager() {
-        return mTelephonyManager;
-    }
-
     public void initialize() {
         requestForUpdateEid();
 
@@ -240,7 +235,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             return;
         }
         mTelephonyManager =
-            getTelephonyManager().createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
+            mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
         mTelephonyCallback = new SimStatusDialogTelephonyCallback();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
@@ -251,8 +246,8 @@ public class SimStatusDialogController implements LifecycleObserver {
 
         // getServiceState() may return null when the subscription is inactive
         // or when there was an error communicating with the phone process.
-        final ServiceState serviceState = getTelephonyManager().getServiceState();
-        final SignalStrength signalStrength = getTelephonyManager().getSignalStrength();
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
+        final SignalStrength signalStrength = mTelephonyManager.getSignalStrength();
 
         updatePhoneNumber();
         updateServiceState(serviceState);
@@ -284,10 +279,9 @@ public class SimStatusDialogController implements LifecycleObserver {
         if (mSubscriptionInfo == null) {
             return;
         }
-        mTelephonyManager = getTelephonyManager().createForSubscriptionId(
+        mTelephonyManager = mTelephonyManager.createForSubscriptionId(
                 mSubscriptionInfo.getSubscriptionId());
-        getTelephonyManager()
-                .registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
+        mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
@@ -310,7 +304,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             if (mIsRegisteredListener) {
                 mSubscriptionManager.removeOnSubscriptionsChangedListener(
                         mOnSubscriptionsChangedListener);
-                getTelephonyManager().unregisterTelephonyCallback(mTelephonyCallback);
+                mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
                 if (mShowLatestAreaInfo) {
                     mContext.unregisterReceiver(mAreaInfoReceiver);
                 }
@@ -321,7 +315,7 @@ public class SimStatusDialogController implements LifecycleObserver {
 
         unregisterImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
-        getTelephonyManager().unregisterTelephonyCallback(mTelephonyCallback);
+        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
@@ -335,7 +329,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    public void updatePhoneNumber() {
+    protected void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
         mDialog.setText(PHONE_NUMBER_VALUE_ID,
                 DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
@@ -439,7 +433,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     private void updateLatestAreaInfo() {
         mShowLatestAreaInfo = Resources.getSystem().getBoolean(
                 com.android.internal.R.bool.config_showAreaUpdateInfoSettings)
-                && getTelephonyManager().getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA;
+                && mTelephonyManager.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA;
 
         if (mShowLatestAreaInfo) {
             // Bind cell broadcast service to get the area info. The info will be updated once
@@ -457,7 +451,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             resetSignalStrength();
         } else if (!Utils.isInService(mPreviousServiceState)) {
             // If ServiceState changed from out of service -> in service, update signal strength.
-            updateSignalStrength(getTelephonyManager().getSignalStrength());
+            updateSignalStrength(mTelephonyManager.getSignalStrength());
         }
 
         String serviceStateValue;
@@ -504,7 +498,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             return;
         }
 
-        ServiceState serviceState = getTelephonyManager().getServiceState();
+        ServiceState serviceState = mTelephonyManager.getServiceState();
         if (!Utils.isInService(serviceState)) {
             return;
         }
@@ -542,8 +536,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         String dataNetworkTypeName = null;
         String voiceNetworkTypeName = null;
         final int subId = mSubscriptionInfo.getSubscriptionId();
-        final int actualDataNetworkType = getTelephonyManager().getDataNetworkType();
-        final int actualVoiceNetworkType = getTelephonyManager().getVoiceNetworkType();
+        final int actualDataNetworkType = mTelephonyManager.getDataNetworkType();
+        final int actualVoiceNetworkType = mTelephonyManager.getVoiceNetworkType();
         final int overrideNetworkType = mTelephonyDisplayInfo == null
                 ? TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE
                 : mTelephonyDisplayInfo.getOverrideNetworkType();
@@ -610,7 +604,7 @@ public class SimStatusDialogController implements LifecycleObserver {
             mDialog.removeSettingFromScreen(ICCID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(ICCID_INFO_VALUE_ID);
         } else {
-            mDialog.setText(ICCID_INFO_VALUE_ID, getTelephonyManager().getSimSerialNumber());
+            mDialog.setText(ICCID_INFO_VALUE_ID, mTelephonyManager.getSimSerialNumber());
         }
     }
 
@@ -623,10 +617,10 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    public AtomicReference<String> getEid(int slotIndex) {
+    protected AtomicReference<String> getEid(int slotIndex) {
         boolean shouldHaveEid = false;
         String eid = null;
-        if (getTelephonyManager().getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
+        if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
             // Get EID per-SIM in multi-SIM mode
             final Map<Integer, Integer> mapping = mTelephonyManager
                     .getLogicalToPhysicalSlotMapping();
@@ -634,10 +628,10 @@ public class SimStatusDialogController implements LifecycleObserver {
                     SubscriptionManager.INVALID_SIM_SLOT_INDEX);
 
             if (pSlotId != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-                final List<UiccCardInfo> infos = getTelephonyManager().getUiccCardsInfo();
+                final List<UiccCardInfo> infos = mTelephonyManager.getUiccCardsInfo();
 
                 for (UiccCardInfo info : infos) {
-                    if (info.getPhysicalSlotIndex() == pSlotId) {
+                    if (info.getSlotIndex() == pSlotId) {
                         if (info.isEuicc()) {
                             shouldHaveEid = true;
                             eid = info.getEid();

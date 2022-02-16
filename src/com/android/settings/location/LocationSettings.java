@@ -16,8 +16,6 @@
 
 package com.android.settings.location;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCATION_SWITCH_TITLE;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.location.SettingInjectorService;
@@ -65,7 +63,6 @@ public class LocationSettings extends DashboardFragment implements
 
     private LocationSwitchBarController mSwitchBarController;
     private LocationEnabler mLocationEnabler;
-    private RecentLocationAccessPreferenceController mController;
 
     @Override
     public int getMetricsCategory() {
@@ -89,32 +86,15 @@ public class LocationSettings extends DashboardFragment implements
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        mController = use(RecentLocationAccessPreferenceController.class);
-        mController.init(this);
+        use(RecentLocationAccessPreferenceController.class).init(this);
         use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
         use(LocationSettingsFooterPreferenceController.class).init(this);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (mController != null) {
-            mController.clearPreferenceList();
-        }
-    }
-
-    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_settings;
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        replaceEnterpriseStringTitle("managed_profile_location_switch",
-                WORK_PROFILE_LOCATION_SWITCH_TITLE, R.string.managed_profile_location_switch_title);
     }
 
     @Override

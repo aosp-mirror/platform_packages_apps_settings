@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED;
-
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
@@ -46,7 +44,6 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterButton;
-import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 import java.util.List;
@@ -59,8 +56,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
 
-    private DevicePolicyManager mDevicePolicyManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mFingerprintManager = Utils.getFingerprintManagerOrNull(this);
@@ -71,8 +66,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
 
         super.onCreate(savedInstanceState);
-
-        mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -183,10 +176,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected String getDescriptionDisabledByAdmin() {
-        return mDevicePolicyManager.getString(
-                FINGERPRINT_UNLOCK_DISABLED,
-                () -> getString(R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled));
+    protected int getDescriptionResDisabledByAdmin() {
+        return R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled;
     }
 
     @Override
@@ -212,7 +203,6 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int checkMaxEnrolled() {
-        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -220,22 +210,13 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            final int maxFingerprintsEnrollableIfSUW = getApplicationContext().getResources()
-                    .getInteger(R.integer.suw_max_fingerprints_enrollable);
-            if (isSetupWizard) {
-                if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
-                    return R.string.fingerprint_intro_error_max;
-                } else {
-                    return 0;
-                }
-            } else if (numEnrolledFingerprints >= max) {
+            if (numEnrolledFingerprints >= max) {
                 return R.string.fingerprint_intro_error_max;
-            } else {
-                return 0;
             }
         } else {
             return R.string.fingerprint_intro_error_unknown;
         }
+        return 0;
     }
 
     @Override

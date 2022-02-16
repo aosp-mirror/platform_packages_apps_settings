@@ -18,7 +18,6 @@ package com.android.settings.development.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,7 +27,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothCodecConfig;
 import android.bluetooth.BluetoothCodecStatus;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -46,7 +44,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -56,8 +53,6 @@ public class BluetoothSampleRateDialogPreferenceControllerTest {
 
     @Mock
     private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -83,31 +78,29 @@ public class BluetoothSampleRateDialogPreferenceControllerTest {
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = spy(new BluetoothSampleRateDialogPreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
-        mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new BluetoothSampleRateDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-        mCodecConfigAAC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
-                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000
-                                | BluetoothCodecConfig.SAMPLE_RATE_88200)
-                .build();
-        mCodecConfigSBC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
-                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000)
-                .build();
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        mCodecConfigAAC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC,
+                BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT,
+                BluetoothCodecConfig.SAMPLE_RATE_48000 | BluetoothCodecConfig.SAMPLE_RATE_88200,
+                BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
+                BluetoothCodecConfig.CHANNEL_MODE_NONE,
+                0, 0, 0, 0);
+        mCodecConfigSBC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC,
+                BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT,
+                BluetoothCodecConfig.SAMPLE_RATE_96000,
+                BluetoothCodecConfig.BITS_PER_SAMPLE_NONE,
+                BluetoothCodecConfig.CHANNEL_MODE_NONE,
+                0, 0, 0, 0);
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
     }
 
     @Test
     public void writeConfigurationValues_selectDefault_setHighest() {
-        BluetoothCodecConfig mCodecConfigSBC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
-                .build();
+        mCodecConfigSBC = new BluetoothCodecConfig(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC);
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null,
-                Arrays.asList(mCodecConfigs));
+        mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
         when(mBluetoothA2dp.getCodecStatus(
             mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
@@ -139,10 +132,7 @@ public class BluetoothSampleRateDialogPreferenceControllerTest {
 
     @Test
     public void getSelectableIndex_verifyList() {
-        List<BluetoothCodecConfig> mCodecConfigs = new ArrayList() {{
-                    add(mCodecConfigAAC);
-                    add(mCodecConfigSBC);
-                }};
+        BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
         mCodecStatus = new BluetoothCodecStatus(mCodecConfigAAC, null, mCodecConfigs);
         when(mBluetoothA2dp.getCodecStatus(
             mActiveDevice)).thenReturn(mCodecStatus);

@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.debug.AdbManager;
-import android.debug.FingerprintAndPairDevice;
 import android.debug.IAdbManager;
 import android.debug.PairDevice;
 import android.os.Build;
@@ -227,8 +226,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
 
-        getActivity().registerReceiver(mReceiver, mIntentFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
     }
 
     @Override
@@ -316,12 +314,8 @@ public class WirelessDebuggingFragment extends DashboardFragment
             mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(
                     Context.ADB_SERVICE));
             try {
-                FingerprintAndPairDevice[] newList = mAdbManager.getPairedDevices();
-                Map<String, PairDevice> newMap = new HashMap<>();
-                for (FingerprintAndPairDevice pair : newList) {
-                    newMap.put(pair.keyFingerprint, pair.device);
-                }
-                updatePairedDevicePreferences(newMap);
+                Map<String, PairDevice> newList = mAdbManager.getPairedDevices();
+                updatePairedDevicePreferences(newList);
                 mConnectionPort = mAdbManager.getAdbWirelessPort();
                 if (mConnectionPort > 0) {
                     Log.i(TAG, "onEnabled(): connect_port=" + mConnectionPort);
@@ -440,7 +434,7 @@ public class WirelessDebuggingFragment extends DashboardFragment
             case FORGET_ACTION:
                 try {
                     p = (PairDevice) data.getParcelableExtra(PAIRED_DEVICE_EXTRA);
-                    mAdbManager.unpairDevice(p.guid);
+                    mAdbManager.unpairDevice(p.getGuid());
                 } catch (RemoteException e) {
                     Log.e(TAG, "Unable to forget the device");
                 }

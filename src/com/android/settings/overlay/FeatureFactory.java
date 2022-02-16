@@ -23,7 +23,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -112,13 +111,13 @@ public abstract class FeatureFactory {
     public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context);
 
     /**
-     * Retrieves implementation for Battery Status feature.
+     * Retrieve implementation for Battery Status feature.
      */
     public abstract BatteryStatusFeatureProvider getBatteryStatusFeatureProvider(
             Context context);
 
     /**
-     * Gets implementation for Battery Settings provider.
+     * Get implementation for Battery Settings provider.
      */
     public abstract BatterySettingsFeatureProvider getBatterySettingsFeatureProvider(
             Context context);
@@ -162,29 +161,24 @@ public abstract class FeatureFactory {
     public abstract WifiTrackerLibProvider getWifiTrackerLibProvider();
 
     /**
-     * Retrieves implementation for Extra App Info feature.
+     * Retrieve implementation for Extra App Info feature.
      */
     public abstract ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider();
 
     /**
-     * Retrieves implementation for SecuritySettings feature.
+     * Retrieve implementation for SecuritySettings feature.
      */
     public abstract SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider();
 
     /**
-     * Retrieves implementation for Game Settings feature.
+     * Retrieve implementation for Game Settings feature.
      */
     public abstract GameSettingsFeatureProvider getGameSettingsFeatureProvider();
 
     /**
-     * Retrieves implementation for Accessibility search index feature.
+     * Retrieve implementation for Accessibility search index feature.
      */
     public abstract AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider();
-
-    /**
-     * Retrieves implementation for Accessibility metrics category feature.
-     */
-    public abstract AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

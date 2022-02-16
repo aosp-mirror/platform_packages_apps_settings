@@ -66,7 +66,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,

@@ -21,6 +21,7 @@ import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.net.TrafficStats;
 import android.os.AsyncTask;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -28,7 +29,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
-import android.util.DataUnit;
 import android.util.Log;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ public abstract class MigrateEstimateTask extends AsyncTask<Void, Void, Long> {
     /**
      * Assume roughly a Class 10 card.
      */
-    private static final long SPEED_ESTIMATE_BPS = DataUnit.MEBIBYTES.toBytes(10);
+    private static final long SPEED_ESTIMATE_BPS = 10 * TrafficStats.MB_IN_BYTES;
 
     private final Context mContext;
 

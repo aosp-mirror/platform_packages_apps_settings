@@ -31,7 +31,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -54,15 +53,12 @@ public class TopLevelSecurityEntryPreferenceControllerTest {
 
     @Mock
     private Context mContext;
-    @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
 
         mPreference = new Preference(ApplicationProvider.getApplicationContext());
         mPreference.setKey(PREFERENCE_KEY);
@@ -124,21 +120,5 @@ public class TopLevelSecurityEntryPreferenceControllerTest {
                 mTopLevelSecurityEntryPreferenceController.handlePreferenceTreeClick(mPreference);
 
         assertThat(preferenceHandled).isFalse();
-    }
-
-    @Test
-    public void getAvailabilityStatus_whenSafetyCenterEnabled_returnsUnavailable() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
-
-        assertThat(mTopLevelSecurityEntryPreferenceController.getAvailabilityStatus())
-                .isEqualTo(TopLevelSecurityEntryPreferenceController.CONDITIONALLY_UNAVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_whenSafetyCenterDisabled_returnsAvailable() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
-
-        assertThat(mTopLevelSecurityEntryPreferenceController.getAvailabilityStatus())
-                .isEqualTo(TopLevelSecurityEntryPreferenceController.AVAILABLE);
     }
 }
