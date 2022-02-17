@@ -19,6 +19,7 @@ package com.android.settings.applications.managedomainurls;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class InstantAppWebActionPreferenceController extends TogglePreferenceController {
@@ -42,5 +43,10 @@ public class InstantAppWebActionPreferenceController extends TogglePreferenceCon
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.INSTANT_APPS_ENABLED, isChecked ? 1 : 0);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_apps;
     }
 }

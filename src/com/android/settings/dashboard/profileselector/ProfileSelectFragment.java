@@ -16,10 +16,13 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 import static android.content.Intent.EXTRA_USER_ID;
 
 import android.annotation.IntDef;
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -96,9 +99,6 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
      */
     public static final int WORK_TAB = 1;
-    private static final int[] LABEL = {
-            R.string.category_personal, R.string.category_work
-    };
 
     private ViewGroup mContentView;
 
@@ -107,6 +107,10 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         final Activity activity = getActivity();
+        final int titleResId = getTitleResId();
+        if (titleResId > 0) {
+            activity.setTitle(titleResId);
+        }
         final int selectedTab = convertPosition(getTabId(activity, getArguments()));
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
@@ -166,6 +170,14 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      */
     public abstract Fragment[] getFragments();
 
+    /**
+     * Returns a resource ID of the title
+     * Override this if the title needs to be updated dynamically.
+     */
+    public int getTitleResId() {
+        return 0;
+    }
+
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.placeholder_preference_screen;
@@ -221,14 +233,23 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mContext.getString(LABEL[convertPosition(position)]);
+            DevicePolicyManager devicePolicyManager =
+                    mContext.getSystemService(DevicePolicyManager.class);
+
+            if (convertPosition(position) == WORK_TAB) {
+                return devicePolicyManager.getString(WORK_CATEGORY_HEADER,
+                        () -> mContext.getString(R.string.category_work));
+            }
+
+            return devicePolicyManager.getString(PERSONAL_CATEGORY_HEADER,
+                    () -> mContext.getString(R.string.category_personal));
         }
     }
 
     private static int convertPosition(int index) {
         if (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())
                 == View.LAYOUT_DIRECTION_RTL) {
-            return LABEL.length - 1 - index;
+            return 1 - index;
         }
         return index;
     }

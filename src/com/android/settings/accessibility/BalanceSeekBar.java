@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import static android.view.HapticFeedbackConstants.CLOCK_TICK;
+
 import static com.android.settings.Utils.isNightMode;
 
 import android.content.Context;
@@ -154,7 +155,7 @@ public class BalanceSeekBar extends SeekBar {
         // Draw a vertical line at 50% that represents centred balance
         int seekBarCenter = (canvas.getHeight() - getPaddingBottom()) / 2;
         canvas.save();
-        canvas.translate((canvas.getWidth() - mCenterMarkerRect.right) / 2,
+        canvas.translate((canvas.getWidth() - mCenterMarkerRect.right - getPaddingEnd()) / 2,
                 seekBarCenter - (mCenterMarkerRect.bottom / 2));
         canvas.drawRect(mCenterMarkerRect, mCenterMarkerPaint);
         canvas.restore();

@@ -88,7 +88,8 @@ public class InternetUpdaterTest {
         mInternetUpdater.onResume();
 
         verify(mAirplaneModeEnabler).start();
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
+                any(int.class));
         verify(mConnectivityManager).registerDefaultNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
         // Unregister callbacks
