@@ -17,6 +17,8 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.SystemProperties;
 
 import androidx.annotation.VisibleForTesting;
@@ -38,12 +40,20 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
     static final String MAX_CONNECTED_AUDIO_DEVICES_PROPERTY =
             "persist.bluetooth.maxconnectedaudiodevices";
 
-    private final int mDefaultMaxConnectedAudioDevices;
+    private int mDefaultMaxConnectedAudioDevices = 0;
 
     public BluetoothMaxConnectedAudioDevicesPreferenceController(Context context) {
         super(context);
-        mDefaultMaxConnectedAudioDevices = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_bluetooth_max_connected_audio_devices);
+
+        try {
+            Resources res = context.getPackageManager().getResourcesForApplication(
+                    "com.android.bluetooth");
+            mDefaultMaxConnectedAudioDevices = res.getInteger(res.getIdentifier(
+                    "config_bluetooth_max_connected_audio_devices",
+                    "integer", "com.android.bluetooth"));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

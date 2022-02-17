@@ -18,6 +18,7 @@ package com.android.settings.wifi.details2;
 
 import android.content.Context;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -53,5 +54,10 @@ public class WifiAutoConnectPreferenceController2 extends TogglePreferenceContro
     public boolean setChecked(boolean isChecked) {
         mWifiEntry.setAutoJoinEnabled(isChecked);
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
     }
 }

@@ -15,14 +15,11 @@
  */
 package com.android.settings.location;
 
-import static android.Manifest.permission.WRITE_SECURE_SETTINGS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,11 +28,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.location.LocationManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -207,7 +202,7 @@ public class LocationEnablerTest {
         when(userHandle.getIdentifier()).thenReturn(5);
         userProfiles.add(userHandle);
         when(mUserManager.getUserProfiles()).thenReturn(userProfiles);
-        when(mUserManager.getUserHandle()).thenReturn(1);
+        when(mUserManager.getProcessUserId()).thenReturn(1);
         when(mUserManager.getUserInfo(5))
                 .thenReturn(new UserInfo(5, "user 5", UserInfo.FLAG_MANAGED_PROFILE));
     }

@@ -39,7 +39,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerExecutor;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -324,14 +323,14 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mStartTetheringCallback = new OnStartTetheringCallback(this);
         mTetheringEventCallback = new TetheringEventCallback();
-        mTm.registerTetheringEventCallback(new HandlerExecutor(mHandler), mTetheringEventCallback);
+        mTm.registerTetheringEventCallback(r -> mHandler.post(r), mTetheringEventCallback);
 
         mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         registerReceiver();
 
         mEthernetListener = new EthernetListener();
         if (mEm != null)
-            mEm.addListener(mEthernetListener);
+            mEm.addListener(mEthernetListener, r -> mHandler.post(r));
 
         updateUsbState();
         updateBluetoothAndEthernetState();

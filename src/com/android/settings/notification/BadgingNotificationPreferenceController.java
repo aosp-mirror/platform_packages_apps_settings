@@ -30,6 +30,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -85,6 +86,11 @@ public class BadgingNotificationPreferenceController extends TogglePreferenceCon
     @Override
     public boolean isSliceable() {
         return TextUtils.equals(getPreferenceKey(), "notification_badging");
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_notifications;
     }
 
     @Override

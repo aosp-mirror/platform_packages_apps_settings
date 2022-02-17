@@ -1256,7 +1256,8 @@ public class ApnEditor extends SettingsPreferenceFragment
             if (!readOnlyApnTypes.contains(apnType)
                     && !apnType.equals(APN_TYPE_IA)
                     && !apnType.equals(APN_TYPE_EMERGENCY)
-                    && !apnType.equals(APN_TYPE_MCX)) {
+                    && !apnType.equals(APN_TYPE_MCX)
+                    && !apnType.equals(APN_TYPE_IMS)) {
                 if (first) {
                     first = false;
                 } else {

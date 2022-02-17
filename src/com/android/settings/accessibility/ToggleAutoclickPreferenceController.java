@@ -35,7 +35,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.Map;
 
@@ -43,7 +43,7 @@ import java.util.Map;
  * Controller class that controls accessibility autoclick settings.
  */
 public class ToggleAutoclickPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
+        LifecycleObserver, SelectorWithWidgetPreference.OnClickListener, PreferenceControllerMixin {
 
     @VisibleForTesting
     static final String CONTROL_AUTOCLICK_DELAY_SECURE =
@@ -67,7 +67,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     private final ContentResolver mContentResolver;
     private final Resources mResources;
     private OnChangeListener mOnChangeListener;
-    private RadioButtonPreference mDelayModePref;
+    private SelectorWithWidgetPreference mDelayModePref;
 
     /**
      * Seek bar preference for autoclick delay value. The seek bar has values between 0 and
@@ -109,7 +109,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mDelayModePref = (RadioButtonPreference)
+        mDelayModePref = (SelectorWithWidgetPreference)
                 screen.findPreference(getPreferenceKey());
         mDelayModePref.setOnClickListener(this);
         mSeekBerPreference = (LayoutPreference) screen.findPreference(KEY_AUTOCLICK_CUSTOM_SEEKBAR);
@@ -117,7 +117,7 @@ public class ToggleAutoclickPreferenceController extends BasePreferenceControlle
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference preference) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         final int value = mAccessibilityAutoclickKeyToValueMap.get(mPreferenceKey);
         handleRadioButtonPreferenceChange(value);
         if (mOnChangeListener != null) {

@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -35,7 +35,7 @@
             android:lineSpacingExtra="@dimen/sud_description_line_spacing_extra"
             android:textAppearance="@*android:style/TextAppearance.DeviceDefault.Body1"
             android:textColor="?android:attr/textColorPrimary" />
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <FrameLayout
         android:layout_width="match_parent"
