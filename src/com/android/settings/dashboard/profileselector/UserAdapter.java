@@ -16,7 +16,12 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_USER_LABEL;
+
 import android.app.ActivityManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.database.DataSetObserver;
@@ -54,9 +59,11 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             Drawable icon;
             if (userInfo.isManagedProfile()) {
-                mName = context.getString(R.string.managed_user_title);
-                icon = context.getDrawable(
-                        com.android.internal.R.drawable.ic_corp_badge);
+                mName = context.getSystemService(DevicePolicyManager.class).getString(
+                        WORK_PROFILE_USER_LABEL,
+                        () -> context.getString(R.string.managed_user_title));
+                icon = context.getPackageManager().getUserBadgeForDensityNoBackground(
+                        userHandle, /* density= */ 0);
             } else {
                 mName = userInfo.name;
                 final int userId = userInfo.id;
@@ -71,20 +78,24 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
         }
 
         private static Drawable encircle(Context context, Drawable icon) {
-            return new UserIconDrawable(UserIconDrawable.getSizeForList(context))
+            return new UserIconDrawable(UserIconDrawable.getDefaultSize(context))
                     .setIconDrawable(icon).bake();
         }
     }
 
     private ArrayList<UserDetails> data;
+    private final Context mContext;
     private final LayoutInflater mInflater;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public UserAdapter(Context context, ArrayList<UserDetails> users) {
         if (users == null) {
             throw new IllegalArgumentException("A list of user details must be provided");
         }
+        mContext = context;
         this.data = users;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     public UserHandle getUserHandle(int position) {
@@ -104,13 +115,15 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
         return row;
     }
 
-    private int getTitle(UserDetails user) {
+    private String getTitle(UserDetails user) {
         int userHandle = user.mUserHandle.getIdentifier();
         if (userHandle == UserHandle.USER_CURRENT
                 || userHandle == ActivityManager.getCurrentUser()) {
-            return R.string.category_personal;
+            return mDevicePolicyManager.getString(PERSONAL_CATEGORY_HEADER,
+                    () -> mContext.getString(R.string.category_personal));
         } else {
-            return R.string.category_work;
+            return mDevicePolicyManager.getString(WORK_CATEGORY_HEADER,
+                    () -> mContext.getString(R.string.category_work));
         }
     }
 

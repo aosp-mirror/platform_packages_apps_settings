@@ -22,6 +22,7 @@ import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -79,5 +80,10 @@ public abstract class SensorToggleController extends TogglePreferenceController 
                 getSensor(),
                 (sensor, blocked) -> updateState(screen.findPreference(mPreferenceKey)),
                 mCallbackExecutor);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_privacy;
     }
 }

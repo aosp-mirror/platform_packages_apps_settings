@@ -305,6 +305,7 @@ public class BluetoothPairingDetailTest {
         when(cachedDevice.isConnected()).thenReturn(true);
         when(cachedDevice.getDevice()).thenReturn(device2);
         when(cachedDevice.getAddress()).thenReturn(TEST_DEVICE_ADDRESS_B);
+        when(cachedDevice.getIdentityAddress()).thenReturn(TEST_DEVICE_ADDRESS_B);
 
         mFragment.onProfileConnectionStateChanged(cachedDevice, BluetoothProfile.A2DP,
                 BluetoothAdapter.STATE_CONNECTED);

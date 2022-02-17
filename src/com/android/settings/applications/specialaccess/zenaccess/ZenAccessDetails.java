@@ -53,10 +53,11 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
         // If this app didn't declare this permission in their manifest, don't bother showing UI.
         final Set<String> needAccessApps =
                 ZenAccessController.getPackagesRequestingNotificationPolicyAccess();
-        if (!needAccessApps.contains(mPackageName)) {
-            return false;
+        if (needAccessApps.contains(mPackageName)) {
+            updatePreference(context, findPreference(SWITCH_PREF_KEY));
+        } else {
+            finish();
         }
-        updatePreference(context, findPreference(SWITCH_PREF_KEY));
         return true;
     }
 
