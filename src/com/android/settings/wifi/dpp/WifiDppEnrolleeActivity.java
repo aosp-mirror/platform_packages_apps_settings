@@ -18,11 +18,14 @@ package com.android.settings.wifi.dpp;
 
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
+import android.util.EventLog;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.android.settings.R;
+import com.android.settingslib.wifi.WifiRestrictionsCache;
 
 /**
  * To provision "this" device with specified Wi-Fi network.
@@ -37,6 +40,9 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
     static final String ACTION_ENROLLEE_QR_CODE_SCANNER =
             "android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER";
 
+    @VisibleForTesting
+    protected WifiRestrictionsCache mWifiRestrictionsCache;
+
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.SETTINGS_WIFI_DPP_ENROLLEE;
@@ -47,6 +53,14 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         String action = intent != null ? intent.getAction() : null;
         if (action == null) {
             finish();
+            return;
+        }
+
+        if (!isWifiConfigAllowed()) {
+            Log.e(TAG, "The user is not allowed to configure Wi-Fi.");
+            finish();
+            EventLog.writeEvent(0x534e4554, "202017876", getApplicationContext().getUserId(),
+                    "The user is not allowed to configure Wi-Fi.");
             return;
         }
 
@@ -61,7 +75,15 @@ public class WifiDppEnrolleeActivity extends WifiDppBaseActivity implements
         }
     }
 
-    private void showQrCodeScannerFragment(String ssid) {
+    private boolean isWifiConfigAllowed() {
+        if (mWifiRestrictionsCache == null) {
+            mWifiRestrictionsCache = WifiRestrictionsCache.getInstance(getApplicationContext());
+        }
+        return mWifiRestrictionsCache.isConfigWifiAllowed();
+    }
+
+    @VisibleForTesting
+    protected void showQrCodeScannerFragment(String ssid) {
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);

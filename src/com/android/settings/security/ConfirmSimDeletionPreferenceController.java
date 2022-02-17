@@ -26,6 +26,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.helper.ConfirmationSimDeletionPredicate;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -34,7 +35,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 /** Enable/disable user confirmation before deleting an eSim */
 public class ConfirmSimDeletionPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener{
-    public static final String KEY_CONFIRM_SIM_DELETION = "confirm_sim_deletion";
+    public static final String KEY_CONFIRM_SIM_DELETION =
+            ConfirmationSimDeletionPredicate.KEY_CONFIRM_SIM_DELETION;
     private boolean mConfirmationDefaultOn;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 

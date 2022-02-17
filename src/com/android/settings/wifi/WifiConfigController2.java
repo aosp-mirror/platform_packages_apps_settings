@@ -169,6 +169,7 @@ public class WifiConfigController2 implements TextWatcher,
     private String mUnspecifiedCertString;
     private String mMultipleCertSetString;
     private String mUseSystemCertsString;
+    private String mTrustOnFirstUse;
     private String mDoNotProvideEapUserCertString;
     @VisibleForTesting String mInstallCertsString;
 
@@ -219,6 +220,7 @@ public class WifiConfigController2 implements TextWatcher,
     Integer[] mSecurityInPosition;
 
     private final WifiManager mWifiManager;
+    private boolean mIsTrustOnFirstUseSupported;
 
     private final List<SubscriptionInfo> mActiveSubscriptionInfos = new ArrayList<>();
 
@@ -251,6 +253,7 @@ public class WifiConfigController2 implements TextWatcher,
         mWifiEntrySecurity = (wifiEntry == null) ? WifiEntry.SECURITY_NONE :
                 wifiEntry.getSecurity();
         mMode = mode;
+        mIsTrustOnFirstUseSupported = mWifiManager.isTrustOnFirstUseSupported();
 
         final Resources res = mContext.getResources();
 
@@ -268,6 +271,7 @@ public class WifiConfigController2 implements TextWatcher,
         mUnspecifiedCertString = mContext.getString(R.string.wifi_unspecified);
         mMultipleCertSetString = mContext.getString(R.string.wifi_multiple_cert_added);
         mUseSystemCertsString = mContext.getString(R.string.wifi_use_system_certs);
+        mTrustOnFirstUse = mContext.getString(R.string.wifi_trust_on_first_use);
         mDoNotProvideEapUserCertString =
             mContext.getString(R.string.wifi_do_not_provide_eap_user_cert);
         mInstallCertsString = mContext.getString(R.string.wifi_install_credentials);
@@ -484,7 +488,7 @@ public class WifiConfigController2 implements TextWatcher,
     }
 
     boolean isValidSaePassword(String password) {
-        if (password.length() >= 1 && password.length() <= 63) {
+        if (password.length() >= 1 && password.length() <= 128) {
             return true;
         }
         return false;
@@ -707,6 +711,8 @@ public class WifiConfigController2 implements TextWatcher,
                 config.enterpriseConfig.setDomainSuffixMatch(mEapDomainView.getText().toString());
                 if (caCert.equals(mUnspecifiedCertString)) {
                     // ca_cert already set to null, so do nothing.
+                } else if (mIsTrustOnFirstUseSupported && caCert.equals(mTrustOnFirstUse)) {
+                    config.enterpriseConfig.enableTrustOnFirstUse(true);
                 } else if (caCert.equals(mUseSystemCertsString)) {
                     config.enterpriseConfig.setCaPath(SYSTEM_CA_STORE_PATH);
                 } else if (caCert.equals(mMultipleCertSetString)) {
@@ -1120,7 +1126,12 @@ public class WifiConfigController2 implements TextWatcher,
             } else {
                 String[] caCerts = enterpriseConfig.getCaCertificateAliases();
                 if (caCerts == null) {
-                    setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+                    if (mIsTrustOnFirstUseSupported
+                            && enterpriseConfig.isTrustOnFirstUseEnabled()) {
+                        setSelection(mEapCaCertSpinner, mTrustOnFirstUse);
+                    } else {
+                        setSelection(mEapCaCertSpinner, mUnspecifiedCertString);
+                    }
                 } else if (caCerts.length == 1) {
                     setSelection(mEapCaCertSpinner, caCerts[0]);
                 } else {
@@ -1263,7 +1274,9 @@ public class WifiConfigController2 implements TextWatcher,
 
         if (mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String eapCertSelection = (String) mEapCaCertSpinner.getSelectedItem();
-            if (eapCertSelection.equals(mUnspecifiedCertString)) {
+            if (eapCertSelection.equals(mUnspecifiedCertString)
+                    || (mIsTrustOnFirstUseSupported
+                            && eapCertSelection.equals(mTrustOnFirstUse))) {
                 // Domain suffix matching is not relevant if the user hasn't chosen a CA
                 // certificate yet, or chooses not to validate the EAP server.
                 setDomainInvisible();
@@ -1482,11 +1495,15 @@ public class WifiConfigController2 implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final String[] displayNames = SubscriptionUtil.getUniqueSubscriptionDisplayNames(
-                mContext).values().stream().toArray(String[]::new);
-        mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
+        final ArrayList<CharSequence> displayNames = new ArrayList<>();
+        for (SubscriptionInfo activeSubInfo : mActiveSubscriptionInfos) {
+            displayNames.add(
+                    SubscriptionUtil.getUniqueSubscriptionDisplayName(activeSubInfo, mContext));
+        }
+        mEapSimSpinner.setAdapter(
+                getSpinnerAdapter(displayNames.toArray(new String[displayNames.size()])));
         mEapSimSpinner.setSelection(0 /* position */);
-        if (displayNames.length == 1) {
+        if (displayNames.size() == 1) {
             mEapSimSpinner.setEnabled(false);
         }
     }
@@ -1507,6 +1524,9 @@ public class WifiConfigController2 implements TextWatcher,
         }
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
+            if (mIsTrustOnFirstUseSupported) {
+                certs.add(mTrustOnFirstUse);
+            }
             certs.add(mInstallCertsString);
         }
 

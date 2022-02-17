@@ -95,6 +95,11 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         return mUiModeManager.setNightModeActivated(isChecked);
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
     private void showDarkModeDialog() {
         final DarkUIInfoDialogFragment frag = new DarkUIInfoDialogFragment();
         if (mFragment != null && mFragment.getFragmentManager() != null) {

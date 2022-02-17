@@ -42,13 +42,13 @@
         android:title="@string/one_handed_mode_swipe_down_category"
         settings:controller="com.android.settings.gestures.OneHandedPreferenceCategoryController">
 
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="gesture_one_handed_action_pull_screen_down"
             android:title="@string/one_handed_action_pull_down_screen_title"
             android:summary="@string/one_handed_action_pull_down_screen_summary"
             settings:controller="com.android.settings.gestures.OneHandedActionPullDownPrefController"/>
 
-        <com.android.settingslib.widget.RadioButtonPreference
+        <com.android.settingslib.widget.SelectorWithWidgetPreference
             android:key="gesture_one_handed_action_show_notification"
             android:title="@string/one_handed_action_show_notification_title"
             android:summary="@string/one_handed_action_show_notification_summary"

@@ -43,10 +43,12 @@ public class ZenRuleStarredContactsPreferenceController extends
         mPriorityCategory = priorityCategory;
         mPackageManager = mContext.getPackageManager();
 
-        mStarredContactsIntent = new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION);
+        mStarredContactsIntent = new Intent(Contacts.Intents.UI.LIST_STARRED_ACTION)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         mFallbackIntent =  new Intent(Intent.ACTION_MAIN);
         mFallbackIntent.addCategory(Intent.CATEGORY_APP_CONTACTS);
+        mFallbackIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 
     @Override

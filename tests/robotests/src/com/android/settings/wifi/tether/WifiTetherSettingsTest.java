@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.TetheringManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -43,10 +44,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowFragment;
-import com.android.settings.testutils.shadow.ShadowWifiManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -60,13 +59,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowWifiManager.class})
 public class WifiTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
 
     private Context mContext;
     private WifiTetherSettings mWifiTetherSettings;
 
+    @Mock
+    private WifiManager mWifiManager;
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
@@ -79,6 +79,7 @@ public class WifiTetherSettingsTest {
         mContext = spy(RuntimeEnvironment.application);
 
         MockitoAnnotations.initMocks(this);
+        doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(mTetheringManager).when(mContext).getSystemService(Context.TETHERING_SERVICE);
@@ -89,7 +90,6 @@ public class WifiTetherSettingsTest {
     }
 
     @Test
-    @Ignore
     public void wifiTetherNonIndexableKeys_tetherAvailable_keysNotReturned() {
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, false);
         // To let TetherUtil.isTetherAvailable return true, select one of the combinations

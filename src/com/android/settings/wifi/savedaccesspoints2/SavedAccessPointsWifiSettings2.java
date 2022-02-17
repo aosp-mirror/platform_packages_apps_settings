@@ -19,7 +19,6 @@ package com.android.settings.wifi.savedaccesspoints2;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,7 +38,7 @@ import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.wifitrackerlib.SavedNetworkTracker;
 
 import java.time.Clock;
@@ -101,7 +100,6 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         mSavedNetworkTracker = new SavedNetworkTracker(getSettingsLifecycle(), context,
                 context.getSystemService(WifiManager.class),
                 context.getSystemService(ConnectivityManager.class),
-                context.getSystemService(NetworkScoreManager.class),
                 new Handler(Looper.getMainLooper()),
                 mWorkerThread.getThreadHandler(),
                 elapsedRealtimeClock,
@@ -126,7 +124,7 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
     }
 
     /**
-     * Shows {@link WifiNetworkDetailsFragment2} for assigned key of {@link WifiEntry}.
+     * Shows {@link WifiNetworkDetailsFragment} for assigned key of {@link WifiEntry}.
      */
     public void showWifiPage(@NonNull String key, CharSequence title) {
         removeDialog(WifiSettings.WIFI_DIALOG_ID);
@@ -137,11 +135,11 @@ public class SavedAccessPointsWifiSettings2 extends DashboardFragment
         }
 
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, key);
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, key);
 
         new SubSettingLauncher(getContext())
                 .setTitleText(title)
-                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();

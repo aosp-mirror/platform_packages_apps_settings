@@ -26,6 +26,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
@@ -96,6 +97,11 @@ public class AccessibilitySlicePreferenceController extends TogglePreferenceCont
     @Override
     public boolean isPublicSlice() {
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 
     private AccessibilityServiceInfo getAccessibilityServiceInfo() {
