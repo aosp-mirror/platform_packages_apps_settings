@@ -44,7 +44,6 @@ import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
 import com.android.settings.deviceinfo.storage.VolumeSizesLoader;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -159,15 +158,6 @@ public class StorageCategoryFragment extends DashboardFragment
         mUserId = Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
 
         super.onAttach(context);
-    }
-
-    @Override
-    public void onViewCreated(View v, Bundle savedInstanceState) {
-        super.onViewCreated(v, savedInstanceState);
-
-        EntityHeaderController.newInstance(getActivity(), this /*fragment*/,
-                null /* header view */)
-                .setRecyclerView(getListView(), getSettingsLifecycle());
     }
 
     @Override
@@ -286,6 +276,7 @@ public class StorageCategoryFragment extends DashboardFragment
             metricsFeatureProvider.logClickedPreference(preference, getMetricsCategory());
             metricsFeatureProvider.action(context, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
             final Intent intent = new Intent(StorageManager.ACTION_MANAGE_STORAGE);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivityAsUser(intent, new UserHandle(mUserId));
             return true;
         }

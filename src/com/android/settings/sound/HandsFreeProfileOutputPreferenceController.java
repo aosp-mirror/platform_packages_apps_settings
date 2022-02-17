@@ -16,7 +16,7 @@
 
 package com.android.settings.sound;
 
-import static android.bluetooth.IBluetoothHearingAid.HI_SYNC_ID_INVALID;
+import static android.bluetooth.BluetoothHearingAid.HI_SYNC_ID_INVALID;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;

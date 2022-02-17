@@ -267,7 +267,8 @@ public class ApnSettings extends RestrictedSettingsFragment
             return;
         }
 
-        getActivity().registerReceiver(mReceiver, mIntentFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         restartPhoneStateListener(mSubId);
 
@@ -301,7 +302,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
-        final UserHandle user = UserHandle.of(mUserManager.getUserHandle());
+        final UserHandle user = UserHandle.of(mUserManager.getProcessUserId());
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, user)
                 && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
                         user)) {
@@ -322,6 +323,8 @@ public class ApnSettings extends RestrictedSettingsFragment
         final StringBuilder where =
                 new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
+        // Remove Emergency type, users should not mess with that
+        where.append(" AND NOT (type='emergency')");
 
         if (mHideImsApn) {
             where.append(" AND NOT (type='ims')");

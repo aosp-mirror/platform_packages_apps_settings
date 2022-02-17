@@ -48,8 +48,12 @@ public class ParentalConsentHelper {
     private static final String KEY_FINGERPRINT_CONSENT = "fingerprint";
     private static final String KEY_IRIS_CONSENT = "iris";
 
-    private final boolean mRequireFace;
-    private final boolean mRequireFingerprint;
+    private static final String KEY_FACE_CONSENT_STRINGS = "face_strings";
+    private static final String KEY_FINGERPRINT_CONSENT_STRINGS = "fingerprint_strings";
+    private static final String KEY_IRIS_CONSENT_STRINGS = "iris_strings";
+
+    private boolean mRequireFace;
+    private boolean mRequireFingerprint;
 
     private long mGkPwHandle;
     @Nullable
@@ -60,15 +64,19 @@ public class ParentalConsentHelper {
     /**
      * Helper for aggregating user consent.
      *
-     * @param requireFace if face consent should be shown
-     * @param requireFingerprint if fingerprint consent should be shown
      * @param gkPwHandle for launched intents
      */
-    public ParentalConsentHelper(boolean requireFace, boolean requireFingerprint,
-            @Nullable Long gkPwHandle) {
+    public ParentalConsentHelper(@Nullable Long gkPwHandle) {
+        mGkPwHandle = gkPwHandle != null ? gkPwHandle : 0L;
+    }
+
+    /**
+     * @param requireFace if face consent should be shown
+     * @param requireFingerprint if fingerprint consent should be shown
+     */
+    public void setConsentRequirement(boolean requireFace, boolean requireFingerprint) {
         mRequireFace = requireFace;
         mRequireFingerprint = requireFingerprint;
-        mGkPwHandle = gkPwHandle != null ? gkPwHandle : 0L;
     }
 
     /**
@@ -152,9 +160,14 @@ public class ParentalConsentHelper {
     public Bundle getConsentResult() {
         final Bundle result = new Bundle();
         result.putBoolean(KEY_FACE_CONSENT, mConsentFace != null ? mConsentFace : false);
+        result.putIntArray(KEY_FACE_CONSENT_STRINGS,
+                FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES);
         result.putBoolean(KEY_FINGERPRINT_CONSENT,
                 mConsentFingerprint != null ? mConsentFingerprint : false);
+        result.putIntArray(KEY_FINGERPRINT_CONSENT_STRINGS,
+                FingerprintEnrollParentalConsent.CONSENT_STRING_RESOURCES);
         result.putBoolean(KEY_IRIS_CONSENT, false);
+        result.putIntArray(KEY_IRIS_CONSENT_STRINGS, new int[0]);
         return result;
     }
 

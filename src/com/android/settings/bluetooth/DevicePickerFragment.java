@@ -107,6 +107,8 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     @Override
     public void onStart() {
         super.onStart();
+        mLocalManager.getCachedDeviceManager().clearNonBondedDevices();
+        removeAllDevices();
         addCachedDevices();
         mSelectedDevice = null;
         if (mScanAllowed) {

@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.view.RotationPolicy;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -62,7 +63,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             updateState(mPreference);
         }
     };
-    private Preference mPreference;
+    protected Preference mPreference;
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
@@ -83,8 +84,12 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         if (!isRotationResolverServiceAvailable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        return !RotationPolicy.isRotationLocked(mContext) && hasSufficientPermission(mContext)
+        return !isRotationLocked() && hasSufficientPermission(mContext)
                 && !isCameraLocked() && !isPowerSaveMode() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
+    }
+
+    protected boolean isRotationLocked() {
+        return RotationPolicy.isRotationLocked(mContext);
     }
 
     @Override
@@ -135,7 +140,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
 
     @Override
     public boolean isChecked() {
-        return !RotationPolicy.isRotationLocked(mContext) && hasSufficientPermission(mContext)
+        return !isRotationLocked() && hasSufficientPermission(mContext)
                 && !isCameraLocked() && !isPowerSaveMode() && Settings.Secure.getInt(
                 mContext.getContentResolver(),
                 CAMERA_AUTOROTATE, 0) == 1;
@@ -157,7 +162,15 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         return true;
     }
 
-    static boolean isRotationResolverServiceAvailable(Context context) {
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
+    /**
+     * Returns true if there is a {@link RotationResolverService} available
+     */
+    public static boolean isRotationResolverServiceAvailable(Context context) {
         final PackageManager packageManager = context.getPackageManager();
         final String resolvePackage = packageManager.getRotationResolverPackageName();
         if (TextUtils.isEmpty(resolvePackage)) {

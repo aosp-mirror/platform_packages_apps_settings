@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
@@ -58,5 +59,10 @@ public class BatterySaverStickyPreferenceController extends TogglePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_battery;
     }
 }
