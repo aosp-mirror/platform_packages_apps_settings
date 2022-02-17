@@ -26,8 +26,11 @@ import android.os.UserHandle;
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+import com.android.settings.accessibility.ShortcutPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.widget.IllustrationPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * Fragment for One-handed mode settings
@@ -39,6 +42,8 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
     private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
+    protected static final String ONE_HANDED_MAIN_SWITCH_KEY =
+            "gesture_one_handed_mode_enabled_main_switch";
     private String mFeatureName;
     private OneHandedSettingsUtils mUtils;
 
@@ -47,16 +52,22 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
         super.updatePreferenceStates();
 
-        final IllustrationPreference preference =
-                (IllustrationPreference) getPreferenceScreen().findPreference(
-                        ONE_HANDED_ILLUSTRATION_KEY);
-        if (preference != null) {
-            final boolean isSwipeDownNotification =
-                    OneHandedSettingsUtils.isSwipeDownNotificationEnabled(getContext());
-            preference.setLottieAnimationResId(
-                    isSwipeDownNotification ? R.raw.lottie_swipe_for_notifications
-                            : R.raw.lottie_one_hand_mode);
-        }
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(ONE_HANDED_ILLUSTRATION_KEY);
+        final boolean isSwipeDownNotification =
+                OneHandedSettingsUtils.isSwipeDownNotificationEnabled(getContext());
+        illustrationPreference.setLottieAnimationResId(
+                isSwipeDownNotification ? R.raw.lottie_swipe_for_notifications
+                        : R.raw.lottie_one_hand_mode);
+
+        final MainSwitchPreference mainSwitchPreference =
+                getPreferenceScreen().findPreference(ONE_HANDED_MAIN_SWITCH_KEY);
+        mainSwitchPreference.addOnSwitchChangeListener((switchView, isChecked) -> {
+            switchView.setChecked(isChecked);
+            if (isChecked) {
+                showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+            }
+        });
     }
 
     @Override
@@ -74,6 +85,11 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     @Override
     protected String getShortcutPreferenceKey() {
         return ONE_HANDED_SHORTCUT_KEY;
+    }
+
+    @Override
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        shortcutPreference.setTitle(R.string.one_handed_mode_shortcut_title);
     }
 
     @Override
@@ -106,6 +122,16 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
 
     @Override
     protected CharSequence getLabelName() {
+        return mFeatureName;
+    }
+
+    @Override
+    protected ComponentName getTileComponentName() {
+        return AccessibilityShortcutController.ONE_HANDED_TILE_COMPONENT_NAME;
+    }
+
+    @Override
+    protected CharSequence getTileName() {
         return mFeatureName;
     }
 

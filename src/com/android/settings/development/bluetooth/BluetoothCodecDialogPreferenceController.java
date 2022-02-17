@@ -69,7 +69,7 @@ public class BluetoothCodecDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return index;
         }
-        final BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
+        final BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             Log.d(TAG, "Unable to get selectable index. No Active Bluetooth device");
             return index;
@@ -77,7 +77,7 @@ public class BluetoothCodecDialogPreferenceController extends
         // Check HD audio is enabled, display the available list.
         if (bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
                 == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED) {
-            BluetoothCodecConfig[] configs = getSelectableConfigs(activeDevice);
+            List<BluetoothCodecConfig> configs = getSelectableConfigs(activeDevice);
             if (configs != null) {
                 return getIndexFromConfig(configs);
             }
@@ -93,8 +93,9 @@ public class BluetoothCodecDialogPreferenceController extends
         int codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT;
         switch (index) {
             case 0:
-                codecTypeValue = getHighestCodec(getSelectableConfigs(
-                    mBluetoothA2dp.getActiveDevice()));
+                final BluetoothDevice activeDevice = getA2dpActiveDevice();
+                codecTypeValue = getHighestCodec(mBluetoothA2dp, activeDevice,
+                        getSelectableConfigs(activeDevice));
                 codecPriorityValue = BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST;
                 break;
             case 1:
@@ -147,10 +148,15 @@ public class BluetoothCodecDialogPreferenceController extends
         mCallback.onBluetoothCodecChanged();
     }
 
-    private List<Integer> getIndexFromConfig(BluetoothCodecConfig[] configs) {
+    @Override
+    public void onHDAudioEnabled(boolean enabled) {
+        writeConfigurationValues(/* index= */ 0);
+    }
+
+    private List<Integer> getIndexFromConfig(List<BluetoothCodecConfig> configs) {
         List<Integer> indexArray = new ArrayList<>();
-        for (int i = 0; i < configs.length; i++) {
-            indexArray.add(convertCfgToBtnIndex(configs[i].getCodecType()));
+        for (BluetoothCodecConfig config : configs) {
+            indexArray.add(convertCfgToBtnIndex(config.getCodecType()));
         }
         return indexArray;
     }

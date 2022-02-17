@@ -60,10 +60,21 @@
         android:fragment="com.android.settings.print.PrintSettingsFragment"
         android:order="-3"/>
 
+    <SwitchPreference
+        android:key="uwb_settings"
+        android:title="@string/uwb_settings_title"
+        android:order="100"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.uwb.UwbPreferenceController"/>
+
     <Preference
-        android:key="bt_received_files"
-        android:icon="@drawable/ic_folder_vd_theme_24"
-        android:title="@string/bluetooth_show_files_received_via_bluetooth"/>
+        android:key="connected_device_fast_pair"
+        android:title="@string/fast_pair_settings"
+        android:summary="@string/fast_pair_settings_summary"
+        android:icon="@drawable/ic_fast_pair_24dp"
+        android:fragment="com.android.settings.nearby.FastPairSettingsFragment"
+        settings:controller="com.android.settings.nearby.FastPairPreferenceController"
+        android:order="-2"/>
 
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"

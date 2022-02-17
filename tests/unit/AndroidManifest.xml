@@ -15,6 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.android.settings.tests.unit">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -68,6 +69,13 @@
             <meta-data android:name="android.accounts.AccountAuthenticator"
                        android:resource="@xml/authenticator" />
         </service>
+
+        <!-- Disable startup provider due to resource loading issue. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:node="remove"
+            tools:replace="android:authorities"/>
 
     </application>
 

@@ -23,8 +23,13 @@ import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -130,8 +135,28 @@ public class DreamSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new DreamPickerController(context));
         controllers.add(new WhenToDreamPreferenceController(context));
         return controllers;
+    }
+
+    @Override
+    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+            Bundle bundle) {
+
+        final ViewGroup root = getActivity().findViewById(android.R.id.content);
+        final Button previewButton = (Button) getActivity().getLayoutInflater().inflate(
+                R.layout.dream_preview_button, root, false);
+        root.addView(previewButton);
+
+        final DreamBackend dreamBackend = DreamBackend.getInstance(getContext());
+        previewButton.setOnClickListener(v -> dreamBackend.preview(dreamBackend.getActiveDream()));
+
+        final RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent, bundle);
+        previewButton.post(() -> {
+            recyclerView.setPadding(0, 0, 0, previewButton.getMeasuredHeight());
+        });
+        return recyclerView;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER

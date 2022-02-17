@@ -33,6 +33,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 /**
  * {@link PreferenceControllerMixin} to toggle Wifi Direct preference on Wi-Fi state.
@@ -51,27 +52,17 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
         }
     };
     private final IntentFilter mFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
-    private final LocationManager mLocationManager;
-    @VisibleForTesting
-    final BroadcastReceiver mLocationReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (mWifiDirectPref != null) {
-                updateState(mWifiDirectPref);
-            }
-        }
-    };
-    private final IntentFilter mLocationFilter =
-            new IntentFilter(LocationManager.MODE_CHANGED_ACTION);
 
     private Preference mWifiDirectPref;
+    @VisibleForTesting
+    boolean mIsWifiDirectAllow;
 
     public WifiP2pPreferenceController(
             Context context, Lifecycle lifecycle, WifiManager wifiManager) {
         super(context);
         mWifiManager = wifiManager;
+        mIsWifiDirectAllow = WifiEnterpriseRestrictionUtils.isWifiDirectAllowed(context);
         lifecycle.addObserver(this);
-        mLocationManager = (LocationManager) context.getSystemService(Service.LOCATION_SERVICE);
     }
 
     @Override
@@ -84,19 +75,17 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(mLocationManager.isLocationEnabled() && mWifiManager.isWifiEnabled());
+        preference.setEnabled(isWifiP2pAvailable());
     }
 
     @Override
     public void onResume() {
         mContext.registerReceiver(mReceiver, mFilter);
-        mContext.registerReceiver(mLocationReceiver, mLocationFilter);
     }
 
     @Override
     public void onPause() {
         mContext.unregisterReceiver(mReceiver);
-        mContext.unregisterReceiver(mLocationReceiver);
     }
 
     @Override
@@ -111,9 +100,11 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
 
     private void togglePreferences() {
         if (mWifiDirectPref != null) {
-            mWifiDirectPref.setEnabled(
-                    mWifiManager.isWifiEnabled()
-                    && mLocationManager.isLocationEnabled());
+            mWifiDirectPref.setEnabled(isWifiP2pAvailable());
         }
     }
+    private boolean isWifiP2pAvailable() {
+        return mWifiManager.isWifiEnabled() && mIsWifiDirectAllow;
+    }
+
 }

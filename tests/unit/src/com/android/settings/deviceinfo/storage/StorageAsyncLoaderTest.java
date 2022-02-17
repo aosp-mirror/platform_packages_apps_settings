@@ -33,9 +33,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.net.TrafficStats;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.DataUnit;
 import android.util.SparseArray;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -62,7 +62,7 @@ public class StorageAsyncLoaderTest {
     private static final String PACKAGE_NAME_1 = "com.blah.test";
     private static final String PACKAGE_NAME_2 = "com.blah.test2";
     private static final String PACKAGE_NAME_3 = "com.blah.test3";
-    private static final long DEFAULT_QUOTA = 64 * TrafficStats.MB_IN_BYTES;
+    private static final long DEFAULT_QUOTA = DataUnit.MEBIBYTES.toBytes(64);
 
     @Mock
     private StorageStatsSource mSource;

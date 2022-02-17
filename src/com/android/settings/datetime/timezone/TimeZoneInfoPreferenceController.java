@@ -20,17 +20,17 @@ import android.content.Context;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.icu.text.SimpleDateFormat;
-import android.icu.util.BasicTimeZone;
 import android.icu.util.Calendar;
 import android.icu.util.TimeZone;
-import android.icu.util.TimeZoneTransition;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+import java.time.Instant;
+import java.time.zone.ZoneOffsetTransition;
+import java.time.zone.ZoneRules;
 import java.util.Date;
 
 public class TimeZoneInfoPreferenceController extends BasePreferenceController {
@@ -86,11 +86,11 @@ public class TimeZoneInfoPreferenceController extends BasePreferenceController {
             return mContext.getString(R.string.zone_info_footer_no_dst, offsetAndName);
         }
 
-        final TimeZoneTransition nextDstTransition = findNextDstTransition(timeZone);
-        if (nextDstTransition == null) {
-            return null;
+        final ZoneOffsetTransition nextDstTransition = findNextDstTransition(item);
+        if (nextDstTransition == null) { // No future transition
+            return mContext.getString(R.string.zone_info_footer_no_dst, offsetAndName);
         }
-        final boolean toDst = nextDstTransition.getTo().getDSTSavings() != 0;
+        final boolean toDst = getDSTSavings(timeZone, nextDstTransition.getInstant()) != 0;
         String timeType = toDst ? item.getDaylightName() : item.getStandardName();
         if (timeType == null) {
             // Fall back to generic "summer time" and "standard time" if the time zone has no
@@ -101,26 +101,37 @@ public class TimeZoneInfoPreferenceController extends BasePreferenceController {
 
         }
         final Calendar transitionTime = Calendar.getInstance(timeZone);
-        transitionTime.setTimeInMillis(nextDstTransition.getTime());
+        transitionTime.setTimeInMillis(nextDstTransition.getInstant().toEpochMilli());
         final String date = mDateFormat.format(transitionTime);
         return SpannableUtil.getResourcesText(mContext.getResources(),
                 R.string.zone_info_footer, offsetAndName, timeType, date);
     }
 
-    private TimeZoneTransition findNextDstTransition(TimeZone timeZone) {
-        if (!(timeZone instanceof BasicTimeZone)) {
-            return null;
-        }
-        final BasicTimeZone basicTimeZone = (BasicTimeZone) timeZone;
-        TimeZoneTransition transition = basicTimeZone.getNextTransition(
-                mDate.getTime(), /* inclusive */ false);
-        do {
-            if (transition.getTo().getDSTSavings() != transition.getFrom().getDSTSavings()) {
+    private ZoneOffsetTransition findNextDstTransition(TimeZoneInfo timeZoneInfo) {
+        TimeZone timeZone = timeZoneInfo.getTimeZone();
+        ZoneRules zoneRules = timeZoneInfo.getJavaTimeZone().toZoneId().getRules();
+
+        Instant from = mDate.toInstant();
+
+        ZoneOffsetTransition transition;
+        while (true) { // Find next transition with different DST offsets
+            transition = zoneRules.nextTransition(from);
+            if (transition == null) {
                 break;
             }
-            transition = basicTimeZone.getNextTransition(
-                    transition.getTime(), /*inclusive */ false);
-        } while (transition != null);
+            Instant to = transition.getInstant();
+            if (getDSTSavings(timeZone, from) != getDSTSavings(timeZone, to)) {
+                break;
+            }
+            from = to;
+        }
+
         return transition;
+    }
+
+    private static int getDSTSavings(TimeZone timeZone, Instant instant) {
+        int[] offsets = new int[2];
+        timeZone.getOffset(instant.toEpochMilli(), false /* local time */, offsets);
+        return offsets[1];
     }
 }

@@ -50,7 +50,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         if (isSettingsPackage || isAllowlistedPackage) {
             return;
         }
-        throw new SecurityException("Search result intents must be called with from a "
+        throw new SecurityException("Search result intents must be called with from an "
                 + "allowlisted package.");
     }
 

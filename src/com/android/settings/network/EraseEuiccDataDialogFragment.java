@@ -19,6 +19,7 @@ package com.android.settings.network;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,7 +33,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.network.helper.ConfirmationSimDeletionPredicate;
 import com.android.settings.system.ResetDashboardFragment;
+import com.android.settings.wifi.dpp.WifiDppUtils;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener {
@@ -73,13 +76,25 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
         }
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            AsyncTask.execute(new Runnable() {
-                @Override
-                public void run() {
-                    RecoverySystem.wipeEuiccData(
-                            getContext(), PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
-                }
-            });
+            Context context = getContext();
+            if (ConfirmationSimDeletionPredicate.getSingleton().test(context)) {
+                // Create a "verify it's you" verification over keyguard
+                // when "erase" button been pressed.
+                // This might protect from erasing by some automation process.
+                WifiDppUtils.showLockScreen(context, () -> runAsyncWipe(context));
+            } else {
+                runAsyncWipe(context);
+            }
         }
+    }
+
+    private void runAsyncWipe(Context context) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                RecoverySystem.wipeEuiccData(
+                        context, PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK);
+            }
+        });
     }
 }
