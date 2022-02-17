@@ -29,11 +29,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class BluetoothDetailsControllerEventsTest extends BluetoothDetailsControllerTestBase {
 
     @Test

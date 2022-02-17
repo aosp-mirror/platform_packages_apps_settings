@@ -224,9 +224,8 @@ public class ProviderModelSliceHelperTest {
     public void getMobileDrawable_noCarrierData_getMobileDrawable() throws Throwable {
         mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
                 false, true);
-        Drawable expectDrawable = mock(Drawable.class);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(null);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
+        Drawable expectDrawable = mock(Drawable.class);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(expectDrawable)).isEqualTo(
                 expectDrawable);
@@ -237,9 +236,8 @@ public class ProviderModelSliceHelperTest {
             throws Throwable {
         mockConnections(true, ServiceState.STATE_IN_SERVICE, "", true,
                 true);
-        Drawable drawable = mock(Drawable.class);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
+        Drawable drawable = mock(Drawable.class);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
                 mDrawableWithSignalStrength);
@@ -254,7 +252,6 @@ public class ProviderModelSliceHelperTest {
                 true);
         Drawable drawable = mock(Drawable.class);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
-        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
                 mDrawableWithSignalStrength);
@@ -304,6 +301,11 @@ public class ProviderModelSliceHelperTest {
         @Override
         public Intent getIntent() {
             return new Intent();
+        }
+
+        @Override
+        public int getSliceHighlightMenuRes() {
+            return NO_RES;
         }
     }
 

@@ -136,7 +136,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    SubscriptionInfo getSubscriptionInfo(int simSlot) {
+    protected SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
@@ -150,7 +150,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
+    protected CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
         final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
@@ -158,7 +158,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    Preference createNewPreference(Context context) {
-        return new Preference(context);
+    protected Preference createNewPreference(Context context) {
+        return new PhoneNumberSummaryPreference(context);
     }
 }
