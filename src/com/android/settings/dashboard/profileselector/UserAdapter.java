@@ -78,7 +78,7 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
         }
 
         private static Drawable encircle(Context context, Drawable icon) {
-            return new UserIconDrawable(UserIconDrawable.getSizeForList(context))
+            return new UserIconDrawable(UserIconDrawable.getDefaultSize(context))
                     .setIconDrawable(icon).bake();
         }
     }

@@ -194,6 +194,29 @@ public class UserSettingsTest {
     }
 
     @Test
+    public void testAssignDefaultPhoto_hasDefaultUserIconSize() {
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        int size = 100;
+        try {
+            SettingsShadowResources.overrideResource(
+                    com.android.internal.R.dimen.user_icon_size,
+                    size);
+            assertThat(UserSettings.assignDefaultPhoto(mContext, ACTIVE_USER_ID)).isTrue();
+
+            int pxSize = mContext.getResources()
+                    .getDimensionPixelSize(com.android.internal.R.dimen.user_icon_size);
+
+            ArgumentCaptor<Bitmap> captor = ArgumentCaptor.forClass(Bitmap.class);
+            verify(mUserManager).setUserIcon(eq(ACTIVE_USER_ID), captor.capture());
+            Bitmap bitmap = captor.getValue();
+            assertThat(bitmap.getWidth()).isEqualTo(pxSize);
+            assertThat(bitmap.getHeight()).isEqualTo(pxSize);
+        } finally {
+            SettingsShadowResources.reset();
+        }
+    }
+
+    @Test
     public void testExitGuest_ShouldLogAction() {
         mUserCapabilities.mIsGuest = true;
         mFragment.exitGuest();

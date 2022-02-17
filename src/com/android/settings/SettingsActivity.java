@@ -143,6 +143,8 @@ public class SettingsActivity extends SettingsBaseActivity
 
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
+    public static final String EXTRA_IS_SECONDARY_LAYER_PAGE =
+            ":settings:is_secondary_layer_page";
 
     /**
      * Additional extra of Settings#ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK.
@@ -301,12 +303,12 @@ public class SettingsActivity extends SettingsBaseActivity
             launchSettingFragment(initialFragmentName, intent);
         }
 
-        final boolean isInSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final boolean isActionBarButtonEnabled = isActionBarButtonEnabled(intent);
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(!isInSetupWizard);
-            actionBar.setHomeButtonEnabled(!isInSetupWizard);
+            actionBar.setDisplayHomeAsUpEnabled(isActionBarButtonEnabled);
+            actionBar.setHomeButtonEnabled(isActionBarButtonEnabled);
             actionBar.setDisplayShowTitleEnabled(true);
         }
         mMainSwitch = findViewById(R.id.switch_bar);
@@ -364,6 +366,18 @@ public class SettingsActivity extends SettingsBaseActivity
         if (DEBUG_TIMING) {
             Log.d(LOG_TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
+    }
+
+    private boolean isActionBarButtonEnabled(Intent intent) {
+        if (WizardManagerHelper.isAnySetupWizard(intent)) {
+            return false;
+        }
+        final boolean isSecondaryLayerPage =
+                intent.getBooleanExtra(EXTRA_IS_SECONDARY_LAYER_PAGE, false);
+
+        // TODO: move Settings's ActivityEmbeddingUtils to SettingsLib.
+        return !com.android.settingslib.activityembedding.ActivityEmbeddingUtils
+                        .shouldHideBackButton(this, isSecondaryLayerPage);
     }
 
     private boolean isSubSettings(Intent intent) {
