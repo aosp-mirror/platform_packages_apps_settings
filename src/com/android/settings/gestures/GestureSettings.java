@@ -25,10 +25,13 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.List;
+
 @SearchIndexable
 public class GestureSettings extends DashboardFragment {
 
     private static final String TAG = "GestureSettings";
+    private static final String PREF_KEY_PREVENT_RINGING = "gesture_prevent_ringing_summary";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfig;
 
@@ -63,5 +66,13 @@ public class GestureSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.gestures);
+            new BaseSearchIndexProvider(R.xml.gestures) {
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    // de-duplicated due to another same entry in Sound page
+                    keys.add(PREF_KEY_PREVENT_RINGING);
+                    return keys;
+                }
+            };
 }

@@ -29,7 +29,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,8 +58,8 @@ public class PreventRingingGesturePreferenceControllerTest {
                 .thenReturn(true);
         mController = new PreventRingingGesturePreferenceController(mContext, null);
         mController.mPreferenceCategory = new PreferenceCategory(mContext);
-        mController.mVibratePref = new RadioButtonPreference(mContext);
-        mController.mMutePref = new RadioButtonPreference(mContext);
+        mController.mVibratePref = new SelectorWithWidgetPreference(mContext);
+        mController.mMutePref = new SelectorWithWidgetPreference(mContext);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class PreventRingingGesturePreferenceControllerTest {
 
     @Test
     public void testRadioButtonClicked_mute() {
-        RadioButtonPreference rbPref = new RadioButtonPreference(mContext);
+        SelectorWithWidgetPreference rbPref = new SelectorWithWidgetPreference(mContext);
         rbPref.setKey(PreventRingingGesturePreferenceController.KEY_MUTE);
 
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,
@@ -136,7 +136,7 @@ public class PreventRingingGesturePreferenceControllerTest {
 
     @Test
     public void testRadioButtonClicked_vibrate() {
-        RadioButtonPreference rbPref = new RadioButtonPreference(mContext);
+        SelectorWithWidgetPreference rbPref = new SelectorWithWidgetPreference(mContext);
         rbPref.setKey(PreventRingingGesturePreferenceController.KEY_VIBRATE);
 
         Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.VOLUME_HUSH_GESTURE,

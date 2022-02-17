@@ -226,7 +226,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                 uninstallDaIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
                         packageName);
                 mMetricsFeatureProvider.action(mActivity,
-                        SettingsEnums.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN);
+                        SettingsEnums.ACTION_SETTINGS_UNINSTALL_DEVICE_ADMIN,
+                        getPackageNameForMetric());
                 mFragment.startActivityForResult(uninstallDaIntent, mRequestRemoveDeviceAdmin);
                 return;
             }
@@ -253,7 +254,8 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
                             mActivity,
                             mAppEntry.info.enabled
                                     ? SettingsEnums.ACTION_SETTINGS_DISABLE_APP
-                                    : SettingsEnums.ACTION_SETTINGS_ENABLE_APP);
+                                    : SettingsEnums.ACTION_SETTINGS_ENABLE_APP,
+                                    getPackageNameForMetric());
                     AsyncTask.execute(new DisableChangerRunnable(mPm, mAppEntry.info.packageName,
                             PackageManager.COMPONENT_ENABLED_STATE_DEFAULT));
                 }
@@ -270,7 +272,9 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         @Override
         public void onClick(View v) {
              mMetricsFeatureProvider.action(
-                     mActivity, SettingsEnums.ACTION_APP_INFO_FORCE_STOP);
+                     mActivity,
+                     SettingsEnums.ACTION_APP_INFO_FORCE_STOP,
+                     getPackageNameForMetric());
             // force stop
             if (mPm.isPackageStateProtected(mAppEntry.info.packageName, mUserId)) {
                 RestrictedLockUtils.sendShowAdminSupportDetailsIntent(mActivity,
@@ -755,6 +759,14 @@ public class AppButtonsPreferenceController extends BasePreferenceController imp
         return mAppEntry != null
                 && (AppUtils.isSystemModule(mContext, mAppEntry.info.packageName)
                 || AppUtils.isMainlineModule(mPm, mAppEntry.info.packageName));
+    }
+
+    private String getPackageNameForMetric() {
+        final String packageName =
+                mAppEntry != null && mAppEntry.info != null
+                        ? mAppEntry.info.packageName
+                        : null;
+        return packageName != null ? packageName : "";
     }
 
     /**

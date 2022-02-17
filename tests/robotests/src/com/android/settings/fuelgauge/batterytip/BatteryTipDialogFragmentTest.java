@@ -31,6 +31,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryDefenderTip;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
@@ -74,6 +75,7 @@ public class BatteryTipDialogFragmentTest {
     private RestrictAppTip mRestrictTwoAppsTip;
     private UnrestrictAppTip mUnrestrictAppTip;
     private SummaryTip mSummaryTip;
+    private BatteryDefenderTip mDefenderTip;
     private AppInfo mAppInfo;
     private ShadowPackageManager mPackageManager;
 
@@ -116,6 +118,7 @@ public class BatteryTipDialogFragmentTest {
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, mAppInfo);
         mSummaryTip = spy(new SummaryTip(BatteryTip.StateType.NEW,
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
+        mDefenderTip = new BatteryDefenderTip(BatteryTip.StateType.NEW);
     }
 
     @After
@@ -242,5 +245,21 @@ public class BatteryTipDialogFragmentTest {
                 "Your apps are using a normal amount of battery. If apps use too much battery, "
                         + "your phone will suggest actions you can take.\n\nYou can always turn"
                         + " on Battery Saver if you’re running low on battery.");
+    }
+
+    @Test
+    public void testOnCreateDialog_defenderTip_fireDialog() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mDefenderTip, METRICS_KEY);
+
+        FragmentController.setupFragment(mDialogFragment, FragmentActivity.class,
+                0 /* containerViewId */, null /* bundle */);
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
+
+        assertThat(shadowDialog.getTitle()).isEqualTo(
+                mContext.getString(R.string.battery_tip_limited_temporarily_title));
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.battery_tip_limited_temporarily_dialog_msg, "80%"));
     }
 }

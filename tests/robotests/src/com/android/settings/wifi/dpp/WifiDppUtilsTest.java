@@ -27,6 +27,8 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -80,4 +82,12 @@ public class WifiDppUtilsTest {
         assertThat(intent.getBooleanExtra(WifiDppUtils.EXTRA_WIFI_HIDDEN_SSID, false))
                 .isEqualTo(true);
     }
+
+    @Test
+    public void getEnrolleeQrCodeScannerIntent_isExplicitIntent() {
+        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(
+                ApplicationProvider.getApplicationContext(), null);
+        assertThat(intent.getComponent()).isNotNull();
+    }
+
 }

@@ -18,15 +18,11 @@ package com.android.settings.nfc;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,8 +33,12 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @SearchIndexable
 public class PaymentSettings extends DashboardFragment {
@@ -62,12 +62,23 @@ public class PaymentSettings extends DashboardFragment {
     }
 
     @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new NfcDefaultPaymentPreferenceController(context, lifecycle));
+
+        return controllers;
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mPaymentBackend = new PaymentBackend(getActivity());
-        setHasOptionsMenu(true);
 
-        use(NfcPaymentPreferenceController.class).setPaymentBackend(mPaymentBackend);
         use(NfcForegroundPreferenceController.class).setPaymentBackend(mPaymentBackend);
     }
 
@@ -91,15 +102,6 @@ public class PaymentSettings extends DashboardFragment {
     public void onPause() {
         super.onPause();
         mPaymentBackend.onPause();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        MenuItem menuItem = menu.add(R.string.nfc_payment_how_it_works);
-        Intent howItWorksIntent = new Intent(getActivity(), HowItWorks.class);
-        menuItem.setIntent(howItWorksIntent);
-        menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_NEVER);
     }
 
     @VisibleForTesting
