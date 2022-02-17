@@ -29,18 +29,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="dream_complication_category"
-        android:title="@string/dream_complications_picker_category"
-        settings:controller="com.android.settings.dream.DreamComplicationCategoryController">
-        <com.android.settingslib.widget.LayoutPreference
-            android:key="dream_complication_picker"
-            android:selectable="false"
-            android:layout="@layout/dream_picker_layout"
-            settings:controller="com.android.settings.dream.DreamComplicationPickerController"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/dream_more_settings_category">
+        <SwitchPreference
+            android:key="dream_complications_toggle"
+            android:title="@string/dream_complications_toggle_title"
+            android:summary="@string/dream_complications_toggle_summary"
+            settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
         <Preference
             android:key="when_to_start"
             android:title="@string/screensaver_settings_when_to_dream"

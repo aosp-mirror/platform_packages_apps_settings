@@ -17,7 +17,6 @@
 
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -30,21 +29,28 @@
         android:layout_height="wrap_content"
         android:minHeight="?android:attr/listPreferredItemHeight">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/preview_container"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/preview"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="@dimen/dream_item_corner_radius"
-            app:cardElevation="0dp"
+            android:background="@drawable/dream_preview_rounded_bg"
+            android:importantForAccessibility="no"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-            <ImageView
-                android:id="@+id/preview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/preview_placeholder"
+            android:layout_width="@dimen/dream_preview_placeholder_width"
+            android:layout_height="0dp"
+            android:src="@drawable/dream_default_preview_icon"
+            android:importantForAccessibility="no"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="@+id/preview"
+            app:layout_constraintBottom_toBottomOf="@+id/preview"
+            app:layout_constraintStart_toStartOf="@+id/preview"
+            app:layout_constraintEnd_toEndOf="@+id/preview"/>
 
         <Button
             android:id="@+id/customize_button"
@@ -53,10 +59,10 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:text="@string/customize_button_title"
-            app:layout_constraintTop_toTopOf="@+id/preview_container"
-            app:layout_constraintBottom_toBottomOf="@+id/preview_container"
-            app:layout_constraintStart_toStartOf="@+id/preview_container"
-            app:layout_constraintEnd_toEndOf="@+id/preview_container"/>
+            app:layout_constraintTop_toTopOf="@+id/preview"
+            app:layout_constraintBottom_toBottomOf="@+id/preview"
+            app:layout_constraintStart_toStartOf="@+id/preview"
+            app:layout_constraintEnd_toEndOf="@+id/preview"/>
 
         <ImageView
             android:id="@+id/icon"
@@ -66,9 +72,10 @@
             android:layout_marginStart="@dimen/dream_item_icon_margin_start"
             android:layout_marginBottom="@dimen/dream_item_title_margin_bottom"
             android:gravity="center_vertical"
+            android:importantForAccessibility="no"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toBottomOf="@+id/preview_container"
+            app:layout_constraintTop_toBottomOf="@+id/preview"
             app_layout_constraintEnd_toStartOf="@+id/title_text"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -82,8 +89,9 @@
             android:gravity="center_vertical"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            app:layout_constraintTop_toBottomOf="@+id/preview_container"
+            android:textSize="16sp"
+            android:textColor="@color/dream_card_text_color_state_list"
+            app:layout_constraintTop_toBottomOf="@+id/preview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/icon"/>
 

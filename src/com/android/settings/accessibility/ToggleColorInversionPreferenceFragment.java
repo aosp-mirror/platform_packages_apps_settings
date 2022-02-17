@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 
 import java.util.ArrayList;
@@ -50,7 +51,9 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }

@@ -56,6 +56,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 import com.android.settings.widget.SettingsMainSwitchBar;
@@ -103,6 +104,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
     protected static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
+    protected static final String KEY_SAVED_QS_TOOLTIP_TYPE = "qs_tooltip_type";
     protected static final String KEY_ANIMATED_IMAGE = "animated_image";
 
     private TouchExplorationStateChangeListener mTouchExplorationStateChangeListener;
@@ -113,6 +115,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
+    private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
 
     public static final int NOT_SET = -1;
     // Save user's shortcutType value when savedInstance has value (e.g. device rotated).
@@ -147,6 +150,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             }
             if (savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_RESHOW)) {
                 mNeedsQSTooltipReshow = savedInstanceState.getBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW);
+            }
+            if (savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_TYPE)) {
+                mNeedsQSTooltipType = savedInstanceState.getInt(KEY_SAVED_QS_TOOLTIP_TYPE);
             }
         }
 
@@ -254,6 +260,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
         if (mTooltipWindow != null) {
             outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+            outState.putInt(KEY_SAVED_QS_TOOLTIP_TYPE, mNeedsQSTooltipType);
         }
         super.onSaveInstanceState(outState);
     }
@@ -274,7 +281,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 mDialog = AccessibilityGestureNavigationTutorial
                         .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes());
+                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
                 mDialog.setCanceledOnTouchOutside(false);
                 return mDialog;
             default:
@@ -695,6 +702,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     /**
+     * This method will be invoked when a button in the tutorial dialog is clicked.
+     *
+     * @param dialog The dialog that received the click
+     * @param which  The button that was clicked
+     */
+    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
+        dialog.dismiss();
+        showQuickSettingsTooltipIfNeeded();
+    }
+
+    /**
      * This method will be invoked when a button in the edit shortcut dialog is clicked.
      *
      * @param dialog The dialog that received the click
@@ -706,12 +724,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         final int value = getShortcutTypeCheckBoxValue();
-
         saveNonEmptyUserShortcutType(value);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), value, mComponentName);
         AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), ~value, mComponentName);
-        mShortcutPreference.setChecked(value != UserShortcutType.EMPTY);
+        final boolean shortcutAssigned = value != UserShortcutType.EMPTY;
+        mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+
+        // Show the quick setting tooltip if the shortcut assigned in the first time
+        if (shortcutAssigned) {
+            showQuickSettingsTooltipIfNeeded();
+        }
     }
 
     protected void updateShortcutPreferenceData() {
@@ -823,23 +846,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     }
 
     /**
-     * Shows the quick settings tooltip if the quick settings service and the shortcut are assigned.
-     * The tooltip only shows once.
+     * Shows the quick settings tooltip if the quick settings feature is assigned. The tooltip only
+     * shows once.
      *
-     * @param shortcutType The shortcut type.
+     * @param type The quick settings tooltip type
      */
-    protected void showQuickSettingsTooltipIfNeeded(@UserShortcutType int shortcutType) {
-        if (shortcutType == AccessibilityUtil.UserShortcutType.EMPTY) {
-            return;
-        }
+    protected void showQuickSettingsTooltipIfNeeded(@QuickSettingsTooltipType int type) {
+        mNeedsQSTooltipType = type;
         showQuickSettingsTooltipIfNeeded();
     }
 
-    /**
-     * Shows the quick settings tooltip if the quick settings service is assigned. The tooltip only
-     * shows once.
-     */
-    protected void showQuickSettingsTooltipIfNeeded() {
+    private void showQuickSettingsTooltipIfNeeded() {
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.
@@ -858,10 +875,13 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
-        final String title =
-                getString(R.string.accessibility_service_quick_settings_tooltips_content, tileName);
+        final int titleResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_service_qs_tooltips_content
+                : R.string.accessibility_service_auto_added_qs_tooltips_content;
+        final String title = getString(titleResId, tileName);
+        final int imageResId = R.drawable.accessibility_qs_tooltips_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(title);
+        mTooltipWindow.setup(title, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);

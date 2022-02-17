@@ -447,6 +447,9 @@
     <!-- Whether top_level_battery should be shown or not. -->
     <bool name="config_show_top_level_battery">true</bool>
 
+    <!-- Whether to use compact battery status string. -->
+    <bool name="config_use_compact_battery_status">false</bool>
+
     <!-- Whether top_level_connected_devices should be shown or not. -->
     <bool name="config_show_top_level_connected_devices">true</bool>
 
@@ -567,19 +570,7 @@
         <item>2</item>
         <item>3</item>
     </integer-array>
-
-    <!-- The settings/preference description for each settable device state defined in the array
-         "config_perDeviceStateRotationLockDefaults".
-         The item in position "i" describes the auto-rotation setting for the device state also in
-         position "i" in the array "config_perDeviceStateRotationLockDefaults". -->
-    <string-array name="config_settableAutoRotationDeviceStatesDescriptions">
-        <!-- Example:
-            <item>Auto-rotate when folded</item>
-            <item>@null</item> No description for state in position 1
-            <item>Auto-rotate when unfolded</item>
-        -->
-    </string-array>
-
+    
     <!-- Whether to aggregate for network selection list-->
     <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 
@@ -605,5 +596,4 @@
 
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
-
 </resources>

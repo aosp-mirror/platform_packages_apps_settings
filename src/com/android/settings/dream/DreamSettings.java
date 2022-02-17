@@ -34,14 +34,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @SearchIndexable
@@ -52,7 +50,6 @@ public class DreamSettings extends DashboardFragment {
     static final String WHILE_DOCKED_ONLY = "while_docked_only";
     static final String EITHER_CHARGING_OR_DOCKED = "either_charging_or_docked";
     static final String NEVER_DREAM = "never";
-    private static final String COMPLICATIONS_CATEGORY_KEY = "dream_complication_category";
 
     @WhenToDream
     static int getSettingFromPrefKey(String key) {
@@ -138,14 +135,8 @@ public class DreamSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final DreamComplicationPickerController complicationPickerController =
-                new DreamComplicationPickerController(context);
-
-        controllers.add(complicationPickerController);
-        controllers.add(new WhenToDreamPreferenceController(context));
         controllers.add(new DreamPickerController(context));
-        controllers.add(new PreferenceCategoryController(context, COMPLICATIONS_CATEGORY_KEY)
-                .setChildren(Collections.singletonList(complicationPickerController)));
+        controllers.add(new WhenToDreamPreferenceController(context));
         return controllers;
     }
 

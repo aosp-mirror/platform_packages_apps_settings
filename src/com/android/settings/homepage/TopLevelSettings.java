@@ -119,6 +119,7 @@ public class TopLevelSettings extends DashboardFragment implements
                         ? ((Instrumentable) caller).getMetricsCategory()
                         : Instrumentable.METRICS_CATEGORY_UNKNOWN)
                 .setTitleRes(-1)
+                .setIsSecondaryLayerPage(true)
                 .launch();
         return true;
     }
