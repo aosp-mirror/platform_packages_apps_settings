@@ -46,6 +46,9 @@ public class ToggleSelectToSpeakPreferenceFragmentForSetupWizard
                 description, icon);
 
         mToggleSwitchWasInitiallyChecked = mToggleServiceSwitchPreference.isChecked();
+        if (mTopIntroPreference != null) {
+            mTopIntroPreference.setVisible(false);
+        }
     }
 
     @Override
