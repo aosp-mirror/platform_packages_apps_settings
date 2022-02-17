@@ -26,6 +26,7 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -62,11 +63,14 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
             new ComponentName("com.android.phone",
                     "com.android.services.telephony.TelephonyConnectionService");
+    private boolean mIsRtlMode;
 
     public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
+        mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
     }
 
     public void init(Lifecycle lifecycle) {
@@ -90,12 +94,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        if (subs.size() > 1 || Utils.isProviderModelEnabled(mContext)) {
-            return AVAILABLE;
-        } else {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
+        return AVAILABLE;
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -158,7 +157,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
-        if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
+        if (subs.size() == 1) {
             mPreference.setEnabled(false);
             mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
                     subs.get(0), mContext));
@@ -186,6 +185,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
 
+        mPreference.setEnabled(true);
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 
@@ -284,5 +284,9 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             updateEntries();
             refreshSummary(mPreference);
         }
+    }
+
+    boolean isRtlMode() {
+        return mIsRtlMode;
     }
 }

@@ -35,6 +35,7 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.applications.ProcStatsData;
+import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settings.fuelgauge.batterytip.AnomalyConfigJobService;
 import com.android.settingslib.net.DataUsageController;
 
@@ -109,14 +110,8 @@ public class SettingsDumpService extends Service {
         if (telephonyManager.isDataCapable()) {
             JSONArray array = new JSONArray();
             for (SubscriptionInfo info : manager.getAvailableSubscriptionInfoList()) {
-                telephonyManager = telephonyManager
-                        .createForSubscriptionId(info.getSubscriptionId());
-                String subscriberId = telephonyManager.getSubscriberId();
-                // The null subscriberId means that no any mobile/carrier network will be matched.
-                // Using old API: buildTemplateMobileAll for the null subscriberId to avoid NPE.
-                NetworkTemplate template = subscriberId != null
-                        ? NetworkTemplate.buildTemplateCarrierMetered(subscriberId)
-                        : NetworkTemplate.buildTemplateMobileAll(subscriberId);
+                NetworkTemplate template = DataUsageLib.getMobileTemplateForSubId(
+                        telephonyManager, info.getSubscriptionId());
                 final JSONObject usage = dumpDataUsage(template, controller);
                 usage.put("subId", info.getSubscriptionId());
                 array.put(usage);
@@ -125,12 +120,12 @@ public class SettingsDumpService extends Service {
         }
         if (packageManager.hasSystemFeature(FEATURE_WIFI)) {
             obj.put("wifi", dumpDataUsage(
-                    NetworkTemplate.buildTemplateWifi(
-                    NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */), controller));
+                    new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build(), controller));
         }
 
         if (packageManager.hasSystemFeature(FEATURE_ETHERNET)) {
-            obj.put("ethernet", dumpDataUsage(NetworkTemplate.buildTemplateEthernet(), controller));
+            obj.put("ethernet", dumpDataUsage(new NetworkTemplate.Builder(
+                    NetworkTemplate.MATCH_ETHERNET).build(), controller));
         }
         return obj;
     }

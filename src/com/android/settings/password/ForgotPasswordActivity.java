@@ -16,12 +16,16 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FORGOT_PASSWORD_TEXT;
+
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.settings.R;
 
@@ -44,6 +48,11 @@ public class ForgotPasswordActivity extends Activity {
             return;
         }
         setContentView(R.layout.forgot_password_activity);
+
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+        TextView forgotPasswordText = (TextView) findViewById(R.id.forgot_password_text);
+        forgotPasswordText.setText(devicePolicyManager.getString(
+                FORGOT_PASSWORD_TEXT, () -> getString(R.string.forgot_password_text)));
 
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
         layout.getMixin(FooterBarMixin.class).setPrimaryButton(

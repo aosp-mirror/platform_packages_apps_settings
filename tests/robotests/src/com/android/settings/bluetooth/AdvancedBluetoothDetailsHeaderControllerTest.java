@@ -99,6 +99,7 @@ public class AdvancedBluetoothDetailsHeaderControllerTest {
         mController.mBluetoothAdapter = mBluetoothAdapter;
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedDevice.getAddress()).thenReturn(MAC_ADDRESS);
+        when(mCachedDevice.getIdentityAddress()).thenReturn(MAC_ADDRESS);
     }
 
     @Test
