@@ -48,8 +48,8 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.view.IInputMethodManager;
 import com.android.settings.R;
 import com.android.settings.development.WirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -198,7 +198,7 @@ public abstract class DevelopmentTiles extends TileService {
         static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
         private IBinder mSurfaceFlinger;
         private IWindowManager mWindowManager;
-        private IInputMethodManager mInputMethodManager;
+        private ImeTracing mImeTracing;
         private Toast mToast;
 
         @Override
@@ -206,8 +206,7 @@ public abstract class DevelopmentTiles extends TileService {
             super.onCreate();
             mWindowManager = WindowManagerGlobal.getWindowManagerService();
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-            mInputMethodManager = IInputMethodManager.Stub.asInterface(
-                    ServiceManager.getService("input_method"));
+            mImeTracing = ImeTracing.getInstance();
             Context context = getApplicationContext();
             CharSequence text = "Trace files written to /data/misc/wmtrace";
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
@@ -261,12 +260,7 @@ public abstract class DevelopmentTiles extends TileService {
         }
 
         private boolean isImeTraceEnabled() {
-            try {
-                return mInputMethodManager.isImeTraceEnabled();
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not get ime trace status, defaulting to false.", e);
-            }
-            return false;
+            return mImeTracing.isEnabled();
         }
 
         @Override
@@ -323,14 +317,10 @@ public abstract class DevelopmentTiles extends TileService {
         }
 
         private void setImeTraceEnabled(boolean isEnabled) {
-            try {
-                if (isEnabled) {
-                    mInputMethodManager.startImeTrace();
-                } else {
-                    mInputMethodManager.stopImeTrace();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set ime trace status." + e.toString());
+            if (isEnabled) {
+                mImeTracing.startImeTrace();
+            } else {
+                mImeTracing.stopImeTrace();
             }
         }
 

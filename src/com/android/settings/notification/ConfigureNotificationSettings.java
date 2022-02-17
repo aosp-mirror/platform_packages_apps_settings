@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_TITLE;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
@@ -67,6 +70,17 @@ public class ConfigureNotificationSettings extends DashboardFragment implements
     @Override
     protected String getLogTag() {
         return TAG;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        replaceEnterpriseStringTitle("lock_screen_work_redact",
+                WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_TITLE,
+                R.string.lock_screen_notifs_redact_work);
+        replaceEnterpriseStringSummary("lock_screen_work_redact",
+                WORK_PROFILE_LOCK_SCREEN_REDACT_NOTIFICATION_SUMMARY,
+                R.string.lock_screen_notifs_redact_work_summary);
     }
 
     @Override

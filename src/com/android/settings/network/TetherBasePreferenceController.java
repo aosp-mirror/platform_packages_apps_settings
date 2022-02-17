@@ -25,6 +25,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.datausage.DataSaverBackend;
 
@@ -115,6 +116,11 @@ public abstract class TetherBasePreferenceController extends TogglePreferenceCon
             return DISABLED_DEPENDENT_SETTING;
         }
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
     }
 
     @Override

@@ -178,7 +178,7 @@ public class LocationForWorkPreferenceControllerTest {
         when(mUserHandle.getIdentifier()).thenReturn(5);
         userProfiles.add(mUserHandle);
         when(mUserManager.getUserProfiles()).thenReturn(userProfiles);
-        when(mUserManager.getUserHandle()).thenReturn(1);
+        when(mUserManager.getProcessUserId()).thenReturn(1);
         when(mUserManager.getUserInfo(5))
                 .thenReturn(new UserInfo(5, "user 5", UserInfo.FLAG_MANAGED_PROFILE));
     }

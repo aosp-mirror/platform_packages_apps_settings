@@ -26,7 +26,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
  * The controller to handle one-handed mode show notification preference.
@@ -46,8 +46,8 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        if (preference instanceof RadioButtonPreference) {
-            ((RadioButtonPreference) preference).setChecked(
+        if (preference instanceof SelectorWithWidgetPreference) {
+            ((SelectorWithWidgetPreference) preference).setChecked(
                     OneHandedSettingsUtils.isSwipeDownNotificationEnabled(mContext));
         }
     }
@@ -65,8 +65,8 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
             return false;
         }
         OneHandedSettingsUtils.setSwipeDownNotificationEnabled(mContext, true);
-        if (preference instanceof RadioButtonPreference) {
-            ((RadioButtonPreference) preference).setChecked(true);
+        if (preference instanceof SelectorWithWidgetPreference) {
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
         }
         return true;
     }
@@ -93,7 +93,8 @@ public class OneHandedActionShowNotificationPrefController extends BasePreferenc
             return;
         }
         if (uri.equals(OneHandedSettingsUtils.ONE_HANDED_MODE_ENABLED_URI)
-                || uri.equals(OneHandedSettingsUtils.SHORTCUT_ENABLED_URI)) {
+                || uri.equals(OneHandedSettingsUtils.SOFTWARE_SHORTCUT_ENABLED_URI)
+                || uri.equals(OneHandedSettingsUtils.HARDWARE_SHORTCUT_ENABLED_URI)) {
             mPreference.setEnabled(OneHandedSettingsUtils.canEnableController(mContext));
         } else if (uri.equals(OneHandedSettingsUtils.SHOW_NOTIFICATION_ENABLED_URI)) {
             updateState(mPreference);

@@ -43,11 +43,24 @@
         android:icon="@drawable/ic_add_40dp"
         android:order="20"/>
 
+    <com.android.settingslib.RestrictedPreference
+        android:key="supervised_user_add"
+        android:title="@*android:string/supervised_user_creation_label"
+        android:icon="@*android:drawable/ic_add_supervised_user"
+        android:order="25"/>
+
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="user_settings_add_users_when_locked"
         android:title="@string/user_add_on_lockscreen_menu"
         android:singleLineTitle="false"
         android:order="105"
         settings:allowDividerAbove="true"/>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="timeout_to_user_zero_preference"
+        android:title="@string/switch_to_user_zero_when_docked"
+        android:order="106"
+        android:fragment="com.android.settings.users.TimeoutToUserZeroSettings"
+        settings:controller="com.android.settings.users.TimeoutToUserZeroPreferenceController"/>
 
 </PreferenceScreen>
