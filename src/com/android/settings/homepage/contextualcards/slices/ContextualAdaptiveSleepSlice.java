@@ -117,8 +117,14 @@ public class ContextualAdaptiveSleepSlice implements CustomSliceable {
         final Uri contentUri = new Uri.Builder().appendPath(PREF_NAME).build();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 ScreenTimeoutSettings.class.getName(), PREF_NAME, screenTitle.toString(),
-                SettingsEnums.SLICE).setClassName(mContext.getPackageName(),
-                SubSettings.class.getName()).setData(contentUri);
+                SettingsEnums.SLICE, this)
+                .setClassName(mContext.getPackageName(),
+                        SubSettings.class.getName()).setData(contentUri);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 
     private PendingIntent getPrimaryAction() {

@@ -89,6 +89,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         when(fragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
 
         when(mCachedDevice.getAddress()).thenReturn(TEST_ADDRESS);
+        when(mCachedDevice.getIdentityAddress()).thenReturn(TEST_ADDRESS);
         Bundle args = new Bundle();
         args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS, TEST_ADDRESS);
         mFragment.setArguments(args);
