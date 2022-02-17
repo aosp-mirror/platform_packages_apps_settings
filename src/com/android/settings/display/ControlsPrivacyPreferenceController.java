@@ -70,6 +70,11 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
         refreshSummary(preference);
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
     private boolean isEnabled() {
         return isControlsAvailable();
     }

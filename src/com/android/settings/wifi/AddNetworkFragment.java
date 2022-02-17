@@ -109,7 +109,8 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
             final String ssid = ssidEditText.getText().toString();
 
             // Launch QR code scanner to join a network.
-            startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+            startActivityForResult(
+                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(view.getContext(), ssid),
                     REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
         }
     }
