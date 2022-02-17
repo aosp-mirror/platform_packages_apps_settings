@@ -16,6 +16,7 @@
 
 package com.android.settings.safetycenter;
 
+import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -67,12 +68,24 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     @Test
+    public void sendSafetyData_whenSafetyCenterIsEnabled_withNoIntentAction_sendsNoData() {
+        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+
+        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+    }
+
+    @Test
     public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(false);
         Intent intent =
-                new Intent().putExtra(
-                        EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                        new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
@@ -82,7 +95,7 @@ public class SafetySourceBroadcastReceiverTest {
     @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNullSourceIds_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
-        Intent intent = new Intent();
+        Intent intent = new Intent().setAction(ACTION_REFRESH_SAFETY_SOURCES);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
@@ -92,7 +105,10 @@ public class SafetySourceBroadcastReceiverTest {
     @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNoSourceIds_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
-        Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
@@ -103,9 +119,11 @@ public class SafetySourceBroadcastReceiverTest {
     public void sendSafetyData_withLockscreenSourceId_sendsLockscreenData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
-                new Intent().putExtra(
-                        EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                        new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
@@ -120,13 +138,31 @@ public class SafetySourceBroadcastReceiverTest {
     public void sendSafetyData_withBiometricsSourceId_sendsBiometricData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
-                new Intent().putExtra(
-                        EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                        new String[]{ BiometricsSafetySource.SAFETY_SOURCE_ID });
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ BiometricsSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
         // TODO(b/215517420): Update this test when BiometricSafetySource is implemented.
         verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+    }
+
+    @Test
+    public void sendSafetyData_onBootCompleted_sendsBiometricAndLockscreenData() {
+        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
+
+        // TODO(b/215517420): Update this test when BiometricSafetySource is implemented to test
+        // that biometrics data is also sent.
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+
+        assertThat(safetySourceData.getId()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
     }
 }
