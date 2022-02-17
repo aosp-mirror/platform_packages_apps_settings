@@ -47,15 +47,12 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 /**
  * SmartAutoRotateController controls whether auto rotation is enabled
  */
 public class SmartAutoRotateController extends TogglePreferenceController implements
         Preference.OnPreferenceChangeListener, LifecycleObserver {
-
-    protected Preference mPreference;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final SensorPrivacyManager mPrivacyManager;
@@ -66,9 +63,7 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             updateState(mPreference);
         }
     };
-    private final DeviceStateRotationLockSettingsManager mDeviceStateAutoRotateSettingsManager;
-    private final DeviceStateRotationLockSettingsManager.DeviceStateRotationLockSettingsListener
-            mDeviceStateRotationLockSettingsListener = () -> updateState(mPreference);
+    protected Preference mPreference;
     private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
 
     public SmartAutoRotateController(Context context, String preferenceKey) {
@@ -78,8 +73,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         mPrivacyManager
                 .addSensorPrivacyListener(CAMERA, (sensor, enabled) -> updateState(mPreference));
         mPowerManager = context.getSystemService(PowerManager.class);
-        mDeviceStateAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(
-                context);
     }
 
     public void init(Lifecycle lifecycle) {
@@ -96,9 +89,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
     }
 
     protected boolean isRotationLocked() {
-        if (DeviceStateAutoRotationHelper.isDeviceStateRotationEnabled(mContext)) {
-            return mDeviceStateAutoRotateSettingsManager.isRotationLockedForAllStates();
-        }
         return RotationPolicy.isRotationLocked(mContext);
     }
 
@@ -137,8 +127,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             };
         }
         RotationPolicy.registerRotationPolicyListener(mContext, mRotationPolicyListener);
-        mDeviceStateAutoRotateSettingsManager.registerListener(
-                mDeviceStateRotationLockSettingsListener);
     }
 
     @OnLifecycleEvent(ON_STOP)
@@ -148,8 +136,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
             RotationPolicy.unregisterRotationPolicyListener(mContext, mRotationPolicyListener);
             mRotationPolicyListener = null;
         }
-        mDeviceStateAutoRotateSettingsManager.unregisterListener(
-                mDeviceStateRotationLockSettingsListener);
     }
 
     @Override

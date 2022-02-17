@@ -20,11 +20,9 @@ import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logA
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.ActivityOptions;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -139,20 +137,6 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     }
 
     @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case AccessibilityDialogUtils.DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                final Dialog dialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
-            default:
-                return super.onCreateDialog(dialogId);
-        }
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do not call super. We don't want to see the "Help & feedback" option on this page so as
         // not to confuse users who think they might be able to send feedback about a specific
@@ -235,23 +219,5 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         return settingsIntent;
-    }
-
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        showQuickSettingsTooltipIfNeeded();
-    }
-
-
-    @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        super.callOnAlertDialogCheckboxClicked(dialog, which);
-        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
     }
 }

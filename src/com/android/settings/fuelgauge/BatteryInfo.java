@@ -37,6 +37,7 @@ import com.android.settings.Utils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.UsageView;
 import com.android.settingslib.R;
+import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
 import com.android.settingslib.utils.PowerUtil;
@@ -253,7 +254,7 @@ public class BatteryInfo {
                 BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
                 == BatteryManager.BATTERY_HEALTH_OVERHEAT;
 
-        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+        info.statusLabel = getBatteryStatus(context, batteryBroadcast);
         info.batteryStatus = batteryBroadcast.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         if (!info.mCharging) {
@@ -291,7 +292,7 @@ public class BatteryInfo {
                     R.string.power_remaining_charging_duration_only, timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
         } else {
-            final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+            final String chargeStatusLabel = getBatteryStatus(context, batteryBroadcast);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,
@@ -323,6 +324,35 @@ public class BatteryInfo {
             info.suggestionLabel = null;
             info.chargeLabel = info.batteryPercentString;
         }
+    }
+
+    private static String getBatteryStatus(Context context, Intent batteryChangedIntent) {
+        final Resources res = context.getResources();
+        final boolean isShortStatus =
+                res.getBoolean(com.android.settings.R.bool.config_use_compact_battery_status);
+
+        if (!isShortStatus) {
+            return Utils.getBatteryStatus(context, batteryChangedIntent);
+        }
+
+        final int status = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
+        final BatteryStatus batteryStatus = new BatteryStatus(batteryChangedIntent);
+        String statusString = res.getString(R.string.battery_info_status_unknown);
+
+        if (batteryStatus.isCharged()) {
+            statusString = res.getString(R.string.battery_info_status_full);
+        } else {
+            if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
+                statusString = res.getString(R.string.battery_info_status_charging);
+            } else if (status == BatteryManager.BATTERY_STATUS_DISCHARGING) {
+                statusString = res.getString(R.string.battery_info_status_discharging);
+            } else if (status == BatteryManager.BATTERY_STATUS_NOT_CHARGING) {
+                statusString = res.getString(R.string.battery_info_status_not_charging);
+            }
+        }
+
+        return statusString;
     }
 
     public interface BatteryDataParser {

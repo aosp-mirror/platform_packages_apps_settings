@@ -144,21 +144,6 @@ public class DashboardFragmentTest {
     }
 
     @Test
-    public void useAll_returnsAllControllersOfType() {
-        final TestPreferenceController controller1 = new TestPreferenceController(mContext);
-        final TestPreferenceController controller2 = new TestPreferenceController(mContext);
-        final SubTestPreferenceController controller3 = new SubTestPreferenceController(mContext);
-        mTestFragment.addPreferenceController(controller1);
-        mTestFragment.addPreferenceController(controller2);
-        mTestFragment.addPreferenceController(controller3);
-
-        final List<TestPreferenceController> retrievedControllers = mTestFragment.useAll(
-                TestPreferenceController.class);
-
-        assertThat(retrievedControllers).containsExactly(controller1, controller2);
-    }
-
-    @Test
     public void displayTilesAsPreference_shouldAddTilesWithIntent() {
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -372,13 +357,6 @@ public class DashboardFragmentTest {
 
         @Override
         public void updateNonIndexableKeys(List<String> keys) {
-        }
-    }
-
-    public static class SubTestPreferenceController extends TestPreferenceController {
-
-        private SubTestPreferenceController(Context context) {
-            super(context);
         }
     }
 
