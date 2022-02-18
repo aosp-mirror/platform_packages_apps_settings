@@ -216,6 +216,10 @@
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Мова додатка"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
+    <!-- no translation found for preference_of_system_locale_title (8067226276038751504) -->
+    <skip />
+    <!-- no translation found for preference_of_system_locale_summary (7828965109093154187) -->
+    <skip />
     <string name="no_multiple_language_supported" msgid="1683023807955740826">"У додатку вибрано таку мову за умовчанням: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>. Кілька мов одночасно не підтримується."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Видалити вибрані мови?</item>
@@ -513,10 +517,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Відбиток додано"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Тепер ви можете за допомогою відбитка пальця розблоковувати телефон або підтверджувати особу, наприклад щоб увійти в додатки"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Пізніше"</string>
-    <!-- no translation found for security_settings_udfps_tip_fingerprint_help (7580784640741217494) -->
-    <skip />
-    <!-- no translation found for security_settings_udfps_side_fingerprint_help (2567232481013195191) -->
-    <skip />
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Підніміть і знову прикладіть палець"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прикладіть до датчика й трохи потримайте одну сторону кінчика пальця, а потім зробіть те саме з іншою стороною"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Пропустити налаштування відбитка пальця?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Ви вибрали відбиток пальця як один зі способів розблокування телефона. Якщо пропустити цей крок зараз, потрібно буде налаштувати відбиток пізніше. Це займає близько хвилини."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-код захищає планшет у разі його втрати чи викрадення"</string>
@@ -1275,7 +1277,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Відключено від мережі \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="carrier" msgid="1755020806290963951">"Оператор"</string>
     <string name="display_settings_title" msgid="626835071804834218">"Екран"</string>
-    <string name="sound_settings" msgid="5514582720435174014">"Звук"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"Звук і вібрація"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Гучність"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Музичні ефекти"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"Гучність дзвінків і сповіщень"</string>
@@ -1419,16 +1421,21 @@
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Немає"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Від заходу до світанку"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Вмикається у вибраний час"</string>
+    <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"Вмикається на час сну"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Статус"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Не ввімкнеться автоматично"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Увімкнеться автоматично після заходу сонця"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Вмикатиметься автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"Увімкнеться автоматично на час сну"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Не вимкнеться автоматично"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Вимкнеться автоматично на світанку"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Вимикатиметься автоматично о <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Вимкнеться автоматично після часу сну"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Увімкнути до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Вимкнути до <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"Щоб економити заряд акумулятора, у темній темі використовується чорний фон. Її розклад буде активовано після вимкнення екрана."</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Темна тема наразі вмикається згідно з розкладом нічного режиму"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Налаштування нічного режиму"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Час вимкнення екрана"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Вимикати екран"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Коли минає <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
@@ -1634,7 +1641,6 @@
     <string name="storage_internal_title" msgid="3265098802217660829">"Пам’ять пристрою"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"Портативний пристрій пам’яті"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="5031288167242496837">"Використовується з <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"Пристрій <xliff:g id="NAME">%1$s</xliff:g> підключено"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"Не вдалося підключити пристрій <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"Пристрій <xliff:g id="NAME">%1$s</xliff:g> безпечно вийнято"</string>
@@ -2085,6 +2091,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Увімкнути"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистити пам’ять"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Видалити оновлення"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"Розблокувати налаштування з обмеженнями"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Деякі вибрані дії запускаються в цьому додатку за умовчанням."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Ви вирішили дозволити цій програмі створювати віджети й отримувати доступ до їх даних."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значення не встановлені."</string>
@@ -2235,6 +2242,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавіатури та інструменти робочого профілю"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Екранна клавіатура для роботи"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"За умовчанням"</string>
+    <string name="speech_category_title" msgid="5995161659186229742">"Мовлення"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"Швидкість курсора"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Ігровий контролер"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Переспрямувати вібросигнал"</string>
@@ -2304,7 +2312,8 @@
     <string name="audio_category_title" msgid="5283853679967605826">"Аудіо"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Загальні"</string>
     <string name="display_category_title" msgid="6638191682294461408">"Екран"</string>
-    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"Текст і відображення"</string>
+    <!-- no translation found for accessibility_color_and_motion_title (2323301706545305874) -->
+    <skip />
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"Затемняти екран"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"Елементи керування взаємодією"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"Налаштування часу реагування"</string>
@@ -2343,18 +2352,23 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Збільшувати кнопкою й потрійним дотиком"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Про сервіс <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"Параметри тексту й читання"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
+    <!-- no translation found for accessibility_text_reading_options_title (3224648909213325563) -->
     <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
+    <!-- no translation found for accessibility_text_reading_options_suggestion_title (2492155642665312733) -->
     <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"Тема: плани щодо машини часу, версія 2"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"Від: bill@email.com"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Доброго ранку! За результатами нашої останньої розмови ми хотіли б поцікавитися, як просувається розробка Вашої машини часу. Чи буде у Вас готовий прототип до цьогорічної виставки E3?"</string>
+    <!-- no translation found for accessibility_text_reading_reset_button_title (8951212362359229102) -->
     <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметри"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Наближуйте екран"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Тричі торкніться, щоб збільшити"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Торкніться кнопки, щоб збільшити вміст"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Щоб збільшити зображення на екрані, швидко наблизьте його.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Для цього:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Активуйте збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt; {1,number,integer}. Торкніться екрана.&lt;br/&gt; {2,number,integer}. Щоб перейти до іншої області на екрані, потягніть по ньому двома пальцями.&lt;br/&gt; {3,number,integer}. Стисніть два пальці, щоб змінити рівень масштабування.&lt;br/&gt; {4,number,integer}. Вимкніть збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Щоб ненадовго наблизити зображення:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Активуйте збільшення, скориставшись призначеною для цього кнопкою чи відповідним жестом.&lt;br/&gt; {1,number,integer}. Натисніть і втримуйте будь-яке місце на екрані.&lt;br/&gt; {2,number,integer}. Щоб перейти до іншої області на екрані, потягніть по ньому пальцем.&lt;br/&gt; {3,number,integer}. Підніміть палець, щоб припинити збільшення."</string>
+    <!-- no translation found for accessibility_screen_magnification_intro_text (3856180549393526339) -->
+    <skip />
+    <!-- no translation found for accessibility_screen_magnification_summary (8267672508057326959) -->
+    <skip />
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Коли функцію збільшення ввімкнено, ви можете наближувати вміст на екрані.\n\n"<b>"Щоб наблизити вміст"</b>", увімкніть збільшення, а потім торкніться будь-якого місця на екрані.\n"<ul><li>"Щоб прокрутити вміст, проведіть по екрану принаймні двома пальцями"</li>\n<li>"Щоб змінити масштаб, стисніть або розведіть принаймні два пальці"</li></ul>\n\n<b>"Щоб тимчасово збільшити вміст"</b>", увімкніть збільшення, а потім натисніть і утримуйте будь-яке місце на екрані.\n"<ul><li>"Пересувайте палець, щоб переміщатись екраном"</li>\n<li>"Підніміть палець, щоб знову зменшити елемент"</li></ul>\n\n"Масштабування не підтримується на клавіатурі та панелі навігації."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Сторінка <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> з <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Використовуйте кнопку спеціальних можливостей"</string>
@@ -2399,13 +2413,17 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Дає змогу вмикати функцію із заблокованого екрана за допомогою комбінації клавіш. Натисніть і утримуйте обидві клавіші гучності впродовж кількох секунд."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Кнопка спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Кнопка й жест спеціальних можливостей"</string>
+    <!-- no translation found for accessibility_button_intro_text (80993874471745687) -->
+    <skip />
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Про кнопку спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Про кнопку й жест спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Докладніше про кнопку й жест спеціальних можливостей"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Використання кнопки спеціальних можливостей. Жест недоступний при навігації трьома кнопками."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Швидкий доступ до спеціальних можливостей"</string>
-    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Отримайте швидкий доступ до спеціальних можливостей із будь-якого екрана.\n\nЩоб почати, відкрийте налаштування спеціальних можливостей і виберіть потрібну функцію. У списку швидкого доступу виберіть кнопку або жест спеціальних можливостей."</string>
-    <string name="accessibility_button_description" msgid="3664784100487881054">"Отримайте швидкий доступ до спеціальних можливостей із будь-якого екрана.\n\nЩоб почати, відкрийте налаштування спеціальних можливостей і виберіть потрібну функцію. У списку швидкого доступу виберіть кнопку спеціальних можливостей."</string>
+    <!-- no translation found for accessibility_button_gesture_description (5087102396258564057) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (9171447568163715949) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Використати кнопку або жест"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Розташування"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Розмір"</string>
@@ -2415,6 +2433,8 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Прозора"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Непрозора"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Висококонтрастний текст"</string>
+    <!-- no translation found for accessibility_toggle_high_text_contrast_preference_summary (5286411556836346180) -->
+    <skip />
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Автоматично оновлювати збільшення"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Оновлювати збільшення екрана в інших програмах"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Кнопка живлення закінчує виклик"</string>
@@ -2434,17 +2454,27 @@
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Про час очікування для спеціальних можливостей"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Докладніше про час очікування для спеціальних можливостей"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Час на виконання дії"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Виберіть, як довго показувати тимчасово видимі повідомлення із закликом до дії.\n\nНе всі додатки підтримують це налаштування."</string>
+    <!-- no translation found for accessibility_control_timeout_preference_summary (4037051091059316310) -->
+    <skip />
+    <!-- no translation found for accessibility_control_timeout_preference_intro_text (1398116710556762245) -->
+    <skip />
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Затримка натискання й утримування"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Інверсія кольорів"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Використовувати інверсію кольорів"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Швидкий запуск інверсії кольорів"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Інверсія кольорів перетворює світлі відтінки зображення на темні.&lt;br/&gt;&lt;br/&gt; Примітка. &lt;ol&gt; &lt;li&gt; Це працює й у зворотному напрямку, якщо початкові кольори темні.&lt;/li&gt; &lt;li&gt; Інверсія також впливає на відтінки статичних зображень і мультимедійного контенту.&lt;/li&gt; &lt;li&gt; Для темного фону можна використовувати темну тему. Темну тему підтримують не всі додатки. Інверсія кольорів поширюється на всі додатки.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for accessibility_display_inversion_preference_intro_text (1159663288481145318) -->
+    <skip />
+    <!-- no translation found for accessibility_display_inversion_preference_subtitle (4494767676482389509) -->
+    <skip />
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автоматичне натискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Про авт. натискання (час взаємодії)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Докладніше про автоматичне натискання (час взаємодії)"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Автоматичне натискання працює з підключеною мишею. Можна налаштувати автоматичне натискання курсора миші, коли він не рухається впродовж певного часу."</string>
-    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Вимкнути"</string>
+    <!-- no translation found for accessibility_autoclick_intro_text (8959680635470639347) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_description (6695732131412361101) -->
+    <skip />
+    <!-- no translation found for accessibility_autoclick_default_title (2024730028293793490) -->
+    <skip />
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Коротке"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 секунди"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Середнє"</string>
@@ -2457,11 +2487,11 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Час автоматичного натискання"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вібрація та вібровідгук"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Керуйте інтенсивністю вібрації для різних випадків"</string>
+    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Налаштування вимкнено, оскільки на пристрої активовано беззвучний режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Виклики"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Сповіщення та будильники"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Інтерактивний вібровідгук"</string>
-    <!-- no translation found for accessibility_vibration_primary_switch_title (6162579254864450592) -->
-    <skip />
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Використовувати вібрацію та вібровідгук"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вібрація сигналу будильника"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вібрація під час відтворення мультимедіа"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Вібрація під час дзвінків"</string>
@@ -2469,8 +2499,14 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Реакція на дотик"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Використовувати <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Відкрити додаток <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"Щоб увімкнути чи вимкнути додаток <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> у швидких налаштуваннях, проведіть пальцем униз"</string>
-    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
+    <!-- no translation found for accessibility_service_auto_added_qs_tooltips_content (4928746290220689428) -->
+    <skip />
+    <!-- no translation found for accessibility_service_qs_tooltips_content (3900536971101946314) -->
+    <skip />
+    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"Закрити"</string>
+    <!-- no translation found for accessibility_daltonizer_about_intro_text (3636710237139542212) -->
+    <skip />
+    <!-- no translation found for accessibility_daltonizer_about_intro_text (3702653229533336133) -->
     <skip />
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Використовувати корекцію кольорів"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Швидкий запуск корекції кольору"</string>
@@ -2483,7 +2519,10 @@
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Розмір і стиль субтитрів"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Розмір шрифту: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Інші параметри"</string>
-    <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"Ці налаштування субтитрів підтримують не всі додатки"</string>
+    <!-- no translation found for accessibility_caption_preference_intro (6662649135457507767) -->
+    <skip />
+    <!-- no translation found for accessibility_caption_preference_summary (632875702223135121) -->
+    <skip />
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Кнопка спеціальних можливостей"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Провести двома пальцями вгору від нижнього краю екрана"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"Утримувати клавіші гучності"</string>
@@ -2501,6 +2540,9 @@
       <item quantity="other">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слухового апарата</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Налаштування аудіо"</string>
+    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"Голосовий супровід"</string>
+    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"Вибрати звукову доріжку з голосовим супроводом за умовчанням"</string>
+    <string name="keywords_audio_description" msgid="6202816411593281252">"голосовий супровід, голосовий, супровід, поганий зір,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Комбінацію клавіш увімкнено"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Вимкнено"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"Увімкнено"</string>
@@ -2509,22 +2551,28 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"Ця служба не працює."</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"Комбінації клавіш для спеціальних можливостей"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"Показувати на панелі швидкого налаштування"</string>
-    <string name="daltonizer_type" msgid="1715154680803795947">"Режим корекції"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"Дейтераномалія"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"Протаномалія"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"Тританомалія"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"Червоний – зелений"</string>
+    <!-- no translation found for daltonizer_mode_protanomaly_title (6392456967103014723) -->
+    <skip />
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Синій – жовтий"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Відтінки сірого"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"Червоний – зелений"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"Червоний – зелений"</string>
-    <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Синій – жовтий"</string>
+    <!-- no translation found for daltonizer_mode_deuteranomaly_summary (2117727423019598455) -->
+    <skip />
+    <!-- no translation found for daltonizer_mode_protanomaly_summary (4617032854982040748) -->
+    <skip />
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Тританомалія"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Додаткове зменшення яскравості"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Додатково зменшувати яскравість екрана"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Швидкий запуск додаткового зменшення яскравості"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Про додаткове зменшення яскравості"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Робити екран телефона темнішим, ніж передбачає мінімальний рівень яскравості"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Робити екран планшета темнішим, ніж передбачає мінімальний рівень яскравості"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Зменште яскравість екрана, щоб читати комфортніше.&lt;br/&gt;&lt;br/&gt; Ця функція корисна, коли: &lt;ol&gt; &lt;li&gt; установлено мінімальне стандартне значення яскравості, але екран телефона все одно засвітлий;&lt;/li&gt; &lt;li&gt; ви користуєтеся телефоном у темряві, наприклад уночі чи перед сном.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Зменште яскравість екрана, щоб читати комфортніше.&lt;br/&gt;&lt;br/&gt; Ця функція корисна, коли: &lt;ol&gt; &lt;li&gt; встановлено мінімальне стандартне значення яскравості, але екран планшета все одно засвітлий;&lt;/li&gt; &lt;li&gt; ви користуєтеся телефоном у темряві, наприклад уночі чи перед сном.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <!-- no translation found for reduce_bright_colors_preference_intro_text (3502290826747650566) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_preference_subtitle (8573408446901659333) -->
+    <skip />
+    <!-- no translation found for reduce_bright_colors_preference_subtitle (5158211121482010799) -->
+    <skip />
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Інтенсивність"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Темніше"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Світліше"</string>
@@ -2626,8 +2674,8 @@
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"Швидка пара"</string>
     <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Пошук Bluetooth-пристроїв для швидкої пари поруч."</string>
-    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
-    <skip />
+    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Шукати пристрої поблизу"</string>
+    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Збережені пристрої"</string>
     <string name="print_settings" msgid="8519810615863882491">"Друк"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Вимкнено"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3412,6 +3460,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"<xliff:g id="USER_NAME">%1$s</xliff:g> – видалити з пристрою"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Параметри блокування екрана"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Додавати користувачів на заблокованому екрані"</string>
+    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Переходити в режим адміністратора в док-станції"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Видалити ваш профіль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Видалити користувача?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Видалити цей профіль?"</string>
@@ -3446,29 +3495,21 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"Вибрати, які додатки встановити"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Установити доступні додатки"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Безконтактні платежі"</string>
-    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
-    <skip />
-    <!-- no translation found for nfc_more_details (1700713533074275233) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
+    <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Платіжний додаток за умовчанням"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Щоб здійснити оплату з платіжного додатка, піднесіть пристрій задньою панеллю до термінала"</string>
+    <string name="nfc_more_details" msgid="1700713533074275233">"Докладніше"</string>
+    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Робочий додаток платіжний за умовчанням?"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Щоб здійснити оплату в робочому додатку:"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"має бути ввімкнено робочий профіль;"</string>
+    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (8161184137833245628) -->
     <skip />
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"Як це працює"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"Оплачуйте покупки за допомогою телефона"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"Додаток для платежів за умовчанням"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Не вибрано"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
-    <skip />
-    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="6127665705799658860">"Відкрити платіжний додаток за умовчанням"</string>
+    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Відкрити платіжний додаток за умовчанням"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Завжди"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Якщо не відкрито інший додаток для платежів"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"У терміналі для безконтактного платежу використовувати додаток:"</string>
@@ -3651,7 +3692,7 @@
     <string name="keywords_network_reset" msgid="4075670452112218042">"скинути, відновити, заводські налаштування"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"стерти, видалити, відновити, очистити, вилучити, відновити заводські налаштування"</string>
     <string name="keywords_printing" msgid="3528250034669909466">"принтер"</string>
-    <string name="keywords_sounds" msgid="1850691834585575875">"сигнал динаміка, динамік, гучність, вимкнути звук, без звуку, аудіо, музика"</string>
+    <string name="keywords_sounds" msgid="187191900698371911">"сигнал динаміка, динамік, гучність, вимкнути звук, без звуку, аудіо, музика, вібровідгук, вібрація"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не турбувати, пріоритет, пріоритетні сповіщення, втручатися"</string>
     <string name="keywords_app" msgid="7983814237980258061">"оперативна пам’ять"</string>
     <string name="keywords_location" msgid="8016374808099706213">"поруч, місцезнаходження, історія, надсилання, GPS"</string>
@@ -3692,7 +3733,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"розумний, затемнений екран, режим сну, акумулятор, час очікування, адаптивний сплячий режим, дисплей, екран, бездіяльність"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"камера, розумний, автообертання, автоматичне обертання, обернути, перевернути, обертання, портретний, альбомний, орієнтація, вертикальний, горизонтальний"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"оновлення, android"</string>
-    <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"не турбувати, графік, сповіщення, блокувати, без звуку, вібрація, сон, робота, зосередитися, звук, вимкнути звук, день, будній день, вихідні, будній вечір, подія"</string>
+    <string name="keywords_zen_mode_settings" msgid="138808997469900639">"графік, сповіщення, блокувати, без звуку, вібрація, сон, робота, зосередитися, звук, вимкнути звук, день, будній день, вихідні, будній вечір, подія, не турбувати"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"екран, час блокування, час вимкнення, заблокований екран"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"пам’ять, кеш, дані, видалити, очистити, звільнити, місце"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"під’єднано, пристрій, навушники, гарнітура, динамік, бездротовий, створення пари, вакуумні навушники, музика, медіа-вміст"</string>
@@ -3703,8 +3744,7 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"платіж, за умовчанням"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"вхідне сповіщення"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"usb в режимі модема, bluetooth у режимі модема, wi-fi у режимі модема"</string>
-    <!-- no translation found for keywords_accessibility_vibration_primary_switch (730692154347231253) -->
-    <skip />
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"вібровідгук, вібрувати, вібрація"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"тактильна реакція, вібрація, екран, чутливість"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"тактильна реакція, вібрація, телефон, виклик, чутливість, дзвінок"</string>
     <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"вібровідгук, вібрація, телефон, виклик, дзвінок, поступово"</string>
@@ -3721,7 +3761,6 @@
     <string name="keywords_always_show_time_info" msgid="9120590185763264666">"інформація на заблокованому екрані"</string>
     <string name="default_sound" msgid="6604374495015245195">"Звук за умовчанням"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Гучність дзвінків і сповіщень: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Гучність, вібросигнал і режим \"Не турбувати\""</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Вібрацію під час дзвінка ввімкнено"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Звук дзвінка вимкнено"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Гучність дзвінків і сповіщень: 80%"</string>
@@ -3757,12 +3796,8 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Увімкнути звуки"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Живі субтитри"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматичні субтитри (медіа)"</string>
-    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Немає}=1{Налаштовано 1 розклад}one{Налаштовано # розклад}few{Налаштовано # розклади}many{Налаштовано # розкладів}other{Налаштовано # розкладу}}"</string>
-    <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбувати"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Отримуйте сповіщення лише від важливих людей і додатків"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Обмеження сповіщень"</string>
-    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Увімкнути режим \"Не турбувати\""</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Звуки будильників і медіа можуть переривати"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Розклад"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Видалити розклади"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Видалити"</string>
@@ -3771,27 +3806,18 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Розклад"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Розклад"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Вимикати звук телефона в певний час"</string>
-    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Налаштувати правила режиму \"Не турбувати\""</string>
-    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Розклад"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Використовувати розклад"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Дозволити сповіщення зі звуком"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Блокувати візуальні сповіщення"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Дозволити візуальні сигнали"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Параметри показу прихованих сповіщень"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Коли ввімкнено режим \"Не турбувати\""</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Вимкнути звук сповіщень"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Ви бачитимете сповіщення на екрані"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Коли надходитимуть сповіщення, телефон не подаватиме сигнал і не вібруватиме."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Вимкнути зображення та звук сповіщень"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Ви не зможете бачити або чути сповіщення"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Ваш телефон не показуватиме нові або наявні сповіщення, не вібруватиме й не сигналізуватиме про них звуком. Зверніть увагу: критичні сповіщення про активність і статус телефона все одно з’являтимуться.\n\nКоли ви вимкнете режим \"Не турбувати\", проведіть пальцем вниз згори екрана, щоб побачити пропущені сповіщення."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Власні налаштування"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Увімкнути власне налаштування"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Видалити власне налаштування"</string>
-    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Вимкнути звук сповіщень"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Частково ховаються"</string>
-    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Вимкнути зображення та звук сповіщень"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Власні обмеження"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Коли екран увімкнено"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Коли екран вимкнено"</string>
@@ -3814,45 +3840,26 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"інші опції"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Додати"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Увімкнути"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Увімкнути"</string>
-    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Вимкнути"</string>
-    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"Режим \"Не турбувати\" ввімкнено до <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
-    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"Режим \"Не турбувати\" буде ввімкнено, доки ви його не вимкнете."</string>
-    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Розклад (<xliff:g id="RULE_NAME">%s</xliff:g>) автоматично ввімкнув режим \"Не турбувати\""</string>
-    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Додаток (<xliff:g id="APP_NAME">%s</xliff:g>) автоматично ввімкнув режим \"Не турбувати\""</string>
-    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Режим \"Не турбувати\" ввімкнено для правила \"<xliff:g id="RULE_NAMES">%s</xliff:g>\" з власними налаштуваннями."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Переглянути власні налаштування"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Лише пріоритетні"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Увімкнено / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Увімкнено"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Запитувати щоразу"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Доки не вимкнути"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 година}one{# година}few{# години}many{# годин}other{# години}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 хвилина}one{# хвилина}few{# хвилини}many{# хвилин}other{# хвилини}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Вимкнено}=1{Вимкнено / 1 розклад може вмикатись автоматично}one{Вимкнено / # розклад може вмикатись автоматично}few{Вимкнено / # розклади можуть вмикатись автоматично}many{Вимкнено / # розкладів можуть вмикатись автоматично}other{Вимкнено / # розкладу може вмикатись автоматично}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"Що може переривати режим \"Не турбувати\""</string>
-    <string name="zen_category_people" msgid="8252926021894933047">"Люди"</string>
-    <string name="zen_category_apps" msgid="1167374545618451925">"Додатки"</string>
-    <string name="zen_category_exceptions" msgid="1316097981052752811">"Будильники й інші сповіщення"</string>
-    <string name="zen_category_schedule" msgid="2003707171924226212">"Розклади"</string>
-    <string name="zen_category_duration" msgid="7515850842082631460">"Тривалість для швидких налаштувань"</string>
-    <string name="zen_settings_general" msgid="2704932194620124153">"Загальні"</string>
-    <string name="zen_sound_footer" msgid="4090291351903631977">"У режимі \"Не турбувати\" звук і вібрація вимикатиметься для всіх сигналів, окрім дозволених вище."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Власні налаштування"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Переглянути розклад"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"OK"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Сповіщення"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Тривалість"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Повідомлення, події й нагадування"</string>
-    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"У режимі \"Не турбувати\" сигнали повідомлень, нагадувань і подій буде вимкнено (окрім дозволених вище). Можна змінити налаштування повідомлень, щоб ваші друзі, члени сім’ї й інші контакти могли зв’язатися з вами."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Готово"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Налаштування"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Вимкнути зображення та звук сповіщень"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Вимкнути звук сповіщень"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Ви не зможете бачити або чути сповіщення. Дозволено виклики від контактів із зірочкою та постійних абонентів."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Поточне налаштування)"</string>
-    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Змінити налаштування сповіщень у режимі \"Не турбувати\"?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Звуки робочого профілю"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Звуки особистого профілю"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Виберіть цей параметр, щоб використовувати ті самі звуки, що й в особистому профілі"</string>
@@ -3994,7 +4001,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"Чат видалено"</string>
     <string name="clear" msgid="5092178335409471100">"Очистити"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Показувати важливі чати в спливаючих сповіщеннях"</string>
-    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Важливі чати показуються у верхній частині розкривної панелі. Ви можете налаштувати надсилання спливаючих сповіщень про них, навіть коли ввімкнено режим \"Не турбувати\"."</string>
+    <string name="important_conversation_behavior_summary" msgid="3993970229878313574">"Важливі розмови показуються у верхній частині розкривної панелі. Ви можете переглядати їх як спливаючі чати, коли ввімкнено режим пріоритету."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Тут з\'являтимуться важливі та змінені чати"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Якщо ви внесете зміни до чатів, наприклад позначите певний чат як важливий, вони з\'являться тут. \n\nЩоб змінити налаштування чату: \nвідкрийте розкривну панель, провівши пальцем униз від верху екрана, а потім натисніть і утримуйте чат."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Показувати без звуку та в згорнутому вигляді"</string>
@@ -4051,17 +4058,13 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Установлені додатки не запитували доступу до сповіщень."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Надати доступ до сповіщень"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ до сповіщень?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"В Android 12 адаптивні сповіщення замінено на покращені. Ця функція допомагає впорядковувати сповіщення й показує в них пропоновані дії та відповіді. \n\nПокращені сповіщення надають доступ до вмісту сповіщень, зокрема до такої особистої інформації, як повідомлення й імена контактів. Ця функція може автоматично закривати сповіщення чи реагувати на них, наприклад відповідати на телефонні дзвінки або керувати режимом \"Не турбувати\"."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Надати додатку <xliff:g id="SERVICE">%1$s</xliff:g> доступ для сповіщень?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе переглядати всі сповіщення, зокрема з особистою інформацією, такою як імена контактів, фотографії та текст отриманих повідомлень. Цей додаток також зможе відкладати й закривати сповіщення або виконувати дії з кнопками в них, зокрема відповідати на дзвінки. \n\nКрім того, додаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> зможе виконувати наведені нижче дії."</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Читати сповіщення"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Може переглядати ваші сповіщення, зокрема з особистою інформацією, такою як імена контактів, текст повідомлень і фотографії."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Відповідати на повідомлення"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Може відповідати на повідомлення та виконувати дії з кнопками в сповіщеннях, зокрема відкладати або закривати їх і відповідати на дзвінки."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Змінювати налаштування"</string>
-    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Може вмикати й вимикати режим \"Не турбувати\" та змінювати пов’язані з ним налаштування."</string>
-    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Якщо ви вимкнете доступ додатка <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> до сповіщень, доступ до режиму \"Не турбувати\" також буде вимкнено."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Вимкнути"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Скасувати"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Дозволені типи сповіщень"</string>
@@ -4119,9 +4122,6 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Щоб підключити ці додатки, установіть додаток <xliff:g id="NAME">%1$s</xliff:g> у своєму робочому профілі"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Щоб підключити ці додатки, установіть додаток <xliff:g id="NAME">%1$s</xliff:g> у своєму особистому профілі"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Натисніть, щоб отримати додаток"</string>
-    <string name="manage_zen_access_title" msgid="1562322900340107269">"Доступ у режимі \"Не турбувати\""</string>
-    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Дозволити доступ у режимі \"Не турбувати\""</string>
-    <string name="zen_access_empty_text" msgid="3779921853282293080">"Установлені додатки не запитували доступу до функції \"Не турбувати\""</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Завантаження додатків…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android блокує сповіщення з цього додатка на цьому пристрої"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"На ваш запит Android блокує цю категорію сповіщень на пристрої"</string>
@@ -4158,8 +4158,6 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"Ніколи не показувати сповіщення на панелі та периферійних пристроях"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Дозволити значок сповіщення"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Показувати значок сповіщення"</string>
-    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Дозволити в режимі \"Не турбувати\""</string>
-    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Показувати ці сповіщення, коли ввімкнено режим \"Не турбувати\""</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Заблокований екран"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Заблоковано"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Пріоритетність"</string>
@@ -4176,7 +4174,6 @@
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Назва розкладу"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"Введіть назву розкладу"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"Назва розкладу вже використовується"</string>
-    <string name="zen_mode_add_rule" msgid="4217731747959400770">"Додати ще"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Додати розклад для події"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Додати розклад для часу"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Видалити розклад"</string>
@@ -4184,13 +4181,8 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Видалити правило \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Видалити"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Невідомо"</string>
-    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Зараз ці налаштування не можна змінити. Додаток (<xliff:g id="APP_NAME">%1$s</xliff:g>) автоматично ввімкнув режим \"Не турбувати\" з користувацькими параметрами."</string>
-    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"Зараз ці налаштування не можна змінити. Додаток автоматично ввімкнув режим \"Не турбувати\" з користувацькими параметрами."</string>
-    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"Зараз ці налаштування не можна змінити. Режим \"Не турбувати\" ввімкнено вручну з користувацькими параметрами."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"Час"</string>
-    <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"Автоматичне правило, за яким у визначений час вмикається режим \"Не турбувати\", налаштовано"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"Подія"</string>
-    <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"Автоматичне правило, за яким за визначених подій вмикається режим \"Не турбувати\", налаштовано"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"Під час подій"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"Під час подій із календаря \"<xliff:g id="CALENDAR">%1$s</xliff:g>\""</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"з усіх календарів"</string>
@@ -4206,9 +4198,6 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Дні"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ніколи"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Щодня"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Будильник може ігнорувати час завершення"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Розклад вимкнеться, коли задзвонить будильник"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Режим \"Не турбувати\""</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Налаштування за умовчанням"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Створити власні налаштування"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Для розкладу \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
@@ -4222,11 +4211,9 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"важливі розмови"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Не дозволено"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Немає}=1{1 чат}one{# чат}few{# чати}many{# чатів}other{# чату}}"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Хто може турбувати"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Дзвінки"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Дзвінки"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"виклики"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Хто може турбувати"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Щоб не пропустити виклик від дозволеного абонента, переконайтеся, що телефон не перебуває в беззвучному режимі"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Вхідні виклики блокуються, коли активовано розклад \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Ви можете змінити налаштування, щоб потрібні люди могли зв’язатися з вами."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Позначені контакти"</string>
@@ -4235,7 +4222,6 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"Повідомлення"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"повідомлення"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Повідомлення"</string>
-    <string name="zen_mode_messages_header" msgid="253721635061451577">"Хто може турбувати"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Щоб не пропустити повідомлення від дозволеного абонента, переконайтеся, що телефон не перебуває в беззвучному режимі"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>: вхідні повідомлення блокуються. Ви можете змінити налаштування, щоб друзі, члени сім’ї й інші контакти зв’язувалися з вами."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Отримувати всі повідомлення"</string>
@@ -4245,9 +4231,6 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Контакти"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Контакти із зірочками"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"Деякі люди або розмови"</string>
-    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Від контактів із зірочкою та постійних абонентів"</string>
-    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Від контактів і постійних абонентів"</string>
-    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Лише від постійних абонентів"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Не дозволено"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Не дозволено"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Будильник"</string>
@@ -4271,25 +4254,15 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"події"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Події"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Дозволити додаткам замінювати режим \"Не турбувати\""</string>
-    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Додатки, які можуть переривати"</string>
-    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Виберіть інші додатки"</string>
-    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Додатки не вибрано"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Додатки не можуть переривати"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="8551235541071796578">"Ви не отримуватимете сповіщення з додатків"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Інші додатки"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Усі сповіщення"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Деякі сповіщення"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Вибрані користувачі й надалі зможуть зв\'язуватися з вами, навіть якщо ви ввімкнете для додатків режим \"Не турбувати\""</string>
-    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Додатки не можуть переривати}=1{Додаток {app_1} може переривати}=2{Додатки {app_1} і {app_2} можуть переривати}=3{Додатки {app_1}, {app_2} і {app_3} можуть переривати}one{Додатки {app_1}, {app_2} і ще # можуть переривати}few{Додатки {app_1}, {app_2} і ще # можуть переривати}many{Додатки {app_1}, {app_2} і ще # можуть переривати}other{Додатки {app_1}, {app_2} і ще # можуть переривати}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Додатки"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Усі сповіщення"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Деякі сповіщення"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Дозволені сповіщення"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Дозволити всі сповіщення"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Ніщо не може переривати}=1{Звук \"{sound_category_1}\" може переривати}=2{Звуки \"{sound_category_1}\" і \"{sound_category_2}\" можуть переривати}=3{Звуки \"{sound_category_1}\", \"{sound_category_2}\" і \"{sound_category_3}\" можуть переривати}one{Звуки \"{sound_category_1}\", \"{sound_category_2}\" і ще # можуть переривати}few{Звуки \"{sound_category_1}\", \"{sound_category_2}\" і ще # можуть переривати}many{Звуки \"{sound_category_1}\", \"{sound_category_2}\" і ще # можуть переривати}other{Звуки \"{sound_category_1}\", \"{sound_category_2}\" і ще # можуть переривати}}"</string>
-    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ніщо не може переривати"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"Ніхто не може переривати"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Деякі люди можуть переривати"</string>
-    <string name="zen_mode_people_all" msgid="311036110283015205">"Усі люди можуть переривати"</string>
+    <string name="zen_mode_sounds_none" msgid="6843840573494370155">"Немає"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Повторні вхідні виклики"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Дозволити повторні дзвінки"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"усі"</string>
@@ -4324,10 +4297,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Активувати режим \"Лише будильник\" до <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Вибрати опцію \"Завжди надсилати\""</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"Коли екран увімкнено"</string>
-    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"Дозволити сповіщенням, для яких вибрано режим \"Не турбувати\", з’являтися на екрані й показувати значок у рядку стану"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"Коли екран вимкнено"</string>
-    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"Дозволити сповіщенням, для яких вибрано режим \"Не турбувати\", вмикати екран та індикатор"</string>
-    <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"Дозволити сповіщенням, для яких вибрано режим \"Не турбувати\", вмикати екран"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"Налаштування сповіщень"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Застереження"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"ОK"</string>
@@ -4431,7 +4401,6 @@
     <string name="notifications_silenced" msgid="2673798575466545098">"Сповіщення вимкнено"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"Немає конфіденційного вмісту на заблокованому екрані"</string>
     <string name="notifications_hidden" msgid="2415415452913806859">"Немає на заблокованому екрані"</string>
-    <string name="notifications_priority" msgid="9068574646650663837">"Режим \"Не турбувати\" замінено"</string>
     <string name="notifications_summary_divider" msgid="6877149909390030983">" / "</string>
     <string name="notification_summary_level" msgid="4074326972839105652">"Рівень %d"</string>
     <string name="notification_summary_channel" msgid="8459033623057872803">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
@@ -4480,7 +4449,6 @@
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Категорії: терміново"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"Категорії: низький пріоритет"</string>
     <string name="filter_notif_blocked_channels" msgid="1131444963543380495">"Категорії: вимкнені"</string>
-    <string name="filter_notif_dnd_channels" msgid="13445325087914932">"Категорії: замінюють режим \"Не турбувати\""</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Розширені налаштування"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Налаштування додатків"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Невідомий додаток"</string>
@@ -4646,11 +4614,7 @@
     <string name="running_frequency" msgid="7260225121706316639">"Як часто працює додаток"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Найбільше використання"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Трафік не споживався"</string>
-    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Надати додатку <xliff:g id="APP">%1$s</xliff:g> доступ до режиму \"Не турбувати\"?"</string>
-    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Додаток зможе вмикати й вимикати режим \"Не турбувати\" та змінювати відповідні налаштування."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Має залишатися ввімкненим, оскільки доступ до сповіщень увімкнено"</string>
-    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Заборонити додатку <xliff:g id="APP">%1$s</xliff:g> доступ до режиму \"Не турбувати\"?"</string>
-    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Усі правила режиму \"Не турбувати\", які створив цей додаток, буде видалено."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Не оптимізувати"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Оптимізувати"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Акумулятор може розряджатися швидше. Додаток зможе використовувати його у фоновому режимі."</string>
@@ -4760,7 +4724,6 @@
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Точку доступу активовано"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"Режим польоту ввімкнено"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Мережі недоступні"</string>
-    <string name="condition_zen_title" msgid="7674761111934567490">"Режим \"Не турбувати\" ввімкнено"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Звук на телефоні вимкнено"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"З винятками"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"Режим енергозбереження ввімкнено"</string>
@@ -5166,14 +5129,28 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Цим пристроєм керує <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Докладніше"</string>
+    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Налаштування з обмеженнями"</string>
+    <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"З міркувань безпеки це налаштування наразі недоступне."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Інформація про пристрій, куплений у кредит"</string>
-    <string name="financed_privacy_exposure_category" msgid="440169672717221900">"Інформація, яку може бачити адміністратор пристрою"</string>
-    <string name="financed_privacy_data" msgid="6931909690419946400">"Дані, пов\'язані з вашим обліковим записом, як-от електронна адреса й інформація в календарі"</string>
-    <string name="financed_privacy_exposure_changes_category" msgid="1556943765530226434">"Зміни, внесені адміністратором пристрою"</string>
-    <string name="financed_privacy_lock_device" msgid="8963934429658453147">"Адміністратор пристрою може його заблокувати й скинути пароль"</string>
-    <string name="financed_privacy_wipe_device" msgid="5711746449385459844">"Адміністратор пристрою може видалити з нього всі дані"</string>
-    <string name="financed_privacy_failed_password_wipe_device" msgid="8777230427603977667">"Дані пристрою видаляться після стількох невдалих спроб ввести пароль"</string>
-    <string name="financed_privacy_header" msgid="7215645340918406124">"Ваш кредитор може змінювати налаштування та встановлювати програмне забезпечення на цьому пристрої.\n\nЩоб дізнатися більше, зв\'яжіться з кредитором."</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваш кредитор може змінювати налаштування та встановлювати програмне забезпечення на цьому пристрої.\n\nЯкщо ви пропустите платіж, ваш пристрій буде заблоковано.\n\nЩоб дізнатися більше, зв\'яжіться з кредитором."</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Якщо за пристрій ще не виплачено кредит, ви не можете:"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"встановлювати додатки не з Google Play"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"перезапускати пристрій у безпечному режимі"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"додавати інших користувачів"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"змінювати дату, час і часові пояси"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"використовувати Параметри розробника"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваш кредитор може виконувати такі дії:"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"отримувати доступ до номера IMEI"</string>
+    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"скидати налаштування пристрою"</string>
+    <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Якщо пристрій заблоковано, ви можете виконувати на ньому лише такі дії:"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"здійснювати екстрені виклики"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"переглядати системну інформацію, наприклад дату, час, статус мережі, заряд акумулятора"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"вмикати й вимикати пристрій"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"переглядати сповіщення й текстові повідомлення"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"отримувати доступ до додатків, дозволених кредитором"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Коли ви сплатите повну суму:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"усі обмеження щодо пристрою знімаються"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"ви можете видалити додаток кредитора"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Додатки для камери</item>
       <item quantity="few">Додатки для камери</item>
@@ -5259,7 +5236,6 @@
     <string name="storage_movies_tv" msgid="7897612625450668593">"Фільми й серіали"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Інформація про ініціалізацію оператора"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Активатор ініціалізації оператора"</string>
-    <string name="zen_suggestion_title" msgid="4555260320474465668">"Оновити режим \"Не турбувати\""</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Призупинити сповіщення, щоб не відволікатися"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Функція недоступна"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Цю функцію вимкнено, оскільки вона сповільнює роботу телефона"</string>
@@ -5552,6 +5528,7 @@
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Не дозволяє постійний примусовий темний режим"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Конфіденційність"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Дозволи, дії в обліковому записі, персональні дані"</string>
+    <string name="privacy_controls_title" msgid="1383047169455206604">"Налаштування"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Видалити"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"Залишити"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"Видалити цю пропозицію?"</string>
@@ -5592,10 +5569,8 @@
     <string name="content_capture" msgid="868372905432812238">"Контент додатків"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"Дозволити додаткам передавати контент системі Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Записати дані динамічної пам’яті системи"</string>
-    <!-- no translation found for reboot_with_mte_title (9167242803901899693) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1024288615073985828) -->
-    <skip />
+    <string name="reboot_with_mte_title" msgid="9167242803901899693">"Перезапустити з MTE"</string>
+    <string name="reboot_with_mte_message" msgid="7675836625682561153">"Система перезапуститься, і ви зможете почати експеримент із Memory Tagging Extension (MTE). Це може негативно вплинути на продуктивність і стабільність системи. Щоб вийти з цього режиму, знову перезапустіть пристрій."</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"Запис даних динамічної пам’яті системи"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"Не вдалося записати дані динамічної пам’яті системи"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"Автоматично записувати дані динамічної пам’яті системи"</string>
@@ -5774,6 +5749,7 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"Дозволити 2G"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"Використання 2G може покращити зв’язок у деяких місцезнаходженнях, однак це менш безпечно. З’єднання 2G завжди можна використовувати для екстрених викликів."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"Оператор <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> вимагає підключення до мережі 2G"</string>
+    <string name="app_info_all_services_label" msgid="3600929226735860271">"Усі сервіси"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Показувати сповіщення про доступ до буфера обміну"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"З\'являтиметься сповіщення, коли будь-який додаток отримуватиме доступ до скопійованого вами тексту, зображень чи іншого контенту"</string>
     <string name="all_apps" msgid="3054120149509114789">"Усі додатки"</string>
@@ -5783,7 +5759,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Коли пристрій використовує UWB, режим польоту вимикається"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Доступ до камери"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Доступ до мікрофона"</string>
-    <string name="cam_toggle_description" msgid="9212762204005146404">"Для додатків і сервісів"</string>
+    <string name="location_toggle_title" msgid="5229867700421750868">"Доступ до геоданих"</string>
+    <string name="perm_toggle_description" msgid="5754629581767319022">"Для додатків і сервісів"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"Для додатків і сервісів. Якщо це налаштування вимкнено, дані мікрофона можуть усе одно передаватися під час виклику екстреного номера."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Налаштування ігор"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"Увімкнути ярлик ігрової панелі тощо"</string>
@@ -5836,8 +5813,20 @@
     <item msgid="588427840913221601">"Статус процесу"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"Підтвердити"</string>
-    <!-- no translation found for dream_preview_button_title (1498088020579092512) -->
+    <!-- no translation found for dream_preview_button_title (6637456541851795952) -->
     <skip />
-    <!-- no translation found for customize_button_title (1110284655990203359) -->
+    <!-- no translation found for dream_picker_category (7726447836872744867) -->
     <skip />
+    <!-- no translation found for dream_complications_toggle_title (4273232303027449163) -->
+    <skip />
+    <!-- no translation found for dream_complications_toggle_summary (8288590233196337078) -->
+    <skip />
+    <string name="dream_more_settings_category" msgid="3119192146760773748">"Інші налаштування"</string>
+    <string name="dream_setup_title" msgid="6356243920317789584">"Налаштуйте заставку"</string>
+    <string name="dream_setup_description" msgid="8881397422185278075">"Виберіть, що має відображатися на екрані, коли пристрій не використовується."</string>
+    <string name="customize_button_title" msgid="1110284655990203359">"Налаштувати"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Щоб увімкнути підтримку довільного формату, перезапустіть пристрій."</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Щоб примусово застосувати режим робочого столу на додаткових екранах, перезапустіть пристрій."</string>
+    <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезапустити зараз"</string>
+    <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезапустити пізніше"</string>
 </resources>
