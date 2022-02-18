@@ -19,19 +19,22 @@ package com.android.settings.safetycenter;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
+import android.safetycenter.SafetySourceStatus.IconAction;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.SettingsActivity;
-import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
+import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,6 +47,10 @@ import org.mockito.MockitoAnnotations;
 @RunWith(AndroidJUnit4.class)
 public class LockScreenSafetySourceTest {
 
+    private static final String SUMMARY = "summary";
+    private static final String FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT = "choose_lock_generic";
+    private static final String FAKE_ACTION_SCREEN_LOCK_SETTINGS = "screen_lock_settings";
+
     private Context mApplicationContext;
 
     @Mock
@@ -51,6 +58,9 @@ public class LockScreenSafetySourceTest {
 
     @Mock
     private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+
+    @Mock
+    private ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailsUtils;
 
     @Before
     public void setUp() {
@@ -70,30 +80,160 @@ public class LockScreenSafetySourceTest {
     public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(false);
 
-        LockScreenSafetySource.sendSafetyData(mApplicationContext);
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
 
         verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsEnabled_sendsPlaceholderData() {
+    public void sendSafetyData_whenScreenLockIsDisabled_sendsNoData() {
         when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(false);
 
-        LockScreenSafetySource.sendSafetyData(mApplicationContext);
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+    }
+
+    @Test
+    public void sendSafetyData_whenScreenLockIsEnabled_sendsData() {
+        whenScreenLockIsEnabled();
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
         assertThat(safetySourceData.getId()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
-        assertThat(safetySourceStatus.getTitle().toString()).isEqualTo("Lock Screen");
+        assertThat(safetySourceStatus.getTitle().toString())
+                .isEqualTo(ResourcesUtils.getResourcesString(
+                        mApplicationContext,
+                        "unlock_set_unlock_launch_picker_title_profile"));
         assertThat(safetySourceStatus.getSummary().toString())
-                .isEqualTo("Lock screen settings");
+                .isEqualTo(SUMMARY);
+        assertThat(safetySourceStatus.getPendingIntent().getIntent()).isNotNull();
+        assertThat(safetySourceStatus.getPendingIntent().getIntent().getAction())
+                .isEqualTo(FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+    }
+
+    @Test
+    public void sendSafetyData_whenLockPatternIsSecure_sendsStatusLevelOk() {
+        whenScreenLockIsEnabled();
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+        SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
+
         assertThat(safetySourceStatus.getStatusLevel())
                 .isEqualTo(SafetySourceStatus.STATUS_LEVEL_OK);
-        assertThat(safetySourceStatus.getPendingIntent()).isNotNull();
-        assertThat(safetySourceStatus.getPendingIntent().getIntent().getStringExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(ChooseLockGeneric.ChooseLockGenericFragment.class.getName());
+    }
+
+    @Test
+    public void sendSafetyData_whenLockPatternIsNotSecure_sendsStatusLevelRecommendation() {
+        whenScreenLockIsEnabled();
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(false);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+        SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
+
+        assertThat(safetySourceStatus.getStatusLevel())
+                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION);
+    }
+
+    @Test
+    public void sendSafetyData_whenPasswordQualityIsManaged_sendsDisabled() {
+        whenScreenLockIsEnabled();
+        when(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(anyInt(), any()))
+                .thenReturn(true);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+        SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
+
+        assertThat(safetySourceStatus.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void sendSafetyData_whenPasswordQualityIsNotManaged_sendsEnabled() {
+        whenScreenLockIsEnabled();
+        when(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(anyInt(), any()))
+                .thenReturn(false);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+        SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
+
+        assertThat(safetySourceStatus.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void sendSafetyData_whenShouldShowGearMenu_sendsGearMenuActionIcon() {
+        whenScreenLockIsEnabled();
+        final Intent launchScreenLockSettings = new Intent(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
+        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent())
+                .thenReturn(launchScreenLockSettings);
+        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        final ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(
+                SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        final IconAction iconAction = captor.getValue().getStatus().getIconAction();
+
+        assertThat(iconAction.getIconType()).isEqualTo(IconAction.ICON_TYPE_GEAR);
+        assertThat(iconAction.getPendingIntent().getIntent().getAction())
+                .isEqualTo(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
+    }
+
+    @Test
+    public void sendSafetyData_whenShouldNotShowGearMenu_sendsNoGearMenuActionIcon() {
+        whenScreenLockIsEnabled();
+        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(false);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+        SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
+
+        assertThat(safetySourceStatus.getIconAction()).isNull();
+    }
+
+    private void whenScreenLockIsEnabled() {
+        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.getSummary(anyInt())).thenReturn(SUMMARY);
+
+        Intent launchChooseLockGenericFragment = new Intent(
+                FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+        when(mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent())
+                .thenReturn(launchChooseLockGenericFragment);
     }
 }
