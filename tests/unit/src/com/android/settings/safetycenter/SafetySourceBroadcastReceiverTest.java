@@ -50,26 +50,21 @@ public class SafetySourceBroadcastReceiverTest {
     @Mock
     private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
-    @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplicationContext = ApplicationProvider.getApplicationContext();
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
     }
 
     @After
     public void tearDown() {
         SafetyCenterManagerWrapper.sInstance = null;
-        SafetyCenterStatusHolder.sInstance = null;
     }
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNoIntentAction_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
@@ -79,7 +74,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
         Intent intent =
                 new Intent()
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
@@ -94,7 +89,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNullSourceIds_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(ACTION_REFRESH_SAFETY_SOURCES);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
@@ -104,7 +99,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsEnabled_withNoSourceIds_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
@@ -117,7 +112,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_withLockscreenSourceId_sendsLockscreenData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
@@ -136,7 +131,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_withBiometricsSourceId_sendsBiometricData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
@@ -152,7 +147,7 @@ public class SafetySourceBroadcastReceiverTest {
 
     @Test
     public void sendSafetyData_onBootCompleted_sendsBiometricAndLockscreenData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
         // TODO(b/215517420): Update this test when BiometricSafetySource is implemented to test
