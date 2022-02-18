@@ -17,51 +17,76 @@
 package com.android.settings.safetycenter;
 
 import android.app.PendingIntent;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
+import android.safetycenter.SafetySourceStatus.IconAction;
 
-import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.password.ChooseLockGeneric;
-import com.android.settingslib.transition.SettingsTransitionHelper;
+import com.android.settings.R;
+import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /** Lock Screen Safety Source for Safety Center. */
 public final class LockScreenSafetySource {
 
     public static final String SAFETY_SOURCE_ID = "LockScreenSafetySource";
 
-    private LockScreenSafetySource() {}
+    private LockScreenSafetySource() {
+    }
 
     /** Sends lock screen safety data to Safety Center. */
-    public static void sendSafetyData(Context context) {
+    public static void sendSafetyData(Context context,
+            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
         if (!SafetyCenterStatusHolder.get().isEnabled(context)) {
             return;
         }
 
-        // TODO(b/215515298): Replace placeholder SafetySourceData with real data.
-        // TODO(b/217409995): Replace SECURITY_ALTERNATIVE with Safety Center metrics category.
-        Intent clickIntent = new SubSettingLauncher(context)
-                .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.SECURITY_ALTERNATIVE)
-                .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
-                .toIntent();
-        PendingIntent pendingIntent = PendingIntent
+        if (!screenLockPreferenceDetailsUtils.isAvailable()) {
+            return;
+        }
+
+        final int userId = UserHandle.myUserId();
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
+                .checkIfPasswordQualityIsSet(context, userId);
+        final PendingIntent pendingIntent = createPendingIntent(context,
+                screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent());
+        final IconAction gearMenuIconAction = createGearMenuIconAction(context,
+                screenLockPreferenceDetailsUtils);
+
+        final SafetySourceStatus status = new SafetySourceStatus.Builder(
+                context.getString(R.string.unlock_set_unlock_launch_picker_title_profile),
+                screenLockPreferenceDetailsUtils.getSummary(UserHandle.myUserId()),
+                screenLockPreferenceDetailsUtils.isLockPatternSecure()
+                        ? SafetySourceStatus.STATUS_LEVEL_OK
+                        : SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION,
+                pendingIntent)
+                .setEnabled(
+                        !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin))
+                .setIconAction(gearMenuIconAction).build();
+        final SafetySourceData safetySourceData = new SafetySourceData.Builder(
+                SAFETY_SOURCE_ID).setStatus(status).build();
+
+        SafetyCenterManagerWrapper.get().sendSafetyCenterUpdate(context, safetySourceData);
+    }
+
+    private static IconAction createGearMenuIconAction(Context context,
+            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
+        return screenLockPreferenceDetailsUtils.shouldShowGearMenu() ? new IconAction(
+                IconAction.ICON_TYPE_GEAR,
+                createPendingIntent(context,
+                        screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent()))
+                : null;
+    }
+
+    private static PendingIntent createPendingIntent(Context context, Intent intent) {
+        return PendingIntent
                 .getActivity(
                         context,
                         0 /* requestCode */,
-                        clickIntent,
+                        intent,
                         PendingIntent.FLAG_IMMUTABLE);
-        SafetySourceData safetySourceData =
-                new SafetySourceData.Builder(SAFETY_SOURCE_ID).setStatus(
-                        new SafetySourceStatus.Builder(
-                                "Lock Screen",
-                                "Lock screen settings",
-                                SafetySourceStatus.STATUS_LEVEL_OK,
-                                pendingIntent).build()
-                ).build();
-
-        SafetyCenterManagerWrapper.get().sendSafetyCenterUpdate(context, safetySourceData);
     }
 }
