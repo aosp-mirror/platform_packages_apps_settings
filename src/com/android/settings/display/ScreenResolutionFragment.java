@@ -36,7 +36,9 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.IllustrationPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,6 +57,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private Display mDefaultDisplay;
     private String[] mScreenResolutionOptions;
     private Set<Point> mResolutions;
+    private String[] mScreenResolutionSummaries;
 
     private IllustrationPreference mImagePreference;
 
@@ -67,6 +70,8 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         mResources = context.getResources();
         mScreenResolutionOptions =
                 mResources.getStringArray(R.array.config_screen_resolution_options_strings);
+        mScreenResolutionSummaries =
+                mResources.getStringArray(R.array.config_screen_resolution_summaries_strings);
         mResolutions = getAllSupportedResolution();
         mImagePreference = new IllustrationPreference(context);
     }
@@ -80,6 +85,24 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     protected void addStaticPreferences(PreferenceScreen screen) {
         updateIllustrationImage(mImagePreference);
         screen.addPreference(mImagePreference);
+
+        final FooterPreference footerPreference = new FooterPreference(screen.getContext());
+        footerPreference.setTitle(R.string.screen_resolution_footer);
+        footerPreference.setSelectable(false);
+        footerPreference.setLayoutResource(R.layout.preference_footer);
+        screen.addPreference(footerPreference);
+    }
+
+    @Override
+    public void bindPreferenceExtra(
+            SelectorWithWidgetPreference pref,
+            String key,
+            CandidateInfo info,
+            String defaultKey,
+            String systemDefaultKey) {
+        final ScreenResolutionCandidateInfo candidateInfo = (ScreenResolutionCandidateInfo) info;
+        final CharSequence summary = candidateInfo.loadSummary();
+        if (summary != null) pref.setSummary(summary);
     }
 
     @Override
@@ -90,6 +113,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             candidates.add(
                     new ScreenResolutionCandidateInfo(
                             mScreenResolutionOptions[i],
+                            mScreenResolutionSummaries[i],
                             mScreenResolutionOptions[i],
                             true /* enabled */));
         }
@@ -134,9 +158,9 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     /** Get the key corresponding to the resolution. */
     @VisibleForTesting
     String getKeyForResolution(int width) {
-        return width == FHD_WIDTH
-                ? mScreenResolutionOptions[FHD_INDEX]
-                : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX] : null;
+        return width == FHD_WIDTH ? mScreenResolutionOptions[FHD_INDEX]
+                : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX]
+                : null;
     }
 
     @Override
@@ -175,19 +199,28 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         return SettingsEnums.SCREEN_RESOLUTION;
     }
 
-    static class ScreenResolutionCandidateInfo extends CandidateInfo {
+    /** This is an extension of the CandidateInfo class, which adds summary information. */
+    public static class ScreenResolutionCandidateInfo extends CandidateInfo {
         private final CharSequence mLabel;
+        private final CharSequence mSummary;
         private final String mKey;
 
-        ScreenResolutionCandidateInfo(CharSequence label, String key, boolean enabled) {
+        ScreenResolutionCandidateInfo(
+                CharSequence label, CharSequence summary, String key, boolean enabled) {
             super(enabled);
             mLabel = label;
+            mSummary = summary;
             mKey = key;
         }
 
         @Override
         public CharSequence loadLabel() {
             return mLabel;
+        }
+
+        /** It is the summary for radio options. */
+        public CharSequence loadSummary() {
+            return mSummary;
         }
 
         @Override
