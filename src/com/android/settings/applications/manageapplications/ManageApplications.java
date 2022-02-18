@@ -135,7 +135,7 @@ import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 import com.google.android.material.appbar.AppBarLayout;
 
