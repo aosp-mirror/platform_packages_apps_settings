@@ -197,7 +197,7 @@ public class ActivityEmbeddingRulesController {
         addActivityFilter(activityFilters, Settings.class);
 
         final Intent intent = new Intent(mContext, Settings.NetworkDashboardActivity.class);
-        intent.putExtra(SettingsActivity.EXTRA_IS_SECONDARY_LAYER_PAGE, true);
+        intent.putExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE, true);
         final SplitPlaceholderRule placeholderRule = new SplitPlaceholderRule(
                 activityFilters,
                 intent,
