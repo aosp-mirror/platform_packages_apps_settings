@@ -78,11 +78,19 @@ public class SwitchSlotSidecar
         super.run(param);
     }
 
-    /** Starts switching to the removable slot. */
-    public void runSwitchToEuiccSlot(int id, int port, SubscriptionInfo removedSubInfo) {
+    /**
+     * Start the SimSlotMapping process if the euicc slot is not in SimSlotMapping list.
+     * @param physicalSlotId The physical slot id.
+     * @param port The port id.
+     * @param removedSubInfo The subscriptionInfo which is selected by the user to disable when all
+     *                      of sim slots are full in the device. If all of slots are not full in
+     *                       the device, then this is null.
+     */
+    public void runSwitchToEuiccSlot(int physicalSlotId, int port,
+            SubscriptionInfo removedSubInfo) {
         Param param = new Param();
         param.command = Command.SWITCH_TO_EUICC_SIM;
-        param.slotId = id;
+        param.slotId = physicalSlotId;
         param.removedSubInfo = removedSubInfo;
         param.port = port;
         super.run(param);
