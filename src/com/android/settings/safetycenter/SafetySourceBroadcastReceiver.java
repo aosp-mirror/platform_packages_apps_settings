@@ -16,6 +16,8 @@
 
 package com.android.settings.safetycenter;
 
+import static android.content.Intent.ACTION_BOOT_COMPLETED;
+import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
 
 import android.content.BroadcastReceiver;
@@ -23,6 +25,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.google.common.collect.ImmutableList;
+
+import java.util.List;
 
 /** Broadcast receiver for handling requests from Safety Center for fresh data. */
 public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
@@ -33,17 +37,33 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
             return;
         }
 
-        String[] sourceIdsExtra = intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
-        if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
-            ImmutableList<String> sourceIds = ImmutableList.copyOf(sourceIdsExtra);
-
-            if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
-                LockScreenSafetySource.sendSafetyData(context);
+        if (ACTION_REFRESH_SAFETY_SOURCES.equals(intent.getAction())) {
+            String[] sourceIdsExtra =
+                    intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
+            if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
+                refreshSafetySources(context, ImmutableList.copyOf(sourceIdsExtra));
             }
-
-            if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
-                BiometricsSafetySource.sendSafetyData(context);
-            }
+            return;
         }
+
+
+        if (ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            refreshAllSafetySources(context);
+        }
+    }
+
+    private static void refreshSafetySources(Context context, List<String> sourceIds) {
+        if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
+            LockScreenSafetySource.sendSafetyData(context);
+        }
+
+        if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
+            BiometricsSafetySource.sendSafetyData(context);
+        }
+    }
+
+    private static void refreshAllSafetySources(Context context) {
+        LockScreenSafetySource.sendSafetyData(context);
+        BiometricsSafetySource.sendSafetyData(context);
     }
 }
