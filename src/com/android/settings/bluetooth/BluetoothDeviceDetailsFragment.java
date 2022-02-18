@@ -187,6 +187,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
                     mCachedDevice, lifecycle));
+            controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
+                    lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
