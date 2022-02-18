@@ -66,7 +66,7 @@ public class StorageItemPreference extends Preference {
             return;
 
         mProgressBar.setMax(PROGRESS_MAX);
-        mProgressBar.setProgress(mProgressPercent);
+        mProgressBar.setProgress(mProgressPercent, true /* animate */);
     }
 
     @Override
