@@ -129,7 +129,8 @@
             android:usesCleartextTraffic="true"
             android:defaultToDeviceProtectedStorage="true"
             android:directBootAware="true"
-            android:appComponentFactory="androidx.core.app.CoreComponentFactory">
+            android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+            android:gwpAsanMode="always">
 
         <uses-library android:name="org.apache.http.legacy" />
 
