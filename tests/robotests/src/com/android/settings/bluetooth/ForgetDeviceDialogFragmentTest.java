@@ -73,6 +73,7 @@ public class ForgetDeviceDialogFragmentTest {
         FakeFeatureFactory.setupForTest();
         String deviceAddress = "55:66:77:88:99:AA";
         when(mCachedDevice.getAddress()).thenReturn(deviceAddress);
+        when(mCachedDevice.getIdentityAddress()).thenReturn(deviceAddress);
         when(mCachedDevice.getDevice()).thenReturn(mBluetoothDevice);
         when(mCachedDevice.getName()).thenReturn(DEVICE_NAME);
         mFragment = spy(ForgetDeviceDialogFragment.newInstance(deviceAddress));
