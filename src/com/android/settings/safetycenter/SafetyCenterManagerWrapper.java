@@ -18,6 +18,7 @@ package com.android.settings.safetycenter;
 
 import android.content.Context;
 import android.safetycenter.SafetyCenterManager;
+import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.util.Log;
 
@@ -26,7 +27,12 @@ import com.android.internal.annotations.VisibleForTesting;
 /** A wrapper for the SafetyCenterManager system service. */
 public class SafetyCenterManagerWrapper {
 
-    private static final String TAG = "SafetyCenterManagerWrapper";
+    /**
+     * Tag for logging.
+     *
+     * <p>The tag is restricted to 23 characters (the maximum allowed for Android logging).
+     */
+    private static final String TAG = "SafetyCenterManagerWrap";
 
     @VisibleForTesting
     public static SafetyCenterManagerWrapper sInstance;
@@ -41,8 +47,10 @@ public class SafetyCenterManagerWrapper {
         return sInstance;
     }
 
-    /** Sends updated safety source data to Safety Center. */
-    public void sendSafetyCenterUpdate(Context context, SafetySourceData safetySourceData) {
+    /** Sets the latest safety source data for Safety Center. */
+    public void setSafetySourceData(Context context, String safetySourceId,
+            SafetySourceData safetySourceData,
+            SafetyEvent safetyEvent) {
         SafetyCenterManager safetyCenterManager =
                 context.getSystemService(SafetyCenterManager.class);
 
@@ -52,7 +60,11 @@ public class SafetyCenterManagerWrapper {
         }
 
         try {
-            safetyCenterManager.sendSafetyCenterUpdate(safetySourceData);
+            safetyCenterManager.setSafetySourceData(
+                    safetySourceId,
+                    safetySourceData,
+                    safetyEvent
+            );
         } catch (Exception e) {
             Log.e(TAG, "Failed to send SafetySourceData", e);
             return;

@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter;
 
 import static android.provider.Settings.ACTION_SHOW_ADMIN_SUPPORT_DETAILS;
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -36,6 +37,7 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
+import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
 
@@ -66,6 +68,8 @@ public class BiometricsSafetySourceTest {
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
     private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
+    private static final SafetyEvent EVENT_SOURCE_STATE_CHANGED =
+            new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build();
 
     private Context mApplicationContext;
 
@@ -103,27 +107,61 @@ public class BiometricsSafetySourceTest {
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
+    public void setSafetyData_whenSafetyCenterIsDisabled_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsEnabled_withoutBiometrics_sendsNoData() {
+    public void setSafetySourceData_whenSafetyCenterIsEnabled_withoutBiometrics_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_withFingerprintNotEnrolled_whenDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_setsDataForBiometricSource() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), captor.capture(), any(), any());
+
+        assertThat(captor.getValue()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
+    }
+
+    @Test
+    public void setSafetySourceData_setsDataWithCorrectSafetyEvent() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
+
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
+        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), any(), any(), captor.capture());
+
+        assertThat(captor.getValue()).isEqualTo(EVENT_SOURCE_STATE_CHANGED);
+    }
+
+    @Test
+    public void setSafetySourceData_withFingerprintNotEnrolled_whenDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
@@ -131,31 +169,31 @@ public class BiometricsSafetySourceTest {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceDisabledDataSentWithSingularSummary(
+        assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary_none");
     }
 
     @Test
-    public void sendSafetyData_withFingerprintNotEnrolled_whenNotDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFingerprintNotEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary_none",
                 FingerprintEnrollIntroduction.class.getName());
     }
 
     @Test
-    public void sendSafetyData_withFingerprintsEnrolled_whenDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFingerprintsEnrolled_whenDisabledByAdmin_setsData() {
         final int enrolledFingerprintsCount = 2;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -166,16 +204,16 @@ public class BiometricsSafetySourceTest {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceDisabledDataSentWithPluralSummary(
+        assertSafetySourceDisabledDataSetWithPluralSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary",
                 enrolledFingerprintsCount);
     }
 
     @Test
-    public void sendSafetyData_withFingerprintsEnrolled_whenNotDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFingerprintsEnrolled_whenNotDisabledByAdmin_setsData() {
         final int enrolledFingerprintsCount = 2;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -185,16 +223,16 @@ public class BiometricsSafetySourceTest {
                 .thenReturn(createFingerprintList(enrolledFingerprintsCount));
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithPluralSummary(
+        assertSafetySourceEnabledDataSetWithPluralSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary", enrolledFingerprintsCount,
                 FingerprintSettings.class.getName());
     }
 
     @Test
-    public void sendSafetyData_withFaceNotEnrolled_whenDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceNotEnrolled_whenDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -202,31 +240,31 @@ public class BiometricsSafetySourceTest {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceDisabledDataSentWithSingularSummary(
+        assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary_none");
     }
 
     @Test
-    public void sendSafetyData_withFaceNotEnrolled_whenNotDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceNotEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary_none",
                 FaceEnrollIntroduction.class.getName());
     }
 
     @Test
-    public void sendSafetyData_withFaceEnrolled_whenDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceEnrolled_whenDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -234,78 +272,78 @@ public class BiometricsSafetySourceTest {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceDisabledDataSentWithSingularSummary(
+        assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary");
     }
 
     @Test
-    public void sendSafetyData_withFaceEnrolled_whenNotDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceEnrolled_whenNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary",
                 Settings.FaceSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenBothNotDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceAndFingerprint_whenBothNotDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_none_enrolled",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenFaceDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_withFaceAndFingerprint_whenFaceDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_none_enrolled",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenFingerprintDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenFingerprintDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_none_enrolled",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenBothDisabledByAdmin_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenBothDisabledByAdmin_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -313,15 +351,15 @@ public class BiometricsSafetySourceTest {
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE
                         | DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceDisabledDataSentWithSingularSummary(
+        assertSafetySourceDisabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_none_enrolled");
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenFaceEnrolled_withMpFingers_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenFaceEnrolled_withMpFingers_setsData() {
         final int enrolledFingerprintsCount = 2;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -330,16 +368,16 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
                 createFingerprintList(enrolledFingerprintsCount));
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_both_fp_multiple",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenFaceEnrolled_withOneFinger_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenFaceEnrolled_withOneFinger_setsData() {
         final int enrolledFingerprintsCount = 1;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -348,16 +386,16 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
                 createFingerprintList(enrolledFingerprintsCount));
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_biometric_preference_summary_both_fp_single",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenFaceEnrolled_withNoFingers_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenFaceEnrolled_withNoFingers_setsData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -365,16 +403,16 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
                 Collections.emptyList());
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithSingularSummary(
+        assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_face_preference_summary",
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
     @Test
-    public void sandSafetyData_withFaceAndFingerprint_whenNoFaceEnrolled_withFingers_sendsData() {
+    public void setSafetySourceData_faceAndFingerprint_whenNoFaceEnrolled_withFingers_setsData() {
         final int enrolledFingerprintsCount = 1;
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
@@ -383,38 +421,38 @@ public class BiometricsSafetySourceTest {
         when(mFingerprintManager.getEnrolledFingerprints(anyInt())).thenReturn(
                 createFingerprintList(enrolledFingerprintsCount));
 
-        BiometricsSafetySource.sendSafetyData(mApplicationContext);
+        BiometricsSafetySource.setSafetySourceData(mApplicationContext, EVENT_SOURCE_STATE_CHANGED);
 
-        assertSafetySourceEnabledDataSentWithPluralSummary(
+        assertSafetySourceEnabledDataSetWithPluralSummary(
                 "security_settings_biometric_preference_title",
                 "security_settings_fingerprint_preference_summary", enrolledFingerprintsCount,
                 Settings.CombinedBiometricSettingsActivity.class.getName());
     }
 
-    private void assertSafetySourceDisabledDataSentWithSingularSummary(String expectedTitleResName,
+    private void assertSafetySourceDisabledDataSetWithSingularSummary(String expectedTitleResName,
             String expectedSummaryResName) {
-        assertSafetySourceDisabledDataSent(
+        assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedSummaryResName)
         );
     }
 
-    private void assertSafetySourceEnabledDataSentWithSingularSummary(String expectedTitleResName,
+    private void assertSafetySourceEnabledDataSetWithSingularSummary(String expectedTitleResName,
             String expectedSummaryResName,
             String expectedSettingsClassName) {
-        assertSafetySourceEnabledDataSent(
+        assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedSummaryResName),
                 expectedSettingsClassName
         );
     }
 
-    private void assertSafetySourceDisabledDataSentWithPluralSummary(String expectedTitleResName,
+    private void assertSafetySourceDisabledDataSetWithPluralSummary(String expectedTitleResName,
             String expectedSummaryResName, int expectedSummaryQuantity) {
         final int stringResId = ResourcesUtils.getResourcesId(
                 ApplicationProvider.getApplicationContext(), "plurals",
                 expectedSummaryResName);
-        assertSafetySourceDisabledDataSent(
+        assertSafetySourceDisabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
                 mApplicationContext.getResources().getQuantityString(stringResId,
                         expectedSummaryQuantity /* quantity */,
@@ -422,13 +460,13 @@ public class BiometricsSafetySourceTest {
         );
     }
 
-    private void assertSafetySourceEnabledDataSentWithPluralSummary(String expectedTitleResName,
+    private void assertSafetySourceEnabledDataSetWithPluralSummary(String expectedTitleResName,
             String expectedSummaryResName, int expectedSummaryQuantity,
             String expectedSettingsClassName) {
         final int stringResId = ResourcesUtils.getResourcesId(
                 ApplicationProvider.getApplicationContext(), "plurals",
                 expectedSummaryResName);
-        assertSafetySourceEnabledDataSent(
+        assertSafetySourceEnabledDataSet(
                 ResourcesUtils.getResourcesString(mApplicationContext, expectedTitleResName),
                 mApplicationContext.getResources().getQuantityString(stringResId,
                         expectedSummaryQuantity /* quantity */,
@@ -437,13 +475,13 @@ public class BiometricsSafetySourceTest {
         );
     }
 
-    private void assertSafetySourceDisabledDataSent(String expectedTitle, String expectedSummary) {
+    private void assertSafetySourceDisabledDataSet(String expectedTitle, String expectedSummary) {
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), any(), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
-        assertThat(safetySourceData.getId()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
         assertThat(safetySourceStatus.getTitle().toString()).isEqualTo(expectedTitle);
         assertThat(safetySourceStatus.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(safetySourceStatus.isEnabled()).isFalse();
@@ -452,14 +490,14 @@ public class BiometricsSafetySourceTest {
         assertThat(clickIntent.getAction()).isEqualTo(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
     }
 
-    private void assertSafetySourceEnabledDataSent(String expectedTitle, String expectedSummary,
+    private void assertSafetySourceEnabledDataSet(String expectedTitle, String expectedSummary,
             String expectedSettingsClassName) {
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), any(), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
-        assertThat(safetySourceData.getId()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
         assertThat(safetySourceStatus.getTitle().toString()).isEqualTo(expectedTitle);
         assertThat(safetySourceStatus.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(safetySourceStatus.isEnabled()).isTrue();
