@@ -79,6 +79,7 @@ import java.util.Locale;
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment
         implements ShortcutPreference.OnClickCallback, OnMainSwitchChangeListener {
 
+    protected TopIntroPreference mTopIntroPreference;
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
@@ -483,10 +484,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (TextUtils.isEmpty(mTopIntroTitle)) {
             return;
         }
-        final TopIntroPreference topIntroPreference = new TopIntroPreference(getPrefContext());
-        topIntroPreference.setKey(KEY_TOP_INTRO_PREFERENCE);
-        topIntroPreference.setTitle(mTopIntroTitle);
-        getPreferenceScreen().addPreference(topIntroPreference);
+        mTopIntroPreference = new TopIntroPreference(getPrefContext());
+        mTopIntroPreference.setKey(KEY_TOP_INTRO_PREFERENCE);
+        mTopIntroPreference.setTitle(mTopIntroTitle);
+        getPreferenceScreen().addPreference(mTopIntroPreference);
     }
 
     private void initToggleServiceSwitchPreference() {
