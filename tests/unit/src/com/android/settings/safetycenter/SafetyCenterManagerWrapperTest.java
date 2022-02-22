@@ -32,7 +32,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
-public class SafetyCenterStatusHolderTest {
+public class SafetyCenterManagerWrapperTest {
 
     @Mock
     private Context mContext;
@@ -44,13 +44,13 @@ public class SafetyCenterStatusHolderTest {
 
     @Test
     public void isEnabled_whenContextNull_returnsFalse() {
-        assertThat(SafetyCenterStatusHolder.get().isEnabled(null)).isFalse();
+        assertThat(SafetyCenterManagerWrapper.get().isEnabled(null)).isFalse();
     }
 
     @Test
     public void isEnabled_whenSystemServiceNull_returnsFalse() {
         when(mContext.getSystemService(SafetyCenterManager.class)).thenReturn(null);
 
-        assertThat(SafetyCenterStatusHolder.get().isEnabled(mContext)).isFalse();
+        assertThat(SafetyCenterManagerWrapper.get().isEnabled(mContext)).isFalse();
     }
 }

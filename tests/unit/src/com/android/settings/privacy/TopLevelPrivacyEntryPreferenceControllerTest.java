@@ -26,7 +26,7 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.TopLevelSecurityEntryPreferenceController;
 
 import org.junit.Before;
@@ -43,12 +43,12 @@ public class TopLevelPrivacyEntryPreferenceControllerTest {
     private TopLevelPrivacyEntryPreferenceController mTopLevelPrivacyEntryPreferenceController;
 
     @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
 
         mTopLevelPrivacyEntryPreferenceController =
                 new TopLevelPrivacyEntryPreferenceController(
@@ -57,7 +57,7 @@ public class TopLevelPrivacyEntryPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_whenSafetyCenterEnabled_returnsUnavailable() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
 
         assertThat(mTopLevelPrivacyEntryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(TopLevelSecurityEntryPreferenceController.CONDITIONALLY_UNAVAILABLE);
@@ -65,7 +65,7 @@ public class TopLevelPrivacyEntryPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_whenSafetyCenterDisabled_returnsAvailable() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
 
         assertThat(mTopLevelPrivacyEntryPreferenceController.getAvailabilityStatus())
                 .isEqualTo(TopLevelSecurityEntryPreferenceController.AVAILABLE);
