@@ -83,9 +83,9 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
                         EconomyManager.DEFAULT_AM_MAX_SATIATED_BALANCE,
                         POLICY_ALARM_MANAGER));
-        mAlarmManagerMap.put(EconomyManager.KEY_AM_MAX_CIRCULATION,
+        mAlarmManagerMap.put(EconomyManager.KEY_AM_INITIAL_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_max_circulation),
-                        EconomyManager.DEFAULT_AM_MAX_CIRCULATION,
+                        EconomyManager.DEFAULT_AM_INITIAL_CONSUMPTION_LIMIT,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
@@ -265,9 +265,9 @@ public class TareFactorController {
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
                         EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE,
                         POLICY_JOB_SCHEDULER));
-        mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_CIRCULATION,
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_max_circulation),
-                        EconomyManager.DEFAULT_JS_MAX_CIRCULATION,
+                        EconomyManager.DEFAULT_JS_INITIAL_CONSUMPTION_LIMIT,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
