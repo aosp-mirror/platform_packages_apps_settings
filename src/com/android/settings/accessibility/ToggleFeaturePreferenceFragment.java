@@ -79,6 +79,7 @@ import java.util.Locale;
 public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment
         implements ShortcutPreference.OnClickCallback, OnMainSwitchChangeListener {
 
+    protected TopIntroPreference mTopIntroPreference;
     protected SettingsMainSwitchPreference mToggleServiceSwitchPreference;
     protected ShortcutPreference mShortcutPreference;
     protected Preference mSettingsPreference;
@@ -483,10 +484,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (TextUtils.isEmpty(mTopIntroTitle)) {
             return;
         }
-        final TopIntroPreference topIntroPreference = new TopIntroPreference(getPrefContext());
-        topIntroPreference.setKey(KEY_TOP_INTRO_PREFERENCE);
-        topIntroPreference.setTitle(mTopIntroTitle);
-        getPreferenceScreen().addPreference(topIntroPreference);
+        mTopIntroPreference = new TopIntroPreference(getPrefContext());
+        mTopIntroPreference.setKey(KEY_TOP_INTRO_PREFERENCE);
+        mTopIntroPreference.setTitle(mTopIntroTitle);
+        getPreferenceScreen().addPreference(mTopIntroPreference);
     }
 
     private void initToggleServiceSwitchPreference() {
@@ -879,7 +880,9 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
                 ? R.string.accessibility_service_qs_tooltips_content
                 : R.string.accessibility_service_auto_added_qs_tooltips_content;
         final String title = getString(titleResId, tileName);
-        final int imageResId = R.drawable.accessibility_qs_tooltips_illustration;
+        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.drawable.accessibility_qs_tooltips_illustration
+                : R.drawable.accessibility_auto_added_qs_tooltips_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
         mTooltipWindow.setup(title, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
