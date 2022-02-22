@@ -113,9 +113,21 @@ public class UiccSlotUtil {
         }
         TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
         int inactiveRemovableSlot = getInactiveRemovableSlot(telMgr.getUiccSlotsInfo(), slotId);
+        Log.i(TAG, "The InactiveRemovableSlot: " + inactiveRemovableSlot);
+
+        Collection<UiccSlotMapping> uiccSlotMappings = telMgr.getSimSlotMapping();
+        Log.i(TAG, "The SimSlotMapping: " + uiccSlotMappings);
+
+        if (inactiveRemovableSlot == INVALID_PHYSICAL_SLOT_ID) {
+            // The slot is invalid slot id, then to skip this.
+            // The slot is active, then the sim can enable directly.
+            return;
+        }
+
         performSwitchToSlot(telMgr,
-                prepareUiccSlotMappingsForRemovableSlot(telMgr.getSimSlotMapping(),
-                        inactiveRemovableSlot, removedSubInfo, telMgr.isMultiSimEnabled()),
+                prepareUiccSlotMappings(uiccSlotMappings,
+                        inactiveRemovableSlot, /*removable sim's port Id*/ 0, removedSubInfo,
+                        telMgr.isMultiSimEnabled()),
                 context);
     }
 
@@ -123,7 +135,7 @@ public class UiccSlotUtil {
      * Switches to the Euicc slot. It waits for SIM_STATE_LOADED after switch.
      *
      * @param context the application context.
-     * @param slotId the Euicc slot id.
+     * @param physicalSlotId the Euicc slot id.
      * @param port the Euicc slot port id.
      * @param removedSubInfo In the DSDS+MEP mode, if the all of slots have sims, it should
      *                       remove the one of active sim.
@@ -131,7 +143,7 @@ public class UiccSlotUtil {
      *                       The default value is the esim slot and portId 0.
      * @throws UiccSlotsException if there is an error.
      */
-    public static synchronized void switchToEuiccSlot(Context context, int slotId, int port,
+    public static synchronized void switchToEuiccSlot(Context context, int physicalSlotId, int port,
             SubscriptionInfo removedSubInfo) throws UiccSlotsException {
         if (ThreadUtils.isMainThread()) {
             throw new IllegalThreadStateException(
@@ -141,38 +153,15 @@ public class UiccSlotUtil {
         Collection<UiccSlotMapping> uiccSlotMappings = telMgr.getSimSlotMapping();
         Log.i(TAG, "The SimSlotMapping: " + uiccSlotMappings);
 
-        if (isTargetSlotActive(uiccSlotMappings, slotId, port)) {
+        if (isTargetSlotActive(uiccSlotMappings, physicalSlotId, port)) {
             Log.i(TAG, "The slot is active, then the sim can enable directly.");
             return;
         }
 
-        Collection<UiccSlotMapping> newUiccSlotMappings = new ArrayList<>();
-        if (!telMgr.isMultiSimEnabled()) {
-            // In the 'SS mode', the port is 0.
-            newUiccSlotMappings.add(new UiccSlotMapping(port, slotId, 0));
-        } else {
-            // DSDS+MEP
-            // The target slot+port is not active, but the all of logical slots are full. It
-            // needs to replace one of logical slots.
-            int removedSlot =
-                    (removedSubInfo != null) ? removedSubInfo.getSimSlotIndex() : slotId;
-            int removedPort = (removedSubInfo != null) ? removedSubInfo.getPortIndex() : 0;
-            Log.i(TAG,
-                    String.format("Start to set SimSlotMapping from slot%d-port%d to slot%d-port%d",
-                            slotId, port, removedSlot, removedPort));
-            newUiccSlotMappings =
-                    uiccSlotMappings.stream().map(uiccSlotMapping -> {
-                        if (uiccSlotMapping.getPhysicalSlotIndex() == removedSlot
-                                && uiccSlotMapping.getPortIndex() == removedPort) {
-                            return new UiccSlotMapping(port, slotId,
-                                    uiccSlotMapping.getLogicalSlotIndex());
-                        }
-                        return uiccSlotMapping;
-                    }).collect(Collectors.toList());
-        }
-
-        Log.i(TAG, "The SimSlotMapping: " + newUiccSlotMappings);
-        performSwitchToSlot(telMgr, newUiccSlotMappings, context);
+        performSwitchToSlot(telMgr,
+                prepareUiccSlotMappings(uiccSlotMappings,
+                        physicalSlotId, port, removedSubInfo, telMgr.isMultiSimEnabled()),
+                context);
     }
 
     /**
@@ -198,10 +187,10 @@ public class UiccSlotUtil {
     }
 
     private static boolean isTargetSlotActive(Collection<UiccSlotMapping> uiccSlotMappings,
-            int slotId, int port) {
+            int physicalSlotId, int port) {
         return uiccSlotMappings.stream()
                 .anyMatch(
-                        uiccSlotMapping -> uiccSlotMapping.getPhysicalSlotIndex() == slotId
+                        uiccSlotMapping -> uiccSlotMapping.getPhysicalSlotIndex() == physicalSlotId
                                 && uiccSlotMapping.getPortIndex() == port);
     }
 
@@ -262,37 +251,30 @@ public class UiccSlotUtil {
         return INVALID_PHYSICAL_SLOT_ID;
     }
 
-    private static Collection<UiccSlotMapping> prepareUiccSlotMappingsForRemovableSlot(
-            Collection<UiccSlotMapping> uiccSlotMappings, int slotId,
+    private static Collection<UiccSlotMapping> prepareUiccSlotMappings(
+            Collection<UiccSlotMapping> uiccSlotMappings, int physicalSlotId, int port,
             SubscriptionInfo removedSubInfo, boolean isMultiSimEnabled) {
-        if (slotId == INVALID_PHYSICAL_SLOT_ID
-                || uiccSlotMappings.stream().anyMatch(uiccSlotMapping ->
-                        uiccSlotMapping.getPhysicalSlotIndex() == slotId
-                                && uiccSlotMapping.getPortIndex() == 0)) {
-            // The slot is invalid slot id, then to skip this.
-            // The slot is active, then the sim can enable directly.
-            return uiccSlotMappings;
-        }
-
         Collection<UiccSlotMapping> newUiccSlotMappings = new ArrayList<>();
         if (!isMultiSimEnabled) {
             // In the 'SS mode', the port is 0.
-            newUiccSlotMappings.add(new UiccSlotMapping(0, slotId, 0));
+            newUiccSlotMappings.add(new UiccSlotMapping(port, physicalSlotId, 0));
         } else if (removedSubInfo != null) {
             // DSDS+MEP
             // The target slot+port is not active, but the all of logical slots are full. It
             // needs to replace one of logical slots.
             Log.i(TAG,
-                    String.format("Start to set SimSlotMapping from slot%d-port%d to slot%d-port%d",
-                            slotId, 0, removedSubInfo.getSimSlotIndex(),
-                            removedSubInfo.getPortIndex()));
+                    String.format(
+                            "Start to set SimSlotMapping from subId%d(LogicalSlot%d-Port%d) to "
+                                    + "PhysicalSlotId%d-Port%d",
+                            removedSubInfo.getSubscriptionId(), removedSubInfo.getSimSlotIndex(),
+                            removedSubInfo.getPortIndex(), physicalSlotId, port));
             newUiccSlotMappings =
                     uiccSlotMappings.stream().map(uiccSlotMapping -> {
-                        if (uiccSlotMapping.getPhysicalSlotIndex()
+                        if (uiccSlotMapping.getLogicalSlotIndex()
                                 == removedSubInfo.getSimSlotIndex()
                                 && uiccSlotMapping.getPortIndex()
                                 == removedSubInfo.getPortIndex()) {
-                            return new UiccSlotMapping(0, slotId,
+                            return new UiccSlotMapping(port, physicalSlotId,
                                     uiccSlotMapping.getLogicalSlotIndex());
                         }
                         return uiccSlotMapping;
