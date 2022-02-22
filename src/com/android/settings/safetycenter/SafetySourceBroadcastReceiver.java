@@ -20,9 +20,12 @@ import static android.content.Intent.ACTION_BOOT_COMPLETED;
 import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
 
+import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 
 import com.google.common.collect.ImmutableList;
 
@@ -54,7 +57,8 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
 
     private static void refreshSafetySources(Context context, List<String> sourceIds) {
         if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
-            LockScreenSafetySource.sendSafetyData(context);
+            LockScreenSafetySource.sendSafetyData(context,
+                    new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER));
         }
 
         if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
@@ -63,7 +67,8 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
     }
 
     private static void refreshAllSafetySources(Context context) {
-        LockScreenSafetySource.sendSafetyData(context);
+        LockScreenSafetySource.sendSafetyData(context,
+                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER));
         BiometricsSafetySource.sendSafetyData(context);
     }
 }

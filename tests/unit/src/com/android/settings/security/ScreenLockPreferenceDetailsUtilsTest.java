@@ -85,7 +85,7 @@ public class ScreenLockPreferenceDetailsUtilsTest {
                 .thenReturn(mDevicePolicyManager);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         doNothing().when(mContext).startActivity(any());
-        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
 
         final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
@@ -254,6 +254,20 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     }
 
     @Test
+    public void isLockPatternSecure_patternIsSecure_shouldReturnTrue() {
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).isTrue();
+    }
+
+    @Test
+    public void isLockPatternSecure_patternIsNotSecure_shouldReturnFalse() {
+        when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).isFalse();
+    }
+
+    @Test
     public void shouldShowGearMenu_patternIsSecure_shouldReturnTrue() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
 
@@ -275,11 +289,29 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     }
 
     @Test
+    public void getLaunchScreenLockSettingsIntent_returnsIntent() {
+        final Intent intent = mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent();
+
+        assertFragmentLaunchIntent(intent, ScreenLockSettings.class.getName());
+    }
+
+    @Test
     public void openChooseLockGenericFragment_noQuietMode_shouldSendIntent_shouldReturnTrue() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         assertThat(mScreenLockPreferenceDetailsUtils.openChooseLockGenericFragment()).isTrue();
         assertFragmentLaunchRequested(ChooseLockGeneric.ChooseLockGenericFragment.class.getName());
+    }
+
+    @Test
+    public void getLaunchChooseLockGenericFragmentIntent_noQuietMode_returnsIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+
+        final Intent intent =
+                mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent();
+
+        assertFragmentLaunchIntent(intent,
+                ChooseLockGeneric.ChooseLockGenericFragment.class.getName());
     }
 
     private void whenConfigShowUnlockSetOrChangeIsEnabled(boolean enabled) {
@@ -301,6 +333,10 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         verify(mContext).startActivity(intentCaptor.capture());
 
         Intent intent = intentCaptor.getValue();
+        assertFragmentLaunchIntent(intent, fragmentClassName);
+    }
+
+    private void assertFragmentLaunchIntent(Intent intent, String fragmentClassName) {
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(fragmentClassName);
         assertThat(intent.getIntExtra(
