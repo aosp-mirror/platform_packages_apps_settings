@@ -32,7 +32,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 /** Lock Screen Safety Source for Safety Center. */
 public final class LockScreenSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "LockScreenSafetySource";
+    public static final String SAFETY_SOURCE_ID = "LockScreen";
 
     private LockScreenSafetySource() {
     }

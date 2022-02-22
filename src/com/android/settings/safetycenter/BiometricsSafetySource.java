@@ -21,7 +21,7 @@ import android.content.Context;
 /** Combined Biometrics Safety Source for Safety Center. */
 public final class BiometricsSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "BiometricsSafetySource";
+    public static final String SAFETY_SOURCE_ID = "Biometrics";
 
     private BiometricsSafetySource() {}
 
