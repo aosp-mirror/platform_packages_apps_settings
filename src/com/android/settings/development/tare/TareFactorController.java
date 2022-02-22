@@ -565,7 +565,6 @@ public class TareFactorController {
         }
     }
 
-
     /**
      * Iterates through the factor policy map for keys and current values to
      * rebuild a current string that is then assigned to be the new global settings string.
@@ -573,56 +572,47 @@ public class TareFactorController {
      * @param factorPolicy policy being updated
      */
     private void rebuildPolicyConstants(int factorPolicy) {
-        StringBuilder newConstantsStringBuilder = new StringBuilder();
-
         switch (factorPolicy) {
             case POLICY_ALARM_MANAGER:
-                int sizeAM = mAlarmManagerMap.size();
-
-                for (int i = 0; i < sizeAM; i++) {
-                    if (i > 0) {
-                        newConstantsStringBuilder.append(",");
-                    }
-
-                    String key = mAlarmManagerMap.keyAt(i);
-                    newConstantsStringBuilder.append(key + "=" + mAlarmManagerMap.get(key)
-                            .currentValue);
-                }
-
-                String newAMConstantsString = newConstantsStringBuilder.toString();
-
-                Settings.Global.putString(mContentResolver, Settings.Global
-                                .TARE_ALARM_MANAGER_CONSTANTS,
-                        newAMConstantsString);
+                writeConstantsToSettings(mAlarmManagerMap,
+                        Settings.Global.TARE_ALARM_MANAGER_CONSTANTS);
 
                 mAlarmManagerConstants = Settings.Global
                         .getString(mContentResolver, Settings.Global
                                 .TARE_ALARM_MANAGER_CONSTANTS);
                 break;
             case POLICY_JOB_SCHEDULER:
-                int sizeJS = mJobSchedulerMap.size();
-
-                for (int i = 0; i < sizeJS; i++) {
-                    if (i > 0) {
-                        newConstantsStringBuilder.append(",");
-                    }
-
-                    String key = mJobSchedulerMap.keyAt(i);
-                    newConstantsStringBuilder.append(key + "=" + mJobSchedulerMap.get(key)
-                            .currentValue);
-                }
-
-                String newJSConstantsString = newConstantsStringBuilder.toString();
-
-                Settings.Global.putString(mContentResolver, Settings.Global
-                                .TARE_JOB_SCHEDULER_CONSTANTS,
-                        newJSConstantsString);
+                writeConstantsToSettings(mJobSchedulerMap,
+                        Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS);
 
                 mJobSchedulerConstants = Settings.Global
                         .getString(mContentResolver, Settings.Global
                                 .TARE_JOB_SCHEDULER_CONSTANTS);
                 break;
         }
+    }
+
+    private void writeConstantsToSettings(ArrayMap<String, TareFactorData> factorMap,
+            String settingsKey) {
+        final StringBuilder constantsStringBuilder = new StringBuilder();
+
+        for (int i = 0, size = factorMap.size(); i < size; ++i) {
+            final TareFactorData factor = factorMap.valueAt(i);
+            if (factor.currentValue == factor.defaultValue) {
+                continue;
+            }
+
+            if (constantsStringBuilder.length() > 0) {
+                constantsStringBuilder.append(",");
+            }
+
+            constantsStringBuilder
+                    .append(factorMap.keyAt(i))
+                    .append("=")
+                    .append(factor.currentValue);
+        }
+
+        Settings.Global.putString(mContentResolver, settingsKey, constantsStringBuilder.toString());
     }
 
     /**
