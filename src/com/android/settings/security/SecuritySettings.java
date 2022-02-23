@@ -25,7 +25,7 @@ import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 import com.android.settings.biometrics.fingerprint.FingerprintStatusPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -129,7 +129,7 @@ public class SecuritySettings extends DashboardFragment {
                 protected boolean isPageSearchEnabled(Context context) {
                     return !FeatureFactory.getFactory(context).getSecuritySettingsFeatureProvider()
                             .hasAlternativeSecuritySettingsFragment()
-                            && !SafetyCenterStatusHolder.get().isEnabled(context);
+                            && !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }
