@@ -41,26 +41,21 @@ public class BiometricsSafetySourceTest {
     @Mock
     private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
-    @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplicationContext = ApplicationProvider.getApplicationContext();
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
     }
 
     @After
     public void tearDown() {
         SafetyCenterManagerWrapper.sInstance = null;
-        SafetyCenterStatusHolder.sInstance = null;
     }
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
 
         BiometricsSafetySource.sendSafetyData(mApplicationContext);
 
@@ -70,7 +65,7 @@ public class BiometricsSafetySourceTest {
     @Test
     // TODO(b/215517420): Adapt this test when method is implemented.
     public void sendSafetyData_whenSafetyCenterIsEnabled_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
 
         BiometricsSafetySource.sendSafetyData(mApplicationContext);
 
