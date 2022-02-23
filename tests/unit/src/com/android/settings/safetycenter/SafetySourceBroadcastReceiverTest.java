@@ -34,6 +34,9 @@ import android.safetycenter.SafetySourceData;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,10 +53,16 @@ public class SafetySourceBroadcastReceiverTest {
     @Mock
     private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplicationContext = ApplicationProvider.getApplicationContext();
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
+                .thenReturn(mLockPatternUtils);
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
     }
 
