@@ -69,11 +69,14 @@ public class TareHomePage extends Activity {
     }
 
     /** Reverts the TARE settings to the original default settings */
-    // TODO: Establish default TARE values and make this method revert all settings back to default.
     public void revertSettings(View v) {
         Toast.makeText(this, R.string.tare_settings_reverted_toast, Toast.LENGTH_LONG).show();
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.ENABLE_TARE, null);
+        Settings.Global.putString(getApplicationContext().getContentResolver(),
+                Settings.Global.TARE_ALARM_MANAGER_CONSTANTS, null);
+        Settings.Global.putString(getApplicationContext().getContentResolver(),
+                Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS, null);
         setEnabled(Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON);
     }
 
