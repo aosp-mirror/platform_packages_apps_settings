@@ -183,6 +183,9 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
     @Override
     public void handleResult(SparseArray<StorageAsyncLoader.StorageResult> stats) {
+        if (stats == null) {
+            return;
+        }
         final StorageAsyncLoader.StorageResult result = stats.get(getUser().id);
         if (result != null) {
             setSize(result.externalStats.totalBytes);
