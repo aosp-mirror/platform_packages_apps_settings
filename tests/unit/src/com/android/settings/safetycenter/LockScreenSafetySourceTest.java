@@ -108,7 +108,7 @@ public class LockScreenSafetySourceTest {
         assertThat(safetySourceStatus.getTitle().toString())
                 .isEqualTo(ResourcesUtils.getResourcesString(
                         mApplicationContext,
-                        "unlock_set_unlock_launch_picker_title_profile"));
+                        "unlock_set_unlock_launch_picker_title"));
         assertThat(safetySourceStatus.getSummary().toString())
                 .isEqualTo(SUMMARY);
         assertThat(safetySourceStatus.getPendingIntent().getIntent()).isNotNull();
