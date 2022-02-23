@@ -53,6 +53,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -278,6 +279,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         return null;
+    }
+
+    /** Returns all controllers of type T. */
+    protected <T extends AbstractPreferenceController> List<T> useAll(Class<T> clazz) {
+        return (List<T>) mPreferenceControllers.getOrDefault(clazz, Collections.emptyList());
     }
 
     protected void addPreferenceController(AbstractPreferenceController controller) {
