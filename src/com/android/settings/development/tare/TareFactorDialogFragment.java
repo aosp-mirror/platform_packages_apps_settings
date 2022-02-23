@@ -16,7 +16,10 @@
 
 package com.android.settings.development.tare;
 
+import android.annotation.NonNull;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
@@ -24,10 +27,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
