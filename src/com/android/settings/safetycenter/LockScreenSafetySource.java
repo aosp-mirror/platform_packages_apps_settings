@@ -57,7 +57,7 @@ public final class LockScreenSafetySource {
                 screenLockPreferenceDetailsUtils);
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(
-                context.getString(R.string.unlock_set_unlock_launch_picker_title_profile),
+                context.getString(R.string.unlock_set_unlock_launch_picker_title),
                 screenLockPreferenceDetailsUtils.getSummary(UserHandle.myUserId()),
                 screenLockPreferenceDetailsUtils.isLockPatternSecure()
                         ? SafetySourceStatus.STATUS_LEVEL_OK
