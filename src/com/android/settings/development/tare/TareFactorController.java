@@ -24,8 +24,13 @@ import android.app.tare.EconomyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Slog;
 
@@ -38,6 +43,8 @@ import com.android.settings.R;
 public class TareFactorController {
     private static final String TAG = "TareFactorController";
 
+    private static TareFactorController sInstance;
+
     private static final int POLICY_ALARM_MANAGER = 0;
     private static final int POLICY_JOB_SCHEDULER = 1;
 
@@ -49,9 +56,14 @@ public class TareFactorController {
     private String mAlarmManagerConstants;
     private String mJobSchedulerConstants;
 
-    public TareFactorController(Context context) {
+    private final ArraySet<DataChangeListener> mDataChangeListeners = new ArraySet<>();
+
+    private TareFactorController(Context context) {
         mContentResolver = context.getContentResolver();
         mResources = context.getResources();
+
+        ConfigObserver configObserver = new ConfigObserver(new Handler(Looper.getMainLooper()));
+        configObserver.start();
 
         mAlarmManagerConstants =
                 Settings.Global.getString(mContentResolver, TARE_ALARM_MANAGER_CONSTANTS);
@@ -65,21 +77,30 @@ public class TareFactorController {
         parseJobSchedulerGlobalSettings();
     }
 
+    static TareFactorController getInstance(Context context) {
+        synchronized (TareFactorController.class) {
+            if (sInstance == null) {
+                sInstance = new TareFactorController(context.getApplicationContext());
+            }
+        }
+        return sInstance;
+    }
+
     /**
      * Initialization for AlarmManager Map that sets a AM factor key to a title, default value, and
      * policy type in a data object.
      */
     private void initAlarmManagerMap() {
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_EXEMPTED,
-                new TareFactorData(mResources.getString(R.string.tare_min_satiated_balance),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_exempted),
                         EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_EXEMPTED,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
-                new TareFactorData(mResources.getString(R.string.tare_headless_app),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_headless_app),
                         EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_OTHER_APP,
-                new TareFactorData(mResources.getString(R.string.tare_other_app),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
                         EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_OTHER_APP,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MAX_SATIATED_BALANCE,
@@ -87,8 +108,12 @@ public class TareFactorController {
                         EconomyManager.DEFAULT_AM_MAX_SATIATED_BALANCE,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_INITIAL_CONSUMPTION_LIMIT,
-                new TareFactorData(mResources.getString(R.string.tare_max_circulation),
+                new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
                         EconomyManager.DEFAULT_AM_INITIAL_CONSUMPTION_LIMIT,
+                        POLICY_ALARM_MANAGER));
+        mAlarmManagerMap.put(EconomyManager.KEY_AM_HARD_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
+                        EconomyManager.DEFAULT_AM_HARD_CONSUMPTION_LIMIT,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
@@ -253,15 +278,15 @@ public class TareFactorController {
      */
     private void initJobSchedulerMap() {
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_EXEMPTED,
-                new TareFactorData(mResources.getString(R.string.tare_min_satiated_balance),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_exempted),
                         EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_EXEMPTED,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
-                new TareFactorData(mResources.getString(R.string.tare_headless_app),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_headless_app),
                         EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP,
-                new TareFactorData(mResources.getString(R.string.tare_other_app),
+                new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
                         EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_OTHER_APP,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
@@ -269,8 +294,12 @@ public class TareFactorController {
                         EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
-                new TareFactorData(mResources.getString(R.string.tare_max_circulation),
+                new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
                         EconomyManager.DEFAULT_JS_INITIAL_CONSUMPTION_LIMIT,
+                        POLICY_JOB_SCHEDULER));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT,
+                new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
+                        EconomyManager.DEFAULT_JS_HARD_CONSUMPTION_LIMIT,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
@@ -474,17 +503,7 @@ public class TareFactorController {
      * @param factorPolicy the policy you want the title of
      */
     private String getTitle(String key, int factorPolicy) {
-        ArrayMap<String, TareFactorData> currentMap;
-        switch (factorPolicy) {
-            case POLICY_ALARM_MANAGER:
-                currentMap = mAlarmManagerMap;
-                break;
-            case POLICY_JOB_SCHEDULER:
-                currentMap = mJobSchedulerMap;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid factor policy given");
-        }
+        final ArrayMap<String, TareFactorData> currentMap = getMap(factorPolicy);
         return currentMap.get(key).title;
     }
 
@@ -516,6 +535,11 @@ public class TareFactorController {
         return currentMap.get(key).factorPolicy;
     }
 
+    int getValue(String key) {
+        final int policy = getFactorType(key);
+        return getCurrentValue(key, policy);
+    }
+
     /**
      * Takes a key,edited value, and factor policy as input and assigns the new edited value to
      * be the new current value for that factors key.
@@ -545,17 +569,9 @@ public class TareFactorController {
         switch (factorPolicy) {
             case POLICY_ALARM_MANAGER:
                 writeConstantsToSettings(mAlarmManagerMap, TARE_ALARM_MANAGER_CONSTANTS);
-
-                mAlarmManagerConstants = Settings.Global
-                        .getString(mContentResolver, Settings.Global
-                                .TARE_ALARM_MANAGER_CONSTANTS);
                 break;
             case POLICY_JOB_SCHEDULER:
                 writeConstantsToSettings(mJobSchedulerMap, TARE_JOB_SCHEDULER_CONSTANTS);
-
-                mJobSchedulerConstants = Settings.Global
-                        .getString(mContentResolver, Settings.Global
-                                .TARE_JOB_SCHEDULER_CONSTANTS);
                 break;
         }
     }
@@ -608,6 +624,53 @@ public class TareFactorController {
             this.defaultValue = defaultValue;
             this.factorPolicy = factorPolicy;
             this.currentValue = defaultValue;
+        }
+    }
+
+    interface DataChangeListener {
+        void onDataChanged();
+    }
+
+    void registerListener(DataChangeListener listener) {
+        mDataChangeListeners.add(listener);
+    }
+
+    void unregisterListener(DataChangeListener listener) {
+        mDataChangeListeners.remove(listener);
+    }
+
+    void notifyListeners() {
+        for (int i = mDataChangeListeners.size() - 1; i >= 0; --i) {
+            mDataChangeListeners.valueAt(i).onDataChanged();
+        }
+    }
+
+    private class ConfigObserver extends ContentObserver {
+
+        ConfigObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void start() {
+            mContentResolver.registerContentObserver(
+                    Settings.Global.getUriFor(TARE_ALARM_MANAGER_CONSTANTS), false, this);
+            mContentResolver.registerContentObserver(
+                    Settings.Global.getUriFor(TARE_JOB_SCHEDULER_CONSTANTS), false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.Global.getUriFor(TARE_ALARM_MANAGER_CONSTANTS))) {
+                mAlarmManagerConstants =
+                        Settings.Global.getString(mContentResolver, TARE_ALARM_MANAGER_CONSTANTS);
+                parseAlarmManagerGlobalSettings();
+                notifyListeners();
+            } else if (uri.equals(Settings.Global.getUriFor(TARE_JOB_SCHEDULER_CONSTANTS))) {
+                mJobSchedulerConstants =
+                        Settings.Global.getString(mContentResolver, TARE_JOB_SCHEDULER_CONSTANTS);
+                parseJobSchedulerGlobalSettings();
+                notifyListeners();
+            }
         }
     }
 }
