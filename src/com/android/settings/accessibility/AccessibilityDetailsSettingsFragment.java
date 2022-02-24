@@ -222,7 +222,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
 
-        final String tileServiceClassName = info.getTileServiceClassName();
+        final String tileServiceClassName = info.getTileServiceName();
         if (!TextUtils.isEmpty(tileServiceClassName)) {
             extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
                     new ComponentName(packageName, tileServiceClassName).flattenToString());
