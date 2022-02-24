@@ -36,7 +36,7 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!SafetyCenterStatusHolder.get().isEnabled(context)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
 
