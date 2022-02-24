@@ -13735,18 +13735,26 @@
     translate "maximum balance when device is fully charged" instead. Balance is the same meaning as
     having money in a bank account. Balance in our feature is the amount of Android Resource Credits
     an app can have. Android Resource Credits are a form of payment used by apps to be able to
-    perform tasks. [CHAR LIMIT=40]-->
+    perform tasks. [CHAR LIMIT=80]-->
     <string name="tare_max_satiated_balance">Maximum Satiated Balance</string>
-    <!-- Title for the TARE policy factor that determines the maximum credits in circulation between
-    all the apps [CHAR LIMIT=40]-->
-    <string name="tare_max_circulation">Maximum Circulation</string>
-    <!-- Title for the TARE policy factor that determines the minimum credits an app can have in one
-    battery life cycle. Satiated means battery is fully charged; If this is not easily translatable,
-    translate "minimum balance when device is fully charged" instead. Balance is the same meaning as
-    having money in a bank account. Balance in our feature is the amount of Android Resource Credits
-    an app can have. Android Resource Credits are a form of payment used by apps to be able to
-    perform tasks. [CHAR LIMIT=40]-->
-    <string name="tare_min_satiated_balance">Minimum Satiated Balance</string>
+    <!-- Title for the TARE policy factors that affect how many credits an app may have. Balance
+    in this context is the same as "bank balance" or "account balance" (ie. how much "money" may be
+    in a bank account). [CHAR LIMIT=55]-->
+    <string name="tare_balances">Balances</string>
+    <!-- Title for the TARE section to modify consumption limits. "Consumption" refers to the idea
+     using resources that are not replenished. [CHAR LIMIT=55]-->
+    <string name="tare_consumption_limits">Consumption Limits</string>
+    <!-- Title for the TARE policy factor that determines the initial maximum amount of credits that
+    can be consumed by all the apps [CHAR LIMIT=80]-->
+    <string name="tare_initial_consumption_limit">Initial Consumption Limit</string>
+    <!-- Title for the TARE policy factor that determines the maximum consumption limit the system
+     can have [CHAR LIMIT=80]-->
+    <string name="tare_hard_consumption_limit">Maximum Consumption Limit</string>
+    <!-- Titles for the consumption limits factors. [CHAR LIMIT=40]-->
+    <string-array name="tare_consumption_limit_subfactors" translatable="false">
+        <item>@string/tare_initial_consumption_limit</item>
+        <item>@string/tare_hard_consumption_limit</item>
+    </string-array>
     <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
     (charging, power save mode, etc.) [CHAR LIMIT=40]-->
     <string name="tare_modifiers">Modifiers</string>
@@ -13782,14 +13790,6 @@
     <string name="tare_nonwakeup_inexact" translatable="false">Inexact NonWakeup Alarm</string>
     <!-- Title for the AlarmClock alarm set via AlarmManager.setAlarmClock() [CHAR LIMIT=50]-->
     <string name="tare_alarm_clock" translatable="false">AlarmClock</string>
-    <!-- Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=50]-->
-    <string name="tare_exempted">Exempted</string>
-    <!-- A headless system app is a preinstalled app that does not have any activities/UI that the
-    user can interact with. [CHAR LIMIT=50]-->
-    <string name="tare_headless_app">Headless System App</string>
-    <!-- Other apps are those apps interacted with by users that are not exempted or headless
-    system apps. [CHAR LIMIT=50]-->
-    <string name="tare_other_app">Other App</string>
     <!-- Top activity means an app is in the TOP android process state and is thus visible to the
     user[CHAR LIMIT=50]-->
     <string name="tare_top_activity">Top Activity</string>
@@ -13846,12 +13846,29 @@
     <!-- Title for the penalty an app receives for letting a job use the maximum execution time and
      time out [CHAR LIMIT=50]-->
     <string name="tare_job_timeout_penalty">Job Timeout Penalty</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Exempted apps are those apps exempted from most power saving features. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_exempted">Minimum Satiated Balance (Exempted)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    A headless system app is a preinstalled app that does not have any activities/UI that the
+    user can interact with. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_headless_app">Minimum Satiated Balance (Headless System App)</string>
+    <!-- Title for the TARE factor that determines the minimum credits an app should have when the
+    device is fully charged. "Satiated" in this context means that the battery is fully charged.
+    Balance is the same meaning as having money in a bank account.
+    Remaining apps are those apps that don't fit into predefined categories. [CHAR LIMIT=80]-->
+    <string name="tare_min_balance_other_app">Minimum Satiated Balance (Remaining Apps)</string>
     <!-- Titles for the minimum satiated credit balances for different types of apps
     (per battery cycle). Satiated means battery is fully charged. [CHAR LIMIT=40]-->
-    <string-array name="tare_min_satiated_balance_subfactors" translatable="false">
-        <item>@string/tare_exempted</item>
-        <item>@string/tare_headless_app</item>
-        <item>@string/tare_other_app</item>
+    <string-array name="tare_app_balance_subfactors" translatable="false">
+        <item>@string/tare_max_satiated_balance</item>
+        <item>@string/tare_min_balance_exempted</item>
+        <item>@string/tare_min_balance_headless_app</item>
+        <item>@string/tare_min_balance_other_app</item>
     </string-array>
     <!-- Various modifier subfactors that alter the cost of TARE tasks depending on what battery
     state the device is in [CHAR LIMIT=50]-->

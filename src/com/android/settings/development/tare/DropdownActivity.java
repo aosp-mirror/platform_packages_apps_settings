@@ -43,7 +43,6 @@ public class DropdownActivity extends Activity {
     static final int POLICY_JOB_SCHEDULER = 1;
     private static final int DEFAULT_POLICY = POLICY_ALARM_MANAGER;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
