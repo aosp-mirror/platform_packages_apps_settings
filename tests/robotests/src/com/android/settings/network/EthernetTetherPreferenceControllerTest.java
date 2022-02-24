@@ -19,6 +19,7 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -65,10 +66,9 @@ public class EthernetTetherPreferenceControllerTest {
         mPreference = spy(SwitchPreference.class);
         when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mTetheringManager.getTetherableIfaces()).thenReturn(new String[]{ETHERNET_REGEX});
-        when(mContext.getSystemService(Context.ETHERNET_SERVICE)).thenReturn(mEthernetManager);
+        when(mContext.getSystemService(EthernetManager.class)).thenReturn(mEthernetManager);
         mController = new EthernetTetherPreferenceController(mContext, "ethernet");
         mController.setTetherEnabler(mTetherEnabler);
-        ReflectionHelpers.setField(mController, "mEthernetRegex", ETHERNET_REGEX);
         ReflectionHelpers.setField(mController, "mPreference", mPreference);
     }
 
@@ -77,7 +77,8 @@ public class EthernetTetherPreferenceControllerTest {
     public void lifecycle_shouldRegisterReceiverOnStart() {
         mController.onStart();
 
-        verify(mEthernetManager).addListener(eq(mController.mEthernetListener));
+        verify(mEthernetManager).addInterfaceStateListener(any(),
+                eq(mController.mEthernetListener));
     }
 
     @Test
@@ -95,11 +96,10 @@ public class EthernetTetherPreferenceControllerTest {
     @Test
     public void lifecycle_shouldUnregisterReceiverOnStop() {
         mController.onStart();
-        EthernetManager.Listener listener = mController.mEthernetListener;
+        EthernetManager.InterfaceStateListener listener = mController.mEthernetListener;
         mController.onStop();
 
-        verify(mEthernetManager).removeListener(eq(listener));
-        assertThat(mController.mEthernetListener).isNull();
+        verify(mEthernetManager).removeInterfaceStateListener(eq(listener));
     }
 
     @Test
@@ -110,8 +110,11 @@ public class EthernetTetherPreferenceControllerTest {
 
     @Test
     public void shouldShow_noEthernetInterface() {
-        ReflectionHelpers.setField(mController, "mEthernetRegex", "");
-        assertThat(mController.shouldShow()).isFalse();
+        when(mContext.getSystemService(EthernetManager.class)).thenReturn(null);
+
+        final EthernetTetherPreferenceController controller =
+                new EthernetTetherPreferenceController(mContext, "ethernet");
+        assertThat(controller.shouldShow()).isFalse();
     }
 
     @Test
