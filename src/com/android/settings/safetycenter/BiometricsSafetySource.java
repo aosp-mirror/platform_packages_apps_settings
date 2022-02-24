@@ -27,7 +27,7 @@ public final class BiometricsSafetySource {
 
     /** Sends biometric safety data to Safety Center. */
     public static void sendSafetyData(Context context) {
-        if (!SafetyCenterStatusHolder.get().isEnabled(context)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
 
