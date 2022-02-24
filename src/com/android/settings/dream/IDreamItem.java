@@ -18,23 +18,52 @@ package com.android.settings.dream;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
+
 /**
  * Interface representing a dream item to be displayed.
  */
 public interface IDreamItem {
+    /**
+     * Gets the title of this dream.
+     */
     CharSequence getTitle();
 
+    /**
+     * Gets the summary of this dream, or null if the dream doesn't provide one.
+     */
+    @Nullable
+    CharSequence getSummary();
+
+    /**
+     * Gets the icon for the dream.
+     */
     Drawable getIcon();
 
+    /**
+     * Callback which can be implemented to handle clicks on this dream.
+     */
     void onItemClicked();
 
+    /**
+     * Callback which can be implemented to handle the customization of this dream.
+     */
     default void onCustomizeClicked() {
     }
 
+    /**
+     * Gets the preview image of this dream.
+     */
     Drawable getPreviewImage();
 
+    /**
+     * Returns whether or not this dream is currently active.
+     */
     boolean isActive();
 
+    /**
+     * Returns whether to allow customization of this dream or not.
+     */
     default boolean allowCustomization() {
         return false;
     }
