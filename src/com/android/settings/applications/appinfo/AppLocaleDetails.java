@@ -325,7 +325,6 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         @VisibleForTesting
         void handleSupportedLocales() {
             mProcessedSupportedLocales.addAll(mAppSupportedLocales);
-
             if (mProcessedSuggestedLocales != null || !mProcessedSuggestedLocales.isEmpty()) {
                 mProcessedSuggestedLocales.retainAll(mProcessedSupportedLocales);
                 mProcessedSupportedLocales.removeAll(mProcessedSuggestedLocales);
@@ -399,9 +398,19 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
         String[] getAssetLocales() {
             try {
                 PackageManager packageManager = mContext.getPackageManager();
-                return packageManager.getResourcesForApplication(
+                String[] locales = packageManager.getResourcesForApplication(
                         packageManager.getPackageInfo(mPackageName, PackageManager.MATCH_ALL)
                                 .applicationInfo).getAssets().getNonSystemLocales();
+                if (locales == null) {
+                    Log.i(TAG, "[" + mPackageName + "] locales are null.");
+                }
+                if (locales.length <= 0) {
+                    Log.i(TAG, "[" + mPackageName + "] locales length is 0.");
+                    return new String[0];
+                }
+                String locale = locales[0];
+                Log.i(TAG, "First asset locale - [" + mPackageName + "] " + locale);
+                return locales;
             } catch (PackageManager.NameNotFoundException e) {
                 Log.w(TAG, "Can not found the package name : " + mPackageName + " / " + e);
             }
