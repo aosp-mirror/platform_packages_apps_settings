@@ -74,9 +74,10 @@ public class DreamPickerController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mAdapter = new DreamAdapter(mDreamInfos.stream()
-                .map(DreamItem::new)
-                .collect(Collectors.toList()));
+        mAdapter = new DreamAdapter(R.layout.dream_preference_layout,
+                mDreamInfos.stream()
+                        .map(DreamItem::new)
+                        .collect(Collectors.toList()));
 
         final LayoutPreference pref = screen.findPreference(getPreferenceKey());
         if (pref == null) {
@@ -109,6 +110,11 @@ public class DreamPickerController extends BasePreferenceController {
         @Override
         public CharSequence getTitle() {
             return mDreamInfo.caption;
+        }
+
+        @Override
+        public CharSequence getSummary() {
+            return mDreamInfo.description;
         }
 
         @Override
