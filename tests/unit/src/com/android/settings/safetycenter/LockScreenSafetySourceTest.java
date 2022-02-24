@@ -57,9 +57,6 @@ public class LockScreenSafetySourceTest {
     private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
-
-    @Mock
     private ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailsUtils;
 
     @Before
@@ -67,18 +64,16 @@ public class LockScreenSafetySourceTest {
         MockitoAnnotations.initMocks(this);
         mApplicationContext = ApplicationProvider.getApplicationContext();
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
     }
 
     @After
     public void tearDown() {
         SafetyCenterManagerWrapper.sInstance = null;
-        SafetyCenterStatusHolder.sInstance = null;
     }
 
     @Test
     public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils);
@@ -88,7 +83,7 @@ public class LockScreenSafetySourceTest {
 
     @Test
     public void sendSafetyData_whenScreenLockIsDisabled_sendsNoData() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(false);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
@@ -113,7 +108,7 @@ public class LockScreenSafetySourceTest {
         assertThat(safetySourceStatus.getTitle().toString())
                 .isEqualTo(ResourcesUtils.getResourcesString(
                         mApplicationContext,
-                        "unlock_set_unlock_launch_picker_title_profile"));
+                        "unlock_set_unlock_launch_picker_title"));
         assertThat(safetySourceStatus.getSummary().toString())
                 .isEqualTo(SUMMARY);
         assertThat(safetySourceStatus.getPendingIntent().getIntent()).isNotNull();
@@ -227,7 +222,7 @@ public class LockScreenSafetySourceTest {
     }
 
     private void whenScreenLockIsEnabled() {
-        when(mSafetyCenterStatusHolder.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.getSummary(anyInt())).thenReturn(SUMMARY);
 

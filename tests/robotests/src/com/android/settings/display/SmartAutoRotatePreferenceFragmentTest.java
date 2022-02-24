@@ -18,6 +18,8 @@ package com.android.settings.display;
 
 import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_SWITCH_PREFERENCE_ID;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -33,6 +35,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.content.res.Resources;
 import android.view.View;
 
 import androidx.preference.Preference;
@@ -40,7 +43,11 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.ResolveInfoBuilder;
+import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
+import com.android.settings.testutils.shadow.ShadowRotationPolicy;
 import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,8 +56,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {
+        ShadowDeviceStateRotationLockSettingsManager.class,
+        ShadowRotationPolicy.class
+})
 public class SmartAutoRotatePreferenceFragmentTest {
 
     private static final String PACKAGE_NAME = "package_name";
@@ -70,18 +84,23 @@ public class SmartAutoRotatePreferenceFragmentTest {
 
     @Mock
     private Preference mRotateSwitchPreference;
+    private Resources mResources;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        final Context context = spy(RuntimeEnvironment.application);
+        mContext = spy(RuntimeEnvironment.application);
         ContentResolver mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        when(context.getPackageManager()).thenReturn(mPackageManager);
-        when(context.getContentResolver()).thenReturn(mContentResolver);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mContext.getContentResolver()).thenReturn(mContentResolver);
         doReturn(PACKAGE_NAME).when(mPackageManager).getRotationResolverPackageName();
         doReturn(PackageManager.PERMISSION_GRANTED).when(mPackageManager).checkPermission(
                 Manifest.permission.CAMERA, PACKAGE_NAME);
+
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
 
         final ResolveInfo resolveInfo = new ResolveInfoBuilder(PACKAGE_NAME).build();
         resolveInfo.serviceInfo = new ServiceInfo();
@@ -90,15 +109,16 @@ public class SmartAutoRotatePreferenceFragmentTest {
         mFragment = spy(new SmartAutoRotatePreferenceFragment());
         when(mActivity.getPackageManager()).thenReturn(mPackageManager);
         when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mFragment.getContext()).thenReturn(context);
+        when(mFragment.getContext()).thenReturn(mContext);
         doReturn(mView).when(mFragment).getView();
 
         when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_ID)).thenReturn(
                 mRotateSwitchPreference);
 
-        mSwitchBar = spy(new SettingsMainSwitchBar(context));
+        mSwitchBar = spy(new SettingsMainSwitchBar(mContext));
         when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
         doReturn(mSwitchBar).when(mView).findViewById(R.id.switch_bar);
+        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(false);
     }
 
 
@@ -111,6 +131,17 @@ public class SmartAutoRotatePreferenceFragmentTest {
     }
 
     @Test
+    public void createHeader_deviceStateRotationSupported_switchBarIsDisabled() {
+        ShadowRotationPolicy.setRotationSupported(true);
+        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(true);
+
+        mFragment.createHeader(mActivity);
+
+        verify(mSwitchBar, never()).show();
+        verify(mRotateSwitchPreference, never()).setVisible(false);
+    }
+
+    @Test
     public void createHeader_faceDetectionUnSupported_switchBarIsDisabled() {
         doReturn(null).when(mPackageManager).getRotationResolverPackageName();
 
@@ -120,4 +151,41 @@ public class SmartAutoRotatePreferenceFragmentTest {
         verify(mRotateSwitchPreference, never()).setVisible(false);
     }
 
+    @Test
+    public void createPreferenceControllers_noSettableDeviceStates_returnsEmptyList() {
+        enableDeviceStateSettableRotationStates(new String[]{}, new String[]{});
+
+        List<AbstractPreferenceController> preferenceControllers =
+                mFragment.createPreferenceControllers(mContext);
+
+        assertThat(preferenceControllers).isEmpty();
+    }
+
+    @Test
+    public void createPreferenceControllers_settableDeviceStates_returnsDeviceStateControllers() {
+        enableDeviceStateSettableRotationStates(new String[]{"0:1", "1:1"},
+                new String[]{"Folded", "Unfolded"});
+
+        List<AbstractPreferenceController> preferenceControllers =
+                mFragment.createPreferenceControllers(mContext);
+
+        assertThat(preferenceControllers).hasSize(2);
+        assertThat(preferenceControllers.get(0)).isInstanceOf(
+                DeviceStateAutoRotateSettingController.class);
+        assertThat(preferenceControllers.get(1)).isInstanceOf(
+                DeviceStateAutoRotateSettingController.class);
+    }
+
+    private void enableDeviceStateSettableRotationStates(String[] settableStates,
+            String[] settableStatesDescriptions) {
+        when(mResources.getStringArray(
+                com.android.internal.R.array.config_perDeviceStateRotationLockDefaults)).thenReturn(
+                settableStates);
+        when(mResources.getStringArray(
+                R.array.config_settableAutoRotationDeviceStatesDescriptions)).thenReturn(
+                settableStatesDescriptions);
+        DeviceStateRotationLockSettingsManager.resetInstance();
+        DeviceStateRotationLockSettingsManager.getInstance(mContext)
+                .resetStateForTesting(mResources);
+    }
 }

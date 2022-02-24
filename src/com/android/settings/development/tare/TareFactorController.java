@@ -16,6 +16,10 @@
 
 package com.android.settings.development.tare;
 
+import static android.provider.Settings.Global.TARE_ALARM_MANAGER_CONSTANTS;
+import static android.provider.Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS;
+
+import android.annotation.NonNull;
 import android.app.tare.EconomyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -49,11 +53,10 @@ public class TareFactorController {
         mContentResolver = context.getContentResolver();
         mResources = context.getResources();
 
-        mAlarmManagerConstants = Settings.Global
-                .getString(mContentResolver, Settings.Global.TARE_ALARM_MANAGER_CONSTANTS);
-
-        mJobSchedulerConstants = Settings.Global
-                .getString(mContentResolver, Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS);
+        mAlarmManagerConstants =
+                Settings.Global.getString(mContentResolver, TARE_ALARM_MANAGER_CONSTANTS);
+        mJobSchedulerConstants =
+                Settings.Global.getString(mContentResolver, TARE_JOB_SCHEDULER_CONSTANTS);
 
         initAlarmManagerMap();
         parseAlarmManagerGlobalSettings();
@@ -408,8 +411,7 @@ public class TareFactorController {
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_low_running),
-                        EconomyManager
-                                .DEFAULT_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MIN_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_min_start),
@@ -425,68 +427,50 @@ public class TareFactorController {
                         POLICY_JOB_SCHEDULER));
     }
 
-
-    /**
-     * Takes a key and factor policy as input and grabs the default value linked to it.
-     *
-     * @param key the key of the factor you want to get the default value of
-     * @param factorPolicy the policy you want the default value of
-     */
-    private int getDefaultValue(String key, int factorPolicy) {
-        ArrayMap<String, TareFactorData> currentMap;
-        switch (factorPolicy) {
-            case POLICY_ALARM_MANAGER:
-                currentMap = mAlarmManagerMap;
-                break;
-            case POLICY_JOB_SCHEDULER:
-                currentMap = mJobSchedulerMap;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid factor policy given");
-        }
-        return currentMap.get(key).defaultValue;
-    }
-
     /**
      * Parses the AM constant from Settings.Global to get to the current value.
      */
     private void parseAlarmManagerGlobalSettings() {
-        try {
-            mParser.setString(mAlarmManagerConstants);
-        } catch (Exception e) {
-            Slog.e(TAG, "Bad value string constants", e);
-        }
-        int size = mParser.size();
-
-        for (int i = 0; i < size - 1; i++) {
-            String key = mParser.keyAt(i);
-            TareFactorData data = mAlarmManagerMap.get(key);
-            data.currentValue = mParser.getInt(key, getDefaultValue(key, getFactorType(key)));
-        }
+        parseSettingsIntoMap(mAlarmManagerConstants, mAlarmManagerMap);
     }
 
     /**
      * Parses the JS constant from Settings.Global to get to the current value.
      */
     private void parseJobSchedulerGlobalSettings() {
-        try {
-            mParser.setString(mJobSchedulerConstants);
-        } catch (Exception e) {
-            Slog.e(TAG, "Bad value string constants", e);
-        }
-        int size = mParser.size();
+        parseSettingsIntoMap(mJobSchedulerConstants, mJobSchedulerMap);
+    }
 
-        for (int i = 0; i < size - 1; i++) {
-            String key = mParser.keyAt(i);
-            TareFactorData data = mJobSchedulerMap.get(key);
-            data.currentValue = mParser.getInt(key, getDefaultValue(key, getFactorType(key)));
+    private void parseSettingsIntoMap(String constants, ArrayMap<String, TareFactorData> map) {
+        try {
+            mParser.setString(constants);
+        } catch (Exception e) {
+            Slog.e(TAG, "Bad string constants value", e);
+        }
+
+        for (int i = map.size() - 1; i >= 0; --i) {
+            final String key = map.keyAt(i);
+            final TareFactorData data = map.valueAt(i);
+            data.currentValue = mParser.getInt(key, data.defaultValue);
+        }
+    }
+
+    @NonNull
+    private ArrayMap<String, TareFactorData> getMap(int factorPolicy) {
+        switch (factorPolicy) {
+            case POLICY_ALARM_MANAGER:
+                return mAlarmManagerMap;
+            case POLICY_JOB_SCHEDULER:
+                return mJobSchedulerMap;
+            default:
+                throw new IllegalArgumentException("Invalid factor policy given");
         }
     }
 
     /**
      * Takes a key and factor policy as input and grabs the title linked to it.
      *
-     * @param key the key of the factor you want to get the title of
+     * @param key          the key of the factor you want to get the title of
      * @param factorPolicy the policy you want the title of
      */
     private String getTitle(String key, int factorPolicy) {
@@ -507,21 +491,11 @@ public class TareFactorController {
     /**
      * Takes a key and factor policy as input and grabs the current value linked to it.
      *
-     * @param key the key of the factor you want to get the default value of
+     * @param key          the key of the factor you want to get the default value of
      * @param factorPolicy the policy you want the current value of
      */
     private int getCurrentValue(String key, int factorPolicy) {
-        ArrayMap<String, TareFactorData> currentMap;
-        switch (factorPolicy) {
-            case POLICY_ALARM_MANAGER:
-                currentMap = mAlarmManagerMap;
-                break;
-            case POLICY_JOB_SCHEDULER:
-                currentMap = mJobSchedulerMap;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid factor policy given");
-        }
+        final ArrayMap<String, TareFactorData> currentMap = getMap(factorPolicy);
         return currentMap.get(key).currentValue;
     }
 
@@ -551,18 +525,14 @@ public class TareFactorController {
      * @param factorPolicy policy being updated
      */
     public void updateValue(String key, int editedValue, int factorPolicy) {
-        switch (factorPolicy) {
-            case POLICY_ALARM_MANAGER:
-                mAlarmManagerMap.get(key).currentValue = editedValue;
-                rebuildPolicyConstants(factorPolicy);
-                break;
-            case POLICY_JOB_SCHEDULER:
-                mJobSchedulerMap.get(key).currentValue = editedValue;
-                rebuildPolicyConstants(factorPolicy);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid factor policy given");
+        final ArrayMap<String, TareFactorData> map = getMap(factorPolicy);
+
+        final TareFactorData data = map.get(key);
+        if (data.currentValue == editedValue) {
+            return;
         }
+        data.currentValue = editedValue;
+        rebuildPolicyConstants(factorPolicy);
     }
 
     /**
@@ -574,16 +544,14 @@ public class TareFactorController {
     private void rebuildPolicyConstants(int factorPolicy) {
         switch (factorPolicy) {
             case POLICY_ALARM_MANAGER:
-                writeConstantsToSettings(mAlarmManagerMap,
-                        Settings.Global.TARE_ALARM_MANAGER_CONSTANTS);
+                writeConstantsToSettings(mAlarmManagerMap, TARE_ALARM_MANAGER_CONSTANTS);
 
                 mAlarmManagerConstants = Settings.Global
                         .getString(mContentResolver, Settings.Global
                                 .TARE_ALARM_MANAGER_CONSTANTS);
                 break;
             case POLICY_JOB_SCHEDULER:
-                writeConstantsToSettings(mJobSchedulerMap,
-                        Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS);
+                writeConstantsToSettings(mJobSchedulerMap, TARE_JOB_SCHEDULER_CONSTANTS);
 
                 mJobSchedulerConstants = Settings.Global
                         .getString(mContentResolver, Settings.Global
@@ -623,7 +591,7 @@ public class TareFactorController {
     public TareFactorDialogFragment createDialog(String key) {
         int policy = getFactorType(key);
         return new TareFactorDialogFragment(getTitle(key, policy), key,
-                getCurrentValue(key, policy), policy , this);
+                getCurrentValue(key, policy), policy, this);
     }
 
     /**

@@ -40,7 +40,7 @@ public final class LockScreenSafetySource {
     /** Sends lock screen safety data to Safety Center. */
     public static void sendSafetyData(Context context,
             ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
-        if (!SafetyCenterStatusHolder.get().isEnabled(context)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
 
@@ -57,7 +57,7 @@ public final class LockScreenSafetySource {
                 screenLockPreferenceDetailsUtils);
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(
-                context.getString(R.string.unlock_set_unlock_launch_picker_title_profile),
+                context.getString(R.string.unlock_set_unlock_launch_picker_title),
                 screenLockPreferenceDetailsUtils.getSummary(UserHandle.myUserId()),
                 screenLockPreferenceDetailsUtils.isLockPatternSecure()
                         ? SafetySourceStatus.STATUS_LEVEL_OK

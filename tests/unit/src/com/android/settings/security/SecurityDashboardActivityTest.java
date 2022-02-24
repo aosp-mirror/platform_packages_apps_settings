@@ -33,7 +33,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -53,14 +53,14 @@ public class SecurityDashboardActivityTest {
     private Intent mDefaultIntent;
 
     @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSecuritySettingsFeatureProvider = mFeatureFactory.getSecuritySettingsFeatureProvider();
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
 
         mDefaultIntent = new Intent();
         mDefaultIntent.setAction(android.provider.Settings.ACTION_SECURITY_SETTINGS);
@@ -122,7 +122,7 @@ public class SecurityDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         mActivity.handleSafetyCenterRedirection();
@@ -133,7 +133,7 @@ public class SecurityDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterDisabled_doesntRedirectToSafetyCenter() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
 
         mActivity.handleSafetyCenterRedirection();
 

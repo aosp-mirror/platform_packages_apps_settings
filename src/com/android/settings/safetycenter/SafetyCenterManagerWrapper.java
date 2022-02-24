@@ -58,4 +58,24 @@ public class SafetyCenterManagerWrapper {
             return;
         }
     }
+
+    /** Returns true is SafetyCenter page is enabled, false otherwise. */
+    public boolean isEnabled(Context context) {
+        if (context == null) {
+            Log.e(TAG, "Context is null at SafetyCenterManagerWrapper#isEnabled");
+            return false;
+        }
+        SafetyCenterManager safetyCenterManager =
+                context.getSystemService(SafetyCenterManager.class);
+        if (safetyCenterManager == null) {
+            Log.w(TAG, "System service SAFETY_CENTER_SERVICE (SafetyCenterManager) is null");
+            return false;
+        }
+        try {
+            return safetyCenterManager.isSafetyCenterEnabled();
+        } catch (RuntimeException e) {
+            Log.e(TAG, "Calling isSafetyCenterEnabled failed.", e);
+            return false;
+        }
+    }
 }
