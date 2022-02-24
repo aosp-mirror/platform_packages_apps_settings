@@ -112,6 +112,11 @@ public class DreamPickerController extends BasePreferenceController {
         }
 
         @Override
+        public CharSequence getSummary() {
+            return mDreamInfo.description;
+        }
+
+        @Override
         public Drawable getIcon() {
             return mDreamInfo.icon;
         }
