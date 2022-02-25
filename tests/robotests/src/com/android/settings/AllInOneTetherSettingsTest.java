@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.EthernetManager;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
@@ -84,6 +85,8 @@ public class AllInOneTetherSettingsTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private PreferenceGroup mWifiTetherGroup;
+    @Mock
+    private EthernetManager mEthernetManager;
 
     @Before
     public void setUp() {
@@ -95,6 +98,7 @@ public class AllInOneTetherSettingsTest {
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(mTetheringManager)
                 .when(mContext).getSystemService(Context.TETHERING_SERVICE);
+        doReturn(mEthernetManager).when(mContext).getSystemService(EthernetManager.class);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(USB_REGEXS).when(mTetheringManager).getTetherableUsbRegexs();
         doReturn(BT_REGEXS).when(mTetheringManager).getTetherableBluetoothRegexs();
