@@ -42,9 +42,15 @@ public class AppLocaleUtil {
             @NonNull Context context,
             @NonNull String packageName,
             @NonNull List<ResolveInfo> infos) {
-        return !isDisallowedPackage(context, packageName)
-                && !isSignedWithPlatformKey(context, packageName)
-                && hasLauncherEntry(packageName, infos);
+        boolean isDisallowedPackage = isDisallowedPackage(context, packageName);
+        boolean hasLauncherEntry = hasLauncherEntry(packageName, infos);
+        boolean isSignedWithPlatformKey = isSignedWithPlatformKey(context, packageName);
+        Log.i(TAG, "Can display preference - [" + packageName + "] :"
+                + " isDisallowedPackage : " + isDisallowedPackage
+                + " / isSignedWithPlatformKey : " + isSignedWithPlatformKey
+                + " / hasLauncherEntry : " + hasLauncherEntry);
+
+        return !isDisallowedPackage && !isSignedWithPlatformKey && hasLauncherEntry;
     }
 
     private static boolean isDisallowedPackage(Context context, String packageName) {
