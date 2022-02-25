@@ -16,6 +16,7 @@
 
 package com.android.settings.dream;
 
+import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -40,6 +41,7 @@ import java.util.List;
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
+    private final @LayoutRes int mLayoutRes;
     private int mLastSelectedPos = -1;
 
     /**
@@ -116,15 +118,16 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public DreamAdapter(List<IDreamItem> itemList) {
+    public DreamAdapter(@LayoutRes int layoutRes, List<IDreamItem> itemList) {
         mItemList = itemList;
+        mLayoutRes = layoutRes;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.dream_preference_layout, viewGroup, false);
+                .inflate(mLayoutRes, viewGroup, false);
         return new DreamViewHolder(view, viewGroup.getContext());
     }
 
