@@ -16,9 +16,11 @@
 
 package com.android.settings.dream;
 
+import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +41,15 @@ import java.util.List;
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
+    private final @LayoutRes int mLayoutRes;
     private int mLastSelectedPos = -1;
 
     /**
      * View holder for each {@link IDreamItem}.
      */
     private class DreamViewHolder extends RecyclerView.ViewHolder {
-        private final ImageView mIconView;
         private final TextView mTitleView;
+        private final TextView mSummaryView;
         private final ImageView mPreviewView;
         private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
@@ -57,8 +60,8 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mContext = context;
             mPreviewView = view.findViewById(R.id.preview);
             mPreviewPlaceholderView = view.findViewById(R.id.preview_placeholder);
-            mIconView = view.findViewById(R.id.icon);
             mTitleView = view.findViewById(R.id.title_text);
+            mSummaryView = view.findViewById(R.id.summary_text);
             mCustomizeButton = view.findViewById(R.id.customize_button);
         }
 
@@ -67,6 +70,14 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
          */
         public void bindView(IDreamItem item, int position) {
             mTitleView.setText(item.getTitle());
+
+            final CharSequence summary = item.getSummary();
+            if (TextUtils.isEmpty(summary)) {
+                mSummaryView.setVisibility(View.GONE);
+            } else {
+                mSummaryView.setText(summary);
+                mSummaryView.setVisibility(View.VISIBLE);
+            }
 
             final Drawable previewImage = item.getPreviewImage();
             if (previewImage != null) {
@@ -82,7 +93,10 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 icon.setTint(Utils.getColorAttrDefaultColor(mContext,
                         com.android.internal.R.attr.colorAccentPrimaryVariant));
             }
-            mIconView.setImageDrawable(icon);
+            final int iconSize = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.dream_item_icon_size);
+            icon.setBounds(0, 0, iconSize, iconSize);
+            mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
             if (item.isActive()) {
                 mLastSelectedPos = position;
@@ -104,15 +118,16 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public DreamAdapter(List<IDreamItem> itemList) {
+    public DreamAdapter(@LayoutRes int layoutRes, List<IDreamItem> itemList) {
         mItemList = itemList;
+        mLayoutRes = layoutRes;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.dream_preference_layout, viewGroup, false);
+                .inflate(mLayoutRes, viewGroup, false);
         return new DreamViewHolder(view, viewGroup.getContext());
     }
 
