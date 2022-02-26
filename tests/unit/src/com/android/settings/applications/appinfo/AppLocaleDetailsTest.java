@@ -43,7 +43,9 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Unittest for ApplocaleDetails
@@ -151,8 +153,9 @@ public class AppLocaleDetailsTest {
     @Test
     @UiThreadTest
     public void
-            handleAllLocalesData_noAppAndNoSupportedSimLocale_1stSuggestedLocaleIsAssetLocale() {
-        Locale firstAssetLocale = new Locale("en", "GB");
+            handleAllLocalesData_noAppAndNoSupportedSimLocale_suggestedLocaleIsSupported() {
+        Locale testEnAssetLocale = new Locale("en", "GB");
+        Locale testJaAssetLocale = new Locale("ja", "JP");
         setupInitialLocales(
                 /* appLocale= */ "",
                 /* simCountry= */ "tw",
@@ -166,8 +169,8 @@ public class AppLocaleDetailsTest {
         helper.handleAllLocalesData();
 
         Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
-        Locale locale = suggestedLocales.iterator().next();
-        assertTrue(locale.equals(firstAssetLocale));
+        assertTrue(suggestedLocales.contains(testEnAssetLocale));
+        assertTrue(suggestedLocales.contains(testJaAssetLocale));
     }
 
     @Test
@@ -293,6 +296,35 @@ public class AppLocaleDetailsTest {
         Locale locale = suggestedLocales.iterator().next();
         Locale systemLocale = mSystemLocales.iterator().next();
         assertTrue(locale.equals(systemLocale));
+    }
+
+    @Test
+    @UiThreadTest
+    public void handleAllLocalesData_sameLocaleButDifferentRegion_notShowDuplicatedLocale() {
+        setupInitialLocales(
+                /* appLocale= */ "",
+                /* simCountry= */ "",
+                /* networkCountry= */ "",
+                /* systemLocales= */ "en-us, en-gb, jp, ne",
+                /* packageLocales= */ "pa, cn, tw, en-us, en-gb",
+                /* assetLocales= */ new String[]{});
+        DummyAppLocaleDetailsHelper helper =
+                new DummyAppLocaleDetailsHelper(mContext, APP_PACKAGE_NAME);
+
+        helper.handleAllLocalesData();
+
+        Collection<Locale> suggestedLocales = helper.getSuggestedLocales();
+        assertFalse(hasDuplicatedResult(suggestedLocales));
+    }
+
+    private boolean hasDuplicatedResult(Collection<Locale> locales) {
+        Set<Locale> tempSet = new HashSet<>();
+        for (Locale locale : locales) {
+            if (!tempSet.add(locale)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Test

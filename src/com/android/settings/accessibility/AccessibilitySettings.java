@@ -576,7 +576,7 @@ public class AccessibilitySettings extends DashboardFragment {
                         serviceEnabled);
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
-                final String tileServiceClassName = info.getTileServiceClassName();
+                final String tileServiceClassName = info.getTileServiceName();
 
                 putBasicExtras(preference, prefKey, title, intro, description, imageRes,
                         htmlDescription, componentName);
@@ -637,7 +637,7 @@ public class AccessibilitySettings extends DashboardFragment {
                 final int imageRes = info.getAnimatedImageRes();
                 final String htmlDescription = info.loadHtmlDescription(mPm);
                 final String settingsClassName = info.getSettingsActivityName();
-                final String tileServiceClassName = info.getTileServiceClassName();
+                final String tileServiceClassName = info.getTileServiceName();
 
                 putBasicExtras(preference, prefKey, title, intro, description, imageRes,
                         htmlDescription, componentName);
