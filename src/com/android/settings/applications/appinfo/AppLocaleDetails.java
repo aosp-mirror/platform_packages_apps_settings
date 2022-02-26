@@ -48,6 +48,7 @@ import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Locale;
 
 /**
@@ -292,7 +293,7 @@ public class AppLocaleDetails extends AppInfoBase implements RadioButtonPreferen
             });
 
             // Other locales in suggested languages group.
-            Collection<Locale> supportedSystemLocales = new ArrayList<>();
+            Collection<Locale> supportedSystemLocales = new HashSet<>();
             getCurrentSystemLocales().forEach(systemLocale -> {
                 mAppSupportedLocales.forEach(supportedLocale -> {
                     if (compareLocale(systemLocale, supportedLocale)) {
