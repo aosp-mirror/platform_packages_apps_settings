@@ -32,7 +32,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
-import com.android.settingslib.Utils;
 
 import java.util.List;
 
@@ -41,7 +40,8 @@ import java.util.List;
  */
 public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<IDreamItem> mItemList;
-    private final @LayoutRes int mLayoutRes;
+    @LayoutRes
+    private final int mLayoutRes;
     private int mLastSelectedPos = -1;
 
     /**
@@ -90,8 +90,8 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
                     : item.getIcon();
             if (icon instanceof VectorDrawable) {
-                icon.setTint(Utils.getColorAttrDefaultColor(mContext,
-                        com.android.internal.R.attr.colorAccentPrimaryVariant));
+                icon.setTintList(
+                        mContext.getColorStateList(R.color.dream_card_text_color_state_list));
             }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
