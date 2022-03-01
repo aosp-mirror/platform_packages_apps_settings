@@ -75,6 +75,7 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedPreference;
 
@@ -856,6 +857,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 mLockPatternUtils.setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
+                LockScreenSafetySource.onLockScreenChange(getContext());
                 finish();
             }
         }
