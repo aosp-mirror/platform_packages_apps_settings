@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
@@ -34,6 +35,9 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 public final class LockScreenSafetySource {
 
     public static final String SAFETY_SOURCE_ID = "LockScreen";
+    public static final String NO_SCREEN_LOCK_ISSUE_ID = "NoScreenLockIssue";
+    public static final String NO_SCREEN_LOCK_ISSUE_TYPE_ID = "NoScreenLockIssueType";
+    public static final String SET_SCREEN_LOCK_ACTION_ID = "SetScreenLockAction";
 
     private LockScreenSafetySource() {
     }
@@ -67,8 +71,12 @@ public final class LockScreenSafetySource {
                 .setEnabled(
                         !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin))
                 .setIconAction(gearMenuIconAction).build();
-        final SafetySourceData safetySourceData = new SafetySourceData.Builder(
-                SAFETY_SOURCE_ID).setStatus(status).build();
+        final SafetySourceData.Builder safetySourceDataBuilder = new SafetySourceData.Builder(
+                SAFETY_SOURCE_ID).setStatus(status);
+        if (!screenLockPreferenceDetailsUtils.isLockPatternSecure()) {
+            safetySourceDataBuilder.addIssue(createNoScreenLockIssue(context, pendingIntent));
+        }
+        final SafetySourceData safetySourceData = safetySourceDataBuilder.build();
 
         SafetyCenterManagerWrapper.get().sendSafetyCenterUpdate(context, safetySourceData);
     }
@@ -96,5 +104,21 @@ public final class LockScreenSafetySource {
                         0 /* requestCode */,
                         intent,
                         PendingIntent.FLAG_IMMUTABLE);
+    }
+
+    private static SafetySourceIssue createNoScreenLockIssue(Context context,
+            PendingIntent pendingIntent) {
+        final SafetySourceIssue.Action action = new SafetySourceIssue.Action.Builder(
+                SET_SCREEN_LOCK_ACTION_ID,
+                context.getString(R.string.no_screen_lock_issue_action_label),
+                pendingIntent).build();
+        return new SafetySourceIssue.Builder(
+                NO_SCREEN_LOCK_ISSUE_ID,
+                context.getString(R.string.no_screen_lock_issue_title),
+                context.getString(R.string.no_screen_lock_issue_summary),
+                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION,
+                NO_SCREEN_LOCK_ISSUE_TYPE_ID)
+                .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
+                .addAction(action).build();
     }
 }
