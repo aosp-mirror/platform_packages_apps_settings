@@ -648,7 +648,7 @@
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
-    <com.android.settings.development.autofill.AutofillPreferenceCategory
+    <PreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
@@ -672,7 +672,7 @@
             android:key="autofill_reset_developer_options"
             android:title="@string/autofill_reset_developer_options" />
 
-    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="storage_category"
