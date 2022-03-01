@@ -103,6 +103,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final Context mContext;
     private final FaceManager mFaceManager;
+    private final FaceUpdater mFaceUpdater;
     private final FaceManager.RemovalCallback mRemovalCallback = new FaceManager.RemovalCallback() {
         @Override
         public void onRemovalError(Face face, int errMsgId, CharSequence errString) {
@@ -144,7 +145,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
                 }
 
                 // Remove the first/only face
-                mFaceManager.remove(faces.get(0), mUserId, mRemovalCallback);
+                mFaceUpdater.remove(faces.get(0), mUserId, mRemovalCallback);
             } else {
                 mButton.setEnabled(true);
                 mRemoving = false;
@@ -157,6 +158,7 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         mContext = context;
         mFaceManager = context.getSystemService(FaceManager.class);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mFaceUpdater = new FaceUpdater(context, mFaceManager);
     }
 
     public FaceSettingsRemoveButtonPreferenceController(Context context) {
