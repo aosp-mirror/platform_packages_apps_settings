@@ -242,9 +242,7 @@ public class BatteryTipDialogFragmentTest {
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                "Your apps are using a normal amount of battery. If apps use too much battery, "
-                        + "your phone will suggest actions you can take.\n\nYou can always turn"
-                        + " on Battery Saver if you’re running low on battery.");
+                mContext.getText(R.string.battery_tip_dialog_summary_message));
     }
 
     @Test
