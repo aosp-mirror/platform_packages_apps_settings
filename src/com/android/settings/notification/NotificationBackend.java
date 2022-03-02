@@ -22,15 +22,20 @@ import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 import static android.os.UserHandle.USER_SYSTEM;
 
+import android.Manifest;
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationHistory;
 import android.app.NotificationManager;
+import android.app.compat.CompatChanges;
 import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
 import android.companion.ICompanionDeviceManager;
+import android.compat.annotation.ChangeId;
+import android.compat.annotation.EnabledAfter;
+import android.compat.annotation.EnabledSince;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +47,7 @@ import android.content.pm.ParceledListSlice;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -100,12 +106,6 @@ public class NotificationBackend {
         return row;
     }
 
-    public boolean isBlockable(Context context, ApplicationInfo info) {
-        final boolean blocked = getNotificationsBanned(info.packageName, info.uid);
-        final boolean systemApp = isSystemApp(context, info);
-        return !systemApp || (systemApp && blocked);
-    }
-
     public AppRow loadAppRow(Context context, PackageManager pm,
             RoleManager roleManager, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
@@ -130,6 +130,15 @@ public class NotificationBackend {
                     || roles.contains(RoleManager.ROLE_EMERGENCY)) {
                 row.systemApp = row.lockedImportance = true;
             }
+            // if the app targets T but has not requested the permission, we cannot change the
+            // permission state
+            if (app.applicationInfo.targetSdkVersion > Build.VERSION_CODES.S_V2) {
+                if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
+                        .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
+                    row.lockedImportance = true;
+                }
+            }
+
         } else {
             row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
             List<String> roles = rm.getHeldRolesFromController(app.packageName);
@@ -192,14 +201,15 @@ public class NotificationBackend {
         return sb.toString();
     }
 
-    public boolean isSystemApp(Context context, ApplicationInfo app) {
+    public boolean enableSwitch(Context context, ApplicationInfo app) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(
                     app.packageName, PackageManager.GET_SIGNATURES);
             RoleManager rm = context.getSystemService(RoleManager.class);
             final AppRow row = new AppRow();
             recordCanBeBlocked(context, context.getPackageManager(), rm, info, row);
-            return row.systemApp;
+            boolean systemBlockable = !row.systemApp || (row.systemApp && row.banned);
+            return systemBlockable && !row.lockedImportance;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

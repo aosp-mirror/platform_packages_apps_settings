@@ -45,6 +45,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
 @RunWith(AndroidJUnit4.class)
 public class SafetySourceBroadcastReceiverTest {
 
@@ -149,9 +151,12 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[]{ BiometricsSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
 
-        // TODO(b/215517420): Update this test when BiometricSafetySource is implemented.
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        assertThat(safetySourceData.getId()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
     }
 
     @Test
@@ -159,14 +164,15 @@ public class SafetySourceBroadcastReceiverTest {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
-        // TODO(b/215517420): Update this test when BiometricSafetySource is implemented to test
-        // that biometrics data is also sent.
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper, times(1))
+        verify(mSafetyCenterManagerWrapper, times(2))
                 .sendSafetyCenterUpdate(any(), captor.capture());
-        SafetySourceData safetySourceData = captor.getValue();
+        List<SafetySourceData> safetySourceDataList = captor.getAllValues();
 
-        assertThat(safetySourceData.getId()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
+        assertThat(safetySourceDataList.stream().anyMatch(
+                data -> data.getId().equals(LockScreenSafetySource.SAFETY_SOURCE_ID))).isTrue();
+        assertThat(safetySourceDataList.stream().anyMatch(
+                data -> data.getId().equals(BiometricsSafetySource.SAFETY_SOURCE_ID))).isTrue();
     }
 }
