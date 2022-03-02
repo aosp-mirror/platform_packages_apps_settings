@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter;
 
 import android.app.PendingIntent;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -70,6 +71,13 @@ public final class LockScreenSafetySource {
                 SAFETY_SOURCE_ID).setStatus(status).build();
 
         SafetyCenterManagerWrapper.get().sendSafetyCenterUpdate(context, safetySourceData);
+    }
+
+    /** Notifies Safety Center of a change in lock screen settings. */
+    public static void onLockScreenChange(Context context) {
+        sendSafetyData(
+                context,
+                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER));
     }
 
     private static IconAction createGearMenuIconAction(Context context,
