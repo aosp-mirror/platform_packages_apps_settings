@@ -27,13 +27,16 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.After;
@@ -59,11 +62,17 @@ public class LockScreenSafetySourceTest {
     @Mock
     private ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailsUtils;
 
+    @Mock
+    private LockPatternUtils mLockPatternUtils;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplicationContext = ApplicationProvider.getApplicationContext();
         SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
+        final FakeFeatureFactory featureFactory = FakeFeatureFactory.setupForTest();
+        when(featureFactory.securityFeatureProvider.getLockPatternUtils(mApplicationContext))
+                .thenReturn(mLockPatternUtils);
     }
 
     @After
@@ -72,8 +81,10 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
+    public void sendSafetyData_whenScreenLockIsEnabled_whenSafetyCenterIsDisabled_sendsNoData() {
+        whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
+        when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(true);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils);
@@ -95,6 +106,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenScreenLockIsEnabled_sendsData() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils);
@@ -119,6 +131,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenLockPatternIsSecure_sendsStatusLevelOk() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
@@ -136,6 +149,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenLockPatternIsNotSecure_sendsStatusLevelRecommendation() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(false);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
@@ -151,8 +165,62 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
+    public void sendSafetyData_whenLockPatternIsSecure_sendsNoIssues() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+
+        assertThat(safetySourceData.getIssues()).isEmpty();
+    }
+
+    @Test
+    public void sendSafetyData_whenLockPatternIsNotSecure_sendsIssue() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(false);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+
+        assertThat(safetySourceData.getIssues()).hasSize(1);
+        SafetySourceIssue issue = safetySourceData.getIssues().get(0);
+        assertThat(issue.getId()).isEqualTo(LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_ID);
+        assertThat(issue.getTitle().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_title"));
+        assertThat(issue.getSummary().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_summary"));
+        assertThat(issue.getSeverityLevel()).isEqualTo(
+                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION);
+        assertThat(issue.getIssueTypeId()).isEqualTo(
+                LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_TYPE_ID);
+        assertThat(issue.getIssueCategory()).isEqualTo(SafetySourceIssue.ISSUE_CATEGORY_DEVICE);
+        assertThat(issue.getActions()).hasSize(1);
+        SafetySourceIssue.Action action = issue.getActions().get(0);
+        assertThat(action.getId()).isEqualTo(LockScreenSafetySource.SET_SCREEN_LOCK_ACTION_ID);
+        assertThat(action.getLabel().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_action_label"));
+        assertThat(action.getPendingIntent().getIntent().getAction())
+                .isEqualTo(FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
+    }
+
+    @Test
     public void sendSafetyData_whenPasswordQualityIsManaged_sendsDisabled() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(anyInt(), any()))
                 .thenReturn(true);
 
@@ -170,6 +238,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenPasswordQualityIsNotManaged_sendsEnabled() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isPasswordQualityManaged(anyInt(), any()))
                 .thenReturn(false);
 
@@ -187,6 +256,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenShouldShowGearMenu_sendsGearMenuActionIcon() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         final Intent launchScreenLockSettings = new Intent(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
         when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent())
                 .thenReturn(launchScreenLockSettings);
@@ -208,6 +278,7 @@ public class LockScreenSafetySourceTest {
     @Test
     public void sendSafetyData_whenShouldNotShowGearMenu_sendsNoGearMenuActionIcon() {
         whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(false);
 
         LockScreenSafetySource.sendSafetyData(mApplicationContext,
@@ -221,8 +292,27 @@ public class LockScreenSafetySourceTest {
         assertThat(safetySourceStatus.getIconAction()).isNull();
     }
 
-    private void whenScreenLockIsEnabled() {
+    @Test
+    public void onLockScreenChange_whenSafetyCenterEnabled_sendsData() {
+        whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+
+        LockScreenSafetySource.onLockScreenChange(mApplicationContext);
+
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), any());
+    }
+
+    @Test
+    public void onLockScreenChange_whenSafetyCenterDisabled_sendsNoData() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
+
+        LockScreenSafetySource.onLockScreenChange(mApplicationContext);
+
+        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+    }
+
+    private void whenScreenLockIsEnabled() {
         when(mScreenLockPreferenceDetailsUtils.isAvailable()).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.getSummary(anyInt())).thenReturn(SUMMARY);
 
