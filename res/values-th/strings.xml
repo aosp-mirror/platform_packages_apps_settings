@@ -214,6 +214,8 @@
     <string name="app_locale_picker_title" msgid="8423365003726200684">"ภาษาของแอป"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"ภาษาที่แนะนำ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ทุกภาษา"</string>
+    <string name="preference_of_system_locale_title" msgid="8067226276038751504">"ภาษาของระบบ"</string>
+    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"ค่าเริ่มต้นของระบบ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
     <string name="no_multiple_language_supported" msgid="1683023807955740826">"แอปจะตั้งค่าเป็นภาษา<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>โดยค่าเริ่มต้น และไม่รองรับหลายภาษา"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">นำภาษาที่เลือกออกไหม</item>
@@ -498,7 +500,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"ยกนิ้วมือเรื่อยๆ เพื่อเพิ่มส่วนอื่นๆ ของลายนิ้วมือ"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"แตะค้างไว้ทุกครั้งที่ไอคอนลายนิ้วมือเคลื่อนไหว การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"วางปลายนิ้วลงบนเซ็นเซอร์"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"สุดท้าย ใช้ปลายนิ้วของคุณ"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"สุดท้าย ใช้ขอบนิ้วของคุณ"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"วางด้านข้างของนิ้วค้างไว้บนเซ็นเซอร์ จากนั้นเปลี่ยนข้าง"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"การทำเช่นนี้จะช่วยให้บันทึกลายนิ้วมือของคุณได้มากขึ้น"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"กำลังลงทะเบียนลายนิ้วมือ <xliff:g id="PERCENTAGE">%d</xliff:g> เปอร์เซ็นต์"</string>
@@ -588,6 +590,12 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"เข้ารหัสแท็บเล็ต"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"เข้ารหัสโทรศัพท์"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"เข้ารหัสแล้ว"</string>
+    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"ป้องกันโทรศัพท์ของคุณ"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ตั้งค่าล็อกหน้าจอเพื่อปกป้องแท็บเล็ต"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"ตั้งค่าล็อกหน้าจอเพื่อปกป้องอุปกรณ์"</string>
@@ -1233,7 +1241,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"ยกเลิกการเชื่อมต่อกับ <xliff:g id="SSID">%1$s</xliff:g> แล้ว"</string>
     <string name="carrier" msgid="1755020806290963951">"ผู้ให้บริการ"</string>
     <string name="display_settings_title" msgid="626835071804834218">"การแสดงผล"</string>
-    <string name="sound_settings" msgid="5514582720435174014">"เสียง"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"เสียงและการสั่น"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"ระดับเสียง"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"เอฟเฟ็กต์เพลง"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"ระดับเสียงเรียกเข้าและการแจ้งเตือน"</string>
@@ -1377,16 +1385,21 @@
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"ไม่มี"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"เปิดตั้งแต่พระอาทิตย์ตกจนขึ้น"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"เปิดในเวลาที่กำหนด"</string>
+    <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"เปิดเมื่อถึงเวลาเข้านอน"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"สถานะ"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"จะไม่เปิดโดยอัตโนมัติ"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"จะเปิดโดยอัตโนมัติเมื่อพระอาทิตย์ตก"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"จะเปิดโดยอัตโนมัติในเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"จะเปิดโดยอัตโนมัติเมื่อถึงเวลาเข้านอน"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"จะไม่ปิดโดยอัตโนมัติ"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"จะปิดโดยอัตโนมัติเมื่อพระอาทิตย์ขึ้น"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"จะปิดโดยอัตโนมัติในเวลา <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"จะปิดโดยอัตโนมัติหลังจากเวลาเข้านอน"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"เปิดจนถึง <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"ปิดจนถึง <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"ธีมมืดใช้พื้นหลังสีดำเพื่อช่วยให้แบตเตอรี่ของคุณใช้งานได้นานขึ้นในหน้าจอบางรุ่น ธีมมืดจะกำหนดเวลารอในการเปิดหน้าจอไว้ก่อนที่จะดับลง"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ปัจจุบันธีมมืดจะเป็นไปตามกำหนดเวลาของโหมดเวลาเข้านอน"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"การตั้งค่าโหมดเวลาเข้านอน"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ระยะหมดเวลาหน้าจอ"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"หน้าจอปิด"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"หลังจากไม่ได้ทำงานเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
@@ -1421,7 +1434,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"การใช้งานแบตเตอรี่เพิ่มขึ้น"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"ทำข้อความเป็นตัวหนา"</string>
     <string name="title_font_size" msgid="570613010306330622">"ขนาดอักษร"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"ทำให้ข้อความมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"ทำให้ข้อความใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"การตั้งค่าการล็อกซิ⁠ม⁠ก⁠าร์⁠ด"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"การล็อกซิมการ์ด"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"ปิด"</string>
@@ -1590,7 +1603,6 @@
     <string name="storage_internal_title" msgid="3265098802217660829">"ที่เก็บข้อมูลอุปกรณ์"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"ที่จัดเก็บข้อมูลแบบพกพา"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="5031288167242496837">"ใช้ไปจากทั้งหมด <xliff:g id="TOTAL">%1$s</xliff:g>"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"ต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>แล้ว"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"ไม่สามารถต่อเชื่อม<xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"นำ<xliff:g id="NAME">%1$s</xliff:g>ออกได้อย่างปลอดภัยแล้ว"</string>
@@ -2035,6 +2047,7 @@
     <string name="enable_text" msgid="8570798764647110430">"เปิดใช้งาน"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"ล้างพื้นที่เก็บข้อมูล"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"ถอนการติดตั้งการอัปเดต"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"ปลดล็อกการตั้งค่าที่จำกัด"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"กิจกรรมบางอย่างที่คุณเลือกจะเปิดในแอปนี้โดยค่าเริ่มต้น"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"คุณได้เลือกอนุญาตให้แอปพลิเคชันนี้สร้างวิดเจ็ตและเข้าถึงข้อมูลวิดเจ็ตได้"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"ไม่ได้ตั้งค่าเริ่มต้น"</string>
@@ -2185,6 +2198,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"แป้นพิมพ์และเครื่องมือของโปรไฟล์งาน"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"แป้นพิมพ์บนหน้าจอสำหรับการทำงาน"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"ค่าเริ่มต้น"</string>
+    <string name="speech_category_title" msgid="5995161659186229742">"คำพูด"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"ความเร็วของตัวชี้"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"อุปกรณ์ควบคุมเกม"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"เปลี่ยนเส้นทางการสั่น"</string>
@@ -2254,7 +2268,7 @@
     <string name="audio_category_title" msgid="5283853679967605826">"เสียง"</string>
     <string name="general_category_title" msgid="6298579528716834157">"ทั่วไป"</string>
     <string name="display_category_title" msgid="6638191682294461408">"การแสดงผล"</string>
-    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"ข้อความและการแสดงผล"</string>
+    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"สีและการเคลื่อนไหว"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"ปรับแสงหน้าจอให้มืดลง"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"ส่วนควบคุมการโต้ตอบ"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"การควบคุมเวลา"</string>
@@ -2293,18 +2307,18 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ขยายโดยใช้ทางลัด"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ขยายโดยใช้ทางลัดและการแตะ 3 ครั้ง"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"เกี่ยวกับ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
-    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"ข้อความและตัวเลือกการอ่าน"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
-    <skip />
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"ขนาดและข้อความที่แสดง"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"เปลี่ยนวิธีแสดงข้อความ"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"อีเมล: แผนสำหรับไทม์แมชชีน v2"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"จาก: bill@email.com"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"สวัสดียามเช้า จากการสนทนาล่าสุดของเรา ฉันขอทราบความคืบหน้าของแผนพัฒนาไทม์แมชชีนที่คุณพูดถึง คุณจะเตรียมเครื่องต้นแบบให้พร้อมสาธิตในงาน E3 ปีนี้ได้ไหม"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"รีเซ็ต"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"ตัวเลือก"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"ซูมเข้าบนหน้าจอ"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"แตะ 3 ครั้งเพื่อซูม"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"แตะปุ่มเพื่อซูม"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {2,number,integer} ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"ซูมเข้าอย่างรวดเร็วบนหน้าจอเพื่อทำให้เนื้อหาใหญ่ขึ้น"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;วิธีซูมเข้า&lt;/b&gt;&lt;br/&gt; {0,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {1,number,integer} แตะหน้าจอ&lt;br/&gt; {2,number,integer} ใช้ 2 นิ้วลากเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {3,number,integer} บีบ 2 นิ้วเพื่อปรับการซูม&lt;br/&gt; {4,number,integer} ใช้ทางลัดเพื่อหยุดการขยาย&lt;br/&gt;&lt;br/&gt; &lt;b&gt;วิธีซูมเข้าชั่วคราว&lt;/b&gt;&lt;br/&gt; {0,number,integer} ตรวจสอบว่าตั้งค่าประเภทการขยายเป็นเต็มหน้าจอ&lt;br/&gt; {1,number,integer} ใช้ทางลัดเพื่อเริ่มการขยาย&lt;br/&gt; {2,number,integer} แตะที่ใดก็ได้บนหน้าจอค้างไว้&lt;br/&gt; {3,number,integer} ลากนิ้วเพื่อย้ายไปรอบๆ หน้าจอ&lt;br/&gt; {4,number,integer} ยกนิ้วขึ้นเพื่อหยุดการขยาย"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"คุณจะซูมหน้าจอเข้าได้เมื่อเปิดการขยาย\n\n"<b>"วิธีซูมคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอ\n"<ul><li>"ลากนิ้วอย่างน้อย 2 นิ้วเพื่อเลื่อน"</li>\n<li>"บีบนิ้วอย่างน้อย 2 นิ้วเพื่อปรับการซูม"</li></ul>\n\n<b>"วิธีซูมชั่วคราวคือ"</b>" เริ่มการขยาย จากนั้นแตะบริเวณที่ต้องการซูมในหน้าจอค้างไว้\n"<ul><li>"ลากเพื่อไปยังส่วนต่างๆ ในหน้าจอ"</li>\n<li>"ยกนิ้วขึ้นเพื่อซูมออก"</li></ul>\n\n"คุณซูมเข้าโดยใช้แป้นพิมพ์หรือแถบนำทางไม่ได้"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"หน้า <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> จาก <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"ใช้ปุ่มการช่วยเหลือพิเศษเพื่อเปิด"</string>
@@ -2349,13 +2363,14 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"อนุญาตให้ทางลัดฟีเจอร์เปิดขึ้นจากหน้าจอล็อก กดปุ่มปรับระดับเสียงทั้ง 2 ปุ่มค้างไว้ 2-3 วินาที"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"ปุ่มและท่าทางสัมผัสการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็วจากหน้าจอใดก็ได้"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"เกี่ยวกับปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"เกี่ยวกับปุ่มการช่วยเหลือพิเศษและท่าทางสัมผัส"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ดูข้อมูลเพิ่มเติมเกี่ยวกับปุ่มการช่วยเหลือพิเศษและท่าทางสัมผัส"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"กำลังใช้ปุ่มการช่วยเหลือพิเศษ ท่าทางสัมผัสดังกล่าวใช้กับการนำทางแบบ 3 ปุ่มไม่ได้"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็ว"</string>
-    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็วจากหน้าจอใดก็ได้\n\nหากต้องการเริ่มต้นใช้งาน ให้ไปที่การตั้งค่าการช่วยเหลือพิเศษแล้วเลือกฟีเจอร์ที่ต้องการ แตะทางลัดแล้วเลือกปุ่มการช่วยเหลือพิเศษหรือท่าทางสัมผัส"</string>
-    <string name="accessibility_button_description" msgid="3664784100487881054">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็วจากหน้าจอใดก็ได้\n\nหากต้องการเริ่มต้นใช้งาน ให้ไปที่การตั้งค่าการช่วยเหลือพิเศษแล้วเลือกฟีเจอร์ที่ต้องการ แตะทางลัดแล้วเลือกปุ่มการช่วยเหลือพิเศษ"</string>
+    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"วิธีใช้ปุ่มหรือท่าทางสัมผัส"</b>\n\n"1. ไปที่การตั้งค่าการช่วยเหลือพิเศษ\n2. เลือกฟีเจอร์และแตะทางลัด\n3. หากต้องการใช้ฟีเจอร์ดังกล่าว ให้แตะปุ่มการช่วยเหลือพิเศษหรือท่าทางสัมผัส"</string>
+    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"วิธีใช้ปุ่ม"</b>\n\n"1. ไปที่การตั้งค่าการช่วยเหลือพิเศษ\n2. เลือกฟีเจอร์และแตะทางลัด\n3. หากต้องการใช้ฟีเจอร์ดังกล่าว ให้แตะปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ใช้ปุ่มหรือท่าทางสัมผัส"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"ตำแหน่ง"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"ขนาด"</string>
@@ -2365,6 +2380,7 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"โปร่งใส"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"ไม่โปร่งใส"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"ข้อความคอนทราสต์สูง"</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"เปลี่ยนสีข้อความเป็นสีดำหรือสีขาว เพิ่มคอนทราสต์กับพื้นหลังให้สูงสุด"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"อัปเดตการขยายหน้าจอโดยอัตโนมัติ"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"อัปเดตการขยายหน้าจอเมื่อเปลี่ยนแอปพลิเคชัน"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"กดปุ่มเปิด/ปิดเพื่อวางสาย"</string>
@@ -2384,17 +2400,20 @@
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"เกี่ยวกับเวลาดำเนินการ (ระยะหมดเวลาช่วยเหลือพิเศษ)"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"ดูข้อมูลเพิ่มเติมเกี่ยวกับเวลาดำเนินการ (ระยะหมดเวลาช่วยเหลือพิเศษ)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"เวลาในการดำเนินการ"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"เลือกระยะเวลาแสดงข้อความที่ขอให้คุณดำเนินการแต่ปรากฏเพียงชั่วคราวเท่านั้น\n\nแอปบางแอปไม่รองรับการตั้งค่านี้"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"แอปทั้งหมดไม่รองรับค่ากำหนดระยะเวลานี้"</string>
+    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"เลือกระยะเวลาแสดงข้อความชั่วคราวที่ขอให้คุณดำเนินการ"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"การหน่วงเวลาด้วยการแตะค้างไว้"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"การกลับสี"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"ใช้การกลับสี"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"ทางลัดการกลับสี"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"การกลับสีปรับหน้าจอที่สว่างให้มืดลง&lt;br/&gt;&lt;br/&gt; หมายเหตุ: &lt;ol&gt; &lt;li&gt; การกลับสีจะปรับหน้าจอที่มืดให้สว่างขึ้นด้วย&lt;/li&gt; &lt;li&gt; สีในสื่อและรูปภาพจะเปลี่ยนไป&lt;/li&gt; &lt;li&gt; คุณใช้ธีมมืดเพื่อแสดงพื้นหลังสีมืดได้ ธีมมืดใช้ได้กับแอปที่รองรับ การกลับสีใช้ได้กับทุกแอป&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"การกลับสีปรับหน้าจอที่สว่างให้มืดลง และยังปรับหน้าจอที่มืดให้สว่างขึ้นด้วย"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;โปรดทราบ&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; สีในสื่อและรูปภาพจะเปลี่ยนไป&lt;/li&gt; &lt;li&gt; การกลับสีใช้ได้กับทุกแอป&lt;/li&gt; &lt;li&gt; หากต้องการแสดงพื้นหลังสีมืด คุณใช้ธีมมืดแทนได้&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"การคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"เกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการคลิกอัตโนมัติ (เวลาที่ไม่มีการขยับเมาส์)"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"การคลิกอัตโนมัติใช้งานได้กับเมาส์ที่เชื่อมต่อ คุณตั้งค่าให้เคอร์เซอร์เมาส์คลิกโดยอัตโนมัติเมื่อเคอร์เซอร์หยุดเคลื่อนที่เป็นระยะเวลาหนึ่งได้"</string>
-    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"ปิด"</string>
+    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"คุณสามารถตั้งค่าให้เมาส์ที่เชื่อมต่อคลิกอัตโนมัติได้เมื่อเคอร์เซอร์หยุดเคลื่อนที่เป็นระยะเวลาหนึ่ง"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"การคลิกอัตโนมัติจะเป็นประโยชน์หากคลิกเมาส์ได้ยาก"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"การคลิกอัตโนมัติปิดอยู่"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"สั้น"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0.2 วินาที"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"กลาง"</string>
@@ -2407,6 +2426,7 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"เวลาในการคลิกอัตโนมัติ"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"การสั่นและการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ควบคุมความแรงของการสั่นสำหรับการใช้งานที่แตกต่างกัน"</string>
+    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"การตั้งค่าถูกปิดใช้เนื่องจากอุปกรณ์ปิดเสียงอยู่"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"การโทร"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"การแจ้งเตือนและนาฬิกาปลุก"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"การโต้ตอบการสัมผัสแบบอินเทอร์แอกทีฟ"</string>
@@ -2418,9 +2438,11 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"การตอบสนองการสัมผัส"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"ใช้ \"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>\""</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"เปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"ปัดลงเพื่อเปิดหรือปิด <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> อย่างรวดเร็วในการตั้งค่าด่วน"</string>
-    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
-    <skip />
+    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> เพิ่มไปยังการตั้งค่าด่วนแล้ว ปัดลงเพื่อเปิดหรือปิดได้ทุกเมื่อ"</string>
+    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"คุณเพิ่มทางลัดไปยัง <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ได้โดยแก้ไขการตั้งค่าด่วน"</string>
+    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"ปิด"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"ปรับวิธีแสดงสีในโทรศัพท์"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"ปรับวิธีแสดงสีในแท็บเล็ต"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"ใช้การแก้สี"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"ทางลัดการแก้สี"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"เกี่ยวกับการแก้สี"</string>
@@ -2432,7 +2454,8 @@
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"ขนาดและรูปแบบของคำบรรยาย"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"ขนาดข้อความ <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"ตัวเลือกเพิ่มเติม"</string>
-    <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"แอปบางแอปไม่รองรับค่ากำหนดคำบรรยายเหล่านี้"</string>
+    <string name="accessibility_caption_preference_intro" msgid="6662649135457507767">"ปรับแต่งขนาดและรูปแบบของคำบรรยายเพื่อให้อ่านได้ง่ายขึ้น"</string>
+    <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"แอปสื่อทั้งหมดไม่รองรับค่ากำหนดคำบรรยายเหล่านี้"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"ใช้ 2 นิ้วเลื่อนขึ้นจากด้านล่าง"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"กดปุ่มปรับระดับเสียงค้างไว้"</string>
@@ -2448,6 +2471,9 @@
       <item quantity="one">บันทึกเครื่องช่วยฟัง <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> เครื่องแล้ว</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"การปรับเสียง"</string>
+    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"เสียงบรรยาย"</string>
+    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"เลือกเสียงซาวด์แทร็กที่มีเสียงบรรยายโดยค่าเริ่มต้น"</string>
+    <string name="keywords_audio_description" msgid="6202816411593281252">"เสียงบรรยาย เสียง คำบรรยาย สายตาเลือนราง"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"ทางลัดเปิดอยู่"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"ปิด"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"เปิด"</string>
@@ -2456,22 +2482,22 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"บริการนี้ทำงานผิดปกติ"</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"ทางลัดสำหรับการช่วยเหลือพิเศษ"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"แสดงในการตั้งค่าด่วน"</string>
-    <string name="daltonizer_type" msgid="1715154680803795947">"โหมดแก้ไข"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ตาบอดสีเขียว"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"ตาบอดสีแดง"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ตาบอดสีน้ำเงิน"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"สีแดง/เขียว"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"สีแดง/เขียว"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"สีน้ำเงิน/เหลือง"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"โทนสีเทา"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"สีแดง/เขียว"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"สีแดง/เขียว"</string>
-    <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"สีน้ำเงิน/เหลือง"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"เห็นสีเขียวได้น้อย ตาบอดสีเขียว"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"เห็นสีแดงได้น้อย ตาบอดสีแดง"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ตาบอดสีน้ำเงิน"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"หรี่แสงเพิ่มเติม"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"หรี่แสงหน้าจอเพิ่มเติม"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"ทางลัดการหรี่แสงเพิ่มเติม"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"เกี่ยวกับการหรี่แสงเพิ่มเติม"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"หรี่แสงหน้าจอให้มืดกว่าความสว่างต่ำสุดของโทรศัพท์"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"หรี่แสงหน้าจอให้มืดกว่าความสว่างต่ำสุดของแท็บเล็ต"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"หรี่แสงหน้าจอเพื่อให้อ่านได้สบายตายิ่งขึ้น&lt;br/&gt;&lt;br/&gt; ฟีเจอร์นี้จะเป็นประโยชน์เมื่อ &lt;ol&gt; &lt;li&gt; ความสว่างต่ำสุดเริ่มต้นของโทรศัพท์ยังคงสว่างเกินไป&lt;/li&gt; &lt;li&gt; คุณกำลังใช้โทรศัพท์ในสภาพแวดล้อมที่มืด เช่น ในเวลากลางคืนหรือก่อนเข้านอนในห้องที่มืด&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"ปรับแสงหน้าจอให้มืดลงเพื่อให้อ่านได้สบายตายิ่งขึ้น&lt;br/&gt;&lt;br/&gt; ฟีเจอร์นี้จะเป็นประโยชน์เมื่อ &lt;ol&gt; &lt;li&gt; ความสว่างต่ำสุดเริ่มต้นของแท็บเล็ตยังคงสว่างเกินไป&lt;/li&gt; &lt;li&gt; คุณกำลังใช้แท็บเล็ตในสภาพแวดล้อมที่มืด เช่น ในเวลากลางคืนหรือก่อนเข้านอนในห้องที่มืด&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"หรี่แสงหน้าจอเพื่อให้อ่านได้สบายตายิ่งขึ้น"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"การหรี่แสงเพิ่มเติมจะเป็นประโยชน์เมื่อ &lt;ol&gt; &lt;li&gt; ความสว่างต่ำสุดเริ่มต้นของโทรศัพท์ยังคงสว่างเกินไป&lt;/li&gt; &lt;li&gt; คุณกำลังใช้โทรศัพท์ในสภาพแวดล้อมที่มืด เช่น ในเวลากลางคืนหรือก่อนเข้านอนในห้องที่มืด&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"การหรี่แสงเพิ่มเติมจะเป็นประโยชน์เมื่อ &lt;ol&gt; &lt;li&gt; ความสว่างต่ำสุดเริ่มต้นของแท็บเล็ตยังคงสว่างเกินไป&lt;/li&gt; &lt;li&gt; คุณกำลังใช้แท็บเล็ตในสภาพแวดล้อมที่มืด เช่น ในเวลากลางคืนหรือก่อนเข้านอนในห้องที่มืด&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"ความเข้ม"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"มืดลง"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"สว่างขึ้น"</string>
@@ -2565,8 +2591,8 @@
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"การจับคู่ด่วน"</string>
     <string name="fast_pair_settings_summary" msgid="1786567691058982987">"การตรวจหาอุปกรณ์บลูทูธที่อยู่ใกล้เคียงสำหรับการจับคู่ด่วน"</string>
-    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
-    <skip />
+    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"สแกนหาอุปกรณ์ที่อยู่ใกล้เคียง"</string>
+    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"อุปกรณ์ที่บันทึกไว้"</string>
     <string name="print_settings" msgid="8519810615863882491">"การพิมพ์"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ปิด"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3321,6 +3347,7 @@
     <string name="user_remove_user_menu" msgid="2183714948094429367">"ลบ <xliff:g id="USER_NAME">%1$s</xliff:g> จากอุปกรณ์นี้"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"การตั้งค่าหน้าจอล็อก"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"เพิ่มผู้ใช้จากหน้าจอล็อก"</string>
+    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"เปลี่ยนเป็นผู้ใช้ที่ดูแลระบบเมื่อวางบนแท่นชาร์จ"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"ลบตัวคุณเองหรือไม่"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"ลบผู้ใช้รายนี้ใช่ไหม"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"นำโปรไฟล์นี้ออกใช่ไหม"</string>
@@ -3355,29 +3382,20 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"เลือกแอปที่จะติดตั้ง"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"ติดตั้งแอปที่มี"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"การชำระเงินแบบไม่ต้องสัมผัส"</string>
-    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
-    <skip />
-    <!-- no translation found for nfc_more_details (1700713533074275233) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
-    <skip />
+    <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"แอปการชำระเงินเริ่มต้น"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"หากต้องการชำระเงินโดยใช้แอปการชำระเงิน ให้ถือด้านหลังของอุปกรณ์ไว้ที่เครื่องชำระเงิน"</string>
+    <string name="nfc_more_details" msgid="1700713533074275233">"ดูข้อมูลเพิ่มเติม"</string>
+    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"กำหนดให้แอปงานเป็นแอปชำระเงินเริ่มต้นไหม"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"หากต้องการชำระเงินโดยใช้แอปการชำระเงิน"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"ต้องเปิดใช้โปรไฟล์งาน"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"คุณจะต้องป้อน PIN, รูปแบบ หรือรหัสผ่านของโปรไฟล์งาน (หากมี)"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"วิธีการทำงาน"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"ชำระเงินโดยใช้โทรศัพท์ของคุณในร้านค้า"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"แอปชำระเงินเริ่มต้น"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"ไม่ได้ตั้งค่า"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
-    <skip />
-    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="6127665705799658860">"ใช้แอปการชำระเงินเริ่มต้น"</string>
+    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"ใช้แอปการชำระเงินเริ่มต้น"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"ทุกครั้ง"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"ยกเว้นเมื่อแอปการชำระเงินอื่นเปิดอยู่"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"แอปสำหรับจ่ายเงินที่เครื่องชำระเงินแบบไม่ต้องสัมผัส"</string>
@@ -3558,7 +3576,7 @@
     <string name="keywords_network_reset" msgid="4075670452112218042">"รีเซ็ต, คืนค่า, ค่าเริ่มต้นจากโรงงาน"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"ล้างข้อมูล, ลบ, กู้คืน, ล้าง, นำออก, รีเซ็ตเป็นค่าเริ่มต้น"</string>
     <string name="keywords_printing" msgid="3528250034669909466">"เครื่องพิมพ์"</string>
-    <string name="keywords_sounds" msgid="1850691834585575875">"เสียงบิ๊บจากลำโพง, ลำโพง, ระดับเสียง, ปิดเสียง, เงียบ, เสียง, เพลง"</string>
+    <string name="keywords_sounds" msgid="187191900698371911">"เสียงบิ๊บจากลำโพง, ลำโพง, ระดับเสียง, ปิดเสียง, เงียบ, เสียง, เพลง, การตอบสนองแบบรู้สึกได้, การสั่น, สั่น"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"ห้าม อย่ารบกวน, แทรก, การรบกวน, การพัก"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"ใกล้เคียง, ประวัติตำแหน่ง, การรายงาน, GPS"</string>
@@ -3654,6 +3672,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"เสียงชาร์จและการสั่น"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"เสียงเชื่อมต่อแท่นลำโพง"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"เสียงแตะ"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"แสดงไอคอนเสมอเมื่ออยู่ในโหมดสั่น"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"เล่นเสียงจากแท่นลำโพง"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"เสียงทั้งหมด"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"เสียงของสื่อเท่านั้น"</string>
@@ -4557,7 +4576,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"กดปุ่มเปิด/ปิด 2 ครั้งสำหรับกล้อง"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"เปิดกล้องอย่างรวดเร็วโดยไม่ต้องปลดล็อกหน้าจอ"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"ขนาดการแสดงผล"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"ทำให้รายการบนหน้าจอมีขนาดใหญ่ขึ้นหรือเล็กลง"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"ทำให้ทุกอย่างใหญ่ขึ้นหรือเล็กลง"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"ความหนาแน่นในการแสดงผล, ซูมหน้าจอ, ระดับ, การปรับระดับ"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"ปรับขนาดข้อความบนหน้าจอให้เล็กลงหรือใหญ่ขึ้น แ⁠อ⁠ปบางส่วนบนหน้าจออาจเปลี่ยนตำแหน่ง"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"ดูตัวอย่าง"</string>
@@ -4998,14 +5017,28 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"อุปกรณ์เครื่องนี้จัดการโดย <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"ดูข้อมูลเพิ่มเติม"</string>
+    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"การตั้งค่าที่จำกัด"</string>
+    <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"การตั้งค่านี้ใช้ไม่ได้ในตอนนี้เพื่อความปลอดภัยของคุณ"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ข้อมูลอุปกรณ์ที่ได้รับการสนับสนุนทางการเงิน"</string>
-    <string name="financed_privacy_exposure_category" msgid="440169672717221900">"ประเภทข้อมูลที่ผู้ดูแลระบบอุปกรณ์ดูได้"</string>
-    <string name="financed_privacy_data" msgid="6931909690419946400">"ข้อมูลที่เชื่อมโยงกับบัญชีของคุณ เช่น อีเมลและปฏิทิน"</string>
-    <string name="financed_privacy_exposure_changes_category" msgid="1556943765530226434">"การเปลี่ยนแปลงที่ดำเนินการโดยผู้ดูแลระบบอุปกรณ์"</string>
-    <string name="financed_privacy_lock_device" msgid="8963934429658453147">"ผู้ดูแลระบบอุปกรณ์ล็อกอุปกรณ์นี้และรีเซ็ตรหัสผ่านได้"</string>
-    <string name="financed_privacy_wipe_device" msgid="5711746449385459844">"ผู้ดูแลระบบอุปกรณ์ลบข้อมูลทั้งหมดในอุปกรณ์ได้"</string>
-    <string name="financed_privacy_failed_password_wipe_device" msgid="8777230427603977667">"มีการป้อนรหัสผ่านผิดหลายครั้งก่อนที่ระบบจะลบข้อมูลในอุปกรณ์"</string>
-    <string name="financed_privacy_header" msgid="7215645340918406124">"ผู้ให้บริการเครดิตเปลี่ยนการตั้งค่าและติดตั้งซอฟต์แวร์ในอุปกรณ์นี้ได้\n\nโปรดติดต่อผู้ให้บริการเครดิตเพื่อดูข้อมูลเพิ่มเติม"</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"ผู้ให้บริการเครดิตจะเปลี่ยนการตั้งค่าและติดตั้งซอฟต์แวร์ในอุปกรณ์นี้ได้\n\nหากคุณไม่ชำระเงิน อุปกรณ์จะถูกล็อก\n\nโปรดติดต่อผู้ให้บริการเครดิตเพื่อสอบถามข้อมูลเพิ่มเติม"</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"หากผ่อนชำระอุปกรณ์อยู่ คุณจะดำเนินการดังต่อไปนี้ไม่ได้"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"ติดตั้งแอปจากภายนอก Play Store"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"รีบูตอุปกรณ์ให้อยู่ในโหมดปลอดภัย"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"เพิ่มผู้ใช้มากกว่า 1 คนในอุปกรณ์"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"เปลี่ยนวันที่ เวลา และเขตเวลา"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ใช้ตัวเลือกสำหรับนักพัฒนาซอฟต์แวร์"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ผู้ให้บริการเครดิตสามารถดำเนินการดังนี้"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"ดูหมายเลข IMEI"</string>
+    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"รีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น"</string>
+    <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"หากมีการล็อกอุปกรณ์ คุณจะใช้อุปกรณ์เพื่อดำเนินการดังต่อไปนี้ได้เท่านั้น"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"โทรหาหมายเลขฉุกเฉิน"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"ดูข้อมูลระบบ เช่น วันที่ เวลา สถานะเครือข่าย และแบตเตอรี่"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"เปิดหรือปิดอุปกรณ์"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"ดูการแจ้งเตือนและ SMS"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"เข้าถึงแอปที่ได้รับอนุญาตจากผู้ให้บริการเครดิต"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"เมื่อคุณชำระเงินเต็มจำนวนแล้ว"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"ระบบจะนำข้อจำกัดทั้งหมดออกจากอุปกรณ์"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"คุณถอนการติดตั้งแอปของผู้ให้บริการเครดิตได้"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">แอปกล้องถ่ายรูป</item>
       <item quantity="one">แอปกล้องถ่ายรูป</item>
@@ -5374,6 +5407,7 @@
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"ลบล้างฟีเจอร์บังคับใช้โหมดมืดให้เปิดตลอดเวลา"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"ความเป็นส่วนตัว"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"สิทธิ์ กิจกรรมในบัญชี ข้อมูลส่วนตัว"</string>
+    <string name="privacy_controls_title" msgid="1383047169455206604">"การควบคุม"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"นำออก"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"เก็บไว้"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"นำคำแนะนำนี้ออกไหม"</string>
@@ -5411,7 +5445,7 @@
     <string name="content_capture_summary" msgid="49720773699715531">"อนุญาตให้แอปส่งเนื้อหาไปยังระบบของ Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"บันทึกฮีพดัมพ์ของระบบ"</string>
     <string name="reboot_with_mte_title" msgid="9167242803901899693">"รีบูตโดยเปิดใช้ MTE"</string>
-    <string name="reboot_with_mte_message" msgid="1024288615073985828">"การดำเนินการนี้จะรีบูตและอนุญาตให้ทดสอบกับ Memory Tagging Extensions (MTE) ซึ่งอาจส่งผลเสียต่อประสิทธิภาพและความเสถียรของระบบ จะรีเซ็ตในการรีบูตครั้งถัดไป"</string>
+    <string name="reboot_with_mte_message" msgid="7675836625682561153">"ระบบจะรีบูตและอนุญาตให้ทดสอบกับ Memory Tagging Extension (MTE) MTE อาจส่งผลเสียต่อประสิทธิภาพและความเสถียรของระบบ จะรีเซ็ตในการรีบูตครั้งถัดไป"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"กำลังบันทึกฮีพดัมพ์ของระบบ"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"บันทึกฮีพดัมพ์ของระบบไม่ได้"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"บันทึกฮีพดัมพ์ของระบบโดยอัตโนมัติ"</string>
@@ -5456,11 +5490,13 @@
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"ไม่นาน"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"นาน"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"แสดง Wallet"</string>
-    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"อนุญาตให้เข้าถึง Wallet จากหน้าจอล็อกและการตั้งค่าด่วน"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"อนุญาตให้เข้าถึงกระเป๋าเงินจากหน้าจอล็อก"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"แสดงเครื่องมือสแกนคิวอาร์"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"อนุญาตให้เข้าถึงเครื่องมือสแกนคิวอาร์จากหน้าจอล็อก"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"แสดงระบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"เข้าถึงระบบควบคุมเมื่อล็อก"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ควบคุมจากอุปกรณ์ที่ล็อกอยู่"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"ควบคุมอุปกรณ์ภายนอกโดยไม่ต้องปลดล็อกโทรศัพท์หรือแท็บเล็ตหากได้รับอนุญาตจากแอประบบควบคุมอุปกรณ์"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"แสดงนาฬิกาแบบสองบรรทัดเมื่อเป็นไปได้"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"นาฬิกาแบบสองบรรทัด"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5588,8 +5624,9 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"ไม่มีหมายเลขโทรศัพท์"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"ตกลง"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"อนุญาตให้ใช้ 2G"</string>
-    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ปลอดภัยน้อย แต่อาจมีการปรับปรุงการเชื่อมต่อในบางพื้นที่ โดยจะอนุญาตเสมอสำหรับหมายเลขฉุกเฉิน"</string>
+    <string name="enable_2g_summary" msgid="2794534052372565914">"2G ปลอดภัยน้อยกว่าแต่อาจเชื่อมต่อดีกว่าในบางพื้นที่ โดยจะอนุญาตเสมอสำหรับหมายเลขฉุกเฉิน"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> กำหนดให้ต้องใช้งาน 2G ได้"</string>
+    <string name="app_info_all_services_label" msgid="3600929226735860271">"บริการทั้งหมด"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"แสดงการเข้าถึงคลิปบอร์ด"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"แสดงข้อความเมื่อแอปเข้าถึงข้อความ รูปภาพ หรือเนื้อหาอื่นๆ ที่คุณคัดลอก"</string>
     <string name="all_apps" msgid="3054120149509114789">"แอปทั้งหมด"</string>
@@ -5599,7 +5636,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"ปิดโหมดบนเครื่องบินเพื่อใช้ UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"สิทธิ์เข้าถึงกล้อง"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"สิทธิ์เข้าถึงไมโครโฟน"</string>
-    <string name="cam_toggle_description" msgid="9212762204005146404">"สำหรับแอปและบริการ"</string>
+    <string name="location_toggle_title" msgid="5229867700421750868">"การเข้าถึงตำแหน่ง"</string>
+    <string name="perm_toggle_description" msgid="5754629581767319022">"สำหรับแอปและบริการ"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"สำหรับแอปและบริการ หากปิดการตั้งค่านี้ ระบบอาจยังคงแชร์ข้อมูลไมโครโฟนเมื่อคุณโทรหาหมายเลขฉุกเฉิน"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"การตั้งค่าเกม"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"เปิดทางลัดสำหรับแดชบอร์ดเกมและอื่นๆ"</string>
@@ -5620,14 +5658,13 @@
     <string name="tare_revert" msgid="3855325741125236638">"เปลี่ยนกลับไปเป็นการตั้งค่าเริ่มต้น"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"เปลี่ยนการตั้งค่ากลับเป็นค่าเริ่มต้นแล้ว"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"สมดุลที่อิ่มตัวสูงสุด"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"การกระจายสูงสุด"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"สมดุลที่อิ่มตัวขั้นต่ำ"</string>
+    <string name="tare_balances" msgid="731881382594747961">"ยอดคงเหลือ"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"ขีดจำกัดการใช้งาน"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"ขีดจำกัดการใช้งานเริ่มต้น"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"ขีดจำกัดการใช้งานสูงสุด"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"ตัวปรับแต่ง"</string>
     <string name="tare_actions" msgid="4573323466443513639">"การดำเนินการ"</string>
     <string name="tare_rewards" msgid="602131401590928885">"รางวัล"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"ได้รับการยกเว้น"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"แอประบบแบบไม่มีส่วนหัว"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"แอปอื่น"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"กิจกรรมแรก"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"เห็นการแจ้งเตือนแล้ว"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"เห็นการแจ้งเตือนภายใน 15 นาที"</string>
@@ -5645,6 +5682,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"เริ่มงานสำคัญน้อยสุด"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"กำลังทำงานสำคัญน้อยสุด"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"โทษเนื่องจากงานหมดเวลา"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"ยอดคงเหลือขั้นต่ำเมื่อชาร์จเต็ม (ได้รับการยกเว้น)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"ยอดคงเหลือขั้นต่ำเมื่อชาร์จเต็ม (แอประบบแบบไม่มีส่วนหัว)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"ยอดคงเหลือขั้นต่ำเมื่อชาร์จเต็ม (แอปที่เหลือ)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"การชาร์จ"</item>
     <item msgid="658627268149681677">"Doze"</item>
@@ -5652,6 +5692,16 @@
     <item msgid="588427840913221601">"สถานะการประมวลผล"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"ยืนยัน"</string>
-    <string name="dream_preview_button_title" msgid="1498088020579092512">"แสดงตัวอย่างโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_preview_button_title" msgid="6637456541851795952">"แสดงตัวอย่าง"</string>
+    <string name="dream_picker_category" msgid="7726447836872744867">"เลือกโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_complications_toggle_title" msgid="4273232303027449163">"แสดงข้อมูลเพิ่มเติม"</string>
+    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"แสดงเวลา วันที่ และสภาพอากาศในโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_more_settings_category" msgid="3119192146760773748">"การตั้งค่าเพิ่มเติม"</string>
+    <string name="dream_setup_title" msgid="6356243920317789584">"ปรับแต่งโปรแกรมรักษาหน้าจอ"</string>
+    <string name="dream_setup_description" msgid="8881397422185278075">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อไม่ได้ใช้งานอุปกรณ์"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"ปรับแต่ง"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ต้องรีบูตเพื่อเปิดใช้การสนับสนุนแบบอิสระ"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ต้องรีบูตเพื่อบังคับให้จอแสดงผลสำรองใช้โหมดเดสก์ท็อป"</string>
+    <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"รีบูตเลย"</string>
+    <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"รีบูตภายหลัง"</string>
 </resources>
