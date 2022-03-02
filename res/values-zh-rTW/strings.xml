@@ -592,6 +592,12 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"加密保護平板電腦"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"加密保護手機"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"已加密"</string>
+    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"保護手機安全"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"設定螢幕鎖定以保護平板電腦"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"設定螢幕鎖定以保護裝置"</string>
@@ -1430,7 +1436,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"開啟這項功能會增加電池用量"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"粗體文字"</string>
     <string name="title_font_size" msgid="570613010306330622">"字型大小"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"縮小或放大文字"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"放大或縮小文字"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM 卡鎖定設定"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM 卡鎖定"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"關閉"</string>
@@ -3613,7 +3619,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"智慧, 調暗螢幕, 休眠, 電池, 逾時, 感知, 顯示, 螢幕, 閒置"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"相機, 智慧, 自動旋轉, 旋轉, 翻轉, 直向, 橫向, 方向, 垂直, 水平"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"升級, android"</string>
-    <string name="keywords_zen_mode_settings" msgid="138808997469900639">"dnd, 時間表, 通知, 封鎖, 靜音, 震動, 休眠, 工作, 專注, 音效, 忽略, 天, 週間, 週末, 週間晚上, 活動, 零打擾"</string>
+    <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"零打擾, 時間表, 通知, 封鎖, 靜音, 震動, 休眠, 工作, 焦點, 音效, 忽略, 天, 週間, 週末, 週間晚上, 活動"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"螢幕, 鎖定時間, 自動關閉, 鎖定螢幕"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"記憶體, 快取, 資料, 刪除, 清除, 釋出, 空間"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"已連線, 裝置, 耳罩式耳機, 耳機, 喇叭, 無線, 配對, 耳塞式耳機, 音樂, 媒體"</string>
@@ -3641,6 +3647,7 @@
     <string name="keywords_always_show_time_info" msgid="9120590185763264666">"持續待機螢幕"</string>
     <string name="default_sound" msgid="6604374495015245195">"預設音效"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"鈴聲和通知音量為 <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、震動、零打擾"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"鈴聲已設為震動"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"鈴聲已設為靜音"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"鈴聲和通知音量為 80%"</string>
@@ -3667,6 +3674,8 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電音效和震動"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"座架插入音效"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"觸控音效"</string>
+    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
+    <skip />
     <string name="dock_audio_media_title" msgid="6474579339356398330">"座架喇叭播放音效"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"所有音訊"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"僅限媒體音訊"</string>
@@ -3676,8 +3685,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"啟動音效"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"即時字幕"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"自動產生媒體字幕"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{無}=1{已設定 1 個時間表}other{已設定 # 個時間表}}"</string>
+    <string name="zen_mode_settings_title" msgid="682676757791334259">"零打擾"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"僅接收重要聯絡人和應用程式的通知"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"降低干擾"</string>
+    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"開啟「零打擾」模式"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"鬧鐘和媒體音效例外"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"排程"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"刪除排程"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"刪除"</string>
@@ -3686,18 +3699,27 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"排程"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"排程"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"在特定時間將手機設為靜音"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"設定「零打擾」規則"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"排程"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"使用排程"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>：<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"允許發出音效的干擾"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"允許視覺信號"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"隱藏通知的顯示方式"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"開啟「零打擾」模式時"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"不發出通知音效"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"通知會顯示在畫面上"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"手機收到通知時不會發出音效或震動。"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"不顯示通知或不發出通知音效"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"通知不會顯示也不會發出音效"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"你的手機將不會顯示現有或新的訊息，也不會因此震動或發出音效。請注意，系統仍會顯示與手機活動和狀態相關的重要通知。\n\n關閉「零打擾」模式後，從螢幕頂端向下滑動即可查看錯過的通知。"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"自訂"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"啟用自訂設定"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"移除自訂設定"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"不發出通知音效"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"隱藏部分通知"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"不顯示通知或不發出通知音效"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"自訂限制"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"螢幕開啟時"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"螢幕關閉時"</string>
@@ -3720,26 +3742,45 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"其他選項"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"新增"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"開啟"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"立即開啟"</string>
+    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"立即關閉"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"零打擾模式結束時間：<xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"零打擾模式會保持開啟，直到你關閉為止"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"時間表 (<xliff:g id="RULE_NAME">%s</xliff:g>) 已將「零打擾」模式自動開啟"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"應用程式 (<xliff:g id="APP_NAME">%s</xliff:g>) 已將零打擾模式自動開啟"</string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"已針對「<xliff:g id="RULE_NAMES">%s</xliff:g>」規則開啟設有自訂設定的「零打擾」模式。"</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"查看自訂設定"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"僅限優先通知"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>。<xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"已開啟 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"開啟"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"每次都詢問"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"直到你關閉為止"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 小時}other{# 小時}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 分鐘}other{# 分鐘}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{已關閉}=1{已關閉 / 系統可以自動啟用 1 個時間表}other{已關閉 / 系統可以自動啟用 # 個時間表}}"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"「零打擾」模式的例外項目"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"聯絡人"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"應用程式"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"鬧鐘和其他干擾"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"排程"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"從快速設定開啟時的持續時間長度"</string>
+    <string name="zen_settings_general" msgid="2704932194620124153">"一般"</string>
+    <string name="zen_sound_footer" msgid="4090291351903631977">"開啟「零打擾」模式時，系統會將音效和震動設為靜音 (你在上方允許的項目除外)。"</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"自訂設定"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"查看時間表"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"我知道了"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"通知"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"時間長度"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"訊息、活動和提醒"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"開啟「零打擾」模式時，系統會將訊息、提醒和活動設為靜音 (你在上方允許的項目除外)。你可以調整訊息設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"完成"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"設定"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"不顯示通知或不發出通知音效"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"不發出通知音效"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"你將不會看到或聽到通知。允許已加星號的聯絡人和重複來電者的來電。"</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(目前設定)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"要變更「零打擾」模式的通知設定嗎？"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"工作資料夾音效"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"使用個人資料夾音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"使用與個人資料夾相同的音效"</string>
@@ -3879,7 +3920,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"對話已移除"</string>
     <string name="clear" msgid="5092178335409471100">"清除"</string>
     <string name="important_bubble" msgid="7911698275408390846">"以泡泡形式顯示優先對話"</string>
-    <string name="important_conversation_behavior_summary" msgid="3993970229878313574">"重要對話會顯示在下拉式通知欄的頂端。你也可以設定讓系統在「重要」模式開啟時以對話框形式顯示通知。"</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"優先對話會顯示在下拉式通知欄的頂端。你也可以設定讓優先對話以泡泡的形式顯示，並允許系統在「零打擾」模式下顯示這類泡泡。"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"這裡會顯示優先對話和已變更的對話"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"你標示為優先對話或做出其他變更的對話會顯示在這裡。\n\n如何變更對話設定：\n從螢幕頂端向下滑動開啟下拉式通知欄，然後按住要變更的對話。"</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"無聲顯示並最小化"</string>
@@ -3930,13 +3971,17 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"最近沒有已安裝的應用程式要求「通知」存取權。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知存取權"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要允許<xliff:g id="SERVICE">%1$s</xliff:g>存取通知嗎？"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，加強型通知功能已取代 Android 自動調整通知。這項功能可以顯示建議的操作和回覆內容，也可以幫你整理通知訊息。\n\n加強型通知功能可存取通知內容，包括聯絡人名稱和訊息內文等個人資訊。此外，這項功能還能關閉或回覆通知，例如接聽來電及控管「零打擾」功能。"</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要授予「<xliff:g id="SERVICE">%1$s</xliff:g>」通知存取權嗎？"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可讀取所有通知 (包括聯絡人姓名、相片和你收到的訊息文字等個人資訊)，也可延後或關閉通知或操作通知中的按鈕 (包括接聽電話)。\n\n此外，這個應用程式還可開啟或關閉「零打擾」功能及變更相關設定。"</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」將可執行以下操作："</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"讀取通知"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"可讀取你的通知，包括聯絡人、訊息和相片等個人資訊。"</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"回覆訊息"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"可回覆訊息及操作通知中的按鈕，包括延後或關閉通知以及接聽電話。"</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"變更設定"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"可開啟或關閉「零打擾」功能及變更相關設定。"</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果你停用「<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>」的通知存取權，「零打擾」模式的存取權可能也會一併遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"關閉"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"允許的通知類型"</string>
@@ -3992,6 +4037,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"如要連結這兩個應用程式，請在工作資料夾中安裝「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"如要連結這兩個應用程式，請在個人資料夾中安裝「<xliff:g id="NAME">%1$s</xliff:g>」"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"輕觸這裡以下載這個應用程式"</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"零打擾存取權"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"允許「零打擾」模式"</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"最近沒有已安裝的應用程式要求「零打擾」存取權"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"正在載入應用程式…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android 已根據你的要求啟用封鎖設定，不讓這個應用程式的通知顯示在這個裝置上"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android 已根據你的要求啟用封鎖設定，不讓這個類別的通知顯示在這個裝置上"</string>
@@ -4022,6 +4070,8 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"一律不在通知欄或週邊裝置上顯示通知"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"允許使用通知圓點"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"顯示通知圓點"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"忽略「零打擾」模式設定"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"允許系統在「零打擾」模式開啟時繼續發出這些通知"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"螢幕鎖定"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"已封鎖"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"優先通知"</string>
@@ -4038,6 +4088,7 @@
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"排程名稱"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"輸入排程名稱"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"這個排程名稱已在使用中"</string>
+    <string name="zen_mode_add_rule" msgid="4217731747959400770">"新增更多"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"新增活動排程"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"新增時間排程"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"刪除排程"</string>
@@ -4045,8 +4096,13 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"要刪除「<xliff:g id="RULE">%1$s</xliff:g>」規則嗎？"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"刪除"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"不明"</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"目前無法變更這些設定。應用程式 (<xliff:g id="APP_NAME">%1$s</xliff:g>) 已依自訂行為將零打擾模式自動開啟。"</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"目前無法變更這些設定。應用程式已依自訂行為將零打擾模式自動開啟。"</string>
+    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"目前無法變更這些設定。使用者已依自訂行為將零打擾模式手動開啟。"</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"時間"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"可在指定時間開啟「零打擾」設定的自動規則集"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"活動"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"可在指定活動期間開啟「零打擾」設定的自動規則集"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"在以下日曆的活動期間："</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"在<xliff:g id="CALENDAR">%1$s</xliff:g>的活動期間"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"任何日曆"</string>
@@ -4062,6 +4118,9 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"星期幾"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"無"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"每天"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"鬧鐘可忽視結束時間"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"鬧鐘響起時，系統會自動停用排程"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"「零打擾」模式的行為"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"使用預設設定"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"為這項排程建立自訂設定"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"用於「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」"</string>
@@ -4075,9 +4134,11 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"重要對話"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"無"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{無}=1{1 個對話}other{# 個對話}}"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"例外的對象"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"通話"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"來電"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"例外的通話"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"為了確保你在接到允許的來電時會聽到音效，請確認裝置已設為響鈴"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」啟用時封鎖來電。你可以調整設定，讓好友、家人或其他聯絡人能聯絡你。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
@@ -4086,6 +4147,7 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"訊息"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"訊息"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"訊息"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"例外的訊息"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"為了確保你在收到允許的訊息時會聽到音效，請確認裝置已設為響鈴"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"系統會在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」排程進行時封鎖訊息。你可以調整設定，讓好友、家人或其他聯絡人可以聯絡你。"</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"你會收到所有訊息的通知"</string>
@@ -4095,6 +4157,9 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"聯絡人"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"已加星號的聯絡人"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"某些人或對話"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"已加星號的聯絡人和重複來電者"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"聯絡人和重複來電者"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"僅限重複來電者"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"無"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"無"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"鬧鐘"</string>
@@ -4118,15 +4183,25 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"活動"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"活動"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"允許應用程式覆寫"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="8551235541071796578">"沒有應用程式能發出通知"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"例外的應用程式"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"選取更多應用程式"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"未選取任何應用程式"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"沒有應用程式例外"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"新增應用程式"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"所有通知"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"部分通知"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"即使未將應用程式設為例外，指定的使用者仍可與你聯絡"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{沒有應用程式例外}=1{「{app_1}」例外}=2{「{app_1}」和「{app_2}」例外}=3{「{app_1}」、「{app_2}」和「{app_3}」例外}other{「{app_1}」、「{app_2}」和另外 # 個應用程式例外}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"應用程式"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"所有通知"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"部分通知"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"例外的通知"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"允許所有通知"</string>
-    <string name="zen_mode_sounds_none" msgid="6843840573494370155">"無"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{沒有音效例外}=1{{sound_category_1}例外}=2{{sound_category_1}和{sound_category_2}例外}=3{{sound_category_1}、{sound_category_2}和{sound_category_3}例外}other{{sound_category_1}、{sound_category_2}和另外 # 種類別例外}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"沒有音效例外"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"沒有人例外"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"某些人例外"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"所有人都例外"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"重複來電者"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"允許顯示重複來電者"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"任何人"</string>
@@ -4157,7 +4232,10 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"變更為僅允許鬧鐘模式，結束時間為 <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"變更為一律允許干擾模式"</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"螢幕開啟時"</string>
+    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"允許在「零打擾」模式中設為靜音的通知可在畫面上彈出通知並顯示狀態列圖示"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"螢幕關閉時"</string>
+    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"允許「零打擾」模式設為靜音的通知開啟螢幕及閃爍燈光"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"允許「零打擾」模式設為靜音的通知開啟螢幕"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"通知設定"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"警告"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"確定"</string>
@@ -4255,6 +4333,7 @@
     <string name="notifications_silenced" msgid="2673798575466545098">"已設為靜音"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"螢幕鎖定時不顯示敏感內容"</string>
     <string name="notifications_hidden" msgid="2415415452913806859">"螢幕鎖定時一律不顯示通知"</string>
+    <string name="notifications_priority" msgid="9068574646650663837">"已覆寫「零打擾」設定"</string>
     <string name="notifications_summary_divider" msgid="6877149909390030983">"/"</string>
     <string name="notification_summary_level" msgid="4074326972839105652">"等級 %d"</string>
     <string name="notification_summary_channel" msgid="8459033623057872803">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
@@ -4293,6 +4372,7 @@
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"類別：緊急重要性"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"類別：低重要性"</string>
     <string name="filter_notif_blocked_channels" msgid="1131444963543380495">"類別：已關閉"</string>
+    <string name="filter_notif_dnd_channels" msgid="13445325087914932">"類別：覆寫「零打擾」"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"進階"</string>
     <string name="configure_apps" msgid="5468359087126598115">"設定應用程式"</string>
     <string name="unknown_app" msgid="2027248925719898714">"不明的應用程式"</string>
@@ -4448,7 +4528,11 @@
     <string name="running_frequency" msgid="7260225121706316639">"頻率"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"最高用量"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"未使用任何數據"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"要允許 <xliff:g id="APP">%1$s</xliff:g> 存取「零打擾」模式嗎？"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"應用程式將可開啟/關閉「零打擾」模式及變更相關設定。"</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"通知存取權已啟用，因此必須保持啟用狀態"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"要撤銷「<xliff:g id="APP">%1$s</xliff:g>」對零打擾模式的存取權嗎？"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"系統將移除這個應用程式建立的所有「零打擾」規則。"</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"不要最佳化"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"最佳化"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"這可能會加快電力耗損速度。系統將不再限制應用程式在背景耗用電力。"</string>
@@ -4495,7 +4579,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"按兩下電源按鈕即可開啟相機"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"不必將螢幕解鎖就能快速開啟相機"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"顯示大小"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"縮小或放大畫面上的項目"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"放大或縮小畫面上的任何項目"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"顯示密度、畫面縮放、縮放、縮放比例"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"縮小或放大畫面上的項目。縮放完成後，畫面上某些應用程式的位置可能會有變動。"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"預覽"</string>
@@ -4556,6 +4640,7 @@
     <string name="condition_hotspot_title" msgid="7903918338790641071">"無線基地台已啟用"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"飛航模式已開啟"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"無法連上網路"</string>
+    <string name="condition_zen_title" msgid="7674761111934567490">"已開啟零打擾模式"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"手機已設為靜音"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"允許例外"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"省電模式已開啟"</string>
@@ -5034,6 +5119,7 @@
     <string name="storage_movies_tv" msgid="7897612625450668593">"影視應用程式"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"電信業者佈建資訊"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"觸發電信業者佈建程序"</string>
+    <string name="zen_suggestion_title" msgid="4555260320474465668">"更新「零打擾」模式"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"暫停通知以保持專注"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"無法使用此功能"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"這項功能會降低你的手機速度，因此已由系統停用"</string>
@@ -5407,12 +5493,13 @@
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"顯示電子錢包"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_summary (3984851951621168573) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"允許從螢幕鎖定畫面使用數位錢包"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"顯示 QR 圖碼掃描器"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"允許從螢幕鎖定畫面使用 QR 圖碼掃描器"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"顯示裝置控制"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"在鎖定畫面上顯示控制項"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"透過未解鎖的裝置控制"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"只要裝置控制應用程式允許，不必解鎖手機或平板電腦也能控制外部裝置"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"顯示雙行時鐘 (如果可用的話)"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"雙行時鐘"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5574,14 +5661,13 @@
     <string name="tare_revert" msgid="3855325741125236638">"還原為預設設定"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"已還原為預設設定。"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"裝置充飽電時的最大可用電量"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"最大循環"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"裝置充飽電時的最低可用電量"</string>
+    <string name="tare_balances" msgid="731881382594747961">"可用電量"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"消耗量限制"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"初始消耗量上限"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"消耗量上限"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"修飾符"</string>
     <string name="tare_actions" msgid="4573323466443513639">"動作"</string>
     <string name="tare_rewards" msgid="602131401590928885">"獎勵"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"例外"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"無使用者介面的系統應用程式"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"其他應用程式"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"最上層顯示的活動"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"已查看通知"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 分鐘內看過通知"</string>
@@ -5599,6 +5685,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"啟動最低優先順序工作"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"正在執行最低優先順序工作"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"工作逾時懲罰"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"裝置充飽電時的最低可用電量 (例外應用程式)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"裝置充飽電時的最低可用電量 (無使用者介面的系統應用程式)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"裝置充飽電時的最低可用電量 (其他應用程式)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"充電"</item>
     <item msgid="658627268149681677">"打盹"</item>
@@ -5618,12 +5707,8 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"必須重新啟動才能在次要螢幕上強制執行桌面模式。"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"立即重新啟動"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"稍後重新啟動"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (6183752635162309599) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (4125762902654875180) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (8021583493584244700) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (2093665685644696866) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"空間音效"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"聲音層次豐富，讓你有身歷其境的感覺。這項功能僅支援部分媒體。"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"讓音效更真實"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"調整音效位置，讓聲音聽起來更自然。"</string>
 </resources>

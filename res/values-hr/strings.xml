@@ -596,6 +596,12 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Šifriraj tablet"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Šifriraj telefon"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Šifrirano"</string>
+    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Zaštitite telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Postavite zaključavanje zaslona radi zaštite tableta"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Postavite zaključavanje zaslona radi zaštite uređaja"</string>
@@ -1450,7 +1456,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Povećana potrošnja baterije"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Podebljani tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Veličina fonta"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"Smanjite ili povećajte tekst"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Povećajte ili smanjite tekst"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Postavke zaključavanja SIM kartice"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Zaključavanje SIM kartice"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Isključeno"</string>
@@ -3658,7 +3664,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"pametno, zatamnjeni zaslon, mirovanje, baterija, vrijeme čekanja, pozornost, prikaz, zaslon, neaktivnost"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"kamera, pametno, automatski zakrenuti, automatsko zakretanje, zakrenuti, okrenuti, rotacija, portret, pejzaž, usmjerenje, okomito, vodoravno"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"nadogradnja, android"</string>
-    <string name="keywords_zen_mode_settings" msgid="138808997469900639">"dnd, raspored, obavijesti, blokiranje, tišina, vibracija, mirovanje, rad, fokus, zvuk, utišano, dan, dan u tjednu, vikend, noć tijekom tjedna, događaj, ne ometaj"</string>
+    <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"dnd, raspored, obavijesti, blokiranje, tišina, vibracija, mirovanje, rad, fokus, zvuk, utišano, dan, dan u tjednu, vikend, noć tijekom tjedna, događaj"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"zaslon, vrijeme zaključavanja, vrijeme čekanja, zaključan zaslon"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memorija, predmemorija, podaci, brisati, čistiti, slobodno, prostor"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"povezano, uređaj, slušalice, slušalice s mikrofonom, zvučnik, bežično, uparivanje, slušalice za umetanje u uho, glazba, medij"</string>
@@ -3686,6 +3692,7 @@
     <string name="keywords_always_show_time_info" msgid="9120590185763264666">"uvijek uključen zaslon"</string>
     <string name="default_sound" msgid="6604374495015245195">"Zadani zvuk"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Glasnoća zvona i obavijesti na <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Glasnoća, vibracija, Ne uznemiravaj"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Softver zvona postavljen na vibraciju"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Softver zvona postavljen na nečujno"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Glasnoća zvona i obavijesti na 80%"</string>
@@ -3712,6 +3719,8 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvukovi i vibracija punjenja"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Zvukovi priključivanja"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Zvukovi dodirivanja"</string>
+    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
+    <skip />
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Priključna stanica reproducira"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Sve zvukove"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Samo medijske zvukove"</string>
@@ -3721,8 +3730,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Uključi zvukove"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Automatski titlovi"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatski titlovi za medije"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nijedan}=1{Postavljen je jedan raspored}one{Postavljen je # raspored}few{Postavljena su # rasporeda}other{Postavljeno je # rasporeda}}"</string>
+    <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne uznemiravaj"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primajte obavijesti samo od važnih osoba i aplikacija"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Ograničavanje prekida"</string>
+    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Uključite opciju Ne uznemiravaj."</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Zvukovi alarma i medija mogu prekidati"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Rasporedi"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Brisanje rasporeda"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Brisanje"</string>
@@ -3731,18 +3744,27 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Raspored"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Raspored"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Utišaj telefon u određeno vrijeme"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Postavite pravila za način Ne uznemiravaj"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Raspored"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Koristi raspored"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Dopusti ometanja koja proizvode zvuk"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Blokiranje vizualnih ometanja"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Dopusti vizualne signale"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Opcije prikaza za skrivene obavijesti"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kad je uključena značajka Ne uznemiravaj"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Bez zvuka obavijesti"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Vidjet ćete obavijesti na zaslonu"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Kada obavijesti stignu, telefon neće davati zvučne signale niti vibrirati."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Bez vizualnih i zvučnih signala obavijesti"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Obavijesti se neće prikazivati niti će se čuti zvučni signali"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefon neće prikazivati nove ili postojeće obavijesti niti će za njih vibrirati ili zvoniti. No ključne obavijesti koje se odnose na aktivnost i status telefona i dalje će se prikazivati.\n\nKada isključite način Ne uznemiravaj, propuštene obavijesti pronaći ćete tako da prstom prijeđete od vrha zaslona prema dolje."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Prilagođeno"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Omogući prilagođenu postavku"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Ukloni prilagođenu postavku"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Bez zvuka obavijesti"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Djelomično skriveno"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Bez vizualnih i zvučnih signala obavijesti"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Prilagođena ograničenja"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Kad je zaslon uključen"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Kad je zaslon isključen"</string>
@@ -3765,26 +3787,45 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"ostale opcije"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Dodaj"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Uključi"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Uključi sada"</string>
+    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Odmah isključi"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"Način Ne uznemiravaj uključen je do <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"Način Ne uznemiravaj ostat će uključen dok ga ne isključite"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Raspored <xliff:g id="RULE_NAME">%s</xliff:g> automatski je uključio Ne uznemiravaj"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Način Ne uznemiravaj automatski je uključila aplikacija (<xliff:g id="APP_NAME">%s</xliff:g>)"</string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Način Ne uznemiravaj uključen je za <xliff:g id="RULE_NAMES">%s</xliff:g> uz prilagođene postavke."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Pregledajte prilagođene postavke"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Samo prioritetno"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Uključeno/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Uključeno"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Pitaj svaki put"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Dok ne isključite"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 sat}one{# sat}few{# sata}other{# sati}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minuta}one{# minuta}few{# minute}other{# minuta}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Isključeno}=1{Isključeno/jedan raspored može se uključiti automatski}one{Isključeno/# raspored može se uključiti automatski}few{Isključeno/# rasporeda mogu se uključiti automatski}other{Isključeno/# rasporeda može se uključiti automatski}}"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Što može prekidati značajku Ne uznemiravaj"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Osobe"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Aplikacije"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmi i druga ometanja"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Rasporedi"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Trajanje za Brze postavke"</string>
+    <string name="zen_settings_general" msgid="2704932194620124153">"Općenito"</string>
+    <string name="zen_sound_footer" msgid="4090291351903631977">"Kada je način Ne uznemiravaj uključen, zvučni signali i vibriranje bit će isključeni, osim za prethodno navedene stavke koje dopustite."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Prilagođene postavke"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Pregledajte raspored"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Shvaćam"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Obavijesti"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Trajanje"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Poruke, događaji i podsjetnici"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Kada je način Ne uznemiravaj uključen, zanemarit će se poruke, podsjetnici i događaji, osim prethodno navedenih stavki koje dopustite. Možete prilagoditi postavke poruka da bi vaša obitelj, prijatelji ili drugi kontakti mogli stupiti u kontakt s vama."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Gotovo"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Postavke"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Bez vizualnih i zvučnih signala obavijesti"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Bez zvuka obavijesti"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Obavijesti se neće prikazivati niti će se čuti zvučni signali. Dopušteni su pozivi kontakata označenih zvjezdicom i ponovnih pozivatelja."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Trenutačna postavka)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Želite li promijeniti postavke obavijesti za način Ne uznemiravaj?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Zvukovi poslovnog profila"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Upotreba zvukova osobnog profila"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Upotrebljavajte iste zvukove kao i vaš osobni profil"</string>
@@ -3925,7 +3966,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"Razgovor uklonjen"</string>
     <string name="clear" msgid="5092178335409471100">"Izbriši"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Prikaži prioritetne razgovore u oblačićima"</string>
-    <string name="important_conversation_behavior_summary" msgid="3993970229878313574">"Prioritetni razgovori prikazuju se pri vrhu zaslona obavijesti. Možete postaviti i da se prikazuju u oblačićima dok je uključen način rada prioritetnih obavijesti."</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioritetni razgovori prikazuju se pri vrhu zaslona obavijesti. Možete postaviti i da se prikazuju u oblačićima te vas ometaju dok je uključena značajka Ne uznemiravaj."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Ovdje će se prikazivati prioritetni i izmijenjeni razgovori"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Ovdje će se prikazivati razgovori označeni kao prioritetni ili razgovori u koje ste unijeli bilo kakve izmjene. \n\nDa biste promijenili postavke razgovora: \nprijeđite prstom od vrha zaslona prema dolje kako bi se otvorio zaslon obavijesti, a zatim dodirnite razgovor i zadržite pritisak."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Prikaži tiho i minimiziraj"</string>
@@ -3979,13 +4020,17 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nijedna instalirana aplikacija nije zatražila pristup obavijestima."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Dopusti pristup obavijestima"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Želite li usluzi <xliff:g id="SERVICE">%1$s</xliff:g> dopustiti da pristupa obavijestima?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"U Androidu 12 poboljšane obavijesti zamjenjuju prilagodljive obavijesti za Android. Ta značajka prikazuje predložene radnje i odgovore te organizira vaše obavijesti. \n\nPoboljšane obavijesti mogu pristupiti sadržaju obavijesti, uključujući osobne podatke kao što su imena kontakata i poruke. Ta značajka može i odbacivati obavijesti ili poduzimati radnje u vezi s njima, na primjer može odgovarati na telefonske pozive i upravljati značajkom Ne uznemiravaj."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Želite li usluzi <xliff:g id="SERVICE">%1$s</xliff:g> dopustiti da pristupa obavijestima?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"Aplikacija <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> moći će čitati sve obavijesti, uključujući osobne podatke, na primjer imena kontakata, fotografije i tekstove poruka koje primate. Aplikacija će moći i odgoditi ili odbaciti obavijesti ili poduzeti radnje povezane s gumbima u obavijestima, uključujući odgovaranje na telefonske pozive. \n\nAplikacija će također moći uključiti ili isključiti značajku Ne uznemiravaj i promijeniti povezane postavke."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"Aplikacija <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> moći će sljedeće:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Čitanje vaših poruka"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Može čitati vaše obavijesti, uključujući osobne podatke kao što su kontakti, poruke i fotografije."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Odgovaranje na poruke"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Može odgovarati na poruke i poduzeti radnje povezane s gumbima u obavijestima, uključujući odgađanje alarma, odbacivanje obavijesti i odgovaranje na pozive."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Promjena postavki"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Može uključiti ili isključiti značajku Ne uznemiravaj i promijeniti povezane postavke."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ako isključite pristup obavijestima za <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, možda će se isključiti i pristup značajci Ne uznemiravaj."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Isključi"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Odustani"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Dopuštene vrste obavijesti"</string>
@@ -4042,6 +4087,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Da biste povezali te aplikacije, instalirajte aplikaciju <xliff:g id="NAME">%1$s</xliff:g> na svoj poslovni profil"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Da biste povezali te aplikacije, instalirajte aplikaciju <xliff:g id="NAME">%1$s</xliff:g> na svoj osobni profil"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Dodirnite da biste preuzeli aplikaciju"</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"Pristup opciji Ne uznemiravaj"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Dopusti Ne uznemiravaj"</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"Nijedna instalirana aplikacija nije zatražila pristup opciji Ne uznemiravaj"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Učitavanje aplikacija…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android na vaš zahtjev blokira prikazivanje obavijesti te aplikacije na ovom uređaju"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android na vaš zahtjev blokira prikazivanje te kategorije obavijesti na ovom uređaju"</string>
@@ -4075,6 +4123,8 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"Nikad ne prikazuj obavijesti na zaslonu obavijesti ili na perifernim uređajima"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Dopusti točku obavijesti"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Prikaži točku obavijesti"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Nadjačaj Ne uznemiravaj"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Dopusti da se obavijesti nastave prikazivati kada je uključen način rada Ne uznemiravaj"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Zaključan zaslon"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Blokirano"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Prioritet"</string>
@@ -4091,6 +4141,7 @@
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Naziv rasporeda"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"Unesite naziv rasporeda"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"Naziv rasporeda već se upotrebljava"</string>
+    <string name="zen_mode_add_rule" msgid="4217731747959400770">"Dodajte više"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Dodajte raspored događaja"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Dodajte vremenski raspored"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Izbriši raspored"</string>
@@ -4098,8 +4149,13 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Želite li izbrisati pravilo \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Izbriši"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Nepoznato"</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Te se postavke trenutačno ne mogu promijeniti. Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> automatski je uključila način Ne uznemiravaj s prilagođenim ponašanjem."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"Te se postavke trenutačno ne mogu promijeniti. Neka je aplikacija automatski uključila način Ne uznemiravaj s prilagođenim ponašanjem."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"Te se postavke trenutačno ne mogu promijeniti. Način Ne uznemiravaj ručno je uključen s prilagođenim ponašanjem."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"Vrijeme"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"Automatsko pravilo postavljeno je na uključivanje opcije \"Ne uznemiravaj\" tijekom navedenih vremena"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"Događaj"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"Automatsko pravilo postavljeno je na uključivanje opcije \"Ne uznemiravaj\" tijekom navedenih događaja"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"Tijekom događaja za"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"Tijekom događaja za <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"bilo koji kalendar"</string>
@@ -4115,6 +4171,9 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Dani"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ništa"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Svaki dan"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarm može nadjačati vrijeme završetka"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Raspored se isključuje kad se oglasi alarm"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Način Ne uznemiravaj"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Upotrijebi zadane postavke"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Izradi prilagođene postavke za ovaj raspored"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Za \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
@@ -4128,9 +4187,11 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioritetni razgovori"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ništa"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nijedan}=1{1 razgovor}one{# razgovor}few{# razgovora}other{# razgovora}}"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Tko može prekidati"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Pozivi"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Pozivi"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"pozivi"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Pozivi koji mogu prekidati"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Da biste bili sigurni da će se dopušteni pozivi čuti, provjerite je li uređaj postavljen na zvonjenje"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Za raspored \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" dolazni su pozivi blokirani. Možete prilagoditi postavke da bi vaša obitelj, prijatelji ili drugi kontakti mogli stupiti u kontakt s vama."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakti označeni zvjezdicom"</string>
@@ -4139,6 +4200,7 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"Poruke"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"poruke"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Poruke"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"Poruke koje mogu prekidati"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Da biste bili sigurni da će se dopuštene poruke čuti, provjerite je li uređaj postavljen na zvonjenje"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Za raspored \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\" dolazne su poruke blokirane. Možete prilagoditi postavke da bi vaša obitelj, prijatelji ili drugi kontakti mogli stupiti u kontakt s vama."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Dostupni ste za sve poruke"</string>
@@ -4148,6 +4210,9 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakti"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Kontakti označeni zvjezdicom"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"Neke osobe ili razgovori"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Kontakti označeni zvjezdicom i ponovni pozivatelji"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Kontakti i ponovni pozivatelji"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Samo ponovni pozivatelji"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Nitko"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Ništa"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmi"</string>
@@ -4171,15 +4236,25 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"događaji"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Događaji"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dopusti aplikacijama da nadjačaju"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="8551235541071796578">"Nijedna vas aplikacija ne može obavijestiti"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Aplikacije koje mogu prekidati"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Odaberite više aplikacija"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Aplikacije nisu odabrane"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Nijedna aplikacija ne može prekidati"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Dodajte aplikacije"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Sve obavijesti"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Neke obavijesti"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Odabrane osobe i dalje vam se mogu obratiti, čak i ako aplikacijama ne dopustite da prekidaju"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Nijedna aplikacija ne može prekidati}=1{{app_1} može prekidati}=2{{app_1} i {app_2} mogu prekidati}=3{{app_1}, {app_2} i {app_3} mogu prekidati}one{{app_1}, {app_2} i još # aplikacija mogu prekidati}few{{app_1}, {app_2} i još # aplikacije mogu prekidati}other{{app_1}, {app_2} i još # aplikacija mogu prekidati}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Aplikacije"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Sve obavijesti"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Neke obavijesti"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Obavijesti koje mogu prekidati"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Dopusti sve obavijesti"</string>
-    <string name="zen_mode_sounds_none" msgid="6843840573494370155">"Nema"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Ništa ne može prekidati}=1{{sound_category_1} može prekidati}=2{{sound_category_1} i {sound_category_2} mogu prekidati}=3{{sound_category_1}, {sound_category_2} i {sound_category_3} mogu prekidati}one{{sound_category_1}, {sound_category_2} i još # zvuk mogu prekidati}few{{sound_category_1}, {sound_category_2} i još # zvuka mogu prekidati}other{{sound_category_1}, {sound_category_2} i još # zvukova mogu prekidati}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ništa ne može prekidati"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"Nitko ne može prekidati"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Neke osobe mogu prekidati"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Sve osobe mogu prekidati"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Uzastopni pozivi"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Dopusti ponovne pozivatelje"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"svi"</string>
@@ -4212,7 +4287,10 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Promijeni na \"Samo alarmi\" do <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Promijeni na \"Uvijek prekidaj\""</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"Kada je zaslon uključen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"Obavijesti utišane opcijom Ne uznemiravaj pojavit će se na zaslonu i prikazati ikonu trake statusa"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"Kada je zaslon isključen"</string>
+    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"Obavijesti utišane opcijom Ne uznemiravaj uključit će zaslon i aktivirati svjetlosni signal"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"Obavijesti utišane opcijom Ne uznemiravaj uključit će zaslon"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"Postavke obavijesti"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Upozorenje"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"U redu"</string>
@@ -4313,6 +4391,7 @@
     <string name="notifications_silenced" msgid="2673798575466545098">"Onemogućeno"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"Osjetljiv sadržaj nije na zaključanom zaslonu"</string>
     <string name="notifications_hidden" msgid="2415415452913806859">"Nije na zaključanom zaslonu"</string>
+    <string name="notifications_priority" msgid="9068574646650663837">"Nadjačana je opcija Ne uznemiravaj"</string>
     <string name="notifications_summary_divider" msgid="6877149909390030983">" / "</string>
     <string name="notification_summary_level" msgid="4074326972839105652">"Razina %d"</string>
     <string name="notification_summary_channel" msgid="8459033623057872803">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
@@ -4356,6 +4435,7 @@
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Kategorije: hitno"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"Kategorije: mala važnost"</string>
     <string name="filter_notif_blocked_channels" msgid="1131444963543380495">"Kategorije: isključene"</string>
+    <string name="filter_notif_dnd_channels" msgid="13445325087914932">"Kat.: nadjačav. način Ne uzn."</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Dodatne postavke"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Konfiguranje aplikacija"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Nepoznata aplikacija"</string>
@@ -4516,7 +4596,11 @@
     <string name="running_frequency" msgid="7260225121706316639">"Učestalost"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimalna upotreba"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nema upotrebe podataka"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Želite li dopustiti aplikaciji <xliff:g id="APP">%1$s</xliff:g> pristup opciji Ne uznemiravaj?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Aplikacija će moći uključiti ili isključiti opciju Ne uznemiravaj i mijenjati povezane postavke."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Mora ostati uključeno jer je pristup obavijestima uključen"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Želite li opozvati pristup opciji Ne uznemiravaj za aplikaciju <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Uklonit će se sva pravila Ne uznemiravaj koja je postavila ova aplikacija."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Ne optimiziraj"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimizacija"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Baterija se može brže isprazniti. Aplikacijama više neće biti ograničeno korištenje pozadinske baterije."</string>
@@ -4563,7 +4647,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Pritisnite uključ. dvaput za fotoaparat"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Brzo otvaranje fotoaparata bez otključavanja zaslona"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Veličina prikaza"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Smanjite ili povećajte stavke na zaslonu"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Povećajte ili smanjite sve"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"prikaz, gustoća, zumiranje zaslona, skalirati, skaliranje"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Smanjite ili povećajte stavke na zaslonu. Neke aplikacije mogu promijeniti položaj na zaslonu."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Pregled"</string>
@@ -4625,6 +4709,7 @@
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Žarišna je točka aktivna"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"Način rada u zrakoplovu uklj."</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Mreže nisu dostupne"</string>
+    <string name="condition_zen_title" msgid="7674761111934567490">"Način Ne uznemiravaj uključen"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Na telefonu je isključen zvuk"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Uz iznimke"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"Štednja baterije je uključena"</string>
@@ -5120,6 +5205,7 @@
     <string name="storage_movies_tv" msgid="7897612625450668593">"Aplikacije za filmove i TV"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Informacije o uslugama mobilnog operatera"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Pokretanje usluga mobilnog operatera"</string>
+    <string name="zen_suggestion_title" msgid="4555260320474465668">"Ažuriranje načina Ne uznemiravaj"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Pauzirajte obavijesti da biste ostali usredotočeni"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Značajka nije dostupna"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Ta je značajka isključena jer usporava telefon"</string>
@@ -5496,12 +5582,13 @@
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kratko"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Dugo"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Prikaži novčanik"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_summary (3984851951621168573) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Dopusti pristup novčaniku sa zaključanog zaslona"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Prikaži QR skener"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Omogućite pristup QR skeneru sa zaključanog zaslona"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Prikaži kontrole uređaja"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Pristupite kontrolama kada je zaslon zaključan"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kontrola sa zaključanog uređaja"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Kontrolirajte vanjske uređaje, a da pritom ne morate otključati telefon ili tablet ako to dopušta aplikacija kontrola uređaja."</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Prikaži sat s dva retka kad je dostupan"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Sat s dva retka"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5663,14 +5750,13 @@
     <string name="tare_revert" msgid="3855325741125236638">"Vraćanje na zadane postavke"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Postavke su vraćene na zadano."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimalan zasićeni balans"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"Maksimalna cirkulacija"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Minimalan zasićeni balans"</string>
+    <string name="tare_balances" msgid="731881382594747961">"Salda"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Ograničenja potrošnje"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Početno ograničenje potrošnje"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Maksimalno ograničenje potrošnje"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifikatori"</string>
     <string name="tare_actions" msgid="4573323466443513639">"Radnje"</string>
     <string name="tare_rewards" msgid="602131401590928885">"Nagrade"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"Izuzeto"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"Apl. sustava bez graf. korisnič. sučelja"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"Druga aplikacija"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Glavna aktivnost"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Obavijest je viđena"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Obavijest je viđena u roku od 15 minuta"</string>
@@ -5688,6 +5774,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Pokretanje zadatka najnižeg prioriteta"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Izvodi se zadatak najnižeg prioriteta"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Sankcija za istek vremena za zadatak"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimalni saldo pri punoj bateriji (izuzeto)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimalni saldo pri punoj bateriji (apl. sustava bez korisničkog sučelja)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimalni saldo pri punoj bateriji (preostale aplikacije)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Punjenje"</item>
     <item msgid="658627268149681677">"Drijemanje"</item>
@@ -5707,12 +5796,8 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Za prisilno uključivanje načina radne površine na sekundarnim zaslonima potrebno je ponovno pokretanje."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Ponovno pokreni sada"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Ponovno pokreni kasnije"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (6183752635162309599) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (4125762902654875180) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (8021583493584244700) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (2093665685644696866) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Prostorni zvuk"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Okružujućim zvukom stvara se dojam da zvuk dopire do vas iz svih smjerova. Radi samo s određenim medijskim sadržajima."</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Učini zvuk realističnijim"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Promijenite položaj audiouređaja za prirodniji zvuk."</string>
 </resources>
