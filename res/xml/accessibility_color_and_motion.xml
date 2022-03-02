@@ -42,12 +42,14 @@
     <SwitchPreference
         android:key="toggle_disable_animations"
         android:persistent="false"
+        android:summary="@string/accessibility_disable_animations_summary"
         android:title="@string/accessibility_disable_animations"
         settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
     <SwitchPreference
         android:key="toggle_large_pointer_icon"
         android:persistent="false"
+        android:summary="@string/accessibility_toggle_large_pointer_icon_summary"
         android:title="@string/accessibility_toggle_large_pointer_icon_title"
         settings:controller="com.android.settings.accessibility.LargePointerIconPreferenceController"/>
 
