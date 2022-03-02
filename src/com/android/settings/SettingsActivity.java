@@ -24,6 +24,7 @@ import static com.android.settings.applications.appinfo.AppButtonsPreferenceCont
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -253,8 +254,7 @@ public class SettingsActivity extends SettingsBaseActivity
         getMetaData();
         final Intent intent = getIntent();
 
-        if (shouldShowTwoPaneDeepLink(intent)) {
-            launchHomepageForTwoPaneDeepLink(intent);
+        if (shouldShowTwoPaneDeepLink(intent) && tryStartTwoPaneDeepLink(intent)) {
             finishAndRemoveTask();
             super.onCreate(savedState);
             return;
@@ -412,7 +412,7 @@ public class SettingsActivity extends SettingsBaseActivity
         return trampolineIntent;
     }
 
-    private void launchHomepageForTwoPaneDeepLink(Intent intent) {
+    private boolean tryStartTwoPaneDeepLink(Intent intent) {
         final Intent trampolineIntent;
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Get menu key for slice deep link case.
@@ -426,7 +426,14 @@ public class SettingsActivity extends SettingsBaseActivity
         } else {
             trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
         }
-        startActivity(trampolineIntent);
+
+        try {
+            startActivity(trampolineIntent);
+        } catch (ActivityNotFoundException e) {
+            Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
+            return false;
+        }
+        return true;
     }
 
     private boolean shouldShowTwoPaneDeepLink(Intent intent) {
