@@ -110,13 +110,12 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     private void applyTheme() {
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         if (ThemeHelper.trySetDynamicColor(this)) {
             final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
                     ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
                     : R.style.SudDynamicColorThemeSettings_SetupWizard;
             setTheme(appliedTheme);
-        } else {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         }
     }
 
