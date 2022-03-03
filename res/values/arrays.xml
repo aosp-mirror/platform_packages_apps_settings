@@ -1626,4 +1626,24 @@
         <item>300000</item>
     </string-array>
 
+    <!-- Developer settings: ingress rate limit entries. [DO NOT TRANSLATE] -->
+    <string-array name="ingress_rate_limit_entries">
+        <item>@string/ingress_rate_limit_no_limit_entry</item>
+        <item>128kbps</item>
+        <item>256kbps</item>
+        <item>1Mbps</item>
+        <item>5Mbps</item>
+        <item>15Mbps</item>
+    </string-array>
+
+    <!-- Developer settings: ingress rate limit values. [DO NOT TRANSLATE] -->
+    <string-array name="ingress_rate_limit_values">
+        <item>-1</item> <!-- -1 codes for disabled -->
+        <item>16000</item> <!-- 128kbps == 16000B/s -->
+        <item>32000</item> <!-- 256kbps == 32000B/s -->
+        <item>125000</item> <!-- 1Mbps == 125000B/s -->
+        <item>625000</item> <!-- 5Mbps == 625000/s -->
+        <item>1875000</item> <!-- 15Mbps == 1875000/s -->
+    </string-array>
+
 </resources>

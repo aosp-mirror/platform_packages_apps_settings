@@ -585,6 +585,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new SharedDataPreferenceController(context));
         controllers.add(new OverlaySettingsPreferenceController(context));
         controllers.add(new StylusHandwritingPreferenceController(context));
+        controllers.add(new IngressRateLimitPreferenceController((context)));
 
         return controllers;
     }
