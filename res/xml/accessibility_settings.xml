@@ -60,16 +60,6 @@
             settings:keywords="@string/keywords_reduce_bright_colors"
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
 
-        <com.android.settings.display.darkmode.DarkModePreference
-            android:key="dark_ui_mode_accessibility"
-            android:icon="@drawable/ic_dark_ui"
-            android:title="@string/dark_ui_mode"
-            android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
-            android:widgetLayout="@null"
-            settings:widgetLayout="@null"
-            settings:controller="com.android.settings.display.DarkUIPreferenceController"
-            settings:searchable="false"/>
-
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
             android:key="magnification_preference_screen"
