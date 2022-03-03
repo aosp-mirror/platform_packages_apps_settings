@@ -258,10 +258,11 @@ public class SimSlotChangeHandler {
         }
 
         List<SubscriptionInfo> subscriptionInfos = getAvailableRemovableSubscription();
-        if (subscriptionInfos == null && subscriptionInfos.get(0) != null) {
+        if (subscriptionInfos == null || subscriptionInfos.get(0) == null) {
             Log.e(TAG, "Unable to find the removable subscriptionInfo. Do nothing.");
             return;
         }
+        Log.d(TAG, "getAvailableRemovableSubscription:" + subscriptionInfos);
         startSimConfirmDialogActivity(subscriptionInfos.get(0).getSubscriptionId());
     }
 
@@ -364,6 +365,7 @@ public class SimSlotChangeHandler {
             Log.i(TAG, "Unable to enable subscription due to invalid subscription ID.");
             return;
         }
+        Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
         Intent intent = ToggleSubscriptionDialogActivity.getIntent(mContext, subId, true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
@@ -372,7 +374,7 @@ public class SimSlotChangeHandler {
     private boolean isMultipleEnabledProfilesSupported() {
         List<UiccCardInfo> cardInfos = mTelMgr.getUiccCardsInfo();
         if (cardInfos == null) {
-            Log.w(TAG, "UICC cards info list is empty.");
+            Log.d(TAG, "UICC cards info list is empty.");
             return false;
         }
         return cardInfos.stream().anyMatch(
