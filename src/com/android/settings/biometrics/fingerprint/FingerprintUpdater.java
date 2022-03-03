@@ -88,7 +88,7 @@ public class FingerprintUpdater {
         public void onEnrollmentProgress(int remaining) {
             mCallback.onEnrollmentProgress(remaining);
             if (remaining == 0) {
-                BiometricsSafetySource.sendSafetyData(mContext); // biometrics data changed
+                BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
             }
         }
     }
@@ -115,7 +115,7 @@ public class FingerprintUpdater {
         @Override
         public void onRemovalSucceeded(@Nullable Fingerprint fp, int remaining) {
             mCallback.onRemovalSucceeded(fp, remaining);
-            BiometricsSafetySource.sendSafetyData(mContext); // biometrics data changed
+            BiometricsSafetySource.onBiometricsChanged(mContext); // biometrics data changed
         }
     }
 }
