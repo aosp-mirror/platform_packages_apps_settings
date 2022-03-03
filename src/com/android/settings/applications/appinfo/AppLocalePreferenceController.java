@@ -17,10 +17,16 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.FeatureFlagUtils;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppLocaleUtil;
+
+import java.util.List;
 
 /**
  * A controller to update current locale information of application.
@@ -28,8 +34,12 @@ import com.android.settings.applications.AppLocaleUtil;
 public class AppLocalePreferenceController extends AppInfoPreferenceControllerBase {
     private static final String TAG = AppLocalePreferenceController.class.getSimpleName();
 
+    private final List<ResolveInfo> mListInfos;
+
     public AppLocalePreferenceController(Context context, String key) {
         super(context, key);
+        mListInfos = context.getPackageManager().queryIntentActivities(
+                AppLocaleUtil.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA);
     }
 
     @Override
@@ -49,7 +59,9 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
         return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry().info.packageName);
     }
 
+    @VisibleForTesting
     boolean canDisplayLocaleUi() {
-        return AppLocaleUtil.canDisplayLocaleUi(mContext, mParent.getAppEntry());
+        return AppLocaleUtil
+                .canDisplayLocaleUi(mContext, mParent.getAppEntry().info.packageName, mListInfos);
     }
 }

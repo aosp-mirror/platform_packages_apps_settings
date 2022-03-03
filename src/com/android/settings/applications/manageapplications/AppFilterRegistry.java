@@ -210,7 +210,7 @@ public class AppFilterRegistry {
         // Apps that can configurate appication's locale.
         mFilters[FILTER_APPS_LOCALE] = new AppFilterItem(
                 AppStateLocaleBridge.FILTER_APPS_LOCALE,
-            FILTER_APPS_LOCALE,
+                FILTER_APPS_LOCALE,
                 R.string.app_locale_picker_title);
     }
 
