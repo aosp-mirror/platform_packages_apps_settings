@@ -116,6 +116,7 @@ public class SimListDialogFragment extends SimDialogFragment {
             final SimDialogActivity activity = (SimDialogActivity) getActivity();
             activity.onSubscriptionSelected(getDialogType(), subId);
         }
+        dismiss();
     }
 
     protected List<SubscriptionInfo> getCurrentSubscriptions() {
