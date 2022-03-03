@@ -27,6 +27,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
@@ -161,6 +162,59 @@ public class LockScreenSafetySourceTest {
 
         assertThat(safetySourceStatus.getStatusLevel())
                 .isEqualTo(SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION);
+    }
+
+    @Test
+    public void sendSafetyData_whenLockPatternIsSecure_sendsNoIssues() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+
+        assertThat(safetySourceData.getIssues()).isEmpty();
+    }
+
+    @Test
+    public void sendSafetyData_whenLockPatternIsNotSecure_sendsIssue() {
+        whenScreenLockIsEnabled();
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(false);
+
+        LockScreenSafetySource.sendSafetyData(mApplicationContext,
+                mScreenLockPreferenceDetailsUtils);
+
+        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        verify(mSafetyCenterManagerWrapper).sendSafetyCenterUpdate(any(), captor.capture());
+        SafetySourceData safetySourceData = captor.getValue();
+
+        assertThat(safetySourceData.getIssues()).hasSize(1);
+        SafetySourceIssue issue = safetySourceData.getIssues().get(0);
+        assertThat(issue.getId()).isEqualTo(LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_ID);
+        assertThat(issue.getTitle().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_title"));
+        assertThat(issue.getSummary().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_summary"));
+        assertThat(issue.getSeverityLevel()).isEqualTo(
+                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION);
+        assertThat(issue.getIssueTypeId()).isEqualTo(
+                LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_TYPE_ID);
+        assertThat(issue.getIssueCategory()).isEqualTo(SafetySourceIssue.ISSUE_CATEGORY_DEVICE);
+        assertThat(issue.getActions()).hasSize(1);
+        SafetySourceIssue.Action action = issue.getActions().get(0);
+        assertThat(action.getId()).isEqualTo(LockScreenSafetySource.SET_SCREEN_LOCK_ACTION_ID);
+        assertThat(action.getLabel().toString()).isEqualTo(
+                ResourcesUtils.getResourcesString(mApplicationContext,
+                        "no_screen_lock_issue_action_label"));
+        assertThat(action.getPendingIntent().getIntent().getAction())
+                .isEqualTo(FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
     }
 
     @Test

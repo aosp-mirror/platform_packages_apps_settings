@@ -39,6 +39,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.deviceinfo.storage.SecondaryUserController;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
+import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settings.deviceinfo.storage.UserIconLoader;
@@ -90,6 +91,8 @@ public class StorageCategoryFragment extends DashboardFragment
     private boolean mIsWorkProfile;
     private int mUserId;
     private Preference mFreeUpSpacePreference;
+    private boolean mIsLoadedFromCache;
+    private StorageCacheHelper mStorageCacheHelper;
 
     /**
      * Refresh UI for specified storageEntry.
@@ -111,14 +114,23 @@ public class StorageCategoryFragment extends DashboardFragment
             mPreferenceController.setVolume(null);
             return;
         }
+        if (mStorageCacheHelper.hasCachedSizeInfo() && mSelectedStorageEntry.isPrivate()) {
+            StorageCacheHelper.StorageCache cachedData = mStorageCacheHelper.retrieveCachedSize();
+            mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
+            mPreferenceController.setUsedSize(cachedData.usedSize);
+            mPreferenceController.setTotalSize(cachedData.totalSize);
+        }
         if (mSelectedStorageEntry.isPrivate()) {
             mStorageInfo = null;
             mAppsResult = null;
-            maybeSetLoading(isQuotaSupported());
-
-            // To prevent flicker, sets null volume to hide category preferences.
-            // onReceivedSizes will setVolume with the volume of selected storage.
-            mPreferenceController.setVolume(null);
+            if (mStorageCacheHelper.hasCachedSizeInfo()) {
+                mPreferenceController.onLoadFinished(mAppsResult, mUserId);
+            } else {
+                maybeSetLoading(isQuotaSupported());
+                // To prevent flicker, sets null volume to hide category preferences.
+                // onReceivedSizes will setVolume with the volume of selected storage.
+                mPreferenceController.setVolume(null);
+            }
 
             // Stats data is only available on private volumes.
             getLoaderManager().restartLoader(STORAGE_JOB_ID, Bundle.EMPTY, this);
@@ -141,6 +153,15 @@ public class StorageCategoryFragment extends DashboardFragment
         }
 
         initializePreference();
+
+        if (mStorageCacheHelper.hasCachedSizeInfo()) {
+            mIsLoadedFromCache = true;
+            if (mSelectedStorageEntry != null) {
+                refreshUi(mSelectedStorageEntry);
+            }
+            updateSecondaryUserControllers(mSecondaryUsers, mAppsResult);
+            setSecondaryUsersVisible(true);
+        }
     }
 
     private void initializePreference() {
@@ -156,6 +177,7 @@ public class StorageCategoryFragment extends DashboardFragment
         mIsWorkProfile = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK;
         mUserId = Utils.getCurrentUserId(mUserManager, mIsWorkProfile);
+        mStorageCacheHelper = new StorageCacheHelper(getContext(), mUserId);
 
         super.onAttach(context);
     }
@@ -164,9 +186,23 @@ public class StorageCategoryFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
 
-        if (mSelectedStorageEntry != null) {
-            refreshUi(mSelectedStorageEntry);
+        if (mIsLoadedFromCache) {
+            mIsLoadedFromCache = false;
+        } else {
+            if (mSelectedStorageEntry != null) {
+                refreshUi(mSelectedStorageEntry);
+            }
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Destroy the data loaders to prevent unnecessary data loading when switching back to the
+        // page.
+        getLoaderManager().destroyLoader(STORAGE_JOB_ID);
+        getLoaderManager().destroyLoader(ICON_JOB_ID);
+        getLoaderManager().destroyLoader(VOLUME_SIZE_JOB_ID);
     }
 
     @Override
@@ -188,6 +224,8 @@ public class StorageCategoryFragment extends DashboardFragment
         mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
         mPreferenceController.setUsedSize(privateUsedBytes);
         mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
+        // Cache total size infor and used size info
+        mStorageCacheHelper.cacheTotalSizeAndUsedSize(mStorageInfo.totalBytes, privateUsedBytes);
         for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
             final AbstractPreferenceController controller = mSecondaryUsers.get(i);
             if (controller instanceof SecondaryUserController) {

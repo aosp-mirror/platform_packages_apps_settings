@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.android.settings.deviceinfo.firmwareversion;
+package com.android.settings.display;
 
 import android.content.Context;
-import android.os.Build;
+import android.hardware.display.AmbientDisplayConfiguration;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 
-public class FirmwareVersionPreferenceController extends BasePreferenceController {
+/**
+ * Only show the "When to show" Doze preferences if there's an ambient display available.
+ */
+public class AmbientDisplayWhenToShowPreferenceController extends
+        BasePreferenceController implements PreferenceControllerMixin {
+    private final AmbientDisplayConfiguration mConfig;
 
-    public FirmwareVersionPreferenceController(Context context, String key) {
+    public AmbientDisplayWhenToShowPreferenceController(Context context, String key) {
         super(context, key);
+        mConfig = new AmbientDisplayConfiguration(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY;
+        return mConfig.ambientDisplayAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
