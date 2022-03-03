@@ -18,6 +18,7 @@ package com.android.settings.display;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -27,6 +28,8 @@ import android.view.Display;
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -86,5 +89,20 @@ public class ScreenResolutionFragmentTest {
         mFragment.setDefaultKey(mFragment.getKeyForResolution(QHD_WIDTH));
 
         verify(mFragment).setDisplayMode(QHD_WIDTH);
+    }
+
+    @Test
+    @UiThreadTest
+    public void bindPreferenceExtra_setSummary() {
+        mFragment.onAttach(mContext);
+        SelectorWithWidgetPreference preference = new SelectorWithWidgetPreference(mContext);
+        ScreenResolutionFragment.ScreenResolutionCandidateInfo candidates =
+                mock(ScreenResolutionFragment.ScreenResolutionCandidateInfo.class);
+        CharSequence summary = "test summary";
+        doReturn(summary).when(candidates).loadSummary();
+
+        mFragment.bindPreferenceExtra(preference, "com.example.test", candidates, null, null);
+
+        assertThat(preference.getSummary().toString().contentEquals(summary)).isTrue();
     }
 }
