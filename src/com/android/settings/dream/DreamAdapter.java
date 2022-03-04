@@ -91,7 +91,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     : item.getIcon();
             if (icon instanceof VectorDrawable) {
                 icon.setTintList(
-                        mContext.getColorStateList(R.color.dream_card_text_color_state_list));
+                        mContext.getColorStateList(R.color.dream_card_icon_color_state_list));
             }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
