@@ -84,6 +84,9 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mPreviewView.setImageDrawable(previewImage);
                 mPreviewView.setClipToOutline(true);
                 mPreviewPlaceholderView.setVisibility(View.GONE);
+            } else {
+                mPreviewView.setImageDrawable(null);
+                mPreviewPlaceholderView.setVisibility(View.VISIBLE);
             }
 
             final Drawable icon = item.isActive()
