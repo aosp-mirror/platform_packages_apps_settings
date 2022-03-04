@@ -545,9 +545,6 @@
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
 
-    <!-- Whether suw to support two panes -->
-    <bool name="config_suw_supported_two_panes">false</bool>
-
     <!-- Whether to support large screen -->
     <bool name="config_supported_large_screen">false</bool>
 
@@ -581,6 +578,18 @@
             <item>@null</item> No description for state in position 1
             <item>Auto-rotate when unfolded</item>
         -->
+    </string-array>
+
+    <!-- The option list for switch screen resolution -->
+    <string-array name="config_screen_resolution_options_strings" translatable="false">
+        <item>@string/screen_resolution_option_high</item>
+        <item>@string/screen_resolution_option_highest</item>
+    </string-array>
+
+    <!-- The option summary list for screen resolution -->
+    <string-array name="config_screen_resolution_summaries_strings" translatable="false">
+        <item>@string/screen_resolution_summary_high</item>
+        <item>@string/screen_resolution_summary_highest</item>
     </string-array>
 
     <!-- Whether to aggregate for network selection list-->

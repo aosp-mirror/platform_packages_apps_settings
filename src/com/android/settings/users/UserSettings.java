@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -555,11 +554,10 @@ public class UserSettings extends SettingsPreferenceFragment
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        final Context context = getContext();
-        SubSettingLauncher launcher = new SubSettingLauncher(context)
+        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
-                .setTitleText(getUserName(context, userInfo))
+                .setTitleText(userInfo.name)
                 .setSourceMetricsCategory(getMetricsCategory());
         if (mGuestUserAutoCreated && userInfo.isGuest()) {
             launcher.setResultListener(this, REQUEST_EDIT_GUEST);
@@ -949,8 +947,7 @@ public class UserSettings extends SettingsPreferenceFragment
             // "Resetting guest..."
             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
             mExecutor.execute(() -> {
-                UserInfo guest = mUserManager.createGuest(
-                        getContext(), getString(com.android.settingslib.R.string.user_guest));
+                UserInfo guest = mUserManager.createGuest(getContext());
                 mGuestCreationScheduled.set(false);
                 if (guest == null) {
                     Log.e(TAG, "Unable to automatically recreate guest user");
@@ -989,9 +986,8 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
             } else {
-                final Context prefContext = getPrefContext();
-                pref = new UserPreference(prefContext, null, user.id);
-                pref.setTitle(getUserName(prefContext, user));
+                pref = new UserPreference(getPrefContext(), null, user.id);
+                pref.setTitle(user.name);
                 userPreferences.add(pref);
                 pref.setOnPreferenceClickListener(this);
                 pref.setEnabled(canOpenUserDetails);
@@ -1221,14 +1217,6 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    /** Returns the user's name, or the appropriate string in the case of a Guest. */
-    public static String getUserName(Context context, @NonNull UserInfo userInfo) {
-        if (userInfo.isGuest()) {
-            return context.getString(R.string.user_guest);
-        }
-        return userInfo.name;
-    }
-
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
@@ -1265,8 +1253,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddGuest.setEnabled(false); // prevent multiple tap issue
             mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
             Trace.beginSection("UserSettings.addGuest");
-            UserInfo guest = mUserManager.createGuest(
-                    getContext(), getString(com.android.settingslib.R.string.user_guest));
+            UserInfo guest = mUserManager.createGuest(getContext());
             Trace.endSection();
             if (guest == null) {
                 Toast.makeText(getContext(),
