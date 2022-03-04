@@ -709,4 +709,15 @@
             android:key="location_indicator_settings"
             settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="input_method_category"
+        android:title="@string/input_method_category"
+        android:order="1400">
+
+        <SwitchPreference
+            android:key="stylus_handwriting"
+            android:title="@string/stylus_handwriting"
+            android:summary="@string/stylus_handwriting_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>
