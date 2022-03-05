@@ -590,6 +590,12 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Kryptér tablet"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Kryptér telefon"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Krypteret"</string>
+    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Beskyt din telefon"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Konfigurer skærmlåsen for at beskytte din tablet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Konfigurer skærmlåsen for at beskytte din enhed"</string>
@@ -1428,7 +1434,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Øget batteriforbrug"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Fed tekst"</string>
     <string name="title_font_size" msgid="570613010306330622">"Skriftstørrelse"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"Gør teksten større eller mindre"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Gør tekst større eller mindre"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Indstillinger for låst SIM-kort"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kortlås"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Oplåst"</string>
@@ -3611,7 +3617,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"smart, dæmp skærm, dvale, batteri, timeout, opmærksom skærm, visning, display, inaktivitet"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"kamera, smart, roter automatisk, automatisk rotation, roter, vend, rotation, stående, liggende, format, retning, landskab, portræt, lodret, vandret"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"opgradere, android"</string>
-    <string name="keywords_zen_mode_settings" msgid="138808997469900639">"forstyr ikke, tidsplan, notifikationer, blokering, lydløs, vibrer, dvale, arbejde, fokus, lyd, slå lyden fra, dag, ugedag, weekend, begivenhed, forstyr ikke"</string>
+    <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"forstyr ikke, planlægge, notifikationer, blokere, lydløs, vibrere, sove, arbejde, fokusere, lyd, slå lyden fra, dag, hverdag, weekend, hverdagsaften, begivenhed"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"skærm, låsetid, timeout, låseskærm"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"hukommelse, cache, data, slet, ryd, frigør, plads"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"forbundet, enhed, høretelefoner, headset, højttaler, trådløs, parre, øretelefoner, musik, medier"</string>
@@ -3639,6 +3645,7 @@
     <string name="keywords_always_show_time_info" msgid="9120590185763264666">"altid aktiv skærm"</string>
     <string name="default_sound" msgid="6604374495015245195">"Standardlyd"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Lydstyrken for ringetone og notifikationer er på <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Lydstyrke, vibration, Forstyr ikke"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Ringesignalet er indstillet til vibration"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Ringesignalet er indstillet til lydløs"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Lydstyrken for ringetone og notifikationer er på 80 %"</string>
@@ -3665,6 +3672,8 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibration ved opladning"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Lyde for dockingstation"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Lyd ved berøring"</string>
+    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
+    <skip />
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dockhøjttaler afspiller"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Al lyd"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Kun medielyd"</string>
@@ -3674,8 +3683,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Aktivér lyde"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Livetekstning"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Undertekster til medier"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
+    <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer om vigtige personer og apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begræns antallet af afbrydelser"</string>
+    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivér Forstyr ikke"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyde kan afbryde"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Tidsplaner"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Slet tidsplaner"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Slet"</string>
@@ -3684,18 +3697,27 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Tidsplan"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Planlæg"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Gør telefonen lydløs på bestemte tidspunkter"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Angiv regler for Forstyr ikke"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Planlæg"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Anvend tidsplan"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Tillad afbrydelser, der laver lyd"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloker visuelle forstyrrelser"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Tillad visuelle signaler"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Visningsindstillinger for skjulte notifikationer"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Når Forstyr ikke er aktiveret"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ingen lyd fra notifikationer"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Notifikationer vises på skærmen"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Din telefon vil ikke afspille lyd eller vibrere, når du får notifikationer."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ingen lyd eller visuelle signaler fra notifikationer"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Notifikationer kan ikke ses eller høres"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Din telefon viser ikke nye eller eksisterende notifikationer, og den vibrerer og ringer heller ikke i forbindelse med disse. Husk, at vigtige notifikationer om telefonaktivitet og -status stadig vises.\n\nNår du deaktiverer Forstyr ikke, kan du finde ulæste notifikationer ved at stryge nedad fra toppen af skærmen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tilpasset"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Aktivér tilpasset indstilling"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Fjern tilpasset indstilling"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Ingen lyd fra notifikationer"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Delvist skjult"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Ingen lyd eller visuelle signaler fra notifikationer"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Tilpassede begrænsninger"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Når skærmen er tændt"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Når skærmen er slukket"</string>
@@ -3718,26 +3740,45 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"andre valgmuligheder"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Tilføj"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Aktivér"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Aktivér nu"</string>
+    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Deaktiver nu"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"Forstyr ikke er aktiveret indtil <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"Forstyr ikke forbliver aktiveret, indtil du deaktiverer tilstanden"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Forstyr ikke blev automatisk aktiveret af en tidsplan (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Forstyr ikke blev automatisk aktiveret af en app <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"Forstyr ikke er aktiveret for <xliff:g id="RULE_NAMES">%s</xliff:g> med tilpassede indstillinger."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Se tilpassede indstillinger"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Kun prioritet"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Til – <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Til"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Spørg hver gang"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Indtil du deaktiverer"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 time}one{# time}other{# timer}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 minut}one{# minut}other{# minutter}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Fra}=1{Fra – 1 tidsplan kan starte automatisk}one{Fra – # tidsplan kan starte automatisk}other{Fra – # tidsplaner kan starte automatisk}}"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Hvad kan afbryde Forstyr ikke"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Personer"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Apps"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Alarmer og andre afbrydelser"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Tidsplaner"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"Varighed af Kvikmenu"</string>
+    <string name="zen_settings_general" msgid="2704932194620124153">"Generelt"</string>
+    <string name="zen_sound_footer" msgid="4090291351903631977">"Når Forstyr ikke er aktiveret, er der kun lyd eller vibration ved de elementer, du tillader ovenfor."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Tilpassede indstillinger"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Gennemgå tidsplan"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"OK"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Notifikationer"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Varighed"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Beskeder, begivenheder og påmindelser"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Når Forstyr ikke er aktiveret, slås lyden fra for beskeder, påmindelser og begivenheder med undtagelse af de elementer, du tillader ovenfor. Du kan ændre beskedindstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Udfør"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Indstillinger"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Ingen lyd eller visuelle signaler fra notifikationer"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Ingen lyd fra notifikationer"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Notifikationer kan ikke ses eller høres. Opkald fra stjernemarkerede kontakter og gentagne opkald er tilladt."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(aktuel indstilling)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Vil du ændre notifikationsindstillingerne for Forstyr ikke?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Lyde for arbejdsprofil"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Brug lyde fra din personlige profil"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Brug de samme lyde som på din personlige profil"</string>
@@ -3877,7 +3918,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"Samtalen blev fjernet"</string>
     <string name="clear" msgid="5092178335409471100">"Ryd"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Vis prioriterede samtaler som bobler"</string>
-    <string name="important_conversation_behavior_summary" msgid="3993970229878313574">"Prioriterede samtaler vises øverst i rullepanelet. Du kan også vise dem som bobler, når tilstanden Prioritet er aktiveret."</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Prioriterede samtaler vises øverst i rullepanelet. Du kan også vise dem som bobler og afbryde Forstyr ikke."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Prioriterede og ændrede samtaler vises her"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Hvis du markerer en samtale som prioriteret eller foretager andre ændringer af samtaler, vises de her. \n\nSådan ændrer du samtaleindstillinger: \nStryg ned fra toppen af skærmen for at åbne rullepanelet, og hold derefter en samtale nede."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Vis lydløst, og minimer"</string>
@@ -3928,13 +3969,17 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ingen installerede apps har anmodet om adgang til notifikationer."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Giv adgang til notifikationer"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Vil du give <xliff:g id="SERVICE">%1$s</xliff:g> adgang til notifikationer?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Tilpassede Android-notifikationer blev erstattet af forbedrede notifikationer i Android 12. Denne funktion viser foreslåede handlinger og svar og organiserer dine notifikationer. \n\nForbedrede notifikationer kan få adgang til indhold i notifikationer, bl.a. personlige oplysninger som f.eks. beskeder og navne på kontakter. Funktionen kan også afvise eller svare på notifikationer, f.eks. ved at besvare telefonopkald og justere Forstyr ikke."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Tillad adgang til notifikationer for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vil kunne læse alle notifikationer, herunder personlige oplysninger såsom navne på kontakter, billeder og teksten i de beskeder, du modtager. Appen vil også kunne udsætte eller afvise notifikationer eller aktivere knapper i notifikationer, herunder besvare telefonopkald. \n\nHerudover vil appen få mulighed for at aktivere eller deaktivere Forstyr ikke og ændre relaterede indstillinger."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> vil kunne gøre følgende:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Læse dine notifikationer"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Den kan læse dine notifikationer, herunder personlige oplysninger såsom kontakter, beskeder og billeder."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Svare på beskeder"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Den kan besvare beskeder og interagere med knapper i notifikationer, herunder udsættelse eller afvisning af notifikationer og besvarelse af opkald."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Skift indstillinger"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Den kan aktivere eller deaktivere Forstyr ikke og ændre relaterede indstillinger."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Hvis du slår adgang til notifikationer fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Annuller"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Tilladte notifikationstyper"</string>
@@ -3990,6 +4035,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Hvis du vil forbinde disse apps, skal du installere <xliff:g id="NAME">%1$s</xliff:g> på din arbejdsprofil"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Hvis du vil forbinde disse apps, skal du installere <xliff:g id="NAME">%1$s</xliff:g> på din personlige profil"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Tryk for at hente appen"</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"Adgang til Forstyr ikke"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"Tillad Forstyr ikke"</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"Ingen installerede apps har anmodet om adgang, når indstillingen \"Forstyr ikke\" er aktiveret."</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Indlæser apps…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Android blokerer på din anmodning notifikationer for denne app, så de ikke vises på enheden"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Android blokerer på din anmodning notifikationer i denne kategori, så de ikke vises på enheden"</string>
@@ -4020,6 +4068,8 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"Vis aldrig notifikationer i underretningspanelet eller på eksterne enheder"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Tillad notifikationsprik"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Vis notifikationsprik"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"Tilsidesæt Forstyr ikke"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Bliv ved med at få disse notifikationer, når Forstyr ikke er aktiveret"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Låseskærm"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Blokeret"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Prioritet"</string>
@@ -4036,6 +4086,7 @@
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Navn på tidsplan"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"Angiv tidsplanens navn"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"Tidsplanens navn er allerede i brug"</string>
+    <string name="zen_mode_add_rule" msgid="4217731747959400770">"Tilføj flere"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Tilføj tidsplan for begivenhed"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Tilføj tidsplan"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Slet tidsplan"</string>
@@ -4043,8 +4094,13 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Vil du slette reglen \"<xliff:g id="RULE">%1$s</xliff:g>\"?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Slet"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Ukendt"</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Disse indstillinger kan ikke ændres lige nu. En app (<xliff:g id="APP_NAME">%1$s</xliff:g>) har automatisk aktiveret Forstyr ikke ved hjælp af en tilpasset funktion."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"Disse indstillinger kan ikke ændres lige nu. En app har automatisk aktiveret Forstyr ikke ved hjælp af en tilpasset funktion."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"Disse indstillinger kan ikke ændres lige nu. Funktionen Forstyr ikke blev aktiveret manuelt ved hjælp af en tilpasset funktion."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"Tidspunkt"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"Der er oprettet en automatisk regel om at aktivere \"Forstyr ikke\" på bestemte tidspunkter"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"Begivenhed"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"En automatisk regel er indstillet til at slå \"Forstyr ikke\" til ved bestemte begivenheder"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"Til begivenheder fra"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"Til begivenheder fra <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"alle kalendere"</string>
@@ -4060,6 +4116,9 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Dage"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Ingen"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Hver dag"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarmen kan tilsidesætte sluttidspunktet"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Tidsplanen deaktiveres, når en alarm ringer"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Adfærd for Forstyr ikke"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Anvend standardindstillinger"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Opret tilpassede indstillinger for denne tidsplan"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"For \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\""</string>
@@ -4073,9 +4132,11 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"prioriterede samtaler"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ingen"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ingen}=1{1 samtale}one{# samtale}other{# samtaler}}"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Hvem kan afbryde?"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Opkald"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Opkald"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"opkald"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Opkald, der kan afbryde"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Hvis du vil sørge for, at tilladte opkald benytter lyd, skal du tjekke, at enheden er indstillet til at ringe"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Indgående opkald blokeres for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjernemarkerede kontakter"</string>
@@ -4084,6 +4145,7 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"Beskeder"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"beskeder"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Beskeder"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"Beskeder, der kan afbryde"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Hvis du vil være sikker på, at tilladte beskeder benytter lyd, skal du tjekke, at enheden er indstillet til at ringe"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Indgående beskeder er blokeret for \"<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>\". Du kan ændre indstillingerne, så dine venner, din familie eller andre kontakter kan få fat i dig."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Du modtager alle beskeder"</string>
@@ -4093,6 +4155,9 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Kontakter"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Stjernemarkerede kontakter"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"Nogle personer eller samtaler"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"Fra stjernemarkerede kontakter og ved gentagne opkald"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Fra kontakter og ved gentagne opkald"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Kun ved gentagne opkald"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Ingen"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Ingen"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmer"</string>
@@ -4116,15 +4181,25 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"begivenheder"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Begivenheder"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Tillad, at apps tilsidesætter"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="8551235541071796578">"Ingen apps kan underrette dig"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Apps, der kan afbryde"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"Vælg flere apps"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Ingen apps er valgt"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Ingen apps kan afbryde"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Tilføj apps"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Alle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Nogle notifikationer"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Valgte personer kan stadig kontakte dig, selv hvis du ikke tillader, at apps kan afbryde"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ingen apps kan afbryde}=1{{app_1} kan afbryde}=2{{app_1} og {app_2} kan afbryde}=3{{app_1}, {app_2} og {app_3} kan afbryde}one{{app_1}, {app_2} og # mere kan afbryde}other{{app_1}, {app_2} og # andre kan afbryde}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Apps"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Alle notifikationer"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Nogle notifikationer"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Notifikationer, der kan afbryde"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Tillad alle notifikationer"</string>
-    <string name="zen_mode_sounds_none" msgid="6843840573494370155">"Ingen"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Intet kan afbryde}=1{{sound_category_1} kan afbryde}=2{{sound_category_1} og {sound_category_2} kan afbryde}=3{{sound_category_1}, {sound_category_2} og{sound_category_3} kan afbryde}one{{sound_category_1}, {sound_category_2} og # mere kan afbryde}other{{sound_category_1}, {sound_category_2} og # andre kan afbryde}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Intet kan afbryde"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"Ingen kan afbryde"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Nogle personer kan afbryde"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Alle personer kan afbryde"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Gentagne opkald"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Tillad gentagne opkald"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"alle"</string>
@@ -4155,7 +4230,10 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Skift til Kun alarmer frem til <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Skift til Afbryd altid"</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"Når skærmen er tændt"</string>
+    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"Tillad, at notifikationer, der gøres lydløse af tilstanden Forstyr ikke, vises på skærmen, og vis et ikon på statusbjælken"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"Når skærmen er slukket"</string>
+    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"Tillad, at notifikationer, der gøres lydløse af Forstyr ikke, tænder skærmen og får lampen til at blinke"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"Tillad, at notifikationer, der gøres lydløse af Forstyr ikke, tænder skærmen"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"Notifikationsindstillinger"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Advarsel"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"OK"</string>
@@ -4253,6 +4331,7 @@
     <string name="notifications_silenced" msgid="2673798575466545098">"Slået fra"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"Intet følsomt indhold på låseskærmen"</string>
     <string name="notifications_hidden" msgid="2415415452913806859">"Ikke på låseskærmen"</string>
+    <string name="notifications_priority" msgid="9068574646650663837">"Forstyr ikke blev tilsidesat"</string>
     <string name="notifications_summary_divider" msgid="6877149909390030983">" / "</string>
     <string name="notification_summary_level" msgid="4074326972839105652">"Niveau %d"</string>
     <string name="notification_summary_channel" msgid="8459033623057872803">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
@@ -4291,6 +4370,7 @@
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Kategorier: Stor vigtighed"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"Kategorier: Lav vigtighed"</string>
     <string name="filter_notif_blocked_channels" msgid="1131444963543380495">"Kategorier: Slået fra"</string>
+    <string name="filter_notif_dnd_channels" msgid="13445325087914932">"Kategorier: Tilsidesætter Forstyr ikke"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Avanceret"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Konfigurer apps"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Ukendt app"</string>
@@ -4446,7 +4526,11 @@
     <string name="running_frequency" msgid="7260225121706316639">"Hyppighed"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimal forbrug"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Der bruges ikke data"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Vil du give <xliff:g id="APP">%1$s</xliff:g> adgang til Forstyr ikke?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Appen vil kunne aktivere/deaktivere Forstyr ikke og foretage ændringer i relaterede indstillinger."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Skal være slået til, fordi adgangen til notifikationer er slået til"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Vil du tilbagekalde adgangen til Forstyr ikke for <xliff:g id="APP">%1$s</xliff:g>?"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Alle Forstyr ikke-regler, der er oprettet af denne app, fjernes."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Undlad at optimere"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimer"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Dette kan dræne batteriet hurtigere. Appen forhindres ikke længere i at bruge batteri i baggrunden."</string>
@@ -4493,7 +4577,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Åbn hurtigt kameraet uden at låse skærmen op"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Visningsstørrelse"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Gør elementerne på skærmen større eller mindre"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Gør alt større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"visningstæthed, zoom på skærmen, skala, skalering"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Gør elementerne på skærmen mindre eller større. Visse apps på din skærm ændrer muligvis placering."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Forhåndsvisning"</string>
@@ -4554,6 +4638,7 @@
     <string name="condition_hotspot_title" msgid="7903918338790641071">"Hotspot er aktiveret"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"Flytilstand er slået til"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Ingen tilgængelige netværk"</string>
+    <string name="condition_zen_title" msgid="7674761111934567490">"Forstyr ikke er aktiveret"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"Telefonen er på lydløs"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Med undtagelser"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"Batterisparefunktion er slået til"</string>
@@ -5032,6 +5117,7 @@
     <string name="storage_movies_tv" msgid="7897612625450668593">"Film- og tv-apps"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Oplysninger om mobilselskab"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Aktivér mobilselskab"</string>
+    <string name="zen_suggestion_title" msgid="4555260320474465668">"Opdater Forstyr ikke"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Sæt notifikationer på pause, så du kan koncentrere dig"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Funktionen er ikke tilgængelig"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Denne funktion er blevet deaktiveret, fordi den gør din telefon langsom"</string>
@@ -5405,12 +5491,13 @@
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Kort"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Langt"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
-    <!-- no translation found for lockscreen_privacy_wallet_summary (3984851951621168573) -->
-    <skip />
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Tillad adgang til Wallet via låseskærmen"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Vis QR-scanner"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Tillad adgang til QR-kodescanneren via låseskærmen"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Vis enhedsstyring"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Få adgang til styring, selvom enheden er låst"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Styr fra låst enhed"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Styr eksterne enheder uden at låse din telefon eller tablet op, hvis dette er tilladt af appen til enhedsstyring"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Vis uret med to linjer, når det er tilgængeligt"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Ur med to linjer"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5572,14 +5659,13 @@
     <string name="tare_revert" msgid="3855325741125236638">"Gendan standardindstillingerne"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Standardindstillingerne blev gendannet."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimal balance ved fuld opladning"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"Maksimal cirkulation"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Minimal balance ved fuld opladning"</string>
+    <string name="tare_balances" msgid="731881382594747961">"Saldi"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Grænser for forbrug"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Grænse for indledende forbrug"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Grænse for maksimalt forbrug"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifikatorer"</string>
     <string name="tare_actions" msgid="4573323466443513639">"Handlinger"</string>
     <string name="tare_rewards" msgid="602131401590928885">"Bonusser"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"Fritaget"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"Systemapp uden grafisk brugerflade"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"Anden app"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Topaktivitet"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notifikationen blev set"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notifikationen blev set inden for 15 min."</string>
@@ -5597,6 +5683,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Job med minimal prioritet starter"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Job med minimal prioritet kører"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Timeout-justering for job"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimumssaldo for fuld opladning (undtagelse)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimumssaldo for fuld opladning (systemapp uden grafisk brugerflade)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimumssaldo for fuld opladning (øvrige apps)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Opladning"</item>
     <item msgid="658627268149681677">"Hvil"</item>
@@ -5616,12 +5705,8 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Du skal genstarte for at gennemtvinge aktivering af computertilstand på sekundære skærme."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Genstart nu"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Genstart senere"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (6183752635162309599) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (4125762902654875180) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (8021583493584244700) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (2093665685644696866) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Rumlig lyd"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Lyden er optimal, når den kan høres lige godt i hele rummet. Fungerer kun sammen med nogle former for medier."</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Gør lyden mere realistisk"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Skift lydpositionering, så lyden bliver mere naturlig."</string>
 </resources>

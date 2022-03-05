@@ -26,6 +26,8 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.InstrumentedActivity;
 
+import com.google.android.setupdesign.util.ThemeHelper;
+
 public abstract class WifiDppBaseActivity extends InstrumentedActivity {
     protected FragmentManager mFragmentManager;
 
@@ -34,6 +36,8 @@ public abstract class WifiDppBaseActivity extends InstrumentedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        applyTheme();
 
         setContentView(R.layout.wifi_dpp_activity);
         mFragmentManager = getSupportFragmentManager();
@@ -45,8 +49,18 @@ public abstract class WifiDppBaseActivity extends InstrumentedActivity {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
-        theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
-        super.onApplyThemeResource(theme, new_resid, first);
+        theme.applyStyle(R.style.SetupWizardPartnerResource, true);
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    private void applyTheme() {
+        if (ThemeHelper.trySetDynamicColor(this)) {
+            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                    ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
+                    : R.style.SudDynamicColorThemeSettings_SetupWizard;
+            setTheme(appliedTheme);
+        } else {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        }
     }
 }

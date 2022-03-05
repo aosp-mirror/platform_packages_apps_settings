@@ -590,6 +590,12 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Táblagép titkosítása"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Telefon titkosítása"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Titkosítva"</string>
+    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
+    <skip />
+    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
+    <skip />
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"A telefon biztonságossá tétele"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Állítson be képernyőzárat a táblagép védelme érdekében"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Állítson be képernyőzárat az eszköz védelme érdekében"</string>
@@ -1428,7 +1434,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Növeli az akkumulátorhasználatot"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Félkövér szöveg"</string>
     <string name="title_font_size" msgid="570613010306330622">"Betűméret"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"Szöveg nagyítása és kicsinyítése"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Szöveg nagyítása vagy kicsinyítése"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM-kártya lezárási beállításai"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM-kártya zárolása"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Kikapcsolva"</string>
@@ -3611,7 +3617,7 @@
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"okos, képernyő halványítása, alvó mód, akkumulátor, időkorlát, figyelem, képernyő, kijelző, inaktivitás, képernyőfigyelő"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"kamera, okos, automatikus forgatás, automatikus elforgatás, elforgatás, elfordítás, forgatás, álló, fekvő, tájolás, függőleges, vízszintes"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"verziófrissítés, android"</string>
-    <string name="keywords_zen_mode_settings" msgid="138808997469900639">"ne zavarjanak, ütemezés, értesítések, letiltás, néma, rezgés, alvó mód, munka, fókusz, hang, némítás, nap, hétköznap, hétvége, hétköznap este, esemény, ne zavarjanak mód"</string>
+    <string name="keywords_zen_mode_settings" msgid="7810203406522669584">"ne zavarjanak, ütemezés, értesítések, letiltás, néma, rezgés, alvó mód, munka, fókusz, hang, némítás, nap, hétköznap, hétvége, hétköznap este, esemény"</string>
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"képernyő, lezárási idő, időkorlát, lezárási képernyő"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memória, gyorsítótár, adatok, törlés, eltávolítás, felszabadítás, tárhely"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"csatlakoztatott, eszköz, fejhallgató, headset, hangfal, vezeték nélküli, párosítás, fülhallgató, zene, médiatartalom"</string>
@@ -3639,6 +3645,7 @@
     <string name="keywords_always_show_time_info" msgid="9120590185763264666">"mindig bekapcsolt kijelző"</string>
     <string name="default_sound" msgid="6604374495015245195">"Alapértelmezett hang"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Csörgetés és értesítések hangereje <xliff:g id="PERCENTAGE">%1$s</xliff:g>-on"</string>
+    <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Csengetés: rezgő"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Csengetés: néma"</string>
     <string name="sound_settings_example_summary" msgid="8125110691864707925">"Csörgetés és értesítések hangereje 80%-on"</string>
@@ -3665,6 +3672,8 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Töltési hangok és rezgés"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Dokkolási hangok"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Érintési hangok"</string>
+    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
+    <skip />
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dokkoláskor hangszórón szól"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Minden hang"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Kizárólag médiahang"</string>
@@ -3674,8 +3683,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Indítási hangok"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Élő feliratozás"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatikus feliratozás"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nincs}=1{1 ütemezés beállítva}other{# ütemezés beállítva}}"</string>
+    <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne zavarjanak"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Értesítés fogadása csak fontos személyektől és alkalmazásoktól"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"A megszakítások korlátozása"</string>
+    <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"A Ne zavarjanak mód bekapcsolása"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Az ébresztések és médiahangok megszakíthatják a „Ne zavarjanak” módot"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"Ütemezések"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"Ütemezések törlése"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"Törlés"</string>
@@ -3684,18 +3697,27 @@
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="5264835276518295033">"Ütemezés"</string>
     <string name="zen_mode_schedule_category_title" msgid="1381879916197350988">"Ütemezés"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Telefonnémítás ütemezése"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"A Ne zavarjanak szabályai"</string>
+    <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Ütemezés"</string>
     <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Ütemezés alkalmazása"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_settings_category" msgid="3794956668816783447">"Hanggal járó jelzések engedélyezése"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Megjelenő értesítések tiltása"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Vizuális jelek engedélyezése"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Rejtett értesítések megjelenítési beállításai"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Ha a „Ne zavarjanak” mód aktív"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Nincs hang az értesítéseknél"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Az értesítések megjelennek a képernyőn"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Amikor értesítés érkezik, a telefon nem ad ki hangot, és nem rezeg."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Nincs hang vagy vizuális jelzés az értesítéseknél"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Nem fog értesítéseket látni vagy hallani"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"A telefonja nem jelenít meg új vagy meglévő értesítéseket, és nem csörög vagy rezeg az értesítéseknél. A telefon funkcióival és állapotával kapcsolatos fontos értesítések azonban így is megjelennek.\n\nAmikor kikapcsolja a Ne zavarjanak módot, a nem fogadott értesítéseket úgy tekintheti meg, hogy ujját lefelé csúsztatja a képernyő tetejéről."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Egyéni"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Egyéni beállítás engedélyezése"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Egyéni beállítás törlése"</string>
+    <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"Nincs hang az értesítéseknél"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"Részben elrejtve"</string>
+    <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"Nincs hang vagy vizuális jelzés az értesítéseknél"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"Egyéni korlátozások"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"Ha a képernyő be van kapcsolva"</string>
     <string name="zen_mode_block_effects_screen_off" msgid="2291988790355612826">"Ha a képernyő ki van kapcsolva"</string>
@@ -3718,26 +3740,45 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"egyéb lehetőségek"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"Hozzáadás"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"Bekapcsolás"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"Bekapcsolás most"</string>
+    <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"Kikapcsolás most"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"A „Ne zavarjanak” mód eddig marad bekapcsolva: <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"A „Ne zavarjanak” mód bekapcsolva marad, amíg Ön ki nem kapcsolja"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="1958092329238152236">"Az egyik ütemezés (<xliff:g id="RULE_NAME">%s</xliff:g>) automatikusan bekapcsolta a „Ne zavarjanak” módot"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="3401685760954156067">"Az egyik alkalmazás (<xliff:g id="APP_NAME">%s</xliff:g>) automatikusan bekapcsolta a „Ne zavarjanak” módot"</string>
+    <string name="zen_mode_settings_dnd_custom_settings_footer" msgid="6566115866660865385">"A Ne zavarjanak mód egyéni beállításokkal be van kapcsolva a következőknél: <xliff:g id="RULE_NAMES">%s</xliff:g>."</string>
     <string name="zen_mode_settings_dnd_custom_settings_footer_link" msgid="8255159194653341835">" "<annotation id="link">"Egyéni beállítások megtekintése"</annotation></string>
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Csak prioritásos"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Be/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Be"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Mindig kérdezzen rá"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Kikapcsolásig"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 óra}other{# óra}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 perc}other{# perc}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{Ki}=1{Ki / 1 szabály automatikusan bekapcsolhat}other{Ki / # szabály automatikusan bekapcsolhat}}"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"Mi szakíthatja meg a „Ne zavarjanak” módot?"</string>
+    <string name="zen_category_people" msgid="8252926021894933047">"Személyek"</string>
+    <string name="zen_category_apps" msgid="1167374545618451925">"Alkalmazások"</string>
+    <string name="zen_category_exceptions" msgid="1316097981052752811">"Ébresztések és további jelzések"</string>
+    <string name="zen_category_schedule" msgid="2003707171924226212">"Ütemezések"</string>
+    <string name="zen_category_duration" msgid="7515850842082631460">"A Gyorsbeállítások időtartama"</string>
+    <string name="zen_settings_general" msgid="2704932194620124153">"Általános"</string>
+    <string name="zen_sound_footer" msgid="4090291351903631977">"Ha a „Ne zavarjanak” mód aktív, akkor a hang és a rezgés némítva lesznek, kivéve a fent engedélyezett elemeket."</string>
     <string name="zen_custom_settings_dialog_title" msgid="4613603772432720380">"Egyéni beállítások"</string>
     <string name="zen_custom_settings_dialog_review_schedule" msgid="4674671820584759928">"Ütemezés áttekintése"</string>
     <string name="zen_custom_settings_dialog_ok" msgid="8842373418878278246">"Értem"</string>
     <string name="zen_custom_settings_notifications_header" msgid="7635280645171095398">"Értesítések"</string>
     <string name="zen_custom_settings_duration_header" msgid="5065987827522064943">"Időtartam"</string>
     <string name="zen_msg_event_reminder_title" msgid="5362025129007417554">"Üzenetek, események és emlékeztetők"</string>
+    <string name="zen_msg_event_reminder_footer" msgid="2700459146293750387">"Ha a „Ne zavarjanak” mód aktív, akkor az üzenetek, emlékeztetők és események némítva lesznek, kivéve a fent engedélyezett elemeket. Az üzenetek beállításainak megadásával lehetővé teheti, hogy ismerősei, családtagjai vagy más névjegyei elérhessék Önt."</string>
     <string name="zen_onboarding_ok" msgid="8764248406533833392">"Kész"</string>
     <string name="zen_onboarding_settings" msgid="2815839576245114342">"Beállítások"</string>
     <string name="zen_onboarding_new_setting_title" msgid="8813308612916316657">"Nincs hang vagy vizuális jelzés az értesítéseknél"</string>
     <string name="zen_onboarding_current_setting_title" msgid="5024603685220407195">"Nincs hang az értesítéseknél"</string>
     <string name="zen_onboarding_new_setting_summary" msgid="7695808354942143707">"Nem fog értesítéseket látni vagy hallani. A csillaggal megjelölt névjegyektől és az ismétlődő hívóktól érkező hívások engedélyezettek."</string>
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Jelenlegi beállítás)"</string>
+    <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"Módosítja a „Ne zavarjanak” értesítési beállításokat?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Munkaprofil hangebállításai"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Személyes profil hangjainak használata"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Használja ugyanazokat a hangbeállításokat, mint a személyes profilja"</string>
@@ -3877,7 +3918,7 @@
     <string name="recent_convo_removed" msgid="8686414146325958281">"A beszélgetés eltávolítva"</string>
     <string name="clear" msgid="5092178335409471100">"Törlés"</string>
     <string name="important_bubble" msgid="7911698275408390846">"Elsődleges beszélgetések buborékba helyezése"</string>
-    <string name="important_conversation_behavior_summary" msgid="3993970229878313574">"A fontos beszélgetések a lehúzható értesítési felület tetején jelennek meg. Beállíthatja azt is, hogy buborékban jelenjenek meg, ha be van kapcsolva a Prioritásos mód."</string>
+    <string name="important_conversation_behavior_summary" msgid="1845064084071107732">"Az elsődleges beszélgetések a lehúzható értesítési felület tetején vannak. Beállíthatja azt is, hogy buborékban jelenjenek meg, és hogy a Ne zavarjanak beállítás mellett is láthatók legyenek."</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Az elsődleges és a módosított beszélgetések itt jelennek meg"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Amikor elsődlegesként jelöl meg egy beszélgetést, vagy ha bármilyen más módosítást végez a beszélgetéseken, ezek az információk itt jelennek meg. \n\nA beszélgetésbeállítások módosításához tegye a következőket: \nCsúsztassa le ujját a képernyő tetejétől a lehúzható értesítési felület megnyitásához, majd tartsa lenyomva ujját az egyik beszélgetésen."</string>
     <string name="notification_importance_min" msgid="4609688642942787774">"Hang nélküli megjelenítés és kis méret"</string>
@@ -3928,13 +3969,17 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Egy telepített alkalmazás sem kért hozzáférést az értesítésekhez"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Értesítés-hozzáférés engedélyezése"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Engedélyezi a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára az értesítésekhez való hozzáférést?"</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"A bővített értesítések felváltják az androidos alkalmazkodó értesítéseket az Android 12-es verziójában. Ez a funkció javasolt műveleteket és válaszokat mutat, és rendszerezi az értesítéseket. \n\nA bővített értesítések minden értesítéstartalmat olvashatnak (így a személyes adatokat, mint például a névjegyek nevét és az üzeneteket is). Ez a funkció emellett elvetheti az értesítéseket, valamint reagálhat rájuk, például felveheti a telefonhívásokat, és vezérelheti a Ne zavarjanak módot."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Engedélyezi az értesítések elérését a(z) <xliff:g id="SERVICE">%1$s</xliff:g> számára?"</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> elolvashatja az összes értesítést, beleértve a személyes adatokat, például az ismerősök neveit, fotóit és a fogadott üzeneteket. Ez az alkalmazás továbbá az értesítéseket is elhalaszthatja, elvetheti, vagy használhatja az értesítéseken lévő gombokat (így például felveheti a bejövő hívásokat) \n\nEzzel az alkalmazás egyúttal képes lesz a „Ne zavarjanak” funkció be- és kikapcsolására, továbbá a kapcsolódó beállítások módosítására is."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"A(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> számára a következőkre nyílik lehetőség:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Az értesítések elolvasása"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Elolvashatja az értesítéseket, beleértve a személyes adatokat, például az ismerősök neveit, az üzeneteket és a fotókat."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Üzenetek megválaszolása"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Válaszolhat az üzenetekre, és az értesítésekben található gombokra is reagálhat, beleértve a szundi üzemmód aktiválását, az értesítések elutasítását és a hívások fogadását."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Beállítások módosítása"</string>
+    <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Be- és kikapcsolhatja a Ne zavarjanak módot, illetve módosíthatja a kapcsolódó beállításokat."</string>
+    <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Ha kikapcsolja a(z) <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> hozzáférését az értesítésekhez, azzal lehet, hogy kikapcsolja a „Ne zavarjanak” módhoz való hozzáférést is."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Kikapcsolás"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Mégse"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"Engedélyezett értesítéstípusok"</string>
@@ -3990,6 +4035,9 @@
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Az alkalmazások összekapcsolásához telepítse a(z) <xliff:g id="NAME">%1$s</xliff:g> alkalmazást munkaprofiljában"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Az alkalmazások összekapcsolásához telepítse a(z) <xliff:g id="NAME">%1$s</xliff:g> alkalmazást személyes profiljában"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Koppintson az alkalmazás letöltéséhez"</string>
+    <string name="manage_zen_access_title" msgid="1562322900340107269">"„Ne zavarjanak” elérés"</string>
+    <string name="zen_access_detail_switch" msgid="4183681772666138993">"A Ne zavarjanak mód engedélyezése"</string>
+    <string name="zen_access_empty_text" msgid="3779921853282293080">"Egy telepített alkalmazás sem kért „Ne zavarjanak” elérést"</string>
     <string name="loading_notification_apps" msgid="5139471829295287945">"Alkalmazások betöltése…"</string>
     <string name="app_notifications_off_desc" msgid="6691342160980435901">"Kérésére az Android letiltotta a jelen alkalmazás értesítéseinek megjelenését ezen az eszközön"</string>
     <string name="channel_notifications_off_desc" msgid="6202042207121633488">"Kérésére az Android letiltotta a jelen értesítési kategória megjelenését ezen az eszközön"</string>
@@ -4020,6 +4068,8 @@
     <string name="notification_content_block_summary" msgid="329171999992248925">"Soha ne jelenjen meg értesítés az értesítési felületen és a perifériás eszközökön"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"Értesítési pötty engedélyezése"</string>
     <string name="notification_channel_badge_title" msgid="6505542437385640049">"Értesítési pötty megjelenítése"</string>
+    <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"A Ne zavarjanak mód felülbírálása"</string>
+    <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"Bekapcsolt Ne zavarjanak mód esetén ezek az értesítések továbbra is zavarhatnak"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"Lezárási képernyő"</string>
     <string name="app_notification_row_banned" msgid="4513523107019706924">"Letiltva"</string>
     <string name="app_notification_row_priority" msgid="8100777138078316446">"Prioritást élvező"</string>
@@ -4036,6 +4086,7 @@
     <string name="zen_mode_rule_name" msgid="7303080427006917702">"Ütemezés neve"</string>
     <string name="zen_mode_rule_name_hint" msgid="7029432803855827697">"Ütemezés nevének megadása"</string>
     <string name="zen_mode_rule_name_warning" msgid="1244435780807634954">"Ez az ütemezésnév már használatban van"</string>
+    <string name="zen_mode_add_rule" msgid="4217731747959400770">"Továbbiak hozzáadása"</string>
     <string name="zen_mode_add_event_rule" msgid="9179404395950854471">"Eseményütemezés hozzáadása"</string>
     <string name="zen_mode_add_time_rule" msgid="2621320450155364432">"Időütemezés hozzáadása"</string>
     <string name="zen_mode_delete_rule" msgid="5419296431989891130">"Ütemezés törlése"</string>
@@ -4043,8 +4094,13 @@
     <string name="zen_mode_delete_rule_confirmation" msgid="6195069346439736688">"Törli a(z) „<xliff:g id="RULE">%1$s</xliff:g>” szabályt?"</string>
     <string name="zen_mode_delete_rule_button" msgid="8328729110756882244">"Törlés"</string>
     <string name="zen_mode_rule_type_unknown" msgid="7819162569994282316">"Ismeretlen"</string>
+    <string name="zen_mode_app_set_behavior" msgid="4319517270279704677">"Ezeket a beállításokat jelenleg nem lehet módosítani. Az egyik alkalmazás (<xliff:g id="APP_NAME">%1$s</xliff:g>) automatikusan bekapcsolta a „Ne zavarjanak” módot egyéni viselkedéssel."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="8544413884273894104">"Ezeket a beállításokat jelenleg nem lehet módosítani. Az egyik alkalmazás automatikusan bekapcsolta a „Ne zavarjanak” módot egyéni viselkedéssel."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="3805244555649172848">"Ezeket a beállításokat jelenleg nem lehet módosítani. A „Ne zavarjanak” módot manuálisan kapcsolták be egyéni viselkedéssel."</string>
     <string name="zen_schedule_rule_type_name" msgid="8071428540221112090">"Idő"</string>
+    <string name="zen_schedule_rule_enabled_toast" msgid="6534402316741678208">"Automatikus szabály beállítva a „Ne zavarjanak” bekapcsolására adott időpontokban"</string>
     <string name="zen_event_rule_type_name" msgid="1921166617081971754">"Esemény"</string>
+    <string name="zen_event_rule_enabled_toast" msgid="4943723266121388395">"Automatikus szabály beállítva a „Ne zavarjanak” bekapcsolására adott események közben"</string>
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"E naptár eseményeinél:"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"E naptár eseményeinél: <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"bármilyen naptár"</string>
@@ -4060,6 +4116,9 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Napok"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Nincs"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Minden nap"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Az ébresztés felülbírálhatja a befejezési időt"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Az ütemezés kikapcsol az ébresztés jelzésekor"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"A Ne zavarjanak mód viselkedése"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Alapbeállítások használata"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Egyéni beállítások létrehozása ehhez az ütemezéshez"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"A következőnél: „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>”"</string>
@@ -4073,9 +4132,11 @@
     <string name="zen_mode_from_important_conversations_second" msgid="7588299891972136599">"fontos beszélgetések"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nincs"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nincs}=1{1 beszélgetés}other{# beszélgetés}}"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Megszakítás engedélyezve"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Hívások"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Hívások"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hívás"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"Azok a hívások, amelyeknél engedélyezve van a megszakítás"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Az engedélyezett hívások akkor adhatnak ki hangot, ha az eszköz csörgésre van állítva"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"A(z) „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” ütemezésnél a bejövő hívások le vannak tiltva. A beállítások módosításával lehetővé teheti, hogy ismerősei, családtagjai vagy a névjegyei között megtalálható más személyek elérhessék Önt."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Csillagozott névjegyek"</string>
@@ -4084,6 +4145,7 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"Üzenetek"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"üzenet"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Üzenetek"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"Azok az üzenetek, amelyeknél engedélyezve van a megszakítás"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Az engedélyezett hívások akkor adhatnak ki hangot, ha az eszköz csörgésre van állítva"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"A(z) „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>” ütemezésnél le vannak tiltva a beérkező üzenetek. A beállítások módosításával lehetővé teheti, hogy ismerősei, családtagjai vagy a névjegyei között megtalálható más személyek elérhessék Önt."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Minden üzenet eljuthat Önhöz"</string>
@@ -4093,6 +4155,9 @@
     <string name="zen_mode_from_contacts" msgid="2989933306317064818">"Névjegyek"</string>
     <string name="zen_mode_from_starred" msgid="8616516644241652287">"Csillagozott névjegyek"</string>
     <string name="zen_mode_from_some" msgid="3708450042225044524">"Néhány személy vagy beszélgetés"</string>
+    <string name="zen_calls_summary_starred_repeat" msgid="8078759939219244001">"A csillaggal megjelölt névjegyektől és az ismétlődő hívóktól"</string>
+    <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"A névjegyektől és az ismétlődő hívóktól"</string>
+    <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Csak az ismétlődő hívóktól"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Egyik sem"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Egyik sem"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Riasztások"</string>
@@ -4116,15 +4181,25 @@
     <string name="zen_mode_events_list" msgid="7191316245742097229">"események"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Események"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Felülbírálás engedélyezése az alkalmazások számára"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="8551235541071796578">"Egyetlen alkalmazás sem küldhet értesítést"</string>
+    <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"Azok az alkalmazások, amelyeknél engedélyezve van a megszakítás"</string>
+    <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"További alkalmazások kiválasztása"</string>
+    <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"Nincs kiválasztott alkalmazás"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"Egy alkalmazás sem szakíthatja meg a „Ne zavarjanak” módot"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"Alkalmazások felvétele"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Összes értesítés"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Egyes értesítések"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"A kiválasztott személyek továbbra is elérhetik Önt, akkor is, ha nem engedélyezi az alkalmazásoknak, hogy megzavarják"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Egy alkalmazás sem szakíthatja meg a „Ne zavarjanak” módot}=1{A következő megszakíthatja a „Ne zavarjanak” módot: {app_1}}=2{A következők megszakíthatják a „Ne zavarjanak” módot: {app_1} és {app_2}}=3{A következők megszakíthatják a „Ne zavarjanak” módot: {app_1}, {app_2} és {app_3}}other{A következők megszakíthatják a „Ne zavarjanak” módot: {app_1}, {app_2} és # egyéb}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Alkalmazások"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Összes értesítés"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Egyes értesítések"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Azok az értesítések, amelyeknél engedélyezve van a megszakítás"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Összes értesítés engedélyezése"</string>
-    <string name="zen_mode_sounds_none" msgid="6843840573494370155">"Nincs"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Semmi sem szakíthatja meg a „Ne zavarjanak” módot}=1{A következő megszakíthatja a „Ne zavarjanak” módot: {sound_category_1}}=2{A következők megszakíthatják a „Ne zavarjanak” módot: {sound_category_1} és {sound_category_2}}=3{A következők megszakíthatják a „Ne zavarjanak” módot: {sound_category_1}, {sound_category_2} és {sound_category_3}}other{A következők megszakíthatják a „Ne zavarjanak” módot: {sound_category_1}, {sound_category_2} és # egyéb}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Semmi sem szakíthatja meg a „Ne zavarjanak” módot"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"Senki sem szakíthatja meg a „Ne zavarjanak” módot"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Néhány személy megszakíthatja a „Ne zavarjanak” módot"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"Minden személy megszakíthatja a „Ne zavarjanak” módot"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Többször hívó személyek"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"Többször hívó személyek engedélyezése"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"bárki"</string>
@@ -4155,7 +4230,10 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="8140619669703968810">"Váltás „Csak ébresztésekre” eddig: <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="722093064250082317">"Módosítás a bármikor történő megszakításra"</string>
     <string name="zen_mode_screen_on" msgid="7312758100468915319">"Ha a képernyő be van kapcsolva"</string>
+    <string name="zen_mode_screen_on_summary" msgid="510055058460316698">"Engedélyezi, hogy a Ne zavarjanak funkcióval lenémított értesítések felugorjanak a képernyőn, és állapotsorikont jelenítsenek meg"</string>
     <string name="zen_mode_screen_off" msgid="7069798697669366075">"Ha a képernyő ki van kapcsolva"</string>
+    <string name="zen_mode_screen_off_summary" msgid="4698018253505406152">"A Ne zavarjanak funkcióval elnémított értesítésekre bekapcsolhat a képernyő, és villoghat a fényjelzés"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="1958271859408992636">"A Ne zavarjanak funkcióval elnémított értesítésekre bekapcsolhat a képernyő"</string>
     <string name="notification_app_settings_button" msgid="4692549882609342128">"Értesítési beállítások"</string>
     <string name="warning_button_text" msgid="1274234338874005639">"Figyelmeztetés"</string>
     <string name="suggestion_button_text" msgid="4370673818678692873">"OK"</string>
@@ -4253,6 +4331,7 @@
     <string name="notifications_silenced" msgid="2673798575466545098">"Lenémítva"</string>
     <string name="notifications_redacted" msgid="8820993927920208612">"A lezárási képernyőn nem látható bizalmas tartalom"</string>
     <string name="notifications_hidden" msgid="2415415452913806859">"Nem látható a lezárási képernyőn"</string>
+    <string name="notifications_priority" msgid="9068574646650663837">"A „Ne zavarjanak” funkció felülbírálása"</string>
     <string name="notifications_summary_divider" msgid="6877149909390030983">" / "</string>
     <string name="notification_summary_level" msgid="4074326972839105652">"%d. szint"</string>
     <string name="notification_summary_channel" msgid="8459033623057872803">"<xliff:g id="CHANNEL_NAME">%1$s</xliff:g> • <xliff:g id="GROUP_NAME">%2$s</xliff:g>"</string>
@@ -4291,6 +4370,7 @@
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Kategóriák: Sürgős"</string>
     <string name="filter_notif_low_channels" msgid="2163005243095264537">"Kategóriák: Kevésbé fontos"</string>
     <string name="filter_notif_blocked_channels" msgid="1131444963543380495">"Kategóriák: Kikapcsolva"</string>
+    <string name="filter_notif_dnd_channels" msgid="13445325087914932">"Kategóriák: Korlát felülírása"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Speciális"</string>
     <string name="configure_apps" msgid="5468359087126598115">"Alkalmazások konfigurálása"</string>
     <string name="unknown_app" msgid="2027248925719898714">"Ismeretlen alkalmazás"</string>
@@ -4446,7 +4526,11 @@
     <string name="running_frequency" msgid="7260225121706316639">"Gyakoriság"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maximális használat"</string>
     <string name="no_data_usage" msgid="4665617440434654132">"Nincs felhasznált adatmennyiség"</string>
+    <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Engedélyezi a(z) <xliff:g id="APP">%1$s</xliff:g> számára a hozzáférést a „Ne zavarjanak” funkcióhoz?"</string>
+    <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Az alkalmazás be- és kikapcsolhatja a „Ne zavarjanak” funkciót, és módosíthatja a vonatkozó beállításokat."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Bekapcsolva kell hagyni, mert az értesítési hozzáférés be van kapcsolva"</string>
+    <string name="zen_access_revoke_warning_dialog_title" msgid="7377261509261811449">"Visszavonja a(z) <xliff:g id="APP">%1$s</xliff:g> hozzáférését a „Ne zavarjanak” szabályhoz?"</string>
+    <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Az alkalmazás által létrehozott összes „Ne zavarjanak” szabály eltávolításra kerül."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"Ne legyen optimalizálva"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimalizálás"</string>
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Az akkumulátor gyorsabban lemerülhet. Az alkalmazás számára többé nem lesz korlátozva a háttérben történő akkuhasználat."</string>
@@ -4493,7 +4577,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"A kamerához nyomja meg a bekapcsológombot kétszer"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"A kamera gyors megnyitása a képernyő feloldása nélkül"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Megjelenített méret"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Nagyíthatja vagy kicsinyítheti a képernyőn megjelenő elemeket"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Minden elem nagyítása vagy kicsinyítése"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"kijelző, sűrűség, képernyő elemeinek mérete, méret, méretezés"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Nagyíthatja vagy kicsinyítheti a képernyőn megjelenő elemeket. Egyes alkalmazások más helyre kerülhetnek a képernyőn."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Előnézet"</string>
@@ -4554,6 +4638,7 @@
     <string name="condition_hotspot_title" msgid="7903918338790641071">"A hotspot aktív"</string>
     <string name="condition_airplane_title" msgid="5847967403687381705">"Repülős üzemmód bekapcsolva"</string>
     <string name="condition_airplane_summary" msgid="1964500689287879888">"Nincsenek rendelkezésre álló hálózatok"</string>
+    <string name="condition_zen_title" msgid="7674761111934567490">"Ne zavarjanak mód: bekapcsolva"</string>
     <string name="condition_zen_summary_phone_muted" msgid="6516753722927681820">"A telefon le van némítva"</string>
     <string name="condition_zen_summary_with_exceptions" msgid="9019937492602199663">"Kivételekkel"</string>
     <string name="condition_battery_title" msgid="6395113995454385248">"Akkumulátorkímélő bekapcsolva"</string>
@@ -5032,6 +5117,7 @@
     <string name="storage_movies_tv" msgid="7897612625450668593">"Filmes és tévés alkalmazások"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Információ a szolgáltatói hozzáférésről"</string>
     <string name="trigger_carrier_provisioning" msgid="3288805742683538597">"Szolgáltatói ellátás aktiválása"</string>
+    <string name="zen_suggestion_title" msgid="4555260320474465668">"A Ne zavarjanak mód frissítése"</string>
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Az összpontosításhoz szüneteltetheti az értesítéseket"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"A funkció nem áll rendelkezésre"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"A rendszer kikapcsolta ezt a funkciót, mert lelassítja a telefont"</string>
@@ -5410,6 +5496,8 @@
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"A QR-szkennerhez a lezárási képernyőn való hozzáférés engedélyezése"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Eszközvezérlők megjelenítése"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Hozzáférés a vezérlőkhöz lezárt képernyő mellett"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Vezérlés zárolt eszközről"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Úgy is vezérelheti a külső eszközöket, hogy nem kell feloldania a telefonját vagy táblagépét, amennyiben ezt engedélyezi az eszközvezérlő alkalmazás"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Kétsoros óra megjelenítése, amikor rendelkezésre áll"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Kétsoros óra"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5571,14 +5659,13 @@
     <string name="tare_revert" msgid="3855325741125236638">"Az alapértelmezett beállítások visszaállítása"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Alapbeállítások visszaállítva."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maximális telítettségi egyenleg"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"Maximális forgalom"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"Minimális telítettségi egyenleg"</string>
+    <string name="tare_balances" msgid="731881382594747961">"Egyenlegek"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Fogyasztásra vonatkozó korlátozások"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Kezdeti fogyasztásra vonatkozó korlátozás"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Maximális fogyasztásra vonatkozó korlátozás"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Módosítók"</string>
     <string name="tare_actions" msgid="4573323466443513639">"Műveletek"</string>
     <string name="tare_rewards" msgid="602131401590928885">"Jutalmak"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"Mentesítve"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"Headless rendszerű alkalmazás"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"Egyéb alkalmazás"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Leggyakoribb tevékenység"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Megtekintett értesítés"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"15 percen belül megtekintett értesítés"</string>
@@ -5596,6 +5683,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Munka minimális prioritású indítása"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Munka minimális prioritású futtatása"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Munka időtúllépéséért járó büntetés"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimális telítettségi egyenleg (mentesítve)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimális telítettségi egyenleg (Headless rendszerű alkalmazás)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimális telítettségi egyenleg (többi alkalmazás)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Töltés"</item>
     <item msgid="658627268149681677">"Kímélés"</item>

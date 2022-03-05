@@ -5214,9 +5214,9 @@
     <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_shortcut_title">Magnification shortcut</string>
     <!-- Title for accessibility follow typing preference for magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_follow_typing_title">Follow typing</string>
+    <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_typing_summary">Magnification area automatically follows the text as you type</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
     <!-- Title for screen magnification footer. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_about_title">About magnification</string>
     <!-- Screen magnification footer link content description [CHAR LIMIT=NONE] -->
@@ -11845,8 +11845,14 @@
     <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
     <!-- Category title for one handed use the shortcut [CHAR_LIMIT=60] -->
     <string name="one_handed_mode_use_shortcut_category">Use the shortcut to</string>
+    <!-- One-handed mode intro Text [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_mode_intro_text">Pull down the top half of your screen so it\u2019s easier to reach with one hand</string>
     <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
-    <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
+    <string name="one_handed_mode_footer_text">
+        <b>How to use one-handed mode</b>\n
+        • Make sure gesture navigation is selected in system navigation settings\n
+        • Swipe down near the bottom edge of the screen
+    </string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
     <string name="one_handed_action_pull_down_screen_title">Pull screen into reach</string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=NONE] -->
@@ -12310,6 +12316,14 @@
     <string name="enable_gnss_raw_meas_full_tracking">Force full GNSS measurements</string>
     <!-- Location setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
     <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
+
+    <!-- Developer options Input method category strings -->
+    <!-- Title for input method category [CHAR LIMIT=30]-->
+    <string name="input_method_category">Input Method</string>
+    <!-- [CHAR LIMIT=30] Title for Stylus handwriting settings -->
+    <string name="stylus_handwriting">Stylus handwriting</string>
+    <!-- [CHAR LIMIT=130] Summary for Stylus handwriting toggle -->
+    <string name="stylus_handwriting_summary">When enabled, current Input method receives stylus MotionEvent if an Editor is focused.</string>
 
     <!-- Name of setting for switching device theme [CHAR LIMIT=60] -->
     <string name="device_theme">Device theme</string>
