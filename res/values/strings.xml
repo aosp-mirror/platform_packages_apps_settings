@@ -2908,6 +2908,20 @@
     <string name="auto_rotate_option_face_based">On - Face-based</string>
     <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
     <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
+
+    <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
+    <string name="screen_resolution_title">Screen resolution</string>
+    <!-- Display settings screen, screen resolution option for "FHD+" [CHAR LIMIT=45] -->
+    <string name="screen_resolution_option_high">High resolution</string>
+    <!-- Display settings screen, screen resolution option for "QHD+" [CHAR LIMIT=45] -->
+    <string name="screen_resolution_option_highest">Highest resolution</string>
+    <!-- Display settings screen, "FHD+" screen resolution summary [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_summary_high">1080p FHD+</string>
+    <!-- Display settings screen, "QHD+" screen resolution summary [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_summary_highest">1440p QHD+</string>
+    <!-- The footer message for switch screen resolution [CHAR LIMIT=NONE] -->
+    <string name="screen_resolution_footer">Switching your resolution might cause some apps currently running to close.</string>
+
     <!-- Display settings screen, Color mode settings title [CHAR LIMIT=30] -->
     <string name="color_mode_title">Colors</string>
     <!-- Display settings screen, Color mode option for "natural(sRGB) color"  [CHAR LIMIT=45] -->
@@ -5200,9 +5214,9 @@
     <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_shortcut_title">Magnification shortcut</string>
     <!-- Title for accessibility follow typing preference for magnification. [CHAR LIMIT=35] -->
-    <string name="accessibility_screen_magnification_follow_typing_title">Follow typing</string>
+    <string name="accessibility_screen_magnification_follow_typing_title">Magnify typing</string>
     <!-- Summary for accessibility follow typing preference for magnification. [CHAR LIMIT=none] -->
-    <string name="accessibility_screen_magnification_follow_typing_summary">Magnification area automatically follows the text as you type</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary">Magnifier follows text as you type</string>
     <!-- Title for screen magnification footer. [CHAR LIMIT=60] -->
     <string name="accessibility_screen_magnification_about_title">About magnification</string>
     <!-- Screen magnification footer link content description [CHAR LIMIT=NONE] -->
@@ -8269,6 +8283,8 @@
     <string name="keywords_default_apps">apps, default</string>
     <string name="keywords_ignore_optimizations">ignore optimizations, doze, app standby</string>
     <string name="keywords_color_mode">vibrant, RGB, sRGB, color, natural, standard</string>
+    <!-- Search keyword for "screen resolution" settings [CHAR_LIMIT=NONE]-->
+    <string name="keywords_screen_resolution">FHD, QHD, resolution, 1080p, 1440p</string>
     <string name="keywords_color_temperature">color, temperature, D65, D73, white, yellow, blue, warm, cool</string>
     <string name="keywords_lockscreen">slide to unlock, password, pattern, PIN</string>
     <!-- Search keyword for App pinning Settings [CHAR LIMIT=NONE] -->
@@ -11829,8 +11845,14 @@
     <string name="one_handed_mode_swipe_down_category">Swipe down to</string>
     <!-- Category title for one handed use the shortcut [CHAR_LIMIT=60] -->
     <string name="one_handed_mode_use_shortcut_category">Use the shortcut to</string>
+    <!-- One-handed mode intro Text [CHAR_LIMIT=NONE] -->
+    <string name="one_handed_mode_intro_text">Pull down the top half of your screen so it\u2019s easier to reach with one hand</string>
     <!-- One-handed mode Intro Text [CHAR_LIMIT=NONE] -->
-    <string name="one_handed_mode_intro_text">To use one handed mode, swipe down from the bottom edge of the screen. To use this feature, make sure gesture navigation is turned on in system navigation settings.</string>
+    <string name="one_handed_mode_footer_text">
+        <b>How to use one-handed mode</b>\n
+        • Make sure gesture navigation is selected in system navigation settings\n
+        • Swipe down near the bottom edge of the screen
+    </string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=60] -->
     <string name="one_handed_action_pull_down_screen_title">Pull screen into reach</string>
     <!-- One-handed mode pull down screen into reach action title [CHAR_LIMIT=NONE] -->
@@ -13360,7 +13382,7 @@
     <!-- Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
     <!-- Device controls summary [CHAR LIMIT=NONE] -->
-    <string name="lockscreen_privacy_controls_summary">Access controls when locked</string>
+    <string name="lockscreen_privacy_controls_summary">Show controls for external devices from the lock screen</string>
     <!-- Trivial Device controls toggle name [CHAR LIMIT=60] -->
     <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
     <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->

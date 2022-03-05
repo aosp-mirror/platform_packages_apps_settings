@@ -25,6 +25,7 @@ import android.telephony.UiccSlotInfo;
 import android.telephony.UiccSlotMapping;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -33,6 +34,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -126,7 +128,10 @@ public class UiccSlotUtil {
 
         performSwitchToSlot(telMgr,
                 prepareUiccSlotMappings(uiccSlotMappings,
-                        inactiveRemovableSlot, /*removable sim's port Id*/ 0, removedSubInfo,
+                        /*slot is psim*/ true,
+                        inactiveRemovableSlot,
+                        /*removable sim's port Id*/ TelephonyManager.DEFAULT_PORT_INDEX,
+                        removedSubInfo,
                         telMgr.isMultiSimEnabled()),
                 context);
     }
@@ -159,7 +164,7 @@ public class UiccSlotUtil {
         }
 
         performSwitchToSlot(telMgr,
-                prepareUiccSlotMappings(uiccSlotMappings,
+                prepareUiccSlotMappings(uiccSlotMappings, /*slot is not psim*/ false,
                         physicalSlotId, port, removedSubInfo, telMgr.isMultiSimEnabled()),
                 context);
     }
@@ -251,9 +256,27 @@ public class UiccSlotUtil {
         return INVALID_PHYSICAL_SLOT_ID;
     }
 
-    private static Collection<UiccSlotMapping> prepareUiccSlotMappings(
-            Collection<UiccSlotMapping> uiccSlotMappings, int physicalSlotId, int port,
-            SubscriptionInfo removedSubInfo, boolean isMultiSimEnabled) {
+    // Device |                                        |Slot   |
+    // Working|                                        |Mapping|
+    // State  |Type                                    |Mode   |Friendly name
+    //--------------------------------------------------------------------------
+    // Single |SIM pSIM [RIL 0]                        |1      |pSIM active
+    // Single |SIM MEP Port #0 [RIL0]                  |2      |eSIM Port0 active
+    // Single |SIM MEP Port #1 [RIL0]                  |2.1    |eSIM Port1 active
+    // DSDS   |pSIM [RIL 0] + MEP Port #0 [RIL 1]      |3      |pSIM+Port0
+    // DSDS   |pSIM [RIL 0] + MEP Port #1 [RIL 1]      |3.1    |pSIM+Port1
+    // DSDS   |MEP Port #0 [RIL 0] + MEP Port #1 [RIL1]|3.2    |Dual-Ports-A
+    // DSDS   |MEP Port #1 [RIL 0] + MEP Port #0 [RIL1]|4      |Dual-Ports-B
+    //
+    // The rules are:
+    // 1. pSIM's logical slots always is [RIL 0].
+    // 2. assign the new active port to the same stack that will be de-activated
+    //    For example: mode#3->mode#4
+
+    @VisibleForTesting
+    static Collection<UiccSlotMapping> prepareUiccSlotMappings(
+            Collection<UiccSlotMapping> uiccSlotMappings, boolean isPsim, int physicalSlotId,
+            int port, SubscriptionInfo removedSubInfo, boolean isMultiSimEnabled) {
         Collection<UiccSlotMapping> newUiccSlotMappings = new ArrayList<>();
         if (!isMultiSimEnabled) {
             // In the 'SS mode', the port is 0.
@@ -268,25 +291,59 @@ public class UiccSlotUtil {
                                     + "PhysicalSlotId%d-Port%d",
                             removedSubInfo.getSubscriptionId(), removedSubInfo.getSimSlotIndex(),
                             removedSubInfo.getPortIndex(), physicalSlotId, port));
+
+            int logicalSlotIndex = 0;
+            if (isPsim) {
+                // The target slot is psim
+                newUiccSlotMappings.add(
+                        new UiccSlotMapping(port, physicalSlotId, logicalSlotIndex++));
+            }
+            Collection<UiccSlotMapping> tempUiccSlotMappings =
+                    uiccSlotMappings.stream()
+                            .sorted(Comparator.comparingInt(UiccSlotMapping::getLogicalSlotIndex))
+                            .collect(Collectors.toList());
+            for (UiccSlotMapping uiccSlotMapping : tempUiccSlotMappings) {
+                if (isSubInfoMappingIntoUiccSlotMapping(uiccSlotMapping, removedSubInfo)) {
+                    if (!isPsim) {
+                        // Replace this uiccSlotMapping
+                        newUiccSlotMappings.add(new UiccSlotMapping(port, physicalSlotId,
+                                uiccSlotMapping.getLogicalSlotIndex()));
+                    }
+                    continue;
+                }
+
+                // If the psim is inserted, then change the
+                // logicalSlotIndex for another uiccSlotMappings.
+                newUiccSlotMappings.add(isPsim
+                        ? new UiccSlotMapping(
+                                uiccSlotMapping.getPortIndex(),
+                                uiccSlotMapping.getPhysicalSlotIndex(),
+                                logicalSlotIndex++
+                        ) : uiccSlotMapping);
+            }
+        } else {
+            // For no inserted psim case in DSDS+MEP, there is only one esim in device and
+            // then user inserts another esim in DSDS+MEP.
+            // If the target is esim, then replace the psim.
+            Log.i(TAG, "The removedSubInfo is null");
             newUiccSlotMappings =
                     uiccSlotMappings.stream().map(uiccSlotMapping -> {
-                        if (uiccSlotMapping.getLogicalSlotIndex()
-                                == removedSubInfo.getSimSlotIndex()
-                                && uiccSlotMapping.getPortIndex()
-                                == removedSubInfo.getPortIndex()) {
+                        if (!isPsim && uiccSlotMapping.getPhysicalSlotIndex() != physicalSlotId) {
                             return new UiccSlotMapping(port, physicalSlotId,
                                     uiccSlotMapping.getLogicalSlotIndex());
                         }
                         return uiccSlotMapping;
                     }).collect(Collectors.toList());
-        } else {
-            // DSDS+no MEP
-            // The removable slot should be in UiccSlotMapping.
-            newUiccSlotMappings = uiccSlotMappings;
-            Log.i(TAG, "The removedSubInfo is null");
         }
 
         Log.i(TAG, "The SimSlotMapping: " + newUiccSlotMappings);
         return newUiccSlotMappings;
+    }
+
+    private static boolean isSubInfoMappingIntoUiccSlotMapping(UiccSlotMapping uiccSlotMapping,
+            SubscriptionInfo subscriptionInfo) {
+        return uiccSlotMapping != null
+                && uiccSlotMapping.getLogicalSlotIndex() == subscriptionInfo.getSimSlotIndex()
+                && uiccSlotMapping.getPortIndex() == subscriptionInfo.getPortIndex();
     }
 }
