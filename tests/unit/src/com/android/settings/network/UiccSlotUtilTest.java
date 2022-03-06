@@ -116,9 +116,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingSsModePsimActive();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingSsModeEsimPort0Active();
+        int removedLogicalSlotIndex = 0;
 
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, null, false);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -129,9 +130,10 @@ public class UiccSlotUtilTest {
                 createUiccSlotMappingSsModeEsimPort0Active();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingSsModePsimActive();
+        int removedLogicalSlotIndex = 0;
 
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, null, false);
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -141,9 +143,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort1();
-        SubscriptionInfo subInfo = createSubscriptionInfo(1, 0);
+        int removedLogicalSlotIndex = 1;
+
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, subInfo, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -153,10 +156,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort0();
+        int removedLogicalSlotIndex = 1;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(1, 1);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -166,10 +169,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingDualPortsB();
+        int removedLogicalSlotIndex = 0;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(0, 0);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, subInfo, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -179,10 +182,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingDualPortsA();
+        int removedLogicalSlotIndex = 0;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(0, 0);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -192,9 +195,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingDualPortsB();
+        int removedLogicalSlotIndex = 0;
 
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, null, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 1, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -204,9 +208,66 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingDualPortsA();
+        int removedLogicalSlotIndex = 0;
 
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, null, true);
+                uiccSlotMappings, false, ESIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
+
+        compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
+    }
+
+    @Test
+    public void prepareUiccSlotMappings_oneEsimAndFromDualPortsAToPsimAndPort1_psimAndPort1() {
+        // There is only one enabled esimPort1 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<UiccSlotMapping> verifyUiccSlotMappings =
+                createUiccSlotMappingPsimAndPort1();
+        int removedLogicalSlotIndex = 0;
+
+        Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
+
+        compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
+    }
+
+    @Test
+    public void prepareUiccSlotMappings_oneEsimAndFromDualPortsAToPsimAndPort0_psimAndPort0() {
+        // There is only one enabled esimPort0 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<UiccSlotMapping> verifyUiccSlotMappings =
+                createUiccSlotMappingPsimAndPort0();
+        int removedLogicalSlotIndex = 1;
+
+        Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
+
+        compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
+    }
+
+    @Test
+    public void prepareUiccSlotMappings_oneEsimAndFromDualPortsBToPsimAndPort1_psimAndPort1() {
+        // There is only one enabled esimPort1 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
+        Collection<UiccSlotMapping> verifyUiccSlotMappings =
+                createUiccSlotMappingPsimAndPort1();
+        int removedLogicalSlotIndex = 1;
+
+        Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
+
+        compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
+    }
+
+    @Test
+    public void prepareUiccSlotMappings_oneEsimAndFromDualPortsBToPsimAndPort0_psimAndPort0() {
+        // There is only one enabled esimPort0 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
+        Collection<UiccSlotMapping> verifyUiccSlotMappings =
+                createUiccSlotMappingPsimAndPort0();
+        int removedLogicalSlotIndex = 0;
+
+        Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -216,10 +277,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort1();
+        int removedLogicalSlotIndex = 0;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(0, 0);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -229,10 +290,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort0();
+        int removedLogicalSlotIndex = 1;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(1, 1);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -242,10 +303,10 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort1();
+        int removedLogicalSlotIndex = 1;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(1, 0);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
@@ -255,20 +316,240 @@ public class UiccSlotUtilTest {
         Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
         Collection<UiccSlotMapping> verifyUiccSlotMappings =
                 createUiccSlotMappingPsimAndPort0();
+        int removedLogicalSlotIndex = 0;
 
-        SubscriptionInfo subInfo = createSubscriptionInfo(0, 1);
         Collection<UiccSlotMapping> testUiccSlotMappings = UiccSlotUtil.prepareUiccSlotMappings(
-                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, subInfo, true);
+                uiccSlotMappings, true, PSIM_PHYSICAL_SLOT, 0, removedLogicalSlotIndex);
 
         compareTwoUiccSlotMappings(testUiccSlotMappings, verifyUiccSlotMappings);
     }
 
-    private SubscriptionInfo createSubscriptionInfo(int logicalSlotIndex, int portIndex) {
-        return new SubscriptionInfo(
-                0, "", logicalSlotIndex, "", "", 0, 0, "", 0, null, "", "", "",
-                true /* isEmbedded */,
-                null, "", 25,
-                false, null, false, 0, 0, 0, null, null, true, portIndex);
+    @Test
+    public void getExcludedLogicalSlotIndex_fromPsimActiveToEsimPort0Active_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingSsModePsimActive();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(0, 0);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, false);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromEsimPort0ActiveToPsimActive_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingSsModeEsimPort0Active();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(0, 0);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, false);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromPsimAndPort0ToPsimAndPort1_logicalSlot1() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 0);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(1, 0);
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromPsimAndPort1ToPsimAndPort0_logicalSlot1() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 1);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(1, 1);
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromPsimAndPort0ToDualPortsB_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 0);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(0, 0);
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromPsimAndPort1ToDualPortsA_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 1);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(0, 0);
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_noPsimAndFromPsimAndPort0ToDualPortsB_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort0();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(1, 0);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_noPsimAndFromPsimAndPort1ToDualPortsA_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(1, 1);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsAToPsimAndPort1_logicalSlot0() {
+        // There is only one enabled esimPort1 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(1, 1);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsAToPsimAndPort0_logicalSlot1() {
+        // There is only one enabled esimPort0 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(0, 0);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsBToPsimAndPort1_logicalSlot1() {
+        // There is only one enabled esimPort1 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(0, 1);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsBToPsimAndPort0_logicalSlot0() {
+        // There is only one enabled esimPort0 before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListOneSim(1, 0);
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromDualPortsAToPsimAndPort1_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 1);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(0, 0);
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromDualPortsAToPsimAndPort0_logicalSlot1() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 0, 1, 1);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(1, 1);
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromDualPortsBToPsimAndPort1_logicalSlot1() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 1, 1, 0);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(1, 0);
+        int verifyExcludedLogicalSlotIndex = 1;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_fromDualPortsBToPsimAndPort0_logicalSlot0() {
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList =
+                createActiveSubscriptionInfoListTwoSims(0, 1, 1, 0);
+        SubscriptionInfo removedSubInfo = createSubscriptionInfo(0, 1);
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
     }
 
     private void compareTwoUiccSlotMappings(Collection<UiccSlotMapping> testUiccSlotMappings,
@@ -286,6 +567,30 @@ public class UiccSlotUtilTest {
             assertThat(testUiccSlotMapping.getPhysicalSlotIndex()).isEqualTo(
                     verifyUiccSlotMapping.getPhysicalSlotIndex());
         }
+    }
+
+    private SubscriptionInfo createSubscriptionInfo(int logicalSlotIndex, int portIndex) {
+        return new SubscriptionInfo(
+                0, "", logicalSlotIndex, "", "", 0, 0, "", 0, null, "", "", "",
+                true /* isEmbedded */,
+                null, "", 25,
+                false, null, false, 0, 0, 0, null, null, true, portIndex);
+    }
+
+    private List<SubscriptionInfo> createActiveSubscriptionInfoListOneSim(int logicalSlotIndex,
+            int portIndex) {
+        List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
+        subscriptionInfoList.add(createSubscriptionInfo(logicalSlotIndex, portIndex));
+
+        return subscriptionInfoList;
+    }
+
+    private List<SubscriptionInfo> createActiveSubscriptionInfoListTwoSims(int logicalSlotIndex1,
+            int portIndex1, int logicalSlotIndex2, int portIndex2) {
+        List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
+        subscriptionInfoList.add(createSubscriptionInfo(logicalSlotIndex1, portIndex1));
+        subscriptionInfoList.add(createSubscriptionInfo(logicalSlotIndex2, portIndex2));
+        return subscriptionInfoList;
     }
 
     // Device |                                        |Slot   |
