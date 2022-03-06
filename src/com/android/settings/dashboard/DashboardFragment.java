@@ -48,7 +48,6 @@ import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +57,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -222,7 +220,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onResume();
         updatePreferenceStates();
         writeElapsedTimeMetric(SettingsEnums.ACTION_DASHBOARD_VISIBLE_TIME,
-                "isParalleledControllers:" + isParalleledControllers());
+                "isParalleledControllers:false");
     }
 
     @Override
@@ -349,14 +347,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     }
 
     /**
-     * @return {@code true} if the underlying controllers should be executed in parallel.
-     * Override this function to enable/disable the behavior.
-     */
-    protected boolean isParalleledControllers() {
-        return false;
-    }
-
-    /**
      * Get current PreferenceController(s)
      */
     protected Collection<List<AbstractPreferenceController>> getPreferenceControllers() {
@@ -390,36 +380,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                     continue;
                 }
                 controller.updateState(preference);
-            }
-        }
-    }
-
-    /**
-     * Use parallel method to update state of each preference managed by PreferenceController.
-     */
-    @VisibleForTesting
-    // To use this parallel approach will cause the side effect of the UI flicker. Such as
-    // the thumb sliding of the toggle button.
-    void updatePreferenceStatesInParallel() {
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Collection<List<AbstractPreferenceController>> controllerLists =
-                mPreferenceControllers.values();
-        final List<ControllerFutureTask> taskList = new ArrayList<>();
-        for (List<AbstractPreferenceController> controllerList : controllerLists) {
-            for (AbstractPreferenceController controller : controllerList) {
-                final ControllerFutureTask task = new ControllerFutureTask(
-                        new ControllerTask(controller, screen, mMetricsFeatureProvider,
-                                getMetricsCategory()), null /* result */);
-                taskList.add(task);
-                ThreadUtils.postOnBackgroundThread(task);
-            }
-        }
-
-        for (ControllerFutureTask task : taskList) {
-            try {
-                task.get();
-            } catch (InterruptedException | ExecutionException e) {
-                Log.w(TAG, task.getController().getPreferenceKey() + " " + e.getMessage());
             }
         }
     }
