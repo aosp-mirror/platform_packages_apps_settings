@@ -320,11 +320,17 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
+    public void onStop_notLastGroupFormed_shouldCloseChannel() {
+        mFragment.onStop();
+
+        assertThat(mFragment.mChannel).isNull();
+    }
+
+    @Test
     public void peerDiscovery_whenOnPause_shouldStop() {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
-        assertThat(mFragment.mChannel).isNull();
     }
 
     @Test
@@ -332,7 +338,6 @@ public class WifiP2pSettingsTest {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
-        assertThat(mFragment.mChannel).isNull();
 
         mFragment.onResume();
         assertThat(mFragment.mChannel).isNotNull();
