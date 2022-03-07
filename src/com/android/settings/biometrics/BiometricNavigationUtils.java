@@ -37,7 +37,11 @@ import com.android.settingslib.transition.SettingsTransitionHelper;
  */
 public class BiometricNavigationUtils {
 
-    private final int mUserId = UserHandle.myUserId();
+    private final int mUserId;
+
+    public BiometricNavigationUtils(int userId) {
+        mUserId = userId;
+    }
 
     /**
      * Tries to launch the Settings screen if Quiet Mode is not enabled
