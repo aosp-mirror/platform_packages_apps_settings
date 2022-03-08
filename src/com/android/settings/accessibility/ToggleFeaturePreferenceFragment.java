@@ -222,7 +222,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         updatePreferenceOrder();
 
-        // Reshow tooltips when activity recreate, such as rotate device.
+        // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
             getView().post(this::showQuickSettingsTooltipIfNeeded);
         }
@@ -331,8 +331,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     /** Returns the accessibility tile component name. */
     abstract ComponentName getTileComponentName();
 
-    /** Returns the accessibility tile feature name. */
-    abstract CharSequence getTileName();
+    /** Returns the accessibility tile tooltip content. */
+    abstract CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type);
 
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         final CharSequence title =
@@ -870,21 +870,17 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             return;
         }
 
-        final CharSequence tileName = getTileName();
-        if (TextUtils.isEmpty(tileName)) {
-            // Returns if no title of tile service assigned.
+        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
+        if (TextUtils.isEmpty(content)) {
+            // Returns if no content of tile tooltip assigned.
             return;
         }
 
-        final int titleResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_service_qs_tooltips_content
-                : R.string.accessibility_service_auto_added_qs_tooltips_content;
-        final String title = getString(titleResId, tileName);
         final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
                 ? R.drawable.accessibility_qs_tooltips_illustration
                 : R.drawable.accessibility_auto_added_qs_tooltips_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(title, imageResId);
+        mTooltipWindow.setup(content, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);

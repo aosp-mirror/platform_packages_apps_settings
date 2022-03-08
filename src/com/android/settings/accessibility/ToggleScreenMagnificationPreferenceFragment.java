@@ -47,6 +47,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 
@@ -405,7 +406,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    CharSequence getTileName() {
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         return null;
     }
 
