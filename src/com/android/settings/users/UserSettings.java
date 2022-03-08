@@ -528,6 +528,30 @@ public class UserSettings extends SettingsPreferenceFragment
         startActivity(intent);
     }
 
+    private void onAddGuestClicked() {
+        final UserCreatingDialog guestCreatingDialog =
+                new UserCreatingDialog(getActivity(), /* isGuest= */ true);
+        guestCreatingDialog.show();
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
+            Trace.beginSection("UserSettings.addGuest");
+            final UserInfo guest = mUserManager.createGuest(getContext());
+            Trace.endSection();
+
+            ThreadUtils.postOnMainThread(() -> {
+                guestCreatingDialog.dismiss();
+                if (guest == null) {
+                    Toast.makeText(getContext(),
+                            com.android.settingslib.R.string.add_guest_failed,
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                openUserDetails(guest, true);
+            });
+        });
+    }
+
     private void onRemoveUserClicked(int userId) {
         synchronized (mUserLock) {
             if (mRemovingUserId == -1 && !mAddingUser) {
@@ -1283,17 +1307,7 @@ public class UserSettings extends SettingsPreferenceFragment
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
-            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
-            Trace.beginSection("UserSettings.addGuest");
-            UserInfo guest = mUserManager.createGuest(getContext());
-            Trace.endSection();
-            if (guest == null) {
-                Toast.makeText(getContext(),
-                        com.android.settingslib.R.string.add_user_failed,
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            openUserDetails(guest, true);
+            onAddGuestClicked();
             return true;
         }
         return false;
