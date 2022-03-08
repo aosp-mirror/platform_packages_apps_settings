@@ -55,9 +55,9 @@ public class EncryptionStatusPreferenceController extends BasePreferenceControll
     public void updateState(Preference preference) {
         final boolean encryptionEnabled = LockPatternUtils.isDeviceEncryptionEnabled();
         if (encryptionEnabled) {
-            preference.setSummary(R.string.crypt_keeper_encrypted_summary);
+            preference.setSummary(R.string.encrypted_summary);
         } else {
-            preference.setSummary(R.string.decryption_settings_summary);
+            preference.setSummary(R.string.not_encrypted_summary);
         }
 
     }
