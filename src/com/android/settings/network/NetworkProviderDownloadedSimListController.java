@@ -130,6 +130,8 @@ public class NetworkProviderDownloadedSimListController extends
             pref.setOnPreferenceClickListener(clickedPref -> {
                 final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                 intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
+                MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(mContext, intent, null);
                 mContext.startActivity(intent);
                 return true;
             });

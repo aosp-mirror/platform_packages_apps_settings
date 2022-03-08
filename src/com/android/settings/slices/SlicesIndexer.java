@@ -116,6 +116,7 @@ class SlicesIndexer implements Runnable {
             values.put(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
                     dataRow.getUnavailableSliceSubtitle());
             values.put(IndexColumns.PUBLIC_SLICE, dataRow.isPublicSlice());
+            values.put(IndexColumns.HIGHLIGHT_MENU_RESOURCE, dataRow.getHighlightMenuRes());
 
             database.replaceOrThrow(Tables.TABLE_SLICES_INDEX, null /* nullColumnHack */,
                     values);
