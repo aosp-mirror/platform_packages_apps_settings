@@ -362,7 +362,8 @@ abstract public class NotificationSettings extends DashboardFragment {
                 final String p = packages[i];
                 if (pkg.equals(p)) {
                     try {
-                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
+                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES
+                                | PackageManager.GET_PERMISSIONS);
                     } catch (NameNotFoundException e) {
                         Log.w(TAG, "Failed to load package " + pkg, e);
                     }
