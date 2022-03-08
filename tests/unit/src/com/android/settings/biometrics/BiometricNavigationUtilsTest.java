@@ -64,7 +64,7 @@ public class BiometricNavigationUtilsTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doNothing().when(mContext).startActivity(any());
-        mBiometricNavigationUtils = new BiometricNavigationUtils();
+        mBiometricNavigationUtils = new BiometricNavigationUtils(UserHandle.myUserId());
     }
 
     @Test
