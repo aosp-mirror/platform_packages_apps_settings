@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceStatus;
@@ -47,9 +48,12 @@ public final class BiometricsSafetySource {
             return;
         }
 
-        final BiometricNavigationUtils biometricNavigationUtils = new BiometricNavigationUtils();
+        final int userId = UserHandle.myUserId();
+
+        final BiometricNavigationUtils biometricNavigationUtils = new BiometricNavigationUtils(
+                userId);
         final CombinedBiometricStatusUtils combinedBiometricStatusUtils =
-                new CombinedBiometricStatusUtils(context);
+                new CombinedBiometricStatusUtils(context, userId);
 
         if (combinedBiometricStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
@@ -66,7 +70,7 @@ public final class BiometricsSafetySource {
         }
 
         final FaceManager faceManager = Utils.getFaceManagerOrNull(context);
-        final FaceStatusUtils faceStatusUtils = new FaceStatusUtils(context, faceManager);
+        final FaceStatusUtils faceStatusUtils = new FaceStatusUtils(context, faceManager, userId);
 
         if (faceStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
@@ -85,7 +89,7 @@ public final class BiometricsSafetySource {
 
         final FingerprintManager fingerprintManager = Utils.getFingerprintManagerOrNull(context);
         final FingerprintStatusUtils fingerprintStatusUtils = new FingerprintStatusUtils(context,
-                fingerprintManager);
+                fingerprintManager, userId);
 
         if (fingerprintStatusUtils.isAvailable()) {
             final RestrictedLockUtils.EnforcedAdmin disablingAdmin =
