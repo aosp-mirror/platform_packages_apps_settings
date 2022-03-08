@@ -75,7 +75,7 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void updateState_lowPowerOn_preferenceIsChecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
-        mController.onSwitchChanged(null, mPowerManager.isPowerSaveMode());
+        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
 
         assertThat(mPreference.isChecked()).isTrue();
     }
@@ -84,7 +84,7 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void testUpdateState_lowPowerOff_preferenceIsUnchecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
-        mController.onSwitchChanged(null, mPowerManager.isPowerSaveMode());
+        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
 
         assertThat(mPreference.isChecked()).isFalse();
     }

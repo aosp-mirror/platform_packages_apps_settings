@@ -52,7 +52,8 @@ public class FingerprintStatusUtilsTest {
 
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
-    private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
+    private static final int USER_ID = UserHandle.myUserId();
+    private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
 
 
     @Mock
@@ -82,7 +83,7 @@ public class FingerprintStatusUtilsTest {
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
         mFingerprintStatusUtils =
-                new FingerprintStatusUtils(mApplicationContext, mFingerprintManager);
+                new FingerprintStatusUtils(mApplicationContext, mFingerprintManager, USER_ID);
     }
 
     @Test
