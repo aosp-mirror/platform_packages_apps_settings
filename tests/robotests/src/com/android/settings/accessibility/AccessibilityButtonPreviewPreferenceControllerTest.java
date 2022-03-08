@@ -19,6 +19,8 @@ package com.android.settings.accessibility;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 
+import static com.android.settings.testutils.ImageTestUtils.drawableToBitmap;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
@@ -28,12 +30,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
-import android.widget.ImageView;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.testutils.ImageTestUtils;
+import com.android.settingslib.widget.IllustrationPreference;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -62,7 +63,7 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
     public void setUp() {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         mController = new AccessibilityButtonPreviewPreferenceController(mContext, "test_key");
-        mController.mPreview = new ImageView(mContext);
+        mController.mIllustrationPreference = new IllustrationPreference(mContext);
     }
 
     @Test
@@ -74,8 +75,8 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
 
         final Drawable navigationBarDrawable = mContext.getDrawable(
                 R.drawable.accessibility_button_navigation);
-        assertThat(ImageTestUtils.drawableToBitmap(mController.mPreview.getDrawable()).sameAs(
-                ImageTestUtils.drawableToBitmap(navigationBarDrawable))).isTrue();
+        assertThat(drawableToBitmap(mController.mIllustrationPreference.getImageDrawable()).sameAs(
+                drawableToBitmap(navigationBarDrawable))).isTrue();
     }
 
     @Test
@@ -90,10 +91,11 @@ public class AccessibilityButtonPreviewPreferenceControllerTest {
         mController.mContentObserver.onChange(false);
 
         final Drawable smallFloatingMenuWithTenOpacityDrawable =
-                FloatingMenuLayerDrawable.createLayerDrawable(mContext,
+                AccessibilityLayerDrawable.createLayerDrawable(mContext,
                         R.drawable.accessibility_button_preview_small_floating_menu, 10);
-        assertThat(mController.mPreview.getDrawable().getConstantState()).isEqualTo(
-                smallFloatingMenuWithTenOpacityDrawable.getConstantState());
+        assertThat(
+                mController.mIllustrationPreference.getImageDrawable().getConstantState())
+                .isEqualTo(smallFloatingMenuWithTenOpacityDrawable.getConstantState());
     }
 
     @Test

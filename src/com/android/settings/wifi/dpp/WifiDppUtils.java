@@ -114,9 +114,9 @@ public class WifiDppUtils {
      * @param ssid The data corresponding to {@code WifiConfiguration} SSID
      * @return Intent for launching QR code scanner
      */
-    public static Intent getEnrolleeQrCodeScannerIntent(String ssid) {
-        final Intent intent = new Intent(
-                WifiDppEnrolleeActivity.ACTION_ENROLLEE_QR_CODE_SCANNER);
+    public static Intent getEnrolleeQrCodeScannerIntent(Context context, String ssid) {
+        final Intent intent = new Intent(context, WifiDppEnrolleeActivity.class);
+        intent.setAction(WifiDppEnrolleeActivity.ACTION_ENROLLEE_QR_CODE_SCANNER);
         if (!TextUtils.isEmpty(ssid)) {
             intent.putExtra(EXTRA_WIFI_SSID, ssid);
         }

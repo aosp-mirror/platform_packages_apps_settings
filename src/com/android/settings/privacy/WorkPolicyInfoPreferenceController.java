@@ -45,7 +45,7 @@ public class WorkPolicyInfoPreferenceController extends BasePreferenceController
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(getPreferenceKey(), preference.getKey())) {
-            mEnterpriseProvider.showWorkPolicyInfo();
+            mEnterpriseProvider.showWorkPolicyInfo(preference.getContext());
             return true;
         }
         return false;

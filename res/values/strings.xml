@@ -212,8 +212,6 @@
     <string name="bluetooth_notif_message">Tap to pair with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Item in bluetooth settings screen, used to show the list of received files [CHAR LIMIT=30] -->
     <string name="bluetooth_show_received_files">Received files</string>
-    <!-- Item in bluetooth settings screen, used to show the list of Files received via Bluetooth [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_show_files_received_via_bluetooth">Files received via Bluetooth</string>
 
     <!-- Title for contextual Bluetooth devices card when Bluetooth is off [CHAR LIMIT=NONE]-->
     <string name="bluetooth_devices_card_off_title">Bluetooth is off</string>
@@ -793,6 +791,8 @@
     <string name="security_settings_face_enroll_introduction_info_looking"></string>
     <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_consent_looking"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_less_secure"></string>
     <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_gaze"></string>
     <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
@@ -871,11 +871,9 @@
     <!-- Dialog title shown when the user removes an enrollment [CHAR LIMIT=35] -->
     <string name="security_settings_face_settings_remove_dialog_title">Delete face model?</string>
     <!-- Dialog contents shown when the user removes an enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted. After deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
-    <!-- Dialog title shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=35] -->
-    <string name="security_settings_face_settings_remove_model_dialog_title">Delete face model?</string>
-    <!-- Dialog contents shown when the user chooses to delete an existing enrolled face model. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_face_settings_remove_model_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
+    <string name="security_settings_face_settings_remove_dialog_details">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
+    <!-- Dialog contents shown when the user removes an enrollment when configured as a convenience [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_settings_remove_dialog_details_convenience">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle">Use Face Unlock to unlock your phone</string>
 
@@ -995,12 +993,16 @@
     <string name="biometric_settings_intro">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
     <!-- Biometric category title - biometric options for unlocking the device. [CHAR LIMIT=50] -->
     <string name="biometric_settings_category_ways_to_unlock">Ways to unlock</string>
-    <!-- Biometric category title - configuration options for using biometric to unlock the device or authenticate in apps. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_category_ways_to_use">Use face and fingerprint for</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_use_biometric_unlock_phone">Unlocking your phone</string>
+    <string name="biometric_settings_use_biometric_unlock_phone">Unlock your phone</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for authentication. [CHAR LIMIT=50] -->
-    <string name="biometric_settings_use_biometric_for_apps">Authentication in apps</string>
+    <string name="biometric_settings_use_biometric_for_apps">Verify it\u2019s you in apps</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Face Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_preference_summary">Using face</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can only be performed by using Fingerprint Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_fingerprint_preference_summary">Using fingerprint</string>
+    <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock or Fingerprint Unlock. [CHAR LIMIT=50] -->
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_hand_back_to_guardian">Hand the phone back to your parent</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
@@ -1053,7 +1055,7 @@
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_start_message">Put your finger on the sensor and lift after you feel a vibration</string>
     <!-- Message shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=NONE] -->
-    <string name="security_settings_udfps_enroll_start_message">Keep your finger on the sensor until you feel a vibration</string>
+    <string name="security_settings_udfps_enroll_start_message">Keep your fingerprint flat on the sensor until you feel a vibration</string>
     <!-- Title shown in fingerprint enrollment [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_udfps_title">Touch &amp; hold the fingerprint sensor</string>
     <!-- Title shown in fingerprint enrollment dialog to repeat touching the fingerprint sensor [CHAR LIMIT=40] -->
@@ -1069,7 +1071,7 @@
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
     <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
-    <string name="security_settings_udfps_enroll_edge_title">Finally, place the edges of your finger</string>
+    <string name="security_settings_udfps_enroll_edge_title">Finally, use the edges of your finger</string>
     <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
@@ -1239,25 +1241,6 @@
 
     <!-- Button to confirm the last removing the last fingerprint. [CHAR LIMIT=20]-->
     <string name="fingerprint_last_delete_confirm">Yes, remove</string>
-
-    <!-- Title of the combined biometrics settings screen. [CHAR LIMIT=40] -->
-    <string name="security_settings_biometrics_title">Face \u0026 fingerprint unlock</string>
-    <!-- Summary of the current biometrics setting when no biometrics have been enrolled. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_none">Tap to set up</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled a face but no fingerprint. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_face">Face only</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled a fingerprint but no face. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_fingerprint">Fingerprint only</string>
-    <!-- Summary of the current biometrics setting when the user has enrolled both a face and a fingerprint. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_summary_both">Face and fingerprint</string>
-    <!-- Description shown on the combined biometrics settings screen. [CHAR LIMIT=NONE] -->
-    <string name="security_settings_biometrics_description">When you set up face and fingerprint unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
-    <!-- Title of a section on the biometrics settings screen for setting up different types of authentication. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_types_category">Ways to unlock</string>
-    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_preferences_category">Use face or fingerprint for</string>
-    <!-- Title of a section on the biometrics settings screen for adjusting authentication preferences. [CHAR LIMIT=50] -->
-    <string name="security_settings_biometrics_preference_use_with_apps">Authentication in apps</string>
 
     <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
@@ -1940,9 +1923,6 @@
     <string name="bluetooth_unpair_dialog_body" product="device">Your device will no longer be paired with <xliff:g id="device_name">%1$s</xliff:g></string>
     <!-- Bluetooth device details companion apps. The body of confirmation dialog for remove association. [CHAR LIMIT=60] -->
     <string name="bluetooth_companion_app_body"><xliff:g id="app_name" example="App Name">%1$s</xliff:g> app will no longer connect to your <xliff:g id="device_name" example="Device Name">%2$s</xliff:g></string>
-
-    <!--  Bluetooth device details. The body of a confirmation dialog for unpairing a paired device. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_untethered_unpair_dialog_body"><xliff:g id="device_name" example="Jack's headphone">%1$s</xliff:g> will no longer be paired with any device linked to this account</string>
 
     <!--  Bluetooth device details. In the confirmation dialog for unpairing a paired device, this is the label on the button that will complete the unpairing action. -->
     <string name="bluetooth_unpair_dialog_forget_confirm_button">Forget device</string>
@@ -3244,6 +3224,8 @@
     <string name="screensaver_settings_when_to_dream">When to start</string>
     <!-- Dream settings screen, action label, current selected screen saver -->
     <string name="screensaver_settings_current">Current screen saver</string>
+    <!-- Dream settings screen, button label to start dreaming [CHAR LIMIT=30] -->
+    <string name="screensaver_settings_dream_start">Start now</string>
     <!-- Dream settings screen, button label for settings for a specific screensaver -->
     <string name="screensaver_settings_button">Settings</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
@@ -5279,8 +5261,18 @@
     <string name="select_to_speak_summary">Tap items on your screen to hear them read aloud</string>
     <!-- Title for the accessibility preference screen to enable video captioning. [CHAR LIMIT=35] -->
     <string name="accessibility_captioning_title">Caption preferences</string>
+    <!-- Title for accessibility captioning footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_captioning_about_title">About caption preferences</string>
+    <!-- Accessibility captioning footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_captioning_footer_learn_more_content_description">Learn more about caption preferences</string>
     <!-- Title for the accessibility preference screen to enable screen magnification. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_magnification_title">Magnification</string>
+    <!-- Title for accessibility shortcut preference for magnification. [CHAR LIMIT=60] -->
+    <string name="accessibility_screen_magnification_shortcut_title">Magnification shortcut</string>
+    <!-- Title for screen magnification footer. [CHAR LIMIT=60] -->
+    <string name="accessibility_screen_magnification_about_title">About magnification</string>
+    <!-- Screen magnification footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description">Learn more about magnification</string>
     <!-- Title for the accessibility preference screen to edit magnification area. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_mode_title">Magnification type</string>
     <!-- Message for the accessibility preference screen to edit magnification area dialog. [CHAR LIMIT=none] -->
@@ -5356,7 +5348,7 @@
     <!-- Title for the accessibility tutorial dialog in accessibility service with gesture. [CHAR LIMIT=50] -->
     <string name="accessibility_tutorial_dialog_title_gesture">Use gesture to open</string>
     <!-- Title for the accessibility tutorial dialog in gesture navigation settings. [CHAR LIMIT=50] -->
-    <string name="accessibility_tutorial_dialog_title_gesture_settings">Use new accessibility gesture</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings">Use accessibility gesture</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the 3-button nav bar. [CHAR LIMIT=NONE] -->
     <string name="accessibility_tutorial_dialog_message_button">To use this feature, tap the accessibility button <xliff:g id="accessibility_icon" example="[Icon]">%s</xliff:g> on the bottom of your screen.\n\nTo switch between features, touch &amp; hold the accessibility button.</string>
     <!-- Message for the accessibility tutorial dialog when user enables an accessibility service while using the accessibility floating button. [CHAR LIMIT=100] -->
@@ -5431,14 +5423,20 @@
     <string name="accessibility_button_title">Accessibility button</string>
     <!-- Title for the accessibility button & gesture page. [CHAR LIMIT=35] -->
     <string name="accessibility_button_gesture_title">Accessibility button &amp; gesture</string>
+    <!-- Title for the accessibility button footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_button_about_title">About accessibility button</string>
+    <!-- Title for the accessibility button & gesture footer. [CHAR LIMIT=55] -->
+    <string name="accessibility_button_gesture_about_title">About accessibility button &amp; gesture</string>
+    <!-- Accessibility button & gestures footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_button_gesture_footer_learn_more_content_description">Learn more about accessibility button &amp; gesture</string>
     <!-- Intro for the accessibility button page. [CHAR LIMIT=100] -->
     <string name="accessibility_button_intro">Using the accessibility button. The gesture isn\u2019t available with 3-button navigation.</string>
     <!-- Summary text for the accessibility button preference. [CHAR LIMIT=50] -->
     <string name="accessibility_button_summary">Quickly access accessibility features</string>
     <!-- Description for the accessibility button in gesture navigation. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.\n\nTo use the accessibility button in the navigation bar instead, switch to 2-button navigation or 3-button navigation.</string>
+    <string name="accessibility_button_gesture_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button or gesture.</string>
     <!-- Description for the accessibility button page. Explain how this page works. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_button_description">Quickly access accessibility features from any screen. \n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
+    <string name="accessibility_button_description">Quickly access accessibility features from any screen.\n\nTo get started, go to accessibility settings and select a feature. Tap on the shortcut and select the accessibility button.</string>
     <!-- Title for the button or gesture of the accessibility button. [CHAR LIMIT=35] -->
     <string name="accessibility_button_or_gesture_title">Use button or gesture</string>
     <!-- Title for the location of the accessibility button. [CHAR LIMIT=35] -->
@@ -5492,6 +5490,10 @@
     <string name="accessibility_timeout_2mins">2 minutes</string>
     <!-- Title for accessibility settings timeout item. [CHAR LIMIT=43] -->
     <string name="accessibility_setting_item_control_timeout_title">Time to take action (Accessibility timeout)</string>
+    <!-- Title for accessibility timeout footer. [CHAR LIMIT=65] -->
+    <string name="accessibility_control_timeout_about_title">About time to take action (Accessibility timeout)</string>
+    <!-- Accessibility timeout footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_control_timeout_footer_learn_more_content_description">Learn more about time to take action (Accessibility timeout)</string>
     <!-- Title for accessibility preference to accessibility timeout. [CHAR LIMIT=35] -->
     <string name="accessibility_control_timeout_preference_title">Time to take action</string>
     <!-- Descriptive text for accessibility preference to accessibility control timeout. [CHAR LIMIT=NONE] -->
@@ -5503,6 +5505,8 @@
     <string name="accessibility_display_inversion_preference_title">Color inversion</string>
     <!-- Used in the accessibility service settings to control turning display color inversion on/off entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_switch_title">Use color inversion</string>
+    <!-- Title for accessibility shortcut preference for color inversion. [CHAR LIMIT=60] -->
+    <string name="accessibility_display_inversion_shortcut_title">Color inversion shortcut</string>
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">
         <![CDATA[Color inversion turns light screens dark.<br/><br/>
@@ -5516,6 +5520,10 @@
     </string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_preference_title">Autoclick (dwell timing)</string>
+    <!-- Title for accessibility dwell timing footer. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_about_title">About autoclick (dwell timing)</string>
+    <!-- Accessibility dwell timing footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_autoclick_footer_learn_more_content_description">Learn more about autoclick (dwell timing)</string>
     <!-- Footer text to explain what autoclick does -->
     <string name="accessibility_autoclick_description">Autoclick works with a connected mouse. You can set the mouse cursor to click automatically when the cursor stops moving for a certain amount of time.</string>
     <!-- Option heading to leave the auto click requirement for accessibility users at its default level. [CHAR LIMIT=50] -->
@@ -5554,6 +5562,16 @@
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_daltonizer_primary_switch_title">Use color correction</string>
+    <!-- Title for accessibility shortcut preference for color correction. [CHAR LIMIT=60] -->
+    <string name="accessibility_daltonizer_shortcut_title">Color correction shortcut</string>
+    <!-- Title for Color correction footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_daltonizer_about_title">About color correction</string>
+    <!-- Color inversion footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_daltonizer_footer_learn_more_content_description">Learn more about color correction</string>
+    <!-- Title for Color inversion footer. [CHAR LIMIT=35] -->
+    <string name="accessibility_color_inversion_about_title">About color inversion</string>
+    <!-- Color correction footer link content description [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_inversion_footer_learn_more_content_description">Learn more about color inversion</string>
     <!-- Title for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=60] -->
     <string name="accessibility_caption_primary_switch_title">Show captions</string>
     <!-- Summary for Captions settings screen to control turning on/off the feature entirely [CHAR LIMIT=NONE] -->
@@ -5633,6 +5651,10 @@
     <string name="reduce_bright_colors_preference_title">Extra dim</string>
     <!-- Title for the activation switch of the Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_switch_title">Make screen extra dim</string>
+    <!-- Title for accessibility shortcut preference for Reduce Brightness. [CHAR LIMIT=60] -->
+    <string name="reduce_bright_colors_shortcut_title">Extra dim shortcut</string>
+    <!-- Title for Reduce Brightness feature footer. [CHAR LIMIT=35] -->
+    <string name="reduce_bright_colors_about_title">About extra dim</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_preference_summary" product="default">Dim screen beyond your phone\u2019s minimum brightness</string>
     <!-- Summary for the accessibility preference to configure Reduce Brightness feature. [CHAR LIMIT=NONE] -->
@@ -6128,7 +6150,7 @@
     <!-- Activity title for battery usage history details [CHAR LIMIT=60] -->
     <string name="history_details_title">History details</string>
     <!-- Preference title for advanced battery usage [CHAR LIMIT=40] -->
-    <string name="advanced_battery_preference_title">Battery Usage</string>
+    <string name="advanced_battery_preference_title">Battery usage</string>
     <!-- Preference summary for advanced battery usage, for past 24 hours [CHAR LIMIT=40] -->
     <string name="advanced_battery_preference_summary_with_hours">View usage for past 24 hours</string>
     <!-- Preference summary for advanced battery usage, from last full charge [CHAR LIMIT=40] -->
@@ -6270,6 +6292,8 @@
 
     <!-- Summary for battery manager when it is on -->
     <string name="battery_manager_summary">Detecting when apps drain battery</string>
+    <!-- Summary for battery manager when it is on. [CHAR LIMIT=NONE] -->
+    <string name="battery_manager_summary_unsupported">Detecting when apps drain battery</string>
 
     <!-- Summary for battery manager when it is off -->
     <string name="battery_manager_off">Off</string>
@@ -6341,8 +6365,8 @@
     <string name="power_wifi">Wi\u2011Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
-    <!-- Label for power consumed by Mobile network idle -->
-    <string name="power_cell">Mobile network standby</string>
+    <!-- Label for power consumed by Mobile network -->
+    <string name="power_cell">Mobile network</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
@@ -6545,6 +6569,8 @@
     <string name="battery_not_usage">No usage from last full charge</string>
     <!-- Description for no any battery usage for past 24 hr [CHAR LIMIT=120] -->
     <string name="battery_not_usage_24hr">No usage for past 24 hr</string>
+    <!-- Description for no usage time but have battery usage [CHAR LIMIT=120] -->
+    <string name="battery_usage_without_time"></string>
 
     <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
     <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
@@ -7440,7 +7466,7 @@
     <!-- Button label to disconnect from a VPN profile. [CHAR LIMIT=40] -->
     <string name="vpn_disconnect">Disconnect</string>
     <!-- Field label to show the version number for a VPN app. [CHAR LIMIT=40] -->
-    <string name="vpn_version">Version <xliff:g id="version" example="3.3.0">%s</xliff:g></string>
+    <string name="vpn_version">Version</string>
     <!-- Button label to forget a VPN profile [CHAR LIMIT=40] -->
     <string name="vpn_forget_long">Forget VPN</string>
     <!-- Dialog message title to set another VPN app to be always-on [CHAR LIMIT=40] -->
@@ -8462,6 +8488,9 @@
 
     <!-- Sound: Title for the other sounds option and associated settings page. [CHAR LIMIT=30] -->
     <string name="other_sound_settings">Other sounds</string>
+
+    <!-- Sound: Title for the option enabling spatializer effect. [CHAR LIMIT=30] -->
+    <string name="spatial_audio_title">Spatial audio</string>
 
     <!-- Sound: Other sounds: Title for the option enabling touch sounds for dial pad tones. [CHAR LIMIT=30] -->
     <string name="dial_pad_tones_title">Dial pad tones</string>
@@ -11788,6 +11817,8 @@
     <string name="one_handed_title">One-handed mode</string>
     <!-- Preference Switch for enabling one handed [CHAR LIMIT=60] -->
     <string name="one_handed_mode_enabled">Use one-handed mode</string>
+    <!-- Title for accessibility shortcut preference for enabling one handed. [CHAR LIMIT=60] -->
+    <string name="one_handed_mode_shortcut_title">One-handed mode shortcut</string>
     <!-- Search keywords for "One-Handed" settings [CHAR_LIMIT=NONE] -->
     <string name="keywords_one_handed">reachability</string>
     <!-- Category title for one handed swipe down [CHAR_LIMIT=60] -->
@@ -13272,6 +13303,10 @@
     <string name="lockscreen_privacy_controls_setting_toggle">Show device controls</string>
     <!-- Device controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_privacy_controls_summary">Access controls when locked</string>
+    <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
+    <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
+    <string name="lockscreen_double_line_clock_setting_toggle">Double-line clock</string>
 
     <!-- Title for RTT setting. [CHAR LIMIT=NONE] -->
     <string name="rtt_settings_title"></string>
@@ -13335,8 +13370,6 @@
     <string name="provider_internet_settings">Internet</string>
     <!-- Provider Model: SIMs controls settings screen, item title to go into the SIMs settings -->
     <string name="provider_network_settings_title">SIMs</string>
-    <!-- Provider Model: Summary for Wi-Fi switch [CHAR LIMIT=NONE] -->
-    <string name="wifi_switch_summary">Find and connect to Wi\u2011Fi networks</string>
     <!-- Provider Model: List of synonyms for the airplane-safe networks, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_airplane_safe_networks">airplane, airplane-safe</string>
     <!-- Provider Model: Calls and SMS controllers settings screen, item title to go into the Calls and SMS settings -->
@@ -13514,8 +13547,6 @@
     <string name="adaptive_brightness_main_switch_title">Use adaptive brightness</string>
     <!-- Title for wifi calling main switch preferences. [CHAR LIMIT=50] -->
     <string name="wifi_calling_main_switch_title">Use Wi‑Fi calling</string>
-    <!-- Title for Screen saver main switch preferences. [CHAR LIMIT=50] -->
-    <string name="screen_saver_main_switch_title">Use screen saver</string>
 
     <!-- Default preference title for showing all apps on device [CHAR_LIMIT=50]-->
     <string name="default_see_all_apps_title">See all apps</string>
@@ -13580,8 +13611,10 @@
     <string name="camera_toggle_title">Camera access</string>
     <!-- Label for the camera use toggle [CHAR LIMIT=40] -->
     <string name="mic_toggle_title">Microphone access</string>
-    <!-- Describes what is affected by the camera or mic toggle [CHAR LIMIT=NONE] -->
-    <string name="sensor_toggle_description">For all apps and services</string>
+    <!-- Describes what is affected by the camera toggle [CHAR LIMIT=NONE] -->
+    <string name="cam_toggle_description">For apps and services</string>
+    <!-- Describes what is affected by the mic toggle [CHAR LIMIT=NONE] -->
+    <string name="mic_toggle_description">For apps and services. If this setting is off, microphone data may still be shared when you call an emergency number.</string>
 
     <!-- Title for Game settings entry. [CHAR_LIMIT=NONE] -->
     <string name="game_settings_title">Game settings</string>
