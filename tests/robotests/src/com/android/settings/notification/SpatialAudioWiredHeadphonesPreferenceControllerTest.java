@@ -39,7 +39,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class SpatialAudioPreferenceControllerTest {
+public class SpatialAudioWiredHeadphonesPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -48,7 +48,7 @@ public class SpatialAudioPreferenceControllerTest {
     @Mock
     private Spatializer mSpatializer;
 
-    private SpatialAudioPreferenceController mController;
+    private SpatialAudioWiredHeadphonesController mController;
 
     @Before
     public void setUp() {
@@ -56,19 +56,19 @@ public class SpatialAudioPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
-        mController = new SpatialAudioPreferenceController(mContext);
+        mController = new SpatialAudioWiredHeadphonesController(mContext);
     }
 
     @Test
     public void getAvailabilityStatus_unavailable_shouldReturnUnavailable() {
-        when(mSpatializer.isAvailableForDevice(mController.mSpeaker)).thenReturn(false);
+        when(mSpatializer.isAvailableForDevice(mController.mWiredHeadphones)).thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
     public void getAvailabilityStatus_available_shouldReturnAvailable() {
-        when(mSpatializer.isAvailableForDevice(mController.mSpeaker)).thenReturn(true);
+        when(mSpatializer.isAvailableForDevice(mController.mWiredHeadphones)).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -77,13 +77,13 @@ public class SpatialAudioPreferenceControllerTest {
     public void setChecked_withTrue_enablesDeviceSpatializer() {
         mController.setChecked(true);
 
-        verify(mSpatializer).addCompatibleAudioDevice(mController.mSpeaker);
+        verify(mSpatializer).addCompatibleAudioDevice(mController.mWiredHeadphones);
     }
 
     @Test
     public void setChecked_withFalse_disablesDeviceSpatializer() {
         mController.setChecked(false);
 
-        verify(mSpatializer).removeCompatibleAudioDevice(mController.mSpeaker);
+        verify(mSpatializer).removeCompatibleAudioDevice(mController.mWiredHeadphones);
     }
 }

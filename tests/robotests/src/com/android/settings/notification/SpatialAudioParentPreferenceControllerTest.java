@@ -22,7 +22,6 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -39,7 +38,9 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class SpatialAudioPreferenceControllerTest {
+public class SpatialAudioParentPreferenceControllerTest {
+
+    private static final String KEY = "spatial_audio_summary";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -48,7 +49,7 @@ public class SpatialAudioPreferenceControllerTest {
     @Mock
     private Spatializer mSpatializer;
 
-    private SpatialAudioPreferenceController mController;
+    private SpatialAudioParentPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -56,34 +57,22 @@ public class SpatialAudioPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
-        mController = new SpatialAudioPreferenceController(mContext);
+        mController = new SpatialAudioParentPreferenceController(mContext, KEY);
     }
 
     @Test
-    public void getAvailabilityStatus_unavailable_shouldReturnUnavailable() {
-        when(mSpatializer.isAvailableForDevice(mController.mSpeaker)).thenReturn(false);
+    public void getAvailabilityStatus_levelNone_shouldReturnUnsupported() {
+        when(mSpatializer.getImmersiveAudioLevel()).thenReturn(
+                Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
-    public void getAvailabilityStatus_available_shouldReturnAvailable() {
-        when(mSpatializer.isAvailableForDevice(mController.mSpeaker)).thenReturn(true);
+    public void getAvailabilityStatus_levelMultiChannel_shouldReturnAvailable() {
+        when(mSpatializer.getImmersiveAudioLevel()).thenReturn(
+                Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_MULTICHANNEL);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void setChecked_withTrue_enablesDeviceSpatializer() {
-        mController.setChecked(true);
-
-        verify(mSpatializer).addCompatibleAudioDevice(mController.mSpeaker);
-    }
-
-    @Test
-    public void setChecked_withFalse_disablesDeviceSpatializer() {
-        mController.setChecked(false);
-
-        verify(mSpatializer).removeCompatibleAudioDevice(mController.mSpeaker);
     }
 }

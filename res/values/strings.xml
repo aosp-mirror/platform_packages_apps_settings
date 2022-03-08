@@ -8531,6 +8531,24 @@
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
 
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker">Phone speaker</string>
+
+    <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_wired_headphones">Wired headphones</string>
+
+    <!-- Sound: Summary for the spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_text">Spatial Audio creates immersive sound that seems like it’s coming from all around you. Only works with some media.</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is off. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_off">Off</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with one output device enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_one">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g></string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with two output devices enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_two">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g> and <xliff:g id="output device" example="Wired headphones">%2$s</xliff:g></string>
+
     <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
         {count, plural,
