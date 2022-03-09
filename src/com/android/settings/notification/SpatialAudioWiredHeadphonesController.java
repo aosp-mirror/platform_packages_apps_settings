@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,23 +28,24 @@ import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * The controller of the Spatial audio setting for speaker in the SoundSettings.
+ * The controller of the Spatial audio setting for wired headphones in the SoundSettings.
  */
-public class SpatialAudioPreferenceController extends TogglePreferenceController {
+public class SpatialAudioWiredHeadphonesController extends TogglePreferenceController {
 
-    private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
+    private static final String KEY_SPATIAL_AUDIO_WIRED_HEADPHONES =
+            "spatial_audio_wired_headphones";
 
     private final Spatializer mSpatializer;
     @VisibleForTesting
-    final AudioDeviceAttributes mSpeaker = new AudioDeviceAttributes(
-            AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
+    final AudioDeviceAttributes mWiredHeadphones = new AudioDeviceAttributes(
+            AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, ""
     );
 
-    public SpatialAudioPreferenceController(Context context) {
-        this(context, KEY_SPATIAL_AUDIO);
+    public SpatialAudioWiredHeadphonesController(Context context) {
+        this(context, KEY_SPATIAL_AUDIO_WIRED_HEADPHONES);
     }
 
-    public SpatialAudioPreferenceController(Context context, String preferenceKey) {
+    public SpatialAudioWiredHeadphonesController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         AudioManager audioManager = context.getSystemService(AudioManager.class);
         mSpatializer = audioManager.getSpatializer();
@@ -52,20 +53,21 @@ public class SpatialAudioPreferenceController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return mSpatializer.isAvailableForDevice(mSpeaker) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return mSpatializer.isAvailableForDevice(mWiredHeadphones) ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
     public boolean isChecked() {
-        return mSpatializer.getCompatibleAudioDevices().contains(mSpeaker);
+        return mSpatializer.getCompatibleAudioDevices().contains(mWiredHeadphones);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
         if (isChecked) {
-            mSpatializer.addCompatibleAudioDevice(mSpeaker);
+            mSpatializer.addCompatibleAudioDevice(mWiredHeadphones);
         } else {
-            mSpatializer.removeCompatibleAudioDevice(mSpeaker);
+            mSpatializer.removeCompatibleAudioDevice(mWiredHeadphones);
         }
         return isChecked == isChecked();
     }

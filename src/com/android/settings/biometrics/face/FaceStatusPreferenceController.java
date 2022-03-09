@@ -57,7 +57,7 @@ public class FaceStatusPreferenceController extends BiometricStatusPreferenceCon
     public FaceStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context, key);
         mFaceManager = Utils.getFaceManagerOrNull(context);
-        mFaceStatusUtils = new FaceStatusUtils(context, mFaceManager);
+        mFaceStatusUtils = new FaceStatusUtils(context, mFaceManager, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);

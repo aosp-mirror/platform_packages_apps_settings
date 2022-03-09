@@ -19,7 +19,6 @@ package com.android.settings.biometrics.face;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
-import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -32,13 +31,14 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  */
 public class FaceStatusUtils {
 
-    private final int mUserId = UserHandle.myUserId();
+    private final int mUserId;
     private final Context mContext;
     private final FaceManager mFaceManager;
 
-    public FaceStatusUtils(Context context, FaceManager faceManager) {
+    public FaceStatusUtils(Context context, FaceManager faceManager, int userId) {
         mContext = context;
         mFaceManager = faceManager;
+        mUserId = userId;
     }
 
     /**

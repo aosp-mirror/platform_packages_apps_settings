@@ -56,7 +56,8 @@ public class CombinedBiometricStatusUtilsTest {
 
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
-    private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
+    private static final int USER_ID = UserHandle.myUserId();
+    private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);;
 
 
     @Mock
@@ -85,7 +86,8 @@ public class CombinedBiometricStatusUtilsTest {
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
-        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(mApplicationContext);
+        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(
+                mApplicationContext, USER_ID);
     }
 
     @Test
