@@ -35,6 +35,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class, ShadowAlertDialogCompat.class})
+@Ignore
 public class SetupSkipDialogTest {
 
     private FragmentActivity mActivity;

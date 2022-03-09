@@ -16,11 +16,14 @@
 
 package com.android.settings.safetycenter;
 
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED;
+
 import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
@@ -42,9 +45,10 @@ public final class LockScreenSafetySource {
     private LockScreenSafetySource() {
     }
 
-    /** Sends lock screen safety data to Safety Center. */
-    public static void sendSafetyData(Context context,
-            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
+    /** Sets lock screen safety data for Safety Center. */
+    public static void setSafetySourceData(Context context,
+            ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils,
+            SafetyEvent safetyEvent) {
         if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
@@ -71,21 +75,31 @@ public final class LockScreenSafetySource {
                 .setEnabled(
                         !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin))
                 .setIconAction(gearMenuIconAction).build();
-        final SafetySourceData.Builder safetySourceDataBuilder = new SafetySourceData.Builder(
-                SAFETY_SOURCE_ID).setStatus(status);
+        final SafetySourceData.Builder safetySourceDataBuilder =
+                new SafetySourceData.Builder().setStatus(status);
         if (!screenLockPreferenceDetailsUtils.isLockPatternSecure()) {
             safetySourceDataBuilder.addIssue(createNoScreenLockIssue(context, pendingIntent));
         }
         final SafetySourceData safetySourceData = safetySourceDataBuilder.build();
 
-        SafetyCenterManagerWrapper.get().sendSafetyCenterUpdate(context, safetySourceData);
+        SafetyCenterManagerWrapper.get().setSafetySourceData(
+                context,
+                SAFETY_SOURCE_ID,
+                safetySourceData,
+                safetyEvent
+        );
     }
 
     /** Notifies Safety Center of a change in lock screen settings. */
     public static void onLockScreenChange(Context context) {
-        sendSafetyData(
+        setSafetySourceData(
                 context,
-                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER));
+                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
+                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build());
+
+        // Also send refreshed safety center data for biometrics, since changing lockscreen settings
+        // can unset biometrics.
+        BiometricsSafetySource.onBiometricsChanged(context);
     }
 
     private static IconAction createGearMenuIconAction(Context context,
@@ -116,7 +130,7 @@ public final class LockScreenSafetySource {
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
                 context.getString(R.string.no_screen_lock_issue_summary),
-                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION,
+                SafetySourceIssue.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
                 .addAction(action).build();

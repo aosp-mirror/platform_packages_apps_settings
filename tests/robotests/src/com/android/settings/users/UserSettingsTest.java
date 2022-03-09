@@ -662,12 +662,12 @@ public class UserSettingsTest {
     public void onPreferenceClick_addGuestClicked_createGuestAndOpenDetails() {
         UserInfo createdGuest = getGuest(false);
         removeFlag(createdGuest, UserInfo.FLAG_INITIALIZED);
-        doReturn(createdGuest).when(mUserManager).createGuest(mActivity, "Guest");
+        doReturn(createdGuest).when(mUserManager).createGuest(mActivity);
         doReturn(mActivity).when(mFragment).getContext();
 
         mFragment.onPreferenceClick(mAddGuestPreference);
 
-        verify(mUserManager).createGuest(mActivity, "Guest");
+        verify(mUserManager).createGuest(mActivity);
         Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);

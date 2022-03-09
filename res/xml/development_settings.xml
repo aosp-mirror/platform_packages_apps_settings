@@ -297,7 +297,7 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
             android:title="@string/usb_default_label"/>
@@ -648,7 +648,7 @@
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
-    <com.android.settings.development.autofill.AutofillPreferenceCategory
+    <PreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
@@ -672,7 +672,7 @@
             android:key="autofill_reset_developer_options"
             android:title="@string/autofill_reset_developer_options" />
 
-    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="storage_category"
@@ -708,5 +708,16 @@
             android:defaultValue="true"
             android:key="location_indicator_settings"
             settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="input_method_category"
+        android:title="@string/input_method_category"
+        android:order="1400">
+
+        <SwitchPreference
+            android:key="stylus_handwriting"
+            android:title="@string/stylus_handwriting"
+            android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

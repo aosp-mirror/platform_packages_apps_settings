@@ -42,7 +42,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
         final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
         final String title = getContext().getString(
                 R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_font_download);
+        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 /* description= */ null, icon);

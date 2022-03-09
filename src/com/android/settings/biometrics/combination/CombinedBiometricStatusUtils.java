@@ -20,7 +20,6 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
 
 import androidx.annotation.Nullable;
 
@@ -35,17 +34,18 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  */
 public class CombinedBiometricStatusUtils {
 
-    private final int mUserId = UserHandle.myUserId();
+    private final int mUserId;
     private final Context mContext;
     @Nullable
     FingerprintManager mFingerprintManager;
     @Nullable
     FaceManager mFaceManager;
 
-    public CombinedBiometricStatusUtils(Context context) {
+    public CombinedBiometricStatusUtils(Context context, int userId) {
         mContext = context;
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+        mUserId = userId;
     }
 
     /**

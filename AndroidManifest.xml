@@ -678,6 +678,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".network.TetherProvisioningCarrierDialogActivity"
+            android:exported="true"
+            android:permission="android.permission.TETHER_PRIVILEGED"
+            android:excludeFromRecents="true"
+            android:theme="@*android:style/Theme.DeviceDefault.Settings.Dialog.NoActionBar">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TETHER_UNSUPPORTED_CARRIER_UI" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".network.telephony.ToggleSubscriptionDialogActivity"
                   android:exported="false"
                   android:permission="android.permission.WRITE_EMBEDDED_SUBSCRIPTIONS"
@@ -1984,11 +1996,6 @@
                 android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard" />
         </activity-alias>
-
-        <activity
-            android:name=".accessibility.AccessibilityScreenSizeForSetupWizardActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Settings"
-            android:exported="false"/>
 
         <activity
             android:name="Settings$AccessibilityDaltonizerSettingsActivity"

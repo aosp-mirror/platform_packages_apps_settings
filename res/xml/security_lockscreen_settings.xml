@@ -79,6 +79,7 @@
     <PreferenceCategory
         android:key="ambient_display_category_when_to_show"
         android:title="@string/ambient_display_category_triggers"
+        settings:controller="com.android.settings.display.AmbientDisplayWhenToShowPreferenceController"
         android:order="1000">
 
         <com.android.settingslib.RestrictedSwitchPreference
