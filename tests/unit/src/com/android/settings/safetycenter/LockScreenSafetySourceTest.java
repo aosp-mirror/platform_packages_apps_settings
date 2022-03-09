@@ -22,6 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -117,12 +118,9 @@ public class LockScreenSafetySourceTest {
 
         LockScreenSafetySource.setSafetySourceData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
-        ArgumentCaptor<String> idCaptor = ArgumentCaptor.forClass(String.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), idCaptor.capture(), any(), any());
-        String safetySourceId = idCaptor.getValue();
 
-        assertThat(safetySourceId).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), any(), any());
     }
 
     @Test
@@ -132,12 +130,9 @@ public class LockScreenSafetySourceTest {
 
         LockScreenSafetySource.setSafetySourceData(mApplicationContext,
                 mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
-        ArgumentCaptor<SafetyEvent> eventCaptor = ArgumentCaptor.forClass(SafetyEvent.class);
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), any(), eventCaptor.capture());
-        SafetyEvent safetyEvent = eventCaptor.getValue();
 
-        assertThat(safetyEvent).isEqualTo(EVENT_SOURCE_STATE_CHANGED);
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), any(), any(), eq(EVENT_SOURCE_STATE_CHANGED));
     }
 
     @Test
@@ -176,7 +171,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -195,7 +190,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -221,7 +216,7 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
-    public void setSafetySourceData_whenLockPatternIsNotSecure_setIssue() {
+    public void setSafetySourceData_whenLockPatternIsNotSecure_setsIssue() {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(false);
@@ -231,7 +226,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
 
         assertThat(safetySourceData.getIssues()).hasSize(1);
@@ -244,7 +239,7 @@ public class LockScreenSafetySourceTest {
                 ResourcesUtils.getResourcesString(mApplicationContext,
                         "no_screen_lock_issue_summary"));
         assertThat(issue.getSeverityLevel()).isEqualTo(
-                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION);
+                SafetySourceIssue.SEVERITY_LEVEL_RECOMMENDATION);
         assertThat(issue.getIssueTypeId()).isEqualTo(
                 LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_TYPE_ID);
         assertThat(issue.getIssueCategory()).isEqualTo(SafetySourceIssue.ISSUE_CATEGORY_DEVICE);
@@ -270,7 +265,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -289,7 +284,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -311,7 +306,7 @@ public class LockScreenSafetySourceTest {
         final ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(
                 SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         final IconAction iconAction = captor.getValue().getStatus().getIconAction();
 
         assertThat(iconAction.getIconType()).isEqualTo(IconAction.ICON_TYPE_GEAR);
@@ -330,7 +325,7 @@ public class LockScreenSafetySourceTest {
 
         ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
-                any(), any(), captor.capture(), any());
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceData safetySourceData = captor.getValue();
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
@@ -338,13 +333,16 @@ public class LockScreenSafetySourceTest {
     }
 
     @Test
-    public void onLockScreenChange_whenSafetyCenterEnabled_setData() {
+    public void onLockScreenChange_whenSafetyCenterEnabled_setsLockscreenAndBiometricData() {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
 
         LockScreenSafetySource.onLockScreenChange(mApplicationContext);
 
-        verify(mSafetyCenterManagerWrapper).setSafetySourceData(any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), eq(LockScreenSafetySource.SAFETY_SOURCE_ID), any(), any());
+        verify(mSafetyCenterManagerWrapper).setSafetySourceData(
+                any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), any(), any());
     }
 
     @Test
