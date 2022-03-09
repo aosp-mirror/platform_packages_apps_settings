@@ -16,6 +16,8 @@
 
 package com.android.settings.users;
 
+import static com.android.settingslib.Utils.getColorAttrDefaultColor;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -31,7 +33,9 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BlendMode;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,6 +50,7 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -1123,7 +1128,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
-            mAddGuest.setIcon(getEncircledDefaultIcon());
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
                 mAddGuest.setTitle(com.android.settingslib.R.string.user_guest);
@@ -1140,11 +1146,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1162,6 +1172,7 @@ public class UserSettings extends SettingsPreferenceFragment
                             || (canAddRestrictedProfile
                             && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
             addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+
             if (!canAddMoreUsers) {
                 addUser.setSummary(
                         getString(R.string.user_add_max_count, getRealUsersCount()));
@@ -1175,6 +1186,20 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             addUser.setVisible(false);
         }
+    }
+
+    private Drawable centerAndTint(Drawable icon) {
+        icon.setTintBlendMode(BlendMode.SRC_IN);
+        icon.setTint(getColorAttrDefaultColor(getContext(), android.R.attr.textColorPrimary));
+
+        Drawable bg = getContext().getDrawable(R.drawable.user_avatar_bg).mutate();
+        LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
+        int size = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_avatar_size);
+        ld.setLayerSize(1, size, size);
+        ld.setLayerGravity(1, Gravity.CENTER);
+
+        return ld;
     }
 
     /**

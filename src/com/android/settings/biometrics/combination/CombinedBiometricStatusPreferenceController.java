@@ -56,7 +56,7 @@ public class CombinedBiometricStatusPreferenceController extends
     public CombinedBiometricStatusPreferenceController(
             Context context, String key, Lifecycle lifecycle) {
         super(context, key);
-        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context);
+        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(context, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);

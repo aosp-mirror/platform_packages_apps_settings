@@ -96,6 +96,10 @@ public final class LockScreenSafetySource {
                 context,
                 new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
                 new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build());
+
+        // Also send refreshed safety center data for biometrics, since changing lockscreen settings
+        // can unset biometrics.
+        BiometricsSafetySource.onBiometricsChanged(context);
     }
 
     private static IconAction createGearMenuIconAction(Context context,
@@ -126,7 +130,7 @@ public final class LockScreenSafetySource {
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
                 context.getString(R.string.no_screen_lock_issue_summary),
-                SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION,
+                SafetySourceIssue.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
                 .addAction(action).build();
