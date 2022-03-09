@@ -20,13 +20,13 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/accessibility_qs_tooltips_background">
+    android:background="@drawable/accessibility_qs_tooltip_background">
 
     <ImageView
         android:id="@+id/qs_illustration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/accessibility_qs_tooltips_margin_top"
+        android:paddingTop="@dimen/accessibility_qs_tooltip_margin_top"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@null" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/qs_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/accessibility_qs_tooltips_margin"
+        android:padding="@dimen/accessibility_qs_tooltip_margin"
         android:textColor="@android:color/black"
         android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
         android:textSize="16sp" />
