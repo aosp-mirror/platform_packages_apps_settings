@@ -96,6 +96,11 @@ public class NightDisplayPreferenceController extends TogglePreferenceController
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
+    @Override
     public void onActivated(boolean activated) {
         updateState(mPreference);
     }

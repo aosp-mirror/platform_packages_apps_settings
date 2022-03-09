@@ -115,8 +115,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
 
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, getLabelName());
-        mShortcutPreference.setTitle(title);
+        updateShortcutTitle(mShortcutPreference);
         getPreferenceScreen().addPreference(mShortcutPreference);
 
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
@@ -180,6 +179,11 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
             default:
                 throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
         }
+    }
+
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        final CharSequence title = getString(R.string.accessibility_shortcut_title, getLabelName());
+        shortcutPreference.setTitle(title);
     }
 
     @Override

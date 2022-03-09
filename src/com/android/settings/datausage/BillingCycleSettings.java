@@ -271,12 +271,14 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             mView = dialogInflater.inflate(R.layout.data_usage_bytes_editor, null, false);
             setupPicker((EditText) mView.findViewById(R.id.bytes),
                     (Spinner) mView.findViewById(R.id.size_spinner));
-            return new AlertDialog.Builder(context)
+            Dialog dialog = new AlertDialog.Builder(context)
                     .setTitle(isLimit ? R.string.data_usage_limit_editor_title
                             : R.string.data_usage_warning_editor_title)
                     .setView(mView)
                     .setPositiveButton(R.string.data_usage_cycle_editor_positive, this)
                     .create();
+            dialog.setCanceledOnTouchOutside(false);
+            return dialog;
         }
 
         private void setupPicker(EditText bytesPicker, Spinner type) {
@@ -402,10 +404,12 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
             mCycleDayPicker.setValue(cycleDay);
             mCycleDayPicker.setWrapSelectorWheel(true);
 
-            return builder.setTitle(R.string.data_usage_cycle_editor_title)
+            Dialog dialog = builder.setTitle(R.string.data_usage_cycle_editor_title)
                     .setView(view)
                     .setPositiveButton(R.string.data_usage_cycle_editor_positive, this)
                     .create();
+            dialog.setCanceledOnTouchOutside(false);
+            return dialog;
         }
 
         @Override
@@ -466,12 +470,14 @@ public class BillingCycleSettings extends DataUsageBaseFragment implements
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
 
-            return new AlertDialog.Builder(context)
+            Dialog dialog = new AlertDialog.Builder(context)
                     .setTitle(R.string.data_usage_limit_dialog_title)
                     .setMessage(R.string.data_usage_limit_dialog_mobile)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
+            dialog.setCanceledOnTouchOutside(false);
+            return dialog;
         }
 
         @Override

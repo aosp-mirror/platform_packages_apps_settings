@@ -56,6 +56,12 @@
             android:title="@string/lockscreen_privacy_controls_setting_toggle"
             android:summary="@string/lockscreen_privacy_controls_summary"
             settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
+
+        <SwitchPreference
+            android:key="lockscreen_double_line_clock_switch"
+            android:title="@string/lockscreen_double_line_clock_setting_toggle"
+            android:summary="@string/lockscreen_double_line_clock_summary"
+            settings:controller="com.android.settings.display.LockscreenClockPreferenceController" />
     </PreferenceCategory>
 
     <PreferenceCategory
