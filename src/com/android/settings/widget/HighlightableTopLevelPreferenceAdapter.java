@@ -67,10 +67,12 @@ public class HighlightableTopLevelPreferenceAdapter extends PreferenceGroupAdapt
     private SparseArray<PreferenceViewHolder> mViewHolders;
 
     public HighlightableTopLevelPreferenceAdapter(SettingsHomepageActivity homepageActivity,
-            PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key) {
+            PreferenceGroup preferenceGroup, RecyclerView recyclerView, String key,
+            boolean scrollNeeded) {
         super(preferenceGroup);
         mRecyclerView = recyclerView;
         mHighlightKey = key;
+        mScrolled = !scrollNeeded;
         mViewHolders = new SparseArray<>();
         mContext = preferenceGroup.getContext();
         mHomepageActivity = homepageActivity;
