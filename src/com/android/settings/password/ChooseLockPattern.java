@@ -21,6 +21,7 @@ import static android.view.View.ACCESSIBILITY_LIVE_REGION_POLITE;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -35,6 +36,7 @@ import android.util.Pair;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -491,11 +493,18 @@ public class ChooseLockPattern extends SettingsActivity {
             getActivity().setTitle(msg);
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.choose_lock_pattern, container, false);
+            layout.findViewById(R.id.lockPattern).setOnTouchListener((v, event) -> {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                }
+                return false;
+            });
             updateActivityTitle();
             layout.setHeaderText(getActivity().getTitle());
             layout.getHeaderTextView().setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);

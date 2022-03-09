@@ -18,8 +18,17 @@ package com.android.settings.applications.managedomainurls;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.verify.domain.DomainVerificationManager;
+import android.content.pm.verify.domain.DomainVerificationUserState;
 import android.util.IconDrawableFactory;
 
 import com.android.settings.R;
@@ -28,6 +37,8 @@ import com.android.settingslib.applications.ApplicationsState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
@@ -40,16 +51,30 @@ public class DomainAppPreferenceControllerTest {
     private Context mContext;
     private IconDrawableFactory mIconDrawableFactory;
 
+    @Mock
+    private DomainVerificationManager mDomainVerificationManager;
+    @Mock
+    private DomainVerificationUserState mDomainVerificationUserState;
+
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mAppEntry = new ApplicationsState.AppEntry(
                 mContext, createApplicationInfo(mContext.getPackageName()), 0);
+        when(mContext.getSystemService(DomainVerificationManager.class)).thenReturn(
+                mDomainVerificationManager);
     }
 
     @Test
-    public void getLayoutResource_shouldUseAppPreferenceLayout() {
+    public void getLayoutResource_shouldUseAppPreferenceLayout()
+            throws PackageManager.NameNotFoundException {
+        final DomainVerificationUserState domainVerificationUserState = mock(
+                DomainVerificationUserState.class);
+        doReturn(domainVerificationUserState).when(
+                mDomainVerificationManager).getDomainVerificationUserState(anyString());
+        doReturn(true).when(domainVerificationUserState).isLinkHandlingAllowed();
         final DomainAppPreference pref = new DomainAppPreference(
                 mContext, mIconDrawableFactory, mAppEntry);
 

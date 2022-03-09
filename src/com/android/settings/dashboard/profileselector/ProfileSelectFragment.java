@@ -107,6 +107,10 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         final Activity activity = getActivity();
+        final int titleResId = getTitleResId();
+        if (titleResId > 0) {
+            activity.setTitle(titleResId);
+        }
         final int selectedTab = convertPosition(getTabId(activity, getArguments()));
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
@@ -165,6 +169,14 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * {@link com.google.android.material.tabs.TabLayout}
      */
     public abstract Fragment[] getFragments();
+
+    /**
+     * Returns a resource ID of the title
+     * Override this if the title needs to be updated dynamically.
+     */
+    int getTitleResId() {
+        return 0;
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
