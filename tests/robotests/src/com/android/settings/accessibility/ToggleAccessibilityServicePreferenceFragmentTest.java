@@ -34,6 +34,9 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,8 +46,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.shadows.ShadowPackageManager;
-
-import java.util.Arrays;
 
 /** Tests for {@link ToggleAccessibilityServicePreferenceFragment} */
 @RunWith(RobolectricTestRunner.class)
@@ -83,53 +84,91 @@ public class ToggleAccessibilityServicePreferenceFragmentTest {
     }
 
     @Test
-    public void getTileName_noTileServiceAssigned_returnNull() {
-        assertThat(mFragment.getTileName()).isNull();
+    public void getTileTooltipContent_noTileServiceAssigned_returnNull() {
+        final CharSequence tileTooltipContent =
+                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
+
+        assertThat(tileTooltipContent).isNull();
     }
 
     @Test
-    public void getTileName_hasOneTileService_haveMatchString() {
-        final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE);
-        final ResolveInfo info = new ResolveInfo();
-        info.serviceInfo = new FakeServiceInfo();
-        info.serviceInfo.packageName = PLACEHOLDER_PACKAGE_NAME;
-        info.serviceInfo.name = PLACEHOLDER_TILE_CLASS_NAME;
-        final ShadowPackageManager shadowPackageManager =
-                Shadows.shadowOf(mContext.getPackageManager());
-        shadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info));
+    public void getTileTooltipContent_hasOneTileService_guideToEdit_haveMatchString() {
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
+                PLACEHOLDER_TILE_NAME);
 
-        final CharSequence tileName = mFragment.getTileName();
-        assertThat(tileName.toString()).isEqualTo(PLACEHOLDER_TILE_NAME);
+        final CharSequence tileTooltipContent =
+                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
+        final CharSequence tileName =
+                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
+        assertThat(tileTooltipContent.toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_service_qs_tooltips_content, tileName));
     }
 
     @Test
-    public void getTileName_hasTwoTileServices_haveMatchString() {
+    public void getTileTooltipContent_hasOneTileService_guideToDirectUse_haveMatchString() {
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
+                PLACEHOLDER_TILE_NAME);
+
+        final CharSequence tileTooltipContent =
+                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        final CharSequence tileName =
+                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
+        assertThat(tileTooltipContent.toString()).isEqualTo(
+                mContext.getString(
+                        R.string.accessibility_service_auto_added_qs_tooltips_content, tileName));
+    }
+
+    @Test
+    public void getTileTooltipContent_hasTwoTileServices_guideToEdit_haveMatchString() {
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
+                PLACEHOLDER_TILE_NAME);
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME2,
+                PLACEHOLDER_TILE_NAME2);
+
+        final CharSequence tileTooltipContent =
+                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_EDIT);
+        final CharSequence tileName =
+                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
+        assertThat(tileTooltipContent.toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_service_qs_tooltips_content, tileName));
+    }
+
+    @Test
+    public void getTileTooltipContent_hasTwoTileServices_guideToDirectUse_haveMatchString() {
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME,
+                PLACEHOLDER_TILE_NAME);
+        setupTileService(PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME2,
+                PLACEHOLDER_TILE_NAME2);
+
+        final CharSequence tileTooltipContent =
+                mFragment.getTileTooltipContent(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        final CharSequence tileName =
+                mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
+        assertThat(tileTooltipContent.toString()).isEqualTo(
+                mContext.getString(
+                        R.string.accessibility_service_auto_added_qs_tooltips_content, tileName));
+    }
+
+    private void setupTileService(String packageName, String name, String tileName) {
         final Intent tileProbe = new Intent(TileService.ACTION_QS_TILE);
         final ResolveInfo info = new ResolveInfo();
-        info.serviceInfo = new FakeServiceInfo();
-        info.serviceInfo.packageName = PLACEHOLDER_PACKAGE_NAME;
-        info.serviceInfo.name = PLACEHOLDER_TILE_CLASS_NAME;
-        final ResolveInfo info2 = new ResolveInfo();
-        info2.serviceInfo = new FakeServiceInfo2();
-        info2.serviceInfo.packageName = PLACEHOLDER_PACKAGE_NAME;
-        info2.serviceInfo.name = PLACEHOLDER_TILE_CLASS_NAME2;
+        info.serviceInfo = new FakeServiceInfo(packageName, name, tileName);
         final ShadowPackageManager shadowPackageManager =
                 Shadows.shadowOf(mContext.getPackageManager());
-        shadowPackageManager.setResolveInfosForIntent(tileProbe, Arrays.asList(info, info2));
-
-        final CharSequence tileName = mFragment.getTileName();
-        assertThat(tileName.toString()).isEqualTo(PLACEHOLDER_TILE_NAME);
+        shadowPackageManager.addResolveInfoForIntent(tileProbe, info);
     }
 
     private static class FakeServiceInfo extends ServiceInfo {
-        public String loadLabel(PackageManager mgr) {
-            return PLACEHOLDER_TILE_NAME;
-        }
-    }
+        private String mTileName;
 
-    private static class FakeServiceInfo2 extends ServiceInfo {
+        FakeServiceInfo(String packageName, String name, String tileName) {
+            this.packageName = packageName;
+            this.name = name;
+            mTileName = tileName;
+        }
+
         public String loadLabel(PackageManager mgr) {
-            return PLACEHOLDER_TILE_NAME2;
+            return mTileName;
         }
     }
 
