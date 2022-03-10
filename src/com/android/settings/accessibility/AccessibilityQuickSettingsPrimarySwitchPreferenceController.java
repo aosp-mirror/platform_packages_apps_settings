@@ -116,7 +116,7 @@ public abstract class AccessibilityQuickSettingsPrimarySwitchPreferenceControlle
 
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(mContext);
         mTooltipWindow.setup(getTileTooltipContent(),
-                R.drawable.accessibility_auto_added_qs_tooltips_illustration);
+                R.drawable.accessibility_auto_added_qs_tooltip_illustration);
         mTooltipWindow.showAtTopCenter(mPreference.getSwitch());
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(mContext, tileComponentName);
         mNeedsQSTooltipReshow = false;
