@@ -877,8 +877,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltips_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltips_illustration;
+                ? R.drawable.accessibility_qs_tooltip_illustration
+                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
         mTooltipWindow.setup(content, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
