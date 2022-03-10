@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.nearby.NearbyManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -56,9 +57,9 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
                 findPreference(SCAN_SWITCH_KEY));
         mainSwitchPreference.addOnSwitchChangeListener(
                 (switchView, isChecked) ->
-                        Settings.Secure.putInt(getContentResolver(),
-                                Settings.Secure.FAST_PAIR_SCAN_ENABLED, isChecked ? 1 : 0));
-        mainSwitchPreference.setChecked(isFastPairScanAvailable());
+                        NearbyManager.setFastPairScanEnabled(getContext(), isChecked));
+        mainSwitchPreference.setChecked(
+                NearbyManager.getFastPairScanEnabled(getContext(), false));
 
         Preference savedDevicePref = Objects.requireNonNull(
                 findPreference(SAVED_DEVICES_PREF_KEY));
@@ -88,11 +89,6 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.fast_pair_settings);
-
-    private boolean isFastPairScanAvailable() {
-        return Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.FAST_PAIR_SCAN_ENABLED, 1) != 0;
-    }
 
     @Nullable
     private ComponentName getSavedDevicesComponent() {
