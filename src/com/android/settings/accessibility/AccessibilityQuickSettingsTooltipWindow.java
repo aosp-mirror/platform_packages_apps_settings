@@ -80,7 +80,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * @param text text to be displayed
      * @param imageResId the resource ID of the image drawable
      */
-    public void setup(String text, @DrawableRes int imageResId) {
+    public void setup(CharSequence text, @DrawableRes int imageResId) {
         this.setup(text, imageResId, /* closeDelayTimeMillis= */ 0);
     }
 
@@ -94,7 +94,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * @param imageResId the resource ID of the image drawable
      * @param closeDelayTimeMillis how long the popup window be auto-closed
      */
-    public void setup(String text, @DrawableRes int imageResId, long closeDelayTimeMillis) {
+    public void setup(CharSequence text, @DrawableRes int imageResId, long closeDelayTimeMillis) {
         this.mCloseDelayTimeMillis = closeDelayTimeMillis;
 
         setBackgroundDrawable(new ColorDrawable(mContext.getColor(android.R.color.transparent)));

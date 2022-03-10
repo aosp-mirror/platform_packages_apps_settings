@@ -184,8 +184,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.reduce_bright_colors_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                 ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
+                 : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 
     @Override
