@@ -628,21 +628,32 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         if (preference instanceof LongPressWifiEntryPreference) {
-            final WifiEntry selectedEntry =
-                    ((LongPressWifiEntryPreference) preference).getWifiEntry();
-
-            if (selectedEntry.shouldEditBeforeConnect()) {
-                launchConfigNewNetworkFragment(selectedEntry);
-                return true;
-            }
-
-            connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
+            onSelectedWifiPreferenceClick((LongPressWifiEntryPreference) preference);
         } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
         return true;
+    }
+
+    @VisibleForTesting
+    void onSelectedWifiPreferenceClick(LongPressWifiEntryPreference preference) {
+        final WifiEntry selectedEntry = preference.getWifiEntry();
+
+        if (selectedEntry.shouldEditBeforeConnect()) {
+            launchConfigNewNetworkFragment(selectedEntry);
+            return;
+        }
+
+        if (selectedEntry.canConnect()) {
+            connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
+            return;
+        }
+
+        if (selectedEntry.isSaved()) {
+            launchNetworkDetailsFragment(preference);
+        }
     }
 
     private void launchWifiDppConfiguratorActivity(WifiEntry wifiEntry) {
@@ -984,7 +995,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return new FirstWifiEntryPreference(getPrefContext(), wifiEntry, this);
     }
 
-    private void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
+    @VisibleForTesting
+    void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
         final Context context = getContext();
         final CharSequence title =
@@ -1253,7 +1265,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
+    @VisibleForTesting
+    void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
         bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());

@@ -3168,6 +3168,8 @@
     <string name="style_suggestion_summary">Try different styles, wallpapers, and more</string>
     <!-- Display settings screen, trigger for screen saver options -->
     <string name="screensaver_settings_title">Screen saver</string>
+    <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
+    <string name="screensaver_settings_toggle_title">Use screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging -->
     <string name="screensaver_settings_summary_either_long">While charging or docked</string>
     <!-- Dream settings screen, dialog option, activated when docked or asleep and charging -->
@@ -5552,11 +5554,27 @@
     <string name="accessibility_service_primary_switch_title">Use <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
     <!-- Used in the accessibility service settings to open the activity. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_primary_open_title">Open <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g></string>
-    <!-- Used in the accessibility service settings to show quick settings tooltips for auto-added feature. [CHAR LIMIT=NONE] -->
+    <!-- Used in the accessibility service settings to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_auto_added_qs_tooltips_content"><xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> added to Quick Settings. Swipe down to turn it on or off anytime.</string>
-    <!-- Used in the accessibility service settings to show quick settings tooltips. [CHAR LIMIT=NONE] -->
+    <!-- Used in the accessibility service settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
     <string name="accessibility_service_qs_tooltips_content">You can also add <xliff:g id="accessibility_app_name" example="TalkBack">%1$s</xliff:g> to Quick Settings from the top of your screen</string>
-    <!-- Used in the accessibility action for accessibility quick settings tooltips to dismiss. [CHAR LIMIT=NONE] -->
+    <!-- Used in the color correction settings to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_correction_auto_added_qs_tooltip_content">Color correction added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <!-- Used in the color correction settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_correction_qs_tooltip_content">You can also add color correction to Quick Settings from the top of your screen</string>
+    <!-- Used in the color inversion settings to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content">Color inversion added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <!-- Used in the color inversion settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_color_inversion_qs_tooltip_content">You can also add color inversion to Quick Settings from the top of your screen</string>
+    <!-- Used in the reduce bright colors settings to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content">Extra dim added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <!-- Used in the reduce bright colors settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_reduce_bright_colors_qs_tooltip_content">You can also add extra dim to Quick Settings from the top of your screen</string>
+    <!-- Used in the One-hand mode color to show quick settings tooltip for auto-added feature. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content">One-handed mode added to Quick Settings. Swipe down to turn it on or off anytime.</string>
+    <!-- Used in the One-hand mode settings to show quick settings tooltip. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_one_handed_mode_qs_tooltip_content">You can also add one-handed mode to Quick Settings from the top of your screen</string>
+    <!-- Used in the accessibility action for accessibility quick settings tooltip to dismiss. [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_tooltips_dismiss">Dismiss</string>
     <!-- Intro for color correction settings screen to control turning on/off the feature entirely. [CHAR LIMIT=NONE] -->
     <string name="accessibility_daltonizer_about_intro_text" product="default">Adjust how colors display on your phone</string>
@@ -5617,10 +5635,10 @@
     <!-- Title for the accessibility audio adjustment page. [CHAR LIMIT=50] -->
     <string name="accessibility_audio_adjustment_title">Audio adjustment</string>
     <!-- Title for control audio description preference. [CHAR LIMIT=50] -->
-    <string name="accessibility_toggle_audio_description_preference_title">Audio Description</string>
+    <string name="accessibility_toggle_audio_description_preference_title">Audio description</string>
     <!-- Summary for accessibility preference for audio description when need
     audio description in adopted apps. [CHAR_LIMIT=NONE] -->
-    <string name="accessibility_audio_description_summary">Select audio sound track with audio description by default</string>
+    <string name="accessibility_audio_description_summary">Hear a description of what\u2019s happening on screen in supported movies and shows</string>
     <!-- List of synonyms used in the settings search bar to find the "Audio Description. [CHAR LIMIT=NONE] -->
     <string name="keywords_audio_description">audio description, audio, description, low vision,</string>
 
@@ -11791,7 +11809,7 @@
     <string name="assistant_corner_gesture_summary">Swipe up from a bottom corner to invoke digital assistant app.</string>
 
     <!-- Title text for holding a long press on Home button to invoke the digital assistant app. [CHAR LIMIT=60] -->
-    <string name="assistant_long_press_home_gesture_title">Hold Home to invoke assistant</string>
+    <string name="assistant_long_press_home_gesture_title">Hold Home for Assistant</string>
     <!-- Summary text for holding a long press on Home button to invoke the digital assistant app. [CHAR LIMIT=NONE] -->
     <string name="assistant_long_press_home_gesture_summary">Press and hold the Home button to invoke digital assistant app.</string>
 
