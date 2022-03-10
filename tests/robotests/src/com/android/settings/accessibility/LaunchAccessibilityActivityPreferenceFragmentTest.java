@@ -101,7 +101,7 @@ public class LaunchAccessibilityActivityPreferenceFragmentTest {
         final CharSequence tileName =
                 mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
         assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_service_qs_tooltips_content, tileName));
+                mContext.getString(R.string.accessibility_service_qs_tooltip_content, tileName));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class LaunchAccessibilityActivityPreferenceFragmentTest {
                 mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
         assertThat(tileTooltipContent.toString()).isEqualTo(
                 mContext.getString(
-                        R.string.accessibility_service_auto_added_qs_tooltips_content, tileName));
+                        R.string.accessibility_service_auto_added_qs_tooltip_content, tileName));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class LaunchAccessibilityActivityPreferenceFragmentTest {
         final CharSequence tileName =
                 mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
         assertThat(tileTooltipContent.toString()).isEqualTo(
-                mContext.getString(R.string.accessibility_service_qs_tooltips_content, tileName));
+                mContext.getString(R.string.accessibility_service_qs_tooltip_content, tileName));
     }
 
     @Test
@@ -146,7 +146,7 @@ public class LaunchAccessibilityActivityPreferenceFragmentTest {
                 mFragment.loadTileLabel(mContext, mFragment.getTileComponentName());
         assertThat(tileTooltipContent.toString()).isEqualTo(
                 mContext.getString(
-                        R.string.accessibility_service_auto_added_qs_tooltips_content, tileName));
+                        R.string.accessibility_service_auto_added_qs_tooltip_content, tileName));
     }
 
     private void setupTileService(String packageName, String name, String tileName) {

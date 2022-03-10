@@ -141,8 +141,8 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_service_qs_tooltips_content
-                : R.string.accessibility_service_auto_added_qs_tooltips_content;
+                ? R.string.accessibility_service_qs_tooltip_content
+                : R.string.accessibility_service_auto_added_qs_tooltip_content;
         return getString(titleResId, tileName);
     }
 
