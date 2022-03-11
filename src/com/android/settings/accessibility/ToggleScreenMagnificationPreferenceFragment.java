@@ -361,6 +361,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setChecked(value != UserShortcutType.EMPTY);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
     }
 
     @Override
