@@ -201,8 +201,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.accessibility_display_daltonizer_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_color_correction_qs_tooltip_content
+                : R.string.accessibility_color_correction_auto_added_qs_tooltip_content);
     }
 
     @Override

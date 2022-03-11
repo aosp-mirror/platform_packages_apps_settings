@@ -131,8 +131,10 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    protected CharSequence getTileName() {
-        return mFeatureName;
+    protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? getText(R.string.accessibility_one_handed_mode_qs_tooltip_content)
+                : getText(R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content);
     }
 
     @Override
