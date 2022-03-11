@@ -297,6 +297,14 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
+        <ListPreference
+            android:key="ingress_rate_limit"
+            android:title="@string/ingress_rate_limit_title"
+            android:summary="@string/ingress_rate_limit_summary"
+            android:dialogTitle="@string/ingress_rate_limit_dialog_title"
+            android:entries="@array/ingress_rate_limit_entries"
+            android:entryValues="@array/ingress_rate_limit_values" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
