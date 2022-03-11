@@ -56,6 +56,13 @@ public class CombinedBiometricStatusUtils {
     }
 
     /**
+     * Returns whether at least one face template or fingerprint has been enrolled.
+     */
+    public boolean hasEnrolled() {
+        return hasEnrolledFingerprints() || hasEnrolledFace();
+    }
+
+    /**
      * Returns the {@link EnforcedAdmin} in case parental consent is required to change both
      * face and fingerprint settings.
      *
@@ -84,8 +91,7 @@ public class CombinedBiometricStatusUtils {
     public String getSummary() {
         final int numFingerprintsEnrolled = mFingerprintManager != null
                 ? mFingerprintManager.getEnrolledFingerprints(mUserId).size() : 0;
-        final boolean faceEnrolled = mFaceManager != null
-                && mFaceManager.hasEnrolledTemplates(mUserId);
+        final boolean faceEnrolled = hasEnrolledFace();
 
         if (faceEnrolled && numFingerprintsEnrolled > 1) {
             return mContext.getString(
@@ -103,6 +109,14 @@ public class CombinedBiometricStatusUtils {
             return mContext.getString(
                     R.string.security_settings_biometric_preference_summary_none_enrolled);
         }
+    }
+
+    private boolean hasEnrolledFingerprints() {
+        return mFingerprintManager != null && mFingerprintManager.hasEnrolledFingerprints(mUserId);
+    }
+
+    private boolean hasEnrolledFace() {
+        return mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
     }
 
     /**

@@ -75,7 +75,10 @@ public class FaceStatusUtils {
                 : FaceEnrollIntroduction.class.getName();
     }
 
-    private boolean hasEnrolled() {
+    /**
+     * Returns whether at least one face template has been enrolled.
+     */
+    public boolean hasEnrolled() {
         return mFaceManager.hasEnrolledTemplates(mUserId);
     }
 }
