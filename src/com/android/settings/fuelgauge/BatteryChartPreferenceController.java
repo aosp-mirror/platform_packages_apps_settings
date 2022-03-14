@@ -618,7 +618,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     }
 
     /** Used for {@link AppBatteryPreferenceController}. */
-    static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
+    public static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
             FeatureFactory.getFactory(context)
