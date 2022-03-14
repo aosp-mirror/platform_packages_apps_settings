@@ -87,13 +87,13 @@ public class WorkModePreferenceController extends BasePreferenceController imple
     @Override
     public CharSequence getSummary() {
         if (isChecked()) {
-            return mDevicePolicyManager
-                    .getString(WORK_PROFILE_SETTING_ON_SUMMARY,
-                            () -> mContext.getString(R.string.work_mode_on_summary));
+            return mDevicePolicyManager.getResources().getString(
+                    WORK_PROFILE_SETTING_ON_SUMMARY,
+                    () -> mContext.getString(R.string.work_mode_on_summary));
         }
 
-        return mDevicePolicyManager
-                .getString(WORK_PROFILE_SETTING_OFF_SUMMARY,
+        return mDevicePolicyManager.getResources().getString(
+                WORK_PROFILE_SETTING_OFF_SUMMARY,
                         () -> mContext.getString(R.string.work_mode_off_summary));
     }
 

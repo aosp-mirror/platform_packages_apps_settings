@@ -199,7 +199,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                         UserHandle.myUserId())) {
                     final SearchIndexableRaw data = new SearchIndexableRaw(mContext);
                     data.key = PREF_KEY_REMOVE_PROFILE;
-                    data.title = mDpm.getString(
+                    data.title = mDpm.getResources().getString(
                             REMOVE_WORK_PROFILE,
                             () -> res.getString(R.string.remove_managed_profile_label));
                     data.screenTitle = screenTitle;
@@ -207,7 +207,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 }
                 final SearchIndexableRaw data = new SearchIndexableRaw(mContext);
                 data.key = PREF_KEY_WORK_PROFILE_SETTING;
-                data.title = mDpm.getString(MANAGED_PROFILE_SETTINGS_TITLE,
+                data.title = mDpm.getResources().getString(MANAGED_PROFILE_SETTINGS_TITLE,
                         () -> res.getString(R.string.managed_profile_settings_title));
                 data.screenTitle = screenTitle;
                 rawData.add(data);
@@ -267,7 +267,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 new SubSettingLauncher(mContext)
                         .setSourceMetricsCategory(metricsCategory)
                         .setDestination(ManagedProfileSettings.class.getName())
-                        .setTitleText(mDpm.getString(MANAGED_PROFILE_SETTINGS_TITLE,
+                        .setTitleText(mDpm.getResources().getString(MANAGED_PROFILE_SETTINGS_TITLE,
                                 () -> mContext.getString(R.string.managed_profile_settings_title)))
                         .setArguments(arguments)
                         .launch();
@@ -347,12 +347,12 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else if (userInfo.isManagedProfile()) {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(
-                        mDpm.getString(WORK_CATEGORY_HEADER,
+                        mDpm.getResources().getString(WORK_CATEGORY_HEADER,
                                 () -> mContext.getString(R.string.category_work)));
                 final String workGroupSummary = getWorkGroupSummary(context, userInfo);
                 preferenceGroup.setSummary(workGroupSummary);
                 preferenceGroup.setContentDescription(
-                        mDpm.getString(ACCESSIBILITY_CATEGORY_WORK, () ->
+                        mDpm.getResources().getString(ACCESSIBILITY_CATEGORY_WORK, () ->
                         mContext.getString(
                                 R.string.accessibility_category_work, workGroupSummary)));
             }
@@ -363,10 +363,10 @@ public class AccountPreferenceController extends AbstractPreferenceController
         } else {
             if (mType == ProfileSelectFragment.ProfileType.ALL) {
                 preferenceGroup.setTitle(
-                        mDpm.getString(PERSONAL_CATEGORY_HEADER,
+                        mDpm.getResources().getString(PERSONAL_CATEGORY_HEADER,
                                 () -> mContext.getString(R.string.category_personal)));
                 preferenceGroup.setContentDescription(
-                        mDpm.getString(ACCESSIBILITY_CATEGORY_PERSONAL, () ->
+                        mDpm.getResources().getString(ACCESSIBILITY_CATEGORY_PERSONAL, () ->
                         mContext.getString(R.string.accessibility_category_personal)));
             }
         }
@@ -401,7 +401,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 mFragment.getPreferenceManager().getContext());
         preference.setKey(PREF_KEY_REMOVE_PROFILE);
         preference.setTitle(
-                mDpm.getString(REMOVE_WORK_PROFILE,
+                mDpm.getResources().getString(REMOVE_WORK_PROFILE,
                         () -> mContext.getString(R.string.remove_managed_profile_label)));
         preference.setIcon(R.drawable.ic_delete);
         preference.setOnPreferenceClickListener(this);
@@ -413,7 +413,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
     private Preference newManagedProfileSettings() {
         Preference preference = new Preference(mFragment.getPreferenceManager().getContext());
         preference.setKey(PREF_KEY_WORK_PROFILE_SETTING);
-        preference.setTitle(mDpm.getString(MANAGED_PROFILE_SETTINGS_TITLE,
+        preference.setTitle(mDpm.getResources().getString(MANAGED_PROFILE_SETTINGS_TITLE,
                 () -> mContext.getString(R.string.managed_profile_settings_title)));
         preference.setIcon(R.drawable.ic_settings_24dp);
         preference.setOnPreferenceClickListener(this);
@@ -428,7 +428,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             return null;
         }
         CharSequence appLabel = packageManager.getApplicationLabel(adminApplicationInfo);
-        return mDpm.getString(MANAGED_BY,
+        return mDpm.getResources().getString(MANAGED_BY,
                 () -> mContext.getString(R.string.managing_admin, appLabel), appLabel);
     }
 
@@ -508,7 +508,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             mProfileNotAvailablePreference.setIcon(R.drawable.empty_icon);
             mProfileNotAvailablePreference.setTitle(null);
             mProfileNotAvailablePreference.setSummary(
-                    mDpm.getString(
+                    mDpm.getResources().getString(
                             WORK_PROFILE_NOT_AVAILABLE, () -> mContext.getString(
                     R.string.managed_profile_not_available_label)));
             profileData.preferenceGroup.addPreference(mProfileNotAvailablePreference);
