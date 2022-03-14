@@ -23,6 +23,7 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -56,5 +57,10 @@ public class AccessibilityShortcutPreferenceController extends TogglePreferenceC
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 }

@@ -86,6 +86,7 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         // Parent sets the title when creating the view, so set it after calling super
         mToggleServiceSwitchPreference.setTitle(R.string.reduce_bright_colors_switch_title);
         updateGeneralCategoryOrder();
+        updateFooterPreference();
         return view;
     }
 
@@ -99,6 +100,12 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         getPreferenceScreen().removePreference(persist);
         persist.setOrder(mShortcutPreference.getOrder() - 1);
         generalCategory.addPreference(persist);
+    }
+
+    private void updateFooterPreference() {
+        final String title = getPrefContext().getString(R.string.reduce_bright_colors_about_title);
+        mFooterPreferenceController.setIntroductionTitle(title);
+        mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -135,7 +142,6 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
         return R.xml.reduce_bright_colors_settings;
     }
 
-
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
         AccessibilityStatsLogUtils.logAccessibilityServiceEnabled(mComponentName, enabled);
@@ -152,6 +158,11 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     @Override
     protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
         switchPreference.setTitle(R.string.reduce_bright_colors_preference_title);
+    }
+
+    @Override
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        shortcutPreference.setTitle(R.string.reduce_bright_colors_shortcut_title);
     }
 
     @Override

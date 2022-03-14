@@ -62,10 +62,11 @@ public class WifiPanel implements PanelContent {
         final String screenTitle =
                 mContext.getText(R.string.wifi_settings).toString();
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                    WifiSettings.class.getName(),
-                    null /* key */,
-                    screenTitle,
-                    SettingsEnums.WIFI);
+                WifiSettings.class.getName(),
+                null /* key */,
+                screenTitle,
+                SettingsEnums.WIFI,
+                R.string.menu_key_network);
         intent.setClassName(mContext.getPackageName(), SubSettings.class.getName());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         return intent;
