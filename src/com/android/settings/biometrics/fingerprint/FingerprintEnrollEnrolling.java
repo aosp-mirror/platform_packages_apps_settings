@@ -81,9 +81,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private static final int STAGE_CENTER = 0;
     private static final int STAGE_GUIDED = 1;
     private static final int STAGE_FINGERTIP = 2;
-    private static final int STAGE_EDGES = 3;
+    private static final int STAGE_LEFT_EDGE = 3;
+    private static final int STAGE_RIGHT_EDGE = 4;
 
-    @IntDef({STAGE_UNKNOWN, STAGE_CENTER, STAGE_GUIDED, STAGE_FINGERTIP, STAGE_EDGES})
+    @IntDef({STAGE_UNKNOWN, STAGE_CENTER, STAGE_GUIDED, STAGE_FINGERTIP, STAGE_LEFT_EDGE,
+            STAGE_RIGHT_EDGE})
     @Retention(RetentionPolicy.SOURCE)
     private @interface EnrollStage {}
 
@@ -132,7 +134,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mIsAccessibilityEnabled;
     private LottieAnimationView mIllustrationLottie;
     private boolean mHaveShownUdfpsTipLottie;
-    private boolean mHaveShownUdfpsSideLottie;
+    private boolean mHaveShownUdfpsLeftEdgeLottie;
+    private boolean mHaveShownUdfpsRightEdgeLottie;
     private boolean mShouldShowLottie;
 
     private OrientationEventListener mOrientationEventListener;
@@ -372,12 +375,31 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 }
                 break;
 
-            case STAGE_EDGES:
+            case STAGE_LEFT_EDGE:
                 setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
-                if (!mHaveShownUdfpsSideLottie && mIllustrationLottie != null) {
-                    mHaveShownUdfpsSideLottie = true;
+                if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsLeftEdgeLottie = true;
                     setDescriptionText("");
-                    mIllustrationLottie.setAnimation(R.raw.udfps_edge_hint_lottie);
+                    mIllustrationLottie.setAnimation(R.raw.udfps_left_edge_hint_lottie);
+                    mIllustrationLottie.setVisibility(View.VISIBLE);
+                    mIllustrationLottie.playAnimation();
+                    mIllustrationLottie.setContentDescription(
+                            getString(R.string.security_settings_udfps_side_fingerprint_help));
+                } else if (mIllustrationLottie == null) {
+                    if (isStageHalfCompleted()) {
+                        setDescriptionText(
+                                R.string.security_settings_fingerprint_enroll_repeat_message);
+                    } else {
+                        setDescriptionText(R.string.security_settings_udfps_enroll_edge_message);
+                    }
+                }
+                break;
+            case STAGE_RIGHT_EDGE:
+                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                if (!mHaveShownUdfpsRightEdgeLottie && mIllustrationLottie != null) {
+                    mHaveShownUdfpsRightEdgeLottie = true;
+                    setDescriptionText("");
+                    mIllustrationLottie.setAnimation(R.raw.udfps_right_edge_hint_lottie);
                     mIllustrationLottie.setVisibility(View.VISIBLE);
                     mIllustrationLottie.playAnimation();
                     mIllustrationLottie.setContentDescription(
@@ -422,8 +444,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             return STAGE_GUIDED;
         } else if (progressSteps < getStageThresholdSteps(2)) {
             return STAGE_FINGERTIP;
+        } else if (progressSteps < getStageThresholdSteps(3)) {
+            return STAGE_LEFT_EDGE;
         } else {
-            return STAGE_EDGES;
+            return STAGE_RIGHT_EDGE;
         }
     }
 
