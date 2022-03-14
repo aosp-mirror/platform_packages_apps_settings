@@ -186,7 +186,7 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected String getDescriptionDisabledByAdmin() {
-        return mDevicePolicyManager.getString(
+        return mDevicePolicyManager.getResources().getString(
                 FINGERPRINT_UNLOCK_DISABLED,
                 () -> getString(R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled));
     }

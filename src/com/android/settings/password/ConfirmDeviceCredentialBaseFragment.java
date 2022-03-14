@@ -247,7 +247,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                     R.string.lock_last_attempt_before_wipe_warning_title);
             final String overrideMessageId = getLastTryOverrideErrorMessageId(userType);
             final int defaultMessageId = getLastTryDefaultErrorMessage(userType);
-            final String message = mDevicePolicyManager.getString(
+            final String message = mDevicePolicyManager.getResources().getString(
                     overrideMessageId, () -> getString(defaultMessageId));
             LastTryDialog.show(fragmentManager, title, message,
                     android.R.string.ok, false /* dismiss */);
@@ -281,9 +281,10 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
                 return getString(com.android.settingslib
                         .R.string.failed_attempts_now_wiping_device);
             case USER_TYPE_MANAGED_PROFILE:
-                return mDevicePolicyManager.getString(WORK_PROFILE_LOCK_ATTEMPTS_FAILED,
-                        () -> getString(com.android.settingslib
-                                .R.string.failed_attempts_now_wiping_profile));
+                return mDevicePolicyManager.getResources().getString(
+                        WORK_PROFILE_LOCK_ATTEMPTS_FAILED,
+                        () -> getString(
+                          com.android.settingslib.R.string.failed_attempts_now_wiping_profile));
             case USER_TYPE_SECONDARY:
                 return getString(com.android.settingslib.R.string.failed_attempts_now_wiping_user);
             default:

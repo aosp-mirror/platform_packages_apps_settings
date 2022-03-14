@@ -47,11 +47,11 @@ public class CaCertsCurrentUserPreferenceController extends CaCertsPreferenceCon
         super.updateState(preference);
 
         if (mFeatureProvider.isInCompMode()) {
-            preference.setTitle(mDevicePolicyManager.getString(
+            preference.setTitle(mDevicePolicyManager.getResources().getString(
                     CA_CERTS_PERSONAL_PROFILE,
                     () -> mContext.getString(R.string.enterprise_privacy_ca_certs_personal)));
         } else {
-            preference.setTitle(mDevicePolicyManager.getString(
+            preference.setTitle(mDevicePolicyManager.getResources().getString(
                     CA_CERTS_DEVICE,
                     () -> mContext.getString(R.string.enterprise_privacy_ca_certs_device)));
         }

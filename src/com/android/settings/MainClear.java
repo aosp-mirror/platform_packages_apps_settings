@@ -500,10 +500,10 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         context.getSystemService(DevicePolicyManager.class);
 
                 if (userInfo.isManagedProfile()) {
-                    titleText.setText(devicePolicyManager.getString(
+                    titleText.setText(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER, () -> getString(R.string.category_work)));
                 } else {
-                    titleText.setText(devicePolicyManager.getString(
+                    titleText.setText(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER, () -> getString(R.string.category_personal)));
                 }
                 contents.addView(titleView);
