@@ -22,7 +22,6 @@ import static android.provider.Settings.Secure.CAMERA_AUTOROTATE;
 import static com.android.settings.display.SmartAutoRotateController.hasSufficientPermission;
 import static com.android.settings.display.SmartAutoRotateController.isRotationResolverServiceAvailable;
 
-import android.text.TextUtils;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,6 +31,7 @@ import android.hardware.SensorPrivacyManager;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -88,6 +88,11 @@ public class SmartAutoRotatePreferenceController extends TogglePreferenceControl
     @Override
     public boolean isPublicSlice() {
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 
     @Override

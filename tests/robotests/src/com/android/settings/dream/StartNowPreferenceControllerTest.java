@@ -16,17 +16,18 @@
 
 package com.android.settings.dream;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.widget.Button;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settingslib.dream.DreamBackend;
-import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,9 @@ public class StartNowPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private MainSwitchPreference mPref;
+    private LayoutPreference mLayoutPref;
+    @Mock
+    private Button mButton;
     @Mock
     private DreamBackend mBackend;
 
@@ -56,36 +59,29 @@ public class StartNowPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mController = new StartNowPreferenceController(mContext, "key");
-        mPref = mock(MainSwitchPreference.class);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mLayoutPref);
+        when(mLayoutPref.findViewById(R.id.dream_start_now_button)).thenReturn(mButton);
 
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }
 
     @Test
-    public void displayPreference_shouldAddOnSwitchChangeListener() {
-        mController.displayPreference(mScreen);
-
-        verify(mPref).addOnSwitchChangeListener(mController);
-    }
-
-    @Test
-    public void updateState_neverDreaming_preferenceShouldDidabled() {
+    public void updateState_neverDreaming_buttonShouldDidabled() {
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.NEVER);
         mController.displayPreference(mScreen);
 
-        mController.updateState(mPref);
+        mController.updateState(mLayoutPref);
 
-        verify(mPref).setEnabled(false);
+        verify(mButton).setEnabled(false);
     }
 
     @Test
-    public void updateState_dreamIsAvailable_preferenceShouldEnabled() {
+    public void updateState_dreamIsAvailable_buttonShouldEnabled() {
         when(mBackend.getWhenToDreamSetting()).thenReturn(DreamBackend.EITHER);
         mController.displayPreference(mScreen);
 
-        mController.updateState(mPref);
+        mController.updateState(mLayoutPref);
 
-        verify(mPref).setEnabled(true);
+        verify(mButton).setEnabled(true);
     }
 }

@@ -42,15 +42,7 @@
 
     <Preference
         android:key="install_credentials"
-        android:title="@string/wifi_install_credentials">
-        <intent
-            android:action="android.credentials.INSTALL"
-            android:targetPackage="com.android.certinstaller"
-            android:targetClass="com.android.certinstaller.CertInstallerMain">
-            <!-- Same value as CERTIFICATE_USAGE_WIFI in keystore/java/android/security/Credentials.java -->
-            <extra android:name="certificate_install_usage" android:value="wifi"/>
-        </intent>
-    </Preference>
+        android:title="@string/wifi_install_credentials"/>
 
     <Preference
         android:key="wifi_direct"

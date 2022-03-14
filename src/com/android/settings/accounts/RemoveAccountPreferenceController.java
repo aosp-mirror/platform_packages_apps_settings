@@ -53,6 +53,7 @@ import java.io.IOException;
 public class RemoveAccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnClickListener {
 
+    private static final String TAG = "RemoveAccountPrefController";
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -175,10 +176,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                                 | IOException
                                 | AuthenticatorException e) {
                             // handled below
-                        }
-                        if (failed) {
+                            Log.w(TAG, "Remove account error: " + e);
                             RemoveAccountFailureDialog.show(getTargetFragment());
-                        } else {
+                        }
+                        Log.i(TAG, "failed: " + failed);
+                        if (!failed) {
                             targetActivity.finish();
                         }
                     }, null, mUserHandle);
@@ -210,7 +212,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             final Context context = getActivity();
 
             return new AlertDialog.Builder(context)
-                    .setTitle(R.string.really_remove_account_title)
+                    .setTitle(R.string.remove_account_label)
                     .setMessage(R.string.remove_account_failed)
                     .setPositiveButton(android.R.string.ok, null)
                     .create();

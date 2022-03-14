@@ -19,7 +19,6 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -28,6 +27,8 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.Settings;
 import android.widget.Toolbar;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -46,13 +47,13 @@ import org.robolectric.shadows.ShadowPackageManager;
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
-    private Activity mActivity;
+    private FragmentActivity mActivity;
     private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.setupActivity(Activity.class);
+        mActivity = Robolectric.setupActivity(FragmentActivity.class);
         mProvider = new SearchFeatureProviderImpl();
         mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
         Settings.Global.putInt(mActivity.getContentResolver(),
