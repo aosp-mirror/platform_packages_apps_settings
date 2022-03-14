@@ -17,7 +17,10 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -163,23 +166,32 @@ public class ChartDataUsagePreferenceTest {
 
     @Test
     public void notifyChange_nonEmptyDataUsage_shouldHaveSingleContentDescription() {
-        final UsageView chart = (UsageView) mHolder.findViewById(R.id.data_usage);
-        final TextView labelTop = (TextView) mHolder.findViewById(R.id.label_top);
-        final TextView labelMiddle = (TextView) mHolder.findViewById(R.id.label_middle);
-        final TextView labelBottom = (TextView) mHolder.findViewById(R.id.label_bottom);
-        final TextView labelStart = (TextView) mHolder.findViewById(R.id.label_start);
-        final TextView labelEnd = (TextView) mHolder.findViewById(R.id.label_end);
+        final ArgumentCaptor<CharSequence> contentCaptor =
+            ArgumentCaptor.forClass(CharSequence.class);
+        final UsageView chart = mock(UsageView.class);
+        doReturn(chart).when(mHolder).findViewById(R.id.data_usage);
+        final TextView labelTop = mock(TextView.class);
+        doReturn(labelTop).when(mHolder).findViewById(R.id.label_top);
+        final TextView labelMiddle = mock(TextView.class);
+        doReturn(labelMiddle).when(mHolder).findViewById(R.id.label_middle);
+        final TextView labelBottom = mock(TextView.class);
+        doReturn(labelBottom).when(mHolder).findViewById(R.id.label_bottom);
+        final TextView labelStart = mock(TextView.class);
+        doReturn(labelStart).when(mHolder).findViewById(R.id.label_start);
+        final TextView labelEnd = mock(TextView.class);
+        doReturn(labelEnd).when(mHolder).findViewById(R.id.label_end);
         createTestNetworkData();
-        mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
         mPreference.onBindViewHolder(mHolder);
+        mPreference.setNetworkCycleData(mNetworkCycleChartData);
 
-        assertThat(chart.getContentDescription()).isNotNull();
-        assertThat(labelTop.getContentDescription()).isNull();
-        assertThat(labelMiddle.getContentDescription()).isNull();
-        assertThat(labelBottom.getContentDescription()).isNull();
-        assertThat(labelStart.getContentDescription()).isNull();
-        assertThat(labelEnd.getContentDescription()).isNull();
+        verify(chart).setContentDescription(contentCaptor.capture());
+        assertThat(contentCaptor.getValue()).isNotNull();
+        verify(labelTop, never()).setContentDescription(any());
+        verify(labelMiddle, never()).setContentDescription(any());
+        verify(labelBottom, never()).setContentDescription(any());
+        verify(labelStart, never()).setContentDescription(any());
+        verify(labelEnd, never()).setContentDescription(any());
     }
 
     @Test
