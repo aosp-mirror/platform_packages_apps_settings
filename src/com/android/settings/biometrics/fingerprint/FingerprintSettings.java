@@ -457,8 +457,10 @@ public class FingerprintSettings extends SubSettings {
             final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
 
             /* Disable preference if too many fingerprints added */
-            final int max = getContext().getResources().getInteger(
-                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
+            final List<FingerprintSensorPropertiesInternal> props =
+                    mFingerprintManager.getSensorPropertiesInternal();
+            // This will need to be updated for devices with multiple fingerprint sensors
+            final int max = props.get(0).maxEnrollmentsPerUser;
             boolean tooMany = mFingerprintManager.getEnrolledFingerprints(mUserId).size() >= max;
             // retryFingerprint() will be called when remove finishes
             // need to disable enroll or have a way to determine if enroll is in progress
