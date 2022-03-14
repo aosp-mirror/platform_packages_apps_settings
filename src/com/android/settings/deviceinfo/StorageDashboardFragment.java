@@ -246,7 +246,7 @@ public class StorageDashboardFragment extends DashboardFragment
         if (mStorageCacheHelper.hasCachedSizeInfo() && mSelectedStorageEntry.isPrivate()) {
             StorageCacheHelper.StorageCache cachedData = mStorageCacheHelper.retrieveCachedSize();
             mPreferenceController.setVolume(mSelectedStorageEntry.getVolumeInfo());
-            mPreferenceController.setUsedSize(cachedData.usedSize);
+            mPreferenceController.setUsedSize(cachedData.totalUsedSize);
             mPreferenceController.setTotalSize(cachedData.totalSize);
         }
 
@@ -396,7 +396,8 @@ public class StorageDashboardFragment extends DashboardFragment
         mPreferenceController.setUsedSize(privateUsedBytes);
         mPreferenceController.setTotalSize(mStorageInfo.totalBytes);
         // Cache total size and used size
-        mStorageCacheHelper.cacheTotalSizeAndUsedSize(mStorageInfo.totalBytes, privateUsedBytes);
+        mStorageCacheHelper
+                .cacheTotalSizeAndTotalUsedSize(mStorageInfo.totalBytes, privateUsedBytes);
         for (int i = 0, size = mSecondaryUsers.size(); i < size; i++) {
             final AbstractPreferenceController controller = mSecondaryUsers.get(i);
             if (controller instanceof SecondaryUserController) {
