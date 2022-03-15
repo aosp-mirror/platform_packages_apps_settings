@@ -329,14 +329,16 @@
 
     <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title">Restart Device?</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message">You need to restart your device to change this setting.</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm">Restart</string>
-    <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel">Cancel</string>
+    <!-- UI debug setting: Disable Bluetooth LE AUDIO hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE AUDIO hardware offload</string>
+    <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_hw_offload_dialog_title">Restart Device?</string>
+    <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_hw_offload_dialog_message">You need to restart your device to change this setting.</string>
+    <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_hw_offload_dialog_confirm">Restart</string>
+    <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_media_device_title">Media devices</string>
@@ -14035,4 +14037,13 @@
     <string name="bluetooth_details_head_tracking_title">Make audio more realistic</string>
     <!-- The summary of the head tracking [CHAR LIMIT=none] -->
     <string name="bluetooth_details_head_tracking_summary">Shift positioning of audio so it sounds more natural.</string>
+
+    <!-- Developer Settings: Title for network bandwidth ingress rate limit [CHAR LIMIT=none] -->
+    <string name="ingress_rate_limit_title">Network download rate limit</string>
+    <!-- Developer Settings: Summary for network bandwidth ingress rate limit [CHAR LIMIT=none] -->
+    <string name="ingress_rate_limit_summary">Configure the network bandwidth ingress rate limit which is applied to all networks that provide internet connectivity.</string>
+    <!-- Developer Settings: Dialog for network bandwidth ingress rate limit [CHAR LIMIT=none] -->
+    <string name="ingress_rate_limit_dialog_title">Configure network download rate limit</string>
+    <!-- Developer Settings: Dialog ListPreference option to disable network bandwidth ingress rate limit [CHAR LIMIT=none] -->
+    <string name="ingress_rate_limit_no_limit_entry">No limit</string>
 </resources>
