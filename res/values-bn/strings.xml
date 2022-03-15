@@ -142,10 +142,16 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"আপনার ডিভাইসটিকে আশেপাশের ব্লুটুথ ডিভাইসগুলির সাথে যোগাযোগ করার অনুমতি দিন"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"আপনার ফোনটিকে আশেপাশের ব্লুটুথ ডিভাইসগুলির সাথে যোগাযোগ করার অনুমতি দিন"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ব্লুটুথ A2DP হার্ডওয়্যার অফলোড বন্ধ করুন"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"রিস্টার্ট করবেন?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"এই সেটিং পরিবর্তন করতে আপনার ডিভাইস রিস্টার্ট করতে হবে"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"রিস্টার্ট"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"বাতিল"</string>
+    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"মিডিয়া ডিভাইস"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"কল করার ডিভাইস"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"অন্যান্য ডিভাইস"</string>
@@ -590,12 +596,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"ট্যাবলেট এনক্রিপ্ট করুন"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"ফোন এনক্রিপ্ট করুন"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"এনক্রিপটেড"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"স্ক্রিন লক সেট করুন"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"বাড়তি সুরক্ষার জন্য এই ডিভাইসের পিন, প্যাটার্ন অথবা পাসওয়ার্ড সেট করুন।"</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"স্ক্রিন লক সেট করুন"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"ফোন সুরক্ষিত করুন"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ট্যাবলেট নিরাপদ রাখতে স্ক্রিন লক সেট করুন"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"ডিভাইস নিরাপদ রাখতে স্ক্রিন লক সেট করুন"</string>
@@ -1190,6 +1193,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"এই হটস্পট খুঁজতে অন্যান্য ডিভাইসকে সহায়তা করে। ব্যাটারির খরচ বেড়ে যায়।"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"হটস্পট চালু হচ্ছে..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"হটস্পট বন্ধ হচ্ছে..."</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"টেথারিংয়ের সুবিধা উপলভ্য নেই"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"আরও তথ্যের জন্য আপনার পরিষেবা প্রদানকারীর সাথে যোগাযোগ করুন"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> সক্রিয় আছে"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"পোর্টেবল  ওয়াই-ফাই হটস্পট ত্রুটি"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"ওয়াই-ফাই হটস্পট সেট করুন"</string>
@@ -1296,6 +1301,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"চালু আছে"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"চালু আছে - মুখের হিসেবে"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"ফেস ডিটেকশন চালু করুন"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"স্ক্রিন রেজোলিউশন"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"হাই রেজোলিউশন"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"সবচেয়ে বেশি রেজোলিউশন"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"রেজোলিউশন পাল্টালে বর্তমানে চালু থাকা কিছু অ্যাপ হয়ত বন্ধ হয়ে যাবে।"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"রঙ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"স্বাভাবিক"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"বুস্ট করা"</string>
@@ -1414,6 +1425,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"আপনার ফোন কাস্টমাইজ করুন"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"বিভিন্ন স্টাইল, ওয়ালপেপার ও অনেক কিছু ব্যবহার করুন"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"স্ক্রিন সেভার"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"স্ক্রিন সেভার ব্যবহার করা"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"চার্জ অথবা ডক করার সময়"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"উভয় ক্ষেত্রেই"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"চার্জ করার সময়"</string>
@@ -2284,8 +2296,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"ক্যাপশন সংক্রান্ত পছন্দের বিষয়ে আরও জানুন"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"বড় করে দেখা"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"বড় করে দেখার শর্টকাট"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"টাইপ করার সাথে সাথে"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"আপনার টাইপ করার সাথে সাথে বড় করে দেখানো জায়গা এগিয়ে যেতে থাকে"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"টাইপ করার সময় বড় করে দেখুন"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"আপনি টাইপ করার সময় ম্যাগনিফায়ার তা বড় করে দেখায়"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"ম্যাগনিফিকেশন বিষয়ক"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"ম্যাগনিফিকেশনের বিষয় আরও জানুন"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"বড় করে দেখার ধরন"</string>
@@ -2369,8 +2381,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"অ্যাক্সেসিবিলিটি বোতাম এবং জেসচারের বিষয়ে আরও জানুন"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"অ্যাক্সেসিবিলিটি বোতাম ব্যবহার করা। ৩টি-বোতাম দিয়ে করা নেভিগেশন এর ক্ষেত্রে জেসচারটি কাজ করবে না।"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"সহজেই অ্যাক্সেসেবিলিটি ফিচার অ্যাক্সেস করুন"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"বোতাম বা জেসচার কীভাবে ব্যবহার করবেন"</b>\n\n"১. অ্যাক্সেসিবিলিটি সেটিংসে যান\n২. একটি ফিচার বেছে নিয়ে শর্টকাটে ট্যাপ করুন\n৩. ফিচার ব্যবহার করার জন্য, অ্যাক্সেসিবিলিটি বোতাম বা জেসচারে ট্যাপ করুন"</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"বোতাম কীভাবে ব্যবহার করবেন"</b>\n\n"১. অ্যাক্সেসিবিলিটি সেটিংসে যান\n২. একটি ফিচার বেছে নিয়ে শর্টকাটে ট্যাপ করুন\n৩. ফিচার ব্যবহার করার জন্য, অ্যাক্সেসিবিলিটি বোতামে ট্যাপ করুন"</string>
+    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"বোতাম বা জেসচার ব্যবহার করুন"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"লোকেশন"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"সাইজ"</string>
@@ -2385,7 +2399,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"অ্যাপ্লিকেশান ট্রানজিশনের উপর স্ক্রিন বৃহত্তরীকরণ আপডেট"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"পাওয়ার বোতামে কল শেষ হয়"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"বড় মাউস পয়েন্টার"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"মাউস পয়েন্টার আরও স্পষ্ট করে তুলুন"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"অ্যানিমেশন সরিয়ে দিন"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"স্ক্রিনের নড়াচড়া কমিয়ে দিন"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"মোনো অডিও"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"অডিও বাজানোর সময় সব চ্যানেলের অডিও সিঙ্ক করুন"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"অডিও ব্যালেন্স"</string>
@@ -2438,9 +2454,28 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"টাচ ফিডব্যাক"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ব্যবহার করুন"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> খুলুন"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"\'দ্রুত সেটিংস\' মেনুতে <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> যোগ করা হয়েছে। যেকোনও সময় চালু বা বন্ধ করতে নিচের দিকে সোয়াইপ করুন।"</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"\'দ্রুত সেটিংস\' এডিট করার মাধ্যমে <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-এ শর্টকার্ট যোগ করতে পারবেন"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"বাতিল করুন"</string>
+    <!-- no translation found for accessibility_service_auto_added_qs_tooltip_content (2941824314912928072) -->
+    <skip />
+    <!-- no translation found for accessibility_service_qs_tooltip_content (6002493441414967868) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_auto_added_qs_tooltip_content (9092661358437404374) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_qs_tooltip_content (3258628434235475205) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_auto_added_qs_tooltip_content (7267618234972101725) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_qs_tooltip_content (5046332142185711869) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_auto_added_qs_tooltip_content (1906588335786328512) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_qs_tooltip_content (7522121299176176785) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_auto_added_qs_tooltip_content (7914554254280416532) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_qs_tooltip_content (2754332083184384603) -->
+    <skip />
+    <!-- no translation found for accessibility_quick_settings_tooltip_dismiss (3269120277643884190) -->
+    <skip />
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"আপনার ফোনে রঙ দেখার সেটিংস অ্যাডজাস্ট করুন"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"আপনার ট্যাবলেটে রঙ দেখানোর সেটিংস অ্যাডজাস্ট করুন"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"রঙ সংশোধন ফিচারটি ব্যবহার করুন"</string>
@@ -2471,8 +2506,10 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g>টি সেভ করা হিয়ারিং এড</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"অডিও অ্যাডজাস্টমেন্ট"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"অডিও বিবরণ"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"ডিফল্ট হিসেবে অডিও বিবরণের সুবিধা সহ অডিও সাউন্ড ট্র্যাক বাছুন"</string>
+    <!-- no translation found for accessibility_toggle_audio_description_preference_title (8916473886256061220) -->
+    <skip />
+    <!-- no translation found for accessibility_audio_description_summary (2554789094873781056) -->
+    <skip />
     <string name="keywords_audio_description" msgid="6202816411593281252">"অডিও বিবরণ, অডিও, বিবরণ, কম দৃষ্টিশক্তি,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"শর্টকাট চালু করুন"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"বন্ধ করুন"</string>
@@ -3409,6 +3446,8 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"কন্ট্যাক্টলেস টার্মিনালে, <xliff:g id="APP_0">%1$s</xliff:g> ব্যবহার করে পেমেন্ট করুন।\n\nএটি <xliff:g id="APP_1">%2$s</xliff:g>-কে আপনার ডিফল্ট পেমেন্ট অ্যাপ হিসেবে পরিবর্তন করবে।"</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"ডিফল্ট সেট করুন"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"আপডেট করুন"</string>
+    <!-- no translation found for nfc_work_text (2496515165821504077) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"সীমাবদ্ধ"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"সীমাবদ্ধগুলি সরান"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"পিন পরিবর্তন করুন"</string>
@@ -3589,6 +3628,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"অ্যাপ্লিকেশানগুলি, ডিফল্ট"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"অপ্টিমাইজেশন উপেক্ষা করুন, ডজ করুন, অ্যাপ্লিকেশন স্ট্যান্ডবাই"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"ভাইব্রেন্ট, RGB, sRGB, রঙ, স্বাভাবিক, মান"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, রেজোলিউশন, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"রঙ, টেম্পারেচার, D65, D73, সাদা, হলুদ, নীল, উষ্ণ, শীতল"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"আনলক করতে, পাসওয়ার্ড, প্যাটার্ন, পিন স্লাইড করুন"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"স্ক্রিন পিন করা"</string>
@@ -3682,6 +3722,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"ধ্বনিগুলিতে শক্তি"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"লাইভ ক্যাপশন"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"মিডিয়া অটোমেটিক ক্যাপশন করুন"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"ফোনের স্পিকার"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"তারযুক্ত হেডফোন"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"স্পেশিয়ল অডিও ইমারসিভ সাউন্ড তৈরি করে, এমন মনে হয় যেন তা আপনার আশপাশ থেকে আসছে। এটি কয়েকটি মিডিয়াতে কাজ করে।"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"বন্ধ আছে"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"চালু আছে / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"চালু আছে / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> এবং <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{একটিও নেই}=1{১টি শিডিউল সেট করা হয়েছে}one{#টি শিডিউল সেট করা হয়েছে}other{#টি শিডিউল সেট করা হয়েছে}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"বিরক্ত করবে না"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"শুধু গুরুত্বপূর্ণ লোকজন এবং অ্যাপ থেকে বিজ্ঞপ্তি পান"</string>
@@ -4446,7 +4492,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"ব্যাটারি অপ্টিমাইজেশান উপলভ্য নেই"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"ব্যাটারি অপ্টিমাইজেশান প্রয়োগ করবেন না। আরো দ্রুত আপনার ব্যাটারির চার্জ শেষ হয়ে যেতে পারে৷"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"অ্যাপটিকে সবসময় পটভূমিতে চালু রাখবেন?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g>-কে সবসময় পটভূমিতে চালু রাখলে ব্যাটারি বেশিদিন নাও টিকতে পারে। \n\nআপনি পরে সেটিংস &gt; অ্যাপ ও বিজ্ঞপ্তি বিকল্প থেকে এটি পরিবর্তন করতে পারেন।"</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"<xliff:g id="APP_NAME">%1$s</xliff:g>-কে ব্যাকগ্রাউন্ডে চালু রাখলে ব্যাটারির ক্ষমতা কমে যেতে পারে। \n\nআপনি \'সেটিংস\' &gt; \'অ্যাপ\' থেকে এটি পরে পরিবর্তন করতে পারবেন।"</string>
     <string name="battery_summary" msgid="2491764359695671207">"শেষ বার সম্পূর্ণ চার্জ করার পর থেকে <xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যবহার হয়েছে"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"গত ২৪ ঘণ্টায় <xliff:g id="PERCENTAGE">%1$s</xliff:g> ব্যবহার করা হয়েছে"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"শেষ সম্পূর্ণ চার্জ করার সময় থেকে কোনো ব্যাটারি ব্যবহার করা হয়নি"</string>
@@ -4884,7 +4930,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"\'ডিজিটাল অ্যাসিস্ট্যান্ট\'"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"\'অ্যাসিস্ট্যান্ট\' চালু করতে সোয়াইপ করুন"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"ডিজিটাল অ্যাসিস্ট্যান্ট\' অ্যাপ চালু করতে নিচের কোণা থেকে উপরের দিকে সোয়াইপ করুন।"</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"অ্যাসিস্ট্যান্ট ইনভোক করতে \'হোম\' বোতাম ধরে থাকুন"</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4865972278738178753) -->
+    <skip />
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ডিজিটাল অ্যাসিস্ট্যান্ট অ্যাপ চালু করতে \'হোম\' বোতাম প্রেস করে ধরে রাখুন।"</string>
     <string name="information_label" msgid="6939310810756569298">"তথ্য"</string>
     <string name="low_label" msgid="6525629096999711220">"কম করুন"</string>
@@ -4906,7 +4953,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"রিচেবিলিটি"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"এর জন্য নিচের দিকে সোয়াইপ করুন"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"এর জন্য শর্টকার্ট ব্যবহার করুন"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"\'এক হাতে ব্যবহার করার মোড\' ব্যবহার করতে, স্ক্রিনের নিচের প্রান্ত থেকে নিচের দিকে সোয়াইপ করুন। এই ফিচার ব্যবহার করতে, সিস্টেম নেভিগেশনের সেটিংসে জেসচার নেভিগেশন চালু আছে কিনা দেখে নিন।"</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"স্ক্রিনের উপরের অংশ টেনে নামান যাতে সহজেই এক হাতে তা ব্যবহার করা যায়"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"কীভাবে \'এক হাতে ব্যবহার করার\' মোড ব্যবহার করবেন"</b>\n" • \'সিস্টেম নেভিগেশন\' সেটিংসে \'জেসচার নেভিগেশন\' বেছে নেওয়া হয়েছে কিনা তা দেখে নিন\n • স্ক্রিনের শেষ প্রান্তের কাছাকাছি নিচের দিকে সোয়াইপ করুন"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"স্ক্রিন টেনে এনে নাগালের মধ্যে নিয়ে আসুন"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"স্ক্রিনের উপরের দিকের যেকোনও অংশ এখন আপনার বুড়ো আঙুলের নাগালে চলে আসবে।"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"বিজ্ঞপ্তিগুলি দেখুন"</string>
@@ -5104,6 +5152,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"নেটওয়ার্ক ও কানেক্টিভিটি সমেত সব লোকেশন দেখুন"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GnssMeasurement সম্পূর্ণভাবে ট্র্যাক করুন"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"ডিউটি-সাইক্লিং বাদে সমস্ত কন্সটেলেশন এবং ফ্রিকোয়েন্সি ট্র্যাক করুন"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"ইনপুট পদ্ধতি"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"স্টাইলাস হ্যান্ডরাইটিং"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"চালু করা থাকলে এবং Editor ফোকাস করা হলে, বর্তমান ইনপুট পদ্ধতি স্টাইলাস MotionEvent কোড পায়।"</string>
     <string name="device_theme" msgid="5027604586494772471">"ডিভাইসের থিম"</string>
     <string name="default_theme" msgid="4815428567082263639">"ডিফল্ট"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"নেটওয়ার্কের নাম"</string>
@@ -5494,7 +5545,7 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR স্ক্যানার দেখুন"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"লক স্ক্রিন থেকে QR স্ক্যানার অ্যাক্সেস করার অনুমতি দিন"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"ডিভাইস কন্ট্রোল দেখুন"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"লক থাকাকালীন কন্ট্রোল অ্যাক্সেস করুন"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"লক স্ক্রিন থেকে এক্সটার্নাল ডিভাইসের নিয়ন্ত্রণ দেখান"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"লক করা ডিভাইস থেকে নিয়ন্ত্রণ করুন"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"\'ডিভাইস কন্ট্রোল\' অ্যাপের অনুমতি থাকলে, ফোন বা ট্যাবলেট আনলক না করেই এক্সটার্নাল ডিভাইস নিয়ন্ত্রণ করতে পারবেন"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ডবল-লাইন ঘড়ি উপলভ্য থাকলে তা দেখান"</string>
@@ -5599,7 +5650,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"অ্যাপ পিন বিকল্প ব্যবহার করুন"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ডেভেলপার বিকল্প ব্যবহার করুন"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"প্রিন্ট পরিষেবা ব্যবহার করুন"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"\'একাধিক ব্যবহারকারী\' বিকল্প ব্যবহার করুন"</string>
+    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"একাধিক ব্যবহারকারী মেইন সুইচ চালু করা"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ওয়্যারলেস ডিবাগিং বিকল্প ব্যবহার করুন"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"গ্রাফিক্স ড্রাইভার বিকল্প ব্যবহার করুন"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"ব্যাটারি সেভার বিকল্প ব্যবহার করুন"</string>
@@ -5708,4 +5759,12 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"ইমারসিভ অডিও শুনে এমন লাগে যেন আওয়াজ আপনার আশপাশ থেকে আসছে। এটি কয়েকটি মিডিয়াতে ব্যবহার করা যাবে।"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"অডিও আরও বাস্তববাদী করে তুলুন"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"অডিও আরও ন্যাচরাল তৈরি করার জন্য স্থান পরিবর্তন করুন।"</string>
+    <!-- no translation found for ingress_rate_limit_title (2106694002836274350) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_summary (1097811019742438371) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_dialog_title (5359461052422633789) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_no_limit_entry (8741098826008012163) -->
+    <skip />
 </resources>
