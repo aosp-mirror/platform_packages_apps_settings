@@ -25,6 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Comparator;
@@ -52,6 +53,7 @@ public class BatteryDiffEntry {
     public double mConsumePower;
     // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
+
     private double mTotalConsumePower;
     private double mPercentOfTotal;
 
@@ -151,8 +153,13 @@ public class BatteryDiffEntry {
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 return true;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
-                return isSystemUid((int) mBatteryHistEntry.mUid)
-                    || mBatteryHistEntry.mIsHidden;
+                if (mBatteryHistEntry.mIsHidden) {
+                    return true;
+                }
+                final boolean combineSystemComponents =
+                        mContext.getResources().getBoolean(
+                                R.bool.config_battery_combine_system_components);
+                return combineSystemComponents && isSystemUid((int) mBatteryHistEntry.mUid);
         }
         return false;
     }
