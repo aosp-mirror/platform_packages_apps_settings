@@ -98,10 +98,10 @@
     <string name="font_size_make_larger_desc">Make larger</string>
 
     <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
-    <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
+    <string name="auto_rotate_settings_primary_switch_title">Use auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
-    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.</string>
+    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -2909,7 +2909,11 @@
     <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
     <string name="auto_rotate_option_face_based">On - Face-based</string>
     <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
-    <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
+    <string name="auto_rotate_switch_face_based">Face Detection</string>
+    <!-- Preference summary to enable auto rotate[CHAR_LIMIT=NONE]-->
+    <string name="auto_rotate_screen_summary">Automatically adjust the screen orientation when you move your phone between portrait and landscape</string>
+    <!-- Accessibility description for auto rotate learn more link [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_link_a11y">Learn more about auto-rotate</string>
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
@@ -12411,6 +12415,9 @@
 
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
+
+    <!-- Help URI, auto rotate page [DO NOT TRANSLATE] -->
+    <string name="help_url_auto_rotate_settings" translatable="false"></string>
 
     <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
     <string name="help_url_app_usage_settings" translatable="false"></string>
