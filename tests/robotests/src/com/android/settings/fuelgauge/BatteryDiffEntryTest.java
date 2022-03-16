@@ -349,12 +349,12 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnTrue() {
+    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnFalse() {
         final BatteryDiffEntry entry =
             createBatteryDiffEntry(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                 /*uid=*/ 1230, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
+        assertThat(entry.isSystemEntry()).isFalse();
     }
 
     @Test
