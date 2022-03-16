@@ -1102,6 +1102,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.setTitle(R.string.user_list_title);
         } else {
             mUserListCategory.setTitle(null);
+            mUserListCategory.setLayoutResource(R.layout.empty_view);
         }
 
         // Remove everything from mUserListCategory and add new users.
