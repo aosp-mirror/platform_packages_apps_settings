@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
         final GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
         final String title = getContext().getString(
                 R.string.accessibility_text_reading_options_title);
-        final Drawable icon = getContext().getDrawable(R.drawable.ic_font_download);
+        final Drawable icon = getContext().getDrawable(R.drawable.ic_accessibility_visibility);
         icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 /* description= */ null, icon);
@@ -57,7 +58,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
 
     @Override
     public int getMetricsCategory() {
-        return super.getMetricsCategory();
+        return SettingsEnums.SUW_ACCESSIBILITY_TEXT_READING_OPTIONS;
     }
 
     @Override

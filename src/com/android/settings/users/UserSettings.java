@@ -16,7 +16,8 @@
 
 package com.android.settings.users;
 
-import android.annotation.NonNull;
+import static com.android.settingslib.Utils.getColorAttrDefaultColor;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -32,7 +33,9 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BlendMode;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -47,6 +50,7 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -524,6 +528,30 @@ public class UserSettings extends SettingsPreferenceFragment
         startActivity(intent);
     }
 
+    private void onAddGuestClicked() {
+        final UserCreatingDialog guestCreatingDialog =
+                new UserCreatingDialog(getActivity(), /* isGuest= */ true);
+        guestCreatingDialog.show();
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
+            Trace.beginSection("UserSettings.addGuest");
+            final UserInfo guest = mUserManager.createGuest(getContext());
+            Trace.endSection();
+
+            ThreadUtils.postOnMainThread(() -> {
+                guestCreatingDialog.dismiss();
+                if (guest == null) {
+                    Toast.makeText(getContext(),
+                            com.android.settingslib.R.string.add_guest_failed,
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                openUserDetails(guest, true);
+            });
+        });
+    }
+
     private void onRemoveUserClicked(int userId) {
         synchronized (mUserLock) {
             if (mRemovingUserId == -1 && !mAddingUser) {
@@ -562,11 +590,10 @@ public class UserSettings extends SettingsPreferenceFragment
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        final Context context = getContext();
-        SubSettingLauncher launcher = new SubSettingLauncher(context)
+        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
-                .setTitleText(getUserName(context, userInfo))
+                .setTitleText(userInfo.name)
                 .setSourceMetricsCategory(getMetricsCategory());
         if (mGuestUserAutoCreated && userInfo.isGuest()) {
             launcher.setResultListener(this, REQUEST_EDIT_GUEST);
@@ -956,8 +983,7 @@ public class UserSettings extends SettingsPreferenceFragment
             // "Resetting guest..."
             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
             mExecutor.execute(() -> {
-                UserInfo guest = mUserManager.createGuest(
-                        getContext(), getString(com.android.settingslib.R.string.user_guest));
+                UserInfo guest = mUserManager.createGuest(getContext());
                 mGuestCreationScheduled.set(false);
                 if (guest == null) {
                     Log.e(TAG, "Unable to automatically recreate guest user");
@@ -996,9 +1022,8 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
             } else {
-                final Context prefContext = getPrefContext();
-                pref = new UserPreference(prefContext, null, user.id);
-                pref.setTitle(getUserName(prefContext, user));
+                pref = new UserPreference(getPrefContext(), null, user.id);
+                pref.setTitle(user.name);
                 userPreferences.add(pref);
                 pref.setOnPreferenceClickListener(this);
                 pref.setEnabled(canOpenUserDetails);
@@ -1127,7 +1152,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
-            mAddGuest.setIcon(getEncircledDefaultIcon());
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
                 mAddGuest.setTitle(com.android.settingslib.R.string.user_guest);
@@ -1144,11 +1170,15 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddUser(Context context) {
         updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
     }
 
     private void updateAddSupervisedUser(Context context) {
         if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
             updateAddUserCommon(context, mAddSupervisedUser, false);
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
         } else {
             mAddSupervisedUser.setVisible(false);
         }
@@ -1166,6 +1196,7 @@ public class UserSettings extends SettingsPreferenceFragment
                             || (canAddRestrictedProfile
                             && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
             addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+
             if (!canAddMoreUsers) {
                 addUser.setSummary(
                         getString(R.string.user_add_max_count, getRealUsersCount()));
@@ -1179,6 +1210,20 @@ public class UserSettings extends SettingsPreferenceFragment
         } else {
             addUser.setVisible(false);
         }
+    }
+
+    private Drawable centerAndTint(Drawable icon) {
+        icon.setTintBlendMode(BlendMode.SRC_IN);
+        icon.setTint(getColorAttrDefaultColor(getContext(), android.R.attr.textColorPrimary));
+
+        Drawable bg = getContext().getDrawable(R.drawable.user_avatar_bg).mutate();
+        LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
+        int size = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_avatar_size);
+        ld.setLayerSize(1, size, size);
+        ld.setLayerGravity(1, Gravity.CENTER);
+
+        return ld;
     }
 
     /**
@@ -1228,14 +1273,6 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    /** Returns the user's name, or the appropriate string in the case of a Guest. */
-    public static String getUserName(Context context, @NonNull UserInfo userInfo) {
-        if (userInfo.isGuest()) {
-            return context.getString(R.string.user_guest);
-        }
-        return userInfo.name;
-    }
-
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
@@ -1270,18 +1307,7 @@ public class UserSettings extends SettingsPreferenceFragment
             return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
-            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
-            Trace.beginSection("UserSettings.addGuest");
-            UserInfo guest = mUserManager.createGuest(
-                    getContext(), getString(com.android.settingslib.R.string.user_guest));
-            Trace.endSection();
-            if (guest == null) {
-                Toast.makeText(getContext(),
-                        com.android.settingslib.R.string.add_user_failed,
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            openUserDetails(guest, true);
+            onAddGuestClicked();
             return true;
         }
         return false;

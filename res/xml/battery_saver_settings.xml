@@ -23,6 +23,7 @@
     <com.android.settingslib.widget.MainSwitchPreference
         android:order="-100"
         android:key="battery_saver"
+        android:title="@string/battery_saver_master_switch_title"
         settings:controller="com.android.settings.fuelgauge.batterysaver.BatterySaverButtonPreferenceController"/>
 
     <Preference

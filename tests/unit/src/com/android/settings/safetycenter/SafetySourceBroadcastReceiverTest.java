@@ -17,7 +17,10 @@
 package com.android.settings.safetycenter;
 
 import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
+import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +32,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetyEvent;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -44,6 +47,9 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class SafetySourceBroadcastReceiverTest {
@@ -72,17 +78,18 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsEnabled_withNoIntentAction_sendsNoData() {
+    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNoIntentAction_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsDisabled_sendsNoData() {
+    public void onReceive_onRefresh_whenSafetyCenterIsDisabled_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
         Intent intent =
                 new Intent()
@@ -93,21 +100,23 @@ public class SafetySourceBroadcastReceiverTest {
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsEnabled_withNullSourceIds_sendsNoData() {
+    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNullSourceIds_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(ACTION_REFRESH_SAFETY_SOURCES);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_whenSafetyCenterIsEnabled_withNoSourceIds_sendsNoData() {
+    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNoSourceIds_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
@@ -116,11 +125,12 @@ public class SafetySourceBroadcastReceiverTest {
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
+                any(), any(), any(), any());
     }
 
     @Test
-    public void sendSafetyData_withLockscreenSourceId_sendsLockscreenData() {
+    public void onReceive_onRefresh_setsRefreshEvent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
@@ -130,16 +140,57 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
-        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
+        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
         verify(mSafetyCenterManagerWrapper, times(1))
-                .sendSafetyCenterUpdate(any(), captor.capture());
-        SafetySourceData safetySourceData = captor.getValue();
+                .setSafetySourceData(any(), any(), any(), captor.capture());
 
-        assertThat(safetySourceData.getId()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
+        assertThat(captor.getValue()).isEqualTo(
+                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED).build());
     }
 
     @Test
-    public void sendSafetyData_withBiometricsSourceId_sendsBiometricData() {
+    public void onReceive_onRefreshWithBroadcastId_setsRefreshEventWithBroadcastId() {
+        final String refreshBroadcastId = "REFRESH_BROADCAST_ID";
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID })
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, refreshBroadcastId);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), any(), any(), captor.capture());
+
+        assertThat(captor.getValue().getRefreshBroadcastId()).isEqualTo(refreshBroadcastId);
+        assertThat(captor.getValue()).isEqualTo(
+                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                        .setRefreshBroadcastId(refreshBroadcastId).build());
+    }
+
+    @Test
+    public void onReceive_onRefresh_withLockscreenSourceId_setsLockscreenData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
+
+        assertThat(captor.getValue()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
+    }
+
+    @Test
+    public void onReceive_onRefresh_withBiometricsSourceId_setsBiometricData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent =
                 new Intent()
@@ -149,24 +200,42 @@ public class SafetySourceBroadcastReceiverTest {
                                 new String[]{ BiometricsSafetySource.SAFETY_SOURCE_ID });
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
 
-        // TODO(b/215517420): Update this test when BiometricSafetySource is implemented.
-        verify(mSafetyCenterManagerWrapper, never()).sendSafetyCenterUpdate(any(), any());
+        assertThat(captor.getValue()).isEqualTo(BiometricsSafetySource.SAFETY_SOURCE_ID);
     }
 
     @Test
-    public void sendSafetyData_onBootCompleted_sendsBiometricAndLockscreenData() {
+    public void onReceive_onBootCompleted_setsBootCompleteEvent() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
 
-        // TODO(b/215517420): Update this test when BiometricSafetySource is implemented to test
-        // that biometrics data is also sent.
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
-        ArgumentCaptor<SafetySourceData> captor = ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper, times(1))
-                .sendSafetyCenterUpdate(any(), captor.capture());
-        SafetySourceData safetySourceData = captor.getValue();
+        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
+        verify(mSafetyCenterManagerWrapper, times(2))
+                .setSafetySourceData(any(), any(), any(), captor.capture());
 
-        assertThat(safetySourceData.getId()).isEqualTo(LockScreenSafetySource.SAFETY_SOURCE_ID);
+        SafetyEvent bootEvent = new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
+        assertThat(captor.getAllValues())
+                .containsExactlyElementsIn(Arrays.asList(bootEvent, bootEvent));
+    }
+
+    @Test
+    public void onReceive_onBootCompleted_sendsBiometricAndLockscreenData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent = new Intent().setAction(Intent.ACTION_BOOT_COMPLETED);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mSafetyCenterManagerWrapper, times(2))
+                .setSafetySourceData(any(), captor.capture(), any(), any());
+        List<String> safetySourceIdList = captor.getAllValues();
+
+        assertThat(safetySourceIdList.stream().anyMatch(
+                id -> id.equals(LockScreenSafetySource.SAFETY_SOURCE_ID))).isTrue();
+        assertThat(safetySourceIdList.stream().anyMatch(
+                id -> id.equals(BiometricsSafetySource.SAFETY_SOURCE_ID))).isTrue();
     }
 }

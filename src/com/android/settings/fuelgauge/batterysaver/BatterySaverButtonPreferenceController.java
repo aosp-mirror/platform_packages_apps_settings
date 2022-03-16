@@ -95,7 +95,6 @@ public class BatterySaverButtonPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mPreference.setTitle(mContext.getString(R.string.battery_saver_master_switch_title));
         mPreference.addOnSwitchChangeListener(this);
         mPreference.updateStatus(isChecked());
     }
@@ -113,7 +112,6 @@ public class BatterySaverButtonPreferenceController extends
     @Override
     public boolean setChecked(boolean stateOn) {
         // This screen already shows a warning, so we don't need another warning.
-        mPreference.updateStatus(isChecked());
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
                 false /* needFirstTimeWarning */);
     }

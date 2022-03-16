@@ -92,12 +92,6 @@
             android:summary="@string/runningservices_settings_summary"
             android:fragment="com.android.settings.applications.RunningServices" />
 
-        <Preference
-            android:key="convert_to_file_encryption"
-            android:title="@string/convert_to_file_encryption"
-            android:summary="@string/convert_to_file_encryption_enabled"
-            android:fragment="com.android.settings.applications.ConvertToFbe" />
-
         <com.android.settings.development.ColorModePreference
             android:key="picture_color_mode"
             android:title="@string/picture_color_mode"
@@ -297,7 +291,15 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <ListPreference
+            android:key="ingress_rate_limit"
+            android:title="@string/ingress_rate_limit_title"
+            android:summary="@string/ingress_rate_limit_summary"
+            android:dialogTitle="@string/ingress_rate_limit_dialog_title"
+            android:entries="@array/ingress_rate_limit_entries"
+            android:entryValues="@array/ingress_rate_limit_values" />
+
+        <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
             android:title="@string/usb_default_label"/>
@@ -313,13 +315,12 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_gabeldorsche_enable"
-            android:title="@string/bluetooth_enable_gabeldorsche"
-            android:summary="@string/bluetooth_enable_gabeldorsche_summary" />
-
-        <SwitchPreference
             android:key="bluetooth_disable_a2dp_hw_offload"
             android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+
+        <SwitchPreference
+            android:key="bluetooth_disable_le_audio_hw_offload"
+            android:title="@string/bluetooth_disable_le_audio_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"
@@ -648,7 +649,7 @@
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
-    <com.android.settings.development.autofill.AutofillPreferenceCategory
+    <PreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
@@ -672,7 +673,7 @@
             android:key="autofill_reset_developer_options"
             android:title="@string/autofill_reset_developer_options" />
 
-    </com.android.settings.development.autofill.AutofillPreferenceCategory>
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="storage_category"
@@ -708,5 +709,16 @@
             android:defaultValue="true"
             android:key="location_indicator_settings"
             settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="input_method_category"
+        android:title="@string/input_method_category"
+        android:order="1400">
+
+        <SwitchPreference
+            android:key="stylus_handwriting"
+            android:title="@string/stylus_handwriting"
+            android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

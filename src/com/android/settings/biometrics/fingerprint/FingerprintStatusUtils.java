@@ -19,7 +19,6 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -31,13 +30,15 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  */
 public class FingerprintStatusUtils {
 
-    private final int mUserId = UserHandle.myUserId();
+    private final int mUserId;
     private final Context mContext;
     private final FingerprintManager mFingerprintManager;
 
-    public FingerprintStatusUtils(Context context, FingerprintManager fingerprintManager) {
+    public FingerprintStatusUtils(Context context, FingerprintManager fingerprintManager,
+            int userId) {
         mContext = context;
         mFingerprintManager = fingerprintManager;
+        mUserId = userId;
     }
 
     /**
@@ -81,7 +82,10 @@ public class FingerprintStatusUtils {
                 : FingerprintEnrollIntroduction.class.getName();
     }
 
-    private boolean hasEnrolled() {
+    /**
+     * Returns whether at least one fingerprint has been enrolled.
+     */
+    public boolean hasEnrolled() {
         return mFingerprintManager.hasEnrolledFingerprints(mUserId);
     }
 }

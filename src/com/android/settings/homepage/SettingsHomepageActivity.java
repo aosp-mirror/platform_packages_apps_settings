@@ -32,7 +32,6 @@ import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -183,6 +182,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             showSuggestionFragment(scrollNeeded);
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.CONTEXTUAL_HOME)) {
                 showFragment(() -> new ContextualCardsFragment(), R.id.contextual_cards_content);
+                ((FrameLayout) findViewById(R.id.main_content))
+                        .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
             }
         }
         mMainFragment = showFragment(() -> {
@@ -191,9 +192,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                     highlightMenuKey);
             return fragment;
         }, R.id.main_content);
-
-        ((FrameLayout) findViewById(R.id.main_content))
-                .getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
@@ -236,12 +234,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content),
                 (v, windowInsets) -> {
                     Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-                    // Apply the insets as a margin to the view. Here the system is setting
-                    // only the top dimensions.
-                    ViewGroup.MarginLayoutParams mlp =
-                            (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-                    mlp.topMargin = insets.top;
-                    v.setLayoutParams(mlp);
+                    // Apply the insets paddings to the view.
+                    v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
 
                     // Return CONSUMED if you don't want the window insets to keep being
                     // passed down to descendant views.

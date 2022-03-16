@@ -60,7 +60,7 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
-        mBiometricNavigationUtils = new BiometricNavigationUtils();
+        mBiometricNavigationUtils = new BiometricNavigationUtils(getUserId());
     }
 
     @Override

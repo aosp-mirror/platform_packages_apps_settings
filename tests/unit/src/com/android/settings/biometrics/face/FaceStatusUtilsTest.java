@@ -49,7 +49,8 @@ public class FaceStatusUtilsTest {
 
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
-    private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
+    private static final int USER_ID = UserHandle.myUserId();
+    private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
 
 
     @Mock
@@ -78,7 +79,7 @@ public class FaceStatusUtilsTest {
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
-        mFaceStatusUtils = new FaceStatusUtils(mApplicationContext, mFaceManager);
+        mFaceStatusUtils = new FaceStatusUtils(mApplicationContext, mFaceManager, USER_ID);
     }
 
     @Test
@@ -111,6 +112,20 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
 
         assertThat(mFaceStatusUtils.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void hasEnrolled_withEnrolledTemplates_returnsTrue() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+
+        assertThat(mFaceStatusUtils.hasEnrolled()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withoutEnrolledTemplates_returnsFalse() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        assertThat(mFaceStatusUtils.hasEnrolled()).isFalse();
     }
 
     @Test

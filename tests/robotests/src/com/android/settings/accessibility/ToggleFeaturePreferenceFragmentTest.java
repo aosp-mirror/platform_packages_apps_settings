@@ -49,6 +49,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
@@ -77,8 +78,8 @@ public class ToggleFeaturePreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
-    private static final String PLACEHOLDER_TILE_NAME =
-            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
@@ -321,7 +322,7 @@ public class ToggleFeaturePreferenceFragmentTest {
                 (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
                         mFragment.getPreferenceScreen().getPreferenceCount() - 1);
         assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
+        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(false);
         assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
 
@@ -361,8 +362,8 @@ public class ToggleFeaturePreferenceFragmentTest {
         }
 
         @Override
-        CharSequence getTileName() {
-            return PLACEHOLDER_TILE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

@@ -94,28 +94,22 @@ public class HapticFeedbackIntensityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_ringerModeUpdates_shouldPreserveSettingAndDisplaySummary() {
+    public void updateState_ringerModeUpdates_shouldNotAffectSettings() {
         updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
         mController.updateState(mPreference);
         assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getSummary()).isNull();
         assertThat(mPreference.isEnabled()).isTrue();
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_SILENT);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        // TODO(b/136805769): summary is broken in SeekBarPreference, enable this once fixed
-//        assertThat(mPreference.getSummary()).isNotNull();
-//        assertThat(mPreference.getSummary().toString()).isEqualTo(mContext.getString(
-//                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary));
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
+        assertThat(mPreference.isEnabled()).isTrue();
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
         mController.updateState(mPreference);
         assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getSummary()).isNull();
         assertThat(mPreference.isEnabled()).isTrue();
     }
 
