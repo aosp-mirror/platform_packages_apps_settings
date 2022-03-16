@@ -378,18 +378,22 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
      */
     public void onLoadFinished(@Nullable SparseArray<StorageAsyncLoader.StorageResult> result,
             int userId) {
+        // Enable animation when the storage size info is from StorageAsyncLoader whereas disable
+        // animation when the cached storage size info is used instead.
+        boolean animate = result != null && mIsPreferenceOrderedBySize;
         // Calculate the size info for each category
         StorageCacheHelper.StorageCache storageCache = getSizeInfo(result, userId);
         // Set size info to each preference
-        mImagesPreference.setStorageSize(storageCache.imagesSize, mTotalSize);
-        mVideosPreference.setStorageSize(storageCache.videosSize, mTotalSize);
-        mAudioPreference.setStorageSize(storageCache.audioSize, mTotalSize);
-        mAppsPreference.setStorageSize(storageCache.allAppsExceptGamesSize, mTotalSize);
-        mGamesPreference.setStorageSize(storageCache.gamesSize, mTotalSize);
-        mDocumentsAndOtherPreference.setStorageSize(storageCache.documentsAndOtherSize, mTotalSize);
-        mTrashPreference.setStorageSize(storageCache.trashSize, mTotalSize);
+        mImagesPreference.setStorageSize(storageCache.imagesSize, mTotalSize, animate);
+        mVideosPreference.setStorageSize(storageCache.videosSize, mTotalSize, animate);
+        mAudioPreference.setStorageSize(storageCache.audioSize, mTotalSize, animate);
+        mAppsPreference.setStorageSize(storageCache.allAppsExceptGamesSize, mTotalSize, animate);
+        mGamesPreference.setStorageSize(storageCache.gamesSize, mTotalSize, animate);
+        mDocumentsAndOtherPreference.setStorageSize(storageCache.documentsAndOtherSize, mTotalSize,
+                animate);
+        mTrashPreference.setStorageSize(storageCache.trashSize, mTotalSize, animate);
         if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(storageCache.systemSize, mTotalSize);
+            mSystemPreference.setStorageSize(storageCache.systemSize, mTotalSize, animate);
         }
         // Cache the size info
         if (result != null) {
@@ -519,7 +523,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (mTrashPreference == null) {
             return;
         }
-        mTrashPreference.setStorageSize(0, mTotalSize);
+        mTrashPreference.setStorageSize(0, mTotalSize, true /* animate */);
         updatePrivateStorageCategoryPreferencesOrder();
     }
 
