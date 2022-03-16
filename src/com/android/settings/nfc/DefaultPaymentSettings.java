@@ -143,7 +143,8 @@ public class DefaultPaymentSettings extends DefaultAppPickerFragment {
             CandidateInfo info, String defaultKey, String systemDefaultKey) {
         final NfcPaymentCandidateInfo candidateInfo = (NfcPaymentCandidateInfo) info;
         if (candidateInfo.isManagedProfile()) {
-            pref.setSummary("Work");
+            final String textWork = getContext().getString(R.string.nfc_work_text);
+            pref.setSummary(textWork);
         }
     }
 
