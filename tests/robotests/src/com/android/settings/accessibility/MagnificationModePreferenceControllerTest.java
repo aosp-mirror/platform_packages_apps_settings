@@ -30,9 +30,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -41,6 +44,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
+import com.android.settings.utils.AnnotationSpan;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -175,6 +179,21 @@ public class MagnificationModePreferenceControllerTest {
         final String allSummary = mContext.getString(
                 R.string.accessibility_magnification_area_settings_all_summary);
         assertThat(TextUtils.equals(mController.getSummary(), allSummary)).isTrue();
+    }
+
+    @Test
+    public void checkSpansInTripleTapWarningDialog_existAnnotationSpan() {
+        mDialogHelper.showDialog(
+                MagnificationModePreferenceController.DIALOG_MAGNIFICATION_TRIPLE_TAP_WARNING);
+        final View contentView = mDialogHelper.getDialog().findViewById(android.R.id.content);
+        final TextView messageView = contentView.findViewById(R.id.message);
+        final CharSequence textInTripleTapWarningDialog = messageView.getText();
+
+        final AnnotationSpan[] annotationSpans =
+                ((SpannableString) textInTripleTapWarningDialog).getSpans(/*queryStart= */ 0,
+                        textInTripleTapWarningDialog.length(), AnnotationSpan.class);
+
+        assertThat(annotationSpans[0]).isNotNull();
     }
 
     @Test

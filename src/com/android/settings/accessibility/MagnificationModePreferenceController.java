@@ -25,11 +25,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -42,6 +44,7 @@ import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -70,6 +73,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     @MagnificationMode
     private int mModeCache = MagnificationMode.NONE;
     private Preference mModePreference;
+    private ShortcutPreference mLinkPreference;
 
     @VisibleForTesting
     ListView mMagnificationModesListView;
@@ -117,6 +121,8 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mModePreference = screen.findPreference(getPreferenceKey());
+        mLinkPreference = screen.findPreference(
+                ToggleFeaturePreferenceFragment.KEY_SHORTCUT_PREFERENCE);
         mModePreference.setOnPreferenceClickListener(preference -> {
             mModeCache = MagnificationCapabilities.getCapabilities(mContext);
             mDialogHelper.showDialog(DIALOG_MAGNIFICATION_MODE);
@@ -248,9 +254,33 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         final CharSequence negativeBtnText = mContext.getString(
                 R.string.accessibility_magnification_triple_tap_warning_negative_button);
 
-        return AccessibilityDialogUtils.createCustomDialog(mContext, title, contentView,
+        final Dialog dialog = AccessibilityDialogUtils.createCustomDialog(mContext, title,
+                contentView,
                 positiveBtnText, this::onMagnificationTripleTapWarningDialogPositiveButtonClicked,
                 negativeBtnText, this::onMagnificationTripleTapWarningDialogNegativeButtonClicked);
+
+        updateLinkInTripleTapWarningDialog(dialog, contentView);
+
+        return dialog;
+    }
+
+    private void updateLinkInTripleTapWarningDialog(Dialog dialog, View contentView) {
+        final TextView messageView = contentView.findViewById(R.id.message);
+        // TODO(b/225682559): Need to remove performClick() after refactoring accessibility dialog.
+        final View.OnClickListener linkListener = view -> {
+            mLinkPreference.performClick();
+            dialog.dismiss();
+        };
+        final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, linkListener);
+        final CharSequence textWithLink = AnnotationSpan.linkify(mContext.getText(
+                R.string.accessibility_magnification_triple_tap_warning_message), linkInfo);
+
+        if (messageView != null) {
+            messageView.setText(textWithLink);
+            messageView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        dialog.setContentView(contentView);
     }
 
     @VisibleForTesting
