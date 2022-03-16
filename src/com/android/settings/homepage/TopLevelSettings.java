@@ -58,6 +58,7 @@ public class TopLevelSettings extends DashboardFragment implements
 
     private boolean mIsEmbeddingActivityEnabled;
     private TopLevelHighlightMixin mHighlightMixin;
+    private boolean mScrollNeeded = true;
     private boolean mFirstStarted = true;
 
     public TopLevelSettings() {
@@ -133,11 +134,14 @@ public class TopLevelSettings extends DashboardFragment implements
             return;
         }
 
+        boolean activityEmbedded = SplitController.getInstance().isActivityEmbedded(getActivity());
         if (icicle != null) {
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
+            mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
+            mHighlightMixin.setActivityEmbedded(activityEmbedded);
         }
         if (mHighlightMixin == null) {
-            mHighlightMixin = new TopLevelHighlightMixin();
+            mHighlightMixin = new TopLevelHighlightMixin(activityEmbedded);
         }
     }
 
@@ -201,7 +205,7 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void highlightPreferenceIfNeeded() {
         if (mHighlightMixin != null) {
-            mHighlightMixin.highlightPreferenceIfNeeded(getActivity());
+            mHighlightMixin.highlightPreferenceIfNeeded();
         }
     }
 
@@ -243,7 +247,7 @@ public class TopLevelSettings extends DashboardFragment implements
         if (!mIsEmbeddingActivityEnabled || !(getActivity() instanceof SettingsHomepageActivity)) {
             return super.onCreateAdapter(preferenceScreen);
         }
-        return mHighlightMixin.onCreateAdapter(this, preferenceScreen);
+        return mHighlightMixin.onCreateAdapter(this, preferenceScreen, mScrollNeeded);
     }
 
     @Override
