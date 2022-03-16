@@ -564,13 +564,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             createFooterPreference(getPreferenceScreen(), mDescription,
                     getString(R.string.accessibility_introduction_title, mPackageName));
         }
-
-        if (TextUtils.isEmpty(mHtmlDescription) && TextUtils.isEmpty(mDescription)) {
-            final CharSequence defaultDescription =
-                    getText(R.string.accessibility_service_default_description);
-            createFooterPreference(getPreferenceScreen(), defaultDescription,
-                    getString(R.string.accessibility_introduction_title, mPackageName));
-        }
     }
 
 
