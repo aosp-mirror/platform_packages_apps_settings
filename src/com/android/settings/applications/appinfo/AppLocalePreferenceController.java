@@ -67,7 +67,7 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (TextUtils.equals(preference.getKey(), mPreferenceKey)) {
+        if (!TextUtils.equals(preference.getKey(), mPreferenceKey)) {
             return false;
         }
 
