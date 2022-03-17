@@ -251,6 +251,10 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         void setPreferenceEntries() {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
+            final boolean display2gOptions = carrierConfig
+                    .getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL);
             clearAllEntries();
             String[] entryValues;
             int[] entryValuesInt;
@@ -266,7 +270,9 @@ public class EnabledNetworkModePreferenceController extends
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
                     add3gEntry(entryValuesInt[1]);
-                    add1xEntry(entryValuesInt[2]);
+                    if (display2gOptions) {
+                        add1xEntry(entryValuesInt[2]);
+                    }
                     addGlobalEntry(entryValuesInt[3]);
                     break;
                 case ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES:
@@ -278,7 +284,9 @@ public class EnabledNetworkModePreferenceController extends
                                 "ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES index error.");
                     }
                     add3gEntry(entryValuesInt[0]);
-                    add1xEntry(entryValuesInt[1]);
+                    if (display2gOptions) {
+                        add1xEntry(entryValuesInt[1]);
+                    }
                     break;
                 case ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES:
                     entryValues = getResourcesForSubId().getStringArray(
@@ -302,7 +310,9 @@ public class EnabledNetworkModePreferenceController extends
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
                     add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    if (display2gOptions) {
+                        add2gEntry(entryValuesInt[2]);
+                    }
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES:
                     entryValues = getResourcesForSubId().getStringArray(
@@ -347,7 +357,9 @@ public class EnabledNetworkModePreferenceController extends
                                 "ENABLED_NETWORKS_EXCEPT_LTE_CHOICES index error.");
                     }
                     add3gEntry(entryValuesInt[0]);
-                    add2gEntry(entryValuesInt[1]);
+                    if (carrierConfig.getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL)) {
+                        add2gEntry(entryValuesInt[1]);
+                    }
                     break;
                 case ENABLED_NETWORKS_4G_CHOICES:
                     entryValues = getResourcesForSubId().getStringArray(
@@ -361,7 +373,9 @@ public class EnabledNetworkModePreferenceController extends
                             entryValuesInt[0]));
                     add4gEntry(entryValuesInt[0]);
                     add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    if (display2gOptions) {
+                        add2gEntry(entryValuesInt[2]);
+                    }
                     break;
                 case ENABLED_NETWORKS_CHOICES:
                     entryValues = getResourcesForSubId().getStringArray(
@@ -373,7 +387,9 @@ public class EnabledNetworkModePreferenceController extends
                     add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
                     addLteEntry(entryValuesInt[0]);
                     add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    if (display2gOptions) {
+                        add2gEntry(entryValuesInt[2]);
+                    }
                     break;
                 case PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE:
                     entryValues = getResourcesForSubId().getStringArray(
