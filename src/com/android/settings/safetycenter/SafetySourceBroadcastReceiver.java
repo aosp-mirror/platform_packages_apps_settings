@@ -26,6 +26,7 @@ import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.safetycenter.SafetyCenterManager;
 import android.safetycenter.SafetyEvent;
 
 import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
@@ -37,8 +38,6 @@ import java.util.List;
 /** Broadcast receiver for handling requests from Safety Center for fresh data. */
 public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
 
-    private static final SafetyEvent EVENT_REFRESH_REQUESTED =
-            new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED).build();
     private static final SafetyEvent EVENT_DEVICE_REBOOTED =
             new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
 
@@ -52,10 +51,15 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
             String[] sourceIdsExtra =
                     intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
             if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
+                final String refreshBroadcastId = intent.getStringExtra(
+                        SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
+                final SafetyEvent safetyEvent = new SafetyEvent.Builder(
+                        SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                        .setRefreshBroadcastId(refreshBroadcastId).build();
                 refreshSafetySources(
                         context,
                         ImmutableList.copyOf(sourceIdsExtra),
-                        EVENT_REFRESH_REQUESTED);
+                        safetyEvent);
             }
             return;
         }

@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter;
 
 import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
+import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
@@ -145,6 +146,29 @@ public class SafetySourceBroadcastReceiverTest {
 
         assertThat(captor.getValue()).isEqualTo(
                 new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED).build());
+    }
+
+    @Test
+    public void onReceive_onRefreshWithBroadcastId_setsRefreshEventWithBroadcastId() {
+        final String refreshBroadcastId = "REFRESH_BROADCAST_ID";
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID })
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, refreshBroadcastId);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
+        verify(mSafetyCenterManagerWrapper, times(1))
+                .setSafetySourceData(any(), any(), any(), captor.capture());
+
+        assertThat(captor.getValue().getRefreshBroadcastId()).isEqualTo(refreshBroadcastId);
+        assertThat(captor.getValue()).isEqualTo(
+                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                        .setRefreshBroadcastId(refreshBroadcastId).build());
     }
 
     @Test
