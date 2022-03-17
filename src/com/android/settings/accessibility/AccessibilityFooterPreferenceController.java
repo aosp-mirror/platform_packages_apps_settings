@@ -122,5 +122,8 @@ public class AccessibilityFooterPreferenceController extends BasePreferenceContr
         } else {
             footerPreference.setLinkEnabled(false);
         }
+
+        // Grouping subcomponents to make more accessible.
+        footerPreference.setSelectable(false);
     }
 }
