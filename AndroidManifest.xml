@@ -1846,7 +1846,7 @@
                   android:exported="true"
                   android:clearTaskOnLaunch="true"
                   android:theme="@style/Theme.Settings.NoActionBar">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
