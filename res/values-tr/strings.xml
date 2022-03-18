@@ -142,10 +142,16 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Cihazınızın yakındaki Bluetooth cihazlarıyla iletişim kurmasına izin verin"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Telefonunuzun yakındaki Bluetooth cihazlarıyla iletişim kurmasına izin verin"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP donanım yükünü devre dışı bırak"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Cihaz Yeniden Başlatılsın mı?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Bu ayarı değiştirmek için cihazınızı yeniden başlatın."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Yeniden başlat"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"İptal"</string>
+    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medya cihazları"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Cihazları ara"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Diğer cihazlar"</string>
@@ -590,12 +596,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Tableti şifrele"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Telefonu şifrele"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Şifreli"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Ekran kilidi ayarlama"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Güvenliği artırmak amacıyla bu cihaz için bir PIN, desen veya şifre belirleyin."</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Ekran kilidini ayarlama"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Telefonunuzun güvenliğini sağlayın"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Tableti korumak için ekran kilidini ayarlayın"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Cihazı korumak için ekran kilidini ayarlayın"</string>
@@ -1190,6 +1193,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Diğer cihazların bu hotspot\'ı bulmasına yardımcı olur. Pil kullanımını artırır."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Hotspot açılıyor…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Hotspot kapatılıyor…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Tethering kullanılamıyor"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"Ayrıntılı bilgiler için operatörünüzle iletişime geçin"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> etkin durumda"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Taşınabilir Kablosuz hotspot"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Kablosuz hotspot kurulumu yap"</string>
@@ -1296,6 +1301,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Açık"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Açık - Yüze göre"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Yüz Algılamayı etkinleştir"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"Ekran çözünürlüğü"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Yüksek çözünürlük"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"En yüksek çözünürlük"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"Çözünürlüğünüzü değiştirmek şu anda çalışan bazı uygulamaların kapanmasına neden olabilir."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Renkler"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Doğal"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Zenginleştirilmiş"</string>
@@ -1414,6 +1425,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Telefonunuzu özelleştirme"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Farklı stiller, duvar kağıtları ve daha fazlasını deneyin"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Ekran koruyucu"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Ekran koruyucu kullan"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Şarj olurken veya yuvadayken"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Her iki durumda da"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Şarj olurken"</string>
@@ -1434,8 +1446,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Yüksek pil kullanımı"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Kalın metin"</string>
     <string name="title_font_size" msgid="570613010306330622">"Yazı tipi boyutu"</string>
-    <!-- no translation found for short_summary_font_size (8444689613442419978) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Metni daha büyük veya daha küçük yapın"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM kart kilit ayarları"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"SIM kart kilidi"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Kapalı"</string>
@@ -2285,8 +2296,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Altyazı tercihleri hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Büyütme"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Büyütme kısayolu"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Yazmayı takip etme"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"Büyütme alanı, yazdığınız metni otomatik olarak takip eder"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Yazma sırasında büyütme"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Büyüteç siz yazarken metni takip eder"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Büyütme hakkında"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Büyütme hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Büyütme yöntemi"</string>
@@ -2370,8 +2381,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Erişilebilirlik düğmesi ve hareketi hakkında daha fazla bilgi edinin"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Erişilebilirlik düğmesini kullanma. Hareket, 3 düğmeli gezinme ile kullanılamaz."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Erişilebilirlik özelliklerine hızlıca erişin"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"Düğme veya hareket nasıl kullanılır?"</b>\n\n"1. Erişilebilirlik ayarlarına gidin\n2. Bir özellik seçip kısayola dokunun\n3. Özelliği kullanmak için erişilebilirlik düğmesine dokunun veya hareketi yapın"</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"Düğme nasıl kullanılır?"</b>\n\n"1. Erişilebilirlik ayarlarına gidin\n2. Bir özellik seçip kısayola dokunun\n3. Özelliği kullanmak için erişilebilirlik düğmesine dokunun"</string>
+    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Düğmeyi veya hareketi kullan"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Yer"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Boyut"</string>
@@ -2386,7 +2399,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Uygulama geçişlerinde ekran büyütmeyi güncelle"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Güç düğmesi çağrıyı sonlandırır"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Geniş fare işaretçisi"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Fare işaretçisini daha belirgin hale getirir"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animasyonları kaldır"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekrandaki hareketliliği azaltın"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Mono ses"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Ses çalınırken kanalları birleştir"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Ses dengesi"</string>
@@ -2439,9 +2454,28 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Dokunma geri bildirimi"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> özelliğini kullan"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> sayfasını aç"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> uygulaması Hızlı Ayarlar\'a eklendi. İstediğiniz zaman açmak veya kapatmak için aşağı kaydırın."</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"Hızlı Ayarlar\'ı düzenleyerek <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> uygulaması için kısayol ekleyebilirsiniz"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"Kapat"</string>
+    <!-- no translation found for accessibility_service_auto_added_qs_tooltip_content (2941824314912928072) -->
+    <skip />
+    <!-- no translation found for accessibility_service_qs_tooltip_content (6002493441414967868) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_auto_added_qs_tooltip_content (9092661358437404374) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_qs_tooltip_content (3258628434235475205) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_auto_added_qs_tooltip_content (7267618234972101725) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_qs_tooltip_content (5046332142185711869) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_auto_added_qs_tooltip_content (1906588335786328512) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_qs_tooltip_content (7522121299176176785) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_auto_added_qs_tooltip_content (7914554254280416532) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_qs_tooltip_content (2754332083184384603) -->
+    <skip />
+    <!-- no translation found for accessibility_quick_settings_tooltip_dismiss (3269120277643884190) -->
+    <skip />
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Renklerin telefonunuzda nasıl görüntüleneceğini düzenleyin"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Renklerin tabletinizde nasıl görüntüleneceğini düzenleyin"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Renk düzeltme işlevini kullan"</string>
@@ -2472,8 +2506,10 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> işitme cihazı kayıtlı</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ses ayarı"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"Sesli Açıklama"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"Sesli açıklamalı film müziğini varsayılan olarak seç"</string>
+    <!-- no translation found for accessibility_toggle_audio_description_preference_title (8916473886256061220) -->
+    <skip />
+    <!-- no translation found for accessibility_audio_description_summary (2554789094873781056) -->
+    <skip />
     <string name="keywords_audio_description" msgid="6202816411593281252">"sesli açıklama, ses, açıklama, az görme,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kısayol açık"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Kapalı"</string>
@@ -3410,6 +3446,8 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Temassız bir terminalde <xliff:g id="APP_0">%1$s</xliff:g> uygulamasıyla ödeyin.\n\nBu seçenek, varsayılan ödeme uygulamanız olan <xliff:g id="APP_1">%2$s</xliff:g> uygulamasının yerini alır."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Varsayılan olarak ayarla"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Güncelle"</string>
+    <!-- no translation found for nfc_work_text (2496515165821504077) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"Kısıtlamalar"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Kısıtlamaları kaldır"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PIN\'i değiştir"</string>
@@ -3590,6 +3628,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"uygulamalar, varsayılan"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"optimizasyonları yoksayma, doz, uygulamayı beklemeye alma"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"canlı, RGB, sRGB, renk, doğal, standart"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, çözünürlük, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"renk, sıcaklık, D65, D73, beyaz, sarı, mavi, sıcak, soğuk"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"kilidini açmak için kaydırma, şifre, desen, PIN"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"ekran sabitleme"</string>
@@ -3673,8 +3712,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Şarj olma sesi ve titreşim"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Yuvaya yerleştirme sesleri"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Dokunma sesleri"</string>
-    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
-    <skip />
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Titreşim modundayken simgeyi her zaman göster"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Yuva hoparlörü çalsın"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Tüm ses"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Yalnızca medya sesi"</string>
@@ -4448,7 +4486,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Pil optimizasyonu kullanılamıyor"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Pil optimizasyonu uygulanmasın. Bu seçenek, pilinizi daha hızlı tüketebilir."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Uygulama arka planda çalışmaya devam etsin mi?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının her zaman arka planda çalıştırılmasına izin vermeniz pil ömrünü kısaltabilir. \n\nBunu daha sonra Ayarlar &gt; Uygulamalar ve bildirimler seçeneğinden değiştirebilirsiniz."</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"<xliff:g id="APP_NAME">%1$s</xliff:g> uygulamasının her zaman arka planda çalıştırılmasına izni vermeniz pil ömrünü kısaltabilir. \n\nBu ayarı daha sonra Ayarlar &gt; Uygulamalar\'dan değiştirebilirsiniz."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Son kez tamamen şarj olduktan sonra <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanıldı"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Son 24 saatte <xliff:g id="PERCENTAGE">%1$s</xliff:g> kullanım"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Son kez tamamen şarj olduktan sonra pil kullanılmadı"</string>
@@ -4578,8 +4616,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Kamera için güç düğmesine iki kez bas"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Ekranınızı kilitlemeden kamerayı hızlıca açın"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Görüntü boyutu"</string>
-    <!-- no translation found for screen_zoom_short_summary (756254364808639194) -->
-    <skip />
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Her şeyi daha büyük veya daha küçük yapın"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"ekran yoğunluğu, ekran yakınlaştırma, ölçek, ölçekleme"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Ekrandaki öğeleri daha küçük veya daha büyük yapın. Ekrandaki bazı uygulamaların konumu değişebilir."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Önizleme"</string>
@@ -4887,7 +4924,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Dijital asistan"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Asistanı çağırmak için ekranı parmağınızla kaydırın"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Dijital asistan uygulamasını çağırmak için ekranı parmağınızla alt köşeden yukarı kaydırın."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Asistanı çağırmak için Ana sayfa düğmesini basılı tutun"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Asistan için ana sayfa düğmesini basılı tutun"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Dijital asistan uygulamasını çağırmak için Ana sayfa düğmesini basılı tutun."</string>
     <string name="information_label" msgid="6939310810756569298">"Bilgi"</string>
     <string name="low_label" msgid="6525629096999711220">"Düşük"</string>
@@ -4909,7 +4946,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"erişilebilirlik"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Ekranı aşağı kaydırıp"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Kısayolu şunun için kullanın:"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Tek el modunu kullanmak için ekranın alt kenarından aşağı kaydırın. Bu özelliği kullanabilmek için sistem gezinme ayarlarında hareketle gezinmenin etkin olduğundan emin olun."</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Tek elle daha kolay ulaşabilmek için ekranınızın üst yarısını aşağı çekin"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Tek el modunu kullanma"</b>\n" • Sistem gezinme ayarlarında hareketle gezinmenin seçili olduğundan emin olun\n • Ekranın alt kenarına yakın bir noktada aşağı kaydırın"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Ekranı erişilebilecek yere çek"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Ekranın üst kısmı, başparmağınızın erişebileceği yere taşınır."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Bildirimleri göster"</string>
@@ -5107,6 +5145,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Ağ ve bağlantı dahil olmak üzere tüm konumlar için göster"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Tam GNSS ölçümlerini zorla"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Tüm GNSS takımyıldızlarını ve görev döngüsü olmayan frekansları takip et"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"Giriş Yöntemi"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Ekran kalemiyle el yazısı"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Bu ayar etkinse bir düzenleyiciye odaklanıldığında mevcut giriş yöntemine ekran kalemi hareket etkinliği iletilir."</string>
     <string name="device_theme" msgid="5027604586494772471">"Cihaz teması"</string>
     <string name="default_theme" msgid="4815428567082263639">"Varsayılan"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Ağ adı"</string>
@@ -5497,11 +5538,9 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR tarayıcıyı göster"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Kilit ekranından QR tarayıcıya erişime izin verin"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Cihaz denetimlerini göster"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Ekran kilitliyken kontrollere erişin"</string>
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (8211063535536295676) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_summary (680581904143387225) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Kilit ekranında harici cihazlar için kontrol düğmeleri gösterir"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kilitli cihazdan kontrol et"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Cihaz denetimleri uygulaması izin veriyorsa harici cihazları telefonunuzun veya tabletinizin kilidini açmadan kontrol edin"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Kullanılabilir olduğunda çift çizgili saati göster"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Çift çizgili saat"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5604,7 +5643,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Uygulama sabitlemeyi kullan"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Geliştirici seçeneklerini kullan"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Yazdırma hizmetini kullan"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Birden çok kullanıcı kullan"</string>
+    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Birden fazla kullanıcıyı etkinleştirin"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Kablosuz hata ayıklamayı kullan"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Grafik sürücüsü tercihlerini kullan"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Pil tasarrufunu kullan"</string>
@@ -5663,14 +5702,10 @@
     <string name="tare_revert" msgid="3855325741125236638">"Varsayılan Ayarlara geri dönülsün mü?"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ayarlar varsayılana geri döndürüldü."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimum Doymuş Bakiye"</string>
-    <!-- no translation found for tare_balances (731881382594747961) -->
-    <skip />
-    <!-- no translation found for tare_consumption_limits (3230949387874396382) -->
-    <skip />
-    <!-- no translation found for tare_initial_consumption_limit (2921646306374048384) -->
-    <skip />
-    <!-- no translation found for tare_hard_consumption_limit (7977885116447608016) -->
-    <skip />
+    <string name="tare_balances" msgid="731881382594747961">"Bakiye"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Tüketim Sınırları"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"İlk Tüketim Sınırı"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Maksimum Tüketim Sınırı"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Değiştiriciler"</string>
     <string name="tare_actions" msgid="4573323466443513639">"İşlemler"</string>
     <string name="tare_rewards" msgid="602131401590928885">"Ödüller"</string>
@@ -5691,12 +5726,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Min Öncelikli İş Başlangıcı"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Min Öncelikli İş Çalışıyor"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"İş Zaman Aşımı Cezası"</string>
-    <!-- no translation found for tare_min_balance_exempted (6693710075762973485) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_headless_app (6906353766678577244) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_other_app (3404774196832506476) -->
-    <skip />
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Minimum Doymuş Bakiye (Muaf)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Minimum Doymuş Bakiye (Gözetimsiz Sistem Uygulaması)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Minimum Doymuş Bakiye (Diğer Uygulamalar)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Şarj etme"</item>
     <item msgid="658627268149681677">"Doz"</item>
@@ -5716,4 +5748,16 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"İkincil ekranlarda masaüstü modunu zorlamak için yeniden başlatma gerekir."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Şimdi yeniden başlat"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Sonra yeniden başlat"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Üç boyutlu ses"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Üç boyutlu seste duyduklarınız etrafınızdan geliyormuş gibi hissettirir. Bu özellik yalnızca bazı medyalarla çalışır."</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Sesi daha gerçekçi hale getirme"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Sesin çıktığı yeri değiştirerek kulağa daha doğal gelmesini sağlayın."</string>
+    <!-- no translation found for ingress_rate_limit_title (2106694002836274350) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_summary (1097811019742438371) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_dialog_title (5359461052422633789) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_no_limit_entry (8741098826008012163) -->
+    <skip />
 </resources>
