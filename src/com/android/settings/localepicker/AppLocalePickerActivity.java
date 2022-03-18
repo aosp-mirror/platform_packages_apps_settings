@@ -17,7 +17,9 @@
 package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
+import android.app.LocaleManager;
 import android.os.Bundle;
+import android.os.LocaleList;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -36,11 +38,13 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
 
+    private String mPackageName;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String packageName = getIntent().getData().getSchemeSpecificPart();
-        if (TextUtils.isEmpty(packageName)) {
+        mPackageName = getIntent().getData().getSchemeSpecificPart();
+        if (TextUtils.isEmpty(mPackageName)) {
             Log.d(TAG, "There is no package name.");
             finish();
             return;
@@ -50,7 +54,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         setContentView(R.layout.app_locale_picker);
 
         // Create App locale info detail part.
-        AppLocaleDetails appLocaleDetails = AppLocaleDetails.newInstance(packageName);
+        AppLocaleDetails appLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.app_locale_detail, appLocaleDetails)
@@ -92,9 +96,24 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     }
 
     @Override
-    public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
-        // TODO When locale is selected, this shall set per app language here.
+    public void onLocaleSelected(LocaleStore.LocaleInfo localeInfo) {
+        // TODO(b/223090003): check localeInfo.isSystemLocale()
+        if (localeInfo == null || localeInfo.getLocale() == null) {
+            setAppDefaultLocale("");
+        } else {
+            setAppDefaultLocale(localeInfo.getLocale().getLanguage());
+        }
         finish();
+    }
+
+    /** Sets the app's locale to the supplied language tag */
+    private void setAppDefaultLocale(String languageTag) {
+        LocaleManager localeManager = getSystemService(LocaleManager.class);
+        if (localeManager == null) {
+            Log.w(TAG, "LocaleManager is null, cannot set default app locale");
+            return;
+        }
+        localeManager.setApplicationLocales(mPackageName, LocaleList.forLanguageTags(languageTag));
     }
 }
 

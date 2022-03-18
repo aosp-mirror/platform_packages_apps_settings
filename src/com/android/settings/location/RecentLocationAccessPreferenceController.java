@@ -28,6 +28,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.applications.RecentAppOpsAccess;
@@ -40,12 +41,15 @@ import java.util.List;
 /**
  * Preference controller that handles the display of apps that access locations.
  */
-public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
+public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController
+        implements BasePreferenceController.UiBlocker {
     public static final int MAX_APPS = 3;
     @VisibleForTesting
     RecentAppOpsAccess mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
     private int mType = ProfileSelectFragment.ProfileType.ALL;
+    private boolean mShowSystem = false;
+    private boolean mSystemSettingChanged = false;
 
     private static class PackageEntryClickedListener implements
             Preference.OnPreferenceClickListener {
@@ -80,23 +84,32 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             RecentAppOpsAccess recentLocationApps) {
         super(context, key);
         mRecentLocationApps = recentLocationApps;
+        mShowSystem = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+        loadRecentAccesses();
     }
 
     @Override
     public void updateState(Preference preference) {
+        // Only reload the recent accesses in updateState if the system setting has changed.
+        if (mSystemSettingChanged) {
+            loadRecentAccesses();
+            mSystemSettingChanged = false;
+        }
+    }
+
+    private void loadRecentAccesses() {
         mCategoryRecentLocationRequests.removeAll();
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentAppOpsAccess.Access> recentLocationAccesses = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
-        final boolean showSystem = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
-        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(showSystem)) {
+        for (RecentAppOpsAccess.Access access : mRecentLocationApps.getAppListSorted(mShowSystem)) {
             if (isRequestMatchesProfileType(userManager, access, mType)) {
                 recentLocationAccesses.add(access);
                 if (recentLocationAccesses.size() == MAX_APPS) {
@@ -176,5 +189,15 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             return true;
         }
         return false;
+    }
+
+    /**
+     * Update the state of the showSystem setting flag and load the new results.
+     */
+    void updateShowSystem() {
+        mSystemSettingChanged = true;
+        mShowSystem = !mShowSystem;
+        clearPreferenceList();
+        loadRecentAccesses();
     }
 }
