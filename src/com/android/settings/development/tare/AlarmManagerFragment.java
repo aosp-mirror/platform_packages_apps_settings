@@ -95,7 +95,8 @@ public class AlarmManagerFragment extends Fragment implements
                 resources.getString(R.string.tare_consumption_limits),
                 resources.getString(R.string.tare_balances),
                 // resources.getString(R.string.tare_modifiers),
-                // resources.getString(R.string.tare_actions),
+                resources.getString(R.string.tare_actions_ctp),
+                resources.getString(R.string.tare_actions_base_price),
                 // resources.getString(R.string.tare_rewards)
         };
 
@@ -104,7 +105,8 @@ public class AlarmManagerFragment extends Fragment implements
                 resources.getStringArray(R.array.tare_app_balance_subfactors),
                 // TODO: support
                 // resources.getStringArray(R.array.tare_modifiers_subfactors),
-                // resources.getStringArray(R.array.tare_alarm_manager_actions),
+                resources.getStringArray(R.array.tare_alarm_manager_actions),
+                resources.getStringArray(R.array.tare_alarm_manager_actions),
                 // resources.getStringArray(R.array.tare_rewards_subfactors)
         };
 
@@ -120,7 +122,31 @@ public class AlarmManagerFragment extends Fragment implements
                         EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_OTHER_APP
                 },
                 // {},
-                // {},
+                {
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_EXACT_WAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_WAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_EXACT_NONWAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_NONWAKEUP_CTP,
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALARMCLOCK_CTP
+                },
+                {
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager
+                                .KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.KEY_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager
+                                .KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_BASE_PRICE,
+                        EconomyManager
+                                .KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_BASE_PRICE,
+                        EconomyManager.KEY_AM_ACTION_ALARM_EXACT_NONWAKEUP_BASE_PRICE,
+                        EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_NONWAKEUP_BASE_PRICE,
+                        EconomyManager.KEY_AM_ACTION_ALARM_ALARMCLOCK_BASE_PRICE
+                },
                 // {},
         };
     }
