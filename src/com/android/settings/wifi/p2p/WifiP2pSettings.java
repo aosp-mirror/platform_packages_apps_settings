@@ -353,6 +353,7 @@ public class WifiP2pSettings extends DashboardFragment
             mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             mIsIgnoreInitConnectionInfoCallback = false;
             mWifiP2pManager.requestNetworkInfo(mChannel, networkInfo -> {
+                if (mChannel == null) return;
                 mWifiP2pManager.requestConnectionInfo(mChannel, wifip2pinfo -> {
                     if (!mIsIgnoreInitConnectionInfoCallback) {
                         if (networkInfo.isConnected()) {
