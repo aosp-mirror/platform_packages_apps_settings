@@ -111,9 +111,8 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public boolean setChecked(boolean stateOn) {
-        // This screen already shows a warning, so we don't need another warning.
         return BatterySaverUtils.setPowerSaveMode(mContext, stateOn,
-                false /* needFirstTimeWarning */);
+                true /* needFirstTimeWarning */);
     }
 
     @Override
