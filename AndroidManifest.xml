@@ -722,7 +722,7 @@
             android:name="Settings$WifiTetherSettingsActivity"
             android:label="@string/wifi_hotspot_checkbox_text"
             android:exported="true"
-            android:icon="@drawable/ic_wifi_tethering">
+            android:icon="@drawable/ic_homepage_wifi_tethering">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -767,7 +767,7 @@
             android:name="Settings$VpnSettingsActivity"
             android:label="@string/vpn_settings_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_wireless">
+            android:icon="@drawable/ic_homepage_vpn">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VPN_SETTINGS" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -2909,7 +2909,7 @@
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_data_usage">
+            android:icon="@drawable/ic_homepage_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
