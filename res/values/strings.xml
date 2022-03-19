@@ -195,6 +195,8 @@
     <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
 
+    <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
+    <string name="bluetooth_screen_related">Related</string>
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
@@ -5648,10 +5650,20 @@
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
-    <!-- Message to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearingaid_pair_instructions_message">To pair your hearing aids, find and tap your device on the next screen. Make sure your hearing aids are in pairing mode.</string>
+    <!-- Title of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=25] -->
+    <string name="accessibility_hearingaid_pair_instructions_title">Pair hearing aids</string>
+    <!-- Message of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearingaid_pair_instructions_message">On the next screen, tap on your hearing aids. You may need to pair the left and right ears separately.\n\nMake sure your hearing aids are turned on and ready to pair.</string>
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> active</string>
+    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> active</string>
+    <!-- Summary for the accessibility preference for hearing aid when there is only left side active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left only</string>
+    <!-- Summary for the accessibility preference for hearing aid when there is only right side active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, right only</string>
+    <!-- Summary for the accessibility preference for hearing aid when both left side and right side are active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
+    <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Summary for the accessibility preference for hearing aid when there are saved devices. [CHAR LIMIT=50] -->
     <plurals name="show_number_hearingaid_count">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
