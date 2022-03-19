@@ -96,7 +96,8 @@ public class JobSchedulerFragment extends Fragment implements
                 resources.getString(R.string.tare_consumption_limits),
                 resources.getString(R.string.tare_balances),
                 // mResources.getString(R.string.tare_modifiers),
-                // mResources.getString(R.string.tare_actions),
+                resources.getString(R.string.tare_actions_ctp),
+                resources.getString(R.string.tare_actions_base_price),
                 // mResources.getString(R.string.tare_rewards)
         };
 
@@ -105,7 +106,8 @@ public class JobSchedulerFragment extends Fragment implements
                 resources.getStringArray(R.array.tare_app_balance_subfactors),
                 // TODO: support
                 // mResources.getStringArray(R.array.tare_modifiers_subfactors),
-                // mResources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
                 // mResources.getStringArray(R.array.tare_rewards_subfactors)
         };
 
@@ -121,7 +123,32 @@ public class JobSchedulerFragment extends Fragment implements
                         EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP
                 },
                 // {},
-                // {},
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP
+                },
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE
+                },
                 // {},
         };
     }
