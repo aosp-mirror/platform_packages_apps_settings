@@ -389,10 +389,11 @@ public class TrustedCredentialsSettings extends InstrumentedFragment
 
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
             if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
-                title.setText(mDevicePolicyManager.getString(WORK_CATEGORY_HEADER,
+                title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                         () -> getString(R.string.category_work)));
             } else {
-                title.setText(mDevicePolicyManager.getString(PERSONAL_CATEGORY_HEADER,
+                title.setText(mDevicePolicyManager.getResources().getString(
+                        PERSONAL_CATEGORY_HEADER,
                         () -> getString(R.string.category_personal)));
 
             }

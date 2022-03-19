@@ -51,7 +51,7 @@ public class ForgotPasswordActivity extends Activity {
 
         DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
         TextView forgotPasswordText = (TextView) findViewById(R.id.forgot_password_text);
-        forgotPasswordText.setText(devicePolicyManager.getString(
+        forgotPasswordText.setText(devicePolicyManager.getResources().getString(
                 FORGOT_PASSWORD_TEXT, () -> getString(R.string.forgot_password_text)));
 
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
