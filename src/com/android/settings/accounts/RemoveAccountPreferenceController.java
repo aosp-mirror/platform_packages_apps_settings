@@ -217,6 +217,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.remove_account_label)
                     .setMessage(getContext().getSystemService(DevicePolicyManager.class)
+                            .getResources()
                             .getString(REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION,
                                     () -> getString(R.string.remove_account_failed)))
                     .setPositiveButton(android.R.string.ok, null)
