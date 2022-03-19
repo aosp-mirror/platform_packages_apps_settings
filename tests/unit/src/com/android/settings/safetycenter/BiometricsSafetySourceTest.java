@@ -40,6 +40,7 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
+import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -427,7 +428,7 @@ public class BiometricsSafetySourceTest {
     }
 
     @Test
-    public void setSafetySourceData_faceAndFingerprint_whenFaceEnrolled_setsOkStatus() {
+    public void setSafetySourceData_faceAndFingerprint_whenFaceEnrolled_setsInfoSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -440,12 +441,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_OK);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
     }
 
     @Test
-    public void setSafetySourceData_faceAndFingerprint_whenFingerprintEnrolled_setsOkStatus() {
+    public void setSafetySourceData_faceAndFingerprint_whenFingerprintEnrolled_setsInfoSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -458,12 +459,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_OK);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
     }
 
     @Test
-    public void setSafetySourceData_faceAndFingerprint_whenNotEnrolled_setsNoneStatus() {
+    public void setSafetySourceData_faceAndFingerprint_whenNotEnrolled_setsUnspSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -476,12 +477,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_NONE);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
     }
 
     @Test
-    public void setSafetySourceData_fingerprint_whenEnrolled_setsOKStatus() {
+    public void setSafetySourceData_fingerprint_whenEnrolled_setsInfoSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
@@ -493,12 +494,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_OK);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
     }
 
     @Test
-    public void setSafetySourceData_fingerprint_whenNotEnrolled_setsNoneStatus() {
+    public void setSafetySourceData_fingerprint_whenNotEnrolled_setsUnspSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         when(mFaceManager.isHardwareDetected()).thenReturn(false);
@@ -510,12 +511,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_NONE);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
     }
 
     @Test
-    public void setSafetySourceData_face_whenEnrolled_setsOKStatus() {
+    public void setSafetySourceData_face_whenEnrolled_setsInfoSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -527,12 +528,12 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_OK);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
     }
 
     @Test
-    public void setSafetySourceData_face_whenNotEnrolled_setsNoneStatus() {
+    public void setSafetySourceData_face_whenNotEnrolled_setsUnspSeverity() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -544,8 +545,8 @@ public class BiometricsSafetySourceTest {
         verify(mSafetyCenterManagerWrapper).setSafetySourceData(
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_NONE);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
     }
 
     private void assertSafetySourceDisabledDataSetWithSingularSummary(String expectedTitleResName,
@@ -604,8 +605,8 @@ public class BiometricsSafetySourceTest {
         assertThat(safetySourceStatus.getTitle().toString()).isEqualTo(expectedTitle);
         assertThat(safetySourceStatus.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(safetySourceStatus.isEnabled()).isFalse();
-        assertThat(safetySourceStatus.getStatusLevel())
-                .isEqualTo(SafetySourceStatus.STATUS_LEVEL_NONE);
+        assertThat(safetySourceStatus.getSeverityLevel())
+                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
 
         final Intent clickIntent = safetySourceStatus.getPendingIntent().getIntent();
         assertThat(clickIntent).isNotNull();

@@ -142,10 +142,16 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Разрешете на устройството си да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Разрешаване на телефона да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Деакт. на разтоварв. чрез хардуер на Bluetooth с код A2DP"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Рестарт. на у-вото?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"За да промените настройката, трябва да рестарт. у-вото си."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Рестарт"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"Отказ"</string>
+    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Мултимедийни устройства"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Устройства за обаждания"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други устройства"</string>
@@ -592,12 +598,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Шифроване на таблета"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Шифроване на телефона"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Шифровано"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Задаване на опция за заключване на екрана"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"За допълнителна сигурност задайте ПИН код, фигура или парола за това устройство."</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Задайте опция за заключване на екрана"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Защита на телефона ви"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Задайте закл. на екрана, за да защитите таблета"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Задайте закл. на екрана, за да защитите устройството"</string>
@@ -1192,6 +1195,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Помага на други устройства да намерят тази точка за достъп. По-интензивно използване на батерията."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Точката за достъп се включва…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Точката за достъп се изключва…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Функцията за тетъринг не е налице"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"За подробности се обърнете към оператора си"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"Мрежата „<xliff:g id="NETWORK_SSID">%1$s</xliff:g>“ е активна"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Грешка на преносимата точка за достъп до Wi‑Fi"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Настройка на точката за достъп до Wi‑Fi"</string>
@@ -1298,6 +1303,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Включено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вкл. – въз основа на лицето"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Вкл. на лицевото разпознаване"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"Разделит. способност на екрана"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока разделителна способност"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Най-високата разделителна способност"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p (FHD+)"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p (QHD+)"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"Превключването на разделителната способност може да доведе до затваряне на някои приложения, които се изпълняват в момента."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Цветове"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Естествени"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Подсилени"</string>
@@ -1416,6 +1427,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Персонализиране на телефона ви"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Изпробвайте различни стилове, тапети и др."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Скрийнсейвър"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Използване на скрийнсейвър"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"При зареждане или връзка с докинг станция"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"И в двата случая"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"При зареждане"</string>
@@ -1436,8 +1448,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"По-интензивно използване на батерията"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Удебелен текст"</string>
     <string name="title_font_size" msgid="570613010306330622">"Размер на шрифта"</string>
-    <!-- no translation found for short_summary_font_size (8444689613442419978) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Уголемяване или смаляване на текста"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Заключване на SIM картата"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Заключване на SIM картата"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Изключено"</string>
@@ -2287,8 +2298,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Научете повече за предпочитанията за надписите"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Ниво на мащаба"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Пряк път за увеличение"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Следване на въвеждането"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"Областта за увеличаване автоматично следва текста, докато въвеждате"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Увеличаване при въвеждане на текст"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупата следва текста, докато въвеждате"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Всичко за увеличението на мащаба"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Научете повече за увеличението на мащаба"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Тип увеличаване"</string>
@@ -2372,8 +2383,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Научете повече за бутона и жеста за достъпност"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Използване на бутона за достъпност. Жестът не е налице посредством навигиране с 3 бутона."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Бърз достъп до функциите за достъпност"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"Как да използвате бутона или жеста"</b>\n\n"1. Отворете настройките за достъпност.\n2. Изберете функция и докоснете прекия път.\n3. За да стартирате съответната функция, използвайте бутона или жеста за достъпност."</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"Как да използвате бутона"</b>\n\n"1. Отворете настройките за достъпност.\n2. Изберете функция и докоснете прекия път.\n3. За да използвате съответната функция, докоснете бутона за достъпност."</string>
+    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Използване на бутона или жеста"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Местоположение"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Размер"</string>
@@ -2388,7 +2401,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ниво на мащаба на екрана при преходи на прилож.: Актуал."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Край на обажд.: Бутон за вкл./изкл."</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Голям курсор на мишката"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Промяна на курсора на мишката така, че да се вижда по-лесно"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Премахване на анимациите"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Намаляване на движенията по екрана"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Монозвук"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Комбиниране на каналите при възпроизв. на звук"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Баланс на звука"</string>
@@ -2441,9 +2456,28 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Обратна връзка при докосване"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Използване на <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Отваряне на <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"Приложението <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> е добавено към бързите настройки. Прекарайте пръст надолу, за да го включите или изключите по всяко време."</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"Можете да добавите пряк път към <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>, като редактирате бързите настройки"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"Отхвърляне"</string>
+    <!-- no translation found for accessibility_service_auto_added_qs_tooltip_content (2941824314912928072) -->
+    <skip />
+    <!-- no translation found for accessibility_service_qs_tooltip_content (6002493441414967868) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_auto_added_qs_tooltip_content (9092661358437404374) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_qs_tooltip_content (3258628434235475205) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_auto_added_qs_tooltip_content (7267618234972101725) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_qs_tooltip_content (5046332142185711869) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_auto_added_qs_tooltip_content (1906588335786328512) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_qs_tooltip_content (7522121299176176785) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_auto_added_qs_tooltip_content (7914554254280416532) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_qs_tooltip_content (2754332083184384603) -->
+    <skip />
+    <!-- no translation found for accessibility_quick_settings_tooltip_dismiss (3269120277643884190) -->
+    <skip />
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Коригирайте как цветовете се показват на телефона ви"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Коригирайте как цветовете се показват на таблета ви"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Използване на корекция на цветовете"</string>
@@ -2474,8 +2508,10 @@
       <item quantity="one">Запазен е <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> слухов апарат</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Коригиране на звука"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"Аудиоописание"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"Изберете аудиозапис с аудиоописание по подразбиране"</string>
+    <!-- no translation found for accessibility_toggle_audio_description_preference_title (8916473886256061220) -->
+    <skip />
+    <!-- no translation found for accessibility_audio_description_summary (2554789094873781056) -->
+    <skip />
     <string name="keywords_audio_description" msgid="6202816411593281252">"аудиоописание, аудио, описание, лице със слабо зрение"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Прекият път е включен"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Изкл."</string>
@@ -3412,6 +3448,8 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"На терминала за безконтактно плащане платете посредством <xliff:g id="APP_0">%1$s</xliff:g>.\n\nТова действие ще замени <xliff:g id="APP_1">%2$s</xliff:g> като основното ви приложение за плащане."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Задаване като основно"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Актуализиране"</string>
+    <!-- no translation found for nfc_work_text (2496515165821504077) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"Ограничения"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Oграничения: Премахване"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Промяна на ПИН кода"</string>
@@ -3592,6 +3630,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"приложения, по подразбиране"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"пренебрегване на оптимизациите, режим на дрямка, режим на готовност за приложенията"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"ярко, RGB, sRGB, цвят, естествено, стандартно"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, разделителна способност, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"цветно, температура, D65, D73, бяло, жълто, синьо, топло, студено"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"отключване чрез плъзгане, парола, фигура, ПИН код"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"фиксиране на екрана"</string>
@@ -3675,8 +3714,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци при зарежд. и вибриране"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Звуци за докинг станция"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Звуци при докосване"</string>
-    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
-    <skip />
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Иконата да се показва винаги в режим на вибриране"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Док. станц.: Пуск. на високог."</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Цялото аудио"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Само мултимедийното аудио"</string>
@@ -4450,7 +4488,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Няма настройка за оптимизиране на батерията"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Батерията не се оптимизира и може да се изразходва по-бързо."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Да се изпълнява винаги на заден план?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план, може да съкрати живота на батерията.\n\nМожете да промените това по-късно от „Настройки &gt; Приложения и известия“."</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"Разрешаването на <xliff:g id="APP_NAME">%1$s</xliff:g> винаги да се изпълнява на заден план може да съкрати живота на батерията. \n\nМожете да промените това по-късно от „Настройки &gt; Приложения“."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Изразходване на <xliff:g id="PERCENTAGE">%1$s</xliff:g> от последното пълно зареждане"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Използване за последните 24 часа: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Батерията не е изразходвана от последното пълно зареждане"</string>
@@ -4580,8 +4618,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"За камерата натиснете бутона за захранване 2 пъти"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Бързо отваряйте камерата, без да отключвате екрана си"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Екранен размер"</string>
-    <!-- no translation found for screen_zoom_short_summary (756254364808639194) -->
-    <skip />
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Уголемяване или смаляване на всичко"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"плътност на дисплея, промяна на мащаба на екрана, мащаб, мащабиране"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Намаляване или уголемяване на елементите на екрана. Позицията на някои приложения може да се промени."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Визуализация"</string>
@@ -4889,7 +4926,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитален асистент"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Прекарване на пръст за извикване на асистент"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Прекарайте пръст нагоре от долен ъгъл на екрана, за да извикате приложението за дигитален асистент."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Задръжте бутона „Начало“, за да извикате асистент"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Задръжте бутона „Начало“, за да извикате Асистент"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Натиснете и задръжте бутона „Начало“, за да извикате приложението за дигитален асистент."</string>
     <string name="information_label" msgid="6939310810756569298">"Информация"</string>
     <string name="low_label" msgid="6525629096999711220">"Ниска"</string>
@@ -4911,7 +4948,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"достъпност"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Прекарайте пръст надолу за"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Използване на прекия път за"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"За да използвате режима за работа с една ръка, прекарайте пръст надолу от долния ъгъл на телефона. За да ползвате тази функция, уверете се, че навигирането с жестове е включено от настройките за навигиране в системата."</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Издърпайте надолу горната част на екрана, за да го използвате по-лесно с една ръка"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Как да използвате режима за работа с една ръка"</b>\n" • Уверете се, че сте избрали навигирането с жестове от настройките за навигиране в системата.\n • Прекарайте пръст надолу близо до долния край на екрана."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Издърпване на екрана в обхват"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Горната част на екрана ще се премести в обхвата на палеца ви."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Показване на известията"</string>
@@ -5109,6 +5147,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Показване за всички местоположения, включително от мрежата и други връзки"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Налагане на пълно проследяване на измерванията с GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Проследяване на всички констелации и честоти на GNSS без използване на коефициент на запълване"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"Метод на въвеждане"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Ръкописно въвеждане с писалка"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Когато опцията е активирана, текущият метод на въвеждане получава MotionEvent от писалката, ако фокусът е върху текстов редактор."</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема на устройството"</string>
     <string name="default_theme" msgid="4815428567082263639">"Стандартно"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Име на мрежата"</string>
@@ -5499,11 +5540,9 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Показване на инструмента за сканиране на QR кодове"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Разрешаване на достъп до инструмента за сканиране на QR кодове от заключения екран"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показване на контролите за устройството"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Достъп до контролите при заключен екран"</string>
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (8211063535536295676) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_summary (680581904143387225) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Показване на контроли за външни устройства на заключения екран"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Управление от заключено устройство"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Управление на външни устройства без отключване на телефона или таблета ви, ако е разрешено от приложението за контроли за устройството"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показване на часовника с двойна линия, когато е налице"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Часовник с двойна линия"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5606,7 +5645,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Използване на функцията за фиксиране на приложение"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Използване на опциите за програмисти"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Използване на услуга за отпечатване"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Използване на функцията за няколко потребители"</string>
+    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Активиране на няколко потребители"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Използване на безжичното отстраняване на грешки"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Използване на предпочитанията за графичния драйвер"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Използване на режима за запазване на батерията"</string>
@@ -5665,14 +5704,10 @@
     <string name="tare_revert" msgid="3855325741125236638">"Възстановяване на стандартните настройки"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Възстановени са стандартните настройки"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максимален баланс при заредена батерия"</string>
-    <!-- no translation found for tare_balances (731881382594747961) -->
-    <skip />
-    <!-- no translation found for tare_consumption_limits (3230949387874396382) -->
-    <skip />
-    <!-- no translation found for tare_initial_consumption_limit (2921646306374048384) -->
-    <skip />
-    <!-- no translation found for tare_hard_consumption_limit (7977885116447608016) -->
-    <skip />
+    <string name="tare_balances" msgid="731881382594747961">"Баланси"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Ограничения за потреблението"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Първоначално ограничение за потреблението"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Максимално ограничение за потреблението"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Модификатори"</string>
     <string name="tare_actions" msgid="4573323466443513639">"Действия"</string>
     <string name="tare_rewards" msgid="602131401590928885">"Награди"</string>
@@ -5693,12 +5728,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Начало на задача с минимален приоритет"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Изпълнява се задача с мин. приоритет"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Време за изчакване на задачата: Санкция"</string>
-    <!-- no translation found for tare_min_balance_exempted (6693710075762973485) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_headless_app (6906353766678577244) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_other_app (3404774196832506476) -->
-    <skip />
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Минимален баланс при заредена батерия (изключени приложения)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Минимален баланс при заредена батерия (системно приложение без графичен ПИ)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Минимален баланс при заредена батерия (оставащи приложения)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Зареждане"</item>
     <item msgid="658627268149681677">"Режим на дрямка"</item>
@@ -5718,4 +5750,16 @@
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"За да се зададе принудително настолният режим на алтернативни дисплеи, се изисква рестартиране."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Рестартиране сега"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Рестартиране по-късно"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Пространствено аудио"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"При всеобхватното аудио звукът сякаш идва отвсякъде около вас. Не работи с всяко мултимедийно съдържание."</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Аудиото да звучи по-реалистично"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Промяна на позиционирането на аудиото така, че да звучи по-естествено."</string>
+    <!-- no translation found for ingress_rate_limit_title (2106694002836274350) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_summary (1097811019742438371) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_dialog_title (5359461052422633789) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_no_limit_entry (8741098826008012163) -->
+    <skip />
 </resources>
