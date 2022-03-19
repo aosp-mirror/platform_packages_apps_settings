@@ -89,7 +89,7 @@ public class WorkModeConditionController implements ConditionalCardController {
 
     @Override
     public ContextualCard buildContextualCard() {
-        String conditionWorkTitle = mDpm.getString(WORK_PROFILE_OFF_CONDITION_TITLE,
+        String conditionWorkTitle = mDpm.getResources().getString(WORK_PROFILE_OFF_CONDITION_TITLE,
                 () -> mAppContext.getString(R.string.condition_work_title));
         return new ConditionalContextualCard.Builder()
                 .setConditionId(ID)

@@ -59,9 +59,9 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
             UserInfo userInfo = um.getUserInfo(mUserHandle.getIdentifier());
             Drawable icon;
             if (userInfo.isManagedProfile()) {
-                mName = context.getSystemService(DevicePolicyManager.class).getString(
-                        WORK_PROFILE_USER_LABEL,
-                        () -> context.getString(R.string.managed_user_title));
+                mName = context.getSystemService(DevicePolicyManager.class).getResources()
+                        .getString(WORK_PROFILE_USER_LABEL,
+                                () -> context.getString(R.string.managed_user_title));
                 icon = context.getPackageManager().getUserBadgeForDensityNoBackground(
                         userHandle, /* density= */ 0);
             } else {
@@ -119,10 +119,10 @@ public class UserAdapter implements SpinnerAdapter, ListAdapter {
         int userHandle = user.mUserHandle.getIdentifier();
         if (userHandle == UserHandle.USER_CURRENT
                 || userHandle == ActivityManager.getCurrentUser()) {
-            return mDevicePolicyManager.getString(PERSONAL_CATEGORY_HEADER,
+            return mDevicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
                     () -> mContext.getString(R.string.category_personal));
         } else {
-            return mDevicePolicyManager.getString(WORK_CATEGORY_HEADER,
+            return mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                     () -> mContext.getString(R.string.category_work));
         }
     }

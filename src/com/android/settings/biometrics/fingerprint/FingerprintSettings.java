@@ -19,7 +19,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED_EXPLANATION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_FINGERPRINT_LAST_DELETE_MESSAGE;
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
@@ -366,7 +366,7 @@ public class FingerprintSettings extends SubSettings {
             if (admin != null) {
                 DevicePolicyManager devicePolicyManager =
                         getSystemService(DevicePolicyManager.class);
-                String footerText = devicePolicyManager.getString(
+                String footerText = devicePolicyManager.getResources().getString(
                         FINGERPRINT_UNLOCK_DISABLED_EXPLANATION,
                         () -> getString(R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled));
 
@@ -457,10 +457,8 @@ public class FingerprintSettings extends SubSettings {
             final Preference addPreference = findPreference(KEY_FINGERPRINT_ADD);
 
             /* Disable preference if too many fingerprints added */
-            final List<FingerprintSensorPropertiesInternal> props =
-                    mFingerprintManager.getSensorPropertiesInternal();
-            // This will need to be updated for devices with multiple fingerprint sensors
-            final int max = props.get(0).maxEnrollmentsPerUser;
+            final int max = getContext().getResources().getInteger(
+                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
             boolean tooMany = mFingerprintManager.getEnrolledFingerprints(mUserId).size() >= max;
             // retryFingerprint() will be called when remove finishes
             // need to disable enroll or have a way to determine if enroll is in progress
@@ -948,7 +946,7 @@ public class FingerprintSettings extends SubSettings {
 
                 final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.fingerprint_last_delete_title)
-                        .setMessage(devicePolicyManager.getString(
+                        .setMessage(devicePolicyManager.getResources().getString(
                                 messageId, () -> getContext().getString(defaultMessageId)))
                         .setPositiveButton(R.string.fingerprint_last_delete_confirm,
                                 new DialogInterface.OnClickListener() {

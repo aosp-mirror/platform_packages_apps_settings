@@ -52,7 +52,7 @@ public abstract class AdminActionPreferenceControllerBase extends
     }
 
     private String getEnterprisePrivacyNone() {
-        return mContext.getSystemService(DevicePolicyManager.class)
+        return mContext.getSystemService(DevicePolicyManager.class).getResources()
                 .getString(ADMIN_ACTION_NONE,
                         () -> mContext.getString(R.string.enterprise_privacy_none));
     }
