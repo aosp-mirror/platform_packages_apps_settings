@@ -142,10 +142,16 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Autoriser l\'appareil à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Autoriser le téléphone à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Redémarrer ?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Vous devez redémarrer l\'appareil pour modifier ce paramètre."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Redémarrer"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"Annuler"</string>
+    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Périphériques multimédias"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Appareils servant pour les appels"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Autres appareils"</string>
@@ -590,12 +596,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Chiffrer la tablette"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Chiffrer le téléphone"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Chiffré"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Définir le verrouillage de l\'écran"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Pour plus de sécurité, définissez un code, un schéma ou un mot de passe pour cet appareil."</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Définir le verrouillage de l\'écran"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Sécuriser votre téléphone"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Définissez verrouillage écran pour protéger tablette"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Définissez verrouillage écran pour protéger appareil"</string>
@@ -1190,6 +1193,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. Accroît l\'utilisation de la batterie."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Partage de connexion non disponible"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"Contactez votre opérateur pour en savoir plus"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> est actif"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Erreur liée au point d\'accès Wi-Fi mobile."</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Configurer le point d\'accès Wi-Fi"</string>
@@ -1296,6 +1301,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activée"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Active - En fonction du visage"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Activer la détection de visages"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"Résolution d\'écran"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Haute résolution"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Résolution maximale"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"FHD+ 1080p"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"QHD+ 1440p"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"Modifier votre résolution peut provoquer la fermeture de certaines applis en cours d\'exécution."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Couleurs"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Rehaussées"</string>
@@ -1414,6 +1425,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Personnaliser votre téléphone"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Essayez différents styles, fonds d\'écran, etc."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Économiseur d\'écran"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Dans les deux cas"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Lorsque l\'appareil est en charge"</string>
@@ -2284,8 +2296,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"En savoir plus sur les préférences pour les sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Agrandissement"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci d\'agrandissement"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Suivre la saisie"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"La zone d\'agrandissement suit automatiquement le texte que vous saisissez"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Agrandir la saisie"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte au fur et à mesure de la saisie"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"À propos de l\'agrandissement"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"En savoir plus sur l\'agrandissement"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Type d\'agrandissement"</string>
@@ -2369,8 +2381,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"En savoir plus sur le bouton et le geste d\'accessibilité"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisation du bouton Accessibilité. Geste indisponible avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"Utiliser le bouton ou le geste"</b>\n\n"1. Accédez aux paramètres d\'accessibilité\n2. Sélectionnez une fonctionnalité et appuyez sur le raccourci\n3. Pour exécuter la fonctionnalité, appuyez sur le bouton Accessibilité ou utilisez le geste d\'accessibilité"</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"Utiliser le bouton"</b>\n\n"1. Accédez aux paramètres d\'accessibilité\n2. Sélectionnez une fonctionnalité et appuyez sur le raccourci\n3. Pour utiliser la fonctionnalité, appuyez sur le bouton Accessibilité"</string>
+    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utiliser le bouton ou le geste"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Emplacement"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
@@ -2385,7 +2399,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Grand curseur de la souris"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Rendre le pointeur de la souris plus visible"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduire les mouvements à l\'écran"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les canaux quand de l\'audio est lu"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Balance audio"</string>
@@ -2438,9 +2454,28 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Retour tactile"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Utiliser <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Ouvrir <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> ajouté aux Réglages rapides. Balayez vers le bas pour l\'activer ou le désactiver à tout moment."</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"Pour ajouter un raccourci vers <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>, modifiez les Réglages rapides"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"Ignorer"</string>
+    <!-- no translation found for accessibility_service_auto_added_qs_tooltip_content (2941824314912928072) -->
+    <skip />
+    <!-- no translation found for accessibility_service_qs_tooltip_content (6002493441414967868) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_auto_added_qs_tooltip_content (9092661358437404374) -->
+    <skip />
+    <!-- no translation found for accessibility_color_correction_qs_tooltip_content (3258628434235475205) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_auto_added_qs_tooltip_content (7267618234972101725) -->
+    <skip />
+    <!-- no translation found for accessibility_color_inversion_qs_tooltip_content (5046332142185711869) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_auto_added_qs_tooltip_content (1906588335786328512) -->
+    <skip />
+    <!-- no translation found for accessibility_reduce_bright_colors_qs_tooltip_content (7522121299176176785) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_auto_added_qs_tooltip_content (7914554254280416532) -->
+    <skip />
+    <!-- no translation found for accessibility_one_handed_mode_qs_tooltip_content (2754332083184384603) -->
+    <skip />
+    <!-- no translation found for accessibility_quick_settings_tooltip_dismiss (3269120277643884190) -->
+    <skip />
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Ajustez l\'affichage des couleurs sur votre téléphone"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Ajustez l\'affichage des couleurs sur votre tablette"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utiliser la correction des couleurs"</string>
@@ -2471,8 +2506,10 @@
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> appareils auditifs enregistrés</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Réglage du son"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"Audiodescription"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"Sélectionnez une piste audio avec audiodescription par défaut"</string>
+    <!-- no translation found for accessibility_toggle_audio_description_preference_title (8916473886256061220) -->
+    <skip />
+    <!-- no translation found for accessibility_audio_description_summary (2554789094873781056) -->
+    <skip />
     <string name="keywords_audio_description" msgid="6202816411593281252">"audiodescription, audio, description, déficience visuelle,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Raccourci activé"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Désactivé"</string>
@@ -3409,6 +3446,8 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Application à utiliser au terminal de paiement sans contact : <xliff:g id="APP_0">%1$s</xliff:g>.\n\nCelle-ci remplace <xliff:g id="APP_1">%2$s</xliff:g> en tant qu\'application de paiement par défaut."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Définir par défaut"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Mettre à jour"</string>
+    <!-- no translation found for nfc_work_text (2496515165821504077) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restrictions"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Annuler les restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Modifier le code PIN"</string>
@@ -3589,6 +3628,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"applications, par défaut"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"ignorer les optimisations, sommeil, mise en veille des applications"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"couleurs éclatantes, RGB, sRGB, couleur, couleurs naturelles, couleurs normales"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, résolution, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"couleur, température, D65, D73, blanc, jaune, bleu, chaud, froid"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"faire glisser pour déverrouiller, mot de passe, schéma, code d\'accès"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"épinglage d\'écran"</string>
@@ -3672,8 +3712,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sons et vibration de recharge"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons de la station d\'accueil"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons des touches"</string>
-    <!-- no translation found for vibrate_icon_title (1281100105045362530) -->
-    <skip />
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Toujours afficher l\'icône en mode vibreur"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Sons haut-parleurs sta. accueil"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Tout l\'audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Audio des contenus multimédias seulement"</string>
@@ -3683,6 +3722,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Sons de mise en route"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Sous-titres instantanés"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Sous-titres automatiques"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Haut-parleur du téléphone"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Casque filaire"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"La fonctionnalité Son spatial, disponible qu\'avec certains contenus multimédias, crée un son immersif qui semble provenir de tout autour de vous."</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Désactivé"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activé - <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activé - <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> et <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et applications importantes"</string>
@@ -4447,7 +4492,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Optimisation de la batterie non disponible"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"N\'applique aucune optimisation de batterie et risque de décharger la batterie plus rapidement."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Toujours autoriser en arrière-plan ?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Autoriser <xliff:g id="APP_NAME">%1$s</xliff:g> à toujours fonctionner en arrière-plan peut réduire l\'autonomie de la batterie. \n\nVous pourrez modifier cette option ultérieurement dans Paramètres &gt; Applis et notifications."</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"Autoriser <xliff:g id="APP_NAME">%1$s</xliff:g> à toujours fonctionner en arrière-plan peut réduire l\'autonomie de la batterie. \n\nVous pourrez modifier cette option plus tard dans Paramètres &gt; Applications."</string>
     <string name="battery_summary" msgid="2491764359695671207">"Utilisation depuis la dernière charge complète : <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> d\'utilisation au cours des dernières 24 h"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Aucune utilisation de la batterie depuis la dernière charge complète"</string>
@@ -4885,7 +4930,8 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Assistant numérique"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Balayer pour appeler l\'assistant"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Pour appeler l\'appli d\'assistant numérique, balayer vers le haut depuis un coin inférieur"</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Appui long sur le bouton d\'accueil pour appeler l\'assistant"</string>
+    <!-- no translation found for assistant_long_press_home_gesture_title (4865972278738178753) -->
+    <skip />
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Appuyez de manière prolongée sur le bouton d\'accueil pour appeler l\'appli d\'assistant numérique."</string>
     <string name="information_label" msgid="6939310810756569298">"Informations"</string>
     <string name="low_label" msgid="6525629096999711220">"Faible"</string>
@@ -4907,7 +4953,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"accessibilité"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Balayer l\'écran vers le bas pour"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Utiliser le raccourci vers"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Pour utiliser le mode une main, balayez l\'écran vers le bas. Pour utiliser cette fonctionnalité, assurez-vous que la navigation par gestes est activée dans les paramètres de navigation du système."</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Déroulez la moitié supérieure de l\'écran pour y accéder plus facilement avec une main"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Utiliser le mode une main"</b>\n" • Assurez-vous que la navigation par gestes est sélectionnée dans les paramètres de navigation du système\n • Balayez l\'écran vers le bas depuis le bord inférieur de l\'écran"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Tirer sur l\'écran pour l\'avoir à portée"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Le haut de l\'écran se déplacera pour être à portée de votre pouce."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Afficher les notifications"</string>
@@ -5105,6 +5152,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Afficher pour tous les emplacements, y compris le réseau et la connectivité"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Forcer les mesures GNSS complètes"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Suivre toutes les fréquences et constellations GNSS sans cycle de service"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"Mode de saisie"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Écriture manuscrite au stylet"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Lorsque cette option est activée, le mode de saisie actuel reçoit des MotionEvent du stylet si un éditeur est sélectionné."</string>
     <string name="device_theme" msgid="5027604586494772471">"Thème de l\'appareil"</string>
     <string name="default_theme" msgid="4815428567082263639">"Par défaut"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Nom du réseau"</string>
@@ -5495,7 +5545,7 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Afficher le lecteur de code QR"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Autoriser l\'accès au lecteur de code QR depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes de contrôle des appareils"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Accéder aux commandes lorsque l\'écran est verrouillé"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Afficher les commandes pour les appareils externes depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Contrôler depuis un appareil verrouillé"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Contrôlez des appareils externes sans déverrouiller votre téléphone ou tablette (si autorisé par l\'appli de commandes de contrôle des appareils)"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Afficher l\'horloge sur deux lignes lorsqu\'elle est disponible"</string>
@@ -5600,7 +5650,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utiliser l\'épinglage d\'application"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Utiliser les options pour les développeurs"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Utiliser le service d\'impression"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Autoriser les utilisateurs multiples"</string>
+    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Permettre les utilisateurs multiples"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utiliser le débogage sans fil"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utiliser les préférences du pilote graphique"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Utiliser l\'économiseur de batterie"</string>
@@ -5709,4 +5759,12 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Le son immersif semble provenir de toutes les directions. Cette fonctionnalité n\'est disponible qu\'avec certains contenus multimédias."</string>
     <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Rendre le son plus réaliste"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Changez la localisation du son afin qu\'il soit plus naturel."</string>
+    <!-- no translation found for ingress_rate_limit_title (2106694002836274350) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_summary (1097811019742438371) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_dialog_title (5359461052422633789) -->
+    <skip />
+    <!-- no translation found for ingress_rate_limit_no_limit_entry (8741098826008012163) -->
+    <skip />
 </resources>

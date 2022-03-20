@@ -142,10 +142,16 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"デバイスが付近の Bluetooth デバイスと通信することを許可する"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"スマートフォンが付近の Bluetooth デバイスと通信することを許可する"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP ハードウェア オフロードの無効化"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"デバイスを再起動しますか？"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"この設定を変更するには、デバイスの再起動が必要です。"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"再起動"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"キャンセル"</string>
+    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
+    <skip />
+    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
+    <skip />
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"メディア デバイス"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"通話デバイス"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"その他のデバイス"</string>
@@ -590,12 +596,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"タブレットの暗号化"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"スマートフォンの暗号化"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"暗号化されています"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"画面ロックの設定"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"セキュリティを強化するために、このデバイスの PIN、パターン、またはパスワードを設定してください。"</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"画面ロックを設定"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"スマートフォンの保護"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"画面ロックを設定するとタブレットを保護できます"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"画面ロックを設定するとデバイスを保護できます"</string>
@@ -1190,6 +1193,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"他のデバイスにこのアクセス ポイントが公開されます。バッテリー使用量が増えます。"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"アクセスポイントをONにしています…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"アクセスポイントをOFFにしています…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"テザリングは利用できません"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"詳しくは携帯通信会社にお問い合わせください"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> はアクティブです"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"ポータブルWi-Fiアクセスポイントエラー"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Wi-Fiアクセスポイントをセットアップ"</string>
@@ -1296,6 +1301,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ON"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ON - 顔ベース"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"顔検出を有効にする"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"最高解像度"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"解像度を切り替えると、現在実行中の一部のアプリが閉じることがあります。"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"カラー"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ナチュラル"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ブースト"</string>
@@ -1414,6 +1425,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"スマートフォンのカスタマイズ"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"別のスタイル、壁紙などを試す"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"スクリーンセーバー"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"スクリーン セーバーの使用"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電時またはドッキング時"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"いずれか"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
@@ -2284,8 +2296,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"字幕の設定の詳細"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"拡大"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"拡大のショートカット"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"テキストの入力に従う"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"テキストの入力に応じて拡大領域が自動で調整されます"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"入力しながら拡大"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"入力にあわせて拡大鏡が文字のサイズを調整します"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"拡大について"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"拡大の詳細"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"拡大の種類"</string>
@@ -2369,8 +2381,10 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ユーザー補助機能ボタンと操作の詳細"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"ユーザー補助機能ボタンを使用します。3 ボタン ナビゲーションでは操作は利用できません。"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ユーザー補助機能にすばやくアクセスできます"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"ボタンや操作の使用方法"</b>\n\n"1. ユーザー補助設定に移動します\n2. 機能を選んでショートカットをタップします\n3. その機能を使用するには、ユーザー補助機能ボタンをタップするかユーザー補助操作を行います"</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"ボタンの使用方法"</b>\n\n"1. ユーザー補助設定に移動します\n2. 機能を選んでショートカットをタップします\n3. その機能を使用するには、ユーザー補助機能ボタンをタップします"</string>
+    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
+    <skip />
+    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
+    <skip />
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ボタンまたは操作を使用する"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"場所"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"サイズ"</string>
@@ -2385,7 +2399,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"アプリの遷移時に画面の拡大を更新"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"電源ボタンで通話を終了"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"マウスポインタを拡大"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"マウスポインタを目立たせることができます"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"アニメーションを無効化"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"画面上の動きを軽減できます"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"モノラル音声"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"音声再生時のチャンネルを統合する"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"オーディオ バランス"</string>
@@ -2438,9 +2454,17 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"触覚フィードバック"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」の使用"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>を開く"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"ショートカットを <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> に追加するにはクイック設定を編集してください"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"閉じる"</string>
+    <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"画面の上部からクイック設定に「<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>」を追加することもできます"</string>
+    <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"「色補正」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
+    <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"画面の上部からクイック設定に「色補正」を追加することもできます"</string>
+    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"「色反転」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
+    <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"画面の上部からクイック設定に「色反転」を追加することもできます"</string>
+    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"「さらに輝度を下げる」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
+    <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"画面の上部からクイック設定に「さらに輝度を下げる」を追加することもできます"</string>
+    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"「片手モード」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
+    <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"画面の上部からクイック設定に「片手モード」を追加することもできます"</string>
+    <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"閉じる"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"スマートフォンで色をどのように表示するかを調整できます"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"タブレットで色をどのように表示するかを調整できます"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
@@ -2471,8 +2495,8 @@
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> 台の保存済み補聴器</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声の調整"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"音声による説明"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"音声による説明付きの音声トラックをデフォルトで選択します"</string>
+    <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"音声による説明"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組で画面に表示されている内容の説明が読み上げられます"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"音声による説明, 音声, 説明, ロービジョン,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"ショートカットを ON にする"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"OFF"</string>
@@ -3409,6 +3433,8 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"非接触型決済端末でのお支払いに <xliff:g id="APP_0">%1$s</xliff:g> を使用します。\n\n<xliff:g id="APP_1">%2$s</xliff:g> に代わるデフォルトのお支払いアプリになります。"</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"デフォルトに設定"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"更新"</string>
+    <!-- no translation found for nfc_work_text (2496515165821504077) -->
+    <skip />
     <string name="restriction_settings_title" msgid="4293731103465972557">"制限"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"制限を削除"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PINを変更"</string>
@@ -3535,7 +3561,7 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth、Android Auto、運転モード"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC がオフのため使用できません"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"アプリと通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
@@ -3589,6 +3615,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"アプリ、デフォルト"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"最適化を無視、Doze、アプリ スタンバイ"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"鮮やか、RGB、sRGB、色、自然、標準"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, 解像度, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"色, 温度, D65, D73, 白, 黄, 青, ウォーム, クール"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"スライドでロック解除、パスワード、パターン、PIN"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"画面固定"</string>
@@ -3682,6 +3709,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"電源オンの音"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"自動字幕起こし"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"メディアの自動字幕起こし"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"スマートフォンのスピーカー"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線ヘッドフォン"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"空間オーディオは、音があらゆる方向から聞こえてくるような、臨場感あふれるサウンドを生み出します。一部のメディアでのみ利用できます。"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"OFF"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"ON / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"ON / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g>、<xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{なし}=1{1 件のスケジュールが有効}other{# 件のスケジュールが有効}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"サイレント モード"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"大切な人やアプリからの通知のみ受け取ります"</string>
@@ -4446,7 +4479,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"電池の最適化を利用不可"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"電池の最適化を適用しません。電池の消耗が速くなる可能性があります。"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"アプリにバックグラウンドでの常時実行を許可しますか？"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g> にバックグラウンドでの常時実行を許可すると、電池消費量が増加する場合があります。\n\nこの設定は、[設定] &gt; [アプリと通知] から後で変更できます。"</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"<xliff:g id="APP_NAME">%1$s</xliff:g> にバックグラウンドでの常時実行を許可すると、バッテリーの消費量が増える場合があります。\n\nこれは後から [設定] &gt; [アプリ] で変更できます。"</string>
     <string name="battery_summary" msgid="2491764359695671207">"前回のフル充電以降 <xliff:g id="PERCENTAGE">%1$s</xliff:g> 使用しています"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> 使用（過去 24 時間）"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"前回のフル充電から電池を使用していません"</string>
@@ -4884,7 +4917,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"デジタル アシスタント"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"スワイプしてアシスタントを起動"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"右下隅または左下隅から斜め上にスワイプしてデジタル アシスタント アプリを起動できます。"</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"ホームボタンを長押ししてアシスタントを起動"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"ホームボタンを長押ししてアシスタントを起動"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ホームボタンを長押しするとデジタル アシスタント アプリが起動します。"</string>
     <string name="information_label" msgid="6939310810756569298">"情報"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
@@ -4906,7 +4939,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"片手モード"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"下にスワイプ:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"ショートカットの使用:"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"片手モードを使用するには、ナビゲーションバーを下方向にスワイプします。この機能を使用するには、システム ナビゲーションの設定でジェスチャー ナビゲーションが ON になっていることを確認してください。"</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"画面の上半分を下にスワイプすると、片手で操作しやすくなります"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"片手モードの使い方"</b>\n" • システム ナビゲーションの設定でジェスチャー ナビゲーションが ON になっていることを確認してください\n • 画面の下端付近まで下にスワイプします"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"片手操作用に画面を縮小する"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"親指が画面上部まで届くようになります。"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"通知を表示"</string>
@@ -5104,6 +5138,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"ネットワークや接続を含め、すべての場所で表示されます"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS 計測の完全実行を強制"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"デューティ サイクリングを無効にした状態で、すべての GNSS コンステレーションと頻度をトラッキングします"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"入力方法"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"タッチペンで手書き入力"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"有効にすると、エディタがフォーカスされている場合に現在の入力方法がタッチペンの MotionEvent を受け取ります。"</string>
     <string name="device_theme" msgid="5027604586494772471">"デバイスのテーマ"</string>
     <string name="default_theme" msgid="4815428567082263639">"デフォルト"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"ネットワーク名"</string>
@@ -5476,7 +5513,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押しする"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押し"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"長押しするとアシスタントが有効になります"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"長押しすると電源ボタン メニューが表示されます"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"長押しは無効です"</string>
@@ -5494,7 +5531,7 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR スキャナの表示"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"ロック画面からの QR スキャナへのアクセスを許可します"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"デバイス コントロールを表示"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"ロック画面にデバイスのコントロールを表示します"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ロック画面から外部デバイスのコントロールを表示できます"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ロックされたデバイスから操作する"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"デバイス コントロール アプリで許可されていれば、スマートフォンやタブレットのロックを解除しなくても外部デバイスを操作できます"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"使用可能な場合はダブルライン時計を表示します"</string>
@@ -5594,12 +5631,12 @@
     <string name="category_name_general" msgid="7737273712848115886">"全般"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ダークモードを使用"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth を使用"</string>
-    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"ショートカットを使用"</string>
+    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"着信音ミュート用のショートカットを使用する"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスの使用"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"複数ユーザーの使用"</string>
+    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"複数のユーザーを有効にする"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ワイヤレス デバッグの使用"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"グラフィックス ドライバの設定の使用"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"バッテリー セーバーの使用"</string>
@@ -5708,4 +5745,8 @@
     <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"臨場感あふれる音声で包み込まれたように聞こえます。一部のメディアでのみ機能します。"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"音声のリアリティを高める"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"音声の位置をずらして自然に聞こえるようにします。"</string>
+    <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ネットワーク ダウンロード速度制限"</string>
+    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"インターネット接続を提供するすべてのネットワークに適用する、ネットワーク帯域幅の内向きの速度制限を設定します。"</string>
+    <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"ネットワーク ダウンロード速度制限の設定"</string>
+    <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"制限なし"</string>
 </resources>
