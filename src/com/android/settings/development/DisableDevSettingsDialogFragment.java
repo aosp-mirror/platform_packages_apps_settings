@@ -56,15 +56,15 @@ public class DisableDevSettingsDialogFragment extends InstrumentedDialogFragment
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Reuse the same text of disable_a2dp_hw_offload_dialog.
+        // Reuse the same text of disable_hw_offload_dialog.
         // The text is generic enough to be used for turning off Dev options.
         return new AlertDialog.Builder(getActivity())
-                .setMessage(R.string.bluetooth_disable_a2dp_hw_offload_dialog_message)
-                .setTitle(R.string.bluetooth_disable_a2dp_hw_offload_dialog_title)
+                .setMessage(R.string.bluetooth_disable_hw_offload_dialog_message)
+                .setTitle(R.string.bluetooth_disable_hw_offload_dialog_title)
                 .setPositiveButton(
-                        R.string.bluetooth_disable_a2dp_hw_offload_dialog_confirm, this)
+                        R.string.bluetooth_disable_hw_offload_dialog_confirm, this)
                 .setNegativeButton(
-                        R.string.bluetooth_disable_a2dp_hw_offload_dialog_cancel, this)
+                        R.string.bluetooth_disable_hw_offload_dialog_cancel, this)
                 .create();
     }
 
