@@ -47,8 +47,8 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.Settings;
-import com.android.settings.biometrics.face.FaceEnrollIntroduction;
-import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroduction;
+import com.android.settings.biometrics.face.FaceEnrollIntroductionInternal;
+import com.android.settings.biometrics.fingerprint.FingerprintEnrollIntroductionInternal;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -187,7 +187,7 @@ public class BiometricsSafetySourceTest {
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_fingerprint_preference_title",
                 "security_settings_fingerprint_preference_summary_none",
-                FingerprintEnrollIntroduction.class.getName());
+                FingerprintEnrollIntroductionInternal.class.getName());
     }
 
     @Test
@@ -258,7 +258,7 @@ public class BiometricsSafetySourceTest {
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary_none",
-                FaceEnrollIntroduction.class.getName());
+                FaceEnrollIntroductionInternal.class.getName());
     }
 
     @Test
@@ -290,7 +290,7 @@ public class BiometricsSafetySourceTest {
         assertSafetySourceEnabledDataSetWithSingularSummary(
                 "security_settings_face_preference_title",
                 "security_settings_face_preference_summary",
-                Settings.FaceSettingsActivity.class.getName());
+                Settings.FaceSettingsInternalActivity.class.getName());
     }
 
     @Test
