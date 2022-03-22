@@ -206,7 +206,9 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                  android:theme="@style/Theme.SubSettings" />
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
@@ -621,6 +623,17 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name="Settings$FaceSettingsInternalActivity"
+                  android:label="@string/security_settings_face_preference_title"
+                  android:exported="false"
+                  android:icon="@drawable/ic_face_header"
+                  android:taskAffinity="com.android.settings.root">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.face.FaceSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
+        </activity>
+
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
@@ -637,7 +650,8 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false">
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -2179,13 +2193,18 @@
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
-            android:exported="true"
-            android:screenOrientation="portrait">
+                  android:exported="true"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:screenOrientation="portrait"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
@@ -2216,7 +2235,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintSettings"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
@@ -2229,6 +2250,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:theme="@style/GlifTheme.Light"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>

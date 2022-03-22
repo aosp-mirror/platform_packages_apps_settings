@@ -171,7 +171,7 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(FaceEnrollIntroduction.class.getName());
+                .isEqualTo(FaceEnrollIntroductionInternal.class.getName());
     }
 
     @Test
@@ -179,6 +179,6 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(Settings.FaceSettingsActivity.class.getName());
+                .isEqualTo(Settings.FaceSettingsInternalActivity.class.getName());
     }
 }
