@@ -149,6 +149,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private String[] mReadOnlyApnFields;
     private boolean mReadOnlyApn;
     private Uri mCarrierUri;
+    private boolean mIsCarrierIdApn;
 
     /**
      * APN types for data connections.  These are usage categories for an APN
@@ -227,7 +228,8 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.MVNO_TYPE,   // 21
             Telephony.Carriers.MVNO_MATCH_DATA,  // 22
             Telephony.Carriers.EDITED_STATUS,   // 23
-            Telephony.Carriers.USER_EDITABLE    //24
+            Telephony.Carriers.USER_EDITABLE,   // 24
+            Telephony.Carriers.CARRIER_ID       // 25
     };
 
     private static final int ID_INDEX = 0;
@@ -262,6 +264,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
     private static final int USER_EDITABLE_INDEX = 24;
+    private static final int CARRIER_ID_INDEX = 25;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -312,6 +315,9 @@ public class ApnEditor extends SettingsPreferenceFragment
         } else {
             mApnData = new ApnData(sProjection.length);
         }
+        final int carrierId = mApnData.getInteger(CARRIER_ID_INDEX,
+                TelephonyManager.UNKNOWN_CARRIER_ID);
+        mIsCarrierIdApn = (carrierId > TelephonyManager.UNKNOWN_CARRIER_ID);
 
         final boolean isUserEdited = mApnData.getInteger(EDITED_INDEX,
                 Telephony.Carriers.USER_EDITED) == Telephony.Carriers.USER_EDITED;
@@ -325,6 +331,10 @@ public class ApnEditor extends SettingsPreferenceFragment
             disableAllFields();
         } else if (!ArrayUtils.isEmpty(mReadOnlyApnFields)) {
             disableFields(mReadOnlyApnFields);
+        }
+        // Make sure that a user cannot break carrier id APN matching
+        if (mIsCarrierIdApn) {
+            disableFieldsForCarrieridApn();
         }
 
         for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
@@ -513,6 +523,16 @@ public class ApnEditor extends SettingsPreferenceFragment
         mRoamingProtocol.setEnabled(false);
         mCarrierEnabled.setEnabled(false);
         mBearerMulti.setEnabled(false);
+        mMvnoType.setEnabled(false);
+        mMvnoMatchData.setEnabled(false);
+    }
+
+    /**
+     * Disables fields for a carrier id APN to avoid breaking the match criteria
+     */
+    private void disableFieldsForCarrieridApn() {
+        mMcc.setEnabled(false);
+        mMnc.setEnabled(false);
         mMvnoType.setEnabled(false);
         mMvnoMatchData.setEnabled(false);
     }
@@ -1150,11 +1170,15 @@ public class ApnEditor extends SettingsPreferenceFragment
         final String apn = checkNotSet(mApn.getText());
         final String mcc = checkNotSet(mMcc.getText());
         final String mnc = checkNotSet(mMnc.getText());
-
+        boolean doNotCheckMccMnc = mIsCarrierIdApn && TextUtils.isEmpty(mcc)
+                && TextUtils.isEmpty(mnc);
         if (TextUtils.isEmpty(name)) {
             errorMsg = getResources().getString(R.string.error_name_empty);
         } else if (TextUtils.isEmpty(apn)) {
             errorMsg = getResources().getString(R.string.error_apn_empty);
+        } else if (doNotCheckMccMnc) {
+            Log.d(TAG, "validateApnData: carrier id APN does not have mcc/mnc defined");
+            // no op, skip mcc mnc null check
         } else if (mcc == null || mcc.length() != 3) {
             errorMsg = getResources().getString(R.string.error_mcc_not3);
         } else if ((mnc == null || (mnc.length() & 0xFFFE) != 2)) {
