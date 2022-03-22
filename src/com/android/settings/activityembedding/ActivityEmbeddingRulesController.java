@@ -53,6 +53,8 @@ import java.util.Set;
 public class ActivityEmbeddingRulesController {
 
     private static final String TAG = "ActivityEmbeddingCtrl";
+    private static final ComponentName COMPONENT_NAME_WILDCARD = new ComponentName(
+            "*" /* pkg */, "*" /* cls */);
     private final Context mContext;
     private final SplitController mSplitController;
 
@@ -188,6 +190,13 @@ public class ActivityEmbeddingRulesController {
                 new ComponentName(context, SubSettings.class),
                 null /* secondaryIntentAction */,
                 clearTop);
+
+        registerTwoPanePairRuleForSettingsHome(
+                context,
+                COMPONENT_NAME_WILDCARD,
+                Intent.ACTION_SAFETY_CENTER,
+                clearTop
+        );
     }
 
     private void registerHomepagePlaceholderRule() {
@@ -228,8 +237,7 @@ public class ActivityEmbeddingRulesController {
     }
 
     private static void addActivityFilter(Set<ActivityFilter> activityFilters, Intent intent) {
-        activityFilters.add(new ActivityFilter(new ComponentName("*" /* pkg */, "*" /* cls */),
-                intent.getAction()));
+        activityFilters.add(new ActivityFilter(COMPONENT_NAME_WILDCARD, intent.getAction()));
     }
 
     private void addActivityFilter(Set<ActivityFilter> activityFilters,
