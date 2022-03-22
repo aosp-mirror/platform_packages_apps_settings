@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -521,8 +520,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             public void onChecked(boolean matched, int timeoutMs) {
                                 mPendingLockCheck = null;
                                 if (matched && isInternalActivity() && mReturnCredentials) {
-                                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                                    StorageManager.CRYPT_TYPE_PATTERN);
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                                     pattern);
                                 }
