@@ -5293,9 +5293,19 @@
     <!-- Message for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_preview_mail_from">From: Bill</string>
     <!-- Content for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_preview_mail_content">Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?</string>
-    <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_reset_button_title">Reset</string>
+    <string name="accessibility_text_reading_preview_mail_content">Good morning! Following up on our last conversation, I\u2019d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?</string>
+    <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=25] -->
+    <string name="accessibility_text_reading_reset_button_title">Reset settings</string>
+    <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_title">Reset display size and text?</string>
+    <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_message">Your display size and text preferences will reset to the phone\u2019s original settings</string>
+    <!-- Title for the reset button of the confirm dialog of reset settings. [CHAR LIMIT=25] -->
+    <string name="accessibility_text_reading_confirm_dialog_reset_button">Reset</string>
+    <!-- Conversation message for the messaging app preview screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_conversation_message_1">Any weekend plans?</string>
+    <!-- Conversation message for the messaging app preview screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_conversation_message_2">Heading to the beach. Want to join?</string>
     <!-- Title for the footer text to explain what option accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_option">Options</string>
     <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
@@ -8583,6 +8593,24 @@
 
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
+
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker">Phone speaker</string>
+
+    <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_wired_headphones">Wired headphones</string>
+
+    <!-- Sound: Summary for the spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_text">Spatial Audio creates immersive sound that seems like it’s coming from all around you. Only works with some media.</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is off. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_off">Off</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with one output device enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_one">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g></string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with two output devices enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_two">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g> and <xliff:g id="output device" example="Wired headphones">%2$s</xliff:g></string>
 
     <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
