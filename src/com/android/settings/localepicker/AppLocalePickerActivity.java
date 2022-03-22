@@ -97,8 +97,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo localeInfo) {
-        // TODO(b/223090003): check localeInfo.isSystemLocale()
-        if (localeInfo == null || localeInfo.getLocale() == null) {
+        if (localeInfo == null || localeInfo.getLocale() == null || localeInfo.isSystemLocale()) {
             setAppDefaultLocale("");
         } else {
             setAppDefaultLocale(localeInfo.getLocale().getLanguage());
