@@ -16,8 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -99,9 +97,6 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                             .findFragmentByTag(TAG);
             mDialogFragment = dialogFragment;
         }
-        replaceEnterpriseStringTitle("sound_work_settings",
-                WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER,
-                R.string.sound_work_settings);
     }
 
     @Override
@@ -261,21 +256,21 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                 new DockingSoundPreferenceController(context, fragment, lifecycle);
         final TouchSoundPreferenceController touchSoundPreferenceController =
                 new TouchSoundPreferenceController(context, fragment, lifecycle);
+        final VibrateOnTouchPreferenceController vibrateOnTouchPreferenceController =
+                new VibrateOnTouchPreferenceController(context, fragment, lifecycle);
         final DockAudioMediaPreferenceController dockAudioMediaPreferenceController =
                 new DockAudioMediaPreferenceController(context, fragment, lifecycle);
         final BootSoundPreferenceController bootSoundPreferenceController =
                 new BootSoundPreferenceController(context);
         final EmergencyTonePreferenceController emergencyTonePreferenceController =
                 new EmergencyTonePreferenceController(context, fragment, lifecycle);
-        final VibrateIconPreferenceController vibrateIconPreferenceController =
-                new VibrateIconPreferenceController(context, fragment, lifecycle);
 
         controllers.add(dialPadTonePreferenceController);
         controllers.add(screenLockSoundPreferenceController);
         controllers.add(chargingSoundPreferenceController);
         controllers.add(dockingSoundPreferenceController);
         controllers.add(touchSoundPreferenceController);
-        controllers.add(vibrateIconPreferenceController);
+        controllers.add(vibrateOnTouchPreferenceController);
         controllers.add(dockAudioMediaPreferenceController);
         controllers.add(bootSoundPreferenceController);
         controllers.add(emergencyTonePreferenceController);
@@ -286,7 +281,7 @@ public class SoundSettings extends DashboardFragment implements OnActivityResult
                         chargingSoundPreferenceController,
                         dockingSoundPreferenceController,
                         touchSoundPreferenceController,
-                        vibrateIconPreferenceController,
+                        vibrateOnTouchPreferenceController,
                         dockAudioMediaPreferenceController,
                         bootSoundPreferenceController,
                         emergencyTonePreferenceController)));

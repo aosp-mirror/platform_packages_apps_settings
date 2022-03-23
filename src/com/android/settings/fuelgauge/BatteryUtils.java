@@ -368,15 +368,8 @@ public class BatteryUtils {
     public BatteryInfo getBatteryInfo(final String tag) {
         final BatteryStatsManager systemService = mContext.getSystemService(
                 BatteryStatsManager.class);
-        BatteryUsageStats batteryUsageStats;
-        try {
-            batteryUsageStats = systemService.getBatteryUsageStats(
-                    new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
-        } catch (RuntimeException e) {
-            Log.e(TAG, "getBatteryInfo() error from getBatteryUsageStats()", e);
-            // Use default BatteryUsageStats.
-            batteryUsageStats = new BatteryUsageStats.Builder(new String[0]).build();
-        }
+        final BatteryUsageStats batteryUsageStats = systemService.getBatteryUsageStats(
+                new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
 
         final long startTime = System.currentTimeMillis();
 
@@ -403,11 +396,6 @@ public class BatteryUtils {
                 batteryUsageStats, estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
-        try {
-            batteryUsageStats.close();
-        } catch (Exception e) {
-            Log.e(TAG, "BatteryUsageStats.close() failed", e);
-        }
         return batteryInfo;
     }
 

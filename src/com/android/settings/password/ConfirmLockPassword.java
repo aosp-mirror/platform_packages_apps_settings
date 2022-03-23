@@ -16,16 +16,6 @@
 
 package com.android.settings.password;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PIN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PASSWORD_REQUIRED;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PIN_REQUIRED;
-import static android.app.admin.DevicePolicyResources.UNDEFINED;
-
 import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
@@ -81,17 +71,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         R.string.lockpassword_strong_auth_required_device_password,
         R.string.lockpassword_strong_auth_required_work_pin,
         R.string.lockpassword_strong_auth_required_work_password
-    };
-
-    private static final String[] DETAIL_TEXT_OVERRIDES = new String[] {
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_CONFIRM_PIN,
-            WORK_PROFILE_CONFIRM_PASSWORD,
-            UNDEFINED,
-            UNDEFINED,
-            WORK_PROFILE_PIN_REQUIRED,
-            WORK_PROFILE_PASSWORD_REQUIRED
     };
 
     public static class InternalActivity extends ConfirmLockPassword {
@@ -181,10 +160,10 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     headerMessage = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
                 }
                 if (TextUtils.isEmpty(headerMessage)) {
-                    headerMessage = getDefaultHeader();
+                    headerMessage = getString(getDefaultHeader());
                 }
                 if (TextUtils.isEmpty(detailsMessage)) {
-                    detailsMessage = getDefaultDetails();
+                    detailsMessage = getString(getDefaultDetails());
                 }
                 mGlifLayout.setHeaderText(headerMessage);
                 mGlifLayout.setDescriptionText(detailsMessage);
@@ -249,37 +228,29 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }, 5000);
         }
 
-        private String getDefaultHeader() {
+        private int getDefaultHeader() {
             if (mFrp) {
-                return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_header_frp)
-                        : getString(R.string.lockpassword_confirm_your_pin_header_frp);
+                return mIsAlpha ? R.string.lockpassword_confirm_your_password_header_frp
+                        : R.string.lockpassword_confirm_your_pin_header_frp;
             }
             if (mIsManagedProfile) {
-                if (mIsAlpha) {
-                    return mDevicePolicyManager.getResources().getString(
-                            CONFIRM_WORK_PROFILE_PASSWORD_HEADER,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_work_password_header));
-                }
-                return mDevicePolicyManager.getResources().getString(
-                        CONFIRM_WORK_PROFILE_PIN_HEADER,
-                        () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
+                return mIsAlpha ? R.string.lockpassword_confirm_your_work_password_header
+                        : R.string.lockpassword_confirm_your_work_pin_header;
             }
-            return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_header)
-                    : getString(R.string.lockpassword_confirm_your_pin_header);
+            return mIsAlpha ? R.string.lockpassword_confirm_your_password_header
+                    : R.string.lockpassword_confirm_your_pin_header;
         }
 
-        private String getDefaultDetails() {
+        private int getDefaultDetails() {
             if (mFrp) {
-                return mIsAlpha ? getString(R.string.lockpassword_confirm_your_password_details_frp)
-                        : getString(R.string.lockpassword_confirm_your_pin_details_frp);
+                return mIsAlpha ? R.string.lockpassword_confirm_your_password_details_frp
+                        : R.string.lockpassword_confirm_your_pin_details_frp;
             }
             boolean isStrongAuthRequired = isStrongAuthRequired();
             // Map boolean flags to an index by isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
             int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((mIsManagedProfile ? 1 : 0) << 1)
                     + (mIsAlpha ? 1 : 0);
-            return mDevicePolicyManager.getResources().getString(
-                    DETAIL_TEXT_OVERRIDES[index], () -> getString(DETAIL_TEXTS[index]));
+            return DETAIL_TEXTS[index];
         }
 
         private int getErrorMessage() {
@@ -288,17 +259,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected String getLastTryOverrideErrorMessageId(int userType) {
-            if (userType == USER_TYPE_MANAGED_PROFILE) {
-                return mIsAlpha ?  WORK_PROFILE_LAST_PASSWORD_ATTEMPT_BEFORE_WIPE
-                        : WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
-            }
-
-            return UNDEFINED;
-        }
-
-        @Override
-        protected int getLastTryDefaultErrorMessage(int userType) {
+        protected int getLastTryErrorMessage(int userType) {
             switch (userType) {
                 case USER_TYPE_PRIMARY:
                     return mIsAlpha ? R.string.lock_last_password_attempt_before_wipe_device

@@ -1503,15 +1503,11 @@ public class WifiConfigController implements TextWatcher,
         }
 
         // Shows display name of each active subscription.
-        final ArrayList<CharSequence> displayNames = new ArrayList<>();
-        for (SubscriptionInfo activeSubInfo : mActiveSubscriptionInfos) {
-            displayNames.add(
-                SubscriptionUtil.getUniqueSubscriptionDisplayName(activeSubInfo, mContext));
-        }
-        mEapSimSpinner.setAdapter(
-            getSpinnerAdapter(displayNames.toArray(new String[displayNames.size()])));
+        final String[] displayNames = SubscriptionUtil.getUniqueSubscriptionDisplayNames(
+                mContext).values().stream().toArray(String[]::new);
+        mEapSimSpinner.setAdapter(getSpinnerAdapter(displayNames));
         mEapSimSpinner.setSelection(0 /* position */);
-        if (displayNames.size() == 1) {
+        if (displayNames.length == 1) {
             mEapSimSpinner.setEnabled(false);
         }
     }

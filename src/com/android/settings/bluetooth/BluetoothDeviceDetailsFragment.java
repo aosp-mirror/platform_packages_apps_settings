@@ -117,7 +117,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             return;
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
-        use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider(context);
@@ -188,8 +187,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
             controllers.add(new BluetoothDetailsCompanionAppsController(context, this,
                     mCachedDevice, lifecycle));
-            controllers.add(new BluetoothDetailsSpatialAudioController(context, this, mCachedDevice,
-                    lifecycle));
             controllers.add(new BluetoothDetailsProfilesController(context, this, mManager,
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,

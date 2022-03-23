@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import android.provider.Settings;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -80,25 +79,6 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mCategory, times(3)).addPreference(any());
-    }
-
-    @Test
-    public void updateState_whenAppListMoreThanThree_showSystem() {
-        when(mController.mRecentLocationApps.getAppListSorted(false))
-                .thenReturn(createMockRequest(2));
-        when(mController.mRecentLocationApps.getAppListSorted(true))
-                .thenReturn(createMockRequest(3));
-
-        mController.displayPreference(mScreen);
-        verify(mCategory, times(2)).addPreference(any());
-
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS,
-                1);
-
-        mController.displayPreference(mScreen);
-        verify(mCategory, times(5)).addPreference(any());
     }
 
     @Test

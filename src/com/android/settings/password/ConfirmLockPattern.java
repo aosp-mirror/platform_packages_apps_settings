@@ -16,14 +16,7 @@
 
 package com.android.settings.password;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PATTERN_ATTEMPT_BEFORE_WIPE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PATTERN_REQUIRED;
-import static android.app.admin.DevicePolicyResources.UNDEFINED;
-
 import android.annotation.Nullable;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -35,7 +28,6 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -116,7 +108,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
 
         }
 
-        @SuppressLint("ClickableViewAccessibility")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
@@ -150,15 +141,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 mHeaderText = mDevicePolicyManager.getOrganizationNameForUser(mUserId);
             }
 
+            mLockPatternView.setTactileFeedbackEnabled(
+                    mLockPatternUtils.isTactileFeedbackEnabled());
             mLockPatternView.setInStealthMode(!mLockPatternUtils.isVisiblePatternEnabled(
                     mEffectiveUserId));
             mLockPatternView.setOnPatternListener(mConfirmExistingLockPatternListener);
-            mLockPatternView.setOnTouchListener((v, event) -> {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    v.getParent().requestDisallowInterceptTouchEvent(true);
-                }
-                return false;
-            });
             updateStage(Stage.NeedToUnlock);
 
             if (savedInstanceState == null) {
@@ -264,27 +251,19 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mGlifLayout.getDescriptionTextView().setAlpha(0f);
         }
 
-        private String getDefaultDetails() {
+        private int getDefaultDetails() {
             if (mFrp) {
-                return getString(R.string.lockpassword_confirm_your_pattern_details_frp);
+                return R.string.lockpassword_confirm_your_pattern_details_frp;
             }
             final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (mIsManagedProfile) {
-                if (isStrongAuthRequired) {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_PATTERN_REQUIRED,
-                            () -> getString(
-                                    R.string.lockpassword_strong_auth_required_work_pattern));
-                } else {
-                    return mDevicePolicyManager.getResources().getString(
-                            WORK_PROFILE_CONFIRM_PATTERN,
-                            () -> getString(
-                                    R.string.lockpassword_confirm_your_pattern_generic_profile));
-                }
+                return isStrongAuthRequired
+                        ? R.string.lockpassword_strong_auth_required_work_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic_profile;
             } else {
                 return isStrongAuthRequired
-                        ? getString(R.string.lockpassword_strong_auth_required_device_pattern)
-                        : getString(R.string.lockpassword_confirm_your_pattern_generic);
+                        ? R.string.lockpassword_strong_auth_required_device_pattern
+                        : R.string.lockpassword_confirm_your_pattern_generic;
             }
         }
 
@@ -366,16 +345,11 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             mGlifLayout.getHeaderTextView().announceForAccessibility(mGlifLayout.getHeaderText());
         }
 
-        private String getDefaultHeader() {
-            if (mFrp) return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
-
-            if (mIsManagedProfile) {
-                return mDevicePolicyManager.getResources().getString(
-                        CONFIRM_WORK_PROFILE_PATTERN_HEADER,
-                        () -> getString(R.string.lockpassword_confirm_your_work_pattern_header));
-            }
-
-            return getString(R.string.lockpassword_confirm_your_pattern_header);
+        private int getDefaultHeader() {
+            if (mFrp) return R.string.lockpassword_confirm_your_pattern_header_frp;
+            return mIsManagedProfile
+                    ? R.string.lockpassword_confirm_your_work_pattern_header
+                    : R.string.lockpassword_confirm_your_pattern_header;
         }
 
         private Runnable mClearPatternRunnable = new Runnable() {
@@ -569,16 +543,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
         }
 
         @Override
-        protected String getLastTryOverrideErrorMessageId(int userType) {
-            if (userType == USER_TYPE_MANAGED_PROFILE) {
-                return WORK_PROFILE_LAST_PATTERN_ATTEMPT_BEFORE_WIPE;
-            }
-
-            return UNDEFINED;
-        }
-
-        @Override
-        protected int getLastTryDefaultErrorMessage(int userType) {
+        protected int getLastTryErrorMessage(int userType) {
             switch (userType) {
                 case USER_TYPE_PRIMARY:
                     return R.string.lock_last_pattern_attempt_before_wipe_device;

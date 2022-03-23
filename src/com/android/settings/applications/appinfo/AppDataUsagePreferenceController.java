@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -137,13 +136,13 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     private static NetworkTemplate getTemplate(Context context) {
         if (DataUsageUtils.hasReadyMobileRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).setMeteredness(
-                    NetworkStats.METERED_YES).build();
+            return NetworkTemplate.buildTemplateMobileWildcard();
         }
         if (DataUsageUtils.hasWifiRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
+            return NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                    null /* subscriberId */);
         }
-        return new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build();
+        return NetworkTemplate.buildTemplateEthernet();
     }
 
     @VisibleForTesting

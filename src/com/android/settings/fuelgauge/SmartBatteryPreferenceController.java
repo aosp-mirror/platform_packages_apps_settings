@@ -24,7 +24,6 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -60,11 +59,6 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     @Override
     public boolean isPublicSlice() {
         return true;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_battery;
     }
 
     @Override

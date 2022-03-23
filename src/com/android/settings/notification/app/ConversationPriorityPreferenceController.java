@@ -62,9 +62,9 @@ public class ConversationPriorityPreferenceController extends NotificationPrefer
 
     public void updateState(Preference preference) {
         if (mAppRow != null) {
-            preference.setEnabled(mAdmin == null && isChannelConfigurable(mChannel));
+            preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());
             ConversationPriorityPreference pref = (ConversationPriorityPreference) preference;
-            pref.setConfigurable(isChannelConfigurable(mChannel));
+            pref.setConfigurable(!mChannel.isImportanceLockedByOEM());
             pref.setImportance(mChannel.getImportance());
             pref.setOriginalImportance(mChannel.getOriginalImportance());
             pref.setPriorityConversation(mChannel.isImportantConversation());

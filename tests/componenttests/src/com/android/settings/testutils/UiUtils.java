@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 public class UiUtils {
     private static final String TAG = "UI_UTILS";
 
-    public static boolean waitUntilCondition(long timeoutInMillis, Supplier<Boolean> condition) {
+    public static void waitUntilCondition(long timeoutInMillis, Supplier<Boolean> condition) {
         long start = System.nanoTime();
         while (System.nanoTime() - start < (timeoutInMillis * 1000000)) {
             try {
@@ -40,14 +40,17 @@ public class UiUtils {
                 //findViewById when the view hierarchy is still rendering, it sometimes encounter
                 //null views that may exist few milliseconds before, and causes a NPE.
                 if (condition.get()) {
-                    return true;
+                    return;
                 }
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
         }
-        Log.w(TAG, "Condition not match and timeout for waiting " + timeoutInMillis + "(ms).");
-        return false;
+        if (System.nanoTime() - start >= (timeoutInMillis * 1000000)) {
+            Log.w(TAG, "Condition not match and timeout for waiting " + timeoutInMillis + "(ms).");
+        } else {
+            Log.d(TAG, "Condition matched.");
+        }
     }
 
     public static boolean waitForActivitiesInStage(long timeoutInMillis, Stage stage) {

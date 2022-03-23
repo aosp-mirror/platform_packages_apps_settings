@@ -46,7 +46,6 @@ import com.android.settingslib.R;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -179,7 +178,6 @@ public class BatteryInfoTest {
     }
 
     @Test
-    @Ignore
     public void getBatteryInfo_MoreThanOneDay_suggestionLabelIsCorrectString() {
         Estimate estimate = new Estimate(Duration.ofDays(3).toMillis(),
                 true /* isBasedOnUsage */,

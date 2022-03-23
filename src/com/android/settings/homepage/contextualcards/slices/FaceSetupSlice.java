@@ -133,16 +133,11 @@ public class FaceSetupSlice implements CustomSliceable {
                     SecuritySettings.class.getName(),
                     FaceStatusPreferenceController.KEY_FACE_SETTINGS,
                     mContext.getText(R.string.security_settings_face_settings_enroll).toString(),
-                    SettingsEnums.SLICE, this)
+                    SettingsEnums.SLICE)
                     .setClassName(mContext.getPackageName(), SubSettings.class.getName());
         } else {
             return new Intent(mContext, FaceReEnrollDialog.class);
         }
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_security;
     }
 
     private static RowBuilder buildRowBuilder(CharSequence title, CharSequence subTitle,
