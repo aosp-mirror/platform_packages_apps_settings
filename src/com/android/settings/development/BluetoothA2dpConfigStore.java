@@ -71,16 +71,10 @@ public class BluetoothA2dpConfigStore {
     }
 
     public BluetoothCodecConfig createCodecConfig() {
-        return new BluetoothCodecConfig.Builder()
-                .setCodecType(mCodecType)
-                .setCodecPriority(mCodecPriority)
-                .setSampleRate(mSampleRate)
-                .setBitsPerSample(mBitsPerSample)
-                .setChannelMode(mChannelMode)
-                .setCodecSpecific1(mCodecSpecific1Value)
-                .setCodecSpecific2(mCodecSpecific2Value)
-                .setCodecSpecific3(mCodecSpecific3Value)
-                .setCodecSpecific4(mCodecSpecific4Value)
-                .build();
+        return new BluetoothCodecConfig(mCodecType, mCodecPriority,
+                mSampleRate, mBitsPerSample,
+                mChannelMode, mCodecSpecific1Value,
+                mCodecSpecific2Value, mCodecSpecific3Value,
+                mCodecSpecific4Value);
     }
 }

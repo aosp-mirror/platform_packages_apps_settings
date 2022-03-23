@@ -76,7 +76,6 @@ import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
-import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.StringUtil;
@@ -146,7 +145,7 @@ public class WifiDetailPreferenceController2Test {
     @Mock
     private WifiInfo mMockWifiInfo;
     @Mock
-    private WifiNetworkDetailsFragment mMockFragment;
+    private WifiNetworkDetailsFragment2 mMockFragment;
     @Mock
     private WifiManager mMockWifiManager;
     @Mock

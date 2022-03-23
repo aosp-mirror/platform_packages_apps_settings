@@ -54,8 +54,8 @@ public class ConditionContextualCardController implements ContextualCardControll
     private boolean mIsExpanded;
 
     public ConditionContextualCardController(Context context) {
-        mContext = context.getApplicationContext();
-        mConditionManager = new ConditionManager(mContext, this);
+        mContext = context;
+        mConditionManager = new ConditionManager(context.getApplicationContext(), this);
         mConditionManager.startMonitoringStateChange();
     }
 

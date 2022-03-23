@@ -21,19 +21,26 @@
     android:title="@string/vision_settings_title">
 
     <Preference
-        android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard"
-        android:icon="@drawable/ic_adaptive_font_download"
-        android:key="text_reading_options"
-        android:persistent="false"
-        android:title="@string/accessibility_text_reading_options_title"
-        settings:keywords="text_reading_options" />
+        android:fragment="com.android.settings.display.FontSizePreferenceFragmentForSetupWizard"
+        android:key="font_size_preference"
+        android:icon="@drawable/ic_font_size"
+        android:summary="@string/short_summary_font_size"
+        android:title="@string/title_font_size"/>
+
+    <com.android.settings.display.ScreenZoomPreference
+        android:fragment="com.android.settings.display.ScreenZoomPreferenceFragmentForSetupWizard"
+        android:key="force_density_preference"
+        android:icon="@drawable/ic_screen_zoom"
+        android:summary="@string/screen_zoom_short_summary"
+        android:title="@string/screen_zoom_title"/>
 
     <Preference
-        android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
+        android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
         android:key="screen_magnification_preference"
         android:icon="@drawable/ic_accessibility_magnification"
         android:summary="@string/accessibility_preference_magnification_summary"
-        android:title="@string/accessibility_screen_magnification_title" />
+        android:title="@string/accessibility_screen_magnification_title"
+        settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
@@ -46,13 +53,5 @@
         android:key="screen_reader_preference"
         android:persistent="true"
         android:summary="@string/talkback_summary"/>
-
-    <SwitchPreference
-        android:icon="@drawable/ic_accessibility_animation"
-        android:key="toggle_disable_animations"
-        android:persistent="false"
-        android:summary="@string/accessibility_disable_animations_summary"
-        android:title="@string/accessibility_disable_animations"
-        settings:controller="com.android.settings.accessibility.DisableAnimationsPreferenceController"/>
 
 </PreferenceScreen>

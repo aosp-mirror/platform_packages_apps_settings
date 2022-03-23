@@ -36,7 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -126,7 +126,9 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId,
                             true);
                 } else {
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, info);
+                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
+                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
+                    mContext.startActivity(intent);
                 }
                 return true;
             });
@@ -170,6 +172,7 @@ public class NetworkProviderSimListController extends AbstractPreferenceControll
         for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
             if (!info.isEmbedded()) {
                 subList.add(info);
+                break;
             }
         }
         return subList;

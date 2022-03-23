@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -54,10 +53,7 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public boolean isAvailable() {
-        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
-                .stream()
-                .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
-        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && !hasLeAudio;
+        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice());
     }
 
     @Override

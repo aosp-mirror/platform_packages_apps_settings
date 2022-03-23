@@ -45,10 +45,6 @@
             android:title="@string/capture_system_heap_dump_title" />
 
         <Preference
-            android:key="reboot_with_mte"
-            android:title="@string/reboot_with_mte_title" />
-
-        <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -91,6 +87,12 @@
             android:title="@string/runningservices_settings_title"
             android:summary="@string/runningservices_settings_summary"
             android:fragment="com.android.settings.applications.RunningServices" />
+
+        <Preference
+            android:key="convert_to_file_encryption"
+            android:title="@string/convert_to_file_encryption"
+            android:summary="@string/convert_to_file_encryption_enabled"
+            android:fragment="com.android.settings.applications.ConvertToFbe" />
 
         <com.android.settings.development.ColorModePreference
             android:key="picture_color_mode"
@@ -140,7 +142,7 @@
         <Preference android:key="clear_adb_keys"
                     android:title="@string/clear_adb_keys" />
 
-        <com.android.settingslib.PrimarySwitchPreference
+        <com.android.settings.widget.PrimarySwitchPreference
             android:fragment="com.android.settings.development.WirelessDebuggingFragment"
             android:key="toggle_adb_wireless"
             android:title="@string/enable_adb_wireless"
@@ -277,9 +279,9 @@
             android:summary="@string/wifi_scan_throttling_summary" />
 
         <SwitchPreference
-            android:key="wifi_non_persistent_mac_randomization"
-            android:title="@string/wifi_non_persistent_mac_randomization"
-            android:summary="@string/wifi_non_persistent_mac_randomization_summary" />
+            android:key="wifi_enhanced_mac_randomization"
+            android:title="@string/wifi_enhanced_mac_randomization"
+            android:summary="@string/wifi_enhanced_mac_randomization_summary" />
 
         <SwitchPreference
             android:key="mobile_data_always_on"
@@ -290,14 +292,6 @@
             android:key="tethering_hardware_offload"
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
-
-        <ListPreference
-            android:key="ingress_rate_limit"
-            android:title="@string/ingress_rate_limit_title"
-            android:summary="@string/ingress_rate_limit_summary"
-            android:dialogTitle="@string/ingress_rate_limit_dialog_title"
-            android:entries="@array/ingress_rate_limit_entries"
-            android:entryValues="@array/ingress_rate_limit_values" />
 
         <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
@@ -315,12 +309,13 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_disable_a2dp_hw_offload"
-            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+            android:key="bluetooth_gabeldorsche_enable"
+            android:title="@string/bluetooth_enable_gabeldorsche"
+            android:summary="@string/bluetooth_enable_gabeldorsche_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_disable_le_audio_hw_offload"
-            android:title="@string/bluetooth_disable_le_audio_hw_offload" />
+            android:key="bluetooth_disable_a2dp_hw_offload"
+            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"
@@ -386,11 +381,6 @@
             android:dialogTitle="@string/bluetooth_max_connected_audio_devices_dialog_title"
             android:entries="@array/bluetooth_max_connected_audio_devices"
             android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
-
-        <SwitchPreference
-            android:key="nfc_stack_debuglog_enabled"
-            android:title="@string/nfc_stack_debuglog_title"
-            android:summary="@string/nfc_stack_debuglog_summary" />
 
     </PreferenceCategory>
 
@@ -611,14 +601,6 @@
             android:title="@string/inactive_apps_title"
             android:fragment="com.android.settings.fuelgauge.InactiveApps" />
 
-        <Preference
-            android:key="tare"
-            android:title="@string/tare_title" >
-            <intent
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.development.tare.TareHomePage" />
-        </Preference>
-
         <SwitchPreference
             android:key="force_allow_on_external"
             android:title="@string/force_allow_on_external"
@@ -649,7 +631,7 @@
             android:title="@string/reset_shortcut_manager_throttling" />
     </PreferenceCategory>
 
-    <PreferenceCategory
+    <com.android.settings.development.autofill.AutofillPreferenceCategory
         android:key="debug_autofill_category"
         android:title="@string/debug_autofill_category"
         settings:searchable="false"
@@ -673,7 +655,7 @@
             android:key="autofill_reset_developer_options"
             android:title="@string/autofill_reset_developer_options" />
 
-    </PreferenceCategory>
+    </com.android.settings.development.autofill.AutofillPreferenceCategory>
 
     <PreferenceCategory
         android:key="storage_category"
@@ -709,16 +691,5 @@
             android:defaultValue="true"
             android:key="location_indicator_settings"
             settings:controller="com.android.settings.location.LocationIndicatorsPreferenceController"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="input_method_category"
-        android:title="@string/input_method_category"
-        android:order="1400">
-
-        <SwitchPreference
-            android:key="stylus_handwriting"
-            android:title="@string/stylus_handwriting"
-            android:summary="@string/stylus_handwriting_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

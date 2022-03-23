@@ -19,7 +19,6 @@ package com.android.settings.network;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -34,10 +33,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.wifi.WifiConnectionPreferenceController;
-import com.android.settings.wifi.WifiEntryPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -72,10 +70,6 @@ public class WifiConnectionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        when(fakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
-                any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
-                .thenReturn(mWifiPickerTracker);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mScreen.findPreference(eq(KEY))).thenReturn(mPreferenceCategory);

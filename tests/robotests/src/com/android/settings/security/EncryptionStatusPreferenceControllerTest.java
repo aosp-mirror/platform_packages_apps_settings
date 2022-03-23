@@ -94,23 +94,23 @@ public class EncryptionStatusPreferenceControllerTest {
 
         assertThat(mPreference.getFragment()).isNull();
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.encrypted_summary));
+                .isEqualTo(mContext.getText(R.string.crypt_keeper_encrypted_summary));
     }
 
     @Test
-    public void updateSummary_unencrypted_shouldSayUnencrypted() {
+    public void updateSummary_unencrypted_shouldHasEncryptionFragment() {
         ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.not_encrypted_summary);
+        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
-        assertThat(mPreference.getFragment()).isNull();
+        assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
     }
 
     @Test
-    public void updateSummary_unencrypted_securityPage_shouldSayUnencrypted() {
+    public void updateSummary_unencrypted_securityPage_shouldNotHaveEncryptionFragment() {
         mController =
                 new EncryptionStatusPreferenceController(mContext,
                         PREF_KEY_ENCRYPTION_SECURITY_PAGE);
@@ -118,8 +118,9 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.not_encrypted_summary);
+        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
-        assertThat(mPreference.getFragment()).isNull();
+
+        assertThat(mPreference.getFragment()).isNotEqualTo(CryptKeeperSettings.class.getName());
     }
 }

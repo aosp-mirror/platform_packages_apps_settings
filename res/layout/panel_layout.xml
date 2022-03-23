@@ -18,9 +18,8 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/panel_container"
-    android:layout_width="@dimen/settings_panel_width"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
     android:background="@drawable/settings_panel_rounded_top_corner_background" >
 
     <LinearLayout
@@ -86,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/settings_panel_title_margin"
-            android:layout_marginBottom="@dimen/settings_panel_title_margin_bottom"
+            android:layout_marginBottom="@dimen/settings_panel_title_margin"
             android:gravity="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="24sp"
@@ -102,24 +101,32 @@
             android:visibility="gone"
             style="@style/TrimmedHorizontalProgressBar"/>
 
+        <include
+            android:id="@+id/header_divider"
+            layout="@layout/horizontal_divider"/>
+
         <!-- Note: There is a landscape version of panel_slice_list which supports scrolling. -->
         <include layout="@layout/panel_slice_list"/>
+
+        <include
+            android:id="@+id/footer_divider"
+            layout="@layout/horizontal_divider"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="18dp">
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
             <Button
                 android:id="@+id/see_more"
-                style="@style/PanelOptionRoundedOutlinedButton"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="0dp"
-                android:text="@string/settings_button"/>
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:text="@string/see_more"/>
 
             <Space
                 android:layout_weight="1"
@@ -128,10 +135,10 @@
 
             <Button
                 android:id="@+id/done"
-                style="@style/PanelOptionRoundedSolidButton"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:minWidth="0dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
                 android:text="@string/done"/>
         </LinearLayout>
     </LinearLayout>

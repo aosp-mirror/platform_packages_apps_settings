@@ -16,9 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.internal.accessibility.AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
-
-import android.content.ComponentName;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.hardware.display.ColorDisplayManager;
@@ -33,14 +30,14 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /** PreferenceController that shows the Reduce Bright Colors summary */
-public class ReduceBrightColorsPreferenceController
-        extends AccessibilityQuickSettingsPrimarySwitchPreferenceController
+public class ReduceBrightColorsPreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
     private ContentObserver mSettingsContentObserver;
     private PrimarySwitchPreference mPreference;
@@ -70,7 +67,6 @@ public class ReduceBrightColorsPreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        super.setChecked(isChecked);
         return mColorDisplayManager.setReduceBrightColorsActivated(isChecked);
     }
 
@@ -99,30 +95,13 @@ public class ReduceBrightColorsPreferenceController
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accessibility;
-    }
-
-    @Override
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED),
                 false, mSettingsContentObserver, UserHandle.USER_CURRENT);
     }
-
     @Override
     public void onStop() {
         mContext.getContentResolver().unregisterContentObserver(mSettingsContentObserver);
-    }
-
-    @Override
-    protected ComponentName getTileComponentName() {
-        return REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME;
-    }
-
-    @Override
-    CharSequence getTileTooltipContent() {
-        return mContext.getText(
-                R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 }
