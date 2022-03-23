@@ -183,7 +183,7 @@ public class FingerprintStatusUtilsTest {
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
 
         assertThat(mFingerprintStatusUtils.getSettingsClassName())
-                .isEqualTo(FingerprintEnrollIntroduction.class.getName());
+                .isEqualTo(FingerprintEnrollIntroductionInternal.class.getName());
     }
 
     @Test

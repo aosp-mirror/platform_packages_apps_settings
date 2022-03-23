@@ -205,7 +205,9 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                  android:theme="@style/Theme.SubSettings" />
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
@@ -620,6 +622,17 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name="Settings$FaceSettingsInternalActivity"
+                  android:label="@string/security_settings_face_preference_title"
+                  android:exported="false"
+                  android:icon="@drawable/ic_face_header"
+                  android:taskAffinity="com.android.settings.root">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.face.FaceSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
+        </activity>
+
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
@@ -636,7 +649,8 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false">
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -721,7 +735,7 @@
             android:name="Settings$WifiTetherSettingsActivity"
             android:label="@string/wifi_hotspot_checkbox_text"
             android:exported="true"
-            android:icon="@drawable/ic_wifi_tethering">
+            android:icon="@drawable/ic_homepage_wifi_tethering">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -766,7 +780,7 @@
             android:name="Settings$VpnSettingsActivity"
             android:label="@string/vpn_settings_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_wireless">
+            android:icon="@drawable/ic_homepage_vpn">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VPN_SETTINGS" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -2180,13 +2194,18 @@
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
-            android:exported="true"
-            android:screenOrientation="portrait">
+                  android:exported="true"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:screenOrientation="portrait"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
@@ -2217,7 +2236,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintSettings"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
@@ -2230,6 +2251,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:theme="@style/GlifTheme.Light"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
@@ -2910,7 +2936,7 @@
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_data_usage">
+            android:icon="@drawable/ic_homepage_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -4294,6 +4320,7 @@
             android:name=".sim.ChooseSimActivity"
             android:theme="@style/GlifV3Theme.DayNight.NoActionBar"
             android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
             android:exported="false"/>
 
         <activity

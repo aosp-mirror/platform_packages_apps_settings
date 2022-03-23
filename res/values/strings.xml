@@ -5293,7 +5293,7 @@
     <!-- Message for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_preview_mail_from">From: Bill</string>
     <!-- Content for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_preview_mail_content">Good morning! Following up on our last conversation, I\u2019d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?</string>
+    <string name="accessibility_text_reading_preview_mail_content">Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?</string>
     <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=25] -->
     <string name="accessibility_text_reading_reset_button_title">Reset settings</string>
     <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
@@ -13887,9 +13887,15 @@
     <string name="tare_actions_ctp">Actions (Cost to Produce)</string>
     <!-- Title for the various TARE policy's actions' starting prices [CHAR LIMIT=40]-->
     <string name="tare_actions_base_price">Actions (Base Price)</string>
-    <!-- Title for the instant, ongoing, and max rewards apps can obtain for different actions that
-    benefit the user. [CHAR LIMIT=40]-->
-    <string name="tare_rewards">Rewards</string>
+    <!-- Title for the rewards apps can obtain for each instance of an event that implies the user
+    finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_instantaneous">Rewards per single event</string>
+    <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
+    implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_ongoing">Rewards for total event duration</string>
+    <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
+    that benefit the user. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_max">Maximum Rewards Per Day</string>
     <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
     AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_exact_idle" translatable="false">
@@ -14025,7 +14031,7 @@
     <string-array name="tare_rewards_subfactors" translatable="false">
         <item>@string/tare_top_activity</item>
         <item>@string/tare_notification_seen</item>
-        <item>@string/tare_notification_seen_15_min</item>
+        <!-- TODO: add back once supported  <item>@string/tare_notification_seen_15_min</item> -->
         <item>@string/tare_notification_interaction</item>
         <item>@string/tare_widget_interaction</item>
         <item>@string/tare_other_interaction</item>
@@ -14090,11 +14096,11 @@
     <!-- The title of the spatial audio [CHAR LIMIT=none] -->
     <string name="bluetooth_details_spatial_audio_title">Spatial audio</string>
     <!-- The summary of the spatial audio [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_spatial_audio_summary">Immersive audio seems like it\u0027s coming from all around you. Only works with some media.</string>
+    <string name="bluetooth_details_spatial_audio_summary">Audio from compatible media becomes more immersive</string>
     <!-- The title of the head tracking [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_head_tracking_title">Make audio more realistic</string>
+    <string name="bluetooth_details_head_tracking_title">Head tracking</string>
     <!-- The summary of the head tracking [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_head_tracking_summary">Shift positioning of audio so it sounds more natural.</string>
+    <string name="bluetooth_details_head_tracking_summary">Audio changes as you move your head to sound more natural</string>
 
     <!-- Developer Settings: Title for network bandwidth ingress rate limit [CHAR LIMIT=none] -->
     <string name="ingress_rate_limit_title">Network download rate limit</string>
