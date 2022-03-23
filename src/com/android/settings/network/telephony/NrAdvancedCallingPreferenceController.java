@@ -46,6 +46,7 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
     Preference mPreference;
     private TelephonyManager mTelephonyManager;
     private PhoneCallStateTelephonyCallback mTelephonyCallback;
+    private boolean mIsVonrEnabledFromCarrierConfig = false;
     private boolean mIsVonrVisibleFromCarrierConfig = false;
     private boolean mIsNrEnableFromCarrierConfig = false;
     private boolean mHas5gCapability = false;
@@ -83,6 +84,9 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
         if (carrierConfig == null) {
             return this;
         }
+        mIsVonrEnabledFromCarrierConfig = carrierConfig.getBoolean(
+            CarrierConfigManager.KEY_VONR_ENABLED_BOOL);
+
         mIsVonrVisibleFromCarrierConfig = carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL);
 
@@ -92,6 +96,7 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
 
         Log.d(TAG, "mHas5gCapability: " + mHas5gCapability
                 + ",mIsNrEnabledFromCarrierConfig: " + mIsNrEnableFromCarrierConfig
+                + ",mIsVonrEnabledFromCarrierConfig: " + mIsVonrEnabledFromCarrierConfig
                 + ",mIsVonrVisibleFromCarrierConfig: " + mIsVonrVisibleFromCarrierConfig);
         return this;
     }
@@ -100,7 +105,10 @@ public class NrAdvancedCallingPreferenceController extends TelephonyTogglePrefer
     public int getAvailabilityStatus(int subId) {
         init(subId);
 
-        if (mHas5gCapability && mIsNrEnableFromCarrierConfig && mIsVonrVisibleFromCarrierConfig) {
+        if (mHas5gCapability
+                && mIsNrEnableFromCarrierConfig
+                && mIsVonrEnabledFromCarrierConfig
+                && mIsVonrVisibleFromCarrierConfig) {
             return AVAILABLE;
         }
         return CONDITIONALLY_UNAVAILABLE;

@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,6 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -86,6 +86,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private static final String KEY_PREF_OPTIMIZED = "optimized_pref";
     private static final String KEY_PREF_RESTRICTED = "restricted_pref";
     private static final String KEY_FOOTER_PREFERENCE = "app_usage_footer_preference";
+    private static final String PACKAGE_NAME_NONE = "none";
 
     private static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
@@ -113,7 +114,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     @VisibleForTesting
     RadioButtonPreference mUnrestrictedPreference;
     @VisibleForTesting
-    boolean enableTriState = true;
+    boolean mEnableTriState = true;
+    @VisibleForTesting
+    @BatteryOptimizeUtils.OptimizationMode
+    int mOptimizationMode = BatteryOptimizeUtils.MODE_UNKNOWN;
+    @VisibleForTesting
+    BackupManager mBackupManager;
 
     private AppButtonsPreferenceController mAppButtonsPreferenceController;
     private BackgroundActivityPreferenceController mBackgroundActivityPreferenceController;
@@ -245,7 +251,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onCreate(icicle);
 
         final String packageName = getArguments().getString(EXTRA_PACKAGE_NAME);
-        if (enableTriState) {
+        if (mEnableTriState) {
             onCreateForTriState(packageName);
         } else {
             mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
@@ -263,7 +269,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         super.onResume();
 
         initHeader();
-        if (enableTriState) {
+        if (mEnableTriState) {
+            mOptimizationMode = mBatteryOptimizeUtils.getAppOptimizationMode();
             initPreferenceForTriState(getContext());
             final String packageName = mBatteryOptimizeUtils.getPackageName();
             FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
@@ -273,6 +280,28 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                     packageName);
         } else {
             initPreference(getContext());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mEnableTriState) {
+            final int selectedPreference = getSelectedPreference();
+
+            notifyBackupManager();
+            logMetricCategory(selectedPreference);
+            mBatteryOptimizeUtils.setAppUsageState(selectedPreference);
+            Log.d(TAG, "Leave with mode: " + selectedPreference);
+        }
+    }
+
+    @VisibleForTesting
+    void notifyBackupManager() {
+        if (mOptimizationMode != mBatteryOptimizeUtils.getAppOptimizationMode()) {
+            final BackupManager backupManager = mBackupManager != null
+                    ? mBackupManager : new BackupManager(getContext());
+            backupManager.dataChanged();
         }
     }
 
@@ -303,11 +332,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             controller.setIsInstantApp(AppUtils.isInstant(mAppEntry.info));
         }
 
-        if (enableTriState) {
-            final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
-            final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
-            final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
-            controller.setSummary(getAppActiveTime(foregroundTimeMs, backgroundTimeMs, slotTime));
+        if (mEnableTriState) {
+            controller.setSummary(getAppActiveTime(bundle));
         }
 
         controller.done(context, true /* rebindActions */);
@@ -340,26 +366,29 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final String footerString;
 
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
-            //Present optimized only string when the package name is invalid.
+            // Present optimized only string when the package name is invalid or
+            // it's in allow list not idle app.
             stateString = context.getString(R.string.manager_battery_usage_optimized_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
-            //Present unrestricted only string when the package is system or default active app.
+            // Present unrestricted only string when the package is system or default active app.
             stateString = context.getString(R.string.manager_battery_usage_unrestricted_only);
             footerString = context.getString(
                     R.string.manager_battery_usage_footer_limited, stateString);
         } else {
-            //Present default string to normal app.
+            // Present default string to normal app.
             footerString = context.getString(R.string.manager_battery_usage_footer);
         }
         mFooterPreference.setTitle(footerString);
-        mFooterPreference.setLearnMoreAction(v ->
-                startActivityForResult(HelpUtils.getHelpIntent(context,
-                        context.getString(R.string.help_url_app_usage_settings),
-                        /*backupContext=*/ ""), /*requestCode=*/ 0));
-        mFooterPreference.setLearnMoreContentDescription(
-                context.getString(R.string.manager_battery_usage_link_a11y));
+        final Intent helpIntent = HelpUtils.getHelpIntent(context, context.getString(
+                R.string.help_url_app_usage_settings), /*backupContext=*/ "");
+        if (helpIntent != null) {
+            mFooterPreference.setLearnMoreAction(v ->
+                    startActivityForResult(helpIntent, /*requestCode=*/ 0));
+            mFooterPreference.setLearnMoreContentDescription(
+                    context.getString(R.string.manager_battery_usage_link_a11y));
+        }
     }
 
     @Override
@@ -374,7 +403,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return enableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
+        return mEnableTriState ? R.xml.power_usage_detail : R.xml.power_usage_detail_legacy;
     }
 
     @Override
@@ -388,7 +417,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 (SettingsActivity) getActivity(), this, getSettingsLifecycle(), packageName,
                 mState, REQUEST_UNINSTALL, REQUEST_REMOVE_DEVICE_ADMIN);
         controllers.add(mAppButtonsPreferenceController);
-        if (enableTriState) {
+        if (mEnableTriState) {
             controllers.add(new UnrestrictedPreferenceController(context, uid, packageName));
             controllers.add(new OptimizedPreferenceController(context, uid, packageName));
             controllers.add(new RestrictedPreferenceController(context, uid, packageName));
@@ -430,30 +459,40 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         updatePreferenceState(mUnrestrictedPreference, selectedKey);
         updatePreferenceState(mOptimizePreference, selectedKey);
         updatePreferenceState(mRestrictedPreference, selectedKey);
-
-        // Logs metric.
-        int metricCategory = 0;
-        if (selectedKey.equals(mUnrestrictedPreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
-        } else if (selectedKey.equals(mOptimizePreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
-        } else if (selectedKey.equals(mRestrictedPreference.getKey())) {
-            metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
-        }
-        if (metricCategory != 0) {
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
-                .action(
-                    getContext(),
-                    metricCategory,
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE,
-                            mBatteryOptimizeUtils.getPackageName()),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE,
-                            getArguments().getString(EXTRA_POWER_USAGE_PERCENT)));
-        }
     }
 
     private void updatePreferenceState(RadioButtonPreference preference, String selectedKey) {
         preference.setChecked(selectedKey.equals(preference.getKey()));
+    }
+
+    private void logMetricCategory(int selectedKey) {
+        if (selectedKey == mOptimizationMode) {
+            return;
+        }
+
+        int metricCategory = 0;
+        switch (selectedKey) {
+            case BatteryOptimizeUtils.MODE_UNRESTRICTED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_UNRESTRICTED;
+                break;
+            case BatteryOptimizeUtils.MODE_OPTIMIZED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED;
+                break;
+            case BatteryOptimizeUtils.MODE_RESTRICTED:
+                metricCategory = SettingsEnums.ACTION_APP_BATTERY_USAGE_RESTRICTED;
+                break;
+        }
+
+        if (metricCategory != 0) {
+            final String packageName = mBatteryOptimizeUtils.getPackageName();
+            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider()
+                    .action(
+                            /* attribution */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                            /* action */ metricCategory,
+                            /* pageId */ SettingsEnums.OPEN_APP_BATTERY_USAGE,
+                            TextUtils.isEmpty(packageName) ? PACKAGE_NAME_NONE : packageName,
+                            getArguments().getInt(EXTRA_POWER_USAGE_AMOUNT));
+        }
     }
 
     private void onCreateForTriState(String packageName) {
@@ -469,16 +508,33 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
                 getContext(), getArguments().getInt(EXTRA_UID), packageName);
     }
 
-    private CharSequence getAppActiveTime(
-            long foregroundTimeMs, long backgroundTimeMs, String slotTime) {
+    private int getSelectedPreference() {
+        if (mRestrictedPreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_RESTRICTED;
+        } else if (mUnrestrictedPreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_UNRESTRICTED;
+        } else if (mOptimizePreference.isChecked()) {
+            return BatteryOptimizeUtils.MODE_OPTIMIZED;
+        } else {
+            return BatteryOptimizeUtils.MODE_UNKNOWN;
+        }
+    }
+
+    private CharSequence getAppActiveTime(Bundle bundle) {
+        final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
+        final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
+        final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
         final PowerUsageFeatureProvider powerFeatureProvider =
                 FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
 
         if (totalTimeMs == 0) {
+            final int batteryWithoutUsageTime = consumedPower > 0
+                    ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
             usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
-                    ? R.string.battery_not_usage_24hr : R.string.battery_not_usage);
+                    ? batteryWithoutUsageTime : R.string.battery_not_usage);
         } else if (slotTime == null) {
             // Shows summary text with past 24 hr or full charge if slot time is null.
             usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())

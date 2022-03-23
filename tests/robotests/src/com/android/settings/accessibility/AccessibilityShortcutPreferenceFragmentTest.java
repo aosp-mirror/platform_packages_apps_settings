@@ -180,8 +180,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         savedInstanceState.putInt(KEY_SAVED_USER_SHORTCUT_TYPE,
                 AccessibilityUtil.UserShortcutType.SOFTWARE
                         | AccessibilityUtil.UserShortcutType.HARDWARE);
-        mFragment.onCreate(savedInstanceState);
         mFragment.onAttach(mContext);
+        mFragment.onCreate(savedInstanceState);
         mFragment.setupEditShortcutDialog(dialog);
         final int value = mFragment.getShortcutTypeCheckBoxValue();
         mFragment.saveNonEmptyUserShortcutType(value);
@@ -195,9 +195,11 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
     public void showGeneralCategory_shouldInitCategory() {
         final Bundle savedInstanceState = new Bundle();
         when(mFragment.showGeneralCategory()).thenReturn(true);
+        mFragment.onAttach(mContext);
         mFragment.onCreate(savedInstanceState);
 
         verify(mFragment).initGeneralCategory();

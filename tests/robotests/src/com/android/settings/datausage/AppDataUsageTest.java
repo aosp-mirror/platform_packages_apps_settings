@@ -18,7 +18,7 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -438,8 +438,7 @@ public class AppDataUsageTest {
 
         assertThat(mFragment.mTemplate.getMatchRule())
                 .isEqualTo(NetworkTemplate.MATCH_WIFI);
-        assertNull(mFragment.mTemplate.getSubscriberId());
-        assertThat(mFragment.mTemplate.getNetworkId())
-                .isEqualTo(NetworkTemplate.WIFI_NETWORKID_ALL);
+        assertTrue(mFragment.mTemplate.getSubscriberIds().isEmpty());
+        assertTrue(mFragment.mTemplate.getWifiNetworkKeys().isEmpty());
     }
 }
