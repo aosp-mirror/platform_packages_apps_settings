@@ -275,11 +275,15 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                 return;
             }
             boolean isLeft = (deviceId & LEFT_DEVICE_ID) != 0;
-            boolean isRight = (deviceId & LEFT_DEVICE_ID) != 0;
+            boolean isRight = (deviceId & RIGHT_DEVICE_ID) != 0;
             boolean isLeftRight = isLeft && isRight;
             // The LE device updates the BatteryLayout
             if (isLeftRight) {
-                Log.d(TAG, "The device id is left+right. Do nothing.");
+                Log.d(TAG, "Show the legacy battery style if the device id is left+right.");
+                final TextView summary = mLayoutPreference.findViewById(R.id.entity_header_summary);
+                if (summary != null) {
+                    summary.setText(mCachedDevice.getConnectionSummary());
+                }
             } else if (isLeft) {
                 updateBatteryLayout(getBatteryTitleResource(LEFT_DEVICE_ID),
                         getBatterySummaryResource(LEFT_DEVICE_ID), cachedDevice.getBatteryLevel());
