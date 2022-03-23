@@ -27,7 +27,6 @@ import android.os.Looper;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -46,10 +45,8 @@ public class OneHandedSettingsUtils {
             Settings.Secure.getUriFor(Settings.Secure.ONE_HANDED_MODE_ENABLED);
     static final Uri SHOW_NOTIFICATION_ENABLED_URI =
             Settings.Secure.getUriFor(Settings.Secure.SWIPE_BOTTOM_TO_NOTIFICATION_ENABLED);
-    static final Uri SOFTWARE_SHORTCUT_ENABLED_URI =
+    static final Uri SHORTCUT_ENABLED_URI =
             Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS);
-    static final Uri HARDWARE_SHORTCUT_ENABLED_URI =
-            Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE);
 
     public enum OneHandedTimeout {
         NEVER(0), SHORT(4), MEDIUM(8), LONG(12);
@@ -241,20 +238,9 @@ public class OneHandedSettingsUtils {
      * @return true if user enabled one-handed shortcut in settings, false otherwise.
      */
     public static boolean getShortcutEnabled(Context context) {
-        // Checks SOFTWARE_SHORTCUT_KEY
-        final String targetsSW = Settings.Secure.getStringForUser(context.getContentResolver(),
+        final String targets = Settings.Secure.getStringForUser(context.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS, sCurrentUserId);
-        if (!TextUtils.isEmpty(targetsSW) && targetsSW.contains(ONE_HANDED_MODE_TARGET_NAME)) {
-            return true;
-        }
-
-        // Checks HARDWARE_SHORTCUT_KEY
-        final String targetsHW = Settings.Secure.getStringForUser(context.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE, sCurrentUserId);
-        if (!TextUtils.isEmpty(targetsHW) && targetsHW.contains(ONE_HANDED_MODE_TARGET_NAME)) {
-            return true;
-        }
-        return false;
+        return targets != null ? targets.contains(ONE_HANDED_MODE_TARGET_NAME) : false;
     }
 
     /**
@@ -299,8 +285,7 @@ public class OneHandedSettingsUtils {
             final ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(ONE_HANDED_MODE_ENABLED_URI, true, this);
             resolver.registerContentObserver(SHOW_NOTIFICATION_ENABLED_URI, true, this);
-            resolver.registerContentObserver(SOFTWARE_SHORTCUT_ENABLED_URI, true, this);
-            resolver.registerContentObserver(HARDWARE_SHORTCUT_ENABLED_URI, true, this);
+            resolver.registerContentObserver(SHORTCUT_ENABLED_URI, true, this);
         }
 
         @Override

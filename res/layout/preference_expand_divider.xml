@@ -26,7 +26,9 @@
     android:paddingRight="?android:attr/listPreferredItemPaddingRight"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:background="?android:attr/selectableItemBackground"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:clipToPadding="false"
+    android:baselineAligned="false">
 
     <TextView
         android:id="@+id/expand_title"

@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -52,6 +53,7 @@ public class RestrictedListPreference extends CustomListPreference {
 
     public RestrictedListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setWidgetLayoutResource(R.layout.restricted_icon);
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
     }
 
@@ -65,6 +67,10 @@ public class RestrictedListPreference extends CustomListPreference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         mHelper.onBindViewHolder(holder);
+        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
+        if (restrictedIcon != null) {
+            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
@@ -181,9 +187,11 @@ public class RestrictedListPreference extends CustomListPreference {
             View root = super.getView(position, convertView, parent);
             CharSequence entry = getItem(position);
             CheckedTextView text = (CheckedTextView) root.findViewById(R.id.text1);
+            ImageView padlock = (ImageView) root.findViewById(R.id.restricted_lock_icon);
             if (isRestrictedForEntry(entry)) {
                 text.setEnabled(false);
                 text.setChecked(false);
+                padlock.setVisibility(View.VISIBLE);
             } else {
                 if (mSelectedIndex != -1) {
                     text.setChecked(position == mSelectedIndex);
@@ -191,6 +199,7 @@ public class RestrictedListPreference extends CustomListPreference {
                 if (!text.isEnabled()) {
                     text.setEnabled(true);
                 }
+                padlock.setVisibility(View.GONE);
             }
             return root;
         }

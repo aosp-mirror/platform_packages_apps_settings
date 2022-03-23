@@ -16,8 +16,6 @@
 
 package com.android.settings.utils;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED;
-
 import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -136,10 +134,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                             service.packageName, managedProfileId)) {
-                pref.setSummary(mDpm.getResources().getString(
-                        WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED,
-                        () -> getString(
-                                R.string.work_profile_notification_access_blocked_summary)));
+                pref.setSummary(R.string.work_profile_notification_access_blocked_summary);
             }
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 final boolean enable = (boolean) newValue;

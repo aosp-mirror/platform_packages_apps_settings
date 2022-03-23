@@ -24,17 +24,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
-import android.util.DataUnit;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -136,11 +135,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
     private boolean mIsWorkProfile;
 
-    private StorageCacheHelper mStorageCacheHelper;
-    // The mIsDocumentsPrefShown being used here is to prevent a flicker problem from displaying
-    // the Document entry.
-    private boolean mIsDocumentsPrefShown;
-    private boolean mIsPreferenceOrderedBySize;
+    private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
 
     public StorageItemPreferenceController(Context context, Fragment hostFragment,
             VolumeInfo volume, StorageVolumeProvider svp, boolean isWorkProfile) {
@@ -153,8 +148,6 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mIsWorkProfile = isWorkProfile;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mUserId = getCurrentUserId();
-        mIsDocumentsPrefShown = isDocumentsPrefShown();
-        mStorageCacheHelper = new StorageCacheHelper(mContext, mUserId);
 
         mImagesUri = Uri.parse(context.getResources()
                 .getString(R.string.config_images_storage_category_uri));
@@ -274,15 +267,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         // If we don't have a shared volume for our internal storage (or the shared volume isn't
         // mounted as readable for whatever reason), we should hide the File preference.
         if (visible) {
-            mDocumentsAndOtherPreference.setVisible(mIsDocumentsPrefShown);
+            final VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
+            mDocumentsAndOtherPreference.setVisible(sharedVolume != null
+                    && sharedVolume.isMountedReadable());
         } else {
             mDocumentsAndOtherPreference.setVisible(false);
         }
-    }
-
-    private boolean isDocumentsPrefShown() {
-        VolumeInfo sharedVolume = mSvp.findEmulatedForPrivate(mVolume);
-        return sharedVolume != null && sharedVolume.isMountedReadable();
     }
 
     private void updatePrivateStorageCategoryPreferencesOrder() {
@@ -370,76 +360,41 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         mTrashPreference = screen.findPreference(TRASH_KEY);
     }
 
-    /**
-     * Fragments use it to set storage result and update UI of this controller.
-     * @param result The StorageResult from StorageAsyncLoader. This allows a nullable result.
-     *               When it's null, the cached storage size info will be used instead.
-     * @param userId User ID to get the storage size info
-     */
-    public void onLoadFinished(@Nullable SparseArray<StorageAsyncLoader.StorageResult> result,
-            int userId) {
-        // Enable animation when the storage size info is from StorageAsyncLoader whereas disable
-        // animation when the cached storage size info is used instead.
-        boolean animate = result != null && mIsPreferenceOrderedBySize;
-        // Calculate the size info for each category
-        StorageCacheHelper.StorageCache storageCache = getSizeInfo(result, userId);
-        // Set size info to each preference
-        mImagesPreference.setStorageSize(storageCache.imagesSize, mTotalSize, animate);
-        mVideosPreference.setStorageSize(storageCache.videosSize, mTotalSize, animate);
-        mAudioPreference.setStorageSize(storageCache.audioSize, mTotalSize, animate);
-        mAppsPreference.setStorageSize(storageCache.allAppsExceptGamesSize, mTotalSize, animate);
-        mGamesPreference.setStorageSize(storageCache.gamesSize, mTotalSize, animate);
-        mDocumentsAndOtherPreference.setStorageSize(storageCache.documentsAndOtherSize, mTotalSize,
-                animate);
-        mTrashPreference.setStorageSize(storageCache.trashSize, mTotalSize, animate);
+    /** Fragments use it to set storage result and update UI of this controller. */
+    public void onLoadFinished(SparseArray<StorageAsyncLoader.StorageResult> result, int userId) {
+        final StorageAsyncLoader.StorageResult data = result.get(userId);
+
+        mImagesPreference.setStorageSize(data.imagesSize, mTotalSize);
+        mVideosPreference.setStorageSize(data.videosSize, mTotalSize);
+        mAudioPreference.setStorageSize(data.audioSize, mTotalSize);
+        mAppsPreference.setStorageSize(data.allAppsExceptGamesSize, mTotalSize);
+        mGamesPreference.setStorageSize(data.gamesSize, mTotalSize);
+        mDocumentsAndOtherPreference.setStorageSize(data.documentsAndOtherSize, mTotalSize);
+        mTrashPreference.setStorageSize(data.trashSize, mTotalSize);
+
         if (mSystemPreference != null) {
-            mSystemPreference.setStorageSize(storageCache.systemSize, mTotalSize, animate);
-        }
-        // Cache the size info
-        if (result != null) {
-            mStorageCacheHelper.cacheSizeInfo(storageCache);
+            // Everything else that hasn't already been attributed is tracked as
+            // belonging to system.
+            long attributedSize = 0;
+            for (int i = 0; i < result.size(); i++) {
+                final StorageAsyncLoader.StorageResult otherData = result.valueAt(i);
+                attributedSize +=
+                        otherData.gamesSize
+                                + otherData.audioSize
+                                + otherData.videosSize
+                                + otherData.imagesSize
+                                + otherData.documentsAndOtherSize
+                                + otherData.trashSize
+                                + otherData.allAppsExceptGamesSize;
+                attributedSize -= otherData.duplicateCodeSize;
+            }
+
+            final long systemSize = Math.max(TrafficStats.GB_IN_BYTES, mUsedBytes - attributedSize);
+            mSystemPreference.setStorageSize(systemSize, mTotalSize);
         }
 
-        // Sort the preference according to size info in descending order
-        if (!mIsPreferenceOrderedBySize) {
-            updatePrivateStorageCategoryPreferencesOrder();
-            mIsPreferenceOrderedBySize = true;
-        }
+        updatePrivateStorageCategoryPreferencesOrder();
         setPrivateStorageCategoryPreferencesVisibility(true);
-    }
-
-    private StorageCacheHelper.StorageCache getSizeInfo(
-            SparseArray<StorageAsyncLoader.StorageResult> result, int userId) {
-        if (result == null) {
-            return mStorageCacheHelper.retrieveCachedSize();
-        }
-        StorageAsyncLoader.StorageResult data = result.get(userId);
-        StorageCacheHelper.StorageCache storageCache = new StorageCacheHelper.StorageCache();
-        storageCache.imagesSize = data.imagesSize;
-        storageCache.videosSize = data.videosSize;
-        storageCache.audioSize = data.audioSize;
-        storageCache.allAppsExceptGamesSize = data.allAppsExceptGamesSize;
-        storageCache.gamesSize = data.gamesSize;
-        storageCache.documentsAndOtherSize = data.documentsAndOtherSize;
-        storageCache.trashSize = data.trashSize;
-        // Everything else that hasn't already been attributed is tracked as
-        // belonging to system.
-        long attributedSize = 0;
-        for (int i = 0; i < result.size(); i++) {
-            final StorageAsyncLoader.StorageResult otherData = result.valueAt(i);
-            attributedSize +=
-                    otherData.gamesSize
-                            + otherData.audioSize
-                            + otherData.videosSize
-                            + otherData.imagesSize
-                            + otherData.documentsAndOtherSize
-                            + otherData.trashSize
-                            + otherData.allAppsExceptGamesSize;
-            attributedSize -= otherData.duplicateCodeSize;
-        }
-        storageCache.systemSize = Math.max(DataUnit.GIBIBYTES.toBytes(1),
-                mUsedBytes - attributedSize);
-        return storageCache;
     }
 
     public void setUsedSize(long usedSizeBytes) {
@@ -523,7 +478,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         if (mTrashPreference == null) {
             return;
         }
-        mTrashPreference.setStorageSize(0, mTotalSize, true /* animate */);
+        mTrashPreference.setStorageSize(0, mTotalSize);
         updatePrivateStorageCategoryPreferencesOrder();
     }
 

@@ -147,15 +147,9 @@ public class BatteryFixSlice implements CustomSliceable {
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 PowerUsageSummary.class.getName(), BatteryTipPreferenceController.PREF_NAME,
                 screenTitle,
-                SettingsEnums.SLICE,
-                this)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_battery;
     }
 
     @Override

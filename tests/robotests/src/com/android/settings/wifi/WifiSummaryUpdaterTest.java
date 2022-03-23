@@ -19,11 +19,7 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -57,9 +53,6 @@ public class WifiSummaryUpdaterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        doReturn(mock(Intent.class)).when(mContext).registerReceiver(any(), any(), anyInt());
-        doNothing().when(mContext).unregisterReceiver(any(BroadcastReceiver.class));
-
         mSummaryUpdater = new WifiSummaryUpdater(mContext, mListener, mWifiTracker);
     }
 
@@ -67,8 +60,7 @@ public class WifiSummaryUpdaterTest {
     public void register_true_shouldRegisterListenerAndTracker() {
         mSummaryUpdater.register(true);
 
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
-                anyInt());
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
         verify(mWifiTracker).setListening(true);
     }
 

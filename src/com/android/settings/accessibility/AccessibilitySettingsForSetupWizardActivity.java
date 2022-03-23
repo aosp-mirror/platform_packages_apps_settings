@@ -16,7 +16,9 @@
 
 package com.android.settings.accessibility;
 
+import android.content.ComponentName;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
@@ -28,15 +30,18 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.display.FontSizePreferenceFragmentForSetupWizard;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
+    private static final String LOG_TAG = "A11ySettingsForSUW";
     private static final String SAVE_KEY_TITLE = "activity_title";
 
     @VisibleForTesting
@@ -97,16 +102,41 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         applyTheme();
+        tryLaunchFontSizeSettings();
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
     }
 
     private void applyTheme() {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
         if (ThemeHelper.trySetDynamicColor(this)) {
             final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
                     ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
                     : R.style.SudDynamicColorThemeSettings_SetupWizard;
             setTheme(appliedTheme);
+        } else {
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        }
+    }
+
+    @VisibleForTesting
+    void tryLaunchFontSizeSettings() {
+        if (WizardManagerHelper.isAnySetupWizard(getIntent())
+                && new ComponentName(getPackageName(),
+                CLASS_NAME_FONT_SIZE_SETTINGS_FOR_SUW).equals(
+                getIntent().getComponent())) {
+            final Bundle args = new Bundle();
+            args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
+            final SubSettingLauncher subSettingLauncher = new SubSettingLauncher(this)
+                    .setDestination(FontSizePreferenceFragmentForSetupWizard.class.getName())
+                    .setArguments(args)
+                    .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                    .setExtras(SetupWizardUtils.copyLifecycleExtra(getIntent().getExtras(),
+                            new Bundle()))
+                    .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_FADE);
+
+            Log.d(LOG_TAG, "Launch font size settings");
+            subSettingLauncher.launch();
+            finish();
         }
     }
 }

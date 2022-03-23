@@ -22,7 +22,6 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /** PreferenceController for persisting feature activation state after a restart. */
@@ -62,10 +61,5 @@ public class ReduceBrightColorsPersistencePreferenceController extends TogglePre
     public final void updateState(Preference preference) {
         super.updateState(preference);
         preference.setEnabled(mColorDisplayManager.isReduceBrightColorsActivated());
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accessibility;
     }
 }

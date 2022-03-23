@@ -19,9 +19,11 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +39,7 @@ public class UnrestrictedPreferenceControllerTest {
     private static final String PACKAGE_NAME = "com.android.app";
 
     private UnrestrictedPreferenceController mController;
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     @Mock BatteryOptimizeUtils mockBatteryOptimizeUtils;
 
@@ -47,7 +49,7 @@ public class UnrestrictedPreferenceControllerTest {
 
         mController = new UnrestrictedPreferenceController(
                 RuntimeEnvironment.application, UID, PACKAGE_NAME);
-        mPreference = new SelectorWithWidgetPreference(RuntimeEnvironment.application);
+        mPreference = new RadioButtonPreference(RuntimeEnvironment.application);
         mController.mBatteryOptimizeUtils = mockBatteryOptimizeUtils;
     }
 
@@ -82,8 +84,8 @@ public class UnrestrictedPreferenceControllerTest {
     @Test
     public void testUpdateState_isUnrestrictedStates_prefChecked() {
         when(mockBatteryOptimizeUtils.isValidPackageName()).thenReturn(true);
-        when(mockBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(
-                BatteryOptimizeUtils.MODE_UNRESTRICTED);
+        when(mockBatteryOptimizeUtils.getAppUsageState()).thenReturn(
+                BatteryOptimizeUtils.AppUsageState.UNRESTRICTED);
 
         mController.updateState(mPreference);
 
@@ -104,11 +106,14 @@ public class UnrestrictedPreferenceControllerTest {
         mPreference.setKey(mController.KEY_UNRESTRICTED_PREF);
         mController.handlePreferenceTreeClick(mPreference);
 
-        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+        verify(mockBatteryOptimizeUtils).setAppUsageState(
+                BatteryOptimizeUtils.AppUsageState.UNRESTRICTED);
     }
 
     @Test
     public void testHandlePreferenceTreeClick_incorrectPrefKey_noAction() {
-        assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verifyZeroInteractions(mockBatteryOptimizeUtils);
     }
 }

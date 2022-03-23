@@ -97,13 +97,17 @@ public class ZenAccessController extends BasePreferenceController {
 
     public static void setAccess(final Context context, final String pkg, final boolean access) {
         logSpecialPermissionChange(access, pkg, context);
-        final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-        mgr.setNotificationPolicyAccessGranted(pkg, access);
+        AsyncTask.execute(() -> {
+            final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+            mgr.setNotificationPolicyAccessGranted(pkg, access);
+        });
     }
 
     public static void deleteRules(final Context context, final String pkg) {
-       final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-       mgr.removeAutomaticZenRules(pkg);
+        AsyncTask.execute(() -> {
+            final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+            mgr.removeAutomaticZenRules(pkg);
+        });
     }
 
     @VisibleForTesting

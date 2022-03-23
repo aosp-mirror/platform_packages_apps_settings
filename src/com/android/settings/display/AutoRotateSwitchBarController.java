@@ -31,7 +31,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
- * The switch controller for auto-rotate.
+ * The switch controller for the location.
  */
 public class AutoRotateSwitchBarController implements OnMainSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop {

@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.internal.util.CollectionUtils.filter;
 
-import android.companion.AssociationInfo;
+import android.companion.Association;
 import android.companion.CompanionDeviceManager;
 import android.companion.ICompanionDeviceManager;
 import android.content.Context;
@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.UserHandle;
 import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
@@ -89,7 +88,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         mProfilesContainer.setLayoutResource(R.layout.preference_companion_app);
     }
 
-    private List<AssociationInfo> getAssociations(String address) {
+    private List<Association> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),
                 a -> Objects.equal(address, a.getDeviceMacAddress()));
@@ -127,8 +126,8 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         try {
             java.util.Objects.requireNonNull(ICompanionDeviceManager.Stub.asInterface(
                     ServiceManager.getService(
-                            Context.COMPANION_DEVICE_SERVICE))).legacyDisassociate(
-                                    address, packageName, UserHandle.myUserId());
+                            Context.COMPANION_DEVICE_SERVICE))).disassociate(
+                                    address, packageName);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -151,7 +150,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
     private List<String> getPreferencesNeedToShow(String address, PreferenceCategory container) {
         List<String> preferencesToRemove = new ArrayList<>();
         Set<String> packages = getAssociations(address)
-                .stream().map(AssociationInfo::getPackageName)
+                .stream().map(Association::getPackageName)
                 .collect(Collectors.toSet());
 
         for (int i = 0; i < container.getPreferenceCount(); i++) {
