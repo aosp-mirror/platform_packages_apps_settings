@@ -56,7 +56,7 @@ public class SpatialAudioPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
-        mController = new SpatialAudioPreferenceController(mContext);
+        mController = new SpatialAudioPreferenceController(mContext, "unused");
     }
 
     @Test

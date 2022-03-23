@@ -32,17 +32,11 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class SpatialAudioPreferenceController extends TogglePreferenceController {
 
-    private static final String KEY_SPATIAL_AUDIO = "spatial_audio";
-
     private final Spatializer mSpatializer;
     @VisibleForTesting
     final AudioDeviceAttributes mSpeaker = new AudioDeviceAttributes(
             AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
     );
-
-    public SpatialAudioPreferenceController(Context context) {
-        this(context, KEY_SPATIAL_AUDIO);
-    }
 
     public SpatialAudioPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);

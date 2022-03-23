@@ -32,18 +32,11 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class SpatialAudioWiredHeadphonesController extends TogglePreferenceController {
 
-    private static final String KEY_SPATIAL_AUDIO_WIRED_HEADPHONES =
-            "spatial_audio_wired_headphones";
-
     private final Spatializer mSpatializer;
     @VisibleForTesting
     final AudioDeviceAttributes mWiredHeadphones = new AudioDeviceAttributes(
             AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, ""
     );
-
-    public SpatialAudioWiredHeadphonesController(Context context) {
-        this(context, KEY_SPATIAL_AUDIO_WIRED_HEADPHONES);
-    }
 
     public SpatialAudioWiredHeadphonesController(Context context, String preferenceKey) {
         super(context, preferenceKey);

@@ -39,8 +39,9 @@ public class SpatialAudioParentPreferenceController extends BasePreferenceContro
         super(context, key);
         AudioManager audioManager = context.getSystemService(AudioManager.class);
         mSpatializer = audioManager.getSpatializer();
-        mSpatialAudioPreferenceController = new SpatialAudioPreferenceController(context);
-        mSpatialAudioWiredHeadphonesController = new SpatialAudioWiredHeadphonesController(context);
+        mSpatialAudioPreferenceController = new SpatialAudioPreferenceController(context, "unused");
+        mSpatialAudioWiredHeadphonesController = new SpatialAudioWiredHeadphonesController(context,
+                "unused");
     }
 
     @Override
