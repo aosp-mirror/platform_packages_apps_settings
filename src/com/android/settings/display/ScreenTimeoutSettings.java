@@ -210,8 +210,8 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
         if (isScreenAttentionAvailable(getContext())) {
             mAdaptiveSleepPermissionController.addToScreen(screen);
             mAdaptiveSleepCameraStatePreferenceController.addToScreen(screen);
-            mAdaptiveSleepBatterySaverPreferenceController.addToScreen(screen);
             mAdaptiveSleepController.addToScreen(screen);
+            mAdaptiveSleepBatterySaverPreferenceController.addToScreen(screen);
             screen.addPreference(mPrivacyPreference);
         }
 
