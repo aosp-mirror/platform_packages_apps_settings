@@ -24,6 +24,8 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.util.ArrayUtils;
 
 import java.util.List;
@@ -70,7 +72,24 @@ public class DataUsageLib {
             return mobileTemplate;
         }
 
-        return NetworkTemplate.normalize(mobileTemplate, mergedSubscriberIds);
+        return normalizeMobileTemplate(mobileTemplate, mergedSubscriberIds);
+    }
+
+    private static NetworkTemplate normalizeMobileTemplate(
+            @NonNull NetworkTemplate template, @NonNull String[] mergedSet) {
+        if (template.getSubscriberIds().isEmpty()) return template;
+        // The input template should have at most 1 subscriberId.
+        final String subscriberId = template.getSubscriberIds().iterator().next();
+
+        if (Set.of(mergedSet).contains(subscriberId)) {
+            // Requested template subscriber is part of the merge group; return
+            // a template that matches all merged subscribers.
+            return new NetworkTemplate.Builder(template.getMatchRule())
+                    .setSubscriberIds(Set.of(mergedSet))
+                    .setMeteredness(template.getMeteredness()).build();
+        }
+
+        return template;
     }
 
     public static NetworkTemplate getMobileTemplateForSubId(

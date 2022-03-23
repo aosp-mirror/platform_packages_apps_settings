@@ -44,9 +44,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return Utils.isProviderModelEnabled(getContext())
-                ? R.xml.network_provider_sims_list
-                : R.xml.mobile_network_list;
+        return R.xml.network_provider_sims_list;
     }
 
     @Override
@@ -63,18 +61,14 @@ public class MobileNetworkListFragment extends DashboardFragment {
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
 
-        if (Utils.isProviderModelEnabled(getContext())) {
-            NetworkProviderSimsCategoryController simCategoryPrefCtrl =
-                    new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
-                            getSettingsLifecycle());
-            controllers.add(simCategoryPrefCtrl);
-            NetworkProviderDownloadedSimsCategoryController downloadedSimsCategoryCtrl =
-                    new NetworkProviderDownloadedSimsCategoryController(context,
-                            KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, getSettingsLifecycle());
-            controllers.add(downloadedSimsCategoryCtrl);
-        } else {
-            controllers.add(new MobileNetworkListController(getContext(), getLifecycle()));
-        }
+        NetworkProviderSimsCategoryController simCategoryPrefCtrl =
+                new NetworkProviderSimsCategoryController(context, KEY_PREFERENCE_CATEGORY_SIM,
+                        getSettingsLifecycle());
+        controllers.add(simCategoryPrefCtrl);
+        NetworkProviderDownloadedSimsCategoryController downloadedSimsCategoryCtrl =
+                new NetworkProviderDownloadedSimsCategoryController(context,
+                        KEY_PREFERENCE_CATEGORY_DOWNLOADED_SIM, getSettingsLifecycle());
+        controllers.add(downloadedSimsCategoryCtrl);
 
         return controllers;
     }
@@ -87,9 +81,7 @@ public class MobileNetworkListFragment extends DashboardFragment {
                         boolean enabled) {
                     final ArrayList<SearchIndexableResource> result = new ArrayList<>();
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = Utils.isProviderModelEnabled(context)
-                            ? R.xml.network_provider_sims_list
-                            : R.xml.mobile_network_list;
+                    sir.xmlResId = R.xml.network_provider_sims_list;
                     result.add(sir);
                     return result;
                 }

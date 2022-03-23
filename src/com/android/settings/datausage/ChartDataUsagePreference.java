@@ -17,13 +17,13 @@ package com.android.settings.datausage;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.NetworkPolicy;
-import android.net.TrafficStats;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.util.DataUnit;
 import android.util.SparseIntArray;
 
 import androidx.annotation.VisibleForTesting;
@@ -46,7 +46,7 @@ public class ChartDataUsagePreference extends Preference {
 
     // The resolution we show on the graph so that we can squash things down to ints.
     // Set to half a meg for now.
-    private static final long RESOLUTION = TrafficStats.MB_IN_BYTES / 2;
+    private static final long RESOLUTION = DataUnit.MEBIBYTES.toBytes(1) / 2;
 
     private final int mWarningColor;
     private final int mLimitColor;

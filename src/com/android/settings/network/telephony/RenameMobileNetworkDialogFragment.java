@@ -184,7 +184,10 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
         final TextView phoneNumber = view.findViewById(R.id.number_value);
-        phoneNumber.setText(DeviceInfoUtils.getBidiFormattedPhoneNumber(getContext(), info));
+        final String pn = DeviceInfoUtils.getBidiFormattedPhoneNumber(getContext(), info);
+        if (!TextUtils.isEmpty(pn)) {
+            phoneNumber.setText(pn);
+        }
     }
 
     @Override
