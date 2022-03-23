@@ -16,8 +16,6 @@
 
 package com.android.settings.enterprise;
 
-import android.content.Context;
-
 import java.util.Date;
 
 public interface EnterprisePrivacyFeatureProvider {
@@ -133,7 +131,7 @@ public interface EnterprisePrivacyFeatureProvider {
      * Launches the Device Owner or Profile Owner's activity that displays the "Your work policy
      * info" page. Returns {@code true} if the activity has indeed been launched.
      */
-    boolean showWorkPolicyInfo(Context activityContext);
+    boolean showWorkPolicyInfo();
 
     /**
      * Launches the parental controls settings page. Returns {@code true} if the activity has

@@ -81,7 +81,7 @@ public class AdbDeviceDetailsHeaderController extends AbstractPreferenceControll
 
         mEntityHeaderController
                 .setIcon(mContext.getDrawable(com.android.internal.R.drawable.ic_bt_laptop))
-                .setLabel(mPairedDevice.name)
+                .setLabel(mPairedDevice.getDeviceName())
                 .done(mFragment.getActivity(), true);
     }
 }

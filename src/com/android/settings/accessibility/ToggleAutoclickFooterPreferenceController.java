@@ -31,14 +31,8 @@ public class ToggleAutoclickFooterPreferenceController extends
     }
 
     @Override
-    protected String getLearnMoreContentDescription() {
-        return mContext.getString(
-            R.string.accessibility_autoclick_footer_learn_more_content_description);
-    }
-
-    @Override
-    protected String getIntroductionTitle() {
-        return mContext.getString(R.string.accessibility_autoclick_about_title);
+    protected String getLabelName() {
+        return mContext.getString(R.string.accessibility_autoclick_preference_title);
     }
 
     @Override

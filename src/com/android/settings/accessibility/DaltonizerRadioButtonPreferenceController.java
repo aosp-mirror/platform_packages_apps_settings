@@ -30,7 +30,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.common.primitives.Ints;
 
@@ -39,7 +39,7 @@ import java.util.Map;
 
 /** Controller class that control radio button of accessibility daltonizer settings. */
 public class DaltonizerRadioButtonPreferenceController extends BasePreferenceController implements
-        LifecycleObserver, SelectorWithWidgetPreference.OnClickListener {
+        LifecycleObserver, RadioButtonPreference.OnClickListener {
     private static final String TYPE = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER;
 
     // pair the preference key and daltonizer value.
@@ -49,7 +49,7 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
     private final ContentResolver mContentResolver;
     private final Resources mResources;
     private DaltonizerRadioButtonPreferenceController.OnChangeListener mOnChangeListener;
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
     private int mAccessibilityDaltonizerValue;
 
     public DaltonizerRadioButtonPreferenceController(Context context, String preferenceKey) {
@@ -120,7 +120,7 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (SelectorWithWidgetPreference)
+        mPreference = (RadioButtonPreference)
                 screen.findPreference(getPreferenceKey());
         mPreference.setOnClickListener(this);
         mPreference.setAppendixVisibility(View.GONE);
@@ -128,7 +128,7 @@ public class DaltonizerRadioButtonPreferenceController extends BasePreferenceCon
     }
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+    public void onRadioButtonClicked(RadioButtonPreference preference) {
         final int value = getDaltonizerValueToKeyMap().get(mPreferenceKey);
         handlePreferenceChange(String.valueOf(value));
         if (mOnChangeListener != null) {

@@ -77,7 +77,7 @@ public class SimLockPreferenceControllerTest {
         shadowApplication.setSystemService(Context.USER_SERVICE, mUserManager);
         shadowApplication.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
         mContext = RuntimeEnvironment.application;
-        mController = new SimLockPreferenceController(mContext, "key");
+        mController = new SimLockPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -136,6 +136,11 @@ public class SimLockPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void getPreferenceKey_byDefault_returnsDefaultValue() {
+        assertThat(mController.getPreferenceKey()).isEqualTo("sim_lock_settings");
     }
 
     @Test

@@ -211,8 +211,7 @@ public class AppsPreferenceController extends BasePreferenceController implement
                 pref.setOrder(showAppsCount++);
                 pref.setOnPreferenceClickListener(preference -> {
                     AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
-                            mContext.getString(R.string.application_info_label),
-                            pkgName, appEntry.info.uid,
+                            R.string.application_info_label, pkgName, appEntry.info.uid,
                             mHost, 1001 /*RequestCode*/, getMetricsCategory());
                     return true;
                 });

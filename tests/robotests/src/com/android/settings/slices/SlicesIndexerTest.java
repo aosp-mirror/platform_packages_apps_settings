@@ -32,7 +32,6 @@ import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -44,18 +43,17 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 public class SlicesIndexerTest {
 
-    private static final String[] KEYS = new String[]{"key1", "key2", "key3"};
-    private static final String[] TITLES = new String[]{"title1", "title2", "title3"};
-    private static final String SUMMARY = "subtitle";
-    private static final String SCREEN_TITLE = "screen title";
-    private static final String KEYWORDS = "a, b, c";
-    private static final String FRAGMENT_NAME = "fragment name";
-    private static final int ICON = 1234; // I declare a thumb war
-    private static final Uri URI = Uri.parse("content://com.android.settings.slices/test");
-    private static final String PREF_CONTROLLER = "com.android.settings.slices.tester";
-    private static final int SLICE_TYPE = SliceData.SliceType.SLIDER;
-    private static final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
-    private static final int HIGHLIGHT_MENU_KEY = 5678; // I declare a thumb war
+    private final String[] KEYS = new String[]{"key1", "key2", "key3"};
+    private final String[] TITLES = new String[]{"title1", "title2", "title3"};
+    private final String SUMMARY = "subtitle";
+    private final String SCREEN_TITLE = "screen title";
+    private final String KEYWORDS = "a, b, c";
+    private final String FRAGMENT_NAME = "fragment name";
+    private final int ICON = 1234; // I declare a thumb war
+    private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
+    private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
+    private final String UNAVAILABLE_SLICE_SUBTITLE = "subtitleOfUnavailableSlice";
 
     private Context mContext;
 
@@ -74,7 +72,6 @@ public class SlicesIndexerTest {
     }
 
     @Test
-    @Ignore
     public void testAlreadyIndexed_doesNotIndexAgain() {
         String newKey = "newKey";
         String newTitle = "newTitle";
@@ -108,7 +105,6 @@ public class SlicesIndexerTest {
     }
 
     @Test
-    @Ignore
     public void testInsertSliceData_nonPublicSlice_mockDataInserted() {
         final List<SliceData> sliceData = getMockIndexableData(false);
         doReturn(sliceData).when(mManager).getSliceData();
@@ -146,9 +142,6 @@ public class SlicesIndexerTest {
                         .isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
                 assertThat(cursor.getInt(
                         cursor.getColumnIndex(IndexColumns.PUBLIC_SLICE))).isEqualTo(0);
-                assertThat(cursor.getInt(
-                        cursor.getColumnIndex(IndexColumns.HIGHLIGHT_MENU_RESOURCE)))
-                        .isEqualTo(HIGHLIGHT_MENU_KEY);
                 cursor.moveToNext();
             }
         } finally {
@@ -157,7 +150,6 @@ public class SlicesIndexerTest {
     }
 
     @Test
-    @Ignore
     public void insertSliceData_publicSlice_mockDataInserted() {
         final List<SliceData> sliceData = getMockIndexableData(true);
         doReturn(sliceData).when(mManager).getSliceData();
@@ -195,9 +187,6 @@ public class SlicesIndexerTest {
                         .isEqualTo(UNAVAILABLE_SLICE_SUBTITLE);
                 assertThat(cursor.getInt(
                         cursor.getColumnIndex(IndexColumns.PUBLIC_SLICE))).isEqualTo(1);
-                assertThat(cursor.getInt(
-                        cursor.getColumnIndex(IndexColumns.HIGHLIGHT_MENU_RESOURCE)))
-                        .isEqualTo(HIGHLIGHT_MENU_KEY);
                 cursor.moveToNext();
             }
         } finally {
@@ -231,8 +220,7 @@ public class SlicesIndexerTest {
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
                 .setSliceType(SLICE_TYPE)
-                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE)
-                .setHighlightMenuRes(HIGHLIGHT_MENU_KEY);
+                .setUnavailableSliceSubtitle(UNAVAILABLE_SLICE_SUBTITLE);
 
         if (isPublicSlice) {
             builder.setIsPublicSlice(true);

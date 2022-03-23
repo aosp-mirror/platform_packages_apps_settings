@@ -21,10 +21,9 @@ import static android.provider.Settings.Secure.SHOW_NOTIFICATION_SNOOZE;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+
+import androidx.annotation.VisibleForTesting;
 
 public class SnoozeNotificationPreferenceController extends TogglePreferenceController {
 
@@ -53,10 +52,5 @@ public class SnoozeNotificationPreferenceController extends TogglePreferenceCont
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 SHOW_NOTIFICATION_SNOOZE, isChecked ? ON : OFF);
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_notifications;
     }
 }

@@ -31,18 +31,12 @@ import com.android.settings.biometrics.BiometricErrorDialog;
  */
 public class FingerprintErrorDialog extends BiometricErrorDialog {
     public static void showErrorDialog(BiometricEnrollBase host, int errMsgId) {
-        if (host.isFinishing()) {
-            return;
-        }
-
-        final FragmentManager fragmentManager = host.getSupportFragmentManager();
-        if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
-            return;
-        }
-
         final CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
         final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId);
-        dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
+        final FragmentManager fragmentManager = host.getSupportFragmentManager();
+        if (!fragmentManager.isDestroyed()) {
+            dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
+        }
     }
 
     private static int getErrorMessage(int errMsgId) {

@@ -19,6 +19,7 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -28,14 +29,11 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.widget.Toolbar;
 
-import androidx.fragment.app.FragmentActivity;
-
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -48,13 +46,13 @@ import org.robolectric.shadows.ShadowPackageManager;
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
-    private FragmentActivity mActivity;
+    private Activity mActivity;
     private ShadowPackageManager mPackageManager;
 
     @Before
     public void setUp() {
         FakeFeatureFactory.setupForTest();
-        mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        mActivity = Robolectric.setupActivity(Activity.class);
         mProvider = new SearchFeatureProviderImpl();
         mPackageManager = Shadows.shadowOf(mActivity.getPackageManager());
         Settings.Global.putInt(mActivity.getContentResolver(),
@@ -62,15 +60,12 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    @Ignore
     @Config(shadows = ShadowUtils.class)
     public void initSearchToolbar_hasResolvedInfo_shouldStartCorrectIntent() {
         final Intent searchIntent = new Intent(Settings.ACTION_APP_SEARCH_SETTINGS)
                 .setPackage(mActivity.getString(R.string.config_settingsintelligence_package_name));
         final ResolveInfo info = new ResolveInfo();
-        final ActivityInfo activityInfo = new ActivityInfo();
-        activityInfo.packageName = "com.android.example";
-        info.activityInfo = activityInfo;
+        info.activityInfo = new ActivityInfo();
         mPackageManager.addResolveInfoForIntent(searchIntent, info);
 
         // Should not crash.

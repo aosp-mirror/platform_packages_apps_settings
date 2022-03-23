@@ -30,7 +30,6 @@ import android.provider.Settings;
 
 import androidx.preference.SwitchPreference;
 
-import com.android.internal.R;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -65,7 +64,6 @@ public class AutoRotatePreferenceControllerTest {
         mPreference = new SwitchPreference(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
-        disableDeviceStateRotation();
 
         mController = new AutoRotatePreferenceController(mContext, "auto_rotate");
     }
@@ -111,26 +109,6 @@ public class AutoRotatePreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
                 .UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_deviceRotationDisabled_returnsAvailable() {
-        enableAutoRotationPreference();
-        disableDeviceStateRotation();
-
-        int availability = mController.getAvailabilityStatus();
-
-        assertThat(availability).isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void getAvailabilityStatus_deviceRotationEnabled_returnsUnsupported() {
-        enableAutoRotationPreference();
-        enableDeviceStateRotation();
-
-        int availability = mController.getAvailabilityStatus();
-
-        assertThat(availability).isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test
@@ -201,16 +179,5 @@ public class AutoRotatePreferenceControllerTest {
     private void disableAutoRotation() {
         Settings.System.putIntForUser(mContentResolver,
                 Settings.System.ACCELEROMETER_ROTATION, 0, UserHandle.USER_CURRENT);
-    }
-
-    private void enableDeviceStateRotation() {
-        when(mContext.getResources().getStringArray(
-                R.array.config_perDeviceStateRotationLockDefaults)).thenReturn(
-                new String[]{"0:0", "1:1", "2:2"});
-    }
-
-    private void disableDeviceStateRotation() {
-        when(mContext.getResources().getStringArray(
-                R.array.config_perDeviceStateRotationLockDefaults)).thenReturn(new String[]{});
     }
 }
