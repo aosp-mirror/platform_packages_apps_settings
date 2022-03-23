@@ -23,6 +23,8 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.VibrationAttributes;
+import android.os.Vibrator;
 import android.provider.Settings;
 
 import com.android.settings.R;
@@ -42,9 +44,11 @@ public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchP
         implements LifecycleObserver, OnStart, OnStop {
 
     private final ContentObserver mSettingObserver;
+    private final Vibrator mVibrator;
 
     public VibrationMainSwitchPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
+        mVibrator = context.getSystemService(Vibrator.class);
         mSettingObserver = new ContentObserver(new Handler(/* async= */ true)) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -79,9 +83,17 @@ public class VibrationMainSwitchPreferenceController extends SettingsMainSwitchP
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return Settings.System.putInt(mContext.getContentResolver(),
+        boolean success = Settings.System.putInt(mContext.getContentResolver(),
                 VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY,
                 isChecked ? ON : OFF);
+
+        if (success && isChecked) {
+            // Play a haptic as preview for the main toggle only when touch feedback is enabled.
+            VibrationPreferenceConfig.playVibrationPreview(
+                    mVibrator, VibrationAttributes.USAGE_TOUCH);
+        }
+
+        return success;
     }
 
     @Override

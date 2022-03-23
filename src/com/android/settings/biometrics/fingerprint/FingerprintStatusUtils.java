@@ -79,7 +79,7 @@ public class FingerprintStatusUtils {
      */
     public String getSettingsClassName() {
         return hasEnrolled() ? FingerprintSettings.class.getName()
-                : FingerprintEnrollIntroduction.class.getName();
+                : FingerprintEnrollIntroductionInternal.class.getName();
     }
 
     /**
