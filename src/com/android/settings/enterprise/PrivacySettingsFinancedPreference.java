@@ -20,8 +20,10 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,6 +61,18 @@ public class PrivacySettingsFinancedPreference implements PrivacySettingsPrefere
      */
     @Override
     public List<AbstractPreferenceController> createPreferenceControllers(boolean async) {
-        return Collections.emptyList();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new NetworkLogsPreferenceController(mContext));
+        controllers.add(new BugReportsPreferenceController(mContext));
+        controllers.add(new SecurityLogsPreferenceController(mContext));
+        final List<AbstractPreferenceController> exposureChangesCategoryControllers =
+                new ArrayList<>();
+        exposureChangesCategoryControllers.add(new EnterpriseInstalledPackagesPreferenceController(
+                mContext, async));
+        controllers.addAll(exposureChangesCategoryControllers);
+        controllers.add(new PreferenceCategoryController(mContext, KEY_EXPOSURE_CHANGES_CATEGORY)
+                .setChildren(exposureChangesCategoryControllers));
+        controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(mContext));
+        return controllers;
     }
 }

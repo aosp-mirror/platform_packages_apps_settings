@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
 
@@ -84,7 +82,6 @@ public class TrustedCredentialsSettings extends InstrumentedFragment
 
     private static final String TAG = "TrustedCredentialsSettings";
 
-    private DevicePolicyManager mDevicePolicyManager;
     private UserManager mUserManager;
     private KeyguardManager mKeyguardManager;
     private int mTrustAllCaUserId;
@@ -182,7 +179,6 @@ public class TrustedCredentialsSettings extends InstrumentedFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Activity activity = getActivity();
-        mDevicePolicyManager = activity.getSystemService(DevicePolicyManager.class);
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mKeyguardManager = (KeyguardManager) activity
                 .getSystemService(Context.KEYGUARD_SERVICE);
@@ -389,13 +385,9 @@ public class TrustedCredentialsSettings extends InstrumentedFragment
 
             final TextView title = (TextView) convertView.findViewById(android.R.id.title);
             if (getUserInfoByGroup(groupPosition).isManagedProfile()) {
-                title.setText(mDevicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
-                        () -> getString(R.string.category_work)));
+                title.setText(R.string.category_work);
             } else {
-                title.setText(mDevicePolicyManager.getResources().getString(
-                        PERSONAL_CATEGORY_HEADER,
-                        () -> getString(R.string.category_personal)));
-
+                title.setText(R.string.category_personal);
             }
             title.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_END);
 

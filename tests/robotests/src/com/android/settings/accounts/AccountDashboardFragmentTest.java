@@ -114,9 +114,4 @@ public class AccountDashboardFragmentTest {
 
         assertThat(indexRaws).isNotEmpty();
     }
-
-    @Test
-    public void shouldSkipForInitialSUW_returnTrue() {
-        assertThat(mFragment.shouldSkipForInitialSUW()).isTrue();
-    }
 }

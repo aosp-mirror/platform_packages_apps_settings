@@ -47,7 +47,6 @@ import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.media.LocalMediaManager;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -136,7 +135,6 @@ public class RemoteMediaSliceTest {
     }
 
     @Test
-    @Ignore
     public void getSlice_withActiveSession_checkRowNumber() {
         final Slice slice = mRemoteMediaSlice.getSlice();
         final int rows = SliceQuery.findAll(slice, FORMAT_SLICE, HINT_LIST_ITEM, null).size();
@@ -146,7 +144,6 @@ public class RemoteMediaSliceTest {
     }
 
     @Test
-    @Ignore
     public void getSlice_withActiveSession_checkTitle() {
         final Slice slice = mRemoteMediaSlice.getSlice();
         final SliceMetadata metadata = SliceMetadata.from(mContext, slice);

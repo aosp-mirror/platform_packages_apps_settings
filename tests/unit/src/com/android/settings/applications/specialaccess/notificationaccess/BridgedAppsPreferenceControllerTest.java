@@ -30,6 +30,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.VersionedPackage;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.service.notification.NotificationListenerFilter;
 import android.util.ArraySet;
@@ -64,7 +65,6 @@ public class BridgedAppsPreferenceControllerTest {
     PreferenceScreen mScreen;
     @Mock
     ApplicationsState mAppState;
-
     private ApplicationsState.AppEntry mAppEntry;
     private ApplicationsState.AppEntry mAppEntry2;
 
@@ -92,6 +92,8 @@ public class BridgedAppsPreferenceControllerTest {
 
         mAppEntry.info = ai;
         mAppEntry.label = "hi";
+        Drawable icon = mock(Drawable.class);
+        mAppEntry.icon = icon;
 
         mController = new BridgedAppsPreferenceController(mContext, "key");
         mController.setCn(mCn);
@@ -165,7 +167,7 @@ public class BridgedAppsPreferenceControllerTest {
 
         assertThat(actual.isChecked()).isTrue();
         assertThat(actual.getTitle()).isEqualTo("hi");
-        assertThat(actual.getIcon()).isNotNull();
+        assertThat(actual.getIcon()).isEqualTo(mAppEntry.icon);
     }
 
     @Test

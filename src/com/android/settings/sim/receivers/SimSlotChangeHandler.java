@@ -26,14 +26,12 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.Log;
 
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.network.UiccSlotsException;
-import com.android.settings.network.telephony.ToggleSubscriptionDialogActivity;
 import com.android.settings.sim.ChooseSimActivity;
 import com.android.settings.sim.DsdsDialogActivity;
 import com.android.settings.sim.SimActivationNotifier;
@@ -42,7 +40,6 @@ import com.android.settings.sim.SwitchToEsimConfirmDialogActivity;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,8 +83,8 @@ public class SimSlotChangeHandler {
             throw new IllegalStateException("Cannot be called from main thread.");
         }
 
-        if (mTelMgr.getActiveModemCount() > 1 && !isMultipleEnabledProfilesSupported()) {
-            Log.i(TAG, "The device is already in DSDS mode and no MEP. Do nothing.");
+        if (mTelMgr.getActiveModemCount() > 1) {
+            Log.i(TAG, "The device is already in DSDS mode. Do nothing.");
             return;
         }
 
@@ -99,30 +96,17 @@ public class SimSlotChangeHandler {
 
         int lastRemovableSlotState = getLastRemovableSimSlotState(mContext);
         int currentRemovableSlotState = removableSlotInfo.getCardStateInfo();
-        boolean isRemovableSimInserted =
-                lastRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_ABSENT
-                        && currentRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_PRESENT;
-        boolean isRemovableSimRemoved =
-                lastRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_PRESENT
-                        && currentRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_ABSENT;
 
         // Sets the current removable slot state.
         setRemovableSimSlotState(mContext, currentRemovableSlotState);
 
-        if (mTelMgr.getActiveModemCount() > 1 && isMultipleEnabledProfilesSupported()) {
-            if(!isRemovableSimInserted) {
-                Log.i(TAG, "Removable Sim is not inserted in DSDS mode and MEP. Do nothing.");
-                return;
-            }
-            handleRemovableSimInsertUnderDsdsMep(removableSlotInfo);
-            return;
-        }
-
-        if (isRemovableSimInserted) {
+        if (lastRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_ABSENT
+                && currentRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_PRESENT) {
             handleSimInsert(removableSlotInfo);
             return;
         }
-        if (isRemovableSimRemoved) {
+        if (lastRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_PRESENT
+                && currentRemovableSlotState == UiccSlotInfo.CARD_STATE_INFO_ABSENT) {
             handleSimRemove(removableSlotInfo);
             return;
         }
@@ -180,12 +164,14 @@ public class SimSlotChangeHandler {
 
     private void handleSimInsert(UiccSlotInfo removableSlotInfo) {
         Log.i(TAG, "Handle SIM inserted.");
+
         if (!isSuwFinished(mContext)) {
             Log.i(TAG, "Still in SUW. Handle SIM insertion after SUW is finished");
             setSuwRemovableSlotAction(mContext, LAST_USER_ACTION_IN_SUW_INSERT);
             return;
         }
-        if (removableSlotInfo.getPorts().stream().findFirst().get().isActive()) {
+
+        if (removableSlotInfo.getIsActive()) {
             Log.i(TAG, "The removable slot is already active. Do nothing.");
             return;
         }
@@ -226,11 +212,9 @@ public class SimSlotChangeHandler {
         }
 
         List<SubscriptionInfo> groupedEmbeddedSubscriptions = getGroupedEmbeddedSubscriptions();
-        if (groupedEmbeddedSubscriptions.size() == 0 || !removableSlotInfo.getPorts().stream()
-                .findFirst().get().isActive()) {
-            Log.i(TAG, "eSIM slot is active or no subscriptions exist. Do nothing."
-                            + " The removableSlotInfo: " + removableSlotInfo
-                            + ", groupedEmbeddedSubscriptions: " + groupedEmbeddedSubscriptions);
+
+        if (groupedEmbeddedSubscriptions.size() == 0 || !removableSlotInfo.getIsActive()) {
+            Log.i(TAG, "eSIM slot is active or no subscriptions exist. Do nothing.");
             return;
         }
 
@@ -246,24 +230,6 @@ public class SimSlotChangeHandler {
         // the number they want to use.
         Log.i(TAG, "Multiple eSIM profiles found. Ask user which subscription to use.");
         startChooseSimActivity(false);
-    }
-
-    private void handleRemovableSimInsertUnderDsdsMep(UiccSlotInfo removableSlotInfo) {
-        Log.i(TAG, "Handle Removable SIM inserted under DSDS+Mep.");
-
-        if (removableSlotInfo.getPorts().stream().findFirst().get().isActive()) {
-            Log.i(TAG, "The removable slot is already active. Do nothing. removableSlotInfo: "
-                    + removableSlotInfo);
-            return;
-        }
-
-        List<SubscriptionInfo> subscriptionInfos = getAvailableRemovableSubscription();
-        if (subscriptionInfos == null || subscriptionInfos.get(0) == null) {
-            Log.e(TAG, "Unable to find the removable subscriptionInfo. Do nothing.");
-            return;
-        }
-        Log.d(TAG, "getAvailableRemovableSubscription:" + subscriptionInfos);
-        startSimConfirmDialogActivity(subscriptionInfos.get(0).getSubscriptionId());
     }
 
     private int getLastRemovableSimSlotState(Context context) {
@@ -295,6 +261,7 @@ public class SimSlotChangeHandler {
         }
         for (UiccSlotInfo slotInfo : slotInfos) {
             if (slotInfo != null && slotInfo.isRemovable()) {
+
                 return slotInfo;
             }
         }
@@ -330,16 +297,6 @@ public class SimSlotChangeHandler {
                         .collect(Collectors.toList()));
     }
 
-    protected List<SubscriptionInfo> getAvailableRemovableSubscription() {
-        List<SubscriptionInfo> subList = new ArrayList<>();
-        for (SubscriptionInfo info : SubscriptionUtil.getAvailableSubscriptions(mContext)) {
-            if (!info.isEmbedded()) {
-                subList.add(info);
-            }
-        }
-        return subList;
-    }
-
     private void startChooseSimActivity(boolean psimInserted) {
         Intent intent = ChooseSimActivity.getIntent(mContext);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -358,27 +315,6 @@ public class SimSlotChangeHandler {
         Intent intent = new Intent(mContext, DsdsDialogActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
-    }
-
-    private void startSimConfirmDialogActivity(int subId) {
-        if (!SubscriptionManager.isUsableSubscriptionId(subId)) {
-            Log.i(TAG, "Unable to enable subscription due to invalid subscription ID.");
-            return;
-        }
-        Log.d(TAG, "Start ToggleSubscriptionDialogActivity with " + subId + " under DSDS+Mep.");
-        Intent intent = ToggleSubscriptionDialogActivity.getIntent(mContext, subId, true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
-    }
-
-    private boolean isMultipleEnabledProfilesSupported() {
-        List<UiccCardInfo> cardInfos = mTelMgr.getUiccCardsInfo();
-        if (cardInfos == null) {
-            Log.d(TAG, "UICC cards info list is empty.");
-            return false;
-        }
-        return cardInfos.stream().anyMatch(
-                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
     }
 
     private SimSlotChangeHandler() {}

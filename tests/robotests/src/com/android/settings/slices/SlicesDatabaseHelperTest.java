@@ -31,7 +31,6 @@ import com.android.settings.testutils.DatabaseTestUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -60,7 +59,6 @@ public class SlicesDatabaseHelperTest {
     }
 
     @Test
-    @Ignore
     public void testDatabaseSchema() {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM slices_index", null);
         String[] columnNames = cursor.getColumnNames();
@@ -84,7 +82,6 @@ public class SlicesDatabaseHelperTest {
     }
 
     @Test
-    @Ignore
     public void testUpgrade_dropsOldData() {
         ContentValues mockValues = getMockRow();
 
@@ -99,7 +96,6 @@ public class SlicesDatabaseHelperTest {
     }
 
     @Test
-    @Ignore
     public void testIndexState_buildAndLocaleSet() {
         mSlicesDatabaseHelper.reconstruct(mDatabase);
 
@@ -112,7 +108,6 @@ public class SlicesDatabaseHelperTest {
     }
 
     @Test
-    @Ignore
     public void testLocaleChanges_newIndexingState() {
         mSlicesDatabaseHelper.reconstruct(mDatabase);
         mSlicesDatabaseHelper.setIndexedState();
@@ -123,7 +118,6 @@ public class SlicesDatabaseHelperTest {
     }
 
     @Test
-    @Ignore
     public void testBuildFingerprintChanges_newIndexingState() {
         mSlicesDatabaseHelper.reconstruct(mDatabase);
         mSlicesDatabaseHelper.setIndexedState();

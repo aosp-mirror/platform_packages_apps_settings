@@ -52,8 +52,6 @@ import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -71,24 +69,21 @@ public class WifiSliceTest {
     private static final String AP2_NAME = "ap2";
     private static final String AP3_NAME = "ap3";
 
-    @Mock
-    private WifiManager mWifiManager;
-
     private Context mContext;
     private ContentResolver mResolver;
+    private WifiManager mWifiManager;
     private WifiSlice mWifiSlice;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mResolver = mock(ContentResolver.class);
         doReturn(mResolver).when(mContext).getContentResolver();
-        doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
-        doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
+        mWifiManager = mContext.getSystemService(WifiManager.class);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
+        mWifiManager.setWifiEnabled(true);
 
         mWifiSlice = new WifiSlice(mContext);
     }
@@ -111,7 +106,7 @@ public class WifiSliceTest {
 
     @Test
     public void getWifiSlice_wifiOff_shouldReturnSingleRow() {
-        doReturn(WifiManager.WIFI_STATE_DISABLED).when(mWifiManager).getWifiState();
+        mWifiManager.setWifiEnabled(false);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
 

@@ -36,7 +36,7 @@ import com.android.settings.Utils;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.android.collect.Lists;
 
@@ -198,9 +198,8 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
         @Override
         public void onTetheringStarted() {
+            Log.d(TAG, "onTetheringStarted()");
             // Set default usb functions again to make internal data persistent
-            mCurrentFunctions = mUsbBackend.getCurrentFunctions();
-            Log.d(TAG, "onTetheringStarted() : mCurrentFunctions " + mCurrentFunctions);
             mUsbBackend.setDefaultUsbFunctions(mCurrentFunctions);
         }
 
@@ -215,7 +214,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     private void refresh(long functions) {
         final PreferenceScreen screen = getPreferenceScreen();
         for (long option : UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet()) {
-            final SelectorWithWidgetPreference pref =
+            final RadioButtonPreference pref =
                     screen.findPreference(UsbBackend.usbFunctionsToString(option));
             if (pref != null) {
                 final boolean isSupported = mUsbBackend.areFunctionsSupported(option);

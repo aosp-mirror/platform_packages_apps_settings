@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,7 +29,6 @@ import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -114,7 +112,7 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return false;
         }
-        if (isUserAMonkey()) {
+        if (Utils.isMonkeyRunning()) {
             return false;
         }
         // Don't enable developer options for secondary non-demo users.
@@ -246,10 +244,5 @@ public class BuildNumberPreferenceController extends BasePreferenceController im
         mDevHitToast = Toast.makeText(mContext, R.string.show_dev_on,
                 Toast.LENGTH_LONG);
         mDevHitToast.show();
-    }
-
-    @VisibleForTesting
-    protected boolean isUserAMonkey() {
-        return ActivityManager.isUserAMonkey();
     }
 }

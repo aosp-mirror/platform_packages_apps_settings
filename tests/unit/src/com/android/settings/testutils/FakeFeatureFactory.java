@@ -19,7 +19,6 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -85,7 +84,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
     public GameSettingsFeatureProvider gameSettingsFeatureProvider;
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
-    public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -126,8 +124,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
         gameSettingsFeatureProvider = mock(GameSettingsFeatureProvider.class);
-        mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
-        mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
     }
 
     @Override
@@ -268,10 +264,5 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider() {
         return mAccessibilitySearchFeatureProvider;
-    }
-
-    @Override
-    public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
-        return mAccessibilityMetricsFeatureProvider;
     }
 }
