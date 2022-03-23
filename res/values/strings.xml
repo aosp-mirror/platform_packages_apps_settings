@@ -10467,8 +10467,14 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
     </plurals>
 
-    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Remove permissions and free up space</string>
+    <!-- Label for category for unused app settings for an app. [CHAR LIMIT=40]-->
+    <string name="unused_apps_category">Unused app settings</string>
+
+    <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Pause app activity</string>
+
+    <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications if unused</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
