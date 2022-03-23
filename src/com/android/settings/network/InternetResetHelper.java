@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.text.TextUtils;
@@ -36,7 +37,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
-import com.android.settingslib.utils.HandlerInjector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class InternetResetHelper implements LifecycleObserver,
 
     public InternetResetHelper(Context context, Lifecycle lifecycle) {
         mContext = context;
-        mHandlerInjector = new HandlerInjector(context.getMainThreadHandler());
+        mHandlerInjector = new HandlerInjector(context);
         mWifiManager = mContext.getSystemService(WifiManager.class);
         mWifiStateFilter = new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION);
 
@@ -105,8 +105,7 @@ public class InternetResetHelper implements LifecycleObserver,
     /** @OnLifecycleEvent(Lifecycle.Event.ON_RESUME) */
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void onResume() {
-        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
     }
 
     /** @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE) */
@@ -239,5 +238,25 @@ public class InternetResetHelper implements LifecycleObserver,
         mIsWifiReady = !mWifiManager.isWifiEnabled();
         mHandlerInjector.postDelayed(mTimeoutRunnable, RESTART_TIMEOUT_MS);
         mConnectivitySubsystemsRecoveryManager.triggerSubsystemRestart(null /* reason */, this);
+    }
+
+    /**
+     * Wrapper for testing compatibility.
+     */
+    @VisibleForTesting
+    static class HandlerInjector {
+        protected final Handler mHandler;
+
+        HandlerInjector(Context context) {
+            mHandler = context.getMainThreadHandler();
+        }
+
+        public void postDelayed(Runnable runnable, long delayMillis) {
+            mHandler.postDelayed(runnable, delayMillis);
+        }
+
+        public void removeCallbacks(Runnable runnable) {
+            mHandler.removeCallbacks(runnable);
+        }
     }
 }

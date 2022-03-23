@@ -15,15 +15,12 @@
  */
 package com.android.settings.accounts;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION;
-
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -56,7 +53,6 @@ import java.io.IOException;
 public class RemoveAccountPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnClickListener {
 
-    private static final String TAG = "RemoveAccountPrefController";
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -179,11 +175,10 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                                 | IOException
                                 | AuthenticatorException e) {
                             // handled below
-                            Log.w(TAG, "Remove account error: " + e);
-                            RemoveAccountFailureDialog.show(getTargetFragment());
                         }
-                        Log.i(TAG, "failed: " + failed);
-                        if (!failed) {
+                        if (failed) {
+                            RemoveAccountFailureDialog.show(getTargetFragment());
+                        } else {
                             targetActivity.finish();
                         }
                     }, null, mUserHandle);
@@ -215,11 +210,8 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             final Context context = getActivity();
 
             return new AlertDialog.Builder(context)
-                    .setTitle(R.string.remove_account_label)
-                    .setMessage(getContext().getSystemService(DevicePolicyManager.class)
-                            .getResources()
-                            .getString(REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION,
-                                    () -> getString(R.string.remove_account_failed)))
+                    .setTitle(R.string.really_remove_account_title)
+                    .setMessage(R.string.remove_account_failed)
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }

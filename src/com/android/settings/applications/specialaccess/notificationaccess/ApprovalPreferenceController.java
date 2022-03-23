@@ -27,10 +27,10 @@ import android.os.AsyncTask;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.RestrictedSwitchPreference;
 
 public class ApprovalPreferenceController extends BasePreferenceController {
 
@@ -78,11 +78,9 @@ public class ApprovalPreferenceController extends BasePreferenceController {
 
     @Override
     public void updateState(Preference pref) {
-        final RestrictedSwitchPreference preference =
-                (RestrictedSwitchPreference) pref;
+        final SwitchPreference preference = (SwitchPreference) pref;
         final CharSequence label = mPkgInfo.applicationInfo.loadLabel(mPm);
-        final boolean isEnabled = isServiceEnabled(mCn);
-        preference.setChecked(isEnabled);
+        preference.setChecked(isServiceEnabled(mCn));
         preference.setOnPreferenceChangeListener((p, newValue) -> {
             final boolean access = (Boolean) newValue;
             if (!access) {
@@ -105,7 +103,6 @@ public class ApprovalPreferenceController extends BasePreferenceController {
                 return false;
             }
         });
-        preference.updateState(mCn.getPackageName(), mPkgInfo.applicationInfo.uid, isEnabled);
     }
 
     public void disable(final ComponentName cn) {

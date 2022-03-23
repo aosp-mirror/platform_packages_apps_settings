@@ -124,7 +124,6 @@ public class QrCamera extends Handler {
         }
         if (mCamera != null) {
             mCamera.stopPreview();
-            releaseCamera();
         }
     }
 

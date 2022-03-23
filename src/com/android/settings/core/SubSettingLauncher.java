@@ -43,11 +43,11 @@ public class SubSettingLauncher {
         }
         mContext = context;
         mLaunchRequest = new LaunchRequest();
-        mLaunchRequest.mTransitionType = TransitionType.TRANSITION_SHARED_AXIS;
+        mLaunchRequest.transitionType = TransitionType.TRANSITION_SHARED_AXIS;
     }
 
     public SubSettingLauncher setDestination(String fragmentName) {
-        mLaunchRequest.mDestinationName = fragmentName;
+        mLaunchRequest.destinationName = fragmentName;
         return this;
     }
 
@@ -67,9 +67,9 @@ public class SubSettingLauncher {
      * @param titleResId       res id of string, will use package name to resolve
      */
     public SubSettingLauncher setTitleRes(String titlePackageName, @StringRes int titleResId) {
-        mLaunchRequest.mTitleResPackageName = titlePackageName;
-        mLaunchRequest.mTitleResId = titleResId;
-        mLaunchRequest.mTitle = null;
+        mLaunchRequest.titleResPackageName = titlePackageName;
+        mLaunchRequest.titleResId = titleResId;
+        mLaunchRequest.title = null;
         return this;
     }
 
@@ -82,22 +82,22 @@ public class SubSettingLauncher {
      * @param title text title
      */
     public SubSettingLauncher setTitleText(CharSequence title) {
-        mLaunchRequest.mTitle = title;
+        mLaunchRequest.title = title;
         return this;
     }
 
     public SubSettingLauncher setArguments(Bundle arguments) {
-        mLaunchRequest.mArguments = arguments;
+        mLaunchRequest.arguments = arguments;
         return this;
     }
 
     public SubSettingLauncher setExtras(Bundle extras) {
-        mLaunchRequest.mExtras = extras;
+        mLaunchRequest.extras = extras;
         return this;
     }
 
     public SubSettingLauncher setSourceMetricsCategory(int sourceMetricsCategory) {
-        mLaunchRequest.mSourceMetricsCategory = sourceMetricsCategory;
+        mLaunchRequest.sourceMetricsCategory = sourceMetricsCategory;
         return this;
     }
 
@@ -108,23 +108,17 @@ public class SubSettingLauncher {
     }
 
     public SubSettingLauncher addFlags(int flags) {
-        mLaunchRequest.mFlags |= flags;
+        mLaunchRequest.flags |= flags;
         return this;
     }
 
     public SubSettingLauncher setUserHandle(UserHandle userHandle) {
-        mLaunchRequest.mUserHandle = userHandle;
+        mLaunchRequest.userHandle = userHandle;
         return this;
     }
 
     public SubSettingLauncher setTransitionType(int transitionType) {
-        mLaunchRequest.mTransitionType = transitionType;
-        return this;
-    }
-
-    /** Decide whether the next page is second layer page or not. */
-    public SubSettingLauncher setIsSecondLayerPage(boolean isSecondLayerPage) {
-        mLaunchRequest.mIsSecondLayerPage = isSecondLayerPage;
+        mLaunchRequest.transitionType = transitionType;
         return this;
     }
 
@@ -137,14 +131,14 @@ public class SubSettingLauncher {
 
         final Intent intent = toIntent();
 
-        boolean launchAsUser = mLaunchRequest.mUserHandle != null
-                && mLaunchRequest.mUserHandle.getIdentifier() != UserHandle.myUserId();
+        boolean launchAsUser = mLaunchRequest.userHandle != null
+                && mLaunchRequest.userHandle.getIdentifier() != UserHandle.myUserId();
         boolean launchForResult = mLaunchRequest.mResultListener != null;
         if (launchAsUser && launchForResult) {
-            launchForResultAsUser(intent, mLaunchRequest.mUserHandle,
-                    mLaunchRequest.mResultListener, mLaunchRequest.mRequestCode);
+            launchForResultAsUser(intent, mLaunchRequest.userHandle, mLaunchRequest.mResultListener,
+                    mLaunchRequest.mRequestCode);
         } else if (launchAsUser && !launchForResult) {
-            launchAsUser(intent, mLaunchRequest.mUserHandle);
+            launchAsUser(intent, mLaunchRequest.userHandle);
         } else if (!launchAsUser && launchForResult) {
             launchForResult(mLaunchRequest.mResultListener, intent, mLaunchRequest.mRequestCode);
         } else {
@@ -156,28 +150,26 @@ public class SubSettingLauncher {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         copyExtras(intent);
         intent.setClass(mContext, SubSettings.class);
-        if (TextUtils.isEmpty(mLaunchRequest.mDestinationName)) {
+        if (TextUtils.isEmpty(mLaunchRequest.destinationName)) {
             throw new IllegalArgumentException("Destination fragment must be set");
         }
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, mLaunchRequest.mDestinationName);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, mLaunchRequest.destinationName);
 
-        if (mLaunchRequest.mSourceMetricsCategory < 0) {
+        if (mLaunchRequest.sourceMetricsCategory < 0) {
             throw new IllegalArgumentException("Source metrics category must be set");
         }
         intent.putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
-                mLaunchRequest.mSourceMetricsCategory);
+                mLaunchRequest.sourceMetricsCategory);
 
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, mLaunchRequest.mArguments);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, mLaunchRequest.arguments);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME,
-                mLaunchRequest.mTitleResPackageName);
+                mLaunchRequest.titleResPackageName);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID,
-                mLaunchRequest.mTitleResId);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.mTitle);
-        intent.addFlags(mLaunchRequest.mFlags);
+                mLaunchRequest.titleResId);
+        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
+        intent.addFlags(mLaunchRequest.flags);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-                mLaunchRequest.mTransitionType);
-        intent.putExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE,
-                mLaunchRequest.mIsSecondLayerPage);
+                mLaunchRequest.transitionType);
 
         return intent;
     }
@@ -204,8 +196,8 @@ public class SubSettingLauncher {
     }
 
     private void copyExtras(Intent intent) {
-        if (mLaunchRequest.mExtras != null) {
-            intent.replaceExtras(mLaunchRequest.mExtras);
+        if (mLaunchRequest.extras != null) {
+            intent.replaceExtras(mLaunchRequest.extras);
         }
     }
 
@@ -213,18 +205,17 @@ public class SubSettingLauncher {
      * Simple container that has information about how to launch a subsetting.
      */
     static class LaunchRequest {
-        String mDestinationName;
-        int mTitleResId;
-        String mTitleResPackageName;
-        CharSequence mTitle;
-        int mSourceMetricsCategory = -100;
-        int mFlags;
+        String destinationName;
+        int titleResId;
+        String titleResPackageName;
+        CharSequence title;
+        int sourceMetricsCategory = -100;
+        int flags;
         Fragment mResultListener;
         int mRequestCode;
-        UserHandle mUserHandle;
-        int mTransitionType;
-        Bundle mArguments;
-        Bundle mExtras;
-        boolean mIsSecondLayerPage;
+        UserHandle userHandle;
+        int transitionType;
+        Bundle arguments;
+        Bundle extras;
     }
 }

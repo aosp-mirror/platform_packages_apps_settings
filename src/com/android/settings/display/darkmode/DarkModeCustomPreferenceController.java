@@ -15,19 +15,20 @@
 
 package com.android.settings.display.darkmode;
 
-import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
-
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.text.TextUtils;
-
 import androidx.preference.Preference;
-
+import androidx.preference.PreferenceScreen;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
 
 /**
  * Controller for custom mode night mode time settings
@@ -88,9 +89,7 @@ public class DarkModeCustomPreferenceController extends BasePreferenceController
 
     @Override
     protected void refreshSummary(Preference preference) {
-        if (mUiModeManager.getNightMode() != MODE_NIGHT_CUSTOM
-                || mUiModeManager.getNightModeCustomType()
-                        != UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE) {
+        if (mUiModeManager.getNightMode() != MODE_NIGHT_CUSTOM) {
             preference.setVisible(false);
             return;
         }

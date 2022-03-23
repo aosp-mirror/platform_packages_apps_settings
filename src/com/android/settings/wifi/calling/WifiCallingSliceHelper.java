@@ -179,8 +179,7 @@ public class WifiCallingSliceHelper {
                         .setTitle(res.getText(R.string.wifi_calling_settings_title))
                         .addEndItem(
                                 SliceAction.createToggle(
-                                        getBroadcastIntent(ACTION_WIFI_CALLING_CHANGED,
-                                                isWifiCallingEnabled),
+                                        getBroadcastIntent(ACTION_WIFI_CALLING_CHANGED),
                                         null /* actionTitle */, isWifiCallingEnabled))
                         .setPrimaryAction(SliceAction.createDeeplink(
                                 getActivityIntent(ACTION_WIFI_CALLING_SETTINGS_ACTIVITY),
@@ -317,7 +316,7 @@ public class WifiCallingSliceHelper {
         final Resources res = getResourcesForSubId(subId);
         return new RowBuilder()
                 .setTitle(res.getText(preferenceTitleResId))
-                .setTitleItem(SliceAction.createToggle(getBroadcastIntent(action, checked),
+                .setTitleItem(SliceAction.createToggle(getBroadcastIntent(action),
                         icon, res.getText(preferenceTitleResId), checked));
     }
 
@@ -371,31 +370,25 @@ public class WifiCallingSliceHelper {
     public void handleWifiCallingChanged(Intent intent) {
         final int subId = getDefaultVoiceSubId();
 
-        if (SubscriptionManager.isValidSubscriptionId(subId)
-                && intent.hasExtra(EXTRA_TOGGLE_STATE)) {
+        if (SubscriptionManager.isValidSubscriptionId(subId)) {
             final WifiCallingQueryImsState queryState = queryImsState(subId);
             if (queryState.isWifiCallingProvisioned()) {
-                final boolean currentValue = isWifiCallingEnabled();
+                final boolean currentValue = queryState.isEnabledByUser()
+                        && queryState.isAllowUserControl();
                 final boolean newValue = intent.getBooleanExtra(EXTRA_TOGGLE_STATE,
                         currentValue);
                 final Intent activationAppIntent =
                         getWifiCallingCarrierActivityIntent(subId);
-                if ((newValue == currentValue) && activationAppIntent == null) {
+                if (!newValue || activationAppIntent == null) {
                     // If either the action is to turn off wifi calling setting
                     // or there is no activation involved - Update the setting
-                    final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
-                    imsMmTelManager.setVoWiFiSettingEnabled(!newValue);
-                } else {
-                    Log.w(TAG, "action not taken: subId " + subId
-                            + " from " + currentValue + " to " + newValue);
+                    if (newValue != currentValue) {
+                        final ImsMmTelManager imsMmTelManager = getImsMmTelManager(subId);
+                        imsMmTelManager.setVoWiFiSettingEnabled(newValue);
+                    }
                 }
-            } else {
-                Log.w(TAG, "action not taken: subId " + subId + " needs provision");
             }
-        } else {
-            Log.w(TAG, "action not taken: subId " + subId);
         }
-
         // notify change in slice in any case to get re-queried. This would result in displaying
         // appropriate message with the updated setting.
         mContext.getContentResolver().notifyChange(WIFI_CALLING_URI, null);
@@ -548,20 +541,10 @@ public class WifiCallingSliceHelper {
                 PendingIntent.FLAG_IMMUTABLE);
     }
 
-    /**
-     * Create PendingIntent for Slice.
-     * Note: SliceAction#createDeeplink() didn't support toggle status so far,
-     *       therefore, embedding toggle status within PendingIntent.
-     *
-     * @param action Slice action
-     * @param isChecked Status when Slice created.
-     * @return PendingIntent
-     */
-    private PendingIntent getBroadcastIntent(String action, boolean isChecked) {
+    private PendingIntent getBroadcastIntent(String action) {
         final Intent intent = new Intent(action);
         intent.setClass(mContext, SliceBroadcastReceiver.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        intent.putExtra(EXTRA_TOGGLE_STATE, isChecked);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
                 PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }

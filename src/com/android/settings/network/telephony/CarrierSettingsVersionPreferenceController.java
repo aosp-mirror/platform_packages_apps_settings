@@ -23,16 +23,15 @@ import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.network.CarrierConfigCache;
 
 public class CarrierSettingsVersionPreferenceController extends BasePreferenceController {
 
     private int mSubscriptionId;
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mManager;
 
     public CarrierSettingsVersionPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
+        mManager = context.getSystemService(CarrierConfigManager.class);
         mSubscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
@@ -42,7 +41,7 @@ public class CarrierSettingsVersionPreferenceController extends BasePreferenceCo
 
     @Override
     public CharSequence getSummary() {
-        final PersistableBundle config = mCarrierConfigCache.getConfigForSubId(mSubscriptionId);
+        final PersistableBundle config = mManager.getConfigForSubId(mSubscriptionId);
         if (config == null) {
             return null;
         }

@@ -30,9 +30,6 @@ import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Preference for showing/hiding sensitive device controls content while the device is locked.
- *
- * Note that ControlsTrivialPrivacyPreferenceController depends on the preferenceKey
- * of this controller.
  */
 public class ControlsPrivacyPreferenceController extends TogglePreferenceController {
 
@@ -71,11 +68,6 @@ public class ControlsPrivacyPreferenceController extends TogglePreferenceControl
         super.updateState(preference);
         preference.setEnabled(getAvailabilityStatus() != DISABLED_DEPENDENT_SETTING);
         refreshSummary(preference);
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
     }
 
     private boolean isEnabled() {

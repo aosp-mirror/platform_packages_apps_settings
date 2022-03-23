@@ -22,7 +22,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 import java.util.Set;
@@ -70,11 +69,6 @@ public class CrossProfileCalendarPreferenceController extends TogglePreferenceCo
         final int value = isChecked ? 1 : 0;
         return Settings.Secure.putIntForUser(mContext.getContentResolver(),
                 CROSS_PROFILE_CALENDAR_ENABLED, value, mManagedUser.getIdentifier());
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_accounts;
     }
 
     static boolean isCrossProfileCalendarDisallowedByAdmin(Context context, int userId) {

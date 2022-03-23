@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.pm.ModuleInfo;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -57,7 +56,6 @@ public class ModuleLicensePreferenceTest {
     }
 
     @Test
-    @Ignore
     public void onClick_sendsCorrectIntent() {
         ModuleLicensePreference pref = new ModuleLicensePreference(mContext, mModuleInfo);
 

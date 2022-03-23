@@ -41,7 +41,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,7 +65,7 @@ public class UsbDetailsFunctionsControllerTest {
     private PreferenceCategory mPreferenceCategory;
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mScreen;
-    private SelectorWithWidgetPreference mRadioButtonPreference;
+    private RadioButtonPreference mRadioButtonPreference;
 
     @Mock
     private UsbBackend mUsbBackend;
@@ -99,7 +99,7 @@ public class UsbDetailsFunctionsControllerTest {
         mScreen.addPreference(mPreferenceCategory);
         mDetailsFunctionsController.displayPreference(mScreen);
 
-        mRadioButtonPreference = new SelectorWithWidgetPreference(mContext);
+        mRadioButtonPreference = new RadioButtonPreference(mContext);
     }
 
     @Test
@@ -109,10 +109,10 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.displayPreference(mScreen);
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
         Iterator<Long> iter = UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet().iterator();
 
-        for (SelectorWithWidgetPreference pref : prefs) {
+        for (RadioButtonPreference pref : prefs) {
             assertThat(pref.getKey()).isEqualTo(UsbBackend.usbFunctionsToString(iter.next()));
         }
     }
@@ -135,7 +135,7 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
         assertThat(prefs.size()).isEqualTo(1);
         assertThat(prefs.get(0).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MIDI));
@@ -147,7 +147,7 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
 
         assertThat(prefs.get(0).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
@@ -160,7 +160,7 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_ACCESSORY, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
 
         assertThat(prefs.get(0).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_MTP));
@@ -173,7 +173,7 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NCM, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
 
         assertThat(prefs.get(1).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
@@ -187,7 +187,7 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NONE);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(0).performClick();
 
         assertThat(prefs.get(0).getKey())
@@ -205,7 +205,7 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_PTP, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_PTP);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(0).performClick();
 
         assertThat(prefs.get(0).getKey())
@@ -226,7 +226,7 @@ public class UsbDetailsFunctionsControllerTest {
         mDetailsFunctionsController.refresh(true, UsbManager.FUNCTION_MTP, POWER_ROLE_SINK,
                 DATA_ROLE_DEVICE);
         when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
-        List<SelectorWithWidgetPreference> prefs = getRadioPreferences();
+        List<RadioButtonPreference> prefs = getRadioPreferences();
         prefs.get(4).performClick();
 
         assertThat(prefs.get(4).getKey())
@@ -244,10 +244,10 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(mDetailsFunctionsController.isAvailable()).isFalse();
     }
 
-    private List<SelectorWithWidgetPreference> getRadioPreferences() {
-        ArrayList<SelectorWithWidgetPreference> result = new ArrayList<>();
+    private List<RadioButtonPreference> getRadioPreferences() {
+        ArrayList<RadioButtonPreference> result = new ArrayList<>();
         for (int i = 0; i < mPreferenceCategory.getPreferenceCount(); i++) {
-            result.add((SelectorWithWidgetPreference) mPreferenceCategory.getPreference(i));
+            result.add((RadioButtonPreference) mPreferenceCategory.getPreference(i));
         }
         return result;
     }

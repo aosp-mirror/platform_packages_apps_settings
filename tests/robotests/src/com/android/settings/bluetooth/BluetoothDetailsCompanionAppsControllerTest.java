@@ -22,11 +22,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.companion.AssociationInfo;
+import android.companion.Association;
 import android.companion.CompanionDeviceManager;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.net.MacAddress;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -63,7 +62,7 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
     private PreferenceCategory mProfiles;
     private List<String> mPackages;
     private List<CharSequence> mAppNames;
-    private List<AssociationInfo> mAssociations;
+    private List<Association> mAssociations;
 
 
     @Override
@@ -98,20 +97,8 @@ public class BluetoothDetailsCompanionAppsControllerTest extends
 
     private void addFakeAssociation(String packageName, CharSequence appName) {
         setupFakeLabelAndInfo(packageName, appName);
-
-        final int associationId = mAssociations.size() + 1;
-        final AssociationInfo association = new AssociationInfo(
-                associationId,
-                /* userId */ 0,
-                packageName,
-                MacAddress.fromString(mCachedDevice.getAddress()),
-                /* displayName */ null,
-                /* deviceProfile */ "",
-                /* selfManaged */ false,
-                /* notifyOnDeviceNearby */ true,
-                /* timeApprovedMs */ System.currentTimeMillis(),
-                /* lastTimeConnected */ Long.MAX_VALUE);
-
+        Association association = new Association(
+                0, mCachedDevice.getAddress(), packageName, "", true, System.currentTimeMillis());
         mAssociations.add(association);
         showScreen(mController);
     }

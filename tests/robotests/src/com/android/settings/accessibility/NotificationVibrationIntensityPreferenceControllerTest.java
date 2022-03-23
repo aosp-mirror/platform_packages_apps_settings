@@ -16,158 +16,144 @@
 
 package com.android.settings.accessibility;
 
+import static android.provider.Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.media.AudioManager;
-import android.os.VibrationAttributes;
+import android.content.res.Resources;
 import android.os.Vibrator;
 import android.provider.Settings;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
 public class NotificationVibrationIntensityPreferenceControllerTest {
 
-    private static final String PREFERENCE_KEY = "preference_key";
+    @Mock
+    private PreferenceScreen mScreen;
 
-    @Mock private PreferenceScreen mScreen;
-    @Mock private AudioManager mAudioManager;
-
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
-    private Vibrator mVibrator;
+    private Resources mResources;
     private NotificationVibrationIntensityPreferenceController mController;
-    private SeekBarPreference mPreference;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
-        mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
-        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
-        mVibrator = mContext.getSystemService(Vibrator.class);
-        mController = new NotificationVibrationIntensityPreferenceController(mContext,
-                PREFERENCE_KEY, Vibrator.VIBRATION_INTENSITY_HIGH);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mContext = spy(RuntimeEnvironment.application);
+        mResources = spy(mContext.getResources());
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_vibration_supports_multiple_intensities))
+            .thenReturn(true);
+        mController = new NotificationVibrationIntensityPreferenceController(mContext) {
+            @Override
+            protected int getDefaultIntensity() {
+                return 10;
+            }
+        };
         mLifecycle.addObserver(mController);
-        mPreference = new SeekBarPreference(mContext);
-        mPreference.setSummary("Test summary");
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        mController.displayPreference(mScreen);
+        mPreference = new Preference(mContext);
+        mPreference.setSummary("Test");
+        when(mScreen.findPreference(mController.getPreferenceKey()))
+                .thenReturn(mPreference);
     }
 
     @Test
     public void verifyConstants() {
-        assertThat(mController.getPreferenceKey()).isEqualTo(PREFERENCE_KEY);
+        assertThat(mController.getPreferenceKey())
+                .isEqualTo(NotificationVibrationIntensityPreferenceController.PREF_KEY);
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
-        assertThat(mController.getMin()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(mController.getMax()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
     }
 
     @Test
-    public void missingSetting_shouldReturnDefault() {
-        Settings.System.putString(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY, /* value= */ null);
+    public void updateState_withMultipleIntensitySuport_shouldRefreshSummary() {
+        setSupportsMultipleIntensities(true);
+        showPreference();
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(
-                mVibrator.getDefaultVibrationIntensity(VibrationAttributes.USAGE_NOTIFICATION));
-    }
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_low));
 
-
-    @Test
-    public void updateState_ringerModeUpdates_shouldPreserveSettingAndDisplaySummary() {
-        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_LOW);
-
-        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getSummary()).isNull();
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_high));
 
-        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_SILENT);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        // TODO(b/136805769): summary is broken in SeekBarPreference, enable this once fixed
-//        assertThat(mPreference.getSummary()).isNotNull();
-//        assertThat(mPreference.getSummary().toString()).isEqualTo(mContext.getString(
-//                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary));
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_medium));
 
-        when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(mPreference.getSummary()).isNull();
-        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_off));
     }
 
     @Test
-    public void updateState_shouldDisplayIntensityInSliderPosition() {
-        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_HIGH);
-        mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+    public void updateState_withoutMultipleIntensitySupport_shouldRefreshSummary() {
+        setSupportsMultipleIntensities(false);
+        showPreference();
 
-        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
 
-        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_LOW);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
 
-        updateSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                Vibrator.VIBRATION_INTENSITY_OFF);
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
+
+        Settings.System.putInt(mContext.getContentResolver(),
+                NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
+        mController.updateState(mPreference);
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getString(R.string.switch_off_text));
     }
 
-
-    @Test
-    @Ignore
-    public void setProgress_updatesIntensitySetting() throws Exception {
-        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_OFF);
-        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-
-        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_LOW);
-        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-
-        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_MEDIUM);
-        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
-
-        mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_HIGH);
-        assertThat(readSetting(Settings.System.NOTIFICATION_VIBRATION_INTENSITY))
-                .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
+    private void setSupportsMultipleIntensities(boolean hasSupport) {
+        when(mResources.getBoolean(R.bool.config_vibration_supports_multiple_intensities))
+            .thenReturn(hasSupport);
     }
 
-    private void updateSetting(String key, int value) {
-        Settings.System.putInt(mContext.getContentResolver(), key, value);
-    }
-
-    private int readSetting(String settingKey) throws Settings.SettingNotFoundException {
-        return Settings.System.getInt(mContext.getContentResolver(), settingKey);
+    private void showPreference() {
+        mController.displayPreference(mScreen);
     }
 }

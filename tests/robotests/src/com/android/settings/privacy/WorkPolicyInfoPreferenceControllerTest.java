@@ -16,7 +16,7 @@
 
 package com.android.settings.privacy;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -33,8 +33,8 @@ import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -64,12 +64,12 @@ public class WorkPolicyInfoPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_haveWorkPolicyInfo_shouldReturnAvailable() {
+    public void getAvailabilityStatus_haveWorkPolicyInfo_shouldReturnAvailableUnsearchable() {
         when(mEnterpriseProvider.hasWorkPolicyInfo()).thenReturn(true);
         WorkPolicyInfoPreferenceController controller =
                 new WorkPolicyInfoPreferenceController(mContext, "test_key");
 
-        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+        assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class WorkPolicyInfoPreferenceControllerTest {
 
         final Preference pref = new Preference(mContext);
         assertThat(controller.handlePreferenceTreeClick(pref)).isFalse();
-        verify(mEnterpriseProvider, never()).showWorkPolicyInfo(mContext);
+        verify(mEnterpriseProvider, never()).showWorkPolicyInfo();
     }
 
     @Test
@@ -92,6 +92,6 @@ public class WorkPolicyInfoPreferenceControllerTest {
         final Preference pref = new Preference(mContext);
         pref.setKey(controller.getPreferenceKey());
         assertThat(controller.handlePreferenceTreeClick(pref)).isTrue();
-        verify(mEnterpriseProvider).showWorkPolicyInfo(mContext);
+        verify(mEnterpriseProvider).showWorkPolicyInfo();
     }
 }

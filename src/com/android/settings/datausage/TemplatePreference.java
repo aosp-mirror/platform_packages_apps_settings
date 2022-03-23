@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.net.INetworkStatsService;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.INetworkManagementService;
@@ -29,6 +30,7 @@ public interface TemplatePreference {
 
     class NetworkServices {
         INetworkManagementService mNetworkService;
+        INetworkStatsService mStatsService;
         NetworkPolicyManager mPolicyManager;
         TelephonyManager mTelephonyManager;
         SubscriptionManager mSubscriptionManager;

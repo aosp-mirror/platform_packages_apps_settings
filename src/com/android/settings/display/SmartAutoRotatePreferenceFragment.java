@@ -34,13 +34,9 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchBar;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
-
-import java.util.List;
 
 /**
  * Preference fragment used for auto rotation
@@ -64,15 +60,6 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         use(SmartAutoRotateController.class).init(getLifecycle());
-        DeviceStateAutoRotationHelper.initControllers(
-                getLifecycle(),
-                useAll(DeviceStateAutoRotateSettingController.class)
-        );
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return DeviceStateAutoRotationHelper.createPreferenceControllers(context);
     }
 
     @Override
@@ -92,9 +79,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
 
     @VisibleForTesting
     void createHeader(SettingsActivity activity) {
-        boolean deviceStateRotationEnabled =
-                DeviceStateAutoRotationHelper.isDeviceStateRotationEnabled(activity);
-        if (isRotationResolverServiceAvailable(activity) && !deviceStateRotationEnabled) {
+        if (isRotationResolverServiceAvailable(activity)) {
             final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
             switchBar.setTitle(
                     getContext().getString(R.string.auto_rotate_settings_primary_switch_title));
@@ -142,12 +127,5 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.auto_rotate_settings) {
-
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(
-                        Context context, boolean enabled) {
-                    return DeviceStateAutoRotationHelper.getRawDataToIndex(context, enabled);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.auto_rotate_settings);
 }

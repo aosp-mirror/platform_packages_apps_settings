@@ -43,7 +43,6 @@ import android.telephony.TelephonyManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -66,7 +65,7 @@ public class CarrierPreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
 
     private CarrierPreferenceController mController;
     private RestrictedPreference mPreference;
@@ -82,11 +81,13 @@ public class CarrierPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
 
         mPreference = new RestrictedPreference(mContext);
         mController = new CarrierPreferenceController(mContext, "mobile_data");
         mController.init(SUB_ID);
+        mController.mCarrierConfigManager = mCarrierConfigManager;
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -95,7 +96,7 @@ public class CarrierPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, false);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -105,7 +106,7 @@ public class CarrierPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, true);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -115,7 +116,7 @@ public class CarrierPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_CARRIER_SETTINGS_ENABLE_BOOL, true);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -126,7 +127,7 @@ public class CarrierPreferenceControllerTest {
         bundle.putString(
                 CarrierConfigManager.KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING,
                 CARRIER_SETTINGS_COMPONENT);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
         PackageManager pm = Mockito.mock(PackageManager.class);
         doReturn(pm).when(mContext).getPackageManager();
         doReturn(new ResolveInfo()).when(pm).resolveActivity(any(Intent.class), anyInt());
@@ -147,7 +148,7 @@ public class CarrierPreferenceControllerTest {
         bundle.putString(
                 CarrierConfigManager.KEY_CARRIER_SETTINGS_ACTIVITY_COMPONENT_NAME_STRING,
                 CARRIER_SETTINGS_COMPONENT);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
         PackageManager pm = Mockito.mock(PackageManager.class);
         doReturn(pm).when(mContext).getPackageManager();
         doReturn(null).when(pm).resolveActivity(any(Intent.class), anyInt());
@@ -161,7 +162,7 @@ public class CarrierPreferenceControllerTest {
     @Test
     public void handlePreferenceClick_activityNotConfigured_DoNothing() {
         final PersistableBundle bundle = new PersistableBundle();
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
         PackageManager pm = Mockito.mock(PackageManager.class);
         doReturn(pm).when(mContext).getPackageManager();
         doReturn(new ResolveInfo()).when(pm).resolveActivity(any(Intent.class), anyInt());

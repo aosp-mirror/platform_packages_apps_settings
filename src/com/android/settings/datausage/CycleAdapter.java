@@ -13,21 +13,18 @@
  */
 package com.android.settings.datausage;
 
-import android.annotation.NonNull;
-import android.app.usage.NetworkStats;
 import android.content.Context;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
+import android.net.NetworkStatsHistory;
 import android.text.format.DateUtils;
 import android.util.Pair;
-import android.util.Range;
 import android.widget.AdapterView;
 
-import com.android.net.module.util.NetworkStatsUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.NetworkCycleData;
-import com.android.settingslib.widget.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
 
 import java.time.ZonedDateTime;
 import java.util.Iterator;
@@ -65,43 +62,9 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         return 0;
     }
 
-    protected static long getTotalBytesForTimeRange(List<NetworkStats.Bucket> stats,
-            Range<Long> range) {
-        long bytes = 0L;
-        for (NetworkStats.Bucket bucket : stats) {
-            final Range<Long> bucketSpan = new Range<>(
-                    bucket.getStartTimeStamp(), bucket.getEndTimeStamp());
-            // Only record bytes that overlapped with the given time range. For partially
-            // overlapped bucket, record rational bytes assuming the traffic is uniform
-            // distributed within the bucket.
-            try {
-                final Range<Long> overlapped = range.intersect(bucketSpan);
-                final long totalOfBucket = bucket.getRxBytes() + bucket.getTxBytes();
-                bytes += NetworkStatsUtils.multiplySafeByRational(totalOfBucket,
-                        overlapped.getUpper() - overlapped.getLower(),
-                        bucketSpan.getUpper() - bucketSpan.getLower());
-            } catch (IllegalArgumentException e) {
-                // Range disjoint, ignore.
-                continue;
-            }
-        }
-        return bytes;
-    }
-
-    @NonNull
-    private Range getTimeRangeOf(@NonNull List<NetworkStats.Bucket> stats) {
-        long start = Long.MAX_VALUE;
-        long end = Long.MIN_VALUE;
-        for (NetworkStats.Bucket bucket : stats) {
-            start = Math.min(start, bucket.getStartTimeStamp());
-            end = Math.max(end, bucket.getEndTimeStamp());
-        }
-        return new Range(start, end);
-    }
-
     /**
      * Rebuild list based on {@link NetworkPolicy} and available
-     * {@link List<NetworkStats.Bucket>} data. Always selects the newest item,
+     * {@link NetworkStatsHistory} data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
     @Deprecated
@@ -112,19 +75,18 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         clear();
 
         final Context context = getContext();
+        NetworkStatsHistory.Entry entry = null;
 
-        long historyStart;
-        long historyEnd;
-        try {
-            final Range<Long> historyTimeRange = getTimeRangeOf(chartData.network);
-            historyStart = historyTimeRange.getLower();
-            historyEnd = historyTimeRange.getUpper();
-        } catch (IllegalArgumentException e) {
-            // Empty history.
-            final long now = System.currentTimeMillis();
-            historyStart = now;
-            historyEnd = now + 1;
+        long historyStart = Long.MAX_VALUE;
+        long historyEnd = Long.MIN_VALUE;
+        if (chartData != null) {
+            historyStart = chartData.network.getStart();
+            historyEnd = chartData.network.getEnd();
         }
+
+        final long now = System.currentTimeMillis();
+        if (historyStart == Long.MAX_VALUE) historyStart = now;
+        if (historyEnd == Long.MIN_VALUE) historyEnd = now + 1;
 
         boolean hasCycles = false;
         if (policy != null) {
@@ -137,9 +99,8 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
 
                 final boolean includeCycle;
                 if (chartData != null) {
-                    final long bytesInCycle = getTotalBytesForTimeRange(chartData.network,
-                            new Range<>(cycleStart, cycleEnd));
-                    includeCycle = bytesInCycle > 0;
+                    entry = chartData.network.getValues(cycleStart, cycleEnd, entry);
+                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
                 } else {
                     includeCycle = true;
                 }
@@ -159,9 +120,8 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
 
                 final boolean includeCycle;
                 if (chartData != null) {
-                    final long bytesInCycle = getTotalBytesForTimeRange(chartData.network,
-                            new Range<>(cycleStart, cycleEnd));
-                    includeCycle = bytesInCycle > 0;
+                    entry = chartData.network.getValues(cycleStart, cycleEnd, entry);
+                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
                 } else {
                     includeCycle = true;
                 }

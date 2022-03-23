@@ -149,11 +149,6 @@ public class DarkThemeSlice implements CustomSliceable {
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
-    }
-
-    @Override
     public Class getBackgroundWorkerClass() {
         return DarkThemeWorker.class;
     }
