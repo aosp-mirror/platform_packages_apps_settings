@@ -39,7 +39,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -484,11 +483,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         public void onChecked(boolean matched, int timeoutMs) {
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
-                                // TODO: get rid of EXTRA_KEY_TYPE, since EXTRA_KEY_PASSWORD already
-                                // distinguishes beteween PIN and password.
-                                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                                mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
-                                                         : StorageManager.CRYPT_TYPE_PIN);
                                 intent.putExtra(
                                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, credential);
                             }

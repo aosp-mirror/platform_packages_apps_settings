@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -162,9 +163,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
-        // If the device doesn't support magnification area, it should hide the settings preference.
-        if (!getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_magnification_area)) {
+        // If the device doesn't support window magnification feature, it should hide the
+        // settings preference.
+        final boolean supportWindowMagnification =
+                getContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_magnification_area)
+                        && getContext().getPackageManager().hasSystemFeature(
+                        PackageManager.FEATURE_WINDOW_MAGNIFICATION);
+        if (!supportWindowMagnification) {
             return;
         }
         mSettingsPreference = new Preference(getPrefContext());
