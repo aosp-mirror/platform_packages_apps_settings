@@ -100,7 +100,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         if (localeInfo == null || localeInfo.getLocale() == null || localeInfo.isSystemLocale()) {
             setAppDefaultLocale("");
         } else {
-            setAppDefaultLocale(localeInfo.getLocale().getLanguage());
+            setAppDefaultLocale(localeInfo.getLocale().toLanguageTag());
         }
         finish();
     }
