@@ -17,6 +17,7 @@
 package com.android.settings.biometrics.fingerprint;
 
 import android.content.Context;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 
 import androidx.annotation.Nullable;
@@ -27,8 +28,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricStatusPreferenceController;
+import com.android.settings.biometrics.ParentalControlsUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
@@ -40,7 +43,6 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     protected final FingerprintManager mFingerprintManager;
     @VisibleForTesting
     RestrictedPreference mPreference;
-    private final FingerprintStatusUtils mFingerprintStatusUtils;
 
     public FingerprintStatusPreferenceController(Context context) {
         this(context, KEY_FINGERPRINT_SETTINGS);
@@ -57,8 +59,6 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     public FingerprintStatusPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context, key);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
-        mFingerprintStatusUtils =
-                new FingerprintStatusUtils(context, mFingerprintManager, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -78,7 +78,13 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
 
     @Override
     protected boolean isDeviceSupported() {
-        return mFingerprintStatusUtils.isAvailable();
+        return !Utils.isMultipleBiometricsSupported(mContext)
+                && Utils.hasFingerprintHardware(mContext);
+    }
+
+    @Override
+    protected boolean hasEnrolledBiometrics() {
+        return mFingerprintManager.hasEnrolledFingerprints(getUserId());
     }
 
     @Override
@@ -88,17 +94,8 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
     }
 
     private void updateStateInternal() {
-        updateStateInternal(mFingerprintStatusUtils.getDisablingAdmin());
-    }
-
-    @Override
-    protected String getSummaryText() {
-        return mFingerprintStatusUtils.getSummary();
-    }
-
-    @Override
-    protected String getSettingsClassName() {
-        return mFingerprintStatusUtils.getSettingsClassName();
+        updateStateInternal(ParentalControlsUtils.parentConsentRequired(
+                mContext, BiometricAuthenticator.TYPE_FINGERPRINT));
     }
 
     @VisibleForTesting
@@ -107,4 +104,28 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }
     }
+
+    @Override
+    protected String getSummaryTextEnrolled() {
+        final int numEnrolled = mFingerprintManager.getEnrolledFingerprints(getUserId()).size();
+        return mContext.getResources().getQuantityString(
+                R.plurals.security_settings_fingerprint_preference_summary,
+                numEnrolled, numEnrolled);
+    }
+
+    @Override
+    protected String getSummaryTextNoneEnrolled() {
+        return mContext.getString(R.string.security_settings_fingerprint_preference_summary_none);
+    }
+
+    @Override
+    protected String getSettingsClassName() {
+        return FingerprintSettings.class.getName();
+    }
+
+    @Override
+    protected String getEnrollClassName() {
+        return FingerprintEnrollIntroduction.class.getName();
+    }
+
 }

@@ -23,7 +23,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,14 +39,14 @@ public class OneHandedActionPullDownPrefControllerTest {
     private Context mContext;
     private OneHandedSettingsUtils mUtils;
     private OneHandedActionPullDownPrefController mController;
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUtils = new OneHandedSettingsUtils(mContext);
         mController = new OneHandedActionPullDownPrefController(mContext, KEY);
-        mPreference = new SelectorWithWidgetPreference(mContext);
+        mPreference = new RadioButtonPreference(mContext);
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 

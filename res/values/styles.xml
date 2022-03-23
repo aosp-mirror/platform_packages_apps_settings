@@ -198,6 +198,10 @@
         <item name="android:activityOpenExitAnimation">@anim/confirm_credential_open_exit</item>
     </style>
 
+    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:background">#ff000000</item>
+    </style>
+
     <style name="SetupWizardButton.Negative" parent="@style/SudGlifButton.Secondary">
         <!-- Negative margin to offset for padding of the button itself. We want the label to be
              aligned with the text above it -->
@@ -233,16 +237,6 @@
         <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
     </style>
 
-    <style name="vpn_app_management_version_title">
-        <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="vpn_app_management_version_summary">
-        <item name="android:textAppearance">?android:attr/textAppearanceListItemSecondary</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
     <style name="TextAppearance" parent="android:TextAppearance.DeviceDefault"/>
 
     <style name="TextAppearance.info_label">
@@ -265,6 +259,14 @@
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.DeviceDefault">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">flagForceAscii|actionDone</item>
     </style>
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.DeviceDefault.Medium"/>
@@ -432,20 +434,38 @@
     </style>
 
     <style name="LockPatternContainerStyle">
-        <item name="android:maxHeight">620dp</item>
-        <item name="android:maxWidth">620dp</item>
+        <item name="android:maxHeight">400dp</item>
+        <item name="android:maxWidth">420dp</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">0dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingHorizontal">0dp</item>
+        <item name="android:paddingHorizontal">44dp</item>
         <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="LockPatternStyle">
-        <item name="*android:regularColor">?android:attr/colorAccent</item>
-        <item name="*android:successColor">?android:attr/textColorPrimary</item>
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
         <item name="*android:errorColor">?android:attr/colorError</item>
-        <item name="*android:dotColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark">
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark.Work">
+        <item name="*android:regularColor">@*android:color/white</item>
+    </style>
+
+    <style name="LockPatternStyle.Unlock">
+        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
+    </style>
+
+    <style name="LockPatternStyle.Setup">
+        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
+        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
     </style>
 
     <style name="device_info_dialog_label">
@@ -524,13 +544,6 @@
         <item name="rowStyle">@style/SliceRow.Slider</item>
     </style>
 
-    <style name="Widget.SliceView.Bluetooth">
-        <item name="titleSize">20dp</item>
-        <item name="subtitleSize">14dp</item>
-        <item name="headerTitleSize">20dp</item>
-        <item name="headerSubtitleSize">14dp</item>
-    </style>
-
     <style name="Widget.SliceView.Panel.Slider.LargeIcon">
         <item name="rowStyle">@style/SliceRow.Slider.LargeIcon</item>
     </style>
@@ -562,16 +575,15 @@
     </style>
 
     <style name="SliceRow.Slider">
-        <!-- Padding between content and the start icon is 5dp -->
-        <item name="contentStartPadding">5dp</item>
-        <item name="contentEndPadding">0dp</item>
+        <!-- Padding between content and the start icon is 0dp -->
+        <item name="contentStartPadding">0dp</item>
+        <item name="contentEndPadding">36dp</item>
 
         <!-- 0dp start padding for the end item -->
         <item name="endItemStartPadding">0dp</item>
         <!-- 8dp end padding for the end item -->
         <item name="endItemEndPadding">8dp</item>
 
-        <item name="titleSize">20sp</item>
         <!-- Align text with slider -->
         <item name="titleStartPadding">11dp</item>
         <item name="subContentStartPadding">11dp</item>
@@ -600,15 +612,6 @@
         <item name="android:layout_margin">16dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
-    </style>
-
-    <style name="PanelOptionRoundedOutlinedButton" parent="@android:style/Widget.Material.Button">
-        <item name="android:background">@drawable/volume_dialog_button_background_outline</item>
-    </style>
-
-    <style name="PanelOptionRoundedSolidButton" parent="@android:style/Widget.Material.Button">
-        <item name="android:textColor">@android:color/system_neutral1_900</item>
-        <item name="android:background">@drawable/volume_dialog_button_background_solid</item>
     </style>
 
     <style name="SetupWizardPartnerResource">
@@ -725,13 +728,6 @@
         <item name="android:paddingEnd">8dp</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
-    </style>
-
-    <style name="AccessibilityTextReadingPreviewTitle"
-        parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Title" >
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Widget.PopupWindow.Settings"
@@ -917,35 +913,5 @@
     <style name="TextAppearance.AdminDialogMessage"
            parent="@*android:style/TextAppearance.DeviceDefault">
         <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="TextAppearance.SimConfirmDialogList" parent="@style/TextAppearance.DialogMessage"/>
-
-    <style name="TextAppearance.SimConfirmDialogList.Summary">
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-
-    <style name="SimConfirmDialog.OutlineButton" parent="@android:style/Widget.Material.Button">
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:lineHeight">20sp</item>
-        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:background">@drawable/sim_confirm_dialog_btn_outline</item>
-    </style>
-
-    <style name="SimConfirmDialog.ButtonBarStyle" parent="@android:style/Widget.Material.ButtonBar">
-        <item name="android:paddingEnd">8dp</item>
-    </style>
-
-    <style name="DreamCardStyle">
-        <item name="cardBackgroundColor">@color/dream_card_color_state_list</item>
-        <item name="cardCornerRadius">@dimen/dream_item_corner_radius</item>
-        <item name="cardElevation">0dp</item>
-        <item name="rippleColor">?android:attr/colorControlHighlight</item>
-        <item name="contentPadding">@dimen/dream_item_content_padding</item>
     </style>
 </resources>

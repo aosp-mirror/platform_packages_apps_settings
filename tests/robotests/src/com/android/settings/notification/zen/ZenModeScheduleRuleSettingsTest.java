@@ -36,7 +36,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.android.settings.R;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -84,7 +83,6 @@ public class ZenModeScheduleRuleSettingsTest {
     }
 
     @Test
-    @Ignore
     public void onCreate_noRuleId_shouldToastAndFinishAndNoCrash() {
         final String expected = mContext.getString(R.string.zen_mode_rule_not_found_text);
 

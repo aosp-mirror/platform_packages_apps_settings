@@ -173,7 +173,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
 
         if (!refreshUi()) {
-            finish();
+            setIntentAndFinish(true /* appChanged */);
         }
         Preference apps = getPreferenceScreen().findPreference(
                 use(BridgedAppsLinkPreferenceController.class).getPreferenceKey());
@@ -195,6 +195,14 @@ public class NotificationAccessDetails extends DashboardFragment {
                 return true;
             });
         }
+    }
+
+    protected void setIntentAndFinish(boolean appChanged) {
+        Log.i(TAG, "appChanged=" + appChanged);
+        Intent intent = new Intent();
+        intent.putExtra(ManageApplications.APP_CHG, appChanged);
+        SettingsActivity sa = (SettingsActivity) getActivity();
+        sa.finishPreferencePanel(Activity.RESULT_OK, intent);
     }
 
     protected void retrieveAppEntry() {
@@ -220,7 +228,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                             PackageManager.GET_SIGNING_CERTIFICATES |
                             PackageManager.GET_PERMISSIONS, mUserId);
         } catch (PackageManager.NameNotFoundException e) {
-            // oh well
+            Log.e(TAG, "Exception when retrieving package:" + mPackageName, e);
         }
     }
 

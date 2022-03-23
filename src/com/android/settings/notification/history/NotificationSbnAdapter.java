@@ -133,6 +133,7 @@ public class NotificationSbnAdapter extends
                         .putExtra(EXTRA_APP_PACKAGE, sbn.getPackageName())
                         .putExtra(EXTRA_CHANNEL_ID, sbn.getNotification().getChannelId())
                         .putExtra(EXTRA_CONVERSATION_ID, sbn.getNotification().getShortcutId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 holder.itemView.getContext().startActivityAsUser(intent, UserHandle.of(userId));
                 return true;
             });

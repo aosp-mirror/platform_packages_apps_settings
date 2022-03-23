@@ -31,7 +31,6 @@ import android.telephony.ims.ProvisioningManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settings.network.ims.MockVtQueryImsState;
 
@@ -52,7 +51,7 @@ public class VideoCallingPreferenceControllerTest {
     @Mock
     private ProvisioningManager mProvisioningManager;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
@@ -70,13 +69,14 @@ public class VideoCallingPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        doReturn(mCarrierConfigManager).when(mContext)
+                .getSystemService(CarrierConfigManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 
         mCarrierConfig = new PersistableBundle();
         mCarrierConfig.putBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, true);
-        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         mQueryImsState = new MockVtQueryImsState(mContext, SUB_ID);
         mQueryImsState.setIsEnabledByUser(true);

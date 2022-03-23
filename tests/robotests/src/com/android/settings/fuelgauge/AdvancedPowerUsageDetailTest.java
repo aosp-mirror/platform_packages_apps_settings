@@ -30,11 +30,9 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
-import android.app.backup.BackupManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -64,7 +62,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -125,16 +123,13 @@ public class AdvancedPowerUsageDetailTest {
     private BatteryUtils mBatteryUtils;
     @Mock
     private BatteryOptimizeUtils mBatteryOptimizeUtils;
-    @Mock
-    private BackupManager mBackupManager;
-
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
     private FooterPreference mFooterPreference;
-    private SelectorWithWidgetPreference mRestrictedPreference;
-    private SelectorWithWidgetPreference mOptimizePreference;
-    private SelectorWithWidgetPreference mUnrestrictedPreference;
+    private RadioButtonPreference mRestrictedPreference;
+    private RadioButtonPreference mOptimizePreference;
+    private RadioButtonPreference mUnrestrictedPreference;
     private AdvancedPowerUsageDetail mFragment;
     private SettingsActivity mTestActivity;
     private FakeFeatureFactory mFeatureFactory;
@@ -185,10 +180,9 @@ public class AdvancedPowerUsageDetailTest {
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
-        mFragment.mEnableTriState = true;
+        mFragment.enableTriState = true;
         mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mBatteryOptimizeUtils = mBatteryOptimizeUtils;
-        mFragment.mBackupManager = mBackupManager;
         mAppEntry.info = mock(ApplicationInfo.class);
 
         mTestActivity = spy(new SettingsActivity());
@@ -214,9 +208,9 @@ public class AdvancedPowerUsageDetailTest {
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
         mFooterPreference = new FooterPreference(mContext);
-        mRestrictedPreference = new SelectorWithWidgetPreference(mContext);
-        mOptimizePreference = new SelectorWithWidgetPreference(mContext);
-        mUnrestrictedPreference = new SelectorWithWidgetPreference(mContext);
+        mRestrictedPreference = new RadioButtonPreference(mContext);
+        mOptimizePreference = new RadioButtonPreference(mContext);
+        mUnrestrictedPreference = new RadioButtonPreference(mContext);
         mFragment.mForegroundPreference = mForegroundPreference;
         mFragment.mBackgroundPreference = mBackgroundPreference;
         mFragment.mFooterPreference = mFooterPreference;
@@ -237,7 +231,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testGetPreferenceScreenResId_disableTriState_returnLegacyLayout() {
-        mFragment.mEnableTriState = false;
+        mFragment.enableTriState = false;
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.power_usage_detail_legacy);
     }
 
@@ -435,21 +429,6 @@ public class AdvancedPowerUsageDetailTest {
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
                 .isEqualTo("No usage for past 24 hr");
-    }
-
-    @Test
-    public void testInitHeader_noUsageTimeButConsumedPower_hasEmptySummary() {
-        Bundle bundle = new Bundle(3);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, /* value */ 0);
-        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, /* value */ 0);
-        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_AMOUNT, /* value */ 10);
-        when(mFragment.getArguments()).thenReturn(bundle);
-
-        mFragment.initHeader();
-
-        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
-        verify(mEntityHeaderController).setSummary(captor.capture());
-        assertThat(captor.getValue().toString()).isEmpty();
     }
 
     @Test
@@ -792,71 +771,13 @@ public class AdvancedPowerUsageDetailTest {
         assertThat(mOptimizePreference.isChecked()).isTrue();
         assertThat(mRestrictedPreference.isChecked()).isFalse();
         assertThat(mUnrestrictedPreference.isChecked()).isFalse();
-    }
-
-    @Test
-    public void testOnPause_optimizationModeChanged_logPreference() {
-        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
-        mFragment.mOptimizationMode = mode;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
-        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
-
-        mFragment.onRadioButtonClicked(mOptimizePreference);
-        mFragment.onPause();
-
         verify(mMetricsFeatureProvider)
-                .action(
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                        SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
-                        SettingsEnums.OPEN_APP_BATTERY_USAGE,
-                        /* package name*/ "none",
-                        /* consumed battery */ 0);
-    }
-
-    @Test
-    public void testOnPause_optimizationModeIsNotChanged_notInvokeLogging() {
-        final int mode = BatteryOptimizeUtils.MODE_OPTIMIZED;
-        mFragment.mOptimizationMode = mode;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
-        mOptimizePreference.setKey(KEY_PREF_OPTIMIZED);
-
-        mFragment.onRadioButtonClicked(mOptimizePreference);
-        mFragment.onPause();
-
-        verifyZeroInteractions(mMetricsFeatureProvider);
-    }
-
-    @Test
-    public void notifyBackupManager_optimizationModeIsNotChanged_notInvokeDataChanged() {
-        final int mode = BatteryOptimizeUtils.MODE_RESTRICTED;
-        mFragment.mOptimizationMode = mode;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode()).thenReturn(mode);
-
-        mFragment.notifyBackupManager();
-
-        verifyZeroInteractions(mBackupManager);
-    }
-
-    @Test
-    public void notifyBackupManager_optimizationModeIsChanged_invokeDataChanged() {
-        mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode())
-                .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
-
-        mFragment.notifyBackupManager();
-
-        verify(mBackupManager).dataChanged();
-    }
-
-    @Test
-    public void notifyBackupManager_triStateIsNotEnabled_notInvokeDataChanged() {
-        mFragment.mOptimizationMode = BatteryOptimizeUtils.MODE_RESTRICTED;
-        when(mBatteryOptimizeUtils.getAppOptimizationMode())
-                .thenReturn(BatteryOptimizeUtils.MODE_UNRESTRICTED);
-        mFragment.mEnableTriState = false;
-
-        mFragment.onPause();
-
-        verifyZeroInteractions(mBackupManager);
+            .action(
+                mContext,
+                SettingsEnums.ACTION_APP_BATTERY_USAGE_OPTIMIZED,
+                (Pair<Integer, Object>[]) new Pair[] {
+                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
+                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, "app label")
+                });
     }
 }

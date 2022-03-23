@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
+import android.telephony.ServiceState;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -107,18 +108,18 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         mSubId = getArguments().getInt(KEY_SUBSCRIPTION_ID);
         Resources res = context.getResources();
         mLightDarkMap = ImmutableMap.<Integer, Integer>builder()
-                .put(res.getInteger(R.color.SIM_color_cyan),
-                        res.getInteger(R.color.SIM_dark_mode_color_cyan))
-                .put(res.getInteger(R.color.SIM_color_blue800),
+                .put(res.getInteger(R.color.SIM_color_teal),
+                        res.getInteger(R.color.SIM_dark_mode_color_teal))
+                .put(res.getInteger(R.color.SIM_color_blue),
                         res.getInteger(R.color.SIM_dark_mode_color_blue))
-                .put(res.getInteger(R.color.SIM_color_green800),
-                        res.getInteger(R.color.SIM_dark_mode_color_green))
-                .put(res.getInteger(R.color.SIM_color_purple800),
+                .put(res.getInteger(R.color.SIM_color_indigo),
+                        res.getInteger(R.color.SIM_dark_mode_color_indigo))
+                .put(res.getInteger(R.color.SIM_color_purple),
                         res.getInteger(R.color.SIM_dark_mode_color_purple))
-                .put(res.getInteger(R.color.SIM_color_pink800),
+                .put(res.getInteger(R.color.SIM_color_pink),
                         res.getInteger(R.color.SIM_dark_mode_color_pink))
-                .put(res.getInteger(R.color.SIM_color_orange),
-                        res.getInteger(R.color.SIM_dark_mode_color_orange))
+                .put(res.getInteger(R.color.SIM_color_red),
+                        res.getInteger(R.color.SIM_dark_mode_color_red))
                 .build();
     }
 
@@ -174,20 +175,23 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         final ColorAdapter adapter = new ColorAdapter(getContext(),
                 R.layout.dialog_mobile_network_color_picker_item, mColors);
         mColorSpinner.setAdapter(adapter);
-        mColorSpinner.setSelection(getSimColorIndex(info.getIconTint()));
+        for (int i = 0; i < mColors.length; i++) {
+            if (mColors[i].getColor() == info.getIconTint()) {
+                mColorSpinner.setSelection(i);
+                break;
+            }
+        }
 
         final TextView operatorName = view.findViewById(R.id.operator_name_value);
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-        operatorName.setText(info.getCarrierName());
+        final ServiceState serviceState = mTelephonyManager.getServiceState();
+        operatorName.setText(serviceState == null ? "" : serviceState.getOperatorAlphaLong());
 
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 
         final TextView phoneNumber = view.findViewById(R.id.number_value);
-        final String pn = DeviceInfoUtils.getBidiFormattedPhoneNumber(getContext(), info);
-        if (!TextUtils.isEmpty(pn)) {
-            phoneNumber.setText(pn);
-        }
+        phoneNumber.setText(DeviceInfoUtils.getBidiFormattedPhoneNumber(getContext(), info));
     }
 
     @Override
@@ -235,7 +239,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     private Color[] getColors() {
         final Resources res = getContext().getResources();
-        final int[] colorInts = res.getIntArray(R.array.sim_color_light);
+        final int[] colorInts = res.getIntArray(com.android.internal.R.array.sim_colors);
         final String[] colorStrings = res.getStringArray(R.array.color_picker);
         final int iconSize = res.getDimensionPixelSize(R.dimen.color_swatch_size);
         final int strokeWidth = res.getDimensionPixelSize(R.dimen.color_swatch_stroke_width);
@@ -281,32 +285,5 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
 
     private int getDarkColor(int lightColor) {
         return mLightDarkMap.getOrDefault(lightColor, lightColor);
-    }
-
-    /*
-    * Get the color index from previous color that defined in Android OS
-    * (frameworks/base/core/res/res/values/arrays.xml). If can't find the color, continue to look
-    * for it in the new color plattee. If not, give it the first index.
-    */
-
-    private int getSimColorIndex(int color) {
-        int index = -1;
-        final int[] previousSimColorInts =
-                getContext().getResources().getIntArray(com.android.internal.R.array.sim_colors);
-        for (int i = 0; i < previousSimColorInts.length; i++) {
-            if (previousSimColorInts[i] == color) {
-                index = i;
-            }
-        }
-
-        if (index == -1) {
-            for (int i = 0; i < mColors.length; i++) {
-                if (mColors[i].getColor() == color) {
-                    index = i;
-                }
-            }
-        }
-
-        return index == -1 ? 0 : index;
     }
 }

@@ -76,7 +76,7 @@ public abstract class BluetoothDetailsControllerTestBase {
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = spy(new Lifecycle(mLifecycleOwner));
-        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
+        mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
     }
 
@@ -155,7 +155,6 @@ public abstract class BluetoothDetailsControllerTestBase {
         mDevice = mBluetoothAdapter.getRemoteDevice(config.getAddress());
         when(mCachedDevice.getDevice()).thenReturn(mDevice);
         when(mCachedDevice.getAddress()).thenReturn(config.getAddress());
-        when(mCachedDevice.getIdentityAddress()).thenReturn(config.getAddress());
     }
 
     /**

@@ -27,12 +27,12 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenRuleVisEffectsCustomPreferenceController extends
         AbstractZenCustomRulePreferenceController implements PreferenceControllerMixin {
 
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     public ZenRuleVisEffectsCustomPreferenceController(Context context, Lifecycle lifecycle,
             String key) {

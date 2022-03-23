@@ -26,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -48,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPreference {
+public class EnterprisePrivacySettingsTest extends BasePrivacySettingsPreferenceTest {
     private static final ComponentName DEVICE_OWNER_COMPONENT =
             new ComponentName("com.android.foo", "bar");
 
@@ -58,8 +57,8 @@ public class EnterprisePrivacySettingsTest extends AbsBasePrivacySettingsPrefere
     private PrivacySettingsPreference mPrivacySettingsPreference;
     private FakeFeatureFactory mFeatureFactory;
     private EnterprisePrivacySettings mSettings;
-    private Context mContext;
 
+    @Override
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
