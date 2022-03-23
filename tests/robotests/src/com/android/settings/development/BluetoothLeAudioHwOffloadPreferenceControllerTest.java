@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController
-        .A2DP_OFFLOAD_DISABLED_PROPERTY;
 import static com.android.settings.development.BluetoothLeAudioHwOffloadPreferenceController
         .LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
 
@@ -41,7 +39,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class BluetoothA2dpHwOffloadPreferenceControllerTest {
+public class BluetoothLeAudioHwOffloadPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -50,51 +48,47 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
 
     private Context mContext;
     private SwitchPreference mPreference;
-    private BluetoothA2dpHwOffloadPreferenceController mController;
+    private BluetoothLeAudioHwOffloadPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
-        mController = spy(new BluetoothA2dpHwOffloadPreferenceController(mContext, mFragment));
+        mController = spy(new BluetoothLeAudioHwOffloadPreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
             .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
     @Test
-    public void onA2dpHwDialogConfirmedAsA2dpOffloadDisabled_shouldChangeProperty() {
-        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+    public void onLeAudioHwDialogConfirmedAsLeAudioOffloadDisabled_shouldChangeProperty() {
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
         mController.onHwOffloadDialogConfirmed();
-        final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        final boolean mode = SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isTrue();
     }
 
     @Test
-    public void onA2dpHwDialogConfirmedAsA2dpOffloadEnabled_shouldChangeProperty() {
-        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
+    public void onLeAudioHwDialogConfirmedAsLeAudioOffloadEnabled_shouldChangeProperty() {
         SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
-
         mController.mChanged = true;
 
         mController.onHwOffloadDialogConfirmed();
-        final boolean a2dpMode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, true);
-        final boolean leAudioMode = SystemProperties
-                .getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
-        assertThat(a2dpMode).isFalse();
-        assertThat(leAudioMode).isFalse();
+        final boolean mode2 = SystemProperties.getBoolean(
+                LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
+        assertThat(mode2).isFalse();
     }
 
     @Test
-    public void onA2dpHwDialogCanceled_shouldNotChangeProperty() {
-        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+    public void onLeAudioHwDialogCanceled_shouldNotChangeProperty() {
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
         mController.onHwOffloadDialogCanceled();
-        final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        final boolean mode = SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isFalse();
     }
 }
