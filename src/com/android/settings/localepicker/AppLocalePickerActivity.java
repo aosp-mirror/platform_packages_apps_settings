@@ -62,7 +62,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         // Create Locale picker part.
         final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
-                this, AppLocalePickerActivity.this, false /* translate only */);
+                this, AppLocalePickerActivity.this, false /* translate only */, mPackageName);
         // LocalePickerWithRegion use android.app.ListFragment. Thus, it can not user
         // getSupportFragmentManager() to add this into container.
         getFragmentManager()
@@ -97,11 +97,10 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo localeInfo) {
-        // TODO(b/223090003): check localeInfo.isSystemLocale()
-        if (localeInfo == null || localeInfo.getLocale() == null) {
+        if (localeInfo == null || localeInfo.getLocale() == null || localeInfo.isSystemLocale()) {
             setAppDefaultLocale("");
         } else {
-            setAppDefaultLocale(localeInfo.getLocale().getLanguage());
+            setAppDefaultLocale(localeInfo.getLocale().toLanguageTag());
         }
         finish();
     }

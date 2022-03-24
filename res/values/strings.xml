@@ -10471,8 +10471,14 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
     </plurals>
 
-    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Remove permissions and free up space</string>
+    <!-- Label for category for unused app settings for an app. [CHAR LIMIT=40]-->
+    <string name="unused_apps_category">Unused app settings</string>
+
+    <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Pause app activity</string>
+
+    <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications if unused</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -13521,6 +13527,11 @@
     <!-- Summary for allowing screen overlays on Settings app. [CHAR LIMIT=NONE]-->
     <string name="overlay_settings_summary">Allow apps that can display over other apps to overlay Settings screens</string>
 
+    <!-- Developer settings: Title for allowing mock modem service for testing. [CHAR LIMIT=50]-->
+    <string name="allow_mock_modem">Allow Mock Modem</string>
+    <!-- Developer settings: Summary for allowing mock modem service. [CHAR LIMIT=NONE]-->
+    <string name="allow_mock_modem_summary">Allow this device to run Mock Modem service for instrumentation testing. Do not enable this during normal usage of the phone</string>
+
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
     <!-- Title of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=50]-->
@@ -14073,13 +14084,13 @@
     <!-- The title of the toggle which enables/disables overlays on top of the screen saver [CHAR LIMIT=none] -->
     <string name="dream_complications_toggle_title">Show additional information</string>
     <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
-    <string name="dream_complications_toggle_summary">Display time, date and weather on the screen saver</string>
+    <string name="dream_complications_toggle_summary">Display time, date, weather, air quality, and Cast details on the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->
-    <string name="dream_setup_title">Customize your screen saver</string>
+    <string name="dream_setup_title">Choose your screen saver</string>
     <!-- The description of the screen saver setup page [CHAR LIMIT=none] -->
-    <string name="dream_setup_description">Choose what you’ll see on your screen when your device is not in use.</string>
+    <string name="dream_setup_description">Choose what you’ll see on your screen when your tablet is docked. Your device may use more energy when a screen saver is used.</string>
 
     <!-- Button to customize the screensaver [CHAR LIMIT=20] -->
     <string name="customize_button_title">Customize</string>
@@ -14101,7 +14112,7 @@
     <string name="placeholder_activity" translatable="false">*This is a temporary placeholder fallback activity.</string>
 
     <!-- The title of the spatial audio [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_spatial_audio_title">Spatial audio</string>
+    <string name="bluetooth_details_spatial_audio_title">Spatial Audio</string>
     <!-- The summary of the spatial audio [CHAR LIMIT=none] -->
     <string name="bluetooth_details_spatial_audio_summary">Audio from compatible media becomes more immersive</string>
     <!-- The title of the head tracking [CHAR LIMIT=none] -->
