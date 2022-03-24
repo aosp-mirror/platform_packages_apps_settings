@@ -2,18 +2,6 @@
 <issues format="4">
 
     <issue
-        id="LintError"
-        severity="Error"
-        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
-        category="Lint"
-        priority="10"
-        summary="Lint Failure"
-        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
-        <location
-            file="."/>
-    </issue>
-
-    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -3253,6 +3241,22 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/homepage_network_background&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_homepage_data_usage.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="            android:color=&quot;@color/homepage_display_background&quot; />"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
@@ -3461,10 +3465,42 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/homepage_network_background&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_homepage_vpn.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="            android:color=&quot;@color/homepage_wallpaper_background&quot; />"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_wallpaper.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="            android:color=&quot;@color/homepage_network_background&quot; />"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_homepage_wifi_tethering.xml"
             line="24"
             column="13"/>
     </issue>
@@ -4517,27 +4553,11 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&quot;‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‏‎‏‏‏‏‏‏‏‏‎‏‏‏‎‎‏‏‎‏‏‎‎‏‏‏‎‎‎‎‏‏‎‏‎‎‎‎‎‎‎‎‎‎‏‏‎‏‎‎‏‎‎‎‎‏‎‏‎‏‏‎‎‎‏‏‎‎‏‎‏‎‎‏‎‎‏‏‎&quot;&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;‎‏‎‎‏‏‏‎Welcome to Google sync!‎‏‎‎‏‏‎&quot;&lt;/font>&quot;‎‏‎‎‏‏‏‎ ‎‏‎‎‏‏‎\n‎‏‎‎‏‏‏‎A Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.‎‏‎‎‏‎&quot;&lt;/string>"
-        errorLine2="                                                                                                                                                                         ~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/values-en-rXC/strings.xml"
-            line="3108"
-            column="170"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;Welcome to Google sync!&quot;&lt;/font>&quot; \nA Google approach to syncing data to allow access to your contacts, appointments and more from wherever you are.&quot;&lt;/string>"
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="3112"
+            line="3128"
             column="64"/>
     </issue>
 
@@ -4553,7 +4573,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="3112"
+            line="3128"
             column="64"/>
     </issue>
 
@@ -4569,7 +4589,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="3112"
+            line="3128"
             column="64"/>
     </issue>
 
@@ -4585,8 +4605,24 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="3112"
+            line="3128"
             column="64"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;string name=&quot;sync_plug&quot; msgid=&quot;7956982719077985381&quot;>&quot;‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‏‎‏‏‏‏‏‏‏‏‎‏‏‏‎‎‏‏‎‏‏‎‎‏‏‏‎‎‎‎‏‏‎‏‎‎‎‎‎‎‎‎‎‎‏‏‎‏‎‎‏‎‎‎‎‏‎‏‎‏‏‎‎‎‏‏‎‎‏‎‏‎‎‏‎‎‏‏‎&quot;&lt;font fgcolor=&quot;#ffffffff&quot;>&quot;‎‏‎‎‏‏‏‎Welcome to Google sync!‎‏‎‎‏‏‎&quot;&lt;/font>&quot;‎‏‎‎‏‏‏‎ ‎‏‎‎‏‏‎\n‎‏‎‎‏‏‏‎A Google approach to syncing data to allow access to your contacts, appointments, and more from wherever you are.‎‏‎‎‏‎&quot;&lt;/string>"
+        errorLine2="                                                                                                                                                                         ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values-en-rXC/strings.xml"
+            line="3128"
+            column="170"/>
     </issue>
 
     <issue
@@ -4601,7 +4637,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="7103"
+            line="7152"
             column="36"/>
     </issue>
 
