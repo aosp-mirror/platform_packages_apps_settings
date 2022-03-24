@@ -56,7 +56,7 @@ public class SpatialAudioWiredHeadphonesPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(AudioManager.class)).thenReturn(mAudioManager);
         when(mAudioManager.getSpatializer()).thenReturn(mSpatializer);
-        mController = new SpatialAudioWiredHeadphonesController(mContext);
+        mController = new SpatialAudioWiredHeadphonesController(mContext, "unused");
     }
 
     @Test
