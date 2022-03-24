@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Kecilkan atau besarkan teks pada skrin."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Kecilkan"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Besarkan"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Gunakan Autoputar"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Pengesanan Wajah menggunakan kamera menghadap hadapan untuk meningkatkan ketepatan Autoputar. Imej tidak sekali-kali disimpan atau dihantar kepada Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gunakan autoputar"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Pengesanan Wajah menggunakan kamera menghadap hadapan untuk meningkatkan ketepatan autoputar. Imej tidak sekali-kali disimpan atau dihantar kepada Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Teks contoh"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Ahli Sihir Oz yang Menakjubkan"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Bab 11: Oz, Kota Zamrud yang Menakjubkan"</string>
@@ -85,6 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Anda tidak mempunyai kebenaran untuk menukar tetapan Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Gandingkan peranti baharu"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Gandingkan telinga lagi satu"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Alat bantu pendengaran kiri anda disambungkan.\n\nUntuk menggandingkan alat bantu pendengaran kanan, pastikan alat dihidupkan dan sedia untuk digandingkan."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Alat bantu pendengaran kanan anda disambungkan.\n\nUntuk menggandingkan alat bantu pendengaran kiri, pastikan alat dihidupkan dan sedia untuk digandingkan."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Gandingkan telinga kanan"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Gandingkan telinga kiri"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Berkaitan"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kelihatan kepada peranti yang berhampiran semasa tetapan Bluetooth dibuka."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Alamat Bluetooth telefon: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Alamat Bluetooth tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,16 +148,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Benarkan peranti anda berkomunikasi dengan peranti Bluetooth yang berdekatan"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Benarkan telefon anda berkomunikasi dengan peranti Bluetooth yang berdekatan"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Lumpuhkan lepas muatan perkakasan A2DP Bluetooth"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Lumpuhkan lepas muatan perkakasan LE AUDIO Bluetooth"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Mulakan Semula Peranti?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Mulakan semula peranti untuk menukar tetapan ini."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Mulakan semula"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Batal"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Peranti media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Panggil peranti"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Peranti lain"</string>
@@ -1300,7 +1301,9 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Mati"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Hidup"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Di - Berasaskan wajah"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Dayakan Pengesanan Wajah"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Pengesanan Wajah"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Laraskan orientasi skrin secara automatik apabila anda menggerakkan telefon anda antara potret dengan landskap"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Ketahui lebih lanjut tentang autoputar"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Peleraian skrin"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Peleraian tinggi"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Peleraian paling tinggi"</string>
@@ -2314,6 +2317,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Tindakan menggunakan tiga ketikan untuk membesarkan sebahagian daripada skrin anda menyebabkan penaipan dan tindakan lain ditangguhkan.\n\nButang kebolehaksesan terapung pada skrin anda di atas apl lain. Ketik untuk membesarkan skrin."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Tukar kepada butang kebolehaksesan"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Gunakan tiga ketikan"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Pintasan mungkin memperlahan papan kekunci anda"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Apabila menggunakan ketikan tiga kali untuk membesarkan sebahagian skrin anda, anda mungkin mendapati masalah pada papan kekunci.\n\nUntuk mengelakkan masalah ini, anda boleh menukar pintasan pembesaran daripada ketikan tiga kali kepada pilihan lain.\n"<annotation id="link">"Tukar tetapan"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Teruskan juga"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Batal"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Tetapan pembesaran"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Besarkan dengan tiga ketikan"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Besarkan menggunakan pintasan"</string>
@@ -2321,10 +2328,16 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Perihal <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Saiz paparan dan teks"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Tukar cara teks dipaparkan"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"E-mel: Rancangan untuk mesin masa, v2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"Daripada: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Selamat pagi! Susulan daripada perbualan terakhir kita, saya ingin bertanya tentang perkembangan rancangan pembangunan mesin masa anda. Adakah anda dapat menyediakan prototaip untuk tunjuk cara di E3 tahun ini?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"Tetapkan semula"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Subjek: Reka bentuk belon udara panas"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Daripada: Bill"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Tetapkan semula tetapan"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Tetapkan semula saiz paparan dan teks?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Saiz paparan dan pilihan teks anda akan ditetapkan semula kepada tetapan asal telefon"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Tetapkan semula"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Ada apa-apa rancangan hujung minggu?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Bercadang pergi ke pantai. Mahu ikut sekali?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Pilihan"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zum masuk pada skrin"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ketik 3 kali untuk mengezum"</string>
@@ -2381,10 +2394,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Ketahui lebih lanjut tentang butang kebolehaksesan &amp; gerak isyarat"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Menggunakan butang kebolehaksesan. Gerak isyarat tidak tersedia dengan navigasi 3 butang."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses ciri kebolehaksesan dengan cepat"</string>
-    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Untuk bermula"</b>\n"1. Pergi ke tetapan kebolehaksesan\n2. Pilih satu ciri dan ketik pintasan\n3. Pilih sama ada anda ingin menggunakan butang atau gerak isyarat untuk mengakses ciri"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Untuk bermula"</b>\n"1. Pergi ke tetapan kebolehaksesan\n2. Pilih satu ciri dan ketik pintasan\n3. Pilih butang untuk mengakses ciri"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gunakan butang atau gerak isyarat"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Saiz"</string>
@@ -2488,8 +2499,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Alat bantu pendengaran"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Tiada alat bantu pendengaran disambungkan"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Tambah alat bantu dengar"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"Untuk menggandingkan alat bantu pendengaran anda, cari dan ketik peranti anda pada skrin seterusnya. Pastikan alat bantu pendengaran berada dalam mod gandingan."</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Gandingkan alat bantu pendengaran"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Pada skrin seterusnya, ketik pada alat bantu pendengaran anda. Anda mungkin perlu menggandingkan telinga kiri dan kanan secara berasingan.\n\nPastikan alat bantu pendengaran anda dihidupkan dan sedia untuk digandingkan."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktif"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, kiri sahaja"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, kanan sahaja"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, kiri dan kanan"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 lagi"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> alat bantu pendengaran disimpan</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> alat bantu pendengaran disimpan</item>
@@ -3433,8 +3449,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Pada terminal tanpa sentuhan, bayar dengan <xliff:g id="APP_0">%1$s</xliff:g>.\n\nIni menggantikan <xliff:g id="APP_1">%2$s</xliff:g> sebagai apl pembayaran lalai anda."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Tetapkan lalai"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Kemas kini"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"Kerja"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Sekatan"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Alih keluar sekatan"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Tukar PIN"</string>
@@ -3606,7 +3621,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"jangan, jangan ganggu, ganggu, gangguan, putus"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"berdekatan, lokasi, sejarah, pelaporan, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"akaun, tambah akaun, profil kerja, tambah akaun"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"akaun, tambah akaun, profil kerja, tambah akaun, alih keluar, padam"</string>
     <string name="keywords_users" msgid="3497517660077620843">"sekatan, sekat, terhad"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"pembetulan teks, betul, bunyi, getaran, auto, bahasa, gerak isyarat, cadang, cadangan, tema, menyinggung, perkataan, taip, emoji, antarabangsa"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"tetapan semula, pilihan, lalai"</string>
@@ -4165,6 +4180,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Tiada"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Tiada}=1{1 perbualan}other{# perbualan}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Orang yang boleh ganggu"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Biarpun apl pemesejan atau panggilan tidak dapat memaklumkan anda, orang yang anda pilih di sini masih boleh menghubungi anda melalui apl tersebut"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Panggilan"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Panggilan"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"panggilan"</string>
@@ -4835,8 +4851,6 @@
       <item quantity="one">1 apl boleh menggunakan data tanpa had</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Lihat lagi"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Benar-benar padamkan data pengguna dan tukarkan kepada penyulitan fail?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Padamkan dan tukar"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Tetapkan semula had kadar ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Had kadar ShortcutManager telah ditetapkan semula"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Kawal maklumat pada skrin kunci"</string>
@@ -5054,7 +5068,8 @@
     <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Tetapan Terhad"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Untuk keselamatan anda, tetapan ini tidak tersedia pada masa ini."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Maklumat peranti dibiaya"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Pembekal kredit anda boleh mengubah tetapan dan memasang perisian pada peranti ini.\n\nJika anda terlepas pembayaran, peranti anda akan dikunci.\n\nUntuk mengetahui lebih lanjut, hubungi pembekal kredit anda."</string>
+    <!-- no translation found for financed_privacy_intro (7836497475568741579) -->
+    <skip />
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Jika peranti anda dibiayai, anda tidak boleh:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Pasang apl dari sumber luar Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"But semula peranti anda ke dalam mod selamat"</string>
@@ -5063,7 +5078,8 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Gunakan pilihan pembangun"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Pembekal kredit anda boleh:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Akses nombor IMEI anda"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Buat tetapan semula kilang pada peranti anda"</string>
+    <!-- no translation found for financed_privacy_factory_reset (5505016667590160732) -->
+    <skip />
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Jika peranti anda dikunci, anda hanya boleh menggunakan peranti untuk:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Buat panggilan kecemasan"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Lihat maklumat sistem seperti tarikh, masa, status rangkaian dan bateri"</string>
@@ -5700,8 +5716,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Had Penggunaan Awal"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Had Penggunaan Maksimum"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Pengubah suai"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"Tindakan"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"Ganjaran"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Tindakan (Kos Penghasilan)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Tindakan (Harga Asas)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"Aktiviti Popular"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Pemberitahuan Dilihat"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Pemberitahuan Dilihat Dalam 15 Minit"</string>
@@ -5742,9 +5764,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"But semula sekarang"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"But semula kemudian"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Audio ruang"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Audio yang mengasyikkan seolah-olah bunyi audio datang dari sekeliling anda. Hanya berfungsi dengan sesetengah media."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Jadikan bunyi audio lebih realistik"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Alihkan kedudukan audio supaya bunyi audio lebih semula jadi."</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Had kadar muat turun rangkaian"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurasikan had kadar kemasukan lebar jalur rangkaian yang digunakan pada semua rangkaian yang menyediakan kesambungan Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurasikan had kadar muat turun rangkaian"</string>

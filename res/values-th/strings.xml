@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"ปรับขนาดข้อความบนหน้าจอให้เล็กลงหรือใหญ่ขึ้น"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ใช้การหมุนอัตโนมัติ"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ รูปภาพจะไม่จัดเก็บหรือส่งไปยัง Google"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ใช้การหมุนอัตโนมัติ"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ รูปภาพจะไม่จัดเก็บหรือส่งไปยัง Google"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ข้อความตัวอย่าง"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"พ่อมดมหัศจรรย์แห่งออซ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"บทที่ 11: เมืองมรกตมหัศจรรย์แห่งออซ"</string>
@@ -85,6 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"คุณไม่มีสิทธิ์ในการเปลี่ยนการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"จับคู่อุปกรณ์ใหม่"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"บลูทูธ"</string>
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"จับคู่หูฟังอีกข้าง"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"เชื่อมต่อเครื่องช่วยฟังข้างซ้ายแล้ว\n\nหากต้องการจับคู่ข้างขวา โปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"เชื่อมต่อเครื่องช่วยฟังข้างขวาแล้ว\n\nหากต้องการจับคู่ข้างซ้าย โปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"จับคู่หูฟังข้างขวา"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"จับคู่หูฟังข้างซ้าย"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"ที่เกี่ยวข้อง"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"อุปกรณ์ใกล้เคียงจะสามารถมองเห็น <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ได้เมื่อเปิดการตั้งค่าบลูทูธ"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"ที่อยู่บลูทูธของโทรศัพท์: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ที่อยู่บลูทูธของแท็บเล็ต: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,16 +148,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"อนุญาตให้อุปกรณ์สื่อสารกับอุปกรณ์บลูทูธใกล้เคียง"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"อนุญาตให้โทรศัพท์สื่อสารกับอุปกรณ์บลูทูธใกล้เคียง"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ปิดใช้การลดภาระฮาร์ดแวร์บลูทูธ A2DP"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"ปิดใช้การลดภาระฮาร์ดแวร์ Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"รีสตาร์ทอุปกรณ์ใช่ไหม"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"คุณต้องรีสตาร์ทอุปกรณ์เพื่อเปลี่ยนการตั้งค่านี้"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"รีสตาร์ท"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"ยกเลิก"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"อุปกรณ์สื่อ"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"อุปกรณ์สำหรับโทร"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"อุปกรณ์อื่นๆ"</string>
@@ -1300,7 +1301,9 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"ปิด"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"เปิด"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"เปิด - ตามใบหน้า"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"เปิดใช้การตรวจจับใบหน้า"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"การตรวจจับใบหน้า"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"ปรับการวางแนวหน้าจอโดยอัตโนมัติเมื่อคุณหันโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนอัตโนมัติ"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ความละเอียดของหน้าจอ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ความละเอียดสูง"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"ความละเอียดสูงสุด"</string>
@@ -2314,6 +2317,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"การใช้การแตะ 3 ครั้งเพื่อขยายบางส่วนของหน้าจอจะทำให้การพิมพ์และการดำเนินการอื่นๆ ล่าช้า\n\nปุ่มการช่วยเหลือพิเศษจะลอยอยู่บนหน้าจอเหนือแอปอื่นๆ แตะปุ่มดังกล่าวเพื่อขยาย"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"เปลี่ยนไปใช้ปุ่มการช่วยเหลือพิเศษ"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"ใช้การแตะ 3 ครั้ง"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"การดำเนินการนี้อาจทำให้แป้นพิมพ์ทำงานช้าลง"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"เมื่อใช้การแตะ 3 ครั้งเพื่อขยายหน้าจอบางส่วน คุณอาจพบปัญหาเกี่ยวกับแป้นพิมพ์\n\nคุณหลีกเลี่ยงปัญหานี้ได้ด้วยการเปลี่ยนแป้นพิมพ์ลัดการขยายหน้าจอไปใช้ตัวเลือกอื่นที่ไม่ใช่การแตะ 3 ครั้ง\n"<annotation id="link">"เปลี่ยนการตั้งค่า"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"ดำเนินการต่อ"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"ยกเลิก"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"การตั้งค่าการขยาย"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"ขยายด้วยการแตะ 3 ครั้ง"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"ขยายโดยใช้ทางลัด"</string>
@@ -2321,10 +2328,16 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"เกี่ยวกับ \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"ขนาดและข้อความที่แสดง"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"เปลี่ยนวิธีแสดงข้อความ"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"อีเมล: แผนสำหรับไทม์แมชชีน v2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"จาก: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"สวัสดียามเช้า จากการสนทนาล่าสุดของเรา ฉันขอทราบความคืบหน้าของแผนพัฒนาไทม์แมชชีนที่คุณพูดถึง คุณจะเตรียมเครื่องต้นแบบให้พร้อมสาธิตในงาน E3 ปีนี้ได้ไหม"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"รีเซ็ต"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"เรื่อง: การออกแบบบอลลูน"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"จาก: Bill"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"รีเซ็ตการตั้งค่า"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"รีเซ็ตขนาดการแสดงผลและข้อความหรือไม่"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"ขนาดการแสดงผลและการกำหนดค่าข้อความของคุณจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของโทรศัพท์"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"รีเซ็ต"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"มีแผนจะทำอะไรไหมในวันหยุดสุดสัปดาห์"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"กำลังจะไปทะเล อยากไปด้วยไหม"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"ตัวเลือก"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"ซูมเข้าบนหน้าจอ"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"แตะ 3 ครั้งเพื่อซูม"</string>
@@ -2381,10 +2394,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"ดูข้อมูลเพิ่มเติมเกี่ยวกับปุ่มการช่วยเหลือพิเศษและท่าทางสัมผัส"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"กำลังใช้ปุ่มการช่วยเหลือพิเศษ ท่าทางสัมผัสดังกล่าวใช้กับการนำทางแบบ 3 ปุ่มไม่ได้"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"เข้าถึงฟีเจอร์การช่วยเหลือพิเศษได้อย่างรวดเร็ว"</string>
-    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"วิธีเริ่มต้นใช้งาน"</b>\n"1. ไปที่การตั้งค่าการช่วยเหลือพิเศษ\n2. เลือกฟีเจอร์และแตะทางลัด\n3. เลือกว่าต้องการใช้ปุ่มหรือท่าทางสัมผัสเพื่อเข้าถึงฟีเจอร์"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"วิธีเริ่มต้นใช้งาน"</b>\n"1. ไปที่การตั้งค่าการช่วยเหลือพิเศษ\n2. เลือกฟีเจอร์และแตะทางลัด\n3. เลือกปุ่มสำหรับการเข้าถึงฟีเจอร์"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ใช้ปุ่มหรือท่าทางสัมผัส"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"ตำแหน่ง"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"ขนาด"</string>
@@ -2445,7 +2456,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"การตั้งค่าถูกปิดใช้เนื่องจากอุปกรณ์ปิดเสียงอยู่"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"การโทร"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"การแจ้งเตือนและนาฬิกาปลุก"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"การโต้ตอบการสัมผัสแบบอินเทอร์แอกทีฟ"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"การตอบสนองแบบอินเทอร์แอกทีฟซึ่งรู้สึกได้"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"ใช้การสั่นและการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"การสั่นเมื่อปลุก"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"การสั่นของสื่อ"</string>
@@ -2488,8 +2499,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"เครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"ไม่ได้เชื่อมต่อเครื่องช่วยฟัง"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"เพิ่มเครื่องช่วยฟัง"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"หากต้องการจับคู่กับเครื่องช่วยฟัง ให้ค้นหาและแตะอุปกรณ์ในหน้าจอถัดไป ตรวจสอบว่าเครื่องช่วยฟังอยู่ในโหมดการจับคู่"</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"จับคู่เครื่องช่วยฟัง"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"ในหน้าจอถัดไป ให้แตะที่เครื่องช่วยฟัง คุณอาจต้องจับคู่อุปกรณ์ของหูฟังข้างซ้ายและขวาแยกกัน\n\nโปรดตรวจสอบว่าคุณเปิดเครื่องช่วยฟังแล้วและอุปกรณ์พร้อมจับคู่"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ใช้งานอยู่"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ซ้ายเท่านั้น"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ขวาเท่านั้น"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ทั้งซ้ายและขวา"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 รายการ"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other">บันทึกเครื่องช่วยฟัง <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> เครื่องแล้ว</item>
       <item quantity="one">บันทึกเครื่องช่วยฟัง <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> เครื่องแล้ว</item>
@@ -3410,7 +3426,7 @@
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"หากต้องการชำระเงินโดยใช้แอปการชำระเงิน ให้ถือด้านหลังของอุปกรณ์ไว้ที่เครื่องชำระเงิน"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"ดูข้อมูลเพิ่มเติม"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"กำหนดให้แอปงานเป็นแอปชำระเงินเริ่มต้นไหม"</string>
-    <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"หากต้องการชำระเงินโดยใช้แอปการชำระเงิน"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"หากต้องการชำระเงินโดยใช้แอปงาน"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"ต้องเปิดใช้โปรไฟล์งาน"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"คุณจะต้องป้อน PIN, รูปแบบ หรือรหัสผ่านของโปรไฟล์งาน (หากมี)"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"วิธีการทำงาน"</string>
@@ -3433,8 +3449,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"ใช้ <xliff:g id="APP_0">%1$s</xliff:g> เพื่อจ่ายเงินที่เครื่องชำระเงินแบบไม่ต้องสัมผัส\n\nระบบจะใช้แอปนี้เป็นแอปการชำระเงินเริ่มต้นแทน <xliff:g id="APP_1">%2$s</xliff:g>"</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"ตั้งเป็นค่าเริ่มต้น"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"อัปเดต"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"งาน"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"ข้อจำกัด"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"ลบข้อจำกัด"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"เปลี่ยน PIN"</string>
@@ -3606,7 +3621,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"ห้าม อย่ารบกวน, แทรก, การรบกวน, การพัก"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"ใกล้เคียง, ประวัติตำแหน่ง, การรายงาน, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"บัญชี, เพิ่มหนึ่งบัญชี, โปรไฟล์งาน, เพิ่มบัญชี"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"บัญชี, เพิ่ม 1 บัญชี, โปรไฟล์งาน, เพิ่มบัญชี, นำออก, ลบ"</string>
     <string name="keywords_users" msgid="3497517660077620843">"การจำกัด, จำกัด, ถูกจำกัด"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"การแก้ไขข้อความ, แก้ไข, เสียง, สั่น, อัตโนมัติ, ภาษา, ท่าทางสัมผัส, แนะนำ, คำแนะนำ, ธีม, คำที่ไม่เหมาะสม, พิมพ์, อีโมจิ, นานาชาติ"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"รีเซ็ต, ค่ากำหนด, ค่าเริ่มต้น"</string>
@@ -4165,6 +4180,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"ไม่มี"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{ไม่มี}=1{การสนทนา 1 รายการ}other{การสนทนา # รายการ}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"ผู้ที่รบกวนคุณได้"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"ผู้ที่คุณเลือกในส่วนนี้จะยังสามารถเข้าถึงคุณผ่านแอปการรับส่งข้อความหรือการโทร แม้ว่าแอปเหล่านั้นจะแจ้งเตือนไม่ได้ก็ตาม"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"การโทร"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"การโทร"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"การโทร"</string>
@@ -4835,8 +4851,6 @@
       <item quantity="one">ใช้อินเทอร์เน็ตได้ไม่จำกัด 1 แอป</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"ดูเพิ่มเติม"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"ต้องการล้างข้อมูลผู้ใช้และแปลงเป็นการเข้ารหัสไฟล์จริงๆ ใช่ไหม"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"ล้างข้อมูลและแปลง"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"รีเซ็ตการจำกัดอัตราของ ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"รีเซ็ตการจำกัดอัตราของ ShortcutManager แล้ว"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"ควบคุมข้อมูลในหน้าจอล็อก"</string>
@@ -5054,7 +5068,8 @@
     <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"การตั้งค่าที่จำกัด"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"การตั้งค่านี้ใช้ไม่ได้ในตอนนี้เพื่อความปลอดภัยของคุณ"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ข้อมูลอุปกรณ์ที่ได้รับการสนับสนุนทางการเงิน"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"ผู้ให้บริการเครดิตจะเปลี่ยนการตั้งค่าและติดตั้งซอฟต์แวร์ในอุปกรณ์นี้ได้\n\nหากคุณไม่ชำระเงิน อุปกรณ์จะถูกล็อก\n\nโปรดติดต่อผู้ให้บริการเครดิตเพื่อสอบถามข้อมูลเพิ่มเติม"</string>
+    <!-- no translation found for financed_privacy_intro (7836497475568741579) -->
+    <skip />
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"หากผ่อนชำระอุปกรณ์อยู่ คุณจะดำเนินการดังต่อไปนี้ไม่ได้"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"ติดตั้งแอปจากภายนอก Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"รีบูตอุปกรณ์ให้อยู่ในโหมดปลอดภัย"</string>
@@ -5063,7 +5078,8 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ใช้ตัวเลือกสำหรับนักพัฒนาซอฟต์แวร์"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ผู้ให้บริการเครดิตสามารถดำเนินการดังนี้"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"ดูหมายเลข IMEI"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"รีเซ็ตอุปกรณ์เป็นค่าเริ่มต้น"</string>
+    <!-- no translation found for financed_privacy_factory_reset (5505016667590160732) -->
+    <skip />
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"หากมีการล็อกอุปกรณ์ คุณจะใช้อุปกรณ์เพื่อดำเนินการดังต่อไปนี้ได้เท่านั้น"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"โทรหาหมายเลขฉุกเฉิน"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"ดูข้อมูลระบบ เช่น วันที่ เวลา สถานะเครือข่าย และแบตเตอรี่"</string>
@@ -5700,8 +5716,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"ขีดจำกัดการใช้งานเริ่มต้น"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"ขีดจำกัดการใช้งานสูงสุด"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"ตัวปรับแต่ง"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"การดำเนินการ"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"รางวัล"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"การดำเนินการ (ต้นทุนในการผลิต)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"การดำเนินการ (ราคาฐาน)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"กิจกรรมแรก"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"เห็นการแจ้งเตือนแล้ว"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"เห็นการแจ้งเตือนภายใน 15 นาที"</string>
@@ -5742,9 +5764,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"รีบูตเลย"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"รีบูตภายหลัง"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"เสียงรอบทิศทาง"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"เสียงแบบกระหึ่มจะให้ความรู้สึกเหมือนกับว่าเสียงมาจากรอบตัวคุณ โดยจะใช้ได้ในบางสื่อเท่านั้น"</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"ทำให้เสียงสมจริงยิ่งขึ้น"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"ปรับเปลี่ยนตำแหน่งของเสียงเพื่อให้ฟังได้อย่างเป็นธรรมชาติมากขึ้น"</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ขีดจำกัดอัตราการดาวน์โหลดของเครือข่าย"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"กำหนดค่าขีดจำกัดอัตราแบนด์วิดท์สำหรับการดาวน์โหลดขั้นต่ำและสูงสุดของเครือข่ายซึ่งใช้กับเครือข่ายทั้งหมดที่ให้การเชื่อมต่ออินเทอร์เน็ต"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"กำหนดค่าขีดจำกัดอัตราการดาวน์โหลดของเครือข่าย"</string>

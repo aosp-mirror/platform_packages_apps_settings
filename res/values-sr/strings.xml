@@ -53,8 +53,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Омогућава да текст на екрану буде мањи или већи."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Умањи"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увећај"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Користи аутоматско ротирање"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Препознавање лица користи предњу камеру за побољшање прецизности аутоматског ротирања. Слике се никада не чувају нити шаљу Google-у."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Користи аутоматско ротирање"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Препознавање лица користи предњу камеру за побољшање прецизности аутоматског ротирања. Слике се никада не чувају нити шаљу Google-у."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чаробњак из Оза"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Поглавље 11: Чудесни Смарагдни град Оза"</string>
@@ -86,6 +86,18 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Немате дозволу за промену подешавања Bluetooth-а."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Упари нови уређај"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
+    <skip />
+    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> је видљив уређајима у близини док су Bluetooth подешавања отворена."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Bluetooth адреса телефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Bluetooth адреса таблета: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -143,16 +155,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Омогућите уређају да комуницира са Bluetooth уређајима у близини"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Омогућите телефону да комуницира са Bluetooth уређајима у близини"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Онемогући Bluetooth A2DP хардверско растерећење"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Онемогући Bluetooth LE AUDIO хардверско растерећење"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Желите да рестартујете уређај?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Рестартујте уређај да бисте променили ово подешавање."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Рестартуј"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Откажи"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Медијски уређаји"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Уређаји за позивање"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други уређаји"</string>
@@ -222,7 +229,7 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени језици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Сви језици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Језик система"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Подразумевано системски – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Подразумеван системски – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
     <string name="no_multiple_language_supported" msgid="1683023807955740826">"Апликација је подразумевано подешена на <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> и не подржава више језика."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Желите ли да уклоните изабране језике?</item>
@@ -1320,7 +1327,9 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Искључено"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Укључено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Укључено – на основу лица"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Омогући препознавање лица"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Препознавање лица"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Аутоматски прилагодите положај екрана када пребацујете телефон између усправног и водоравног режима"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Сазнајте више о аутоматском ротирању"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Највиша резолуција"</string>
@@ -2338,6 +2347,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Ако увећате део екрана помоћу троструког додира, унос текста и друге радње се одлажу.\n\nДугме Приступачност плута на екрану преко других апликација. Додирните га да бисте увећали."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Пређи на дугме Приступачност"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Користићу троструки додир"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Ово може да успори тастатуру"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Када користите троструки додир, можете да приметите проблеме са тастатуром.\n\nДа бисте то избегли, можете да промените пречицу за увећање из троструког додира у другу опцију.\n"<annotation id="link">"Промените подешавање"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Ипак настави"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Откажи"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Подешавања увећања"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Увећање помоћу троструког додира"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Увећавајте помоћу пречице"</string>
@@ -2345,10 +2358,24 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"О услузи <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Величина приказа и текст"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Промените начин на који се приказује текст"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"Имејл: Планови за времеплов, v2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"Од: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Добро јутро! У складу са нашим последњим разговором, желим да проверим како напредује ваш план за израду времеплова. Да ли ћете моћи да направите прототип за демонстрацију на изложби E3 ове године?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"Ресетујте"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Опције"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Увећајте приказ на екрану"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Додирните 3 пута да бисте зумирали"</string>
@@ -2405,10 +2432,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Сазнајте више о дугмету и покрету Приступачност"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Коришћење дугмета Приступачност. Покрет није доступан уз навигацију помоћу 3 дугмета."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Брзо приступајте функцијама приступачности"</string>
-    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Да бисте започели"</b>\n"1. Идите у подешавања приступачности\n2. Изаберите функцију и додирните пречицу\n3. Одаберите да ли желите да користите дугме или покрет за приступ тој функцији"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Да бисте започели"</b>\n"1. Идите у подешавања приступачности\n2. Изаберите функцију и додирните пречицу\n3. Одаберите дугме које ћете користити за приступ тој функцији"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Користите дугме или покрет"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Локација"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Величина"</string>
@@ -2469,7 +2494,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Подешавање је онемогућено зато што је звук уређаја искључен"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Позиви"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Обавештења и аларми"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивне додирне повратне информације"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивне вибрације"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користите вибрирање и додирне повратне информације"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрирање аларма"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрирање медија"</string>
@@ -2512,8 +2537,19 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слушни апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Није повезан ниједан слушни апарат"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Додајте слушне апарате"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"Да бисте упарили слушне апарате, пронађите и додирните уређај на следећем екрану. Проверите да ли су слушни апарати у режиму упаривања."</string>
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
+    <skip />
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Активан: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
+    <skip />
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> сачувани слушни апарат</item>
       <item quantity="few"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> сачувана слушна апарата</item>
@@ -3453,7 +3489,7 @@
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Подразумевана апликација за плаћање"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"Да бисте платили помоћу апликације за плаћање, прислоните полеђину уређаја на терминал за плаћање"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Сазнајте више"</string>
-    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Посл. аплик. ће бити подраз. за плаћање?"</string>
+    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Пословна апл. подразумевана за плаћање?"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Да бисте платили пословном апликацијом:"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"пословни профил мора да буде укључен."</string>
     <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"треба да унесете PIN, шаблон или лозинку за посао ако је имате."</string>
@@ -3477,8 +3513,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"На терминалу за бесконтактно плаћање користиће се <xliff:g id="APP_0">%1$s</xliff:g>.\n\nТо значи да <xliff:g id="APP_1">%2$s</xliff:g> више неће бити подразумевана апликација за плаћање."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Подеси као подразумевано"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Ажурирај"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"Посао"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Ограничења"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Уклони ограничења"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Промени PIN"</string>
@@ -3651,7 +3686,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не ометати, прекидати, прекид, прекинути"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"у близини, локација, историја, извештавање, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"налог, додајте налог, пословни профил, додавање налога"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"налог, додајте налог, пословни профил, додавање налога, уклањање, брисање"</string>
     <string name="keywords_users" msgid="3497517660077620843">"ограничење, ограничити, ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"исправка текста, исправити, звук, вибрирати, аутоматски, језик, покрет, предлагати, предлог, тема, увредљиво, реч, куцати, емоџи, међународно"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"ресетовање, подешавања, подразумевано"</string>
@@ -4218,6 +4253,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ништа"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ниједна}=1{1 конверзација}one{# конверзација}few{# конверзације}other{# конверзација}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Ко може да прекида"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Чак и ако апликације за размену порука или позивање не могу да вас обавесте, људи које одаберете овде могу да вам се обрате преко тих апликација"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Позиви"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Позиви"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"позиви"</string>
@@ -4910,8 +4946,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апликација може да користи неограничену количину података</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Прикажи још"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Желите ли стварно да избришете податке корисника и да конвертујете у шифровање датотека?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Избриши и конвертуј"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Ресетуј ограничавање броја у ShortcutManager-у"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Ограничавање броја у ShortcutManager-у је ресетовано"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Контролишите информације на закључаном екрану"</string>
@@ -5136,7 +5170,8 @@
     <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Ограничена подешавања"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Ово подешавање је тренутно недоступно ради ваше безбедности."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информације о финансираном уређају"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Добављач кредита може да мења подешавања и инсталира софтвер на овом уређају.\n\nАко пропустите плаћање, уређај ће се закључати.\n\nДа бисте сазнали више, обратите се добављачу кредита."</string>
+    <!-- no translation found for financed_privacy_intro (7836497475568741579) -->
+    <skip />
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ако је уређај финансиран, не можете:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Инсталирајте апликације изван Play продавнице"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Рестартујте уређај у безбедном режиму"</string>
@@ -5145,7 +5180,8 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"користи опције за програмера"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Добављач кредита може да:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Приступите IMEI броју"</string>
-    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"ресетује уређај на фабричка подешавања"</string>
+    <!-- no translation found for financed_privacy_factory_reset (5505016667590160732) -->
+    <skip />
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ако је уређај закључан, можете да га користите да бисте:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"упућује хитне позиве"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Прегледајте информације система попут датума, времена, статуса мреже и батерије"</string>
@@ -5789,8 +5825,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Ограничење првобитне потрошње"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Ограничење максималне потрошње"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Модификатори"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"Радње"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"Награде"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Радње (цена спровођења)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Радње (основна цена)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"Највећа активност"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Обавештење је прегледано"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Обавештење је прегледано за 15 минута"</string>
@@ -5831,9 +5873,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Рестартуј"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Рестартуј касније"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Просторни звук"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Реалистични звук делује као да је свуда око вас. Ово ради само са одређеним медијским садржајем."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Нека звук буде реалистичнији"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Промените положај аудио опреме да би звучала природније."</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничење брзине преузимања на мрежи"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Конфигуришите ограничење брзине долазног пропусног опсега мреже које се примењује на све мреже које пружају интернет везу."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Конфигуришите ограничење брзине преузимања на мрежи"</string>
