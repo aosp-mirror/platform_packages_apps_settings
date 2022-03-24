@@ -56,7 +56,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -153,8 +152,6 @@ public class UserSettingsTest {
         ReflectionHelpers.setField(mFragment, "mDefaultIconDrawable", mDefaultIconDrawable);
         ReflectionHelpers.setField(mFragment, "mAddingUser", false);
         ReflectionHelpers.setField(mFragment, "mMetricsFeatureProvider", mMetricsFeatureProvider);
-        ReflectionHelpers.setField(mFragment, "mRemoveGuestOnExitPreferenceController",
-                mock(RemoveGuestOnExitPreferenceController.class));
 
         doReturn(mUserManager).when(mActivity).getSystemService(UserManager.class);
         doReturn(mPackageManager).when(mActivity).getPackageManager();
@@ -181,11 +178,6 @@ public class UserSettingsTest {
         mFragment.mAddSupervisedUser = mAddSupervisedUserPreference;
         mFragment.mAddGuest = mAddGuestPreference;
         mFragment.mUserListCategory = mock(PreferenceCategory.class);
-        mFragment.mGuestUserCategory = mock(PreferenceCategory.class);
-        mFragment.mGuestCategory = mock(PreferenceCategory.class);
-        mFragment.mGuestResetPreference = mock(Preference.class);
-        mFragment.mGuestExitPreference = mock(Preference.class);
-        mFragment.mGuestInfoPreference = mock(Preference.class);
     }
 
     @After
@@ -227,7 +219,7 @@ public class UserSettingsTest {
     @Test
     public void testExitGuest_ShouldLogAction() {
         mUserCapabilities.mIsGuest = true;
-        mFragment.clearAndExitGuest();
+        mFragment.exitGuest();
         verify(mMetricsFeatureProvider).action(any(),
                 eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
     }
@@ -235,7 +227,7 @@ public class UserSettingsTest {
     @Test
     public void testExitGuestWhenNotGuest_ShouldNotLogAction() {
         mUserCapabilities.mIsGuest = false;
-        mFragment.clearAndExitGuest();
+        mFragment.exitGuest();
         verify(mMetricsFeatureProvider, never()).action(any(),
                 eq(SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED));
     }
@@ -331,6 +323,7 @@ public class UserSettingsTest {
 
         verify(mAddGuestPreference).setVisible(true);
         verify(mAddGuestPreference).setEnabled(true);
+        verify(mAddGuestPreference).setIcon(any(Drawable.class));
         verify(mAddGuestPreference).setSelectable(true);
     }
 
@@ -377,6 +370,7 @@ public class UserSettingsTest {
 
         verify(mAddGuestPreference).setVisible(true);
         verify(mAddGuestPreference).setEnabled(false);
+        verify(mAddGuestPreference).setIcon(any(Drawable.class));
         verify(mAddGuestPreference).setSelectable(true);
     }
 
@@ -478,9 +472,9 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mGuestUserCategory, times(1))
+        verify(mFragment.mUserListCategory, times(2))
                 .addPreference(captor.capture());
-        UserPreference guestPref = captor.getAllValues().get(0);
+        UserPreference guestPref = captor.getAllValues().get(1);
         assertThat(guestPref.getUserId()).isEqualTo(INACTIVE_GUEST_USER_ID);
         assertThat(guestPref.getTitle()).isEqualTo("Guest");
         assertThat(guestPref.getIcon()).isNotNull();
@@ -600,9 +594,9 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
-        verify(mFragment.mGuestUserCategory, times(1))
+        verify(mFragment.mUserListCategory, times(2))
                 .addPreference(captor.capture());
-        UserPreference userPref = captor.getAllValues().get(0);
+        UserPreference userPref = captor.getAllValues().get(1);
         assertThat(userPref.getUserId()).isEqualTo(INACTIVE_GUEST_USER_ID);
         assertThat(userPref.getSummary()).isNull();
     }
