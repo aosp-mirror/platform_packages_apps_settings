@@ -73,7 +73,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private static final int DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS = 3;
     private static final int DIALOG_SETUP_USER = 4;
     private static final int DIALOG_CONFIRM_RESET_GUEST = 5;
-    private static final int DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER = 6;
 
     /** Whether to enable the app_copying fragment. */
     private static final boolean SHOW_APP_COPYING_PREF = false;
@@ -143,11 +142,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (canSwitchUserNow()) {
                 if (shouldShowSetupPromptDialog()) {
                     showDialog(DIALOG_SETUP_USER);
-                } else if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
-                    // if we are switching away from a ephemeral guest then,
-                    // show a dialog that guest user will be reset and then switch
-                    // the user
-                    showDialog(DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER);
                 } else {
                     switchUser();
                 }
@@ -179,7 +173,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         switch (dialogId) {
             case DIALOG_CONFIRM_REMOVE:
             case DIALOG_CONFIRM_RESET_GUEST:
-            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
                 return SettingsEnums.DIALOG_USER_REMOVE;
             case DIALOG_CONFIRM_ENABLE_CALLING:
                 return SettingsEnums.DIALOG_USER_ENABLE_CALLING;
@@ -218,9 +211,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             case DIALOG_CONFIRM_RESET_GUEST:
                 return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
-            case DIALOG_CONFIRM_RESET_GUEST_AND_SWITCH_USER:
-                return UserDialogs.createResetGuestDialog(getActivity(),
-                        (dialog, which) -> switchUser());
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -365,16 +355,6 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
         try {
             if (mUserInfo.isGuest()) {
                 mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_SWITCH_TO_GUEST);
-            }
-            if (mUserCaps.mIsGuest && mUserCaps.mIsEphemeral) {
-                int guestUserId = UserHandle.myUserId();
-                // Using markGuestForDeletion allows us to create a new guest before this one is
-                // fully removed.
-                boolean marked = mUserManager.markGuestForDeletion(guestUserId);
-                if (!marked) {
-                    Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
-                    return;
-                }
             }
             ActivityManager.getService().switchUser(mUserInfo.id);
         } catch (RemoteException re) {
