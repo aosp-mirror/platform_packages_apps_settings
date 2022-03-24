@@ -10467,8 +10467,14 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
     </plurals>
 
-    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Remove permissions and free up space</string>
+    <!-- Label for category for unused app settings for an app. [CHAR LIMIT=40]-->
+    <string name="unused_apps_category">Unused app settings</string>
+
+    <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Pause app activity</string>
+
+    <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications if unused</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -13514,6 +13520,11 @@
     <!-- Summary for allowing screen overlays on Settings app. [CHAR LIMIT=NONE]-->
     <string name="overlay_settings_summary">Allow apps that can display over other apps to overlay Settings screens</string>
 
+    <!-- Developer settings: Title for allowing mock modem service for testing. [CHAR LIMIT=50]-->
+    <string name="allow_mock_modem">Allow Mock Modem</string>
+    <!-- Developer settings: Summary for allowing mock modem service. [CHAR LIMIT=NONE]-->
+    <string name="allow_mock_modem_summary">Allow this device to run Mock Modem service for instrumentation testing. Do not enable this during normal usage of the phone</string>
+
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
     <!-- Title of toggle to enable or disable the media resumption feature in quick settings [CHAR LIMIT=50]-->
@@ -14094,7 +14105,7 @@
     <string name="placeholder_activity" translatable="false">*This is a temporary placeholder fallback activity.</string>
 
     <!-- The title of the spatial audio [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_spatial_audio_title">Spatial audio</string>
+    <string name="bluetooth_details_spatial_audio_title">Spatial Audio</string>
     <!-- The summary of the spatial audio [CHAR LIMIT=none] -->
     <string name="bluetooth_details_spatial_audio_summary">Audio from compatible media becomes more immersive</string>
     <!-- The title of the head tracking [CHAR LIMIT=none] -->
