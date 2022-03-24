@@ -23,9 +23,11 @@ import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,14 +40,15 @@ import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityManager.TouchExplorationStateChangeListener;
 import android.widget.CheckBox;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 
@@ -74,8 +77,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private static final TextUtils.SimpleStringSplitter sStringColonSplitter =
             new TextUtils.SimpleStringSplitter(COMPONENT_NAME_SEPARATOR);
 
-    private MagnificationModePreferenceController mModePreferenceController;
     private DialogCreatable mDialogDelegate;
+    private MagnificationFollowTypingPreferenceController mFollowTypingPreferenceController;
+
+    protected SwitchPreference mFollowingTypingSwitchPreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +100,20 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };
-        return super.onCreateView(inflater, container, savedInstanceState);
+
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
+        updateFooterPreference();
+        return view;
+    }
+
+    private void updateFooterPreference() {
+        final String title = getPrefContext().getString(
+                R.string.accessibility_screen_magnification_about_title);
+        final String learnMoreContentDescription = getPrefContext().getString(
+                R.string.accessibility_screen_magnification_footer_learn_more_content_description);
+        mFooterPreferenceController.setIntroductionTitle(title);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -119,26 +137,25 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     public Dialog onCreateDialog(int dialogId) {
         if (mDialogDelegate != null) {
-            final Dialog dialog = mDialogDelegate.onCreateDialog(dialogId);
-            if (dialog != null) {
-                return dialog;
+            mDialog = mDialogDelegate.onCreateDialog(dialogId);
+            if (mDialog != null) {
+                return mDialog;
             }
         }
-        final AlertDialog dialog;
         switch (dialogId) {
             case DialogEnums.GESTURE_NAVIGATION_TUTORIAL:
                 return AccessibilityGestureNavigationTutorial
-                        .showGestureNavigationTutorialDialog(getPrefContext());
+                        .showAccessibilityGestureTutorialDialog(getPrefContext());
             case DialogEnums.MAGNIFICATION_EDIT_SHORTCUT:
                 final CharSequence dialogTitle = getPrefContext().getString(
                         R.string.accessibility_shortcut_title, mPackageName);
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_MAGNIFICATION_SUW
                         : DialogType.EDIT_SHORTCUT_MAGNIFICATION;
-                dialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
+                mDialog = AccessibilityDialogUtils.showEditShortcutDialog(getPrefContext(),
                         dialogType, dialogTitle, this::callOnAlertDialogCheckboxClicked);
-                setupMagnificationEditShortcutDialog(dialog);
-                return dialog;
+                setupMagnificationEditShortcutDialog(mDialog);
+                return mDialog;
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -146,9 +163,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
-        // If the device doesn't support magnification area, it should hide the settings preference.
-        if (!getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_magnification_area)) {
+        // If the device doesn't support window magnification feature, it should hide the
+        // settings preference.
+        final boolean supportWindowMagnification =
+                getContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_magnification_area)
+                        && getContext().getPackageManager().hasSystemFeature(
+                        PackageManager.FEATURE_WINDOW_MAGNIFICATION);
+        if (!supportWindowMagnification) {
             return;
         }
         mSettingsPreference = new Preference(getPrefContext());
@@ -159,11 +181,27 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mSettingsPreference);
 
-        mModePreferenceController = new MagnificationModePreferenceController(getContext(),
-                MagnificationModePreferenceController.PREF_KEY);
-        mModePreferenceController.setDialogHelper(this);
-        getSettingsLifecycle().addObserver(mModePreferenceController);
-        mModePreferenceController.displayPreference(getPreferenceScreen());
+        final MagnificationModePreferenceController magnificationModePreferenceController =
+                new MagnificationModePreferenceController(getContext(),
+                        MagnificationModePreferenceController.PREF_KEY);
+        magnificationModePreferenceController.setDialogHelper(this);
+        getSettingsLifecycle().addObserver(magnificationModePreferenceController);
+        magnificationModePreferenceController.displayPreference(getPreferenceScreen());
+
+        mFollowingTypingSwitchPreference =
+                new SwitchPreference(getPrefContext());
+        mFollowingTypingSwitchPreference.setTitle(
+                R.string.accessibility_screen_magnification_follow_typing_title);
+        mFollowingTypingSwitchPreference.setSummary(
+                R.string.accessibility_screen_magnification_follow_typing_summary);
+        mFollowingTypingSwitchPreference.setKey(
+                MagnificationFollowTypingPreferenceController.PREF_KEY);
+        generalCategory.addPreference(mFollowingTypingSwitchPreference);
+
+        mFollowTypingPreferenceController = new MagnificationFollowTypingPreferenceController(
+                getContext(), MagnificationFollowTypingPreferenceController.PREF_KEY);
+        getSettingsLifecycle().addObserver(mFollowTypingPreferenceController);
+        mFollowTypingPreferenceController.displayPreference(getPreferenceScreen());
     }
 
     @Override
@@ -196,7 +234,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @VisibleForTesting
-    void setupMagnificationEditShortcutDialog(AlertDialog dialog) {
+    void setupMagnificationEditShortcutDialog(Dialog dialog) {
         final View dialogSoftwareView = dialog.findViewById(R.id.software_shortcut);
         mSoftwareTypeCheckBox = dialogSoftwareView.findViewById(R.id.checkbox);
         setDialogTextAreaClickListener(dialogSoftwareView, mSoftwareTypeCheckBox);
@@ -252,6 +290,40 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         return (value & type) == type;
     }
 
+    private static CharSequence getSoftwareShortcutTypeSummary(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_shortcut_edit_summary_software_gesture;
+        } else {
+            resId = R.string.accessibility_shortcut_edit_summary_software;
+        }
+        return context.getText(resId);
+    }
+
+    @Override
+    protected void registerKeysToObserverCallback(
+            AccessibilitySettingsContentObserver contentObserver) {
+        super.registerKeysToObserverCallback(contentObserver);
+
+        final List<String> followingTypingKeys = new ArrayList<>();
+        followingTypingKeys.add(Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED);
+        contentObserver.registerKeysToObserverCallback(followingTypingKeys,
+                key -> updateFollowTypingState());
+    }
+
+    private void updateFollowTypingState() {
+        mFollowTypingPreferenceController.updateState();
+    }
+
+    @Override
+    protected List<String> getShortcutFeatureSettingsKeys() {
+        final List<String> shortcutKeys = super.getShortcutFeatureSettingsKeys();
+        shortcutKeys.add(Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
+        return shortcutKeys;
+    }
+
     @Override
     protected CharSequence getShortcutTypeSummary(Context context) {
         if (!mShortcutPreference.isChecked()) {
@@ -262,18 +334,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
                 MAGNIFICATION_CONTROLLER_NAME, UserShortcutType.SOFTWARE);
 
         final List<CharSequence> list = new ArrayList<>();
-        final CharSequence softwareTitle = context.getText(
-                R.string.accessibility_shortcut_edit_summary_software);
-
         if (hasShortcutType(shortcutTypes, UserShortcutType.SOFTWARE)) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
         if (hasShortcutType(shortcutTypes, UserShortcutType.HARDWARE)) {
             final CharSequence hardwareTitle = context.getText(
                     R.string.accessibility_shortcut_hardware_keyword);
             list.add(hardwareTitle);
         }
-
         if (hasShortcutType(shortcutTypes, UserShortcutType.TRIPLETAP)) {
             final CharSequence tripleTapTitle = context.getText(
                     R.string.accessibility_shortcut_triple_tap_keyword);
@@ -282,7 +350,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         // Show software shortcut if first time to use.
         if (list.isEmpty()) {
-            list.add(softwareTitle);
+            list.add(getSoftwareShortcutTypeSummary(context));
         }
 
         return CaseMap.toTitle().wholeString().noLowercase().apply(Locale.getDefault(), /* iter= */
@@ -336,6 +404,16 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     @Override
     int getUserShortcutTypes() {
         return getUserShortcutTypeFromSettings(getPrefContext());
+    }
+
+    @Override
+    ComponentName getTileComponentName() {
+        return null;
+    }
+
+    @Override
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return null;
     }
 
     @Override
@@ -394,6 +472,11 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mShortcutPreference);
+    }
+
+    @Override
+    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
+        shortcutPreference.setTitle(R.string.accessibility_screen_magnification_shortcut_title);
     }
 
     @Override

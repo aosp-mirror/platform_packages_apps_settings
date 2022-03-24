@@ -32,7 +32,10 @@
         settings:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
         settings:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
         settings:fastScrollVerticalTrackDrawable="@drawable/line_drawable"
-        settings:layout_constraintTop_toBottomOf="@id/pinned_header"/>
+        settings:layout_constrainedHeight="true"
+        settings:layout_constraintVertical_bias="0.0"
+        settings:layout_constraintTop_toBottomOf="@id/pinned_header"
+        settings:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@android:id/empty"
@@ -55,7 +58,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:colorBackground"
-        settings:layout_constraintTop_toTopOf="parent"/>
+        settings:layout_constraintVertical_chainStyle="packed"
+        settings:layout_constraintVertical_bias="0.0"
+        settings:layout_constraintTop_toTopOf="parent"
+        settings:layout_constraintBottom_toTopOf="@id/apps_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

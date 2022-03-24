@@ -23,7 +23,9 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.display.DeviceStateAutoRotationHelper;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -58,7 +60,14 @@ public class LockScreenRotationPreferenceController extends TogglePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return RotationPolicy.isRotationSupported(mContext) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return RotationPolicy.isRotationSupported(mContext)
+                && !DeviceStateAutoRotationHelper.isDeviceStateRotationEnabledForA11y(mContext)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 
     @Override

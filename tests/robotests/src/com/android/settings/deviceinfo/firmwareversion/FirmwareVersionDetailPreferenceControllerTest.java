@@ -63,7 +63,7 @@ public class FirmwareVersionDetailPreferenceControllerTest {
 
     @Test
     public void getSummary_shouldGetBuildVersion() {
-        assertThat(mController.getSummary()).isEqualTo(Build.VERSION.RELEASE_OR_CODENAME);
+        assertThat(mController.getSummary()).isEqualTo(Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY);
     }
 
     @Test

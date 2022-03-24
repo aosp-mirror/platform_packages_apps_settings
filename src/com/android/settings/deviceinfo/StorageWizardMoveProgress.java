@@ -16,9 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ERROR_MOVE_DEVICE_ADMIN;
 import static android.content.Intent.EXTRA_TITLE;
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.MoveCallback;
 import android.os.Bundle;
@@ -87,7 +89,9 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
             case PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE:
                 return getString(R.string.insufficient_storage);
             case PackageManager.MOVE_FAILED_DEVICE_ADMIN:
-                return getString(R.string.move_error_device_admin);
+                return getSystemService(DevicePolicyManager.class).getResources()
+                        .getString(ERROR_MOVE_DEVICE_ADMIN,
+                                () -> getString(R.string.move_error_device_admin));
             case PackageManager.MOVE_FAILED_DOESNT_EXIST:
                 return getString(R.string.does_not_exist);
             case PackageManager.MOVE_FAILED_INVALID_LOCATION:

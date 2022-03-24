@@ -51,23 +51,37 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
     private DockUpdater mConnectedDockUpdater;
+    private final PackageManager mPackageManager;
 
     public ConnectedDeviceGroupController(Context context) {
         super(context, KEY);
+        mPackageManager = context.getPackageManager();
     }
 
     @Override
     public void onStart() {
-        mBluetoothDeviceUpdater.registerCallback();
-        mConnectedUsbDeviceUpdater.registerCallback();
+        if (mBluetoothDeviceUpdater != null) {
+            mBluetoothDeviceUpdater.registerCallback();
+            mBluetoothDeviceUpdater.refreshPreference();
+        }
+
+        if (mConnectedUsbDeviceUpdater != null) {
+            mConnectedUsbDeviceUpdater.registerCallback();
+        }
+
         mConnectedDockUpdater.registerCallback();
-        mBluetoothDeviceUpdater.refreshPreference();
     }
 
     @Override
     public void onStop() {
-        mConnectedUsbDeviceUpdater.unregisterCallback();
-        mBluetoothDeviceUpdater.unregisterCallback();
+        if (mBluetoothDeviceUpdater != null) {
+            mBluetoothDeviceUpdater.unregisterCallback();
+        }
+
+        if (mConnectedUsbDeviceUpdater != null) {
+            mConnectedUsbDeviceUpdater.unregisterCallback();
+        }
+
         mConnectedDockUpdater.unregisterCallback();
     }
 
@@ -80,9 +94,15 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
         if (isAvailable()) {
             final Context context = screen.getContext();
-            mBluetoothDeviceUpdater.setPrefContext(context);
-            mBluetoothDeviceUpdater.forceUpdate();
-            mConnectedUsbDeviceUpdater.initUsbPreference(context);
+            if (mBluetoothDeviceUpdater != null) {
+                mBluetoothDeviceUpdater.setPrefContext(context);
+                mBluetoothDeviceUpdater.forceUpdate();
+            }
+
+            if (mConnectedUsbDeviceUpdater != null) {
+                mConnectedUsbDeviceUpdater.initUsbPreference(context);
+            }
+
             mConnectedDockUpdater.setPreferenceContext(context);
             mConnectedDockUpdater.forceUpdate();
         }
@@ -90,10 +110,8 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        final PackageManager packageManager = mContext.getPackageManager();
-        return (packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)
-                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)
+        return (hasBluetoothFeature()
+                || hasUsbFeature()
                 || mConnectedDockUpdater != null)
                 ? AVAILABLE_UNSEARCHABLE
                 : UNSUPPORTED_ON_DEVICE;
@@ -121,7 +139,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     }
 
     @VisibleForTesting
-    public void init(BluetoothDeviceUpdater bluetoothDeviceUpdater,
+    void init(BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater,
             DockUpdater connectedDockUpdater) {
 
@@ -136,8 +154,21 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
                 FeatureFactory.getFactory(context).getDockUpdaterFeatureProvider();
         final DockUpdater connectedDockUpdater =
                 dockUpdaterFeatureProvider.getConnectedDockUpdater(context, this);
-        init(new ConnectedBluetoothDeviceUpdater(context, fragment, this),
-                new ConnectedUsbDeviceUpdater(context, fragment, this),
+        init(hasBluetoothFeature()
+                        ? new ConnectedBluetoothDeviceUpdater(context, fragment, this)
+                        : null,
+                hasUsbFeature()
+                        ? new ConnectedUsbDeviceUpdater(context, fragment, this)
+                        : null,
                 connectedDockUpdater);
+    }
+
+    private boolean hasBluetoothFeature() {
+        return mPackageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+    }
+
+    private boolean hasUsbFeature() {
+        return mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)
+                || mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST);
     }
 }

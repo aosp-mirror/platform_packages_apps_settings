@@ -16,6 +16,9 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_MANAGED_WITHOUT_NAME;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.DEVICE_MANAGED_WITH_NAME;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -95,10 +98,12 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         final SpannableStringBuilder disclosure = new SpannableStringBuilder();
         final CharSequence organizationName = mDpm.getDeviceOwnerOrganizationName();
         if (organizationName != null) {
-            disclosure.append(mResources.getString(R.string.do_disclosure_with_name,
-                    organizationName));
+            disclosure.append(mDpm.getResources().getString(DEVICE_MANAGED_WITH_NAME,
+                    () -> mResources.getString(R.string.do_disclosure_with_name,
+                    organizationName), organizationName));
         } else {
-            disclosure.append(mResources.getString(R.string.do_disclosure_generic));
+            disclosure.append(mDpm.getResources().getString(DEVICE_MANAGED_WITHOUT_NAME,
+                    () -> mResources.getString(R.string.do_disclosure_generic)));
         }
         return disclosure;
     }
@@ -227,17 +232,17 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     }
 
     @Override
-    public boolean showWorkPolicyInfo() {
+    public boolean showWorkPolicyInfo(Context activityContext) {
         Intent intent = getWorkPolicyInfoIntentDO();
         if (intent != null) {
-            mContext.startActivity(intent);
+            activityContext.startActivity(intent);
             return true;
         }
 
         intent = getWorkPolicyInfoIntentPO();
         final UserInfo userInfo = getManagedProfileUserInfo();
         if (intent != null && userInfo != null) {
-            mContext.startActivityAsUser(intent, userInfo.getUserHandle());
+            activityContext.startActivityAsUser(intent, userInfo.getUserHandle());
             return true;
         }
 
@@ -305,8 +310,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Device Owner's package
         final Intent intent =
                 new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        .setPackage(ownerComponent.getPackageName());
         final List<ResolveInfo> activities = mPm.queryIntentActivities(intent, 0);
         if (activities.size() != 0) {
             return intent;
@@ -329,8 +333,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         // Only search for the required action in the Profile Owner's package
         final Intent intent =
                 new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName())
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        .setPackage(ownerComponent.getPackageName());
         final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, userId);
         if (activities.size() != 0) {
             return intent;

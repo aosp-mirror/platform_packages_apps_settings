@@ -53,6 +53,7 @@ public class TimeoutListPreference extends RestrictedListPreference {
         super.onPrepareDialogBuilder(builder, listener);
         if (mAdmin != null) {
             builder.setView(R.layout.admin_disabled_other_options_footer);
+            // TODO: replace Text on textview with admin_disabled_other_options
         } else {
             builder.setView(null);
         }

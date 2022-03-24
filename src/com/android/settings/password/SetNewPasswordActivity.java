@@ -29,6 +29,7 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_I
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
 import android.app.Activity;
+import android.app.RemoteServiceException.MissingRequestPasswordComplexityPermissionException;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyManager.PasswordComplexity;
 import android.app.admin.PasswordMetrics;
@@ -101,7 +102,8 @@ public class SetNewPasswordActivity extends Activity implements SetNewPasswordCo
                 PasswordUtils.crashCallingApplication(activityToken,
                         "Must have permission "
                                 + REQUEST_PASSWORD_COMPLEXITY + " to use extra "
-                                + EXTRA_PASSWORD_COMPLEXITY);
+                                + EXTRA_PASSWORD_COMPLEXITY,
+                        MissingRequestPasswordComplexityPermissionException.TYPE_ID);
                 finish();
                 return;
             }

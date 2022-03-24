@@ -15,6 +15,11 @@
  */
 package com.android.settings;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARE_REMOTE_BUGREPORT_DIALOG_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARE_REMOTE_BUGREPORT_FINISHED_REQUEST_CONSENT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARE_REMOTE_BUGREPORT_NOT_FINISHED_REQUEST_CONSENT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SHARING_REMOTE_BUGREPORT_MESSAGE;
+
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -42,12 +47,16 @@ public class RemoteBugreportActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+
         final int notificationType = getIntent().getIntExtra(
                 DevicePolicyManager.EXTRA_BUGREPORT_NOTIFICATION_TYPE, -1);
 
         if (notificationType == DevicePolicyManager.NOTIFICATION_BUGREPORT_ACCEPTED_NOT_FINISHED) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage(R.string.sharing_remote_bugreport_dialog_message)
+                    .setMessage(devicePolicyManager.getResources().getString(
+                            SHARING_REMOTE_BUGREPORT_MESSAGE,
+                            () -> getString(R.string.sharing_remote_bugreport_dialog_message)))
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
@@ -65,12 +74,22 @@ public class RemoteBugreportActivity extends Activity {
         } else if (notificationType == DevicePolicyManager.NOTIFICATION_BUGREPORT_STARTED
                 || notificationType
                         == DevicePolicyManager.NOTIFICATION_BUGREPORT_FINISHED_NOT_ACCEPTED) {
+
+            int defaultMessageId =  notificationType
+                    == DevicePolicyManager.NOTIFICATION_BUGREPORT_STARTED
+                    ? R.string.share_remote_bugreport_dialog_message
+                    : R.string.share_remote_bugreport_dialog_message_finished;
+            String overrideMessageId = notificationType
+                    == DevicePolicyManager.NOTIFICATION_BUGREPORT_STARTED
+                    ? SHARE_REMOTE_BUGREPORT_NOT_FINISHED_REQUEST_CONSENT
+                    : SHARE_REMOTE_BUGREPORT_FINISHED_REQUEST_CONSENT;
+
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle(R.string.share_remote_bugreport_dialog_title)
-                    .setMessage(notificationType
-                                    == DevicePolicyManager.NOTIFICATION_BUGREPORT_STARTED
-                            ? R.string.share_remote_bugreport_dialog_message
-                            : R.string.share_remote_bugreport_dialog_message_finished)
+                    .setTitle(devicePolicyManager.getResources().getString(
+                            SHARE_REMOTE_BUGREPORT_DIALOG_TITLE,
+                            () -> getString(R.string.share_remote_bugreport_dialog_title)))
+                    .setMessage(devicePolicyManager.getResources().getString(overrideMessageId,
+                            () -> getString(defaultMessageId)))
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
