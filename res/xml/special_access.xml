@@ -157,6 +157,11 @@
     </Preference>
 
     <Preference
+        android:key="turn_screen_on"
+        android:title="@string/turn_screen_on_title"
+        android:fragment="com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings" />
+
+    <Preference
         android:key="special_access_more"
         android:title="@string/special_access_more"
         settings:controller="com.android.settings.applications.specialaccess.MoreSpecialAccessPreferenceController" />
