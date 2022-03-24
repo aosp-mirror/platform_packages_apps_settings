@@ -34,6 +34,7 @@ import com.android.settings.SubSettings;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -101,6 +102,7 @@ public class SearchResultTrampoline extends Activity {
         } else if (isSettingsIntelligence(callingActivity)) {
             if (FeatureFlagUtils.isEnabled(this, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
                 startActivity(SettingsActivity.getTrampolineIntent(intent, highlightMenuKey)
+                        .setClass(this, DeepLinkHomepageActivityInternal.class)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                 | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS));
             } else {
