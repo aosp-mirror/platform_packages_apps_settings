@@ -1199,8 +1199,7 @@ public class UserSettings extends SettingsPreferenceFragment
             addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
 
             if (!canAddMoreUsers) {
-                addUser.setSummary(
-                        getString(R.string.user_add_max_count, getRealUsersCount()));
+                addUser.setSummary(getString(R.string.user_add_max_count));
             } else {
                 addUser.setSummary(null);
             }
