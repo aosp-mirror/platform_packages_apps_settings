@@ -58,8 +58,7 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
         mainSwitchPreference.addOnSwitchChangeListener(
                 (switchView, isChecked) ->
                         NearbyManager.setFastPairScanEnabled(getContext(), isChecked));
-        mainSwitchPreference.setChecked(
-                NearbyManager.getFastPairScanEnabled(getContext(), false));
+        mainSwitchPreference.setChecked(NearbyManager.getFastPairScanEnabled(getContext()));
 
         Preference savedDevicePref = Objects.requireNonNull(
                 findPreference(SAVED_DEVICES_PREF_KEY));
