@@ -16,6 +16,9 @@
 
 package com.android.settings.homepage;
 
-/** Activity for Slices to launch Settings deep link page */
-public class SliceDeepLinkHomepageActivity extends SettingsHomepageActivity {
+/**
+ * Activity used for search results and slices to launch a deep link page without the cross-app
+ * transition animation
+ */
+public class DeepLinkHomepageActivityInternal extends SettingsHomepageActivity {
 }

@@ -344,7 +344,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
 
         if (!(this instanceof DeepLinkHomepageActivity
-                || this instanceof SliceDeepLinkHomepageActivity)) {
+                || this instanceof DeepLinkHomepageActivityInternal)) {
             Log.e(TAG, "Not a deep link component");
             finish();
             return;
