@@ -725,6 +725,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
 
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
+
         // Show the quick setting tooltip if the shortcut assigned in the first time
         if (shortcutAssigned) {
             showQuickSettingsTooltipIfNeeded();
