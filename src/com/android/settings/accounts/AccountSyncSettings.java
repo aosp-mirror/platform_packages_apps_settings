@@ -16,10 +16,14 @@
 
 package com.android.settings.accounts;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACCESSIBILITY_PERSONAL_ACCOUNT_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ACCESSIBILITY_WORK_ACCOUNT_TITLE;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -154,10 +158,21 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         UserInfo user = um.getUserInfo(mUserHandle.getIdentifier());
         boolean isWorkProfile = user != null ? user.isManagedProfile() : false;
         CharSequence currentTitle = getActivity().getTitle();
+
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+
         String accessibilityTitle =
-                getString(isWorkProfile
-                        ? R.string.accessibility_work_account_title
-                        : R.string.accessibility_personal_account_title, currentTitle);
+                isWorkProfile
+                        ? devicePolicyManager.getResources().getString(
+                                ACCESSIBILITY_WORK_ACCOUNT_TITLE,
+                                () -> getString(R.string.accessibility_work_account_title,
+                                        currentTitle), currentTitle)
+                                : devicePolicyManager.getResources().getString(
+                                        ACCESSIBILITY_PERSONAL_ACCOUNT_TITLE,
+                                        () -> getString(
+                                                R.string.accessibility_personal_account_title,
+                                                currentTitle), currentTitle);
+
         getActivity().setTitle(Utils.createAccessibleSequence(currentTitle, accessibilityTitle));
     }
 

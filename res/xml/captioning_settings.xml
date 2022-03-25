@@ -21,12 +21,16 @@
     android:persistent="false"
     android:title="@string/accessibility_captioning_title">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="captions_intro"
+        android:persistent="false"
+        android:title="@string/accessibility_caption_preference_intro"/>
+
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
-        android:layout="@layout/accessibility_captions_preview"
         android:persistent="false"
         android:selectable="false"
-        android:title="@string/summary_placeholder"
+        settings:lottie_rawRes="@drawable/accessibility_captions_banner"
         settings:searchable="false" />
 
     <com.android.settings.widget.SettingsMainSwitchPreference
@@ -39,7 +43,8 @@
         android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
         android:key="captioning_caption_appearance"
         android:persistent="false"
-        android:title="@string/captioning_caption_appearance_title" />
+        android:title="@string/captioning_caption_appearance_title"
+        settings:controller="com.android.settings.accessibility.CaptionAppearancePreferenceController" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.CaptionMoreOptionsFragment"

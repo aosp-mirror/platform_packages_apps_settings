@@ -13,6 +13,10 @@
  */
 package com.android.settings.accounts;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SETTING_OFF_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SETTING_ON_SUMMARY;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +44,7 @@ public class WorkModePreferenceController extends BasePreferenceController imple
 
     private UserManager mUserManager;
     private UserHandle mManagedUser;
+    private DevicePolicyManager mDevicePolicyManager;
 
     private Preference mPreference;
     private IntentFilter mIntentFilter;
@@ -47,6 +52,7 @@ public class WorkModePreferenceController extends BasePreferenceController imple
     public WorkModePreferenceController(Context context, String key) {
         super(context, key);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
         mIntentFilter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
@@ -58,7 +64,8 @@ public class WorkModePreferenceController extends BasePreferenceController imple
 
     @Override
     public void onStart() {
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mContext.registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     @Override
@@ -79,9 +86,15 @@ public class WorkModePreferenceController extends BasePreferenceController imple
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getText(isChecked()
-                ? R.string.work_mode_on_summary
-                : R.string.work_mode_off_summary);
+        if (isChecked()) {
+            return mDevicePolicyManager.getResources().getString(
+                    WORK_PROFILE_SETTING_ON_SUMMARY,
+                    () -> mContext.getString(R.string.work_mode_on_summary));
+        }
+
+        return mDevicePolicyManager.getResources().getString(
+                WORK_PROFILE_SETTING_OFF_SUMMARY,
+                        () -> mContext.getString(R.string.work_mode_off_summary));
     }
 
     private boolean isChecked() {

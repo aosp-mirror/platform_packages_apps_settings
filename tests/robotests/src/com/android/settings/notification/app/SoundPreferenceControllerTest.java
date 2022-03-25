@@ -183,20 +183,6 @@ public class SoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notBlockable() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
-        AttributeSet attributeSet = Robolectric.buildAttributeSet().build();
-        Preference pref = new NotificationSoundPreference(mContext, attributeSet);
-        mController.updateState(pref);
-
-        assertTrue(pref.isEnabled());
-    }
-
-    @Test
     public void testUpdateState_configurable() {
         Uri sound = Settings.System.DEFAULT_ALARM_ALERT_URI;
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();

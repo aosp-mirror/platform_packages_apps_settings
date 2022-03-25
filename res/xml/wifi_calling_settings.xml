@@ -21,6 +21,7 @@
 
     <com.android.settings.wifi.calling.ListWithEntrySummaryPreference
             android:key="wifi_calling_mode"
+            isPreferenceVisible="false"
             android:title="@string/wifi_calling_mode_title"
             android:summary="@string/wifi_calling_mode_title"
             android:entries="@array/wifi_calling_mode_choices"
@@ -30,6 +31,7 @@
 
     <com.android.settings.wifi.calling.ListWithEntrySummaryPreference
             android:key="wifi_calling_roaming_mode"
+            isPreferenceVisible="false"
             android:title="@string/wifi_calling_roaming_mode_title"
             android:summary="@string/wifi_calling_roaming_mode_summary"
             android:entries="@array/wifi_calling_mode_choices_v2"
@@ -39,7 +41,12 @@
 
     <Preference
             android:key="emergency_address_key"
+            isPreferenceVisible="false"
             android:title="@string/emergency_address_title"
             android:summary="@string/emergency_address_summary" />
+
+    <com.android.settings.wifi.calling.LinkifyDescriptionPreference
+            android:key="no_options_description"
+            isPreferenceVisible="false" />
 
 </PreferenceScreen>

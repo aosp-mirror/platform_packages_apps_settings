@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ProgressBar;
@@ -30,6 +32,7 @@ public class StorageItemPreference extends Preference {
     public int userHandle;
 
     private static final int UNINITIALIZED = -1;
+    private static final int ANIMATE_DURATION_IN_MILLIS = 1000;
 
     private ProgressBar mProgressBar;
     private static final int PROGRESS_MAX = 100;
@@ -46,15 +49,33 @@ public class StorageItemPreference extends Preference {
     }
 
     public void setStorageSize(long size, long total) {
-        mStorageSize = size;
-        setSummary(StorageUtils.getStorageSizeLabel(getContext(), size));
+        setStorageSize(size, total, false /* animate */);
+    }
 
-        if (total == 0) {
-            mProgressPercent = 0;
+    /**
+     * Set the storage size info with/without animation
+     */
+    public void setStorageSize(long size, long total, boolean animate) {
+        if (animate) {
+            TypeEvaluator<Long> longEvaluator =
+                    (fraction, startValue, endValue) -> {
+                        // Directly returns end value if fraction is 1.0 and the end value is 0.
+                        if (fraction >= 1.0f && endValue == 0) {
+                            return endValue;
+                        }
+                        return startValue + (long) (fraction * (endValue - startValue));
+                    };
+            ValueAnimator valueAnimator = ValueAnimator.ofObject(longEvaluator, mStorageSize, size);
+            valueAnimator.setDuration(ANIMATE_DURATION_IN_MILLIS);
+            valueAnimator.addUpdateListener(
+                    animation -> {
+                        updateProgressBarAndSizeInfo((long) animation.getAnimatedValue(), total);
+                    });
+            valueAnimator.start();
         } else {
-            mProgressPercent = (int)(size * PROGRESS_MAX / total);
+            updateProgressBarAndSizeInfo(size, total);
         }
-        updateProgressBar();
+        mStorageSize = size;
     }
 
     public long getStorageSize() {
@@ -62,11 +83,18 @@ public class StorageItemPreference extends Preference {
     }
 
     protected void updateProgressBar() {
-        if (mProgressBar == null || mProgressPercent == UNINITIALIZED)
+        if (mProgressBar == null || mProgressPercent == UNINITIALIZED) {
             return;
+        }
 
         mProgressBar.setMax(PROGRESS_MAX);
         mProgressBar.setProgress(mProgressPercent);
+    }
+
+    private void updateProgressBarAndSizeInfo(long size, long total) {
+        setSummary(StorageUtils.getStorageSizeLabel(getContext(), size));
+        mProgressPercent = total == 0 ? 0 : (int) (size * PROGRESS_MAX / total);
+        updateProgressBar();
     }
 
     @Override

@@ -99,12 +99,18 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
     @VisibleForTesting
     boolean mIsRegisterCallback = false;
     @VisibleForTesting
+    boolean mIsLeftDeviceEstimateReady;
+    @VisibleForTesting
+    boolean mIsRightDeviceEstimateReady;
+    @VisibleForTesting
     final BluetoothAdapter.OnMetadataChangedListener mMetadataListener =
             new BluetoothAdapter.OnMetadataChangedListener() {
                 @Override
                 public void onMetadataChanged(BluetoothDevice device, int key, byte[] value) {
-                    Log.i(TAG, String.format("Metadata updated in Device %s: %d = %s.", device, key,
-                            value == null ? null : new String(value)));
+                    if (DEBUG) {
+                        Log.d(TAG, String.format("Metadata updated in Device %s: %d = %s.", device,
+                                key, value == null ? null : new String(value)));
+                    }
                     refresh();
                 }
             };
@@ -224,6 +230,8 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                         BluetoothDevice.METADATA_UNTETHERED_RIGHT_CHARGING,
                         R.string.bluetooth_right_name,
                         RIGHT_DEVICE_ID);
+
+                showBothDevicesBatteryPredictionIfNecessary();
             }
         }
     }
@@ -363,8 +371,13 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
                                 + ", ESTIMATE_READY : " + estimateReady
                                 + ", BATTERY_ESTIMATE : " + batteryEstimate);
                     }
-                    showBatteryPredictionIfNecessary(estimateReady, batteryEstimate,
-                            linearLayout);
+
+                    showBatteryPredictionIfNecessary(estimateReady, batteryEstimate, linearLayout);
+                    if (batteryId == LEFT_DEVICE_ID) {
+                        mIsLeftDeviceEstimateReady = estimateReady == 1;
+                    } else if (batteryId == RIGHT_DEVICE_ID) {
+                        mIsRightDeviceEstimateReady = estimateReady == 1;
+                    }
                 }
             } finally {
                 cursor.close();
@@ -378,7 +391,6 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
         ThreadUtils.postOnMainThread(() -> {
             final TextView textView = linearLayout.findViewById(R.id.bt_battery_prediction);
             if (estimateReady == 1) {
-                textView.setVisibility(View.VISIBLE);
                 textView.setText(
                         StringUtil.formatElapsedTime(
                                 mContext,
@@ -388,6 +400,24 @@ public class AdvancedBluetoothDetailsHeaderController extends BasePreferenceCont
             } else {
                 textView.setVisibility(View.GONE);
             }
+        });
+    }
+
+    @VisibleForTesting
+    void showBothDevicesBatteryPredictionIfNecessary() {
+        TextView leftDeviceTextView =
+                mLayoutPreference.findViewById(R.id.layout_left)
+                        .findViewById(R.id.bt_battery_prediction);
+        TextView rightDeviceTextView =
+                mLayoutPreference.findViewById(R.id.layout_right)
+                        .findViewById(R.id.bt_battery_prediction);
+
+        boolean isBothDevicesEstimateReady =
+                mIsLeftDeviceEstimateReady && mIsRightDeviceEstimateReady;
+        int visibility = isBothDevicesEstimateReady ? View.VISIBLE : View.GONE;
+        ThreadUtils.postOnMainThread(() -> {
+            leftDeviceTextView.setVisibility(visibility);
+            rightDeviceTextView.setVisibility(visibility);
         });
     }
 
