@@ -44,8 +44,10 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.gestures.OneHandedSettingsUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -178,6 +180,12 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
             return null;
         }
         for (ResolveInfo info : activities) {
+            if (info.activityInfo.name.contains(
+                    Settings.OneHandedSettingsActivity.class.getSimpleName())) {
+                if (!OneHandedSettingsUtils.isSupportOneHandedMode()) {
+                    continue;
+                }
+            }
             if (info.activityInfo.name.endsWith(TetherSettingsActivity.class.getSimpleName())) {
                 if (!mConnectivityManager.isTetheringSupported()) {
                     continue;

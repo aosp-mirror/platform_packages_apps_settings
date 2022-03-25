@@ -26,6 +26,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,6 +43,7 @@ public class EraseEuiccDataControllerTest {
         mController = new EraseEuiccDataController(context, ERASE_EUICC_DATA_PREFERENCE_KEY);
     }
 
+    @Ignore("Will not work on devices without FEATURE_TELEPHONY_EUICC")
     @Test
     public void getAvailabilityStatus_returnAVAILABLE_UNSEARCHABLE() {
         assertThat(mController.getAvailabilityStatus())

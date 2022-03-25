@@ -301,8 +301,8 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         if (entries == null) {
             return 0;
         }
-        final ArrayMap<String, PermissionState> entriesForProfile = entries.get(mUserManager
-                .getUserHandle());
+        final ArrayMap<String, PermissionState> entriesForProfile =
+                entries.get(mUserManager.getProcessUserId());
         if (entriesForProfile == null) {
             return 0;
         }
@@ -316,8 +316,8 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
         }
         loadPermissionsStates(entries);
         loadAppOpsStates(entries);
-        final ArrayMap<String, PermissionState> entriesForProfile = entries.get(mUserManager
-                .getUserHandle());
+        final ArrayMap<String, PermissionState> entriesForProfile =
+                entries.get(mUserManager.getProcessUserId());
         if (entriesForProfile == null) {
             return 0;
         }

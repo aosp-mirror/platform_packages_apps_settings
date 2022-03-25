@@ -83,6 +83,11 @@ public class MagnificationNavbarPreferenceController extends TogglePreferenceCon
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
+    }
+
+    @Override
     public CharSequence getSummary() {
         int resId = 0;
         if (mIsFromSUW) {

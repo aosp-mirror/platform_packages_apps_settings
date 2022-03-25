@@ -38,13 +38,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.LocationManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.util.FeatureFlagUtils;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,10 +65,11 @@ import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConnectedWifiEntryPreference;
+import com.android.settings.wifi.LongPressWifiEntryPreference;
 import com.android.settings.wifi.WifiConfigController2;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -97,6 +98,8 @@ public class NetworkProviderSettingsTest {
     @Mock
     private UserManager mUserManager;
     @Mock
+    private LocationManager mLocationManager;
+    @Mock
     private AirplaneModeEnabler mAirplaneModeEnabler;
     @Mock
     private DataUsagePreference mDataUsagePreference;
@@ -104,6 +107,8 @@ public class NetworkProviderSettingsTest {
     private NetworkProviderSettings mNetworkProviderSettings;
     @Mock
     private WifiPickerTracker mMockWifiPickerTracker;
+    @Mock
+    private WifiEntry mWifiEntry;
     @Mock
     private PreferenceManager mPreferenceManager;
     @Mock
@@ -132,6 +137,7 @@ public class NetworkProviderSettingsTest {
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mLocationManager).when(mContext).getSystemService(LocationManager.class);
         when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
@@ -144,6 +150,7 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.mAirplaneModeMsgPreference = mAirplaneModeMsgPreference;
         mNetworkProviderSettings.mAirplaneModeEnabler = mAirplaneModeEnabler;
         mNetworkProviderSettings.mInternetUpdater = mInternetUpdater;
+        mNetworkProviderSettings.mWifiStatusMessagePreference = new FooterPreference(mContext);
         doReturn(NetworkProviderSettings.PREF_KEY_CONNECTED_ACCESS_POINTS)
                 .when(mConnectedWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mConnectedWifiEntryPreferenceCategory =
@@ -152,20 +159,18 @@ public class NetworkProviderSettingsTest {
                 .when(mFirstWifiEntryPreferenceCategory).getKey();
         mNetworkProviderSettings.mFirstWifiEntryPreferenceCategory =
                 mFirstWifiEntryPreferenceCategory;
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
     }
 
     @Test
     public void addNetworkFragmentSendResult_onActivityResult_shouldHandleEvent() {
-        final NetworkProviderSettings NetworkProviderSettings = spy(new NetworkProviderSettings());
         final Intent intent = new Intent();
-        doNothing().when(NetworkProviderSettings).handleAddNetworkRequest(anyInt(),
+        doNothing().when(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(),
                 any(Intent.class));
 
-        NetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
+        mNetworkProviderSettings.onActivityResult(NetworkProviderSettings.ADD_NETWORK_REQUEST,
                 Activity.RESULT_OK, intent);
 
-        verify(NetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
+        verify(mNetworkProviderSettings).handleAddNetworkRequest(anyInt(), any(Intent.class));
     }
 
     @Test
@@ -306,14 +311,13 @@ public class NetworkProviderSettingsTest {
         when(activity.getApplicationContext()).thenReturn(mContext);
         when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
 
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        when(wifiEntry.canDisconnect()).thenReturn(true);
-        when(wifiEntry.canForget()).thenReturn(true);
-        when(wifiEntry.isSaved()).thenReturn(true);
-        when(wifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
 
         final LongPressWifiEntryPreference connectedWifiEntryPreference =
-                mNetworkProviderSettings.createLongPressWifiEntryPreference(wifiEntry);
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
         final View view = mock(View.class);
         when(view.getTag()).thenReturn(connectedWifiEntryPreference);
 
@@ -323,6 +327,53 @@ public class NetworkProviderSettingsTest {
         verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_FORGET), anyInt(), anyInt());
         verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_DISCONNECT), anyInt(),
                 anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        when(activity.getApplicationContext()).thenReturn(mContext);
+        when(mNetworkProviderSettings.getActivity()).thenReturn(activity);
+
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(false);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_CONNECTED);
+
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        final ContextMenu menu = mock(ContextMenu.class);
+        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+
+        verify(menu, never())
+                .add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
     }
 
     @Test
@@ -338,10 +389,9 @@ public class NetworkProviderSettingsTest {
                 FAKE_URI_STRING);
         doNothing().when(mNetworkProviderSettings).startActivityForResult(any(Intent.class),
                 anyInt());
-        final WifiEntry mockWifiEntry = mock(WifiEntry.class);
-        when(mockWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
+        when(mWifiEntry.getHelpUriString()).thenReturn(FAKE_URI_STRING);
 
-        mNetworkProviderSettings.openSubscriptionHelpPage(mockWifiEntry);
+        mNetworkProviderSettings.openSubscriptionHelpPage(mWifiEntry);
 
         verify(mNetworkProviderSettings, times(1)).startActivityForResult(any(), anyInt());
     }
@@ -409,12 +459,11 @@ public class NetworkProviderSettingsTest {
     }
 
     private WifiDialog2 createWifiDialog2(int mode, WifiConfiguration config) {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
-        when(wifiEntry.canConnect()).thenReturn(true);
+        when(mWifiEntry.canConnect()).thenReturn(true);
         final WifiConfigController2 controller = mock(WifiConfigController2.class);
         when(controller.getConfig()).thenReturn(config);
-        final WifiDialog2 wifiDialog2 =  spy(WifiDialog2.createModal(mContext, null /* listener */,
-                wifiEntry, mode));
+        final WifiDialog2 wifiDialog2 = spy(WifiDialog2.createModal(mContext, null /* listener */,
+                mWifiEntry, mode));
         when(wifiDialog2.getController()).thenReturn(controller);
         return wifiDialog2;
     }
@@ -485,20 +534,18 @@ public class NetworkProviderSettingsTest {
 
     @Test
     public void createConnectedWifiEntryPreference_internetWiFi_createConnectedPreference() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
         doReturn(InternetUpdater.INTERNET_WIFI).when(mInternetUpdater).getInternetType();
 
-        final Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(wifiEntry);
+        Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(mWifiEntry);
 
         assertThat(p instanceof ConnectedWifiEntryPreference).isTrue();
     }
 
     @Test
     public void createConnectedWifiEntryPreference_internetCellular_createFirstWifiPreference() {
-        final WifiEntry wifiEntry = mock(WifiEntry.class);
         doReturn(InternetUpdater.INTERNET_CELLULAR).when(mInternetUpdater).getInternetType();
 
-        final Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(wifiEntry);
+        Preference p = mNetworkProviderSettings.createConnectedWifiEntryPreference(mWifiEntry);
 
         assertThat(p instanceof NetworkProviderSettings.FirstWifiEntryPreference).isTrue();
     }
@@ -529,6 +576,93 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.updateWifiEntryPreferences();
 
         verify(mNetworkProviderSettings.mWifiEntryPreferenceCategory, never()).setVisible(true);
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOnScanOn_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ true);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOnScanOn_footerIsVisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isTrue();
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.getTitle().length())
+            .isNotEqualTo(0);
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOnScanOff_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mLocationManager.isLocationEnabled()).thenReturn(true);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOffScanOn_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(true);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void setWifiScanMessage_wifiOffLocationOffScanOff_footerIsInvisible() {
+        when(mWifiManager.isScanAlwaysAvailable()).thenReturn(false);
+        when(mLocationManager.isLocationEnabled()).thenReturn(false);
+
+        mNetworkProviderSettings.setWifiScanMessage(/* isWifiEnabled */ false);
+
+        assertThat(mNetworkProviderSettings.mWifiStatusMessagePreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void onSelectedWifiPreferenceClick_shouldEditBeforeConnect_launchNewNetworkFragment() {
+        when(mWifiEntry.shouldEditBeforeConnect()).thenReturn(true);
+        final LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        doNothing().when(mNetworkProviderSettings).launchConfigNewNetworkFragment(mWifiEntry);
+
+        mNetworkProviderSettings.onSelectedWifiPreferenceClick(preference);
+
+        verify(mNetworkProviderSettings).launchConfigNewNetworkFragment(mWifiEntry);
+    }
+
+    @Test
+    public void onSelectedWifiPreferenceClick_canConnect_connectWifi() {
+        when(mWifiEntry.canConnect()).thenReturn(true);
+        final LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        doNothing().when(mNetworkProviderSettings).connect(any(), anyBoolean(), anyBoolean());
+
+        mNetworkProviderSettings.onSelectedWifiPreferenceClick(preference);
+
+        verify(mNetworkProviderSettings).connect(any(), anyBoolean(), anyBoolean());
+    }
+
+    @Test
+    public void onSelectedWifiPreferenceClick_isSaved_launchNetworkDetailsFragment() {
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final LongPressWifiEntryPreference preference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        doNothing().when(mNetworkProviderSettings).launchNetworkDetailsFragment(preference);
+
+        mNetworkProviderSettings.onSelectedWifiPreferenceClick(preference);
+
+        verify(mNetworkProviderSettings).launchNetworkDetailsFragment(preference);
     }
 
     @Test

@@ -16,15 +16,14 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.net.ConnectivityManager.TETHERING_WIFI;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -52,6 +51,8 @@ public class WifiTetherSwitchBarControllerTest {
     private ConnectivityManager mConnectivityManager;
     @Mock
     private NetworkPolicyManager mNetworkPolicyManager;
+    @Mock
+    private Switch mSwitch;
 
     private Context mContext;
     private SettingsMainSwitchBar mSwitchBar;
@@ -99,23 +100,20 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
-    public void onSwitchToggled_switchOff_noStartTethering() {
-        final Switch mockSwitch = mock(Switch.class);
-        when(mockSwitch.isChecked()).thenReturn(false);
+    public void onSwitchChanged_isChecked_startTethering() {
+        when(mSwitch.isChecked()).thenReturn(true);
 
-        mController.onClick(mockSwitch);
+        mController.onSwitchChanged(mSwitch, mSwitch.isChecked());
 
-        verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
+        verify(mConnectivityManager).startTethering(eq(TETHERING_WIFI), anyBoolean(), any(), any());
     }
 
     @Test
-    public void onSwitchToggled_switchOn_startTethering() {
-        final Switch mockSwitch = mock(Switch.class);
-        when(mockSwitch.isChecked()).thenReturn(true);
+    public void onSwitchChanged_isNotChecked_stopTethering() {
+        when(mSwitch.isChecked()).thenReturn(false);
 
-        mController.onClick(mockSwitch);
+        mController.onSwitchChanged(mSwitch, mSwitch.isChecked());
 
-        verify(mConnectivityManager, times(1))
-                .startTethering(anyInt(), anyBoolean(), any(), any());
+        verify(mConnectivityManager).stopTethering(TETHERING_WIFI);
     }
 }
