@@ -167,8 +167,8 @@ public class ParentalConsentHelperTest {
         }
 
         // initial consent status
-        final ParentalConsentHelper helper =
-                new ParentalConsentHelper(requireFace, requireFingerprint, gkpw);
+        final ParentalConsentHelper helper = new ParentalConsentHelper(gkpw);
+        helper.setConsentRequirement(requireFace, requireFingerprint);
         assertThat(ParentalConsentHelper.hasFaceConsent(helper.getConsentResult()))
                 .isFalse();
         assertThat(ParentalConsentHelper.hasFingerprintConsent(helper.getConsentResult()))

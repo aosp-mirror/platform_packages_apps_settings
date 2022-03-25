@@ -43,6 +43,7 @@ import com.google.android.setupcompat.PartnerCustomizationLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -99,6 +100,7 @@ public class FingerprintSuggestionActivityTest {
     }
 
     @Test
+    @Ignore
     public void testKeyguardSecure_shouldFinishWithFingerprintResultSkip() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 

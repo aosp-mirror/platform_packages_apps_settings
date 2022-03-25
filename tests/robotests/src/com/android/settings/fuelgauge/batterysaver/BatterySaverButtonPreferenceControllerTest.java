@@ -18,13 +18,17 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.PowerManager;
 import android.provider.SettingsSlicesContract;
 
@@ -75,7 +79,7 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void updateState_lowPowerOn_preferenceIsChecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(true);
 
-        mController.onSwitchChanged(null, mPowerManager.isPowerSaveMode());
+        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
 
         assertThat(mPreference.isChecked()).isTrue();
     }
@@ -84,16 +88,17 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void testUpdateState_lowPowerOff_preferenceIsUnchecked() {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
-        mController.onSwitchChanged(null, mPowerManager.isPowerSaveMode());
+        mPreference.updateStatus(mPowerManager.isPowerSaveMode());
 
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    public void setChecked_on_setPowerSaveMode() {
+    public void setChecked_on_showWarningMessage() {
         mController.setChecked(true);
 
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
+        verify(mContext).sendBroadcast(any(Intent.class));
+        verify(mPowerManager, never()).setPowerSaveModeEnabled(anyBoolean());
     }
 
     @Test

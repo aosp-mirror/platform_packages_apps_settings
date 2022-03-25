@@ -30,7 +30,6 @@ import android.os.UserHandle;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -41,6 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -68,7 +68,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testConvert_returnsExpectedContentValues() {
+    public void convert_returnsExpectedContentValues() {
         final int expectedType = 3;
         when(mockBatteryEntry.getUid()).thenReturn(1001);
         when(mockBatteryEntry.getLabel()).thenReturn("Settings");
@@ -125,7 +125,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testConvert_nullBatteryEntry_returnsExpectedContentValues() {
+    public void convert_nullBatteryEntry_returnsExpectedContentValues() {
         final ContentValues values =
             ConvertUtils.convert(
                 /*entry=*/ null,
@@ -152,7 +152,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testGetIndexedUsageMap_nullOrEmptyHistoryMap_returnEmptyCollection() {
+    public void getIndexedUsageMap_nullOrEmptyHistoryMap_returnEmptyCollection() {
         final int timeSlotSize = 2;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
 
@@ -167,7 +167,7 @@ public final class ConvertUtilsTest {
             .isEmpty();
     }
     @Test
-    public void testGetIndexedUsageMap_returnsExpectedResult() {
+    public void getIndexedUsageMap_returnsExpectedResult() {
         // Creates the fake testing data.
         final int timeSlotSize = 2;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
@@ -279,7 +279,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testGetIndexedUsageMap_usageTimeExceed_returnsExpectedResult() {
+    public void getIndexedUsageMap_usageTimeExceed_returnsExpectedResult() {
         final int timeSlotSize = 1;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
@@ -320,73 +320,8 @@ public final class ConvertUtilsTest {
             .isEqualTo(entry.mConsumePower * ratio);
     }
 
-    @Ignore
     @Test
-    public void testUtcToLocalTime_returnExpectedResult() {
-        ConvertUtils.sZoneId = null;
-        ConvertUtils.sLocale = null;
-        final long timestamp = 1619196786769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormat = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTime(mContext, /*timestamp=*/ 0);
-        ConvertUtils.sSimpleDateFormat
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTime(mContext, timestamp))
-            .isEqualTo("Apr 24,2021 00:53:06");
-        assertThat(ConvertUtils.sZoneId).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocale).isEqualTo(new Locale("en_US"));
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_12HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ false)).isEqualTo("6");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
-    }
-
-    @Ignore
-    @Test
-    public void testUtcToLocalTimeHour_24HourFormat_returnExpectedResult() {
-        ConvertUtils.sZoneIdForHour = null;
-        ConvertUtils.sLocaleForHour = null;
-        final long timestamp = 1619000086769L;
-        final String expectedZoneId = "America/Los_Angeles";
-        ConvertUtils.sSimpleDateFormatForHour = null;
-        // Invokes the method first to create the SimpleDateFormat.
-        ConvertUtils.utcToLocalTimeHour(
-            mContext, /*timestamp=*/ 0, /*is24HourFormat=*/ false);
-        ConvertUtils.sSimpleDateFormatForHour
-            .setTimeZone(TimeZone.getTimeZone(expectedZoneId));
-        mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
-
-        assertThat(ConvertUtils.utcToLocalTimeHour(
-            mContext, timestamp, /*is24HourFormat=*/ true)).isEqualTo("18");
-        assertThat(ConvertUtils.sZoneIdForHour).isNotEqualTo(expectedZoneId);
-        assertThat(ConvertUtils.sLocaleForHour).isEqualTo(new Locale("en_US"));
-    }
-
-    @Test
-    public void testGetIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
+    public void getIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         final BatteryHistEntry fakeEntry = createBatteryHistEntry(
@@ -405,8 +340,8 @@ public final class ConvertUtilsTest {
             "package3", "label3", 500, 5L, 3600000L, 7200000L);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
-        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeList(mContext))
-            .thenReturn(Arrays.asList((CharSequence) "package3"));
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
+            .thenReturn(new HashSet(Arrays.asList((CharSequence) "package3")));
 
         final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
             ConvertUtils.getIndexedUsageMap(

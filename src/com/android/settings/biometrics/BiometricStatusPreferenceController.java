@@ -16,11 +16,7 @@
 
 package com.android.settings.biometrics;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_FROM_SETTINGS_SUMMARY;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
@@ -30,9 +26,7 @@ import androidx.preference.Preference;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.transition.SettingsTransitionHelper;
 
 public abstract class BiometricStatusPreferenceController extends BasePreferenceController {
 
@@ -42,35 +36,22 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
     private final int mUserId = UserHandle.myUserId();
     protected final int mProfileChallengeUserId;
 
+    private final BiometricNavigationUtils mBiometricNavigationUtils;
+
     /**
      * @return true if the manager is not null and the hardware is detected.
      */
     protected abstract boolean isDeviceSupported();
 
     /**
-     * @return true if the user has enrolled biometrics of the subclassed type.
+     * @return the summary text.
      */
-    protected abstract boolean hasEnrolledBiometrics();
-
-    /**
-     * @return the summary text if biometrics are enrolled.
-     */
-    protected abstract String getSummaryTextEnrolled();
-
-    /**
-     * @return the summary text if no biometrics are enrolled.
-     */
-    protected abstract String getSummaryTextNoneEnrolled();
+    protected abstract String getSummaryText();
 
     /**
      * @return the class name for the settings page.
      */
     protected abstract String getSettingsClassName();
-
-    /**
-     * @return the class name for entry to enrollment.
-     */
-    protected abstract String getEnrollClassName();
 
     public BiometricStatusPreferenceController(Context context, String key) {
         super(context, key);
@@ -79,6 +60,7 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+        mBiometricNavigationUtils = new BiometricNavigationUtils(getUserId());
     }
 
     @Override
@@ -103,8 +85,7 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
         } else {
             preference.setVisible(true);
         }
-        preference.setSummary(hasEnrolledBiometrics() ? getSummaryTextEnrolled()
-                : getSummaryTextNoneEnrolled());
+        preference.setSummary(getSummaryText());
     }
 
     @Override
@@ -113,26 +94,8 @@ public abstract class BiometricStatusPreferenceController extends BasePreference
             return super.handlePreferenceTreeClick(preference);
         }
 
-        final Context context = preference.getContext();
-        final UserManager userManager = UserManager.get(context);
-        final int userId = getUserId();
-        if (Utils.startQuietModeDialogIfNecessary(context, userManager, userId)) {
-            return false;
-        }
-
-        final Intent intent = new Intent();
-        final String clazz = hasEnrolledBiometrics() ? getSettingsClassName()
-                : getEnrollClassName();
-        intent.setClassName(SETTINGS_PACKAGE_NAME, clazz);
-        if (!preference.getExtras().isEmpty()) {
-            intent.putExtras(preference.getExtras());
-        }
-        intent.putExtra(Intent.EXTRA_USER_ID, userId);
-        intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, true);
-        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-                SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE);
-        context.startActivity(intent);
-        return true;
+        return mBiometricNavigationUtils.launchBiometricSettings(
+                preference.getContext(), getSettingsClassName(), preference.getExtras());
     }
 
     protected int getUserId() {

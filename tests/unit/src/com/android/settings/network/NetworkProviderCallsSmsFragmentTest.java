@@ -20,30 +20,24 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
 
-import android.app.Instrumentation;
 import android.content.Context;
 import android.os.Looper;
-import android.provider.SearchIndexableResource;
-import android.util.FeatureFlagUtils;
 
 import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class NetworkProviderCallsSmsFragmentTest {
 
     private Context mContext;
-    private NetworkProviderCallsSmsFragment mNetworkProviderCallsSmsFragment;
     private List<String> mPreferenceKeyList;
 
     @Before
@@ -55,14 +49,11 @@ public class NetworkProviderCallsSmsFragmentTest {
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-
-        mNetworkProviderCallsSmsFragment = new NetworkProviderCallsSmsFragment();
     }
 
     @Test
     @UiThreadTest
-    public void isPageSearchEnabled_providerModelEnable_shouldIncludeFragmentXml() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
+    public void isPageSearchEnabled_shouldIncludeFragmentXml() {
         mPreferenceKeyList =
                 NetworkProviderCallsSmsFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(mContext);
@@ -70,18 +61,5 @@ public class NetworkProviderCallsSmsFragmentTest {
                 NetworkProviderCallsSmsFragment.KEY_PREFERENCE_CALLS);
         assertThat(mPreferenceKeyList).doesNotContain(
                 NetworkProviderCallsSmsFragment.KEY_PREFERENCE_SMS);
-    }
-
-    @Test
-    @UiThreadTest
-    public void isPageSearchEnabled_providerModelDisable_shouldNotIncludeFragmentXml() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, false);
-        mPreferenceKeyList =
-                NetworkProviderCallsSmsFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(mContext);
-        assertThat(mPreferenceKeyList).contains(NetworkProviderCallsSmsFragment
-                .KEY_PREFERENCE_CALLS);
-        assertThat(mPreferenceKeyList).contains(NetworkProviderCallsSmsFragment
-                .KEY_PREFERENCE_SMS);
     }
 }

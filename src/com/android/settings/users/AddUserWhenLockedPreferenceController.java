@@ -20,6 +20,7 @@ import android.provider.Settings;
 
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -68,5 +69,10 @@ public class AddUserWhenLockedPreferenceController extends TogglePreferenceContr
     public boolean setChecked(boolean isChecked) {
         return Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ADD_USERS_WHEN_LOCKED, isChecked ? 1 : 0);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -53,5 +54,10 @@ public class LocationIndicatorsPreferenceController extends TogglePreferenceCont
         // Location indicators feature is only available on devices that support location.
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LOCATION)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_location;
     }
 }

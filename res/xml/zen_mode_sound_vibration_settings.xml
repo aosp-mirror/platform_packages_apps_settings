@@ -19,37 +19,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/zen_category_exceptions" >
 
-    <PreferenceCategory
-        android:title="@string/zen_mode_settings_category"
-        android:key="zen_mode_settings_category_sound_vibration">
+    <!-- Alarms -->
+    <SwitchPreference
+        android:key="zen_mode_alarms"
+        android:title="@string/zen_mode_alarms"/>
 
-        <!-- Alarms -->
-        <SwitchPreference
-            android:key="zen_mode_alarms"
-            android:title="@string/zen_mode_alarms"/>
+    <!-- Media -->
+    <SwitchPreference
+        android:key="zen_mode_media"
+        android:title="@string/zen_mode_media"
+        android:summary="@string/zen_mode_media_summary"/>
 
-        <!-- Media -->
-        <SwitchPreference
-            android:key="zen_mode_media"
-            android:title="@string/zen_mode_media"
-            android:summary="@string/zen_mode_media_summary"/>
+    <!-- System -->
+    <SwitchPreference
+        android:key="zen_mode_system"
+        android:title="@string/zen_mode_system"
+        android:summary="@string/zen_mode_system_summary"/>
 
-        <!-- System -->
-        <SwitchPreference
-            android:key="zen_mode_system"
-            android:title="@string/zen_mode_system"
-            android:summary="@string/zen_mode_system_summary"/>
+    <!-- Reminders -->
+    <SwitchPreference
+        android:key="zen_mode_reminders"
+        android:title="@string/zen_mode_reminders"/>
 
-        <!-- Reminders -->
-        <SwitchPreference
-            android:key="zen_mode_reminders"
-            android:title="@string/zen_mode_reminders"/>
-
-        <!-- Events -->
-        <SwitchPreference
-            android:key="zen_mode_events"
-            android:title="@string/zen_mode_events"/>
-
-    </PreferenceCategory>
+    <!-- Events -->
+    <SwitchPreference
+        android:key="zen_mode_events"
+        android:title="@string/zen_mode_events"/>
 
 </PreferenceScreen>

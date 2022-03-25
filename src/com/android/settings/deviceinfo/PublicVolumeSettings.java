@@ -28,8 +28,6 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.os.storage.VolumeRecord;
 import android.provider.DocumentsContract;
-import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,8 +38,10 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.deviceinfo.storage.StorageUtils;
 import com.android.settings.deviceinfo.storage.StorageUtils.MountTask;
 import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
+import com.android.settingslib.widget.UsageProgressBarPreference;
 
 import java.io.File;
 import java.util.Objects;
@@ -59,7 +59,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private VolumeInfo mVolume;
     private DiskInfo mDisk;
 
-    private StorageSummaryPreference mSummary;
+    private UsageProgressBarPreference mSummary;
 
     private Preference mMount;
     private Preference mFormatPublic;
@@ -114,7 +114,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.device_info_storage_volume);
         getPreferenceScreen().setOrderingAsAdded(true);
 
-        mSummary = new StorageSummaryPreference(getPrefContext());
+        mSummary = new UsageProgressBarPreference(getPrefContext());
 
         mMount = buildAction(R.string.storage_menu_mount);
         mUnmount = new Button(getActivity());
@@ -162,12 +162,10 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             final long freeBytes = file.getFreeSpace();
             final long usedBytes = totalBytes - freeBytes;
 
-            final Formatter.BytesResult result = Formatter.formatBytes(getResources(), usedBytes,
-                    0);
-            mSummary.setTitle(TextUtils.expandTemplate(getText(R.string.storage_size_large),
-                    result.value, result.units));
-            mSummary.setSummary(getString(R.string.storage_volume_used,
-                    Formatter.formatFileSize(context, totalBytes)));
+            mSummary.setUsageSummary(StorageUtils.getStorageSummary(
+                    context, R.string.storage_usage_summary, usedBytes));
+            mSummary.setTotalSummary(StorageUtils.getStorageSummary(
+                    context, R.string.storage_total_summary, totalBytes));
             mSummary.setPercent(usedBytes, totalBytes);
         }
 

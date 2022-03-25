@@ -250,4 +250,22 @@ public class SavedBluetoothDeviceUpdaterTest {
         verify(mBluetoothDeviceUpdater).addPreference(mCachedBluetoothDevice,
                 BluetoothDevicePreference.SortType.TYPE_NO_SORT);
     }
+
+    @Test
+    public void forceUpdate_deviceIsSubDevice_doesNothing() {
+        final List<BluetoothDevice> bluetoothDevices = new ArrayList<>();
+        bluetoothDevices.add(mBluetoothDevice);
+
+        when(mBluetoothAdapter.isEnabled()).thenReturn(true);
+        when(mBluetoothAdapter.getMostRecentlyConnectedDevices()).thenReturn(bluetoothDevices);
+        when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mDeviceManager);
+        when(mDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
+        when(mDeviceManager.isSubDevice(mBluetoothDevice)).thenReturn(true);
+
+        mBluetoothDeviceUpdater.forceUpdate();
+
+        verify(mBluetoothDeviceUpdater, never()).removePreference(mCachedBluetoothDevice);
+        verify(mBluetoothDeviceUpdater, never()).addPreference(mCachedBluetoothDevice,
+                BluetoothDevicePreference.SortType.TYPE_NO_SORT);
+    }
 }

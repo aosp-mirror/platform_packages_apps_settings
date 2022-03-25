@@ -22,8 +22,10 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -40,6 +42,7 @@ public abstract class BluetoothDetailsController extends AbstractPreferenceContr
     protected final Context mContext;
     protected final PreferenceFragmentCompat mFragment;
     protected final CachedBluetoothDevice mCachedDevice;
+    protected final MetricsFeatureProvider mMetricsFeatureProvider;
 
     public BluetoothDetailsController(Context context, PreferenceFragmentCompat fragment,
             CachedBluetoothDevice device, Lifecycle lifecycle) {
@@ -48,6 +51,7 @@ public abstract class BluetoothDetailsController extends AbstractPreferenceContr
         mFragment = fragment;
         mCachedDevice = device;
         lifecycle.addObserver(this);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override

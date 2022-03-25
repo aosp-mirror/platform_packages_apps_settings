@@ -16,8 +16,8 @@
 
 package com.android.settings.development;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.debug.IAdbManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -28,7 +28,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.SubSettingLauncher;
 
 /**
  * Controller for the "Pair device with QR code" preference in the Wireless debugging
@@ -68,12 +67,9 @@ public class AdbQrCodePreferenceController extends BasePreferenceController {
             return false;
         }
 
-        new SubSettingLauncher(preference.getContext())
-                .setDestination(AdbQrcodeScannerFragment.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.SETTINGS_ADB_WIRELESS)
-                .setResultListener(mParentFragment,
-                    WirelessDebuggingFragment.PAIRING_DEVICE_REQUEST)
-                .launch();
+        final Intent intent = new Intent(mContext, AdbQrCodeActivity.class);
+        mParentFragment.startActivityForResult(intent,
+                WirelessDebuggingFragment.PAIRING_DEVICE_REQUEST);
         return true;
     }
 }
