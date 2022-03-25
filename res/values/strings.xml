@@ -1586,15 +1586,6 @@
     <!-- Content of the dialog shown when the user only has one attempt left to provide the work lock password before the work profile is removed. [CHAR LIMIT=NONE] -->
     <string name="lock_last_password_attempt_before_wipe_profile">If you enter an incorrect password on the next attempt, your work profile and its data will be deleted</string>
 
-    <!-- Content of the dialog shown when the user has failed to provide the device lock too many times and the device is wiped. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_device">Too many incorrect attempts. This device\'s data will be deleted.</string>
-    <!-- Content of the dialog shown when the user has failed to provide the user lock too many times and the user is removed. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_user">Too many incorrect attempts. This user will be deleted.</string>
-    <!-- Content of the dialog shown when the user has failed to provide the work lock too many times and the work profile is removed. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_profile">Too many incorrect attempts. This work profile and its data will be deleted.</string>
-    <!-- Button label to dismiss the dialog telling the user the work profile has been wiped. [CHAR LIMIT=40] -->
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss">Dismiss</string>
-
     <!-- Hint shown in dialog screen when password is too short -->
     <plurals name="lockpassword_password_too_short">
         <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
@@ -4689,8 +4680,8 @@
     <string name="clear_user_data_text">Clear storage</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
-    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted settings from lock screen title -->
-    <string name="app_restricted_settings_lockscreen_title">Unlock restricted settings</string>
+    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted setting from lock screen title -->
+    <string name="app_restricted_settings_lockscreen_title">Allow restricted settings</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
@@ -7640,8 +7631,6 @@
     <string name="user_list_title">Users &amp; profiles</string>
     <!-- User settings add user or restricted profile menu [CHAR LIMIT=35] -->
     <string name="user_add_user_or_profile_menu">Add user or profile</string>
-    <!-- User settings add user menu [CHAR LIMIT=35] -->
-    <string name="user_add_user_menu">Add user</string>
     <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
     <string name="user_summary_restricted_profile">Restricted profile</string>
 
@@ -7657,8 +7646,7 @@
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
 
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
-    <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
-
+    <string name="user_add_max_count">You can\u2019t add any more users. Remove a user to add a new one.</string>
 
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
@@ -7702,12 +7690,6 @@
     <!-- Delete button text [CHAR LIMIT=25] -->
     <string name="user_delete_button">Delete</string>
     <!-- TODO: Remove it once the same entry in SettingsLib is translated. -->
-    <!-- Title for Guest user [CHAR LIMIT=35] -->
-    <string name="user_guest">Guest</string>
-    <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_title">Remove guest</string>
-    <!-- Title of dialog to user to confirm exiting guest. [CHAR LIMIT=50] -->
-    <string name="user_exit_guest_confirm_title">Remove guest?</string>
     <!-- Message to user to confirm exiting guest. [CHAR LIMIT=none] -->
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
@@ -12184,7 +12166,9 @@
     <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=2416766240581561009] -->
     <string name="learn_more">Learn more</string>
     <!--Title for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=50] -->
-    <string name="blocked_by_restricted_settings_title">Restricted Settings</string>
+    <string name="blocked_by_restricted_settings_title">Restricted setting</string>
+    <!--Toast message shown after the user successfully allows restricted settings [CHAR LIMIT=50] -->
+    <string name="toast_allows_restricted_settings_successfully">Restricted settings allowed for <xliff:g id="app_name" example="Gmail">%s</xliff:g></string>
     <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=100] -->
     <string name="blocked_by_restricted_settings_content">For your security, this setting is currently unavailable.</string>
 
@@ -13712,7 +13696,7 @@
     <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
     <string name="default_print_service_main_switch_title">Use print service</string>
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title">Enable multiple users</string>
+    <string name="multiple_users_main_switch_title">Allow multiple users</string>
     <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->
     <string name="wireless_debugging_main_switch_title">Use wireless debugging</string>
     <!-- Title for graphics driver main switch. [CHAR LIMIT=50] -->

@@ -384,7 +384,7 @@ public class LockScreenSafetySourceTest {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
         final Intent launchScreenLockSettings = new Intent(FAKE_ACTION_SCREEN_LOCK_SETTINGS);
-        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent())
+        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(anyInt()))
                 .thenReturn(launchScreenLockSettings);
         when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
 
@@ -450,7 +450,7 @@ public class LockScreenSafetySourceTest {
 
         Intent launchChooseLockGenericFragment = new Intent(
                 FAKE_ACTION_CHOOSE_LOCK_GENERIC_FRAGMENT);
-        when(mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent())
+        when(mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(anyInt()))
                 .thenReturn(launchChooseLockGenericFragment);
     }
 }
