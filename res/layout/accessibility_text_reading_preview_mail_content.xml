@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:text="@string/accessibility_text_reading_preview_mail_subject"
         android:textSize="14sp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?android:attr/textColorPrimary"/>
 
     <TextView
         android:id="@+id/from"
@@ -44,5 +45,5 @@
         android:layout_height="wrap_content"
         android:textSize="13sp"
         android:text="@string/accessibility_text_reading_preview_mail_content"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="?android:attr/textColorPrimary"/>
 </LinearLayout>

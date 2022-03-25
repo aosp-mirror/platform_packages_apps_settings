@@ -154,8 +154,7 @@
         <!-- Activity for launching deep link page in 2-pane. -->
         <activity android:name=".homepage.DeepLinkHomepageActivity"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
-                  android:taskAffinity=""
+                  android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask"
                   android:exported="true"
                   android:enabled="false"
@@ -169,9 +168,9 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
+        <activity android:name=".homepage.DeepLinkHomepageActivityInternal"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
+                  android:theme="@style/Theme.Settings.Home.NoAnimation"
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="false"
@@ -3139,6 +3138,24 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <activity
+            android:name="Settings$TurnScreenOnSettingsActivity"
+            android:exported="true"
+            android:label="@string/turn_screen_on_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TURN_SCREEN_ON_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
         </activity>

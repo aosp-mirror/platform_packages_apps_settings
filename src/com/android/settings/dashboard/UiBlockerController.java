@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class UiBlockerController {
     private static final String TAG = "UiBlockerController";
-    private static final int TIMEOUT_MILLIS = 500;
+    private static final int TIMEOUT_MILLIS = 300;
 
     private CountDownLatch mCountDownLatch;
     private boolean mBlockerFinished;
