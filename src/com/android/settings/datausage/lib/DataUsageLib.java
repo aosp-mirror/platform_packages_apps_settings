@@ -17,15 +17,19 @@
 package com.android.settings.datausage.lib;
 
 import android.content.Context;
+import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.android.internal.util.ArrayUtils;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Lib class for data usage
@@ -68,15 +72,37 @@ public class DataUsageLib {
             return mobileTemplate;
         }
 
-        return NetworkTemplate.normalize(mobileTemplate, mergedSubscriberIds);
+        return normalizeMobileTemplate(mobileTemplate, mergedSubscriberIds);
     }
 
-    private static NetworkTemplate getMobileTemplateForSubId(
+    private static NetworkTemplate normalizeMobileTemplate(
+            @NonNull NetworkTemplate template, @NonNull String[] mergedSet) {
+        if (template.getSubscriberIds().isEmpty()) return template;
+        // The input template should have at most 1 subscriberId.
+        final String subscriberId = template.getSubscriberIds().iterator().next();
+
+        if (Set.of(mergedSet).contains(subscriberId)) {
+            // Requested template subscriber is part of the merge group; return
+            // a template that matches all merged subscribers.
+            return new NetworkTemplate.Builder(template.getMatchRule())
+                    .setSubscriberIds(Set.of(mergedSet))
+                    .setMeteredness(template.getMeteredness()).build();
+        }
+
+        return template;
+    }
+
+    public static NetworkTemplate getMobileTemplateForSubId(
             TelephonyManager telephonyManager, int subId) {
-        // The null subscriberId means that no any mobile/carrier network will be matched.
-        // Using old API: buildTemplateMobileAll for the null subscriberId to avoid NPE.
+        // Create template that matches any mobile network when the subscriberId is null.
         String subscriberId = telephonyManager.getSubscriberId(subId);
-        return subscriberId != null ? NetworkTemplate.buildTemplateCarrierMetered(subscriberId)
-                : NetworkTemplate.buildTemplateMobileAll(subscriberId);
+        return subscriberId != null
+                ? new NetworkTemplate.Builder(NetworkTemplate.MATCH_CARRIER)
+                .setSubscriberIds(Set.of(subscriberId))
+                .setMeteredness(NetworkStats.METERED_YES)
+                .build()
+                : new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
+                        .setMeteredness(NetworkStats.METERED_YES)
+                        .build();
     }
 }

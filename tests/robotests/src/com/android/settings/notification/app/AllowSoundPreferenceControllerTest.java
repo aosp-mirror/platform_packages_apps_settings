@@ -166,20 +166,6 @@ public class AllowSoundPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notBlockable_oem() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getId()).thenReturn("");
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
-        Preference pref = new RestrictedSwitchPreference(mContext);
-        mController.updateState(pref);
-
-        assertTrue(pref.isEnabled());
-    }
-
-    @Test
     public void testUpdateState_configurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);

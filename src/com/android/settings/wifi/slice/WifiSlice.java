@@ -44,13 +44,15 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.network.NetworkProviderSettings;
+import com.android.settings.network.WifiSwitchPreferenceController;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.WifiUtils;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.wifitrackerlib.WifiEntry;
 
 import java.util.Arrays;
@@ -200,11 +202,11 @@ public class WifiSlice implements CustomSliceable {
 
         if (wifiSliceItem.getConnectedState() != WifiEntry.CONNECTED_STATE_DISCONNECTED) {
             final Bundle bundle = new Bundle();
-            bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+            bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                     wifiSliceItem.getKey());
             final Intent intent = new SubSettingLauncher(mContext)
                     .setTitleRes(R.string.pref_title_network_details)
-                    .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                    .setDestination(WifiNetworkDetailsFragment.class.getName())
                     .setArguments(bundle)
                     .setSourceMetricsCategory(SettingsEnums.WIFI)
                     .toIntent();
@@ -269,13 +271,20 @@ public class WifiSlice implements CustomSliceable {
     public Intent getIntent() {
         final String screenTitle = mContext.getText(R.string.wifi_settings).toString();
         final Uri contentUri = new Uri.Builder().appendPath(KEY_WIFI).build();
-        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext,
-                WifiSettings.class.getName(), KEY_WIFI, screenTitle,
-                SettingsEnums.DIALOG_WIFI_AP_EDIT)
+        final String className = NetworkProviderSettings.class.getName();
+        final String key = WifiSwitchPreferenceController.KEY;
+
+        final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext, className,
+                key, screenTitle, SettingsEnums.DIALOG_WIFI_AP_EDIT, this)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
 
         return intent;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
     }
 
     private boolean isWifiEnabled() {

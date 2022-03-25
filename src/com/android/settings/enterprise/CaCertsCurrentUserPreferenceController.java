@@ -14,6 +14,10 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CA_CERTS_DEVICE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CA_CERTS_PERSONAL_PROFILE;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.annotation.VisibleForTesting;
@@ -26,8 +30,11 @@ public class CaCertsCurrentUserPreferenceController extends CaCertsPreferenceCon
     @VisibleForTesting
     static final String CA_CERTS_CURRENT_USER = "ca_certs_current_user";
 
+    DevicePolicyManager mDevicePolicyManager;
+
     public CaCertsCurrentUserPreferenceController(Context context) {
         super(context);
+        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
@@ -38,9 +45,16 @@ public class CaCertsCurrentUserPreferenceController extends CaCertsPreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setTitle(mFeatureProvider.isInCompMode()
-                ? R.string.enterprise_privacy_ca_certs_personal
-                : R.string.enterprise_privacy_ca_certs_device);
+
+        if (mFeatureProvider.isInCompMode()) {
+            preference.setTitle(mDevicePolicyManager.getResources().getString(
+                    CA_CERTS_PERSONAL_PROFILE,
+                    () -> mContext.getString(R.string.enterprise_privacy_ca_certs_personal)));
+        } else {
+            preference.setTitle(mDevicePolicyManager.getResources().getString(
+                    CA_CERTS_DEVICE,
+                    () -> mContext.getString(R.string.enterprise_privacy_ca_certs_device)));
+        }
     }
 
     @Override

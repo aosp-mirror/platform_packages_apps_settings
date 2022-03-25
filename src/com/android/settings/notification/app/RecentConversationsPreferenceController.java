@@ -233,8 +233,13 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
                 private final Collator sCollator = Collator.getInstance();
                 @Override
                 public int compare(ConversationChannel o1, ConversationChannel o2) {
-                    int labelComparison = sCollator.compare(o1.getShortcutInfo().getLabel(),
-                            o2.getShortcutInfo().getLabel());
+                    int labelComparison = 0;
+                    if (o1.getShortcutInfo().getLabel() != null
+                            && o2.getShortcutInfo().getLabel() != null) {
+                        labelComparison = sCollator.compare(
+                                o1.getShortcutInfo().getLabel().toString(),
+                                o2.getShortcutInfo().getLabel().toString());
+                    }
 
                     if (labelComparison == 0) {
                         return o1.getNotificationChannel().getId().compareTo(

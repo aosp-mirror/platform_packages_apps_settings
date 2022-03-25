@@ -27,7 +27,7 @@ import android.service.notification.ZenPolicy;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class ZenRuleDefaultPolicyPreferenceControllerTest extends
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private RadioButtonPreference mMockPref;
+    private SelectorWithWidgetPreference mMockPref;
     @Mock
     private PreferenceScreen mScreen;
 

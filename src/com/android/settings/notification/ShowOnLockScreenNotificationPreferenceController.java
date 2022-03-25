@@ -116,7 +116,7 @@ public class ShowOnLockScreenNotificationPreferenceController extends AbstractPr
         } else if (!getLockscreenSilentNotificationsEnabled()) {
             return mContext.getString(R.string.lock_screen_notifs_show_alerting);
         } else {
-            return mContext.getString(R.string.lock_screen_notifs_show_all);
+            return mContext.getString(R.string.lock_screen_notifs_show_all_summary);
         }
     }
 

@@ -16,6 +16,8 @@
 
 package com.android.settings.security;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE;
+
 import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_PROFILE_REQUEST;
 import static com.android.settings.security.SecuritySettings.UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
 
@@ -107,7 +109,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     @Override
     public boolean isAvailable() {
         return mProfileUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileUserId);
+                && mUm.isManagedProfile(mProfileUserId);
     }
 
     @Override
@@ -190,8 +192,9 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
      */
     public void startUnification() {
         // Confirm profile lock
-        final String title = mContext.getString(
-                R.string.unlock_set_unlock_launch_picker_title_profile);
+        final String title = mDpm.getResources().getString(
+                WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE,
+                () -> mContext.getString(R.string.unlock_set_unlock_launch_picker_title_profile));
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);
         final boolean launched = builder.setRequestCode(UNIFY_LOCK_CONFIRM_PROFILE_REQUEST)

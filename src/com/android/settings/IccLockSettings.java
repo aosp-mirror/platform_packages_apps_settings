@@ -587,6 +587,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
                 .inflate(com.android.internal.R.layout.transient_notification, null);
         final TextView tv = (TextView) v.findViewById(com.android.internal.R.id.message);
         tv.setText(errorMessage);
+        tv.setSingleLine(false);
 
         final WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         final Configuration config = v.getContext().getResources().getConfiguration();

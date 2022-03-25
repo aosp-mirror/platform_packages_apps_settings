@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -108,6 +110,8 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setWindowsOverlay();
+
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, /* root */ null);
         setView(mView);
         mController = new WifiConfigController2(this, mView, mWifiEntry, mMode);
@@ -124,6 +128,13 @@ public class WifiDialog2 extends AlertDialog implements WifiConfigUiBase2,
         if (mWifiEntry == null) {
             mController.hideForgetButton();
         }
+    }
+
+    private void setWindowsOverlay() {
+        final Window window = getWindow();
+        final WindowManager.LayoutParams lp = window.getAttributes();
+        window.setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        window.setAttributes(lp);
     }
 
     @Override

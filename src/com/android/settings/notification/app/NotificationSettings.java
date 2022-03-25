@@ -270,6 +270,9 @@ abstract public class NotificationSettings extends DashboardFragment {
         String conversationId = intent != null
                 ? intent.getStringExtra(Settings.EXTRA_CONVERSATION_ID) : null;
         mChannel = mBackend.getChannel(mPkg, mUid, channelId, conversationId);
+        if (mChannel == null) {
+            mBackend.getChannel(mPkg, mUid, channelId, null);
+        }
     }
 
     private void loadConversation() {
@@ -334,10 +337,10 @@ abstract public class NotificationSettings extends DashboardFragment {
                 }
                 continue;
             }
-            // TODO(78660939): This should actually start a new task
             mAppRow.settingsIntent = intent
                     .setPackage(null)
-                    .setClassName(activityInfo.packageName, activityInfo.name);
+                    .setClassName(activityInfo.packageName, activityInfo.name)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (mChannel != null) {
                 mAppRow.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
             }
@@ -359,7 +362,8 @@ abstract public class NotificationSettings extends DashboardFragment {
                 final String p = packages[i];
                 if (pkg.equals(p)) {
                     try {
-                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
+                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES
+                                | PackageManager.GET_PERMISSIONS);
                     } catch (NameNotFoundException e) {
                         Log.w(TAG, "Failed to load package " + pkg, e);
                     }

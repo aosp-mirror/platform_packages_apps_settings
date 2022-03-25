@@ -39,6 +39,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -231,5 +232,16 @@ public class ColorModePreferenceFragmentTest {
                 mFragment.getKeyForColorMode(ColorDisplayManager.COLOR_MODE_AUTOMATIC));
 
         verify(mFragment).setColorMode(ColorDisplayManager.COLOR_MODE_AUTOMATIC);
+    }
+
+    @Test
+    @UiThreadTest
+    public void checkViewPagerTotalCount() throws Throwable {
+        final ArrayList<Integer> viewPagerResList = mFragment.getViewPagerResource();
+
+        assertThat(viewPagerResList.size()).isEqualTo(3);
+        for (int idx = 0; idx < viewPagerResList.size(); idx++) {
+            assertThat(viewPagerResList.get(idx) > 0).isTrue();
+        }
     }
 }
