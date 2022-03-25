@@ -32,6 +32,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
@@ -147,6 +148,11 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_notifications;
+    }
+
+    @Override
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS),
@@ -172,7 +178,8 @@ public class RedactNotificationPreferenceController extends TogglePreferenceCont
 
     private boolean getAllowPrivateNotifications(int userId) {
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, userId) != 0;
+                LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, userId) != 0
+                && getEnforcedAdmin(userId) == null;
     }
 
     private boolean getLockscreenNotificationsEnabled(int userId) {

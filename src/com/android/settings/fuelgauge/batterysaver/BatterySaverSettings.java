@@ -83,7 +83,6 @@ public class BatterySaverSettings extends DashboardFragment {
     void addHelpLink() {
         FooterPreference pref = getPreferenceScreen().findPreference(KEY_FOOTER_PREFERENCE);
         if (pref != null) {
-            pref.setSelectable(false);
             pref.setLearnMoreAction(v -> {
                 mMetricsFeatureProvider.action(getContext(),
                         SettingsEnums.ACTION_APP_BATTERY_LEARN_MORE);

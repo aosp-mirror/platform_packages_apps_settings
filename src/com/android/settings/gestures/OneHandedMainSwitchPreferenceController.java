@@ -21,6 +21,7 @@ import android.net.Uri;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -91,5 +92,10 @@ public class OneHandedMainSwitchPreferenceController extends
         if (uri.equals(OneHandedSettingsUtils.ONE_HANDED_MODE_ENABLED_URI)) {
             mPreference.setChecked(isChecked());
         }
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
     }
 }

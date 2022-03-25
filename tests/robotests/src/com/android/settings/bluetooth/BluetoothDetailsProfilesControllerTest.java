@@ -42,6 +42,7 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -56,6 +57,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 @Config(shadows = ShadowBluetoothDevice.class)
 public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsControllerTestBase {
 

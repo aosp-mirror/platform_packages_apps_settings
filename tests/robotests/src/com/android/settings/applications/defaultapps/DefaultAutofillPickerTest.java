@@ -194,7 +194,7 @@ public class DefaultAutofillPickerTest {
                 .thenReturn(Arrays.asList(mainUserHandle, managedUserHandle));
         when(mUserManager.getUserInfo(MANAGED_PROFILE_UID))
                 .thenReturn(managedUserInfo);
-        when(mUserManager.getUserHandle()).thenReturn(MAIN_PROFILE_UID);
+        when(mUserManager.getProcessUserId()).thenReturn(MAIN_PROFILE_UID);
     }
 
     private void setupCaller() {

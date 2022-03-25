@@ -18,10 +18,7 @@ package com.android.settings.biometrics.combination;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -107,9 +104,7 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         mController.updateStateInternal(admin);
         verify(restrictedPreference).setDisabledByAdmin(eq(admin));
 
-        reset(admin);
-
-        mController.updateStateInternal(null /* enforcedAdmin */);
-        verify(restrictedPreference, never()).setDisabledByAdmin(any());
+        mController.updateStateInternal(null);
+        verify(restrictedPreference).setDisabledByAdmin(eq(null));
     }
 }

@@ -65,8 +65,7 @@ public class ExpandDividerPreference extends Preference {
 
     @Override
     public void onClick() {
-        mIsExpanded = !mIsExpanded;
-        refreshState();
+        setIsExpanded(!mIsExpanded);
         if (mOnExpandListener != null) {
             mOnExpandListener.onExpand(mIsExpanded);
         }
@@ -74,10 +73,7 @@ public class ExpandDividerPreference extends Preference {
 
     void setTitle(final String titleContent) {
         mTitleContent = titleContent;
-        if (mTextView != null) {
-            mTextView.postDelayed(
-                () -> mTextView.setText(titleContent), 50);
-        }
+        refreshState();
     }
 
     void setIsExpanded(boolean isExpanded) {
@@ -90,13 +86,13 @@ public class ExpandDividerPreference extends Preference {
     }
 
     private void refreshState() {
-        final int iconId =
-            mIsExpanded
-                ? R.drawable.ic_settings_expand_less
-                : R.drawable.ic_settings_expand_more;
         if (mImageView != null) {
-            mImageView.setImageResource(iconId);
+            mImageView.setImageResource(mIsExpanded
+                    ? R.drawable.ic_settings_expand_less
+                    : R.drawable.ic_settings_expand_more);
         }
-        setTitle(mTitleContent);
+        if (mTextView != null) {
+            mTextView.setText(mTitleContent);
+        }
     }
 }

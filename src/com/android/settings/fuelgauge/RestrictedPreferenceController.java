@@ -17,8 +17,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.RESTRICTED;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -27,7 +25,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class RestrictedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -55,13 +53,14 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, disable pref");
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppUsageState() == RESTRICTED) {
+        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+                == BatteryOptimizeUtils.MODE_RESTRICTED) {
             Log.d(TAG, "is restricted states");
-            ((RadioButtonPreference) preference).setChecked(true);
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
         }
     }
 
@@ -77,12 +76,6 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_RESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppUsageState(RESTRICTED);
-        Log.d(TAG, "Set restricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }
