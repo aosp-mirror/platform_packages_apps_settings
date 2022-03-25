@@ -17,16 +17,11 @@
 package com.android.settings.notification;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Spatial audio settings located in the sound menu
@@ -51,19 +46,6 @@ public class SpatialAudioSettings extends DashboardFragment {
         return TAG;
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SpatialAudioPreferenceController(context));
-        controllers.add(new SpatialAudioWiredHeadphonesController(context));
-        return controllers;
-    }
-
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.spatial_audio_settings) {
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildPreferenceControllers(context);
-                }
-            };
+            new BaseSearchIndexProvider(R.xml.spatial_audio_settings);
 }

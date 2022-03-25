@@ -31,7 +31,6 @@ import android.media.Spatializer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -42,7 +41,7 @@ public class SpatialAudioParentPreferenceControllerTest {
 
     private static final String KEY = "spatial_audio_summary";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private Context mContext;
     @Mock
     private AudioManager mAudioManager;
