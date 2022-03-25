@@ -37,8 +37,11 @@ import android.os.UserManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.window.embedding.SplitController;
 
 import com.android.settings.Settings.CreateShortcutActivity;
+import com.android.settings.homepage.DeepLinkHomepageActivity;
+import com.android.settings.search.SearchStateReceiver;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -48,7 +51,8 @@ import java.util.List;
  * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
  * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
  * adds cross-profile intent filters for the appropriate Settings activities), disables the
- * webview setting for non-admin users, and updates the intent flags for any existing shortcuts.
+ * webview setting for non-admin users, updates the intent flags for any existing shortcuts and
+ * enables DeepLinkHomepageActivity for large screen devices.
  */
 public class SettingsInitialize extends BroadcastReceiver {
     private static final String TAG = "Settings";
@@ -64,6 +68,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
+        enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -142,5 +147,18 @@ public class SettingsInitialize extends BroadcastReceiver {
             updates.add(updatedInfo);
         }
         shortcutManager.updateShortcuts(updates);
+    }
+
+    private void enableTwoPaneDeepLinkActivityIfNecessary(PackageManager pm, Context context) {
+        final ComponentName deepLinkHome = new ComponentName(context,
+                DeepLinkHomepageActivity.class);
+        final ComponentName searchStateReceiver = new ComponentName(context,
+                SearchStateReceiver.class);
+        final int enableState = SplitController.getInstance().isSplitSupported()
+                ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                : PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+        pm.setComponentEnabledSetting(deepLinkHome, enableState, PackageManager.DONT_KILL_APP);
+        pm.setComponentEnabledSetting(searchStateReceiver, enableState,
+                PackageManager.DONT_KILL_APP);
     }
 }

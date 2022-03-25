@@ -68,8 +68,8 @@ public class PhoneNumberPreferenceControllerTest {
     private SubscriptionInfo mSubscriptionInfo;
     @Mock
     private SubscriptionManager mSubscriptionManager;
-    private PreferenceScreen mScreen;
     private PreferenceCategory mCategory;
+    private PreferenceScreen mScreen;
 
     private Context mContext;
     private PhoneNumberPreferenceController mController;

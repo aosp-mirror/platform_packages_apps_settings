@@ -19,6 +19,7 @@ package com.android.settings.notification.zen;
 import android.app.Application;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 
@@ -35,8 +36,10 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppChannelsBypassingDndSettings;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
@@ -111,6 +114,24 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
         updateAppList(apps);
     }
 
+    // Set the icon for the given preference to the entry icon from cache if available, or look
+    // it up.
+    private void updateIcon(Preference pref, ApplicationsState.AppEntry entry) {
+        synchronized (entry) {
+            final Drawable cachedIcon = AppUtils.getIconFromCache(entry);
+            if (cachedIcon != null && entry.mounted) {
+                pref.setIcon(cachedIcon);
+            } else {
+                ThreadUtils.postOnBackgroundThread(() -> {
+                    final Drawable icon = AppUtils.getIcon(mPrefContext, entry);
+                    if (icon != null) {
+                        ThreadUtils.postOnMainThread(() -> pref.setIcon(icon));
+                    }
+                });
+            }
+        }
+    }
+
     @VisibleForTesting
     void updateAppList(List<ApplicationsState.AppEntry> apps) {
         if (mPreferenceCategory == null || apps == null) {
@@ -120,7 +141,6 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
         List<Preference> appsBypassingDnd = new ArrayList<>();
         for (ApplicationsState.AppEntry app : apps) {
             String pkg = app.info.packageName;
-            mApplicationsState.ensureIcon(app);
             final int appChannels = mNotificationBackend.getChannelCount(pkg, app.info.uid);
             final int appChannelsBypassingDnd = mNotificationBackend
                     .getNotificationChannelsBypassingDnd(pkg, app.info.uid).getList().size();
@@ -147,7 +167,7 @@ public class ZenModeAllBypassingAppsPreferenceController extends AbstractPrefere
                     });
                 }
                 pref.setTitle(BidiFormatter.getInstance().unicodeWrap(app.label));
-                pref.setIcon(app.icon);
+                updateIcon(pref, app);
                 if (appChannels > appChannelsBypassingDnd) {
                     pref.setSummary(R.string.zen_mode_bypassing_apps_summary_some);
                 } else {

@@ -19,8 +19,11 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 
@@ -31,6 +34,7 @@ import androidx.loader.content.Loader;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -62,6 +66,17 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private BatteryChartPreferenceController mBatteryChartPreferenceController;
     private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
+
+    private final ContentObserver mBatteryObserver =
+            new ContentObserver(new Handler()) {
+            @Override
+            public void onChange(boolean selfChange) {
+                Log.d(TAG, "onBatteryContentChange: " + selfChange);
+                mIsChartDataLoaded = false;
+                restartBatteryStatsLoader(
+                        BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
+            }
+    };
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -104,6 +119,20 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         super.onPause();
         // Resets the flag to reload usage data in onResume() callback.
         mIsChartDataLoaded = false;
+        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        if (uri != null) {
+            getContext().getContentResolver().unregisterContentObserver(mBatteryObserver);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final Uri uri = mPowerUsageFeatureProvider.getBatteryHistoryUri();
+        if (uri != null) {
+            getContext().getContentResolver().registerContentObserver(
+                    uri, /*notifyForDescendants*/ true, mBatteryObserver);
+        }
     }
 
     @Override

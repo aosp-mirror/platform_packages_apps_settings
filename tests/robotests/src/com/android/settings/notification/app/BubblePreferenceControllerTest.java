@@ -298,21 +298,6 @@ public class BubblePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_channel_channelNotBlockable() {
-        Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.pkg = "a";
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-
-        Preference pref = new RestrictedSwitchPreference(mContext);
-        mController.updateState(pref);
-
-        assertTrue(pref.isEnabled());
-    }
-
-    @Test
     public void updateState_channel() {
         Settings.Secure.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, SYSTEM_WIDE_ON);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();

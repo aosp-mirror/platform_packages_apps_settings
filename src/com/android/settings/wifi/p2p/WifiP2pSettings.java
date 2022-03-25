@@ -353,6 +353,7 @@ public class WifiP2pSettings extends DashboardFragment
             mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             mIsIgnoreInitConnectionInfoCallback = false;
             mWifiP2pManager.requestNetworkInfo(mChannel, networkInfo -> {
+                if (mChannel == null) return;
                 mWifiP2pManager.requestConnectionInfo(mChannel, wifip2pinfo -> {
                     if (!mIsIgnoreInitConnectionInfoCallback) {
                         if (networkInfo.isConnected()) {
@@ -375,13 +376,20 @@ public class WifiP2pSettings extends DashboardFragment
         super.onPause();
         if (mWifiP2pManager != null && mChannel != null) {
             mWifiP2pManager.stopPeerDiscovery(mChannel, null);
+        }
+        getActivity().unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mWifiP2pManager != null && mChannel != null) {
             if (!mLastGroupFormed) {
                 // Close the channel when p2p doesn't connected.
                 mChannel.close();
                 mChannel = null;
             }
         }
-        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override

@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -47,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -63,6 +65,7 @@ import java.util.List;
  */
 public class BatteryAppListPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy {
+    private static final String TAG = "BatteryAppListPreferenceController";
     @VisibleForTesting
     static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
@@ -101,8 +104,15 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             PowerProfile powerProfile = new PowerProfile(context);
-            return powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL)
-                    >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            // Cheap hack to try to figure out if the power_profile.xml was populated.
+            final double averagePowerForOrdinal = powerProfile.getAveragePowerForOrdinal(
+                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
+            final boolean shouldShowBatteryAttributionList =
+                    averagePowerForOrdinal >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            if (!shouldShowBatteryAttributionList) {
+                Log.w(TAG, "shouldShowBatteryAttributionList(): " + averagePowerForOrdinal);
+            }
+            return shouldShowBatteryAttributionList;
         }
     };
 
@@ -440,8 +450,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private boolean shouldShowSummary(BatteryEntry entry) {
-        final CharSequence[] allowlistPackages = mContext.getResources()
-                .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        final CharSequence[] allowlistPackages =
+                FeatureFactory.getFactory(mContext)
+                        .getPowerUsageFeatureProvider(mContext)
+                        .getHideApplicationSummary(mContext);
         final String target = entry.getDefaultPackageName();
 
         for (CharSequence packageName : allowlistPackages) {
@@ -491,8 +503,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         use = 450;
         for (int i = 0; i < 100; i++) {
-            builder.getOrCreateUidBatteryConsumerBuilder(
-                            new FakeUid(Process.FIRST_APPLICATION_UID + i))
+            builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + i)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND, 10000 + i * 1000)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND, 20000 + i * 2000)
                     .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
@@ -500,18 +511,17 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
 
         // Simulate dex2oat process.
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + 1)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(
-                        new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
+        builder.getOrCreateUidBatteryConsumerBuilder(UserHandle.getSharedAppGid(Process.LOG_UID))
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 

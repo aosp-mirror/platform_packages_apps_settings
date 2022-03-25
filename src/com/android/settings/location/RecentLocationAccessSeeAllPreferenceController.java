@@ -20,13 +20,16 @@ import static com.android.settings.location.RecentLocationAccessPreferenceContro
 
 import android.content.Context;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
-import com.android.settingslib.location.RecentLocationAccesses;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.RecentAppOpsAccess;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
@@ -36,15 +39,19 @@ import java.util.List;
 public class RecentLocationAccessSeeAllPreferenceController
         extends LocationBasePreferenceController {
 
+    private final RecentAppOpsAccess mRecentLocationAccesses;
+
     private PreferenceScreen mCategoryAllRecentLocationAccess;
-    private final RecentLocationAccesses mRecentLocationAccesses;
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private boolean mShowSystem = false;
     private Preference mPreference;
-    private int mType = ProfileSelectFragment.ProfileType.ALL;
 
     public RecentLocationAccessSeeAllPreferenceController(Context context, String key) {
         super(context, key);
-        mRecentLocationAccesses = new RecentLocationAccesses(context);
+        mShowSystem = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
+        mRecentLocationAccesses = RecentAppOpsAccess.createForLocation(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
@@ -65,10 +72,11 @@ public class RecentLocationAccessSeeAllPreferenceController
 
         final UserManager userManager = UserManager.get(mContext);
 
-        final List<RecentLocationAccesses.Access> recentLocationAccesses = new ArrayList<>();
-        for (RecentLocationAccesses.Access access : mRecentLocationAccesses.getAppListSorted(
+        final List<RecentAppOpsAccess.Access> recentLocationAccesses = new ArrayList<>();
+        for (RecentAppOpsAccess.Access access : mRecentLocationAccesses.getAppListSorted(
                 mShowSystem)) {
-            if (isRequestMatchesProfileType(userManager, access, mType)) {
+            if (isRequestMatchesProfileType(
+                    userManager, access, ProfileSelectFragment.ProfileType.ALL)) {
                 recentLocationAccesses.add(access);
             }
         }
@@ -80,7 +88,7 @@ public class RecentLocationAccessSeeAllPreferenceController
             banner.setSelectable(false);
             mCategoryAllRecentLocationAccess.addPreference(banner);
         } else {
-            for (RecentLocationAccesses.Access request : recentLocationAccesses) {
+            for (RecentAppOpsAccess.Access request : recentLocationAccesses) {
                 final Preference appPreference = createAppPreference(
                         preference.getContext(),
                         request, mFragment);
@@ -90,21 +98,13 @@ public class RecentLocationAccessSeeAllPreferenceController
     }
 
     /**
-     * Initialize {@link ProfileSelectFragment.ProfileType} of the controller
-     *
-     * @param type {@link ProfileSelectFragment.ProfileType} of the controller.
-     */
-    public void setProfileType(@ProfileSelectFragment.ProfileType int type) {
-        mType = type;
-    }
-
-    /**
      * Set the value of {@link #mShowSystem}.
      */
     public void setShowSystem(boolean showSystem) {
         mShowSystem = showSystem;
         if (mPreference != null) {
             updateState(mPreference);
+            mMetricsFeatureProvider.logClickedPreference(mPreference, getMetricsCategory());
         }
     }
 }

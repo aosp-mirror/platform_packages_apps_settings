@@ -17,7 +17,13 @@
 package com.android.settings.development.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.development.BluetoothA2dpConfigStore;
@@ -26,6 +32,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+import java.util.List;
 
 /**
  * Abstract class for Bluetooth A2DP config controller in developer option.
@@ -36,12 +44,16 @@ public abstract class AbstractBluetoothPreferenceController extends
 
     protected volatile BluetoothA2dp mBluetoothA2dp;
 
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
+
     public AbstractBluetoothPreferenceController(Context context, Lifecycle lifecycle,
                                                  BluetoothA2dpConfigStore store) {
         super(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
+        mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
     }
 
     @Override
@@ -81,5 +93,14 @@ public abstract class AbstractBluetoothPreferenceController extends
          * @param enabled Is {@code true} when the setting is enabled.
          */
         void onBluetoothHDAudioEnabled(boolean enabled);
+    }
+
+    protected BluetoothDevice getA2dpActiveDevice() {
+        if (mBluetoothAdapter == null) {
+            return null;
+        }
+        List<BluetoothDevice> activeDevices =
+                mBluetoothAdapter.getActiveDevices(BluetoothProfile.A2DP);
+        return (activeDevices.size() > 0) ? activeDevices.get(0) : null;
     }
 }

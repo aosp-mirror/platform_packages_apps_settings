@@ -59,6 +59,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     @Override
     public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         mContext = getActivity();
 
         final Intent intent = getActivity().getIntent();
@@ -81,7 +82,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
             return;
         }
 
-        super.onCreate(icicle);
         mCustomBehaviorPreference = getPreferenceScreen().findPreference(CUSTOM_BEHAVIOR_KEY);
         mCustomBehaviorPreference.setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {

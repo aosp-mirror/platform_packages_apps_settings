@@ -32,6 +32,8 @@ import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 
+import com.android.settingslib.qrcode.QrCodeGenerator;
+
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.RGBLuminanceSource;
