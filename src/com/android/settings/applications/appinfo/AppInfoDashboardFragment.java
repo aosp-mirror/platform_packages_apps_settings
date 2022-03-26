@@ -48,6 +48,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -443,14 +444,14 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     };
 
             final BiometricPrompt.Builder builder = new BiometricPrompt.Builder(context)
-                    .setTitle(context.getText(R.string.app_restricted_settings_lockscreen_title));
+                    .setUseDefaultTitle(); // use default title if title is null/empty
 
-            if (context.getSystemService(BiometricManager.class).canAuthenticate(
-                    BiometricManager.Authenticators.DEVICE_CREDENTIAL
-                            | BiometricManager.Authenticators.BIOMETRIC_WEAK)
-                    == BiometricManager.BIOMETRIC_SUCCESS) {
-                builder.setAllowedAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL
-                        | BiometricManager.Authenticators.BIOMETRIC_WEAK);
+            final BiometricManager bm = context.getSystemService(BiometricManager.class);
+            final int authenticators = BiometricManager.Authenticators.DEVICE_CREDENTIAL
+                    | BiometricManager.Authenticators.BIOMETRIC_WEAK;
+            if (bm.canAuthenticate(authenticators) == BiometricManager.BIOMETRIC_SUCCESS) {
+                builder.setAllowedAuthenticators(authenticators);
+                builder.setSubtitle(bm.getStrings(authenticators).getPromptMessage());
             }
 
             final BiometricPrompt bp = builder.build();
@@ -481,6 +482,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
                             getPackageName(),
                             AppOpsManager.MODE_ALLOWED);
                     getActivity().invalidateOptionsMenu();
+                    final String toastString = getContext().getString(
+                            R.string.toast_allows_restricted_settings_successfully,
+                            mAppEntry.label);
+                    Toast.makeText(getContext(), toastString, Toast.LENGTH_LONG).show();
                 });
                 return true;
         }
