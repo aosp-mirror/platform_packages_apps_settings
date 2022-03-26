@@ -85,18 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Sinulla ei ole lupaa muuttaa Bluetooth-asetuksia."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Muodosta uusi laitepari"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
-    <skip />
-    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Liitä toinen korva"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Vasemman korvan kuulolaite on yhdistetty.\n\nJos haluat liittää oikean sen pariksi, varmista, että se on päällä ja valmis parin muodostukseen."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Oikean korvan kuulolaite on yhdistetty.\n\nJos haluat liittää vasemman sen pariksi, varmista, että se on päällä ja valmis parin muodostukseen."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Liitä oikea korva"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Liitä vasen korva"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Samankaltaisia"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> näkyy lähellä olevissa laitteissa, kun Bluetooth-asetukset on auki."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Puhelimen Bluetooth-osoite: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Tabletin Bluetooth-osoite: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -734,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Jos annat väärän kuvion seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jos syötät väärän PIN-koodin seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jos annat väärän salasanan seuraavalla yrityskerralla, työprofiilisi ja sen tiedot poistetaan."</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Liian monta virheellistä yritystä. Laitteen tiedot poistetaan."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Liian monta virheellistä yritystä. Tämä käyttäjä poistetaan."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Liian monta virheellistä yritystä. Tämä työprofiili ja sen tiedot poistetaan."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Ohita"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> merkkiä.</item>
       <item quantity="one">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> merkki.</item>
@@ -2321,14 +2311,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Jos käytät kolmoisnapautusta näyttösi osan suurentamiseen, kirjoittamisessa ja muissa toiminnoissa voi esiintyä viivettä.\n\nEsteettömyyspainike kelluu näytöllä muiden sovellusten päällä. Suurenna sitä napauttamalla."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Vaihda esteettömyyspainikkeeseen"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Käytä kolmoisnapautusta"</string>
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_title (8484669851397296597) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_message (2008671502848936410) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_positive_button (8712304035901450010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_negative_button (2028849736366584733) -->
-    <skip />
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Tämä voi hidastaa näppäimistön toimintaa"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Kun käytät kolmoisnapautusta näytön osan suurentamiseen, näppäimistöllä saattaa esiintyä ongelmia.\n\nVoit välttää tämän vaihtamalla suurennuksen pikakomennon kolmoisnapautuksesta joksikin muuksi.\n"<annotation id="link">"Muuta asetusta"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Jatka silti"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Peru"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Suurennusasetukset"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Suurenna kolmoisnapautuksella"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Suurenna pikanäppäimellä"</string>
@@ -2336,24 +2322,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Tietoja: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Näytön koko ja teksti"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Muuta tekstin näkymistä"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Aihe: Kuumailmapallot"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Lähettäjä: Mika"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Huomenta!\n\nHalusin vain tarkistaa, miten suunnitelmat etenevät. Ovatko ne valmiina ennen kuin alamme rakentaa uusia kuumailmapalloja?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nollaa asetukset"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Nollataanko näytön koko ja teksti?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Näytön koko ja tekstiasetukset nollataan puhelimen alkuperäisiin asetuksiin"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nollaa"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Suunnitelmia viikonlopuksi?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Lähden rannalle. Liitytkö seuraan?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Asetukset"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Lähennä näkymää."</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Lähennä napauttamalla kolme kertaa."</string>
@@ -2411,8 +2388,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Esteettömyyspainikkeen käyttö. Elettä ei voi käyttää kolmen painikkeen navigoinnissa."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Avaa esteettömyysominaisuudet nopeasti"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Näin pääset alkuun"</b>\n"1. Siirry saavutettavuusasetuksiin\n2. Valitse ominaisuus ja napauta pikanäppäintä\n3. Valitse, haluatko saada pääsyn ominaisuuteen painikkeella vai eleellä"</string>
-    <!-- no translation found for accessibility_button_description (1261273371298608222) -->
-    <skip />
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Näin pääset alkuun"</b>\n"1. Siirry saavutettavuusasetuksiin\n2. Valitse ominaisuus ja napauta pikanäppäintä\n3. Valitse painike, jolla saat pääsyn ominaisuuteen"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Käytä painiketta tai elettä"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Sijainti"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Koko"</string>
@@ -2516,19 +2492,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Kuulolaitteet"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Ei yhdistettyjä kuulolaitteita"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Lisää kuulolaitteita"</string>
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
-    <skip />
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Liitä kuulolaitteet"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Napauta kuulolaitteitasi seuraavassa kohdassa. Sinun täytyy ehkä liittää vasen ja oikea korva erikseen.\n\nVarmista, että kuulolaitteet ovat päällä ja valmiita parin muodostukseen."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktiivinen"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vain vasen"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vain oikea"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vasen ja oikea"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ja 1 muu"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> tallennettua kuulolaitetta</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> tallennettu kuulolaite</item>
@@ -3396,14 +3366,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Jaa puhelimesi lisäämällä uusia käyttäjiä. Kullakin käyttäjällä on laitteella oma tila räätälöityjä aloitusnäyttöjä, tilejä, sovelluksia, asetuksia ja muita tietoja varten."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Käyttäjät ja profiilit"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Lisää käyttäjä tai profiili"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Lisää käyttäjä"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Rajoitettu profiili"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Ei määritetty"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Asetuksia ei ole määritetty – rajoitettu profiili"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Ei määritetty – työprofiili"</string>
     <string name="user_admin" msgid="4024553191395768119">"Järjestelmänvalvoja"</string>
     <string name="user_you" msgid="3070562015202859996">"Sinä (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Voit lisätä korkeintaan <xliff:g id="USER_COUNT">%1$d</xliff:g> käyttäjää."</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Vain tablet-laitteen omistaja voi hallita käyttäjiä."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Vain puhelimen omistaja voi hallita käyttäjiä."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Rajoitetut profiilit eivät voi lisätä tilejä"</string>
@@ -3423,9 +3393,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Lisätään uutta käyttäjää..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Poista käyttäjä"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Poista"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Vieras"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Poista vieras"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Poistetaanko vieras?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Kaikki sovellukset ja tämän istunnon tiedot poistetaan."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Poista"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Ota puhelut käyttöön"</string>
@@ -3644,8 +3611,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"älä häiritse, keskeytä, keskeytys, tauko"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"nearby, sijaintihistoria, sijainnin ilmoittaminen, GPS"</string>
-    <!-- no translation found for keywords_accounts (3013897982630845506) -->
-    <skip />
+    <string name="keywords_accounts" msgid="3013897982630845506">"tili, lisää tili, työprofiili, tilin lisääminen, poista, poistaminen"</string>
     <string name="keywords_users" msgid="3497517660077620843">"rajoitus, rajoittaa, rajoitettu"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"tekstin korjaus, korjaa, ääni, värinä, automaattinen, kieli, ele, ehdottaa, ehdotus, teema, loukkaava, sana, kirjoita, emoji, kansainvälinen"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"nollaa, asetukset, oletus"</string>
@@ -4204,8 +4170,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"–"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ei yhtään}=1{1 keskustelu}other{# keskustelua}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kuka saa keskeyttää"</string>
-    <!-- no translation found for zen_mode_people_footer (7710707353004137431) -->
-    <skip />
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Vaikka viesti- ja puhelusovellukset eivät voi lähettää sinulle ilmoituksia, täällä valitsemasi henkilöt saavat kuitenkin sinuun yhteyden kyseisten sovellusten kautta"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Puhelut"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Puhelut"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"puhelut"</string>
@@ -4434,7 +4399,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> käyttämätöntä sovellusta</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> käyttämätön sovellus</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Poista lupia ja vapauta tilaa"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Kaikki sovellukset"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Asennetut sovellukset"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Pikasovellukset"</string>
@@ -5590,6 +5560,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Vuokra-aika ei pääty koskaan."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Salli näytön peitto Asetukset-sovelluksessa"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Anna sovellusten, jotka voivat näkyä muiden sovellusten päällä, peittää Asetukset-sovelluksen näytöt"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Kiinnitä mediasoitin"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Mediasoitin pysyy auki pika-asetuksissa, jotta toistoa voi jatkaa nopeasti"</string>
@@ -5675,7 +5649,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Käytä sovelluksen kiinnitystä"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Käytä kehittäjäasetuksia"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Käytä tulostuspalvelua"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Salli useat käyttäjät"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Käytä langatonta virheenkorjausta"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Käytä grafiikkaohjaimen asetuksia"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Käytä virransäästöä"</string>
@@ -5739,10 +5714,8 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Kulutuksen alkuraja"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Kulutuksen enimmäisraja"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Muuttujat"</string>
-    <!-- no translation found for tare_actions_ctp (5110104015354916401) -->
-    <skip />
-    <!-- no translation found for tare_actions_base_price (3300967942666376589) -->
-    <skip />
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Toiminnot (tuotannon hinta)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Toiminnot (perushinta)"</string>
     <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
     <skip />
     <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
@@ -5779,16 +5752,20 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Esikatsele"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Valitse näytönsäästäjä"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Näytä lisätietoja"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Näytä aika, päivämäärä ja sää näytönsäästäjässä"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Lisää asetuksia"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Personoi näytönsäästäjää"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Valitse, mitä näytölläsi näkyy, kun et käytä laitetta."</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"Yksilöi"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Vapaamuotoisen tilan käyttöönotto edellyttää uudelleenkäynnistystä."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Työpöytätilan pakottaminen toissijaisille näytöille edellyttää uudelleenkäynnistystä."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Käynnistä uudelleen nyt"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Käynnistä uudelleen myöhemmin"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Spatiaalinen audio"</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
+    <skip />
     <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
     <skip />
     <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->

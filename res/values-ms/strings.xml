@@ -728,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Jika anda memasukkan corak yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jika anda memasukkan PIN yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika anda memasukkan kata laluan yang salah pada percubaan seterusnya, profil kerja anda dan data profil itu akan dipadamkan"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Terlalu banyak percubaan yang salah. Data peranti ini akan dipadamkan."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Terlalu banyak percubaan yang salah. Pengguna ini akan dipadamkan."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak percubaan yang salah. Profil kerja ini dan data profil akan dipadamkan."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Ketepikan"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_1">%d</xliff:g> aksara</item>
       <item quantity="one">Mesti mengandungi sekurang-kurangnya <xliff:g id="COUNT_0">%d</xliff:g> aksara</item>
@@ -2328,8 +2324,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Tukar cara teks dipaparkan"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Subjek: Reka bentuk belon udara panas"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Daripada: Bill"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Selamat pagi!\n\nBoleh saya tahu kemajuan untuk reka bentuk itu? Adakah kandungan akan tersedia sebelum kami mula membuat belon baharu?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Tetapkan semula tetapan"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Tetapkan semula saiz paparan dan teks?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Saiz paparan dan pilihan teks anda akan ditetapkan semula kepada tetapan asal telefon"</string>
@@ -3371,14 +3366,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Kongsi telefon anda dengan menambahkan pengguna baharu. Setiap pengguna mempunyai ruang peribadi pada telefon anda untuk Skrin utama tersuai, akaun, apl, tetapan dan pelbagai lagi."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Pengguna &amp; profil"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Tambah pengguna atau profil"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Tambah pengguna"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil terhad"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Tidak disediakan"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Tidak disediakan - Profil terhad"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Tidak disediakan - Profil kerja"</string>
     <string name="user_admin" msgid="4024553191395768119">"Pentadbir"</string>
     <string name="user_you" msgid="3070562015202859996">"Anda (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Anda boleh menambahkan sehingga <xliff:g id="USER_COUNT">%1$d</xliff:g> pengguna"</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Hanya pemilik tablet boleh menguruskan pengguna."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Hanya pemilik telefon boleh menguruskan pengguna."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Profil yang disekat tidak boleh menambah akaun"</string>
@@ -3398,9 +3393,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Menambah pengguna baharu..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Padam pengguna"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Padam"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Tetamu"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Alih keluar tetamu"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Alih keluar tetamu?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Semua apl dan data dalam sesi ini akan dipadam."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Alih keluar"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Hidupkan panggilan telefon"</string>
@@ -4407,7 +4399,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apl yang tidak digunakan</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> apl tidak digunakan</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Alih keluar kebenaran dan kosongkan ruang"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Semua apl"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Apl yang dipasang"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Apl segera"</string>
@@ -5563,6 +5560,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Sewaan tidak akan tamat tempoh."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Benarkan tindanan skrin pada Tetapan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Benarkan apl yang boleh dipaparkan di atas apl lain untuk menindan skrin Tetapan"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Sematkan pemain media"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Untuk menyambung semula main balik dengan pantas, biarkan pemain media kekal terbuka dalam Tetapan Pantas"</string>
@@ -5648,7 +5649,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan apl"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan pilihan pembangun"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan perkhidmatan cetakan"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Dayakan berbilang pengguna"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gunakan nyahpepijat wayarles"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Gunakan pilihan pemacu grafik"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Gunakan penjimat bateri"</string>
@@ -5750,16 +5752,20 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pratonton"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pilih penyelamat skrin"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Tunjukkan maklumat tambahan"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Paparkan masa, tarikh dan cuaca pada penyelamat skrin"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Lagi tetapan"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Sesuaikan penyelamat skrin anda"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Pilih perkara yang akan anda lihat pada skrin apabila peranti anda tidak digunakan."</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"Sesuaikan"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"But semula diperlukan untuk mendayakan sokongan bentuk bebas."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"But semula diperlukan untuk memaksa mod desktop pada paparan sekunder."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"But semula sekarang"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"But semula kemudian"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Audio ruang"</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
+    <skip />
     <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
     <skip />
     <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
