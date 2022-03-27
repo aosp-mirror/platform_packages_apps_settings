@@ -102,7 +102,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     protected static final String KEY_USE_SERVICE_PREFERENCE = "use_service";
     public static final String KEY_GENERAL_CATEGORY = "general_categories";
     protected static final String KEY_HTML_DESCRIPTION_PREFERENCE = "html_description";
-    private static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
+    public static final String KEY_SHORTCUT_PREFERENCE = "shortcut_preference";
     protected static final String KEY_SAVED_USER_SHORTCUT_TYPE = "shortcut_type";
     protected static final String KEY_SAVED_QS_TOOLTIP_RESHOW = "qs_tooltip_reshow";
     protected static final String KEY_SAVED_QS_TOOLTIP_TYPE = "qs_tooltip_type";
@@ -724,6 +724,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         final boolean shortcutAssigned = value != UserShortcutType.EMPTY;
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
 
         // Show the quick setting tooltip if the shortcut assigned in the first time
         if (shortcutAssigned) {
