@@ -141,13 +141,14 @@
 
     <PreferenceCategory
         android:key="app_hibernation_info"
-        android:title="@string/unused_apps"
+        android:title="@string/unused_apps_category"
         settings:controller=
             "com.android.settings.applications.appinfo.AppHibernationPreferenceCategoryController">
 
         <SwitchPreference
             android:key="hibernation_switch"
             android:title="@string/unused_apps_switch"
+            android:summary="@string/unused_apps_switch_summary"
             settings:controller=
                 "com.android.settings.applications.appinfo.HibernationSwitchPreferenceController" />
     </PreferenceCategory>
