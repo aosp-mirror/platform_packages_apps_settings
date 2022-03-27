@@ -21,6 +21,8 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -106,14 +108,14 @@ public class ConversationMessageView extends FrameLayout {
                 MeasureSpec.EXACTLY);
         mContactIconView.measure(iconMeasureSpec, iconMeasureSpec);
 
-        final int arrowWidth =
-                getResources().getDimensionPixelSize(R.dimen.message_bubble_arrow_width);
+        final int messageBubblePadding =
+                getResources().getDimensionPixelOffset(R.dimen.message_bubble_left_right_padding);
 
         // We need to subtract contact icon width twice from the horizontal space to get
         // the max leftover space because we want the message bubble to extend no further than the
         // starting position of the message bubble in the opposite direction.
         final int maxLeftoverSpace = horizontalSpace - mContactIconView.getMeasuredWidth() * 2
-                - arrowWidth - getPaddingLeft() - getPaddingRight();
+                - messageBubblePadding - getPaddingLeft() - getPaddingRight();
         final int messageContentWidthMeasureSpec = MeasureSpec.makeMeasureSpec(maxLeftoverSpace,
                 MeasureSpec.AT_MOST);
 
@@ -170,19 +172,28 @@ public class ConversationMessageView extends FrameLayout {
     private void updateViewContent() {
         mMessageTextView.setText(mMessageText);
         mStatusTextView.setText(mTimestampText);
+        mStatusTextView.setVisibility(TextUtils.isEmpty(mTimestampText) ? GONE : VISIBLE);
         mContactIconView.setText(mIconText);
 
         mContactIconView.setTextColor(mIconTextColor);
-        final Drawable iconBase = getContext().getDrawable(R.drawable.conversation_message_icon);
-        mContactIconView
-                .setBackground(getTintedDrawable(getContext(), iconBase, mIconBackgroundColor));
+        final Drawable iconBackground = getContext().getDrawable(
+                R.drawable.conversation_message_icon);
+        final Drawable icon = getContext().getDrawable(R.drawable.ic_person);
+        final LayerDrawable layerDrawable = new LayerDrawable(
+                new Drawable[]{
+                        getTintedDrawable(getContext(), iconBackground, mIconBackgroundColor),
+                        getTintedDrawable(getContext(), icon,
+                                getContext().getColor(R.color.message_icon_color))});
+        final int iconInset = getResources().getDimensionPixelOffset(R.dimen.message_icon_inset);
+        layerDrawable.setLayerInset(/* index= */ 1, iconInset, iconInset, iconInset, iconInset);
+        mContactIconView.setBackground(layerDrawable);
     }
 
     private void updateViewAppearance() {
         final Resources res = getResources();
 
-        final int arrowWidth = res.getDimensionPixelOffset(
-                R.dimen.message_bubble_arrow_width);
+        final int messageBubbleLeftRightPadding = res.getDimensionPixelOffset(
+                R.dimen.message_bubble_left_right_padding);
         final int messageTextLeftRightPadding = res.getDimensionPixelOffset(
                 R.dimen.message_text_left_right_padding);
         final int textTopPadding = res.getDimensionPixelOffset(
@@ -191,14 +202,11 @@ public class ConversationMessageView extends FrameLayout {
                 R.dimen.message_text_bottom_padding);
 
         final int textLeftPadding, textRightPadding;
+        textLeftPadding = messageTextLeftRightPadding;
+        textRightPadding = messageTextLeftRightPadding;
 
-        if (mIncoming) {
-            textLeftPadding = messageTextLeftRightPadding + arrowWidth;
-            textRightPadding = messageTextLeftRightPadding;
-        } else {
-            textLeftPadding = messageTextLeftRightPadding;
-            textRightPadding = messageTextLeftRightPadding + arrowWidth;
-        }
+        final int messageBubbleLeftPadding = mIncoming ? messageBubbleLeftRightPadding : 0;
+        final int messageBubbleRightPadding = mIncoming ? 0 : messageBubbleLeftRightPadding;
 
         // These values do not depend on whether the message includes attachments
         final int gravity = mIncoming ? (Gravity.START | Gravity.CENTER_VERTICAL) :
@@ -216,7 +224,7 @@ public class ConversationMessageView extends FrameLayout {
         final Context context = getContext();
 
         final Drawable textBackgroundDrawable = getTintedDrawable(context,
-                context.getDrawable(bubbleDrawableResId),
+                context.getDrawable(R.drawable.conversation_message_text_info_view_background),
                 context.getColor(bubbleColorResId));
         mMessageTextAndInfoView.setBackground(textBackgroundDrawable);
 
@@ -234,6 +242,8 @@ public class ConversationMessageView extends FrameLayout {
         // Update the message row and message bubble views
         setPadding(getPaddingLeft(), messageTopPadding, getPaddingRight(), 0);
         mMessageBubble.setGravity(gravity);
+        mMessageBubble.setPaddingRelative(messageBubbleLeftPadding, /* top= */ 0,
+                messageBubbleRightPadding, /* bottom= */ 0);
 
         updateTextAppearance();
     }
