@@ -18,10 +18,15 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
 
+import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.DialogInterface;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -88,14 +93,52 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 new HighTextContrastPreferenceController(context, HIGHT_TEXT_CONTRAST_KEY);
         controllers.add(highTextContrastController);
 
-        final List<ResetStateListener> resetStateListeners =
-                controllers.stream().filter(c -> c instanceof ResetStateListener).map(
-                        c -> (ResetStateListener) c).collect(Collectors.toList());
         final TextReadingResetController resetController =
-                new TextReadingResetController(context, RESET_KEY, resetStateListeners);
+                new TextReadingResetController(context, RESET_KEY,
+                        v -> showDialog(DialogEnums.DIALOG_RESET_SETTINGS));
         controllers.add(resetController);
 
         return controllers;
+    }
+
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        if (dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
+            return new AlertDialog.Builder(getPrefContext())
+                    .setTitle(R.string.accessibility_text_reading_confirm_dialog_title)
+                    .setMessage(R.string.accessibility_text_reading_confirm_dialog_message)
+                    .setPositiveButton(
+                            R.string.accessibility_text_reading_confirm_dialog_reset_button,
+                            this::onPositiveButtonClicked)
+                    .setNegativeButton(R.string.cancel, /* listener= */ null)
+                    .create();
+        }
+
+        throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DialogEnums.DIALOG_RESET_SETTINGS) {
+            return SettingsEnums.DIALOG_RESET_SETTINGS;
+        }
+
+        return super.getDialogMetricsCategory(dialogId);
+    }
+
+    private void onPositiveButtonClicked(DialogInterface dialog, int which) {
+        // To avoid showing the dialog again, probably the onDetach() of SettingsDialogFragment
+        // was interrupted by unexpectedly recreating the activity.
+        removeDialog(DialogEnums.DIALOG_RESET_SETTINGS);
+
+        getResetStateListeners().forEach(ResetStateListener::resetState);
+    }
+
+    private List<ResetStateListener> getResetStateListeners() {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        getPreferenceControllers().forEach(controllers::addAll);
+        return controllers.stream().filter(c -> c instanceof ResetStateListener).map(
+                c -> (ResetStateListener) c).collect(Collectors.toList());
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

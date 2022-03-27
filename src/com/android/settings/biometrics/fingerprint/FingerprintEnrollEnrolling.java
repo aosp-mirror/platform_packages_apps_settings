@@ -32,8 +32,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.media.AudioAttributes;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
@@ -108,11 +109,8 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final VibrationEffect VIBRATE_EFFECT_ERROR =
             VibrationEffect.createWaveform(new long[] {0, 5, 55, 60}, -1);
-    private static final AudioAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
-            new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .build();
+    private static final VibrationAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ACCESSIBILITY);
 
     private FingerprintManager mFingerprintManager;
     private boolean mCanAssumeUdfps;
@@ -582,8 +580,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 mErrorText.setTranslationY(0f);
             }
         }
-        if (isResumed()) {
-            mVibrator.vibrate(VIBRATE_EFFECT_ERROR, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
+        if (isResumed() && (mIsAccessibilityEnabled || !mCanAssumeUdfps)) {
+            mVibrator.vibrate(Process.myUid(), getApplicationContext().getOpPackageName(),
+                    VIBRATE_EFFECT_ERROR, "FingerprintEnrollEnrolling:showError",
+                    FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
         }
     }
 
