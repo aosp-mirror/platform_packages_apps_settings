@@ -85,6 +85,18 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Você não tem permissão para alterar as configurações de Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Parear novo dispositivo"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
+    <skip />
+    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> está visível para dispositivos próximos enquanto as configurações de Bluetooth estão abertas."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Endereço Bluetooth do smartphone: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Endereço Bluetooth do tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,16 +154,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permita que seu dispositivo se comunique com dispositivos Bluetooth nas proximidades"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permite que seu smartphone se comunique com dispositivos Bluetooth nas proximidades"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desativar descarga de hardware Bluetooth A2DP"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Desativar descarga de hardware Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Reiniciar dispositivo?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Reinicie o dispositivo para mudar essa configuração."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reiniciar"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos portáteis de mídia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de chamada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Outros dispositivos"</string>
@@ -2316,6 +2323,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"O uso do toque triplo para ampliar parte da tela deixará a digitação e outras ações mais lentas.\n\nO botão de acessibilidade aparecerá na tela sobre outros apps. Toque nele para ampliar."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Mudar para o botão de acessibilidade"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Usar o toque triplo"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Isso pode deixar seu teclado mais lento"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Ao usar o toque triplo para ampliar parte da tela, talvez você encontre algum problema no teclado.\n\nPara evitar isso, mude o atalho de ampliação do toque triplo para outro comando.\n"<annotation id="link">"Mudar configuração"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuar mesmo assim"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancelar"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Configurações de ampliação"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Ampliar com toque triplo"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Ampliar com atalho"</string>
@@ -2323,10 +2334,24 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Texto e tamanho de exibição"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Mudar a exibição do texto"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"E-mail: planos para a máquina do tempo, v2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"De: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Bom dia! Continuando nossa última conversa, quero ver o progresso do plano de desenvolvimento da sua máquina do tempo. Você terá um protótipo pronto para demonstração na E3 deste ano?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"Redefinir"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opções"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Aumentar o zoom na tela"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tocar três vezes para ampliar"</string>
@@ -2383,10 +2408,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Saiba mais sobre o botão e o gesto de acessibilidade"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Como usar o botão de acessibilidade. O gesto não está disponível na navegação com três botões."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Acessar rapidamente os recursos de acessibilidade"</string>
-    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Para começar, siga estas instruções:"</b>\n"1. Vá para as configurações de acessibilidade.\n2. Selecione um recurso e toque no atalho.\n3. Escolha se você quer usar um botão ou gesto para acessar esse recurso."</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Para começar, siga estas instruções:"</b>\n"1. Vá para as configurações de acessibilidade.\n2. Selecione um recurso e toque no atalho.\n3. Escolha o botão para acessar o recurso."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usar botão ou gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Localização"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamanho"</string>
@@ -2490,8 +2513,19 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Aparelhos auditivos"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Nenhum aparelho auditivo conectado"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Adicionar aparelhos auditivos"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"Para parear aparelhos auditivos, localize seu dispositivo na próxima tela e toque nele. Verifique se seus aparelhos auditivos estão no modo de pareamento."</string>
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
+    <skip />
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ativo"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
+    <skip />
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> aparelho auditivo salvo</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> aparelhos auditivos salvos</item>
@@ -3435,8 +3469,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Em um terminal por aproximação, pagar com <xliff:g id="APP_0">%1$s</xliff:g>.\n\nIsso substitui <xliff:g id="APP_1">%2$s</xliff:g> como seu app de pagamento padrão."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Definir padrão"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Atualizar"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"Trabalho"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restrições"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remover restrições"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Alterar PIN"</string>
@@ -3608,7 +3641,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"não perturbe, interromper, interrupção"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"por perto, local, histórico, relatório, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"conta, adicionar uma conta, perfil de trabalho, adicionar conta"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"conta, adicionar uma conta, perfil de trabalho, adicionar conta, remover, excluir"</string>
     <string name="keywords_users" msgid="3497517660077620843">"restrição, restringir, restrito"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"correção de texto, corrigir, som, vibrar, automático, idioma, gesto, sugerir, sugestão, tema, ofensivo, palavra, digitar, emoji, internacional"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"redefinir, preferências, padrão"</string>
@@ -3711,6 +3744,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Ativar sons"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Legenda Instantânea"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Legendar mídias automaticamente"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Alto-falante do smartphone"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Fones de ouvido com fio"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"O Áudio espacial cria um som imersivo que parece vir de todos os lados. Ele só funciona com alguns tipos de mídia."</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Desativado"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Ativado / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhum}=1{1 programação definida}one{# programação definida}other{# programações definidas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não perturbe"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receber notificações apenas de pessoas e apps importantes"</string>
@@ -4161,6 +4200,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Nenhuma"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Nenhuma}=1{1 conversa}one{# conversa}other{# conversas}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Quem pode interromper"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Mesmo se os apps de mensagens ou chamadas não puderem notificar você, as pessoas escolhidas aqui ainda vão poder entrar em contato por esses apps"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Chamadas"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Chamadas"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"chamadas"</string>
@@ -4831,8 +4871,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps podem usar dados ilimitados</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Ver mais"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Quer mesmo limpar dados do usuário e converter em criptografia de arquivos?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Limpar e converter…"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Redefinir limite de taxa do ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"O limite de taxa do ShortcutManager foi redefinido"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar informações na tela de bloqueio"</string>
@@ -5696,8 +5734,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Limite de consumo inicial"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Limite máximo de consumo"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modificadores"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"Ações"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"Recompensas"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Ações (custo de produção)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Ações (preço base)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"Principal atividade"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificação vista"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificação vista em 15 minutos"</string>
@@ -5738,9 +5782,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar agora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar mais tarde"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Áudio espacial"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"O áudio imersivo é aquele que parece que vem de todos os lados. Ele só funciona com alguns tipos de mídia."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Deixar o áudio mais realista"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Mude posição do áudio para que o som fique mais natural."</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limitação da velocidade de download da rede"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configurar a limitação da velocidade de entrada da largura de banda da rede, que se aplica a todas as redes que fornecem uma conexão de Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configurar a limitação da velocidade de download da rede"</string>

@@ -85,6 +85,18 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"You don\'t have permission to change Bluetooth settings."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Pair new device"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
+    <skip />
+    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> is visible to nearby devices while the Bluetooth settings are open."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Phone\'s Bluetooth address: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Tablet\'s Bluetooth address: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -2309,6 +2321,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Using triple-tap to magnify part of your screen causes typing and other delays.\n\nThe Accessibility button floats on your screen over other apps. Tap it to magnify."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Switch to accessibility button"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Use triple-tap"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"This may slow down your keyboard"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"When using triple-tap to magnify part of your screen, you may notice issues over the keyboard.\n\nTo avoid this, you can change your magnification shortcut from triple-tap to another option.\n"<annotation id="link">"Change setting"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continue anyway"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Cancel"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Magnification settings"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Magnify with triple-tap"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Magnify with shortcut"</string>
@@ -2316,10 +2332,24 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"About <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Display size and text"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Change how text displays"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"Email: Plans for time machine, v2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"From: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Good morning! Following up on our last conversation, I’d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"Reset"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Options"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom in on screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tap 3 times to zoom"</string>
@@ -2377,7 +2407,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Using the accessibility button. The gesture isn’t available with 3-button navigation."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Quickly access accessibility features"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"To get started"</b>\n"1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. Choose whether you want to use a button or gesture to access the feature"</string>
-    <string name="accessibility_button_description" msgid="3052248616240648249"><b>"To get started"</b>\n"1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. Choose the button to use to access the feature"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"To get started"</b>\n"1. Go to accessibility settings\n2. Select a feature and tap the shortcut\n3. Choose the button to access the feature"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Use button or gesture"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Location"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Size"</string>
@@ -2481,8 +2511,19 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Hearing aids"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"No hearing aids connected"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Add hearing aids"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"To pair your hearing aids, find and tap your device on the next screen. Make sure that your hearing aids are in pairing mode."</string>
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
+    <skip />
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> active"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
+    <skip />
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> saved hearing aids</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> saved hearing aid</item>
@@ -3426,8 +3467,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"At a contactless terminal, pay with <xliff:g id="APP_0">%1$s</xliff:g>.\n\nThis replaces <xliff:g id="APP_1">%2$s</xliff:g> as your default payment app."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Set default"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Update"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"Work"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Restrictions"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remove restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Change PIN"</string>
@@ -3599,7 +3639,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"don\'t disturb, interrupt, interruption, break"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"nearby, location, history, reporting, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"account, add an account, work profile, add account"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"account, add an account, work profile, add account, remove, delete"</string>
     <string name="keywords_users" msgid="3497517660077620843">"restriction, restrict, restricted"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"reset, preferences, default"</string>
@@ -3702,6 +3742,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Power on sounds"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Live Caption"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatically caption media"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Phone speaker"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Wired headphones"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"Spatial Audio creates immersive sound that seems like it’s coming from all around you. Only works with some media."</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Off"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"On/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"On / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> and <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{None}=1{1 schedule set}other{# schedules set}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do Not Disturb"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Only get notified by important people and apps"</string>
@@ -4152,6 +4198,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"None"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{None}=1{1 conversation}other{# conversations}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Who can interrupt"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Even if messaging or calling apps can\'t notify you, people that you choose here can still reach you through those apps"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Calls"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Calls"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"calls"</string>
@@ -4822,8 +4869,6 @@
       <item quantity="one">1 app can use unrestricted data</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"See more"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Really wipe user data and convert to file encryption?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Wipe and convert"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Reset ShortcutManager rate-limiting"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"ShortcutManager rate-limiting has been reset"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Control info on lock screen"</string>
@@ -4904,8 +4949,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digital assistant"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Swipe to invoke the assistant"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Swipe up from a bottom corner to invoke digital assistant app."</string>
-    <!-- no translation found for assistant_long_press_home_gesture_title (4865972278738178753) -->
-    <skip />
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hold home for Assistant"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Press and hold the Home button to invoke digital assistant app."</string>
     <string name="information_label" msgid="6939310810756569298">"Information"</string>
     <string name="low_label" msgid="6525629096999711220">"Low"</string>
@@ -5688,8 +5732,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Initial consumption limit"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Maximum consumption limit"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modifiers"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"Actions"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"Rewards"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Actions (cost to produce)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Actions (base price)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"Top activity"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notification seen"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notification seen within 15 minutes"</string>
@@ -5730,9 +5780,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reboot now"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reboot later"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Spatial audio"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"Immersive audio seems like it\'s coming from all around you. Only works with some media."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"Make audio more realistic"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"Shift positioning of audio so that it sounds more natural."</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Network download rate limit"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configure the network bandwidth ingress rate limit which is applied to all networks that provide Internet connectivity."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configure network download rate limit"</string>
