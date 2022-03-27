@@ -26,6 +26,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -56,6 +57,11 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private static final int DIALOG_TAG_ENABLE_DSDS_REBOOT_CONFIRMATION = 4;
     // Number of SIMs for DSDS
     private static final int NUM_OF_SIMS_FOR_DSDS = 2;
+    // Support RTL mode
+    private static final String LINE_BREAK = "\n";
+    private static final int LINE_BREAK_OFFSET_ONE = 1;
+    private static final int LINE_BREAK_OFFSET_TWO = 2;
+    private static final String RTL_MARK = "\u200F";
 
     /**
      * Returns an intent of ToggleSubscriptionDialogActivity.
@@ -78,6 +84,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private boolean mEnable;
     private boolean mIsEsimOperation;
     private TelephonyManager mTelMgr;
+    private boolean isRtlMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +114,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         mSwitchToRemovableSlotSidecar = SwitchToRemovableSlotSidecar.get(getFragmentManager());
         mEnableMultiSimSidecar = EnableMultiSimSidecar.get(getFragmentManager());
         mEnable = intent.getBooleanExtra(ARG_enable, true);
+        isRtlMode = getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
 
         if (savedInstanceState == null) {
             if (mEnable) {
@@ -377,6 +386,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             showNonSwitchSimConfirmDialog();
             return;
         }
+
         ConfirmDialogFragment.show(
                 this,
                 ConfirmDialogFragment.OnConfirmListener.class,
@@ -429,21 +439,33 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 mSubInfo, this);
         final CharSequence activeSubName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 activeSub, this);
+        final StringBuilder switchDialogMsg = new StringBuilder();
         if (betweenEsim && mIsEsimOperation) {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text_downloaded,
                     subInfoName,
-                    activeSubName);
+                    activeSubName));
         } else if (mIsEsimOperation) {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text,
                     subInfoName,
-                    activeSubName);
+                    activeSubName));
         } else {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text_single_sim,
-                    activeSubName);
+                    activeSubName));
         }
+        if (isRtlMode) {
+            /* There are two lines of message in the dialog, and the RTL symbols must be added
+             * before and after each sentence, so use the line break symbol to find the position.
+             * (Each message are all with two line break symbols)
+             */
+            switchDialogMsg.insert(0, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) - LINE_BREAK_OFFSET_ONE, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) + LINE_BREAK_OFFSET_TWO, RTL_MARK)
+                    .insert(switchDialogMsg.length(), RTL_MARK);
+        }
+        return switchDialogMsg.toString();
     }
 
     private boolean isDsdsConditionSatisfied() {
