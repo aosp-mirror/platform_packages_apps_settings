@@ -26,7 +26,6 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.View;
 import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
@@ -36,12 +35,13 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
  * Controller for logic pertaining to switch Wi-Fi tethering.
  */
 public class WifiTetherSwitchBarController implements
-        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, View.OnClickListener {
+        LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnMainSwitchChangeListener {
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
@@ -82,7 +82,7 @@ public class WifiTetherSwitchBarController implements
     @Override
     public void onStart() {
         mDataSaverBackend.addListener(this);
-        mSwitch.setOnClickListener(this);
+        mSwitchBar.addOnSwitchChangeListener(this);
         mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER,
                 Context.RECEIVER_EXPORTED_UNAUDITED);
     }
@@ -94,8 +94,8 @@ public class WifiTetherSwitchBarController implements
     }
 
     @Override
-    public void onClick(View v) {
-        if (((Switch) v).isChecked()) {
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        if (isChecked) {
             startTether();
         } else {
             stopTether();
