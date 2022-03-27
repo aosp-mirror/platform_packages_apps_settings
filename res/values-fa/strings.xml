@@ -85,6 +85,18 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"اجازه ندارید تنظیمات بلوتوث را تغییر دهید."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"مرتبط‌سازی دستگاه جدید"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"بلوتوث"</string>
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
+    <skip />
+    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
+    <skip />
+    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
+    <skip />
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"هنگام باز بودن تنظیمات بلوتوث، <xliff:g id="DEVICE_NAME">%1$s</xliff:g> برای دستگاه‌های اطراف قابل مشاهده است."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"نشانی بلوتوث تلفن: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"نشانی بلوتوث رایانه لوحی: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,16 +154,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"به دستگاهتان اجازه دهید با دستگاه‌های بلوتوث اطراف مرتبط شود"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"به تلفنتان اجازه دهید با دستگاه‌های بلوتوث اطراف مرتبط شود"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"‏غیرفعال کردن انتقال داده ازطریق سخت‌افزار بلوتوث A2DP"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (3966022676505972908) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_title (6001142380445276918) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_message (1524373895333698779) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_confirm (5594859658551707592) -->
-    <skip />
-    <!-- no translation found for bluetooth_disable_hw_offload_dialog_cancel (3663690305043973720) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"‏غیرفعال کردن تخلیه سخت‌افزار بلوتوث LE AUDIO"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"دستگاه بازراه‌اندازی شود؟"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"برای تغییر این تنظیم، باید دستگاه را بازراه‌اندازی کنید."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"بازراه‌اندازی"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"لغو"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"دستگاه‌های ذخیره‌سازی"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"دستگاه‌های برقراری تماس"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"دستگاه‌های دیگر"</string>
@@ -2161,7 +2168,7 @@
     <string name="no_services" msgid="3898812785511572899">"غیر فعال"</string>
     <string name="runningservicedetails_services_title" msgid="11853795112787355">"سرویس‌ها"</string>
     <string name="runningservicedetails_processes_title" msgid="5292271587797234038">"فرآیندها"</string>
-    <string name="service_stop" msgid="5712522600201308795">"توقف"</string>
+    <string name="service_stop" msgid="5712522600201308795">"متوقف کردن"</string>
     <string name="service_manage" msgid="3896322986828332075">"تنظیمات"</string>
     <string name="service_stop_description" msgid="6327742632400026677">"این سرویس توسط برنامهٔ خود سرویس راه‌اندازی شد. توقف آن ممکن است باعث شود برنامه کار نکند."</string>
     <string name="heavy_weight_stop_description" msgid="3086419998820881290">"این برنامه را نمی‌توان به صورت ایمن متوقف کرد. در صورت متوقف کردن آن، ممکن است برخی از کارهای اخیر خود را از دست بدهید."</string>
@@ -2314,6 +2321,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"استفاده از سه‌ضربه برای درشت‌نمایی بخشی از صفحه باعث می‌شود تایپ کردن و دیگر کنش‌ها با تأخیر انجام شود.\n\nدکمه دسترس‌پذیری در صفحه بالای برنامه‌های دیگر شناور است. برای درشت‌نمایی، روی آن ضربه بزنید."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"رفتن به دکمه دسترس‌پذیری"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"استفاده از سه‌ضربه"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"این کار ممکن است باعث کند شدن صفحه‌کلید شود"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"هنگام استفاده از سه‌ضربه برای درشت‌نمایی بخشی از صفحه‌نمایش، ممکن است متوجه مشکلاتی در صفحه‌کلید شوید.\n\nبرای جلوگیری از این مشکلات، می‌توانید میان‌بر درشت‌نمایی را از سه‌ضربه به گزینه دیگری تغییر دهید.\n"<annotation id="link">"تغییر تنظیم"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"درهرصورت ادامه داده شود"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"لغو"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"تنظیمات بزرگ‌نمایی"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"درشت‌نمایی با سه ضربه"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"درشت‌نمایی بااستفاده از میان‌بر"</string>
@@ -2321,10 +2332,24 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"درباره <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"اندازه نمایش و نوشتار"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"تغییر دادن نحوه نمایش نوشتار"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"ایمیل: طرح‌هایی برای ماشین زمان، نسخه ۲"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"‏از: bill@email.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"‏صبح به‌خیر! پیروی مکالمه قبلی ما، می‌خواهم پیشرفت طرح توسعه ماشین زمان شما را بررسی کنم. آیا می‌توانید امسال نمونه اولیه‌ای برای نمایش آزمایشی در E3 آماده کنید؟"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"بازنشانی"</string>
+    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
+    <skip />
+    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
+    <skip />
     <string name="accessibility_screen_option" msgid="8465307075278878145">"گزینه‌ها"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"بزرگ کردن روی صفحه"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"برای بزرگ‌نمایی، ۳ بار ضربه بزنید"</string>
@@ -2381,10 +2406,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"درباره دکمه دسترس‌پذیری و اشاره بیشتر بدانید"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"درحال استفاده از دکمه دسترس‌پذیری هستید. اشاره موردنظر با پیمایش ۳دکمه‌ای دردسترس نیست."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"دسترسی سریع به ویژگی‌های دسترس‌پذیری"</string>
-    <!-- no translation found for accessibility_button_gesture_description (7507097717493960397) -->
-    <skip />
-    <!-- no translation found for accessibility_button_description (3052248616240648249) -->
-    <skip />
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"برای شروع به کار"</b>\n"۱. به تنظیمات دسترس‌پذیری بروید\n۲. یکی‌از ویژگی‌ها را انتخاب کنید و روی میان‌بر ضربه بزنید\n۳. انتخاب کنید که برای دسترسی به ویژگی می‌خواهید از دکمه استفاده کنید یا از اشاره"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"برای شروع کار"</b>\n"۱. به تنظیمات دسترس‌پذیری بروید\n۲. یکی از ویژگی‌ها را انتخاب کنید و روی میان‌بر ضربه بزنید\n۳. دکمه موردنظر را برای دسترسی به آن ویژگی انتخاب کنید"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"استفاده از دکمه یا اشاره"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"مکان"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"اندازه"</string>
@@ -2445,7 +2468,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"تنظیم غیرفعال است چون دستگاه روی بی‌صدا تنظیم شده است"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"تماس‌ها"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"اعلان‌ها و هشدارها"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"لمس تعاملی"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"لامسه تعاملی"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"استفاده از لرزش و لمس"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"لرزش هشدار"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"لرزش رسانه‌ها"</string>
@@ -2488,8 +2511,19 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"سمعک‌ها"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"هیچ سمعکی متصل نشده است"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"افزودن سمعک‌ها"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"برای مرتبط‌سازی سمعکتان، دستگاهتان را در صفحه بعد پیدا کنید و روی آن ضربه بزنید. مطمئن شوید سمعکتان در حالت مرتبط‌سازی باشد."</string>
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
+    <skip />
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> فعال"</string>
+    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
+    <skip />
+    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
+    <skip />
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> سمعک ذخیره‌شده</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> سمعک ذخیره‌شده</item>
@@ -2586,7 +2620,7 @@
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"این عملکرد می‌تواند با برنامه یا حسگری سخت‌افزاری تعاملاتتان را ردیابی کند و ازطرف شما با برنامه‌ها تعامل داشته باشد."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"مجاز بودن"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"مجاز نبودن"</string>
-    <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"توقف"</string>
+    <string name="accessibility_dialog_button_stop" msgid="7295448112784528196">"متوقف کردن"</string>
     <string name="accessibility_dialog_button_cancel" msgid="4813234247237851121">"لغو"</string>
     <string name="disable_service_title" msgid="2909108731776956167">"«<xliff:g id="SERVICE">%1$s</xliff:g>» متوقف شود؟"</string>
     <string name="disable_service_message" msgid="4814173941688548016">"با زدن روی «<xliff:g id="STOP">%1$s</xliff:g>»، «<xliff:g id="SERVICE">%2$s</xliff:g>» متوقف می‌شود."</string>
@@ -3409,7 +3443,7 @@
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"برنامه پرداخت پیش‌فرض"</string>
     <string name="nfc_default_payment_footer" msgid="978535088340021360">"برای انجام پرداخت بااستفاده از برنامه پرداخت، پشت دستگاه را جلوی درگاه پرداخت نگه دارید"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"بیشتر بدانید"</string>
-    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"نمایه کاری به‌عنوان برنامه پرداخت پیش‌فرض تنظیم شود؟"</string>
+    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"به‌طور پیش‌فرض با برنامه کاری پرداخت کنید؟"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"برای پرداخت بااستفاده از برنامه کاری:"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"باید نمایه کاری روشن باشد."</string>
     <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"باید پین، الگو، یا گذرواژه محل کارتان را (درصورت وجود) وارد کنید."</string>
@@ -3433,8 +3467,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"در پایانه «غیرلمسی»، با <xliff:g id="APP_0">%1$s</xliff:g> پرداخت شود.\n\nاین برنامه به‌عنوان برنامه پرداخت پیش‌فرض، جایگزین <xliff:g id="APP_1">%2$s</xliff:g> می‌شود."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"تنظیم پیش‌فرض"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"به‌روزرسانی"</string>
-    <!-- no translation found for nfc_work_text (2496515165821504077) -->
-    <skip />
+    <string name="nfc_work_text" msgid="2496515165821504077">"محل کار"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"محدودیت‌ها"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"حذف محدودیت‌ها"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"تغییر پین"</string>
@@ -3606,7 +3639,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"مزاحم نشوید، قطع، وقفه، توقف"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"‏اطراف، مکان، سابقه، گزارش، GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"حساب، افزودن حساب، نمایه کاری، افزودن حساب"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"حساب، افزودن حساب، نمایه کاری، اضافه کردن حساب، برداشتن، حذف"</string>
     <string name="keywords_users" msgid="3497517660077620843">"محدودیت، محدود، محدودشده"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"تصحیح نوشتار، تصحیح، صدا، لرزش، خودکار، زبان، اشاره، پیشنهاد دادن، پیشنهاد، زمینه، توهین‌آمیز، کلمه، نوع، اموجی، بین‌المللی"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"بازنشانی، اولویت‌ها، پیش‌فرض"</string>
@@ -3709,6 +3742,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"صدای راه‌اندازی"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"زیرنویس زنده"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"رسانه زیرنویس خودکار"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"بلندگوی تلفن"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"هدفون سیمی"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"«صدای فضایی» صدایی فراگیر تولید می‌کند که به‌نظر می‌رسد از همه جهات شنیده می‌شود. فقط با بعضی رسانه‌ها سازگار است."</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"خاموش"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"روشن / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"روشن / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> و <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{هیچ‌کدام}=1{۱ زمان‌بندی تنظیم شد}one{# زمان‌بندی تنظیم شده است}other{# زمان‌بندی تنظیم شده است}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"مزاحم نشوید"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"فقط در ارتباط با افراد و برنامه‌های مهم اعلان دریافت کنید"</string>
@@ -4159,6 +4198,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"هیچ‌کدام"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{هیچ‌کدام}=1{۱ مکالمه}one{# مکالمه}other{# مکالمه}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"افرادی که می‌توانند وقفه ایجاد کنند"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"حتی اگر برنامه‌های پیام‌رسانی و تماس نتوانند برایتان اعلان ارسال کنند، افرادی که در اینجا انتخاب می‌کنید همچنان می‌توانند ازطریق این برنامه‌ها با شما ارتباط برقرار کنند"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"تماس‌ها"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"تماس‌ها"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"تماس‌ها"</string>
@@ -4829,8 +4869,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> برنامه می‌تواند از داده نامحدود استفاده کند</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"مشاهده محتوای بیشتر"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"واقعاً داده‌های کاربر محو شود و به رمزگذاری فایل تبدیل شود؟"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"محو کردن داده و تبدیل"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"‏بازنشانی محدودکننده سرعت ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"‏محدودکننده سرعت ShortcutManager بازنشانی شد"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"کنترل اطلاعات روی صفحه قفل"</string>
@@ -5694,8 +5732,14 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"حداکثر محدودیت مصرف اولیه"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"حداکثر محدودیت مصرف"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"اصلاح‌کننده‌ها"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"کنش‌ها"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"پاداش‌ها"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"کنش‌ها (هزینه تولید)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"کنش‌ها (قیمت پایه)"</string>
+    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
+    <skip />
+    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
+    <skip />
+    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
+    <skip />
     <string name="tare_top_activity" msgid="7266560655483385757">"فعالیت برتر"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"اعلان دیده‌شده"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"اعلان دیده‌شده ظرف ۱۵ دقیقه"</string>
@@ -5736,9 +5780,12 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"اکنون راه‌اندازی مجدد شود"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"بعداً راه‌اندازی مجدد شود"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"صدای فراگیر"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="4125762902654875180">"صدای سه‌بعدی به‌این صورت است که انگار از دورتادور شما شنیده می‌شود. فقط با بعضی رسانه‌ها سازگار است."</string>
-    <string name="bluetooth_details_head_tracking_title" msgid="8021583493584244700">"واقعی‌تر کردن صدا"</string>
-    <string name="bluetooth_details_head_tracking_summary" msgid="2093665685644696866">"موقعیت صدا را تغییر می‌دهد تا طبیعی‌تر شنیده شود."</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
+    <skip />
+    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
+    <skip />
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"محدودیت نرخ بارگیری شبکه"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"برای نرخ ورودی پهنای باند شبکه، محدودیت پیکربندی کنید. این محدودیت بر همه شبکه‌هایی که اتصال اینترنت ارائه می‌دهند اعمال می‌شود."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"پیکربندی محدودیت نرخ بارگیری شبکه"</string>

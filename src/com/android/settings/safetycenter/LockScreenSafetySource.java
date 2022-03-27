@@ -62,7 +62,8 @@ public final class LockScreenSafetySource {
         final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfPasswordQualityIsSet(context, userId);
         final PendingIntent pendingIntent = createPendingIntent(context,
-                screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent());
+                screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(
+                        SettingsEnums.SAFETY_CENTER));
         final IconAction gearMenuIconAction = createGearMenuIconAction(context,
                 screenLockPreferenceDetailsUtils);
         final boolean enabled =
@@ -100,8 +101,7 @@ public final class LockScreenSafetySource {
     /** Notifies Safety Center of a change in lock screen settings. */
     public static void onLockScreenChange(Context context) {
         setSafetySourceData(
-                context,
-                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
+                context, new ScreenLockPreferenceDetailsUtils(context),
                 new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build());
 
         // Also send refreshed safety center data for biometrics, since changing lockscreen settings
@@ -114,7 +114,8 @@ public final class LockScreenSafetySource {
         return screenLockPreferenceDetailsUtils.shouldShowGearMenu() ? new IconAction(
                 IconAction.ICON_TYPE_GEAR,
                 createPendingIntent(context,
-                        screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent()))
+                        screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
+                                SettingsEnums.SAFETY_CENTER)))
                 : null;
     }
 
