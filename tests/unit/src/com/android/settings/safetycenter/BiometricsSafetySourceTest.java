@@ -40,7 +40,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
-import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -442,7 +441,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
     }
 
     @Test
@@ -460,7 +459,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
     }
 
     @Test
@@ -478,7 +477,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
     @Test
@@ -495,7 +494,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
     }
 
     @Test
@@ -512,7 +511,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
     @Test
@@ -529,7 +528,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
     }
 
     @Test
@@ -546,7 +545,7 @@ public class BiometricsSafetySourceTest {
                 any(), eq(BiometricsSafetySource.SAFETY_SOURCE_ID), captor.capture(), any());
         SafetySourceStatus safetySourceStatus = captor.getValue().getStatus();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
     private void assertSafetySourceDisabledDataSetWithSingularSummary(String expectedTitleResName,
@@ -606,7 +605,7 @@ public class BiometricsSafetySourceTest {
         assertThat(safetySourceStatus.getSummary().toString()).isEqualTo(expectedSummary);
         assertThat(safetySourceStatus.isEnabled()).isFalse();
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
 
         final Intent clickIntent = safetySourceStatus.getPendingIntent().getIntent();
         assertThat(clickIntent).isNotNull();
