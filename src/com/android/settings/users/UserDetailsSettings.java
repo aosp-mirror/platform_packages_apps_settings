@@ -297,7 +297,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
-                        : R.string.user_exit_guest_title);
+                        : com.android.settingslib.R.string.guest_exit_guest);
                 if (mGuestUserAutoCreated) {
                     mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
                 }
