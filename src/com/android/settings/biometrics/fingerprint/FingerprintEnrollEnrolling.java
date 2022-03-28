@@ -376,7 +376,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 break;
 
             case STAGE_LEFT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_left_edge_title);
                 if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsLeftEdgeLottie = true;
                     setDescriptionText("");
@@ -395,7 +395,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 }
                 break;
             case STAGE_RIGHT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_right_edge_title);
                 if (!mHaveShownUdfpsRightEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsRightEdgeLottie = true;
                     setDescriptionText("");
