@@ -728,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"หากคุณป้อนรูปแบบไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"หากคุณป้อน PIN ไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"หากคุณป้อนรหัสผ่านไม่ถูกต้องในครั้งถัดไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบข้อมูลในอุปกรณ์เครื่องนี้"</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"ใช้ความพยายามหลายครั้งเกินไป ระบบจะลบผู้ใช้รายนี้"</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ป้อนไม่ถูกต้องหลายครั้งเกินไป ระบบจะลบโปรไฟล์งานนี้ รวมถึงข้อมูลในโปรไฟล์"</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"ปิด"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_1">%d</xliff:g> ตัว</item>
       <item quantity="one">ต้องมีอักขระอย่างน้อย <xliff:g id="COUNT_0">%d</xliff:g> ตัว</item>
@@ -2328,8 +2324,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"เปลี่ยนวิธีแสดงข้อความ"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"เรื่อง: การออกแบบบอลลูน"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"จาก: Bill"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"สวัสดี\n\nเราอยากรู้ว่าการออกแบบมีความคืบหน้าอย่างไรบ้าง และจะพร้อมใช้งานก่อนเริ่มสร้างบอลลูนใหม่ใช่ไหม"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"รีเซ็ตการตั้งค่า"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"รีเซ็ตขนาดการแสดงผลและข้อความหรือไม่"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"ขนาดการแสดงผลและการกำหนดค่าข้อความของคุณจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของโทรศัพท์"</string>
@@ -3371,14 +3366,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"แชร์โทรศัพท์โดยการเพิ่มผู้ใช้ใหม่ ผู้ใช้แต่ละรายจะมีพื้นที่ส่วนตัวในโทรศัพท์ของคุณสำหรับหน้าจอหลักที่กำหนดเอง บัญชี แอป การตั้งค่า และอื่นๆ"</string>
     <string name="user_list_title" msgid="1387379079186123404">"ผู้ใช้และโปรไฟล์"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"เพิ่มผู้ใช้หรือโปรไฟล์"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"เพิ่มผู้ใช้"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"โปรไฟล์ที่ถูกจำกัด"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"ไม่ได้ตั้งค่า"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"ไม่ได้ตั้งค่า - โปรไฟล์ที่ถูกจำกัด"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"ไม่ได้ตั้งค่า - โปรไฟล์งาน"</string>
     <string name="user_admin" msgid="4024553191395768119">"ผู้ดูแลระบบ"</string>
     <string name="user_you" msgid="3070562015202859996">"คุณ (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"คุณสามารถเพิ่มผู้ใช้ได้สูงสุดถึง <xliff:g id="USER_COUNT">%1$d</xliff:g> คน"</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"เฉพาะเจ้าของแท็บเล็ตเท่านั้นที่สามารถจัดการผู้ใช้ได้"</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"เฉพาะเจ้าของโทรศัพท์เท่านั้นที่สามารถจัดการผู้ใช้ได้"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"โปรไฟล์ที่ถูกจำกัดไม่สามารถเพิ่มบัญชีได้"</string>
@@ -3398,9 +3393,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"กำลังเพิ่มผู้ใช้ใหม่…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"ลบผู้ใช้"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"ลบ"</string>
-    <string name="user_guest" msgid="4545590092001460388">"ผู้ใช้ชั่วคราว"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"นำผู้ใช้ชั่วคราวออก"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"ต้องการนำผู้ใช้ชั่วคราวออกไหม"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ระบบจะลบแอปและข้อมูลทั้งหมดในเซสชันนี้"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"นำออก"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"เปิดการโทร"</string>
@@ -4407,7 +4399,12 @@
       <item quantity="other">แอปที่ไม่ได้ใช้ <xliff:g id="COUNT_1">%d</xliff:g> รายการ</item>
       <item quantity="one">แอปที่ไม่ได้ใช้ <xliff:g id="COUNT_0">%d</xliff:g> รายการ</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"นำสิทธิ์ออกและเพิ่มพื้นที่ว่าง"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"แอปทั้งหมด"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"แอปที่ติดตั้ง"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -4918,7 +4915,7 @@
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"ลองใช้ปุ่มหน้าแรกใหม่"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"เปิดท่าทางสัมผัสใหม่เพื่อสลับแอป"</string>
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ความปลอดภัยและกรณีฉุกเฉิน"</string>
-    <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS ฉุกเฉิน ข้อมูลทางการแพทย์ การแจ้งเตือน"</string>
+    <string name="emergency_dashboard_summary" msgid="401033951074039302">"SOS ฉุกเฉิน, ข้อมูลทางการแพทย์, การแจ้งเตือน"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"การนำทางด้วยท่าทางสัมผัส"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ไปที่หน้าแรกโดยปัดขึ้นจากด้านล่างของหน้าจอ สลับแอปโดยปัดขึ้นจากด้านล่างค้างไว้แล้วปล่อย กลับโดยปัดจากขอบด้านซ้ายหรือขวา"</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"การนำทางแบบ 3 ปุ่ม"</string>
@@ -5563,6 +5560,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"เวลาได้รับสิทธิ์ไม่มีวันหมดอายุ"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"อนุญาตการซ้อนทับบนหน้าจอในการตั้งค่า"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"อนุญาตแอปที่แสดงเหนือแอปอื่นๆ ได้เพื่อวางซ้อนหน้าจอการตั้งค่า"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"สื่อ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"ปักหมุดโปรแกรมเล่นสื่อ"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"โปรแกรมเล่นสื่อจะยังเปิดอยู่ในการตั้งค่าด่วนเพื่อกลับมาเล่นต่อได้โดยเร็ว"</string>
@@ -5648,7 +5649,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ใช้การปักหมุดแอป"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ใช้ตัวเลือกสำหรับนักพัฒนาซอฟต์แวร์"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"ใช้บริการพิมพ์"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"เปิดใช้ผู้ใช้หลายคน"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ใช้การแก้ไขข้อบกพร่องผ่าน Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ใช้ค่ากำหนดไดรเวอร์กราฟิก"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"ใช้โหมดประหยัดแบตเตอรี่"</string>
@@ -5750,22 +5752,23 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"แสดงตัวอย่าง"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"เลือกโปรแกรมรักษาหน้าจอ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"แสดงข้อมูลเพิ่มเติม"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"แสดงเวลา วันที่ และสภาพอากาศในโปรแกรมรักษาหน้าจอ"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"การตั้งค่าเพิ่มเติม"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"ปรับแต่งโปรแกรมรักษาหน้าจอ"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"เลือกสิ่งที่คุณจะเห็นในหน้าจอเมื่อไม่ได้ใช้งานอุปกรณ์"</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"ปรับแต่ง"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ต้องรีบูตเพื่อเปิดใช้การสนับสนุนแบบอิสระ"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ต้องรีบูตเพื่อบังคับให้จอแสดงผลสำรองใช้โหมดเดสก์ท็อป"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"รีบูตเลย"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"รีบูตภายหลัง"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"เสียงรอบทิศทาง"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
     <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"เสียงจากสื่อที่เข้ากันได้จะสมจริงยิ่งขึ้น"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"การติดตามการเคลื่อนไหวของศีรษะ"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"เสียงจะเปลี่ยนตามการขยับศีรษะเพื่อให้ฟังดูเป็นธรรมชาติมากยิ่งขึ้น"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ขีดจำกัดอัตราการดาวน์โหลดของเครือข่าย"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"กำหนดค่าขีดจำกัดอัตราแบนด์วิดท์สำหรับการดาวน์โหลดขั้นต่ำและสูงสุดของเครือข่ายซึ่งใช้กับเครือข่ายทั้งหมดที่ให้การเชื่อมต่ออินเทอร์เน็ต"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"กำหนดค่าขีดจำกัดอัตราการดาวน์โหลดของเครือข่าย"</string>
