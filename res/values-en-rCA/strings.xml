@@ -734,10 +734,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"If you enter an incorrect pattern on the next attempt, your work profile and its data will be deleted"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"If you enter an incorrect PIN on the next attempt, your work profile and its data will be deleted"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"If you enter an incorrect password on the next attempt, your work profile and its data will be deleted"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Too many incorrect attempts. This device\'s data will be deleted."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Too many incorrect attempts. This user will be deleted."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Too many incorrect attempts. This work profile and its data will be deleted."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Dismiss"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
       <item quantity="one">Must contain at least <xliff:g id="COUNT_0">%d</xliff:g> character</item>
@@ -2336,20 +2332,13 @@
     <skip />
     <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
     <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Reset settings"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Reset display size and text?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Your display size and text preferences will reset to the phone’s original settings"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Reset"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Any weekend plans?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Heading to the beach. Want to join?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Options"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom in on screen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tap 3 times to zoom"</string>
@@ -3391,14 +3380,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Share your phone by adding new users. Each user has a personal space on your phone for custom Home screens, accounts, apps, settings and more."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Users &amp; profiles"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Add user or profile"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Add user"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Restricted profile"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Not set up"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Not set up - Restricted profile"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Not set up – Work profile"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"You (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"You can add up to <xliff:g id="USER_COUNT">%1$d</xliff:g> users"</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Only the tablet\'s owner can manage users."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Only the phone\'s owner can manage users."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Restricted profiles cannot add accounts"</string>
@@ -3418,9 +3407,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Adding new user…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Delete user"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Delete"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Guest"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Remove guest"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Remove guest?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"All apps and data in this session will be deleted."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Remove"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Turn on phone calls"</string>
@@ -4427,7 +4413,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> unused apps</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> unused app</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Remove permissions and free up space"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"All apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installed apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
@@ -5583,6 +5574,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Lease never expires."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Allow screen overlays on settings"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Allow apps that can display over other apps to overlay settings screens"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pin media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"To quickly resume playback, media player stays open in Quick Settings"</string>
@@ -5668,7 +5663,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Use app pinning"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Use Developer options"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Use print service"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Enable multiple users"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Use wireless debugging"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Use graphics driver preferences"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Use Battery Saver"</string>
@@ -5770,22 +5766,23 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Preview"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Choose a screen saver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Show additional information"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Display time, date and weather on the screen saver"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"More settings"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Customise your screen saver"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Choose what you’ll see on your screen when your device is not in use."</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"Customise"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"A reboot is required to enable freeform support."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"A reboot is required to force desktop mode on secondary displays."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reboot now"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reboot later"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Spatial audio"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
     <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Audio from compatible media becomes more immersive"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Head tracking"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Audio changes as you move your head to sound more natural"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Network download rate limit"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configure the network bandwidth ingress rate limit which is applied to all networks that provide Internet connectivity."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configure network download rate limit"</string>
