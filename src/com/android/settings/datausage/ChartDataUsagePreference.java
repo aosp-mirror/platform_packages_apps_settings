@@ -73,21 +73,20 @@ public class ChartDataUsagePreference extends Preference {
     }
 
     private void onUpdateView() {
-        UsageView chart = mUsageView;
-        if ((chart == null) || (mNetworkCycleChartData == null)) {
+        if ((mUsageView == null) || (mNetworkCycleChartData == null)) {
             return;
         }
         final int top = getTop();
-        chart.clearPaths();
-        chart.configureGraph(toInt(mEnd - mStart), top);
-        calcPoints(chart, mNetworkCycleChartData.getUsageBuckets());
-        setupContentDescription(chart, mNetworkCycleChartData.getUsageBuckets());
-        chart.setBottomLabels(new CharSequence[] {
+        mUsageView.clearPaths();
+        mUsageView.configureGraph(toInt(mEnd - mStart), top);
+        calcPoints(mUsageView, mNetworkCycleChartData.getUsageBuckets());
+        setupContentDescription(mUsageView, mNetworkCycleChartData.getUsageBuckets());
+        mUsageView.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),
                 Utils.formatDateRange(getContext(), mEnd, mEnd),
         });
 
-        bindNetworkPolicy(chart, mPolicy, top);
+        bindNetworkPolicy(mUsageView, mPolicy, top);
     }
 
     public int getTop() {
