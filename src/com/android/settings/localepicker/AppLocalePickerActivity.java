@@ -18,9 +18,11 @@ package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
 import android.app.LocaleManager;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,6 +33,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
@@ -45,6 +48,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private String mPackageName;
     private LocalePickerWithRegion mLocalePickerWithRegion;
     private AppLocaleDetails mAppLocaleDetails;
+    private Context mContextAsUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +65,21 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             finish();
             return;
         }
+        int uid = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
+        if (uid == -1) {
+            Log.w(TAG, "Unexpected user id");
+            finish();
+        }
+        UserHandle userHandle = UserHandle.getUserHandleForUid(uid);
+        mContextAsUser = createContextAsUser(userHandle, 0);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
-                this, AppLocalePickerActivity.this, false /* translate only */, mPackageName);
+                mContextAsUser,
+                AppLocalePickerActivity.this,
+                false /* translate only */,
+                mPackageName);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
 
         // Launch Locale picker part.
@@ -107,7 +121,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
-        LocaleManager localeManager = getSystemService(LocaleManager.class);
+        LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
         if (localeManager == null) {
             Log.w(TAG, "LocaleManager is null, cannot set default app locale");
             return;
