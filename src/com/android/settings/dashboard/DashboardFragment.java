@@ -558,7 +558,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setTitle(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 
@@ -571,7 +571,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setSummary(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 }

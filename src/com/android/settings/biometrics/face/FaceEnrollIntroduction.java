@@ -225,7 +225,7 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     @Override
     protected String getDescriptionDisabledByAdmin() {
         DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
-        return devicePolicyManager.getString(
+        return devicePolicyManager.getResources().getString(
                 FACE_UNLOCK_DISABLED,
                 () -> getString(R.string.security_settings_face_enroll_introduction_message_unlock_disabled));
     }
