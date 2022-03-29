@@ -728,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാറ്റേണാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പിൻ ആണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാസ്‌വേഡാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"ഡിസ്‌മിസ് ചെയ്യുക"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">കുറഞ്ഞത് <xliff:g id="COUNT_1">%d</xliff:g> പ്രതീകങ്ങൾ അടങ്ങിയിരിക്കണം</item>
       <item quantity="one">കുറഞ്ഞത് <xliff:g id="COUNT_0">%d</xliff:g> പ്രതീകം അടങ്ങിയിരിക്കണം</item>
@@ -2328,8 +2324,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"ടെക്‌സ്‌റ്റ് പ്രദർശിപ്പിക്കുന്ന രീതി മാറ്റുക"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"വിഷയം: ഹോട്ട് എയർ ബലൂൺ ഡിസൈനുകൾ"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"അയച്ചത്: രാമൻ"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"ഗുഡ് മോണിംഗ്!\n\nഡിസൈനുകളുടെ രൂപകൽപ്പന എന്തായി എന്ന് പരിശോധിക്കാൻ ഞാൻ ആഗ്രഹിക്കുന്നു. ഞങ്ങൾ പുതിയ ബലൂണുകൾ നിർമ്മിക്കാൻ തുടങ്ങുന്നതിന് മുമ്പ് അവ തയ്യാറാകുമോ?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"ക്രമീകരണം റീസെറ്റുചെയ്യുക"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ഡിസ്പ്ലേ വലുപ്പവും ടെക്സ്റ്റും റീസെറ്റ് ചെയ്യണോ?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"നിങ്ങളുടെ ഡിസ്പ്ലേ വലുപ്പവും ടെക്സ്റ്റ് മുൻഗണനകളും ഫോണിന്റെ ഒറിജിനൽ ക്രമീകരണത്തിലേക്ക് റീസെറ്റ് ചെയ്യും"</string>
@@ -3371,14 +3366,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"പുതിയ ഉപയോക്താക്കളെ ചേർത്ത് നിങ്ങളുടെ ഫോൺ പങ്കിടുക. ഇഷ്‌ടാനുസൃത ഹോം സ്‌ക്രീനുകൾ, അക്കൗണ്ടുകൾ, ആപ്പുകൾ, ക്രമീകരണം എന്നിവയ്ക്കായും മറ്റും ഓരോ ഉപയോക്താവിനും നിങ്ങളുടെ ഫോണിൽ വ്യക്തിപരമായ ഇടമുണ്ട്."</string>
     <string name="user_list_title" msgid="1387379079186123404">"ഉപയോക്താക്കളും പ്രൊഫൈലുകളും"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"ഉപയോക്താവിനെയോ പ്രൊഫൈലോ ചേർക്കുക"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"ഉപയോക്താവിനെ ചേര്‍ക്കുക"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"നിയന്ത്രിത പ്രൊഫൈൽ"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"സജ്ജീകരിച്ചിട്ടില്ല"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"സജ്ജീകരിച്ചിട്ടില്ല - നിയന്ത്രിത പ്രൊഫൈൽ"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"സജ്ജീകരിച്ചിട്ടില്ല - ഔദ്യോഗിക പ്രൊഫൈൽ"</string>
     <string name="user_admin" msgid="4024553191395768119">"അഡ്‌മിന്‍"</string>
     <string name="user_you" msgid="3070562015202859996">"നിങ്ങൾ (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"<xliff:g id="USER_COUNT">%1$d</xliff:g> ഉപയോക്താക്കളെ വരെ നിങ്ങൾക്ക് ചേർക്കാം"</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"ടാബ്‌ലെറ്റ് ഉടമയ്‌ക്ക് മാത്രമേ ഉപയോക്താക്കളെ നിയന്ത്രിക്കാനാകൂ."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"ഫോൺ ഉടമയ്‌ക്ക് മാത്രമേ ഉപയോക്താക്കളെ നിയന്ത്രിക്കാനാകൂ."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"നിയന്ത്രിത പ്രൊഫൈലുകൾക്ക് അക്കൗണ്ടുകൾ ചേർക്കാനാകില്ല"</string>
@@ -3398,9 +3393,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"പുതിയ ഉപയോക്താവിനെ ചേർക്കുന്നു…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"ഉപയോക്താവിനെ ഇല്ലാതാക്കുക"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"ഇല്ലാതാക്കുക"</string>
-    <string name="user_guest" msgid="4545590092001460388">"അതിഥി"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"അതിഥിയെ നീക്കംചെയ്യുക"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"അതിഥിയെ നീക്കംചെയ്യണോ?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"ഈ സെഷനിലെ എല്ലാ ആപ്പുകളും ഡാറ്റയും ഇല്ലാതാക്കും."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"നീക്കംചെയ്യുക"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ഫോൺ കോളുകൾ ഓണാക്കുക"</string>
@@ -4407,7 +4399,12 @@
       <item quantity="other">ഉപയോഗിക്കാത്ത <xliff:g id="COUNT_1">%d</xliff:g> ആപ്പുകൾ</item>
       <item quantity="one">ഉപയോഗിക്കാത്ത <xliff:g id="COUNT_0">%d</xliff:g> ആപ്പ്</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"അനുമതികൾ നീക്കം ചെയ്‌ത് ഇടം സൃഷ്‌ടിക്കുക"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"എല്ലാ ആപ്പുകളും"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ഇൻസ്‌റ്റാൾ ചെയ്‌ത ആപ്പുകൾ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ഇൻസ്‌റ്റ‌ന്റ് ആപ്പ്"</string>
@@ -5563,6 +5560,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"ലീസ് ഒരിക്കലും കാലഹരണപ്പെടില്ല."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings ആപ്പിൽ സ്‌ക്രീൻ ഓവർലേ അനുവദിക്കുക"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings സ്‌ക്രീനുകളിൽ ഓവർലേ ചെയ്യാൻ മറ്റ് ആപ്പുകൾക്ക് മുകളിൽ കാണിക്കാനാകുന്ന ആപ്പുകളെ അനുവദിക്കുക"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"മീഡിയ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"മീഡിയ പ്ലേയർ പിൻ ചെയ്യുക"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"പ്ലേബാക്ക് വേഗത്തിൽ പുനരാരംഭിക്കാൻ, ദ്രുത ക്രമീകരണത്തിൽ മീഡിയ പ്ലേയർ തുറന്ന നിലയിൽ തുടരും"</string>
@@ -5648,7 +5649,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ആപ്പ് പിൻ ചെയ്യൽ ഉപയോഗിക്കുക"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ഡെവലപ്പർ ഓ‌പ്ഷനുകൾ ഉപയോഗിക്കുക"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"പ്രിന്റ് സേവനം ഉപയോഗിക്കുക"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"ഒന്നിലധികം ഉപയോക്താക്കളെ പ്രവർത്തനക്ഷമമാക്കുക"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"വയർലസ് ഡീബഗ്ഗിംഗ് ഉപയോഗിക്കുക"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ഗ്രാഫിക്‌സ് ഡ്രൈവർ മുൻഗണനകൾ ഉപയോഗിക്കുക"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"ബാറ്ററി ലാഭിക്കൽ ഉപയോഗിക്കുക"</string>
@@ -5750,16 +5752,20 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"പ്രിവ്യൂ ചെയ്യുക"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"ഒരു സ്ക്രീൻ സേവർ തിരഞ്ഞെടുക്കുക"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"അധിക വിവരങ്ങൾ കാണിക്കുക"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"സമയം, തീയതി, കാലാവസ്ഥ എന്നിവ സ്ക്രീൻ സേവറിൽ പ്രദർശിപ്പിക്കുന്നു"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"കൂടുതൽ ക്രമീകരണം"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"നിങ്ങളുടെ സ്ക്രീൻ സേവർ ഇഷ്‌ടാനുസൃതമാക്കുക"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"നിങ്ങളുടെ ഉപകരണം ഉപയോഗിക്കാത്തപ്പോൾ സ്ക്രീനിൽ എന്ത് കാണണമെന്ന് തിരഞ്ഞെടുക്കുക."</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"ഇഷ്‌ടാനുസൃതമാക്കുക"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"ഫ്രീംഫോം പിന്തുണ പ്രവർത്തനക്ഷമമാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"ദ്വിതീയ ഡിസ്പ്ലേകളെ നിർബന്ധിതമായി ഡെസ്ക്ക്ടോപ്പ് മോഡിലാക്കാൻ റീബൂട്ട് ചെയ്യേണ്ടതുണ്ട്."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ഇപ്പോൾ റീബൂട്ട് ചെയ്യുക"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"പിന്നീട് റീബൂട്ട് ചെയ്യുക"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"സ്പേഷ്യൽ ഓഡിയോ"</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
+    <skip />
     <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
     <skip />
     <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
