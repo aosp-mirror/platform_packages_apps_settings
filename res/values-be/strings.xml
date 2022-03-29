@@ -87,18 +87,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"У вас няма дазволу на змяненне налад Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спалучыць новую прыладу"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
-    <skip />
-    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спалучыце для іншага вуха"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Падключаны слыхавы апарат для левага вуха.\n\nКаб спалучыць апарат для правага вуха, уключыце яго."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Падключаны слыхавы апарат для правага вуха.\n\nКаб спалучыць апарат для левага вуха, уключыце яго."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Спалучыць для правага вуха"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Спалучыць для левага вуха"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Звязанае"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Пакуль Bluetooth уключаны, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> бачная для прылад, якія знаходзяцца побач."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Адрас Bluetooth тэлефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Адрас Bluetooth планшэта: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -744,10 +738,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Калі вы яшчэ раз уведзяце няправільны ўзор разблакіроўкі, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Калі вы яшчэ раз уведзяце няправільны PIN-код, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Калі вы яшчэ раз уведзяце няправільны пароль, ваш працоўны профіль і звязаныя з ім даныя будуць выдалены"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Занадта шмат няўдалых спроб. Даныя з гэтай прылады будуць выдалены."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Занадта шмат няўдалых спроб. Гэты карыстальнік будзе выдалены."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Занадта шмат няўдалых спроб. Гэты працоўны профіль і звязаныя з ім даныя будуць выдалены."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Адхіліць"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвал</item>
       <item quantity="few">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвалы</item>
@@ -1120,7 +1110,7 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Выкарыстоўваць сістэмныя сертыфікаты"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Не даваць"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Не правяраць"</string>
-    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Уносіць сетку ў спіс давераных падчас першага выкарыстання"</string>
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Давяраць падчас першага выкарыстання"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Імя сеткі занадта доўгае."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Неабходна ўказаць дамен."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Патрэбны сертыфікат."</string>
@@ -2371,14 +2361,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Павелічэнне часткі экрана з дапамогай трайнога націскання прыпыняе ўвод тэксту і іншыя дзеянні.\n\nПлаваючая кнопка спецыяльных магчымасцей узнікае на экране паверх іншых праграм. Націсніце, каб павялічыць."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Перайсці на кнопку спецыяльных магчымасцей"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Скарыстаць трайное націсканне"</string>
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_title (8484669851397296597) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_message (2008671502848936410) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_positive_button (8712304035901450010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_negative_button (2028849736366584733) -->
-    <skip />
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"У выніку можа быць запаволена праца клавіятуры"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Пры выкарыстанні трайнога націску для павелічэння часткі экрана могуць узнікнуць праблемы з клавіятурай.\n\nКаб іх пазбегнуць, замест трайнога націску вы можаце задаць іншую хуткую каманду для павелічэння.\n"<annotation id="link">"Змяніць наладу"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Усё роўна працягнуць"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Скасаваць"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налады павелічэння"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Павялічваць трайным дотыкам"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Павялічваць спалучэннем клавіш"</string>
@@ -2386,24 +2372,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Інфармацыя пра службу \"<xliff:g id="SERVICE">%1$s</xliff:g>\""</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Памер і тэкст дысплэя"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Змяніць налады паказу тэксту"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тэма: Дызайн паветраных шароў"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Ад каго: Біл"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добрай раніцы!\n\nМне хацелася б ведаць, як ідуць справы з праектамі. Ці будуць яны гатовыя да таго, як мы пачнем выпуск новых паветраных шароў?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Скінуць налады"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Скінуць памер дысплэя і налады тэксту?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Памер вашага дысплэя і параметры тэксту будуць скінуты да першапачатковых налад тэлефона"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Скінуць"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Ёсць планы на выхадныя?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Мы збіраемся на пляж. Ці ёсць жаданне далучыцца?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметры"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Павялічыць маштаб экрана"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Тройчы дакраніцеся, каб змяніць маштаб"</string>
@@ -2461,8 +2438,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Выкарыстанне кнопкі спецыяльных магчымасцей. Гэты жэст недаступны з 3-кнопачнай навігацыяй."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Хуткі доступ да спецыяльных магчымасцей"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Каб пачаць, выканайце наступныя дзеянні:"</b>\n"1. Перайдзіце да налад спецыяльных магчымасцей.\n2. Выберыце патрэбную функцыю і націсніце ярлык.\n3. Выберыце, як вы будзеце атрымліваць доступ да гэтай функцыі: праз кнопку ці праз жэст"</string>
-    <!-- no translation found for accessibility_button_description (1261273371298608222) -->
-    <skip />
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Каб пачаць, выканайце наступныя дзеянні:"</b>\n"1. Перайдзіце да налад спецыяльных магчымасцей.\n2. Выберыце патрэбную функцыю і націсніце ярлык.\n3. Выберыце кнопку для доступу да функцыі"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Скарыстаць кнопку ці жэст"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Месцазнаходжанне"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Памер"</string>
@@ -2566,19 +2542,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слыхавы апарат"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Няма падключаных слыхавых апаратаў"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Дадаць слыхавыя апараты"</string>
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
-    <skip />
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Спалучыце слыхавы апарат"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На наступным экране націсніце на слыхавы апарат. Вам можа спатрэбіцца спалучыць паасобку левы і правы навушнікі.\n\nПераканайцеся, што слыхавы апарат уключаны і гатовы да спалучэння."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Прылада <xliff:g id="DEVICE_NAME">%1$s</xliff:g> актыўная"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, толькі для левага вуха"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, толькі для правага вуха"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, для левага і правага вуха"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one">Захаваны <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слыхавы апарат</item>
       <item quantity="few">Захаваныя <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слыхавыя апараты</item>
@@ -3486,14 +3456,14 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Абагульце свой тэлефон, дадаўшы новых карыстальнікаў. Кожны карыстальнік мае на тэлефоне асабістае месца для размяшчэння сваіх галоўных старонак, уліковых запісаў, праграм, налад і іншага."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Карыстальнікi і профілi"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Дадаць карыстальніка або профіль"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Дадаць карыстальніка"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Абмежаваны профiль"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Не наладжана"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Не наладжаны: абмежаваны профіль"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Не наладжана – Рабочы профіль"</string>
     <string name="user_admin" msgid="4024553191395768119">"Адміністратар"</string>
     <string name="user_you" msgid="3070562015202859996">"Вы (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Вы можаце дадаць да <xliff:g id="USER_COUNT">%1$d</xliff:g> карыстальнікаў"</string>
+    <!-- no translation found for user_add_max_count (3328539978480663740) -->
+    <skip />
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Толькі ўладальнік планшэта можа кіраваць карыстальнікамі."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Толькі ўладальнік тэлефона можа кіраваць карыстальнікамі."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Уладальнiкi профіляў з абмежаваннямi не могуць дадаваць уліковыя запісы"</string>
@@ -3513,9 +3483,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Даданне новага карыстальніка..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Выдалiць карыстальніка"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Выдаліць"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Госць"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Выдаліць госця"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Выдаліць госця?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Усе дадаткі і даныя гэтага сеансу будуць выдаленыя."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Выдаліць"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Уключыць тэлефонныя выклікі"</string>
@@ -3736,8 +3703,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не турбаваць, умешвацца, умяшанне, перапыняць"</string>
     <string name="keywords_app" msgid="7983814237980258061">"аператыўная памяць"</string>
     <string name="keywords_location" msgid="8016374808099706213">"паблізу, месцазнаходжанне, гісторыя, справаздачы, GPS"</string>
-    <!-- no translation found for keywords_accounts (3013897982630845506) -->
-    <skip />
+    <string name="keywords_accounts" msgid="3013897982630845506">"уліковы запіс, дадаць уліковы запіс, працоўны профіль, дадаць уліковы запіс, прыбраць, выдаліць"</string>
     <string name="keywords_users" msgid="3497517660077620843">"абмежаванне, абмяжоўваць, абмежаваны"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"выпраўленне тэксту, правільны, гук, вібрацыя, аўтаматычна, мова, жэст, прапанаваць, прапанова, тэма, абразлівы, слова, набіраць, эмодзі, міжнародны"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"скінуць, параметры, стандартныя"</string>
@@ -4312,8 +4278,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ніякія"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ніводнай}=1{1 размова}one{# размова}few{# размовы}many{# размоў}other{# размовы}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"На што гэты рэжым не распаўсюджваецца"</string>
-    <!-- no translation found for zen_mode_people_footer (7710707353004137431) -->
-    <skip />
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Нават калі праграмы абмену паведамленнямі ці выклікаў не могуць адпраўляць вам апавяшчэнні, карыстальнікі, якіх вы выбераце тут, усё роўна змогуць звязвацца з вамі праз гэтыя праграмы"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Выклікі"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Выклікі"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"выклікі"</string>
@@ -4562,7 +4527,12 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> праграм не выкарыстоўваюцца</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> праграмы не выкарыстоўваецца</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Выдаліць дазволы і вызваліць месца"</string>
+    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Усе праграмы"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Усталяваныя праграмы"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Імгненныя праграмы"</string>
@@ -5770,6 +5740,10 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Бестэрміновая арэнда."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дазволіць экранныя накладкі на Налады"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дазвольце праграмам, якія могуць паказвацца паверх іншых, накладацца на экраны Налад"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Мультымедыя"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Замацаваць медыяпрайгравальнік"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Каб хутка ўзнавіць прайграванне, медыяпрайгравальнік застаецца адкрытым у хуткіх наладах"</string>
@@ -5855,7 +5829,8 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Выкарыстоўваць замацаванне праграмы"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Выкарыстоўваць параметры распрацоўшчыка"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Скарыстаць сэрвіс друку"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Уключыць шматкарыстальніцкі рэжым"</string>
+    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
+    <skip />
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Выкарыстоўваць адладку па Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Выкарыстоўваць налады драйвера графічнай сістэмы"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Выкарыстоўваць рэжым эканоміі зараду"</string>
@@ -5919,10 +5894,8 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Першапачатковае абмежаванне выкарыстання"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Максімальнае абмежаванне выкарыстання"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Мадыфікатары"</string>
-    <!-- no translation found for tare_actions_ctp (5110104015354916401) -->
-    <skip />
-    <!-- no translation found for tare_actions_base_price (3300967942666376589) -->
-    <skip />
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Дзеянні (кошт вытворчасці)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Дзеянні (базісная цана)"</string>
     <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
     <skip />
     <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
@@ -5959,16 +5932,20 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Прагледзець"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберыце экранную застаўку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Паказваць дадатковую інфармацыю"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Паказваць на экраннай застаўцы час, дату і інфармацыю пра надвор\'е"</string>
+    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
+    <skip />
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дадатковыя налады"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Наладзьце экранную застаўку"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Выберыце змесціва, якое будзе паказвацца на экране, калі прылада не выкарыстоўваецца."</string>
+    <!-- no translation found for dream_setup_title (2458303874255396142) -->
+    <skip />
+    <!-- no translation found for dream_setup_description (7508547154038580296) -->
+    <skip />
     <string name="customize_button_title" msgid="1110284655990203359">"Наладзіць"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Каб уключыць падтрымку адвольнай формы, патрабуецца перазагрузка."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Каб прымусова ўключыць на дадатковых дысплэях рэжым працоўнага стала, патрабуецца перазагрузка."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перазагрузіць зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перазагрузіць пазней"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Прасторавы гук"</string>
+    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
+    <skip />
     <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
     <skip />
     <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
