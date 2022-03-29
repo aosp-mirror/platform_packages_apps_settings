@@ -250,6 +250,11 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             mListeningToCategoryChange = false;
         }
+        mControllers.forEach(controller -> {
+            if (controller instanceof BasePreferenceController.UiBlocker) {
+                ((BasePreferenceController) controller).revokeFirstLaunch();
+            }
+        });
     }
 
     @Override
@@ -424,7 +429,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             for (AbstractPreferenceController controller : controllerList) {
                 final String key = controller.getPreferenceKey();
                 final Preference preference = findPreference(key);
-                if (preference != null) {
+                if (preference == null) {
+                    continue;
+                }
+                if (controller instanceof BasePreferenceController.UiBlocker) {
+                    final boolean prefVisible =
+                            ((BasePreferenceController) controller).getSavedPrefVisibility();
+                    preference.setVisible(visible && controller.isAvailable() && prefVisible);
+                } else {
                     preference.setVisible(visible && controller.isAvailable());
                 }
             }
@@ -496,6 +508,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onBlockerWorkFinished(BasePreferenceController controller) {
         mBlockerController.countDown(controller.getPreferenceKey());
+        controller.setUiBlockerFinished(mBlockerController.isBlockerFinished());
     }
 
     protected Preference createPreference(Tile tile) {
@@ -545,7 +558,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setTitle(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 
@@ -558,7 +571,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setSummary(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 }

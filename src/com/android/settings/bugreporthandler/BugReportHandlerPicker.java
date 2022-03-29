@@ -196,10 +196,10 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
                 context.getSystemService(DevicePolicyManager.class);
 
         if (userInfo != null && userInfo.isManagedProfile()) {
-            return devicePolicyManager.getString(WORK_PROFILE_APP_SUBTEXT,
+            return devicePolicyManager.getResources().getString(WORK_PROFILE_APP_SUBTEXT,
                     () -> context.getString(R.string.work_profile_app_subtext));
         }
-        return devicePolicyManager.getString(PERSONAL_PROFILE_APP_SUBTEXT,
+        return devicePolicyManager.getResources().getString(PERSONAL_PROFILE_APP_SUBTEXT,
                 () -> context.getString(R.string.personal_profile_app_subtext));
     }
 

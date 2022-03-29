@@ -111,6 +111,15 @@
         settings:keywords="@string/sound_settings"/>
 
     <!-- Live Caption -110 and Now Playing -105-->
+
+    <!-- Spatial audio -->
+    <Preference
+        android:key="spatial_audio_summary"
+        android:title="@string/spatial_audio_title"
+        android:fragment="com.android.settings.notification.SpatialAudioSettings"
+        android:order="-107"
+        settings:controller="com.android.settings.notification.SpatialAudioParentPreferenceController"/>
+
     <Preference
         android:key="media_controls_summary"
         android:title="@string/media_controls_title"
@@ -153,13 +162,6 @@
         android:persistent="false"
         android:ringtoneType="alarm"
         android:order="-60"/>
-
-    <!-- Spatial audio -->
-    <SwitchPreference
-        android:key="spatial_audio"
-        android:title="@string/spatial_audio_title"
-        android:order="-55"
-        settings:controller="com.android.settings.notification.SpatialAudioPreferenceController"/>
 
     <!-- Dial pad tones -->
     <SwitchPreference
