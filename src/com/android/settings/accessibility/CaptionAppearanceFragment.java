@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
@@ -92,6 +94,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
 
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final View.OnLayoutChangeListener mLayoutChangeListener =
             new View.OnLayoutChangeListener() {
                 @Override
@@ -99,7 +102,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
                         int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     // Remove the listener once the callback is triggered.
                     mPreviewViewport.removeOnLayoutChangeListener(this);
-                    refreshPreviewText();
+                    mHandler.post(() ->refreshPreviewText());
                 }
             };
 
