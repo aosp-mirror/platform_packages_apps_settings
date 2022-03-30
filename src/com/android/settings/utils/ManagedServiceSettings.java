@@ -136,7 +136,8 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                             service.packageName, managedProfileId)) {
-                pref.setSummary(mDpm.getString(WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED,
+                pref.setSummary(mDpm.getResources().getString(
+                        WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED,
                         () -> getString(
                                 R.string.work_profile_notification_access_blocked_summary)));
             }

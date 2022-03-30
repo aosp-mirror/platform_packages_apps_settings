@@ -63,13 +63,13 @@ public final class UserDialogs {
                 .setPositiveButton(R.string.user_delete_button, onConfirmListener)
                 .setNegativeButton(android.R.string.cancel, null);
         if (userInfo.isManagedProfile()) {
-            builder.setTitle(dpm.getString(WORK_PROFILE_CONFIRM_REMOVE_TITLE,
+            builder.setTitle(dpm.getResources().getString(WORK_PROFILE_CONFIRM_REMOVE_TITLE,
                     () -> context.getString(R.string.work_profile_confirm_remove_title)));
             View view = createRemoveManagedUserDialogView(context, removingUserId);
             if (view != null) {
                 builder.setView(view);
             } else {
-                builder.setMessage(dpm.getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+                builder.setMessage(dpm.getResources().getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
                         () -> context.getString(R.string.work_profile_confirm_remove_message)));
             }
         } else if (UserHandle.myUserId() == removingUserId) {
@@ -107,12 +107,14 @@ public final class UserDialogs {
 
         TextView openingParagraph = (TextView)
                 view.findViewById(R.id.delete_managed_profile_opening_paragraph);
-        openingParagraph.setText(devicePolicyManager.getString(WORK_PROFILE_MANAGED_BY,
+        openingParagraph.setText(devicePolicyManager.getResources().getString(
+                WORK_PROFILE_MANAGED_BY,
                 () -> context.getString(
                         R.string.opening_paragraph_delete_profile_unknown_company)));
         TextView closingParagraph = (TextView)
                 view.findViewById(R.id.delete_managed_profile_closing_paragraph);
-        closingParagraph.setText(devicePolicyManager.getString(WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
+        closingParagraph.setText(devicePolicyManager.getResources().getString(
+                WORK_PROFILE_CONFIRM_REMOVE_MESSAGE,
                 () -> context.getString(R.string.work_profile_confirm_remove_message)));
 
         CharSequence appLabel = packageManager.getApplicationLabel(mdmApplicationInfo);

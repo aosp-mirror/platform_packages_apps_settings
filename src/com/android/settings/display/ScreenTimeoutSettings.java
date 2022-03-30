@@ -223,7 +223,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
 
     @VisibleForTesting
     void setupDisabledFooterPreference() {
-        final String textDisabledByAdmin = mDevicePolicyManager.getString(
+        final String textDisabledByAdmin = mDevicePolicyManager.getResources().getString(
                 OTHER_OPTIONS_DISABLED_BY_ADMIN, () -> getResources().getString(
                         R.string.admin_disabled_other_options));
         final String textMoreDetails = getResources().getString(R.string.admin_more_details);

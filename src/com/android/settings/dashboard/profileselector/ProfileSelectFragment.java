@@ -189,11 +189,11 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
                 getContext().getSystemService(DevicePolicyManager.class);
 
         if (position == WORK_TAB) {
-            return devicePolicyManager.getString(WORK_CATEGORY_HEADER,
+            return devicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
                     () -> getContext().getString(R.string.category_work));
         }
 
-        return devicePolicyManager.getString(PERSONAL_CATEGORY_HEADER,
+        return devicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
                 () -> getContext().getString(R.string.category_personal));
     }
 

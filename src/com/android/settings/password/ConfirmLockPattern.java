@@ -16,11 +16,11 @@
 
 package com.android.settings.password;
 
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PATTERN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PATTERN_REQUIRED;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import android.annotation.Nullable;
 import android.annotation.SuppressLint;
@@ -270,11 +270,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (mIsManagedProfile) {
                 if (isStrongAuthRequired) {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_PATTERN_REQUIRED,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_PATTERN_REQUIRED,
                             () -> getString(
                                     R.string.lockpassword_strong_auth_required_work_pattern));
                 } else {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_CONFIRM_PATTERN,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PATTERN,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_pattern_generic_profile));
                 }
@@ -367,7 +369,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mFrp) return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
 
             if (mIsManagedProfile) {
-                return mDevicePolicyManager.getString(
+                return mDevicePolicyManager.getResources().getString(
                         CONFIRM_WORK_PROFILE_PATTERN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pattern_header));
             }
