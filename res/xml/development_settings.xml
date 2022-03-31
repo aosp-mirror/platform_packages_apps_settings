@@ -92,12 +92,6 @@
             android:summary="@string/runningservices_settings_summary"
             android:fragment="com.android.settings.applications.RunningServices" />
 
-        <Preference
-            android:key="convert_to_file_encryption"
-            android:title="@string/convert_to_file_encryption"
-            android:summary="@string/convert_to_file_encryption_enabled"
-            android:fragment="com.android.settings.applications.ConvertToFbe" />
-
         <com.android.settings.development.ColorModePreference
             android:key="picture_color_mode"
             android:title="@string/picture_color_mode"
@@ -256,6 +250,11 @@
             android:title="@string/force_high_refresh_rate_toggle"
             android:summary="@string/force_high_refresh_rate_desc" />
 
+        <SwitchPreference
+            android:key="allow_mock_modem"
+            android:title="@string/allow_mock_modem"
+            android:summary="@string/allow_mock_modem_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -297,6 +296,14 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
+        <ListPreference
+            android:key="ingress_rate_limit"
+            android:title="@string/ingress_rate_limit_title"
+            android:summary="@string/ingress_rate_limit_summary"
+            android:dialogTitle="@string/ingress_rate_limit_dialog_title"
+            android:entries="@array/ingress_rate_limit_entries"
+            android:entryValues="@array/ingress_rate_limit_values" />
+
         <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
@@ -313,13 +320,12 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_gabeldorsche_enable"
-            android:title="@string/bluetooth_enable_gabeldorsche"
-            android:summary="@string/bluetooth_enable_gabeldorsche_summary" />
-
-        <SwitchPreference
             android:key="bluetooth_disable_a2dp_hw_offload"
             android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+
+        <SwitchPreference
+            android:key="bluetooth_disable_le_audio_hw_offload"
+            android:title="@string/bluetooth_disable_le_audio_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"

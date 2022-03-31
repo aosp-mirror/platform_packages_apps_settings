@@ -27,6 +27,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.utils.LocaleUtils;
 
@@ -161,9 +163,14 @@ public class ToggleScreenMagnificationPreferenceFragment extends
 
     @Override
     protected void initSettingsPreference() {
-        // If the device doesn't support magnification area, it should hide the settings preference.
-        if (!getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_magnification_area)) {
+        // If the device doesn't support window magnification feature, it should hide the
+        // settings preference.
+        final boolean supportWindowMagnification =
+                getContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_magnification_area)
+                        && getContext().getPackageManager().hasSystemFeature(
+                        PackageManager.FEATURE_WINDOW_MAGNIFICATION);
+        if (!supportWindowMagnification) {
             return;
         }
         mSettingsPreference = new Preference(getPrefContext());
@@ -360,6 +367,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
         mShortcutPreference.setChecked(value != UserShortcutType.EMPTY);
         mShortcutPreference.setSummary(
                 getShortcutTypeSummary(getPrefContext()));
+
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
     }
 
     @Override
@@ -405,7 +416,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     }
 
     @Override
-    CharSequence getTileName() {
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         return null;
     }
 

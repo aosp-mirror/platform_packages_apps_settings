@@ -83,8 +83,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     /** Returns the accessibility tile component name. */
     protected abstract ComponentName getTileComponentName();
 
-    /** Returns the accessibility tile feature name. */
-    protected abstract CharSequence getTileName();
+    /** Returns the accessibility tile tooltip content. */
+    protected abstract CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,7 +148,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Reshow tooltips when activity recreate, such as rotate device.
+        // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
             getView().post(this::showQuickSettingsTooltipIfNeeded);
         }
@@ -333,6 +333,10 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
 
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
+
         // Show the quick setting tooltip if the shortcut assigned in the first time
         if (shortcutAssigned) {
             showQuickSettingsTooltipIfNeeded();
@@ -499,21 +503,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
             return;
         }
 
-        final CharSequence tileName = getTileName();
-        if (TextUtils.isEmpty(tileName)) {
-            // Returns if no title of tile service assigned.
+        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
+        if (TextUtils.isEmpty(content)) {
+            // Returns if no content of tile tooltip assigned.
             return;
         }
 
-        final int titleResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.string.accessibility_service_qs_tooltips_content
-                : R.string.accessibility_service_auto_added_qs_tooltips_content;
-        final String title = getString(titleResId, tileName);
         final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
-                ? R.drawable.accessibility_qs_tooltips_illustration
-                : R.drawable.accessibility_auto_added_qs_tooltips_illustration;
+                ? R.drawable.accessibility_qs_tooltip_illustration
+                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(title, imageResId);
+        mTooltipWindow.setup(content, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);

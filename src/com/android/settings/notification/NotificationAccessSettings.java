@@ -107,7 +107,7 @@ public class NotificationAccessSettings extends EmptyTextSettings {
         if (UserManager.get(mContext).isManagedProfile()) {
             // Apps in the work profile do not support notification listeners.
             Toast.makeText(mContext,
-                    mDpm.getString(WORK_APPS_CANNOT_ACCESS_NOTIFICATION_SETTINGS,
+                    mDpm.getResources().getString(WORK_APPS_CANNOT_ACCESS_NOTIFICATION_SETTINGS,
                             () -> mContext.getString(R.string.notification_settings_work_profile)),
                     Toast.LENGTH_SHORT).show();
             finish();
@@ -168,7 +168,8 @@ public class NotificationAccessSettings extends EmptyTextSettings {
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                     service.packageName, managedProfileId)) {
-                pref.setSummary(mDpm.getString(WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED,
+                pref.setSummary(mDpm.getResources().getString(
+                        WORK_PROFILE_NOTIFICATION_LISTENER_BLOCKED,
                         () -> getString(
                                 R.string.work_profile_notification_access_blocked_summary)));
             }

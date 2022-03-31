@@ -115,6 +115,20 @@ public class FaceStatusUtilsTest {
     }
 
     @Test
+    public void hasEnrolled_withEnrolledTemplates_returnsTrue() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+
+        assertThat(mFaceStatusUtils.hasEnrolled()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withoutEnrolledTemplates_returnsFalse() {
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        assertThat(mFaceStatusUtils.hasEnrolled()).isFalse();
+    }
+
+    @Test
     public void getDisabledAdmin_whenFaceDisabled_returnsEnforcedAdmin() {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FACE);
@@ -157,7 +171,7 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(FaceEnrollIntroduction.class.getName());
+                .isEqualTo(FaceEnrollIntroductionInternal.class.getName());
     }
 
     @Test
@@ -165,6 +179,6 @@ public class FaceStatusUtilsTest {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
 
         assertThat(mFaceStatusUtils.getSettingsClassName())
-                .isEqualTo(Settings.FaceSettingsActivity.class.getName());
+                .isEqualTo(Settings.FaceSettingsInternalActivity.class.getName());
     }
 }

@@ -119,6 +119,20 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
+    public void hasEnrolled_withEnrolledFingerprints_returnsTrue() {
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+
+        assertThat(mFingerprintStatusUtils.hasEnrolled()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withoutEnrolledFingerprints_returnsFalse() {
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+
+        assertThat(mFingerprintStatusUtils.hasEnrolled()).isFalse();
+    }
+
+    @Test
     public void getDisabledAdmin_whenFingerprintDisabled_returnsEnforcedAdmin() {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME))
                 .thenReturn(DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT);
@@ -169,7 +183,7 @@ public class FingerprintStatusUtilsTest {
         when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
 
         assertThat(mFingerprintStatusUtils.getSettingsClassName())
-                .isEqualTo(FingerprintEnrollIntroduction.class.getName());
+                .isEqualTo(FingerprintEnrollIntroductionInternal.class.getName());
     }
 
     @Test

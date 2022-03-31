@@ -18,13 +18,17 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.PowerManager;
 import android.provider.SettingsSlicesContract;
 
@@ -90,10 +94,11 @@ public class BatterySaverButtonPreferenceControllerTest {
     }
 
     @Test
-    public void setChecked_on_setPowerSaveMode() {
+    public void setChecked_on_showWarningMessage() {
         mController.setChecked(true);
 
-        verify(mPowerManager).setPowerSaveModeEnabled(true);
+        verify(mContext).sendBroadcast(any(Intent.class));
+        verify(mPowerManager, never()).setPowerSaveModeEnabled(anyBoolean());
     }
 
     @Test

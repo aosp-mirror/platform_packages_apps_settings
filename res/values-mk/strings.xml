@@ -85,6 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Немате дозвола за промена на поставките на Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Спарете нов уред"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Спари го другото уво"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Левото слушно помагало е поврзано.\n\nЗа да го спарите десното, проверете дали е вклучено и подготвено за спарување."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Десното слушно помагало е поврзано.\n\nЗа да го спарите левото, проверете дали е вклучено и подготвено за спарување."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Спари го десното уво"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Спари го левото уво"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Поврзани"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> е видлив за уредите во близина кога се отворени Поставки за Bluetooth."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Адреса на Bluetooth на телефонот: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Адреса на Bluetooth на таблетот: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,10 +148,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Дозволете уредот да комуницира со уредите со Bluetooth во близина"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Дозволете телефонот да комуницира со уредите со Bluetooth во близина"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Оневоз. хард. ослоб. за Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Да се рестартира?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Треба да го рестартирате уредот за да ја смените поставкава."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Да"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"Откажи"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Оневозможете хардверско ослободување за Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Да се рестартира уредот?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Треба да го рестартирате уредот за да ја смените поставкава."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Рестартирај"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Откажи"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Преносливи уреди"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Уреди за повикување"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други уреди"</string>
@@ -592,12 +599,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Шифрирајте го таблетот"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"Шифрирајте го телефонот"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"Шифрирано"</string>
-    <!-- no translation found for no_screen_lock_issue_title (1814109590692792891) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_summary (2383217853510608406) -->
-    <skip />
-    <!-- no translation found for no_screen_lock_issue_action_label (2691229130486382863) -->
-    <skip />
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Поставете заклучување екран"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"За дополнителна безбедност, поставете PIN, шема или лозинка за уредов."</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Постави заклучување екран"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Заштита на телефонот"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Поставете заклучување екран за заштита на таблетот"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Поставете заклучување екран за заштита на уредот"</string>
@@ -726,10 +730,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Ако внесете погрешна шема при следниот обид, работниот профил и неговите податоци ќе се избришат"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Ако внесете погрешен PIN при следниот обид, работниот профил и неговите податоци ќе се избришат"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Ако внесете погрешна лозинка при следниот обид, работниот профил и неговите податоци ќе се избришат"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Премногу неточни обиди. Податоците на уредов ќе се избришат."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Премногу погрешни обиди. Корисникот ќе се избрише."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Премногу погрешни обиди. Работниот профил и неговите податоци ќе се избришат."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Отфрли"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> знак</item>
       <item quantity="other">Мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> знаци</item>
@@ -1192,6 +1192,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Помага другите уреди да ја најдат точкава на пристап. Го зголемува користењето на батеријата."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Вклучување точка на пристап..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Исклучување точка на пристап..."</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Интернет преку мобилен не е достапен"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"Контактирајте со операторот за детали"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> е активно"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Грешка на точка на пристап на пренослива Wi-Fi"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Поставете точка на пристап со Wi-Fi"</string>
@@ -1298,6 +1300,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Вклучено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Овозможи откривање лица"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"Резолуција на екран"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока резолуција"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Највисока резолуција"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"Ако ја промените резолуцијата, можно е да се затворат некои апликации што се вклучени во моментов."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природни"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Нагласени"</string>
@@ -1416,6 +1424,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Приспособете го телефонот"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Пробајте различни стилови, тапети и друго"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заштитник на екран"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Користи заштитник на екран"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Додека се полни или е приклучен"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"И во двата случаи"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Додека се полни"</string>
@@ -1436,8 +1445,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"Зголемено користење на батеријата"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Текст во болд"</string>
     <string name="title_font_size" msgid="570613010306330622">"Големина на фонт"</string>
-    <!-- no translation found for short_summary_font_size (8444689613442419978) -->
-    <skip />
+    <string name="short_summary_font_size" msgid="8444689613442419978">"Намалете го или зголемете го текстот"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"Поставки за заклучување SIM-картичка"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"Заклучување SIM-картичка"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"Исклученo"</string>
@@ -1899,7 +1907,8 @@
     <string name="module_license_title" msgid="8705484239826702828">"Лиценци за системско ажурирање од Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Одредби и услови"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Системска лиценца за WebView"</string>
-    <string name="wallpaper_attributions" msgid="3080339190260272255">"Тапети"</string>
+    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
+    <skip />
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Извор на сателитски снимки:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Упатство"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Постои проблем со вчитување на упатството."</string>
@@ -2050,7 +2059,8 @@
     <string name="enable_text" msgid="8570798764647110430">"Овозможи"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Избриши ги податоците"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Деинсталирај ажурирања"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"Отклучете ги ограничените поставки"</string>
+    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
+    <skip />
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некои од активностите што ги избравте стандардно се отвораат во апликацијава."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Сте одбрале да ѝ дозволите за апликацијата да создава виџети и да пристапува кон нивните податоци."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Нема поставени стандардни вредности."</string>
@@ -2287,8 +2297,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Дознајте повеќе за поставките за титлови"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Зголемување"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Кратенка за зголемување"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"Следи го текстот"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"Областа на зголемување автоматски го следи текстот додека пишувате"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Пишувајте со помош на лупа"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Лупата го следи текстот додека пишувате"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"За зголемување"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Дознајте повеќе за зголемување"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Тип зголемување"</string>
@@ -2305,6 +2315,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Ако зголемувате дел од екранот со троен допир, тоа ќе предизвика доцнење во пишувањето и другите дејства.\n\nКопчето за пристапност лебди на екранот врз другите апликации. Допрете го за зголемување."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Префрли на копче за пристапност"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Користи троен допир"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Со ова може да се забави тастатурата"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Кога ќе користите тројно допирање за зголемување на дел од екранот, можеби ќе забележите проблеми со тастатурата.\n\nЗа да го избегнете ова, може да ја промените кратенката за зголемување од троен допир во друга опција.\n"<annotation id="link">"Променете ја поставката"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Сепак продолжи"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Откажи"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Поставки за зголемување"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Зголеми со троен допир"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Зголемување со кратенка"</string>
@@ -2312,10 +2326,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"За <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Големина на приказ и текст"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Променете како да се прикажува текстот"</string>
-    <string name="accessibility_text_reading_preview_mail_subject" msgid="8410011779056611430">"Е-порака: Планови за временска машина, верзија 2"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="8008010238385973504">"Од: vasko@e-poshta.com"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="2845972588748160509">"Добро утро! Да се надоврзам на нашиот последен разговор, сакам да го проверам напредокот на вашиот план за развој на временска машина. Дали ќе имате прототип спремен за демонстрација на E3 годинава?"</string>
-    <string name="accessibility_text_reading_reset_button_title" msgid="8951212362359229102">"Ресетирај"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Предмет: дизајни на балони на топол воздух"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Од: Бил"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добро утро!\n\nСамо сакав да проверам како оди со дизајните. Дали ќе бидат готови пред да почнеме да ги градиме новите балони?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Ресетирај поставки"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се ресетираат големината и текстот на екранот?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Вашите поставки за големина и текст на екранот ќе се ресетираат на оригиналните поставки на телефонот"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Ресетирај"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Имате ли планови за викендот?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Одиме на плажа. Сакате да ни се придружите?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Опции"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Зумирање на екранот"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Допрете три пати за да зумирате"</string>
@@ -2372,8 +2391,8 @@
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Дознајте повеќе за копчето за пристапност и движење"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Користење на копчето за пристапност. Движењето не е достапно со навигација со 3 копчиња."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Брзо пристапувајте до функциите за пристапност"</string>
-    <string name="accessibility_button_gesture_description" msgid="5087102396258564057"><b>"Како се користи копчето или движењето"</b>\n\n"1. Одете на поставките за пристапност\n2. Изберете функција и допрете ја кратенката\n3. За да ја користите функцијата, допрете го копчето за пристапност или извршете го движењето"</string>
-    <string name="accessibility_button_description" msgid="9171447568163715949"><b>"Како се користи копчето"</b>\n\n"1. Одете на поставките за пристапност\n2. Изберете функција и допрете ја кратенката\n3. За да ја користите функцијата, допрете го копчето за пристапност."</string>
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"За да започнете"</b>\n"1. Одете на поставките за пристапност\n2. Изберете функција и допрете ја кратенката\n3. Изберете дали сакате да користите копче или движење за пристап до функцијата"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"За да започнете"</b>\n"1. Одете на поставките за пристапност\n2. Изберете функција и допрете ја кратенката\n3. Изберете го копчето за пристап до функцијата"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Користете копче или движење"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Локација"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Големина"</string>
@@ -2388,7 +2407,9 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Ажурирај зголемување екран при премини меѓу аплик."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Прекини повик со копче за вклучување"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Голем покажувач на глувчето"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Истакнете го покажувачот на глувчето"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Отстранување анимации"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Намалете го движењето на екранот"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Моно аудио"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Комбинирај канали кога се пушта аудио"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Баланс на аудио"</string>
@@ -2432,7 +2453,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Поставката е оневозможена бидејќи уредот е поставен на тивко"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Повици"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Известувања и аларми"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивен допир"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивни вибрации"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Користење вибрации и допир"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Вибрации за аларм"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Вибрации за аудиовизуелни содржини"</string>
@@ -2441,9 +2462,17 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Вибрации при допир"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Користи <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Отворете ја апликацијата <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
-    <string name="accessibility_service_auto_added_qs_tooltips_content" msgid="4928746290220689428">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> е додадена во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
-    <string name="accessibility_service_qs_tooltips_content" msgid="3900536971101946314">"Може да додадете кратенка до <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> со изменување на брзите поставки"</string>
-    <string name="accessibility_quick_settings_tooltips_dismiss" msgid="1684723414081728584">"Отфрли"</string>
+    <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> е додадена во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"Може да ја додадете <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> во „Брзи поставки“ и од врвот на екранот"</string>
+    <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"Корекција на боите е додадена во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"Може да додадете корекција на боите во „Брзи поставки“ и од врвот на екранот"</string>
+    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Инверзија на боите е додадена во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"Може да додадете инверзија на боите во „Брзи поставки“ и од врвот на екранот"</string>
+    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Дополнително затемнување е додадено во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Може да додадете дополнително затемнување во „Брзи поставки“ и од врвот на екранот"</string>
+    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Режимот со една рака е додаден во „Брзи поставки“. Повлечете надолу за да ја вклучите или исклучите кога сакате."</string>
+    <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Може да додадете режим со една рака во „Брзи поставки“ и од врвот на екранот"</string>
+    <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"Отфрли"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Приспособете го приказот на боите на телефонот"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Приспособете го приказот на боите на таблетот"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Користи „Корекција на бои“"</string>
@@ -2467,15 +2496,20 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слушни помагала"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Не се поврзани слушни помагала"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Додајте слушни помагала"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"За да ги спарите слушните помагала, најдете го и допрете го уредот на следниот екран. Проверете дали слушните помагала се во режим на спарување."</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Спари слушни памагала"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На следниот екран, допрете ги слушните помагала. Можеби ќе треба да ги спарите левото и десното уво одделно.\n\nСлушните помагала треба да се вклучени и подготвени за спарување."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Слушното помагало <xliff:g id="DEVICE_NAME">%1$s</xliff:g> е активно"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, само лево"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, само десно"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, лево и десно"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> и уште 1"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> зачувано слушно помагало</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> зачувани слушни помагала</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Приспособување на аудиото"</string>
-    <string name="accessibility_toggle_audio_description_preference_title" msgid="6504310337248994394">"Звучен опис"</string>
-    <string name="accessibility_audio_description_summary" msgid="7628652828705990722">"Изберете аудиолента со стандарден звучен опис"</string>
+    <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Звучен опис"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Слушајте опис од она што се случува на екранот во поддржаните филмови и серии"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"звучен опис, аудио, опис, слаб вид"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Кратенката е вклучена"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Исклучено"</string>
@@ -3336,14 +3370,13 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Споделете го телефонот така што ќе додадете нови корисници. Секој корисник ќе има личен простор на телефонот за приспособени почетни екрани, сметки, апликации, поставки и друго."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Корисници и профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Додајте корисник или профил"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Додајте корисник"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Ограничен профил"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Не е поставен"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Не е поставен - ограничен профил"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Не е поставен – Работен профил"</string>
     <string name="user_admin" msgid="4024553191395768119">"Администратор"</string>
     <string name="user_you" msgid="3070562015202859996">"Вие (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Може да додадете најмногу <xliff:g id="USER_COUNT">%1$d</xliff:g> корисници"</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"Не може да додадете уште корисници. Отстранете корисник за да додадете нов."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Само сопственикот на таблетот може да управува со корисниците."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Само сопственикот на телефонот може да управува со корисниците."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Ограничените профили не можат да додаваат сметки"</string>
@@ -3363,9 +3396,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Додавање нов корисник..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Избриши корисник"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Избриши"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Гостин"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Отстрани гостин"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Да се отстрани гостинот?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Сите апликации и податоци во сесијата ќе се избришат."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Отстрани"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Вклучи телефонски повици"</string>
@@ -3412,6 +3442,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"Кај бесконтактен терминал, плаќајте со <xliff:g id="APP_0">%1$s</xliff:g>.\n\nОва ја заменува <xliff:g id="APP_1">%2$s</xliff:g> како ваша стандардна апликација за плаќање."</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"Постави стандарден метод"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"Ажурирај"</string>
+    <string name="nfc_work_text" msgid="2496515165821504077">"Работни"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"Ограничувања"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"Отстрани ограничувања"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Промени PIN"</string>
@@ -3583,7 +3614,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не вознемирувај, прекини, прекинување, пауза"</string>
     <string name="keywords_app" msgid="7983814237980258061">"РАМ"</string>
     <string name="keywords_location" msgid="8016374808099706213">"во близина, локација, историја, пријавување, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"сметка, додај сметка, работен профил, додавање сметка"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"сметка, додај сметка, работен профил, додавање сметка, отстрани, избриши"</string>
     <string name="keywords_users" msgid="3497517660077620843">"ограничување, ограничи, ограничено"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"поправка на текст, поправи, звук, вибрирај, автоматски, јазик, движење, предложи, предлог, тема, навредлив, збор, напиши, емотикон, меѓународно"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"ресетирај, претпочитања, стандардни"</string>
@@ -3592,6 +3623,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"апликации, стандардни"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"игнорирај оптимизации, дремка, мирување на апликацијата"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"динамично, RGB, sRGB, боја, природно, стандардно"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, резолуција, 1080p, 1440p"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"боја, температура, D65, D73, бела, жолта, сина, топла, ладна"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"лизгајте за отклучување, лозинка, шема, пин"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"прикачување екран"</string>
@@ -3685,6 +3717,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Вклучете ги звуците"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Автоматски титлови"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматски титлови за аудиовизуелни содржини"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"Телефонски звучник"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Жичени слушалки"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"Просторниот звук создава подлабок звук што се чини дека доаѓа од секаде околу вас. Функционира само со некои аудиовизуелни содржини."</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"Исклучено"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Вклучено/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"Вклучено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ниеден}=1{Поставен е 1 распоред}one{Поставен е # распоред}other{Поставени се # распореди}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не вознемирувај"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Добивајте известувања само од важни луѓе и апликации"</string>
@@ -4135,6 +4173,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Ниеден"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Ниеден}=1{1 разговор}one{# разговор}other{# разговори}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Кој може да го прекинува"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Дури и ако апликациите за размена на пораки или повикување не можат да ве известат, луѓето што ќе ги изберете сѐ уште ќе можат да ве добијат преку тие апликации"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Повици"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Повици"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"повици"</string>
@@ -4363,7 +4402,9 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> некористена апликација</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> некористени апликации</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Отстранувај дозволи и ослободувај простор"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Поставки за некористена апликација"</string>
+    <string name="unused_apps_switch" msgid="2979882622987847195">"Паузирај ја активноста на апликацијата"</string>
+    <string name="unused_apps_switch_summary" msgid="6971069728614582344">"Отстранува дозволи, брише привремени датотеки и запира известувања ако не се користат"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Сите апликации"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Инсталирани апликации"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Инстант апликации"</string>
@@ -4448,8 +4489,8 @@
     <string name="high_power_off" msgid="317000444619279018">"Се оптимизира користењето на батеријата"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Оптимизација на батеријата не е достапна"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Не применувајте оптимизација на батеријата. Може побрзо да ја истроши вашата батерија."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Да се извршува во заднина?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Ако дозволите <xliff:g id="APP_NAME">%1$s</xliff:g> секогаш да се извршува во заднина, тоа може да го намали траењето на батеријата. \n\nОва може да го промените подоцна во „Поставки &gt; Апликации и известувања“."</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Да работи во заднина?"</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"Ако дозволите <xliff:g id="APP_NAME">%1$s</xliff:g> секогаш да се извршува во заднина, тоа може да ја намали трајноста на батеријата. \n\nМоже да го промените ова подоцна во „Поставки &gt; Апликации“"</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> употреба од последното целосно полнење"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Користење од <xliff:g id="PERCENTAGE">%1$s</xliff:g> во минатите 24 часа"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Нема употреба на батерија од последното целосно полнење"</string>
@@ -4579,8 +4620,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Прит. копче за напој. двапати за камера"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Брзо отворете ја камерата без да го отклучувате екранот"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Големина на приказ"</string>
-    <!-- no translation found for screen_zoom_short_summary (756254364808639194) -->
-    <skip />
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Намалете или зголемете сѐ"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"големина на екран, зумирај екран, скалирај, скалирање"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Намалете ги или зголемете ги ставките на екранот. Некои апликации на екранот може да ја сменат позицијата."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Преглед"</string>
@@ -4806,8 +4846,6 @@
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> апликации може да користат неограничен мобилен интернет</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Видете повеќе"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Навистина ли да се избришат податоците за корисникот и да се конвертираат во шифрирана датотека?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Избриши и конвертирај"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Ресетирајте го ограничувањето оценки на ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Ограничувањето оценки на ShortcutManager е ресетирано"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Контролирајте ги информациите на заклучениот екран"</string>
@@ -4888,7 +4926,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Дигитален помошник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Повлечете за да го повикате помошникот"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Повлечете нагоре од долниот агол за да ја повикате апликацијата за дигитален помошник."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"Држете го копчето за почетен екр. за да се повика помошникот"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Задржете го копчето за почетен екран за „Помошник“"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Притиснете и задржете го копчето за почетен екран за да ја повикате апликацијата за дигитален помошник."</string>
     <string name="information_label" msgid="6939310810756569298">"Информации"</string>
     <string name="low_label" msgid="6525629096999711220">"Ниска"</string>
@@ -4910,7 +4948,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"дофатливост"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Повлечете надолу за"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Користете ја кратенката за"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"За да користите режим со една рака, повлечете надолу од долниот раб на екранот. За да ја користите функцијава, треба да вклучите „Навигација со движења“ во поставките за „Навигација низ системот“."</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Повлечете ја надолу горната половина од екранот за да ви биде полесно да достигнете со една рака"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Како се користи режим со една рака"</b>\n" • проверете дали е избрана „навигација со движење“ во поставките за навигација низ системот \n • повлечете надолу блиску до долниот раб на екранот"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Поместување на екранот во дофат"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Горниот дел на екранот ќе се помести во дофат на палецот."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Приказ на известувањата"</string>
@@ -5021,7 +5060,10 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> управува со уредов."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Дознајте повеќе"</string>
-    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Ограничени поставки"</string>
+    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
+    <skip />
+    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
+    <skip />
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Заради ваша безбедност, поставкава не е достапна во моментов."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Податоци за уред на рати"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Вашиот продавач на рати може да ги менува поставките и да инсталира софтвер на уредов.\n\nАко пропуштите плаќање, уредот ќе ви биде заклучен.\n\nЗа да дознаете повеќе, контактирајте со продавачот на рати."</string>
@@ -5108,6 +5150,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Прикажи за сите локации, вклучително и за мрежата и поврзливоста"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Присилување целосни мерења со GNSS"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Следете ги сите констелации и фреквенции со GNSS без работен циклус"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"Метод за внесување"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"Ракописно пишување со пенкало"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Кога е овозможено, тековниот метод за внесување добива MotionEvent за пенкало ако е фокусиран „Уредник“."</string>
     <string name="device_theme" msgid="5027604586494772471">"Тема на уредот"</string>
     <string name="default_theme" msgid="4815428567082263639">"Стандардно"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Име на мрежата"</string>
@@ -5498,11 +5543,9 @@
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Прикажувај го QR-скенерот"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Дозволи пристап до QR-скенерот од заклучен екран"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Прикажувај контроли за уреди"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Пристапувајте до контролите кога екранот е заклучен"</string>
-    <!-- no translation found for lockscreen_trivial_controls_setting_toggle (8211063535536295676) -->
-    <skip />
-    <!-- no translation found for lockscreen_trivial_controls_summary (680581904143387225) -->
-    <skip />
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Приказ на контролите за надворешни уреди од заклучен екран"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Контролирајте од заклучен уред"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Контролирајте ги надворешните уреди без да го отклучите телефонот или таблетот ако е дозволено со апликацијата за контроли за уреди"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Прикажувај часовник со двојна линија кога е достапен"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Часовник со двојна линија"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5520,6 +5563,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Закупот никогаш не истекува."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволи преклопување на екраните на Поставки"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволи апликации што може да прикажуваат врз други апликации да ги преклопуваат екраните на Поставки"</string>
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Дозволете лажен модем"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Дозволете уредов да ја извршува услугата за лажен модем за тестирање инструменти. Не овозможувајте го ова при нормално користење на телефонот"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Аудиовизуелни содржини"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закачете го плеерот"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"За брзо продолжување на репродукцијата, плеерот останува отворен во „Брзи поставки“"</string>
@@ -5605,7 +5650,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Користи „Закачување апликации“"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Користи „Програмерски опции“"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Користете ја услугата за печатење"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"Користи „Повеќе корисници“"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволи повеќе корисници"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Користи „Безжично отстранување грешки“"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Користи „Поставки за драјверот за графика“"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Користи „Штедач на батерија“"</string>
@@ -5664,17 +5709,16 @@
     <string name="tare_revert" msgid="3855325741125236638">"Вратете на стандардните поставки"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Поставките се вратени на стандардни."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максимално салдо на исполнетост"</string>
-    <!-- no translation found for tare_balances (731881382594747961) -->
-    <skip />
-    <!-- no translation found for tare_consumption_limits (3230949387874396382) -->
-    <skip />
-    <!-- no translation found for tare_initial_consumption_limit (2921646306374048384) -->
-    <skip />
-    <!-- no translation found for tare_hard_consumption_limit (7977885116447608016) -->
-    <skip />
+    <string name="tare_balances" msgid="731881382594747961">"Салда"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"Ограничувања за користењето"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Почетно ограничување за користењето"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Максимално ограничување за користењето"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Модификатори"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"Дејства"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"Награди"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Дејства (цена за производство)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Дејства (основна цена)"</string>
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Награди по еден настан"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Награди за вкупно времетраење на настан"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Максимум награди по ден"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Врвна активност"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Видено известување"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Видено известување во период од 15 мин."</string>
@@ -5692,12 +5736,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"Почеток на задача со минимален приоритет"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"Во тек е задача со минимален приоритет"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"Казна за истек на време на задача"</string>
-    <!-- no translation found for tare_min_balance_exempted (6693710075762973485) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_headless_app (6906353766678577244) -->
-    <skip />
-    <!-- no translation found for tare_min_balance_other_app (3404774196832506476) -->
-    <skip />
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"Минимално салдо при полна батерија (изземени апликации)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"Минимално салдо при полна батерија (апликации без кориснички интерфејс)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"Минимално салдо при полна батерија (останати апликации)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"Се полни"</item>
     <item msgid="658627268149681677">"Дремка"</item>
@@ -5708,13 +5749,21 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Преглед"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Избор на заштитник на екран"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Прикажување дополнителни податоци"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Приказ на време, датум и временска прогноза на заштитникот на екран"</string>
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Прикажува време, датум, временска прогноза, квалитет на воздухот и детали за Cast на заштитникот на екранот"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Повеќе поставки"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Приспособете го заштитникот на екран"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Изберете што да се прикажува на екранот кога нема да го користите уредот."</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Изберете го заштитникот на екранот"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Изберете што да се прикажува на екранот кога таблетот е приклучен на док. Уредот може да користи повеќе енергија кога се користи заштитник на екранот."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Приспособи"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Потребно е рестартирање за да се овозможи поддршка со слободна форма."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Потребно е рестартирање за да се присили режимот на компјутер на секундарни екрани."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Рестартирај сега"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Рестартирај подоцна"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Просторен звук"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звукот од компатибилните аудиовизуелни содржини е подлабок"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Следење на главата"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звукот се менува како што ја движите главата за да звучи поприродно"</string>
+    <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничување за мрежна брзина на преземање"</string>
+    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Конфигурирајте го ограничувањето за брзина на пристап до мрежата што ќе се примени на сите мрежи што овозможуваат поврзување на интернет."</string>
+    <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Конфигурирајте го ограничувањето за мрежна брзина на преземање"</string>
+    <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Нема ограничување"</string>
 </resources>

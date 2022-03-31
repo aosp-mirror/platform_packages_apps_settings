@@ -54,7 +54,7 @@ public class RemoteBugreportActivity extends Activity {
 
         if (notificationType == DevicePolicyManager.NOTIFICATION_BUGREPORT_ACCEPTED_NOT_FINISHED) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setMessage(devicePolicyManager.getString(
+                    .setMessage(devicePolicyManager.getResources().getString(
                             SHARING_REMOTE_BUGREPORT_MESSAGE,
                             () -> getString(R.string.sharing_remote_bugreport_dialog_message)))
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -85,9 +85,10 @@ public class RemoteBugreportActivity extends Activity {
                     : SHARE_REMOTE_BUGREPORT_FINISHED_REQUEST_CONSENT;
 
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle(devicePolicyManager.getString(SHARE_REMOTE_BUGREPORT_DIALOG_TITLE,
+                    .setTitle(devicePolicyManager.getResources().getString(
+                            SHARE_REMOTE_BUGREPORT_DIALOG_TITLE,
                             () -> getString(R.string.share_remote_bugreport_dialog_title)))
-                    .setMessage(devicePolicyManager.getString(overrideMessageId,
+                    .setMessage(devicePolicyManager.getResources().getString(overrideMessageId,
                             () -> getString(defaultMessageId)))
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override

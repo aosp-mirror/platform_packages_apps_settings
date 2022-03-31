@@ -144,8 +144,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.accessibility_display_inversion_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_color_inversion_qs_tooltip_content
+                : R.string.accessibility_color_inversion_auto_added_qs_tooltip_content);
     }
 
     @Override

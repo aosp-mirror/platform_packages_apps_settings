@@ -20,11 +20,13 @@ import android.content.Context;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.core.BasePreferenceController;
+
 /**
  * Preference controller that handles the "See All" button for recent location access.
  */
 public class RecentLocationAccessSeeAllButtonPreferenceController extends
-        LocationBasePreferenceController {
+        LocationBasePreferenceController implements BasePreferenceController.UiBlocker {
 
     private Preference mPreference;
 
@@ -44,6 +46,6 @@ public class RecentLocationAccessSeeAllButtonPreferenceController extends
     @Override
     public void onLocationModeChanged(int mode, boolean restricted) {
         boolean enabled = mLocationEnabler.isEnabled(mode);
-        mPreference.setVisible(enabled);
+        updatePreferenceVisibilityDelegate(mPreference, enabled);
     }
 }

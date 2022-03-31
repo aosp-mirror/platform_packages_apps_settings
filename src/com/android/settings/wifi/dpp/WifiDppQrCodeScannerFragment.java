@@ -56,8 +56,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.qrcode.QrCamera;
-import com.android.settings.wifi.qrcode.QrDecorateView;
+import com.android.settingslib.qrcode.QrCamera;
+import com.android.settingslib.qrcode.QrDecorateView;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -168,10 +168,18 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
+                    final Context context = getContext();
+                    if (context == null) {
+                        // Context may be null if the message is received after the Activity has
+                        // been destroyed
+                        Log.d(TAG, "Scan success but context is null");
+                        return;
+                    }
+
                     // We may get 2 WifiConfiguration if the QR code has no password in it,
                     // one for open network and one for enhanced open network.
                     final WifiManager wifiManager =
-                            getContext().getSystemService(WifiManager.class);
+                            context.getSystemService(WifiManager.class);
                     final WifiNetworkConfig qrCodeWifiNetworkConfig =
                             (WifiNetworkConfig)msg.obj;
                     final List<WifiConfiguration> qrCodeWifiConfigurations =
