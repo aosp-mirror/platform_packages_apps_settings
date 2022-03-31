@@ -217,19 +217,17 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 }
             case DIALOG_TAG_ENABLE_SIM_CONFIRMATION:
                 Log.i(TAG, "User confirmed to enable the subscription.");
+                showProgressDialog(
+                        getString(
+                                R.string.sim_action_switch_sub_dialog_progress,
+                                SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                                        mSubInfo, this)));
                 if (mIsEsimOperation) {
-                    showProgressDialog(
-                            getString(
-                                    R.string.sim_action_switch_sub_dialog_progress,
-                                    SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                                            mSubInfo, this)));
                     mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId(),
                             UiccSlotUtil.INVALID_PORT_ID,
                             removedSubInfo);
                     return;
                 }
-                showProgressDialog(
-                        getString(R.string.sim_action_enabling_sim_without_carrier_name));
                 mSwitchToRemovableSlotSidecar.run(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID,
                         removedSubInfo);
                 break;
