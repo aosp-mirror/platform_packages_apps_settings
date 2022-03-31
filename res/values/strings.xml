@@ -4758,11 +4758,13 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">This app\u2019s data will be permanently deleted. This includes files, settings, databases, and other app data.</string>
-    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
+    <string name="clear_data_dlg_text">This app\u2019s data, including files and settings, will be permanently deleted from this device</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
     <string name="dlg_cancel">Cancel</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. [CHAR LIMIT=25] -->
+    <string name="dlg_delete">Delete</string>
     <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
@@ -10453,10 +10455,10 @@
     <string name="unused_apps_category">Unused app settings</string>
 
     <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Pause app activity</string>
+    <string name="unused_apps_switch">Pause app activity if unused</string>
 
     <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
-    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications if unused</string>
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -13461,6 +13463,8 @@
     <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
     <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_controls_summary">Control external devices without unlocking your phone or tablet if allowed by the device controls app</string>
+    <!-- Trivial Device disabled controls summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_disabled_controls_summary">To use, first turn on \u0022Show device controls\u0022</string>
     <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->

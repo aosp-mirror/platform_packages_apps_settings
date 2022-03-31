@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -73,6 +74,7 @@ public class TopLevelSettingsTest {
         doReturn(1).when(screen).getPreferenceCount();
         doReturn(preference).when(screen).getPreference(anyInt());
         doReturn(screen).when(mSettings).getPreferenceScreen();
+        doReturn(new PreferenceManager(mContext)).when(mSettings).getPreferenceManager();
         doReturn(0).when(mSettings).getPreferenceScreenResId();
 
         mSettings.onCreatePreferences(new Bundle(), "rootKey");
