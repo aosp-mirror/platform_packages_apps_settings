@@ -56,8 +56,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.qrcode.QrCamera;
-import com.android.settings.wifi.qrcode.QrDecorateView;
+import com.android.settingslib.qrcode.QrCamera;
+import com.android.settingslib.qrcode.QrDecorateView;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
