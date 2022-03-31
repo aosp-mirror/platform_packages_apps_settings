@@ -21,16 +21,20 @@ import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
-import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.testutils.shadow.ShadowContentResolver;
+import com.android.settings.users.AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,12 +42,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowContentResolver.class})
 public class AutoSyncDataPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -51,12 +57,11 @@ public class AutoSyncDataPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
     @Mock
-    private Fragment mFragment;
+    private PreferenceFragmentCompat mFragment;
 
-    private Preference mPreference;
+    private SwitchPreference mPreference;
     private Context mContext;
     private AutoSyncDataPreferenceController mController;
-    private AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment mConfirmSyncFragment;
 
     @Before
     public void setUp() {
@@ -65,11 +70,17 @@ public class AutoSyncDataPreferenceControllerTest {
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = RuntimeEnvironment.application;
         mController = new AutoSyncDataPreferenceController(mContext, mFragment);
-        mConfirmSyncFragment = new AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment();
-        mConfirmSyncFragment.setTargetFragment(mFragment, 0);
-        mPreference = new Preference(mContext);
-        mPreference.setKey(mController.getPreferenceKey());
-        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
+        String preferenceKey = mController.getPreferenceKey();
+        mPreference = new SwitchPreference(mContext);
+        mPreference.setKey(preferenceKey);
+        mPreference.setChecked(true);
+        when(mScreen.findPreference(preferenceKey)).thenReturn(mPreference);
+        when(mFragment.findPreference(preferenceKey)).thenReturn(mPreference);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowContentResolver.reset();
     }
 
     @Test
@@ -119,15 +130,26 @@ public class AutoSyncDataPreferenceControllerTest {
     }
 
     @Test
-    public void autoSyncData_shouldNotBeSetOnCancel() {
-        final Context context = RuntimeEnvironment.application;
-        final SwitchPreference preference = new SwitchPreference(context);
-        preference.setChecked(false);
-        mController = new AutoSyncDataPreferenceController(context, mFragment);
-        mConfirmSyncFragment.mPreference = preference;
-        mConfirmSyncFragment.mEnabling = true;
+    public void confirmDialog_uncheckThenOk_shouldUncheck() {
+        ConfirmAutoSyncChangeFragment confirmSyncFragment =
+                ConfirmAutoSyncChangeFragment.newInstance(false, 0, mController.getPreferenceKey());
+        confirmSyncFragment.setTargetFragment(mFragment, 0);
 
-        mConfirmSyncFragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
-        assertThat(preference.isChecked()).isFalse();
+        confirmSyncFragment.onClick(null, DialogInterface.BUTTON_POSITIVE);
+
+        assertThat(ContentResolver.getMasterSyncAutomaticallyAsUser(0)).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+    }
+
+    @Test
+    public void confirmDialog_uncheckThenCancel_shouldNotUncheck() {
+        ConfirmAutoSyncChangeFragment confirmSyncFragment =
+                ConfirmAutoSyncChangeFragment.newInstance(false, 0, mController.getPreferenceKey());
+        confirmSyncFragment.setTargetFragment(mFragment, 0);
+
+        confirmSyncFragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
+
+        assertThat(ContentResolver.getMasterSyncAutomaticallyAsUser(0)).isTrue();
+        assertThat(mPreference.isChecked()).isTrue();
     }
 }
