@@ -131,12 +131,16 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             banner.setSelectable(false);
             mCategoryRecentLocationRequests.addPreference(banner);
         }
+
+        if (mUiBlockListener != null) {
+            mUiBlockListener.onBlockerWorkFinished(this);
+        }
     }
 
     @Override
     public void onLocationModeChanged(int mode, boolean restricted) {
         boolean enabled = mLocationEnabler.isEnabled(mode);
-        mCategoryRecentLocationRequests.setVisible(enabled);
+        updatePreferenceVisibilityDelegate(mCategoryRecentLocationRequests, enabled);
     }
 
     /**
