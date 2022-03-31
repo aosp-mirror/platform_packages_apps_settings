@@ -20,29 +20,43 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.preference.Preference;
-
-import com.android.settings.R;
+import androidx.preference.PreferenceViewHolder;
 
 /** A customized layout for homepage preference. */
-public class HomepagePreference extends Preference {
+public class HomepagePreference extends Preference implements
+        HomepagePreferenceLayoutHelper.HomepagePreferenceLayout {
+
+    private final HomepagePreferenceLayoutHelper mHelper;
+
     public HomepagePreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public HomepagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public HomepagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public HomepagePreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        mHelper.onBindViewHolder(holder);
+    }
+
+    @Override
+    public HomepagePreferenceLayoutHelper getHelper() {
+        return mHelper;
     }
 }

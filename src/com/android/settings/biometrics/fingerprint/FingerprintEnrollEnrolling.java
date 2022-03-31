@@ -112,6 +112,12 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private static final VibrationAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
             VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ACCESSIBILITY);
 
+    private static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(VibrationAttributes.USAGE_HARDWARE_FEEDBACK);
+
+    private static final VibrationEffect SUCCESS_VIBRATION_EFFECT =
+            VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
+
     private FingerprintManager mFingerprintManager;
     private boolean mCanAssumeUdfps;
     @Nullable private ProgressBar mProgressBar;
@@ -509,6 +515,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
         } else {
+            if (mVibrator != null) {
+                mVibrator.vibrate(Process.myUid(),
+                        getApplicationContext().getOpPackageName(),
+                        SUCCESS_VIBRATION_EFFECT,
+                        getClass().getSimpleName() + "::OnEnrollmentProgressChanged",
+                        HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES);
+            }
+
             if (mIsAccessibilityEnabled) {
                 final int percent = (int) (((float)(steps - remaining) / (float) steps) * 100);
                 CharSequence cs = getString(
@@ -582,7 +596,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
         }
         if (isResumed() && (mIsAccessibilityEnabled || !mCanAssumeUdfps)) {
             mVibrator.vibrate(Process.myUid(), getApplicationContext().getOpPackageName(),
-                    VIBRATE_EFFECT_ERROR, "FingerprintEnrollEnrolling:showError",
+                    VIBRATE_EFFECT_ERROR, getClass().getSimpleName() + "::showError",
                     FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
         }
     }

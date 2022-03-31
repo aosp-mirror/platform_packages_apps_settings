@@ -209,8 +209,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                             }
                         });
             case DIALOG_CONFIRM_RESET_GUEST:
-                return UserDialogs.createResetGuestDialog(getActivity(),
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
