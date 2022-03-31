@@ -50,6 +50,9 @@ public class ControlsTrivialPrivacyPreferenceController extends TogglePreference
 
     @Override
     public CharSequence getSummary() {
+        if (getAvailabilityStatus() == DISABLED_DEPENDENT_SETTING) {
+            return mContext.getText(R.string.lockscreen_trivial_disabled_controls_summary);
+        }
         return mContext.getText(R.string.lockscreen_trivial_controls_summary);
     }
 
