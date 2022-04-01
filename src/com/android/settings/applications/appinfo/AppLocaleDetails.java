@@ -26,6 +26,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.LocaleList;
+import android.os.UserHandle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Locale;
@@ -72,14 +74,15 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.app_locale_details);
         Bundle bundle = getArguments();
         mPackageName = bundle.getString(AppInfoBase.ARG_PACKAGE_NAME, "");
-
         if (mPackageName.isEmpty()) {
             Log.d(TAG, "No package name.");
             finish();
         }
+
+        addPreferencesFromResource(R.xml.app_locale_details);
+        mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
     }
 
     // Override here so we don't have an empty screen
@@ -96,17 +99,16 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
 
     @Override
     public void onResume() {
-        refreshUiInternal();
         super.onResume();
+        refreshUi();
     }
 
-    private void refreshUiInternal() {
-        if (!hasAppSupportedLocales()) {
-            Log.d(TAG, "No supported language.");
+    private void refreshUi() {
+        int res = getAppDescription();
+        if (res != -1) {
             mPrefOfDescription.setVisible(true);
             TextView description = (TextView) mPrefOfDescription.findViewById(R.id.description);
-            description.setText(getContext().getString(R.string.no_multiple_language_supported,
-                    Locale.getDefault().getDisplayName(Locale.getDefault())));
+            description.setText(getContext().getString(res));
             return;
         }
     }
@@ -157,9 +159,19 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         }
     }
 
-    private boolean hasAppSupportedLocales() {
-        LocaleList localeList = getPackageLocales();
-        return (localeList != null && localeList.size() > 0) || getAssetLocales().length > 0;
+    private int getAppDescription() {
+        LocaleList packageLocaleList = getPackageLocales();
+        String[] assetLocaleList = getAssetLocales();
+        // TODO add apended url string, "Learn more", to these both sentenses.
+        if (packageLocaleList == null && assetLocaleList.length == 0) {
+            // There is no locale info from PackageManager amd AssetManager.
+            return R.string.desc_no_available_supported_locale;
+        } else if (packageLocaleList != null && packageLocaleList.isEmpty()) {
+            // LocaleConfig is empty, and this means only allow user modify language
+            // by the application.
+            return R.string.desc_disallow_locale_change_in_settings;
+        }
+        return -1;
     }
 
     private String[] getAssetLocales() {
@@ -214,8 +226,10 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
      * TODO (b209962418) Do a performance test to low end device.
      * @return Return the summary to show the current app's language.
      */
-    public static CharSequence getSummary(Context context, String packageName) {
-        Locale appLocale = getAppDefaultLocale(context, packageName);
+    public static CharSequence getSummary(Context context, AppEntry entry) {
+        final UserHandle userHandle = UserHandle.getUserHandleForUid(entry.info.uid);
+        final Context contextAsUser = context.createContextAsUser(userHandle, 0);
+        Locale appLocale = getAppDefaultLocale(contextAsUser, entry.info.packageName);
         if (appLocale == null) {
             Locale systemLocale = Locale.getDefault();
             return context.getString(R.string.preference_of_system_locale_summary,

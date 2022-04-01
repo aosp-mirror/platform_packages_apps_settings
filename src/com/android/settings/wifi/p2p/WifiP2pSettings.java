@@ -47,6 +47,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -199,7 +200,10 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View root = super.onCreateView(inflater, container, savedInstanceState);
+
         final Activity activity = getActivity();
         if (mWifiP2pManager == null) {
             mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
@@ -332,8 +336,7 @@ public class WifiP2pSettings extends DashboardFragment
                 }
             }
         };
-
-        super.onActivityCreated(savedInstanceState);
+        return root;
     }
 
     @Override
