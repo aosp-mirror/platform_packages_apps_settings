@@ -217,7 +217,7 @@ public class InternetResetHelperTest {
         // Show resetting preference
         assertThat(mResettingPreference.isVisible()).isTrue();
         // Show Mobile Network controller
-        verify(mMobileNetworkController).hidePreference(false /* hide */, false /* immediately*/);
+        verify(mMobileNetworkController).hidePreference(false /* hide */, true /* immediately*/);
         // Hide Wi-Fi preferences
         assertThat(mWifiTogglePreferences.isVisible()).isFalse();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isFalse();
@@ -240,7 +240,7 @@ public class InternetResetHelperTest {
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
         // Hide Mobile Network controller
         verify(mMobileNetworkController, never())
-                .hidePreference(false /* hide */, false /* immediately*/);
+                .hidePreference(false /* hide */, true /* immediately*/);
     }
 
     @Test
@@ -251,7 +251,7 @@ public class InternetResetHelperTest {
         mInternetResetHelper.resumePreferences();
 
         // Show subsystem preferences
-        verify(mMobileNetworkController).hidePreference(false, false);
+        verify(mMobileNetworkController).hidePreference(false, true);
         assertThat(mWifiTogglePreferences.isVisible()).isTrue();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isTrue();
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
