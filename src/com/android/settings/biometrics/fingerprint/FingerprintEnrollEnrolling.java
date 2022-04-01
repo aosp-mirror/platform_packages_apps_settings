@@ -19,11 +19,13 @@ package com.android.settings.biometrics.fingerprint;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.IntDef;
+import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -54,7 +56,9 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.BiometricsEnrollEnrolling;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.display.DisplayDensityUtils;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
@@ -126,9 +130,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private boolean mIsSetupWizard;
     private AccessibilityManager mAccessibilityManager;
     private boolean mIsAccessibilityEnabled;
+    private LottieAnimationView mIllustrationLottie;
+    private boolean mHaveShownUdfpsTipLottie;
+    private boolean mHaveShownUdfpsSideLottie;
+    private boolean mShouldShowLottie;
 
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
+
+    private boolean mShowingNewUdfpsEnroll = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +171,25 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             updateTitleAndDescription();
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
+        }
+
+        DisplayDensityUtils displayDensity =
+                new DisplayDensityUtils(getApplicationContext());
+        int currentDensityIndex = displayDensity.getCurrentIndex();
+        final int currentDensity = displayDensity.getValues()[currentDensityIndex];
+        final int defaultDensity = displayDensity.getDefaultDensity();
+        mShouldShowLottie = defaultDensity == currentDensity;
+
+        mShowingNewUdfpsEnroll = getApplicationContext().getResources().getBoolean(
+                com.android.internal.R.bool.config_udfpsSupportsNewUi);
+        // Only show the lottie if the current display density is the default density.
+        // Otherwise, the lottie will overlap with the settings header text.
+        boolean isLandscape = BiometricUtils.isReverseLandscape(getApplicationContext())
+                || BiometricUtils.isLandscape(getApplicationContext());
+
+        if (mShowingNewUdfpsEnroll) {
+            updateOrientation((isLandscape
+                    ? Configuration.ORIENTATION_LANDSCAPE : Configuration.ORIENTATION_PORTRAIT));
         }
 
         mErrorText = findViewById(R.id.error_text);
@@ -339,20 +368,53 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
             case STAGE_FINGERTIP:
                 setHeaderText(R.string.security_settings_udfps_enroll_fingertip_title);
-                if (isStageHalfCompleted()) {
-                    setDescriptionText(R.string.security_settings_fingerprint_enroll_repeat_title);
+                if (mShowingNewUdfpsEnroll) {
+                    if (!mHaveShownUdfpsTipLottie && mIllustrationLottie != null) {
+                        mHaveShownUdfpsTipLottie = true;
+                        setDescriptionText("");
+                        mIllustrationLottie.setAnimation(R.raw.udfps_tip_hint_lottie);
+                        mIllustrationLottie.setVisibility(View.VISIBLE);
+                        mIllustrationLottie.playAnimation();
+                        mIllustrationLottie.setContentDescription(
+                                getString(R.string.security_settings_udfps_tip_fingerprint_help));
+                    }
                 } else {
-                    setDescriptionText("");
+                    if (isStageHalfCompleted()) {
+                        setDescriptionText(
+                                R.string.security_settings_fingerprint_enroll_repeat_title);
+                    } else {
+                        setDescriptionText("");
+                    }
                 }
                 break;
 
             case STAGE_EDGES:
                 setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
-                if (isStageHalfCompleted()) {
-                    setDescriptionText(
-                            R.string.security_settings_fingerprint_enroll_repeat_message);
+                if (mShowingNewUdfpsEnroll) {
+                    if (!mHaveShownUdfpsSideLottie && mIllustrationLottie != null) {
+                        mHaveShownUdfpsSideLottie = true;
+                        setDescriptionText("");
+                        mIllustrationLottie.setAnimation(R.raw.udfps_edge_hint_lottie);
+                        mIllustrationLottie.setVisibility(View.VISIBLE);
+                        mIllustrationLottie.playAnimation();
+                        mIllustrationLottie.setContentDescription(
+                                getString(R.string.security_settings_udfps_side_fingerprint_help));
+                    } else if (mIllustrationLottie == null) {
+                        if (isStageHalfCompleted()) {
+                            setDescriptionText(
+                                    R.string.security_settings_fingerprint_enroll_repeat_message);
+                        } else {
+                            setDescriptionText(
+                                    R.string.security_settings_udfps_enroll_edge_message);
+                        }
+                    }
                 } else {
-                    setDescriptionText(R.string.security_settings_udfps_enroll_edge_message);
+                    if (isStageHalfCompleted()) {
+                        setDescriptionText(
+                                R.string.security_settings_fingerprint_enroll_repeat_message);
+                    } else {
+                        setDescriptionText(R.string.security_settings_udfps_enroll_edge_message);
+                    }
                 }
                 break;
 
@@ -632,6 +694,45 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.FINGERPRINT_ENROLLING;
+    }
+
+    private void updateOrientation(int orientation) {
+        switch(orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE: {
+                mIllustrationLottie = null;
+                break;
+            }
+            case Configuration.ORIENTATION_PORTRAIT: {
+                if (mShouldShowLottie) {
+                    mIllustrationLottie = findViewById(R.id.illustration_lottie);
+                }
+                break;
+            }
+            default:
+                Log.e(TAG, "Error unhandled configuration change");
+                break;
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (!mShowingNewUdfpsEnroll) {
+            return;
+        }
+
+        switch(newConfig.orientation) {
+            case Configuration.ORIENTATION_LANDSCAPE: {
+                updateOrientation(Configuration.ORIENTATION_LANDSCAPE);
+                break;
+            }
+            case Configuration.ORIENTATION_PORTRAIT: {
+                updateOrientation(Configuration.ORIENTATION_PORTRAIT);
+                break;
+            }
+            default:
+                Log.e(TAG, "Error unhandled configuration change");
+                break;
+        }
     }
 
     public static class IconTouchDialog extends InstrumentedDialogFragment {
