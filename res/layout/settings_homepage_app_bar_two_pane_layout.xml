@@ -17,11 +17,10 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?androidprv:attr/colorSurface"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/settings_two_pane_background_color">
 
     <FrameLayout
         android:id="@+id/two_pane_suggestion_content"
