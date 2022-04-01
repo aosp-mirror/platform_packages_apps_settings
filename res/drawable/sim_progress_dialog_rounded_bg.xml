@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2021 The Android Open Source Project
+<!--
+     Copyright (C) 2022 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,18 +14,14 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/app_locale_picker_title">
-
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="app_locale_description"
-        android:layout="@layout/app_locale_details_description"
-        android:selectable="false"
-        android:visibility="gone"
-        settings:allowDividerBelow="true"
-        settings:searchable="false"/>
-
-</PreferenceScreen>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="24dp"
+    android:insetRight="24dp">
+    <shape
+           android:shape="rectangle">
+        <solid android:color="?android:attr/colorBackground"/>
+        <corners
+            android:radius="@*android:dimen/config_dialogCornerRadius"
+            />
+    </shape>
+</inset>
