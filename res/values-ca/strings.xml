@@ -2776,7 +2776,7 @@
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Gestor de bateria"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gestiona les aplicacions automàticament"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limita l\'ús de bateria de les aplicacions que no utilitzes habitualment"</string>
-    <string name="smart_battery_footer" msgid="8407121907452993645">"Quan el gestor de bateria detecta que hi ha aplicacions que estan esgotant la bateria, t\'ofereix l\'opció de restringir-les. És possible que les aplicacions restringides no funcionin correctament i que en rebis les notificacions amb retard."</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Quan el gestor de bateria detecta que hi ha aplicacions que estan exhaurint la bateria, t\'ofereix l\'opció de restringir-les. És possible que les aplicacions restringides no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicacions restringides"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">S\'ha limitat l\'ús de la bateria per a %1$d aplicacions</item>
@@ -2785,9 +2785,9 @@
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restringida (<xliff:g id="TIME">%1$s</xliff:g>)"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Aquestes aplicacions tenen restringit l\'ús de la bateria en segon pla. És possible que no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilitza el gestor de bateria"</string>
-    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta quan les aplicacions consumeixen bateria"</string>
-    <string name="battery_manager_summary" msgid="255708681438809287">"S\'està detectant el consum de bateria de les aplicacions"</string>
-    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"S\'està detectant el consum de bateria de les aplicacions"</string>
+    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta quan les aplicacions exhaureixen la bateria"</string>
+    <string name="battery_manager_summary" msgid="255708681438809287">"Detecta quan les aplicacions exhaureixen la bateria"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detecta quan les aplicacions exhaureixen la bateria"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivat"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">S\'han restringit %1$d aplicacions</item>
@@ -2873,7 +2873,7 @@
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"L\'aplicació pot oferir paràmetres per reduir el consum de la bateria"</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"Bateria utilitzada per l\'usuari"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Ús variat de l\'energia"</string>
-    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"El consum de la bateria és l\'ús d\'energia aproximat i no inclou totes les fonts de descàrrega de la bateria. Altres és la diferència entre el consum d\'energia calculat i la descàrrega real que es detecta a la bateria."</string>
+    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"El consum de la bateria és l\'ús d\'energia aproximat i no inclou totes les fonts d\'exhauriment de la bateria. Altres és la diferència entre el consum d\'energia calculat i l\'exhauriment real que es detecta a la bateria."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Consum d\'energia comptabilitzat més d\'una vegada"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"En ús durant <xliff:g id="TIME">^1</xliff:g>"</string>
@@ -3374,8 +3374,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"El perfil de treball no està configurat."</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"Tu (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"No pots afegir cap altre usuari. Suprimeix un usuari per afegir-ne un."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Només el propietari de la tauleta pot gestionar els usuaris."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Només el propietari del telèfon pot gestionar els usuaris."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Els perfils restringits no poden afegir comptes."</string>
@@ -4401,11 +4400,10 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplicacions no utilitzades</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació no utilitzada</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
+    <string name="unused_apps_category" msgid="8954930958175500851">"Configuració d\'apps no utilitzades"</string>
+    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
     <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
+    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
     <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Totes les aplicacions"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicacions instal·lades"</string>
@@ -4483,14 +4481,14 @@
       <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> s\'està comportant de manera anòmala</item>
     </plurals>
     <plurals name="power_high_usage_title" formatted="false" msgid="8013115866788425817">
-      <item quantity="other">Hi ha aplicacions que estan esgotant la bateria</item>
-      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> està esgotant la bateria</item>
+      <item quantity="other">Hi ha aplicacions que estan exhaurint la bateria</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> està exhaurint la bateria</item>
     </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"Sense optimitzar"</string>
     <string name="high_power_on" msgid="8778058701270819268">"Sense optimitzar"</string>
     <string name="high_power_off" msgid="317000444619279018">"Optimitza l\'ús de la bateria"</string>
     <string name="high_power_system" msgid="3966701453644915787">"L\'optimització de la bateria no està disponible"</string>
-    <string name="high_power_desc" msgid="2753076899835765338">"No s\'aplica l\'optimització de la bateria. És possible que es consumeixi més ràpidament."</string>
+    <string name="high_power_desc" msgid="2753076899835765338">"No s\'aplica l\'optimització de la bateria. És possible que s\'exhaureixi més ràpidament."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Vols permetre que l\'aplicació s\'executi sempre en segon pla?"</string>
     <string name="high_power_prompt_body" msgid="6029266540782139941">"Si permets que <xliff:g id="APP_NAME">%1$s</xliff:g> s\'executi sempre en segon pla, és possible que redueixi la durada de la bateria. \n\nPots canviar-ho més endavant des de Configuració &gt; Aplicacions."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> d\'ús des de l\'última càrrega completa"</string>
@@ -4578,7 +4576,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se suprimiran totes les regles del mode No molestis creades per aquesta aplicació."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimitzis la bateria"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimitza la bateria"</string>
-    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"És possible que la bateria es consumeixi més ràpidament. L\'aplicació ja no té restringit l\'ús de la bateria en segon pla."</string>
+    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"És possible que la bateria s\'exhaureixi més ràpidament. L\'aplicació ja no té restringit l\'ús de la bateria en segon pla."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Es recomana per allargar la bateria"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Vols permetre que <xliff:g id="APP">%s</xliff:g> ignori les optimitzacions de la bateria?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Cap"</string>
@@ -5548,6 +5546,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Mostra els controls per a dispositius externs des de la pantalla de bloqueig"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Controla amb el dispositiu bloquejat"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Controla dispositius externs sense desbloquejar el telèfon o la tauleta si l\'aplicació de control de dispositius ho permet"</string>
+    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
+    <skip />
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra el rellotge de doble línia quan estigui disponible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Rellotge de doble línia"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5565,10 +5565,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"La concessió no caduca mai."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permet les superposicions de pantalla a Configuració"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permet que les aplicacions que poden mostrar-se sobre altres aplicacions se superposin sobre les pantalles de Configuració"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Permet el mòdem de prova"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Permet que aquest dispositiu executi el servei de mòdem de prova per fer una prova d\'instrumentalització. No activis aquesta opció durant l\'ús normal del telèfon."</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimèdia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixa el reproductor multimèdia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Per reprendre la reproducció ràpidament, el reproductor multimèdia continua obert a la configuració ràpida"</string>
@@ -5654,8 +5652,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utilitza la fixació d\'aplicacions"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Utilitza les opcions per a desenvolupadors"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Utilitza el servei d\'impressions"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permet diversos usuaris"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utilitza la depuració sense fil"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utilitza les preferències del controlador de gràfics"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Utilitza Estalvi de bateria"</string>
@@ -5721,12 +5718,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"Modificadors"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Accions (cost de producció)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Accions (preu base)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompenses per cada esdeveniment"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Recompenses per durada de l\'esdeveniment"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Nombre màxim de recompenses al dia"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Activitat principal"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificació vista"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificació vista en 15 minuts"</string>
@@ -5757,20 +5751,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Previsualitza"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Tria un estalvi de pantalla"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostra informació addicional"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Mostra l\'hora, la data, el temps, la qualitat de l\'aire i informació sobre Cast a l\'estalvi de pantalla"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Més opcions"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"Tria l\'estalvi de pantalla"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Tria què vols veure a la pantalla quan la tauleta estigui acoblada. És possible que el dispositiu utilitzi més energia si es fa servir un estalvi de pantalla."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalitza"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Cal reiniciar per activar la compatibilitat amb la forma lliure."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Cal reiniciar per forçar el mode d\'escriptori en pantalles secundàries."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reinicia ara"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reinicia més tard"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Àudio espacial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"L\'àudio dels dispositius multimèdia compatibles passa a ser més immersiu"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Seguiment del cap"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"L\'àudio canvia a mesura que mous el cap per sonar més natural"</string>
