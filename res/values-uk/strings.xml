@@ -87,18 +87,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Ви не маєте дозволу змінювати налаштування Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Підключити новий пристрій"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
-    <skip />
-    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Підключити другий"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Ваш лівий слуховий апарат підключено.\n\nЩоб підключити правий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Ваш правий слуховий апарат підключено.\n\nЩоб підключити лівий слуховий апарат, переконайтеся, що він увімкнений і готовий до підключення."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Підключити правий"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Підключити лівий"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Схожі"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Пристрої поблизу можуть знайти <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, якщо відкрито налаштування Bluetooth."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Адреса Bluetooth телефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Адреса Bluetooth планшета: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -742,10 +736,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Якщо наступного разу ви введете неправильний ключ, ваш робочий профіль і його дані буде видалено"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Якщо наступного разу ви введете неправильний PIN-код, ваш робочий профіль і його дані буде видалено"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Якщо наступного разу ви введете неправильний пароль, ваш робочий профіль і його дані буде видалено"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Забагато невдалих спроб. Дані на цьому пристрої буде видалено."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Забагато невдалих спроб. Цього користувача буде видалено."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Забагато невдалих спроб. Цей робочий профіль і його дані буде видалено."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Закрити"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Має містити принаймні <xliff:g id="COUNT_1">%d</xliff:g> символ</item>
       <item quantity="few">Має містити принаймні <xliff:g id="COUNT_1">%d</xliff:g> символи</item>
@@ -1959,7 +1949,8 @@
     <string name="module_license_title" msgid="8705484239826702828">"Ліцензії оновлень системи Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Заг. положення й умови"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Ліцензія компонента WebView"</string>
-    <string name="wallpaper_attributions" msgid="3080339190260272255">"Фонові малюнки"</string>
+    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
+    <skip />
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Постачальники супутникових зображень:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Посібник"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Не вдалося завантажити посібник."</string>
@@ -2114,7 +2105,8 @@
     <string name="enable_text" msgid="8570798764647110430">"Увімкнути"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистити пам’ять"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Видалити оновлення"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"Розблокувати налаштування з обмеженнями"</string>
+    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
+    <skip />
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Деякі вибрані дії запускаються в цьому додатку за умовчанням."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Ви вирішили дозволити цій програмі створювати віджети й отримувати доступ до їх даних."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значення не встановлені."</string>
@@ -2369,14 +2361,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Коли ви збільшуєте частину екрана за допомогою потрійного дотику, це, зокрема, сповільнює введення тексту.\n\nКнопка спеціальних можливостей відображається на екрані поверх інших додатків. Натисніть її, щоб збільшити екран."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Перейти на кнопку спеціальних можливостей"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Використовувати потрійний дотик"</string>
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_title (8484669851397296597) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_message (2008671502848936410) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_positive_button (8712304035901450010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_negative_button (2028849736366584733) -->
-    <skip />
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Клавіатура може працювати повільніше"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Збільшуючи частину екрана за допомогою потрійного дотику, ви можете помітити проблеми з клавіатурою.\n\nЩоб уникнути цього, змініть швидку команду збільшення з потрійного дотику на інший варіант.\n"<annotation id="link">"Змінити налаштування"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Усе одно продовжити"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Скасувати"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Налаштування збільшення"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Збільшувати потрійним торканням"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
@@ -2384,24 +2372,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Про сервіс <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Розмір елементів на екрані й оформлення тексту"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Змініть параметри відображення тексту"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Проекти повітряних куль"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Від: Борис"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброго ранку!\n\nПросто хотілося б дізнатися, як просуваються проекти. Чи будуть вони готові, щоб ми встигли з конструюванням?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Скинути налаштування"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Скинути налаштування масштабу й тексту?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Параметри масштабу й тексту буде скинуто до початкових налаштувань телефона"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Скинути"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Маєте плани на вихідні?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Їдемо на пляж. Хочете з нами?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметри"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Наближуйте екран"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Тричі торкніться, щоб збільшити"</string>
@@ -2459,8 +2438,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Використання кнопки спеціальних можливостей. Жест недоступний при навігації трьома кнопками."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Швидкий доступ до спеціальних можливостей"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Щоб почати:"</b>\n"1. Перейдіть до налаштувань спеціальних можливостей.\n2. Виберіть потрібну функцію й натисніть ярлик.\n3. Виберіть, чи використовувати кнопку або жест для доступу до функції."</string>
-    <!-- no translation found for accessibility_button_description (1261273371298608222) -->
-    <skip />
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Щоб почати:"</b>\n"1. Перейдіть до налаштувань спеціальних можливостей.\n2. Виберіть потрібну функцію й натисніть швидку команду.\n3. Виберіть кнопку для доступу до функції."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Використати кнопку або жест"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Розташування"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Розмір"</string>
@@ -2564,19 +2542,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слухові апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Слухові апарати не під’єднано"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Додати слухові апарати"</string>
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
-    <skip />
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Підключіть слух. апарати"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Виберіть слухові апарати на наступному екрані. Можливо, вам знадобиться підключити слухові апарати для лівого та правого вух окремо.\n\nПереконайтеся, що слухові апарати ввімкнені й готові до підключення."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g> активовано"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, лише лівий"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, лише правий"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, лівий і правий"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> і ще 1 пристрій"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слуховий апарат</item>
       <item quantity="few">Збережено <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> слухові апарати</item>
@@ -3484,14 +3456,13 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Щоб надати спільний доступ до телефона, додавайте нових користувачів. Кожен із них матиме особистий профіль із власними головним екраном, обліковим записом, додатками, налаштуваннями тощо."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Користувачі та профілі"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Додати користувача чи профіль"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Додати користувача"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Профіль з обмеженням"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Не створено"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Не налаштовано – профіль з обмеженням"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Робочий профіль не налаштовано"</string>
     <string name="user_admin" msgid="4024553191395768119">"Адміністратор"</string>
     <string name="user_you" msgid="3070562015202859996">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Можна додати максимум стільки користувачів: <xliff:g id="USER_COUNT">%1$d</xliff:g>"</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"Ви додали максимальну кількість користувачів. Щоб додати нового користувача, вилучіть наявного."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Лише власник планшетного ПК може керувати користувачами."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Лише власник телефону може керувати користувачами."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Обмежені профілі не можуть додавати облікові записи"</string>
@@ -3511,9 +3482,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Додавання нового користувача…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Видалити користувача"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Видалити"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Гість"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Вийти з режиму гостя"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Вийти з режиму гостя?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Усі додатки й дані з цього сеансу буде видалено."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Вийти"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Увімкнути телефонні дзвінки"</string>
@@ -3734,8 +3702,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"не турбувати, пріоритет, пріоритетні сповіщення, втручатися"</string>
     <string name="keywords_app" msgid="7983814237980258061">"оперативна пам’ять"</string>
     <string name="keywords_location" msgid="8016374808099706213">"поруч, місцезнаходження, історія, надсилання, GPS"</string>
-    <!-- no translation found for keywords_accounts (3013897982630845506) -->
-    <skip />
+    <string name="keywords_accounts" msgid="3013897982630845506">"обліковий запис, як додати обліковий запис, робочий профіль, додати обліковий запис, вилучити, видалити"</string>
     <string name="keywords_users" msgid="3497517660077620843">"обмеження, обмежувати, обмежено"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"виправлення тексту, виправити, звук, вібросигнал. автоматично, мова, жести, пропонувати, пропозиція, тема, образливо, слово, ввести текст, смайли міжнародний"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"скинути, параметри, за умовчанням"</string>
@@ -4310,8 +4277,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Не дозволено"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Немає}=1{1 чат}one{# чат}few{# чати}many{# чатів}other{# чату}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Хто може турбувати"</string>
-    <!-- no translation found for zen_mode_people_footer (7710707353004137431) -->
-    <skip />
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Навіть якщо сповіщення з додатків для обміну повідомленнями або дзвінків не надходитимуть, вибрані тут користувачі все одно зможуть зв’язуватися з вами через ці додатки"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Дзвінки"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Дзвінки"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"виклики"</string>
@@ -4560,7 +4526,11 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> додатків, що не використовуються</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> додатка, що не використовується</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Вилучати дозволи й звільняти місце"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Налаштування невикористовуваних додатків"</string>
+    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Усі додатки"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установлені додатки"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Додатки з миттєвим запуском"</string>
@@ -5254,7 +5224,10 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Цим пристроєм керує <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Докладніше"</string>
-    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Налаштування з обмеженнями"</string>
+    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
+    <skip />
+    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
+    <skip />
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"З міркувань безпеки це налаштування наразі недоступне."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Інформація про пристрій, куплений у кредит"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваш кредитор може змінювати налаштування та встановлювати програмне забезпечення на цьому пристрої.\n\nЯкщо ви пропустите платіж, ваш пристрій буде заблоковано.\n\nЩоб дізнатися більше, зв\'яжіться з кредитором."</string>
@@ -5751,6 +5724,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Елементи керування зовнішніми пристроями відображатимуться на заблокованому екрані"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Керування із заблокованого пристрою"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Керуйте зовнішніми пристроями, не розблоковуючи телефон або планшет, якщо це дозволено додатком для керування пристроєм"</string>
+    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
+    <skip />
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показувати двосторонній годинник за наявності"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Дворядковий годинник"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5768,6 +5743,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Безстроковий доступ."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволити показ поверх інших вікон у налаштуваннях"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволити додаткам, що можуть показуватися поверх інших додатків, накладатися на екрани налаштувань"</string>
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Дозволити тестовий модем"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Цьому пристрою буде дозволено запускати сервіс тестового модема для інструментального тестування. Не вмикайте цю функцію у звичайному режимі роботи телефона."</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медіа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закріпити медіапрогравач"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Щоб швидко відновлювати відтворення, медіапрогравач залишається відкритим у швидких налаштуваннях"</string>
@@ -5853,7 +5830,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Використовувати закріплення додатка"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Використовувати Параметри розробника"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Використовувати сервіс друку"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Увімкнути кількох користувачів"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволити кілька користувачів"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Використовувати налагодження через Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Використовувати параметри графічного драйвера"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Використовувати режим енергозбереження"</string>
@@ -5917,16 +5894,11 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Початковий ліміт споживання"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Максимальний ліміт споживання"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Модифікатори"</string>
-    <!-- no translation found for tare_actions_ctp (5110104015354916401) -->
-    <skip />
-    <!-- no translation found for tare_actions_base_price (3300967942666376589) -->
-    <skip />
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Дії (вартість виконання)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Дії (основна ціна)"</string>
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Винагороди за кожну подію"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Винагороди за весь час події"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Максимальна кількість винагород на день"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Перші дії"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Сповіщення переглянуто"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Сповіщення переглянуто впродовж 15 хв"</string>
@@ -5957,22 +5929,19 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Переглянути"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Виберіть заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показувати додаткову інформацію"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Показувати час, дату та погоду на заставці"</string>
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Відображення часу, дати, погоди, якості повітря та даних Cast на заставці"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Інші налаштування"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Налаштуйте заставку"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Виберіть, що має відображатися на екрані, коли пристрій не використовується."</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Виберіть заставку"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Виберіть, що має відображатися на екрані, коли планшет не використовується. Коли використовується заставка, ваш пристрій може споживати більше енергії."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Налаштувати"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Щоб увімкнути підтримку довільного формату, перезапустіть пристрій."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Щоб примусово застосувати режим робочого столу на додаткових екранах, перезапустіть пристрій."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезапустити зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезапустити пізніше"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Просторовий звук"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Просторове звучання"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук із сумісних носіїв стає реалістичнішим"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Відстеження рухів голови"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Коли ви рухаєте головою, звучання стає природнішим"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ліміт швидкості завантаження в мережі"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Налаштуйте ліміт вхідної пропускної спроможності мережі, який застосовуватиметься до всіх мереж, що забезпечують інтернет-з’єднання."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Налаштувати ліміт швидкості завантаження в мережі"</string>

@@ -864,7 +864,7 @@
         </activity>
 
         <activity
-            android:name=".Settings$AppLocalePickerActivity"
+            android:name=".localepicker.AppLocalePickerActivity"
             android:label="@string/app_locale_picker_title"
             android:exported="true" >
             <intent-filter>
@@ -872,8 +872,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </activity>
 
         <activity
@@ -2343,7 +2341,7 @@
         </activity>
 
         <activity android:name=".password.ScreenLockSuggestionActivity"
-            android:exported="true"
+            android:exported="false"
             android:icon="@drawable/ic_suggestion_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />

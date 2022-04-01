@@ -86,6 +86,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private TopLevelSettings mMainFragment;
     private View mHomepageView;
+    private View mAppBar;
     private View mSuggestionView;
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
@@ -93,6 +94,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     private SplitController mSplitController;
     private boolean mIsEmbeddingActivityEnabled;
     private boolean mIsTwoPane;
+    // A regular layout shows icons on homepage, whereas a simplified layout doesn't.
+    private boolean mIsRegularLayout = true;
 
     /** A listener receiving homepage loaded events. */
     public interface HomepageLoadedListener {
@@ -100,8 +103,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         void onHomepageLoaded();
     }
 
-    private interface FragmentBuilder<T extends Fragment> {
-        T build();
+    private interface FragmentCreator<T extends Fragment> {
+        T create();
+
+        /** To initialize after {@link #create} */
+        default void init(Fragment fragment) {}
     }
 
     /**
@@ -145,6 +151,11 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return mMainFragment;
     }
 
+    /** Whether the activity is showing in two-pane */
+    public boolean isTwoPane() {
+        return mIsTwoPane;
+    }
+
     @Override
     public CategoryMixin getCategoryMixin() {
         return mCategoryMixin;
@@ -160,8 +171,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSplitController = SplitController.getInstance();
         mIsTwoPane = mSplitController.isActivityEmbedded(this);
 
-        final View appBar = findViewById(R.id.app_bar_container);
-        appBar.setMinimumHeight(getSearchBoxHeight());
+        mAppBar = findViewById(R.id.app_bar_container);
+        mAppBar.setMinimumHeight(getSearchBoxHeight());
         initHomepageContainer();
         updateHomepageAppBar();
         updateHomepageBackground();
@@ -195,6 +206,8 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         // Launch the intent from deep link for large screen devices.
         launchDeepLinkIntentToRight();
+        updateHomepagePaddings();
+        updateSplitLayout();
     }
 
     @Override
@@ -226,7 +239,42 @@ public class SettingsHomepageActivity extends FragmentActivity implements
             mIsTwoPane = newTwoPaneState;
             updateHomepageAppBar();
             updateHomepageBackground();
+            updateHomepagePaddings();
         }
+        updateSplitLayout();
+    }
+
+    private void updateSplitLayout() {
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+
+        if (mIsTwoPane) {
+            if (mIsRegularLayout == ActivityEmbeddingUtils.isRegularHomepageLayout(this)) {
+                // Layout unchanged
+                return;
+            }
+        } else if (mIsRegularLayout) {
+            // One pane mode with the regular layout, not needed to change
+            return;
+        }
+        mIsRegularLayout = !mIsRegularLayout;
+
+        // Update search title padding
+        View searchTitle = findViewById(R.id.search_bar_title);
+        if (searchTitle != null) {
+            int paddingStart = getResources().getDimensionPixelSize(
+                    mIsRegularLayout
+                            ? R.dimen.search_bar_title_padding_start_regular_two_pane
+                            : R.dimen.search_bar_title_padding_start);
+            searchTitle.setPaddingRelative(paddingStart, 0, 0, 0);
+        }
+        // Notify fragments
+        getSupportFragmentManager().getFragments().forEach(fragment -> {
+            if (fragment instanceof SplitLayoutListener) {
+                ((SplitLayoutListener) fragment).onSplitLayoutChanged(mIsRegularLayout);
+            }
+        });
     }
 
     private void setupEdgeToEdge() {
@@ -277,7 +325,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         final Window window = getWindow();
         final int color = mIsTwoPane
-                ? Utils.getColorAttrDefaultColor(this, com.android.internal.R.attr.colorSurface)
+                ? getColor(R.color.settings_two_pane_background_color)
                 : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -303,29 +351,25 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // Schedule a timer to show the homepage and hide the suggestion on timeout.
         mHomepageView.postDelayed(() -> showHomepageWithSuggestion(false),
                 HOMEPAGE_LOADING_TIMEOUT_MS);
-        final FragmentBuilder<?> fragmentBuilder = () -> {
-            try {
-                return fragmentClass.getConstructor().newInstance();
-            } catch (Exception e) {
-                Log.w(TAG, "Cannot show fragment", e);
-            }
-            return null;
-        };
-        showFragment(fragmentBuilder, R.id.suggestion_content);
+        showFragment(new SuggestionFragCreator(fragmentClass, /* isTwoPaneLayout= */ false),
+                R.id.suggestion_content);
         if (mIsEmbeddingActivityEnabled) {
-            showFragment(fragmentBuilder, R.id.two_pane_suggestion_content);
+            showFragment(new SuggestionFragCreator(fragmentClass, /* isTwoPaneLayout= */ true),
+                    R.id.two_pane_suggestion_content);
         }
     }
 
-    private <T extends Fragment> T showFragment(FragmentBuilder<T> fragmentBuilder, int id) {
+    private <T extends Fragment> T showFragment(FragmentCreator<T> fragmentCreator, int id) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         T showFragment = (T) fragmentManager.findFragmentById(id);
 
         if (showFragment == null) {
-            showFragment = fragmentBuilder.build();
+            showFragment = fragmentCreator.create();
+            fragmentCreator.init(showFragment);
             fragmentTransaction.add(id, showFragment);
         } else {
+            fragmentCreator.init(showFragment);
             fragmentTransaction.show(showFragment);
         }
         fragmentTransaction.commit();
@@ -447,9 +491,54 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         }
     }
 
+    private void updateHomepagePaddings() {
+        if (!mIsEmbeddingActivityEnabled) {
+            return;
+        }
+        if (mIsTwoPane) {
+            int padding = getResources().getDimensionPixelSize(
+                    R.dimen.homepage_padding_horizontal_two_pane);
+            mAppBar.setPaddingRelative(padding, 0, padding, 0);
+            mMainFragment.setPaddingHorizontal(padding);
+        } else {
+            mAppBar.setPaddingRelative(0, 0, 0, 0);
+            mMainFragment.setPaddingHorizontal(0);
+        }
+        mMainFragment.updatePreferencePadding(mIsTwoPane);
+    }
+
     private int getSearchBoxHeight() {
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
         final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
         return searchBarHeight + searchBarMargin * 2;
+    }
+
+    private static class SuggestionFragCreator implements FragmentCreator {
+
+        private final Class<? extends Fragment> mClass;
+        private final boolean mIsTwoPaneLayout;
+
+        SuggestionFragCreator(Class<? extends Fragment> clazz, boolean isTwoPaneLayout) {
+            mClass = clazz;
+            mIsTwoPaneLayout = isTwoPaneLayout;
+        }
+
+        @Override
+        public Fragment create() {
+            try {
+                Fragment fragment = mClass.getConstructor().newInstance();
+                return fragment;
+            } catch (Exception e) {
+                Log.w(TAG, "Cannot show fragment", e);
+            }
+            return null;
+        }
+
+        @Override
+        public void init(Fragment fragment) {
+            if (fragment instanceof SplitLayoutListener) {
+                ((SplitLayoutListener) fragment).setSplitLayoutSupported(mIsTwoPaneLayout);
+            }
+        }
     }
 }

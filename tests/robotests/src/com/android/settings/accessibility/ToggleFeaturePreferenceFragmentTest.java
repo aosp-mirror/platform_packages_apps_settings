@@ -38,6 +38,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.PopupWindow;
 
 import androidx.annotation.XmlRes;
@@ -181,6 +182,28 @@ public class ToggleFeaturePreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void dialogCheckboxClicked_hardwareType_skipTimeoutRestriction() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mFragment::callOnAlertDialogCheckboxClicked);
+        mFragment.setupEditShortcutDialog(dialog);
+
+        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
+        final CheckBox hardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        hardwareTypeCheckBox.setChecked(true);
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        final boolean skipTimeoutRestriction = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, 0) != 0;
+
+        assertThat(skipTimeoutRestriction).isTrue();
     }
 
     @Test

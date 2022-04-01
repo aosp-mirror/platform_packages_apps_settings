@@ -85,18 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Anda tidak memiliki izin untuk mengubah setelan Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Sambungkan perangkat baru"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
-    <skip />
-    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Sambungkan ke telinga satunya"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Alat bantu dengar telinga kiri terhubung.\n\nUntuk menyambungkan yang sebelah kanan, pastikan alat sudah dinyalakan dan siap disambungkan."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Alat bantu dengar telinga kanan terhubung.\n\nUntuk menyambungkan yang sebelah kiri, pastikan alat sudah dinyalakan dan siap disambungkan."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Sambungkan ke telinga kanan"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Sambungkan ke telinga kiri"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Terkait"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> dapat dilihat oleh perangkat lain di sekitar saat Setelan Bluetooth dibuka."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Alamat Bluetooth ponsel: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Alamat Bluetooth tablet: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -223,7 +217,7 @@
     <string name="app_locale_preference_title" msgid="5513627099300360232">"Bahasa"</string>
     <string name="locale_picker_category_title" msgid="6212064706962721255">"Bahasa Pilihan"</string>
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Bahasa Aplikasi"</string>
-    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Menyetel bahasa untuk setiap aplikasi"</string>
+    <string name="app_locale_picker_summary" msgid="6742557329924446252">"Setel bahasa untuk setiap aplikasi"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Bahasa Aplikasi"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Bahasa yang disarankan"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Semua bahasa"</string>
@@ -734,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Jika Anda memasukkan pola yang salah saat mencoba lagi, profil kerja dan datanya akan dihapus"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jika Anda memasukkan PIN yang salah saat mencoba lagi, profil kerja dan datanya akan dihapus"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Jika Anda memasukkan sandi yang salah saat mencoba lagi, profil kerja dan datanya akan dihapus"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Terlalu sering mencoba dengan salah. Data perangkat ini akan dihapus."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Terlalu sering mencoba dengan salah. Pengguna ini akan dihapus."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Terlalu banyak upaya salah. Profil kerja ini dan datanya akan dihapus."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Tutup"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">Minimal berisi <xliff:g id="COUNT_1">%d</xliff:g> karakter</item>
       <item quantity="one">Minimal berisi <xliff:g id="COUNT_0">%d</xliff:g> karakter</item>
@@ -1915,7 +1905,8 @@
     <string name="module_license_title" msgid="8705484239826702828">"Lisensi update sistem Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Persyaratan dan ketentuan"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Lisensi WebView Sistem"</string>
-    <string name="wallpaper_attributions" msgid="3080339190260272255">"Wallpaper"</string>
+    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
+    <skip />
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Penyedia citra satelit:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Ada masalah saat memuat manual."</string>
@@ -2066,7 +2057,8 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktifkan"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Hapus penyimpanan"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Uninstal pembaruan"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"Buka kunci setelan terbatas"</string>
+    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
+    <skip />
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Beberapa aktivitas yang Anda pilih terbuka di aplikasi ini secara default."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Anda telah memilih untuk mengizinkan aplikasi ini untuk membuat widget dan mengakses data mereka."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Tidak ada setelan default."</string>
@@ -2321,14 +2313,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Menggunakan ketuk tiga kali untuk memperbesar bagian layar Anda akan menyebabkan penundaan pengetikan dan penundaan lainnya.\n\nTombol aksesibilitas mengambang di layar di atas aplikasi lainnya. Ketuk tombol untuk memperbesar."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Beralih ke tombol Aksesibilitas"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Gunakan ketuk tiga kali"</string>
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_title (8484669851397296597) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_message (2008671502848936410) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_positive_button (8712304035901450010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_negative_button (2028849736366584733) -->
-    <skip />
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Ini mungkin memperlambat keyboard Anda"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Saat mengetuk tiga kali untuk memperbesar bagian layar, Anda mungkin menemukan masalah pada keyboard.\n\nUntuk menghindarinya, Anda dapat mengubah pintasan pembesaran dari ketuk tiga kali ke opsi lain.\n"<annotation id="link">"Ubah setelan"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Tetap lanjutkan"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Batal"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Setelan pembesaran"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Perbesar dengan ketuk 3 kali"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Perbesar dengan pintasan"</string>
@@ -2336,24 +2324,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Tentang <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Ukuran layar dan teks"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Ubah tampilan teks"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Subjek: Desain balon udara"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Dari: Budi"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Selamat pagi.\n\nSaya ingin menanyakan progres desainnya. Apakah desainnya akan siap sebelum kita mulai membuat balon baru?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Reset setelan"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Reset teks dan ukuran layar?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Preferensi teks dan ukuran layar akan direset ke setelan asli ponsel"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Reset"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Ada rencana untuk akhir pekan ini?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Pergi ke pantai. Mau ikut?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Opsi"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Perbesar tampilan di layar"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ketuk 3 kali untuk memperbesar"</string>
@@ -2411,8 +2390,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Menggunakan tombol aksesibilitas. Gestur tidak tersedia dengan navigasi 3 tombol."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Akses fitur aksesibilitas dengan cepat"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Untuk memulai"</b>\n"1. Buka setelan aksesibilitas\n2. Pilih salah satu fitur, lalu ketuk pintasan\n3. Pilih apakah Anda ingin menggunakan tombol atau gestur untuk mengakses fitur tersebut"</string>
-    <!-- no translation found for accessibility_button_description (1261273371298608222) -->
-    <skip />
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Untuk memulai"</b>\n"1. Buka setelan aksesibilitas\n2. Pilih salah satu fitur, lalu ketuk pintasan\n3. Pilih tombol untuk mengakses fitur tersebut"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gunakan tombol atau gestur"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasi"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Ukuran"</string>
@@ -2516,19 +2494,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Alat bantu dengar"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Tidak ada alat bantu dengar yang terhubung"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Tambahkan alat bantu dengar"</string>
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
-    <skip />
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Sambungkan ke alat bantu dengar"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Pada layar berikutnya, ketuk alat bantu dengar Anda. Anda mungkin perlu menyambungkan alat untuk telinga kiri dan kanan secara terpisah.\n\nPastikan alat bantu dengar Anda dinyalakan dan siap disambungkan."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> aktif"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, hanya kiri"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, hanya kanan"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, kiri dan kanan"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 lainnya"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> alat bantu dengar yang tersimpan</item>
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> alat bantu dengar yang tersimpan</item>
@@ -3396,14 +3368,13 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Gunakan ponsel bersama orang lain dengan menambahkan pengguna baru. Setiap pengguna memiliki ruang pribadi di perangkat Anda untuk akun, aplikasi, setelan, Layar utama kustom, dan lainnya."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Pengguna &amp; profil"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Tambahkan pengguna atau profil"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Tambahkan pengguna"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil dibatasi"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Tidak disiapkan"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Tidak disiapkan - Profil dibatasi"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Tidak disiapkan - Profil kerja"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"Anda (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Anda dapat menambahkan maksimal <xliff:g id="USER_COUNT">%1$d</xliff:g> pengguna"</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"Tidak dapat menambahkan pengguna lagi. Hapus satu pengguna untuk menambahkan pengguna baru."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Hanya pemilik tablet yang dapat mengelola pengguna."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Hanya pemilik ponsel yang dapat mengelola pengguna."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Profil yang dibatasi tidak dapat menambahkan akun"</string>
@@ -3423,9 +3394,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Menambahkan pengguna baru..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Hapus pengguna"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Hapus"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Tamu"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Hapus tamu"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Hapus tamu?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Semua aplikasi dan data di sesi ini akan dihapus."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Hapus"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktifkan panggilan telepon"</string>
@@ -3644,8 +3612,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"jangan jangan ganggu, mengganggu, gangguan, putus"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"di sekitar, lokasi, histori, pelaporan, GPS"</string>
-    <!-- no translation found for keywords_accounts (3013897982630845506) -->
-    <skip />
+    <string name="keywords_accounts" msgid="3013897982630845506">"akun, tambahkan akun, profil kerja, tambah akun, buang, hapus"</string>
     <string name="keywords_users" msgid="3497517660077620843">"pembatasan, membatasi, dibatasi"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"koreksi teks, benar suara, getar otomatis, bahasa, isyarat, sarankan, saran, tema, menyinggung, kata, jenis, emoji, internasional"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"reset, preferensi, default"</string>
@@ -4204,8 +4171,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Tidak ada"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Tidak ada}=1{1 percakapan}other{# percakapan}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Siapa yang dapat mengganggu"</string>
-    <!-- no translation found for zen_mode_people_footer (7710707353004137431) -->
-    <skip />
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Meskipun aplikasi pesan atau telepon tidak dapat memberi tahu Anda, orang yang Anda pilih di sini masih dapat menghubungi Anda melalui aplikasi tersebut"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Panggilan telepon"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Panggilan telepon"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"panggilan telepon"</string>
@@ -4434,7 +4400,11 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> aplikasi tidak digunakan</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplikasi tidak digunakan</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Hapus izin &amp; kosongkan ruang penyimpanan"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Setelan aplikasi yang tidak digunakan"</string>
+    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Semua aplikasi"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplikasi terinstal"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplikasi instan"</string>
@@ -5090,7 +5060,10 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Perangkat ini dikelola oleh <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Pelajari lebih lanjut"</string>
-    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Setelan Terbatas"</string>
+    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
+    <skip />
+    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
+    <skip />
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Demi keamanan Anda, setelan ini tidak tersedia untuk saat ini."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Info perangkat yang dibiayai"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Penyedia kredit Anda dapat mengubah setelan dan menginstal software di perangkat ini.\n\nJika Anda terlambat membayar, perangkat akan dikunci.\n\nUntuk mempelajari lebih lanjut, hubungi penyedia kredit Anda."</string>
@@ -5573,6 +5546,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Menampilkan kontrol untuk perangkat eksternal dari layar kunci"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kontrol dari perangkat yang dikunci"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Kontrol perangkat eksternal tanpa membuka kunci ponsel atau tablet jika diizinkan oleh aplikasi kontrol perangkat"</string>
+    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
+    <skip />
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Menampilkan jam dua baris jika tersedia"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Jam dua baris"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5590,6 +5565,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Lease akan terus berlaku."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Mengizinkan overlay layar pada Setelan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Izinkan aplikasi yang dapat ditampilkan di atas aplikasi lain untuk menempatkan layar Setelan"</string>
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Izinkan Modem Simulasi"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Izinkan perangkat ini menjalankan layanan Modem Simulasi untuk uji instrumentasi. Jangan mengaktifkannya selama penggunaan normal ponsel"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Sematkan pemutar media"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Untuk melanjutkan pemutaran dengan cepat, pemutar media tetap terbuka di Setelan Cepat"</string>
@@ -5675,7 +5652,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Gunakan penyematan aplikasi"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Gunakan opsi developer"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Gunakan layanan pencetakan"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Aktifkan beberapa pengguna"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Izinkan beberapa pengguna"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Gunakan proses debug nirkabel"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Menggunakan preferensi driver grafis"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Menggunakan penghemat baterai"</string>
@@ -5739,16 +5716,11 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Batas Penggunaan Awal"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Batas Penggunaan Maksimum"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Pengubah"</string>
-    <!-- no translation found for tare_actions_ctp (5110104015354916401) -->
-    <skip />
-    <!-- no translation found for tare_actions_base_price (3300967942666376589) -->
-    <skip />
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Tindakan (Biaya Produksi)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Tindakan (Harga Dasar)"</string>
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Reward per satu acara"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Reward untuk total durasi acara"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Reward Maksimum Per Hari"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Aktivitas Teratas"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notifikasi Sudah Dilihat"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notifikasi Sudah Dilihat dalam 15 Menit"</string>
@@ -5779,22 +5751,19 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pratinjau"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Pilih screensaver"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Tampilkan informasi tambahan"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Menampilkan waktu, tanggal, dan cuaca pada screensaver"</string>
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Menampilkan detail waktu, tanggal, kualitas udara, dan Transmisi di screensaver"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Setelan lainnya"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Sesuaikan screensaver Anda"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Pilih screensaver yang akan ditampilkan di layar saat perangkat tidak digunakan."</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Pilih screensaver"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Pilih screensaver yang akan ditampilkan di layar saat tablet dipasang ke dok. Perangkat Anda mungkin menggunakan lebih banyak daya saat screensaver digunakan."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Sesuaikan"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Perlu memulai ulang untuk mengaktifkan dukungan bentuk bebas."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Perlu memulai ulang untuk memaksa mode desktop di layar sekunder."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Mulai ulang sekarang"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Mulai ulang nanti"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Audio spasial"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Audio Spasial"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Audio dari perangkat media yang kompatibel menjadi lebih imersif"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Pelacakan gerak kepala"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Audio akan berubah saat Anda menggerakkan kepala agar terdengar lebih alami"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Batas kecepatan download jaringan"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Mengonfigurasi batas kecepatan masuk bandwidth jaringan yang diterapkan ke semua jaringan yang menyediakan koneksi internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurasi batas kecepatan download jaringan"</string>

@@ -85,18 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"Vous n\'êtes pas autorisé à modifier les paramètres Bluetooth."</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Associer un autre appareil"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"Bluetooth"</string>
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_title (3814943511999984012) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_message (7936892941892347102) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_message (8242208936062915941) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_right_ear_positive_button (533612082529204078) -->
-    <skip />
-    <!-- no translation found for bluetooth_pair_other_ear_dialog_left_ear_positive_button (6500192653171220257) -->
-    <skip />
-    <!-- no translation found for bluetooth_screen_related (7976543255501825536) -->
-    <skip />
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Associer l\'autre oreille"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Votre prothèse auditive gauche est connectée.\n\nPour associer celle de droite, assurez-vous qu\'elle est activée et prête à être associée."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Votre prothèse auditive droite est connectée.\n\nPour associer celle de gauche, assurez-vous qu\'elle est activée et prête à être associée."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Assoc. oreille droite"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Assoc. oreille gauche"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"Connexes"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"Lorsque le Bluetooth est activé, votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g> est visible par les appareils à proximité."</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"Adresse Bluetooth du téléphone : <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"Adresse Bluetooth de la tablette : <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -734,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"Si vous entrez un schéma incorrect à la prochaine tentative, votre profil professionnel et ses données seront supprimés"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Si vous entrez un NIP incorrect à la prochaine tentative, votre profil professionnel et ses données seront supprimés"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Si vous entrez un mot de passe incorrect à la prochaine tentative, votre profil professionnel et ses données seront supprimés"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"Trop de tentatives incorrectes. Les données de cet appareil seront supprimées."</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"Trop de tentatives incorrectes. Cet utilisateur sera supprimé."</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"Trop de tentatives incorrectes. Ce profil professionnel et ses données seront supprimés."</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"Ignorer"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="one">Doit contenir au moins <xliff:g id="COUNT_1">%d</xliff:g> caractère</item>
       <item quantity="other">Doit contenir au moins <xliff:g id="COUNT_1">%d</xliff:g> caractères</item>
@@ -1084,7 +1074,7 @@
     <string name="wifi_use_system_certs" msgid="5587866698144996931">"Utiliser les certificats système"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"Ne pas fournir"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Ne pas valider"</string>
-    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Considérer comme de confiance à la première utilisation"</string>
+    <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Faire confiance lors de la première utilisation"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"Le nom du réseau est trop long."</string>
     <string name="wifi_no_domain_warning" msgid="1452133316532366772">"Vous devez spécifier un domaine."</string>
     <string name="wifi_no_user_cert_warning" msgid="8466376918835248956">"Certificat obligatoire."</string>
@@ -1915,7 +1905,8 @@
     <string name="module_license_title" msgid="8705484239826702828">"Licences des mises à jour système pour Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Conditions d\'utilisation"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Licence WebView du système"</string>
-    <string name="wallpaper_attributions" msgid="3080339190260272255">"Fonds d\'écran"</string>
+    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
+    <skip />
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Fournisseurs d\'images satellite :\n© CNES/Astrium, DigitalGlobe, Bluesky 2014"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manuel"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Problème lors du chargement du manuel."</string>
@@ -2066,7 +2057,8 @@
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Effacer l\'espace de stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller mises à jour"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="7930576126329843435">"Déverrouiller les paramètres restreints"</string>
+    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
+    <skip />
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette application par défaut."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aucun paramètre par défaut défini"</string>
@@ -2321,14 +2313,10 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"L\'utilisation du triple toucher pour agrandir une partie de l\'écran a pour effet de retarder l\'entrée et les autres actions.\n\nLe bouton d\'accessibilité flotte sur votre écran par-dessus les autres applications. Touchez-le pour l\'agrandir."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Passer au bouton d\'accessibilité"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Utiliser le triple toucher"</string>
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_title (8484669851397296597) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_message (2008671502848936410) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_positive_button (8712304035901450010) -->
-    <skip />
-    <!-- no translation found for accessibility_magnification_triple_tap_warning_negative_button (2028849736366584733) -->
-    <skip />
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Cela peut ralentir votre clavier"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Lorsque vous touchez trois fois pour agrandir une partie de votre écran, vous remarquerez peut-être des problèmes avec le clavier.\n\nPour éviter cela, vous pouvez changer votre raccourci d\'agrandissement du toucher trois fois à une autre option.\n"<annotation id="link">"Changer le paramètre"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Continuer quand même"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Annuler"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Paramètres d\'agrandissement"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"Agrandir en touchant 3 fois"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Agrandir avec un raccourci"</string>
@@ -2336,24 +2324,15 @@
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"À propos de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Taille de l\'affichage et texte"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Modifier l\'affichage du texte"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (4597374768612733616) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (1797499780365288020) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (8078152365771951802) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_reset_button_title (5960753279788187669) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_title (2865331351355690389) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (517090197003540264) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_reset_button (8215800137850243736) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_1 (7883952203831957831) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_conversation_message_2 (8112160435318635856) -->
-    <skip />
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Objet : Conceptions de ballon à air chaud"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De : Bill"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bonjour!\n\nJe voulais juste vérifier l\'avancement des conceptions. Seront-elles prêtes avant que nous commencions à construire les nouveaux ballons?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Réinitialiser paramètres"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Réinitialiser la taille d\'affichage et le texte?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Vos préférences de taille d\'affichage et de texte seront réinitialisées aux paramètres par défaut du téléphone"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Réinitialiser"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Des plans pour la fin de semaine?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Direction la plage. Tu viens?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Options"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoomez sur l\'écran"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Touchez trois fois pour zoomer vers l\'avant"</string>
@@ -2411,8 +2390,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisez le bouton d\'accessibilité. Le geste n\'est pas proposé avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Pour commencer :"</b>\n"1. Accédez aux paramètres d\'accessibilité\n2. Sélectionnez une fonctionnalité et touchez le raccourci\n3. Choisissez d\'utiliser un bouton ou un geste pour accéder à la fonctionnalité"</string>
-    <!-- no translation found for accessibility_button_description (1261273371298608222) -->
-    <skip />
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Pour commencer :"</b>\n"1. Accédez aux paramètres d\'accessibilité\n2. Sélectionnez une fonctionnalité et touchez le raccourci\n3. Choisissez le bouton pour accéder à la fonctionnalité"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Utiliser le bouton ou le geste"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Position"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
@@ -2429,7 +2407,7 @@
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Grand curseur de souris"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Mettez en évidence le pointeur de la souris"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
-    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduction du mouvement sur l\'écran"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduisez les mouvements sur l\'écran"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les chaînes lors de la lecture audio"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"Équilibre sonore"</string>
@@ -2516,19 +2494,13 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Prothèses auditives"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Aucune prothèse auditive connectée"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Ajouter des prothèses auditives"</string>
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_title (2357706801112207624) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_pair_instructions_message (581652489109350119) -->
-    <skip />
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Associer prothèses audit."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"À l\'écran suivant, sélectionnez vos prothèses auditives. Vous devrez peut-être associer les oreilles gauche et droite séparément.\n\nAssurez-vous que vos prothèses auditives sont activées et prêtes à être associées."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> est actif"</string>
-    <!-- no translation found for accessibility_hearingaid_left_side_device_summary (1907302799168261001) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_right_side_device_summary (148257064855054376) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_left_and_right_side_device_summary (4268221140368164452) -->
-    <skip />
-    <!-- no translation found for accessibility_hearingaid_more_device_summary (8092641784056942546) -->
-    <skip />
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, gauche seulement"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, droite seulement"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, gauche et droite"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 autre"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> prothèse auditive enregistrée</item>
       <item quantity="other"><xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> prothèses auditives enregistrées</item>
@@ -3396,14 +3368,13 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Partagez votre téléphone en ajoutant des utilisateurs. Chaque utilisateur dispose d\'un espace personnel sur votre téléphone pour ses écrans d\'accueil personnalisés, ses comptes, ses applications, ses paramètres et plus encore."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Utilisateurs et profils"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Ajouter un utilisateur ou un profil"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"Ajouter un utilisateur"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Profil limité"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Non configuré"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Non configuré : profil limité"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Non configuré : profil professionnel"</string>
     <string name="user_admin" msgid="4024553191395768119">"Admin"</string>
     <string name="user_you" msgid="3070562015202859996">"Vous (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"Vous pouvez ajouter jusqu\'à <xliff:g id="USER_COUNT">%1$d</xliff:g> utilisateurs"</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"Vous ne pouvez plus ajouter d’utilisateurs. Retirez un utilisateur pour en ajouter un nouveau."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Seul le propriétaire de la tablette peut gérer les utilisateurs."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Seul le propriétaire de la tablette peut gérer les utilisateurs."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Les profils limités ne peuvent pas ajouter de compte."</string>
@@ -3423,9 +3394,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"Ajout de l\'utilisateur…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Supprimer l\'utilisateur"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"Supprimer"</string>
-    <string name="user_guest" msgid="4545590092001460388">"Invité"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"Supprimer l\'invité"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Supprimer l\'invité?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Toutes les applications et les données de cette session seront supprimées."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Supprimer"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
@@ -3446,7 +3414,7 @@
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Installer les applis proposées"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Paiements sans contact"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"Application de paiement par défaut"</string>
-    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Application de paiement : maintenez l\'arrière de votre appareil contre un terminal de paiement"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Pour effectuer un paiement à l\'aide d\'une application, approchez l\'arrière de votre appareil du terminal"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"En savoir plus"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Appli pro par défaut pour les paiements?"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Pour les paiments avec une appli pro :"</string>
@@ -3644,8 +3612,7 @@
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"ne pas déranger, interrompre, interruption, pause"</string>
     <string name="keywords_app" msgid="7983814237980258061">"Mémoire vive"</string>
     <string name="keywords_location" msgid="8016374808099706213">"à proximité, position, historique, signalement, GPS"</string>
-    <!-- no translation found for keywords_accounts (3013897982630845506) -->
-    <skip />
+    <string name="keywords_accounts" msgid="3013897982630845506">"compte, ajouter un compte, profil professionnel, ajouter compte, retirer, supprimer"</string>
     <string name="keywords_users" msgid="3497517660077620843">"restriction, restreindre, restreint"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"correction de texte, corriger, son, vibreur, automatique, langue, geste, suggérer, suggestion, thème, choquant, mot, type, emoji, international"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"réinitialiser, préférences, par défaut"</string>
@@ -4204,8 +4171,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Aucune"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Aucune}=1{1 conversation}one{# conversation}other{# conversations}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Qui peut provoquer des interruptions"</string>
-    <!-- no translation found for zen_mode_people_footer (7710707353004137431) -->
-    <skip />
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"Même si vous ne pouvez pas recevoir de notifications des applications de messagerie ou de téléphonie, les personnes que vous choisissez ici peuvent toujours vous joindre par le biais de celles-ci"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Appels"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Appels"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"appels"</string>
@@ -4434,7 +4400,11 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> application non utilisée</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> applications non utilisées</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"Retirer autorisations et libérer espace"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"Paramètres des applications inutilisées"</string>
+    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"Toutes les applications"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Applications installées"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Applications instantanées"</string>
@@ -5090,7 +5060,10 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Cet appareil est géré par <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"En savoir plus"</string>
-    <string name="blocked_by_restricted_settings_title" msgid="612784193997454496">"Paramètres restreints"</string>
+    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
+    <skip />
+    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
+    <skip />
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Pour protéger votre sécurité, ce paramètre n\'est pas disponible actuellement."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Renseignements sur l\'appareil financé"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Votre fournisseur de crédit peut modifier des paramètres et installer des logiciels sur cet appareil.\n\nSi vous manquez un paiement, votre appareil sera verrouillé.\n\nPour en savoir plus, communiquez avec votre fournisseur de crédit."</string>
@@ -5573,6 +5546,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Affichez les commandes des appareils externes à partir de l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Contrôler à partir d\'un appareil verrouillé"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Contrôlez les appareils externes sans déverrouiller votre téléphone ou votre tablette si l\'application de commandes de ces derniers l\'autorise"</string>
+    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
+    <skip />
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Afficher l\'horloge à double ligne lorsqu\'elle est accessible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Horloge à double ligne"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5590,6 +5565,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Le bail n\'expire jamais."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser les superpos. d\'écran pour les paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autorisez les applications qui peuvent se superposer à d\'autres à afficher du contenu par-dessus les écrans des paramètres"</string>
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Autoriser le service de modem simulé"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Autorisez cet appareil à exécuter le service de modem simulé pour les tests d\'instrumentation; ne l\'activez pas pendant l\'utilisation normale du téléphone"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Commandes multimédias"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Épingler le lecteur multimédia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Pour que vous puissiez reprendre rapidement la lecture, le lecteur multimédia reste ouvert dans Paramètres rapides"</string>
@@ -5675,7 +5652,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utiliser l\'épinglage d\'application"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Utiliser les options pour les développeurs"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Utiliser le service d\'impression"</string>
-    <string name="multiple_users_main_switch_title" msgid="564013811417665756">"Activer la prise en charge de plusieurs utilisateurs"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Autoriser plusieurs utilisateurs"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utiliser le débogage sans fil"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utiliser les préférences du pilote graphique"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Utiliser l\'économiseur de pile"</string>
@@ -5739,16 +5716,11 @@
     <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"Limite de consommation initiale"</string>
     <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"Limite de consommation maximale"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"Modificateurs"</string>
-    <!-- no translation found for tare_actions_ctp (5110104015354916401) -->
-    <skip />
-    <!-- no translation found for tare_actions_base_price (3300967942666376589) -->
-    <skip />
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"Actions (coût de production)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"Actions (prix de base)"</string>
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Récompenses par événement individuel"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Récompenses pour la durée de l\'événement"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Maximum de récompenses par jour"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Activité principale"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notification vue"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notification vue dans les 15 minutes"</string>
@@ -5779,22 +5751,19 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Aperçu"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Choisir un écran de veille"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Afficher d\'autres informations"</string>
-    <string name="dream_complications_toggle_summary" msgid="8288590233196337078">"Affichez l\'heure, la date et la météo sur votre écran de veille"</string>
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Affichez l\'heure, la date, la météo, la qualité de l\'air et les renseignements de diffusion sur l\'écran de veille"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Plus de paramètres"</string>
-    <string name="dream_setup_title" msgid="6356243920317789584">"Personnaliser votre écran de veille"</string>
-    <string name="dream_setup_description" msgid="8881397422185278075">"Choisissez ce que vous voyez à l\'écran lorsque votre appareil n\'est pas utilisé."</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"Choisir votre écran de veille"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Choisissez ce que vous voyez à l\'écran lorsque votre tablette est ancrée. Votre appareil peut consommer plus d\'énergie lorsqu\'un écran de veille est utilisé."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personnaliser"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Vous devez redémarrer l\'appareil pour activer la prise en charge des fenêtres de forme libre."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Vous devez redémarrer l\'appareil pour forcer le mode Bureau sur des écrans secondaires."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Redémarrer maintenant"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Redémarrer plus tard"</string>
-    <string name="bluetooth_details_spatial_audio_title" msgid="6183752635162309599">"Son spatialisé"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Son spatialisé"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Le son des supports compatibles devient plus immersif"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Suivi de la tête"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Le son est modifié en fonction des mouvements de votre tête pour produire un son plus naturel"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Limitation du taux de téléchargement sur le réseau"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configurez la limitation du taux d\'entrée sur la bande passante qui est appliquée à tous les réseaux qui fournissent une connectivité Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configurer la limitation du taux de téléchargement sur le réseau"</string>

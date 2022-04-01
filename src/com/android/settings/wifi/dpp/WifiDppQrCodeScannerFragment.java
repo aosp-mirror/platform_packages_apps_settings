@@ -56,8 +56,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.qrcode.QrCamera;
-import com.android.settings.wifi.qrcode.QrDecorateView;
+import com.android.settingslib.qrcode.QrCamera;
+import com.android.settingslib.qrcode.QrDecorateView;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -117,7 +117,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
-    private WifiPickerTracker mWifiPickerTracker;
+    @VisibleForTesting
+    WifiPickerTracker mWifiPickerTracker;
     private HandlerThread mWorkerThread;
 
     private final Handler mHandler = new Handler() {
@@ -193,6 +194,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         if (id == -1) {
                             continue;
                         }
+
+                        if (!canConnectWifi(qrCodeWifiConfiguration.SSID)) return;
+
                         wifiManager.enableNetwork(id, /* attemptConnect */ false);
                         // WifiTracker only contains a hidden SSID Wi-Fi network if it's saved.
                         // We can't check if a hidden SSID Wi-Fi network is reachable in advance.
@@ -264,6 +268,21 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         }
         return false;
+    }
+
+    @VisibleForTesting
+    boolean canConnectWifi(String ssid) {
+        final List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
+        for (WifiEntry wifiEntry : wifiEntries) {
+            if (!TextUtils.equals(wifiEntry.getSsid(), sanitizeSsid(ssid))) continue;
+
+            if (!wifiEntry.canConnect()) {
+                Log.w(TAG, "Wi-Fi is not allowed to connect by your organization. SSID:" + ssid);
+                showErrorMessageAndRestartCamera(R.string.not_allowed_by_ent);
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -575,7 +594,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         message.sendToTarget();
     }
 
-    private void showErrorMessageAndRestartCamera(@StringRes int messageResId) {
+    @VisibleForTesting
+    void showErrorMessageAndRestartCamera(@StringRes int messageResId) {
         final Message message = mHandler.obtainMessage(MESSAGE_SHOW_ERROR_MESSAGE,
                 getString(messageResId));
         message.arg1 = ARG_RESTART_CAMERA;
@@ -603,6 +623,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                 if (wifiConfig.networkId == newNetworkId) {
                     mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
                     mEnrolleeWifiConfiguration = wifiConfig;
+                    if (!canConnectWifi(wifiConfig.SSID)) return;
                     wifiManager.connect(wifiConfig, WifiDppQrCodeScannerFragment.this);
                     return;
                 }
