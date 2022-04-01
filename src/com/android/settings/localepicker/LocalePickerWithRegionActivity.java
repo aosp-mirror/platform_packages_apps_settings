@@ -17,8 +17,11 @@
 package com.android.settings.localepicker;
 
 import android.app.FragmentTransaction;
+import android.app.LocaleManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.LocaleList;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.android.internal.app.LocalePickerWithRegion;
@@ -31,6 +34,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener {
 
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
+    private static final String TAG = "Calvin";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,25 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
                 .commit();
     }
 
+    public void setAppDefaultLocale(String languageTag) {
+        if (languageTag.isEmpty()) {
+            Log.w(TAG, "[setAppDefaultLocale] No language tag.");
+            return;
+        }
+        setAppDefaultLocale(LocaleList.forLanguageTags(languageTag));
+    }
+
+    /** Sets per app's default language to system. */
+    public void setAppDefaultLocale(LocaleList localeList) {
+        LocaleManager mLocaleManager = getSystemService(LocaleManager.class);
+        if (mLocaleManager == null) {
+            Log.w(TAG, "LocaleManager is null, and cannot set the app locale up.");
+            return;
+        }
+        mLocaleManager.setApplicationLocales("com.android.vending", localeList);
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -58,9 +81,16 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
 
     @Override
     public void onLocaleSelected(LocaleStore.LocaleInfo locale) {
-        final Intent intent = new Intent();
+        /*final Intent intent = new Intent();
         intent.putExtra(LocaleListEditor.INTENT_LOCALE_KEY, locale);
-        setResult(RESULT_OK, intent);
+        setResult(RESULT_OK, intent);*/
+        if(locale != null) {
+            Log.d("Calvin", "onLocaleSelected " + locale.getLocale().toLanguageTag());
+            setAppDefaultLocale(locale.getLocale().toLanguageTag());
+        } else {
+            Log.d("Calvin", "onLocaleSelected null");
+            setAppDefaultLocale("");
+        }
         finish();
     }
 
