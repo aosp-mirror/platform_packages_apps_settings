@@ -13,21 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/app_locale_detail_container"
-    android:orientation="vertical">
-
-    <FrameLayout
-        android:id="@+id/app_locale_detail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <FrameLayout
-        android:id="@+id/app_locale_picker_with_region"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@android:color/system_neutral1_500" android:lStar="87" />
+</selector>
