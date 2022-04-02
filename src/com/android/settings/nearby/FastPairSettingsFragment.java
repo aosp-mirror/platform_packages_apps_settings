@@ -21,7 +21,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.nearby.NearbyManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -55,10 +54,7 @@ public class FastPairSettingsFragment extends SettingsPreferenceFragment {
 
         MainSwitchPreference mainSwitchPreference = Objects.requireNonNull(
                 findPreference(SCAN_SWITCH_KEY));
-        mainSwitchPreference.addOnSwitchChangeListener(
-                (switchView, isChecked) ->
-                        NearbyManager.setFastPairScanEnabled(getContext(), isChecked));
-        mainSwitchPreference.setChecked(NearbyManager.getFastPairScanEnabled(getContext()));
+        mainSwitchPreference.setChecked(false);
 
         Preference savedDevicePref = Objects.requireNonNull(
                 findPreference(SAVED_DEVICES_PREF_KEY));
