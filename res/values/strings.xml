@@ -500,6 +500,15 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
+    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
+    <string name="warnings_title">Update the app</string>
+
+    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
+    <string name="warnings_summary">You need to update the app for the latest available languages</string>
+
+    <!-- Button text on warning message [CHAR LIMIT=20]-->
+    <string name="warnings_button_update">Update now</string>
+
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -513,7 +522,11 @@
     <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
 
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
-    <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
+    <string name="desc_no_available_supported_locale">Language selection for this app isn\u2019t available from Settings.</string>
+
+    <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
+    <string name="desc_disallow_locale_change_in_settings">You can\u2019t select a language for this app from Settings.</string>
+
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>

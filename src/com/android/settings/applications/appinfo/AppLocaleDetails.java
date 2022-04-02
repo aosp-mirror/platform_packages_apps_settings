@@ -22,14 +22,19 @@ import android.app.LocaleConfig;
 import android.app.LocaleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.UserHandle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -42,6 +47,8 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.widget.BannerMessagePreference;
+import com.android.settingslib.widget.BannerMessagePreference.AttentionLevel;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Locale;
@@ -54,10 +61,12 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     private static final String TAG = "AppLocaleDetails";
 
     private static final String KEY_APP_DESCRIPTION = "app_locale_description";
+    private static final String KEY_WARNINGS = "key_warnings";
 
     private boolean mCreated = false;
     private String mPackageName;
     private LayoutPreference mPrefOfDescription;
+    private ApplicationInfo mApplicationInfo;
 
     /**
      * Create a instance of AppLocaleDetails.
@@ -74,14 +83,16 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.app_locale_details);
         Bundle bundle = getArguments();
         mPackageName = bundle.getString(AppInfoBase.ARG_PACKAGE_NAME, "");
-
         if (mPackageName.isEmpty()) {
             Log.d(TAG, "No package name.");
             finish();
         }
+        addPreferencesFromResource(R.xml.app_locale_details);
+        mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
+        mApplicationInfo = getApplicationInfo(mPackageName, getContext().getUserId());
+        setWarningMessage();
     }
 
     // Override here so we don't have an empty screen
@@ -98,19 +109,13 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
 
     @Override
     public void onResume() {
-        refreshUiInternal();
         super.onResume();
+        refreshUi();
     }
 
-    private void refreshUiInternal() {
-        if (!hasAppSupportedLocales()) {
-            Log.d(TAG, "No supported language.");
-            mPrefOfDescription.setVisible(true);
-            TextView description = (TextView) mPrefOfDescription.findViewById(R.id.description);
-            description.setText(getContext().getString(R.string.no_multiple_language_supported,
-                    Locale.getDefault().getDisplayName(Locale.getDefault())));
-            return;
-        }
+    private void refreshUi() {
+        setWarningMessage();
+        setDescription();
     }
 
     @Override
@@ -131,20 +136,60 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         }
         // Creates a head icon button of app on this page.
         final Activity activity = getActivity();
-        ApplicationInfo applicationInfo =
-                getApplicationInfo(mPackageName, getContext().getUserId());
         final Preference pref = EntityHeaderController
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getSettingsLifecycle())
-                .setIcon(Utils.getBadgedIcon(getContext(), applicationInfo))
-                .setLabel(applicationInfo.loadLabel(getContext().getPackageManager()))
-                .setIsInstantApp(AppUtils.isInstant(applicationInfo))
+                .setIcon(Utils.getBadgedIcon(getContext(), mApplicationInfo))
+                .setLabel(mApplicationInfo.loadLabel(getContext().getPackageManager()))
+                .setIsInstantApp(AppUtils.isInstant(mApplicationInfo))
                 .setPackageName(mPackageName)
-                .setUid(applicationInfo.uid)
+                .setUid(mApplicationInfo.uid)
                 .setHasAppInfoLink(true)
                 .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
+    }
+
+    private void setWarningMessage() {
+        BannerMessagePreference warningPreference =
+                (BannerMessagePreference) getPreferenceScreen().findPreference(KEY_WARNINGS);
+        try {
+            InstallSourceInfo installSourceInfo =
+                    getContext().getPackageManager().getInstallSourceInfo(mPackageName);
+            if (mApplicationInfo.isSystemApp()
+                    && installSourceInfo.getInstallingPackageName() == null) {
+                warningPreference.setAttentionLevel(AttentionLevel.MEDIUM);
+                warningPreference.setPositiveButtonOnClickListener(mBannerButtonClickListener);
+                warningPreference.setPositiveButtonText(R.string.warnings_button_update);
+                warningPreference.setVisible(true);
+            } else {
+                warningPreference.setVisible(false);
+            }
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Exception while retrieving the package installer of " + mPackageName, e);
+        }
+    }
+
+    private void setDescription() {
+        int res = getAppDescription();
+        if (res != -1) {
+            mPrefOfDescription.setVisible(true);
+            TextView description = (TextView) mPrefOfDescription.findViewById(R.id.description);
+            description.setText(getContext().getString(res));
+        }
+    }
+
+    private OnClickListener mBannerButtonClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(getAppSearchIntent(mPackageName));
+        }
+    };
+
+    private static Intent getAppSearchIntent(String pkg) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("market://details?id=" + pkg));
+        return intent;
     }
 
     private ApplicationInfo getApplicationInfo(String packageName, int userId) {
@@ -159,9 +204,19 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         }
     }
 
-    private boolean hasAppSupportedLocales() {
-        LocaleList localeList = getPackageLocales();
-        return (localeList != null && localeList.size() > 0) || getAssetLocales().length > 0;
+    private int getAppDescription() {
+        LocaleList packageLocaleList = getPackageLocales();
+        String[] assetLocaleList = getAssetLocales();
+        // TODO add apended url string, "Learn more", to these both sentenses.
+        if (packageLocaleList == null && assetLocaleList.length == 0) {
+            // There is no locale info from PackageManager amd AssetManager.
+            return R.string.desc_no_available_supported_locale;
+        } else if (packageLocaleList != null && packageLocaleList.isEmpty()) {
+            // LocaleConfig is empty, and this means only allow user modify language
+            // by the application.
+            return R.string.desc_disallow_locale_change_in_settings;
+        }
+        return -1;
     }
 
     private String[] getAssetLocales() {
