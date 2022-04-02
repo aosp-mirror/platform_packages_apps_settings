@@ -524,25 +524,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 PackageManager.FEATURE_IPSEC_TUNNELS)) {
             Log.wtf(TAG, "FEATURE_IPSEC_TUNNELS missing from system");
         }
-        // If the vpn is new or is not already a legacy type,
-        // don't allow the user to set the type to a legacy option.
 
-        // Set the mProfile.type to TYPE_IKEV2_IPSEC_USER_PASS if the VPN not exist
-        if (!mExists) {
-            mProfile.type = VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS;
-        }
-
-        // Remove all types which are legacy types from the typesList
-        if (!VpnProfile.isLegacyType(mProfile.type)) {
-            for (int i = mAllowedTypes.size() - 1; i >= 0; i--) {
-                // This must be removed from back to front in order to ensure index consistency
-                if (VpnProfile.isLegacyType(i)) {
-                    mAllowedTypes.remove(i);
-                }
-            }
-
-            types = mAllowedTypes.toArray(new String[0]);
-        }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getContext(), android.R.layout.simple_spinner_item, types);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
