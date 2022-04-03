@@ -204,7 +204,7 @@ public class InternetResetHelper implements LifecycleObserver,
     protected void resumePreferences() {
         if (mIsRecoveryReady && mMobileNetworkController != null) {
             Log.d(TAG, "Resume the Mobile Network controller");
-            mMobileNetworkController.hidePreference(false /* hide */, false /* immediately */);
+            mMobileNetworkController.hidePreference(false /* hide */, true /* immediately */);
         }
         if (mIsWifiReady && mWifiTogglePreferences != null) {
             Log.d(TAG, "Resume the Wi-Fi preferences");
