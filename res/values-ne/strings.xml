@@ -85,6 +85,12 @@
     <string name="bluetooth_empty_list_user_restricted" msgid="909734990821975673">"तपाईं सँग ब्लुटुथ सेटिङहरू परिवर्तन गर्न अनुमति छैन।"</string>
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"नयाँ डिभाइस कनेक्ट गर्नुहोस्"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"ब्लुटुथ"</string>
+    <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"अर्को भाग कनेक्ट गर्नुहोस्"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"तपाईंको बायाँ हियरिङ डिभाइस कनेक्ट गरिएको छ।\n\nदायाँ हियरिङ डिभाइस कनेक्ट गर्न उक्त डिभाइस अन छ र कनेक्ट गर्नका निम्ति तयार छ भन्ने कुरा सुनिश्चित गर्नुहोस्।"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"तपाईंको दायाँ हियरिङ डिभाइस कनेक्ट गरिएको छ।\n\nबायाँ हियरिङ डिभाइस कनेक्ट गर्न उक्त डिभाइस अन छ र कनेक्ट गर्नका निम्ति तयर छ भन्ने कुरा सुनिश्चित गर्नुहोस्।"</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"दायाँ भाग कनेक्ट गर्नुहोस्"</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"बायाँ भाग कनेक्ट गर्नुहोस्"</string>
+    <string name="bluetooth_screen_related" msgid="7976543255501825536">"सम्बन्धित"</string>
     <string name="bluetooth_is_visible_message" msgid="3811631869768157387">"ब्लुटुथ सेटिङहरू खुला हुँदा <xliff:g id="DEVICE_NAME">%1$s</xliff:g> लाई नजिकैका उपकरणहरू देख्न सक्नेछन्।"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="4782330594323261630">"फोनको ब्लुटुथ एड्रेस: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="1257226691967432025">"ट्याब्लेटको ब्लुटुथ एड्रेस: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -142,10 +148,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"आफ्नो यन्त्रलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"आफ्नो फोनलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ब्लुटुथ A2DP हार्डवेयरको अफलोड असक्षम पारियोस्"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"यन्त्र पुनः सुरु गर्ने हो?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"यो सेटिङ परिवर्तन गर्न तपाईंले आफ्नो यन्त्र पुनः सुरु गर्नु पर्छ।"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"पुन: सुरु गर्नु…"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"रद्द गर्नु…"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"ब्लुटुथ LE AUDIO हार्डवेयरको अफलोड असक्षम पारियोस्"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"डिभाइस रिस्टार्ट गर्ने हो?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"यो सेटिङ बदल्न तपाईंले आफ्नो डिभाइस रिस्टार्ट गर्नु पर्ने हुन्छ।"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रिस्टार्ट गर्नुहोस्"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"रद्द गर्नुहोस्"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मिडियासम्बन्धी यन्त्रहरू"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कल गर्ने सुविधा भएका यन्त्रहरू"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"अन्य डिभाइसहरू"</string>
@@ -214,6 +221,8 @@
     <string name="app_locale_picker_title" msgid="8423365003726200684">"एपको भाषा"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"सिफारिस गरिएका भाषाहरू"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"सबै भाषा"</string>
+    <string name="preference_of_system_locale_title" msgid="8067226276038751504">"सिस्टमको भाषा"</string>
+    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"सिस्टम डिफल्ट - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
     <string name="no_multiple_language_supported" msgid="1683023807955740826">"यो एपको डिफल्ट भाषाका रूपमा <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> सेट गरिएको छ त्यसैले यसमा एकभन्दा बढी भाषा प्रयोग गर्न मिल्दैन।"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">चयन गरिएका भाषाहरूलाई हटाउने हो?</item>
@@ -505,10 +514,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फिंगरप्रिन्ट हालियो"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"तपाईं अब फोन अनलक गर्न वा एपमा साइन इन गर्ने जस्ता प्रयोजनका लागि आफ्नो पहिचान पुष्टि गर्न आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"यो काम पछि गर्नुहोस्‌"</string>
-    <!-- no translation found for security_settings_udfps_tip_fingerprint_help (7580784640741217494) -->
-    <skip />
-    <!-- no translation found for security_settings_udfps_side_fingerprint_help (2567232481013195191) -->
-    <skip />
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"औँला उठाएर फेरि छुनुहोस्"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"आफ्नो कुनै औँलाको एकतिरको भाग सेन्सरमा राखिरहनुहोस् अनि उक्त औँलाको अर्को भाग पनि सेन्सरमा राखिरहनुहोस्"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"फिंगरप्रिन्ट सेटअप छोड्न चाहनुहुन्छ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"तपाईँले आफ्नो फोन अनलक गर्ने एक तरिका रूपमा फिंगरप्रिन्ट छान्‍नुभएको छ। यदि तपाईँले अहिले छोड्नु भएमा पछि पुन: सेटअप गर्न पर्नेछ। सेटअप गर्न मात्र केहि मिनेट लाग्‍नेछ।"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"तपाईंको ट्याब्लेट हराएको वा चोरी भएको खण्डमा PIN ले उक्त ट्याब्लेट सुरक्षित राख्छ"</string>
@@ -590,6 +597,9 @@
     <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"ट्याब्लेट इन्क्रिप्ट गर्नुहोस्"</string>
     <string name="encrypt_title" product="default" msgid="7337365190988321100">"फोन इन्क्रिप्ट गर्नुहोस्"</string>
     <string name="encrypted_summary" msgid="545623487587251207">"इन्क्रिप्ट गरिएको छ"</string>
+    <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"स्क्रिन लक सेट गर्नुहोस्"</string>
+    <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"यो डिभाइस थप सुरक्षित बनाउनका लागि PIN, प्याटर्न वा पासवर्ड सेट गर्नुहोस्।"</string>
+    <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"स्क्रिन लक सेट गर्नुहोस्"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"आफ्नो फोनलाई सुरक्षित राख्नुहोस्"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"ट्याब्लेटलाई सुरक्षित राख्न स्क्रिन लक सेट गर्नुहोस्"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"यन्त्रलाई सुरक्षित राख्न स्क्रिन लक सेट गर्नुहोस्"</string>
@@ -718,10 +728,6 @@
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2479195488386373253">"तपाईंले अर्को प्रयासमा गलत ढाँचा प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"तपाईंले अर्को प्रयासमा गलत PIN प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"तपाईंले अर्को प्रयासमा गलत पासवर्ड प्रविष्ट गर्नुभयो भने तपाईंको कार्य प्रोफाइल र यसको डेटा मेटाइने छ"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="2813744895409014471">"अनलक गर्ने अत्यधिक गलत प्रयासहरू भए। यो डिभाइसको डेटा मेटाइनेछ।"</string>
-    <string name="lock_failed_attempts_now_wiping_user" msgid="3958755474620948727">"धेरै पकट गलत प्रयास गरियो। यो प्रयोगकर्तालाई मेटाइनेछ"</string>
-    <string name="lock_failed_attempts_now_wiping_profile" msgid="3171880997211568208">"धेरै पटक गलत प्रयास गरियो। यो कार्य प्रोफाइल र यसको डेटा मेटाइने छ।"</string>
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="170155081899679669">"खारेज गर्नुहोस्"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
       <item quantity="other">अनिवार्य रूपमा कम्तीमा <xliff:g id="COUNT_1">%d</xliff:g> वर्णहरू हुनु पर्छ</item>
       <item quantity="one">अनिवार्य रूपमा कम्तीमा <xliff:g id="COUNT_0">%d</xliff:g> वर्ण हुनु पर्छ</item>
@@ -1184,6 +1190,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"यो सुविधाको सहायताले अन्य डिभाइसहरू यो हटस्पट भेट्टाउन सक्छन्। यसले गर्दा ब्याट्रीको खपत बढ्छ।"</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"हटस्पट खुल्दै..."</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"हटस्पट बन्द गरिँदै..."</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"टेदरिङ उपलब्ध छैन"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"यससम्बन्धी थप जानकारी प्राप्त गर्न आफ्नो मोबाइल सेवा प्रदायकलाई सम्पर्क गर्नुहोस्"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> सक्रिय छ"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"पोर्टेबल Wi-Fi हटस्पट त्रुटि"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Wi-Fi हटस्पट सेटअप गर्नुहोस्"</string>
@@ -1235,7 +1243,7 @@
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> बाट डिस्केनेक्ट गरियो"</string>
     <string name="carrier" msgid="1755020806290963951">"सेवा प्रदायक"</string>
     <string name="display_settings_title" msgid="626835071804834218">"डिस्प्ले"</string>
-    <string name="sound_settings" msgid="5514582720435174014">"आवाज"</string>
+    <string name="sound_settings" msgid="7622986039384531304">"साउन्ड तथा भाइब्रेसन"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"भोल्युम"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"सङ्गीत प्रभावहरू"</string>
     <string name="ring_volume_title" msgid="4869034595079914541">"घन्टी तथा सूचनाको भोल्युम"</string>
@@ -1290,6 +1298,12 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"अन छ"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"अन छ - अनुहारमा आधारित"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"अनुहार पत्ता लगाउने सुविधा अन गरियोस्"</string>
+    <string name="screen_resolution_title" msgid="2690518693139811486">"स्क्रिन रिजोल्युसन"</string>
+    <string name="screen_resolution_option_high" msgid="2617496842852992853">"उच्च रिजोल्युसन"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"अधिकतम रिजोल्युसन"</string>
+    <string name="screen_resolution_summary_high" msgid="5611896959631297437">"१०८० पिक्सेल FHD+"</string>
+    <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"१४४० पिक्सेल QHD+"</string>
+    <string name="screen_resolution_footer" msgid="2563830074752340045">"तपाईंले स्क्रिन रिजोल्युसन बदल्नुभयो भने हाल चलिरहेका केही एपहरू बन्द हुन सक्छन्।"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"रङ्गहरू"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"प्राकृतिक"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"बुस्ट गरिएको"</string>
@@ -1379,16 +1393,21 @@
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"कुनै पनि होइन"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"सूर्यास्तदेखि सूर्योदयसम्म अन हुन्छ"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"तोकिएको समयमा अन हुन्छ"</string>
+    <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"सुत्ने समयमा अन हुन्छ"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"स्थिति"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"कहिले पनि स्वतः अन नहोस्"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"सूर्यास्तको बेला स्वतः सक्रिय हुने छ"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः सक्रिय हुने छ"</string>
+    <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"सुत्ने समयमा स्वतः अन हुने छ"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"कहिल्यै पनि स्वतः निष्क्रिय हुने छैन"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"सूर्योदयको बेला स्वतः निष्क्रिय हुने छ"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"<xliff:g id="ID_1">%1$s</xliff:g> मा स्वतः निष्क्रिय हुने छ"</string>
+    <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"सुत्ने समय सकिएपछि स्वतः अफ हुने छ"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> सम्म सक्रिय गर्नुहोस्"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> सम्म निष्क्रिय पार्नुहोस्"</string>
     <string name="dark_ui_text" msgid="4392646155331126666">"केही स्क्रिनहरूमा तपाईंको ब्याट्री अझै लामो समयसम्म टिकाएर राख्न कालो रङको ब्याकग्राउन्ड प्रयोग गर्दछ। अँध्यारो थिम तपाईंको स्क्रिन निष्क्रिय नहुन्जेल सक्रिय नहुने समयतालिका तय गर्दछ।"</string>
+    <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"अँध्यारो थिम हाल तपाईंको बेडटाइम मोडको समयतालिकाअनुसार चल्छ"</string>
+    <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"बेडटाइम मोडसम्बन्धी सेटिङहरू"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"स्क्रिन टाइम आउट हुने समय"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"स्क्रिन बन्द हुन्छ"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>को निष्क्रियतापछि"</string>
@@ -1403,6 +1422,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"आफ्नो फोन आफूले चाहे जस्तो पार्नुहोस्‌"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"विभिन्न शैली, वालपेपर र थप कुरा चलाएर हेर्नुहोस्"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"स्क्रिन सेभर"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"स्क्रिन सेभर प्रयोग गरियोस्"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"चार्ज वा डक गरिरहँदा"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"कुनै"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"चार्ज गरिरहेका बेला"</string>
@@ -1423,7 +1443,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"ब्याट्री बढी खपत हुने"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"बोल्ड टेक्स्ट"</string>
     <string name="title_font_size" msgid="570613010306330622">"फन्टको आकार"</string>
-    <string name="short_summary_font_size" msgid="184712645848458143">"टेक्स्ट म्यासेज अझ ठुलो वा सानो पार्नुहोस्"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"टेक्स्ट अझ ठुलो वा अझ सानो बनाउनुहोस्"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"SIM कार्ड लक गर्ने सेटिङ"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"सिमकार्ड लक"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"निष्क्रिय छ"</string>
@@ -1592,7 +1612,6 @@
     <string name="storage_internal_title" msgid="3265098802217660829">"यन्त्र भण्डारण"</string>
     <string name="storage_external_title" msgid="8984075540312137135">"पोर्टेबल भण्डारण"</string>
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
-    <string name="storage_volume_used" msgid="5031288167242496837">"<xliff:g id="TOTAL">%1$s</xliff:g> को प्रयोग भएको"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"<xliff:g id="NAME">%1$s</xliff:g> माउन्ट गरियो"</string>
     <string name="storage_mount_failure" msgid="3667915814876418011">"<xliff:g id="NAME">%1$s</xliff:g> लाई माउन्ट गर्न सकेन"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"<xliff:g id="NAME">%1$s</xliff:g> सुरक्षित तवरले निकालिएको छ"</string>
@@ -1886,7 +1905,8 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play सिस्टम अपडेट गर्ने इजाजतपत्र"</string>
     <string name="terms_title" msgid="2071742973672326073">"सेवाका सर्तहरू"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"प्रणाली वेबभ्यु लाइसेन्स"</string>
-    <string name="wallpaper_attributions" msgid="3080339190260272255">"वालपेपरहरु"</string>
+    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
+    <skip />
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"स्याटेलाइट फोटो उपलब्ध गराउने संस्था::\n©२०१४ CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"म्यानुअल"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"म्यानुअल लोड गर्दा एउटा समस्या आएको छ।"</string>
@@ -2037,6 +2057,8 @@
     <string name="enable_text" msgid="8570798764647110430">"सक्रिय गर्नुहोस्"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"भण्डारण खाली गर्नुहोस्"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"अद्यावधिकहरू अनइन्स्टल गर्नुहोस्"</string>
+    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
+    <skip />
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"तपाईंले चयन गर्नुभएका केही क्रियाकलापहरू यो एपमा डिफल्ट रूपमा खुल्छन्।"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"तपाईंले यो एपलाई विजेटहरू सिर्जना गर्न र तिनीहरूको डेटा पहुँच गर्न अनुमतिको लागि छान्नुभयो।"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"कुनै डिफल्ट सेट गरिएको छैन।"</string>
@@ -2187,6 +2209,7 @@
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल किबोर्ड र उपकरणहरू"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"कार्यालयमा प्रयोग गरिने अनस्क्रिन किबोर्ड"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"डिफल्ट"</string>
+    <string name="speech_category_title" msgid="5995161659186229742">"बोली"</string>
     <string name="pointer_speed" msgid="7398649279282675718">"पोइन्टरको गति"</string>
     <string name="game_controller_settings_category" msgid="8557472715034961918">"खेल नियन्त्रक"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"कम्पन रिडिरेक्ट गर्नुहोस्"</string>
@@ -2256,7 +2279,7 @@
     <string name="audio_category_title" msgid="5283853679967605826">"अडियो"</string>
     <string name="general_category_title" msgid="6298579528716834157">"सामान्य"</string>
     <string name="display_category_title" msgid="6638191682294461408">"प्रदर्शन"</string>
-    <string name="accessibility_text_and_display_title" msgid="1398507755501334961">"टेक्स्ट तथा डिस्प्ले"</string>
+    <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"रङ र मोसन"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"स्क्रिन अझ अँध्यारो बनाउनुहोस्"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"अन्तर्क्रियासम्बन्धी सेटिङ"</string>
     <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"समयसम्बन्धी कन्ट्रोल"</string>
@@ -2272,8 +2295,8 @@
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"क्याप्सनसम्बन्धी प्राथमिकताहरूका बारेमा थप जान्नुहोस्"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"म्याग्निफिकेसन"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"जुम इनको सर्टकट"</string>
-    <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"टाइप गर्दै जाँदा"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="5616263345412748821">"तपाईंले टाइप गर्दै गर्दा टेक्स्ट स्वतः जुम इन हुने छ"</string>
+    <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"टाइप गरेको टेक्स्ट जुम इन गर्नुहोस्"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"म्याग्निफायरले तपाईंले टेक्स्ट टाइप गर्दै गर्दा उक्त टेक्स्ट जुम इन गरेर देखाउँछ"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"जुम इन गर्ने सुविधाका बारेमा"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"जुम इन गर्ने सुविधाका बारेमा थप जान्नुहोस्"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"जुम इनको प्रकार"</string>
@@ -2290,23 +2313,32 @@
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"तपाईंले स्क्रिनमा तीन पटक ट्याप गरेर स्क्रिनको जुनसुकै भाग जुम इन गर्ने सुविधा प्रयोग गर्नुभयो भने टाइपिङलगायतका अन्य काम गर्दा ढिलाइ हुन्छ।\n\nयो एक्सेसिबिलिटी बटन तपाईंको स्क्रिनमा अन्य एपहरूको माथिपट्टि देखा पर्छ। जुम इन गर्न उक्त एक्सेसिबिलिटी बटनमा ट्याप गर्नुहोस्।"</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"एक्सेसिबिलिटी बटन नै प्रयोग गरियोस्"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"ट्रिपल ट्याप प्रयोग गरियोस्"</string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"तपाईंले यसो गर्नुभयो भने किबोर्ड ढिलो चल्न सक्छ"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"आफ्नो स्क्रिनको कुनै भाग जुम इन गर्न तीन पटक ट्याप गर्दा किबोर्डमा केही समस्या देखिन सक्छ।\n\nयस्ता समस्या हुन नदिन तपाईं आफूले जुम इन गर्न प्रयोग गर्ने गरेको तीन पटक ट्याप गर्ने विकल्प बदलेर अर्को विकल्प रोज्न सक्नुहुन्छ।\n"<annotation id="link">"सेटिङ बदल्नुहोस्"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"जे भए पनि जारी राख्नुहोस्"</string>
+    <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"रद्द गर्नु…"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"म्याग्निफिकेसनसम्बन्धी सेटिङ"</string>
     <string name="accessibility_screen_magnification_gestures_title" msgid="3121714118381882167">"तीन ट्यापमा म्याग्निफाइ गर्नुहोस्"</string>
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"सर्टकट प्रयोग गरी म्याग्निफाइ गर्नुहोस्"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"सर्टकट र तीन पटक ट्याप गरेर म्याग्निफाइ गर्नुहोस्"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>का बारेमा"</string>
-    <string name="accessibility_text_reading_options_title" msgid="4684613866595056574">"टेक्स्ट गर्ने र पढ्ने विकल्पहरू"</string>
-    <!-- no translation found for accessibility_text_reading_preview_mail_subject (8410011779056611430) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_from (8008010238385973504) -->
-    <skip />
-    <!-- no translation found for accessibility_text_reading_preview_mail_content (2845972588748160509) -->
-    <skip />
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"पाठको आकार र शैली देखाइयोस्"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"पाठ देखिने शैली बदल्नुहोस्"</string>
+    <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"विषय: हट एयर बेलुनका डिजाइनहरू"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"प्रेषक: Bill"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"नमस्ते!\n\n म यी डिजाइनहरू कसरी तयार हुँदै छन् भन्ने हेर्न मात्र चाहन्थेँ। हामीले नयाँ बेलुन बनाउन थाल्नुअघि नै ती डिजाइनहरू तयार भइसक्छन्?"</string>
+    <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"सेटिङ रिसेट गर्नुहोस्"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"डिस्प्लेको आकार र टेक्स्टसम्बन्धी सेटिङ रिसेट गर्ने हो?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"डिस्प्लेको आकार र टेक्स्टसम्बन्धी सेटिङ रिसेट गरी फोनको डिफल्ट सेटिङ लागू गरिने छ"</string>
+    <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"रिसेट गर्नुहोस्"</string>
+    <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"सप्ताहान्त कसरी बिताउने योजना छ?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"समुद्री तटतिर जाँदै छु। तपाईं पनि मसँगै जाने हो?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"विकल्पहरू"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"स्क्रिनमा जुम इन गर्नुहोस्"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"जुम गर्न ३ पटक ट्याप गर्नुहोस्"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"जुम गर्न बटनमा ट्याप गर्नुहोस्"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"सामग्री अझ ठुलो बनाउन स्क्रिनमा द्रुत रूपमा जुम इन गर्नुहोस्।&lt;br/&gt;&lt;br/&gt; &lt;b&gt;जुम इन गर्न:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। जुम इन गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {1,number,integer}। स्क्रिनमा ट्याप गर्नुहोस्&lt;br/&gt; {2,number,integer}। स्क्रिनमा यताउता गर्न दुई वटा औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {3,number,integer}। जुम इन वा जुम आउट गर्न २ वटा औँलाले पिन्च गर्नुहोस्&lt;br/&gt; {4,number,integer}। जुम इन गर्न छाड्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt;&lt;br/&gt; &lt;b&gt;केही समयका लागि जुम गर्न:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। जुम इन गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {1,number,integer}। स्क्रिनको कुनै भागमा केही बेरसम्म छोइराख्नुहोस्&lt;br/&gt; {2,number,integer}। स्क्रिनमा सामग्री यताउता सार्न औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {3,number,integer}। जुम इन गर्ने सुविधा बन्द गर्न औँला उठाउनुहोस्"</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"तपाईं सामग्री अझ ठुलो बनाउन चाहनुहुन्छ भने द्रुत रूपमा स्क्रिनमा जुम इन गर्नुहोस्"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;तपाईं जुम इन गर्न चाहनुहुन्छ भने निम्न कार्य गर्नुहोस्:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. जुम इन गर्ने सुविधा प्रयोग गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {1,number,integer}. स्क्रिनमा ट्याप गर्नुहोस्&lt;br/&gt; {2,number,integer}. स्क्रिनमा सामग्री यताउता सार्न २ वटा औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {3,number,integer}. जुम इन वा जुम आउट गर्न २ वटा औँलाले पिन्च गर्नुहोस्&lt;br/&gt; {4,number,integer}. जुम इन गर्ने सुविधा बन्द गर्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt;&lt;br/&gt; &lt;b&gt;तपाईं केही समयका लागि जुम इन गर्न चाहनुहुन्छ भने निम्न कार्य गर्नुहोस्:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. जुम इनको प्रकार फुल स्क्रिन तय गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्&lt;br/&gt; {1,number,integer}. जुम इन गर्ने सुविधा प्रयोग गर्न थाल्न सर्टकट प्रयोग गर्नुहोस्&lt;br/&gt; {2,number,integer}. स्क्रिनको कुनै भागमा टच एण्ड होल्ड गर्नुहोस्&lt;br/&gt; {3,number,integer}. स्क्रिनमा सामग्री यताउता सार्न औँलाले ड्र्याग गर्नुहोस्&lt;br/&gt; {4,number,integer}. जुम इन गर्ने सुविधा बन्द गर्न औँला उठाउनुहोस्"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"म्याग्निफिकेसन सुविधा सक्रिय गरेपछि, तपाईं आफ्नो स्क्रिनमा जुम इन गर्न सक्नुहुन्छ।\n\n"<b>"जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा ट्याप गर्नुहोस्।\n"<ul><li>"स्क्रोल गर्न २ वा सोभन्दा बढी औँलाले ड्र्याग गर्नुहोस्"</li>\n<li>"जुम समायोजन गर्न २ वा सोभन्दा बढी औँलाले पिन्च गर्नुहोस्"</li></ul>\n\n<b>"केहीबेरका लागि जुम गर्न"</b>", म्याग्निफिकेसन सुविधा सुरु गर्नुहोस्, त्यसपछि स्क्रिनको कुनै पनि भागमा केहीबेर छोइरहनुहोस्।\n"<ul><li>"स्क्रिनमा यताउता जान ड्र्याग गर्नुहोस्"</li>\n<li>"जुम आउट गर्न औँला उचाल्नुहोस्"</li></ul>\n\n"तपाईं किबोर्ड वा नेभिगेसन पट्टीमा जुम इन गर्न सक्नुहुन्न।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> मध्ये <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> औँ पृष्ठ"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"खोल्नका लागि एक्सेसिबिलिटी बटन प्रयोग गर्नुहोस्"</string>
@@ -2351,13 +2383,14 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"केही सेकेन्डसम्म दुवै भोल्युम की थिचेर लक स्क्रिनबाटै यो सर्टकट प्रयोग गर्न मिल्ने बनाइयोस्।"</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"एक्सेसिबिलिटी बटन"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"एक्सेसिबिलिटी बटन तथा जेस्चर"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"तपाईं जुनसुकै स्क्रिनमा भए पनि सर्वसुलभता कायम गर्ने सुविधाहरू तुरुन्तै चलाउन सक्नुहुन्छ।"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"एक्सेसिबिलिटी बटनका बारेमा"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"एक्सेसिबिलिटी बटन र जेस्चरका बारेमा"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"एक्सेसिबिलिटी बटन र जेस्चरका बारेमा थप जान्नुहोस्"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"एक्सेसिबिलिटी बटन प्रयोग गरिँदै छ। यो जेस्चर ३ बटनमार्फत गरिने नेभिगेसनका सहायताले प्रयोग गर्न मिल्दैन।"</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"एक्सेसिबिलिटी सुविधा तुरुन्तै प्रयोग गर्नुहोस्"</string>
-    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"तपाईं जुनसुकै स्क्रिनमा भए पनि सर्वसुलभता कायम गर्ने सुविधाहरू तुरुन्तै प्रयोग गर्न सक्नुहुन्छ। \n\nसुरु गर्न एक्सेसिबिलिटी सेटिङमा जानुहोस् अनि कुनै सुविधा चयन गर्नुहोस्। सर्टकटमा ट्याप गर्नुहोस् अनि एक्सेसिबिलिटी बटन वा इसारा चयन गर्नुहोस्।"</string>
-    <string name="accessibility_button_description" msgid="3664784100487881054">"तपाईं जुनसुकै स्क्रिनमा भए पनि सर्वसुलभता कायम गर्ने सुविधाहरू तुरुन्तै प्रयोग गर्न सक्नुहुन्छ।\n\nसुरु गर्न एक्सेसिबिलिटी सेटिङमा जानुहोस् अनि कुनै सुविधा चयन गर्नुहोस्। सर्टकटमा ट्याप गर्नुहोस् अनि एक्सेसिबिलिटी बटन चयन गर्नुहोस्।"</string>
+    <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"सुरुवात गर्नका लागि"</b>\n"१. एस्सेसिबिलिटी सेटिङमा जानुहोस्\n२. कुनै सुविधा चयन गर्नुहोस् र सर्टकटमा ट्याप गर्नुहोस्\n३. यो सुविधा प्रयोग गर्ने प्रयोजनका लागि तपाईं बटन प्रयोग गर्न चाहनुहुन्छ कि इसारा प्रयोग गर्न चाहनुहुन्छ छनौट गर्नुहोस्"</string>
+    <string name="accessibility_button_description" msgid="1261273371298608222"><b>"सुरुवात गर्नका लागि"</b>\n"१. एस्सेसिबिलिटी सेटिङमा जानुहोस्\n२. कुनै सुविधा चयन गर्नुहोस् र सर्टकटमा ट्याप गर्नुहोस्\n३. कुन बटन थिचेर यो सुविधा चलाउन सकिन्छ भन्ने कुरा छनौट गर्नुहोस्"</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"बटन वा जेस्चर प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"स्थान"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"आकार"</string>
@@ -2367,11 +2400,14 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"पारदर्शी"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"अपारदर्शी"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"हाइ कन्ट्रास्ट टेक्स्ट"</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"पाठको रङ बदलेर कालो वा सेतो बनाउनुहोस्। यसले ब्याकग्राउन्डमा कन्ट्रास्टको लेभल अधिकतम बनाउँछ।"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"स्क्रिन आवर्धन स्वतः अपडेट गर्नुहोस्"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"एप ट्रान्जिसनहरूमा स्क्रिन आवर्धन अपडेट गर्नुहोस्"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"पावर बटन थोच्दा फोन काटियोस्"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"ठुलो माउस पोइन्टर"</string>
+    <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"माउस पोइन्टर अझ राम्रोसँग देखिने बनाउनुहोस्"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"एनिमेसन हटाइयोस्"</string>
+    <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रिनमा मोसन कम गर्नुहोस्"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"मोनो अडियो"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"सबै अडियो एउटै च्यानलबाट बजाइयोस्"</string>
     <string name="accessibility_toggle_primary_balance_title" msgid="7332275200153366714">"अडियोको सन्तुलन"</string>
@@ -2386,17 +2422,20 @@
     <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"कारबाही गर्न लाग्ने समय (एक्सेसिबिलिटी टाइमआउट) का बारेमा"</string>
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"कारबाही गर्न लाग्ने समय (एक्सेसिबिलिटी टाइमआउट) का बारेमा थप जान्नुहोस्"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"कारबाही गर्ने समय"</string>
-    <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"तपाईंलाई कारबाही गर्न लगाउने अस्थायी म्यासेज कति बेर देखाइनु पर्छ भन्ने कुरा छान्नुहोस्।\n\nयो सेटिङले सबै एपमा काम गर्दैन।"</string>
+    <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"सबै एपहरूमा समयावधिसम्बन्धी यो प्राथमिकता लागू गर्न मिल्दैन"</string>
+    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"तपाईंलाई कारबाही गर्न अनुरोध गरिने अस्थायी म्यासेजहरू कति समयसम्म देखाउने भन्ने कुरा छनौट गर्नुहोस्"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"टच एण्ड होल्डको ढिलाइ"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"रङ्ग उल्टाउने सुविधा"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"रङ्ग उल्टाउने सुविधा प्रयोग गरियोस्"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"कलर इन्भर्सनको सर्टकट"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"रङ्ग उल्टाउने सुविधाले उज्यालो स्क्रिनलाई अँध्यारो बनाउँछ।&lt;br/&gt;&lt;br/&gt; ध्यान दिनु पर्ने कुरा: &lt;ol&gt; &lt;li&gt; रङ्ग उल्टाउने सुविधाले अँध्यारो स्क्रिनलाई उज्यालो पनि बनाउँछ&lt;/li&gt; &lt;li&gt; मिडिया र फोटोका रङ्ग परिवर्तन हुने छन्।&lt;/li&gt; &lt;li&gt; ब्याकग्राउन्ड अँध्यारो बनाउन अँध्यारो थिम प्रयोग गर्न सकिन्छ। अँध्यारो थिमले यो सुविधा चल्ने एपहरूमा मात्र काम गर्छ। रङ्ग उल्टाउने सुविधाले सबै एपमा काम गर्छ।&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"कलर इन्भर्सनले उज्यालो स्क्रिन बदलेर अँध्यारो बनाउँछ। यसले अँध्यारो स्क्रिन बदलेर उज्यालो पनि बनाउँछ।"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;ख्याल गर्नुहोस्&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; मिडिया र फोटोहरूमा रङ बदलिने छ&lt;/li&gt; &lt;li&gt; कलर इन्भर्सनले सबै एपहरूमा काम गर्छ&lt;/li&gt; &lt;li&gt; अँध्यारो ब्याकग्राउन्ड डिस्प्ले गर्नका लागि यसको साटो अँध्यारो थिम प्रयोग गर्न सकिन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"अटोक्लिक (ड्वेल टाइमिङ)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"अटोक्लिक (कर्सर रहने समय) का बारेमा"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"अटोक्लिक (कर्सर रहने समय) का बारेमा थप जान्नुहोस्"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"डिभाइसमा जोडिएको माउसबाट अटोक्लिक प्रयोग गर्न मिल्छ। तपाईं माउसको कर्सर निश्चित समयका लागि नचलिकन एकै ठाउँमा रोकिँदा कर्सरले उक्त ठाउँमा स्वतः क्लिक गर्ने गरी आफ्नो माउसको कर्सर सेट गर्न सक्नुहुन्छ।"</string>
-    <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"अफ छ"</string>
+    <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"तपाईं कर्सर निश्चित समयावधिसम्म चल्न छाडेपछि कनेक्ट गरिएको माउस स्वतः क्लिक हुने विकल्प अन गर्न सक्नुहुन्छ"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"माउस क्लिक गर्दा अप्ठ्यारो भएमा अटोक्लिक उपयोगी हुन सक्छ"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"अटोक्लिक अफ छ"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"छोटो"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"०.२ सेकेन्ड"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"मध्यम"</string>
@@ -2409,11 +2448,11 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"स्वतः क्लिक हुने समय"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"भाइब्रेसन र ह्याप्टिक्स"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"विभिन्न प्रयोगका लागि भाइब्रेसनको क्षमता नियन्त्रण गर्नुहोस्"</string>
+    <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"डिभाइस साइलेन्ट मोडमा भएकाले सेटिङ अफ गरिएको छ"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"कलहरू"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"सूचना र अलार्महरू"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"अन्तर्क्रियात्मक ह्याप्टिक्स"</string>
-    <!-- no translation found for accessibility_vibration_primary_switch_title (6162579254864450592) -->
-    <skip />
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"इन्टरयाक्टिभ ह्याप्टिक्स"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"भाइब्रेसन र हेप्टिक्स प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"अलार्म भाइब्रेसन"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"मिडिया भाइब्रेसन"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"घन्टीको भाइब्रेसन"</string>
@@ -2421,9 +2460,19 @@
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"टच गर्दाको भाइब्रेसन"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> प्रयोग गर्नुहोस्"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> खोल्नुहोस्"</string>
-    <string name="accessibility_service_quick_settings_tooltips_content" msgid="4033381225041886637">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> तुरुन्तै अन वा अफ गर्न द्रुत सेटिङहरूमा गई तलतिर स्वाइप गर्नुहोस्"</string>
-    <!-- no translation found for accessibility_quick_settings_tooltips_dismiss (1684723414081728584) -->
-    <skip />
+    <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"द्रुत सेटिङको मेनुमा <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> हालियो। तपाईं जुनसुकै बेला तलतिर स्वाइप गरेर यो सेटिङ अन वा अफ गर्न सक्नुहुन्छ।"</string>
+    <string name="accessibility_service_qs_tooltip_content" msgid="6002493441414967868">"तपाईं आफ्नो स्क्रिनको सिरानबाट पनि द्रुत सेटिङको मेनुमा <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> हाल्न सक्नुहुन्छ"</string>
+    <string name="accessibility_color_correction_auto_added_qs_tooltip_content" msgid="9092661358437404374">"द्रुत सेटिङको मेनुमा रङ सच्याउनेसम्बन्धी सुविधा हालियो। तपाईं जुनसुकै बेला तलतिर स्वाइप गरेर यो सेटिङ अन वा अफ गर्न सक्नुहुन्छ।"</string>
+    <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"तपाईं स्क्रिनको सिरानबाट पनि द्रुत सेटिङको मेनुमा रङ सच्याउनेसम्बन्धी सुविधा हाल्न सक्नुहुन्छ"</string>
+    <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"द्रुत सेटिङको मेनुमा कलर इन्भर्सन सुविधा हालियो। तपाईं जुनसुकै बेला तलतिर स्वाइप गरेर यो सेटिङ अन वा अफ गर्न सक्नुहुन्छ।"</string>
+    <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"तपाईं स्क्रिनको सिरानबाट पनि द्रुत सेटिङको मेनुमा कलर इन्भर्सन सुविधा हाल्न सक्नुहुन्छ"</string>
+    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"द्रुत सेटिङको मेनुमा स्क्रिन अझै मधुरो बनाउने सुविधा हालियो। तपाईं जुनसुकै बेला तलतिर स्वाइप गरेर यो सेटिङ अन वा अफ गर्न सक्नुहुन्छ।"</string>
+    <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"तपाईं स्क्रिनको सिरानबाट पनि द्रुत सेटिङको मेनुमा स्क्रिन अझै मधुरो बनाउने सुविधा हाल्न सक्नुहुन्छ"</string>
+    <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"द्रुत सेटिङको मेनुमा एक हाते मोड सुविधा हालियो। तपाईं जुनसुकै बेला तलतिर स्वाइप गरेर यो सेटिङ अन वा अफ गर्न सक्नुहुन्छ।"</string>
+    <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"तपाईं स्क्रिनको सिरानबाट पनि द्रुत सेटिङको मेनुमा एक हाते मोड सुविधा हाल्न सक्नुहुन्छ"</string>
+    <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"हटाउनुहोस्"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"तपाईंको फोनमा रङहरू कस्ता देखिन्छन् भन्ने कुरा मिलाउनुहोस्"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"तपाईंको ट्याब्लेटमा रङहरू कस्ता देखिन्छन् भन्ने कुरा मिलाउनुहोस्"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"रङ्ग सच्याउने सुविधा प्रयोग गरियोस्"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"रङ सच्याउने सुविधाको सर्टकट"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"रङ सच्याउने कार्यका बारेमा"</string>
@@ -2435,7 +2484,8 @@
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"क्याप्सनको आकार र शैली"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"<xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g> पाठको आकार"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"थप विकल्पहरू"</string>
-    <string name="accessibility_caption_preference_summary" msgid="1191356970836416954">"क्याप्सनसम्बन्धी यी सेटिङ सबै एपमा लागू गर्न मिल्दैन"</string>
+    <string name="accessibility_caption_preference_intro" msgid="6662649135457507767">"क्याप्सनहरू पढ्न सहज होस् भन्नाका लागि क्याप्सनको आकार र शैली कस्टमाइज गर्नुहोस्"</string>
+    <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"सबै मिडिया एपहरूमा क्याप्सनसम्बन्धी यी प्राथमिकताहरू लागू गर्न मिल्दैन"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"एक्सेसिबिलिटी बटन"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"फेदबाट २ औँलाले माथितिर स्वाइप गर्ने"</string>
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"भोल्युम कीहरू थिचिरहनुहोस्"</string>
@@ -2444,13 +2494,21 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"श्रवण यन्त्रहरू"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"कुनै पनि श्रवण यन्त्र जडान गरिएको छैन"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"श्रवण यन्त्रहरू थप्नुहोस्"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"आफ्ना श्रवण यन्त्रहरूसँग जोडा बनाउन आगामी स्क्रिनमा आफ्नो यन्त्र फेला पारी तिनमा ट्याप गर्नुहोस्। आफ्ना श्रवण यन्त्रहरू जोडा बनाउने मोडमा भएको कुरा सुनिश्चित गर्नुहोस्।"</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"हियरिङ डिभाइस कनेक्ट गर्नुहोस्"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"अर्को स्क्रिनमा गई हियरिङ डिभाइसमा ट्याप गर्नुहोस् तपाईंले बायाँ र दायाँ कानका डिभाइसहरू छुट्टा छुट्टै कनेक्ट गर्नु पर्ने हुन्छ।\n\nतपाईंका हियरिङ डिभाइस अन छन् र कनेक्ट गर्नका निम्ति तयार छन् भन्ने कुरा सुनिश्चित गर्नुहोस्।"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> सक्रिय"</string>
+    <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, बायाँ भाग मात्रै"</string>
+    <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, दायाँ भाग मात्रै"</string>
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary" msgid="4268221140368164452">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, बायाँ र दायाँ भाग"</string>
+    <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> र थप १"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="other">सुरक्षित गरिएका <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> श्रवण यन्त्रहरू</item>
       <item quantity="one">सुरक्षित गरिएका <xliff:g id="NUMBER_DEVICE_COUNT_0">%1$d</xliff:g> श्रवण यन्त्र</item>
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"अडियो समायोजन"</string>
+    <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"अडियोको वर्णन"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"हेर्न मिल्ने चलचित्र र सोहरू प्ले भइरहेका बेला स्क्रिनमा के भइरहेको छ भन्ने कुरा वर्णन गरिएको अडियो सुन्नुहोस्"</string>
+    <string name="keywords_audio_description" msgid="6202816411593281252">"अडियोको वर्णन, अडियो, वर्णन, कमजोर दृष्टि"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"सर्टकट सक्रिय छ"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"अफ छ"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"अन छ"</string>
@@ -2459,22 +2517,22 @@
     <string name="accessibility_description_state_stopped" msgid="5364752492861199133">"यो सेवाले राम्ररी काम गरिरहेको छैन।"</string>
     <string name="accessibility_shortcuts_settings_title" msgid="974740249671825145">"एक्सेसिबिलिटी सर्टकट"</string>
     <string name="enable_quick_setting" msgid="6648073323202243604">"द्रुत सेटिङमा देखाउनुहोस्"</string>
-    <string name="daltonizer_type" msgid="1715154680803795947">"सुधार मोड"</string>
-    <string name="daltonizer_mode_deuteranomaly_title" msgid="3811397143576433035">"ड्युटेरानोमेली"</string>
-    <string name="daltonizer_mode_protanomaly_title" msgid="6787594316700223938">"प्रोटानोमेली"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="1869867447813349033">"ट्रिटानोमेली"</string>
+    <string name="daltonizer_mode_deuteranomaly_title" msgid="4210949400493358650">"रातो-हरियो"</string>
+    <string name="daltonizer_mode_protanomaly_title" msgid="6392456967103014723">"रातो-हरियो"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"निलो-पहेँलो"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"ग्रेस्केल"</string>
-    <string name="daltonizer_mode_deuteranomaly_summary" msgid="791173297742998942">"रातो-हरियो"</string>
-    <string name="daltonizer_mode_protanomaly_summary" msgid="482834207025141433">"रातो-हरियो"</string>
-    <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"निलो-पहेँलो"</string>
+    <string name="daltonizer_mode_deuteranomaly_summary" msgid="2117727423019598455">"हरियो रङ ठम्याउन नसक्ने समस्या, ड्युटेरानोमेली"</string>
+    <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"रातो रङ ठम्याउन नसक्ने समस्या, प्रोटानोमेली"</string>
+    <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"ट्रिटानोमेली"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"अझै मधुरो"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"स्क्रिन अझै मधुरो बनाइयोस्"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"\"अझै मधुरो\" सुविधाको सर्टकट"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"\"अझै मधुरो\" सुविधाका बारेमा"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"फोनको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि मधुरो बनाइयोस्"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"ट्याब्लेटको स्क्रिनको चमक घटाएर न्यूनतम चमकभन्दा पनि मधुरो बनाइयोस्"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"स्क्रिनमा भएको पाठ पढ्न अझ सजिलो होस् भन्नाका खातिर आफ्नो स्क्रिन अझ मधुरो बनाउनुहोस्।&lt;br/&gt;&lt;br/&gt; निम्न अवस्थाहरूमा यसो गर्नु उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको फोनको स्क्रिनको डिफल्ट चमक अझै पनि धेरै उज्यालो छ भने&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो फोन राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ भने&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"स्क्रिनमा भएको पाठ पढ्न अझ सजिलो होस् भन्नाका खातिर आफ्नो स्क्रिन अझ अँध्यारो बनाउनुहोस्।&lt;br/&gt;&lt;br/&gt; निम्न अवस्थाहरूमा यसो गर्नु उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको ट्याब्लेटको स्क्रिनको न्यूनतम डिफल्ट चमक अझै पनि धेरै उज्यालो छ&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो ट्याब्लेट राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"सामग्री पढ्न थप सहज होस् भन्नाका लागि आफ्नो डिभाइसको स्क्रिन अझ मधुरो बनाउनुहोस्"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"निम्न अवस्थामा अझै मधुरो बनाउने सुविधा उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको फोनको डिफल्ट न्यूनतम पूर्वनिर्धारित चमक अझै पनि धेरै उज्यालो छ&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो फोन राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"निम्न अवस्थामा अझै मधुरो बनाउने सुविधा उपयोगी हुन सक्छ: &lt;ol&gt; &lt;li&gt; तपाईंको ट्याब्लेटको डिफल्ट न्यूनतम पूर्वनिर्धारित चमक अझै पनि धेरै उज्यालो छ&lt;/li&gt; &lt;li&gt; तपाईं आफ्नो फोन राति वा सुत्नुअघि अँध्यारो कोठा जस्ता अँध्यारो ठाउँमा प्रयोग गर्दै हुनुहुन्छ&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"स्क्रिनको चमकको स्तर"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"अझ धमिलो"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"अझ चम्किलो"</string>
@@ -2568,8 +2626,8 @@
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"फास्ट पेयर"</string>
     <string name="fast_pair_settings_summary" msgid="1786567691058982987">"फास्ट पेयर सुविधा चल्ने नजिकैका ब्लुटुथ डिभाइस पत्ता लगाउँछ।"</string>
-    <!-- no translation found for fast_pair_main_switch_title (1439039801201425194) -->
-    <skip />
+    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"नजिकैका डिभाइसहरू स्क्यान गर्नुहोस्"</string>
+    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"सेभ गरिएका डिभाइसहरू"</string>
     <string name="print_settings" msgid="8519810615863882491">"प्रिन्टिङ"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"निष्क्रिय छ"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3310,20 +3368,20 @@
     <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"नयाँ प्रयोगकर्ताहरू थपेर आफ्नो फोन सेयर गर्नुहोस्। तपाईंको फोनमा प्रत्येक प्रयोगकर्ताका लागि कस्टम होम स्क्रिन, खाता, एप, सेटिङ र थप कुराहरूका लागि व्यक्तिगत स्थान उपलब्ध हुन्छ।"</string>
     <string name="user_list_title" msgid="1387379079186123404">"प्रयोगकर्ता र प्रोफाइलहरू"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"प्रयोगकर्ता वा प्रोफाइल थप गर्नुहोस्"</string>
-    <string name="user_add_user_menu" msgid="6395904234221724625">"प्रयोगकर्ता थप्नुहोस्"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"निषेध गरिएको प्रोफाइल"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"सेटअप छैन"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"सेट भएको छैन - सीमित प्रोफाइल"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"सेट भएको छैन - कार्य प्रोफाइल"</string>
     <string name="user_admin" msgid="4024553191395768119">"प्रशासक"</string>
     <string name="user_you" msgid="3070562015202859996">"तपाईं (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <string name="user_add_max_count" msgid="5739771048517070983">"तपाईँले <xliff:g id="USER_COUNT">%1$d</xliff:g> जना प्रयोगकर्ता सम्म थप्न सक्नुहुनेछ"</string>
+    <string name="user_add_max_count" msgid="3328539978480663740">"तपाईं योभन्दा बढी प्रयोगकर्ता थप्न सक्नुहुन्न। नयाँ प्रयोगकर्ता थप्न कोही प्रयोगकर्ता हटाउनुहोस्।"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"ट्याब्लेटको मालिकले मात्र प्रयोगकर्ताहरूलाई व्यवस्थापन गर्न सक्छ।"</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"केवल फोनको धनीले मात्र प्रयोगकर्ता व्यवस्थापन गर्न सक्छ"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"निषेध लगाइएको प्रोफाइलले खाताहरू थप गर्न सक्दैन"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"यस उपकरणबाट <xliff:g id="USER_NAME">%1$s</xliff:g> हटाउनुहोस्"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"लक स्क्रिन सेटिङहरू"</string>
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"लक स्क्रिनबाट प्रयोगकर्ताहरू थप्नुहोस्"</string>
+    <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"डक गरिएका बेला एड्मिन खाता प्रयोग गर्नुहोस्"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"आफैंलाई हटाउने हो?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"यो प्रयोगकर्ता हटाउने हो?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"यो प्रोफाइल हटाउने?"</string>
@@ -3336,9 +3394,6 @@
     <string name="user_adding_new_user" msgid="7439602720177181412">"नयाँ प्रयोगकर्ता थप गरिँदै..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"प्रयोगकर्ता मेटाउनुहोस्"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"मेट्नुहोस्"</string>
-    <string name="user_guest" msgid="4545590092001460388">"अतिथि"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"अतिथि हटाउनुहोस्"</string>
-    <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"अतिथि हटाउने हो?"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"यो सत्रमा भएका सबै एपहरू र डेटा मेटाइने छ।"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"हटाउनुहोस्"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"फोन गर्ने सेवा सक्रिय गरियोस्"</string>
@@ -3358,29 +3413,20 @@
     <string name="user_choose_copy_apps_to_another_user" msgid="5914037067347012870">"इन्स्टल गर्नु पर्ने एपहरू छनौट गर्नुहोस्"</string>
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"उपलब्ध एपहरू इन्स्टल गर्नुहोस्"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"कन्ट्याक्टलेस भुक्तानी"</string>
-    <!-- no translation found for nfc_default_payment_settings_title (2150504446774382261) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_footer (978535088340021360) -->
-    <skip />
-    <!-- no translation found for nfc_more_details (1700713533074275233) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_title (746921251872504687) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_title (1533022606333010329) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_1 (2917430119080702912) -->
-    <skip />
-    <!-- no translation found for nfc_default_payment_workapp_confirmation_message_2 (480686123504790005) -->
-    <skip />
+    <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"भुक्तानी गर्न प्रयोग गरिने डिफल्ट एप"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"भुक्तानी गर्न प्रयोग गरिने एपबाट भुक्तानी गर्न डिभाइसको पछाडिको भाग भुक्तानी टर्मिनल नजिकै राख्नुहोस्"</string>
+    <string name="nfc_more_details" msgid="1700713533074275233">"थप जान्नुहोस्"</string>
+    <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"कामसम्बन्धी एपलाई भुक्तानी गर्न प्रयोग गरिने डिफल्ट एप बनाउने हो?"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"कामसम्बन्धी एप प्रयोग गरी भुक्तानी गर्न:"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_1" msgid="2917430119080702912">"कार्य प्रोफाइल अन गरिएको हुनु पर्छ।"</string>
+    <string name="nfc_default_payment_workapp_confirmation_message_2" msgid="8161184137833245628">"तपाईंले आफ्नो कार्य प्रोफाइलमा कुनै PIN, प्याटर्न वा पासवर्ड राख्नुभएको छ भने तपाईंले उक्त PIN, प्याटर्न वा पासवर्ड हाल्नु पर्ने हुन्छ।"</string>
     <string name="nfc_payment_how_it_works" msgid="3658253265242662010">"यसले कसरी काम गर्दछ"</string>
     <string name="nfc_payment_no_apps" msgid="6840001883471438798">"स्टोरहरूमा तपाईँको फोनमार्फत भुक्तानी गर्नुहोस्।"</string>
     <string name="nfc_payment_default" msgid="3769788268378614608">"डिफल्ट भुक्तानी विधि"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"सेट गरिएको छैन"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> - <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <!-- no translation found for nfc_payment_use_default (6127665705799658860) -->
-    <skip />
-    <!-- no translation found for nfc_payment_use_default_dialog (8556328090777785383) -->
-    <skip />
+    <string name="nfc_payment_use_default" msgid="6127665705799658860">"भुक्तानी गर्न प्रयोग गरिने डिफल्ट एप प्रयोग गर्नुहोस्"</string>
+    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"भुक्तानी गर्न प्रयोग गरिने डिफल्ट एप प्रयोग गर्नुहोस्"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"सधैँ"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"अर्को भुक्तानी एप खुला नभएको अवस्थामा"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"कन्ट्याक्टलेस टर्मिनलमा निम्न एपबाट भुक्तानी गरियोस्:"</string>
@@ -3394,6 +3440,7 @@
     <string name="nfc_payment_set_default_instead_of" msgid="565237441045013280">"कन्ट्याक्टलेस टर्मिनलमा <xliff:g id="APP_0">%1$s</xliff:g> मार्फत भुक्तानी गर्नुहोस्।\n\nयसले तपाईंको अहिलेको डिफल्ट भुक्तानी एप <xliff:g id="APP_1">%2$s</xliff:g> लाई प्रतिस्थापन गर्छ।"</string>
     <string name="nfc_payment_btn_text_set_deault" msgid="1821065137209590196">"डिफल्ट एप सेट गर्नुहोस्"</string>
     <string name="nfc_payment_btn_text_update" msgid="5159700960497443832">"अपडेट गर्नुहोस्"</string>
+    <string name="nfc_work_text" msgid="2496515165821504077">"कामसम्बन्धी एप"</string>
     <string name="restriction_settings_title" msgid="4293731103465972557">"प्रतिबन्धहरू"</string>
     <string name="restriction_menu_reset" msgid="92859464456364092">"प्रतिबन्धहरू हटाउनुहोस्"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PIN फेर्नुहोस्"</string>
@@ -3561,11 +3608,11 @@
     <string name="keywords_network_reset" msgid="4075670452112218042">"रिसेट गर्नुहोस्, पुनर्स्थापित गर्नुहोस्, कारखाना"</string>
     <string name="keywords_factory_data_reset" msgid="4979623326958976773">"मेटाउनुहोस्, मेट्नुहोस्, पुनर्स्थापना गर्नुहोस्, खाली गर्नुहोस्, हटाउनुहोस्, फ्याक्ट्री रिसेट गर्नुहोस्"</string>
     <string name="keywords_printing" msgid="3528250034669909466">"प्रिन्टर"</string>
-    <string name="keywords_sounds" msgid="1850691834585575875">"स्पिकर बिप, स्पिकर, भोल्युम, म्युट, माैन, अडियो, सङ्गीत"</string>
+    <string name="keywords_sounds" msgid="187191900698371911">"स्पिकर बिप, स्पिकर, भोल्युम, म्युट गर्नुहोस्, साइलेन्ट पार्नुहोस्, अडियो, सङ्गीत, ह्याप्टिक, भाइब्रेटर, भाइब्रेट"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="1500312884808362467">"बाधा नपुर्याउनुहोस्, हस्तक्षेप गर्नुहोस्, हस्तक्षेप, ब्रेक"</string>
     <string name="keywords_app" msgid="7983814237980258061">"RAM"</string>
     <string name="keywords_location" msgid="8016374808099706213">"वरपर, स्थान, इतिहास, रिपोर्टिङ, GPS"</string>
-    <string name="keywords_accounts" msgid="3482052586502133909">"खाता, कुनै खाता थप्नुहोस्, कार्य प्रोफाइल, खाता थप्नुहोस्"</string>
+    <string name="keywords_accounts" msgid="3013897982630845506">"खाता, कुनै खाता हाल्नुहोस्, कार्य प्रोफाइल, खाता हाल्नुहोस्, हटाउनुहोस्, मेटाउनुहोस्"</string>
     <string name="keywords_users" msgid="3497517660077620843">"प्रतिबन्ध, प्रतिबन्ध लगाउनुहोस्, प्रतिबन्धित"</string>
     <string name="keywords_keyboard_and_ime" msgid="4741098648730042570">"पाठ सच्याइ, सही, ध्वनि, कम्पन, स्वतः, भाषा, इसारा, सुझाव दिनु, सुझाव, विषयवस्तु, अपमानजनक, शब्द, प्रकार, इमोजी, अन्तर्राष्ट्रिय"</string>
     <string name="keywords_reset_apps" msgid="8254315757754930862">"रिसेट गर्नुहोस्, प्राथमिकताहरू, डिफल्ट"</string>
@@ -3574,6 +3621,7 @@
     <string name="keywords_default_apps" msgid="4601664230800605416">"एपहरू, डिफल्ट"</string>
     <string name="keywords_ignore_optimizations" msgid="8967142288569785145">"अनुकूलनहरूलाई बेवास्ता गर्नुहोस्, डोज, एप स्ट्यान्डबाइ"</string>
     <string name="keywords_color_mode" msgid="1193896024705705826">"चम्किलो RGB, sRGB, रङ्ग, प्राकृतिक, डिफल्ट"</string>
+    <string name="keywords_screen_resolution" msgid="6652125115386722875">"FHD, QHD, रिजोल्युसन, १०८० पिक्सेल, १४४० पिक्सेल"</string>
     <string name="keywords_color_temperature" msgid="8159539138837118453">"रङ्ग, तापक्रम, D65, D73, सेतो, पहेँलो, निलो, न्यानो, शीतल"</string>
     <string name="keywords_lockscreen" msgid="3656926961043485797">"अनलक गर्न स्लाइड गर्नुहोस्, पासवर्ड, ढाँचा, PIN"</string>
     <string name="keywords_app_pinning" msgid="1564144561464945019">"स्क्रिन पिनिङ"</string>
@@ -3613,8 +3661,7 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"भुक्तानी, डिफल्ट"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"आगमन सूचना"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"usb टेदर, ब्लुटुथ टेदर, wifi हटस्पट"</string>
-    <!-- no translation found for keywords_accessibility_vibration_primary_switch (730692154347231253) -->
-    <skip />
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"ह्याप्टिक्स, भाइब्रेट, भाइब्रेसन"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"अनुभूतिमूलक, कम्पन, स्क्रिन, संवेदनशीलता"</string>
     <string name="keywords_ring_vibration" msgid="1736301626537417541">"अनुभूतिमूलक, कम्पन, फोन, कल, संवेदनशीलता, घन्टी"</string>
     <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"ह्याप्टिक्स, भाइब्रेट, फोन, कल, घण्टी, बिस्तारै"</string>
@@ -3658,6 +3705,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"चार्ज गर्दा बज्ने साउन्ड र भाइब्रेसन"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"डाकिंग आवाज"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"टच साउन्ड"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"भाइब्रेसन मोडमा भएका बेला सधैँ आइकन देखाउनुहोस्"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"डक स्पिकर बज्दै"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"सबै अडियो"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"मिडिया अडियो मात्र"</string>
@@ -3667,6 +3715,12 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"यन्त्र सक्रिय हुँदाका ध्वनिहरू"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"लाइभ क्याप्सन"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"मिडियाको स्वत: क्याप्सन बनाउनुहोस्"</string>
+    <string name="spatial_audio_speaker" msgid="9145233652433523302">"फोनको स्पिकर"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"तारयुक्त हेडफोन"</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"स्पेसियल अडियोले चारैतिरबाट आए जस्तो लाग्ने इमर्सिभ आवाज निकाल्छ। यो अडियोले केही मिडियामा मात्र काम गर्छ।"</string>
+    <string name="spatial_summary_off" msgid="8272678804629774378">"अफ छ"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"अन छ / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_two" msgid="4526919818832483883">"अन छ / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> र <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{कुनै पनि समयतालिका बनाइएको छैन}=1{एउटा समयतालिका बनाइएको छ}other{# वटा समयतालिका बनाइएको छ}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"बाधा नपुऱ्याउनुहोस्"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"महत्त्वपूर्ण मान्छे र एपका सूचना मात्र प्राप्त गर्नुहोस्"</string>
@@ -4117,6 +4171,7 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कुनै पनि होइन"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कुनै पनि वार्तालाप होइन}=1{एउटा वार्तालाप}other{# वटा वार्तालाप}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"यो सेटिङ लागू नहुने व्यक्तिहरू"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"तपाईंले म्यासेजिङ वा कलिङ एपबाट सूचना प्राप्त गर्नुभएन भने पनि तपाईंले रोज्नुभएका मान्छेले ती एपमार्फत तपाईंलाई सम्पर्क भने गरिरहन सक्छन्"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"कलहरू"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"कलहरू"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"कलहरू"</string>
@@ -4345,7 +4400,11 @@
       <item quantity="other">प्रयोग नगरिएका <xliff:g id="COUNT_1">%d</xliff:g> वटा एप</item>
       <item quantity="one">प्रयोग नगरिएको <xliff:g id="COUNT_0">%d</xliff:g> एप</item>
     </plurals>
-    <string name="unused_apps_switch" msgid="419282628373205038">"अनुमतिहरू हटाई ठाउँ खाली गरियोस्"</string>
+    <string name="unused_apps_category" msgid="8954930958175500851">"प्रयोग नगरिएको एपसम्बन्धी सेटिङ"</string>
+    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
+    <skip />
+    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
+    <skip />
     <string name="filter_all_apps" msgid="6645539744080251371">"सबै एपहरू"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इन्स्टल गरिएका एपहरू"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"तात्कालिक एपहरू"</string>
@@ -4431,7 +4490,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"ब्याट्री आफू अनुकूल उपलब्ध छैन"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"ब्याट्री आफू अनुकूल लागू नगर्नुहोस्। तपाईँको ब्याट्री निकै छिटो सिध्याउन सक्छ।"</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"एपलाई सधैँ ब्याकग्राउन्डमा चल्न दिने हो?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"<xliff:g id="APP_NAME">%1$s</xliff:g>लाई सधैँ ब्याकग्राउन्डमा चल्न दिनुभयो भने ब्याट्रीको आयु घट्न सक्छ। \n\nयसलाई तपाईं पछि सेटिङ&gt; एपहरू&gt; सूचनाहरूमा गई हटाउन सक्नुहुन्छ।"</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"तपाईंले <xliff:g id="APP_NAME">%1$s</xliff:g> लाई जहिले पनि ब्याकग्राउन्डमा चल्ने अनुमति दिनुभयो भने ब्याट्रीको आयु घट्न सक्छ। \n\nतपाईं पछि \"सेटिङ &gt; एपहरू\" मा गई यो सेटिङ बदल्न सक्नुहुन्छ।"</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> पछिल्‍लो पटक पूरा चार्ज भएदेखिको प्रयोग"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"पछिल्लो २४ घण्टामा <xliff:g id="PERCENTAGE">%1$s</xliff:g> ब्याट्री खपत भयो"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"पछिल्लो पूरा चार्ज देखि ब्याट्रीको खपत गरिएको छैन"</string>
@@ -4561,7 +4620,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"क्यामेराका लागि दुई पटक पावर बटन थिच्नुहोस्"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"स्क्रिन अनलक नगरी क्यामेरा चाँडै खोल्नुहोस्"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"डिस्प्लेको आकार"</string>
-    <string name="screen_zoom_short_summary" msgid="2458636490408833800">"स्क्रिनमा भएको वस्तुहरूलाई अझ ठुलो वा सानो पार्नुहोस्"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"सबै कुरा अझ ठुला वा अझ साना बनाउनुहोस्"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"घनत्व प्रदर्शन गर्नुहोस्, स्क्रिन जुम, स्केल, स्केलिङ"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"तपाईंको स्क्रिनमा भएको वस्तुहरूलाई अझ सानो वा ठुलो पार्नुहोस्। तपाईंको स्क्रिनमा भएको केही एपको स्थिति परिवर्तन हुनसक्छ।"</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"पूर्वावलोकन"</string>
@@ -4787,8 +4846,6 @@
       <item quantity="one">१ एपले असीमित डेटा प्रयोग गर्न सक्छ</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"थप हेर्नुहोस्"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"निश्चित रूपमा प्रयोगकर्ताको डेटालाई वाइप गरेर फाइल इन्क्रिप्सनमा रूपान्तरण गर्ने हो?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"वाइप गरेर रूपान्तरण गर्नुहोस्"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"ShortcutManager को दर-सीमित गर्ने सुविधालाई रिसेट गर्नुहोस्"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"ShortcutManager को दर-सीमित गर्ने सुविधालाई रिसेट गरियो"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"लक स्क्रिनमा जानकारी नियन्त्रण गर्नुहोस्"</string>
@@ -4869,7 +4926,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"डिजिटल सहायक"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"स्वाइप गर्दा सहायक सुरु होस्"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"डिजिटल सहायक एप चलाउन थाल्न स्क्रिनको फेदको कुनाबाट माथितिर स्वाइप गर्नुहोस्।"</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4313405834615605657">"सहायक खोल्न होम बटन थिचिराख्नुहोस्"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"सहायक खोल्न होम बटन थिचिराख्नुहोस्"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"डिजिटल सहायक एप खोल्न होम बटन थिचिराख्नुहोस्।"</string>
     <string name="information_label" msgid="6939310810756569298">"जानकारी"</string>
     <string name="low_label" msgid="6525629096999711220">"न्यून"</string>
@@ -4891,7 +4948,8 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"गम्यता"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"निम्न कार्य गर्न तल स्वाइप गर्नुहोस्ः"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"निम्न कार्यका लागि सर्टकट प्रयोग गर्नुहोस्"</string>
-    <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"एक हाते मोड चलाउन स्क्रिनको फेदको किनारबाट तलतिर स्वाइप गर्नुहोस्। यो सुविधा चलाउन सिस्टम नेभिगेसनसम्बन्धी सेटिङमा इसारामार्फत नेभिगेसन गर्ने सुविधा अन छ भन्ने कुरा सुनिश्चित गर्नुहोस्।"</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"तपाईं एक हाते मोड प्रयोग गर्न चाहनुहुन्छ भने स्क्रिनको माथिल्लो आधा भागबाट तलतिर स्वाइप गर्नुहोस्"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"एक हाते मोड प्रयोग गर्ने तरिका"</b>\n" • सिस्टमको नेभिगेसनसम्बन्धी सेटिङमा इसारामार्फत गरिने नेभिगेसन चयन गरिएको छ भन्ने कुरा सुनिश्चित गर्नुहोस्\n • स्क्रिनको पुछारको किनारा नजिकैबाट तलतिर स्वाइप गर्नुहोस्"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"स्क्रिन स्लाइड गरेर बुढी औँलाले भेट्ने ठाउँमा ल्याउन"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"तपाईंले यो सुविधा अन गर्नुभयो भने तपाईं आफ्नो बुढी औँलाले स्क्रिनको सिरानको भाग छुन सक्नु हुने छ।"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"सूचनाहरू देखाइऊन्"</string>
@@ -5002,14 +5060,31 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"यो डिभाइस <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ले व्यवस्थापन गर्दछ।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"थप जान्नुहोस्"</string>
+    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
+    <skip />
+    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
+    <skip />
+    <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"तपाईंको खाताको सुरक्षार्थ यो सेटिङ हाल उपलब्ध छैन।"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"किस्तामा खरिद गरिएको डिभाइससम्बन्धी जानकारी"</string>
-    <string name="financed_privacy_exposure_category" msgid="440169672717221900">"तपाईंको डिभाइसका एड्मिनले देख्न सक्ने जानकारीका प्रकारहरू"</string>
-    <string name="financed_privacy_data" msgid="6931909690419946400">"इमेल र पात्रोसम्बन्धी जानकारी जस्ता तपाईंका खातासँग सम्बन्धित डेटा"</string>
-    <string name="financed_privacy_exposure_changes_category" msgid="1556943765530226434">"तपाईंको डिभाइसका एड्मिनले गर्नुभएका परिवर्तनहरू"</string>
-    <string name="financed_privacy_lock_device" msgid="8963934429658453147">"डिभाइसका एड्मिन यो डिभाइस लक गर्न र यसको पासवर्ड रिसेट गर्न सक्नुहुन्छ"</string>
-    <string name="financed_privacy_wipe_device" msgid="5711746449385459844">"डिभाइसका एड्मिन यो डिभाइसको सम्पूर्ण डेटा मेटाउन सक्नुहुन्छ"</string>
-    <string name="financed_privacy_failed_password_wipe_device" msgid="8777230427603977667">"कति पटक पासवर्ड गलत टाइप गरियो भने डिभाइसको डेटा मेटाइन्छ भन्ने बारेमा जानकारी"</string>
-    <string name="financed_privacy_header" msgid="7215645340918406124">"तपाईंको क्रेडिट प्रदायकले यो डिभाइसका सेटिङ बदल्न तथा यो डिभाइसमा सफ्टवेयर इन्स्टल गर्न सक्छ।\n\nयसबारे थप जान्न आफ्नो क्रेडिट प्रदायकलाई सम्पर्क गर्नुहोस्।"</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"तपाईंको क्रेडिट प्रदायकले यो डिभाइसमा सेटिङ बदलेर सफ्टवेयर इन्स्टल गर्न सक्छन्।\n\nतपाईंले भुक्तानी गर्न बिर्सनुभयो भने तपाईंको डिभाइस लक हुने छ।\n\nतपाईं यसका सम्बन्धमा थप जान्न चाहनुहुन्छ भने आफ्नो क्रेडिट प्रदायकलाई सम्पर्क गर्नुहोस्।"</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"तपाईंको डिभाइस किस्तामा खरिद गरिएको हो भने तपाईं निम्न कार्य गर्न सक्नुहुन्न:"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play स्टोरभन्दा बाहिरबाट एपहरू इन्स्टल गर्न"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"आफ्नो डिभाइस रिबुट गरेर सेफ मोडमा लैजान"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"आफ्नो डिभाइसमा एकभन्दा बढी प्रयोगकर्ताहरू समावेश गर्न"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"मिति, समय र प्रामाणिक समय बदल्न"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"विकासकर्ता विकल्पहरू प्रयोग गर्न"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"तपाईंको क्रेडिट प्रदायकले निम्न कार्य गर्न सक्छ:"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"तपाईंको IMEI नम्बर प्राप्त गर्न"</string>
+    <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"तपाईंको डिभाइस फ्याक्ट्री रिसेट गर्न"</string>
+    <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"तपाईंको डिभाइस लक भयो भने तपाईं उक्त डिभाइस प्रयोग गरी निम्न कार्य मात्र गर्न सक्नुहुन्छ:"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"आपत्‌कालीन कलहरू गर्न"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"मिति, समय, नेटवर्कको स्थिति र ब्याट्रीलगायतका सिस्टमसम्बन्धी जानकारी हेर्न"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"आफ्नो डिभाइस अन वा अफ गर्न"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"सूचना तथा टेक्स्ट म्यासेजहरू हेर्न"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"क्रेडिट प्रदायकले अनुमोदन गरेका एपहरू चलाउन"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"तपाईंले पूरै रकम तिरेपछि:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"यो डिभाइसमाथि लगाइएका सबै प्रतिबन्धहरू हटाइएका छन्"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"तपाईं क्रेडिटर एप अनइन्स्टल गर्न सक्नुहुन्छ"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">क्यामेरा एपहरू</item>
       <item quantity="one">क्यामेरा अनुप्रयोग</item>
@@ -5075,6 +5150,9 @@
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"नेटवर्क र कनेक्टिभिटीसहित सबै स्थानहरूको जानकारी देखाइयोस्"</string>
     <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"GNSS का पूर्ण मापनहरू बलपूर्वक लागू गरियोस्"</string>
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"ड्युटी साइक्लिङबिनै सबै GNSS कन्स्टेलेसन तथा फ्रिक्वेन्सीहरूको ट्र्याक गरियोस्"</string>
+    <string name="input_method_category" msgid="2252659253631639005">"इनपुट विधि"</string>
+    <string name="stylus_handwriting" msgid="2154591374132794563">"स्टाइलस प्रयोग गरेर गरिने हस्तलेखन"</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"यो सेटिङ अन गरिएको बेला एडिटरमा फोकस गरिएका खण्डमा हालको इनपुट विधिले स्टाइलस MotionEvent प्राप्त गर्छ।"</string>
     <string name="device_theme" msgid="5027604586494772471">"डिभाइसको विषयवस्तु"</string>
     <string name="default_theme" msgid="4815428567082263639">"डिफल्ट"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"नेटवर्कको नाम"</string>
@@ -5378,6 +5456,7 @@
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"\'फोर्स डार्क\' सधैँ अन हुने सेटिङ ओभरराइड गर्छ"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"गोपनीयता"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"अनुमति, खाताको क्रियाकलाप, व्यक्तिगत जानकारी"</string>
+    <string name="privacy_controls_title" msgid="1383047169455206604">"कन्ट्रोलहरू"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"हटाउनुहोस्"</string>
     <string name="contextual_card_dismiss_keep" msgid="440516181066490747">"राख्नुहोस्"</string>
     <string name="contextual_card_dismiss_confirm_message" msgid="6434344989238055188">"यो सुझाव हटाउने हो?"</string>
@@ -5414,10 +5493,8 @@
     <string name="content_capture" msgid="868372905432812238">"एपको सामग्री"</string>
     <string name="content_capture_summary" msgid="49720773699715531">"एपहरूलाई Android सिस्टममा सामग्री पठाउने अनुमति दिइयोस्"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"सिस्टमको हिप डम्प क्याप्चर गर्नुहोस्"</string>
-    <!-- no translation found for reboot_with_mte_title (9167242803901899693) -->
-    <skip />
-    <!-- no translation found for reboot_with_mte_message (1024288615073985828) -->
-    <skip />
+    <string name="reboot_with_mte_title" msgid="9167242803901899693">"MTE अन गरेर रिबुट गर्नुहोस्"</string>
+    <string name="reboot_with_mte_message" msgid="7675836625682561153">"सिस्टम रिबुट हुने छ र यसपछि मेमोरी ट्यागिङ एक्स्टेन्सन (MTE) प्रयोग गरी परीक्षण गर्न मिल्ने छ। MTE ले सिस्टमको पर्फर्मेन्स र स्थिरतामा नकारात्मक प्रभाव पार्न सक्छ। अर्को पटक रिबुट गर्दा यो रिसेट हुने छ।"</string>
     <string name="capturing_system_heap_dump_message" msgid="8410503247477360622">"प्रणालीको हिप डम्प समावेश गर्दै"</string>
     <string name="error_capturing_system_heap_dump_message" msgid="2352983250048200052">"प्रणालीको हिप डम्प समावेश गर्न सकिएन"</string>
     <string name="automatic_system_heap_dump_title" msgid="4093306504711109479">"प्रणालीका हिप डम्पहरू स्वत: समावेश गर्नुहोस्"</string>
@@ -5462,11 +5539,15 @@
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"छोटो"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"लामो"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"वालेट देखाइयोस्"</string>
-    <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"लक स्क्रिन र द्रुत सेटिङमार्फत वालेट प्रयोग गर्ने अनुमति दिनुहोस्"</string>
+    <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"लक स्क्रिनबाट वालेट प्रयोग गर्ने अनुमति दिनुहोस्"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"QR स्क्यानर देखाइयोस्"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"लक स्क्रिनबाटै QR कोड स्क्यानर खोल्न दिनुहोस्"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"डिभाइस नियन्त्रण गर्ने विजेटहरू देखाइयोस्"</string>
-    <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"डिभाइस लक हुँदा डिभाइस नियन्त्रण गर्ने विजेटहरू देखाइयोस्"</string>
+    <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"बाह्य डिभाइसहरूको कन्ट्रोल स्क्रिन लकमा देखाइयोस्"</string>
+    <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"लक गरिएको डिभाइसबाट गरिने नियन्त्रण"</string>
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"डिभाइस नियन्त्रण गर्ने विजेट एपले अनुमति दिएका खण्डमा आफ्नो फोन वा ट्याब्लेट अनलक नगरिकनै बाह्य डिभाइसहरू नियन्त्रण गर्नुहोस्"</string>
+    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
+    <skip />
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध भएका बेला दुई हरफको घडी देखाइयोस्"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"दुई हरफको घडी"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5484,6 +5565,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"लिजको म्याद कहिले पनि सकिँदैन।"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"सेटिङमा स्क्रिन ओभरले देखिन दिइयोस्"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"अन्य एपको माथिपट्टि देखिन सक्ने एपहरूलाई ओभरले सेटिङ स्क्रिनको माथिपट्टि देखिन दिइयोस्"</string>
+    <string name="allow_mock_modem" msgid="3832264806530479214">"मक मोडेम प्रयोग गर्ने अनुमति दिनुहोस्"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"उपकरणहरूको परीक्षण गर्ने प्रयोजनका लागि यो डिभाइसलाई मक मोडेम सेवा प्रयोग गर्ने अनुमति दिनुहोस्। फोन सामान्य रूपमा प्रयोग गर्दा यो सेवा अन नगर्नुहोस्"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मिडिया"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"मिडिया प्लेयर पिन गरियोस्"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"प्लेब्याक तुरुन्तै सुचारु गर्न सकियोस् भन्नाका खातिर द्रुत सेटिङमा मिडिया प्लेयर खुला रहन्छ"</string>
@@ -5569,7 +5652,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"\"एप पिनिङ\" प्रयोग गरियोस्"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"\'विकासकर्ता विकल्पहरू\' प्रयोग गरियोस्"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिन्ट सेवा चलाउनुहोस्"</string>
-    <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"\'एकभन्दा बढी प्रयोगकर्ता\' प्रयोग गरियोस्"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"एकभन्दा बढी व्यक्तिलाई प्रयोग गर्न दिनुहोस्"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"\'वायरलेस डिबगिङ\' सुविधा प्रयोग गरियोस्"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"\'ग्राफिक्स ड्राइभरसम्बन्धी प्राथमिकता\' प्रयोग गर्नुहोस्"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"\'ब्याट्री सेभर\' नामक सुविधा प्रयोग गर्नुहोस्"</string>
@@ -5596,6 +5679,7 @@
     <string name="enable_2g_title" msgid="8184757884636162942">"2G चलाउन दिनुहोस्"</string>
     <string name="enable_2g_summary" msgid="2794534052372565914">"2G अलि कम सुरक्षित हुन्छ तर तपाईंले यसको प्रयोग गर्नुभयो भने यसले कतिपय लोकेसनमा तपाईंको डिभाइसमा इन्टरनेट कनेक्ट गर्न सजिलो बनाउन सक्छ। 2G प्रयोग गरेर जुनसुकै बेला आपत्कालीन कल गर्न सकिन्छ।"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> को सेवा लिन 2G चाहिन्छ"</string>
+    <string name="app_info_all_services_label" msgid="3600929226735860271">"सबै सेवाहरू"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"एपले क्लिपबोर्डमा रहेको सामग्री प्रयोग गर्दा सूचना देखाइयोस्"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"मैले कपी गरेका टेक्स्ट, फोटो वा अन्य सामग्री एपहरूले प्रयोग गर्दा म्यासेज देखाइयोस्"</string>
     <string name="all_apps" msgid="3054120149509114789">"सबै एपहरू"</string>
@@ -5605,7 +5689,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB प्रयोग गर्न हवाइजहाज मोड अफ गर्नुहोस्"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"क्यामेरा प्रयोग गर्ने अनुमति"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"माइक्रोफोन प्रयोग गर्ने अनुमति"</string>
-    <string name="cam_toggle_description" msgid="9212762204005146404">"एप र सेवाहरूका लागि"</string>
+    <string name="location_toggle_title" msgid="5229867700421750868">"लोकेसन प्रयोग गर्ने अनुमति"</string>
+    <string name="perm_toggle_description" msgid="5754629581767319022">"एप र सेवाहरूका लागि"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"एप र सेवाहरूका लागि। यो सेटिङ अफ गरिएको अवस्थामा तपाईंले आपत्‍कालीन नम्बरमा कल गर्नुभयो भने माइक्रोफोनसम्बन्धी डेटा अझै पनि सेयर गरिन सक्छ।"</string>
     <string name="game_settings_title" msgid="1028178627743422090">"गेमका सेटिङ"</string>
     <string name="game_settings_summary" msgid="8623110986485071064">"गेम ड्यासबोर्डको सर्टकटलगायतका सुविधा अन गर्नुहोस्"</string>
@@ -5626,14 +5711,16 @@
     <string name="tare_revert" msgid="3855325741125236638">"फेरि डिफल्ट सेटिङ प्रयोग गर्न थाल्नुहोस्"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"फेरि डिफल्ट सेटिङ प्रयोग गर्न थालियो"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"ब्याट्री पूरा चार्ज हुँदाखेरिको अधिकतम ब्यालेन्स"</string>
-    <string name="tare_max_circulation" msgid="1119152898303214809">"अधिकतम सर्कुलेसन"</string>
-    <string name="tare_min_satiated_balance" msgid="8038047539584856564">"ब्याट्री पूरा चार्ज हुँदाखेरिको न्यूनतम ब्यालेन्स"</string>
+    <string name="tare_balances" msgid="731881382594747961">"बैंक मौज्दात"</string>
+    <string name="tare_consumption_limits" msgid="3230949387874396382">"उपभोगको सीमा"</string>
+    <string name="tare_initial_consumption_limit" msgid="2921646306374048384">"उपभोगको प्रारम्भिक सीमा"</string>
+    <string name="tare_hard_consumption_limit" msgid="7977885116447608016">"उपभोगको अधिकतम सीमा"</string>
     <string name="tare_modifiers" msgid="8919975635360280820">"परिमार्जकहरू"</string>
-    <string name="tare_actions" msgid="4573323466443513639">"कारबाहीहरू"</string>
-    <string name="tare_rewards" msgid="602131401590928885">"पुरस्कारहरू"</string>
-    <string name="tare_exempted" msgid="223247432456678980">"छुट दिइएका एप"</string>
-    <string name="tare_headless_app" msgid="6523878455829211651">"युजर इन्टरफेस नभएको सिस्टम एप"</string>
-    <string name="tare_other_app" msgid="4361184813378127700">"अन्य एप"</string>
+    <string name="tare_actions_ctp" msgid="5110104015354916401">"कारबाहीहरू (उत्पादन लागत)"</string>
+    <string name="tare_actions_base_price" msgid="3300967942666376589">"कारबाहीहरू (आधार मूल्य)"</string>
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"प्रत्येक कार्यक्रमबाट पाइने रिवार्डहरू"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"कार्यक्रमको कुल अवधिमा पाइने रिवार्डहरू"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"प्रत्येक दिन पाइने अधिकतम रिवार्डहरू"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"सबैभन्दा उच्च गतिविधि"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"सूचना हेरियो"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"१५ मिनेटभित्रै सूचना हेरियो"</string>
@@ -5651,6 +5738,9 @@
     <string name="tare_job_min_start" msgid="6508233901992538188">"न्यूनतम प्राथमिकता दिइएको कार्यको सुरुवात"</string>
     <string name="tare_job_min_running" msgid="6167128996320622604">"न्यूनतम प्राथमिकता दिइएको कार्य गरिँदै छ"</string>
     <string name="tare_job_timeout_penalty" msgid="7644332836795492506">"कार्यका लागि तोकिएको समय समाप्त भएकाले लागेको पेनाल्टी"</string>
+    <string name="tare_min_balance_exempted" msgid="6693710075762973485">"ब्याट्री पूरा चार्ज हुँदाखेरिको न्यूनतम ब्यालेन्स (छुट दिइएका एप)"</string>
+    <string name="tare_min_balance_headless_app" msgid="6906353766678577244">"ब्याट्री पूरा चार्ज हुँदाखेरिको न्यूनतम ब्यालेन्स (हेडलेस सिस्टम एप)"</string>
+    <string name="tare_min_balance_other_app" msgid="3404774196832506476">"ब्याट्री पूरा चार्ज हुँदाखेरिको न्यूनतम ब्यालेन्स (बाँकी एपहरू)"</string>
   <string-array name="tare_modifiers_subfactors">
     <item msgid="3325940509857535498">"चार्ज गरिँदै छ"</item>
     <item msgid="658627268149681677">"डोज"</item>
@@ -5658,8 +5748,24 @@
     <item msgid="588427840913221601">"प्रोसेस स्थिति"</item>
   </string-array>
     <string name="tare_dialog_confirm_button_title" msgid="9179397559760203348">"पुष्टि गर्नुहोस्"</string>
-    <!-- no translation found for dream_preview_button_title (1498088020579092512) -->
-    <skip />
-    <!-- no translation found for customize_button_title (1110284655990203359) -->
-    <skip />
+    <string name="dream_preview_button_title" msgid="6637456541851795952">"प्रिभ्यू"</string>
+    <string name="dream_picker_category" msgid="7726447836872744867">"स्क्रिन सेभर छनौट गर्नुहोस्"</string>
+    <string name="dream_complications_toggle_title" msgid="4273232303027449163">"अतिरिक्त जानकारी देखाइयोस्"</string>
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"स्क्रिन सेभरमा समय, मिति, मौसम, वायुको गुणस्तर र कास्ट गर्ने सेवासम्बन्धी विवरणहरू देखाइयोस्"</string>
+    <string name="dream_more_settings_category" msgid="3119192146760773748">"थप सेटिङ"</string>
+    <string name="dream_setup_title" msgid="2458303874255396142">"स्क्रिन सेभर छान्नुहोस्"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"तपाईंको ट्याब्लेट डक गरिएका बेला तपाईंको डिभाइसमा देखाइनु पर्ने कुराहरू छान्नुहोस्। स्क्रिन सेभर प्रयोग गरिएका बेला तपाईंको डिभाइसले अरू बेलाको तुलनामा बढी ब्याट्री खपत गर्न सक्छ।"</string>
+    <string name="customize_button_title" msgid="1110284655990203359">"कस्टमाइज गर्नुहोस्"</string>
+    <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"फ्रिफर्म मोड अन गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
+    <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"सहायक डिस्प्लेहरूमा डेस्कटप मोड बलपूर्वक लागू गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
+    <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"अहिले नै रिबुट गर्नुहोस्"</string>
+    <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"पछि रिबुट गर्नुहोस्"</string>
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"स्पेशियल अडियो"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"कम्प्याटिबल मिडियाको अडियो अझै इमर्सिभ हुन्छ"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"हेड ट्र्याकिङ"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"तपाईंले थप स्वाभाविक देखिनका लागि टाउको हल्लाउँदा अडियो बदलिन्छ"</string>
+    <string name="ingress_rate_limit_title" msgid="2106694002836274350">"इन्टरनेटबाट सामग्री डाउनलोड गर्ने स्पिडको सीमा"</string>
+    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"इन्टरनेटबाट सामग्री डाउनलोड गर्ने स्पिडको सीमा तोक्नुहोस्। इन्टरनेट सेवा प्रदान गर्ने जुनसुकै सेवाहरूमा यस्तो सीमा तोक्न सकिन्छ।"</string>
+    <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"इन्टरनेटबाट सामग्री डाउनलोड गर्ने स्पिडको सीमा तोक्नुहोस्"</string>
+    <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"सीमा तोकिएको छैन"</string>
 </resources>

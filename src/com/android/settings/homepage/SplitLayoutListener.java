@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,19 @@
 
 package com.android.settings.homepage;
 
-/** Activity for Slices to launch Settings deep link page */
-public class SliceDeepLinkHomepageActivity extends SettingsHomepageActivity {
+/** A listener receiving the spilt layout change */
+public interface SplitLayoutListener {
+
+    /**
+     * Called when the spilt layout is changed.
+     *
+     * @param isRegularLayout whether the layout should be regular or simplified
+     */
+    void onSplitLayoutChanged(boolean isRegularLayout);
+
+    /**
+     * Notifies the listener whether the split layout is supported.
+     */
+    default void setSplitLayoutSupported(boolean supported) {
+    }
 }

@@ -17,14 +17,21 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppLocaleUtil;
+import com.android.settings.localepicker.AppLocalePickerActivity;
 
 import java.util.List;
 
@@ -56,7 +63,25 @@ public class AppLocalePreferenceController extends AppInfoPreferenceControllerBa
 
     @Override
     public CharSequence getSummary() {
-        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry().info.packageName);
+        return AppLocaleDetails.getSummary(mContext, mParent.getAppEntry());
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(preference.getKey(), mPreferenceKey)) {
+            return false;
+        }
+
+        if (mParent != null) {
+            Intent intent = new Intent(mContext, AppLocalePickerActivity.class);
+            intent.setData(Uri.parse("package:" + mParent.getAppEntry().info.packageName));
+            intent.putExtra(AppInfoBase.ARG_PACKAGE_UID, mParent.getAppEntry().info.uid);
+            mContext.startActivity(intent);
+            return true;
+        } else {
+            Log.d(TAG, "mParent is null");
+            return false;
+        }
     }
 
     @VisibleForTesting

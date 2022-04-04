@@ -18,6 +18,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/app_locale_picker_title">
+
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="key_warnings"
+        android:icon="@drawable/ic_error_outline"
+        android:title="@string/warnings_title"
+        android:summary="@string/warnings_summary"/>
+
     <com.android.settingslib.widget.LayoutPreference
         android:key="app_locale_description"
         android:layout="@layout/app_locale_details_description"
@@ -25,20 +32,5 @@
         android:visibility="gone"
         settings:allowDividerBelow="true"
         settings:searchable="false"/>
-
-    <PreferenceCategory
-        android:key="category_key_suggested_languages"
-        android:title="@string/suggested_app_locales_title" >
-
-        <com.android.settingslib.widget.RadioButtonPreference
-            android:key="system_default_locale"
-            android:title="@string/preference_of_system_locale_title"
-            android:order="-10000"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="category_key_all_languages"
-        android:title="@string/all_supported_app_locales_title" />
 
 </PreferenceScreen>

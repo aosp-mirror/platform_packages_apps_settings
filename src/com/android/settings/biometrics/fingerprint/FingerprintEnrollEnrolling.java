@@ -32,8 +32,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
-import android.media.AudioAttributes;
 import android.os.Bundle;
+import android.os.Process;
+import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.TextUtils;
@@ -108,11 +109,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private static final VibrationEffect VIBRATE_EFFECT_ERROR =
             VibrationEffect.createWaveform(new long[] {0, 5, 55, 60}, -1);
-    private static final AudioAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
-            new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                    .build();
+    private static final VibrationAttributes FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ACCESSIBILITY);
+
+    private static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
+            VibrationAttributes.createForUsage(VibrationAttributes.USAGE_HARDWARE_FEEDBACK);
+
+    private static final VibrationEffect SUCCESS_VIBRATION_EFFECT =
+            VibrationEffect.get(VibrationEffect.EFFECT_CLICK);
 
     private FingerprintManager mFingerprintManager;
     private boolean mCanAssumeUdfps;
@@ -376,7 +380,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 break;
 
             case STAGE_LEFT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_left_edge_title);
                 if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsLeftEdgeLottie = true;
                     setDescriptionText("");
@@ -395,7 +399,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 }
                 break;
             case STAGE_RIGHT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_right_edge_title);
                 if (!mHaveShownUdfpsRightEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsRightEdgeLottie = true;
                     setDescriptionText("");
@@ -511,6 +515,14 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
             mErrorText.postDelayed(mTouchAgainRunnable, HINT_TIMEOUT_DURATION);
         } else {
+            if (mVibrator != null) {
+                mVibrator.vibrate(Process.myUid(),
+                        getApplicationContext().getOpPackageName(),
+                        SUCCESS_VIBRATION_EFFECT,
+                        getClass().getSimpleName() + "::OnEnrollmentProgressChanged",
+                        HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES);
+            }
+
             if (mIsAccessibilityEnabled) {
                 final int percent = (int) (((float)(steps - remaining) / (float) steps) * 100);
                 CharSequence cs = getString(
@@ -582,8 +594,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 mErrorText.setTranslationY(0f);
             }
         }
-        if (isResumed()) {
-            mVibrator.vibrate(VIBRATE_EFFECT_ERROR, FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
+        if (isResumed() && (mIsAccessibilityEnabled || !mCanAssumeUdfps)) {
+            mVibrator.vibrate(Process.myUid(), getApplicationContext().getOpPackageName(),
+                    VIBRATE_EFFECT_ERROR, getClass().getSimpleName() + "::showError",
+                    FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
         }
     }
 

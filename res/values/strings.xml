@@ -184,6 +184,19 @@
     <!-- Keywords for bluetooth pairing item [CHAR LIMIT=30] -->
     <string name="keywords_add_bt_device">bluetooth</string>
 
+    <!-- Connected devices settings. Title of the dialog to hint user to pair other ear of the hearing aid device. Shows when only one of the hearing aid device set is connected. [CHAR LIMIT=25] -->
+    <string name="bluetooth_pair_other_ear_dialog_title">Pair your other ear</string>
+    <!-- Connected devices settings. Message of the dialog to hint user to pair right ear of the hearing aid device. Shows when only left side of hearing aid device set is connected. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message">Your left hearing aid is connected.\n\nTo pair the right one, make sure it\u2019s turned on and ready to pair.</string>
+    <!-- Connected devices settings. Message of the dialog to hint user to pair other ear of the hearing aid device. Shows when only right side of the hearing aid device set is connected. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message">Your right hearing aid is connected.\n\nTo pair the left one, make sure it\u2019s turned on and ready to pair.</string>
+    <!-- Connected devices settings. Positive button of the dialog to help user to pair right ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button">Pair right ear</string>
+    <!-- Connected devices settings. Positive button of the dialog to help user to pair left ear of the hearing aid device. Dialog shows when only one of the hearing aid device set is connected. [CHAR LIMIT=20] -->
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button">Pair left ear</string>
+
+    <!-- Title for related tools section. This section will list related tools below. [CHAR LIMIT=15] -->
+    <string name="bluetooth_screen_related">Related</string>
     <!-- Bluetooth Visibility message.  This message informs the user that their device is now visible to other bluetooth devices.  [CHAR LIMIT=NONE] -->
     <string name="bluetooth_is_visible_message"><xliff:g id="device_name">%1$s</xliff:g> is visible to nearby devices while Bluetooth settings is open.</string>
     <!-- Bluetooth mac address message.  This message shows the bluetooth mac address for this device.  [CHAR LIMIT=120] -->
@@ -487,6 +500,15 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
+    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
+    <string name="warnings_title">Update the app</string>
+
+    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
+    <string name="warnings_summary">You need to update the app for the latest available languages</string>
+
+    <!-- Button text on warning message [CHAR LIMIT=20]-->
+    <string name="warnings_button_update">Update now</string>
+
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -500,7 +522,11 @@
     <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
 
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
-    <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
+    <string name="desc_no_available_supported_locale">Language selection for this app isn\u2019t available from Settings.</string>
+
+    <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
+    <string name="desc_disallow_locale_change_in_settings">You can\u2019t select a language for this app from Settings.</string>
+
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>
@@ -996,6 +1022,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5">Your child\u2019s phone can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your fingerprint may not work.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
@@ -1107,8 +1137,10 @@
     <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
     <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
-    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
-    <string name="security_settings_udfps_enroll_edge_title">Finally, use the edges of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Place the left edge of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Place the right edge of your finger</string>
     <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
@@ -1572,15 +1604,6 @@
     <string name="lock_last_pin_attempt_before_wipe_profile">If you enter an incorrect PIN on the next attempt, your work profile and its data will be deleted</string>
     <!-- Content of the dialog shown when the user only has one attempt left to provide the work lock password before the work profile is removed. [CHAR LIMIT=NONE] -->
     <string name="lock_last_password_attempt_before_wipe_profile">If you enter an incorrect password on the next attempt, your work profile and its data will be deleted</string>
-
-    <!-- Content of the dialog shown when the user has failed to provide the device lock too many times and the device is wiped. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_device">Too many incorrect attempts. This device\'s data will be deleted.</string>
-    <!-- Content of the dialog shown when the user has failed to provide the user lock too many times and the user is removed. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_user">Too many incorrect attempts. This user will be deleted.</string>
-    <!-- Content of the dialog shown when the user has failed to provide the work lock too many times and the work profile is removed. [CHAR LIMIT=NONE] -->
-    <string name="lock_failed_attempts_now_wiping_profile">Too many incorrect attempts. This work profile and its data will be deleted.</string>
-    <!-- Button label to dismiss the dialog telling the user the work profile has been wiped. [CHAR LIMIT=40] -->
-    <string name="lock_failed_attempts_now_wiping_dialog_dismiss">Dismiss</string>
 
     <!-- Hint shown in dialog screen when password is too short -->
     <plurals name="lockpassword_password_too_short">
@@ -4312,7 +4335,7 @@
     <!-- About phone settings screen, setting option name to see licensing info for WebView component. [CHAR LIMIT=35] -->
     <string name="webview_license_title">System WebView License</string>
     <!-- About phone settings screen, setting option name to see wallpapers attributions -->
-    <string name="wallpaper_attributions">Wallpapers</string>
+    <string name="wallpaper_attributions">Wallpaper credits</string>
     <!-- About phone settings screen, setting option name to see wallpapers attributions values -->
     <string name="wallpaper_attributions_values">Satellite imagery providers:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky</string>
 
@@ -4676,8 +4699,8 @@
     <string name="clear_user_data_text">Clear storage</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
-    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted settings from lock screen title -->
-    <string name="app_restricted_settings_lockscreen_title">Unlock restricted settings</string>
+    <!-- [CHAR LIMIT=50] Manage applications, unlock restricted setting from lock screen title -->
+    <string name="app_restricted_settings_lockscreen_title">Allow restricted settings</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">Some activities you\u2019ve selected open in this app by default.</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app was given user permission to create widgets. -->
@@ -4754,11 +4777,13 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">This app\u2019s data will be permanently deleted. This includes files, settings, databases, and other app data.</string>
-    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
+    <string name="clear_data_dlg_text">This app\u2019s data, including files and settings, will be permanently deleted from this device</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
     <string name="dlg_cancel">Cancel</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. [CHAR LIMIT=25] -->
+    <string name="dlg_delete">Delete</string>
     <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
@@ -5253,6 +5278,14 @@
     <string name="accessibility_magnification_switch_shortcut_positive_button">Switch to accessibility button</string>
     <!-- Title for the cancel button in accessibility switch shortcut dialog to keep the config shortcut value. [CHAR LIMIT=54] -->
     <string name="accessibility_magnification_switch_shortcut_negative_button">Use triple-tap</string>
+    <!-- Title for the accessibility magnification triple tap warning dialog. [CHAR LIMIT=48] -->
+    <string name="accessibility_magnification_triple_tap_warning_title">This may slow down your keyboard</string>
+    <!-- Message for the accessibility magnification triple tap warning dialog. [CHAR LIMIT=none] -->
+    <string name="accessibility_magnification_triple_tap_warning_message">When using triple-tap to magnify part of your screen, you may notice issues over the keyboard.\n\nTo avoid this, you can change your magnification shortcut from triple-tap to another option.\n<annotation id="link">Change setting</annotation></string>
+    <!-- Title for the continue button in accessibility triple tap warning dialog to confirm the action. [CHAR LIMIT=30] -->
+    <string name="accessibility_magnification_triple_tap_warning_positive_button">Continue anyway</string>
+    <!-- Title for the cancel button in accessibility triple tap warning dialog to go back to edit. [CHAR LIMIT=12] -->
+    <string name="accessibility_magnification_triple_tap_warning_negative_button">Cancel</string>
     <!-- Title for the accessibility preference screen to enable screen magnification settings. [CHAR LIMIT=35] -->
     <string name="accessibility_magnification_service_settings_title">Magnification settings</string>
     <!-- Title for the accessibility preference screen to enable triple-tap gesture screen magnification. [CHAR LIMIT=35] -->
@@ -5268,13 +5301,23 @@
     <!-- Title for the entry of the text reading options. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_options_suggestion_title">Change how text displays</string>
     <!-- Subject for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_preview_mail_subject">Email: Plans for time machine, v2</string>
+    <string name="accessibility_text_reading_preview_mail_subject">Subject: Hot air balloon designs</string>
     <!-- Message for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_preview_mail_from">From: bill@email.com</string>
+    <string name="accessibility_text_reading_preview_mail_from">From: Bill</string>
     <!-- Content for the mail content of the accessibility text reading preview. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_preview_mail_content">Good morning! Following up on our last conversation, I’d like to check in on the progress of your time machine development plan. Will you be able to have a prototype ready to demo at E3 this year?</string>
-    <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_text_reading_reset_button_title">Reset</string>
+    <string name="accessibility_text_reading_preview_mail_content">Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?</string>
+    <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=25] -->
+    <string name="accessibility_text_reading_reset_button_title">Reset settings</string>
+    <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_title">Reset display size and text?</string>
+    <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_confirm_dialog_message">Your display size and text preferences will reset to the phone\u2019s original settings</string>
+    <!-- Title for the reset button of the confirm dialog of reset settings. [CHAR LIMIT=25] -->
+    <string name="accessibility_text_reading_confirm_dialog_reset_button">Reset</string>
+    <!-- Conversation message for the messaging app preview screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_conversation_message_1">Any weekend plans?</string>
+    <!-- Conversation message for the messaging app preview screen. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_conversation_message_2">Heading to the beach. Want to join?</string>
     <!-- Title for the footer text to explain what option accessibility service does. [CHAR LIMIT=35] -->
     <string name="accessibility_screen_option">Options</string>
     <!-- Summary for the accessibility preference to enable screen magnification. [CHAR LIMIT=25] -->
@@ -5625,10 +5668,20 @@
     <string name="accessibility_hearingaid_not_connected_summary">No hearing aids connected</string>
     <!-- Summary for the accessibility preference for hearing aid when adding new devices. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_adding_summary">Add hearing aids</string>
-    <!-- Message to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_hearingaid_pair_instructions_message">To pair your hearing aids, find and tap your device on the next screen. Make sure your hearing aids are in pairing mode.</string>
+    <!-- Title of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=25] -->
+    <string name="accessibility_hearingaid_pair_instructions_title">Pair hearing aids</string>
+    <!-- Message of the pair instruction dialog. Dialog shows to ask the user to make sure that their hearing aid devices are in pairing mode. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_hearingaid_pair_instructions_message">On the next screen, tap on your hearing aids. You may need to pair the left and right ears separately.\n\nMake sure your hearing aids are turned on and ready to pair.</string>
     <!-- Summary for the accessibility preference for hearing aid when there is an active device. [CHAR LIMIT=50] -->
-    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name">%1$s</xliff:g> active</string>
+    <string name="accessibility_hearingaid_active_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g> active</string>
+    <!-- Summary for the accessibility preference for hearing aid when there is only left side active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_left_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left only</string>
+    <!-- Summary for the accessibility preference for hearing aid when there is only right side active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, right only</string>
+    <!-- Summary for the accessibility preference for hearing aid when both left side and right side are active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name"  example="GN Hearing Aids">%1$s</xliff:g>, left and right</string>
+    <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
+    <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
     <!-- Summary for the accessibility preference for hearing aid when there are saved devices. [CHAR LIMIT=50] -->
     <plurals name="show_number_hearingaid_count">
         <item quantity="one"><xliff:g id="number_device_count">%1$d</xliff:g> saved hearing aid</item>
@@ -7599,8 +7652,6 @@
     <string name="user_list_title">Users &amp; profiles</string>
     <!-- User settings add user or restricted profile menu [CHAR LIMIT=35] -->
     <string name="user_add_user_or_profile_menu">Add user or profile</string>
-    <!-- User settings add user menu [CHAR LIMIT=35] -->
-    <string name="user_add_user_menu">Add user</string>
     <!-- User settings summary for a restricted profile [CHAR LIMIT=50] -->
     <string name="user_summary_restricted_profile">Restricted profile</string>
 
@@ -7616,8 +7667,7 @@
     <string name="user_you">You (<xliff:g id="name" example="Name">%s</xliff:g>)</string>
 
     <!-- Summary for add user action, when it's disabled [CHAR LIMIT=100] -->
-    <string name="user_add_max_count">You can add up to <xliff:g id="user_count">%1$d</xliff:g> users</string>
-
+    <string name="user_add_max_count">You can\u2019t add any more users. Remove a user to add a new one.</string>
 
     <!-- Message to secondary users that only owner can manage users [CHAR LIMIT=none] -->
     <string name="user_cannot_manage_message" product="tablet">Only the tablet\u2019s owner can manage users.</string>
@@ -7661,12 +7711,6 @@
     <!-- Delete button text [CHAR LIMIT=25] -->
     <string name="user_delete_button">Delete</string>
     <!-- TODO: Remove it once the same entry in SettingsLib is translated. -->
-    <!-- Title for Guest user [CHAR LIMIT=35] -->
-    <string name="user_guest">Guest</string>
-    <!-- Label for item to exit guest mode [CHAR LIMIT=35] -->
-    <string name="user_exit_guest_title">Remove guest</string>
-    <!-- Title of dialog to user to confirm exiting guest. [CHAR LIMIT=50] -->
-    <string name="user_exit_guest_confirm_title">Remove guest?</string>
     <!-- Message to user to confirm exiting guest. [CHAR LIMIT=none] -->
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
@@ -8552,6 +8596,24 @@
 
     <!-- Setting summary for controlling how caption text display in real time [CHAR LIMIT=NONE]-->
     <string name="live_caption_summary">Automatically caption media</string>
+
+    <!-- Output device type for the phone speaker that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_speaker">Phone speaker</string>
+
+    <!-- Output device type for the wired headphones that is available for spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_wired_headphones">Wired headphones</string>
+
+    <!-- Sound: Summary for the spatializer effect. [CHAR LIMIT=NONE]-->
+    <string name="spatial_audio_text">Spatial Audio creates immersive sound that seems like it’s coming from all around you. Only works with some media.</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is off. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_off">Off</string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with one output device enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_one">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g></string>
+
+    <!-- Sound: Summary for the Spatial audio setting when it is on with two output devices enabled. [CHAR LIMIT=NONE]-->
+    <string name="spatial_summary_on_two">On / <xliff:g id="output device" example="Phone speaker">%1$s</xliff:g> and <xliff:g id="output device" example="Wired headphones">%2$s</xliff:g></string>
 
     <!-- Sound: Summary for the Do not Disturb option that describes how many automatic rules (schedules) are enabled [CHAR LIMIT=NONE]-->
     <string name="zen_mode_settings_schedules_summary">
@@ -10408,8 +10470,14 @@
         <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> unused apps</item>
     </plurals>
 
-    <!-- Label of a switch preference that controls whether the system will remove the permissions and free up space when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Remove permissions and free up space</string>
+    <!-- Label for category for unused app settings for an app. [CHAR LIMIT=40]-->
+    <string name="unused_apps_category">Unused app settings</string>
+
+    <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
+    <string name="unused_apps_switch">Pause app activity if unused</string>
+
+    <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -12119,7 +12187,9 @@
     <!-- Button label to allow the user to view additional information [CHAR LIMIT=NONE BACKUP_MESSAGE_ID=2416766240581561009] -->
     <string name="learn_more">Learn more</string>
     <!--Title for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=50] -->
-    <string name="blocked_by_restricted_settings_title">Restricted Settings</string>
+    <string name="blocked_by_restricted_settings_title">Restricted setting</string>
+    <!--Toast message shown after the user successfully allows restricted settings [CHAR LIMIT=50] -->
+    <string name="toast_allows_restricted_settings_successfully">Restricted settings allowed for <xliff:g id="app_name" example="Gmail">%s</xliff:g></string>
     <!--Content for dialog displayed to tell user that settings are blocked by setting restrictions [CHAR LIMIT=100] -->
     <string name="blocked_by_restricted_settings_content">For your security, this setting is currently unavailable.</string>
 
@@ -13412,6 +13482,8 @@
     <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
     <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_controls_summary">Control external devices without unlocking your phone or tablet if allowed by the device controls app</string>
+    <!-- Trivial Device disabled controls summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_disabled_controls_summary">To use, first turn on \u0022Show device controls\u0022</string>
     <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
@@ -13454,6 +13526,11 @@
     <string name="overlay_settings_title">Allow screen overlays on Settings</string>
     <!-- Summary for allowing screen overlays on Settings app. [CHAR LIMIT=NONE]-->
     <string name="overlay_settings_summary">Allow apps that can display over other apps to overlay Settings screens</string>
+
+    <!-- Developer settings: Title for allowing mock modem service for testing. [CHAR LIMIT=50]-->
+    <string name="allow_mock_modem">Allow Mock Modem</string>
+    <!-- Developer settings: Summary for allowing mock modem service. [CHAR LIMIT=NONE]-->
+    <string name="allow_mock_modem_summary">Allow this device to run Mock Modem service for instrumentation testing. Do not enable this during normal usage of the phone</string>
 
     <!-- Title for media control settings [CHAR LIMIT=50]-->
     <string name="media_controls_title">Media</string>
@@ -13642,7 +13719,7 @@
     <!-- Title for default print service main switch. [CHAR LIMIT=50] -->
     <string name="default_print_service_main_switch_title">Use print service</string>
     <!-- Title for multiple users main switch. [CHAR LIMIT=50] -->
-    <string name="multiple_users_main_switch_title">Enable multiple users</string>
+    <string name="multiple_users_main_switch_title">Allow multiple users</string>
     <!-- Title for wireless debugging main switch. [CHAR LIMIT=50] -->
     <string name="wireless_debugging_main_switch_title">Use wireless debugging</string>
     <!-- Title for graphics driver main switch. [CHAR LIMIT=50] -->
@@ -13823,12 +13900,20 @@
     <!-- Title for the various modifiers that alter the cost of TARE tasks based on battery status
     (charging, power save mode, etc.) [CHAR LIMIT=40]-->
     <string name="tare_modifiers">Modifiers</string>
-    <!-- Title for the various TARE policy's action's cost to produce and price paid by
-    apps [CHAR LIMIT=40]-->
-    <string name="tare_actions">Actions</string>
-    <!-- Title for the instant, ongoing, and max rewards apps can obtain for different actions that
-    benefit the user. [CHAR LIMIT=40]-->
-    <string name="tare_rewards">Rewards</string>
+    <!-- Title for the various TARE policy's actions' cost to produce. "Cost to produce" refers to
+     how many credits it costs the system to perform (produce) the action. [CHAR LIMIT=40]-->
+    <string name="tare_actions_ctp">Actions (Cost to Produce)</string>
+    <!-- Title for the various TARE policy's actions' starting prices [CHAR LIMIT=40]-->
+    <string name="tare_actions_base_price">Actions (Base Price)</string>
+    <!-- Title for the rewards apps can obtain for each instance of an event that implies the user
+    finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_instantaneous">Rewards per single event</string>
+    <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
+    implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_ongoing">Rewards for total event duration</string>
+    <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
+    that benefit the user. [CHAR LIMIT=40]-->
+    <string name="tare_rewards_max">Maximum Rewards Per Day</string>
     <!-- Title for the Allow While Idle Exact Wakeup Alarm set via
     AlarmManager.setExactAndAllowWhileIdle() [CHAR LIMIT=50]-->
     <string name="tare_wakeup_exact_idle" translatable="false">
@@ -13964,7 +14049,7 @@
     <string-array name="tare_rewards_subfactors" translatable="false">
         <item>@string/tare_top_activity</item>
         <item>@string/tare_notification_seen</item>
-        <item>@string/tare_notification_seen_15_min</item>
+        <!-- TODO: add back once supported  <item>@string/tare_notification_seen_15_min</item> -->
         <item>@string/tare_notification_interaction</item>
         <item>@string/tare_widget_interaction</item>
         <item>@string/tare_other_interaction</item>
@@ -13999,13 +14084,13 @@
     <!-- The title of the toggle which enables/disables overlays on top of the screen saver [CHAR LIMIT=none] -->
     <string name="dream_complications_toggle_title">Show additional information</string>
     <!-- The summary of what overlays this toggle controls [CHAR LIMIT=none] -->
-    <string name="dream_complications_toggle_summary">Display time, date and weather on the screen saver</string>
+    <string name="dream_complications_toggle_summary">Display time, date, weather, air quality, and Cast details on the screen saver</string>
     <!-- The title of the category to show for the screensaver miscellaneous settings [CHAR LIMIT=none] -->
     <string name="dream_more_settings_category">More settings</string>
     <!-- The title of the screen saver setup page [CHAR LIMIT=none] -->
-    <string name="dream_setup_title">Customize your screen saver</string>
+    <string name="dream_setup_title">Choose your screen saver</string>
     <!-- The description of the screen saver setup page [CHAR LIMIT=none] -->
-    <string name="dream_setup_description">Choose what you’ll see on your screen when your device is not in use.</string>
+    <string name="dream_setup_description">Choose what you’ll see on your screen when your tablet is docked. Your device may use more energy when a screen saver is used.</string>
 
     <!-- Button to customize the screensaver [CHAR LIMIT=20] -->
     <string name="customize_button_title">Customize</string>
@@ -14027,13 +14112,13 @@
     <string name="placeholder_activity" translatable="false">*This is a temporary placeholder fallback activity.</string>
 
     <!-- The title of the spatial audio [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_spatial_audio_title">Spatial audio</string>
+    <string name="bluetooth_details_spatial_audio_title">Spatial Audio</string>
     <!-- The summary of the spatial audio [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_spatial_audio_summary">Immersive audio seems like it\u0027s coming from all around you. Only works with some media.</string>
+    <string name="bluetooth_details_spatial_audio_summary">Audio from compatible media becomes more immersive</string>
     <!-- The title of the head tracking [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_head_tracking_title">Make audio more realistic</string>
+    <string name="bluetooth_details_head_tracking_title">Head tracking</string>
     <!-- The summary of the head tracking [CHAR LIMIT=none] -->
-    <string name="bluetooth_details_head_tracking_summary">Shift positioning of audio so it sounds more natural.</string>
+    <string name="bluetooth_details_head_tracking_summary">Audio changes as you move your head to sound more natural</string>
 
     <!-- Developer Settings: Title for network bandwidth ingress rate limit [CHAR LIMIT=none] -->
     <string name="ingress_rate_limit_title">Network download rate limit</string>
