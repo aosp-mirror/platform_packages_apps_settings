@@ -15,6 +15,8 @@
  */
 package com.android.settings.datetime.timezone;
 
+import static com.android.settingslib.datetime.ZoneGetter.capitalizeForStandaloneDisplay;
+
 import android.content.Context;
 import android.icu.text.LocaleDisplayNames;
 
@@ -23,19 +25,21 @@ import java.util.Locale;
 public class RegionPreferenceController extends BaseTimeZonePreferenceController {
     private static final String PREFERENCE_KEY = "region";
 
+    private final Locale mLocale;
     private final LocaleDisplayNames mLocaleDisplayNames;
     private String mRegionId = "";
 
     public RegionPreferenceController(Context context) {
         super(context, PREFERENCE_KEY);
         Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+        mLocale = locale;
         mLocaleDisplayNames = LocaleDisplayNames.getInstance(locale);
-
     }
 
     @Override
     public CharSequence getSummary() {
-        return mLocaleDisplayNames.regionDisplayName(mRegionId);
+        return capitalizeForStandaloneDisplay(mLocale,
+                mLocaleDisplayNames.regionDisplayName(mRegionId));
     }
 
     public void setRegionId(String regionId) {
