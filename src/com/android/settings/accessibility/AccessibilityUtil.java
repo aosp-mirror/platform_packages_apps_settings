@@ -434,4 +434,15 @@ public final class AccessibilityUtil {
     public static boolean isSystemApp(@NonNull AccessibilityServiceInfo info) {
         return info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp();
     }
+
+    /**
+     * Bypasses the timeout restriction if volume key shortcut assigned.
+     *
+     * @param context the current context.
+     */
+    public static void skipVolumeShortcutDialogTimeoutRestriction(Context context) {
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, /*
+                    true */ 1);
+    }
 }

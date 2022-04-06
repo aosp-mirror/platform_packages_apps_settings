@@ -79,10 +79,13 @@ public class FingerprintStatusUtils {
      */
     public String getSettingsClassName() {
         return hasEnrolled() ? FingerprintSettings.class.getName()
-                : FingerprintEnrollIntroduction.class.getName();
+                : FingerprintEnrollIntroductionInternal.class.getName();
     }
 
-    private boolean hasEnrolled() {
+    /**
+     * Returns whether at least one fingerprint has been enrolled.
+     */
+    public boolean hasEnrolled() {
         return mFingerprintManager.hasEnrolledFingerprints(mUserId);
     }
 }

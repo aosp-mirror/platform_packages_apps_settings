@@ -60,6 +60,8 @@ import com.android.settings.applications.specialaccess.notificationaccess.Notifi
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnDetails;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
@@ -335,7 +337,9 @@ public class SettingsGateway {
             AutoBrightnessSettings.class.getName(),
             OneHandedSettings.class.getName(),
             MobileNetworkSettings.class.getName(),
-            AppLocaleDetails.class.getName()
+            AppLocaleDetails.class.getName(),
+            TurnScreenOnSettings.class.getName(),
+            TurnScreenOnDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

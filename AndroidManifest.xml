@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -154,8 +154,7 @@
         <!-- Activity for launching deep link page in 2-pane. -->
         <activity android:name=".homepage.DeepLinkHomepageActivity"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
-                  android:taskAffinity=""
+                  android:theme="@style/Theme.Settings.Home"
                   android:launchMode="singleTask"
                   android:exported="true"
                   android:enabled="false"
@@ -169,9 +168,9 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name=".homepage.SliceDeepLinkHomepageActivity"
+        <activity android:name=".homepage.DeepLinkHomepageActivityInternal"
                   android:label="@string/settings_label_launcher"
-                  android:theme="@style/Theme.Settings.Home.DeepLink"
+                  android:theme="@style/Theme.Settings.Home.NoAnimation"
                   android:taskAffinity=""
                   android:launchMode="singleTask"
                   android:exported="false"
@@ -205,7 +204,9 @@
         </receiver>
 
         <activity android:name=".SubSettings"
-                  android:theme="@style/Theme.SubSettings" />
+                  android:exported="false"
+                  android:theme="@style/Theme.SubSettings"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".Settings$CreateShortcutActivity"
                   android:exported="true"
@@ -620,6 +621,17 @@
                        android:value="@string/menu_key_security"/>
         </activity>
 
+        <activity android:name="Settings$FaceSettingsInternalActivity"
+                  android:label="@string/security_settings_face_preference_title"
+                  android:exported="false"
+                  android:icon="@drawable/ic_face_header"
+                  android:taskAffinity="com.android.settings.root">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.biometrics.face.FaceSettings" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_security"/>
+        </activity>
+
         <activity android:name="Settings$FingerprintSettingsActivity"
                   android:label="@string/security_settings_fingerprint_preference_title"
                   android:exported="true"
@@ -636,7 +648,8 @@
 
         <activity android:name="Settings$CombinedBiometricSettingsActivity"
                   android:label="@string/security_settings_biometric_preference_title"
-                  android:exported="false">
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.biometrics.combination.CombinedBiometricSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
@@ -721,7 +734,7 @@
             android:name="Settings$WifiTetherSettingsActivity"
             android:label="@string/wifi_hotspot_checkbox_text"
             android:exported="true"
-            android:icon="@drawable/ic_wifi_tethering">
+            android:icon="@drawable/ic_homepage_wifi_tethering">
             <intent-filter>
                 <action android:name="com.android.settings.WIFI_TETHER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -766,7 +779,7 @@
             android:name="Settings$VpnSettingsActivity"
             android:label="@string/vpn_settings_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_wireless">
+            android:icon="@drawable/ic_homepage_vpn">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.VPN_SETTINGS" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -851,7 +864,7 @@
         </activity>
 
         <activity
-            android:name=".Settings$AppLocalePickerActivity"
+            android:name=".localepicker.AppLocalePickerActivity"
             android:label="@string/app_locale_picker_title"
             android:exported="true" >
             <intent-filter>
@@ -859,8 +872,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.appinfo.AppLocaleDetails" />
         </activity>
 
         <activity
@@ -1517,6 +1528,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity-alias>
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
@@ -1529,6 +1542,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="package" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <!-- Provide direct entry into manage apps showing running services. -->
@@ -1842,7 +1857,7 @@
                   android:exported="true"
                   android:clearTaskOnLaunch="true"
                   android:theme="@style/Theme.Settings.NoActionBar">
-            <intent-filter>
+            <intent-filter android:priority="1000">
                 <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -1947,8 +1962,7 @@
         <activity android:name=".accessibility.AccessibilitySettingsForSetupWizardActivity"
                 android:icon="@drawable/ic_accessibility_suggestion"
                 android:label="@string/vision_settings_title"
-                android:exported="true"
-                android:theme="@style/GlifV3Theme.Light">
+                android:exported="true">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS_FOR_SUW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2177,13 +2191,18 @@
                   android:screenOrientation="portrait"/>
 
         <activity android:name=".biometrics.face.FaceEnrollIntroduction"
-            android:exported="true"
-            android:screenOrientation="portrait">
+                  android:exported="true"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.settings.FACE_ENROLL"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.face.FaceEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:screenOrientation="portrait"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.face.FaceEnrollEducation"
             android:exported="false"
@@ -2214,7 +2233,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".biometrics.fingerprint.FingerprintSettings" android:exported="false"/>
+        <activity android:name=".biometrics.fingerprint.FingerprintSettings"
+                  android:exported="false"
+                  android:taskAffinity="com.android.settings.root" />
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.FingerprintEnrollFinish" android:exported="false"/>
@@ -2227,6 +2248,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".biometrics.fingerprint.FingerprintEnrollIntroductionInternal"
+                  android:exported="false"
+                  android:theme="@style/GlifTheme.Light"
+                  android:taskAffinity="com.android.settings.root" />
 
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".biometrics.fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>
@@ -2315,7 +2341,7 @@
         </activity>
 
         <activity android:name=".password.ScreenLockSuggestionActivity"
-            android:exported="true"
+            android:exported="false"
             android:icon="@drawable/ic_suggestion_security">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.MAIN" />
@@ -2907,7 +2933,7 @@
             android:name="Settings$DataUsageSummaryActivity"
             android:label="@string/data_usage_summary_title"
             android:exported="true"
-            android:icon="@drawable/ic_settings_data_usage">
+            android:icon="@drawable/ic_homepage_data_usage">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.DATA_USAGE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3110,6 +3136,24 @@
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_apps"/>
+        </activity>
+
+        <activity
+            android:name="Settings$TurnScreenOnSettingsActivity"
+            android:exported="true"
+            android:label="@string/turn_screen_on_title">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.TURN_SCREEN_ON_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_apps"/>
         </activity>
@@ -4291,6 +4335,7 @@
             android:name=".sim.ChooseSimActivity"
             android:theme="@style/GlifV3Theme.DayNight.NoActionBar"
             android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
             android:exported="false"/>
 
         <activity

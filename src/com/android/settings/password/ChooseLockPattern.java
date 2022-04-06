@@ -482,7 +482,7 @@ public class ChooseLockPattern extends SettingsActivity {
             } else if (mForFace) {
                 msg = getString(R.string.lockpassword_choose_your_pattern_header_for_face);
             } else if (mIsManagedProfile) {
-                msg = getContext().getSystemService(DevicePolicyManager.class)
+                msg = getContext().getSystemService(DevicePolicyManager.class).getResources()
                         .getString(SET_WORK_PROFILE_PATTERN_HEADER,
                                 () -> getString(
                                         R.string.lockpassword_choose_your_profile_pattern_header));

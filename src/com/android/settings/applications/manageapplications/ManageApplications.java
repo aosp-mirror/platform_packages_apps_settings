@@ -120,6 +120,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
+import com.android.settings.localepicker.AppLocalePickerActivity;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
@@ -532,12 +533,12 @@ public class ManageApplications extends InstrumentedFragment
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
         outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
-        outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
-        outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
         }
         if (mApplications != null) {
+            outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
+            outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
             mApplications.onSaveInstanceState(outState);
         }
     }
@@ -635,8 +636,10 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.media_management_apps_title);
                 break;
             case LIST_TYPE_APPS_LOCALE:
-                startAppInfoFragment(AppLocaleDetails.class,
-                        R.string.app_locale_picker_title);
+                Intent intent = new Intent(getContext(), AppLocalePickerActivity.class);
+                intent.setData(Uri.parse("package:" + mCurrentPkgName));
+                intent.putExtra(AppInfoBase.ARG_PACKAGE_UID, mCurrentUid);
+                startActivity(intent);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -1559,8 +1562,7 @@ public class ManageApplications extends InstrumentedFragment
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
                 case LIST_TYPE_APPS_LOCALE:
-                    holder.setSummary(AppLocaleDetails
-                            .getSummary(mContext, entry.info.packageName));
+                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

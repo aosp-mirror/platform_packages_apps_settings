@@ -530,7 +530,7 @@ public class TareFactorController {
         } else if (mJobSchedulerMap.containsKey(key)) {
             currentMap = mJobSchedulerMap;
         } else {
-            throw new IllegalArgumentException("Couldn't link key to policy map");
+            throw new IllegalArgumentException("Couldn't link key '" + key + "' to a policy");
         }
         return currentMap.get(key).factorPolicy;
     }

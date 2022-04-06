@@ -38,6 +38,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.PopupWindow;
 
 import androidx.annotation.XmlRes;
@@ -49,6 +50,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogType;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settingslib.widget.TopIntroPreference;
@@ -77,8 +79,8 @@ public class ToggleFeaturePreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
-    private static final String PLACEHOLDER_TILE_NAME =
-            PLACEHOLDER_PACKAGE_NAME + "tile.placeholder";
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
@@ -180,6 +182,28 @@ public class ToggleFeaturePreferenceFragmentTest {
         final int expectedType = PreferredShortcuts.retrieveUserShortcutType(mContext,
                 mFragment.mComponentName.flattenToString(), UserShortcutType.SOFTWARE);
         assertThat(expectedType).isEqualTo(UserShortcutType.HARDWARE);
+    }
+
+    @Test
+    public void dialogCheckboxClicked_hardwareType_skipTimeoutRestriction() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+        final ShortcutPreference shortcutPreference = new ShortcutPreference(mContext, /* attrs= */
+                null);
+        mFragment.mComponentName = PLACEHOLDER_COMPONENT_NAME;
+        mFragment.mShortcutPreference = shortcutPreference;
+        final AlertDialog dialog = AccessibilityDialogUtils.showEditShortcutDialog(
+                mContext, DialogType.EDIT_SHORTCUT_GENERIC, PLACEHOLDER_DIALOG_TITLE,
+                mFragment::callOnAlertDialogCheckboxClicked);
+        mFragment.setupEditShortcutDialog(dialog);
+
+        final View dialogHardwareView = dialog.findViewById(R.id.hardware_shortcut);
+        final CheckBox hardwareTypeCheckBox = dialogHardwareView.findViewById(R.id.checkbox);
+        hardwareTypeCheckBox.setChecked(true);
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+        final boolean skipTimeoutRestriction = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, 0) != 0;
+
+        assertThat(skipTimeoutRestriction).isTrue();
     }
 
     @Test
@@ -321,7 +345,7 @@ public class ToggleFeaturePreferenceFragmentTest {
                 (AccessibilityFooterPreference) mFragment.getPreferenceScreen().getPreference(
                         mFragment.getPreferenceScreen().getPreferenceCount() - 1);
         assertThat(accessibilityFooterPreference.getSummary()).isEqualTo(DEFAULT_SUMMARY);
-        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(true);
+        assertThat(accessibilityFooterPreference.isSelectable()).isEqualTo(false);
         assertThat(accessibilityFooterPreference.getOrder()).isEqualTo(Integer.MAX_VALUE - 1);
     }
 
@@ -361,8 +385,8 @@ public class ToggleFeaturePreferenceFragmentTest {
         }
 
         @Override
-        CharSequence getTileName() {
-            return PLACEHOLDER_TILE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

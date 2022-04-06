@@ -61,23 +61,30 @@ public final class LockScreenSafetySource {
         final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtilsInternal
                 .checkIfPasswordQualityIsSet(context, userId);
         final PendingIntent pendingIntent = createPendingIntent(context,
-                screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent());
+                screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(
+                        SettingsEnums.SAFETY_CENTER));
         final IconAction gearMenuIconAction = createGearMenuIconAction(context,
                 screenLockPreferenceDetailsUtils);
+        final boolean enabled =
+                !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin);
+        final boolean isLockPatternSecure = screenLockPreferenceDetailsUtils.isLockPatternSecure();
+        final int severityLevel = enabled
+                ? isLockPatternSecure
+                        ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
+                        : SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION
+                : SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED;
+
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(
                 context.getString(R.string.unlock_set_unlock_launch_picker_title),
                 screenLockPreferenceDetailsUtils.getSummary(UserHandle.myUserId()),
-                screenLockPreferenceDetailsUtils.isLockPatternSecure()
-                        ? SafetySourceStatus.STATUS_LEVEL_OK
-                        : SafetySourceStatus.STATUS_LEVEL_RECOMMENDATION,
-                pendingIntent)
-                .setEnabled(
-                        !screenLockPreferenceDetailsUtils.isPasswordQualityManaged(userId, admin))
+                severityLevel)
+                .setPendingIntent(pendingIntent)
+                .setEnabled(enabled)
                 .setIconAction(gearMenuIconAction).build();
         final SafetySourceData.Builder safetySourceDataBuilder =
                 new SafetySourceData.Builder().setStatus(status);
-        if (!screenLockPreferenceDetailsUtils.isLockPatternSecure()) {
+        if (enabled && !isLockPatternSecure) {
             safetySourceDataBuilder.addIssue(createNoScreenLockIssue(context, pendingIntent));
         }
         final SafetySourceData safetySourceData = safetySourceDataBuilder.build();
@@ -93,8 +100,7 @@ public final class LockScreenSafetySource {
     /** Notifies Safety Center of a change in lock screen settings. */
     public static void onLockScreenChange(Context context) {
         setSafetySourceData(
-                context,
-                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
+                context, new ScreenLockPreferenceDetailsUtils(context),
                 new SafetyEvent.Builder(SAFETY_EVENT_TYPE_SOURCE_STATE_CHANGED).build());
 
         // Also send refreshed safety center data for biometrics, since changing lockscreen settings
@@ -107,7 +113,8 @@ public final class LockScreenSafetySource {
         return screenLockPreferenceDetailsUtils.shouldShowGearMenu() ? new IconAction(
                 IconAction.ICON_TYPE_GEAR,
                 createPendingIntent(context,
-                        screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent()))
+                        screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
+                                SettingsEnums.SAFETY_CENTER)))
                 : null;
     }
 
@@ -130,7 +137,7 @@ public final class LockScreenSafetySource {
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
                 context.getString(R.string.no_screen_lock_issue_summary),
-                SafetySourceIssue.SEVERITY_LEVEL_RECOMMENDATION,
+                SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
                 .addAction(action).build();

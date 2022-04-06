@@ -21,6 +21,9 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
+
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -30,11 +33,15 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 import com.android.settingslib.search.SearchIndexableRaw;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -54,11 +61,25 @@ public class DeviceStateAutoRotateSettingControllerTest {
     private static final int DEFAULT_ORDER = -10;
 
     private final Context mContext = RuntimeEnvironment.application;
-    private final DeviceStateAutoRotateSettingController mController =
-            new DeviceStateAutoRotateSettingController(mContext, DEFAULT_DEVICE_STATE,
-                    DEFAULT_DEVICE_STATE_DESCRIPTION, DEFAULT_ORDER);
     private final DeviceStateRotationLockSettingsManager mAutoRotateSettingsManager =
             DeviceStateRotationLockSettingsManager.getInstance(mContext);
+
+    @Mock private MetricsFeatureProvider mMetricsFeatureProvider;
+
+    private DeviceStateAutoRotateSettingController mController;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
+        mController = new DeviceStateAutoRotateSettingController(
+                mContext,
+                DEFAULT_DEVICE_STATE,
+                DEFAULT_DEVICE_STATE_DESCRIPTION,
+                DEFAULT_ORDER,
+                mMetricsFeatureProvider
+        );
+    }
 
     @Test
     public void displayPreference_addsPreferenceToPreferenceScreen() {
@@ -141,6 +162,22 @@ public class DeviceStateAutoRotateSettingControllerTest {
         boolean rotationLocked = mAutoRotateSettingsManager.isRotationLocked(DEFAULT_DEVICE_STATE);
 
         assertThat(rotationLocked).isTrue();
+    }
+
+    @Test
+    public void setChecked_true_logsDeviceStateBasedSettingOn() {
+        mController.setChecked(true);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_ENABLE_AUTO_ROTATION_DEVICE_STATE, DEFAULT_DEVICE_STATE);
+    }
+
+    @Test
+    public void setChecked_false_logsDeviceStateBasedSettingOff() {
+        mController.setChecked(false);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_DISABLE_AUTO_ROTATION_DEVICE_STATE, DEFAULT_DEVICE_STATE);
     }
 
     @Test
