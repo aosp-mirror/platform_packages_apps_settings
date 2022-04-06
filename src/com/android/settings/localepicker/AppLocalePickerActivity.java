@@ -89,24 +89,10 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            handleBackPressed();
+            super.onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        handleBackPressed();
-    }
-
-    private void handleBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 1) {
-            super.onBackPressed();
-        } else {
-            setResult(RESULT_CANCELED);
-            finish();
-        }
     }
 
     @Override
