@@ -146,17 +146,17 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.registerFragmentLifecycleCallbacks(
                 new android.app.FragmentManager.FragmentLifecycleCallbacks() {
-                @Override
-                public void onFragmentViewCreated(
-                        android.app.FragmentManager fm,
-                        android.app.Fragment f,
-                        View v,
-                        Bundle savedInstanceState) {
-                    super.onFragmentViewCreated(fm, f, v, savedInstanceState);
-                    mLocalePickerWithRegion
-                        .getListView().addHeaderView(launchAppLocaleDetailsPage());
-                }
-            }, true);
+                    @Override
+                    public void onFragmentViewCreated(
+                            android.app.FragmentManager fm,
+                            android.app.Fragment f,
+                            View v,
+                            Bundle savedInstanceState) {
+                        super.onFragmentViewCreated(fm, f, v, savedInstanceState);
+                        mLocalePickerWithRegion.getListView()
+                                .addHeaderView(launchAppLocaleDetailsPage());
+                    }
+                }, true);
         fragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.content_frame, mLocalePickerWithRegion)
