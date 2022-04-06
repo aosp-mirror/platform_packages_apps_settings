@@ -44,12 +44,12 @@ import android.content.res.Resources;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.widget.FooterPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -86,7 +86,7 @@ public class ScreenTimeoutSettingsTest {
     AdaptiveSleepBatterySaverPreferenceController mAdaptiveSleepBatterySaverPreferenceController;
 
     @Mock
-    Preference mDisableOptionsPreference;
+    FooterPreference mDisableOptionsPreference;
 
     @Mock
     private PackageManager mPackageManager;

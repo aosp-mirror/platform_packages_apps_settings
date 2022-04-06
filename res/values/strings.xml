@@ -500,6 +500,15 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
+    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
+    <string name="warnings_title">Update the app</string>
+
+    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
+    <string name="warnings_summary">You need to update the app for the latest available languages</string>
+
+    <!-- Button text on warning message [CHAR LIMIT=20]-->
+    <string name="warnings_button_update">Update now</string>
+
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -513,7 +522,11 @@
     <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
 
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
-    <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
+    <string name="desc_no_available_supported_locale">Language selection for this app isn\u2019t available from Settings.</string>
+
+    <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
+    <string name="desc_disallow_locale_change_in_settings">You can\u2019t select a language for this app from Settings.</string>
+
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>
@@ -770,8 +783,8 @@
     <!-- Main Settings screen setting title for the item that takes you to the safety center [CHAR LIMIT=60] -->
     <string name="safety_center_title">Security &amp; privacy</string>
     <!-- TODO(b/208624929): Update to an UX approved summary and char limit. -->
-    <!-- Main Settings screen setting summary for the item that takes you to the safety center [CHAR LIMIT=60] -->
-    <string name="safety_center_summary">Permissions, screen lock, app security</string>
+    <!-- Main Settings screen setting summary for the item that takes you to the privacy and security settings. [CHAR LIMIT=60] -->
+    <string name="safety_center_summary">App security, device lock, permissions</string>
 
     <!-- Face enrollment and settings --><skip />
     <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
@@ -1009,6 +1022,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5">Your child\u2019s phone can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your fingerprint may not work.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
@@ -1120,8 +1137,10 @@
     <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
     <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
-    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
-    <string name="security_settings_udfps_enroll_edge_title">Finally, use the edges of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Place the left edge of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Place the right edge of your finger</string>
     <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
@@ -1269,14 +1288,14 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
-    <!-- Title for Advanced Security Settings [CHAR LIMIT=60] -->
-    <string name="security_advanced_settings">Advanced settings</string>
-    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is a work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_work_profile_settings_summary">Work profile lock, Smart Lock</string>
-    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is no work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_no_work_profile_settings_summary">Smart Lock and more</string>
-    <!-- Search keywords for Advanced settings in Security page. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_keywords">Advanced settings</string>
+    <!-- Title for the section that has additional security settings. [CHAR LIMIT=60] -->
+    <string name="security_advanced_settings">More security settings</string>
+    <!-- String for the "More security settings" summary when a work profile is on the device. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_work_profile_settings_summary">Work profile lock, encryption, and more</string>
+    <!-- Summary string for the "More security settings" section. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_no_work_profile_settings_summary">Encryption, credentials, and more</string>
+    <!-- Search keywords for the "More security settings" section in security settings. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_keywords">security, more security settings, more settings, advanced security settings</string>
 
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
