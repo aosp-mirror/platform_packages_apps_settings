@@ -233,7 +233,9 @@ public class RestrictedPreferenceHelper {
                 final int mode = mAppOps.noteOpNoThrow(
                         AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
                         preference.getUid(), preference.getPackageName());
-                appOpsAllowed = mode == AppOpsManager.MODE_ALLOWED;
+                final boolean ecmEnabled = mContext.getResources().getBoolean(
+                        com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
+                appOpsAllowed = !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
                 serviceAllowed = appOpsAllowed;
             } catch (Exception e) {
                 // Allow service in case if app ops is not available in testing.

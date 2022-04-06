@@ -163,7 +163,9 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         try {
             final int mode = mAppOps.noteOpNoThrow(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
                     uid, packageName);
-            return mode != AppOpsManager.MODE_ERRORED && mode != AppOpsManager.MODE_IGNORED;
+            final boolean ecmEnabled = getContext().getResources().getBoolean(
+                    com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
+            return !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
         } catch (Exception e) {
             // Fallback in case if app ops is not available in testing.
             return true;
