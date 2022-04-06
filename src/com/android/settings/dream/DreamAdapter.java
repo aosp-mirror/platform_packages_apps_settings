@@ -50,14 +50,13 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      * View holder for each {@link IDreamItem}.
      */
     private class DreamViewHolder extends RecyclerView.ViewHolder {
-        private static final int VALUE_ENABLED_ALPHA = 255;
         private final TextView mTitleView;
         private final TextView mSummaryView;
         private final ImageView mPreviewView;
         private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
         private final Context mContext;
-        private final int mDisabledAlphaValue;
+        private final float mDisabledAlphaValue;
 
         DreamViewHolder(View view, Context context) {
             super(view);
@@ -67,7 +66,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mTitleView = view.findViewById(R.id.title_text);
             mSummaryView = view.findViewById(R.id.summary_text);
             mCustomizeButton = view.findViewById(R.id.customize_button);
-            mDisabledAlphaValue = (int) (ColorUtil.getDisabledAlpha(context) * VALUE_ENABLED_ALPHA);
+            mDisabledAlphaValue = ColorUtil.getDisabledAlpha(context);
         }
 
         /**
@@ -93,7 +92,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mPreviewView.setImageDrawable(null);
                 mPreviewPlaceholderView.setVisibility(View.VISIBLE);
             }
-            mPreviewView.setImageAlpha(getAlpha());
 
             final Drawable icon = item.isActive()
                     ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
@@ -105,7 +103,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);
-            icon.setAlpha(getAlpha());
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
             if (item.isActive()) {
@@ -130,10 +127,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             setEnabledStateOnViews(itemView, mEnabled);
         }
 
-        private int getAlpha() {
-            return mEnabled ? VALUE_ENABLED_ALPHA : mDisabledAlphaValue;
-        }
-
         /**
          * Makes sure the view (and any children) get the enabled state changed.
          */
@@ -145,6 +138,8 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 for (int i = vg.getChildCount() - 1; i >= 0; i--) {
                     setEnabledStateOnViews(vg.getChildAt(i), enabled);
                 }
+            } else {
+                v.setAlpha(enabled ? 1 : mDisabledAlphaValue);
             }
         }
     }
