@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"使用自動旋轉"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"臉部偵測技術會使用前置鏡頭提高自動旋轉的準確度。系統不會將相關圖像儲存或傳送給 Google。"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"臉部偵測技術會使用前置鏡頭提高「自動旋轉」功能的準確度。系統不會儲存相關圖像，也不會將這類圖像傳送給 Google。"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"範例文字"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"綠野仙蹤"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章：奧茲國的翡翠城"</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"應用程式語言"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"設定每個應用程式的語言"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"應用程式語言"</string>
+    <string name="warnings_title" msgid="613849105118598110">"更新應用程式"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"你必須更新應用程式，才能使用最新的可用語言"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"立即更新"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建議語言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有語言"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系統語言"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"系統預設 - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"這個應用程式的預設語言為<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>，而且不支援其他語言。"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"無法從「設定」選取這個應用程式的語言。"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"你無法從「設定」選取這個應用程式的語言。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除所選語言嗎？</item>
       <item quantity="one">要移除所選語言嗎？</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"安全性狀態"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"螢幕鎖定、尋找我的裝置、應用程式安全性"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"安全性與隱私權"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"權限、螢幕鎖定、應用程式安全性"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已新增臉孔"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"輕觸即可設定臉孔"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人臉解鎖"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"你和孩子隨時可以前往「設定」刪除指紋圖像和模型，或停用指紋解鎖功能。指紋圖像和模型會儲存在手機上，直到你或孩子刪除為止。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"你的手機有可能會意外解鎖，例如有人讓你的手指觸碰到手機。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"孩子的手機有可能會意外解鎖，例如有人讓他們的手指觸碰到手機。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"為獲得最佳效果，請使用 Made For Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識你的指紋。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"為獲得最佳效果，請使用 Made For Google 認證的螢幕保護貼。如果使用其他螢幕保護貼，系統可能無法辨識孩子的指紋。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"每次掃描時請稍微變更手指的位置"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"請用指紋的中央部分蓋住圖示"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"重覆按壓指紋感應器，以建立完整的指紋檔案"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"請依照指紋圖示的移動方式重複按下手指。這樣做可以擷取更多指紋。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"將指尖放上感應器"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最後一步是將手指邊緣放到感應器上"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"將手指左側邊緣放到感應器上"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"將手指右側邊緣放到感應器上"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"這樣做可以擷取更多指紋"</string>
     <!-- String.format failed for translation -->
@@ -581,10 +589,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 螢幕鎖定選項已停用。如要瞭解詳情，請與你的機構管理員聯絡。"<annotation id="admin_details">"詳細資訊"</annotation>\n\n"你依然可以使用指紋來授權購物交易及存取應用程式。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"移開手指，然後再次輕觸感應器"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"指紋感應器無法使用，請洽詢維修供應商"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"進階設定"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"工作資料夾鎖定、Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock 和其他設定"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"進階設定"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"你最多可以新增 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"你新增的指紋數量已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法新增其他指紋"</string>
@@ -1339,7 +1351,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"不要根據環境光源調整亮度"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"開啟會使耗電量增加。"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"根據環境光源調整最佳亮度。開啟這項功能之後，你依然可以暫時調整亮度。"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿協助自動調整亮度功能記憶偏好的亮度。"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿，協助自動調整亮度功能記憶你所偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
@@ -1384,7 +1396,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持開啟狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜燈模式目前已關閉"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位模式，裝置才能判斷日落和日出的時間。"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位功能，裝置才能判斷日落和日出的時間。"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置資訊設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
@@ -1907,8 +1919,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play 系統更新授權"</string>
     <string name="terms_title" msgid="2071742973672326073">"條款及細則"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"System WebView 授權"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"桌布出處"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"衛星影像提供者：\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"說明書"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"載入說明書時發生問題。"</string>
@@ -2059,8 +2070,7 @@
     <string name="enable_text" msgid="8570798764647110430">"啟用"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"清除儲存空間"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"解除安裝更新"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"允許受限制的設定"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"你選取的某些活動預設會在這個應用程式中開啟。"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"你已選擇允許這個應用程式建立小工具並存取其資料。"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"沒有預設值。"</string>
@@ -2095,9 +2105,10 @@
     <string name="internal_storage" msgid="999496851424448809">"內部儲存空間"</string>
     <string name="recompute_size" msgid="1098091228370999128">"重新計算大小…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"你要刪除應用程式資料嗎？"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"系統將永久刪除這個應用程式的資料，包括檔案、設定、資料庫和應用程式的其他資料。"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"這個應用程式的資料 (包括檔案和設定) 都將從這部裝置上永久刪除"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"確定"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"取消"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"刪除"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"在已安裝的應用程式清單中找不到這個應用程式。"</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"無法清除應用程式的儲存空間。"</string>
@@ -4403,10 +4414,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個未使用的應用程式</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"未使用的應用程式設定"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"如果未使用就暫停應用程式活動"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"移除權限、刪除暫存檔及停止通知"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"所有應用程式"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安裝的應用程式"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"免安裝應用程式"</string>
@@ -5062,10 +5071,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"這個裝置是由 <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> 所管理。"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"瞭解詳情"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"受限制的設定"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"已允許「<xliff:g id="APP_NAME">%s</xliff:g>」的受限制設定"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"為了安全起見，目前無法使用這項設定。"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"分期付款裝置資訊"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"你的信貸提供者可以在這部裝置上變更設定及安裝軟體。\n\n如果你未按時支付款項，裝置就會遭到鎖定。\n\n如要瞭解詳情，請與你的信貸提供者聯絡。"</string>
@@ -5548,8 +5555,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"在螢幕鎖定畫面上顯示外部裝置的控制選項"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"透過未解鎖的裝置控制"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"只要裝置控制應用程式允許，不必解鎖手機或平板電腦也能控制外部裝置"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"如要使用，請先開啟「顯示裝置控制」"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"顯示雙行時鐘 (如果可用的話)"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"雙行時鐘"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5571,7 +5577,7 @@
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"允許這部裝置執行模擬數據機服務，以進行檢測設備測試。正常使用手機時不要啟用這項服務"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速繼續播放"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速恢復播放"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體推薦內容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據你的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>

@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"යෙදුම් භාෂා"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"එක් එක් යෙදුම සඳහා භාෂාව සකසන්න"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"යෙදුම් භාෂාව"</string>
+    <string name="warnings_title" msgid="613849105118598110">"යෙදුම යාවත්කාලීන කරන්න"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"ඔබට පවතින නවතම භාෂා සඳහා යෙදුම යාවත්කාලීන කිරීමට අවශ්‍ය වේ"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"දැන් යාවත්කාලීන කරන්න"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"යෝජිත භාෂා"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"සියලු භාෂා"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"පද්ධති භාෂාව"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"පද්ධති පෙරනිමිය - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"මෙම යෙදුම පෙරනිමියෙන් <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> භාෂාවට සකසා ඇති අතර බහුවිධ භාෂාවලට සහාය නොදක්වයි."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"මෙම යෙදුම සඳහා භාෂා තේරීම සැකසීම් වෙතින් ලබා ගත නොහැකිය."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ඔබට සැකසීම් වෙතින් මෙම යෙදුම සඳහා භාෂාවක් තෝරා ගත නොහැකිය."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">තෝරා ගත් භාෂා ඉවත් කරන්නද?</item>
       <item quantity="other">තෝරා ගත් භාෂා ඉවත් කරන්නද?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"ආරක්ෂක තත්ත්වය"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"තිර අගුල, මගේ උපාංගය සොයන්න, යෙදුම් ආරක්ෂාව"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"ආරක්ෂාව සහ පෞද්ගලිකත්වය"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"අවසර, තිර අගුල, යෙදුම් ආරක්ෂාව"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"මුහුණ එකතු කරන ලදි"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"මුහුණ පිහිටුවීමට තට්ටු කරන්න"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"මුහුණෙන් අගුළු හැරීම"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"ඔබට සහ ඔබගේ දරුවාට සැකසීම් තුළ ඕනෑම වේලාවක සිය ඇඟිලි සලකුණු රූප සහ ආකෘතිය මැකීමට, හෝ ඇඟිලි සලකුණු අගුලු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු රූප සහ ආකෘති ඔබ ඒවා මකන තෙක් දුරකථනයේ ගබඩා කර ඇත."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"යම් කෙනෙක් එය ඔබගේ ඇඟිල්ලට තබාගෙන සිටින විට වැනි, ඔබ අදහස් නොකරන විටක ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"යම් කෙනෙක් එය ඔවුන්ගේ ඇඟිල්ලට තබාගෙන සිටින විට වැනි, ඔවුන් අදහස් නොකරන විටක ඔබගේ දරුවාගේ දුරකථනය අගුලු හැරීමට හැකිය."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"හොඳම ප්‍රතිඵල සඳහා, සහතික කළ Google සඳහා තනන ලද තිර ආරක්ෂකයක් භාවිත කරන්න. වෙනත් තිර ආරක්ෂක සමඟ, ඔබ‍ගේ ඇඟිලි සලකුණ ක්‍රියා නොකරනු ඇත."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"හොඳම ප්‍රතිඵල සඳහා, සහතික කළ Google සඳහා තනන ලද තිර ආරක්ෂකයක් භාවිත කරන්න. වෙනත් තිර ආරක්ෂක සමඟ, ඔබ‍ගේ දරුවාගේ ඇඟිලි සලකුණ ක්‍රියා නොකළ හැකිය."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"එක් එක් අවස්ථාවේ ඔබගේ ඇඟිල්ලේ පිහිටීම මදක් වෙනස් කරන්න"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"ඔබගේ ඇඟිලි සලකුණ මධ්‍යය සමගින් නිරූපකය ආවරණය කරන්න"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"ඔබේ ඇඟිලි සලකුණෙහි විවිධ කොටස් එක් කිරීමට ඔබගේ ඇඟිල්ල ඔසවා තබා ගන්න"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ඇඟිලි සලකුණු නිරූපකය චලනය වන එක් එක් අවස්ථාවේ ස්පර්ශ කර අල්ලාගෙන සිටින්න. මෙය ඔබගේ ඇඟිලි සලකුණෙහි වැඩි ප්‍රමාණයක් ග්‍රහණය කර ගැනීමට උපකාරී වේ."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"ඔබගේ ඇඟිලි තුඩ සංවේදකය මත තබන්න"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"අවසානයේදී, ඔබගේ ඇඟිල්ලේ දාර භාවිත කරන්න"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"ඔබ‍ගේ ඇඟිල්ලේ වම් කෙළවර තබන්න"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"ඔබ‍ගේ ඇඟිල්ලේ දකුණු කෙළවර තබන්න"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"ඔබගේ ඇඟිලි සලකුණුණෙහි පැත්ත සංවේදකය මත තබා අල්ලාගෙන සිටින්න, අනතුරුව අනෙක් පැත්තට මාරු වන්න"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"මෙය ඔබගේ ඇඟිලි සලකුණෙහි වැඩි ප්‍රමාණයක් ග්‍රහණය කර ගැනීමට උපකාරී වේ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ඇඟිලි සලකුණ සියයට <xliff:g id="PERCENTAGE">%d</xliff:g>ක් ලියාපදිංචි කරමින්"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" තිර අගුලු විකල්පය අබලයි. තව දැන ගැනීමට ඔබේ සංවිධානයේ පරිපාලක අමතන්න. "<annotation id="admin_details">"තවත් විස්තර"</annotation>\n\n"ඔබට තවමත් මිලදී ගැනීම් සහ යෙදුම් ප්‍රවේශය සඳහා අනුමැතිය දීමට ඔබේ ඇඟිලි සලකුණ භාවිත කළ හැකිය. "<annotation id="url">"තව දැන ගන්න"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ඇඟිල්ල ඔසවා, අනතුරුව නැවත සංවේදකය ස්පර්ශ කරන්න"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ඇඟිලි සලකුණු සංවේදකය භාවිත කළ නොහැකිය. අළුත්වැඩියා සැපයුම්කරුවෙකු බලන්න"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"උසස් සැකසීම්"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"කාර්යාල පැතිකඩ අගුල, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock සහ තවත් දේ"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"උසස් සැකසීම්"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ඔබට ඇඟිලි සලකුණු <xliff:g id="COUNT">%d</xliff:g> දක්වා එකතු කළ හැකිය"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"ඔබ ඇඟිලි සලකුණු උපරිම සංඛ්‍යාව එක් කර ඇත"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"තවත් ඇඟිලි සලකුණු එක් කළ නොහැකිය"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play පද්ධති යාවත්කාලීන බලපත්‍ර"</string>
     <string name="terms_title" msgid="2071742973672326073">"නියමයන් සහ කොන්දේසි"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"පද්ධති WebView බලපත"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"වෝල්පේපර ස්තුතිය"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"චන්‍ද්‍රිකා රූප සපයන්නන්:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"අත්පොත"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"අත්පොත පූරණය කිරීමේදී ගැටලුවක් ඇතිවිය."</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"සක්‍රීය කරන්න"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"ගබඩාව හිස් කරන්න"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"යාවත්කාලීන අස්ථාපනය කරන්න"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"සීමා කළ සැකසීම්වලට ඉඩ දෙන්න"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"ඔබ තෝරා ඇති සමහර ක්‍රියාකාරකම් පෙරනිමියෙන් මෙම යෙදුම තුළ විවෘත වේ."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"මෙම යෙදුමට විජට සෑදීමට සහ ඒවායේ දත්ත වෙත ප්‍රවේශ වීමට ඉඩ ලබා දීමට ඔබ තෝරාගෙන ඇත."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"සුපුරුදු සකසා නැත."</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"අභ්‍යන්තර ආචයනය"</string>
     <string name="recompute_size" msgid="1098091228370999128">"විශාලත්වය නැවත ගණනය කරමින්…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"යෙදුම් දත්ත මකන්නද?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"මෙම යෙදුමේ දත්ත ස්ථිරවම මකනු ඇත. මෙයට ගොනු, සැකසීම්, දත්ත සමුදායන් සහ වෙනත් යෙදුම් දත්ත ඇතුළත් වේ."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"ගොනු සහ සැකසීම් ඇතුළුව, මෙම යෙදුමේ දත්ත, මෙම උපාංගයෙන් ස්ථිරවම මකනු ඇත"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"හරි"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"අවලංගු කරන්න"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"මකන්න"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"මෙම යෙදුම ස්ථාපනය කළ යෙදුම් ලැයිස්තුවෙහි සොයා නොගත්තේය."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"යෙදුම සඳහා ගබඩාව හිස් කළ නොහැකිය."</string>
@@ -4401,10 +4412,8 @@
       <item quantity="other">භාවිත නොකළ යෙදුම් <xliff:g id="COUNT_1">%d</xliff:g></item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"භාවිත නොකළ යෙදුම් සැකසීම්"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"භාවිත නොකළේ නම් යෙදුම් ක්‍රියාකාරකම් විරාම කරන්න"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"අවසර ඉවත් කරන්න, තාවකාලික ගොනු මකන්න සහ දැනුම්දීම් නවත්වන්න"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"සියලු යෙදුම්"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ස්ථාපිත යෙදුම්"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ක්ෂණික යෙදුම්"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"මෙම උපාංගය <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> මගින් කළමනාකරණය කෙරේ"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"තව දැන ගන්න"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"සීමා කළ සැකසීම"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> සඳහා සීමා කළ සැකසීම් ඉඩ දේ"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"ඔබගේ ආරක්ෂාව සඳහා, මෙම සැකසීම දැනට නොමැත."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"මූල්‍යනය කළ උපාංග තොරතුරු"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"ඔබගේ ණය සැපයුම්කරුට මෙම උපාංගයේ සැකසීම් වෙනස් කිරීමට සහ මෘදුකාංග ස්ථාපනය කිරීමට හැකිය.\n\nඔබට ගෙවීමක් මග හැරුණහොත්, ඔබගේ උපාංගය අගුලු දමනු ඇත.\n\nතව දැන ගැනීමට, ඔබගේ ණය සැපයුම්කරු අමතන්න."</string>
@@ -5546,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"අගුලු තිරයෙන් බාහිර උපාංග සඳහා පාලන පෙන්වන්න"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"අගුලු දැමූ උපාංගයෙන් පාලනය කරන්න"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"උපාංග පාලන යෙදුම මඟින් ඉඩ දෙන්නේ නම් ඔබගේ දුරකථනය හෝ ටැබ්ලටය අගුලු හැරීමෙන් තොරව බාහිර උපාංග පාලනය කරන්න"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"භාවිත කිරීමට, පළමුව \"උපාංග පාලන පෙන්වන්න\" ක්‍රියාත්මක කරන්න"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ලබා ගත හැකි විට ද්විත්ව රේඛා ඔරලෝසුව පෙන්වන්න"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ද්විත්ව රේඛා ඔරලෝසුව"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

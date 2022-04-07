@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomes de les aplicacions"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Configura l\'idioma per a cada aplicació"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma de l\'aplicació"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Actualitza l\'aplicació"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Cal que actualitzis l\'aplicació per veure els darrers idiomes disponibles"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Actualitza ara"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomes suggerits"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tots els idiomes"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Valor predeterminat del sistema: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"L\'aplicació està configurada en <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> de manera predeterminada i no admet diversos idiomes."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selecció d\'idioma per a aquesta aplicació no està disponible des de Configuració."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"No pots seleccionar un idioma per a aquesta aplicació des de Configuració."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vols suprimir els idiomes seleccionats?</item>
       <item quantity="one">Vols suprimir l\'idioma seleccionat?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"Estat de seguretat"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueig de pantalla, Troba el meu dispositiu, seguretat per a aplicacions"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Seguretat i privadesa"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Permisos, bloqueig de pantalla, seguretat de l\'aplicació"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Cara afegida"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toca per configurar la cara"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueig facial"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Tu i el teu fill podeu suprimir les imatges i el model de la seva empremta digital o desactivar Desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al telèfon fins que se suprimeixin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"El teu telèfon es pot desbloquejar sense voler, com quan algú te l\'acosta al dit."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"El telèfon del teu fill es pot desbloquejar sense voler, com quan algú li l\'apropi al dit."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que la teva empremta digital no funcioni."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que l\'empremta digital del teu fill o filla no funcioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Canvia lleugerament la posició del dit en cada intent"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cobreix la icona amb el centre de l\'empremta digital"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Continua aixecant el dit per afegir les diferents parts de l\'empremta digital"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén premuda la icona d\'empremta digital cada vegada que es mogui. Això ajuda a capturar millor l\'empremta digital."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Col·loca la punta del dit al sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Per acabar, utilitza les vores del dit"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Col·loca l\'extrem esquerre del teu dit"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Col·loca l\'extrem dret del teu dit"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Això ajuda a capturar millor l\'empremta digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'opció de bloqueig de pantalla està desactivada. Per obtenir més informació, contacta amb l\'administrador de l\'organització. "<annotation id="admin_details">"Més informació"</annotation>\n\n"Pots continuar utilitzant l\'empremta digital per autoritzar compres i accedir a l\'aplicació. "<annotation id="url">"Més informació"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Aixeca el dit i, a continuació, torna a tocar el sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"No es pot utilitzar el sensor d\'empremtes digitals. Visita un proveïdor de reparacions."</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Configuració avançada"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Bloqueig del perfil de treball, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock i més"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Configuració avançada"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Pots afegir un màxim de <xliff:g id="COUNT">%d</xliff:g> empremtes digitals"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Has afegit el nombre màxim d\'empremtes digitals"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No es poden afegir més empremtes digitals"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Llicències d\'actualització del sistema de Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Termes i condicions"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Llicència de WebView del sistema"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Crèdits de fons de pantalla"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Proveïdors d\'imatges per satèl·lit:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"S\'ha produït un problema en carregar el manual."</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Activa"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Esborra emmagatzematge"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Desinstal·la les actualitzacions"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Permet la configuració restringida"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Algunes activitats que has seleccionat s\'obren en aquesta aplicació de manera predeterminada."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Has seleccionat que vols permetre que aquesta aplicació creï widgets i que accedeixi a les seves dades."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"No s\'ha definit cap valor predeterminat."</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Emmagatzematge intern"</string>
     <string name="recompute_size" msgid="1098091228370999128">"S\'està tornant a calcular la mida..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Vols suprimir les dades de l\'aplicació?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Les dades d\'aquesta aplicació se suprimiran permanentment. Això inclou fitxers, opcions de configuració, bases de dades i altres dades de l\'aplicació."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Les dades d\'aquesta aplicació, inclosos els fitxers i la configuració, se suprimiran permanentment d\'aquest dispositiu"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"D\'acord"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancel·la"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Suprimeix"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"No s\'ha trobat l\'aplicació a la llista d\'aplicacions instal·lades."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"No s\'ha pogut esborrar l\'emmagatzematge de l\'aplicació."</string>
@@ -4401,10 +4412,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> aplicació no utilitzada</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Configuració d\'apps no utilitzades"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Posa en pausa activitat a app si no s\'usa"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Suprimeix els permisos i els fitxers temporals, i atura les notificacions"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Totes les aplicacions"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Aplicacions instal·lades"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Aplicacions instantànies"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> gestiona aquest dispositiu."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Més informació"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Configuració restringida"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"S\'ha permès la configuració restringida per a <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Per la teva seguretat, aquesta opció de configuració no està disponible en aquests moments."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informació del dispositiu finançat"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"La teva entitat de crèdit pot canviar la configuració i instal·lar programari en aquest dispositiu.\n\nSi t\'oblides d\'un pagament, el dispositiu es bloquejarà.\n\nPer obtenir més informació, contacta amb l\'entitat de crèdit."</string>
@@ -5546,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Mostra els controls per a dispositius externs des de la pantalla de bloqueig"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Controla amb el dispositiu bloquejat"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Controla dispositius externs sense desbloquejar el telèfon o la tauleta si l\'aplicació de control de dispositius ho permet"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Per utilitzar-ho, primer activa Mostra el control de dispositius"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Mostra el rellotge de doble línia quan estigui disponible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Rellotge de doble línia"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
