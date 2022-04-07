@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Verkleinern"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Vergrößern"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"„Automatisch drehen“ verwenden"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Bei der Gesichtserkennung wird die Kamera auf der Vorderseite verwendet, um die Genauigkeit beim automatischen Drehen zu verbessern. Bilder weder gespeichert noch an Google gesendet."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Bei der Gesichtserkennung wird die Kamera auf der Vorderseite verwendet, um die Genauigkeit beim automatischen Drehen zu verbessern. Bilder werden weder gespeichert noch an Google gesendet."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Beispieltext"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Der Zauberer von Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitel 11: Die wundervolle Smaragdstadt von Oz"</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App-Sprachen"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Sprache für einzelne Apps festlegen"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"App-Sprache"</string>
+    <string name="warnings_title" msgid="613849105118598110">"App aktualisieren"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Für die neuesten verfügbaren Sprachen muss die App aktualisiert werden"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Jetzt aktualisieren"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Vorgeschlagene Sprachen"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle Sprachen"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprache"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Standardeinstellung des Systems – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Die App ist standardmäßig in <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> und unterstützt nicht mehrere Sprachen."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Für diese App ist in den Einstellungen keine Sprachauswahl verfügbar."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Für diese App kannst du in den Einstellungen keine Sprache auswählen."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ausgewählte Sprachen entfernen?</item>
       <item quantity="one">Ausgewählte Sprache entfernen?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"Sicherheitsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Displaysperre, „Mein Gerät finden“, App-Sicherheit"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sicherheit &amp; Datenschutz"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Berechtigungen, Displaysperre, App-Sicherheit"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Gesicht hinzugefügt"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Zum Einrichten der Gesichtsentsperrung tippen"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Gesichtsentsperrung"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du und dein Kind könnt jederzeit die Aufnahmen der Fingerabdrücke und das erstellte Fingerabdruckmodell löschen oder die Funktion „Entsperrung per Fingerabdruck“ in den Einstellungen deaktivieren. Aufnahmen von Fingerabdrücken und Fingerabdruckmodelle bleiben auf dem Smartphone gespeichert, bis sie gelöscht werden."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Es kann passieren, dass dein Smartphone unbeabsichtigt entsperrt wird, wenn es von jemandem gegen deinen Finger gehalten wird."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Das Smartphone deines Kindes kann entsperrt werden, selbst wenn es das nicht beabsichtigt. Dazu kann es z. B. an seinen Finger gehalten werden."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der „Made for Google“-zertifiziert ist. Bei anderen Displayschutzfolien wird dein Fingerabdruck möglicherweise nicht erkannt."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der „Made for Google“-zertifiziert ist. Bei anderen Displayschutzfolien wird der Fingerabdruck deines Kindes möglicherweise nicht erkannt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Ändere jedes Mal die Position deines Fingers"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Lege deinen Finger mittig auf das Symbol"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Lege den Finger immer wieder in leicht geänderter Position auf, bis der Abdruck vollständig erfasst ist."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Leg deinen Finger jedes Mal für längere Zeit auf den Sensor, wenn sich das Fingerabdrucksymbol bewegt. Dadurch kann dein Fingerabdruck besser erfasst werden."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg deine Fingerkuppe auf den Sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Roll den Finger zu beiden Seiten"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Leg die linke Seite deines Fingers auf den Sensor"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Leg die rechte Seite deines Fingers auf den Sensor"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Halte nacheinander beide Seiten der Fingerkuppe auf den Sensor"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dadurch kann dein Fingerabdruck besser erfasst werden"</string>
     <!-- String.format failed for translation -->
@@ -581,10 +589,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Die Option für die Displaysperre ist deaktiviert. Wende dich an den Administrator deiner Organisation, um weitere Informationen zu erhalten. "<annotation id="admin_details">"Weitere Details"</annotation>\n\n"Du kannst deinen Fingerabdruck dennoch verwenden, um Käufe zu autorisieren und dich in Apps anzumelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Der Fingerabdrucksensor kann nicht verwendet werden. Suche einen Reparaturdienstleister auf."</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Erweiterte Einstellungen"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Arbeitsprofilsperre, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock und weitere Einstellungen"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Erweiterte Einstellungen"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kannst bis zu <xliff:g id="COUNT">%d</xliff:g> Fingerabdrücke hinzufügen."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du hast die maximale Anzahl an Fingerabdrücken hinzugefügt"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Es können keine Fingerabdrücke mehr hinzugefügt werden"</string>
@@ -1908,8 +1920,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Lizenzen für Google Play-Systemupdates"</string>
     <string name="terms_title" msgid="2071742973672326073">"Nutzungsbedingungen"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"System-WebView-Lizenz"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Quellenangaben für Hintergründe"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Satellitenbilder bereitgestellt von:\n© 2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Handbuch"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Problem beim Laden des Handbuchs."</string>
@@ -2060,8 +2071,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivieren"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Speicherinhalt löschen"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Updates deinstallieren"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Eingeschränkte Einstellungen zulassen"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Einige von dir ausgewählte Aktivitäten werden standardmäßig in dieser App geöffnet."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Du hast dieser App das Erstellen von Widgets und den Zugriff auf deine Daten erlaubt."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Kein Standard"</string>
@@ -2096,9 +2106,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Interner Speicher"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Größe wird neu berechnet..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"App-Daten löschen?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Die Daten dieser App werden endgültig gelöscht. Dazu gehören Dateien, Einstellungen, Datenbanken und sonstige App-Daten."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Die Daten dieser App, einschließlich Dateien und Einstellungen, werden endgültig von diesem Gerät gelöscht"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Ok"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Abbrechen"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Löschen"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Die App wurde nicht in der Liste der installierten Apps gefunden."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Speicherinhalt der App konnte nicht gelöscht werden."</string>
@@ -4404,13 +4415,11 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nicht verwendete App</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Nicht verwendete App-Einstellungen"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"App-Aktivität bei Nichtnutzung stoppen"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Berechtigungen entfernen, temporäre Dateien löschen und Benachrichtigungen stoppen"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle Apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Installierte Apps"</string>
-    <string name="filter_instant_apps" msgid="2292108467020380068">"Instant-Apps"</string>
+    <string name="filter_instant_apps" msgid="2292108467020380068">"Instant Apps"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"Apps: alle"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Deaktiviert"</string>
     <string name="filter_notif_urgent_channels" msgid="875381675739324318">"Kategorien: sehr hohe Wichtigkeit"</string>
@@ -4994,10 +5003,10 @@
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="168124660162907358">"Auf vom Mobilfunkanbieter gesperrten Geräten nicht verfügbar"</string>
     <string name="oem_lock_info_message" msgid="8843145669619429197">"Starte das Gerät neu, um die Geräteschutzfunktion zu aktivieren."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="706230592123831676">"Insgesamt <xliff:g id="SIZE">%1$s</xliff:g> freigegeben\n\nZuletzt ausgeführt am <xliff:g id="DATE">%2$s</xliff:g>"</string>
-    <string name="web_action_enable_title" msgid="6654581786741216382">"Instant-Apps"</string>
+    <string name="web_action_enable_title" msgid="6654581786741216382">"Instant Apps"</string>
     <string name="web_action_enable_summary" msgid="2658930257777545990">"Links in Apps öffnen, ohne dass die Apps dazu installiert sein müssen"</string>
-    <string name="web_action_section_title" msgid="994717569424234098">"Instant-Apps"</string>
-    <string name="instant_apps_settings" msgid="4280942494969957858">"Instant-Apps-Einstellungen"</string>
+    <string name="web_action_section_title" msgid="994717569424234098">"Instant Apps"</string>
+    <string name="instant_apps_settings" msgid="4280942494969957858">"Instant Apps-Einstellungen"</string>
     <string name="domain_url_section_title" msgid="9028890472923474958">"Installierte Apps"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Dein Speicher wird jetzt vom Speichermanager verwaltet"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Konten für <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
@@ -5063,10 +5072,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Dieses Gerät wird von <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> verwaltet."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Weitere Informationen"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Eingeschränkte Einstellung"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Eingeschränkte Einstellungen zugelassen für <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Aus Sicherheitsgründen ist diese Einstellung derzeit nicht verfügbar."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Info zu finanzierten Geräten"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Dein Kreditinstitut kann auf diesem Gerät Einstellungen ändern und Software installieren.\n\nWenn du nicht rechtzeitig bezahlst, wird dein Gerät gesperrt.\n\nWeitere Informationen erhältst du bei deinem Kreditinstitut."</string>
@@ -5128,7 +5135,7 @@
     <string name="storage_usage_summary" msgid="4591121727356723463">"<xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g> belegt"</string>
     <string name="storage_total_summary" msgid="7163360249534964272">"Insgesamt <xliff:g id="NUMBER">%1$s</xliff:g> <xliff:g id="UNIT">%2$s</xliff:g>"</string>
     <string name="clear_instant_app_data" msgid="5951258323364386357">"App löschen"</string>
-    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Möchtest du diese Instant-App entfernen?"</string>
+    <string name="clear_instant_app_confirmation" msgid="3964731334459209482">"Möchtest du diese Instant App entfernen?"</string>
     <string name="launch_instant_app" msgid="8503927414339606561">"Öffnen"</string>
     <string name="game_storage_settings" msgid="2521393115726178837">"Spiele"</string>
     <string name="app_info_storage_title" msgid="4076977173803093808">"Belegter Speicherplatz"</string>
@@ -5163,7 +5170,7 @@
     <string name="storage_manager_indicator" msgid="6187509172735927297">"Speichermanager: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="2705959642617709265">"Aus"</string>
     <string name="storage_manager_indicator_on" msgid="8380330763647785309">"An"</string>
-    <string name="install_type_instant" msgid="7685381859060486009">"Instant-App"</string>
+    <string name="install_type_instant" msgid="7685381859060486009">"Instant App"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="4905106133215702099">"Speichermanager deaktivieren?"</string>
     <string name="storage_movies_tv" msgid="7897612625450668593">"Film- und TV-Apps"</string>
     <string name="carrier_provisioning" msgid="7217868336140325816">"Informationen zur Nutzerverwaltung durch den Anbieter"</string>
@@ -5549,8 +5556,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Einstellungen für externe Geräte auf dem Sperrbildschirm anzeigen"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Über gesperrtes Gerät steuern"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Externe Geräte steuern, ohne das Smartphone oder Tablet zu entsperren, wenn dies in der Gerätesteuerung aktiviert ist"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Wenn du dies nutzen möchtest, aktiviere zuerst die Option „Gerätesteuerung anzeigen“"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Uhrzeit in zwei Zeilen anzeigen, wenn verfügbar"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Uhrzeit in zwei Zeilen"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

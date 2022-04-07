@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ایپ کی زبانیں"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ہر ایپ کے لیے زبان سیٹ کریں"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"ایپ کی زبان"</string>
+    <string name="warnings_title" msgid="613849105118598110">"ایپ اپ ڈیٹ کریں"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"آپ کو تازہ ترین دستیاب زبانوں کے لیے ایپ کو اپ ڈیٹ کرنے کی ضرورت ہے"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"ابھی اپ ڈیٹ کریں"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"تجویز کردہ زبانیں"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"سبھی زبانیں"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"سسٹم کی زبان"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"سسٹم ڈیفالٹ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"یہ ایپ بطور ڈیفالٹ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> پر سیٹ ہے اور متعدد زبانوں کو سپورٹ نہیں کرتی ہے۔"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"اس ایپ کے لیے زبان کا انتخاب ترتیبات سے دستیاب نہیں ہے۔"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"آپ ترتیبات سے اس ایپ کے لیے کوئی زبان منتخب نہیں کر سکتے۔"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">منتخب کردہ زبانیں ہٹائیں؟</item>
       <item quantity="one">منتخب کردہ زبان ہٹائیں؟</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"سیکیورٹی کی صورتحال"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"اسکرین لاک، \'میرا آلہ ڈھونڈیں\'، ایپ کی سیکیورٹی"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"سیکیورٹی اور رازداری"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"اجازتیں، اسکرین لاک، ایپ سیکیورٹی"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"چہرہ شامل کر دیا گیا"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"فیس سیٹ اپ کرنے کے لیے تھپتھپائیں"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"فیس اَنلاک"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"آپ اور آپ کا بچہ اپنے فنگر پرنٹ کی تصاویر اور ماڈل کو حذف کر سکتے ہیں یا ترتیبات میں کسی بھی وقت فنگر پرنٹ اَن لاک کو آف کر سکتے ہیں۔ فون پر فنگر پرنٹ کی تصاویر اور ماڈلز تب تک اسٹور ہوتے ہیں جب تک انہیں حذف نہیں کیا جاتا ہے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"جب آپ کا ارادہ نہ بھی ہو تب بھی آپ کا فون غیر مقفل ہو سکتا ہے مثال کے طور پر کوئی اور شخص فون کو آپ کی انگلی پر رکھ دے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"جب آپ کے بچے کا ارادہ نہ ہو تب بھی اس کا فون غیر مقفل ہو سکتا ہے جیسے کوئی اور شخص فون کو اس کی انگلی پر رکھ دے۔"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏بہترین نتائج کے لیے، ایک ایسے اسکرین پروٹیکٹر کا استعمال کریں جو Google کے لیے تیار کردہ سے سند یافتہ ہو۔ ممکن ہے کہ دوسرے اسکرین پروٹیکٹرز کے ساتھ آپ کا فنگر پرنٹ کام نہ کرے۔"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏بہترین نتائج کے لیے، ایک ایسے اسکرین پروٹیکٹر کا استعمال کریں جو Google کے لیے تیار کردہ سے سند یافتہ ہو۔ ممکن ہے کہ دوسرے اسکرین پروٹیکٹرز کے ساتھ آپ کے بچے کا فنگر پرنٹ کام نہ کرے۔"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"ہر بار اپنی انگلی کی پوزیشن کو تھوڑا تبدیل کریں"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"اپنی انگلی کو سینسر کے اوپر رکھیں"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"اپنے فنگر پرنٹ کے مختلف حصوں کو شامل کرنے کے لیے اپنی انگلی کو اٹھاتے رہیں"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ہر بار جب فنگر پرنٹ کا آئیکن حرکت کرتا ہے تو اسے ٹچ کریں اور دبائے رکھیں۔ اس سے آپ کے فنگر پرنٹ کے مزید حصوں کو کیپچر کرنے میں مدد ملے گی۔"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"سینسر پر اپنی انگلی کے سرے کو رکھیں"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"بالآخر، اپنی انگلی کے کناروں کا استعمال کریں"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"اپنی انگلی کے بائیں کنارے کو رکھیں"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"اپنی انگلی کے دائیں کنارے کو رکھیں"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"اپنے فنگر پرنٹ کے حصے کو سینسر پر رکھیں اور دبائے رکھیں پھر، دوسرے حصے پر سوئچ کریں"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"اس سے آپ کے فنگر پرنٹ کے مزید حصوں کو کیپچر کرنے میں مدد ملے گی"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"فنگر پرنٹ اندراج کرنے کی کارروائی <xliff:g id="PERCENTAGE">%d</xliff:g> فیصد مکمل ہو چکی ہے"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" اسکرین لاک اختیار غیر فعال ہے۔ مزید جاننے کیلئے اپنی تنظیم کے منتظم سے رابطہ کریں۔ "<annotation id="admin_details">"مزید تفصیلات"</annotation>\n\n"آپ پھر بھی خریداریوں کی اجازت دینے کیلئے اور ایپ کی رسائی کیلئے اپنا فنگر پرنٹ استعمال کر سکتے ہیں۔ "<annotation id="url">"مزید جانیں"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"انگلی اٹھائیں اور سنسر کو دوبارہ ٹچ کریں"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"فنگر پرنٹ سینسر کا استعمال نہیں کر سکتے۔ ایک مرمت فراہم کنندہ کو ملاحظہ کریں"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"جدید ترین ترتیبات"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"‏دفتری پروفائل کا قفل، Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"‏Smart Lock اور مزید"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"جدید ترین ترتیبات"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"آپ <xliff:g id="COUNT">%d</xliff:g> تک فنگر پرنٹس کا اضافہ کر سکتے ہیں"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"آپ فنگر پرنٹس کی زیادہ سے زیادہ تعداد شامل کر چکے ہیں"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"مزید فنگر پرنٹس شامل نہیں کر سکتے"</string>
@@ -1443,7 +1455,7 @@
     <string name="doze_always_on_summary" msgid="509097829739647852">"بیٹری کا اضافی استعمال"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"بولڈ ٹیکسٹ"</string>
     <string name="title_font_size" msgid="570613010306330622">"فونٹ سائز"</string>
-    <string name="short_summary_font_size" msgid="8444689613442419978">"متن کو بڑا یا چھوٹا بنائیں"</string>
+    <string name="short_summary_font_size" msgid="8444689613442419978">"ٹیکسٹ کو بڑا یا چھوٹا بنائیں"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"‏SIM کارڈ لاک کی ترتیبات"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"‏SIM کارڈ لاک"</string>
     <string name="sim_lock_settings_summary_off" msgid="4570941250786847095">"آف"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"‏Google Play سسٹم اپ ڈیٹ لائسنسز"</string>
     <string name="terms_title" msgid="2071742973672326073">"شرائط و ضوابط"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"‏سسٹم WebView کا لائسنس"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"وال پیپر کریڈٹس"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"‏سیٹلائٹ تصاویر کے فراہم کنندگان:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"مینوئل"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"مینوئل لوڈ کرنے میں ایک مسئلہ ہے۔"</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"فعال کریں"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"اسٹوریج صاف کریں"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"اپ ڈیٹس اَن انسٹال کریں"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"محدود ترتیبات کی اجازت دیں"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"آپ کی منتخب کردہ کچھ سرگرمیاں اس ایپ میں بطور ڈیفالٹ کھلتی ہیں۔"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ویجیٹس بنانے اور ان کے ڈیٹا تک رسائی حاصل کرنے کیلئے آپ نے اس ایپ کو اجازت دینے کو منتخب کیا ہے۔"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"کوئی ڈیفالٹس سیٹ نہیں ہیں۔"</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"داخلی اسٹوریج"</string>
     <string name="recompute_size" msgid="1098091228370999128">"سائز کو دوبارہ شمار کر رہا ہے…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ایپ کا ڈیٹا حذف کریں؟"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"اس ایپ کا ڈیٹا مستقل طور پر حذف کر دیا جائے گا۔ اس میں فائلز، ترتیبات، ڈیٹا بیس اور دیگر ایپ کا ڈیٹا شامل ہے۔"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"اس ایپ کا ڈیٹا بشمول فائلز اور ترتیبات کو اس آلے سے مستقل طور پر حذف کر دیا جائے گا"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ٹھیک ہے"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"منسوخ کریں"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"حذف کریں"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"ایپ انسٹال کردہ ایپس کی فہرست میں نہیں ملی۔"</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ایپ کیلئے اسٹوریج صاف نہيں کر سکا۔"</string>
@@ -3374,8 +3385,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"ترتیب نہیں دیا گیا - دفتری پروفائل"</string>
     <string name="user_admin" msgid="4024553191395768119">"منتظم"</string>
     <string name="user_you" msgid="3070562015202859996">"آپ (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"آپ مزید صارفین شامل نہیں کر سکتے۔ ایک نیا صارف شامل کرنے کے لیے کسی صارف کو ہٹائیں۔"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"صرف ٹیبلٹ کا مالک صارفین کا نظم کر سکتا ہے۔"</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"صرف فون کا مالک صارفین کا نظم کر سکتا ہے۔"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"محدود پروفائلز اکاؤنٹس شامل نہیں کر سکتے ہیں"</string>
@@ -3722,7 +3732,7 @@
     <string name="spatial_summary_off" msgid="8272678804629774378">"آف ہے"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"آن / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"آن / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> اور <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{کوئی نہیں}=1{1 شیڈول سیٹ کریں}other{# شیڈول سیٹ کریں}}"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{کوئی نہیں}=1{1 شیڈول سیٹ ہے}other{# شیڈول سیٹ ہیں}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"ڈسٹرب نہ کریں"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"صرف اہم لوگوں اور ایپس کی جانب سے اطلاعات حاصل کریں"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"مداخلتوں کی حد مقرر کریں"</string>
@@ -4401,12 +4411,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> غیر مستعمل ایپس</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> غیر مستعمل ایپ</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"غیر استعمال شدہ ایپ کی ترتیبات"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"غیر استعمال شدہ ہو تو ایپ سرگرمی روکیں"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"اجازتیں ہٹائیں، عارضی فائلز حذف کریں اور اطلاعات موقوف کریں"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"سبھی ایپس"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"انسٹال کردہ ایپس"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"فوری ایپس"</string>
@@ -5062,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"یہ آلہ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> کے زیر انتظام ہے۔"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"مزید جانیں"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"محدود ترتیب"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> کے لیے محدود ترتیبات کی اجازت ہے"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"آپ کی سیکیورٹی کے لیے، یہ ترتیب فی الحال دستیاب نہیں ہے۔"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"مالی تعاون یافتہ آلے کی معلومات"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"آپ کا کریڈٹ فراہم کنندہ ترتیبات کو تبدیل اور اس آلے پر سافٹ ویئر انسٹال کر سکتا ہے۔\n\nاگر آپ سے ادائیگی چھوٹ جاتی ہے تو آپ کا آلہ مقفل ہو جائے گا۔\n\nمزید جاننے کے لیے، اپنے کریڈٹ فراہم کنندہ سے رابطہ کریں۔"</string>
@@ -5548,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"مقفل اسکرین سے بیرونی آلات کے لیے کنٹرولز دکھائیں"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"مقفل آلہ سے کنٹرول کریں"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"آلہ کے کنٹرولز ایپ کی اجازت ہونے پر اپنے فون یا ٹیبلیٹ کو غیر مقفل کیے بغیر خارجی آلات کو کنٹرول کریں"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"استعمال کرنے کے لیے، پہلے \"آلہ کے کنٹرولز دکھائیں\" کو آن کریں"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"دستیاب ہونے پر دو لائن والی گھڑی دکھائیں"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"دو لائن والی گھڑی"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5567,10 +5571,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"لیز کی میعاد کبھی ختم نہیں ہوتی ہے۔"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"ترتیبات پر اسکرین اوورلیز کو اجازت دیتا ہے"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"ایسی ایپس کو اجازت دیں جو ترتیبات کی اسکرینز کو ایک دوسرے پر چڑھانے کے لیے دوسرے ایپس پر ڈسپلے کر سکتی ہیں"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"موک موڈیم کی اجازت دیں"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"اس آلے کو آلات کی جانچ کرنے کے لیے موک موڈیم سروس چلانے کی اجازت دیں۔ فون کے عام استعمال کے دوران اسے فعال نہ کریں"</string>
     <string name="media_controls_title" msgid="403271085636252597">"میڈیا"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"میڈیا پلیئر کو پن کریں"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"پلے بیک کو فوری طور پر دوبارہ شروع کرنے کے لیے میڈیا پلیئر فوری ترتیبات میں کھلا رہتا ہے"</string>
@@ -5656,8 +5658,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ایپ کو پن کرنے کی سہولت کا استعمال کریں"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"ڈویلپر کے اختیارات کا استعمال کریں"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"پرنٹ سروس کا استعمال کریں"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"متعدد صارفین کو اجازت دیں"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"وائرلیس ڈیبگنگ کا استعمال کریں"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"گرافکس ڈرائیور کی ترتیبات کا استعمال کریں"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"بیٹری سیور کا استعمال کریں"</string>
@@ -5723,12 +5724,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"موڈیفائرز"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"کارروائیاں (پروڈیوس کرنے کی لاگت)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"کارروائیاں (بنیادی قیمت)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"فی واحد ایونٹ انعامات"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"ایونٹ کے کل دورانیے کے لیے انعامات"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"فی دن زیادہ سے زیادہ انعامات"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"سرفہرست سرگرمی"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"اطلاع کو دیکھا گیا"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"اطلاع کو 15 منٹ کے اندر دیکھا گیا"</string>
@@ -5759,20 +5757,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"پیش منظر"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"اسکرین سیور منتخب کریں"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"اضافی معلومات دکھائیں"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"‏اسکرین سیور پر وقت، تاریخ، موسم، ہوا کا معیار اور Cast کی تفصیلات ڈسپلے کریں"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"مزید ترتیبات"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"اپنا اسکرین سیور منتخب کریں"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"منتخب کریں کہ آپ کے ٹیبلیٹ کو ڈاک سے منسلک کئے جانے پر آپ کو اپنی اسکرین پر کیا دکھائی دے۔ اسکرین سیور کا استعمال کرنے پر آپ کا آلہ زیادہ توانائی استعمال کر سکتا ہے۔"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"حسب ضرورت بنائیں"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"فری فارم سپورٹ کو فعال کرنے کے لیے ریبوٹ درکار ہے۔"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"سیکنڈری ڈسپلیز پر ڈیسک ٹاپ موڈ فورس کرنے کے لیے ریبوٹ درکار ہے۔"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ابھی ریبوٹ کریں"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"بعد میں ریبوٹ کریں"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"اسپیشیئل آڈیو"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"موافق میڈیا سے آڈیو کا مزید دلچسپ تجربہ فراہم ہوتا ہے"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"سر کی ٹریکنگ"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"خود کو زیادہ فطری دکھانے کے لیے اپنے سر کو حرکت دیتے ہی آڈیو تبدیل ہو جاتی ہے"</string>
