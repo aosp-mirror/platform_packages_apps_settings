@@ -487,7 +487,7 @@
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"指先をセンサーに当ててください"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"最後に指の縁の部分を当ててください"</string>
-    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指の一方の端をセンサーに押し当て、その後他方の端を押し当てます"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
@@ -798,10 +798,10 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"次へ"</string>
     <string name="lock_setup" msgid="4622999020926280737">"設定が完了しました。"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"デバイス管理アプリ"</string>
-    <string name="number_of_device_admins_none" msgid="152926922020437312">"アクティブなアプリはありません"</string>
+    <string name="number_of_device_admins_none" msgid="152926922020437312">"実行中のアプリはありません"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other">有効なアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
-      <item quantity="one">有効なアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
+      <item quantity="other">実行中のアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
+      <item quantity="one">実行中のアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信頼エージェント"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"使用するには、まず画面ロックを設定してください"</string>
@@ -1335,7 +1335,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"周囲に合わせて調整しない"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"バッテリー使用量が増えます"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"周囲に合わせて明るさを最適化します。この機能が ON の場合でも、一時的に明るさを調整できます。"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"画面の明るさは環境やアクティビティに応じて自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"環境やアクティビティに応じて画面の明るさが自動的に調整されます。スライダーを手動で動かして、明るさの自動調節機能に設定を学習させることもできます。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ディスプレイのホワイト バランス"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"スムーズ ディスプレイ"</string>
@@ -1380,7 +1380,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"<xliff:g id="ID_1">%1$s</xliff:g> まで ON にする"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> まで OFF にする"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜間モードは現在 OFF です"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"日の入りと日の出の時刻を確認するには、デバイスの位置情報が必要です。"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"日の入りと日の出の時刻を使用するには、位置情報へのアクセスを許可してください。"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置情報の設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"今すぐ ON にする"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"OFF にする"</string>
@@ -1400,7 +1400,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"自動的に OFF: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g>までオンにする"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g>までオフにする"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"ダークモードでは黒い背景を使用するため、一部の画面で電池が長持ちします。画面が OFF になるまでダークモードが ON にならないように設定できます。"</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"ダークモードでは黒い背景を使用するため、一部の画面で電池が長持ちします。スケジュールを設定した場合、時刻を過ぎても画面が OFF になるまではダークモードに切り替わりません。"</string>
     <string name="screen_timeout" msgid="7709947617767439410">"画面消灯"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"画面がOFFになったとき"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過後"</string>
@@ -2866,7 +2866,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーの使用"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用する"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"自動的にON"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
@@ -3227,7 +3227,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"<xliff:g id="PROFILE">%s</xliff:g>に接続"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"この VPN の接続を解除しますか？"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"接続を解除"</string>
-    <string name="vpn_version" msgid="41856553718304367">"バージョン<xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"バージョン"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"VPN を削除"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"既存の VPN を置き換えますか？"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"常時接続 VPN を設定しますか？"</string>
@@ -3463,7 +3463,7 @@
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"SIMカードが挿入されていません"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM のステータス"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM ステータス（SIM スロット %1$d）"</string>
-    <string name="sim_call_back_title" msgid="4274099761123657464">"デフォルトのSIMからコールバック"</string>
+    <string name="sim_call_back_title" msgid="4274099761123657464">"デフォルトの SIM からかけ直す"</string>
     <string name="sim_outgoing_call_title" msgid="7759080345748128897">"発信用のSIM"</string>
     <string name="sim_other_call_settings" msgid="5956308869284958883">"その他の通話設定"</string>
     <string name="preferred_network_offload_title" msgid="6453199586512609557">"優先ネットワークオフロード"</string>
@@ -3494,7 +3494,7 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth、Android Auto、運転モード"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC がオフのため使用できません"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"アプリと通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
@@ -4047,12 +4047,12 @@
     <string name="zen_mode_event_rule_calendar" msgid="6279460374929508907">"対象となる予定"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="3065013489987409864">"対象となる予定: <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_summary_any_calendar" msgid="8395450413356855311">"すべてのカレンダー"</string>
-    <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"返信: <xliff:g id="REPLY">%1$s</xliff:g>"</string>
+    <string name="zen_mode_event_rule_summary_reply_template" msgid="7786137431469077008">"対象となる返信ステータス: <xliff:g id="REPLY">%1$s</xliff:g>"</string>
     <string name="zen_mode_event_rule_calendar_any" msgid="5152139705998281205">"すべてのカレンダー"</string>
-    <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"返信"</string>
-    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"はい/未定/返信なし"</string>
-    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"はい/未定"</string>
-    <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"はい"</string>
+    <string name="zen_mode_event_rule_reply" msgid="6099405414361340225">"対象となる返信ステータス"</string>
+    <string name="zen_mode_event_rule_reply_any_except_no" msgid="4672746760505346596">"参加/未定/未返信"</string>
+    <string name="zen_mode_event_rule_reply_yes_or_maybe" msgid="6584448788100186574">"参加/未定"</string>
+    <string name="zen_mode_event_rule_reply_yes" msgid="7812120982734551236">"参加"</string>
     <string name="zen_mode_rule_not_found_text" msgid="5303667326973891036">"ルールが見つかりません。"</string>
     <string name="zen_mode_rule_summary_enabled_combination" msgid="1183604368083885789">"ON/<xliff:g id="MODE">%1$s</xliff:g>"</string>
     <string name="zen_mode_rule_summary_provider_combination" msgid="785343032708491365">"<xliff:g id="PACKAGE">%1$s</xliff:g>\n<xliff:g id="SUMMARY">%2$s</xliff:g>"</string>
@@ -4079,7 +4079,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"通話"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"割り込み可能な通話"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"許可した通話で必ず音が鳴るようにするには、デバイスの設定が着信音になっていることをご確認ください"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"許可した通話で必ず音を鳴らすには、設定から着信音が鳴る状態になっていることを確認してください"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」の間、着信がブロックされます。ただし設定を調整することで、友だち、家族などの連絡先からの着信をブロックせず通知できます。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"スター付きの連絡先"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{なし}=1{{contact_1}}=2{{contact_1} さんと {contact_2} さん}=3{{contact_1} さん、{contact_2} さん、{contact_3} さん}other{{contact_1} さん、{contact_2} さん、他 # 人}}"</string>
@@ -4142,7 +4142,7 @@
     <string name="zen_mode_people_some" msgid="9101872681298810281">"一部のユーザーが割り込み可能"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"すべてのユーザーが割り込み可能"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"同一発信者による再着信"</string>
-    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"同一発信者による再着信の許可"</string>
+    <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"同一発信者による再着信に割り込みを許可"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"全員"</string>
     <string name="zen_mode_contacts_callers" msgid="5429267704011896833">"連絡先"</string>
     <string name="zen_mode_starred_callers" msgid="1002370699564211178">"スター付きの連絡先"</string>
@@ -5391,7 +5391,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押しする"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押し"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"長押しするとアシスタントが有効になります"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"長押しすると電源ボタン メニューが表示されます"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"長押しは無効です"</string>
@@ -5419,9 +5419,9 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"他のアプリの上に重ねて表示して設定画面をオーバーレイすることをアプリに許可します"</string>
     <string name="media_controls_title" msgid="403271085636252597">"メディア"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"メディア プレーヤーを固定する"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開するには、[クイック設定] でメディア プレーヤーを開いたままにしてください"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"再生をすばやく再開できるよう、[クイック設定] にメディア プレーヤーを開いたままにします"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"おすすめのメディアを表示"</string>
-    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"アクティビティに基づいて表示"</string>
+    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"アクティビティに基づいて表示します"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"プレーヤーを非表示"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"クイック設定に表示させるプレーヤーを選択"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"メディア"</string>
@@ -5496,7 +5496,7 @@
     <string name="category_name_general" msgid="7737273712848115886">"全般"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ダークモードを使用"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth を使用"</string>
-    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"ショートカットを使用"</string>
+    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"着信音ミュート用のショートカットを使用する"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>
