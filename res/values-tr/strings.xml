@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Küçült"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Büyüt"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Otomatik döndürmeyi kullan"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Yüz Algılama işlevi, Otomatik Döndürme doğruluğunu iyileştirmek için ön kamerayı kullanır. Resimler hiçbir zaman saklanmaz veya Google\'a gönderilmez."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Yüz Algılama işlevi, otomatik döndürme doğruluğunu iyileştirmek için ön kamerayı kullanır. Görüntüler hiçbir zaman saklanmaz veya Google\'a gönderilmez."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Örnek metin"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Muhteşem Oz Büyücüsü"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. Bölüm: Oz\'un Muhteşem Zümrüt Kenti"</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Uygulama dilleri"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Her uygulamanın dilini ayarlayın"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Uygulama Dili"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Uygulamayı güncelleyin"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Uygulamayı mevcut en son dillerle güncellemeniz gerekiyor."</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Şimdi güncelle"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Önerilen diller"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tüm diller"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistem dili"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Sistem varsayılanı: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Uygulama varsayılan olarak <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> diline ayarlı ve birden fazla dili desteklemiyor."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Bu uygulama için Ayarlar\'dan dil seçemezsiniz."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Seçilen diller kaldırılsın mı?</item>
       <item quantity="one">Seçilen dil kaldırılsın mı?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"Güvenlik durumu"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Ekran kilidi, Cihazımı Bul, uygulama güvenliği"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Güvenlik ve gizlilik"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"İzinler, ekran kilidi, uygulama güvenliği"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Yüz eklendi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Yüz tanımayı kurmak için dokunun"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Yüz Tanıma Kilidi"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Siz ve çocuğunuz, istediğiniz zaman Ayarlar\'dan Parmak İzi Kilidi\'ni devre dışı bırakabilir veya çocuğunuzun parmak izi resimlerini ve modelini silebilirsiniz. Parmak izi resimleri ve modelleri, silinene kadar telefonda saklanır."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonunuzun kilidi, istemediğiniz zamanlarda da açılabilir. Örneğin, telefonunuz başka birisi tarafından parmağınıza tutulduğunda kilidi açılabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Çocuğunuz istemeden de telefonunun kilidi açılabilir. Örneğin, telefonu başka birisi tarafından parmağına tutulduğunda kilidi açılabilir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"En iyi sonuçlar için Made for Google sertifikalı bir ekran koruyucu kullanın. Parmak iziniz diğer ekran koruyucularla çalışmayabilir."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"En iyi sonuçlar için Made for Google sertifikalı bir ekran koruyucu kullanın. Çocuğunuzun parmak izi diğer ekran koruyucularla çalışmayabilir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Her defasında parmağınızın konumunu biraz değiştirin"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Parmak izinizin ortasıyla simgenin üzerini kapatın"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Parmak izinizin tüm farklı noktalarını eklemek için parmağınızı kaldırıp dokundurmaya devam edin"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Parmak izi simgesi her hareket ettiğinde dokunup basılı tutun. Bu şekilde parmak iziniz daha fazla yakalanabilir"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Parmağınızın ucunu sensöre yerleştirin"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Son olarak parmağınızın kenarlarını kullanın"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Parmağınızın sol kenarını yerleştirin"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Parmağınızın sağ kenarını yerleştirin"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Parmak izinizin yan tarafını sensöre yerleştirip basılı tuttuktan sonra diğer tarafa geçin"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bu şekilde parmak iziniz daha fazla yakalanabilir"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Parmak izi kaydı yüzde <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekran kilidi seçeneği devre dışı bırakıldı. Daha fazla bilgi için kuruluşunuzdaki yöneticiyle iletişime geçin. "<annotation id="admin_details">"Daha fazla ayrıntı"</annotation>\n\n"Satın alma işlemlerini ve uygulama erişimini yetkilendirmek için parmak izinizi kullanmaya devam edebilirsiniz. "<annotation id="url">"Daha fazla bilgi"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Parmağınızı kaldırın ve sensöre tekrar dokunun"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Parmak izi sensörü kullanılamıyor. Bir onarım hizmeti sağlayıcıyı ziyaret edin"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Gelişmiş ayarlar"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"İş profili kilidi, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock ve diğer ayarlar"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Gelişmiş ayarlar"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> adede kadar parmak izi ekleyebilirsiniz"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Maksimum sayıda parmak izi eklediniz"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Daha fazla parmak izi eklenemez"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play sistem güncelleme lisansları"</string>
     <string name="terms_title" msgid="2071742973672326073">"Şartlar ve koşullar"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Sistem Web Görünümü Lisansı"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Duvar kağıdına katkıda bulunanlar"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Uydu görüntüleri sağlayıcıları:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manuel"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Kılavuzun yüklenmesiyle ilgili bir sorun var."</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Etkinleştir"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Depolama alanını temizle"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Güncellemeleri kaldır"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Kısıtlanmış ayarlara izin verme"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Seçtiğiniz bazı etkinlikler varsayılan olarak bu uygulamada açılır."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Bu uygulamanın widget oluşturmasına ve oluşturulan widget\'ların verilerine erişmesine izin vermeyi seçtiniz."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Hiçbir varsayılan ayarlanmadı."</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Dahili Bellek"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Boyut yeniden hesaplanıyor…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Uygulama verileri silinsin mi?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Bu uygulamanın verileri kalıcı olarak silinecek. Buna dosyalar, ayarlar, veritabanları ve diğer uygulama verileri de dahildir."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Dosyalar ve ayarlar da dahil olmak üzere bu uygulama verileri bu cihazdan kalıcı olarak silinecektir"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Tamam"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"İptal"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Sil"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Uygulama, yüklü uygulamalar listesinde bulunamadı."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Uygulama depolama alanı temizlenemedi."</string>
@@ -2452,7 +2463,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Aramalar"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Bildirimler ve alarmlar"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Etkileşimli geri bildirim teknolojisi"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Titreşimi ve dokunma teknolojisini kullanma"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Titreşimi ve dokunma teknolojisini kullan"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Alarm titreşimi"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Medya titreşimi"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Zili çaldırma titreşimi"</string>
@@ -2507,7 +2518,7 @@
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ses ayarı"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Sesli açıklama"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Desteklenen filmlerde ve dizilerde ekranda neler olduğuyla ilgili açıklamaları duyun"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Desteklenen filmlerde ve programlarda ekranda neler olduğuyla ilgili açıklamaları dinleyin"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"sesli açıklama, ses, açıklama, az görme,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Kısayol açık"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Kapalı"</string>
@@ -4401,10 +4412,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> kullanılmayan uygulama</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Kullanılmayan uygulama ayarları"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Kullanılmayan uygulama etkinliğini duraklat"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"İzinleri kaldırın, geçici dosyaları silin ve bildirimleri durdurun"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Tüm uygulamalar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Yüklü uygulamalar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Hazır uygulamalar"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Bu cihaz <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> tarafından yönetiliyor."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Daha fazla bilgi"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Kısıtlanmış ayar"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> için kısıtlanmış ayarlara izin veriliyor"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Güvenliğiniz için bu ayar şu anda kullanılamıyor."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Finanse edilen cihaz bilgisi"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Sözleşmeli cihaz sağlayıcınız bu cihazda ayarları değiştirip yazılım yükleyebilir.\n\nÖdemelerden birini yapmazsanız cihazınız kilitlenir.\n\nDaha fazla bilgi için sözleşmeli cihaz sağlayıcınızla iletişime geçin."</string>
@@ -5546,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Kilit ekranında harici cihazlar için kontrol düğmeleri gösterir"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Kilitli cihazdan kontrol et"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Cihaz denetimleri uygulaması izin veriyorsa harici cihazları telefonunuzun veya tabletinizin kilidini açmadan kontrol edin"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Kullanmak için önce \"Cihaz denetimlerini göster\" seçeneğini etkinleştirin"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Kullanılabilir olduğunda çift çizgili saati göster"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Çift çizgili saat"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

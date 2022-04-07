@@ -34,7 +34,7 @@
     <string name="header_category_system" msgid="1665516346845259058">"ਸਿਸਟਮ"</string>
     <string name="radioInfo_service_in" msgid="9088637745836646271">"ਸੇਵਾ ਵਿੱਚ"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"ਸੇਵਾ ਵਿੱਚ ਨਹੀਂ"</string>
-    <string name="radioInfo_service_emergency" msgid="6838935881091760942">"ਸਿਰਫ਼ ਸੰਕਟਕਾਲੀਨ ਕਾਲਾਂ"</string>
+    <string name="radioInfo_service_emergency" msgid="6838935881091760942">"ਸਿਰਫ਼ ਐਮਰਜੈਂਸੀ ਕਾਲਾਂ"</string>
     <string name="radioInfo_service_off" msgid="6184928420860868571">"ਰੇਡੀਓ ਬੰਦ"</string>
     <string name="radioInfo_roaming_in" msgid="8892550453644088692">"ਰੋਮਿੰਗ"</string>
     <string name="radioInfo_roaming_not" msgid="3137594549464975054">"ਰੋਮਿੰਗ ਨਹੀਂ"</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ਐਪ ਦੀਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ਹਰੇਕ ਐਪ ਲਈ ਭਾਸ਼ਾ ਸੈੱਟ ਕਰੋ"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"ਐਪ ਦੀ ਭਾਸ਼ਾ"</string>
+    <string name="warnings_title" msgid="613849105118598110">"ਐਪ ਨੂੰ ਅੱਪਡੇਟ ਕਰੋ"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"ਤੁਹਾਨੂੰ ਨਵੀਨਤਮ ਉਪਲਬਧ ਭਾਸ਼ਾਵਾਂ ਲਈ ਐਪ ਨੂੰ ਅੱਪਡੇਟ ਕਰਨ ਦੀ ਲੋੜ ਹੈ"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"ਹੁਣੇ ਅੱਪਡੇਟ ਕਰੋ"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"ਸੁਝਾਈਆਂ ਗਈਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ਸਾਰੀਆਂ ਭਾਸ਼ਾਵਾਂ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"ਸਿਸਟਮ ਦੀ ਭਾਸ਼ਾ"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"ਸਿਸਟਮ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"ਐਪ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਤੌਰ \'ਤੇ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> \'ਤੇ ਸੈੱਟ ਹੈ ਅਤੇ ਇੱਕ ਤੋਂ ਵੱਧ ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੀ ਹੈ।"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਇਸ ਐਪ ਲਈ ਭਾਸ਼ਾ ਦੀ ਚੋਣ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ਤੁਸੀਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਇਸ ਐਪ ਲਈ ਕੋਈ ਭਾਸ਼ਾ ਨਹੀਂ ਚੁਣ ਸਕਦੇ ਹੋ।"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">ਕੀ ਚੁਣੀ ਗਈ ਭਾਸ਼ਾ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?</item>
       <item quantity="other">ਕੀ ਚੁਣੀਆਂ ਗਈਆਂ ਭਾਸ਼ਾਵਾਂ ਨੂੰ ਹਟਾਉਣਾ ਹੈ?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"ਸੁਰੱਖਿਆ ਸਥਿਤੀ"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"ਸਕ੍ਰੀਨ ਲਾਕ, Find My Device, ਐਪ ਸੁਰੱਖਿਆ"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"ਸੁਰੱਖਿਆ ਅਤੇ ਪਰਦੇਦਾਰੀ"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"ਇਜਾਜ਼ਤਾਂ, ਸਕ੍ਰੀਨ ਲਾਕ, ਐਪ ਸੁਰੱਖਿਆ"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ਚਿਹਰਾ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ਫ਼ੇਸ ਅਣਲਾਕ ਦਾ ਸੈੱਟਅੱਪ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ਫ਼ੇਸ ਅਣਲਾਕ"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"ਤੁਸੀਂ ਅਤੇ ਤੁਹਾਡਾ ਬੱਚਾ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਕਿਸੇ ਵੇਲੇ ਵੀ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦੇ ਚਿੱਤਰਾਂ ਅਤੇ ਮਾਡਲ ਨੂੰ ਮਿਟਾ ਸਕਦੇ ਹਨ ਜਾਂ ਫਿੰਗਰਪ੍ਰਿੰਟ ਅਣਲਾਕ ਨੂੰ ਬੰਦ ਕਰ ਸਕਦੇ ਹਨ। ਫਿੰਗਰਪ੍ਰਿੰਟ ਚਿੱਤਰ ਅਤੇ ਮਾਡਲ ਫ਼ੋਨ \'ਤੇ ਉਦੋਂ ਤੱਕ ਸਟੋਰ ਰਹਿੰਦੇ ਹਨ ਜਦੋਂ ਤੱਕ ਉਹਨਾਂ ਨੂੰ ਮਿਟਾਇਆ ਨਹੀਂ ਜਾਂਦਾ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"ਤੁਹਾਡੇ ਨਾ ਚਾਹੁੰਦੇ ਹੋਏ ਵੀ ਕਈ ਵਾਰ ਤੁਹਾਡਾ ਫ਼ੋਨ ਅਣਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਜਿਵੇਂ ਕਿ, ਜੇ ਕੋਈ ਵਿਅਕਤੀ ਤੁਹਾਡੇ ਫ਼ੋਨ ਨੂੰ ਤੁਹਾਡੀ ਉਂਗਲ ਕੋਲ ਲਿਜਾ ਕੇ ਸਪਰਸ਼ ਕਰਵਾ ਦੇਵੇ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"ਜੇ ਕੋਈ ਵਿਅਕਤੀ ਤੁਹਾਡੇ ਬੱਚੇ ਦੇ ਫ਼ੋਨ ਨੂੰ ਉਸਦੀ ਉਂਗਲ ਕੋਲ ਲਿਜਾ ਕੇ ਸਪਰਸ਼ ਕਰਵਾ ਦੇਵੇ, ਤਾਂ ਨਾ ਚਾਹੁੰਦੇ ਹੋਏ ਵੀ ਇਹ ਅਣਲਾਕ ਹੋ ਸਕਦਾ ਹੈ।"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ਬਿਹਤਰੀਨ ਨਤੀਜਿਆਂ ਲਈ, Made for Google ਵੱਲੋਂ ਪ੍ਰਮਾਣਿਤ ਸਕ੍ਰੀਨ ਰੱਖਿਅਕ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਹੋਰ ਸਕ੍ਰੀਨ ਰੱਖਿਅਕਾਂ ਨਾਲ, ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਡਾ ਫਿੰਗਰਪ੍ਰਿੰਟ ਕੰਮ ਨਾ ਕਰੇ।"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ਬਿਹਤਰੀਨ ਨਤੀਜਿਆਂ ਲਈ, Made for Google ਵੱਲੋਂ ਪ੍ਰਮਾਣਿਤ ਸਕ੍ਰੀਨ ਰੱਖਿਅਕ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਹੋਰ ਸਕ੍ਰੀਨ ਰੱਖਿਅਕਾਂ ਨਾਲ, ਹੋ ਸਕਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਬੱਚੇ ਦਾ ਫਿੰਗਰਪ੍ਰਿੰਟ ਕੰਮ ਨਾ ਕਰੇ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"ਹਰ ਵਾਰ ਆਪਣੀ ਉਂਗਲ ਨੂੰ ਥੋੜ੍ਹਾ ਹਿਲਾਓ"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਾ ਵਿਚਲਾ ਹਿੱਸਾ ਪ੍ਰਤੀਕ ਉੱਤੇ ਰੱਖੋ"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦੇ ਵੱਖ-ਵੱਖ ਭਾਗਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕਰਨ ਲਈ ਆਪਣੀ ਉਂਗਲ ਨੂੰ ਰੱਖਣਾ-ਚੁੱਕਣਾ ਜਾਰੀ ਰੱਖੋ"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਪ੍ਰਤੀਕ ਵਿੱਚ ਹਰੇਕ ਵਾਰ ਹਲਚਲ ਹੋਣ \'ਤੇ ਉਸਨੂੰ ਸਪਰਸ਼ ਕਰਕੇ ਰੱਖੋ। ਇਸ ਨਾਲ ਤੁਹਾਡੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਨੂੰ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਕੈਪਚਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਹੁੰਦੀ ਹੈ।"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਪੋਟੇ ਨੂੰ ਸੈਂਸਰ \'ਤੇ ਰੱਖੋ"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"ਅੰਤ ਵਿੱਚ, ਆਪਣੀ ਉਂਗਲ ਦੇ ਕੋਨਿਆਂ ਦੀ ਵਰਤੋਂ ਕਰੋ"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਖੱਬੇ ਕੋਨੇ ਨੂੰ ਰੱਖੋ"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਸੱਜੇ ਕੋਨੇ ਨੂੰ ਰੱਖੋ"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"ਆਪਣੀ ਉਂਗਲ ਦੇ ਇੱਕ ਪਾਸੇ ਨੂੰ ਸੈਂਸਰ \'ਤੇ ਲਗਾ ਕੇ ਰੱਖੋ, ਫਿਰ ਦੂਜੇ ਪਾਸੇ ਨੂੰ ਲਗਾਓ"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ਇਸ ਨਾਲ ਤੁਹਾਡੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਨੂੰ ਬਿਹਤਰ ਢੰਗ ਨਾਲ ਕੈਪਚਰ ਕਰਨ ਵਿੱਚ ਮਦਦ ਹੁੰਦੀ ਹੈ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਦਰਜ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ <xliff:g id="PERCENTAGE">%d</xliff:g> ਫ਼ੀਸਦ ਹੋ ਗਈ ਹੈ"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" ਸਕ੍ਰੀਨ ਲਾਕ ਵਿਕਲਪ ਨੂੰ ਅਯੋਗ ਬਣਾਇਆ ਗਿਆ ਹੈ। ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ, ਆਪਣੀ ਸੰਸਥਾ ਦੇ ਪ੍ਰਸ਼ਾਸਕ ਨਾਲ ਸੰਪਰਕ ਕਰੋ। "<annotation id="admin_details">"ਹੋਰ ਵੇਰਵੇ"</annotation>\n\n"ਤੁਸੀਂ ਖਰੀਦਾਂ ਨੂੰ ਅਧਿਕਾਰਿਤ ਕਰਨ ਅਤੇ ਐਪ \'ਤੇ ਪਹੁੰਚ ਕਰਨ ਲਈ ਹਾਲੇ ਵੀ ਆਪਣੇ ਫਿੰਗਰਪ੍ਰਿੰਟ ਦੀ ਵਰਤੋਂ ਕਰ ਸਕਦੇ ਹੋ। "<annotation id="url">"ਹੋਰ ਜਾਣੋ"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ਉਂਗਲ ਚੁੱਕੋ, ਫਿਰ ਦੁਬਾਰਾ ਸੈਂਸਰ ਨੂੰ ਸਪਰਸ਼ ਕਰੋ"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ। ਮੁਰੰਮਤ ਪ੍ਰਦਾਨਕ \'ਤੇ ਜਾਓ"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"ਅਡਵਾਂਸ ਸੈਟਿੰਗਾਂ"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"ਕਾਰਜ ਪ੍ਰੋਫਾਈਲ ਲਾਕ, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock ਅਤੇ ਹੋਰ"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"ਅਡਵਾਂਸ ਸੈਟਿੰਗਾਂ"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"ਤੁਸੀਂ <xliff:g id="COUNT">%d</xliff:g> ਤੱਕ ਫਿੰਗਰਪ੍ਰਿੰਟ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"ਤੁਸੀਂ ਫਿੰਗਰਪ੍ਰਿੰਟਾਂ ਦੀ ਅਧਿਕਤਮ ਸੰਖਿਆ ਨੂੰ ਸ਼ਾਮਲ ਕੀਤਾ ਹੋਇਆ ਹੈ"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"ਹੋਰ ਫਿੰਗਰਪ੍ਰਿੰਟਾਂ ਨੂੰ ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"</string>
@@ -1335,7 +1347,7 @@
     <string name="auto_brightness_very_high_title" msgid="4935132626750630713">"ਬਹੁਤ ਉੱਚ"</string>
     <string name="auto_brightness_subtitle" msgid="6839449395639517870">"ਤੁਹਾਡਾ ਤਰਜੀਹੀ ਚਮਕ ਪੱਧਰ"</string>
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"ਉਪਲਬਧ ਲਾਈਟ ਲਈ ਵਿਵਸਥਿਤ ਨਾ ਕਰੋ"</string>
-    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"ਬੈਟਰੀ ਵਰਤੋਂ ਵਧ ਜਾਵੇਗੀ"</string>
+    <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"ਬੈਟਰੀ ਵਰਤੋਂ ਵੱਧ ਜਾਵੇਗੀ"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"ਉਪਲਬਧ ਲਾਈਟ ਲਈ ਚਮਕ ਦੇ ਪੱਧਰ ਨੂੰ ਸੁਯੋਗ ਬਣਾਓ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਦੇ ਚਾਲੂ ਹੋਣ \'ਤੇ ਵੀ ਤੁਸੀਂ ਚਮਕ ਨੂੰ ਅਸਥਾਈ ਤੌਰ \'ਤੇ ਵਿਵਸਥਿਤ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="auto_brightness_description" msgid="6807117118142381193">"ਤੁਹਾਡੀ ਸਕ੍ਰੀਨ ਦੀ ਚਮਕ ਸਵੈਚਲਿਤ ਤੌਰ \'ਤੇ ਵਾਤਾਵਰਨ ਅਤੇ ਤੁਹਾਡੇ ਵੱਲੋਂ ਕੀਤੀਆਂ ਜਾਣ ਵਾਲੀਆਂ ਸਰਗਰਮੀਆਂ ਦੇ ਮੁਤਾਬਕ ਵੱਧ-ਘੱਟ ਹੋਵੇਗੀ। ਅਡੈਪਟਿਵ ਬ੍ਰਾਈਟਨੈੱਸ ਨੂੰ ਤੁਹਾਡੀਆਂ ਤਰਜੀਹਾਂ ਬਾਰੇ ਸਿੱਖਣ ਵਿੱਚ ਮਦਦ ਕਰਨ ਲਈ ਤੁਸੀਂ ਸਲਾਈਡਰ ਨੂੰ ਹੱਥੀਂ ਹਿਲਾ ਸਕਦੇ ਹੋ।"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"ਸਫ਼ੈਦ ਸੰਤੁਲਨ ਦਿਖਾਓ"</string>
@@ -1440,7 +1452,7 @@
     <string name="doze_title" msgid="1523090408230862316">"ਸੂਚਨਾਵਾਂ ਲਈ ਸਕ੍ਰੀਨ ਕਿਰਿਆਸ਼ੀਲ ਕਰੋ"</string>
     <string name="doze_summary" msgid="8252867381522942804">"ਜਦੋਂ ਸਕ੍ਰੀਨ ਗੂੜ੍ਹੀ ਹੁੰਦੀ ਹੈ, ਤਾਂ ਇਹ ਨਵੀਂਆਂ ਸੂਚਨਾਵਾਂ ਲਈ ਚਾਲੂ ਹੋ ਜਾਂਦੀ ਹੈ"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"ਸਮਾਂ ਅਤੇ ਜਾਣਕਾਰੀ ਹਮੇਸ਼ਾਂ ਦਿਖਾਓ"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"ਬੈਟਰੀ ਵਰਤੋਂ ਵਧ ਜਾਵੇਗੀ"</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"ਬੈਟਰੀ ਵਰਤੋਂ ਵੱਧ ਜਾਵੇਗੀ"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"ਬੋਲਡ ਲਿਖਤ"</string>
     <string name="title_font_size" msgid="570613010306330622">"ਫੌਂਟ ਦਾ ਆਕਾਰ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ਲਿਖਤ ਨੂੰ ਵੱਡਾ ਜਾਂ ਛੋਟਾ ਕਰੋ"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play ਸਿਸਟਮ ਅੱਪਡੇਟ ਲਾਇਸੰਸ"</string>
     <string name="terms_title" msgid="2071742973672326073">"ਨਿਯਮ ਅਤੇ ਸ਼ਰਤਾਂ"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"ਸਿਸਟਮ WebView ਲਾਇਸੰਸ"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"ਵਾਲਪੇਪਰ ਕ੍ਰੈਡਿਟ"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"ਉਪਗ੍ਰਹਿ ਇਮੇਜਰੀ ਪ੍ਰਦਾਨਕ:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"ਮੈਨੁਅਲ"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"ਮੈਨੁਅਲ ਲੋਡ ਕਰਨ ਵਿੱਚ ਇੱਕ ਸਮੱਸਿਆ ਹੋਈ ਸੀ।"</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"ਚਾਲੂ ਕਰੋ"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"ਸਟੋਰੇਜ ਕਲੀਅਰ ਕਰੋ"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"ਅੱਪਡੇਟਾਂ ਅਣਸਥਾਪਤ ਕਰੋ"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"ਪ੍ਰਤਿਬੰਧਿਤ ਸੈਟਿੰਗਾਂ ਦੀ ਆਗਿਆ ਦਿਓ"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"ਤੁਹਾਡੇ ਵੱਲੋਂ ਚੁਣੀਆਂ ਕੁਝ ਸਰਗਰਮੀਆਂ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਤੌਰ \'ਤੇ ਇਸ ਐਪ ਵਿੱਚ ਖੁੱਲ੍ਹਦੀਆਂ ਹਨ।"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ਤੁਸੀਂ ਇਸ ਐਪ ਨੂੰ ਵਿਜੇਟ ਬਣਾਉਣ ਲਈ ਅਤੇ ਉਹਨਾਂ ਦੇ ਡਾਟਾ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦੇਣ ਦੀ ਚੋਣ ਕੀਤੀ ਹੈ।"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"ਕੋਈ ਪੂਰਵ-ਨਿਰਧਾਰਿਤ ਸੈੱਟ ਨਹੀਂ ਕੀਤੇ"</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"ਅੰਦਰੂਨੀ ਸਟੋਰੇਜ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"ਅਕਾਰ ਰੀਕੰਪਿਊਟ ਕਰ ਰਿਹਾ ਹੈ..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ਕੀ ਐਪ ਡਾਟਾ ਮਿਟਾਉਣਾ ਹੈ?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"ਇਸ ਐਪ ਦਾ ਡਾਟਾ ਪੱਕੇ ਤੌਰ \'ਤੇ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ। ਇਸ ਵਿੱਚ ਫ਼ਾਈਲਾਂ, ਸੈਟਿੰਗਾਂ, ਡਾਟਾਬੇਸ ਅਤੇ ਹੋਰ ਐਪ ਡਾਟਾ ਸ਼ਾਮਲ ਹੈ।"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"ਫ਼ਾਈਲਾਂ ਅਤੇ ਸੈਟਿੰਗਾਂ ਸਮੇਤ ਇਸ ਐਪ ਦੇ ਡਾਟੇ ਨੂੰ ਇਸ ਡੀਵਾਈਸ ਤੋਂ ਪੱਕੇ ਤੌਰ \'ਤੇ ਮਿਟਾਇਆ ਜਾਵੇਗਾ"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ਠੀਕ ਹੈ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ਰੱਦ ਕਰੋ"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"ਮਿਟਾਓ"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"ਐਪ ਇੰਸਟੌਲ ਕੀਤੇ ਐਪਸ ਦੀ ਸੂਚੀ ਵਿੱਚ ਨਹੀਂ ਮਿਲਿਆ ਸੀ।"</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ਐਪ ਦੀ ਸਟੋਰੇਜ ਕਲੀਅਰ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ।"</string>
@@ -2325,7 +2336,7 @@
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"ਡਿਸਪਲੇ ਦਾ ਆਕਾਰ ਅਤੇ ਲਿਖਤ"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"ਲਿਖਤ ਦੇ ਦਿਸਣ ਦਾ ਤਰੀਕਾ ਬਦਲੋ"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"ਵਿਸ਼ਾ: ਗਰਮ ਹਵਾ ਦੇ ਗੁਬਾਰੇ ਦੇ ਡਿਜ਼ਾਈਨ"</string>
-    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"ਭੇਜਣਵਾਲਾ: ਬਿੱਲ"</string>
+    <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"ਵੱਲੋਂ: ਬਿੱਲ"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ!\n\nਮੇਰੀ ਸਿਰਫ਼ ਇਹ ਜਾਣਨ ਦੀ ਇੱਛਾ ਹੈ ਕਿ ਡਿਜ਼ਾਈਨ ਦਾ ਕੰਮ ਕਿੰਨਾ ਕੁ ਹੋ ਗਿਆ ਹੈ। ਕੀ ਸਾਡੇ ਵੱਲੋਂ ਨਵੇਂ ਗੁਬਾਰੇ ਬਣਾਉਣਾ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾਣ ਤੋਂ ਪਹਿਲਾਂ ਉਹ ਤਿਆਰ ਹੋ ਜਾਣਗੇ?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"ਸੈਟਿੰਗਾਂ ਰੀਸੈੱਟ ਕਰੋ"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ਕੀ ਡਿਸਪਲੇ ਦੇ ਆਕਾਰ ਅਤੇ ਲਿਖਤ ਨੂੰ ਰੀਸੈੱਟ ਕਰਨਾ ਹੈ?"</string>
@@ -3742,14 +3753,14 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"ਧੁਨੀ ਵਜਾਉਣ ਵਾਲੀਆਂ ਰੁਕਾਵਟਾਂ ਨੂੰ ਆਗਿਆ ਦਿਓ"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"ਦ੍ਰਿਸ਼ਟੀਗਤ ਗੜਬੜੀਆਂ ਬਲਾਕ ਕਰੋ"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"ਦ੍ਰਿਸ਼ਟੀਗਤ ਸਿਗਨਲ ਦਿਖਣ ਦਿਓ"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"ਲੁਕੀਆਂ ਹੋਈਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਦਿਖਾਉਣ ਸਬੰਧੀ ਵਿਕਲਪ"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"ਲੁਕੀਆਂ ਹੋਈਆਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਦਿਖਾਉਣ ਸੰਬੰਧੀ ਵਿਕਲਪ"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"\'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਦੇ ਚਾਲੂ ਹੋਣ \'ਤੇ"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"ਸੂਚਨਾਵਾਂ ਦੀ ਕੋਈ ਧੁਨੀ ਨਹੀਂ"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"ਤੁਸੀਂ ਆਪਣੀ ਸਕ੍ਰੀਨ \'ਤੇ ਸੂਚਨਾਵਾਂ ਦੇਖੋਗੇ"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"ਸੂਚਨਾਵਾਂ ਆਉਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਕੋਈ ਧੁਨੀ ਨਹੀਂ ਵਜਾਵੇਗਾ ਜਾਂ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ।"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"ਸੂਚਨਾਵਾਂ ਆਉਣ \'ਤੇ ਤੁਹਾਡਾ ਫ਼ੋਨ ਕੋਈ ਧੁਨੀ ਨਹੀਂ ਵਜਾਏਗਾ ਜਾਂ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ।"</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"ਸੂਚਨਾਵਾਂ ਦੇ ਕੋਈ ਦ੍ਰਿਸ਼ਟੀਗਤ ਸੰਕੇਤ ਜਾਂ ਧੁਨੀ ਨਹੀਂ"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"ਤੁਹਾਨੂੰ ਸੂਚਨਾਵਾਂ ਨਾ ਹੀ ਦਿਸਣਗੀਆਂ ਅਤੇ ਨਾ ਹੀ ਸੁਣਨਗੀਆਂ"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"ਤੁਹਾਡਾ ਫ਼ੋਨ ਨਵੀਆਂ ਜਾਂ ਮੌਜੂਦਾ ਸੂਚਨਾਵਾਂ ਨਹੀਂ ਦਿਖਾਵੇਗਾ, ਉਹਨਾਂ ਲਈ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ ਜਾਂ ਧੁਨੀ ਨਹੀਂ ਵਜਾਵੇਗਾ। ਧਿਆਨ ਵਿੱਚ ਰੱਖੋ, ਫ਼ੋਨ ਸਰਗਰਮੀ ਅਤੇ ਸਥਿਤੀ ਦੀਆਂ ਅਤਿ ਜ਼ਰੂਰੀ ਸੂਚਨਾਵਾਂ ਹਾਲੇ ਵੀ ਦਿਸਣਗੀਆਂ।\n\nਜਦੋਂ ਤੁਸੀਂ \'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਨੂੰ ਬੰਦ ਕਰੋਗੇ, ਤਾਂ ਤੁਹਾਡੀ ਸਕ੍ਰੀਨ ਨੂੰ ਉੱਪਰੋਂ ਥੱਲੇ ਵੱਲ ਸਵਾਈਪ ਕਰਨ \'ਤੇ ਖੁੰਝੀਆਂ ਸੂਚਨਾਵਾਂ ਦਿਸਣਗੀਆਂ।"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"ਤੁਹਾਡਾ ਫ਼ੋਨ ਨਵੀਆਂ ਜਾਂ ਮੌਜੂਦਾ ਸੂਚਨਾਵਾਂ ਨਹੀਂ ਦਿਖਾਵੇਗਾ, ਉਨ੍ਹਾਂ ਲਈ ਥਰਥਰਾਹਟ ਨਹੀਂ ਕਰੇਗਾ ਜਾਂ ਧੁਨੀ ਨਹੀਂ ਵਜਾਏਗਾ। ਧਿਆਨ ਵਿੱਚ ਰੱਖੋ, ਫ਼ੋਨ ਸਰਗਰਮੀ ਅਤੇ ਸਥਿਤੀ ਦੀਆਂ ਅਤਿ ਜ਼ਰੂਰੀ ਸੂਚਨਾਵਾਂ ਹਾਲੇ ਵੀ ਦਿਸਣਗੀਆਂ।\n\nਜਦੋਂ ਤੁਸੀਂ \'ਪਰੇਸ਼ਾਨ ਨਾ ਕਰੋ\' ਨੂੰ ਬੰਦ ਕਰੋਗੇ, ਤਾਂ ਤੁਹਾਡੀ ਸਕ੍ਰੀਨ ਨੂੰ ਉੱਪਰੋਂ ਥੱਲੇ ਵੱਲ ਸਵਾਈਪ ਕਰਨ \'ਤੇ ਖੁੰਝੀਆਂ ਸੂਚਨਾਵਾਂ ਦਿਸਣਗੀਆਂ।"</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"ਵਿਉਂਤਬੱਧ"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਚਾਲੂ ਕਰੋ"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"ਵਿਉਂਤੀ ਸੈਟਿੰਗ ਹਟਾਓ"</string>
@@ -4176,7 +4187,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"ਕਾਲਾਂ"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"ਕਾਲਾਂ"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"ਕਾਲਾਂ ਜੋ ਵਿਘਨ ਪਾ ਸਕਦੀਆਂ ਹਨ"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"ਇਹ ਪੱਕਾ ਕਰਨ ਲਈ ਕਿ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਕਾਲਾਂ ਲਈ ਧੁਨੀ ਵਜਦੀ ਹੈ, ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡਾ ਡੀਵਾਈਸ ਘੰਟੀ \'ਤੇ ਸੈੱਟ ਹੈ"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"ਇਹ ਪੱਕਾ ਕਰਨ ਲਈ ਕਿ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਕਾਲਾਂ ਲਈ ਧੁਨੀ ਵੱਜਦੀ ਹੈ, ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡਾ ਡੀਵਾਈਸ ਘੰਟੀ \'ਤੇ ਸੈੱਟ ਹੈ"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ ਲਈ ਇਨਕਮਿੰਗ ਕਾਲਾਂ ਬਲਾਕ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ। ਤੁਸੀਂ ਆਪਣੇ ਦੋਸਤਾਂ, ਪਰਿਵਾਰਕ ਮੈਂਬਰਾਂ ਜਾਂ ਹੋਰ ਸੰਪਰਕਾਂ ਨੂੰ ਤੁਹਾਨੂੰ ਸੰਪਰਕ ਕਰਨ ਦੇਣ ਲਈ ਸੈਟਿੰਗਾਂ ਨੂੰ ਵਿਵਸਥਿਤ ਕਰ ਸਕਦੇ ਹੋ।"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"ਤਾਰਾਬੱਧ ਸੰਪਰਕ"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{ਕੋਈ ਨਹੀਂ}=1{{contact_1}}=2{{contact_1} ਅਤੇ {contact_2}}=3{{contact_1}, {contact_2}, ਅਤੇ {contact_3}}other{{contact_1}, {contact_2}, ਅਤੇ # ਹੋਰ}}"</string>
@@ -4401,10 +4412,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ਅਣਵਰਤੀਆਂ ਐਪਾਂ</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"ਅਣਵਰਤੀ ਐਪ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"ਵਰਤੋਂ ਵਿੱਚ ਨਾ ਹੋਣ \'ਤੇ, ਐਪ ਸਰਗਰਮੀ ਰੋਕੋ"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ਇਜਾਜ਼ਤਾਂ ਹਟਾਓ, ਅਸਥਾਈ ਫ਼ਾਈਲਾਂ ਮਿਟਾਓ ਅਤੇ ਸੂਚਨਾਵਾਂ ਬੰਦ ਕਰੋ"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ਸਾਰੀਆਂ ਐਪਾਂ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ਸਥਾਪਤ ਐਪਾਂ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ਤਤਕਾਲ ਐਪਾਂ"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"ਇਸ ਡੀਵਾਈਸ ਦਾ ਪ੍ਰਬੰਧਨ <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ਵੱਲੋਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"ਹੋਰ ਜਾਣੋ"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"ਪ੍ਰਤਿਬੰਧਿਤ ਸੈਟਿੰਗਾਂ"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> ਲਈ ਪ੍ਰਤਿਬੰਧਿਤ ਸੈਟਿੰਗਾਂ ਦੀ ਆਗਿਆ ਹੈ"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"ਤੁਹਾਡੀ ਸੁਰੱਖਿਆ ਲਈ, ਫ਼ਿਲਹਾਲ ਇਹ ਸੈਟਿੰਗ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ਵਿੱਤ ਪ੍ਰਬੰਧਿਤ ਡੀਵਾਈਸ ਬਾਰੇ ਜਾਣਕਾਰੀ"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"ਤੁਹਾਡਾ ਕ੍ਰੈਡਿਟ ਪ੍ਰਦਾਨਕ ਸੈਟਿੰਗਾਂ ਨੂੰ ਬਦਲ ਕੇ ਇਸ ਡੀਵਾਈਸ \'ਤੇ ਸਾਫ਼ਟਵੇਅਰ ਸਥਾਪਤ ਕਰ ਸਕਦਾ ਹੈ।\n\nਜੇ ਤੁਸੀਂ ਕੋਈ ਭੁਗਤਾਨ ਖੁੰਝਾ ਦਿੰਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਡੇ ਡੀਵਾਈਸ ਨੂੰ ਲਾਕ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ।\n\nਹੋਰ ਜਾਣਨ ਲਈ, ਆਪਣੇ ਕ੍ਰੈਡਿਟ ਪ੍ਰਦਾਨਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ।"</string>
@@ -5546,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ਲਾਕ ਸਕ੍ਰੀਨ \'ਤੇ ਬਾਹਰੀ ਡੀਵਾਈਸਾਂ ਦੇ ਕੰਟਰੋਲ ਦਿਖਾਓ"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ਲਾਕ ਡੀਵਾਈਸ ਤੋਂ ਕੰਟਰੋਲ ਕਰੋ"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"ਜੇ ਡੀਵਾਈਸ ਕੰਟਰੋਲ ਐਪ ਵੱਲੋਂ ਆਗਿਆ ਦਿੱਤੀ ਜਾਂਦੀ ਹੈ, ਤਾਂ ਆਪਣੇ ਫ਼ੋਨ ਜਾਂ ਟੈਬਲੈੱਟ ਨੂੰ ਅਣਲਾਕ ਕੀਤੇ ਬਿਨਾਂ ਬਾਹਰੀ ਡੀਵਾਈਸਾਂ ਨੂੰ ਕੰਟਰੋਲ ਕਰੋ"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ਵਰਤੋਂ ਕਰਨ ਲਈ, ਪਹਿਲਾਂ \"ਡੀਵਾਈਸ ਕੰਟਰੋਲ ਦਿਖਾਓ\" ਨੂੰ ਚਾਲੂ ਕਰੋ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ਉਪਲਬਧ ਹੋਣ \'ਤੇ ਡਬਲ-ਲਾਈਨ ਘੜੀ ਦਿਖਾਓ"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ਡਬਲ-ਲਾਈਨ ਘੜੀ"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

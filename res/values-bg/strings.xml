@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Езици за приложенията"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Задаване на език за всяко приложение"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Език на приложението"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Актуализиране на приложението"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Трябва да актуализирате приложението за най-новите налични езици"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Актуализиране сега"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени езици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Всички езици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системен език"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Стандартен за системата – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Езикът <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> е зададен като основен за приложението и то не поддържа няколко езика."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избирането на език за това приложение не е налице от настройките."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Можете да изберете език за това приложение от настройките."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Да се премахнат ли избраните езици?</item>
       <item quantity="one">Да се премахне ли избраният език?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"Състояние на сигурността"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Заключване на екрана, „Намиране на устройството ми“, сигурност на приложенията"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Сигурност и поверителност"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Разрешения, заключване на екрана, сигурност на приложенията"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Добавено е лице"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Докоснете, за да настроите лице"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Отключване с лице"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Вие и детето ви можете по всяко време да изтриете изображенията и модела на отпечатъка му или да изключите функцията за отключване с отпечатък от настройките. Изображенията и моделите се съхраняват на телефона, докато не бъдат изтрити."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Телефонът ви може да бъде отключен неволно, ако например някой го допре до пръста ви."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефонът на детето ви може да бъде отключен неволно, ако например някой допре устройството до пръста му."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"За най-добри резултати използвайте защитен слой на екрана, който е със сертификат „Създадено за Google“. Отпечатъкът ви може да не работи с други защитни слоеве."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"За най-добри резултати използвайте защитен слой на екрана, който е със сертификат „Създадено за Google“. Отпечатъкът на детето ви може да не работи с други защитни слоеве."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Всеки път променяйте леко позицията на пръста си"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Закрийте иконата с центъра на отпечатъка си"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Продължавайте да вдигате пръста си, за да добавите различните части от отпечатъка си"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"При всяко преместване на иконата за отпечатъци я докоснете и задръжте. По този начин се улавя най-голяма част от отпечатъка ви."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете върха на пръста си върху сензора"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Накрая използвайте краищата на пръста си"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Поставете левия край на пръста си"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Поставете десния край на пръста си"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете едната страна на пръста си върху сензора и задръжте, след това поставете другата"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"По този начин се улавя най-голяма част от отпечатъка ви"</string>
     <!-- String.format failed for translation -->
@@ -581,10 +589,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцията за заключване на екрана е деактивирана. За да научите повече, свържете се с администратора на организацията си. "<annotation id="admin_details">"Повече подробности"</annotation>\n\n"Пак можете да използвате отпечатъка си за оторизиране на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Вдигнете пръста, след което докоснете сензора отново"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Сензорът за отпечатъци не може да се използва. Посетете оторизиран сервиз."</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Разширени настройки"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Заключване на служебен потребителски профил, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock и др."</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Разширени настройки"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Добавихте максималния брой отпечатъци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не могат да се добавят още отпечатъци"</string>
@@ -1373,7 +1385,7 @@
     <string name="night_display_temperature_title" msgid="857248782470764263">"Наситеност"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Няма да се включи автоматично"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Ще се включи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Ще се включи автоматично при залез"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Ще се включва автоматично при залез"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Няма да се изключи автоматично"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Ще се изключи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Ще се изключи автоматично при изгрев"</string>
@@ -1907,8 +1919,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Лицензи за системните актуализации на Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Общи условия"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Системен лиценз за WebView"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Признания за тапета"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Доставчици на сателитни изображения:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Ръководство"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Възникна проблем при зареждане на ръководството."</string>
@@ -2059,8 +2070,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Активиране"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Изчистване на данните"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Деинсталиране на актуализации"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Разрешаване на ограничените настройки"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Някои избрани от вас действия се отварят по подразбиране в това приложение."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Избрахте да разрешите на това приложение да създава приспособления и да осъществява достъп до данните им."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Не са зададени стандартни."</string>
@@ -2095,9 +2105,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Вътр. хранилище"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Размерът се преизчислява..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Да се изтрият ли данните от приложенията?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Данните на приложението ще бъдат изтрити за постоянно. Това включва файловете, настройките, базите от данни и други данни от приложението."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Данните в това приложение, включително файловете и настройките, ще бъдат изтрити за постоянно от устройството"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Отказ"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Изтриване"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Приложението не бе намерено в списъка с инсталирани приложения."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Изчистването на данните за приложението не бе успешно."</string>
@@ -2453,7 +2464,7 @@
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Настройката е деактивирана, защото за устройството е зададен тих режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Обаждания"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Известия и будилници"</string>
-    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивна хаптична обратна връзка"</string>
+    <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактивна осезателна обратна връзка"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Използване на вибриране и осезателна обратна връзка"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Будилници – вибриране"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Мулдимедия – вибриране"</string>
@@ -4403,10 +4414,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> неизползвано приложение</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Настройки за неизползваните приложения"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Поставяне на активн. в прилож. на пауза, ако не се ползва"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Премахване на разрешенията, изтриване на временните файлове и спиране на известията"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Всички приложения"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Инсталирани приложения"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Мигновени приложения"</string>
@@ -5062,10 +5071,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Това устройство се управлява от <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Научете повече"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Ограничени настройки"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Ограничените настройки са разрешени за <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"От съображения за сигурност понастоящем тази настройка не е налице."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация за финансираното устройство"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитодателят ви може да променя настройките на това устройство и да инсталира софтуер на него.\n\nАко пропуснете плащане, устройството ви ще бъде заключено.\n\nЗа да научите повече, свържете се с кредитодателя си."</string>
@@ -5544,14 +5551,13 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="3984851951621168573">"Разрешаване на достъп до Wallet от заключения екран"</string>
     <string name="lockscreen_privacy_qr_code_scanner_setting_toggle" msgid="4284186474146767523">"Показване на инструмента за сканиране на QR кодове"</string>
     <string name="lockscreen_privacy_qr_code_scanner_summary" msgid="6152471629901191089">"Разрешаване на достъп до инструмента за сканиране на QR кодове от заключения екран"</string>
-    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показване на контролите за устройството"</string>
+    <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Показване на контроли за устройства"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Показване на контроли за външни устройства на заключения екран"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Управление от заключено устройство"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Управление на външни устройства без отключване на телефона или таблета ви, ако е разрешено от приложението за контроли за устройството"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показване на часовника с двойна линия, когато е налице"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Часовник с двойна линия"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"За да използвате, първо включете „Показване на контроли за устройства“"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показване на часовника на два реда, когато е налице"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Часовник на два реда"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
