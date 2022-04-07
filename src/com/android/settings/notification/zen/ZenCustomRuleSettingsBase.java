@@ -59,6 +59,10 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
 
     @Override
     public void onResume() {
+        if (!mIsFirstLaunch) {
+            // Rule will be used in updatePreferenceStates() in super.onResume().
+            updateRule();
+        }
         super.onResume();
         updatePreferences();
     }
@@ -66,6 +70,7 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
     @Override
     public void onZenModeConfigChanged() {
         super.onZenModeConfigChanged();
+        updateRule();
         updatePreferences();
         updatePreferenceStates();
     }
@@ -80,10 +85,6 @@ abstract class ZenCustomRuleSettingsBase extends ZenModeSettingsBase {
     }
 
     public void updatePreferences() {
-        if (!mIsFirstLaunch) {
-            updateRule();
-        }
-
         final PreferenceScreen screen = getPreferenceScreen();
         String categoryKey = getPreferenceCategoryKey();
         if (categoryKey != null) {
