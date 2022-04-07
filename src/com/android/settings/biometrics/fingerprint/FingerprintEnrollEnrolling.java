@@ -52,6 +52,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 import com.android.settings.biometrics.BiometricUtils;
@@ -145,6 +146,15 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     private OrientationEventListener mOrientationEventListener;
     private int mPreviousRotation = 0;
 
+    @VisibleForTesting
+    protected boolean shouldShowLottie() {
+        DisplayDensityUtils displayDensity = new DisplayDensityUtils(getApplicationContext());
+        int currentDensityIndex = displayDensity.getCurrentIndex();
+        final int currentDensity = displayDensity.getValues()[currentDensityIndex];
+        final int defaultDensity = displayDensity.getDefaultDensity();
+        return defaultDensity == currentDensity;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,12 +188,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
         }
 
-        DisplayDensityUtils displayDensity =
-                new DisplayDensityUtils(getApplicationContext());
-        int currentDensityIndex = displayDensity.getCurrentIndex();
-        final int currentDensity = displayDensity.getValues()[currentDensityIndex];
-        final int defaultDensity = displayDensity.getDefaultDensity();
-        mShouldShowLottie = defaultDensity == currentDensity;
+        mShouldShowLottie = shouldShowLottie();
         // Only show the lottie if the current display density is the default density.
         // Otherwise, the lottie will overlap with the settings header text.
         boolean isLandscape = BiometricUtils.isReverseLandscape(getApplicationContext())
