@@ -246,6 +246,8 @@
 
     <!-- This theme was applied to Settings pages which are running under SUW. -->
     <style name="SettingsPreferenceTheme.SetupWizard" parent="@style/PreferenceTheme.SettingsLib">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
         <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/settingslib_listPreferredItemPaddingStart</item>
         <item name="android:listPreferredItemPaddingEnd">16dp</item>
