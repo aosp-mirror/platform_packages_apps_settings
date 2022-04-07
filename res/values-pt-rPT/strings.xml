@@ -52,7 +52,7 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Aumente ou diminua o texto no ecrã."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Diminuir"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Aumentar"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utilizar a rotação automática"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Usar rotação automática"</string>
     <string name="smart_rotate_text_headline" msgid="436277795183609578">"A deteção facial utiliza a câmara frontal para melhorar a precisão da rotação automática. As imagens nunca são armazenadas nem enviadas à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplo de texto"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"O Maravilhoso Feiticeiro de Oz"</string>
@@ -178,7 +178,7 @@
     <string name="proxy_exclusionlist_label" msgid="2598613986784917542">"Ignorar proxy para"</string>
     <string name="proxy_defaultView_text" msgid="6795150505379688451">"Restaurar predefinições"</string>
     <string name="proxy_action_text" msgid="1103328484441449542">"Concluído"</string>
-    <string name="proxy_hostname_label" msgid="5504327742505848063">"Nome de anfitrião do proxy"</string>
+    <string name="proxy_hostname_label" msgid="5504327742505848063">"Nome do anfitrião do proxy"</string>
     <string name="proxy_error" msgid="3615905975598084126">"Atenção"</string>
     <string name="proxy_error_dismiss" msgid="4207430265140873078">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="3814412792702059247">"O nome de anfitrião que introduziu não é válido."</string>
@@ -188,8 +188,8 @@
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"A porta introduzida não é válida."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"O proxy HTTP é utilizado pelo navegador, mas não pode ser utilizado por outras apps."</string>
     <string name="proxy_url_title" msgid="3502625766036404073">"URL do PAC: "</string>
-    <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Nome de anfitrião de ping (www.google.com) IPv4:"</string>
-    <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Nome de anfitrião de ping (www.google.com) IPv6:"</string>
+    <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Nome do anfitrião de ping (www.google.com) IPv4:"</string>
+    <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Nome do anfitrião de ping (www.google.com) IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"Teste de Cliente HTTP:"</string>
     <string name="ping_test_label" msgid="265427033290391845">"Executar teste de ping"</string>
     <string name="sdcard_changes_instructions" msgid="2331969501845866957">"As alterações terão efeito ao ligar novamente o cabo USB."</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas de apps"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Defina o idioma para cada app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma da app"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Atualize a app"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Tem de atualizar a app para obter os idiomas disponíveis mais recentes"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Atualizar agora"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma do sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Predefinição do sistema - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"A app está definida para <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> por predefinição e não suporta vários idiomas."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção do idioma para esta app não está disponível a partir das Definições."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Não pode selecionar um idioma para esta app a partir das Definições."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remover os idiomas selecionados?</item>
       <item quantity="one">Remover o idioma selecionado?</item>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"O utilizador e a criança podem eliminar o modelo e as imagens da impressão digital ou desativar o Desbloqueio por impressão digital em qualquer altura nas Definições. Os modelos e as imagens de impressões digitais são armazenados no telemóvel até serem eliminados."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"O telemóvel pode ser desbloqueado involuntariamente (por exemplo, se alguém o encostar ao seu dedo)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"O telemóvel da criança pode ser desbloqueado involuntariamente, como se alguém o encostar ao dedo da criança."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Para obter os melhores resultados, use um protetor de ecrã com a certificação Made For Google. Com outros protetores de ecrã, a sua impressão digital pode não funcionar."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para obter os melhores resultados, use um protetor de ecrã com a certificação Made For Google. Com outros protetores de ecrã, a impressão digital da criança pode não funcionar."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Altere a posição do seu dedo ligeiramente de cada vez"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cubra o ícone com a parte central da sua impressão digital"</string>
@@ -507,7 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Vá levantando o dedo para adicionar as diferentes partes da sua impressão digital"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Toque sem soltar de cada vez que o ícone da impressão digital se mover. Isto ajuda a capturar mais da sua impressão digital."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Coloque a ponta do dedo no sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Por fim, utilize as extremidades do dedo"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Coloque a extremidade esquerda do seu dedo"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloque a extremidade direita do seu dedo"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Coloque o lado da sua impressão digital no sensor, mantenha essa posição e, em seguida, mude para o outro lado"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Isto ajuda a capturar mais da sua impressão digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Inscrição da impressão digital: <xliff:g id="PERCENTAGE">%d</xliff:g> por cento"</string>
@@ -1422,7 +1429,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Personalizar o telemóvel"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Experimente diferentes estilos, imagens de fundo e muito mais"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Proteção de ecrã"</string>
-    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utilizar proteção de ecrã"</string>
+    <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar proteção de ecrã"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou na estação de ancoragem"</string>
     <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Ambos os casos"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Ao carregar"</string>
@@ -1905,8 +1912,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Licenças da atualização do sistema do Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Termos e condições"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Licença WebView do sistema"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Créditos da imagem de fundo"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Fornecedores de imagens de satélite:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manual"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Ocorreu um problema ao carregar o manual."</string>
@@ -2057,8 +2063,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Ativar"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Limpar armazenamento"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Desinstalar actualizações"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Permitir definições restritas"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Algumas atividades que selecionou são abertas nesta app por predefinição."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Optou por permitir que esta aplicação crie widgets e aceda aos seus dados."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Nenhuma predefinição estabelecida."</string>
@@ -2093,9 +2098,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Armaz. interno"</string>
     <string name="recompute_size" msgid="1098091228370999128">"A recalcular tamanho..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Eliminar dados da app?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Os dados desta app serão permanentemente eliminados. Estão incluídos ficheiros, definições, bases de dados e outros dados de apps."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Os dados desta app, incluindo ficheiros e definições, vão ser eliminados permanentemente deste dispositivo"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancelar"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Eliminar"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"A aplicação não foi encontrada na lista de aplicações instaladas."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Não foi possível limpar o armazenamento para a aplicação."</string>
@@ -2452,7 +2458,7 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Chamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificações e alarmes"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Resposta interativa"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utilize a vibração e a funcionalidade tátil"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Usar vibração e a funcionalidade tátil"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibração do alarme"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibração de multimédia"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibração do toque"</string>
@@ -3374,8 +3380,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Não configurado – Perfil de trabalho"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrador"</string>
     <string name="user_you" msgid="3070562015202859996">"O utilizador (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"Não pode adicionar mais utilizadores. Remova um utilizador para adicionar um novo."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"A gestão dos utilizadores só pode ser feita pelo proprietário do tablet."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"A gestão dos utilizadores só pode ser feita pelo proprietário do telemóvel."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Os perfis restritos não podem adicionar contas"</string>
@@ -3415,7 +3420,7 @@
     <string name="user_copy_apps_menu_title" msgid="5354300105759670300">"Instalar apps disponíveis"</string>
     <string name="nfc_payment_settings_title" msgid="2043139180030485500">"Pagamentos sem contacto"</string>
     <string name="nfc_default_payment_settings_title" msgid="2150504446774382261">"App de pagamentos predefinida"</string>
-    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Para pagar com uma app de pagamentos, encoste a parte de trás do dispositivo a terminal de pagamento"</string>
+    <string name="nfc_default_payment_footer" msgid="978535088340021360">"Para pagar com app de pagamentos, encoste a parte de trás do dispositivo a um terminal de pagamento"</string>
     <string name="nfc_more_details" msgid="1700713533074275233">"Saiba mais"</string>
     <string name="nfc_default_payment_workapp_confirmation_title" msgid="746921251872504687">"Predef. app de trab. como app de pag.?"</string>
     <string name="nfc_default_payment_workapp_confirmation_message_title" msgid="1533022606333010329">"Para pagar com uma app de trabalho:"</string>
@@ -3724,7 +3729,7 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhum}=1{1 horário definido}other{# horários definidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não incomodar"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receber notificações apenas de pessoas e apps importantes"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receba notificações apenas de pessoas e apps importantes"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limite as interrupções"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Ativar o modo Não incomodar"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Os sons de alarmes e multimédia podem interromper."</string>
@@ -3738,7 +3743,7 @@
     <string name="zen_mode_automation_suggestion_title" msgid="7776129050500707960">"Silenciar telemóvel se necessário"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="1946750790084170826">"Definir regras de Não incomodar"</string>
     <string name="zen_mode_schedule_title" msgid="7064866561892906613">"Horário"</string>
-    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Utilizar horário"</string>
+    <string name="zen_mode_use_automatic_rule" msgid="733850322530002484">"Usar horário"</string>
     <string name="zen_mode_summary_combination" msgid="5944689309915947828">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permitir interrupções que emitam som"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear perturbações visuais"</string>
@@ -4401,12 +4406,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> apps não utilizadas</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> app não utilizada</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"Definições de apps não usadas"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Pausar atividade de apps, se não usadas"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Remova autorizações, elimine ficheiros temporários e pare notificações"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Todas as apps"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Apps instaladas"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Apps instantâneas"</string>
@@ -5062,10 +5064,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Este dispositivo é gerido por <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Saber mais"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Definição restrita"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Definições restritas permitidas para a app <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Para sua segurança, esta definição está indisponível atualmente."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informações do dispositivo financiado"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"O seu fornecedor de crédito pode alterar as definições e instalar software neste dispositivo.\n\nSe falhar um pagamento, o dispositivo será bloqueado.\n\nPara saber mais, contacte o seu fornecedor de crédito."</string>
@@ -5548,6 +5548,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Mostre controlos de dispositivos externos no ecrã de bloqueio"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Controlo a partir do dispositivo bloqueado"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Controle dispositivos externos sem desbloquear o seu telemóvel ou tablet se for permitido pela app de controlos de dispositivos"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Para usar, ative primeiro a opção \"Mostrar controlos de dispositivos\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Apresente o relógio de duas linhas quando estiver disponível"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Relógio de duas linhas"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5565,10 +5566,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"A alocação nunca expira."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Permitir sobreposições de ecrãs nas Definições"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Permita que as apps que se podem sobrepor a outras apps se sobreponham a ecrãs de Definições"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Autorize o modem fictício"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Permita que este dispositivo execute o serviço de modem fictício para testes de instrumentação. Não ative isto durante a utilização normal do telemóvel"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Fixar leitor de multimédia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para retomar rapidamente a reprodução, o leitor de multimédia mantém-se aberto nas Definições rápidas"</string>
@@ -5647,24 +5646,23 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Outros controlos de visualização"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Outros"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Geral"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Utilizar tema escuro"</string>
+    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Usar tema escuro"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Utilizar Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Utilizar Impedir o toque"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Utilizar zona Wi-Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utilizar fixação de apps"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Utilizar opções de programador"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Utilize o serviço de impressão"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários utilizadores"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Utilizar depuração sem fios"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Utilizar preferências da placa gráfica"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Utilizar Poupança de bateria"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"Desativar agora"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"Ativar agora"</string>
-    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Utilizar Luz noturna"</string>
+    <string name="night_light_main_switch_title" msgid="3428298022467805219">"Usar Luz noturna"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"Utilizar NFC"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Utilizar bateria adaptável"</string>
-    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Utilizar luminosidade adaptável"</string>
+    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Usar luminosidade adaptável"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Utilizar Chamadas Wi-Fi"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ver todas as apps"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Encaminhamento inteligente"</string>
@@ -5721,12 +5719,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"Modificadores"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Ações (custo de produção)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Ações (preço base)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompensas por evento único"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Recompensas para duração total do evento"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Máximo de recompensas por dia"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Principal atividade"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificação vista"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Notificação vista no prazo de 15 minutos"</string>
@@ -5757,20 +5752,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Pré-visualizar"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Escolha uma proteção de ecrã"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Mostrar informações adicionais"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Apresente a hora, a data, a meteorologia, a qualidade do ar e os detalhes da transmissão na proteção de ecrã"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Mais definições"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"Escolha a proteção de ecrã"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Escolha o que é apresentado no ecrã quando o seu tablet está na estação de ancoragem. O seu dispositivo pode consumir mais energia quando é usada uma proteção de ecrã."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personalizar"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"É necessário reiniciar para ativar o suporte de forma livre."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"É necessário reiniciar para forçar o modo de ambiente de trabalho em ecrãs secundários."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Reiniciar agora"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Reiniciar mais tarde"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Áudio espacial"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"O áudio de dispositivos multimédia compatíveis torna-se mais envolvente"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Acompanhamento da cabeça"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"O áudio muda conforme move a cabeça para soar mais natural"</string>

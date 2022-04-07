@@ -221,11 +221,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Языки приложений"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Выберите язык для каждого приложения"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Язык приложения"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Обновите приложение"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Чтобы добавить в приложение новые языки, его нужно обновить."</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Обновить"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Рекомендуемые языки"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Все языки"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Язык системы"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"По умолчанию – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"В этом приложении по умолчанию выбран <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>. Оно поддерживает только один язык."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Для этого приложения нельзя выбрать язык в настройках."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Удалить выбранные языки?</item>
       <item quantity="few">Удалить выбранные языки?</item>
@@ -462,6 +466,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Вы и ваш ребенок в любой момент можете удалить модель и снимки отпечатка пальца или отключить функцию разблокировки по отпечатку пальца в настройках. Изображения и модель хранятся на телефоне, пока вы не удалите их."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"В некоторых ситуациях телефон может быть разблокирован без вашего желания, например если кто-то приложит его к вашему пальцу."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"В некоторых ситуациях телефон может быть разблокирован без желания ребенка, например если кто-то приложит устройство к пальцу ребенка."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуем использовать защитное стекло или пленку из серии \"Сделано для Google\". Устройства с другими стеклами или пленками могут не распознавать отпечаток пальца."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуем использовать защитное стекло или пленку из серии \"Сделано для Google\". Устройства с другими стеклами или пленками могут не распознавать отпечаток пальца ребенка."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Каждый раз немного меняйте положение пальца."</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Приложите центр пальца к этому значку."</string>
@@ -515,7 +521,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Немного перемещайте палец, чтобы отсканировать его полностью."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Нажимайте и удерживайте значок каждый раз, когда он перемещается. Так отпечаток пальца будет более точным."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Коснитесь датчика и удерживайте его подушечкой пальца"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Осталось отсканировать края пальца"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Приложите левый край пальца"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Приложите правый край пальца"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Наклоните палец набок, нажмите на датчик и удерживайте. Затем наклоните палец на другой бок и повторите действия."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Так отпечаток пальца будет более точным"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Процент выполнения задачи по добавлению отпечатка пальца: <xliff:g id="PERCENTAGE">%d</xliff:g>."</string>
@@ -1377,7 +1384,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"Не учитывать уровень освещенности"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"Батарея разряжается быстрее"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"Яркость регулируется с учетом уровня освещенности. При необходимости ее можно временно изменить."</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет настраиваться автоматически в зависимости от окружающих условий и ваших действий. Вы сможете регулировать ее и вручную, и тогда ваши предпочтения будут сохраняться."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет настраиваться автоматически в зависимости от окружающих условий и ваших действий. Дополнительно ее можно регулировать вручную, чтобы система учитывала ваши предпочтения."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс белого на экране"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавный экран"</string>
@@ -1400,7 +1407,7 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Для работы функции \"Распознавание лиц\" нужен доступ к камере. Нажмите, чтобы настроить разрешения для сервисов персонализации устройств."</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Управление разрешениями"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Ночная подсветка"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"С ночной подсветкой экран приобретает желтоватый оттенок. Это снижает напряжение глаз при тусклом свете и может помочь вам быстрее заснуть."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"С ночной подсветкой экран приобретает желтоватый оттенок. Это снижает напряжение глаз и может помочь вам быстрее заснуть."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Расписание"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Нет"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"В выбранное время"</string>
@@ -1949,8 +1956,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Лицензии обновления системы через Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Условия использования"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Системная лицензия WebView"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Создатели обоев"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Спутниковые фотографии:\n© 2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Руководство пользователя"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Не удалось загрузить руководство пользователя."</string>
@@ -2105,8 +2111,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Включить"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистить хранилище"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Удалить обновления"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Разрешить доступ к настройкам"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Некоторые выбранные вами действия выполняются в этом приложении по умолчанию."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Это приложение может создавать виджеты и получать их данные."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значения по умолчанию не установлены."</string>
@@ -2141,9 +2146,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Внутр. накопитель"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Повторное вычисление размера..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Удалить данные приложения?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Данные этого приложения (включая файлы, базы данных, настройки и т. д.) будут удалены без возможности восстановления."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Данные приложения, включая файлы и настройки, будут навсегда удалены с этого устройства."</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ОК"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Отмена"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Удалить"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Приложение не найдено в списке установленных."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Не удалось очистить хранилище."</string>
@@ -2374,7 +2380,7 @@
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Настройки отображения текста"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Дизайн воздушного шара"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Борис"</string>
-    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброе утро!\n\nКак дела с дизайном? Он будет готов до того, как мы начнем разработку новых всплывающих окон?"</string>
+    <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброе утро!\n\nКак дела с дизайном? Он будет готов до того, как мы начнем разработку новых шаров?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Сбросить настройки"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Сбросить настройки текста и размера экрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Будут восстановлены исходные параметры текста и размера экрана, заданные на телефоне."</string>
@@ -3462,8 +3468,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Рабочий профиль не настроен"</string>
     <string name="user_admin" msgid="4024553191395768119">"Администратор"</string>
     <string name="user_you" msgid="3070562015202859996">"Вы (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"Невозможно добавить ещё пользователей. Удалите одного, чтобы добавить нового."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Только владелец может настроить устройство для других пользователей."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Только владелец может настроить устройство для других пользователей."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Пользователи с ограниченным доступом не могут добавлять аккаунты"</string>
@@ -4527,12 +4532,9 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> неиспользуемых приложений</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> неиспользуемого приложения</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"Настройки неиспользуемых приложений"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Приостановить работу в неактивный период"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Удалить разрешения и временные файлы, прекратить отправку уведомлений"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Все приложения"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установленные приложения"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Приложения с мгновенным запуском"</string>
@@ -5226,10 +5228,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Этим устройством управляет <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Подробнее"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Настройки с ограниченным доступом"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Приложению \"<xliff:g id="APP_NAME">%s</xliff:g>\" разрешен доступ к настройкам."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"В целях безопасности доступ к этой функции пока ограничен."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация о купленном в кредит устройстве"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитор может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь к кредитору."</string>
@@ -5726,6 +5726,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Показывать элементы управления внешними устройствами на заблокированном экране"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Управление с заблокированного устройства"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Вы можете управлять внешними устройствами с заблокированного телефона или планшета, установив нужное разрешение в приложении \"Управление устройствами\"."</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Чтобы использовать эту функцию, включите параметр \"Показывать виджеты управления устройством\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показывать вертикальные часы, если они доступны"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Вертикальные часы"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5743,10 +5744,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Бессрочное разрешение"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Разрешить экранный оверлей в настройках"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Разрешить приложениям, которые могут показываться поверх других, накладываться на экраны настроек"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Разрешить имитацию модема"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Разрешить этому устройству запускать сервис, имитирующий модем, для инструментального теста. Не включайте этот параметр, когда пользуетесь телефоном в обычном режиме."</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закрепить медиапроигрыватель"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Медиапроигрыватель остается открытым в Быстрых настройках, чтобы вы могли легко продолжить воспроизведение"</string>
@@ -5832,8 +5831,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Закрепление приложений"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Режим разработчика"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Использовать службу печати"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Разрешить добавлять несколько пользователей"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Использовать отладку по Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Изменение настроек графического драйвера"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Использование режима энергосбережения"</string>
@@ -5899,12 +5897,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"Модификаторы"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Действия (затраты на выполнение)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Действия (базовые затраты)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Бонусы за одно событие"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Бонусы за общую длительность события"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Максимальное число бонусов в день"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Максимальная активность"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Уведомление просмотрено"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Уведомление просмотрено &lt; 15 мин. назад"</string>
@@ -5935,20 +5930,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Посмотреть"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Выберите заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показывать дополнительную информацию"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Показывает время, дату, погоду, качество воздуха и сведения о трансляции на экране заставки"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Дополнительные настройки"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"Выберите заставку"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Выберите, что будет показано на экране, когда планшет подключен к док-станции. Устройство может потреблять больше энергии, если включена заставка."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Настроить"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Чтобы включить поддержку создания окон произвольной формы, требуется перезагрузка."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Чтобы принудительно включить режим рабочего стола на дополнительных экранах, требуется перезагрузка."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезагрузить сейчас"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезагрузить позже"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Пространственное звучание"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук с совместимых медиаустройств становится более выразительным."</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Отслеживание движений головы"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звук меняется, когда вы двигаете головой, и становится более естественным."</string>

@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"የመተግበሪያ ቋንቋዎች"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"ለእያንዳንዱ መተግበሪያ ቋንቋውን ያዘጋጁ"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"የመተግበሪያ ቋንቋ"</string>
+    <string name="warnings_title" msgid="613849105118598110">"መተግበሪያውን ያዘምኑ"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"ለቅርብ ጊዜዎቹ የሚገኙ ቋንቋዎች መተግበሪያውን ማዘመን ያስፈልግዎታል"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"አሁን አዘምን"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"የተጠቆሙ ቋንቋዎች"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ሁሉም ቋንቋዎች"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"የስርዓት ቋንቋ"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"የሥርዓት ነባሪ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"መተግበሪያው በነባሪ ወደ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> ይቀናበራል እንዲሁም ብዙ ቋንቋዎችን አይደግፍም።"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ለዚህ መተግበሪያ የቋንቋ መረጣ ከቅንብሮች አይገኝም።"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ለዚህ መተግበሪያ ከቅንብሮች ቋንቋ መምረጥ አይችሉም።"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">የተመረጡት ቋንቋዎች ይወገዱ?</item>
       <item quantity="other">የተመረጡት ቋንቋዎች ይወገዱ?</item>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"እርስዎ እና ልጅዎ የጣት አሻራቸውን ምስሎች እና ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መክፈቻን ማጥፋት ትችላላችሁ። የጣት አሻራ ምስሎች እና ሞዴሎች እስኪሰረዙ ድረስ በስልኩ ላይ ይቀመጣሉ።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"የእርስዎ ስልክ ለምሳሌ የሆነ ሰው በግድ ወደ እርስዎ ጣት ቢያስጠጋው እርስዎ ሳይፈለጉ ሊከፈት ይችላል።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"ልጅዎ ሳይፈልጉ ስልካቸው ሊከፈት ይችላል፣ ለምሳሌ የሆነ ሰው ስልኩን ወደ ጣታቸው ቢያስጠጋው።"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ለምርጥ ውጤቶች ለGoogle የተሰራ የተረጋገጠ የማያ ገጽ መከላከያን ይጠቀሙ። በሌሎች የማያ ገጽ መከላከያዎች አማካኝነት የጣት አሻራዎ ላይሰራ ይችላል።"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ለምርጥ ውጤቶች ለGoogle የተሰራ የተረጋገጠ የማያ ገጽ መከላከያን ይጠቀሙ። በሌሎች የማያ ገጽ መከላከያዎች አማካኝነት የልጅዎ የጣት አሻራ ላይሰራ ይችላል።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"በእያንዳንዱ ጊዜ የጣትዎን ቦታ በትንሹ ይለዋውጡ"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"አዶውን በጣት አሻራዎ መሃል ይሸፍኑ"</string>
@@ -507,7 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"የእርስዎን የጣት አሻራ የተለያዩ ክፍሎችን ለማከል ጣትዎትን ማንሳትና ማስቀመጥዎን ይቀጥሉ"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"የጣት አሻራ አዶው በተንቀሳቀሰ ቁጥር ነክተው ይያዙት። ይህ ተጨማሪ የጣት አሻራዎን ክፍል እንዲይዝ ያግዛል።"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"የጣትዎን ላይኛው ጫፍ በዳሳሹ ላይ ያስቀምጡት"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"በመጨረሻም፣ የጣትዎን ጠርዞች ይጠቀሙ"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"የጣትዎን የግራ ጠርዝ ያስቀምጡ"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"የጣትዎን የቀኝ ጠርዝ ያስቀምጡ"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"የጣት አሻራዎን ጎን በዳሳሹ ላይ አስቀምጠው ይያዙት፣ ከዚያ ወደ ሌላኛው ጎን ይቀይሩ"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ይህ ተጨማሪ የጣት አሻራዎን ክፍል እንዲይዝ ያግዛል"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"የጣት አሻራ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛን በመመዝገብ ላይ"</string>
@@ -1905,8 +1912,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"የGoogle Play ስርዓት ዝማኔ ፈቃዶች"</string>
     <string name="terms_title" msgid="2071742973672326073">"ውሎች እና ደንቦች"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"የስርዓት WebView ፍቃድ"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"የልጣፍ ምስጋናዎች"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"የሳተላይት ምስሎች አቅራቢዎች፦\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"መመሪያ"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"መመሪያውን መጫን ላይ አንድ ችግር ነበር።"</string>
@@ -2057,8 +2063,7 @@
     <string name="enable_text" msgid="8570798764647110430">"አንቃ"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"ማከማቻን አጽዳ"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"አዘምኖች አትጫን"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"የተገደቡ ቅንብሮችን ፍቀድ"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"እርስዎ የመረጧቸው አንዳንድ እንቅስቃሴዎች በነባሪነት በዚህ መተግበሪያ ውስጥ ይከፈታሉ።"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"ይህ መተግበሪያ ፍርግሞችን ፈጥሮ ውሂባቸውን እንዲደርስ ይፈቅዳል።"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"ምንም ነባሪዎች አልተዘጋጁም።"</string>
@@ -2093,9 +2098,10 @@
     <string name="internal_storage" msgid="999496851424448809">"የውስጥ ማከማቻ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"መጠን ድጋሚ በማስላት ላይ..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"መተግበሪያ ውሂብ ሰርዝ?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"የዚህ መተግበሪያ ውሂብ እስከመጨረሻው ይሰረዛል። ይህ ፋይሎችን፣ ቅንብሮችን፣ የውሂብ ጎታን እና ሌላ የመተግበሪያ ውሂብን ያካትታል።"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"ፋይሎችን እና ቅንብሮችን ጨምሮ የዚህ መተግበሪያ ውሂብ እስከመጨረሻው ከዚህ መሳሪያ ይሰረዛል"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"እሺ"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ይቅር"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"ሰርዝ"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"መተግበሪያው በተጫኑ መተግበሪያዎች ዝርዝር ውስጥ አልተገኘም።"</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ለመተግበሪያው ማከማቻን ማጽዳት አልተቻለም"</string>
@@ -2428,7 +2434,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"ተቃራኒ ቀለም"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"የቀለም ግልበጣን ተጠቀም"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"የተቃራኒ ቀለም አቋራጭ"</string>
-    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"የቀለም ግልበጣ ብርሃን ማያ ገጾችን ወደ ጨለማ ይቀይራል። እንዲሁም የጨለማ ማያ ገጾች ብርሃንን ያበራል።"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"የተቃራኒ ቀለም ብርሃን ማያ ገጾችን ወደ ጨለማ ይቀይራል። እንዲሁም የጨለማ ማያ ገጾች ብርሃንን ያበራል።"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;ልብ ይበሉ&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; ቀለሞች በሚዲያ እና በምስሎች ይለወጣሉ&lt;/li&gt; &lt;li&gt; ተቃራኒ ቀለም በሁሉም መተግበሪያዎች ላይ ይሰራል&lt;/li&gt; &lt;li&gt; ጥቁር ዳራ ለማሳየት፣ በምትኩ ጠቆር ያለ ገጽታን መጠቀም ይቻላል&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"በራስ-ሰር ጠቅ አድርግ (መቆያ ጊዜ)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"ስለራስ-ሰር ጠቅ ማድረግ (መቆያ ጊዜ)"</string>
@@ -3374,8 +3380,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"አልተዋቀረም - የስራ መገለጫ"</string>
     <string name="user_admin" msgid="4024553191395768119">"አስተዳዳሪ"</string>
     <string name="user_you" msgid="3070562015202859996">"እርስዎ (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"ተጨማሪ ተጠቃሚዎችን ማከል አይችሉም። አዲስ መለያ ለማከል ተጠቃሚ ያስወግዱ።"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"የጡባዊው ባለቤት ብቻ ነው ተጠቃሚዎችን ማስተዳደር የሚችለው።"</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"የስልኩ ባለቤት ብቻ ነው ተጠቃሚዎችን ማስተዳደር የሚችለው።"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"የተገደቡ መገለጫዎች መለያዎችን ማከል አይችሉም"</string>
@@ -4401,12 +4406,9 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> ጥቅም ላይ ያልዋሉ መተግበሪያዎች</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ጥቅም ላይ ያልዋሉ መተግበሪያዎች</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"ስራ ላይ ያልዋሉ የመተግበሪያ ቅንብሮች"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"የመተግበሪያ እንቅስቃሴ ስራ ላይ ካልዋለ ባለበት አቁም"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ፈቃዶችን አስወግድ፣ ጊዜያዊ ፋይሎችን ሰርዝ እና ማሳወቂያዎችን አቁም"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"ሁሉም መተግበሪያዎች"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"የተጫኑ መተግበሪያዎች"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ቅጽበታዊ መተግበሪያዎች"</string>
@@ -5062,10 +5064,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"ይህ መሣሪያ በ<xliff:g id="ORGANIZATION_NAME">%s</xliff:g> የሚተዳደር ነው።"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"የበለጠ መረዳት"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"የተገደበ ቅንብር"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"የተገደቡ ቅንብሮች ለ<xliff:g id="APP_NAME">%s</xliff:g> ተፈቅደዋል"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"ለእርስዎ ደህንነት ሲባል ይህ ቅንብር በአሁኑ ጊዜ አይገኝም።"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"የገንዘብ ድጋፍ የተደረገለት የመሣሪያ መረጃ"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"ክሬዲት አቅራቢዎ በዚህ መሣሪያ ላይ ቅንብሮችን ሊለውጥ እና ሶፍትዌር ሊጭን ይችላል።\n\nክፍያ ካልፈጸሙ መሣሪያዎ ይቆለፋል።\n\nየበለጠ ለመረዳት ክሬዲት አቅራቢዎን ያነጋግሩ።"</string>
@@ -5548,6 +5548,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"ከመቆለፊያ ማያ ገጽ ሆነው የውጫዊ መሣሪያዎች መቆጣጠሪያዎችን አሳይ"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"ከተቆለፈ መሣሪያ ሆነው ይቆጣጠሩ"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"በመሣሪያው መቆጣጠሪያዎች መተግበሪያ ከተፈቀደ የእርስዎን ስልክ ወይም ጡባዊ ሳይከፍቱ ውጫዊ መሣሪያዎችን ይቆጣጠሩ"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ለመጠቀም መጀመሪያ «የመሣሪያ መቆጣጠሪያዎችን አሳይ» የሚለውን ያብሩ"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"የሚገኝ ሲሆን ባለ ሁለት-መስመር ሰዓት አሳይ"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ባለ ሁለት-መስመር ሰዓት"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5565,10 +5566,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"ኪራይ መቼም የአገልግሎት ጊዜው አያበቃም።"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"በቅንብሮች ላይ የማያ ገጽ ተደራቢዎችን ይፍቀዱ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"የቅንብሮች ማያ ገጾችን ለመደራረብ በሌሎች መተግበሪያዎች ላይ የሚያሳዩ መተግበሪያዎችን ይፍቀዱ"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"የማስመሰያ ሞደምን ፍቀድ"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"ይህ መሣሪያ ለመሣሪያ ሙከራ የማስመሰያ ሞደም አገልግሎትን እንዲያሄድ ይፍቀዱለት። ስልኩን በመደበኛነት ሲጠቀሙ ይህንን አያንቁ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"ሚዲያ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"ሚዲያ ማጫወቻ ይሰኩ"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"መልሶ ማጫዎትን በፍጥነት ካቆሙበት ለመቀጠል ሚዲያ ማጫወቻን በፈጣን ቅንብሮች ውስጥ ክፍት ሆኖ ይቆያል"</string>
@@ -5654,8 +5653,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"መተግበሪያን መሰካትን ይጠቀሙ"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"የገንቢ አማራጮችን ይጠቀሙ"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"የህትመት አገልግሎትን ይጠቀሙ"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"በርካታ ተጠቃሚዎችን ይፍቀዱ"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ገመድ አልባ ማረምን ይጠቀሙ"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"የግራፊክስ ነጂ አማራጮችን ይጠቀሙ"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"የባትሪ ኃይል ቆጣቢን ይጠቀሙ"</string>
@@ -5721,12 +5719,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"ቀያሪዎች"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"እርምጃዎች (የሚያስወጣው ወጪ)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"እርምጃዎች (መሰረታዊ ዋጋ)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"ሽልማቶች በአንድ ክስተት"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"ሽልማቶች ለጠቅላላ ክስተት ቆይታ"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"በቀን ከፍተኛው ሽልማቶች"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"ከፍተኛ እንቅስቃሴ"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"የማሳወቂያ ታይቷል"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"ማሳወቂያ በ15 ደቂቃዎች ውስጥ ታይቷል"</string>
@@ -5757,20 +5752,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"ቅድመ ዕይታ"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"ማያ ገጽ ማቆያ ይምረጡ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"ተጨማሪ መረጃ አሳይ"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"የማያ ገጽ ማቆያ ላይ ሰዓት፣ ቀን፣ የአየር ሁኔታ፣ የአየር ጥራት እና የCast ዝርዝሮችን አሳይ"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"ተጨማሪ ቅንብሮች"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"የእርስዎን የማያ ገጽ ማቆያ ይምረጡ"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"ጡባዊዎ ሲተከል በማያ ገጽዎ ላይ የሚያዩትን ይምረጡ። የማያ ገጽ ማቆያ ስራ ላይ ሲውል መሣሪያዎ የበለጠ ኃይል ሊጠቀም ይችላል።"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"አብጅ"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"የነጻ ቅርጽ ድጋፍን ለማንቃት ዳግም ማስነሳት ያስፈልጋል።"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"የዴስክቶፕ ሁነታን በሁለተኛ ደረጃ ማሳያዎች ላይ ለማስገደድ ዳግም ማስነሳት ያስፈልጋል።"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"ዳግም አስነሳ"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"በኋላ ዳግም አስነሳ"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"ከባቢያዊ ኦዲዮ"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"ከተኳኋኝ ሚዲያ የሚመጣው ድምጽ ይበልጥ መሳጭ ይሆናል"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"የጭንቅላት ክትትል"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"ጭንቅላትዎን ወደ ይበልጥ ተፈጥሯዊ ድምጽ ሲያንቀሳቅሱት ኦዲዮው ይቀየራል"</string>
