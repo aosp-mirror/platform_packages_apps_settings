@@ -32,14 +32,8 @@ import android.hardware.SensorPrivacyManager;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.ClickableSpan;
 import android.util.Log;
-import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -95,7 +89,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
     RestrictedLockUtils.EnforcedAdmin mAdmin;
 
     @VisibleForTesting
-    Preference mDisableOptionsPreference;
+    FooterPreference mDisableOptionsPreference;
 
     @VisibleForTesting
     AdaptiveSleepPermissionPreferenceController mAdaptiveSleepPermissionController;
@@ -228,26 +222,13 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment implements
                         R.string.admin_disabled_other_options));
         final String textMoreDetails = getResources().getString(R.string.admin_more_details);
 
-        final SpannableString spannableString = new SpannableString(
-                textDisabledByAdmin + System.lineSeparator()
-                        + System.lineSeparator() + textMoreDetails);
-        final ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
-            }
-        };
-
-        if (textDisabledByAdmin != null && textMoreDetails != null) {
-            spannableString.setSpan(clickableSpan, textDisabledByAdmin.length() + 1,
-                    textDisabledByAdmin.length() + textMoreDetails.length() + 2,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
         mDisableOptionsPreference = new FooterPreference(getContext());
-        mDisableOptionsPreference.setLayoutResource(R.layout.preference_footer);
-        mDisableOptionsPreference.setTitle(spannableString);
+        mDisableOptionsPreference.setTitle(textDisabledByAdmin);
         mDisableOptionsPreference.setSelectable(false);
+        mDisableOptionsPreference.setLearnMoreText(textMoreDetails);
+        mDisableOptionsPreference.setLearnMoreAction(v -> {
+            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(), mAdmin);
+        });
         mDisableOptionsPreference.setIcon(R.drawable.ic_info_outline_24dp);
 
         // The 'disabled by admin' preference should always be at the end of the setting page.

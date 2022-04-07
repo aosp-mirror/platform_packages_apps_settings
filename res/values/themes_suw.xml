@@ -224,28 +224,10 @@
         <item name="android:fontFamily">@*android:string/config_bodyFontFamily</item>
     </style>
 
-    <!-- This theme was applied to Settings pages which are running under SUW with DynamicColor. -->
-    <style name="SudDynamicColorThemeSettings.SetupWizard" parent="SudDynamicColorThemeGlifV3.Light">
-        <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
-        <item name="android:listPreferredItemPaddingStart">24dp</item>
-        <item name="android:listPreferredItemPaddingEnd">16dp</item>
-        <item name="preferenceTheme">@style/PreferenceTheme.SettingsLib</item>
-        <item name="android:switchStyle">@style/Switch.SettingsLib</item>
-        <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
-    </style>
-
-    <!-- This theme was applied to Settings pages which are running under SUW with DynamicColor. -->
-    <style name="SudDynamicColorThemeSettings.SetupWizard.DayNight" parent="SudDynamicColorThemeGlifV3.DayNight">
-        <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
-        <item name="android:listPreferredItemPaddingStart">24dp</item>
-        <item name="android:listPreferredItemPaddingEnd">16dp</item>
-        <item name="preferenceTheme">@style/PreferenceTheme.SettingsLib</item>
-        <item name="android:switchStyle">@style/Switch.SettingsLib</item>
-        <item name="preferenceFragmentCompatStyle">@style/SetupWizardPreferenceFragmentStyle</item>
-    </style>
-
     <!-- This theme was applied to Settings pages which are running under SUW. -->
     <style name="SettingsPreferenceTheme.SetupWizard" parent="@style/PreferenceTheme.SettingsLib">
+        <item name="android:clipToPadding">true</item>
+        <item name="android:clipChildren">true</item>
         <item name="android:textAppearanceListItem">@style/TextAppearance.PreferenceTitle.SettingsLib</item>
         <item name="android:listPreferredItemPaddingStart">@dimen/settingslib_listPreferredItemPaddingStart</item>
         <item name="android:listPreferredItemPaddingEnd">16dp</item>

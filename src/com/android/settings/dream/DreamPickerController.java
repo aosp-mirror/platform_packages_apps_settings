@@ -141,10 +141,9 @@ public class DreamPickerController extends BasePreferenceController implements
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            mMetricsFeatureProvider.action(
-                    mContext,
-                    SettingsEnums.ACTION_DREAM_SELECT_TYPE,
-                    mDreamInfo.componentName.flattenToString());
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.PAGE_UNKNOWN,
+                    mDreamInfo.componentName.flattenToString(), 1);
         }
 
         @Override
