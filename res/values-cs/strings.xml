@@ -221,11 +221,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Jazyky aplikací"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Nastavení jazyka pro jednotlivé aplikace"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Jazyk aplikace"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Aktualizujte aplikaci"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Po aktualizaci aplikace budou k dispozici všechny podporované jazyky"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Aktualizovat"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Navrhované jazyky"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Všechny jazyky"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Jazyk systému"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Výchozí nastavení – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Aplikace je ve výchozím nastavení nastavená na jazyk <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> a nepodporuje více jazyků."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"V Nastavení nelze vybrat jazyk pro tuto aplikaci."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"V Nastavení nelze vybrat jazyk pro tuto aplikaci."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="few">Odstranit vybrané jazyky?</item>
       <item quantity="many">Odstranit vybrané jazyky?</item>
@@ -344,7 +348,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"Stav zabezpečení"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Zámek obrazovky, Najdi moje zařízení, zabezpečení aplikací"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Zabezpečení a ochrana soukromí"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Oprávnění, zámek obrazovky, zabezpečení aplikací"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Obličej přidán"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Klepnutím nastavíte obličej"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Odemknutí obličejem"</string>
@@ -462,6 +467,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"V Nastavení můžete vy nebo vaše dítě snímky a model otisku prstu kdykoli smazat, případně odemknutí otiskem prstu vypnout. Snímky a modely otisků prstů zůstanou v telefonu uloženy, dokud nebudou smazány."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Váš telefon lze odemknout, i když to nezamýšlíte, třeba když ho někdo podrží u vašeho prstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefon dítěte lze odemknout, i když to nezamýšlí, třeba když ho někdo podrží u prstu dítěte."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu fungovat."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu dítěte fungovat."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Pokaždé lehce změňte polohu prstu"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Zakryjte ikonu středem prstu"</string>
@@ -515,7 +522,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Prst opakovaně zvedejte a pokládejte, aby se zaznamenaly různé části otisku."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Podržte snímač pokaždé, když se ikona otisku prstu pohne. Bude tak zachycena větší část otisku prstu."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Umístěte špičku prstu na snímač"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Nakonec umístěte okraje prstu"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Přiložte levou stranu prstu"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Přiložte pravou stranu prstu"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bude tak zachycena větší část otisku prstu"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
@@ -587,10 +595,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Možnost zámku obrazovky je zakázána. Další informace vám sdělí administrátor vaší organizace. "<annotation id="admin_details">"Další podrobnosti"</annotation>\n\n"Otisk prstu můžete i nadále používat k autorizaci nákupů a přístupu k aplikacím. "<annotation id="url">"Další informace"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Prst opakovaně zvedejte a přikládejte na senzor."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Snímač otisků prstů nelze použít. Navštivte servis"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Rozšířená nastavení"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Zámek pracovního profilu, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock a další"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Rozšířená nastavení"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maximální počet otisků prstů, které lze přidat: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Přidali jste maximální počet otisků prstů"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Další otisky prstů nelze přidat"</string>
@@ -2139,9 +2151,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Interní úložiště"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Přepočítávání velikosti..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Smazat data aplikace?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Data této aplikace budou trvale smazána. To zahrnuje soubory, nastavení, databáze a další data aplikace."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Data této aplikace (včetně souborů a nastavení) budou ze zařízení trvale smazána"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Zrušit"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Smazat"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Aplikaci se nepodařilo najít na seznamu nainstalovaných aplikací."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Data aplikace v úložišti se nepodařilo vymazat."</string>
@@ -2499,8 +2512,8 @@
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Oznámení a budíky"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Interaktivní odezva"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Použít vibrace a hmatovou odezvu"</string>
-    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrace budíku"</string>
-    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrace médií"</string>
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrace u budíku"</string>
+    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrace u médií"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibrace při vyzvánění"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibrace při oznámení"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Odezva při klepnutí"</string>
@@ -3773,7 +3786,7 @@
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitost médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitost odesílání"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitost hovoru"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíku"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíků"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitost vyzvánění a oznámení"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitost oznámení"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Vyzvánění telefonu"</string>
@@ -4275,12 +4288,12 @@
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"Žádné"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{Žádná}=1{1 konverzace}few{# konverzace}many{# konverzace}other{# konverzací}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"Kdo smí vyrušovat"</string>
-    <string name="zen_mode_people_footer" msgid="7710707353004137431">"I když vás nebudou moci informovat aplikace na odesílání zpráv nebo volání, vybraní lidé vás přesto budou moci prostřednictvím těchto aplikací kontaktovat"</string>
+    <string name="zen_mode_people_footer" msgid="7710707353004137431">"I když vás nebudou moci informovat aplikace na odesílání zpráv nebo volání, vybraní lidé vás přesto budou moci prostřednictvím těchto aplikací kontaktovat."</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"Volání"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"Volání"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hovory"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Hovory, které smí vyrušovat"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pokud chcete, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pokud chcete, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastaveno na vyzvánění."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí hovory. Nastavení můžete upravit, aby se vám dovolali kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakty označené hvězdičkou"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nikdo}=1{{contact_1}}=2{{contact_1} a {contact_2}}=3{{contact_1}, {contact_2} a {contact_3}}few{{contact_1}, {contact_2} a # další}many{{contact_1}, {contact_2} a # dalšího}other{{contact_1}, {contact_2} a # dalších}}"</string>
@@ -4289,7 +4302,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"zprávy"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Zprávy"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Zprávy, které smí vyrušovat"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Pokud chcete, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Pokud chcete, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastaveno na vyzvánění."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí zprávy. Nastavení můžete upravit, aby se s vámi mohli spojit kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Zprávu vám může poslat kdokoli"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Může se vám dovolat kdokoli"</string>
@@ -4525,10 +4538,8 @@
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> nepoužívaná aplikace</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Nastavení nepoužívaných aplikací"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Pozastavit aktivitu aplikace, pokud není používána"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Odebrat oprávnění, smazat dočasné soubory a zastavit oznámení"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Všechny aplikace"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Nainstalované aplikace"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Okamžité aplikace"</string>
@@ -5720,8 +5731,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Zobrazit ovládací prvky externích zařízení na obrazovce uzamčení"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Ovládání z uzamknutého zařízení"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Pokud to aplikace k ovládání zařízení umožňuje, ovládat externí zařízení bez odemykání telefonu nebo tabletu"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Nejprve zapněte zobrazení ovládání zařízení"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Zobrazovat hodiny na dva řádky, je-li to možné"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Hodiny na dva řádky"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

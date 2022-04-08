@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ઍપની ભાષાઓ"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"દરેક ઍપ માટે કોઈ ભાષા સેટ કરો"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"ઍપની ભાષા"</string>
+    <string name="warnings_title" msgid="613849105118598110">"ઍપ અપડેટ કરો"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"તમારે નવીનતમ ઉપલબ્ધ ભાષાઓ માટે ઍપ અપડેટ કરવી જરૂરી છે"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"હમણાં અપડેટ કરો"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"સૂચવેલી ભાષાઓ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"બધી ભાષાઓ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"સિસ્ટમની ભાષા"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"સિસ્ટમ ડિફૉલ્ટ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"ઍપને ડિફૉલ્ટ તરીકે <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> પર સેટ કરવામાં આવી છે અને તે એક કરતાં વધારે ભાષાઓને સપોર્ટ કરતી નથી."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"આ ઍપ માટે સેટિંગમાંથી ભાષા પસંદ કરી શકાતી નથી."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"તમે આ ઍપ માટે સેટિંગમાં જઈને ભાષા પસંદ કરી શકશો નહીં."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
       <item quantity="other">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"સુરક્ષાની સ્થિતિ"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"સ્ક્રીન લૉક, Find My Device, ઍપ સુરક્ષા"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"સુરક્ષા અને પ્રાઇવસી"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"પરવાનગીઓ, સ્ક્રીન લૉક, ઍપની સુરક્ષા"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ચહેરો ઉમેર્યો"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ફેસ અનલૉક સુવિધાનું સેટઅપ કરવા ટૅપ કરો"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ફેસ અનલૉક"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"સેટિંગમાં જઈને તમે અને તમારું બાળક કોઈપણ સમયે તેમની ફિંગરપ્રિન્ટની છબીઓ અને મૉડલ ડિલીટ કરી શકશો અથવા ફિંગરપ્રિન્ટ અનલૉક સુવિધા બંધ કરી શકશો. જ્યાં સુધી ફિંગરપ્રિન્ટની છબીઓ અને મૉડલને ડિલીટ ન કરવામાં આવે, ત્યાં સુધી તેને ફોન પર સ્ટોર કરવામાં આવે છે."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"તમારે તમારો ફોન અનલૉક કરવો ન હોય, ત્યારે પણ તે અનલૉક થઈ શકે છે, જેમ કે જો કોઈ વ્યક્તિ તેને તમારી આંગળી સામે પકડી રાખે તો."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"તમારા બાળકે તેમનો ફોન અનલૉક કરવો ન હોય, ત્યારે પણ તે અનલૉક થઈ શકે છે, જેમ કે જો કોઈ વ્યક્તિ તેને તેમની આંગળી સામે પકડી રાખે તો."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"શ્રેષ્ઠ પરિણામો માટે, \'Google માટે બનાવેલા\' પ્રમાણિત સ્ક્રીનગાર્ડનો ઉપયોગ કરો. અન્ય સ્ક્રીનગાર્ડમાં, તમારી ફિંગરપ્રિન્ટ કદાચ યોગ્ય રીતે કામ કરશે નહીં."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"શ્રેષ્ઠ પરિણામો માટે, \'Google માટે બનાવેલા\' પ્રમાણિત સ્ક્રીનગાર્ડનો ઉપયોગ કરો. અન્ય સ્ક્રીનગાર્ડમાં, તમારા બાળકની ફિંગરપ્રિન્ટ કદાચ યોગ્ય રીતે કામ કરશે નહીં."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"દરેક વખતે હળવેથી તમારી આંગળીની સ્થિતિ બદલો"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"આઇકનને તમારી ફિંગરપ્રિન્ટના મધ્ય ભાગ વડે ઢાંકી દો"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"તમારી ફિંગરપ્રિન્ટના વિવિધ ભાગ ઉમેરવા માટે તમારી આંગળી ઉપાડતા રહો"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"જ્યારે પણ ફિંગરપ્રિન્ટ આઇકન ખસે ત્યારે દરેક વખતે ટચ કરીને થોડીવાર દબાવી રાખો. આમ કરવાથી, તમારી ફિંગરપ્રિન્ટને બહેતર રીતે કૅપ્ચર કરવામાં સહાય મળે છે."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"તમારી આંગળીની ટોચને સેન્સર પર મૂકો"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"છેલ્લે, તમારી આંગળીની કિનારીઓનો ઉપયોગ કરો"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"તમારી આંગળીની ડાબી કિનારી સેન્સર પર રાખો"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"તમારી આંગળીની જમણી કિનારી સેન્સર પર રાખો"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"તમારી આંગળીને સેન્સર પર મૂકો અને દબાવી રાખો, પછી આંગળીના બીજા ભાગોને સેન્સર પર મૂકો"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"આમ કરવાથી, તમારી ફિંગરપ્રિન્ટને બહેતર રીતે કૅપ્ચર કરવામાં સહાય મળે છે"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ફિંગરપ્રિન્ટની નોંધણી કરવાની પ્રક્રિયા <xliff:g id="PERCENTAGE">%d</xliff:g> ટકા પૂર્ણ થઈ છે"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" સ્ક્રીન લૉક વિકલ્પ અક્ષમ કરેલ છે. વધુ જાણવા માટે, તમારી સંસ્થાના વ્યવસ્થાપકનો સંપર્ક કરો. "<annotation id="admin_details">"વધુ વિગતો"</annotation>\n\n"તમે ખરીદીઓ અને ઍપ્લિકેશનની ઍક્સેસ અધિકૃત કરવા માટે હજુ પણ તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો. "<annotation id="url">"વધુ જાણો"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"આંગળીને ઉંચકો, પછી ફરીથી સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ફિંગરપ્રિન્ટ સેન્સરનો ઉપયોગ કરી શકાતો નથી. રિપેર કરવાની સેવા આપતા પ્રદાતાની મુલાકાત લો"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"વિગતવાર સેટિંગ"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"ઑફિસની પ્રોફાઇલનું લૉક, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock અને બીજું ઘણું બધું"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"વિગતવાર સેટિંગ"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"તમે <xliff:g id="COUNT">%d</xliff:g> જેટલી ફિંગરપ્રિન્ટ્સ ઉમેરી શકો છો"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"તમે મહત્તમ ફિંગરપ્રિન્ટ્સ ઉમેર્યા છે"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"વધુ ફિંગરપ્રિન્ટ્સ ઉમેરી શકતાં નથી"</string>
@@ -1442,7 +1454,7 @@
     <string name="doze_always_on_title" msgid="7326245192352868477">"સમય અને માહિતી હંમેશાં બતાવો"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"વધારેલો બૅટરી વપરાશ"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"બોલ્ડ ટેક્સ્ટ"</string>
-    <string name="title_font_size" msgid="570613010306330622">"ફોન્ટનું કદ"</string>
+    <string name="title_font_size" msgid="570613010306330622">"ફૉન્ટનું કદ"</string>
     <string name="short_summary_font_size" msgid="8444689613442419978">"ટેક્સ્ટને મોટી અથવા નાની કરો"</string>
     <string name="sim_lock_settings" msgid="4493069398250139205">"સિમ કાર્ડ લૉક સેટિંગ"</string>
     <string name="sim_lock_settings_category" msgid="4280307997492851625">"સિમ કાર્ડ લૉક"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play સિસ્ટમ અપડેટના લાઇસન્સ"</string>
     <string name="terms_title" msgid="2071742973672326073">"નિયમો અને શરતો"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"સિસ્ટમ વેબવ્યૂ લાઇસન્સ"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"વૉલપેપર ક્રેડિટ"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"ઉપગ્રહ છબી પ્રદાતાઓ:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"મેન્યુઅલ"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"મેન્યુઅલ લોડ કરવામાં સમસ્યા છે."</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"સક્ષમ કરો"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"સ્ટોરેજ સાફ કરો"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"અપડેટ્સ અનઇન્સ્ટોલ કરો"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"પ્રતિબંધિત સેટિંગને મંજૂરી આપો"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"તમે પસંદ કરેલી અમુક પ્રવૃતિઓ ડિફૉલ્ટ તરીકે આ ઍપમાં ખૂલે છે."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"તમે આ એપ્લિકેશનને વિજેટ્સ બનાવવા અને તેના ડેટાની અ‍ૅક્સેસ આપવાનું નક્કી કર્યુ છે"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"કોઈ ડિફૉલ્ટ સેટ કરેલા નથી."</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"આંતરિક સ્ટોરેજ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"કદની ફરીથી ગણના કરી રહ્યું છે…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"ઍપનો ડેટા ડિલીટ કરીએ?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"આ ઍપના ડેટાને કાયમી રીતે કાઢી નાખવામાં આવશે. આમાં ફાઇલો, સેટિંગ, ડેટાબેઝ અને અન્ય ઍપ ડેટા પણ શામેલ હોય છે."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"આ ડિવાઇસમાંથી ફાઇલો અને સેટિંગ સહિત આ ઍપનો ડેટા કાયમી રીતે ડિલીટ કરવામાં આવશે"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ઓકે"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"રદ કરો"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"ડિલીટ કરો"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"ઇન્સ્ટોલ કરેલ ઍપ્લિકેશન્સની સૂચિમાં ઍપ્લિકેશન મળી નહોતી."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ઍપ માટે સ્ટોરેજ સાફ ન કરી શક્યાં."</string>
@@ -2272,7 +2283,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"ઍક્સેસિબિલિટી સેટિંગ"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"ડિસ્પ્લે, ક્રિયાપ્રતિક્રિયા, ઑડિયો"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"વિઝન સેટિંગ"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"તમે તમારી જરૂરતોના મુજબ આ ડિવાઇસને કસ્ટમાઇઝ કરી શકો છો. સેટિંગમાં આ ઍક્સેસિબિલિટી સુવિધાઓ પછીથી બદલી શકાય છે."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"તમે તમારી જરૂરિયાતો મુજબ આ ડિવાઇસને કસ્ટમાઇઝ કરી શકો છો. સેટિંગમાં આ ઍક્સેસિબિલિટી સુવિધાઓ પછીથી બદલી શકાય છે."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ફૉન્ટનું કદ બદલો"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"સ્ક્રીન રીડર"</string>
     <string name="captions_category_title" msgid="574490148949400274">"કૅપ્શન"</string>
@@ -2322,7 +2333,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"શૉર્ટકટ વડે વિસ્તૃત કરો"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"શૉર્ટકટ વડે વિસ્તૃત કરો અને ત્રણ વાર ટૅપ કરો"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g> વિશે"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"કદ અને ટેક્સ્ટ બતાવો"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"ડિસ્પ્લેનું કદ અને ટેક્સ્ટ"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"ટેક્સ્ટને બતાવવાની રીત બદલો"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"વિષય: હોટ-એર બલૂનની ડિઝાઇન"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"મોકલનાર: બિલ"</string>
@@ -4181,11 +4192,11 @@
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"સ્ટાર આપેલા સંપર્કો"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{એકપણ નહીં}=1{{contact_1}}=2{{contact_1} અને {contact_2}}=3{{contact_1}, {contact_2} અને {contact_3}}one{{contact_1}, {contact_2} અને # અન્ય વ્યક્તિ}other{{contact_1}, {contact_2} અને # અન્ય લોકો}}"</string>
     <string name="zen_mode_starred_contacts_empty_name" msgid="2906404745550293688">"(નામ નથી)"</string>
-    <string name="zen_mode_messages" msgid="7315084748885170585">"સંદેશા"</string>
-    <string name="zen_mode_messages_list" msgid="5431014101342361882">"સંદેશા"</string>
-    <string name="zen_mode_messages_title" msgid="1777598523485334405">"સંદેશા"</string>
-    <string name="zen_mode_messages_header" msgid="253721635061451577">"વિક્ષેપ ઊભો કરી શકે તેવા સંદેશા"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"જે સંદેશાની મંજૂરી આપી હોય તેમાં સાઉન્ડ આવે તેની ખાતરી કરવા માટે, ડિવાઇસ રિંગ વાગે તેમ સેટ કરેલું હોવાનું ચેક કરો"</string>
+    <string name="zen_mode_messages" msgid="7315084748885170585">"મેસેજ"</string>
+    <string name="zen_mode_messages_list" msgid="5431014101342361882">"મેસેજ"</string>
+    <string name="zen_mode_messages_title" msgid="1777598523485334405">"મેસેજ"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"વિક્ષેપ ઊભો કરી શકે તેવા મેસેજ"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"જે મેસેજની મંજૂરી આપી હોય તેમાં સાઉન્ડ આવે તેની ખાતરી કરવા માટે, ડિવાઇસ રિંગ વાગે તેમ સેટ કરેલું હોવાનું ચેક કરો"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ માટે આવનારા સંદેશા બ્લૉક કરેલા છે. તમારા મિત્રો, પરિવારજનો અથવા અન્ય સંપર્કો તમારો સંપર્ક કરી શકે તે માટે તમે સેટિંગને અનુકૂળ કરી શકો છો."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"બધા સંદેશા તમને પ્રાપ્ત થઈ શકે છે"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"બધા કૉલ તમારા પર આવી શકે છે"</string>
@@ -4401,10 +4412,8 @@
       <item quantity="other">બિનવપરાયેલી <xliff:g id="COUNT_1">%d</xliff:g> ઍપ</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"ન વપરાયેલી ઍપના સેટિંગ"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"જો ઉપયોગ કરતા ન હો, તો ઍપ પ્રવૃત્તિ થોભાવો"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"પરવાનગીઓ કાઢી નાખો, હંગામી ફાઇલો ડિલીટ કરો અને નોટિફિકેશન બંધ કરો"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"બધી ઍપ"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"ઇન્સ્ટૉલ કરેલી ઍપ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"ઝટપટ ઍપ્લિકેશનો"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"આ ડિવાઇસનું સંચાલન <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> દ્વારા થાય છે."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"વધુ જાણો"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"પ્રતિબંધિત સેટિંગ"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> માટે પ્રતિબંધિત સેટિંગને મંજૂરી આપી"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"તમારી સુરક્ષા માટે, આ સેટિંગ હાલમાં ઉપલબ્ધ નથી."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"લોન પર લીધેલા ડિવાઇસની માહિતી"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"તમને ક્રેડિટ પર વેચાણ કરનારા આ ડિવાઇસ પર સેટિંગમાં ફેરફાર કરી શકશે અને સૉફ્ટવેર ઇન્સ્ટૉલ કરી શકશે.\n\nજો તમે કોઈ ચુકવણી ચૂકી જાઓ, તો તમારું ડિવાઇસ લૉક કરવામાં આવશે.\n\nવધુ જાણવા માટે, તમને ડિવાઇસ ક્રેડિટ પર વેચાણ કરનારાનો સંપર્ક કરો."</string>
@@ -5546,8 +5553,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"બાહ્ય ડિવાઇસ માટેના નિયંત્રણો લૉક સ્ક્રીનમાંથી બતાવો"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"લૉક કરેલા ડિવાઇસમાંથી નિયંત્રણ કરો"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"ડિવાઇસ નિયંત્રણોની ઍપ દ્વારા મંજૂર કરેલું હોય તો તમારો ફોન અથવા ટૅબ્લેટ અનલૉક કર્યા વિના જ બાહ્ય ડિવાઇસનું નિયંત્રણ કરો"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"ઉપયોગ કરવા માટે, પહેલા \"ડિવાઇસના નિયંત્રણો બતાવો\" ચાલુ કરો"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"ઉપલબ્ધ હોય ત્યારે ડબલ-લાઇન ઘડિયાળ બતાવો"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ડબલ-લાઇન ઘડિયાળ"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

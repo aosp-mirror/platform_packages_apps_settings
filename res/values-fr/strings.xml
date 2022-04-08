@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Langue des applis"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Définir la langue pour chaque appli"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Langue de l\'appli"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Mettre à jour l\'appli"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Vous devez mettre à jour l\'appli pour les nouvelles langues dispo"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Mettre à jour"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Langues suggérées"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Langue par défaut du système : <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"L\'appli est définie par défaut sur <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> et n\'accepte pas plusieurs langues."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection d\'une langue pour cette appli n\'est pas disponible depuis les paramètres."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Vous ne pouvez pas sélectionner de langue pour cette appli depuis les paramètres."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Supprimer la langue sélectionnée ?</item>
       <item quantity="other">Supprimer les langues sélectionnées ?</item>
@@ -338,7 +342,8 @@
     <string name="security_status_title" msgid="6958004275337618656">"État de la sécurité"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Verrouillage de l\'écran, Localiser mon appareil, sécurité des applications"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sécurité et confidentialité"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Autorisations, verrouillage de l\'écran, sécurité des applis"</string>
+    <!-- no translation found for safety_center_summary (3554867379951053869) -->
+    <skip />
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Visage ajouté"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Appuyer pour configurer un visage"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Déverrouillage facial"</string>
@@ -454,6 +459,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"À tout moment dans les paramètres, vous et votre enfant pouvez supprimer les images et le modèle de vos empreintes, ou désactiver le déverrouillage par empreinte digitale. Les images et le modèle de vos empreintes digitales sont stockés sur le téléphone jusqu\'à ce que vous les supprimiez."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Vous pouvez déverrouiller votre téléphone sans le vouloir, par exemple si quelqu\'un le porte à votre doigt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Le téléphone de votre enfant peut être déverrouillé involontairement, par exemple quand quelqu\'un pose le doigt dessus."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. Votre empreinte digitale peut ne pas être reconnue avec d\'autres protections d\'écran."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. L\'empreinte digitale de votre enfant peut ne pas être reconnue avec d\'autres protections d\'écran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Changez légèrement de position chaque fois"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Centrez votre doigt sur le lecteur"</string>
@@ -507,7 +514,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Continuez jusqu\'à ce que toutes les parties de votre empreinte soient lues"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Appuyez de manière prolongée chaque fois que l\'icône de l\'empreinte bouge. Cela permet de mieux capturer votre empreinte."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placez le bout de votre doigt sur le capteur"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Pour finir, faites rouler votre doigt de chaque côté"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Posez l\'extrémité gauche de votre doigt"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Posez l\'extrémité droite de votre doigt"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placez le côté de votre empreinte sur le capteur, maintenez-le, puis passez à l\'autre côté"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Cela permet de mieux capturer votre empreinte"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enregistrement de l\'empreinte digitale à <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
@@ -579,10 +587,14 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, contactez l\'administrateur de votre entreprise. "<annotation id="admin_details">"Plus d\'informations"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser des achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis reposez-le sur le lecteur"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible d\'utiliser le lecteur d\'empreinte digitale. Contactez un réparateur"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Paramètres avancés"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Verrouillage du profil professionnel, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock et autres"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Paramètres avancés"</string>
+    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
+    <skip />
+    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal autorisé d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter d\'autres empreintes digitales"</string>
@@ -1351,7 +1363,7 @@
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Vous devez autoriser l\'accès à l\'appareil photo pour utiliser Regard sur écran. Appuyez ici pour gérer les autorisations liées aux services de personnalisation de l\'appareil"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Gérer les autorisations"</string>
     <string name="adaptive_sleep_description" msgid="1835321775327187860">"Empêcher l\'écran de s\'éteindre pendant que vous le regardez"</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"La fonctionnalité Regard sur écran utilise la caméra frontale pour détecter si quelqu\'un regarde l\'écran. Elle fonctionne seulement sur l\'appareil et les images ne sont jamais enregistrées ni envoyées à Google."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"La fonctionnalité Regard sur écran utilise la caméra frontale pour détecter si quelqu\'un regarde l\'écran. Elle opère sur l\'appareil uniquement, et les images ne sont jamais enregistrées ni envoyées à Google."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"Activer Regard sur l\'écran"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Garde l\'écran allumé quand vous le regardez"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"L\'appareil photo est verrouillé"</string>
@@ -1905,8 +1917,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Licences des mises à jour du système Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Conditions d\'utilisation"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Licence WebView du système"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Crédits du fond d\'écran"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Fournisseurs d\'images satellite :\n© 2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Manuel"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Un problème est survenu lors du chargement du manuel."</string>
@@ -2057,8 +2068,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Vider l\'espace de stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller les mises à jour"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Autoriser les paramètres restreints"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette appli par défaut."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Aucun paramètre par défaut défini"</string>
@@ -2093,9 +2103,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Stockage interne"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Calcul de la taille..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Supprimer les données de l\'application ?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Les données de cette application (fichiers, paramètres, comptes, bases de données, etc.) seront définitivement supprimées."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Les données de cette appli, y compris les fichiers et paramètres, seront supprimées définitivement de cet appareil"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Annuler"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Supprimer"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"L\'application ne figure pas dans la liste des applications installées."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Impossible d\'effacer le stockage pour l\'application."</string>
@@ -2400,7 +2411,7 @@
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"Transparent"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"Opaque"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"Texte avec contraste élevé"</string>
-    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettez le texte en noir ou blanc pour maximiser le contraste avec l\'arrière-plan."</string>
+    <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Mettre le texte en noir ou blanc pour accentuer le contraste avec le fond."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
@@ -2446,15 +2457,15 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Plus court"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Plus long"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Délai du clic automatique"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrations et retour haptique"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibreur et retour haptique"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Contrôler la force des vibrations pour différentes utilisations"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Ce paramètre est désactivé, car l\'appareil est mode silencieux"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Appels"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifications et alarmes"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Retour haptique interactif"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utiliser les vibrations et le retour haptique"</string>
-    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibrations des alarmes"</string>
-    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibrations des contenus multimédias"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Utiliser le vibreur et le retour haptique"</string>
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Vibreur des alarmes"</string>
+    <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Vibreur des contenus multimédias"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Vibreur de la sonnerie"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Vibreur des notifications"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Retour tactile"</string>
@@ -3685,7 +3696,7 @@
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume des contenus multimédias"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume de diffusion"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volume des appels"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volume du réveil"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volume des alarmes"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume des sonneries/notifications"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume des notifications"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Sonnerie du téléphone"</string>
@@ -3702,10 +3713,10 @@
     <string name="spatial_audio_title" msgid="6591051622375191603">"Son spatial"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Sons du clavier"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Son du verrouillage de l\'écran"</string>
-    <string name="charging_sounds_title" msgid="5261683808537783668">"Sons et vibration de recharge"</string>
+    <string name="charging_sounds_title" msgid="5261683808537783668">"Sons et vibreur pour la recharge"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons de la station d\'accueil"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons des touches"</string>
-    <string name="vibrate_icon_title" msgid="1281100105045362530">"Toujours afficher l\'icône en mode vibreur"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Toujours afficher l\'icône si en mode vibreur"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Sons haut-parleurs sta. accueil"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Tout l\'audio"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Audio des contenus multimédias seulement"</string>
@@ -3723,7 +3734,7 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activé - <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> et <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recevez uniquement les notifications des personnes et applications importantes"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ne recevoir des notifications que des personnes et applications importantes"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Limiter les interruptions"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Activer le mode Ne pas déranger"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Les alarmes et les sons des contenus multimédias peuvent interrompre le mode Ne pas déranger"</string>
@@ -4401,10 +4412,8 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> applis inutilisées</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Paramètres d\'appli inutilisés"</string>
-    <!-- no translation found for unused_apps_switch (7595419855882245772) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (2171098908014596802) -->
-    <skip />
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Suspendre activité appli si inutilisée"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Retirer les autorisations, supprimer les fichiers temporaires et arrêter les notifications"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Toutes les applis"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Applications installées"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Applis instantanées"</string>
@@ -5060,10 +5069,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Cet appareil est géré par <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"En savoir plus"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Paramètre restreint"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Paramètres restreints autorisés pour <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Pour votre sécurité, ce paramètre est actuellement indisponible."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Infos sur l\'appareil financé"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Votre société de crédit peut modifier les paramètres et installer le logiciel sur cet appareil.\n\nSi vous n\'effectuez pas un paiement, votre appareil sera verrouillé.\n\nPour en savoir plus, contactez la société de crédit."</string>
@@ -5545,9 +5552,8 @@
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Afficher les commandes de contrôle des appareils"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Afficher les commandes pour les appareils externes depuis l\'écran de verrouillage"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Contrôler depuis un appareil verrouillé"</string>
-    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Contrôlez des appareils externes sans déverrouiller votre téléphone ou tablette (si autorisé par l\'appli de commandes de contrôle des appareils)"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Contrôler des appareils externes sans déverrouiller votre téléphone ou tablette (si autorisé par l\'appli de commandes de contrôle des appareils)"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Pour les utiliser, activez tout d\'abord \"Afficher les commandes de contrôle des appareils\""</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Afficher l\'horloge sur deux lignes lorsqu\'elle est disponible"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Horloge sur deux lignes"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5605,7 +5611,7 @@
     <string name="networks_available" msgid="3299512933684383474">"Réseaux disponibles"</string>
     <string name="to_switch_networks_disconnect_ethernet" msgid="6615374552827587197">"Pour changer de réseau, déconnectez l\'Ethernet"</string>
     <string name="wifi_is_off" msgid="8308136482502734453">"Wi-Fi désactivé"</string>
-    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Appuyez sur un réseau pour vous connecter"</string>
+    <string name="tap_a_network_to_connect" msgid="8044777400224037875">"Appuyez sur un réseau pour vous y connecter"</string>
     <string name="carrier_wifi_offload_title" msgid="7263365988016247722">"Connexions W+"</string>
     <string name="carrier_wifi_offload_summary" msgid="2980563718888371142">"Autoriser Google Fi à utiliser les réseaux W+ pour améliorer la vitesse et la couverture"</string>
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Réseau W+"</string>
