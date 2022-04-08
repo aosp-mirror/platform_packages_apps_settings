@@ -221,11 +221,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"השפות של האפליקציות"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"הגדרת השפה של כל אפליקציה"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"שפת האפליקציה"</string>
+    <string name="warnings_title" msgid="613849105118598110">"לעדכון האפליקציה"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"צריך להתקין באפליקציה את העדכון עם השפות החדשות שנוספו"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"לעדכון"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"השפות המוצעות"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"כל השפות"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"שפת המערכת"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"ברירת המחדל של המערכת – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"שפת האפליקציה מוגדרת כ<xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> כברירת מחדל, ובאפליקציה אין תמיכה בריבוי שפות."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"בחירות השפה לאפליקציה הזו לא זמינה בהגדרות."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"אי אפשר לבחור שפה לאפליקציה הזו בהגדרות."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="two">להסיר את השפות שנבחרו?</item>
       <item quantity="many">להסיר את השפות שנבחרו?</item>
@@ -462,6 +466,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"האפשרות למחוק את התמונות והתבנית של טביעת האצבע, או להשבית את הפיצ\'ר \'ביטול הנעילה בטביעת אצבע\', זמינה לך ולילד או לילדה שלך בכל שלב בהגדרות. התמונות והתבניות של טביעת האצבע נשמרות בטלפון עד שהן נמחקות."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"נעילת הטלפון עלולה להתבטל בלי כוונה, למשל כשמישהו מחזיק אותו בצמוד לאצבע שלך."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"נעילת הטלפון של הילד או הילדה עשויה להתבטל ללא כוונה, למשל במקרה שמישהו יצמיד את הטלפון לאצבע שלהם."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏לקבלת התוצאות הטובות ביותר, כדאי להשתמש במגן מסך בעל אישור Made for Google. טביעת האצבע שלך עלולה לא לעבוד עם מגני מסך אחרים."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏לקבלת התוצאות הטובות ביותר, כדאי להשתמש במגן מסך בעל אישור Made for Google. טביעת האצבע של הילד או הילדה עלולה לא לעבוד עם מגני מסך אחרים."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"יש לשנות מעט את תנוחת האצבע בכל פעם"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"האצבע צריכה להיות מונחת כך שמרכז טביעת האצבע יכסה את הסמל"</string>
@@ -515,7 +521,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך יתועד חלק גדול יותר מהאצבע."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"יש לסובב את קצה האצבע"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"יש להניח את הקצה השמאלי של האצבע"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"יש להניח את הקצה הימני של האצבע"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
     <!-- String.format failed for translation -->
@@ -1951,8 +1958,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"‏רישיונות לעדכון מערכת של Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"תנאים והגבלות"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"‏רישיון WebView במערכת"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"קרדיטים של טפטים"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"‏ספקים של צילומי לוויין:\n‎©2014 CNES / Astrium‏, DigitalGlobe‏, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"ידני"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"יש בעיה בטעינת המדריך."</string>
@@ -2107,8 +2113,7 @@
     <string name="enable_text" msgid="8570798764647110430">"הפעלה"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"מחיקת כל הנתונים מהאחסון"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"להסרת התקנה של עדכונים"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"הרשאה להגדרות מוגבלות"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"פעילויות מסוימות שבחרת נפתחות באפליקציה הזו כברירת מחדל."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"בחרת לאפשר לאפליקציה ליצור ווידג\'טים ולגשת לנתונים שלהם."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"לא הוגדרו ברירות מחדל."</string>
@@ -2143,9 +2148,10 @@
     <string name="internal_storage" msgid="999496851424448809">"אחסון פנימי"</string>
     <string name="recompute_size" msgid="1098091228370999128">"הגודל מחושב מחדש..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"למחוק את נתוני האפליקציה?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"נתוני האפליקציה יימחקו באופן סופי. לרבות קבצים, הגדרות, מסדי נתונים ונתונים אחרים מהאפליקציה."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"הנתונים של האפליקציה הזו, כולל הקבצים וההגדרות, יימחקו מהמכשיר באופן סופי"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"אישור"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"ביטול"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"מחיקה"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"האפליקציה לא נמצאת ברשימת האפליקציות המותקנות."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"לא ניתן לפנות שטח אחסון לאפליקציה."</string>
@@ -2502,11 +2508,11 @@
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"שיחות"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"התראות"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"משוב פיזי אינטראקטיבי"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"שימוש ברטט ובמגע פיזי"</string>
-    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"רטט של התראה"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"שימוש ברטט ובמשוב פיזי"</string>
+    <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"רטט של שעון מעורר"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"רטט של פריט מדיה"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט ההתראות"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט של התראה"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"שימוש באפליקציה <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"פתיחה של <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3464,8 +3470,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"לא מוגדר – פרופיל עבודה"</string>
     <string name="user_admin" msgid="4024553191395768119">"מנהל מערכת"</string>
     <string name="user_you" msgid="3070562015202859996">"את/ה (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"לא ניתן להוסיף עוד משתמשים. צריך להסיר משתמש כדי להוסיף משתמש חדש."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"רק הבעלים של הטאבלט יכול לנהל משתמשים."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"רק הבעלים של הטלפון יכול לנהל משתמשים."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"פרופילים מוגבלים לא יכולים להוסיף חשבונות"</string>
@@ -3871,7 +3876,7 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"אפשרויות אחרות"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"הוספה"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"הפעלה"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"הפעלה עכשיו"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"הפעלה"</string>
     <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"כיבוי עכשיו"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"המצב \'נא לא להפריע\' מופעל עד <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"המצב \'נא לא להפריע\' ימשיך לפעול עד שמכבים אותו"</string>
@@ -3888,7 +3893,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{שעה}two{שעתיים}many{# שעות}other{# שעות}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{דקה אחת}two{# דקות}many{# דקות}other{# דקות}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{מצב כבוי}=1{מצב כבוי. ניתן להפעיל לוח זמנים אחד באופן אוטומטי}two{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}many{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}other{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע לתכונה \'נא לא להפריע\'"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע כשהמכשיר במצב \'נא לא להפריע\'"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"אנשים"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
@@ -4325,7 +4330,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"תזכורות"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"אירועים ביומן"</string>
-    <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים צפויים ביומן"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים קרובים ביומן"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"אירועים"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"אירועים"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
@@ -4529,12 +4534,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> אפליקציות שמזמן לא השתמשת בהן</item>
       <item quantity="one">אפליקציה אחת (<xliff:g id="COUNT_0">%d</xliff:g>) שמזמן לא השתמשת בה</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"הגדרות של אפליקציות שמזמן לא השתמשת בהן"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"השהיית הפעילות באפליקציה אם אין בה שימוש"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"ההרשאות של האפליקציה יוסרו, הקבצים הזמניים יימחקו ותופסק קבלת ההתראות ממנה"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"כל האפליקציות"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"אפליקציות מותקנות"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"אפליקציות ללא התקנה"</string>
@@ -5228,10 +5230,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"מכשיר זה מנוהל על ידי <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"מידע נוסף"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"הגדרה מוגבלת"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"האפליקציה <xliff:g id="APP_NAME">%s</xliff:g> קיבלה הרשאה להגדרות מוגבלות"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"ההגדרה הזו לא זמינה כרגע לצורך שמירה על האבטחה שלך."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"פרטי מכשיר ממומן"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"החברה שמוכרת מכשירים באשראי יכולה לשנות הגדרות ולהתקין תוכנות במכשיר הזה.\n\nאם תשלום כלשהו לא ישולם, המכשיר יינעל.\n\nלקבלת מידע נוסף אפשר לפנות לחברה."</string>
@@ -5728,6 +5728,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"הצגת פקדים למכשירים חיצוניים ממסך הנעילה"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"שליטה ממכשיר נעול"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"אפשר לשלוט במכשירים חיצוניים בלי לבטל את נעילת הטלפון או הטאבלט, אם ניתנה הרשאה באפליקציית פקדי המכשירים"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"כדי להשתמש באפשרות הזו, קודם צריך להפעיל את \'הצגת פקדי המכשירים\'"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"הצגת השעון עם שתי השורות כשאפשר"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"שעון עם שתי שורות"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5745,10 +5746,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"חכירה ללא תפוגה."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"אפשרות של שכבות-על במסכי \'הגדרות\'"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"אפליקציות שיכולות להופיע מעל אפליקציות אחרות יוכלו ליצור שכבות-על במסכי ההגדרות"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"הרשאה לשימוש במודם מדומה"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"הרשאה להפעלת שירות של מודם מדומה במכשיר הזה לצורך בדיקת אינסטרומנטציה. אין להעניק את ההרשאה הזו במהלך שימוש רגיל בטלפון"</string>
     <string name="media_controls_title" msgid="403271085636252597">"מדיה"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"הצמדה של נגן המדיה"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"לצורך המשך מהיר של ההפעלה, נגן המדיה נשאר פתוח בהגדרות המהירות"</string>
@@ -5834,11 +5833,10 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"שימוש בהצמדת אפליקציה"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"שימוש באפשרויות למפתחים"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"שימוש בשירות הדפסה"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"הרשאה למשתמשים מרובים"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ניפוי באגים אלחוטי"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"שימוש בהעדפות של מנהל ההתקן לגרפיקה"</string>
-    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"שימוש במצב \'חיסכון בסוללה\'"</string>
+    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"מצב \'חיסכון בסוללה\'"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"כיבוי"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"הפעלה"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"שימוש בתאורת לילה"</string>
@@ -5901,12 +5899,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"גורמי שינוי"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"פעולות (עלות ייצור)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"פעולות (מחיר בסיסי)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"תגמולים לאירוע יחיד"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"תגמולים לכל משך האירוע"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"מגבלת תגמולים יומית"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"הפעילות המובילה"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"התראה שנראתה"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"התראה שנראתה בתוך 15 דקות"</string>
@@ -5937,26 +5932,19 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"תצוגה מקדימה"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"בחירה של שומר מסך"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"הצגת מידע נוסף"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"‏הצגת השעה, התאריך, מזג האוויר, איכות האוויר ופרטי ההעברה (cast) בשומר המסך"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"הגדרות נוספות"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"בחירת שומר המסך"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"אפשר לבחור מה יוצג במסך כשהטאבלט בעגינה. יכול להיות שהמכשיר ינצל יותר אנרגיה בזמן השימוש בשומר מסך."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"התאמה אישית"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"צריך להפעיל מחדש כדי להפעיל את התמיכה במצב החופשי."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"צריך להפעיל מחדש כדי לאלץ את הצגת הגרסה למחשב במסכים המשניים."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"להפעיל מחדש עכשיו"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"להפעיל מחדש מאוחר יותר"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_spatial_audio_summary (5026859623681482668) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_title (5416972521040337799) -->
-    <skip />
-    <!-- no translation found for bluetooth_details_head_tracking_summary (3942238746595985395) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"אודיו מרחבי"</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"אודיו שמגיע ממכשירי מדיה תואמים יוצר חוויה עשירה יותר"</string>
+    <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"מעקב אחר תנועות הראש"</string>
+    <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"האודיו משתנה בהתאם לתנועות הראש כדי שיישמע טבעי יותר"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"הגבלה לקצב ההורדה ברשת"</string>
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"הגדרת הגבלה לקצב של תעבורת הנתונים הנכנסת ברוחב הפס של הרשת. ההגבלה תחול על כל הרשתות שמאפשרות חיבור לאינטרנט."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"הגדרת הגבלה לקצב ההורדה ברשת"</string>

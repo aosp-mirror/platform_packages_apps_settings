@@ -89,20 +89,6 @@ public interface Sliceable {
     }
 
     /**
-     * Copy the key slice information to the clipboard.
-     * It is highly recommended to show the toast to notify users when implemented this function.
-     */
-    default void copy() {
-    }
-
-    /**
-     * Whether or not it's a copyable slice.
-     */
-    default boolean isCopyableSlice() {
-        return false;
-    }
-
-    /**
      * Whether or not summary comes from something dynamic (ie, not hardcoded in xml)
      */
     default boolean useDynamicSliceSummary() {
