@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Հավելվածների լեզուներ"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Լեզու ընտրեք յուրաքանչյուր հավելվածի համար"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Հավելվածի լեզուն"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Թարմացրեք հավելվածը"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Հավելվածում նոր լեզուներ ավելացնելու համար անհրաժեշտ է թարմացնել այն"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Թարմացնել"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Առաջարկվող լեզուներ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Բոլոր լեզուները"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Համակարգի լեզու"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Կանխադրված — <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Հավելվածի համար ըստ կանխադրման սահմանված է <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> լեզուն, և այն չի աջակցում մի քանի լեզուներ։"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Լեզվի ընտրությունն այս հավելվածի համար հասանելի չէ Կարգավորումներում։"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Դուք չեք կարող այս հավելվածի համար լեզու ընտրել Կարգավորումներից։"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Հեռացնե՞լ ընտրված լեզուն</item>
       <item quantity="other">Հեռացնե՞լ ընտրված լեզուները</item>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Դուք և ձեր երեխան ցանկացած պահի կարող եք ջնջել նրա մատնահետքի պատկերներն ու նմուշը կամ անջատել մատնահետքով ապակողպումը սարքի կարգավորումներում։ Մատնահետքի պատկերներն ու նմուշները պահվում են հեռախոսում այնքան ժամանակ, մինչև որ ջնջեք դրանք։"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Դուք կարող եք ապակողպել հեռախոսը, նույնիսկ եթե մտադրված չեք դա անել, օրինակ՝ երբ ինչ-որ մեկը այն հպի ձեր մատին։"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Ձեր երեխայի հեռախոսը կարող է ապակողպվել, նույնիսկ եթե նա մտադրված չէ դա անել, օրինակ՝ երբ ինչ-որ մեկը այն հպի նրա մատին։"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Խորհուրդ ենք տալիս օգտագործել էկրանի պաշտպանիչ՝ «Made for Google» մակնշմամբ։ Էկրանի այլ պաշտպանիչներով սարքերը կարող են չճանաչել ձեր մատնահետքը։"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Խորհուրդ ենք տալիս օգտագործել էկրանի պաշտպանիչ՝ «Made for Google» մակնշմամբ։ Էկրանի այլ պաշտպանիչներով սարքերը կարող են չճանաչել ձեր երեխայի մատնահետքը։"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Ամեն անգամ թեթևակի փոխեք մատի դիրքը"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Ծածկեք պատկերակը ձեր մատնահետքի կենտրոնով"</string>
@@ -507,7 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Փոքր-ինչ տեղաշարժեք մատը՝ մատնահետքի տարբեր հատվածներ ավելացնելու համար"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Հպեք մատնահետքի պատկերակին և պահեք ամեն անգամ, երբ այն տեղաշարժվում է։ Այդպես տվիչն ավելի մեծ մակերեսով կնկարի ձեր մատնահետքը։"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Մատի ծայրը դրեք տվիչի վրա"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Այժմ սկանավորեք մատի եզրերը"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Դրեք մատի ձախ եզրը սկաների վրա"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Դրեք մատի աջ եզրը սկաների վրա"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Մատի մի կողմը դրեք տվիչի վրա և պահեք, ապա նույնն արեք մյուս կողմով"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Այդպես տվիչն ավելի մեծ մակերեսով կնկարի ձեր մատնահետքը"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Մատնահետքը գրանցվել է <xliff:g id="PERCENTAGE">%d</xliff:g> տոկոսով"</string>
@@ -1343,7 +1350,7 @@
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Սահուն պատկեր"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Որոշակի բովանդակության համար թարմացման հաճախականությունը 60-ից կդառնա 90 Հց։ Երկարացնում է մարտկոցի օգտագործման ժամանակը։"</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Պարտադիր թարմացման առավելագույն հաճախականությունը"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Էկրանի թարմացման բարձր հաճախականությունը լավացնում է հպման արձագանքը և շարժանկարների որակը։ Այն նաև երկարացնում է մարտկոցի օգտագործման ժամանակը։"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Էկրանի թարմացման բարձր հաճախականությունը լավացնում է հապտիկ արձագանքը և շարժանկարների որակը։ Այն նաև երկարացնում է մարտկոցի օգտագործման ժամանակը։"</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Ադապտիվ քնի ռեժիմ"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Միացված է – Եթե նայում եք էկրանին, այն չի անջատվի։"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Անջատված է"</string>
@@ -1905,8 +1912,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play-ի համակարգային թարմացման լիցենզիաներ"</string>
     <string name="terms_title" msgid="2071742973672326073">"Կանոններն ու պայմանները"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Համակարգի WebView-ի լիցենզիա"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Պաստառների հեղինակներ"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Արբանյակային պատկերների մատակարարներ՝\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Ձեռքով"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Ձեռնարկը բեռնելու խնդիր կա:"</string>
@@ -2057,8 +2063,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Միացնել"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Մաքրել հիշողությունը"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Ապատեղադրել թարմացումները"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Թույլատրել սահմանափակ ռեժիմի կարգավորումները"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Ձեր ընտրած որոշ գործողություններ ըստ կանխադրման բացվում են այս հավելվածում։"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Դուք ընտրել եք թույտարել այս ծրագրին ստեղծել վիջեթներ և մուտք գործել իրենց տվյալներ:"</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Լռելյայները կարգավորված չեն:"</string>
@@ -2093,9 +2098,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Ներքին պահոց"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Չափի վերահաշվարկում…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Ջնջե՞լ հավելվածի տվյալները"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Այս հավելվածի տվյալներն ընդմիշտ կջնջվեն։Դա վերաբերում է ֆայլերին, կարգավորումներին, տվյալների շտեմարաններին և հավելվածի այլ տվյալներին։"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Այս հավելվածի տվյալները, այդ թվում՝ ֆայլերն ու կարգավորումները, ընդմիշտ կջնջվեն այս սարքից։"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"Հաստատել"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Չեղարկել"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Ջնջել"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Հավելվածը չի գտնվել տեղադրված հավելվածների ցանկում:"</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Չհաջողվեց մաքրել հիշողությունը"</string>
@@ -2446,18 +2452,18 @@
     <string name="accessibility_autoclick_shorter_desc" msgid="7631013255724544348">"Ավելի կարճ"</string>
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"Ավելի երկար"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Ավտոմատ սեղմման ժամանակի կարգավորում"</string>
-    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Թրթռոց և հպման արձագանք"</string>
+    <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Թրթռոց և հապտիկ արձագանք"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Կառավարեք թրթռոցի ուժգնությունը տարբեր դեպքերի համար"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Կարգավորումն անջատված է, քանի որ սարքն անձայն ռեժիմում է"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Զանգեր"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Ծանուցումներ և ազդանշաններ"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Ինտերակտիվ հապտիկ արձագանք"</string>
-    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Օգտագործել թրթռոցը և հպման արձագանքը"</string>
+    <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Օգտագործել թրթռոցը և հապտիկ արձագանքը"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Զարթուցիչի թրթռոց"</string>
     <string name="accessibility_media_vibration_title" msgid="1372073715403945428">"Մեդիա բովանդակության թրթռոց"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"Թրթռազանգ"</string>
     <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"Թրթռոց ծանուցման ժամանակ"</string>
-    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Հպման արձագանք"</string>
+    <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"Հապտիկ արձագանք"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Օգտագործել <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-ը"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Բացել <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> հավելվածը"</string>
     <string name="accessibility_service_auto_added_qs_tooltip_content" msgid="2941824314912928072">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>-ն ավելացվել է Արագ կարգավորումներում։ Այն միացնելու կամ անջատելու համար մատը սահեցրեք ներքև։"</string>
@@ -3374,8 +3380,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Կարգավորված չէ - Աշխատանքային պրոֆիլ"</string>
     <string name="user_admin" msgid="4024553191395768119">"Ադմինիստրատոր"</string>
     <string name="user_you" msgid="3070562015202859996">"Դուք (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"Դուք չեք կարող ևս մի օգտատեր ավելացնել։ Նոր օգտատեր ավելացնելու համար նախ հեռացրեք որևէ մեկին։"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Միայն պլանշետի սեփականատերը կարող է կառավարել օգտատերերին:"</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Միայն հեռախոսի օգտատերը կարող է կառավարել օգտատերերին:"</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Սահմանափակված պրոֆիլները չեն կարող հաշիվներ ավելացնել"</string>
@@ -3662,14 +3667,14 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"վճարում, կանխադրված"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"մուտքային ծանուցում"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB մոդեմ, Bluetooth մոդեմ, Wi-Fi թեժ կետ"</string>
-    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"հպման արձագանք, թրթռալ, թրթռոց"</string>
+    <string name="keywords_accessibility_vibration_primary_switch" msgid="730692154347231253">"հապտիկ արձագանք, թրթռալ, թրթռոց"</string>
     <string name="keywords_touch_vibration" msgid="1125291201902251273">"հանգիստ, թրթռալ, էկրան, զգայունություն"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"հպման արձագանք, թրթռոց, հեռախոս, զանգ, զգայունություն, զանգել"</string>
-    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"հպման արձագանք, թրթռոց, հեռախոս, զանգ, աստիճանաբար"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"հապտիկ արձագանք, թրթռոց, հեռախոս, զանգ, զգայունություն, զանգել"</string>
+    <string name="keywords_ramping_ringer_vibration" msgid="3678966746742257366">"հապտիկ արձագանք, թրթռոց, հեռախոս, զանգ, աստիճանաբար"</string>
     <string name="keywords_notification_vibration" msgid="2620799301276142183">"հանգիստ, թրթռալ, զգայունություն, ծանուցում"</string>
     <string name="keywords_alarm_vibration" msgid="4833220371621521817">"հանգիստ, թրթռալ, զգայունություն, զարթուցիչ"</string>
     <string name="keywords_media_vibration" msgid="723896490102792327">"հանգիստ, թրթռալ, զգայունություն, մեդիա"</string>
-    <string name="keywords_vibration" msgid="670455132028025952">"հպման արձագանք, թրթռալ, թրթռոց"</string>
+    <string name="keywords_vibration" msgid="670455132028025952">"հապտիկ արձագանք, թրթռալ, թրթռոց"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"մարտկոցի տնտեսում, մշտական, էներգախնայում, մարտկոց"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"գործողությունների հերթականություն, ժամանակացույց, մարտկոցի տնտեսում, էներգախնայում, մարտկոց, ավտոմատ, տոկոս"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, ընդլայնված հնարավորություններով զանգեր, 4g զանգեր"</string>
@@ -4155,7 +4160,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"Օրեր"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"Չկան"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Ամեն օր"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Զարթուցիչը կարող է հնչել ավելի շուտ, քան կսպառվի ժամանակը"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Անջատել զարթուցիչի հետ"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Ժամանակացույցն անջատվում է, երբ միանում է զարթուցիչը"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"«Չանհանգստաց­­­­­նել» ռեժիմի կարգավորումներ"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Օգտագործել կանխադրված կարգավորումները"</string>
@@ -4401,12 +4406,9 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> չօգտագործվող հավելված</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> չօգտագործվող հավելված</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"Չօգտագործվող հավելվածների կարգավորումներ"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Դադարեցնել աշխատանքը ոչ ակտիվ վիճակում"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Հեռացնել թույլտվությունները, ջնջել ժամանակավոր ֆայլերը և դադարեցնել ծանուցումները"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Բոլոր հավելվածները"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Տեղադրված հավելվածներ"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Ակնթարթային հավելվածները"</string>
@@ -5062,10 +5064,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Այս սարքի կառավարիչն է <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> կազմակերպությունը։"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Իմանալ ավելին"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Սահմանափակ ռեժիմի կարգավորում"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Սահմանափակումները թույլատրված են <xliff:g id="APP_NAME">%s</xliff:g> հավելվածի համար"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Անվտանգության նկատառումներից ելնելով՝ այս կարգավորումը ներկայումս անհասանելի է։"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Ֆինանսավորվող սարքի մասին"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Ձեր բանկը կարող է փոխել կարգավորումները և այս սարքում ծրագրեր տեղադրել։\n\nԵթե դուք բաց թողնեք վճարումը, ձեր սարքը կկողպվի։\n\nԼրացուցիչ տեղեկությունների համար դիմեք ձեր բանկին։"</string>
@@ -5548,6 +5548,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Ցույց տալ արտաքին սարքերի կարգավորումները կողպէկրանից"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Կառավարում կողպէկրանից"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Կառավարեք արտաքին սարքերն առանց ապակողպելու հեռախոսը կամ պլանշետը՝ տրամադրելով անհրաժեշտ թույլտվությունը սարքերի կառավարման հավելվածում"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Օգտագործելու համար նախ միացրեք «Ցույց տալ սարքի կառավարման տարրերը» կարգավորումը"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Առկայության դեպքում ցույց տալ երկտող ժամացույցը"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Երկտող ժամացույց"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5565,14 +5566,12 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Անժամկետ վարձակալություն"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Թույլատրել Կարգավորումների էկրանների վրադրումները"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Թույլատրել հավելվածներին, որոնք կարող են ցուցադրվել այլ հավելվածների վրա, վրադրել Կարգավորումների էկրանները"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Թույլատրեք «կեղծ մոդեմի» գործարկումը"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Թույլատրեք այս սարքին գործարկել «կեղծ մոդեմի» ծառայությունը գործիքային փորձարկման համար։ Մի՛ միացրեք սա հեռախոսի սովորական օգտագործման ժամանակ։"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Մեդիա"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Ամրացնել մեդիա նվագարկիչը"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Մեդիա նվագարկիչը բաց է մնում Արագ կարգավորումներում, որպեսզի դուք կարողանաք անմիջապես վերսկսել նվագարկումը։"</string>
-    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Ցույց տալ մեդիա բովանդակության առաջարկները"</string>
+    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Ցույց տալ մեդիա բովանդակության առաջարկներ"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Ձեր գործողությունների հիման վրա"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Թաքցնել նվագարկիչը"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Ցուցադրել նվագարկիչը"</string>
@@ -5654,8 +5653,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Օգտագործել հավելվածի ամրացումը"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Օգտագործել մշակողի ընտրանքները"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Օգտագործել տպման ծառայությունը"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Թույլատրեք մեկից ավելի օգտատերեր"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Օգտագործել անլար վրիպազերծումը"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Օգտագործել գրաֆիկական սարքավարի կարգավորումները"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Օգտագործել մարտկոցի տնտեսումը"</string>
@@ -5721,12 +5719,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"Կերպափոխիչներ"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Գործողություններ (արտադրման արժեքը)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Գործողություններ (բազային գին)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Պարգևներ մեկ իրադարձության համար"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Պարգևները իրադարձության ընթացքում"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Պարգևների առավելագույն քանակը մեկ օրում"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Առավել հաճախակի կատարվող գործողությունը"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Ծանուցումը դիտվել է"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Ծանուցումը դիտվել է վերջին 15 ր․ ընթացքում"</string>
@@ -5757,20 +5752,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Նախադիտում"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Ընտրեք էկրանապահ"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Ցույց տալ լրացուցիչ տեղեկություններ"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Ցուցադրել ժամը, ամսաթիվը, եղանակը, օդի որակը և հեռարձակման մանրամասները էկրանապահի վրա"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Այլ կարգավորումներ"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"Ընտրեք ձեր էկրանապահը"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Ընտրեք, թե ինչ եք ուզում տեսնել ձեր սարքի էկրանին, երբ ձեր պլանշետը դոկ-կայանում է։ Ձեր սարքը կարող է ավելի շատ էներգիա ծախսել, երբ էկրանապահ է օգտագործվում։"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Անհատականացնել"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Կամայական ձևի պատուհանների ստեղծման աջակցումը միացնելու համար պահանջվում է վերաբեռնում։"</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Լրացուցիչ էկրաններին համակարգչի ռեժիմը հարկադրաբար միացնելու համար պահանջվում է վերաբեռնում։"</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Վերաբեռնել հիմա"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Վերաբեռնել ավելի ուշ"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Տարածական հնչողություն"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Համատեղելի մեդիա սարքերի ձայնը դառնում է ավելի իրական"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Գլխի շարժումների հետագծում"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Երբ դուք շարժում եք ձեր գլուխը, ձայնը դառնում է ավելի բնական"</string>

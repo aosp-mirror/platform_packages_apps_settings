@@ -15,10 +15,9 @@
 -->
 
 <Spinner xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/profile_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/user_spinner_height"
-        android:overlapAnchor="true"
-        android:paddingBottom="@dimen/user_spinner_padding"
-        android:paddingTop="@dimen/user_spinner_padding"
-        android:paddingLeft="@dimen/user_spinner_padding" />
+         android:id="@+id/profile_spinner"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:paddingStart="@dimen/user_spinner_padding"
+         android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+         android:layout_centerVertical="true"/>
