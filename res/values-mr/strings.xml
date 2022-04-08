@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"ॲपच्या भाषा"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"प्रत्येक ॲपसाठी भाषा सेट करा"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"अ‍ॅपची भाषा"</string>
+    <string name="warnings_title" msgid="613849105118598110">"ॲप अपडेट करा"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"नवीनतम उपलब्ध भाषांसाठी तुम्ही अ‍ॅप अपडेट करणे आवश्यक आहे"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"आता अपडेट करा"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"सुचवलेल्या भाषा"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"सर्व भाषा"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"सिस्टीम भाषा"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"सिस्टीम डीफॉल्ट - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"ॲप हे बाय डीफॉल्ट <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> वर सेट केले आहे आणि ते एकाहून अधिक भाषांना सपोर्ट करत नाही."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"या अ‍ॅपसाठीची भाषा निवडणे हे सेटिंग्ज मध्ये उपलब्ध नाही."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"तुम्ही सेटिंग्ज मधून या अ‍ॅपसाठीची भाषा निवडू शकत नाही."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">निवडक भाषा काढायच्या?</item>
       <item quantity="one">निवडक भाषा काढायची?</item>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"तुम्ही आणि तुमचे लहान मूल त्यांच्या फिंगरप्रिंट इमेज व मॉडेल हटवू शकते किंवा सेटिंग्ज मध्ये फिंगरप्रिंट अनलॉक कधीही बंद करू शकते. फिंगरप्रिंट इमेज आणि मॉडेल हटवली जात नाहीत तोपर्यंत, ती फोनमध्ये स्टोअर केलेली असतात."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"एखाद्या व्यक्तीने तुमच्या बोटावर तुमचा फोन धरल्यास, तुम्हाला तो अनलॉक करायचा नसतानादेखील तो अनलॉक होऊ शकतो."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"एखाद्या व्यक्तीने तुमच्या लहान मुलाच्या बोटावर त्यांचा फोन धरल्यास, त्यांना तो अनलॉक करायचा नसतानादेखील तो अनलॉक होऊ शकतो."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"सर्वोत्तम परिणामांसाठी, Google साठी बनवलेले प्रमाणित असलेले स्क्रीन प्रोटेक्टर वापरा. इतर स्क्रीन प्रोटेक्‍टरसह, तुमचे फिंगरप्रिंट कदाचित काम करणार नाही."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"सर्वोत्तम परिणामांसाठी, Google साठी बनवलेले प्रमाणित असलेले स्क्रीन प्रोटेक्टर वापरा. इतर स्क्रीन प्रोटेक्‍टरसह, तुमच्या लहान मुलाचे फिंगरप्रिंट कदाचित काम करणार नाही."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"तुमच्या बोटाची स्थिती प्रत्येक वेळी थोडीशी बदला"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"तुमच्या फिंगरप्रिंटचा मध्यभाग वापरून आयकन झाका"</string>
@@ -507,7 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"तुमच्‍या फिंगरप्रिंटचे वेगवेगळे भाग जोडण्यासाठी तुमचे बोट उचलत रहा"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"प्रत्येक वेळी फिंगरप्रिंट आयकन हलल्यावर स्पर्श करा आणि धरून ठेवा. यामुळे तुमची फिंगरप्रिंट आणखी स्पष्टपणे कॅप्चर करण्यात मदत होते."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"तुमच्या बोटाचे टोक सेन्सरवर ठेवा"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"शेवटी, तुमच्या बोटाच्या कडा वापरा"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"तुमच्या बोटाची डावी बाजू ठेवा"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"तुमच्या बोटाची उजवी बाजू ठेवा"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"तुमची फिंगरप्रिंट घ्यायची असलेली एक बाजू सेन्सरवर ठेवा आणि धरून ठेवा, त्यानंतर दुसऱ्या बाजूवर स्विच करा"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"यामुळे तुमची फिंगरप्रिंट आणखी स्पष्टपणे कॅप्चर करण्यात मदत होते"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फिंगरप्रिंटची <xliff:g id="PERCENTAGE">%d</xliff:g> टक्के नोंदणी झाली आहे"</string>
@@ -1308,7 +1315,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"नैसर्गिक"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"बूस्ट केलेला"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"सॅच्युरेटेड"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"ॲडॅप्टिव्ह"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"अडॅप्टिव्ह"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"फक्त अचूक रंग वापरा"</string>
     <string name="color_mode_summary_automatic" msgid="8157885594041700275">"उठावदार आणि अचूक रंगामध्ये ॲडजस्‍ट करा"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="6413384391658481700">"टॅब्लेट फिरवताना ओरिएंटेशन आपोआप स्विच करा"</string>
@@ -1337,10 +1344,10 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"उपलब्ध प्रकाशासाठी समायोजित करू नका"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"वाढलेला बॅटरी वापर"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"उपलब्ध प्रकाशासाठी उज्ज्वलता स्तर अनुकूल करा. हे वैशिष्ट्य सुरू असताना, तुम्ही तरीही उज्ज्वलता तात्पुरती समायोजित करू शकता."</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"तुमच्या स्क्रीनचा ब्राइटनेस तुमच्या वातावरण आणि ॲक्टिव्हिटीशी आपोआप अ‍ॅडजस्ट होईल. अ‍ॅडॅप्टिव्ह ब्राइटनेसला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर मॅन्युअली हलवू शकता."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"तुमच्या स्क्रीनचा ब्राइटनेस तुमच्या वातावरण आणि अ‍ॅक्टिव्हिटीशी आपोआप अ‍ॅडजस्ट होईल. अडॅप्टिव्ह ब्राइटनेसला तुमची प्राधान्ये जाणून घेण्यात मदत करण्यासाठी तुम्ही स्लाइडर मॅन्युअली हलवू शकता."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"व्हाइट बॅलन्स डिस्प्ले करा"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
-    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
+    <string name="peak_refresh_rate_title" msgid="1878771412897140903">"स्मूथ डिस्प्ले"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"काही आशयासाठी रिफ्रेश रेट ६० ते ९० Hz पर्यंत आपोआप वाढवते. बॅटरी वापर वाढवते."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"सक्तीने सर्वोच्च रिफ्रेश रेट गाठा"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"सुधारित स्पर्श प्रतिसाद आणि अ‍ॅनिमेशन गुणवत्तेसाठी उच्चतम रिफ्रेश रेट. बॅटरी वापर वाढवतो."</string>
@@ -1906,8 +1913,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play सिस्टम अपडेट परवाने"</string>
     <string name="terms_title" msgid="2071742973672326073">"अटी आणि नियम"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"सिस्टम WebView परवाना"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"वॉलपेपर श्रेय"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"उपग्रह इमेज पुरवठादार:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"मॅन्युअल"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"व्यक्तिचलित लोड करताना समस्या आली."</string>
@@ -2058,8 +2064,7 @@
     <string name="enable_text" msgid="8570798764647110430">"सुरू करा"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"स्‍टोरेज साफ करा"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"अपडेट अनइंस्टॉल करा"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"प्रतिबंधित सेटिंग्जना अनुमती द्या"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"तुम्ही निवडलेल्या काही अ‍ॅक्टिव्हिटी बाय डीफॉल्ट या अ‍ॅपमध्ये उघडतात."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"तुम्ही या ॲपला विजेट तयार करण्याची आणि त्यांच्या डेटामध्ये प्रवेश करण्याची अनुमती देण्यासाठी निवडले आहे."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"कोणताही डीफॉल्ट सेट केलेला नाही."</string>
@@ -2094,9 +2099,10 @@
     <string name="internal_storage" msgid="999496851424448809">"अंतर्गत स्टोरेज"</string>
     <string name="recompute_size" msgid="1098091228370999128">"आकाराचे पुनर्संगणन करत आहे…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"अ‍ॅप डेटा हटवायचा?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"या ॲपचा डेटा कायमचा हटवला जाईल. यामध्ये फाइल, सेटिंग्ज, डेटाबेस आणि इतर अ‍ॅप डेटा यांचा समावेश आहे."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"फाइल आणि सेटिंग्जसोबतच, या अ‍ॅपचा डेटा या डिव्हाइवरून कायमचा हटवला जाईल"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"ठीक"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"रद्द करा"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"हटवा"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"इंस्टॉल अ‍ॅप्सच्या सूचीमध्ये अ‍ॅप आढळला नाही."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"ॲपसाठी स्‍टोरेज साफ करता आले नाही."</string>
@@ -3375,8 +3381,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"सेट केलेले नाही - कार्य प्रोफाईल"</string>
     <string name="user_admin" msgid="4024553191395768119">"ॲडमिन"</string>
     <string name="user_you" msgid="3070562015202859996">"तुम्ही (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"तुम्ही आणखी वापरकर्ते जोडू शकत नाही. एका नवीन वापरकर्त्याला जोडण्यासाठी वापरकर्ता काढून टाका."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"केवळ टॅब्लेटचा मालक वापरकर्त्यांना व्यवस्थापित करु शकतो."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"केवळ फोनचा मालक वापरकर्त्यांना व्यवस्थापित करु शकतो."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"प्रतिबंधित प्रोफाईल्स खाती जोडू शकत नाहीत"</string>
@@ -3730,7 +3735,7 @@
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"व्यत्यय आणू नका सुरू करा"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"अलार्म आणि मीडियाचे आवाज व्यत्यय आणू शकतात"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"शेड्युल"</string>
-    <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"शेड्युल रद्द करा"</string>
+    <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"शेड्युल हटवा"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"हटवा"</string>
     <string name="zen_mode_rule_name_edit" msgid="1053237022416700481">"संपादित करा"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="6217433860514433311">"शेड्युल"</string>
@@ -4202,7 +4207,7 @@
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"कोणतेही नाहीत"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"कोणतेही नाहीत"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"अलार्म"</string>
-    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"टायमर, अलार्म, सुरक्षा सिस्टम आणि इतर ॲप्स मधील"</string>
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"टायमर, अलार्म, सुरक्षा सिस्टीम आणि इतर ॲप्समधील"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"अलार्म"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"अलार्म"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"मीडियाचा आवाज"</string>
@@ -4402,12 +4407,9 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> न वापरलेली अ‍ॅप्स</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> न वापरलेले ॲप</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"न वापरलेली ॲप सेटिंग्ज"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"न वापरल्यास अ‍ॅप अ‍ॅक्टिव्हिटी थांबवा"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"परवानग्या काढून टाका, तात्पुरत्या फाइल हटवा आणि सूचना थांबवा"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"सर्व अ‍ॅप्स"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"इंस्टॉल केलेली अ‍ॅप्स"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"इन्स्टंट अ‍ॅप्स"</string>
@@ -5063,10 +5065,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"हे डिव्हाइस <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> द्वारे व्यवस्थापित आहे."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"अधिक जाणून घ्या"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"प्रतिबंधित सेटिंग"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g> साठी प्रतिबंधित सेटिंग्जना अनुमती आहे"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"तुमच्या सुरक्षेसाठी, हे सेटिंग सध्या उपलब्ध नाही."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"फायनान्स केलेल्या डिव्हाइसची माहिती"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"तुमचा क्रेडिट पुरवठादार या डिव्हाइसवरील सेटिंग्ज बदलू शकतो आणि सॉफ्टवेअर इंस्टॉल करू शकतो.\n\nतुम्ही पेमेंट न केल्यास, तुमचे डिव्हाइस लॉक केले जाईल.\n\nअधिक जाणून घेण्यासाठी, तुमच्या क्रेडिट पुरवठादाराशी संपर्क साधा."</string>
@@ -5549,6 +5549,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"लॉक स्‍क्रीनवर बाह्य डिव्हाइससाठी नियंत्रणे दाखवा"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"लॉक केलेल्या डिव्हाइसवरून नियंत्रित करा"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"डिव्हाइस नियंत्रणे ॲपद्वारे अनुमती असल्यास, तुमचा फोन किंवा टॅबलेट अनलॉक न करता बाह्य डिव्हाइस नियंत्रित करा."</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"वापरण्यासाठी, सर्वप्रथम \"डिव्हाइस नियंत्रणे दाखवा\" सुरू करा"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध असताना, ड्युअल क्लॉक दाखवा"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"ड्युअल क्लॉक"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5566,10 +5567,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"मुदत कधीही एक्स्पायर होत नाही."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Settings यामध्ये स्‍क्रीन ओव्‍हरलेची अनुमती द्या"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Settings स्क्रीनवर ओव्हरले करण्यासाठी इतर अ‍ॅप्सवर प्रदर्शित करू शकणाऱ्या अ‍ॅप्सना अनुमती द्या"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"नमुना मोडेमला अनुमती द्या"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"इन्स्ट्रुमेंटेशन चाचणीसाठी या डिव्हाइसला नमुना मोडेम सेवा रन करण्याची अनुमती द्या. फोनच्या सामान्य वापरादरम्यान हे सुरू करू नका"</string>
     <string name="media_controls_title" msgid="403271085636252597">"मीडिया"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"मीडिया प्लेअर पिन करा"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"प्लेबॅक करणे पुन्‍हा झटपट सुरू करण्यासाठी, क्विक सेटिंग्जमध्ये मीडिया प्लेअर उघडा राहतो"</string>
@@ -5655,8 +5654,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"ॲप पिनिंग वापरणे"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"डेव्हलपर पर्याय वापरणे"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"प्रिंट सेवा वापरा"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"एकाहून अधिक वापरकर्त्यांना अनुमती द्या"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"वायरलेस डीबगिंग वापरणे"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"ग्राफिक ड्रायव्हर प्राधान्ये वापरणे"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"बॅटरी सेव्हर वापरणे"</string>
@@ -5722,12 +5720,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"मॉडिफायर"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"कृती (उत्पादनाचे शुल्क)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"कृती (मूळ किंमत)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"प्रति एका इव्हेंटसाठीची रिवॉर्ड"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"एकूण इव्हेंट कालावधीसाठीची रिवॉर्ड"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"प्रति दिवसासाठीची कमाल रिवॉर्ड"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"टॉप अ‍ॅक्टिव्हिटी"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"सूचना पाहिली"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"१५ मिनिटांमध्ये सूचना पाहिली"</string>
@@ -5758,20 +5753,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"पूर्वावलोकन"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"स्क्रीन सेव्हर निवडा"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"अतिरिक्त माहिती दाखवा"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"स्क्रीन सेव्हरवर वेळ, तारीख, हवामान, हवेची गुणवत्ता आणि कास्ट करण्याशी संबंधित तपशील दाखवा"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"अधिक सेटिंग्ज"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"तुमचा स्क्रीन सेव्हर निवडा"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"तुमचा टॅबलेट डॉक केलेला असतो, तेव्हा तुम्ही तुमच्या स्क्रीनवर काय पाहाल ते निवडा. स्क्रीन सेव्हर वापरला जातो, तेव्हा तुमचे डिव्हाइस आणखी ऊर्जा वापरू शकते."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"कस्टमाइझ करा"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"फ्रीफॉर्म सपोर्ट सुरू करण्यासाठी, रीबूट करणे आवश्यक आहे."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"दुय्यम डिस्प्लेवर डेस्कटॉप मोडची सक्ती करण्यासाठी, रीबूट करणे आवश्यक आहे."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"आता रीबूट करा"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"नंतर रीबूट करा"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"अवकाशीय ऑडिओ"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"कंपॅटिबिल मीडियामधील ऑडिओ हा आणखी वेधक होतो"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"हेड ट्रॅकिंग"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"अधिक नैसर्गिक वाटावे यासाठी, तुम्ही डोके हलवता तसा आवाज बदलतो"</string>
