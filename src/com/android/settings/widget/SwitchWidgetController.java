@@ -65,9 +65,9 @@ public abstract class SwitchWidgetController {
     /**
      * Update the preference title associated with the switch.
      *
-     * @param title the preference title
+     * @param isChecked whether the switch is currently checked
      */
-    public abstract void setTitle(String title);
+    public abstract void updateTitle(boolean isChecked);
 
     /**
      * Start listening to switch toggling.

@@ -31,7 +31,6 @@ import android.os.Message;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -58,12 +57,12 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     final static String EXTRA_IS_SPECIFIED_SSID =
         "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
 
-    @VisibleForTesting NetworkRequestDialogBaseFragment mDialogFragment;
+    private NetworkRequestDialogBaseFragment mDialogFragment;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
     private boolean mIsSpecifiedSsid;
     private boolean mShowingErrorDialog;
     private WifiConfiguration mMatchedConfig;
-    @VisibleForTesting ProgressDialog mProgressDialog;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -194,7 +193,8 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         if (mIsSpecifiedSsid) {
             // Prevent from throwing same dialog, because onMatch() will be called many times.
             if (mMatchedConfig == null) {
-                mMatchedConfig = WifiUtils.getWifiConfig(null /* wifiEntry */, scanResults.get(0));
+                mMatchedConfig = WifiUtils.getWifiConfig(
+                    null /* accesspoint */, scanResults.get(0), null /* password */);
                 showSingleSsidRequestDialog(
                         WifiInfo.sanitizeSsid(mMatchedConfig.SSID), false /* isTryAgain */);
             }

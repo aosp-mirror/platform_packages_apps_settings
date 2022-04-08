@@ -19,23 +19,23 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.BatteryStatsManager;
-import android.os.BatteryUsageStats;
-import android.os.BatteryUsageStatsQuery;
+import android.os.BatteryStats;
 
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -46,10 +46,10 @@ public class BatteryInfoLoaderTest {
 
     private static final long TEST_TIME_REMAINING = 1000L;
 
-    @Mock
-    private BatteryStatsManager mBatteryStatsManager;
-    @Mock
-    private BatteryUsageStats mBatteryUsageStats;
+    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
+    private BatteryStatsHelper mHelper;
+    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
+    private BatteryStats mStats;
 
     private Context mContext;
 
@@ -60,11 +60,8 @@ public class BatteryInfoLoaderTest {
         FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider(mContext);
 
         doReturn(mContext).when(mContext).getApplicationContext();
-        when(mContext.getSystemService(eq(Context.BATTERY_STATS_SERVICE)))
-                .thenReturn(mBatteryStatsManager);
-        when(mBatteryUsageStats.getBatteryTimeRemainingMs()).thenReturn(TEST_TIME_REMAINING);
-        when(mBatteryStatsManager.getBatteryUsageStats(any(BatteryUsageStatsQuery.class)))
-                .thenReturn(mBatteryUsageStats);
+        when(mStats.computeBatteryTimeRemaining(anyLong())).thenReturn(TEST_TIME_REMAINING);
+        doReturn(mStats).when(mHelper).getStats();
 
         final Intent dischargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
         doReturn(dischargingBatteryBroadcast).when(mContext).registerReceiver(any(), any());
@@ -72,12 +69,12 @@ public class BatteryInfoLoaderTest {
 
     @Test
     public void test_loadInBackground_dischargingOldEstimate_dischargingLabelNotNull() {
-        BatteryInfoLoader loader = new BatteryInfoLoader(mContext);
-        loader.mBatteryUtils = new BatteryUtils(mContext);
+        BatteryInfoLoader loader = new BatteryInfoLoader(mContext, mHelper);
+        loader.batteryUtils = new BatteryUtils(mContext);
 
         BatteryInfo info = loader.loadInBackground();
 
         assertThat(info.remainingLabel).isNotNull();
-        assertThat(info.remainingTimeUs).isEqualTo(TEST_TIME_REMAINING * 1000);
+        assertThat(info.remainingTimeUs).isEqualTo(TEST_TIME_REMAINING);
     }
 }

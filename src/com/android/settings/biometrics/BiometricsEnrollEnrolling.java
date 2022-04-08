@@ -16,7 +16,6 @@
 
 package com.android.settings.biometrics;
 
-import android.annotation.Nullable;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.view.View;
@@ -34,7 +33,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     private static final String TAG_SIDECAR = "sidecar";
 
-    @Nullable
     protected BiometricEnrollSidecar mSidecar;
 
     /**
@@ -89,17 +87,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
 
     @Override
     public void onBackPressed() {
-        cancelEnrollment();
-        super.onBackPressed();
-    }
-
-    protected void onSkipButtonClick(View view) {
-        cancelEnrollment();
-        setResult(RESULT_SKIP);
-        finish();
-    }
-
-    public void cancelEnrollment() {
         if (mSidecar != null) {
             mSidecar.setListener(null);
             mSidecar.cancelEnrollment();
@@ -107,6 +94,12 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                     .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             mSidecar = null;
         }
+        super.onBackPressed();
+    }
+
+    protected void onSkipButtonClick(View view) {
+        setResult(RESULT_SKIP);
+        finish();
     }
 
     public void startEnrollment() {
@@ -126,8 +119,6 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN, token);
-        intent.putExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, mSensorId);
-        intent.putExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, mChallenge);
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);

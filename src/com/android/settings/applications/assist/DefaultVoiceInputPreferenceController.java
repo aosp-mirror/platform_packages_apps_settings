@@ -19,13 +19,13 @@ package com.android.settings.applications.assist;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.app.AssistUtils;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -41,13 +41,15 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
     private static final String KEY_VOICE_INPUT = "voice_input_settings";
 
     private VoiceInputHelper mHelper;
+    private AssistUtils mAssistUtils;
     private PreferenceScreen mScreen;
     private Preference mPreference;
-    private Context mContext;
+    private SettingObserver mSettingObserver;
 
     public DefaultVoiceInputPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
-        mContext = context;
+        mSettingObserver = new SettingObserver();
+        mAssistUtils = new AssistUtils(context);
         mHelper = new VoiceInputHelper(context);
         mHelper.buildUi();
         if (lifecycle != null) {
@@ -57,8 +59,13 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
 
     @Override
     public boolean isAvailable() {
-        return mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_VOICE_RECOGNIZERS);
+        // If current assist is also voice service, don't show voice preference.
+        final ComponentName currentVoiceService =
+                DefaultVoiceInputPicker.getCurrentService(mHelper);
+        final ComponentName currentAssist =
+                mAssistUtils.getAssistComponentForUser(mUserId);
+        return !DefaultVoiceInputPicker.isCurrentAssistVoiceService(
+                currentAssist, currentVoiceService);
     }
 
     @Override
@@ -75,6 +82,7 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
 
     @Override
     public void onResume() {
+        mSettingObserver.register(mContext.getContentResolver(), true);
         updatePreference();
     }
 
@@ -85,13 +93,21 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
     }
 
     @Override
-    public void onPause() {}
+    public void onPause() {
+        mSettingObserver.register(mContext.getContentResolver(), false);
+    }
 
     @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         final String defaultKey = getDefaultAppKey();
         if (defaultKey == null) {
             return null;
+        }
+        for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
+            if (TextUtils.equals(defaultKey, info.key)) {
+                return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mContext,
+                        mPackageManager, mUserId, info, true /* enabled */);
+            }
         }
 
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
@@ -134,5 +150,17 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
             return null;
         }
         return currentService.flattenToShortString();
+    }
+
+    class SettingObserver extends AssistSettingObserver {
+        @Override
+        protected List<Uri> getSettingUris() {
+            return null;
+        }
+
+        @Override
+        public void onSettingChange() {
+            updatePreference();
+        }
     }
 }

@@ -29,7 +29,7 @@ public class VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mToggleSwitchWasInitiallyChecked = mToggleServiceSwitchPreference.isChecked();
+        mToggleSwitchWasInitiallyChecked = mToggleServiceDividerSwitchPreference.isChecked();
     }
 
     @Override
@@ -40,10 +40,10 @@ public class VolumeShortcutToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     public void onStop() {
         // Log the final choice in value if it's different from the previous value.
-        if (mToggleServiceSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() != mToggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(getContext(),
                     SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_READER,
-                    mToggleServiceSwitchPreference.isChecked());
+                    mToggleServiceDividerSwitchPreference.isChecked());
         }
 
         super.onStop();

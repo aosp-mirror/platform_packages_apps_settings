@@ -35,7 +35,6 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.ArrayList;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 public class ShowOnLockScreenNotificationPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
@@ -67,9 +66,8 @@ public class ShowOnLockScreenNotificationPreferenceController extends AbstractPr
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        RestrictedListPreference pref = screen.findPreference(mSettingKey);
+    public void updateState(Preference preference) {
+        RestrictedListPreference pref = (RestrictedListPreference) preference;
         pref.clearRestrictedItems();
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
@@ -106,7 +104,7 @@ public class ShowOnLockScreenNotificationPreferenceController extends AbstractPr
 
         pref.setOnPreferenceChangeListener(this);
 
-        refreshSummary(pref);
+        refreshSummary(preference);
     }
 
     @Override

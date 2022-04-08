@@ -80,10 +80,6 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     @CallSuper
     public List<SearchIndexableRaw> getDynamicRawDataToIndex(Context context, boolean enabled) {
         final List<SearchIndexableRaw> dynamicRaws = new ArrayList<>();
-        if (!isPageSearchEnabled(context)) {
-            // Entire page should be suppressed, do not add dynamic raw data.
-            return dynamicRaws;
-        }
         final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers == null || controllers.isEmpty()) {
             return dynamicRaws;
@@ -132,13 +128,8 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        List<AbstractPreferenceController> controllersFromCode = new ArrayList<>();
-        try {
-            controllersFromCode = createPreferenceControllers(context);
-        } catch (Exception e) {
-            Log.w(TAG, "Error initial controller");
-        }
-
+        final List<AbstractPreferenceController> controllersFromCode =
+                createPreferenceControllers(context);
         final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);
         if (res == null || res.isEmpty()) {
             return controllersFromCode;

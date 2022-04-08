@@ -53,7 +53,6 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
@@ -551,10 +550,12 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testSwitchOnChangeListener() {
+    public void testSwitchOnClickListener() {
+        ViewGroup parent = mock(ViewGroup.class);
         Switch toggle = mock(Switch.class);
         when(toggle.isChecked()).thenReturn(true);
         when(toggle.isEnabled()).thenReturn(true);
+        when(parent.findViewById(anyInt())).thenReturn(toggle);
 
         AppEntry entry = mock(AppEntry.class);
         entry.info = new ApplicationInfo();
@@ -562,9 +563,10 @@ public class AppStateNotificationBridgeTest {
         entry.info.uid = 1356;
         entry.extraInfo = new NotificationsSentState();
 
-        CompoundButton.OnCheckedChangeListener listener = mBridge.getSwitchOnCheckedListener(entry);
-        listener.onCheckedChanged(toggle, true);
+        ViewGroup.OnClickListener listener = mBridge.getSwitchOnClickListener(entry);
+        listener.onClick(parent);
 
+        verify(toggle).toggle();
         verify(mBackend).setNotificationsEnabledForPackage(
                 entry.info.packageName, entry.info.uid, true);
         assertThat(((NotificationsSentState) entry.extraInfo).blocked).isFalse();

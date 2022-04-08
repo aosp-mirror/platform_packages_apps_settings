@@ -297,7 +297,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             preference.setEnabled(false);
             preference.setKey(KEY_BOTTOM_PREFERENCE);
             preference.setOrder(ORDINAL);
-            preference.setSelectable(false);
             mProfilesContainer.addPreference(preference);
         }
     }

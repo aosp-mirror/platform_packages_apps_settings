@@ -41,7 +41,7 @@ public class SmartBatterySettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return SettingsEnums.OPEN_BATTERY_ADAPTIVE_PREFERENCES;
+        return SettingsEnums.FUELGAUGE_SMART_BATTERY;
     }
 
     @Override

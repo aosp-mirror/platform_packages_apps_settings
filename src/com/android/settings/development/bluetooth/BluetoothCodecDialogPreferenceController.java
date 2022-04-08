@@ -61,6 +61,14 @@ public class BluetoothCodecDialogPreferenceController extends
     }
 
     @Override
+    public void onHDAudioEnabled(boolean enabled) {
+        if (!enabled) {
+            // If option codec is disabled, SBC is the only only one available codec.
+            onIndexUpdated(convertCfgToBtnIndex(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC));
+        }
+    }
+
+    @Override
     public List<Integer> getSelectableIndex() {
         List<Integer> index = new ArrayList<>();
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;

@@ -18,15 +18,14 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.telephony.TelephonyManager;
 import android.util.DataUnit;
@@ -39,11 +38,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
 public final class DataUsageUtilsTest {
 
+    @Mock
+    private ConnectivityManager mManager;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -56,20 +56,21 @@ public final class DataUsageUtilsTest {
         MockitoAnnotations.initMocks(this);
         final ShadowApplication shadowContext = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
+        shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
         shadowContext.setSystemService(Context.NETWORK_STATS_SERVICE, mNetworkStatsManager);
     }
 
     @Test
     public void mobileDataStatus_whenNetworkIsSupported() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
         final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isTrue();
     }
 
     @Test
     public void mobileDataStatus_whenNetworkIsNotSupported() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+        when(mManager.isNetworkSupported(anyInt())).thenReturn(false);
         final boolean hasMobileData = DataUsageUtils.hasMobileData(mContext);
         assertThat(hasMobileData).isFalse();
     }
@@ -84,8 +85,7 @@ public final class DataUsageUtilsTest {
 
     @Test
     public void hasEthernet_shouldQueryEthernetSummaryForUser() throws Exception {
-        ShadowPackageManager pm = shadowOf(RuntimeEnvironment.application.getPackageManager());
-        pm.setSystemFeature(PackageManager.FEATURE_ETHERNET, true);
+        when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
         final String subscriber = "TestSub";
         when(mTelephonyManager.getSubscriberId()).thenReturn(subscriber);
 

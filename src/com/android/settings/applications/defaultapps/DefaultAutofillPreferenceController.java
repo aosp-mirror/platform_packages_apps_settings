@@ -69,9 +69,4 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         }
         return null;
     }
-
-    @Override
-    protected boolean showLabelAsTitle() {
-        return true;
-    }
 }

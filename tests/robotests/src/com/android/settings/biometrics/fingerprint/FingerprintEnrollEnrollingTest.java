@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.content.Intent;
@@ -37,7 +36,6 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -76,7 +74,6 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    @Ignore
     public void fingerprintEnrollHelp_shouldShowHelpText() {
         EnrollmentCallback enrollmentCallback = verifyAndCaptureEnrollmentCallback();
 
@@ -96,8 +93,8 @@ public class FingerprintEnrollEnrollingTest {
                 any(byte[].class),
                 any(CancellationSignal.class),
                 anyInt(),
-                callbackCaptor.capture(),
-                eq(FingerprintManager.ENROLL_ENROLL));
+                anyInt(),
+                callbackCaptor.capture());
 
         return callbackCaptor.getValue();
     }

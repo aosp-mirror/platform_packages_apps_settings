@@ -17,7 +17,6 @@
 package com.android.settings.wifi.calling;
 
 import android.app.settings.SettingsEnums;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -30,24 +29,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
-import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -56,10 +51,7 @@ import java.util.List;
  */
 public class WifiCallingSettings extends InstrumentedFragment implements HelpResourceProvider {
     private static final String TAG = "WifiCallingSettings";
-    private int mConstructionSubId;
     private List<SubscriptionInfo> mSil;
-    private ActiveSubscriptionsListener mSubscriptionChangeListener;
-    private static final int [] EMPTY_SUB_ID_LIST = new int[0];
 
     //UI objects
     private RtlCompatibleViewPager mViewPager;
@@ -104,26 +96,16 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         return view;
     }
 
-    private int getConstructionSubId(Bundle bundle) {
-        int subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-
-        Intent intent = getActivity().getIntent();
-        if (intent != null) {
-            subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        }
-        if ((subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) && (bundle != null)) {
-            subId = bundle.getInt(Settings.EXTRA_SUB_ID,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        }
-        return subId;
-    }
-
     private void maybeSetViewForSubId() {
         if (mSil == null) {
             return;
         }
-        int subId = mConstructionSubId;
+        final Intent intent = getActivity().getIntent();
+        if (intent == null) {
+            return;
+        }
+        final int subId = intent.getIntExtra(Settings.EXTRA_SUB_ID,
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
             for (SubscriptionInfo subInfo : mSil) {
                 if (subId == subInfo.getSubscriptionId()) {
@@ -136,15 +118,14 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
     @Override
     public void onCreate(Bundle icicle) {
-        mConstructionSubId = getConstructionSubId(icicle);
         super.onCreate(icicle);
-        Log.d(TAG, "SubId=" + mConstructionSubId);
+        setHasOptionsMenu(true);
+        SearchMenuController.init(this /* host */);
+        HelpMenuController.init(this /* host */);
 
-        if (mConstructionSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            // Only config Wfc if it's enabled by platform.
-            mSubscriptionChangeListener = getSubscriptionChangeListener(getContext());
-        }
-        mSil = updateSubList();
+        // TODO: besides in onCreate, we should also update subList when SIM / Sub status
+        // changes.
+        updateSubList();
     }
 
     @Override
@@ -158,26 +139,6 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         }
 
         updateTitleForCurrentSub();
-
-        if (mSubscriptionChangeListener != null) {
-            mSubscriptionChangeListener.start();
-        }
-    }
-
-    @Override
-    public void onStop() {
-        if (mSubscriptionChangeListener != null) {
-            mSubscriptionChangeListener.stop();
-        }
-
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // keep subscription ID for recreation
-        outState.putInt(Settings.EXTRA_SUB_ID, mConstructionSubId);
     }
 
     @Override
@@ -197,17 +158,16 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return String.valueOf(SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    mSil.get(position), getContext()));
+            return String.valueOf(mSil.get(position).getDisplayName());
         }
 
         @Override
         public Fragment getItem(int position) {
-            int subId = mSil.get(position).getSubscriptionId();
-            Log.d(TAG, "Adapter getItem " + position + " for subId=" + subId);
+            Log.d(TAG, "Adapter getItem " + position);
             final Bundle args = new Bundle();
             args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
-            args.putInt(WifiCallingSettingsForSub.FRAGMENT_BUNDLE_SUBID, subId);
+            args.putInt(WifiCallingSettingsForSub.FRAGMENT_BUNDLE_SUBID,
+                    mSil.get(position).getSubscriptionId());
             final WifiCallingSettingsForSub fragment = new WifiCallingSettingsForSub();
             fragment.setArguments(args);
 
@@ -233,27 +193,22 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
         }
     }
 
-    @VisibleForTesting
-    protected List<SubscriptionInfo> getSelectableSubscriptions(Context context) {
-        return SubscriptionUtil.getSelectableSubscriptionInfoList(context);
-    }
+    private void updateSubList() {
+        mSil = SubscriptionUtil.getActiveSubscriptions(
+                getContext().getSystemService(SubscriptionManager.class));
 
-    private List<SubscriptionInfo> updateSubList() {
-        List<SubscriptionInfo> subInfoList = getSelectableSubscriptions(getContext());
-
-        if (subInfoList == null) {
-            return Collections.emptyList();
+        // Only config Wfc if it's enabled by platform.
+        if (mSil == null) {
+            return;
         }
-        List<SubscriptionInfo> selectedList = new ArrayList<SubscriptionInfo>();
-        for (SubscriptionInfo subInfo : subInfoList) {
-            int subId = subInfo.getSubscriptionId();
-            try {
-                if (queryImsState(subId).isWifiCallingProvisioned()) {
-                    selectedList.add(subInfo);
-                }
-            } catch (Exception exception) {}
+        for (int i = 0; i < mSil.size(); ) {
+            final SubscriptionInfo info = mSil.get(i);
+            if (!queryImsState(info.getSubscriptionId()).isWifiCallingProvisioned()) {
+                mSil.remove(i);
+            } else {
+                i++;
+            }
         }
-        return selectedList;
     }
 
     private void updateTitleForCurrentSub() {
@@ -266,78 +221,7 @@ public class WifiCallingSettings extends InstrumentedFragment implements HelpRes
     }
 
     @VisibleForTesting
-    protected WifiCallingQueryImsState queryImsState(int subId) {
+    WifiCallingQueryImsState queryImsState(int subId) {
         return new WifiCallingQueryImsState(getContext(), subId);
-    }
-
-    @VisibleForTesting
-    protected ActiveSubscriptionsListener getSubscriptionChangeListener(Context context) {
-        return new ActiveSubscriptionsListener(context.getMainLooper(), context) {
-            public void onChanged() {
-                onSubscriptionChange(context);
-            }
-        };
-    }
-
-    protected void onSubscriptionChange(Context context) {
-        if (mSubscriptionChangeListener == null) {
-            return;
-        }
-        int [] previousSubIdList = subscriptionIdList(mSil);
-        List<SubscriptionInfo> updateList = updateSubList();
-        int [] currentSubIdList = subscriptionIdList(updateList);
-
-        if (currentSubIdList.length > 0) {
-            // only keep fragment when any provisioned subscription is available
-            if (previousSubIdList.length == 0) {
-                // initial loading of list
-                mSil = updateList;
-                return;
-            }
-            if (previousSubIdList.length == currentSubIdList.length) {
-                // same number of subscriptions
-                if ( (!containsSubId(previousSubIdList, mConstructionSubId))
-                        // original request not yet appears in list
-                        || containsSubId(currentSubIdList, mConstructionSubId) )
-                        // original request appears in list
-                {
-                    mSil = updateList;
-                    return;
-                }
-            }
-        }
-        Log.d(TAG, "Closed subId=" + mConstructionSubId
-                + " due to subscription change: " + Arrays.toString(previousSubIdList)
-                + " -> " + Arrays.toString(currentSubIdList));
-
-        // close this fragment when no provisioned subscriptions available
-        if (mSubscriptionChangeListener != null) {
-            mSubscriptionChangeListener.stop();
-            mSubscriptionChangeListener = null;
-        }
-
-        // close this fragment
-        finish();
-    }
-
-    protected void finish() {
-        FragmentActivity activity = getActivity();
-        if (activity == null) return;
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        } else {
-            activity.finish();
-        }
-    }
-
-    protected int [] subscriptionIdList(List<SubscriptionInfo> subInfoList) {
-        return (subInfoList == null) ? EMPTY_SUB_ID_LIST :
-                subInfoList.stream().mapToInt(subInfo -> (subInfo == null) ?
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID : subInfo.getSubscriptionId())
-                .toArray();
-    }
-
-    protected boolean containsSubId(int [] subIdArray, int subIdLookUp) {
-        return Arrays.stream(subIdArray).anyMatch(subId -> (subId == subIdLookUp));
     }
 }

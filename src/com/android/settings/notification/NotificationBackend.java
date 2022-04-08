@@ -19,6 +19,7 @@ import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_CACHED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_DYNAMIC;
+import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED;
 import static android.content.pm.LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED_BY_ANY_LAUNCHER;
 
 import android.app.INotificationManager;
@@ -29,7 +30,6 @@ import android.app.NotificationManager;
 import android.app.role.RoleManager;
 import android.app.usage.IUsageStatsManager;
 import android.app.usage.UsageEvents;
-import android.companion.ICompanionDeviceManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +45,6 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.service.notification.ConversationChannelWrapper;
-import android.service.notification.NotificationListenerFilter;
 import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
@@ -54,18 +53,14 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.notification.ConversationIconFactory;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -139,35 +134,6 @@ public class NotificationBackend {
                 }
             }
         }
-    }
-
-    static public CharSequence getDeviceList(ICompanionDeviceManager cdm, LocalBluetoothManager lbm,
-            String pkg, int userId) {
-        boolean multiple = false;
-        StringBuilder sb = new StringBuilder();
-
-        try {
-            List<String> associatedMacAddrs = cdm.getAssociations(pkg, userId);
-            if (associatedMacAddrs != null) {
-                for (String assocMac : associatedMacAddrs) {
-                    final Collection<CachedBluetoothDevice> cachedDevices =
-                            lbm.getCachedDeviceManager().getCachedDevicesCopy();
-                    for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
-                        if (Objects.equals(assocMac, cachedBluetoothDevice.getAddress())) {
-                            if (multiple) {
-                                sb.append(", ");
-                            } else {
-                                multiple = true;
-                            }
-                            sb.append(cachedBluetoothDevice.getName());
-                        }
-                    }
-                }
-            }
-        } catch (RemoteException e) {
-            Log.w(TAG, "Error calling CDM", e);
-        }
-        return sb.toString();
     }
 
     public boolean isSystemApp(Context context, ApplicationInfo app) {
@@ -561,23 +527,6 @@ public class NotificationBackend {
         }
     }
 
-    public ComponentName getDefaultNotificationAssistant() {
-        try {
-            return sINM.getDefaultNotificationAssistant();
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return null;
-        }
-    }
-
-    public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig) {
-        try {
-            sINM.setNASMigrationDoneAndResetDefault(userId, loadFromConfig);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-    }
-
     public boolean setNotificationAssistantGranted(ComponentName cn) {
         try {
             sINM.setNotificationAssistantAccessGranted(cn, true);
@@ -589,15 +538,6 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
-        }
-    }
-
-    public void createConversationNotificationChannel(String pkg, int uid,
-            NotificationChannel parent, String conversationId) {
-        try {
-            sINM.createConversationNotificationChannelForPackage(pkg, uid, parent, conversationId);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
         }
     }
 
@@ -634,41 +574,6 @@ public class NotificationBackend {
     public void requestPinShortcut(Context context, ShortcutInfo shortcutInfo) {
         ShortcutManager sm = context.getSystemService(ShortcutManager.class);
         sm.requestPinShortcut(shortcutInfo, null);
-    }
-
-    public void resetNotificationImportance() {
-        try {
-            sINM.unlockAllNotificationChannels();
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-    }
-
-    public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId) {
-        NotificationListenerFilter nlf = null;
-        try {
-            nlf = sINM.getListenerFilter(cn, userId);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-        return nlf != null ? nlf : new NotificationListenerFilter();
-    }
-
-    public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf) {
-        try {
-            sINM.setListenerFilter(cn, userId, nlf);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-    }
-
-    public boolean isNotificationListenerAccessGranted(ComponentName cn) {
-        try {
-            return sINM.isNotificationListenerAccessGranted(cn);
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-        }
-        return false;
     }
 
     /**

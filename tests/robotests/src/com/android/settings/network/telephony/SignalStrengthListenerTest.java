@@ -16,9 +16,13 @@
 
 package com.android.settings.network.telephony;
 
+import static android.telephony.PhoneStateListener.LISTEN_NONE;
+import static android.telephony.PhoneStateListener.LISTEN_SIGNAL_STRENGTHS;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -27,7 +31,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.telephony.TelephonyCallback;
+import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
 import org.junit.Before;
@@ -39,8 +43,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.collections.Sets;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.concurrent.Executor;
 
 @RunWith(RobolectricTestRunner.class)
 public class SignalStrengthListenerTest {
@@ -86,19 +88,13 @@ public class SignalStrengthListenerTest {
     @Test
     public void updateSubscriptionIds_beforeResume_startedListening() {
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1, SUB_ID_2));
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor1 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor2 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
-
-        verify(mManager1).registerTelephonyCallback(
-                any(Executor.class), captor1.capture());
-        verify(mManager2).registerTelephonyCallback(
-                any(Executor.class), captor2.capture());
-        verify(mManager3, never()).registerTelephonyCallback(any(), any());
-
+        ArgumentCaptor<PhoneStateListener> captor1 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
+        ArgumentCaptor<PhoneStateListener> captor2 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager2).listen(captor2.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager3, never()).listen(any(), anyInt());
         assertThat(captor1.getValue()).isNotNull();
         assertThat(captor2.getValue()).isNotNull();
 
@@ -109,57 +105,46 @@ public class SignalStrengthListenerTest {
     @Test
     public void updateSubscriptionIds_twoCalls_oneIdAdded() {
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1, SUB_ID_2));
-
-        verify(mManager1).registerTelephonyCallback(any(Executor.class),
-                eq(mListener.mTelephonyCallbacks.get(SUB_ID_1)));
-        verify(mManager2).registerTelephonyCallback(any(Executor.class),
-                eq(mListener.mTelephonyCallbacks.get(SUB_ID_2)));
+        verify(mManager1).listen(any(PhoneStateListener.class), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager2).listen(any(PhoneStateListener.class), eq(LISTEN_SIGNAL_STRENGTHS));
 
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1, SUB_ID_2, SUB_ID_3));
-        verify(mManager1, never()).unregisterTelephonyCallback(
-                mListener.mTelephonyCallbacks.get(SUB_ID_1));
-        verify(mManager2, never()).unregisterTelephonyCallback(
-                mListener.mTelephonyCallbacks.get(SUB_ID_2));
-        verify(mManager3).registerTelephonyCallback(
-                any(Executor.class), eq(mListener.mTelephonyCallbacks.get(SUB_ID_3)));
+        verify(mManager1, never()).listen(any(PhoneStateListener.class), eq(LISTEN_NONE));
+        verify(mManager2, never()).listen(any(PhoneStateListener.class), eq(LISTEN_NONE));
+        verify(mManager3).listen(any(PhoneStateListener.class), eq(LISTEN_SIGNAL_STRENGTHS));
     }
 
     @Test
     public void updateSubscriptionIds_twoCalls_oneIdRemoved() {
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor1 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
+        ArgumentCaptor<PhoneStateListener> captor1 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
 
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1, SUB_ID_2));
-        verify(mManager1).registerTelephonyCallback(any(Executor.class), captor1.capture());
-        verify(mManager2).registerTelephonyCallback(
-                any(Executor.class), any(TelephonyCallback.class));
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager2).listen(any(PhoneStateListener.class), eq(LISTEN_SIGNAL_STRENGTHS));
 
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_2));
-        verify(mManager1).unregisterTelephonyCallback(captor1.capture());
-        verify(mManager2, never()).unregisterTelephonyCallback(any(TelephonyCallback.class));
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_NONE));
+        verify(mManager2, never()).listen(any(PhoneStateListener.class), eq(LISTEN_NONE));
         // Make sure the correct listener was removed.
         assertThat(captor1.getAllValues().get(0) == captor1.getAllValues().get(1)).isTrue();
     }
 
     @Test
     public void updateSubscriptionIds_twoCalls_twoIdsRemovedOneAdded() {
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor1 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor2 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
+        ArgumentCaptor<PhoneStateListener> captor1 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
+        ArgumentCaptor<PhoneStateListener> captor2 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
 
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_1, SUB_ID_2));
-        verify(mManager1).registerTelephonyCallback(any(Executor.class), captor1.capture());
-        verify(mManager2).registerTelephonyCallback(any(Executor.class), captor2.capture());
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager2).listen(captor2.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
 
         mListener.updateSubscriptionIds(Sets.newSet(SUB_ID_3));
-        verify(mManager1).unregisterTelephonyCallback(captor1.capture());
-        verify(mManager2).unregisterTelephonyCallback(captor2.capture());
-        verify(mManager3).registerTelephonyCallback(
-                any(Executor.class), any(TelephonyCallback.class));
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_NONE));
+        verify(mManager2).listen(captor2.capture(), eq(LISTEN_NONE));
+        verify(mManager3).listen(any(PhoneStateListener.class), eq(LISTEN_SIGNAL_STRENGTHS));
         // Make sure the correct listeners were removed.
         assertThat(captor1.getValue() != captor2.getValue()).isTrue();
         assertThat(captor1.getAllValues().get(0) == captor1.getAllValues().get(1)).isTrue();
@@ -172,19 +157,15 @@ public class SignalStrengthListenerTest {
         mListener.pause();
         mListener.resume();
 
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor1 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
-        ArgumentCaptor<SignalStrengthListener.SignalStrengthTelephonyCallback> captor2 =
-                ArgumentCaptor.forClass(
-                        SignalStrengthListener.SignalStrengthTelephonyCallback.class);
-        verify(mManager1, times(2)).registerTelephonyCallback(
-                any(Executor.class), captor1.capture());
-        verify(mManager1).unregisterTelephonyCallback(captor1.capture());
+        ArgumentCaptor<PhoneStateListener> captor1 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
+        ArgumentCaptor<PhoneStateListener> captor2 = ArgumentCaptor.forClass(
+                PhoneStateListener.class);
+        verify(mManager1, times(2)).listen(captor1.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager1).listen(captor1.capture(), eq(LISTEN_NONE));
 
-        verify(mManager2, times(2)).registerTelephonyCallback(
-                any(Executor.class), captor2.capture());
-        verify(mManager2).unregisterTelephonyCallback(captor2.capture());
+        verify(mManager2, times(2)).listen(captor2.capture(), eq(LISTEN_SIGNAL_STRENGTHS));
+        verify(mManager2).listen(captor2.capture(), eq(LISTEN_NONE));
 
         assertThat(captor1.getAllValues().get(0) == captor1.getAllValues().get(1)).isTrue();
         assertThat(captor1.getAllValues().get(0) == captor1.getAllValues().get(2)).isTrue();

@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.net.Uri;
 
 import androidx.core.graphics.drawable.IconCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.settingslib.core.instrumentation.Instrumentable;
 
@@ -32,6 +31,7 @@ import java.util.List;
 public interface PanelContent extends Instrumentable {
 
     int VIEW_TYPE_SLIDER = 1;
+    int VIEW_TYPE_SLIDER_LARGE_ICON = 2;
 
     /**
      * @return a icon for the title of the Panel.
@@ -95,11 +95,8 @@ public interface PanelContent extends Instrumentable {
 
     /**
      * Implement the click event for custom button.
-     *
-     * @param panelActivity the FragmentActivity from PanelFragment, the user can decide whether
-     * to finish activity or not.
      */
-    default void onClickCustomizedButton(FragmentActivity panelActivity) {}
+    default void onClickCustomizedButton() {}
 
     /**
      * Register to start receiving callbacks for custom button events.
@@ -113,12 +110,5 @@ public interface PanelContent extends Instrumentable {
      */
     default int getViewType() {
         return 0;
-    }
-
-    /**
-     * @return {@code true} to enable progress bar visibility, {@code false} otherwise.
-     */
-    default boolean isProgressBarVisible() {
-        return false;
     }
 }

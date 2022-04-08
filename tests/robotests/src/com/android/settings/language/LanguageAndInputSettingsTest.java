@@ -133,7 +133,7 @@ public class LanguageAndInputSettingsTest {
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
-        assertThat(keys).containsAtLeastElementsIn(niks);
+        assertThat(keys).containsAllIn(niks);
     }
 
     @Test
@@ -151,7 +151,7 @@ public class LanguageAndInputSettingsTest {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 
-        assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
+        assertThat(preferenceScreenKeys).containsAllIn(preferenceKeys);
     }
 
     /**

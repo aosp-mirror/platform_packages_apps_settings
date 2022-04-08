@@ -39,10 +39,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.euicc.EuiccManager;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -55,6 +51,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.Arrays;
+
+import androidx.lifecycle.Lifecycle;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 @RunWith(RobolectricTestRunner.class)
 public class MobileNetworkListControllerTest {

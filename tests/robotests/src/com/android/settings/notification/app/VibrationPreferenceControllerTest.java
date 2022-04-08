@@ -45,8 +45,6 @@ import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import com.google.common.collect.ImmutableList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +54,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class VibrationPreferenceControllerTest {
@@ -102,7 +98,7 @@ public class VibrationPreferenceControllerTest {
         when(mVibrator.hasVibrator()).thenReturn(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -110,7 +106,7 @@ public class VibrationPreferenceControllerTest {
     public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -119,7 +115,7 @@ public class VibrationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -127,25 +123,8 @@ public class VibrationPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredIn() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null,
-                ImmutableList.of(NotificationChannel.EDIT_VIBRATION));
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredOut() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
-        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -153,7 +132,7 @@ public class VibrationPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
-                RestrictedLockUtils.EnforcedAdmin.class), null);
+                RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -166,7 +145,7 @@ public class VibrationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -179,7 +158,7 @@ public class VibrationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
         mController.updateState(pref);
@@ -191,8 +170,7 @@ public class VibrationPreferenceControllerTest {
     public void testUpdateState_vibrateOn() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldVibrate()).thenReturn(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -204,8 +182,7 @@ public class VibrationPreferenceControllerTest {
     public void testUpdateState_vibrateOff() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldVibrate()).thenReturn(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -217,8 +194,7 @@ public class VibrationPreferenceControllerTest {
     public void testOnPreferenceChange_on() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);
@@ -234,8 +210,7 @@ public class VibrationPreferenceControllerTest {
     public void testOnPreferenceChange_off() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         RestrictedSwitchPreference pref =
                 new RestrictedSwitchPreference(RuntimeEnvironment.application);

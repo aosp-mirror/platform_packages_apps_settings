@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.SpannedString;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -45,8 +44,6 @@ public class DeviceNamePreferenceController extends BasePreferenceController
         OnSaveInstanceState,
         OnCreate {
     private static final String KEY_PENDING_DEVICE_NAME = "key_pending_device_name";
-    @VisibleForTesting
-    static final int RES_SHOW_DEVICE_NAME_BOOL = R.bool.config_show_device_name;
     private String mDeviceName;
     protected WifiManager mWifiManager;
     private final BluetoothAdapter mBluetoothAdapter;

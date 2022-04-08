@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
@@ -52,11 +51,6 @@ public class LightsPreferenceController extends NotificationPreferenceController
         return checkCanBeVisible(NotificationManager.IMPORTANCE_DEFAULT)
                 && canPulseLight()
                 && !isDefaultChannel();
-    }
-
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_LOCKED_DEVICE);
     }
 
     public void updateState(Preference preference) {

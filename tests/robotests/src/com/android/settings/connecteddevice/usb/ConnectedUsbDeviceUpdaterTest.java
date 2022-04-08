@@ -22,17 +22,11 @@ import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
-import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -61,30 +55,21 @@ public class ConnectedUsbDeviceUpdaterTest {
     private DevicePreferenceCallback mDevicePreferenceCallback;
     @Mock
     private UsbBackend mUsbBackend;
-    @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         when(mFragment.getContext()).thenReturn(mContext);
         mDeviceUpdater =
                 new ConnectedUsbDeviceUpdater(mContext, mFragment, mDevicePreferenceCallback,
                         mUsbBackend);
         mDeviceUpdater.mUsbReceiver = mUsbReceiver;
-        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
-        doReturn(mContext).when(mContext).createPackageContextAsUser(
-                any(String.class), anyInt(), any(UserHandle.class));
     }
 
     @Test
     public void initUsbPreference_preferenceInit() {
-        when(mDevicePolicyManager.isUsbDataSignalingEnabledForUser(
-                UserHandle.myUserId())).thenReturn(true);
-
         mDeviceUpdater.initUsbPreference(mContext);
 
         assertThat(mDeviceUpdater.mUsbPreference.getTitle()).isEqualTo("USB");

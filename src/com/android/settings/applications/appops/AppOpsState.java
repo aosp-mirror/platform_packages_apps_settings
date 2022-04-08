@@ -588,7 +588,7 @@ public class AppOpsState {
             if (appEntry == null) {
                 continue;
             }
-            List<AppOpsManager.OpEntry> stubOps = null;
+            List<AppOpsManager.OpEntry> dummyOps = null;
             AppOpsManager.PackageOps pkgOps = null;
             if (appInfo.requestedPermissions != null) {
                 for (int j=0; j<appInfo.requestedPermissions.length; j++) {
@@ -611,15 +611,15 @@ public class AppOpsState {
                         if (appEntry.hasOp(permOps.get(k))) {
                             continue;
                         }
-                        if (stubOps == null) {
-                            stubOps = new ArrayList<AppOpsManager.OpEntry>();
+                        if (dummyOps == null) {
+                            dummyOps = new ArrayList<AppOpsManager.OpEntry>();
                             pkgOps = new AppOpsManager.PackageOps(
-                                    appInfo.packageName, appInfo.applicationInfo.uid, stubOps);
+                                    appInfo.packageName, appInfo.applicationInfo.uid, dummyOps);
 
                         }
                         AppOpsManager.OpEntry opEntry = new AppOpsManager.OpEntry(
                                 permOps.get(k), AppOpsManager.MODE_ALLOWED, Collections.emptyMap());
-                        stubOps.add(opEntry);
+                        dummyOps.add(opEntry);
                         addOp(entries, pkgOps, appEntry, opEntry, packageName == null,
                                 packageName == null ? 0 : opToOrder[opEntry.getOp()]);
                     }

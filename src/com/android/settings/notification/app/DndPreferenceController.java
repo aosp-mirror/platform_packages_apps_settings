@@ -47,11 +47,6 @@ public class DndPreferenceController extends NotificationPreferenceController
         return true;
     }
 
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_ZEN);
-    }
-
     public void updateState(Preference preference) {
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;

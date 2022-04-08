@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2018 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="default_autofill_picker"
+    android:title="@string/autofill_app"
+    settings:keywords="@string/autofill_keywords">
+
+  <com.android.settings.widget.GearPreference
+      android:key="default_autofill_main"
+      android:title="@string/autofill_app"
+      android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+      settings:searchable="false"
+      settings:keywords="@string/autofill_keywords">
+    <extra android:name="for_work" android:value="false" />
+  </com.android.settings.widget.GearPreference>
+
+
+  <com.android.settings.widget.WorkOnlyCategory
+      android:key="autofill_work_app_defaults"
+      android:title="@string/default_for_work">
+
+    <com.android.settings.widget.GearPreference
+        android:key="default_autofill_work"
+        android:title="@string/autofill_app"
+        android:fragment="com.android.settings.applications.defaultapps.DefaultAutofillPicker"
+        settings:searchable="false"
+        settings:keywords="@string/autofill_keywords">
+      <extra android:name="for_work" android:value="true" />
+    </com.android.settings.widget.GearPreference>
+  </com.android.settings.widget.WorkOnlyCategory>
+</PreferenceScreen>

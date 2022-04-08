@@ -34,7 +34,6 @@ import androidx.test.core.content.pm.ApplicationInfoBuilder;
 
 import com.android.settings.R;
 import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +43,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowNfcAdapter;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -71,7 +70,7 @@ public class AdvancedConnectedDeviceControllerTest {
         mContentResolver = mContext.getContentResolver();
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
+        mShadowNfcAdapter = Shadows.shadowOf(NfcAdapter.getNfcAdapter(mContext));
         mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
     }
 

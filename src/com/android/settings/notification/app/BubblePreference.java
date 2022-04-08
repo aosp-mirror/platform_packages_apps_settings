@@ -45,6 +45,8 @@ public class BubblePreference extends Preference implements View.OnClickListener
     private int mSelectedPreference;
 
     private Context mContext;
+    private Drawable mSelectedBackground;
+    private Drawable mUnselectedBackground;
 
     private ButtonViewHolder mBubbleAllButton;
     private ButtonViewHolder mBubbleSelectedButton;
@@ -70,6 +72,8 @@ public class BubblePreference extends Preference implements View.OnClickListener
         mHelper = new RestrictedPreferenceHelper(context, this, attrs);
         mHelper.useAdminDisabledSummary(true);
         mContext = context;
+        mSelectedBackground = mContext.getDrawable(R.drawable.button_border_selected);
+        mUnselectedBackground = mContext.getDrawable(R.drawable.button_border_unselected);
         setLayoutResource(R.layout.bubble_preference);
     }
 
@@ -163,9 +167,7 @@ public class BubblePreference extends Preference implements View.OnClickListener
         }
 
         void setSelected(Context context, boolean selected) {
-            mView.setBackground(mContext.getDrawable(selected
-                ? R.drawable.button_border_selected
-                : R.drawable.button_border_unselected));
+            mView.setBackground(selected ?  mSelectedBackground : mUnselectedBackground);
             mView.setSelected(selected);
 
             ColorStateList stateList = selected

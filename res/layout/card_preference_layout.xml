@@ -15,19 +15,20 @@
   limitations under the License.
   -->
 
-<com.google.android.material.card.MaterialCardView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:foreground="@drawable/contextual_card_background"
-    android:clickable="true"
-    style="@style/ContextualCardStyle">
-
-    <include
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-8dp"
-        layout="@layout/settingslib_preference"/>
-</com.google.android.material.card.MaterialCardView>
+        android:layout_margin="8dp"
+        style="@style/ContextualCardStyle">
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-8dp"
+            layout="@layout/preference_material" />
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

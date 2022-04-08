@@ -19,6 +19,7 @@ package com.android.settings.core;
 import android.annotation.StringRes;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.text.TextUtils;
@@ -29,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.transition.SettingsTransitionHelper.TransitionType;
 
 public class SubSettingLauncher {
 
@@ -43,7 +43,6 @@ public class SubSettingLauncher {
         }
         mContext = context;
         mLaunchRequest = new LaunchRequest();
-        mLaunchRequest.transitionType = TransitionType.TRANSITION_SHARED_AXIS;
     }
 
     public SubSettingLauncher setDestination(String fragmentName) {
@@ -117,11 +116,6 @@ public class SubSettingLauncher {
         return this;
     }
 
-    public SubSettingLauncher setTransitionType(int transitionType) {
-        mLaunchRequest.transitionType = transitionType;
-        return this;
-    }
-
     public void launch() {
         if (mLaunched) {
             throw new IllegalStateException(
@@ -168,9 +162,6 @@ public class SubSettingLauncher {
                 mLaunchRequest.titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
         intent.addFlags(mLaunchRequest.flags);
-        intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
-                mLaunchRequest.transitionType);
-
         return intent;
     }
 
@@ -181,6 +172,8 @@ public class SubSettingLauncher {
 
     @VisibleForTesting
     void launchAsUser(Intent intent, UserHandle userHandle) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         mContext.startActivityAsUser(intent, userHandle);
     }
 
@@ -190,8 +183,7 @@ public class SubSettingLauncher {
         resultListener.getActivity().startActivityForResultAsUser(intent, requestCode, userHandle);
     }
 
-    @VisibleForTesting
-    void launchForResult(Fragment listener, Intent intent, int requestCode) {
+    private void launchForResult(Fragment listener, Intent intent, int requestCode) {
         listener.startActivityForResult(intent, requestCode);
     }
 
@@ -200,7 +192,6 @@ public class SubSettingLauncher {
             intent.replaceExtras(mLaunchRequest.extras);
         }
     }
-
     /**
      * Simple container that has information about how to launch a subsetting.
      */
@@ -214,7 +205,6 @@ public class SubSettingLauncher {
         Fragment mResultListener;
         int mRequestCode;
         UserHandle userHandle;
-        int transitionType;
         Bundle arguments;
         Bundle extras;
     }

@@ -55,7 +55,6 @@ public class PriorityConversationsPreferenceController extends
         Preference pref = new Preference(mContext);
         pref.setOrder(1);
         pref.setSummary(R.string.important_conversations_summary_bubbles);
-        pref.setSelectable(false);
         return pref;
     }
 
@@ -68,9 +67,22 @@ public class PriorityConversationsPreferenceController extends
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
-        mConversations = mBackend.getConversations(true).getList();
-        Collections.sort(mConversations, mConversationComparator);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                mConversations = mBackend.getConversations(true).getList();
+                Collections.sort(mConversations, mConversationComparator);
+                return null;
+            }
 
-        populateList(mConversations, pref);
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
+                populateList(mConversations, pref);
+            }
+        }.execute();
+
     }
 }

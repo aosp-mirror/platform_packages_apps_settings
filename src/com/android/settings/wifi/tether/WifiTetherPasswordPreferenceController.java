@@ -37,16 +37,12 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.UUID;
 
-/**
- * Controller for logic pertaining to the password of Wi-Fi tethering.
- */
 public class WifiTetherPasswordPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
 
     private static final String PREF_KEY = "wifi_tether_network_password";
 
     private String mPassword;
-    private int mSecurityType;
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -72,13 +68,13 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     @Override
     public void updateDisplay() {
         final SoftApConfiguration config = mWifiManager.getSoftApConfiguration();
-        if (config.getSecurityType() != SoftApConfiguration.SECURITY_TYPE_OPEN
-                && TextUtils.isEmpty(config.getPassphrase())) {
+        if (config == null
+                || (config.getSecurityType() == SoftApConfiguration.SECURITY_TYPE_WPA2_PSK
+                && TextUtils.isEmpty(config.getPassphrase()))) {
             mPassword = generateRandomPassword();
         } else {
             mPassword = config.getPassphrase();
         }
-        mSecurityType = config.getSecurityType();
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         ((ValidatedEditTextPreference) mPreference).setIsPassword(true);
         ((ValidatedEditTextPreference) mPreference).setIsSummaryPassword(true);
@@ -109,27 +105,20 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
         // don't actually overwrite unless we get a new config in case it was accidentally toggled.
         if (securityType == SoftApConfiguration.SECURITY_TYPE_OPEN) {
             return "";
-        } else if (!WifiUtils.isHotspotPasswordValid(mPassword, securityType)) {
+        } else if (!isTextValid(mPassword)) {
             mPassword = generateRandomPassword();
             updatePasswordDisplay((EditTextPreference) mPreference);
         }
         return mPassword;
     }
 
-    /**
-     * This method set the security type of user selection. Then the controller will based on the
-     * security type changed to update the password changed on the preference.
-     *
-     * @param securityType The security type of SoftApConfiguration.
-     */
-    public void setSecurityType(int securityType) {
-        mSecurityType = securityType;
+    public void updateVisibility(int securityType) {
         mPreference.setVisible(securityType != SoftApConfiguration.SECURITY_TYPE_OPEN);
     }
 
     @Override
     public boolean isTextValid(String value) {
-        return WifiUtils.isHotspotPasswordValid(value, mSecurityType);
+        return WifiUtils.isHotspotPasswordValid(value);
     }
 
     private static String generateRandomPassword() {

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.icu.text.NumberFormat;
 import android.provider.Settings;
 import android.provider.Settings.Global;
-import android.text.TextUtils;
-
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 import com.android.settings.R;
@@ -39,11 +37,13 @@ public class BatterySaverStickyPreferenceController extends TogglePreferenceCont
     @Override
     protected void refreshSummary(Preference preference) {
         super.refreshSummary(preference);
-        final int stickyShutoffLevel = Settings.Global.getInt(
+        final double stickyShutoffLevel = Settings.Global.getInt(
             mContext.getContentResolver(), Global.LOW_POWER_MODE_STICKY_AUTO_DISABLE_LEVEL, 90);
-        preference.setSummary(TextUtils.expandTemplate(
-                mContext.getString(R.string.battery_saver_sticky_description_new),
-                NumberFormat.getIntegerInstance().format(stickyShutoffLevel)));
+        final String percentage = NumberFormat
+            .getPercentInstance()
+            .format(stickyShutoffLevel / 100.0);
+        preference.setSummary(
+            mContext.getString(R.string.battery_saver_sticky_description_new, percentage));
     }
 
     @Override

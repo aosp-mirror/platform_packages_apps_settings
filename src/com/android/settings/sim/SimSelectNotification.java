@@ -23,7 +23,6 @@ import static android.provider.Settings.EXTRA_SUB_ID;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_ALL;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DATA;
-import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS;
 import static android.telephony.TelephonyManager.EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_NONE;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_NAMES;
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE;
@@ -31,9 +30,6 @@ import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_T
 import static android.telephony.TelephonyManager.EXTRA_SIM_COMBINATION_WARNING_TYPE_NONE;
 import static android.telephony.TelephonyManager.EXTRA_SUBSCRIPTION_ID;
 import static android.telephony.data.ApnSetting.TYPE_MMS;
-
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-import static com.android.settings.sim.SimDialogActivity.PICK_DISMISS;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -54,6 +50,7 @@ import com.android.settings.HelpTrampoline;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settingslib.HelpUtils;
 
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";
@@ -139,8 +136,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         }
 
         CharSequence notificationSummary = context.getResources().getString(
-                R.string.enable_mms_notification_summary,
-                SubscriptionUtil.getUniqueSubscriptionDisplayName(info, context));
+                R.string.enable_mms_notification_summary, SubscriptionUtil.getDisplayName(info));
 
         cancelEnableMmsNotification(context);
 
@@ -162,16 +158,6 @@ public class SimSelectNotification extends BroadcastReceiver {
 
         // Cancel any previous notifications
         cancelSimSelectNotification(context);
-
-        // If the dialog type is to dismiss.
-        if (dialogType == EXTRA_DEFAULT_SUBSCRIPTION_SELECT_TYPE_DISMISS) {
-            Intent newIntent = new Intent(context, SimDialogActivity.class);
-            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            newIntent.putExtra(SimDialogActivity.DIALOG_TYPE_KEY, PICK_DISMISS);
-            context.startActivity(newIntent);
-            return;
-        }
-
         // Create a notification to tell the user that some defaults are missing
         createSimSelectNotification(context);
 
@@ -199,11 +185,10 @@ public class SimSelectNotification extends BroadcastReceiver {
         final int warningType = intent.getIntExtra(EXTRA_SIM_COMBINATION_WARNING_TYPE,
                 EXTRA_SIM_COMBINATION_WARNING_TYPE_NONE);
 
-        // Cancel any previous notifications
-        cancelSimCombinationWarningNotification(context);
-
         if (warningType == EXTRA_SIM_COMBINATION_WARNING_TYPE_DUAL_CDMA) {
-            // Create a notification to tell the user that there's a sim combination warning.
+            // Cancel any previous notifications
+            cancelSimCombinationWarningNotification(context);
+            // Create a notification to tell the user that some defaults are missing
             createSimCombinationWarningNotification(context, intent);
         }
     }
@@ -224,10 +209,9 @@ public class SimSelectNotification extends BroadcastReceiver {
                 .setContentText(resources.getText(R.string.sim_notification_summary))
                 .setAutoCancel(true);
         Intent resultIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
-        resultIntent.setPackage(SETTINGS_PACKAGE_NAME);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -265,7 +249,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         resultIntent.putExtra(Settings.EXTRA_SUB_ID, subId);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
         // Notify the notification.
@@ -313,7 +297,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         resultIntent.putExtra(Intent.EXTRA_TEXT, "help_uri_sim_combination_warning");
 
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
         NotificationManager notificationManager =

@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -93,7 +91,6 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().addPrivateFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
         setResult(RESULT_CANCELED); // By default, set the result to cancelled
         Intent intent = getIntent();
         CharSequence label = "";

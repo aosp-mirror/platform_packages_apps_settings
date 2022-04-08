@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -39,11 +38,10 @@ public class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
         return SettingsEnums.DIALOG_ZEN_ACCESS_GRANT;
     }
 
-    public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label, Fragment target) {
+    public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
         Bundle args = new Bundle();
         args.putString(KEY_PKG, pkg);
         args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
-        setTargetFragment(target, 0);
         setArguments(args);
         return this;
     }
@@ -59,18 +57,12 @@ public class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
                 label);
         final String summary = getResources()
                 .getString(R.string.zen_access_warning_dialog_summary);
-
-        ZenAccessDetails parent = (ZenAccessDetails) getTargetFragment();
-
         return new AlertDialog.Builder(getContext())
                 .setMessage(summary)
                 .setTitle(title)
                 .setCancelable(true)
                 .setPositiveButton(R.string.allow,
-                        (dialog, id) -> {
-                            ZenAccessController.setAccess(getContext(), pkg, true);
-                            parent.refreshUi();
-                        })
+                        (dialog, id) -> ZenAccessController.setAccess(getContext(), pkg, true))
                 .setNegativeButton(R.string.deny,
                         (dialog, id) -> {
                             // pass

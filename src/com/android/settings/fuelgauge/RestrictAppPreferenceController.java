@@ -18,7 +18,6 @@
 package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -30,7 +29,6 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
@@ -82,8 +80,6 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
             // start fragment
             RestrictedAppDetails.startRestrictedAppDetails(mPreferenceFragment,
                     mAppInfos);
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                    .action(mContext, SettingsEnums.OPEN_APP_RESTRICTED_LIST);
             return true;
         }
 

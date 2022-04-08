@@ -44,7 +44,6 @@ import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -53,7 +52,8 @@ import java.lang.annotation.RetentionPolicy;
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
  */
-public final class BluetoothDevicePreference extends GearPreference {
+public final class BluetoothDevicePreference extends GearPreference implements
+        CachedBluetoothDevice.Callback {
     private static final String TAG = "BluetoothDevicePref";
 
     private static int sDimAlpha = Integer.MIN_VALUE;
@@ -77,20 +77,10 @@ public final class BluetoothDevicePreference extends GearPreference {
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
     private boolean mHideSecondTarget = false;
-    private boolean mIsCallbackRemoved = false;
     @VisibleForTesting
     boolean mNeedNotifyHierarchyChanged = false;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
-    final BluetoothDevicePreferenceCallback mCallback;
-
-    private class BluetoothDevicePreferenceCallback implements CachedBluetoothDevice.Callback {
-
-        @Override
-        public void onDeviceAttributesChanged() {
-            onPreferenceAttributesChanged();
-        }
-    }
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
             boolean showDeviceWithoutNames, @SortType int type) {
@@ -106,12 +96,11 @@ public final class BluetoothDevicePreference extends GearPreference {
         }
 
         mCachedDevice = cachedDevice;
-        mCallback = new BluetoothDevicePreferenceCallback();
-        mCachedDevice.registerCallback(mCallback);
+        mCachedDevice.registerCallback(this);
         mCurrentTime = System.currentTimeMillis();
         mType = type;
 
-        onPreferenceAttributesChanged();
+        onDeviceAttributesChanged();
     }
 
     public void setNeedNotifyHierarchyChanged(boolean needNotifyHierarchyChanged) {
@@ -138,32 +127,10 @@ public final class BluetoothDevicePreference extends GearPreference {
     @Override
     protected void onPrepareForRemoval() {
         super.onPrepareForRemoval();
-        if (!mIsCallbackRemoved) {
-            mCachedDevice.unregisterCallback(mCallback);
-            mIsCallbackRemoved = true;
-        }
+        mCachedDevice.unregisterCallback(this);
         if (mDisconnectDialog != null) {
             mDisconnectDialog.dismiss();
             mDisconnectDialog = null;
-        }
-    }
-
-    @Override
-    public void onAttached() {
-        super.onAttached();
-        if (mIsCallbackRemoved) {
-            mCachedDevice.registerCallback(mCallback);
-            mIsCallbackRemoved = false;
-        }
-        onPreferenceAttributesChanged();
-    }
-
-    @Override
-    public void onDetached() {
-        super.onDetached();
-        if (!mIsCallbackRemoved) {
-            mCachedDevice.unregisterCallback(mCallback);
-            mIsCallbackRemoved = true;
         }
     }
 
@@ -175,11 +142,7 @@ public final class BluetoothDevicePreference extends GearPreference {
         mHideSecondTarget = hideSecondTarget;
     }
 
-    void onPreferenceAttributesChanged() {
-        Pair<Drawable, String> pair = mCachedDevice.getDrawableWithDescription();
-        setIcon(pair.first);
-        contentDescription = pair.second;
-
+    public void onDeviceAttributesChanged() {
         /*
          * The preference framework takes care of making sure the value has
          * changed before proceeding. It will also call notifyChanged() if
@@ -188,6 +151,13 @@ public final class BluetoothDevicePreference extends GearPreference {
         setTitle(mCachedDevice.getName());
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
+
+        final Pair<Drawable, String> pair =
+                BluetoothUtils.getBtRainbowDrawableWithDescription(getContext(), mCachedDevice);
+        if (pair.first != null) {
+            setIcon(pair.first);
+            contentDescription = pair.second;
+        }
 
         // Used to gray out the item
         setEnabled(!mCachedDevice.isBusy());

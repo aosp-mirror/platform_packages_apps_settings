@@ -40,7 +40,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -117,7 +117,7 @@ public class AllInOneTetherPreferenceControllerTest {
     @Mock
     private BluetoothAdapter mBluetoothAdapter;
     @Mock
-    private PrimarySwitchPreference mPreference;
+    private MasterSwitchPreference mPreference;
 
     private static final String PREF_KEY = "tether";
     private AllInOneTetherPreferenceController mController;

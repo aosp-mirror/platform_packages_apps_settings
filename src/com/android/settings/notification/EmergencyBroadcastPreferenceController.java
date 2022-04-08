@@ -86,11 +86,7 @@ public class EmergencyBroadcastPreferenceController extends AbstractPreferenceCo
     private boolean isCellBroadcastAppLinkEnabled() {
         // Enable link to CMAS app settings depending on the value in config.xml.
         boolean enabled = mContext.getResources().getBoolean(
-            com.android.internal.R.bool.config_cellBroadcastAppLinks) &&
-            // For data-only tablet devices which need to not forwarding any WEA-alert and hide from
-            // settings menu.
-            !mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_disable_all_cb_messages);
+                com.android.internal.R.bool.config_cellBroadcastAppLinks);
         if (enabled) {
             try {
                 String packageName = CellBroadcastUtils

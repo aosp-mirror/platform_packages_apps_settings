@@ -33,7 +33,6 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -65,8 +64,6 @@ public class PhoneNumberPreferenceControllerTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private PreferenceCategory mCategory;
 
     private Context mContext;
     private PhoneNumberPreferenceController mController;
@@ -81,8 +78,6 @@ public class PhoneNumberPreferenceControllerTest {
         final String prefKey = mController.getPreferenceKey();
         when(mScreen.findPreference(prefKey)).thenReturn(mPreference);
         when(mScreen.getContext()).thenReturn(mContext);
-        final String categoryKey = "basic_info_category";
-        when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
         doReturn(mSubscriptionInfo).when(mController).getSubscriptionInfo(anyInt());
         doReturn(mSecondPreference).when(mController).createNewPreference(mContext);
         when(mPreference.isVisible()).thenReturn(true);
@@ -110,7 +105,7 @@ public class PhoneNumberPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(mSecondPreference);
+        verify(mScreen).addPreference(mSecondPreference);
     }
 
     @Test

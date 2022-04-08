@@ -25,13 +25,28 @@
     android:clickable="false"
     android:orientation="horizontal">
 
-    <include layout="@layout/settingslib_icon_frame"/>
+    <LinearLayout
+        android:id="@+id/icon_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="56dp"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+        <com.android.internal.widget.PreferenceImageView
+            android:id="@android:id/icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp">
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textAppearance="@*android:style/TextAppearance.Material.Subhead"
                 android:textColor="?android:attr/textColorPrimary"
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"/>
@@ -57,14 +72,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layoutDirection="ltr"
             android:orientation="vertical">
 
             <com.android.settings.accessibility.BalanceSeekBar
                 android:id="@*android:id/seekbar"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                android:paddingStart="0dp"
-                android:paddingEnd="12dp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -76,9 +87,7 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/left_text"
-                    android:text="@string/accessibility_toggle_primary_balance_left_label"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:text="@string/accessibility_toggle_master_balance_left_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -86,9 +95,7 @@
                     android:textAlignment="viewStart" />
                 <TextView
                     android:id="@+id/right_text"
-                    android:text="@string/accessibility_toggle_primary_balance_right_label"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?android:attr/textColorSecondary"
+                    android:text="@string/accessibility_toggle_master_balance_right_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

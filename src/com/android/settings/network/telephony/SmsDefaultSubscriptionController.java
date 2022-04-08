@@ -21,16 +21,10 @@ import android.telecom.PhoneAccountHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.android.settings.Utils;
-
 public class SmsDefaultSubscriptionController extends DefaultSubscriptionController {
-
-    private final boolean mIsAskEverytimeSupported;
 
     public SmsDefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mIsAskEverytimeSupported = mContext.getResources()
-                .getBoolean(com.android.internal.R.bool.config_sms_ask_every_time_support);
     }
 
     @Override
@@ -49,22 +43,8 @@ public class SmsDefaultSubscriptionController extends DefaultSubscriptionControl
     }
 
     @Override
-    protected boolean isAskEverytimeSupported() {
-        return mIsAskEverytimeSupported;
-    }
-
-    @Override
     public PhoneAccountHandle getDefaultCallingAccountHandle() {
         // Not supporting calling account override by VoIP
         return null;
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        if (Utils.isProviderModelEnabled(mContext)) {
-            return MobileNetworkUtils.getPreferredStatus(mContext, mManager, false);
-        } else {
-            return super.getSummary();
-        }
     }
 }

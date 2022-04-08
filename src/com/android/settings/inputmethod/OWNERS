@@ -1,7 +1,5 @@
-# Bug component: 34867
-include platform/frameworks/base:/services/core/java/com/android/server/inputmethod/OWNERS
+# Default reviewers for this and subdirectories.
+yukawa@google.com
+michaelwr@google.com
 
-# Settings for physical keyboard and game pad are better to be reviewed by the input team
-per-file GameControllerPreferenceController.java = file: platform/frameworks/base:/services/core/java/com/android/server/input/OWNERS
-per-file KeyboardLayoutPicker*.java = file: platform/frameworks/base:/services/core/java/com/android/server/input/OWNERS
-per-file PhysicalKeyboard*.java = file: platform/frameworks/base:/services/core/java/com/android/server/input/OWNERS
+# Emergency approvers in case the above are not available

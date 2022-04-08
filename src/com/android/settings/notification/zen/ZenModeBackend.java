@@ -26,7 +26,7 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.database.Cursor;
-import android.icu.text.MessageFormat;
+import android.icu.text.ListFormatter;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.Settings;
@@ -41,9 +41,7 @@ import com.android.settings.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class ZenModeBackend {
@@ -447,9 +445,9 @@ public class ZenModeBackend {
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 String contact = cursor.getString(0);
-                starredContacts.add(contact != null ? contact :
-                        mContext.getString(R.string.zen_mode_starred_contacts_empty_name));
-
+                if (contact != null) {
+                    starredContacts.add(contact);
+                }
             } while (cursor.moveToNext());
         }
         return starredContacts;
@@ -470,30 +468,37 @@ public class ZenModeBackend {
     String getStarredContactsSummary(Context context) {
         List<String> starredContacts = getStarredContacts();
         int numStarredContacts = starredContacts.size();
-        MessageFormat msgFormat = new MessageFormat(
-                mContext.getString(R.string.zen_mode_starred_contacts_summary_contacts),
-                Locale.getDefault());
-        Map<String, Object> args = new HashMap<>();
-        args.put("count", numStarredContacts);
-        if (numStarredContacts >= 1) {
-            args.put("contact_1", starredContacts.get(0));
-            if (numStarredContacts >= 2) {
-                args.put("contact_2", starredContacts.get(1));
-                if (numStarredContacts == 3) {
-                    args.put("contact_3", starredContacts.get(2));
-                }
+
+        List<String> displayContacts = new ArrayList<>();
+
+        if (numStarredContacts == 0) {
+            displayContacts.add(context.getString(R.string.zen_mode_starred_contacts_summary_none));
+        } else {
+            for (int i = 0; i < 2 && i < numStarredContacts; i++) {
+                displayContacts.add(starredContacts.get(i));
+            }
+
+            if (numStarredContacts == 3) {
+                displayContacts.add(starredContacts.get(2));
+            } else if (numStarredContacts > 2) {
+                displayContacts.add(context.getResources().getQuantityString(
+                        R.plurals.zen_mode_starred_contacts_summary_additional_contacts,
+                        numStarredContacts - 2, numStarredContacts - 2));
             }
         }
-        return msgFormat.format(args);
+
+        // values in displayContacts must not be null
+        return ListFormatter.getInstance().format(displayContacts);
     }
 
     String getContactsNumberSummary(Context context) {
-        MessageFormat msgFormat = new MessageFormat(
-                mContext.getString(R.string.zen_mode_contacts_count),
-                Locale.getDefault());
-        Map<String, Object> args = new HashMap<>();
-        args.put("count", queryAllContactsData().getCount());
-        return msgFormat.format(args);
+        final int numContacts = queryAllContactsData().getCount();
+        if (numContacts == 0) {
+            return context.getResources().getString(
+                    R.string.zen_mode_contacts_count_none);
+        }
+        return context.getResources().getQuantityString(R.plurals.zen_mode_contacts_count,
+                numContacts, numContacts);
     }
 
     private Cursor queryStarredContactsData() {

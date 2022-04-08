@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import android.app.NotificationChannel;
 import android.content.Context;
 import android.text.TextUtils;
 
@@ -55,11 +54,6 @@ public class ConversationPromotePreferenceController extends NotificationPrefere
             return false;
         }
         return !TextUtils.isEmpty(mChannel.getConversationId()) && mChannel.isDemoted();
-    }
-
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_CONVERSATION);
     }
 
     public void updateState(Preference preference) {

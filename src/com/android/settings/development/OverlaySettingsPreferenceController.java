@@ -16,10 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin.SECURE_OVERLAY_SETTINGS;
-
 import android.content.Context;
-import android.provider.Settings;
+import android.content.SharedPreferences;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -35,6 +33,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 public class OverlaySettingsPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
+    public static final String SHARE_PERFS = "overlay_settings";
     private static final String KEY_OVERLAY_SETTINGS = "overlay_settings";
 
     public OverlaySettingsPreferenceController(Context context) {
@@ -65,10 +64,10 @@ public class OverlaySettingsPreferenceController extends DeveloperOptionsPrefere
     /**
      * Check if this setting is enabled or not.
      */
-    @VisibleForTesting
-    static boolean isOverlaySettingsEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                SECURE_OVERLAY_SETTINGS, 0 /* defValue */) != 0;
+    public static boolean isOverlaySettingsEnabled(Context context) {
+        final SharedPreferences editor = context.getSharedPreferences(SHARE_PERFS,
+                Context.MODE_PRIVATE);
+        return editor.getBoolean(SHARE_PERFS, false /* defValue */);
     }
 
     /**
@@ -76,8 +75,9 @@ public class OverlaySettingsPreferenceController extends DeveloperOptionsPrefere
      */
     @VisibleForTesting
     static void setOverlaySettingsEnabled(Context context, boolean enabled) {
-        Settings.Secure.putInt(context.getContentResolver(),
-                SECURE_OVERLAY_SETTINGS, enabled ? 1 : 0);
+        final SharedPreferences editor = context.getSharedPreferences(SHARE_PERFS,
+                Context.MODE_PRIVATE);
+        editor.edit().putBoolean(SHARE_PERFS, enabled).apply();
     }
 
     @Override

@@ -27,14 +27,11 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
-import android.util.Log;
 
 import com.android.internal.telephony.TelephonyIntents;
 
 /** Helper class for listening to changes in availability of telephony subscriptions */
 public class SubscriptionsChangeListener extends ContentObserver {
-
-    private static final String TAG = "SubscriptionsChangeListener";
 
     public interface SubscriptionsChangeListenerClient {
         void onAirplaneModeChanged(boolean airplaneModeEnabled);
@@ -47,7 +44,6 @@ public class SubscriptionsChangeListener extends ContentObserver {
     private OnSubscriptionsChangedListener mSubscriptionsChangedListener;
     private Uri mAirplaneModeSettingUri;
     private BroadcastReceiver mBroadcastReceiver;
-    private boolean mRunning = false;
 
     public SubscriptionsChangeListener(Context context, SubscriptionsChangeListenerClient client) {
         super(new Handler(Looper.getMainLooper()));
@@ -79,19 +75,12 @@ public class SubscriptionsChangeListener extends ContentObserver {
         final IntentFilter radioTechnologyChangedFilter = new IntentFilter(
                 TelephonyIntents.ACTION_RADIO_TECHNOLOGY_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, radioTechnologyChangedFilter);
-        mRunning = true;
     }
 
     public void stop() {
-        if (mRunning) {
-            mSubscriptionManager.removeOnSubscriptionsChangedListener(
-                    mSubscriptionsChangedListener);
-            mContext.getContentResolver().unregisterContentObserver(this);
-            mContext.unregisterReceiver(mBroadcastReceiver);
-            mRunning = false;
-        } else {
-            Log.d(TAG, "Stop has been called without associated Start.");
-        }
+        mSubscriptionManager.removeOnSubscriptionsChangedListener(mSubscriptionsChangedListener);
+        mContext.getContentResolver().unregisterContentObserver(this);
+        mContext.unregisterReceiver(mBroadcastReceiver);
     }
 
     public boolean isAirplaneModeOn() {

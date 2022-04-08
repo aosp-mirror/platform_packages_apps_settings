@@ -45,8 +45,8 @@ abstract class WifiDppBaseActivity extends InstrumentedActivity {
 
     @Override
     protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        final int new_resid = SetupWizardUtils.getTheme(this, getIntent());
+        resid = SetupWizardUtils.getTheme(getIntent());
         theme.applyStyle(R.style.SetupWizardPartnerResource, /* force */ true);
-        super.onApplyThemeResource(theme, new_resid, first);
+        super.onApplyThemeResource(theme, resid, first);
     }
 }

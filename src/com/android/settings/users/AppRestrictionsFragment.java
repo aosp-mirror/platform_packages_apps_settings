@@ -18,6 +18,7 @@ package com.android.settings.users;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +38,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -393,7 +395,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             p.setChecked(false);
             p.setTitle(app.activityName);
             p.setKey(getKeyForPackage(packageName));
-            p.setSettingsEnabled(hasSettings && app.primaryEntry == null);
+            p.setSettingsEnabled(hasSettings && app.masterEntry == null);
             p.setPersistent(false);
             p.setOnPreferenceChangeListener(this);
             p.setOnPreferenceClickListener(this);
@@ -406,14 +408,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
                 // Get and populate the defaults, since the user is not going to be
                 // able to toggle this app ON (it's ON by default and immutable).
                 // Only do this for restricted profiles, not single-user restrictions
-                // Also don't do this for secondary icons
-                if (app.primaryEntry == null) {
+                // Also don't do this for slave icons
+                if (app.masterEntry == null) {
                     requestRestrictionsForApp(packageName, p, false);
                 }
             } else if (!mNewUser && isAppEnabledForUser(pi)) {
                 p.setChecked(true);
             }
-            if (app.primaryEntry != null) {
+            if (app.masterEntry != null) {
                 p.setImmutable(true);
                 p.setChecked(mHelper.isPackageSelected(packageName));
             }
@@ -432,17 +434,17 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
 
     private String getPackageSummary(PackageInfo pi, AppRestrictionsHelper.SelectableAppInfo app) {
         // Check for 3 cases:
-        // - Secondary entry that can see primary user accounts
-        // - Secondary entry that cannot see primary user accounts
-        // - Primary entry that can see primary user accounts
+        // - Slave entry that can see primary user accounts
+        // - Slave entry that cannot see primary user accounts
+        // - Master entry that can see primary user accounts
         // Otherwise no summary is returned
-        if (app.primaryEntry != null) {
+        if (app.masterEntry != null) {
             if (mRestrictedProfile && pi.restrictedAccountType != null) {
                 return getString(R.string.app_sees_restricted_accounts_and_controlled_by,
-                        app.primaryEntry.activityName);
+                        app.masterEntry.activityName);
             }
             return getString(R.string.user_restrictions_controlled_by,
-                    app.primaryEntry.activityName);
+                    app.masterEntry.activityName);
         } else if (pi.restrictedAccountType != null) {
             return getString(R.string.app_sees_restricted_accounts);
         }
@@ -641,7 +643,15 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             } else if (restrictionsIntent != null) {
                 preference.setRestrictions(restrictions);
                 if (invokeIfCustom && AppRestrictionsFragment.this.isResumed()) {
-                    assertSafeToStartCustomActivity(restrictionsIntent);
+                    try {
+                        assertSafeToStartCustomActivity(restrictionsIntent);
+                    } catch (ActivityNotFoundException | SecurityException e) {
+                        // return without startActivity
+                        Log.e(TAG, "Cannot start restrictionsIntent " + e);
+                        EventLog.writeEvent(0x534e4554, "200688991", -1 /* UID */, "");
+                        return;
+                    }
+
                     int requestCode = generateCustomActivityRequestCode(
                             RestrictionsResultReceiver.this.preference);
                     AppRestrictionsFragment.this.startActivityForResult(
@@ -655,14 +665,14 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             if (intent.getPackage() != null && intent.getPackage().equals(packageName)) {
                 return;
             }
-            // Activity can be started if intent resolves to multiple activities
-            List<ResolveInfo> resolveInfos = AppRestrictionsFragment.this.mPackageManager
-                    .queryIntentActivities(intent, 0 /* no flags */);
-            if (resolveInfos.size() != 1) {
-                return;
+            ResolveInfo resolveInfo = mPackageManager.resolveActivity(
+                    intent, PackageManager.MATCH_DEFAULT_ONLY);
+
+            if (resolveInfo == null) {
+                throw new ActivityNotFoundException("No result for resolving " + intent);
             }
             // Prevent potential privilege escalation
-            ActivityInfo activityInfo = resolveInfos.get(0).activityInfo;
+            ActivityInfo activityInfo = resolveInfo.activityInfo;
             if (!packageName.equals(activityInfo.packageName)) {
                 throw new SecurityException("Application " + packageName
                         + " is not allowed to start activity " + intent);

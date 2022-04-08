@@ -33,10 +33,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -98,17 +99,32 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        updatePreferenceOrder();
     }
 
     /** Customizes the order by preference key. */
-    protected List<String> getPreferenceOrderList() {
-        final List<String> lists = new ArrayList<>();
+    private List<String> getPreferenceOrderList() {
+        List<String> lists = new ArrayList<>();
         lists.add(KEY_PREVIEW);
         lists.add(KEY_USE_SERVICE_PREFERENCE);
         lists.add(KEY_CATEGORY_MODE);
         lists.add(KEY_GENERAL_CATEGORY);
-        lists.add(KEY_HTML_DESCRIPTION_PREFERENCE);
+        lists.add(KEY_INTRODUCTION_CATEGORY);
         return lists;
+    }
+
+    private void updatePreferenceOrder() {
+        List<String> lists = getPreferenceOrderList();
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.setOrderingAsAdded(false);
+
+        final int size = lists.size();
+        for (int i = 0; i < size; i++) {
+            final Preference preference = preferenceScreen.findPreference(lists.get(i));
+            if (preference != null) {
+                preference.setOrder(i);
+            }
+        }
     }
 
     @Override
@@ -159,12 +175,29 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     @Override
     protected void onRemoveSwitchPreferenceToggleSwitch() {
         super.onRemoveSwitchPreferenceToggleSwitch();
-        mToggleServiceSwitchPreference.setOnPreferenceClickListener(null);
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener(null);
     }
 
     @Override
-    protected void updateToggleServiceTitle(SettingsMainSwitchPreference switchPreference) {
-        switchPreference.setTitle(R.string.accessibility_daltonizer_primary_switch_title);
+    protected void updateToggleServiceTitle(SwitchPreference switchPreference) {
+        switchPreference.setTitle(R.string.accessibility_daltonizer_master_switch_title);
+    }
+
+    @Override
+    protected void onInstallSwitchPreferenceToggleSwitch() {
+        super.onInstallSwitchPreferenceToggleSwitch();
+        updateSwitchBarToggleSwitch();
+        mToggleServiceDividerSwitchPreference.setOnPreferenceClickListener((preference) -> {
+            boolean checked = ((SwitchPreference) preference).isChecked();
+            onPreferenceToggled(mPreferenceKey, checked);
+            return false;
+        });
+    }
+
+    @Override
+    public void onSettingsClicked(ShortcutPreference preference) {
+        super.onSettingsClicked(preference);
+        showDialog(DialogEnums.EDIT_SHORTCUT);
     }
 
     @Override
@@ -173,13 +206,12 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
                 mComponentName);
     }
 
-    @Override
-    protected void updateSwitchBarToggleSwitch() {
+    private void updateSwitchBarToggleSwitch() {
         final boolean checked = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
-        if (mToggleServiceSwitchPreference.isChecked() == checked) {
+        if (mToggleServiceDividerSwitchPreference.isChecked() == checked) {
             return;
         }
-        mToggleServiceSwitchPreference.setChecked(checked);
+        mToggleServiceDividerSwitchPreference.setChecked(checked);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

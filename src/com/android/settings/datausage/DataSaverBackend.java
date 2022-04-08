@@ -20,7 +20,10 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
+import android.os.RemoteException;
+import android.telephony.SubscriptionPlan;
 import android.util.SparseIntArray;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -39,8 +42,8 @@ public class DataSaverBackend {
     private final NetworkPolicyManager mPolicyManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
     private SparseIntArray mUidPolicies = new SparseIntArray();
-    private boolean mAllowlistInitialized;
-    private boolean mDenylistInitialized;
+    private boolean mWhitelistInitialized;
+    private boolean mBlacklistInitialized;
 
     // TODO: Staticize into only one.
     public DataSaverBackend(Context context) {
@@ -74,63 +77,63 @@ public class DataSaverBackend {
                 mContext, SettingsEnums.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
     }
 
-    public void refreshAllowlist() {
-        loadAllowlist();
+    public void refreshWhitelist() {
+        loadWhitelist();
     }
 
-    public void setIsAllowlisted(int uid, String packageName, boolean allowlisted) {
-        final int policy = allowlisted ? POLICY_ALLOW_METERED_BACKGROUND : POLICY_NONE;
+    public void setIsWhitelisted(int uid, String packageName, boolean whitelisted) {
+        final int policy = whitelisted ? POLICY_ALLOW_METERED_BACKGROUND : POLICY_NONE;
         mPolicyManager.setUidPolicy(uid, policy);
         mUidPolicies.put(uid, policy);
-        if (allowlisted) {
+        if (whitelisted) {
             mMetricsFeatureProvider.action(
                     mContext, SettingsEnums.ACTION_DATA_SAVER_WHITELIST, packageName);
         }
     }
 
-    public boolean isAllowlisted(int uid) {
-        loadAllowlist();
+    public boolean isWhitelisted(int uid) {
+        loadWhitelist();
         return mUidPolicies.get(uid, POLICY_NONE) == POLICY_ALLOW_METERED_BACKGROUND;
     }
 
-    private void loadAllowlist() {
-        if (mAllowlistInitialized) {
+    private void loadWhitelist() {
+        if (mWhitelistInitialized) {
             return;
         }
 
         for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_ALLOW_METERED_BACKGROUND)) {
             mUidPolicies.put(uid, POLICY_ALLOW_METERED_BACKGROUND);
         }
-        mAllowlistInitialized = true;
+        mWhitelistInitialized = true;
     }
 
-    public void refreshDenylist() {
-        loadDenylist();
+    public void refreshBlacklist() {
+        loadBlacklist();
     }
 
-    public void setIsDenylisted(int uid, String packageName, boolean denylisted) {
-        final int policy = denylisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE;
+    public void setIsBlacklisted(int uid, String packageName, boolean blacklisted) {
+        final int policy = blacklisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE;
         mPolicyManager.setUidPolicy(uid, policy);
         mUidPolicies.put(uid, policy);
-        if (denylisted) {
+        if (blacklisted) {
             mMetricsFeatureProvider.action(
                     mContext, SettingsEnums.ACTION_DATA_SAVER_BLACKLIST, packageName);
         }
     }
 
-    public boolean isDenylisted(int uid) {
-        loadDenylist();
+    public boolean isBlacklisted(int uid) {
+        loadBlacklist();
         return mUidPolicies.get(uid, POLICY_NONE) == POLICY_REJECT_METERED_BACKGROUND;
     }
 
-    private void loadDenylist() {
-        if (mDenylistInitialized) {
+    private void loadBlacklist() {
+        if (mBlacklistInitialized) {
             return;
         }
         for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
             mUidPolicies.put(uid, POLICY_REJECT_METERED_BACKGROUND);
         }
-        mDenylistInitialized = true;
+        mBlacklistInitialized = true;
     }
 
     private void handleRestrictBackgroundChanged(boolean isDataSaving) {
@@ -139,21 +142,21 @@ public class DataSaverBackend {
         }
     }
 
-    private void handleAllowlistChanged(int uid, boolean isAllowlisted) {
+    private void handleWhitelistChanged(int uid, boolean isWhitelisted) {
         for (int i = 0; i < mListeners.size(); i++) {
-            mListeners.get(i).onAllowlistStatusChanged(uid, isAllowlisted);
+            mListeners.get(i).onWhitelistStatusChanged(uid, isWhitelisted);
         }
     }
 
-    private void handleDenylistChanged(int uid, boolean isDenylisted) {
+    private void handleBlacklistChanged(int uid, boolean isBlacklisted) {
         for (int i = 0; i < mListeners.size(); i++) {
-            mListeners.get(i).onDenylistStatusChanged(uid, isDenylisted);
+            mListeners.get(i).onBlacklistStatusChanged(uid, isBlacklisted);
         }
     }
 
     private void handleUidPoliciesChanged(int uid, int newPolicy) {
-        loadAllowlist();
-        loadDenylist();
+        loadWhitelist();
+        loadBlacklist();
 
         final int oldPolicy = mUidPolicies.get(uid, POLICY_NONE);
         if (newPolicy == POLICY_NONE) {
@@ -162,39 +165,54 @@ public class DataSaverBackend {
             mUidPolicies.put(uid, newPolicy);
         }
 
-        final boolean wasAllowlisted = oldPolicy == POLICY_ALLOW_METERED_BACKGROUND;
-        final boolean wasDenylisted = oldPolicy == POLICY_REJECT_METERED_BACKGROUND;
-        final boolean isAllowlisted = newPolicy == POLICY_ALLOW_METERED_BACKGROUND;
-        final boolean isDenylisted = newPolicy == POLICY_REJECT_METERED_BACKGROUND;
+        final boolean wasWhitelisted = oldPolicy == POLICY_ALLOW_METERED_BACKGROUND;
+        final boolean wasBlacklisted = oldPolicy == POLICY_REJECT_METERED_BACKGROUND;
+        final boolean isWhitelisted = newPolicy == POLICY_ALLOW_METERED_BACKGROUND;
+        final boolean isBlacklisted = newPolicy == POLICY_REJECT_METERED_BACKGROUND;
 
-        if (wasAllowlisted != isAllowlisted) {
-            handleAllowlistChanged(uid, isAllowlisted);
+        if (wasWhitelisted != isWhitelisted) {
+            handleWhitelistChanged(uid, isWhitelisted);
         }
 
-        if (wasDenylisted != isDenylisted) {
-            handleDenylistChanged(uid, isDenylisted);
+        if (wasBlacklisted != isBlacklisted) {
+            handleBlacklistChanged(uid, isBlacklisted);
         }
 
     }
 
-    private final NetworkPolicyManager.Listener mPolicyListener =
-            new NetworkPolicyManager.Listener() {
+    private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
+        @Override
+        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
+        }
+
         @Override
         public void onUidPoliciesChanged(final int uid, final int uidPolicies) {
             ThreadUtils.postOnMainThread(() -> handleUidPoliciesChanged(uid, uidPolicies));
         }
 
         @Override
-        public void onRestrictBackgroundChanged(final boolean isDataSaving) {
+        public void onMeteredIfacesChanged(String[] strings) throws RemoteException {
+        }
+
+        @Override
+        public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
             ThreadUtils.postOnMainThread(() -> handleRestrictBackgroundChanged(isDataSaving));
+        }
+
+        @Override
+        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue) {
+        }
+
+        @Override
+        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {
         }
     };
 
     public interface Listener {
         void onDataSaverChanged(boolean isDataSaving);
 
-        void onAllowlistStatusChanged(int uid, boolean isAllowlisted);
+        void onWhitelistStatusChanged(int uid, boolean isWhitelisted);
 
-        void onDenylistStatusChanged(int uid, boolean isDenylisted);
+        void onBlacklistStatusChanged(int uid, boolean isBlacklisted);
     }
 }

@@ -25,7 +25,6 @@ import android.view.TextureView.SurfaceTextureListener;
 
 import androidx.annotation.GuardedBy;
 import androidx.annotation.RawRes;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Plays the video by {@link MediaPlayer} on {@link TextureView}, calls {@link #create(Context, int,
@@ -33,25 +32,19 @@ import androidx.annotation.VisibleForTesting;
  * is no longer used, call {@link #release()} so that MediaPlayer object can be released.
  */
 public class VideoPlayer implements SurfaceTextureListener {
-    private final Context mContext;
-    private final Object mMediaPlayerLock = new Object();
+    private final Context context;
+    private final Object mediaPlayerLock = new Object();
     // Media player object can't be used after it has been released, so it will be set to null. But
     // VideoPlayer is asynchronized, media player object might be paused or resumed again before
     // released media player is set to null. Therefore, lock mediaPlayer and mediaPlayerState by
     // mediaPlayerLock keep their states consistent.
-    @VisibleForTesting
     @GuardedBy("mediaPlayerLock")
-    MediaPlayer mMediaPlayer;
-
-    @VisibleForTesting
+    private MediaPlayer mediaPlayer;
     @GuardedBy("mediaPlayerLock")
-    State mMediaPlayerState = State.NONE;
-
+    private State mediaPlayerState = State.NONE;
     @RawRes
-    private final int mVideoRes;
-
-    @VisibleForTesting
-    Surface mAnimationSurface;
+    private final int videoRes;
+    private Surface animationSurface;
 
 
     /**
@@ -65,54 +58,54 @@ public class VideoPlayer implements SurfaceTextureListener {
     }
 
     private VideoPlayer(Context context, @RawRes int videoRes, TextureView textureView) {
-        this.mContext = context;
-        this.mVideoRes = videoRes;
+        this.context = context;
+        this.videoRes = videoRes;
         textureView.setSurfaceTextureListener(this);
     }
 
     public void pause() {
-        synchronized (mMediaPlayerLock) {
-            if (mMediaPlayerState == State.STARTED) {
-                mMediaPlayerState = State.PAUSED;
-                mMediaPlayer.pause();
+        synchronized (mediaPlayerLock) {
+            if (mediaPlayerState == State.STARTED) {
+                mediaPlayerState = State.PAUSED;
+                mediaPlayer.pause();
             }
         }
     }
 
     public void resume() {
-        synchronized (mMediaPlayerLock) {
-            if (mMediaPlayerState == State.PAUSED) {
-                mMediaPlayer.start();
-                mMediaPlayerState = State.STARTED;
+        synchronized (mediaPlayerLock) {
+            if (mediaPlayerState == State.PAUSED) {
+                mediaPlayer.start();
+                mediaPlayerState = State.STARTED;
             }
         }
     }
 
     /** Release media player when it's no longer needed. */
     public void release() {
-        synchronized (mMediaPlayerLock) {
-            if (mMediaPlayerState != State.NONE && mMediaPlayerState != State.END) {
-                mMediaPlayerState = State.END;
-                mMediaPlayer.release();
-                mMediaPlayer = null;
+        synchronized (mediaPlayerLock) {
+            if (mediaPlayerState != State.NONE && mediaPlayerState != State.END) {
+                mediaPlayerState = State.END;
+                mediaPlayer.release();
+                mediaPlayer = null;
             }
         }
-        if (mAnimationSurface != null) {
-            mAnimationSurface.release();
-            mAnimationSurface = null;
+        if (animationSurface != null) {
+            animationSurface.release();
+            animationSurface = null;
         }
     }
 
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-        mAnimationSurface = new Surface(surface);
-        synchronized (mMediaPlayerLock) {
-            mMediaPlayer = MediaPlayer.create(mContext, mVideoRes);
-            mMediaPlayerState = State.PREPARED;
-            mMediaPlayer.setSurface(mAnimationSurface);
-            mMediaPlayer.setLooping(true);
-            mMediaPlayer.start();
-            mMediaPlayerState = State.STARTED;
+        animationSurface = new Surface(surface);
+        synchronized (mediaPlayerLock) {
+            mediaPlayer = MediaPlayer.create(context, videoRes);
+            mediaPlayerState = State.PREPARED;
+            mediaPlayer.setSurface(animationSurface);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+            mediaPlayerState = State.STARTED;
         }
     }
 

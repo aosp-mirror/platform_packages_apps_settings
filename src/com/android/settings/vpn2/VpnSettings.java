@@ -30,18 +30,20 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.ConnectivityManager.NetworkCallback;
+import android.net.IConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
-import android.net.VpnManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.security.Credentials;
-import android.security.LegacyVpnProfileStore;
+import android.security.KeyStore;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -57,9 +59,9 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
-import com.android.settings.Utils;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.widget.GearPreference.OnGearClickListener;
 import com.android.settingslib.RestrictedLockUtilsInternal;
@@ -90,9 +92,12 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_TRUSTED)
             .build();
 
+    private final IConnectivityManager mConnectivityService = IConnectivityManager.Stub
+            .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     private ConnectivityManager mConnectivityManager;
     private UserManager mUserManager;
-    private VpnManager mVpnManager;
+
+    private final KeyStore mKeyStore = KeyStore.getInstance();
 
     private Map<String, LegacyVpnPreference> mLegacyVpnPreferences = new ArrayMap<>();
     private Map<AppVpnInfo, AppPreference> mAppPreferences = new ArrayMap<>();
@@ -119,7 +124,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         mUserManager = (UserManager) getSystemService(Context.USER_SERVICE);
         mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mVpnManager = (VpnManager) getSystemService(Context.VPN_MANAGEMENT_SERVICE);
 
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
@@ -130,17 +134,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        // Although FEATURE_IPSEC_TUNNELS should always be present in android S,
-        // keep this check here just to be safe.
-        if (Utils.isProviderModelEnabled(getContext())
-                && !getContext().getPackageManager().hasSystemFeature(
-                        PackageManager.FEATURE_IPSEC_TUNNELS)) {
-            Log.w(LOG_TAG, "FEATURE_IPSEC_TUNNELS missing from system, cannot create new VPNs");
-            return;
-        } else {
-            // By default, we should inflate this menu.
-            inflater.inflate(R.menu.vpn, menu);
-        }
+        inflater.inflate(R.menu.vpn, menu);
     }
 
     @Override
@@ -230,7 +224,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         final Context context = activity.getApplicationContext();
 
         // Run heavy RPCs before switching to UI thread
-        final List<VpnProfile> vpnProfiles = loadVpnProfiles();
+        final List<VpnProfile> vpnProfiles = loadVpnProfiles(mKeyStore);
         final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
@@ -305,7 +299,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                     p.setState(LegacyVpnPreference.STATE_NONE);
                 }
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(profile.key));
-                p.setInsecureVpn(VpnProfile.isLegacyType(profile.type));
                 updates.add(p);
             }
 
@@ -315,9 +308,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                 LegacyVpnPreference p = mSettings.findOrCreatePreference(stubProfile, false);
                 p.setState(vpn.state);
                 p.setAlwaysOn(lockdownVpnKey != null && lockdownVpnKey.equals(vpn.key));
-                // (b/184921649) do not call setInsecureVpn() for connectedLegacyVpns, since the
-                // LegacyVpnInfo does not contain VPN type information, and the profile already
-                // exists within vpnProfiles.
                 updates.add(p);
             }
 
@@ -477,9 +467,13 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
     @WorkerThread
     private Map<String, LegacyVpnInfo> getConnectedLegacyVpns() {
-        mConnectedLegacyVpn = mVpnManager.getLegacyVpnInfo(UserHandle.myUserId());
-        if (mConnectedLegacyVpn != null) {
-            return Collections.singletonMap(mConnectedLegacyVpn.key, mConnectedLegacyVpn);
+        try {
+            mConnectedLegacyVpn = mConnectivityService.getLegacyVpnInfo(UserHandle.myUserId());
+            if (mConnectedLegacyVpn != null) {
+                return Collections.singletonMap(mConnectedLegacyVpn.key, mConnectedLegacyVpn);
+            }
+        } catch (RemoteException e) {
+            Log.e(LOG_TAG, "Failure updating VPN list with connected legacy VPNs", e);
         }
         return Collections.emptyMap();
     }
@@ -488,11 +482,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
     private Set<AppVpnInfo> getConnectedAppVpns() {
         // Mark connected third-party services
         Set<AppVpnInfo> connections = new ArraySet<>();
-        for (UserHandle profile : mUserManager.getUserProfiles()) {
-            VpnConfig config = mVpnManager.getVpnConfig(profile.getIdentifier());
-            if (config != null && !config.legacy) {
-                connections.add(new AppVpnInfo(profile.getIdentifier(), config.user));
+        try {
+            for (UserHandle profile : mUserManager.getUserProfiles()) {
+                VpnConfig config = mConnectivityService.getVpnConfig(profile.getIdentifier());
+                if (config != null && !config.legacy) {
+                    connections.add(new AppVpnInfo(profile.getIdentifier(), config.user));
+                }
             }
+        } catch (RemoteException e) {
+            Log.e(LOG_TAG, "Failure updating VPN list with connected app VPNs", e);
         }
         return connections;
     }
@@ -502,7 +500,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         Set<AppVpnInfo> result = new ArraySet<>();
         for (UserHandle profile : mUserManager.getUserProfiles()) {
             final int profileId = profile.getIdentifier();
-            final String packageName = mVpnManager.getAlwaysOnVpnPackageForUser(profileId);
+            final String packageName = mConnectivityManager.getAlwaysOnVpnPackageForUser(profileId);
             if (packageName != null) {
                 result.add(new AppVpnInfo(profileId, packageName));
             }
@@ -552,13 +550,12 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         return result;
     }
 
-    private static List<VpnProfile> loadVpnProfiles() {
+    static List<VpnProfile> loadVpnProfiles(KeyStore keyStore, int... excludeTypes) {
         final ArrayList<VpnProfile> result = Lists.newArrayList();
 
-        for (String key : LegacyVpnProfileStore.list(Credentials.VPN)) {
-            final VpnProfile profile = VpnProfile.decode(key,
-                    LegacyVpnProfileStore.get(Credentials.VPN + key));
-            if (profile != null) {
+        for (String key : keyStore.list(Credentials.VPN)) {
+            final VpnProfile profile = VpnProfile.decode(key, keyStore.get(Credentials.VPN + key));
+            if (profile != null && !ArrayUtils.contains(excludeTypes, profile.type)) {
                 result.add(profile);
             }
         }

@@ -21,42 +21,45 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.sysprop.TelephonyProperties;
-import android.telephony.TelephonyManager;
+
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
+
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class BasebandVersionPreferenceControllerTest {
-    @Mock
+
     private Context mContext;
     private BasebandVersionPreferenceController mController;
-    @Mock
-    private TelephonyManager mTelephonyManager;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mController = new BasebandVersionPreferenceController(mContext, "key");
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
     }
 
     @Test
     public void getAvailability_wifiOnly_unavailable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+        final ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
 
@@ -64,7 +67,10 @@ public class BasebandVersionPreferenceControllerTest {
     public void getAvailability_hasMobile_available() {
         final String text = "test";
         TelephonyProperties.baseband_version(Arrays.asList(new String[]{text}));
-        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 }

@@ -53,9 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:text="@string/lock_screen_notifications_summary_show"
-                android:textColor="?android:attr/textColorSecondary"
-                android:fontFamily="@*android:string/config_headlineFontFamily" />
+                android:text="@string/lock_screen_notifications_summary_show" />
 
             <com.android.settings.RestrictedRadioButton
                 android:id="@+id/redact_sensitive"
@@ -64,9 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:text="@string/lock_screen_notifications_summary_hide"
-                android:textColor="?android:attr/textColorSecondary"
-                android:fontFamily="@*android:string/config_headlineFontFamily" />
+                android:text="@string/lock_screen_notifications_summary_hide" />
 
             <RadioButton
                 android:id="@+id/hide_all"
@@ -75,9 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:minHeight="?android:attr/listPreferredItemHeight"
-                android:text="@string/lock_screen_notifications_summary_disable"
-                android:textColor="?android:attr/textColorSecondary"
-                android:fontFamily="@*android:string/config_headlineFontFamily" />
+                android:text="@string/lock_screen_notifications_summary_disable" />
 
         </RadioGroup>
 

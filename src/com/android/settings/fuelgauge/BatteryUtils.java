@@ -23,23 +23,24 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.BatteryConsumer;
 import android.os.BatteryStats;
-import android.os.BatteryStatsManager;
-import android.os.BatteryUsageStats;
-import android.os.BatteryUsageStatsQuery;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemClock;
-import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
+import android.os.UserManager;
+import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.SparseLongArray;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AnomalyInfo;
@@ -49,7 +50,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.fuelgauge.Estimate;
 import com.android.settingslib.fuelgauge.EstimateKt;
-import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
@@ -57,6 +58,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -81,6 +84,9 @@ public class BatteryUtils {
 
     private static final String TAG = "BatteryUtils";
 
+    private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
+
+    private static final int SECONDS_IN_HOUR = 60 * 60;
     private static BatteryUtils sInstance;
     private PackageManager mPackageManager;
 
@@ -97,7 +103,7 @@ public class BatteryUtils {
     }
 
     @VisibleForTesting
-    public BatteryUtils(Context context) {
+    BatteryUtils(Context context) {
         mContext = context;
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
@@ -165,61 +171,111 @@ public class BatteryUtils {
     }
 
     /**
-     * Returns true if the specified battery consumer should be excluded from the summary
-     * battery consumption list.
+     * Remove the {@link BatterySipper} that we should hide and smear the screen usage based on
+     * foreground activity time.
+     *
+     * @param sippers sipper list that need to check and remove
+     * @return the total power of the hidden items of {@link BatterySipper}
+     * for proportional smearing
      */
-    public boolean shouldHideUidBatteryConsumer(UidBatteryConsumer consumer) {
-        return shouldHideUidBatteryConsumer(consumer,
-                mPackageManager.getPackagesForUid(consumer.getUid()));
+    public double removeHiddenBatterySippers(List<BatterySipper> sippers) {
+        double proportionalSmearPowerMah = 0;
+        BatterySipper screenSipper = null;
+        for (int i = sippers.size() - 1; i >= 0; i--) {
+            final BatterySipper sipper = sippers.get(i);
+            if (shouldHideSipper(sipper)) {
+                sippers.remove(i);
+                if (sipper.drainType != BatterySipper.DrainType.OVERCOUNTED
+                        && sipper.drainType != BatterySipper.DrainType.SCREEN
+                        && sipper.drainType != BatterySipper.DrainType.UNACCOUNTED
+                        && sipper.drainType != BatterySipper.DrainType.BLUETOOTH
+                        && sipper.drainType != BatterySipper.DrainType.WIFI
+                        && sipper.drainType != BatterySipper.DrainType.IDLE
+                        && !isHiddenSystemModule(sipper)) {
+                    // Don't add it if it is overcounted, unaccounted, wifi, bluetooth, screen
+                    // or hidden system modules
+                    proportionalSmearPowerMah += sipper.totalPowerMah;
+                }
+            }
+
+            if (sipper.drainType == BatterySipper.DrainType.SCREEN) {
+                screenSipper = sipper;
+            }
+        }
+
+        smearScreenBatterySipper(sippers, screenSipper);
+
+        return proportionalSmearPowerMah;
     }
 
     /**
-     * Returns true if the specified battery consumer should be excluded from the summary
-     * battery consumption list.
+     * Smear the screen on power usage among {@code sippers}, based on ratio of foreground activity
+     * time.
      */
-    public boolean shouldHideUidBatteryConsumer(UidBatteryConsumer consumer, String[] packages) {
-        return mPowerUsageFeatureProvider.isTypeSystem(consumer.getUid(), packages)
-                || shouldHideUidBatteryConsumerUnconditionally(consumer, packages);
-    }
+    @VisibleForTesting
+    void smearScreenBatterySipper(List<BatterySipper> sippers, BatterySipper screenSipper) {
+        long totalActivityTimeMs = 0;
+        final SparseLongArray activityTimeArray = new SparseLongArray();
+        for (int i = 0, size = sippers.size(); i < size; i++) {
+            final BatteryStats.Uid uid = sippers.get(i).uidObj;
+            if (uid != null) {
+                final long timeMs = getProcessTimeMs(StatusType.SCREEN_USAGE, uid,
+                        BatteryStats.STATS_SINCE_CHARGED);
+                activityTimeArray.put(uid.getUid(), timeMs);
+                totalActivityTimeMs += timeMs;
+            }
+        }
 
-    /**
-     * Returns true if the specified battery consumer should be excluded from
-     * battery consumption lists, either short or full.
-     */
-    boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
-            String[] packages) {
-        return consumer.getUid() < 0 || isHiddenSystemModule(packages);
-    }
+        if (totalActivityTimeMs >= 10 * DateUtils.MINUTE_IN_MILLIS) {
+            if (screenSipper == null) {
+                Log.e(TAG, "screen sipper is null even when app screen time is not zero");
+                return;
+            }
 
-    /**
-     * Returns true if the specified device power component should be excluded from the summary
-     * battery consumption list.
-     */
-    public boolean shouldHideDevicePowerComponent(BatteryConsumer consumer,
-            @BatteryConsumer.PowerComponent int powerComponentId) {
-        switch (powerComponentId) {
-            case BatteryConsumer.POWER_COMPONENT_IDLE:
-            case BatteryConsumer.POWER_COMPONENT_MOBILE_RADIO:
-            case BatteryConsumer.POWER_COMPONENT_SCREEN:
-            case BatteryConsumer.POWER_COMPONENT_BLUETOOTH:
-            case BatteryConsumer.POWER_COMPONENT_WIFI:
-                return true;
-            default:
-                return false;
+            final double screenPowerMah = screenSipper.totalPowerMah;
+            for (int i = 0, size = sippers.size(); i < size; i++) {
+                final BatterySipper sipper = sippers.get(i);
+                sipper.totalPowerMah += screenPowerMah * activityTimeArray.get(sipper.getUid(), 0)
+                        / totalActivityTimeMs;
+            }
         }
     }
 
     /**
-     * Returns true if one the specified packages belongs to a hidden system module.
+     * Check whether we should hide the battery sipper.
      */
-    public boolean isHiddenSystemModule(String[] packages) {
-        if (packages != null) {
-            for (int i = 0, length = packages.length; i < length; i++) {
-                if (AppUtils.isHiddenSystemModule(mContext, packages[i])) {
+    public boolean shouldHideSipper(BatterySipper sipper) {
+        final BatterySipper.DrainType drainType = sipper.drainType;
+
+        return drainType == BatterySipper.DrainType.IDLE
+                || drainType == BatterySipper.DrainType.CELL
+                || drainType == BatterySipper.DrainType.SCREEN
+                || drainType == BatterySipper.DrainType.UNACCOUNTED
+                || drainType == BatterySipper.DrainType.OVERCOUNTED
+                || drainType == BatterySipper.DrainType.BLUETOOTH
+                || drainType == BatterySipper.DrainType.WIFI
+                || (sipper.totalPowerMah * SECONDS_IN_HOUR) < MIN_POWER_THRESHOLD_MILLI_AMP
+                || mPowerUsageFeatureProvider.isTypeService(sipper)
+                || mPowerUsageFeatureProvider.isTypeSystem(sipper)
+                || isHiddenSystemModule(sipper);
+    }
+
+    /**
+     * Return {@code true} if one of packages in {@code sipper} is hidden system modules
+     */
+    public boolean isHiddenSystemModule(BatterySipper sipper) {
+        if (sipper.uidObj == null) {
+            return false;
+        }
+        sipper.mPackages = mPackageManager.getPackagesForUid(sipper.getUid());
+        if (sipper.mPackages != null) {
+            for (int i = 0, length = sipper.mPackages.length; i < length; i++) {
+                if (AppUtils.isHiddenSystemModule(mContext, sipper.mPackages[i])) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 
@@ -228,17 +284,36 @@ public class BatteryUtils {
      *
      * @param powerUsageMah   power used by the app
      * @param totalPowerMah   total power used in the system
+     * @param hiddenPowerMah  power used by no-actionable app that we want to hide, i.e. Screen,
+     *                        Android OS.
      * @param dischargeAmount The discharge amount calculated by {@link BatteryStats}
      * @return A percentage value scaled by {@paramref dischargeAmount}
      * @see BatteryStats#getDischargeAmount(int)
      */
     public double calculateBatteryPercent(double powerUsageMah, double totalPowerMah,
-            int dischargeAmount) {
+            double hiddenPowerMah, int dischargeAmount) {
         if (totalPowerMah == 0) {
             return 0;
         }
 
-        return (powerUsageMah / totalPowerMah) * dischargeAmount;
+        return (powerUsageMah / (totalPowerMah - hiddenPowerMah)) * dischargeAmount;
+    }
+
+    /**
+     * Calculate the whole running time in the state {@code statsType}
+     *
+     * @param batteryStatsHelper utility class that contains the data
+     * @param statsType          state that we want to calculate the time for
+     * @return the running time in millis
+     */
+    public long calculateRunningTimeBasedOnStatsType(BatteryStatsHelper batteryStatsHelper,
+            int statsType) {
+        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
+                SystemClock.elapsedRealtime());
+        // Return the battery time (millisecond) on status mStatsType
+        return PowerUtil.convertUsToMs(
+                batteryStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs, statsType));
+
     }
 
     /**
@@ -288,26 +363,44 @@ public class BatteryUtils {
     }
 
     /**
+     * Sort the {@code usageList} based on {@link BatterySipper#totalPowerMah}
+     */
+    public void sortUsageList(List<BatterySipper> usageList) {
+        Collections.sort(usageList, new Comparator<BatterySipper>() {
+            @Override
+            public int compare(BatterySipper a, BatterySipper b) {
+                return Double.compare(b.totalPowerMah, a.totalPowerMah);
+            }
+        });
+    }
+
+    /**
      * Calculate the time since last full charge, including the device off time
      *
-     * @param batteryUsageStats  class that contains the data
+     * @param batteryStatsHelper utility class that contains the data
      * @param currentTimeMs      current wall time
      * @return time in millis
      */
-    public long calculateLastFullChargeTime(BatteryUsageStats batteryUsageStats,
+    public long calculateLastFullChargeTime(BatteryStatsHelper batteryStatsHelper,
             long currentTimeMs) {
-        return currentTimeMs - batteryUsageStats.getStatsStartTimestamp();
+        return currentTimeMs - batteryStatsHelper.getStats().getStartClockTime();
+
+    }
+
+    /**
+     * Calculate the screen usage time since last full charge.
+     *
+     * @param batteryStatsHelper utility class that contains the screen usage data
+     * @return time in millis
+     */
+    public long calculateScreenUsageTime(BatteryStatsHelper batteryStatsHelper) {
+        final BatterySipper sipper = findBatterySipperByType(
+                batteryStatsHelper.getUsageList(), BatterySipper.DrainType.SCREEN);
+        return sipper != null ? sipper.usageTimeMs : 0;
     }
 
     public static void logRuntime(String tag, String message, long startTime) {
         Log.d(tag, message + ": " + (System.currentTimeMillis() - startTime) + "ms");
-    }
-
-    /**
-     * Return {@code true} if battery is overheated and charging.
-     */
-    public static boolean isBatteryDefenderOn(BatteryInfo batteryInfo) {
-        return batteryInfo.isOverheated && !batteryInfo.discharging;
     }
 
     /**
@@ -364,36 +457,37 @@ public class BatteryUtils {
         }
     }
 
-    @WorkerThread
-    public BatteryInfo getBatteryInfo(final String tag) {
-        final BatteryStatsManager systemService = mContext.getSystemService(
-                BatteryStatsManager.class);
-        final BatteryUsageStats batteryUsageStats = systemService.getBatteryUsageStats(
-                new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
+    public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
+            UserManager userManager) {
+        statsHelper.create(bundle);
+        statsHelper.clearStats();
+        statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
+    }
 
+    @WorkerThread
+    public BatteryInfo getBatteryInfo(final BatteryStatsHelper statsHelper, final String tag) {
         final long startTime = System.currentTimeMillis();
 
         // Stuff we always need to get BatteryInfo
         final Intent batteryBroadcast = mContext.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
-
+        final BatteryStats stats = statsHelper.getStats();
         BatteryInfo batteryInfo;
         Estimate estimate = getEnhancedEstimate();
 
         // couldn't get estimate from cache or provider, use fallback
         if (estimate == null) {
             estimate = new Estimate(
-                    batteryUsageStats.getBatteryTimeRemainingMs(),
+                    PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
                     false /* isBasedOnUsage */,
                     EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
 
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
-        batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast,
-                batteryUsageStats, estimate, elapsedRealtimeUs, false /* shortString */);
+        batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
+                estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;
@@ -414,6 +508,20 @@ public class BatteryUtils {
             }
         }
         return estimate;
+    }
+
+    /**
+     * Find the {@link BatterySipper} with the corresponding {@link BatterySipper.DrainType}
+     */
+    public BatterySipper findBatterySipperByType(List<BatterySipper> usageList,
+            BatterySipper.DrainType type) {
+        for (int i = 0, size = usageList.size(); i < size; i++) {
+            final BatterySipper sipper = usageList.get(i);
+            if (sipper.drainType == type) {
+                return sipper;
+            }
+        }
+        return null;
     }
 
     private boolean isDataCorrupted() {
@@ -470,7 +578,7 @@ public class BatteryUtils {
     /**
      * Return {@code true} if we should hide anomaly app represented by {@code uid}
      */
-    public boolean shouldHideAnomaly(PowerAllowlistBackend powerAllowlistBackend, int uid,
+    public boolean shouldHideAnomaly(PowerWhitelistBackend powerWhitelistBackend, int uid,
             AnomalyInfo anomalyInfo) {
         final String[] packageNames = mPackageManager.getPackagesForUid(uid);
         if (ArrayUtils.isEmpty(packageNames)) {
@@ -478,7 +586,7 @@ public class BatteryUtils {
             return true;
         }
 
-        return isSystemUid(uid) || powerAllowlistBackend.isAllowlisted(packageNames)
+        return isSystemUid(uid) || powerWhitelistBackend.isWhitelisted(packageNames)
                 || (isSystemApp(mPackageManager, packageNames) && !hasLauncherEntry(packageNames))
                 || (isExcessiveBackgroundAnomaly(anomalyInfo) && !isPreOApp(packageNames));
     }
@@ -550,3 +658,4 @@ public class BatteryUtils {
         return -1L;
     }
 }
+

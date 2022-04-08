@@ -235,11 +235,11 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
-            mDataSaverBackend.setIsDenylisted(mAppItem.key, mPackageName, !(Boolean) newValue);
+            mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
             updatePrefs();
             return true;
         } else if (preference == mUnrestrictedData) {
-            mDataSaverBackend.setIsAllowlisted(mAppItem.key, mPackageName, (Boolean) newValue);
+            mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
             return true;
         }
         return false;
@@ -330,7 +330,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
 
     private boolean getUnrestrictData() {
         if (mDataSaverBackend != null) {
-            return mDataSaverBackend.isAllowlisted(mAppItem.key);
+            return mDataSaverBackend.isWhitelisted(mAppItem.key);
         }
         return false;
     }
@@ -464,16 +464,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     @Override
-    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
         if (mAppItem.uids.get(uid, false)) {
-            updatePrefs(getAppRestrictBackground(), isAllowlisted);
+            updatePrefs(getAppRestrictBackground(), isWhitelisted);
         }
     }
 
     @Override
-    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
         if (mAppItem.uids.get(uid, false)) {
-            updatePrefs(isDenylisted, getUnrestrictData());
+            updatePrefs(isBlacklisted, getUnrestrictData());
         }
     }
 }

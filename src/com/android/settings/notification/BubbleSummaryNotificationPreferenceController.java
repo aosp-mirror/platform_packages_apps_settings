@@ -16,9 +16,8 @@
 
 package com.android.settings.notification;
 
-import static android.provider.Settings.Secure.NOTIFICATION_BUBBLES;
+import static android.provider.Settings.Global.NOTIFICATION_BUBBLES;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -49,12 +48,11 @@ public class BubbleSummaryNotificationPreferenceController extends BasePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        ActivityManager am = mContext.getSystemService(ActivityManager.class);
-        return am.isLowRamDevice() ? UNSUPPORTED_ON_DEVICE : AVAILABLE;
+        return AVAILABLE;
     }
 
     private boolean areBubblesEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
+        return Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON) == ON;
     }
 }

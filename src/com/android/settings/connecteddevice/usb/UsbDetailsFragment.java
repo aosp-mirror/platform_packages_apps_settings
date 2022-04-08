@@ -16,12 +16,9 @@
 
 package com.android.settings.connecteddevice.usb;
 
-import static com.android.settingslib.RestrictedLockUtilsInternal.checkIfUsbDataSignalingIsDisabled;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.view.View;
 
 import androidx.annotation.VisibleForTesting;
@@ -95,7 +92,6 @@ public class UsbDetailsFragment extends DashboardFragment {
         ret.add(new UsbDetailsDataRoleController(context, fragment, usbBackend));
         ret.add(new UsbDetailsFunctionsController(context, fragment, usbBackend));
         ret.add(new UsbDetailsPowerRoleController(context, fragment, usbBackend));
-        ret.add(new UsbDetailsTranscodeMtpController(context, fragment, usbBackend));
         return ret;
     }
 
@@ -104,11 +100,6 @@ public class UsbDetailsFragment extends DashboardFragment {
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.usb_details_fragment) {
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return checkIfUsbDataSignalingIsDisabled(
-                            context, UserHandle.myUserId()) == null;
-                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

@@ -33,7 +33,6 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settingslib.widget.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,11 +72,6 @@ public class AppConversationListPreferenceController extends NotificationPrefere
         }
         return mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid) || mBackend.isInInvalidMsgState(
                 mAppRow.pkg, mAppRow.uid);
-    }
-
-    @Override
-    boolean isIncludedInFilter() {
-        return false;
     }
 
     @Override
@@ -145,7 +139,7 @@ public class AppConversationListPreferenceController extends NotificationPrefere
     }
 
     protected Preference createConversationPref(final ConversationChannelWrapper conversation) {
-        AppPreference pref = new AppPreference(mContext);
+        Preference pref = new Preference(mContext);
         populateConversationPreference(conversation, pref);
         return pref;
     }

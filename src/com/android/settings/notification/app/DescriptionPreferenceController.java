@@ -54,11 +54,6 @@ public class DescriptionPreferenceController extends NotificationPreferenceContr
         return false;
     }
 
-    @Override
-    boolean isIncludedInFilter() {
-        return false;
-    }
-
     public void updateState(Preference preference) {
         if (mAppRow != null) {
             if (mChannel != null) {

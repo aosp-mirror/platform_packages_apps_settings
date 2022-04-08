@@ -55,14 +55,11 @@ public class BatterySaverScheduleSeekBarController implements
     public BatterySaverScheduleSeekBarController(Context context) {
         mContext = context;
         mSeekBarPreference = new SeekBarPreference(context);
-        mSeekBarPreference.setLayoutResource(R.layout.preference_widget_seekbar_settings);
-        mSeekBarPreference.setIconSpaceReserved(false);
         mSeekBarPreference.setOnPreferenceChangeListener(this);
         mSeekBarPreference.setContinuousUpdates(true);
         mSeekBarPreference.setMax(MAX_SEEKBAR_VALUE);
         mSeekBarPreference.setMin(MIN_SEEKBAR_VALUE);
         mSeekBarPreference.setKey(KEY_BATTERY_SAVER_SEEK_BAR);
-        mSeekBarPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_TICKS);
         updateSeekBar();
     }
 
@@ -72,9 +69,8 @@ public class BatterySaverScheduleSeekBarController implements
         final int percentage = ((Integer) newValue) * 5;
         Settings.Global.putInt(mContext.getContentResolver(), Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                 percentage);
-        final CharSequence stateDescription = formatStateDescription(percentage);
-        preference.setTitle(stateDescription);
-        mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
+        preference.setTitle(mContext.getString(
+                R.string.battery_saver_seekbar_title, Utils.formatPercentage(percentage)));
         return true;
     }
 
@@ -94,10 +90,9 @@ public class BatterySaverScheduleSeekBarController implements
                 final int currentSeekbarValue = Math.max(threshold / 5, MIN_SEEKBAR_VALUE);
                 mSeekBarPreference.setVisible(true);
                 mSeekBarPreference.setProgress(currentSeekbarValue);
-                final CharSequence stateDescription = formatStateDescription(
-                        currentSeekbarValue * 5);
-                mSeekBarPreference.setTitle(stateDescription);
-                mSeekBarPreference.overrideSeekBarStateDescription(stateDescription);
+                mSeekBarPreference.setTitle(mContext.getString(
+                        R.string.battery_saver_seekbar_title,
+                        Utils.formatPercentage(currentSeekbarValue * 5)));
             }
         } else {
             mSeekBarPreference.setVisible(false);
@@ -114,10 +109,5 @@ public class BatterySaverScheduleSeekBarController implements
         // saver message
         mSeekBarPreference.setOrder(100);
         screen.addPreference(mSeekBarPreference);
-    }
-
-    private CharSequence formatStateDescription(int percentage) {
-        return mContext.getString(R.string.battery_saver_seekbar_title,
-                Utils.formatPercentage(percentage));
     }
 }

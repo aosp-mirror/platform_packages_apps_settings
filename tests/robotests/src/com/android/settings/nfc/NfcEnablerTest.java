@@ -26,7 +26,7 @@ import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.provider.Settings;
 
-import com.android.settingslib.widget.MainSwitchPreference;
+import androidx.preference.SwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 public class NfcEnablerTest {
 
     @Mock
-    private MainSwitchPreference mNfcPreference;
+    private SwitchPreference mNfcPreference;
 
     private Context mContext;
     private NfcEnabler mNfcEnabler;

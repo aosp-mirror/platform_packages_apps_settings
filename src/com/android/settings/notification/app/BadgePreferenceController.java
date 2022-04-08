@@ -18,7 +18,6 @@ package com.android.settings.notification.app;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
-import android.app.NotificationChannel;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -66,11 +65,6 @@ public class BadgePreferenceController extends NotificationPreferenceController
             }
         }
         return true;
-    }
-
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_LAUNCHER);
     }
 
     public void updateState(Preference preference) {

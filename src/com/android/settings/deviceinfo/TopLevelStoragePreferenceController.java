@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.storage.StorageManager;
 import android.text.format.Formatter;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -30,7 +29,6 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.text.NumberFormat;
-import java.util.concurrent.Future;
 
 public class TopLevelStoragePreferenceController extends BasePreferenceController {
 
@@ -54,15 +52,10 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
             return;
         }
 
-        refreshSummaryThread(preference);
-    }
-
-    @VisibleForTesting
-    protected Future refreshSummaryThread(Preference preference) {
-        return ThreadUtils.postOnBackgroundThread(() -> {
+        ThreadUtils.postOnBackgroundThread(() -> {
             final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
             final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
-                    getStorageManagerVolumeProvider());
+                    mStorageManagerVolumeProvider);
             final double privateUsedBytes = info.totalBytes - info.freeBytes;
 
             ThreadUtils.postOnMainThread(() -> {
@@ -71,11 +64,5 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
                         Formatter.formatFileSize(mContext, info.freeBytes)));
             });
         });
-    }
-
-
-    @VisibleForTesting
-    protected StorageManagerVolumeProvider getStorageManagerVolumeProvider() {
-        return mStorageManagerVolumeProvider;
     }
 }

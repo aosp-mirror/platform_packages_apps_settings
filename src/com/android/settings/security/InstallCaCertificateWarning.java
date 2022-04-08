@@ -16,6 +16,8 @@
 
 package com.android.settings.security;
 
+import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
+
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,12 +27,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Creates a warning dialog explaining the consequences of installing a CA certificate
@@ -42,11 +42,10 @@ public class InstallCaCertificateWarning extends Activity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        ThemeHelper.trySetDynamicColor(this);
         setContentView(R.layout.ca_certificate_warning_dialog);
+        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+
         final GlifLayout layout = findViewById(R.id.setup_wizard_layout);
-        layout.setHeaderText(R.string.ca_certificate_warning_title);
 
         final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
         mixin.setSecondaryButton(
@@ -57,6 +56,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setTheme(R.style.SudGlifButton_Secondary)
                         .build()
         );
+        mixin.getSecondaryButtonView().setFilterTouchesWhenObscured(true);
 
         mixin.setPrimaryButton(
                 new FooterButton.Builder(this)
@@ -66,6 +66,7 @@ public class InstallCaCertificateWarning extends Activity {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+        mixin.getPrimaryButtonView().setFilterTouchesWhenObscured(true);
     }
 
     private View.OnClickListener installCaCertificate() {

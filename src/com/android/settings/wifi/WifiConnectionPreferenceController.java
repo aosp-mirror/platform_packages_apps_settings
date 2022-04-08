@@ -17,6 +17,9 @@
 package com.android.settings.wifi;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkScoreManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -26,14 +29,11 @@ import android.os.SimpleClock;
 import android.os.SystemClock;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -50,7 +50,7 @@ import java.time.ZoneOffset;
  * controller class when there is a wifi connection present.
  */
 public class WifiConnectionPreferenceController extends AbstractPreferenceController implements
-        WifiPickerTracker.WifiPickerTrackerCallback, LifecycleObserver {
+        WifiPickerTracker.WifiPickerTrackerCallback {
 
     private static final String TAG = "WifiConnPrefCtrl";
 
@@ -97,7 +97,6 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
             UpdateListener updateListener, String preferenceGroupKey, int order,
             int metricsCategory) {
         super(context);
-        lifecycle.addObserver(this);
         mUpdateListener = updateListener;
         mPreferenceGroupKey = preferenceGroupKey;
         this.order = order;
@@ -113,23 +112,16 @@ public class WifiConnectionPreferenceController extends AbstractPreferenceContro
                 return SystemClock.elapsedRealtime();
             }
         };
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
-                .getWifiTrackerLibProvider()
-                .createWifiPickerTracker(lifecycle, context,
-                        new Handler(Looper.getMainLooper()),
-                        mWorkerThread.getThreadHandler(),
-                        elapsedRealtimeClock,
-                        MAX_SCAN_AGE_MILLIS,
-                        SCAN_INTERVAL_MILLIS,
-                        this);
-    }
-
-    /**
-     * This event is triggered when users click back button at 'Network & internet'.
-     */
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy() {
-        mWorkerThread.quit();
+        mWifiPickerTracker = new WifiPickerTracker(lifecycle, context,
+                context.getSystemService(WifiManager.class),
+                context.getSystemService(ConnectivityManager.class),
+                context.getSystemService(NetworkScoreManager.class),
+                new Handler(Looper.getMainLooper()),
+                mWorkerThread.getThreadHandler(),
+                elapsedRealtimeClock,
+                MAX_SCAN_AGE_MILLIS,
+                SCAN_INTERVAL_MILLIS,
+                this);
     }
 
     @Override

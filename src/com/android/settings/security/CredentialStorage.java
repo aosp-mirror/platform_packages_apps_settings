@@ -46,7 +46,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
-import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 
 /**
  * CredentialStorage handles resetting and installing keys into KeyStore.
@@ -64,6 +63,7 @@ public final class CredentialStorage extends FragmentActivity {
 
     private static final int CONFIRM_CLEAR_SYSTEM_CREDENTIAL_REQUEST = 1;
 
+    private final KeyStore mKeyStore = KeyStore.getInstance();
     private LockPatternUtils mUtils;
 
     /**
@@ -75,7 +75,6 @@ public final class CredentialStorage extends FragmentActivity {
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         mUtils = new LockPatternUtils(this);
-        getLifecycle().addObserver(new HideNonSystemOverlayMixin(this));
     }
 
     @Override
@@ -86,7 +85,7 @@ public final class CredentialStorage extends FragmentActivity {
         final String action = intent.getAction();
         final UserManager userManager = (UserManager) getSystemService(Context.USER_SERVICE);
         if (!userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-            if (ACTION_RESET.equals(action)) {
+            if (ACTION_RESET.equals(action) && checkCallerIsSelf()) {
                 new ResetDialog();
             } else {
                 if (ACTION_INSTALL.equals(action) && checkCallerIsCertInstallerOrSelfInProfile()) {
@@ -319,6 +318,19 @@ public final class CredentialStorage extends FragmentActivity {
     }
 
     /**
+     * Check that the caller is Settings.
+     */
+    private boolean checkCallerIsSelf() {
+        try {
+            return Process.myUid() == android.app.ActivityManager.getService()
+                    .getLaunchedFromUid(getActivityToken());
+        } catch (RemoteException re) {
+            // Error talking to ActivityManager, just give up
+            return false;
+        }
+    }
+
+    /**
      * Check that the caller is either certinstaller or Settings running in a profile of this user.
      */
     private boolean checkCallerIsCertInstallerOrSelfInProfile() {
@@ -358,11 +370,9 @@ public final class CredentialStorage extends FragmentActivity {
      */
     private boolean confirmKeyGuard(int requestCode) {
         final Resources res = getResources();
-        final ChooseLockSettingsHelper.Builder builder =
-                new ChooseLockSettingsHelper.Builder(this);
-        return builder.setRequestCode(requestCode)
-                .setTitle(res.getText(R.string.credentials_title))
-                .show();
+        return new ChooseLockSettingsHelper(this)
+                .launchConfirmationActivity(requestCode,
+                        res.getText(R.string.credentials_title), true);
     }
 
     @Override

@@ -34,6 +34,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -46,8 +47,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 
-import com.google.common.collect.ImmutableList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,8 +56,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConversationPriorityPreferenceControllerTest {
@@ -98,7 +95,7 @@ public class ConversationPriorityPreferenceControllerTest {
     @Test
     public void testIsAvailable_notChannelNull() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -106,29 +103,8 @@ public class ConversationPriorityPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredIn() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null,
-                ImmutableList.of(NotificationChannel.EDIT_IMPORTANCE));
-        assertTrue(mController.isAvailable());
-
-        mController.onResume(appRow, channel, null, null, null, null,
-                ImmutableList.of(NotificationChannel.EDIT_CONVERSATION));
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredOut() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
-        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -136,7 +112,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
-                RestrictedLockUtils.EnforcedAdmin.class), null);
+                RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new ConversationPriorityPreference(mContext, null);
         mController.updateState(pref);
@@ -150,7 +126,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ConversationPriorityPreference(mContext, null);
         mController.updateState(pref);
@@ -165,7 +141,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(false);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ConversationPriorityPreference(mContext, null);
         mController.updateState(pref);
@@ -180,7 +156,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ConversationPriorityPreference(mContext, null);
         mController.updateState(pref);
@@ -194,7 +170,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         channel.setImportantConversation(true);
         channel.setOriginalImportance(IMPORTANCE_DEFAULT);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         ConversationPriorityPreference pref = mock(ConversationPriorityPreference.class);
         mController.updateState(pref);
@@ -209,8 +185,7 @@ public class ConversationPriorityPreferenceControllerTest {
     public void testImportanceLowToImportant() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ConversationPriorityPreference pref = new ConversationPriorityPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -228,8 +203,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         channel.setAllowBubbles(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ConversationPriorityPreference pref = new ConversationPriorityPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -248,8 +222,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_DEFAULT);
         channel.setAllowBubbles(false);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ConversationPriorityPreference pref = new ConversationPriorityPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -268,8 +241,7 @@ public class ConversationPriorityPreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         channel.setAllowBubbles(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ConversationPriorityPreference pref = new ConversationPriorityPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -289,8 +261,7 @@ public class ConversationPriorityPreferenceControllerTest {
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         channel.setAllowBubbles(true);
         channel.setImportantConversation(true);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ConversationPriorityPreference pref = new ConversationPriorityPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

@@ -16,12 +16,9 @@
 
 package com.android.settings.notification.app;
 
-import android.app.people.IPeopleManager;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.RemoteException;
 import android.service.notification.ConversationChannelWrapper;
-import android.util.Log;
 import android.view.View;
 
 import androidx.preference.Preference;
@@ -30,18 +27,17 @@ import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.widget.LayoutPreference;
 
+import java.util.List;
+
 public class NoConversationsPreferenceController extends ConversationListPreferenceController {
 
-    private static String TAG = "NoConversationsPC";
     private static final String KEY = "no_conversations";
 
-    private IPeopleManager mPs;
-    private int mConversationCount = 0;
+    private List<ConversationChannelWrapper> mConversations;
 
     public NoConversationsPreferenceController(Context context,
-            NotificationBackend backend, IPeopleManager ps) {
+            NotificationBackend backend) {
         super(context, backend);
-        mPs = ps;
     }
 
     @Override
@@ -71,12 +67,7 @@ public class NoConversationsPreferenceController extends ConversationListPrefere
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... unused) {
-                mConversationCount = mBackend.getConversations(false).getList().size();
-                try {
-                    mConversationCount += mPs.getRecentConversations().getList().size();
-                } catch (RemoteException e) {
-                    Log.w(TAG, "Error calling PS", e);
-                }
+                mConversations = mBackend.getConversations(false).getList();
                 return null;
             }
 
@@ -85,9 +76,9 @@ public class NoConversationsPreferenceController extends ConversationListPrefere
                 if (mContext == null) {
                     return;
                 }
-                pref.findViewById(R.id.onboarding).setVisibility(mConversationCount == 0
+                pref.findViewById(R.id.onboarding).setVisibility(mConversations.size() == 0
                         ? View.VISIBLE : View.GONE);
-                preference.setVisible(mConversationCount == 0);
+                preference.setVisible(mConversations.size() == 0);
             }
         }.execute();
     }

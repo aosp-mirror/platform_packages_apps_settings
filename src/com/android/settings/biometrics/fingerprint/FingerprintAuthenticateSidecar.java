@@ -103,8 +103,8 @@ public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
 
     public void startAuthentication(int userId) {
         mCancellationSignal = new CancellationSignal();
-        mFingerprintManager.authenticate(null /* crypto */, mCancellationSignal,
-                mAuthenticationCallback, null /* handler */, userId);
+        mFingerprintManager.authenticate(null, mCancellationSignal, 0 /* flags */,
+                mAuthenticationCallback, null, userId);
     }
 
     public void stopAuthentication() {

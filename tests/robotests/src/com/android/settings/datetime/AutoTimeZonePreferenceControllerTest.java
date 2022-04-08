@@ -18,15 +18,16 @@ package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.robolectric.shadow.api.Shadow.extract;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 
 import androidx.preference.Preference;
+
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,28 +36,27 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class AutoTimeZonePreferenceControllerTest {
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
-    @Mock
+
     private Context mContext;
     private AutoTimeZonePreferenceController mController;
     private Preference mPreference;
-    @Mock
-    private TelephonyManager mTelephonyManager;
+    private ShadowConnectivityManager connectivityManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-
+        mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
-
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mTelephonyManager.isDataCapable()).thenReturn(true);
+        connectivityManager = extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
     }
 
     @Test
@@ -77,7 +77,8 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void isWifiOnly_notAvailable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
+
         mController = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 
@@ -94,7 +95,8 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void isWifiOnly_notEnable() {
-        when(mTelephonyManager.isDataCapable()).thenReturn(false);
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
+
         mController = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 

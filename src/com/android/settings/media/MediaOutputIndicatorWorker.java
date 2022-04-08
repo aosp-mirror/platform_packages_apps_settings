@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
@@ -52,7 +53,6 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         LocalMediaManager.DeviceCallback {
 
     private static final String TAG = "MediaOutputIndWorker";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     private final DevicesChangedBroadcastReceiver mReceiver;
     private final Context mContext;
@@ -127,8 +127,24 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
 
     @Nullable
     MediaController getActiveLocalMediaController() {
-        return MediaOutputUtils.getActiveLocalMediaController(mContext.getSystemService(
-                MediaSessionManager.class));
+        final MediaSessionManager mMediaSessionManager = mContext.getSystemService(
+                MediaSessionManager.class);
+
+        for (MediaController controller : mMediaSessionManager.getActiveSessions(null)) {
+            final MediaController.PlaybackInfo pi = controller.getPlaybackInfo();
+            if (pi == null) {
+                return null;
+            }
+            final PlaybackState playbackState = controller.getPlaybackState();
+            if (playbackState == null) {
+                return null;
+            }
+            if (pi.getPlaybackType() == MediaController.PlaybackInfo.PLAYBACK_TYPE_LOCAL
+                    && playbackState.getState() == PlaybackState.STATE_PLAYING) {
+                return controller;
+            }
+        }
+        return null;
     }
 
     @Override

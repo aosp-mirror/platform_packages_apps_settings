@@ -39,9 +39,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.widget.LayoutPreference;
 
-import com.google.android.setupdesign.util.ButtonStyler;
-import com.google.android.setupdesign.util.PartnerStyleHelper;
-
 import java.util.List;
 
 /**
@@ -166,11 +163,6 @@ public class FaceSettingsRemoveButtonPreferenceController extends BasePreference
         mPreference = preference;
         mButton = ((LayoutPreference) preference)
                 .findViewById(R.id.security_settings_face_settings_remove_button);
-
-        if (PartnerStyleHelper.shouldApplyPartnerResource(mButton)) {
-            ButtonStyler.applyPartnerCustomizationPrimaryButtonStyle(mContext, mButton);
-        }
-
         mButton.setOnClickListener(this);
 
         if (!FaceSettings.isFaceHardwareDetected(mContext)) {

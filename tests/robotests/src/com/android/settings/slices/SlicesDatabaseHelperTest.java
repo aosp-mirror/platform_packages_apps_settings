@@ -83,9 +83,9 @@ public class SlicesDatabaseHelperTest {
 
     @Test
     public void testUpgrade_dropsOldData() {
-        ContentValues mockValues = getMockRow();
+        ContentValues dummyValues = getDummyRow();
 
-        mDatabase.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, mockValues);
+        mDatabase.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, dummyValues);
         Cursor baseline = mDatabase.rawQuery("SELECT * FROM slices_index", null);
         assertThat(baseline.getCount()).isEqualTo(1);
 
@@ -126,7 +126,7 @@ public class SlicesDatabaseHelperTest {
         assertThat(mSlicesDatabaseHelper.isSliceDataIndexed()).isFalse();
     }
 
-    private ContentValues getMockRow() {
+    private ContentValues getDummyRow() {
         final ContentValues values = new ContentValues();
         values.put(IndexColumns.KEY, "key");
         values.put(IndexColumns.TITLE, "title");

@@ -214,11 +214,10 @@ public class TimeZoneSettings extends DashboardFragment {
                 mTimeZoneData.lookupCountryTimeZones(regionId);
 
         use(RegionZonePreferenceController.class).setTimeZoneInfo(tzInfo);
-
         // Only clickable when the region has more than 1 time zones or no time zone is selected.
+
         use(RegionZonePreferenceController.class).setClickable(tzInfo == null ||
-                (countryTimeZones != null
-                        && countryTimeZones.getPreferredTimeZoneIds().size() > 1));
+                (countryTimeZones != null && countryTimeZones.getTimeZoneIds().size() > 1));
         use(TimeZoneInfoPreferenceController.class).setTimeZoneInfo(tzInfo);
 
         updatePreferenceStates();
@@ -245,8 +244,7 @@ public class TimeZoneSettings extends DashboardFragment {
 
         FilteredCountryTimeZones countryTimeZones =
                 timeZoneData.lookupCountryTimeZones(regionId);
-        if (countryTimeZones == null
-                || !countryTimeZones.getPreferredTimeZoneIds().contains(tzId)) {
+        if (countryTimeZones == null || !countryTimeZones.getTimeZoneIds().contains(tzId)) {
             Log.e(TAG, "Unknown time zone id is selected: " + tzId);
             return;
         }

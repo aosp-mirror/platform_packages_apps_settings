@@ -20,36 +20,22 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
 public class EnterprisePrivacySettings extends DashboardFragment {
 
     static final String TAG = "EnterprisePrivacySettings";
-
-    @VisibleForTesting
-    PrivacySettingsPreference mPrivacySettingsPreference;
-
-    @Override
-    public void onAttach(Context context) {
-        mPrivacySettingsPreference =
-                PrivacySettingsPreferenceFactory.createPrivacySettingsPreference(context);
-
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        mPrivacySettingsPreference = null;
-        super.onDetach();
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -63,12 +49,47 @@ public class EnterprisePrivacySettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mPrivacySettingsPreference.getPreferenceScreenResId();
+        return R.xml.enterprise_privacy_settings;
     }
 
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return mPrivacySettingsPreference.createPreferenceControllers(true /* async */);
+        return buildPreferenceControllers(context, true /* async */);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            boolean async) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new NetworkLogsPreferenceController(context));
+        controllers.add(new BugReportsPreferenceController(context));
+        controllers.add(new SecurityLogsPreferenceController(context));
+        final List<AbstractPreferenceController> exposureChangesCategoryControllers =
+                new ArrayList<>();
+        exposureChangesCategoryControllers.add(new EnterpriseInstalledPackagesPreferenceController(
+                context, async));
+        exposureChangesCategoryControllers.add(
+                new AdminGrantedLocationPermissionsPreferenceController(context, async));
+        exposureChangesCategoryControllers.add(
+                new AdminGrantedMicrophonePermissionPreferenceController(context, async));
+        exposureChangesCategoryControllers.add(new AdminGrantedCameraPermissionPreferenceController(
+                context, async));
+        exposureChangesCategoryControllers.add(new EnterpriseSetDefaultAppsPreferenceController(
+                context));
+        exposureChangesCategoryControllers.add(new AlwaysOnVpnCurrentUserPreferenceController(
+                context));
+        exposureChangesCategoryControllers.add(new AlwaysOnVpnManagedProfilePreferenceController(
+                context));
+        exposureChangesCategoryControllers.add(new ImePreferenceController(context));
+        exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context));
+        exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(context));
+        exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
+                context));
+        controllers.addAll(exposureChangesCategoryControllers);
+        controllers.add(new PreferenceCategoryController(context, "exposure_changes_category")
+                .setChildren(exposureChangesCategoryControllers));
+        controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(context));
+        controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context));
+        return controllers;
     }
 
     public static boolean isPageEnabled(Context context) {
@@ -78,32 +99,17 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                private PrivacySettingsPreference mPrivacySettingsPreference;
-
+            new BaseSearchIndexProvider(R.xml.enterprise_privacy_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return isPageEnabled(context);
                 }
 
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    mPrivacySettingsPreference =
-                            PrivacySettingsPreferenceFactory.createPrivacySettingsPreference(
-                                    context);
-                    return mPrivacySettingsPreference.getXmlResourcesToIndex();
-                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    mPrivacySettingsPreference =
-                            PrivacySettingsPreferenceFactory.createPrivacySettingsPreference(
-                                    context);
-                    return mPrivacySettingsPreference.createPreferenceControllers(
-                            false /* async */);
+                    return buildPreferenceControllers(context, false /* async */);
                 }
             };
 }

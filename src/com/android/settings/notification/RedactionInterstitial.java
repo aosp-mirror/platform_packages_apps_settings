@@ -26,6 +26,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -49,7 +50,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
-import com.google.android.setupdesign.util.ThemeHelper;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -61,21 +61,20 @@ public class RedactionInterstitial extends SettingsActivity {
     }
 
     @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
+    }
+
+    @Override
     protected boolean isValidFragment(String fragmentName) {
         return RedactionInterstitialFragment.class.getName().equals(fragmentName);
     }
 
     @Override
     protected void onCreate(Bundle savedInstance) {
-        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        ThemeHelper.trySetDynamicColor(this);
         super.onCreate(savedInstance);
         findViewById(R.id.content_parent).setFitsSystemWindows(false);
-    }
-
-    @Override
-    protected boolean isToolbarEnabled() {
-        return false;
     }
 
     /**
@@ -153,7 +152,7 @@ public class RedactionInterstitial extends SettingsActivity {
             }
             final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
             if (activity != null) {
-                activity.setResult(RESULT_CANCELED, null);
+                activity.setResult(RESULT_OK, null);
                 finish();
             }
         }

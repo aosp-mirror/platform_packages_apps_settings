@@ -33,7 +33,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -75,8 +74,6 @@ public class AllInOneTetherSettingsTest {
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
-    private TetheringManager mTetheringManager;
-    @Mock
     private UserManager mUserManager;
     @Mock
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
@@ -92,12 +89,10 @@ public class AllInOneTetherSettingsTest {
         MockitoAnnotations.initMocks(this);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
-        doReturn(mTetheringManager)
-                .when(mContext).getSystemService(Context.TETHERING_SERVICE);
-        doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
-        doReturn(USB_REGEXS).when(mTetheringManager).getTetherableUsbRegexs();
-        doReturn(BT_REGEXS).when(mTetheringManager).getTetherableBluetoothRegexs();
-        doReturn(ETHERNET_REGEXS).when(mTetheringManager).getTetherableIfaces();
+        doReturn(WIFI_REGEXS).when(mConnectivityManager).getTetherableWifiRegexs();
+        doReturn(USB_REGEXS).when(mConnectivityManager).getTetherableUsbRegexs();
+        doReturn(BT_REGEXS).when(mConnectivityManager).getTetherableBluetoothRegexs();
+        doReturn(ETHERNET_REGEXS).when(mConnectivityManager).getTetherableIfaces();
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         // Assume the feature is enabled for most test cases.
         FeatureFlagUtils.setEnabled(mContext, FeatureFlags.TETHER_ALL_IN_ONE, true);

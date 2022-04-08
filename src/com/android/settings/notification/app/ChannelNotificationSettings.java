@@ -66,30 +66,23 @@ public class ChannelNotificationSettings extends NotificationSettings {
             return;
         }
 
-        getActivity().setTitle(mChannel.getName());
-
-        if (!TextUtils.isEmpty(mChannel.getConversationId()) && !mChannel.isDemoted()) {
-            Intent intent = new SubSettingLauncher(mContext)
+        if (mChannel != null && !TextUtils.isEmpty(mChannel.getConversationId())
+            && !mChannel.isDemoted()) {
+            startActivity(new SubSettingLauncher(mContext)
                     .setDestination(ConversationNotificationSettings.class.getName())
                     .setArguments(getArguments())
                     .setExtras(getIntent() != null ? getIntent().getExtras(): null)
                     .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_TOPIC_NOTIFICATION)
-                    .toIntent();
-            if (mPreferenceFilter != null) {
-                intent.setClass(mContext, ChannelPanelActivity.class);
-            }
-            startActivity(intent);
+                    .toIntent());
             finish();
             return;
         }
 
         for (NotificationPreferenceController controller : mControllers) {
-            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin,
-                    mPreferenceFilter);
+            controller.onResume(mAppRow, mChannel, mChannelGroup, null, null, mSuspendedAppsAdmin);
             controller.displayPreference(getPreferenceScreen());
         }
         updatePreferenceStates();
-        animatePanel();
     }
 
     @Override
@@ -129,6 +122,7 @@ public class ChannelNotificationSettings extends NotificationSettings {
                 mDependentFieldListener, mBackend));
         mControllers.add(new VibrationPreferenceController(context, mBackend));
         mControllers.add(new AppLinkPreferenceController(context));
+        mControllers.add(new DescriptionPreferenceController(context));
         mControllers.add(new VisibilityPreferenceController(context, new LockPatternUtils(context),
                 mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));

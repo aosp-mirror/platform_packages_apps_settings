@@ -26,7 +26,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -95,15 +93,10 @@ public class PanelFragment extends Fragment {
     private String mPanelClosedKey;
     private LinearLayout mPanelHeader;
     private ImageView mTitleIcon;
-    private LinearLayout mTitleGroup;
-    private LinearLayout mHeaderLayout;
     private TextView mHeaderTitle;
     private TextView mHeaderSubtitle;
     private int mMaxHeight;
     private View mFooterDivider;
-    private boolean mPanelCreating;
-    private ProgressBar mProgressBar;
-    private View mHeaderDivider;
 
     private final Map<Uri, LiveData<Slice>> mSliceLiveData = new LinkedHashMap<>();
 
@@ -134,7 +127,6 @@ public class PanelFragment extends Fragment {
                     if (mPanelSlices != null) {
                         mPanelSlices.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
-                    mPanelCreating = false;
                 }
             };
 
@@ -148,7 +140,6 @@ public class PanelFragment extends Fragment {
         mLayoutView.getViewTreeObserver()
                 .addOnGlobalLayoutListener(mPanelLayoutListener);
         mMaxHeight = getResources().getDimensionPixelSize(R.dimen.output_switcher_slice_max_height);
-        mPanelCreating = true;
         createPanelContent();
         return mLayoutView;
     }
@@ -162,7 +153,6 @@ public class PanelFragment extends Fragment {
      * Call createPanelContent() once animation end.
      */
     void updatePanelWithAnimation() {
-        mPanelCreating = true;
         final View panelContent = mLayoutView.findViewById(R.id.panel_container);
         final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
                 0.0f /* startY */, panelContent.getHeight() /* endY */,
@@ -181,21 +171,11 @@ public class PanelFragment extends Fragment {
         animatorSet.start();
     }
 
-    boolean isPanelCreating() {
-        return mPanelCreating;
-    }
-
     private void createPanelContent() {
         final FragmentActivity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-
         if (mLayoutView == null) {
             activity.finish();
-            return;
         }
-
         final ViewGroup.LayoutParams params = mLayoutView.getLayoutParams();
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         mLayoutView.setLayoutParams(params);
@@ -206,13 +186,9 @@ public class PanelFragment extends Fragment {
         mTitleView = mLayoutView.findViewById(R.id.panel_title);
         mPanelHeader = mLayoutView.findViewById(R.id.panel_header);
         mTitleIcon = mLayoutView.findViewById(R.id.title_icon);
-        mTitleGroup = mLayoutView.findViewById(R.id.title_group);
-        mHeaderLayout = mLayoutView.findViewById(R.id.header_layout);
         mHeaderTitle = mLayoutView.findViewById(R.id.header_title);
         mHeaderSubtitle = mLayoutView.findViewById(R.id.header_subtitle);
         mFooterDivider = mLayoutView.findViewById(R.id.footer_divider);
-        mProgressBar = mLayoutView.findViewById(R.id.progress_bar);
-        mHeaderDivider = mLayoutView.findViewById(R.id.header_divider);
 
         // Make the panel layout gone here, to avoid janky animation when updating from old panel.
         // We will make it visible once the panel is ready to load.
@@ -228,7 +204,6 @@ public class PanelFragment extends Fragment {
 
         if (mPanel == null) {
             activity.finish();
-            return;
         }
 
         mPanel.registerCallback(new LocalPanelCallback());
@@ -237,8 +212,6 @@ public class PanelFragment extends Fragment {
         }
 
         mMetricsProvider = FeatureFactory.getFactory(activity).getMetricsFeatureProvider();
-
-        updateProgressBar();
 
         mPanelSlices.setLayoutManager(new LinearLayoutManager((activity)));
         // Add predraw listener to remove the animation and while we wait for Slices to load.
@@ -249,21 +222,45 @@ public class PanelFragment extends Fragment {
 
         final IconCompat icon = mPanel.getIcon();
         final CharSequence title = mPanel.getTitle();
-        final CharSequence subtitle = mPanel.getSubTitle();
-
-        if (icon != null || (subtitle != null && subtitle.length() > 0)) {
-            enablePanelHeader(icon, title, subtitle);
+        if (icon == null) {
+            mTitleView.setVisibility(View.VISIBLE);
+            mPanelHeader.setVisibility(View.GONE);
+            mTitleView.setText(title);
         } else {
-            enableTitle(title);
+            mTitleView.setVisibility(View.GONE);
+            mPanelHeader.setVisibility(View.VISIBLE);
+            mPanelHeader.setAccessibilityPaneTitle(title);
+            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
+            mHeaderTitle.setText(title);
+            mHeaderSubtitle.setText(mPanel.getSubTitle());
+            if (mPanel.getHeaderIconIntent() != null) {
+                mTitleIcon.setOnClickListener(getHeaderIconListener());
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            } else {
+                final int size = getResources().getDimensionPixelSize(
+                        R.dimen.output_switcher_panel_icon_size);
+                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+            }
         }
 
-        mFooterDivider.setVisibility(View.GONE);
+        if (mPanel.getViewType() == PanelContent.VIEW_TYPE_SLIDER_LARGE_ICON) {
+            mFooterDivider.setVisibility(View.VISIBLE);
+        } else {
+            mFooterDivider.setVisibility(View.GONE);
+        }
 
         mSeeMoreButton.setOnClickListener(getSeeMoreListener());
         mDoneButton.setOnClickListener(getCloseListener());
 
         if (mPanel.isCustomizedButtonUsed()) {
-            enableCustomizedButton();
+            final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
+            if (TextUtils.isEmpty(customTitle)) {
+                mSeeMoreButton.setVisibility(View.GONE);
+            } else {
+                mSeeMoreButton.setVisibility(View.VISIBLE);
+                mSeeMoreButton.setText(customTitle);
+            }
         } else if (mPanel.getSeeMoreIntent() == null) {
             // If getSeeMoreIntent() is null hide the mSeeMoreButton.
             mSeeMoreButton.setVisibility(View.GONE);
@@ -276,59 +273,6 @@ public class PanelFragment extends Fragment {
                 mPanel.getMetricsCategory(),
                 callingPackageName,
                 0 /* value */);
-    }
-
-    private void enablePanelHeader(IconCompat icon, CharSequence title, CharSequence subtitle) {
-        mTitleView.setVisibility(View.GONE);
-        mPanelHeader.setVisibility(View.VISIBLE);
-        mPanelHeader.setAccessibilityPaneTitle(title);
-        mHeaderTitle.setText(title);
-        mHeaderSubtitle.setText(subtitle);
-        mHeaderSubtitle.setAccessibilityPaneTitle(subtitle);
-        if (icon != null) {
-            mTitleGroup.setVisibility(View.VISIBLE);
-            mHeaderLayout.setGravity(Gravity.LEFT);
-            mTitleIcon.setImageIcon(icon.toIcon(getContext()));
-            if (mPanel.getHeaderIconIntent() != null) {
-                mTitleIcon.setOnClickListener(getHeaderIconListener());
-                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            } else {
-                final int size = getResources().getDimensionPixelSize(
-                        R.dimen.output_switcher_panel_icon_size);
-                mTitleIcon.setLayoutParams(new LinearLayout.LayoutParams(size, size));
-            }
-        } else {
-            mTitleGroup.setVisibility(View.GONE);
-            mHeaderLayout.setGravity(Gravity.CENTER_HORIZONTAL);
-        }
-    }
-
-    private void enableTitle(CharSequence title) {
-        mPanelHeader.setVisibility(View.GONE);
-        mTitleView.setVisibility(View.VISIBLE);
-        mTitleView.setAccessibilityPaneTitle(title);
-        mTitleView.setText(title);
-    }
-
-    private void enableCustomizedButton() {
-        final CharSequence customTitle = mPanel.getCustomizedButtonTitle();
-        if (TextUtils.isEmpty(customTitle)) {
-            mSeeMoreButton.setVisibility(View.GONE);
-        } else {
-            mSeeMoreButton.setVisibility(View.VISIBLE);
-            mSeeMoreButton.setText(customTitle);
-        }
-    }
-
-    private void updateProgressBar() {
-        if (mPanel.isProgressBarVisible()) {
-            mProgressBar.setVisibility(View.VISIBLE);
-            mHeaderDivider.setVisibility(View.GONE);
-        } else {
-            mProgressBar.setVisibility(View.GONE);
-            mHeaderDivider.setVisibility(View.VISIBLE);
-        }
     }
 
     private void loadAllSlices() {
@@ -356,7 +300,7 @@ public class PanelFragment extends Fragment {
                  * Watching for the {@link Slice} to load.
                  * <p>
                  *     If the Slice comes back {@code null} or with the Error attribute, if slice
-                 *     uri is not in the allowlist, remove the Slice data from the list, otherwise
+                 *     uri is not in the whitelist, remove the Slice data from the list, otherwise
                  *     keep the Slice data.
                  * <p>
                  *     If the Slice has come back fully loaded, then mark the Slice as loaded.  No
@@ -387,10 +331,10 @@ public class PanelFragment extends Fragment {
     }
 
     private void removeSliceLiveData(Uri uri) {
-        final List<String> allowList = Arrays.asList(
+        final List<String> whiteList = Arrays.asList(
                 getResources().getStringArray(
                         R.array.config_panel_keep_observe_uri));
-        if (!allowList.contains(uri.toString())) {
+        if (!whiteList.contains(uri.toString())) {
             mSliceLiveData.remove(uri);
         }
     }
@@ -411,11 +355,7 @@ public class PanelFragment extends Fragment {
                     .addOnGlobalLayoutListener(mOnGlobalLayoutListener);
             mPanelSlices.setVisibility(View.VISIBLE);
 
-            final FragmentActivity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            final DividerItemDecoration itemDecoration = new DividerItemDecoration(activity);
+            final DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
             itemDecoration
                     .setDividerCondition(DividerItemDecoration.DIVIDER_CONDITION_BOTH);
             if (mPanelSlices.getItemDecorationCount() == 0) {
@@ -475,24 +415,22 @@ public class PanelFragment extends Fragment {
         if (mLayoutView != null) {
             mLayoutView.getViewTreeObserver().removeOnGlobalLayoutListener(mPanelLayoutListener);
         }
-        if (mPanel != null) {
-            mMetricsProvider.action(
-                    0 /* attribution */,
-                    SettingsEnums.PAGE_HIDE,
-                    mPanel.getMetricsCategory(),
-                    mPanelClosedKey,
-                    0 /* value */);
-        }
+        mMetricsProvider.action(
+                0 /* attribution */,
+                SettingsEnums.PAGE_HIDE,
+                mPanel.getMetricsCategory(),
+                mPanelClosedKey,
+                0 /* value */);
     }
 
     @VisibleForTesting
     View.OnClickListener getSeeMoreListener() {
         return (v) -> {
             mPanelClosedKey = PanelClosedKeys.KEY_SEE_MORE;
-            final FragmentActivity activity = getActivity();
             if (mPanel.isCustomizedButtonUsed()) {
-                mPanel.onClickCustomizedButton(activity);
+                mPanel.onClickCustomizedButton();
             } else {
+                final FragmentActivity activity = getActivity();
                 activity.startActivityForResult(mPanel.getSeeMoreIntent(), 0);
                 activity.finish();
             }
@@ -524,14 +462,18 @@ public class PanelFragment extends Fragment {
         @Override
         public void onCustomizedButtonStateChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                enableCustomizedButton();
+                mSeeMoreButton.setVisibility(
+                        mPanel.isCustomizedButtonUsed() ? View.VISIBLE : View.GONE);
+                mSeeMoreButton.setText(mPanel.getCustomizedButtonTitle());
             });
         }
 
         @Override
         public void onHeaderChanged() {
             ThreadUtils.postOnMainThread(() -> {
-                enablePanelHeader(mPanel.getIcon(), mPanel.getTitle(), mPanel.getSubTitle());
+                mTitleIcon.setImageIcon(mPanel.getIcon().toIcon(getContext()));
+                mHeaderTitle.setText(mPanel.getTitle());
+                mHeaderSubtitle.setText(mPanel.getSubTitle());
             });
         }
 
@@ -539,20 +481,6 @@ public class PanelFragment extends Fragment {
         public void forceClose() {
             mPanelClosedKey = PanelClosedKeys.KEY_OTHERS;
             getFragmentActivity().finish();
-        }
-
-        @Override
-        public void onTitleChanged() {
-            ThreadUtils.postOnMainThread(() -> {
-                enableTitle(mPanel.getTitle());
-            });
-        }
-
-        @Override
-        public void onProgressBarVisibleChanged() {
-            ThreadUtils.postOnMainThread(() -> {
-                updateProgressBar();
-            });
         }
 
         @VisibleForTesting

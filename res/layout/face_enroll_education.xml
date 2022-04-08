@@ -18,11 +18,11 @@
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:FaceEnrollAccessibilitySwitch="http://schemas.android.com/apk/res/com.android.settings"
     style="?attr/face_layout_theme"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:sucHeaderText="@string/security_settings_face_enroll_education_title">
+    android:layout_height="match_parent">
 
     <LinearLayout
         style="@style/SudContentFrame"
@@ -32,6 +32,14 @@
         android:clipToPadding="false"
         android:orientation="vertical">
 
+        <com.google.android.setupdesign.view.RichTextView
+            android:id="@+id/sud_layout_description"
+            style="@style/SudDescription.Glif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/security_settings_face_enroll_education_message"/>
+
         <Space android:layout_width="match_parent"
                android:layout_height="0dp"
                android:layout_weight="1"/>
@@ -39,26 +47,14 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-24dp">
+            android:layout_marginVertical="12dp">
 
             <com.google.android.setupdesign.view.IllustrationVideoView
-                android:id="@+id/illustration_default"
+                android:id="@+id/illustration_normal"
                 style="@style/SudContentIllustration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:sudVideo="@raw/face_education"/>
-
-            <!-- Animation res MUST be set in code, gated by config_face_education_use_lottie. -->
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/illustration_lottie"
-                android:layout_width="match_parent"
-                android:layout_height="440dp"
-                android:layout_marginTop="-52dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_speed="1.5" />
 
             <ImageView
                 android:id="@+id/illustration_accessibility"
@@ -66,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:visibility="invisible"
-                android:background="@drawable/face_enroll_icon_large"/>
+                android:background="@drawable/face_enroll_introduction"/>
 
         </FrameLayout>
 
@@ -98,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:messageText="@string/security_settings_face_enroll_introduction_accessibility"/>
+                    FaceEnrollAccessibilitySwitch:messageText="@string/security_settings_face_enroll_introduction_accessibility_diversity"/>
 
             </FrameLayout>
 

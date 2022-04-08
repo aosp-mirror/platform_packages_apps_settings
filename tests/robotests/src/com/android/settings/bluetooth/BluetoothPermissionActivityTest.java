@@ -53,6 +53,6 @@ public class BluetoothPermissionActivityTest {
         mActivity.sendReplyIntentToReceiver(true, true);
 
         verify(mContext).sendBroadcast(intentCaptor.capture(),
-                eq("android.permission.BLUETOOTH_CONNECT"));
+                eq("android.permission.BLUETOOTH_ADMIN"));
     }
 }

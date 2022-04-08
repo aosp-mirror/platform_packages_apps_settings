@@ -25,6 +25,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.TetheringManager;
 
 import androidx.preference.SwitchPreference;
@@ -42,7 +43,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class UsbTetherPreferenceControllerTest {
 
     @Mock
-    private TetheringManager mTetheringManager;
+    private ConnectivityManager mConnectivityManager;
     @Mock
     private TetherEnabler mTetherEnabler;
 
@@ -55,8 +56,9 @@ public class UsbTetherPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
-        when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
-        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
+                mConnectivityManager);
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[]{""});
         mController = new UsbTetherPreferenceController(mContext, "USB");
         mController.setTetherEnabler(mTetherEnabler);
         mSwitchPreference = spy(SwitchPreference.class);
@@ -92,7 +94,7 @@ public class UsbTetherPreferenceControllerTest {
 
     @Test
     public void shouldShow_noTetherableUsb() {
-        when(mTetheringManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
+        when(mConnectivityManager.getTetherableUsbRegexs()).thenReturn(new String[0]);
         assertThat(mController.shouldShow()).isFalse();
     }
 

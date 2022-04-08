@@ -106,12 +106,12 @@ public class WifiP2PPreferenceControllerTest {
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference).setEnabled(true);
 
-        Intent fakeIntent = new Intent();
-        mController.mReceiver.onReceive(mContext, fakeIntent);
+        Intent dummyIntent = new Intent();
+        mController.mReceiver.onReceive(mContext, dummyIntent);
         verify(mWifiDirectPreference, times(2)).setEnabled(true);
 
         when(mWifiManager.isWifiEnabled()).thenReturn(false);
-        mController.mReceiver.onReceive(mContext, fakeIntent);
+        mController.mReceiver.onReceive(mContext, dummyIntent);
         verify(mWifiDirectPreference).setEnabled(false);
     }
 
@@ -136,12 +136,12 @@ public class WifiP2PPreferenceControllerTest {
     public void updateState_withLocationDisabled_preferenceShouldBeDisable() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
         when(mLocationManager.isLocationEnabled()).thenReturn(true);
-        Intent fakeIntent = new Intent();
+        Intent dummyIntent = new Intent();
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference).setEnabled(true);
 
         when(mLocationManager.isLocationEnabled()).thenReturn(false);
-        mController.mLocationReceiver.onReceive(mContext, fakeIntent);
+        mController.mLocationReceiver.onReceive(mContext, dummyIntent);
         verify(mWifiDirectPreference).setEnabled(false);
     }
 }

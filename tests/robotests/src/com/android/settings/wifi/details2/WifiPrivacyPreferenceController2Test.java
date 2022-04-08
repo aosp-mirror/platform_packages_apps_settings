@@ -89,15 +89,7 @@ public class WifiPrivacyPreferenceController2Test {
     }
 
     @Test
-    public void testUpdateState_canSetPrivacyInNextUpdate_shouldBeSelectable() {
-        // Return false in WifiEntry#canSetPrivacy to make preference un-selectable first.
-        when(mMockWifiEntry.canSetPrivacy()).thenReturn(false);
-
-        mPreferenceController.updateState(mDropDownPreference);
-
-        assertThat(mDropDownPreference.isSelectable()).isFalse();
-
-        // Return true in WifiEntry#canSetPrivacy to verify preference back to selectable.
+    public void testUpdateState_canSetPrivacy_shouldBeSelectable() {
         when(mMockWifiEntry.canSetPrivacy()).thenReturn(true);
 
         mPreferenceController.updateState(mDropDownPreference);
@@ -106,15 +98,7 @@ public class WifiPrivacyPreferenceController2Test {
     }
 
     @Test
-    public void testUpdateState_canNotSetPrivacyInNextUpdate_shouldNotBeSelectable() {
-        // Return true in WifiEntry#canSetPrivacy to make preference selectable first.
-        when(mMockWifiEntry.canSetPrivacy()).thenReturn(true);
-
-        mPreferenceController.updateState(mDropDownPreference);
-
-        assertThat(mDropDownPreference.isSelectable()).isTrue();
-
-        // Return false in WifiEntry#canSetPrivacy to verify preference back to un-selectable.
+    public void testUpdateState_canNotSetPrivacy_shouldNotSelectable() {
         when(mMockWifiEntry.canSetPrivacy()).thenReturn(false);
 
         mPreferenceController.updateState(mDropDownPreference);

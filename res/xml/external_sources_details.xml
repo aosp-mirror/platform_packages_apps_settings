@@ -21,9 +21,9 @@
         android:key="external_sources_settings_switch"
         android:title="@string/external_source_switch_title" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <Preference
         android:key="external_sources_settings_description"
-        android:title="@string/install_all_warning"
+        android:summary="@string/install_all_warning"
         android:selectable="false" />
 
 </PreferenceScreen>

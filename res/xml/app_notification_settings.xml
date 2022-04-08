@@ -16,17 +16,17 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="app_notifications"
-        android:title="@string/notifications_title">
+        android:key="app_notifications">
 
     <com.android.settingslib.widget.LayoutPreference
         android:key="pref_app_header"
         android:layout="@layout/settings_entity_header" />
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
-        android:key="block" />
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="block"
+        android:layout="@layout/styled_switch_bar" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="block_desc" />
 
 
@@ -58,16 +58,7 @@
         android:key="channels"
         android:layout="@layout/empty_view"
         settings:allowDividerAbove="true"
-        settings:allowDividerBelow="true" />
-
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_badge_title"
-        settings:useAdditionalSummary="true"
-        android:order="1001"
-        settings:allowDividerAbove="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+        settings:allowDividerBelow="false" />
 
     <!-- Importance toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -84,19 +75,32 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="bypass_dnd"
         android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"/>
+        android:summary="@string/app_notification_override_dnd_summary"
+        settings:useAdditionalSummary="true"/>
 
+    <PreferenceCategory
+        android:key="app_advanced"
+        android:order="1000"
+        settings:initialExpandedChildrenCount="0">
+        <!-- Show badge -->
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="badge"
+            android:title="@string/notification_badge_title"
+            settings:useAdditionalSummary="true"
+            android:order="1001"
+            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
         <Preference
             android:key="app_link"
             android:order="1003"
-            android:icon="@drawable/ic_settings_24dp"
             android:title="@string/app_settings_link" />
 
-    <com.android.settingslib.widget.FooterPreference
+    </PreferenceCategory>
+
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="desc"
         android:order="5000" />
 
-    <com.android.settingslib.widget.FooterPreference
+    <com.android.settings.notification.app.NotificationFooterPreference
         android:key="deleted"
         android:order="8000" />
 

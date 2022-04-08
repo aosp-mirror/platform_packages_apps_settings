@@ -36,12 +36,10 @@ import java.util.List;
 
 public class WallpaperPreferenceController extends BasePreferenceController {
     private static final String TAG = "WallpaperPrefController";
-    private static final String LAUNCHED_SETTINGS = "app_launched_settings";
 
     private final String mWallpaperPackage;
     private final String mWallpaperClass;
     private final String mStylesAndWallpaperClass;
-    private final String mWallpaperLaunchExtra;
 
     public WallpaperPreferenceController(Context context, String key) {
         super(context, key);
@@ -49,7 +47,6 @@ public class WallpaperPreferenceController extends BasePreferenceController {
         mWallpaperClass = mContext.getString(R.string.config_wallpaper_picker_class);
         mStylesAndWallpaperClass =
                 mContext.getString(R.string.config_styles_and_wallpaper_picker_class);
-        mWallpaperLaunchExtra = mContext.getString(R.string.config_wallpaper_picker_launch_extra);
     }
 
     @Override
@@ -65,11 +62,8 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     }
 
     public ComponentName getComponentName() {
-        return new ComponentName(mWallpaperPackage, getComponentClassString());
-    }
-
-    public String getComponentClassString() {
-        return areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass;
+        return new ComponentName(mWallpaperPackage,
+                areStylesAvailable() ? mStylesAndWallpaperClass : mWallpaperClass);
     }
 
     public String getKeywords() {
@@ -82,12 +76,11 @@ public class WallpaperPreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        if ((TextUtils.isEmpty(mWallpaperClass) && TextUtils.isEmpty(mStylesAndWallpaperClass))
-                || TextUtils.isEmpty(mWallpaperPackage)) {
+        if (TextUtils.isEmpty(mWallpaperPackage) || TextUtils.isEmpty(mWallpaperClass)) {
             Log.e(TAG, "No Wallpaper picker specified!");
             return UNSUPPORTED_ON_DEVICE;
         }
-        return canResolveWallpaperComponent(getComponentClassString())
+        return canResolveWallpaperComponent(mWallpaperClass)
                 ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
@@ -99,12 +92,7 @@ public class WallpaperPreferenceController extends BasePreferenceController {
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (getPreferenceKey().equals(preference.getKey())) {
-            final Intent intent = new Intent().setComponent(
-                getComponentName()).putExtra(mWallpaperLaunchExtra, LAUNCHED_SETTINGS);
-            if (areStylesAvailable()) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-            preference.getContext().startActivity(intent);
+            preference.getContext().startActivity(new Intent().setComponent(getComponentName()));
             return true;
         }
         return super.handlePreferenceTreeClick(preference);

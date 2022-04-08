@@ -26,19 +26,18 @@ import android.view.accessibility.CaptioningManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing more options of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionMoreOptionsFragment extends DashboardFragment
+public class CaptionMoreOptionsFragment extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
-
-    private static final String TAG = "CaptionMoreOptionsFragment";
     private static final String PREF_LOCALE = "captioning_locale";
 
     private CaptioningManager mCaptioningManager;
+
     private LocalePreference mLocale;
 
     @Override
@@ -47,24 +46,15 @@ public class CaptionMoreOptionsFragment extends DashboardFragment
     }
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
 
         mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
 
+        addPreferencesFromResource(R.xml.captioning_more_options);
         initializeAllPreferences();
         updateAllPreferences();
         installUpdateListeners();
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.captioning_more_options;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return TAG;
     }
 
     private void initializeAllPreferences() {

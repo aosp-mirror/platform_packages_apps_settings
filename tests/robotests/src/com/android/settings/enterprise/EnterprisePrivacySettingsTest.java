@@ -16,70 +16,47 @@
 
 package com.android.settings.enterprise;
 
-import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_DEFAULT;
-
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.provider.SearchIndexableResource;
-
-import androidx.test.core.app.ApplicationProvider;
+import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class EnterprisePrivacySettingsTest extends BasePrivacySettingsPreferenceTest {
-    private static final ComponentName DEVICE_OWNER_COMPONENT =
-            new ComponentName("com.android.foo", "bar");
+public class EnterprisePrivacySettingsTest {
 
-    @Mock
-    private DevicePolicyManager mDevicePolicyManager;
-    @Mock
-    private PrivacySettingsPreference mPrivacySettingsPreference;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     private EnterprisePrivacySettings mSettings;
 
-    @Override
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mSettings = new EnterprisePrivacySettings();
-        mSettings.mPrivacySettingsPreference = mPrivacySettingsPreference;
-
-        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDevicePolicyManager);
-        when(mDevicePolicyManager.isDeviceManaged()).thenReturn(true);
-        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser())
-                .thenReturn(DEVICE_OWNER_COMPONENT);
-        when(mDevicePolicyManager.getDeviceOwnerType(DEVICE_OWNER_COMPONENT))
-                .thenReturn(DEVICE_OWNER_TYPE_DEFAULT);
     }
 
     @Test
     public void verifyConstants() {
-        when(mPrivacySettingsPreference.getPreferenceScreenResId())
-                .thenReturn(R.xml.enterprise_privacy_settings);
-
         assertThat(mSettings.getMetricsCategory())
                 .isEqualTo(MetricsEvent.ENTERPRISE_PRIVACY_SETTINGS);
         assertThat(mSettings.getLogTag()).isEqualTo("EnterprisePrivacySettings");
@@ -99,7 +76,6 @@ public class EnterprisePrivacySettingsTest extends BasePrivacySettingsPreference
 
     @Test
     public void isPageEnabled_noDeviceOwner_shouldReturnFalse() {
-        when(mDevicePolicyManager.isDeviceManaged()).thenReturn(false);
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.hasDeviceOwner())
                 .thenReturn(false);
 
@@ -109,35 +85,53 @@ public class EnterprisePrivacySettingsTest extends BasePrivacySettingsPreference
 
     @Test
     public void getPreferenceControllers() {
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new NetworkLogsPreferenceController(mContext));
-        when(mPrivacySettingsPreference.createPreferenceControllers(anyBoolean()))
-                .thenReturn(controllers);
-
-        final List<AbstractPreferenceController> privacyControllers =
-                mSettings.createPreferenceControllers(mContext);
-
-        assertThat(privacyControllers).isNotNull();
-        assertThat(privacyControllers.size()).isEqualTo(1);
-        assertThat(controllers.get(0)).isInstanceOf(NetworkLogsPreferenceController.class);
+        final List<AbstractPreferenceController> controllers =
+            mSettings.createPreferenceControllers(RuntimeEnvironment.application);
+        verifyPreferenceControllers(controllers);
     }
 
     @Test
-    public void
-            getSearchIndexProviderPreferenceControllers_returnsEnterpriseSearchIndexPreferenceControllers() {
+    public void getSearchIndexProviderPreferenceControllers() {
         final List<AbstractPreferenceController> controllers =
             EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
-                .getPreferenceControllers(mContext);
-
-        verifyEnterprisePreferenceControllers(controllers);
+                .getPreferenceControllers(RuntimeEnvironment.application);
+        verifyPreferenceControllers(controllers);
     }
 
-    @Test
-    public void getXmlResourcesToIndex_returnsEnterpriseXmlResources() {
-        final List<SearchIndexableResource> searchIndexableResources =
-                EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
-                        .getXmlResourcesToIndex(mContext, true);
-
-        verifyEnterpriseSearchIndexableResources(searchIndexableResources);
+    private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers) {
+        assertThat(controllers).isNotNull();
+        assertThat(controllers.size()).isEqualTo(17);
+        int position = 0;
+        assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                SecurityLogsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                EnterpriseInstalledPackagesPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                AdminGrantedLocationPermissionsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                AdminGrantedMicrophonePermissionPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                AdminGrantedCameraPermissionPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                EnterpriseSetDefaultAppsPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                AlwaysOnVpnCurrentUserPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                AlwaysOnVpnManagedProfilePreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(ImePreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                GlobalHttpProxyPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                CaCertsCurrentUserPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                CaCertsManagedProfilePreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                PreferenceCategoryController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                FailedPasswordWipeCurrentUserPreferenceController.class);
+        assertThat(controllers.get(position)).isInstanceOf(
+                FailedPasswordWipeManagedProfilePreferenceController.class);
     }
 }

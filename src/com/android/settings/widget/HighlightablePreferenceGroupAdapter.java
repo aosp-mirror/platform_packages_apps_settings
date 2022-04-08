@@ -23,6 +23,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,13 +40,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-import com.google.android.material.appbar.AppBarLayout;
-
 public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter {
 
     private static final String TAG = "HighlightableAdapter";
-    @VisibleForTesting
-    static final long DELAY_COLLAPSE_DURATION_MILLIS = 300L;
     @VisibleForTesting
     static final long DELAY_HIGHLIGHT_DURATION_MILLIS = 600L;
     private static final long HIGHLIGHT_DURATION = 15000L;
@@ -117,50 +114,29 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
     @VisibleForTesting
     void updateBackground(PreferenceViewHolder holder, int position) {
         View v = holder.itemView;
-        if (position == mHighlightPosition
-                && (mHighlightKey != null
-                && TextUtils.equals(mHighlightKey, getItem(position).getKey()))) {
+        if (position == mHighlightPosition) {
             // This position should be highlighted. If it's highlighted before - skip animation.
-            addHighlightBackground(holder, !mFadeInAnimated);
+            addHighlightBackground(v, !mFadeInAnimated);
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
-            removeHighlightBackground(holder, false /* animate */);
+            removeHighlightBackground(v, false /* animate */);
         }
     }
 
-    /**
-     * A function can highlight a specific setting in recycler view.
-     * note: Before highlighting a setting, screen collapses tool bar with an animation.
-     */
-    public void requestHighlight(View root, RecyclerView recyclerView, AppBarLayout appBarLayout) {
+    public void requestHighlight(View root, RecyclerView recyclerView) {
         if (mHighlightRequested || recyclerView == null || TextUtils.isEmpty(mHighlightKey)) {
             return;
         }
-        final int position = getPreferenceAdapterPosition(mHighlightKey);
-        if (position < 0) {
-            return;
-        }
-
-        // Collapse app bar after 300 milliseconds.
-        if (appBarLayout != null) {
-            root.postDelayed(() -> {
-                appBarLayout.setExpanded(false, true);
-            }, DELAY_COLLAPSE_DURATION_MILLIS);
-        }
-
-        // Scroll to correct position after 600 milliseconds.
         root.postDelayed(() -> {
+            final int position = getPreferenceAdapterPosition(mHighlightKey);
+            if (position < 0) {
+                return;
+            }
             mHighlightRequested = true;
-            // Remove the animator to avoid a RecyclerView crash.
-            recyclerView.setItemAnimator(null);
             recyclerView.smoothScrollToPosition(position);
             mHighlightPosition = position;
-        }, DELAY_HIGHLIGHT_DURATION_MILLIS);
-
-        // Highlight preference after 900 milliseconds.
-        root.postDelayed(() -> {
             notifyItemChanged(position);
-        }, DELAY_COLLAPSE_DURATION_MILLIS + DELAY_HIGHLIGHT_DURATION_MILLIS);
+        }, DELAY_HIGHLIGHT_DURATION_MILLIS);
     }
 
     public boolean isHighlightRequested() {
@@ -168,21 +144,19 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
     }
 
     @VisibleForTesting
-    void requestRemoveHighlightDelayed(PreferenceViewHolder holder) {
-        final View v = holder.itemView;
+    void requestRemoveHighlightDelayed(View v) {
         v.postDelayed(() -> {
             mHighlightPosition = RecyclerView.NO_POSITION;
-            removeHighlightBackground(holder, true /* animate */);
+            removeHighlightBackground(v, true /* animate */);
         }, HIGHLIGHT_DURATION);
     }
 
-    private void addHighlightBackground(PreferenceViewHolder holder, boolean animate) {
-        final View v = holder.itemView;
+    private void addHighlightBackground(View v, boolean animate) {
         v.setTag(R.id.preference_highlighted, true);
         if (!animate) {
             v.setBackgroundColor(mHighlightColor);
             Log.d(TAG, "AddHighlight: Not animation requested - setting highlight background");
-            requestRemoveHighlightDelayed(holder);
+            requestRemoveHighlightDelayed(v);
             return;
         }
         mFadeInAnimated = true;
@@ -197,12 +171,10 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         fadeInLoop.setRepeatCount(4);
         fadeInLoop.start();
         Log.d(TAG, "AddHighlight: starting fade in animation");
-        holder.setIsRecyclable(false);
-        requestRemoveHighlightDelayed(holder);
+        requestRemoveHighlightDelayed(v);
     }
 
-    private void removeHighlightBackground(PreferenceViewHolder holder, boolean animate) {
-        final View v = holder.itemView;
+    private void removeHighlightBackground(View v, boolean animate) {
         if (!animate) {
             v.setTag(R.id.preference_highlighted, false);
             v.setBackgroundResource(mNormalBackgroundRes);
@@ -230,7 +202,6 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
                 // Animation complete - the background is now white. Change to mNormalBackgroundRes
                 // so it is white and has ripple on touch.
                 v.setBackgroundResource(mNormalBackgroundRes);
-                holder.setIsRecyclable(true);
             }
         });
         colorAnimation.start();

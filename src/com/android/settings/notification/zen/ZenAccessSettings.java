@@ -17,7 +17,6 @@
 package com.android.settings.notification.zen;
 
 import android.annotation.Nullable;
-import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -25,11 +24,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
-import android.util.Log;
 
 import androidx.preference.PreferenceScreen;
 
@@ -41,7 +37,7 @@ import com.android.settings.applications.specialaccess.zenaccess.ZenAccessSettin
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.EmptyTextSettings;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.AppPreference;
+import com.android.settingslib.widget.apppreference.AppPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,11 +92,6 @@ public class ZenAccessSettings extends EmptyTextSettings implements
     }
 
     private void reloadList() {
-        if (mContext.getSystemService(UserManager.class)
-                .isManagedProfile(UserHandle.myUserId())) {
-            Log.w(TAG, "DND access cannot be enabled in a work profile");
-            return;
-        }
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         final ArrayList<ApplicationInfo> apps = new ArrayList<>();
@@ -118,7 +109,6 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         }
         ArraySet<String> autoApproved = new ArraySet<>();
         autoApproved.addAll(mNoMan.getEnabledNotificationListenerPackages());
-        autoApproved.addAll(ZenAccessController.getPackagesWithManageNotifications());
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;

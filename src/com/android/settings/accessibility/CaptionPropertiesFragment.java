@@ -22,17 +22,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
-import android.widget.Switch;
 
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.common.primitives.Floats;
 
@@ -41,17 +39,15 @@ import java.util.List;
 
 /** Settings fragment containing captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionPropertiesFragment extends DashboardFragment
-        implements OnPreferenceChangeListener, OnMainSwitchChangeListener {
-
-    private static final String TAG = "CaptionPropertiesFragment";
+public class CaptionPropertiesFragment extends SettingsPreferenceFragment
+        implements OnPreferenceChangeListener {
     private static final String PREF_SWITCH = "captioning_preference_switch";
     private static final String PREF_TEXT = "captioning_caption_appearance";
     private static final String PREF_MORE = "captioning_more_options";
 
     private CaptioningManager mCaptioningManager;
 
-    private SettingsMainSwitchPreference mSwitch;
+    private SwitchPreference mSwitch;
     private Preference mTextAppearance;
     private Preference mMoreOptions;
 
@@ -64,11 +60,12 @@ public class CaptionPropertiesFragment extends DashboardFragment
     }
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
 
         mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
 
+        addPreferencesFromResource(R.xml.captioning_settings);
         initializeAllPreferences();
         installUpdateListeners();
         initFontSizeValuesArray();
@@ -80,18 +77,8 @@ public class CaptionPropertiesFragment extends DashboardFragment
         updateAllPreferences();
     }
 
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.captioning_settings;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return TAG;
-    }
-
     private void initializeAllPreferences() {
-        mSwitch = (SettingsMainSwitchPreference) findPreference(PREF_SWITCH);
+        mSwitch = (SwitchPreference) findPreference(PREF_SWITCH);
         mTextAppearance = (Preference) findPreference(PREF_TEXT);
         mMoreOptions = (Preference) findPreference(PREF_MORE);
 
@@ -101,8 +88,6 @@ public class CaptionPropertiesFragment extends DashboardFragment
 
     private void installUpdateListeners() {
         mSwitch.setOnPreferenceChangeListener(this);
-        mSwitch.addOnSwitchChangeListener(this);
-
     }
 
     private void initFontSizeValuesArray() {
@@ -148,11 +133,4 @@ public class CaptionPropertiesFragment extends DashboardFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.captioning_settings);
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        final ContentResolver cr = getActivity().getContentResolver();
-        Settings.Secure.putInt(
-                cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, isChecked ? 1 : 0);
-    }
 }

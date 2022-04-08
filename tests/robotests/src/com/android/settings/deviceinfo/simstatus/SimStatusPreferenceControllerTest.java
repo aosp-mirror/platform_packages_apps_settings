@@ -30,7 +30,6 @@ import android.telephony.TelephonyManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -60,8 +59,6 @@ public class SimStatusPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private Fragment mFragment;
-    @Mock
-    private PreferenceCategory mCategory;
 
     private Context mContext;
     private SimStatusPreferenceController mController;
@@ -74,8 +71,6 @@ public class SimStatusPreferenceControllerTest {
         mController = spy(new SimStatusPreferenceController(mContext, mFragment));
         doReturn(true).when(mController).isAvailable();
         when(mScreen.getContext()).thenReturn(mContext);
-        final String categoryKey = "device_detail_category";
-        when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
         doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -90,7 +85,7 @@ public class SimStatusPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(mSecondSimPreference);
+        verify(mScreen).addPreference(mSecondSimPreference);
     }
 
     @Test

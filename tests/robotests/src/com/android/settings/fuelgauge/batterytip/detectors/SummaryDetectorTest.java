@@ -54,9 +54,9 @@ public class SummaryDetectorTest {
     }
 
     @Test
-    public void testDetect_notDisabled_tipInvisible() {
+    public void testDetect_notDisabled_tipVisible() {
         SummaryDetector detector = new SummaryDetector(mPolicy, AVERAGE_TIME_MS);
 
-        assertThat(detector.detect().isVisible()).isFalse();
+        assertThat(detector.detect().isVisible()).isTrue();
     }
 }

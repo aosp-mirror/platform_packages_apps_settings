@@ -20,8 +20,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.debug.IAdbManager;
 import android.net.ConnectivityManager;
-import android.net.Network;
-import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -36,7 +35,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -44,7 +43,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
- * This controls the primary switch controller in the developer options page for
+ * This controls the master switch controller in the developer options page for
  * "Wireless debugging".
  */
 public class WirelessDebuggingPreferenceController extends DeveloperOptionsPreferenceController
@@ -133,7 +132,7 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
         boolean enabled = Settings.Global.getInt(mContentResolver,
                 Settings.Global.ADB_WIFI_ENABLED, AdbPreferenceController.ADB_SETTING_OFF)
                     != AdbPreferenceController.ADB_SETTING_OFF;
-        ((PrimarySwitchPreference) preference).setChecked(enabled);
+        ((MasterSwitchPreference) preference).setChecked(enabled);
     }
 
     /**
@@ -142,16 +141,10 @@ public class WirelessDebuggingPreferenceController extends DeveloperOptionsPrefe
     public static boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
-        if (cm == null) {
-            return false;
-        }
-        for (Network network : cm.getAllNetworks()) {
-            final NetworkCapabilities nc = cm.getNetworkCapabilities(network);
-            if (nc == null) {
-                continue;
-            }
-            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                return true;
+        if (cm != null) {
+            NetworkInfo info = cm.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                return info.getType() == ConnectivityManager.TYPE_WIFI;
             }
         }
         return false;

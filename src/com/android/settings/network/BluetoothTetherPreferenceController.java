@@ -70,7 +70,7 @@ public final class BluetoothTetherPreferenceController extends TetherBasePrefere
 
     @Override
     public boolean shouldShow() {
-        final String[] bluetoothRegexs = mTm.getTetherableBluetoothRegexs();
+        final String[] bluetoothRegexs = mCm.getTetherableBluetoothRegexs();
         return bluetoothRegexs != null && bluetoothRegexs.length != 0;
     }
 

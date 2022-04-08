@@ -62,7 +62,7 @@ public class ModuleLicenseProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        checkUri(getModuleContext(), uri);
+        checkUri(getContext(), uri);
         return LICENSE_FILE_MIME_TYPE;
     }
 
@@ -83,7 +83,7 @@ public class ModuleLicenseProvider extends ContentProvider {
 
     @Override
     public ParcelFileDescriptor openFile(Uri uri, String mode) {
-        final Context context = getModuleContext();
+        final Context context = getContext();
         checkUri(context, uri);
         Preconditions.checkArgument("r".equals(mode), "Read is the only supported mode");
 
@@ -190,11 +190,5 @@ public class ModuleLicenseProvider extends ContentProvider {
 
     private static SharedPreferences getPrefs(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-    }
-
-    // Method to allow context injection for testing purposes.
-    @VisibleForTesting
-    protected Context getModuleContext() {
-        return getContext();
     }
 }

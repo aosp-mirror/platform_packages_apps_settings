@@ -41,11 +41,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
     private TelephonyManager mTelephonyManager;
 
     public SimLockPreferenceController(Context context) {
-        this(context, KEY_SIM_LOCK);
-    }
-
-    public SimLockPreferenceController(Context context, String key) {
-        super(context, key);
+        super(context, KEY_SIM_LOCK);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mCarrierConfigManager = (CarrierConfigManager)
                 mContext.getSystemService(Context.CARRIER_CONFIG_SERVICE);

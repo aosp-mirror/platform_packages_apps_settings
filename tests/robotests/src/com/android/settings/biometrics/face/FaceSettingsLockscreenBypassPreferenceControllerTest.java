@@ -31,11 +31,9 @@ import android.hardware.face.FaceManager;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,11 +41,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUtils.class})
 public class FaceSettingsLockscreenBypassPreferenceControllerTest {
 
     @Mock
@@ -73,11 +69,7 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
                 "test_key"));
         ReflectionHelpers.setField(mController, "mFaceManager", mFaceManager);
         ReflectionHelpers.setField(mController, "mUserManager", mUserManager);
-    }
 
-    @After
-    public void tearDown() {
-        ShadowUtils.reset();
     }
 
     @Test
@@ -90,13 +82,6 @@ public class FaceSettingsLockscreenBypassPreferenceControllerTest {
     @Test
     public void isAvailable_isManagedProfile_shouldReturnUnsupported() {
         when(mUserManager.isManagedProfile(anyInt())).thenReturn(true);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_multipleBiometricsSupported_shouldReturnUnsupported() {
-        ShadowUtils.setIsMultipleBiometricsSupported(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }

@@ -11,7 +11,6 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,7 +21,8 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
 
 /**
  * Fragment to display a bunch of text about backup and restore, and allow the user to enable/
@@ -41,7 +41,8 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
 
     private IBackupManager mBackupManager;
 
-    protected SettingsMainSwitchBar mSwitchBar;
+    protected SwitchBar mSwitchBar;
+    protected ToggleSwitch mToggleSwitch;
 
     private Preference mSummaryPreference;
 
@@ -78,6 +79,7 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mToggleSwitch = mSwitchBar.getSwitch();
 
         // Set up UI.
         // If the user has not seen legal text for full data backup (if they OTA from L to M) then
@@ -103,7 +105,7 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
     public void onDestroyView() {
         super.onDestroyView();
 
-        mSwitchBar.setOnBeforeCheckedChangeListener(null);
+        mToggleSwitch.setOnBeforeCheckedChangeListener(null);
         mSwitchBar.hide();
     }
 
@@ -113,11 +115,11 @@ public class ToggleBackupSettingFragment extends SettingsPreferenceFragment
 
         // Set up toggle listener. We need this b/c we have to intercept the toggle event in order
         // to pop up the dialogue.
-        mSwitchBar.setOnBeforeCheckedChangeListener(
-                new SettingsMainSwitchBar.OnBeforeCheckedChangeListener() {
+        mToggleSwitch.setOnBeforeCheckedChangeListener(
+                new ToggleSwitch.OnBeforeCheckedChangeListener() {
                     @Override
                     public boolean onBeforeCheckedChanged(
-                            Switch toggleSwitch, boolean checked) {
+                            ToggleSwitch toggleSwitch, boolean checked) {
                         if (!checked) {
                             // Don't change Switch status until user makes choice in dialog
                             // so return true here.

@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.app;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Vibrator;
@@ -53,11 +52,6 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
                 && !isDefaultChannel()
                 && mVibrator != null
                 && mVibrator.hasVibrator();
-    }
-
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_VIBRATION);
     }
 
     public void updateState(Preference preference) {

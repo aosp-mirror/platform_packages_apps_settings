@@ -26,12 +26,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenModeVisEffectsCustomPreferenceController
         extends AbstractZenModePreferenceController {
 
-    private RadioButtonPreference mPreference;
+    private ZenCustomRadioButtonPreference mPreference;
 
     protected static final int INTERRUPTIVE_EFFECTS =
             NotificationManager.Policy.SUPPRESSED_EFFECT_AMBIENT
@@ -54,11 +53,12 @@ public class ZenModeVisEffectsCustomPreferenceController
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
 
-        mPreference.setExtraWidgetOnClickListener(p -> {
+        mPreference.setOnGearClickListener(p -> {
             launchCustomSettings();
+
         });
 
-        mPreference.setOnClickListener(p -> {
+        mPreference.setOnRadioButtonClickListener(p -> {
             launchCustomSettings();
         });
     }

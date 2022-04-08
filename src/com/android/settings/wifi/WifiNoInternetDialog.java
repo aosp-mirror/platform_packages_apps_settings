@@ -38,16 +38,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
-/**
- * To display a dialog that asks the user whether to connect to a network that is not validated.
- */
-public class WifiNoInternetDialog extends AlertActivity implements
+public final class WifiNoInternetDialog extends AlertActivity implements
         DialogInterface.OnClickListener {
     private static final String TAG = "WifiNoInternetDialog";
 
@@ -55,7 +50,7 @@ public class WifiNoInternetDialog extends AlertActivity implements
     private Network mNetwork;
     private String mNetworkName;
     private ConnectivityManager.NetworkCallback mNetworkCallback;
-    @VisibleForTesting CheckBox mAlwaysAllow;
+    private CheckBox mAlwaysAllow;
     private String mAction;
     private boolean mButtonClicked;
 
@@ -70,17 +65,22 @@ public class WifiNoInternetDialog extends AlertActivity implements
         super.onCreate(savedInstanceState);
 
         final Intent intent = getIntent();
-        if (intent == null || !isKnownAction(intent)) {
+        if (intent == null || !isKnownAction(intent) || !"netId".equals(intent.getScheme())) {
             Log.e(TAG, "Unexpected intent " + intent + ", exiting");
             finish();
             return;
         }
 
         mAction = intent.getAction();
-        mNetwork = intent.getParcelableExtra(ConnectivityManager.EXTRA_NETWORK);
+
+        try {
+            mNetwork = new Network(Integer.parseInt(intent.getData().getSchemeSpecificPart()));
+        } catch (NullPointerException|NumberFormatException e) {
+            mNetwork = null;
+        }
 
         if (mNetwork == null) {
-            Log.e(TAG, "Can't determine network from intent extra, exiting");
+            Log.e(TAG, "Can't determine network from '" + intent.getData() + "' , exiting");
             finish();
             return;
         }

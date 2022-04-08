@@ -19,7 +19,6 @@ package com.android.settings.applications;
 import android.content.Intent;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.intentpicker.AppLaunchSettings;
 
 public class InstalledAppOpenByDefaultActivity extends SettingsActivity {
 

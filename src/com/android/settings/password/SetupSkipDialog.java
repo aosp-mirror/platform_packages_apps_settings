@@ -21,11 +21,8 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -46,16 +43,14 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
     public static final int RESULT_SKIP = Activity.RESULT_FIRST_USER + 10;
 
     public static SetupSkipDialog newInstance(boolean isFrpSupported, boolean isPatternMode,
-            boolean isAlphanumericMode, boolean forFingerprint, boolean forFace,
-            boolean forBiometrics) {
+            boolean isAlphanumericMode, boolean isFingerprintSupported, boolean isFaceSupported) {
         SetupSkipDialog dialog = new SetupSkipDialog();
         Bundle args = new Bundle();
         args.putBoolean(ARG_FRP_SUPPORTED, isFrpSupported);
         args.putBoolean(ARG_LOCK_TYPE_PATTERN, isPatternMode);
         args.putBoolean(ARG_LOCK_TYPE_ALPHANUMERIC, isAlphanumericMode);
-        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, forFingerprint);
-        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, forFace);
-        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS, forBiometrics);
+        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, isFingerprintSupported);
+        args.putBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE, isFaceSupported);
         dialog.setArguments(args);
         return dialog;
     }
@@ -73,34 +68,27 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
     @NonNull
     public AlertDialog.Builder onCreateDialogBuilder() {
         Bundle args = getArguments();
-        final boolean forFace =
+        final boolean isFaceSupported =
                 args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FACE);
-        final boolean forFingerprint =
+        final boolean isFingerprintSupported =
                 args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT);
-        final boolean forBiometrics =
-                args.getBoolean(ChooseLockSettingsHelper.EXTRA_KEY_FOR_BIOMETRICS);
-        if (forFace || forFingerprint || forBiometrics) {
-            final boolean hasFace = forFace || forBiometrics;
-            final boolean hasFingerprint = forFingerprint || forBiometrics;
-
+        if (isFaceSupported || isFingerprintSupported) {
             final int titleId;
-            final int msgResId;
+
             if (args.getBoolean(ARG_LOCK_TYPE_PATTERN)) {
-                titleId = getPatternSkipTitleRes(hasFace, hasFingerprint);
-                msgResId = getPatternSkipMessageRes(hasFace, hasFingerprint);
-            } else if (args.getBoolean(ARG_LOCK_TYPE_ALPHANUMERIC)) {
-                titleId = getPasswordSkipTitleRes(hasFace, hasFingerprint);
-                msgResId = getPasswordSkipMessageRes(hasFace, hasFingerprint);
+                titleId = R.string.lock_screen_pattern_skip_title;
             } else {
-                titleId = getPinSkipTitleRes(hasFace, hasFingerprint);
-                msgResId = getPinSkipMessageRes(hasFace, hasFingerprint);
+                titleId = args.getBoolean(ARG_LOCK_TYPE_ALPHANUMERIC) ?
+                    R.string.lock_screen_password_skip_title : R.string.lock_screen_pin_skip_title;
             }
 
             return new AlertDialog.Builder(getContext())
                     .setPositiveButton(R.string.skip_lock_screen_dialog_button_label, this)
                     .setNegativeButton(R.string.cancel_lock_screen_dialog_button_label, this)
                     .setTitle(titleId)
-                    .setMessage(msgResId);
+                    .setMessage(isFaceSupported ?
+                            R.string.face_lock_screen_setup_skip_dialog_text :
+                            R.string.fingerprint_lock_screen_setup_skip_dialog_text);
         } else {
             return new AlertDialog.Builder(getContext())
                     .setPositiveButton(R.string.skip_anyway_button_label, this)
@@ -112,100 +100,13 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
         }
     }
 
-    @StringRes
-    private int getPatternSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_pattern_skip_biometrics_title;
-        } else if (hasFace) {
-            return R.string.lock_screen_pattern_skip_face_title;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_pattern_skip_fingerprint_title;
-        } else {
-            return R.string.lock_screen_pattern_skip_title;
-        }
-    }
-
-    @StringRes
-    private int getPatternSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_pattern_skip_biometrics_message;
-        } else if (hasFace) {
-            return R.string.lock_screen_pattern_skip_face_message;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_pattern_skip_fingerprint_message;
-        } else {
-            return R.string.lock_screen_pattern_skip_message;
-        }
-    }
-
-    @StringRes
-    private int getPasswordSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_password_skip_biometrics_title;
-        } else if (hasFace) {
-            return R.string.lock_screen_password_skip_face_title;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_password_skip_fingerprint_title;
-        } else {
-            return R.string.lock_screen_password_skip_title;
-        }
-    }
-
-    @StringRes
-    private int getPasswordSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_password_skip_biometrics_message;
-        } else if (hasFace) {
-            return R.string.lock_screen_password_skip_face_message;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_password_skip_fingerprint_message;
-        } else {
-            return R.string.lock_screen_password_skip_message;
-        }
-    }
-
-    @StringRes
-    private int getPinSkipTitleRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_pin_skip_biometrics_title;
-        } else if (hasFace) {
-            return R.string.lock_screen_pin_skip_face_title;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_pin_skip_fingerprint_title;
-        } else {
-            return R.string.lock_screen_pin_skip_title;
-        }
-    }
-
-    @StringRes
-    private int getPinSkipMessageRes(boolean hasFace, boolean hasFingerprint) {
-        if (hasFace && hasFingerprint) {
-            return R.string.lock_screen_pin_skip_biometrics_message;
-        } else if (hasFace) {
-            return R.string.lock_screen_pin_skip_face_message;
-        } else if (hasFingerprint) {
-            return R.string.lock_screen_pin_skip_fingerprint_message;
-        } else {
-            return R.string.lock_screen_pin_skip_message;
-        }
-    }
-
     @Override
     public void onClick(DialogInterface dialog, int button) {
-        Activity activity = getActivity();
         switch (button) {
             case DialogInterface.BUTTON_POSITIVE:
+                Activity activity = getActivity();
                 activity.setResult(RESULT_SKIP);
                 activity.finish();
-                break;
-            case DialogInterface.BUTTON_NEGATIVE:
-                View view = activity.getCurrentFocus();
-                if(view != null) {
-                    view.requestFocus();
-                    InputMethodManager imm = (InputMethodManager) activity
-                            .getSystemService(Activity.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-                }
                 break;
         }
     }

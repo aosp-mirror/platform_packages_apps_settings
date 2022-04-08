@@ -38,16 +38,15 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
-import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 public class AndroidBeam extends InstrumentedFragment
-        implements OnMainSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener {
     private View mView;
     private NfcAdapter mNfcAdapter;
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
     private CharSequence mOldActivityTitle;
     private boolean mBeamDisallowedByBase;
     private boolean mBeamDisallowedByOnlyAdmin;

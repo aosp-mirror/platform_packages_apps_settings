@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2015 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License")
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:icon="@drawable/ic_lock"
+    android:layout="@layout/sud_glif_blank_template"
+    settings:sucHeaderText="@string/lock_settings_picker_title">
+
+    <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
+        android:id="@+id/topLayout"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- left side: instructions and messages -->
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_marginStart="?attr/sudMarginSides"
+            android:layout_marginBottom="@dimen/sud_content_frame_padding_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:id="@+id/scroll_layout_title_header"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/sud_layout_icon"
+                        style="@style/SudGlifIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="?attr/sudGlifHeaderGravity"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:src="@drawable/ic_lock"/>
+
+                    <TextView
+                        android:id="@+id/suc_layout_title"
+                        style="@style/SudGlifHeaderTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"/>
+
+                    <TextView
+                        android:id="@+id/sud_layout_description"
+                        style="@style/SudDescription.Glif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minLines="2" />
+
+                    <!-- header message -->
+                    <TextView
+                        android:id="@+id/headerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="?attr/sudGlifHeaderGravity"
+                        android:textSize="18sp"/>
+
+                    <TextView android:id="@+id/footerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/screen_lock_options"
+                        style="@style/SudGlifButton.Tertiary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="?attr/sudGlifHeaderGravity"
+                        android:text="@string/setup_lock_settings_options_button_label"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <!-- right side: lock pattern -->
+        <com.google.android.setupdesign.view.FillContentLayout
+            style="@style/LockPatternContainerStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:paddingStart="0dp">
+
+            <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/lock_pattern_background" />
+
+        </com.google.android.setupdesign.view.FillContentLayout>
+
+    </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
+
+</com.google.android.setupdesign.GlifLayout>

@@ -36,26 +36,31 @@ import org.robolectric.shadows.ShadowActivity.IntentForResult;
 public class ChooseLockSettingsHelperTest {
 
     @Test
-    public void testLaunchConfirmationActivityWithExternal() {
+    public void testLaunchConfirmationActivityWithExternalAndChallenge() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
-
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
-        builder.setRequestCode(100)
-                .setTitle("title")
-                .setHeader("header")
-                .setDescription("description")
-                .setExternal(true)
-                .setUserId(UserHandle.myUserId());
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
-        helper.launch();
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
+        helper.launchConfirmationActivityWithExternalAndChallenge(
+            100, // request
+            "title",
+            "header",
+            "description",
+            true, // external
+            10000L,
+            UserHandle.myUserId()
+        );
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
 
-        assertEquals(new ComponentName("com.android.settings", ConfirmLockPattern.class.getName()),
+        assertEquals(new ComponentName("com.android.settings",
+                        ConfirmLockPattern.InternalActivity.class.getName()),
                 startedIntent.getComponent());
         assertFalse(startedIntent.getBooleanExtra(
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false));
+        assertTrue(startedIntent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
+        assertEquals(10000L, startedIntent.getLongExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
         assertTrue((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
@@ -66,30 +71,30 @@ public class ChooseLockSettingsHelperTest {
     }
 
     @Test
-    public void testLaunchConfirmationActivityInternal() {
+    public void testLaunchConfirmationActivityInternalAndChallenge() {
         final Activity activity = Robolectric.setupActivity(Activity.class);
-
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
-        builder.setRequestCode(100)
-                .setTitle("title")
-                .setHeader("header")
-                .setDescription("description")
-                .setForceVerifyPath(true)
-                .setReturnCredentials(true)
-                .setUserId(UserHandle.myUserId());
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
-        helper.launch();
-
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
+        helper.launchConfirmationActivityWithExternalAndChallenge(
+            100,
+            "title",
+            "header",
+            "description",
+            false, // external
+            10000L,
+            UserHandle.myUserId()
+        );
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent startedIntent = shadowActivity.getNextStartedActivity();
 
         assertEquals(new ComponentName("com.android.settings",
                         ConfirmLockPattern.InternalActivity.class.getName()),
                 startedIntent.getComponent());
+        assertFalse(startedIntent.getBooleanExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false));
         assertTrue(startedIntent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, true));
-        assertTrue(startedIntent.getBooleanExtra(
-                ChooseLockSettingsHelper.EXTRA_KEY_FORCE_VERIFY, true));
+                ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
+        assertEquals(10000L, startedIntent.getLongExtra(
+                ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0L));
         assertFalse((startedIntent.getFlags() & Intent.FLAG_ACTIVITY_FORWARD_RESULT) != 0);
         assertFalse(startedIntent.getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.DARK_THEME, false));
@@ -104,14 +109,8 @@ public class ChooseLockSettingsHelperTest {
         Intent intent = new Intent()
                 .putExtra(WizardManagerHelper.EXTRA_THEME, ThemeHelper.THEME_GLIF_V2);
         Activity activity = Robolectric.buildActivity(Activity.class, intent).get();
-
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
-        builder.setRequestCode(123)
-                .setTitle("test title")
-                .setReturnCredentials(true)
-                .setUserId(0);
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
-        helper.launch();
+        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
+        helper.launchConfirmationActivity(123, "test title", true, 0 /* userId */);
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
@@ -120,53 +119,12 @@ public class ChooseLockSettingsHelperTest {
                 .isEqualTo(ThemeHelper.THEME_GLIF_V2);
     }
 
-    @Test
-    public void launchConfirmPattern_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
-
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
-        builder.setRequestCode(100)
-                .setForceVerifyPath(true);
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
-        when(helper.mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
-        helper.launch();
-
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-
-        assertEquals(new ComponentName("com.android.settings",
-                        ConfirmLockPattern.InternalActivity.class.getName()),
-                startedIntent.getComponent());
-    }
-
-    @Test
-    public void launchConfirmPassword_ForceVerify_shouldLaunchInternalActivity() {
-        final Activity activity = Robolectric.setupActivity(Activity.class);
-
-        ChooseLockSettingsHelper.Builder builder = new ChooseLockSettingsHelper.Builder(activity);
-        builder.setRequestCode(100)
-                .setForceVerifyPath(true);
-        ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(builder);
-        when(helper.mLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
-                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
-        helper.launch();
-
-        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        Intent startedIntent = shadowActivity.getNextStartedActivity();
-
-        assertEquals(new ComponentName("com.android.settings",
-                        ConfirmLockPassword.InternalActivity.class.getName()),
-                startedIntent.getComponent());
-    }
-
-    private ChooseLockSettingsHelper getChooseLockSettingsHelper(
-            ChooseLockSettingsHelper.Builder builder) {
+    private ChooseLockSettingsHelper getChooseLockSettingsHelper(Activity activity) {
         LockPatternUtils mockLockPatternUtils = mock(LockPatternUtils.class);
         when(mockLockPatternUtils.getKeyguardStoredPasswordQuality(anyInt()))
                 .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
 
-        ChooseLockSettingsHelper helper = builder.build();
+        ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(activity);
         helper.mLockPatternUtils = mockLockPatternUtils;
         return helper;
     }

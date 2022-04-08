@@ -16,55 +16,30 @@
 
 package com.android.settings.wifi;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Process;
-import android.os.SimpleClock;
-import android.os.SystemClock;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.dpp.WifiDppUtils;
-import com.android.settingslib.core.lifecycle.ObservableActivity;
 import com.android.settingslib.wifi.AccessPoint;
-import com.android.wifitrackerlib.NetworkDetailsTracker;
-import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.util.ThemeHelper;
 
-import java.time.Clock;
-import java.time.ZoneOffset;
-
-/**
- * The activity shows a Wi-fi editor dialog.
- *
- * TODO(b/152571756): This activity supports both WifiTrackerLib and SettingsLib because this is an
- *                    exported UI component, some other APPs (e.g., SetupWizard) still use
- *                    SettingsLib. Remove the SettingsLib compatible part after these APPs use
- *                    WifiTrackerLib.
- */
-public class WifiDialogActivity extends ObservableActivity implements WifiDialog.WifiDialogListener,
-        WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
+public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialogListener,
+        DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiDialogActivity";
 
-    // For the callers which support WifiTrackerLib.
-    public static final String KEY_CHOSEN_WIFIENTRY_KEY = "key_chosen_wifientry_key";
-
-    // For the callers which support SettingsLib.
     public static final String KEY_ACCESS_POINT_STATE = "access_point_state";
 
     /**
@@ -83,136 +58,49 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     private static final int REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER = 0;
 
-    // Max age of tracked WifiEntries.
-    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating NetworkDetailsTracker scans.
-    private static final long SCAN_INTERVAL_MILLIS = 10_000;
-
     private WifiDialog mDialog;
-    private AccessPoint mAccessPoint;
-
-    private WifiDialog2 mDialog2;
-
-    // The received intent supports a key of WifiTrackerLib or SettingsLib.
-    private boolean mIsWifiTrackerLib;
 
     private Intent mIntent;
-    private NetworkDetailsTracker mNetworkDetailsTracker;
-    private HandlerThread mWorkerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mIntent = getIntent();
         if (WizardManagerHelper.isSetupWizardIntent(mIntent)) {
-            setTheme(SetupWizardUtils.getTransparentTheme(this, mIntent));
+            setTheme(SetupWizardUtils.getTransparentTheme(mIntent));
         }
 
         super.onCreate(savedInstanceState);
 
-        mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
-
-        if (mIsWifiTrackerLib) {
-            mWorkerThread = new HandlerThread(
-                    TAG + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                    Process.THREAD_PRIORITY_BACKGROUND);
-            mWorkerThread.start();
-            final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
-                @Override
-                public long millis() {
-                    return SystemClock.elapsedRealtime();
-                }
-            };
-            mNetworkDetailsTracker = FeatureFactory.getFactory(this)
-                    .getWifiTrackerLibProvider()
-                    .createNetworkDetailsTracker(
-                            getLifecycle(),
-                            this,
-                            new Handler(Looper.getMainLooper()),
-                            mWorkerThread.getThreadHandler(),
-                            elapsedRealtimeClock,
-                            MAX_SCAN_AGE_MILLIS,
-                            SCAN_INTERVAL_MILLIS,
-                            mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
-        } else {
-            final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
-            if (accessPointState != null) {
-                mAccessPoint = new AccessPoint(this, accessPointState);
-            }
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (mDialog2 != null || mDialog != null) {
-            return;
+        final Bundle accessPointState = mIntent.getBundleExtra(KEY_ACCESS_POINT_STATE);
+        AccessPoint accessPoint = null;
+        if (accessPointState != null) {
+            accessPoint = new AccessPoint(this, accessPointState);
         }
 
         if (WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            final int targetStyle = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SuwAlertDialogThemeCompat_DayNight :
-                    R.style.SuwAlertDialogThemeCompat_Light;
-            if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
-                        mNetworkDetailsTracker.getWifiEntry(),
-                        WifiConfigUiBase2.MODE_CONNECT, targetStyle);
-            } else {
-                mDialog = WifiDialog.createModal(this, this, mAccessPoint,
-                        WifiConfigUiBase.MODE_CONNECT, targetStyle);
-            }
+            mDialog = WifiDialog.createModal(this, this, accessPoint,
+                    WifiConfigUiBase.MODE_CONNECT, R.style.SuwAlertDialogThemeCompat_Light);
         } else {
-            if (mIsWifiTrackerLib) {
-                mDialog2 = WifiDialog2.createModal(this, this,
-                        mNetworkDetailsTracker.getWifiEntry(), WifiConfigUiBase2.MODE_CONNECT);
-            } else {
-                mDialog = WifiDialog.createModal(
-                        this, this, mAccessPoint, WifiConfigUiBase.MODE_CONNECT);
-            }
+            mDialog = WifiDialog.createModal(
+                    this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
         }
-
-        if (mIsWifiTrackerLib) {
-            mDialog2.show();
-            mDialog2.setOnDismissListener(this);
-        } else {
-            mDialog.show();
-            mDialog.setOnDismissListener(this);
-        }
+        mDialog.show();
+        mDialog.setOnDismissListener(this);
     }
 
     @Override
     public void finish() {
-        overridePendingTransition(0, 0);
-
         super.finish();
+        overridePendingTransition(0, 0);
     }
 
     @Override
     public void onDestroy() {
-        if (mIsWifiTrackerLib) {
-            if (mDialog2 != null && mDialog2.isShowing()) {
-                mDialog2.dismiss();
-                mDialog2 = null;
-            }
-            mWorkerThread.quit();
-        } else {
-            if (mDialog != null && mDialog.isShowing()) {
-                mDialog.dismiss();
-                mDialog = null;
-            }
-        }
-
         super.onDestroy();
-    }
-
-    @Override
-    public void onForget(WifiDialog2 dialog) {
-        final WifiEntry wifiEntry = dialog.getController().getWifiEntry();
-        if (wifiEntry != null && wifiEntry.canForget()) {
-            wifiEntry.forget(null /* callback */);
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
+            mDialog = null;
         }
-
-        setResult(RESULT_FORGET);
-        finish();
     }
 
     @Override
@@ -242,27 +130,6 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
             resultData.putExtra(KEY_ACCESS_POINT_STATE, accessPointState);
         }
         setResult(RESULT_FORGET);
-        finish();
-    }
-
-    @Override
-    public void onSubmit(WifiDialog2 dialog) {
-        final WifiEntry wifiEntry = dialog.getController().getWifiEntry();
-        final WifiConfiguration config = dialog.getController().getConfig();
-
-        if (getIntent().getBooleanExtra(KEY_CONNECT_FOR_CALLER, true)) {
-            if (config == null && wifiEntry != null && wifiEntry.canConnect()) {
-                wifiEntry.connect(null /* callback */);
-            } else {
-                getSystemService(WifiManager.class).connect(config, null /* listener */);
-            }
-        }
-
-        final Intent resultData = new Intent();
-        if (config != null) {
-            resultData.putExtra(KEY_WIFI_CONFIGURATION, config);
-        }
-        setResult(RESULT_CONNECTED, resultData);
         finish();
     }
 
@@ -304,18 +171,8 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-        mDialog2 = null;
         mDialog = null;
         finish();
-    }
-
-    @Override
-    public void onScan(WifiDialog2 dialog, String ssid) {
-        Intent intent = WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid);
-        WizardManagerHelper.copyWizardManagerExtras(mIntent, intent);
-
-        // Launch QR code scanner to join a network.
-        startActivityForResult(intent, REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
     @Override

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/GlifV3Theme.Footer"
+    android:icon="@drawable/ic_delete_accent"
+    app:sucHeaderText="@string/master_clear_title">
+
+    <ScrollView
+        android:id="@+id/master_clear_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/reset_master_clear_margin_start"
+        android:layout_marginEnd="@dimen/reset_master_clear_margin_end">
+
+        <LinearLayout
+            android:id="@+id/master_clear_container"
+            style="@style/SudContentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:id="@+id/sud_layout_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/master_clear_desc"/>
+            <TextView
+                android:id="@+id/also_erases_external"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/master_clear_desc_also_erases_external"/>
+            <TextView
+                android:id="@+id/also_erases_esim"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/master_clear_desc_also_erases_esim"/>
+            <TextView
+                android:id="@+id/accounts_label"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/master_clear_accounts"/>
+            <LinearLayout
+                android:id="@+id/accounts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <!-- Do not add any children here as they will be removed in the MasterClear.java
+                    code. A list of accounts will be inserted programmatically. -->
+            </LinearLayout>
+            <TextView
+                android:id="@+id/other_users_present"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/master_clear_other_users_present"/>
+            <TextView
+                android:id="@+id/no_cancel_mobile_plan"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/master_clear_desc_no_cancel_mobile_plan"/>
+            <TextView
+                android:id="@+id/erase_external_option_text"
+                style="@style/TextAppearance.SudGlifItemSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/master_clear_desc_erase_external_storage"/>
+            <LinearLayout
+                android:id="@+id/erase_external_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:focusable="true"
+                android:clickable="true">
+                <CheckBox
+                    android:id="@+id/erase_external"
+                    style="@style/SudCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:duplicateParentState="true"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/TextAppearance.SudGlifItemTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/erase_external_storage"/>
+                    <TextView
+                        style="@style/TextAppearance.SudGlifItemSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/erase_external_storage_description"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <include layout="@layout/reset_esim_checkbox"/>
+
+        </LinearLayout>
+    </ScrollView>
+</com.google.android.setupdesign.GlifLayout>

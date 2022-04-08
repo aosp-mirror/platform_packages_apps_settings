@@ -96,6 +96,6 @@ public class LocationSlice implements CustomSliceable {
     private PendingIntent getPrimaryAction() {
         final Intent intent = getIntent();
         return PendingIntent.getActivity(mContext, 0 /* requestCode */,
-                intent, PendingIntent.FLAG_IMMUTABLE);
+                intent, 0 /* flags */);
     }
 }

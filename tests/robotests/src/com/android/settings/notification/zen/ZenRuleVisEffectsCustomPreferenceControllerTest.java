@@ -27,7 +27,6 @@ import android.service.notification.ZenPolicy;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +47,7 @@ public class ZenRuleVisEffectsCustomPreferenceControllerTest extends
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private RadioButtonPreference mMockPref;
+    private ZenCustomRadioButtonPreference mockPref;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -70,7 +69,7 @@ public class ZenRuleVisEffectsCustomPreferenceControllerTest extends
                 PREF_KEY);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         when(mBackend.getAutomaticZenRule(RULE_ID)).thenReturn(mRule);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mMockPref);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mScreen);
     }
 
@@ -79,8 +78,8 @@ public class ZenRuleVisEffectsCustomPreferenceControllerTest extends
         updateControllerZenPolicy(new ZenPolicy.Builder()
                 .hideAllVisualEffects()
                 .build());
-        mController.updateState(mMockPref);
-        verify(mMockPref).setChecked(false);
+        mController.updateState(mockPref);
+        verify(mockPref).setChecked(false);
     }
 
     @Test
@@ -88,8 +87,8 @@ public class ZenRuleVisEffectsCustomPreferenceControllerTest extends
         updateControllerZenPolicy(new ZenPolicy.Builder()
                 .showAllVisualEffects()
                 .build());
-        mController.updateState(mMockPref);
-        verify(mMockPref).setChecked(false);
+        mController.updateState(mockPref);
+        verify(mockPref).setChecked(false);
     }
 
     @Test
@@ -98,8 +97,8 @@ public class ZenRuleVisEffectsCustomPreferenceControllerTest extends
                 .showPeeking(true)
                 .showBadges(false)
                 .build());
-        mController.updateState(mMockPref);
+        mController.updateState(mockPref);
 
-        verify(mMockPref).setChecked(true);
+        verify(mockPref).setChecked(true);
     }
 }

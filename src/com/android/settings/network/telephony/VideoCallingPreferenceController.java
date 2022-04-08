@@ -17,10 +17,11 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsMmTelManager;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     private Preference mPreference;
     private CarrierConfigManager mCarrierConfigManager;
-    private PhoneTelephonyCallback mTelephonyCallback;
+    private PhoneCallStateListener mPhoneStateListener;
     @VisibleForTesting
     Integer mCallState;
     private MobileDataEnabledListener mDataContentObserver;
@@ -58,7 +59,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         super(context, key);
         mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new MobileDataEnabledListener(context, this);
-        mTelephonyCallback = new PhoneTelephonyCallback();
+        mPhoneStateListener = new PhoneCallStateListener();
     }
 
     @Override
@@ -77,13 +78,13 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     @Override
     public void onStart() {
-        mTelephonyCallback.register(mContext, mSubId);
+        mPhoneStateListener.register(mContext, mSubId);
         mDataContentObserver.start(mSubId);
     }
 
     @Override
     public void onStop() {
-        mTelephonyCallback.unregister();
+        mPhoneStateListener.unregister();
         mDataContentObserver.stop();
     }
 
@@ -142,16 +143,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             return false;
         }
 
-        // When called within Settings Search, this variable may still be null.
-        if (mCarrierConfigManager == null) {
-            Log.e(TAG, "CarrierConfigManager set to null.");
-            mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
-            if (mCarrierConfigManager == null) {
-                Log.e(TAG, "Unable to reinitialize CarrierConfigManager.");
-                return false;
-            }
-        }
-
         final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         if (carrierConfig == null) {
             return false;
@@ -172,13 +163,16 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         updateState(mPreference);
     }
 
-    private class PhoneTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.CallStateListener {
+    private class PhoneCallStateListener extends PhoneStateListener {
+
+        PhoneCallStateListener() {
+            super(Looper.getMainLooper());
+        }
 
         private TelephonyManager mTelephonyManager;
 
         @Override
-        public void onCallStateChanged(int state) {
+        public void onCallStateChanged(int state, String incomingNumber) {
             mCallState = state;
             updateState(mPreference);
         }
@@ -188,15 +182,12 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             if (SubscriptionManager.isValidSubscriptionId(subId)) {
                 mTelephonyManager = mTelephonyManager.createForSubscriptionId(subId);
             }
-            // assign current call state so that it helps to show correct preference state even
-            // before first onCallStateChanged() by initial registration.
-            mCallState = mTelephonyManager.getCallState(subId);
-            mTelephonyManager.registerTelephonyCallback(context.getMainExecutor(), this);
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_CALL_STATE);
         }
 
         public void unregister() {
             mCallState = null;
-            mTelephonyManager.unregisterTelephonyCallback(this);
+            mTelephonyManager.listen(this, PhoneStateListener.LISTEN_NONE);
         }
     }
 

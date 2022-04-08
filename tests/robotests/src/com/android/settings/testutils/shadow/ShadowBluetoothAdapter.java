@@ -17,7 +17,6 @@
 package com.android.settings.testutils.shadow;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -30,7 +29,6 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
 
     private int mState;
     private List<Integer> mSupportedProfiles = new ArrayList<>();
-    private List<BluetoothDevice> mMostRecentlyConnectedDevices = new ArrayList<>();
 
     @Implementation
     protected List<Integer> getSupportedProfiles() {
@@ -57,14 +55,5 @@ public class ShadowBluetoothAdapter extends org.robolectric.shadows.ShadowBlueto
     @Implementation
     protected boolean factoryReset() {
         return true;
-    }
-
-    @Implementation
-    protected List<BluetoothDevice> getMostRecentlyConnectedDevices() {
-        return mMostRecentlyConnectedDevices;
-    }
-
-    public void setMostRecentlyConnectedDevices(List<BluetoothDevice> list) {
-        mMostRecentlyConnectedDevices = list;
     }
 }

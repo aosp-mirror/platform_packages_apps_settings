@@ -45,7 +45,7 @@ public final class ContentCaptureUtils {
 
     public static boolean isFeatureAvailable() {
         // We cannot look for ContentCaptureManager, because it's not available if the service
-        // didn't allowlist Settings
+        // didn't whitelist Settings
         IBinder service = ServiceManager.checkService(Context.CONTENT_CAPTURE_MANAGER_SERVICE);
         return service != null;
     }

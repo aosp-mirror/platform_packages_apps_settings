@@ -97,8 +97,7 @@ public class BluetoothDevicesSliceTest {
         // Mock the icon and detail intent of Bluetooth.
         mIcon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
-        mDetailIntent = PendingIntent.getActivity(mContext, 0, new Intent("test action"),
-                PendingIntent.FLAG_IMMUTABLE);
+        mDetailIntent = PendingIntent.getActivity(mContext, 0, new Intent("test action"), 0);
         doReturn(mIcon).when(mBluetoothDevicesSlice).getBluetoothDeviceIcon(any());
         doReturn(mDetailIntent).when(mBluetoothDevicesSlice).getBluetoothDetailIntent(any());
 

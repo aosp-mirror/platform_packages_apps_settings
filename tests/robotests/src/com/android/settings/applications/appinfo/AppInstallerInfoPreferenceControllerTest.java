@@ -32,7 +32,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.InstallSourceInfo;
 import android.content.pm.ModuleInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -61,8 +60,6 @@ public class AppInstallerInfoPreferenceControllerTest {
     @Mock
     private ApplicationInfo mAppInfo;
     @Mock
-    private InstallSourceInfo mInstallSourceInfo;
-    @Mock
     private AppInfoDashboardFragment mFragment;
     @Mock
     private Preference mPreference;
@@ -77,8 +74,7 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         final String installerPackage = "Installer1";
-        when(mPackageManager.getInstallSourceInfo(anyString())).thenReturn(mInstallSourceInfo);
-        when(mInstallSourceInfo.getInstallingPackageName()).thenReturn(installerPackage);
+        when(mPackageManager.getInstallerPackageName(anyString())).thenReturn(installerPackage);
         when(mPackageManager.getApplicationInfo(eq(installerPackage), anyInt()))
                 .thenReturn(mAppInfo);
         mController = new AppInstallerInfoPreferenceController(mContext, "test_key");

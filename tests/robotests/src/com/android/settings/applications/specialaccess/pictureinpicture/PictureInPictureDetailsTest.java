@@ -55,18 +55,18 @@ public class PictureInPictureDetailsTest {
 
     @Test
     public void testNonPippableApp() {
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage")).isFalse();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
+        assertThat(checkPackageHasPictureInPictureActivities("com.android.dummypackage")).isFalse();
+        assertThat(checkPackageHasPictureInPictureActivities("com.android.dummypackage",
                 false, false, false)).isFalse();
     }
 
     @Test
     public void testPippableApp() {
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
+        assertThat(checkPackageHasPictureInPictureActivities("com.android.dummypackage",
                 true)).isTrue();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
+        assertThat(checkPackageHasPictureInPictureActivities("com.android.dummypackage",
                 false, true)).isTrue();
-        assertThat(checkPackageHasPictureInPictureActivities("com.android.fakepackage",
+        assertThat(checkPackageHasPictureInPictureActivities("com.android.dummypackage",
                 true, false)).isTrue();
     }
 

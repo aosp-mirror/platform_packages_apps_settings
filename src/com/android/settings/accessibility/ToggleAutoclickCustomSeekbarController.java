@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -50,9 +49,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
 
     private static final String CONTROL_AUTOCLICK_DELAY_SECURE =
             Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY;
-
-    @VisibleForTesting
-    static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
+    private static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
 
     // Min allowed autoclick delay value.
     static final int MIN_AUTOCLICK_DELAY_MS = 200;
@@ -62,8 +59,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
 
     // Allowed autoclick delay values are discrete.
     // This is the difference between two allowed values.
-    @VisibleForTesting
-    static final int AUTOCLICK_DELAY_STEP = 100;
+    private static final int AUTOCLICK_DELAY_STEP = 100;
 
     private final SharedPreferences mSharedPreferences;
     private final ContentResolver mContentResolver;
@@ -72,8 +68,7 @@ public class ToggleAutoclickCustomSeekbarController extends BasePreferenceContro
     private SeekBar mSeekBar;
     private TextView mDelayLabel;
 
-    @VisibleForTesting
-    final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
+    private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
 
                 @Override

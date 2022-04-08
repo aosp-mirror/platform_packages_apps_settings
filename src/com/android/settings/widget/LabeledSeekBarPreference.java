@@ -18,7 +18,6 @@ package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -33,7 +32,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
 
     private final int mTextStartId;
     private final int mTextEndId;
-    private final int mTickMarkId;
     private OnPreferenceChangeListener mStopListener;
 
     public LabeledSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
@@ -50,8 +48,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         mTextEndId = styledAttrs.getResourceId(
                 R.styleable.LabeledSeekBarPreference_textEnd,
                 R.string.summary_placeholder);
-        mTickMarkId = styledAttrs.getResourceId(
-                R.styleable.LabeledSeekBarPreference_tickMark, /* defValue= */ 0);
         styledAttrs.recycle();
     }
 
@@ -69,13 +65,6 @@ public class LabeledSeekBarPreference extends SeekBarPreference {
         final TextView endText = (TextView) holder.findViewById(android.R.id.text2);
         startText.setText(mTextStartId);
         endText.setText(mTextEndId);
-
-        if (mTickMarkId != 0) {
-            final Drawable tickMark = getContext().getDrawable(mTickMarkId);
-            final SeekBar seekBar = (SeekBar) holder.findViewById(
-                    com.android.internal.R.id.seekbar);
-            seekBar.setTickMark(tickMark);
-        }
     }
 
     public void setOnPreferenceChangeStopListener(OnPreferenceChangeListener listener) {

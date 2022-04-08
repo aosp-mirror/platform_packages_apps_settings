@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.nfc.NfcAdapter;
@@ -25,38 +26,35 @@ import android.provider.SearchIndexableResource;
 
 import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUserManager.class,
-        ShadowConnectivityManager.class, ShadowNfcAdapter.class})
+        ShadowConnectivityManager.class})
 public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     private AdvancedConnectedDeviceDashboardFragment mFragment;
 
-    private Context mContext;
-    private ShadowNfcAdapter mShadowNfcAdapter;
+    @Mock
+    private NfcAdapter mNfcAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
         mFragment = new AdvancedConnectedDeviceDashboardFragment();
-        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
     }
 
     @Test
@@ -81,10 +79,13 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     @Test
     public void testSearchIndexProvider_correctNonIndexables() {
-        mShadowNfcAdapter.setSecureNfcSupported(true);
+        Context context = spy(RuntimeEnvironment.application);
+        when(context.getApplicationContext()).thenReturn(context);
+        when(NfcAdapter.getDefaultAdapter(context)).thenReturn(mNfcAdapter);
+        when(mNfcAdapter.isSecureNfcSupported()).thenReturn(true);
         final List<String> niks =
                 AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                        .getNonIndexableKeys(mContext);
+                        .getNonIndexableKeys(context);
 
         assertThat(niks).contains(AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
     }

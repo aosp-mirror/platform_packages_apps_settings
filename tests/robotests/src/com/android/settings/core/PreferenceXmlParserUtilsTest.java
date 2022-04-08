@@ -16,8 +16,6 @@
 
 package com.android.settings.core;
 
-import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
-
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_APPEND;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEYWORDS;
@@ -40,6 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -53,7 +52,7 @@ import java.util.Objects;
  * uncommon (such as summaryOn).
  *
  * If changing a preference file breaks a test in this test file, please replace its reference
- * with another preference with a matching replacement attribute.
+ * with another preference with a matchin replacement attribute.
  */
 @RunWith(RobolectricTestRunner.class)
 public class PreferenceXmlParserUtilsTest {
@@ -62,43 +61,43 @@ public class PreferenceXmlParserUtilsTest {
 
     @Before
     public void setUp() {
-        mContext = getApplicationContext();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
     public void testDataTitleValid_ReturnsPreferenceTitle() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
-        String expTitle = mContext.getString(R.string.dark_ui_mode);
+        String expTitle = mContext.getString(R.string.screen_timeout);
         assertThat(title).isEqualTo(expTitle);
     }
 
     @Test
     public void testDataKeywordsValid_ReturnsPreferenceKeywords() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String keywords = PreferenceXmlParserUtils.getDataKeywords(mContext, attrs);
-        String expKeywords = mContext.getString(R.string.keywords_dark_ui_mode);
+        String expKeywords = mContext.getString(R.string.keywords_screen_timeout);
         assertThat(keywords).isEqualTo(expKeywords);
     }
 
     @Test
     public void testDataKeyValid_ReturnsPreferenceKey() {
         XmlResourceParser parser = getChildByType(R.xml.display_settings,
-                "com.android.settings.display.darkmode.DarkModePreference");
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
-        String expKey = "dark_ui_mode";
+        String expKey = "screen_timeout";
         assertThat(key).isEqualTo(expKey);
     }
 
     @Test
     public void testDataSummaryValid_ReturnsPreferenceSummary() {
-        XmlResourceParser parser = getChildByType(R.xml.sound_settings,
-                "com.android.settings.DefaultRingtonePreference");
+        XmlResourceParser parser = getChildByType(R.xml.display_settings,
+                "com.android.settings.display.TimeoutListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
         String expSummary = mContext.getString(R.string.summary_placeholder);

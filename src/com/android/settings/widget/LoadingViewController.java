@@ -22,66 +22,34 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import androidx.annotation.Nullable;
-
 /**
- * A helper class that manages show/hide loading spinner, content view and empty view (optional).
+ * A helper class that manages show/hide loading spinner.
  */
 public class LoadingViewController {
 
     private static final long DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS = 100L;
 
-    private final Handler mFgHandler;
-    private final View mLoadingView;
-    private final View mContentView;
-    private final View mEmptyView;
+    public final Handler mFgHandler;
+    public final View mLoadingView;
+    public final View mContentView;
 
     public LoadingViewController(View loadingView, View contentView) {
-        this(loadingView, contentView, null /* emptyView*/);
-    }
-
-    public LoadingViewController(View loadingView, View contentView, @Nullable View emptyView) {
         mLoadingView = loadingView;
         mContentView = contentView;
-        mEmptyView = emptyView;
         mFgHandler = new Handler(Looper.getMainLooper());
     }
 
     private Runnable mShowLoadingContainerRunnable = new Runnable() {
         public void run() {
-            showLoadingView();
+            handleLoadingContainer(false /* done */, false /* animate */);
         }
     };
 
-    /**
-     *  Shows content view and hides loading view & empty view.
-     */
     public void showContent(boolean animate) {
         // Cancel any pending task to show the loading animation and show the list of
         // apps directly.
         mFgHandler.removeCallbacks(mShowLoadingContainerRunnable);
-        handleLoadingContainer(true /* showContent */, false /* showEmpty*/, animate);
-    }
-
-    /**
-     *  Shows empty view and hides loading view & content view.
-     */
-    public void showEmpty(boolean animate) {
-        if (mEmptyView == null) {
-            return;
-        }
-
-        // Cancel any pending task to show the loading animation and show the list of
-        // apps directly.
-        mFgHandler.removeCallbacks(mShowLoadingContainerRunnable);
-        handleLoadingContainer(false /* showContent */, true /* showEmpty */, animate);
-    }
-
-    /**
-     *  Shows loading view and hides content view & empty view.
-     */
-    public void showLoadingView() {
-        handleLoadingContainer(false /* showContent */, false /* showEmpty */, false /* animate */);
+        handleLoadingContainer(true /* show */, animate);
     }
 
     public void showLoadingViewDelayed() {
@@ -89,9 +57,8 @@ public class LoadingViewController {
                 mShowLoadingContainerRunnable, DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS);
     }
 
-    private void handleLoadingContainer(boolean showContent, boolean showEmpty, boolean animate) {
-        handleLoadingContainer(mLoadingView, mContentView, mEmptyView,
-                showContent, showEmpty, animate);
+    public void handleLoadingContainer(boolean done, boolean animate) {
+        handleLoadingContainer(mLoadingView, mContentView, done, animate);
     }
 
     /**
@@ -106,25 +73,6 @@ public class LoadingViewController {
             boolean animate) {
         setViewShown(loading, !done, animate);
         setViewShown(content, done, animate);
-    }
-
-    /**
-     * Show/hide loading view and content view and empty view.
-     *
-     * @param loading The loading spinner view
-     * @param content The content view
-     * @param empty The empty view shows no item summary to users.
-     * @param showContent    If true, content is set visible and loading is set invisible.
-     * @param showEmpty    If true, empty is set visible and loading is set invisible.
-     * @param animate Whether or not content/loading views should animate in/out.
-     */
-    public static void handleLoadingContainer(View loading, View content, View empty,
-            boolean showContent, boolean showEmpty, boolean animate) {
-        if (empty != null) {
-            setViewShown(empty, showEmpty, animate);
-        }
-        setViewShown(content, showContent, animate);
-        setViewShown(loading, !showContent && !showEmpty, animate);
     }
 
     private static void setViewShown(final View view, boolean shown, boolean animate) {

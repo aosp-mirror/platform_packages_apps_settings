@@ -112,13 +112,13 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
             public void run() {
                 final List<ApplicationInfo> apps = mPm.getInstalledApplications(
                         PackageManager.GET_DISABLED_COMPONENTS);
-                final List<String> allowList = Arrays.asList(
+                final List<String> whiteList = Arrays.asList(
                         mContext.getResources().getStringArray(
                                 R.array.config_skip_reset_apps_package_name));
 
                 for (int i = 0; i < apps.size(); i++) {
                     ApplicationInfo app = apps.get(i);
-                    if (allowList.contains(app.packageName)) {
+                    if (whiteList.contains(app.packageName)) {
                         continue;
                     }
                     try {

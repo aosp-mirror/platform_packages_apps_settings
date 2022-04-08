@@ -14,25 +14,26 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class GlobalHttpProxyPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
 
     private static final String KEY_GLOBAL_HTTP_PROXY = "global_http_proxy";
-    private final ConnectivityManager mCm;
+    private final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
     public GlobalHttpProxyPreferenceController(Context context) {
         super(context);
-        mCm = context.getSystemService(ConnectivityManager.class);
+        mFeatureProvider = FeatureFactory.getFactory(context)
+                .getEnterprisePrivacyFeatureProvider(context);
     }
 
     @Override
     public boolean isAvailable() {
-        return mCm.getGlobalProxy() != null;
+        return mFeatureProvider.isGlobalHttpProxySet();
     }
 
     @Override

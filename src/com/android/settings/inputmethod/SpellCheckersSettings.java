@@ -36,11 +36,11 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.widget.SettingsMainSwitchBar;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.SwitchBar.OnSwitchChangeListener;
 
 public class SpellCheckersSettings extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener, OnPreferenceChangeListener {
+        implements OnSwitchChangeListener, OnPreferenceChangeListener {
     private static final String TAG = SpellCheckersSettings.class.getSimpleName();
     private static final boolean DBG = false;
 
@@ -48,7 +48,7 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     private static final String KEY_DEFAULT_SPELL_CHECKER = "default_spellchecker";
     private static final int ITEM_ID_USE_SYSTEM_LANGUAGE = 0;
 
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
     private Preference mSpellCheckerLanaguagePref;
     private AlertDialog mDialog = null;
     private SpellCheckerInfo mCurrentSci;
@@ -92,7 +92,9 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     public void onResume() {
         super.onResume();
         mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
-        mSwitchBar.setTitle(getContext().getString(R.string.spell_checker_primary_switch_title));
+        mSwitchBar.setSwitchBarText(
+                R.string.spell_checker_master_switch_title,
+                R.string.spell_checker_master_switch_title);
         mSwitchBar.show();
         mSwitchBar.addOnSwitchChangeListener(this);
         updatePreferenceScreen();

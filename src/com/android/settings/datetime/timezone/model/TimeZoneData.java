@@ -18,9 +18,9 @@ package com.android.settings.datetime.timezone.model;
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArraySet;
 
-import com.android.i18n.timezone.CountryTimeZones;
-import com.android.i18n.timezone.CountryZonesFinder;
-import com.android.i18n.timezone.TimeZoneFinder;
+import libcore.timezone.CountryTimeZones;
+import libcore.timezone.CountryZonesFinder;
+import libcore.timezone.TimeZoneFinder;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
@@ -71,7 +71,7 @@ public class TimeZoneData {
         Set<String> regionIds = new ArraySet<>();
         for (CountryTimeZones countryTimeZone : countryTimeZones) {
             FilteredCountryTimeZones filteredZones = new FilteredCountryTimeZones(countryTimeZone);
-            if (filteredZones.matches(tzId)) {
+            if (filteredZones.getTimeZoneIds().contains(tzId)) {
                 regionIds.add(filteredZones.getRegionId());
             }
         }

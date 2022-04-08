@@ -142,6 +142,7 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
     }
 
+
     @Test
     public void populateImeiInfo_cdmaSimPresent_shouldSetImeiInfoAndSetAllCdmaSetting() {
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);

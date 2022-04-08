@@ -37,14 +37,12 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
-import com.android.settings.network.ActiveSubscriptionsListener;
-import com.android.settings.network.CarrierWifiTogglePreferenceController;
+import com.android.settings.network.ActiveSubsciptionsListener;
 import com.android.settings.network.telephony.cdma.CdmaSubscriptionPreferenceController;
 import com.android.settings.network.telephony.cdma.CdmaSystemSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.AutoSelectPreferenceController;
 import com.android.settings.network.telephony.gsm.OpenNetworkSelectPagePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
@@ -74,9 +72,9 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     private UserManager mUserManager;
     private String mClickedPrefKey;
 
-    private ActiveSubscriptionsListener mActiveSubscriptionsListener;
+    private ActiveSubsciptionsListener mActiveSubsciptionsListener;
     private boolean mDropFirstSubscriptionChangeNotify;
-    private int mActiveSubscriptionsListenerCount;
+    private int mActiveSubsciptionsListenerCount;
 
     public MobileNetworkSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -149,9 +147,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(DisableSimFooterPreferenceController.class).init(mSubId);
         use(NrDisabledInDsdsFooterPreferenceController.class).init(mSubId);
         use(MobileDataPreferenceController.class).init(getFragmentManager(), mSubId);
-        use(MobileDataPreferenceController.class).setWifiPickerTrackerHelper(
-                new WifiPickerTrackerHelper(getSettingsLifecycle(), context,
-                        null /* WifiPickerTrackerCallback */));
         use(RoamingPreferenceController.class).init(getFragmentManager(), mSubId);
         use(ApnPreferenceController.class).init(mSubId);
         use(CarrierPreferenceController.class).init(mSubId);
@@ -159,8 +154,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
         use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
-        use(Enable2gPreferenceController.class).init(mSubId);
-        use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
 
         final WifiCallingPreferenceController wifiCallingPreferenceController =
                 use(WifiCallingPreferenceController.class).init(mSubId);
@@ -180,11 +173,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
 
         final VideoCallingPreferenceController videoCallingPreferenceController =
                 use(VideoCallingPreferenceController.class).init(mSubId);
-        final BackupCallingPreferenceController crossSimCallingPreferenceController =
-                use(BackupCallingPreferenceController.class).init(mSubId);
         use(CallingPreferenceCategoryController.class).setChildren(
-                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController,
-                        crossSimCallingPreferenceController));
+                Arrays.asList(wifiCallingPreferenceController, videoCallingPreferenceController));
         use(Enhanced4gLtePreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gCallingPreferenceController.class).init(mSubId)
@@ -216,10 +206,8 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
     @Override
     public void onResume() {
         super.onResume();
-        // TODO: remove log after fixing b/182326102
-        Log.d(LOG_TAG, "onResume() subId=" + mSubId);
-        if (mActiveSubscriptionsListener == null) {
-            mActiveSubscriptionsListener = new ActiveSubscriptionsListener(
+        if (mActiveSubsciptionsListener == null) {
+            mActiveSubsciptionsListener = new ActiveSubsciptionsListener(
                     getContext().getMainLooper(), getContext(), mSubId) {
                 public void onChanged() {
                     onSubscriptionDetailChanged();
@@ -227,7 +215,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             };
             mDropFirstSubscriptionChangeNotify = true;
         }
-        mActiveSubscriptionsListener.start();
+        mActiveSubsciptionsListener.start();
     }
 
     private void onSubscriptionDetailChanged() {
@@ -236,21 +224,21 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
-        mActiveSubscriptionsListenerCount++;
-        if (mActiveSubscriptionsListenerCount != 1) {
+        mActiveSubsciptionsListenerCount++;
+        if (mActiveSubsciptionsListenerCount != 1) {
             return;
         }
 
         ThreadUtils.postOnMainThread(() -> {
-            mActiveSubscriptionsListenerCount = 0;
+            mActiveSubsciptionsListenerCount = 0;
             redrawPreferenceControllers();
         });
     }
 
     @Override
     public void onDestroy() {
-        if (mActiveSubscriptionsListener != null) {
-            mActiveSubscriptionsListener.stop();
+        if (mActiveSubsciptionsListener != null) {
+            mActiveSubsciptionsListener.stop();
         }
         super.onDestroy();
     }

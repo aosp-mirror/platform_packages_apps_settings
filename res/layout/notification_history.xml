@@ -17,7 +17,6 @@
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll"
-    android:background="?android:attr/colorBackgroundFloating"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,11 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.android.settingslib.widget.MainSwitchBar
-            android:id="@+id/main_switch_bar"
-            android:visibility="invisible"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+        <include layout="@layout/styled_switch_bar"/>
 
         <LinearLayout
             android:id="@+id/history_off"
@@ -61,7 +56,6 @@
                 android:gravity="center"
                 android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
                 android:text="@string/notification_history_off_title_extended" />
 
             <TextView
@@ -75,7 +69,6 @@
                 android:textAlignment="center"
                 android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"
                 android:text="@string/notification_history_off_summary" />
 
         </LinearLayout>
@@ -107,7 +100,6 @@
                 android:gravity="center"
                 android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
                 android:text="@string/history_toggled_on_title" />
 
             <TextView
@@ -122,7 +114,6 @@
                 android:textAlignment="center"
                 android:focusable="true"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="?android:attr/textColorSecondary"
                 android:text="@string/history_toggled_on_summary" />
         </LinearLayout>
 
@@ -150,6 +141,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
+                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -173,6 +165,7 @@
                     android:paddingBottom="16dp" />
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/notification_list"
+                        android:elevation="1dp"
                         android:background="@drawable/rounded_bg"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -196,6 +189,7 @@
                     android:id="@+id/apps"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:elevation="1dp"
                     android:orientation="vertical"
                     android:background="@drawable/rounded_bg">
                     <!-- app based recycler views added here -->

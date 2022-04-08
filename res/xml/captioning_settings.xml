@@ -27,13 +27,15 @@
         android:persistent="false"
         android:selectable="false"
         android:title="@string/summary_placeholder"
+        settings:allowDividerBelow="true"
         settings:searchable="false" />
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
+    <SwitchPreference
         android:key="captioning_preference_switch"
         android:persistent="false"
-        android:summary="@string/accessibility_caption_primary_switch_summary"
-        android:title="@string/accessibility_caption_primary_switch_title" />
+        android:summary="@string/accessibility_caption_master_switch_summary"
+        android:title="@string/accessibility_caption_master_switch_title"
+        settings:allowDividerAbove="true" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
@@ -47,12 +49,10 @@
         android:persistent="false"
         android:title="@string/captioning_more_options_title" />
 
-    <com.android.settings.accessibility.AccessibilityFooterPreference
-        android:key="captioning_settings_footer"
-        android:title="@string/accessibility_caption_preference_summary"
+    <com.android.settingslib.widget.FooterPreference
         android:persistent="false"
         android:selectable="false"
-        settings:searchable="false"
-        settings:controller="com.android.settings.accessibility.CaptionFooterPreferenceController"/>
+        android:title="@string/accessibility_caption_preference_summary"
+        settings:searchable="false"/>
 
 </PreferenceScreen>

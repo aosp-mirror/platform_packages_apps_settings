@@ -55,7 +55,6 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
         Preference pref = new Preference(mContext);
         pref.setOrder(1);
         pref.setSummary(R.string.other_conversations_summary);
-        pref.setSelectable(false);
         return pref;
     }
 
@@ -68,10 +67,21 @@ public class AllConversationsPreferenceController extends ConversationListPrefer
     public void updateState(Preference preference) {
         PreferenceCategory pref = (PreferenceCategory) preference;
         // Load conversations
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                mConversations = mBackend.getConversations(false).getList();
+                Collections.sort(mConversations, mConversationComparator);
+                return null;
+            }
 
-        mConversations = mBackend.getConversations(false).getList();
-        Collections.sort(mConversations, mConversationComparator);
-
-        populateList(mConversations, pref);
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
+                populateList(mConversations, pref);
+            }
+        }.execute();
     }
 }

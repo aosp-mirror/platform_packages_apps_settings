@@ -22,6 +22,11 @@
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="header_view" />
 
+    <com.android.settings.applications.SpacePreference
+        android:key="storage_space"
+        android:layout_height="8dp"
+        settings:allowDividerAbove="true"/>
+
     <Preference
         android:key="storage_used"
         android:title="@string/storage_used"
@@ -36,7 +41,8 @@
 
     <PreferenceCategory
         android:key="storage_category"
-        android:title="@string/app_info_storage_title">
+        android:title="@string/app_info_storage_title"
+        settings:allowDividerBelow="false">
 
         <Preference
             android:key="app_size"

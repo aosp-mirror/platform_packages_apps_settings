@@ -18,9 +18,6 @@ package com.android.settings.notification.app;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -42,13 +39,8 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -82,7 +74,6 @@ abstract public class NotificationSettings extends DashboardFragment {
     protected NotificationBackend.AppRow mAppRow;
     protected Drawable mConversationDrawable;
     protected ShortcutInfo mConversationInfo;
-    protected List<String> mPreferenceFilter;
 
     protected boolean mShowLegacyChannelConfig = false;
     protected boolean mListeningToPackageRemove;
@@ -92,20 +83,6 @@ abstract public class NotificationSettings extends DashboardFragment {
 
     protected Intent mIntent;
     protected Bundle mArgs;
-
-    private ViewGroup mLayoutView;
-    private static final int DURATION_ANIMATE_PANEL_EXPAND_MS = 250;
-
-    private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
-            new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    animateIn();
-                    if (mLayoutView != null) {
-                        mLayoutView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    }
-                }
-            };
 
     @Override
     public void onAttach(Context context) {
@@ -142,7 +119,6 @@ abstract public class NotificationSettings extends DashboardFragment {
             loadChannel();
             loadAppRow();
             loadChannelGroup();
-            loadPreferencesFilter();
             collectConfigActivities();
 
             if (use(HeaderPreferenceController.class) != null) {
@@ -155,7 +131,7 @@ abstract public class NotificationSettings extends DashboardFragment {
 
             for (NotificationPreferenceController controller : mControllers) {
                 controller.onResume(mAppRow, mChannel, mChannelGroup, null, null,
-                        mSuspendedAppsAdmin, mPreferenceFilter);
+                        mSuspendedAppsAdmin);
             }
         }
     }
@@ -205,59 +181,7 @@ abstract public class NotificationSettings extends DashboardFragment {
         loadChannel();
         loadConversation();
         loadChannelGroup();
-        loadPreferencesFilter();
         collectConfigActivities();
-    }
-
-    protected void animatePanel() {
-        if (mPreferenceFilter != null) {
-            mLayoutView = getActivity().findViewById(R.id.main_content);
-            mLayoutView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
-        }
-    }
-
-    /**
-     * Animate a Panel onto the screen.
-     * <p>
-     * Takes the entire panel and animates in from behind the navigation bar.
-     * <p>
-     * Relies on the Panel being having a fixed height to begin the animation.
-     */
-    private void animateIn() {
-        final AnimatorSet animatorSet = buildAnimatorSet(mLayoutView,
-                mLayoutView.getHeight() /* startY */, 0.0f /* endY */,
-                0.0f /* startAlpha */, 1.0f /* endAlpha */,
-                DURATION_ANIMATE_PANEL_EXPAND_MS);
-        final ValueAnimator animator = new ValueAnimator();
-        animator.setFloatValues(0.0f, 1.0f);
-        animatorSet.play(animator);
-        animatorSet.start();
-    }
-
-    /**
-     * Build an {@link AnimatorSet} to animate the Panel, {@param parentView} in or out of the
-     * screen, based on the positional parameters {@param startY}, {@param endY}, the parameters
-     * for alpha changes {@param startAlpha}, {@param endAlpha}, and the {@param duration} in
-     * milliseconds.
-     */
-    @NonNull
-    private static AnimatorSet buildAnimatorSet(@NonNull View targetView,
-            float startY, float endY,
-            float startAlpha, float endAlpha, int duration) {
-        final AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.setDuration(duration);
-        animatorSet.setInterpolator(new DecelerateInterpolator());
-        animatorSet.playTogether(
-                ObjectAnimator.ofFloat(targetView, View.TRANSLATION_Y, startY, endY),
-                ObjectAnimator.ofFloat(targetView, View.ALPHA, startAlpha, endAlpha));
-        return animatorSet;
-    }
-
-    private void loadPreferencesFilter() {
-        Intent intent = getActivity().getIntent();
-        mPreferenceFilter = intent != null
-                ? intent.getStringArrayListExtra(Settings.EXTRA_CHANNEL_FILTER_LIST)
-                : null;
     }
 
     private void loadChannel() {

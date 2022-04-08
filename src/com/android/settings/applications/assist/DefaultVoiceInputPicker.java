@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.android.internal.app.AssistUtils;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -34,6 +35,8 @@ import java.util.List;
 public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
     private VoiceInputHelper mHelper;
+    private AssistUtils mAssistUtils;
+    private String mAssistRestrict;
 
     @Override
     public int getMetricsCategory() {
@@ -43,8 +46,13 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mAssistUtils = new AssistUtils(context);
         mHelper = new VoiceInputHelper(context);
         mHelper.buildUi();
+        final ComponentName assist = getCurrentAssist();
+        if (isCurrentAssistVoiceService(assist, getCurrentService(mHelper))) {
+            mAssistRestrict = assist.flattenToShortString();
+        }
     }
 
     @Override
@@ -56,9 +64,16 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     protected List<VoiceInputDefaultAppInfo> getCandidates() {
         final List<VoiceInputDefaultAppInfo> candidates = new ArrayList<>();
         final Context context = getContext();
+        boolean hasEnabled = true;
+        for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
+            final boolean enabled = TextUtils.equals(info.key, mAssistRestrict);
+            hasEnabled |= enabled;
+            candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
+        }
 
+        final boolean assistIsService = !hasEnabled;
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
-            final boolean enabled = true;
+            final boolean enabled = !assistIsService;
             candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
         }
         return candidates;
@@ -75,8 +90,23 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
     @Override
     protected boolean setDefaultKey(String value) {
+        for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
+            if (TextUtils.equals(value, info.key)) {
+                Settings.Secure.putString(getContext().getContentResolver(),
+                        Settings.Secure.VOICE_INTERACTION_SERVICE, value);
+                Settings.Secure.putString(getContext().getContentResolver(),
+                        Settings.Secure.VOICE_RECOGNITION_SERVICE,
+                        new ComponentName(info.service.packageName,
+                                info.serviceInfo.getRecognitionService())
+                                .flattenToShortString());
+                return true;
+            }
+        }
+
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
             if (TextUtils.equals(value, info.key)) {
+                Settings.Secure.putString(getContext().getContentResolver(),
+                        Settings.Secure.VOICE_INTERACTION_SERVICE, "");
                 Settings.Secure.putString(getContext().getContentResolver(),
                         Settings.Secure.VOICE_RECOGNITION_SERVICE, value);
                 return true;
@@ -86,7 +116,23 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     }
 
     public static ComponentName getCurrentService(VoiceInputHelper helper) {
-        return helper.mCurrentRecognizer;
+        if (helper.mCurrentVoiceInteraction != null) {
+            return helper.mCurrentVoiceInteraction;
+        } else if (helper.mCurrentRecognizer != null) {
+            return helper.mCurrentRecognizer;
+        } else {
+            return null;
+        }
+    }
+
+    private ComponentName getCurrentAssist() {
+        return mAssistUtils.getAssistComponentForUser(mUserId);
+    }
+
+    public static boolean isCurrentAssistVoiceService(ComponentName currentAssist,
+            ComponentName currentVoiceService) {
+        return currentAssist == null && currentVoiceService == null ||
+                currentAssist != null && currentAssist.equals(currentVoiceService);
     }
 
     public static class VoiceInputDefaultAppInfo extends DefaultAppInfo {
@@ -106,7 +152,11 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
         @Override
         public CharSequence loadLabel() {
-            return mInfo.label;
+            if (mInfo instanceof VoiceInputHelper.InteractionInfo) {
+                return mInfo.appLabel;
+            } else {
+                return mInfo.label;
+            }
         }
 
         public Intent getSettingIntent() {

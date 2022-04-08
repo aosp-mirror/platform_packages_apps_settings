@@ -37,7 +37,7 @@ class LocaleRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_CANCEL) {
+        if (e.getAction() == MotionEvent.ACTION_UP) {
             LocaleDragAndDropAdapter adapter = (LocaleDragAndDropAdapter) this.getAdapter();
             if (adapter != null) {
                 adapter.doTheUpdate();

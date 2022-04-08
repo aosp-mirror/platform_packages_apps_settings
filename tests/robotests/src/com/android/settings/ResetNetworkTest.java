@@ -18,9 +18,10 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.robolectric.Shadows.shadowOf;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -56,7 +57,7 @@ public class ResetNetworkTest {
 
         Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false)).isTrue();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false)).isTrue();
     }
 
     @Test
@@ -68,7 +69,7 @@ public class ResetNetworkTest {
 
         Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false)).isFalse();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false)).isFalse();
     }
 
     @Test
@@ -80,7 +81,7 @@ public class ResetNetworkTest {
 
         Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false)).isFalse();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false)).isFalse();
     }
 
     @Test
@@ -92,6 +93,6 @@ public class ResetNetworkTest {
 
         Intent intent = shadowOf(mActivity).getNextStartedActivity();
         assertThat(intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                .getBoolean(MainClear.ERASE_ESIMS_EXTRA, false)).isFalse();
+                .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false)).isFalse();
     }
 }

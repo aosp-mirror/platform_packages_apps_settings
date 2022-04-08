@@ -51,7 +51,7 @@ public class InstantAppDomainsPreferenceController extends AppInfoPreferenceCont
         final String[] handledDomains =
                 handledDomainSet.toArray(new String[handledDomainSet.size()]);
         instantAppDomainsPreference.setTitles(handledDomains);
-        // placeholder values, unused in the implementation
+        // Dummy values, unused in the implementation
         instantAppDomainsPreference.setValues(new int[handledDomains.length]);
     }
 

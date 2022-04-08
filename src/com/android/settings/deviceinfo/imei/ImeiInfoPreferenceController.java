@@ -27,7 +27,6 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -42,8 +41,6 @@ import java.util.List;
  * Controller that manages preference for single and multi sim devices.
  */
 public class ImeiInfoPreferenceController extends BasePreferenceController {
-
-    private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
@@ -64,7 +61,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
-        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
 
         mPreferenceList.add(preference);
         updatePreference(preference, 0 /* simSlot */);
@@ -76,7 +72,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
-            category.addPreference(multiSimPreference);
+            screen.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
             updatePreference(multiSimPreference, simSlotNumber);
         }

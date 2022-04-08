@@ -19,11 +19,12 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.content.Context;
-import android.os.BatteryUsageStats;
-import android.os.UidBatteryConsumer;
+import android.os.BatteryStats;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.internal.os.BatterySipper;
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -33,6 +34,7 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -42,8 +44,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class HighUsageDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
-    private BatteryUsageStats mBatteryUsageStats;
-    private final BatteryInfo mBatteryInfo;
+    private BatteryStatsHelper mBatteryStatsHelper;
     private List<AppInfo> mHighUsageAppList;
     @VisibleForTesting
     HighUsageDataParser mDataParser;
@@ -53,49 +54,50 @@ public class HighUsageDetector implements BatteryTipDetector {
     boolean mDischarging;
 
     public HighUsageDetector(Context context, BatteryTipPolicy policy,
-            BatteryUsageStats batteryUsageStats, BatteryInfo batteryInfo) {
+            BatteryStatsHelper batteryStatsHelper, boolean discharging) {
         mPolicy = policy;
-        mBatteryUsageStats = batteryUsageStats;
-        mBatteryInfo = batteryInfo;
+        mBatteryStatsHelper = batteryStatsHelper;
         mHighUsageAppList = new ArrayList<>();
         mBatteryUtils = BatteryUtils.getInstance(context);
         mDataParser = new HighUsageDataParser(mPolicy.highUsagePeriodMs,
                 mPolicy.highUsageBatteryDraining);
-        mDischarging = batteryInfo.discharging;
+        mDischarging = discharging;
     }
 
     @Override
     public BatteryTip detect() {
         final long lastFullChargeTimeMs = mBatteryUtils.calculateLastFullChargeTime(
-                mBatteryUsageStats, System.currentTimeMillis());
+                mBatteryStatsHelper, System.currentTimeMillis());
         if (mPolicy.highUsageEnabled && mDischarging) {
             parseBatteryData();
             if (mDataParser.isDeviceHeavilyUsed() || mPolicy.testHighUsageTip) {
-                final double totalPower = mBatteryUsageStats.getConsumedPower();
-                final int dischargeAmount = mBatteryUsageStats.getDischargePercentage();
-                final List<UidBatteryConsumer> uidBatteryConsumers =
-                        mBatteryUsageStats.getUidBatteryConsumers();
-                // Sort by descending power
-                uidBatteryConsumers.sort(
-                        (consumer1, consumer2) -> Double.compare(consumer2.getConsumedPower(),
-                                consumer1.getConsumedPower()));
-                for (UidBatteryConsumer consumer : uidBatteryConsumers) {
+                final BatteryStats batteryStats = mBatteryStatsHelper.getStats();
+                final List<BatterySipper> batterySippers
+                        = new ArrayList<>(mBatteryStatsHelper.getUsageList());
+                final double totalPower = mBatteryStatsHelper.getTotalPower();
+                final int dischargeAmount = batteryStats != null
+                        ? batteryStats.getDischargeAmount(BatteryStats.STATS_SINCE_CHARGED)
+                        : 0;
+
+                Collections.sort(batterySippers,
+                        (sipper1, sipper2) -> Double.compare(sipper2.totalSmearedPowerMah,
+                                sipper1.totalSmearedPowerMah));
+                for (BatterySipper batterySipper : batterySippers) {
                     final double percent = mBatteryUtils.calculateBatteryPercent(
-                            consumer.getConsumedPower(), totalPower, dischargeAmount);
-                    if ((percent + 0.5f < 1f)
-                            || mBatteryUtils.shouldHideUidBatteryConsumer(consumer)) {
+                            batterySipper.totalSmearedPowerMah, totalPower, 0, dischargeAmount);
+                    if ((percent + 0.5f < 1f) || mBatteryUtils.shouldHideSipper(batterySipper)) {
                         // Don't show it if we should hide or usage percentage is lower than 1%
                         continue;
                     }
-
                     mHighUsageAppList.add(new AppInfo.Builder()
-                            .setUid(consumer.getUid())
+                            .setUid(batterySipper.getUid())
                             .setPackageName(
-                                    mBatteryUtils.getPackageName(consumer.getUid()))
+                                    mBatteryUtils.getPackageName(batterySipper.getUid()))
                             .build());
                     if (mHighUsageAppList.size() >= mPolicy.highUsageAppCount) {
                         break;
                     }
+
                 }
 
                 // When in test mode, add an app if necessary
@@ -113,6 +115,6 @@ public class HighUsageDetector implements BatteryTipDetector {
 
     @VisibleForTesting
     void parseBatteryData() {
-        mBatteryInfo.parseBatteryHistory(mDataParser);
+        BatteryInfo.parse(mBatteryStatsHelper.getStats(), mDataParser);
     }
 }

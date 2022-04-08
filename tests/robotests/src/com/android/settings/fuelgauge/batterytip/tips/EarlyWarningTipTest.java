@@ -74,13 +74,24 @@ public class EarlyWarningTipTest {
     }
 
     @Test
-    public void testUpdate_powerModeTurnedOn_typeBecomeInvisible() {
+    public void testInfo_stateHandled_displayPowerModeHandledInfo() {
+        final EarlyWarningTip tip =
+                new EarlyWarningTip(BatteryTip.StateType.HANDLED, false /* powerModeOn */);
+
+        assertThat(tip.getTitle(mContext)).isEqualTo("Battery Saver is on");
+        assertThat(tip.getSummary(mContext)).isEqualTo("Some features may be limited");
+        assertThat(tip.getIconId()).isEqualTo(R.drawable.ic_battery_status_maybe_24dp);
+        assertThat(tip.getIconTintColorId()).isEqualTo(R.color.battery_maybe_color_light);
+    }
+
+    @Test
+    public void testUpdate_powerModeTurnedOn_typeBecomeHandled() {
         final EarlyWarningTip nextTip =
                 new EarlyWarningTip(BatteryTip.StateType.INVISIBLE, true /* powerModeOn */);
 
         mEarlyWarningTip.updateState(nextTip);
 
-        assertThat(mEarlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+        assertThat(mEarlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test

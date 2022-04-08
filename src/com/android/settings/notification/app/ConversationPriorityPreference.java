@@ -50,6 +50,8 @@ public class ConversationPriorityPreference extends Preference {
     private View mAlertButton;
     private View mPriorityButton;
     private Context mContext;
+    Drawable selectedBackground;
+    Drawable unselectedBackground;
     private static final int BUTTON_ANIM_TIME_MS = 100;
 
     public ConversationPriorityPreference(Context context, AttributeSet attrs,
@@ -75,6 +77,8 @@ public class ConversationPriorityPreference extends Preference {
 
     private void init(Context context) {
         mContext = context;
+        selectedBackground = mContext.getDrawable(R.drawable.button_border_selected);
+        unselectedBackground = mContext.getDrawable(R.drawable.button_border_unselected);
         setLayoutResource(R.layout.notif_priority_conversation_preference);
     }
 
@@ -144,43 +148,86 @@ public class ConversationPriorityPreference extends Preference {
             TransitionManager.beginDelayedTransition(parent, transition);
         }
 
-        if (importance <= IMPORTANCE_LOW && importance > IMPORTANCE_UNSPECIFIED) {
-            setSelected(mPriorityButton, false);
-            setSelected(mAlertButton, false);
-            setSelected(mSilenceButton, true);
-        } else {
-            if (isPriority) {
-                setSelected(mPriorityButton, true);
-                setSelected(mAlertButton, false);
-                setSelected(mSilenceButton, false);
-            } else {
-                setSelected(mPriorityButton, false);
-                setSelected(mAlertButton, true);
-                setSelected(mSilenceButton, false);
-            }
-        }
-    }
-
-    void setSelected(View view, boolean selected) {
         ColorStateList colorAccent = getAccentTint();
         ColorStateList colorNormal = getRegularTint();
+        ImageView silenceIcon = parent.findViewById(R.id.silence_icon);
+        TextView silenceLabel = parent.findViewById(R.id.silence_label);
+        TextView silenceSummary = parent.findViewById(R.id.silence_summary);
+        ImageView alertIcon = parent.findViewById(R.id.alert_icon);
+        TextView alertLabel = parent.findViewById(R.id.alert_label);
+        TextView alertSummary = parent.findViewById(R.id.alert_summary);
+        ImageView priorityIcon = parent.findViewById(R.id.priority_icon);
+        TextView priorityLabel = parent.findViewById(R.id.priority_label);
+        TextView prioritySummary = parent.findViewById(R.id.priority_summary);
 
-        ImageView icon = view.findViewById(R.id.icon);
-        TextView label = view.findViewById(R.id.label);
-        TextView summary = view.findViewById(R.id.summary);
+        if (importance <= IMPORTANCE_LOW && importance > IMPORTANCE_UNSPECIFIED) {
+            alertSummary.setVisibility(GONE);
+            alertIcon.setImageTintList(colorNormal);
+            alertLabel.setTextColor(colorNormal);
 
-        icon.setImageTintList(selected ? colorAccent : colorNormal);
-        label.setTextColor(selected ? colorAccent : colorNormal);
-        summary.setVisibility(selected ? VISIBLE : GONE);
+            prioritySummary.setVisibility(GONE);
+            priorityIcon.setImageTintList(colorNormal);
+            priorityLabel.setTextColor(colorNormal);
 
-        view.setBackground(mContext.getDrawable(selected
-                ? R.drawable.button_border_selected
-                : R.drawable.button_border_unselected));
-        // a11y service won't always read the newly appearing text in the right order if the
-        // selection happens too soon (readback happens on a different thread as layout). post
-        // the selection to make that conflict less likely
-        view.post(() -> {
-            view.setSelected(selected);
-        });
+            silenceIcon.setImageTintList(colorAccent);
+            silenceLabel.setTextColor(colorAccent);
+            silenceSummary.setVisibility(VISIBLE);
+
+            mAlertButton.setBackground(unselectedBackground);
+            mPriorityButton.setBackground(unselectedBackground);
+            mSilenceButton.setBackground(selectedBackground);
+            // a11y service won't always read the newly appearing text in the right order if the
+            // selection happens too soon (readback happens on a different thread as layout). post
+            // the selection to make that conflict less likely
+            parent.post(() -> {
+                mSilenceButton.setSelected(true);
+                mAlertButton.setSelected(false);
+                mPriorityButton.setSelected(false);
+            });
+        } else {
+            if (isPriority) {
+                alertSummary.setVisibility(GONE);
+                alertIcon.setImageTintList(colorNormal);
+                alertLabel.setTextColor(colorNormal);
+
+                prioritySummary.setVisibility(VISIBLE);
+                priorityIcon.setImageTintList(colorAccent);
+                priorityLabel.setTextColor(colorAccent);
+
+                silenceIcon.setImageTintList(colorNormal);
+                silenceLabel.setTextColor(colorNormal);
+                silenceSummary.setVisibility(GONE);
+
+                mAlertButton.setBackground(unselectedBackground);
+                mPriorityButton.setBackground(selectedBackground);
+                mSilenceButton.setBackground(unselectedBackground);
+                parent.post(() -> {
+                    mSilenceButton.setSelected(false);
+                    mAlertButton.setSelected(false);
+                    mPriorityButton.setSelected(true);
+                });
+            } else {
+                alertSummary.setVisibility(VISIBLE);
+                alertIcon.setImageTintList(colorAccent);
+                alertLabel.setTextColor(colorAccent);
+
+                prioritySummary.setVisibility(GONE);
+                priorityIcon.setImageTintList(colorNormal);
+                priorityLabel.setTextColor(colorNormal);
+
+                silenceIcon.setImageTintList(colorNormal);
+                silenceLabel.setTextColor(colorNormal);
+                silenceSummary.setVisibility(GONE);
+
+                mAlertButton.setBackground(selectedBackground);
+                mPriorityButton.setBackground(unselectedBackground);
+                mSilenceButton.setBackground(unselectedBackground);
+                parent.post(() -> {
+                    mSilenceButton.setSelected(false);
+                    mAlertButton.setSelected(true);
+                    mPriorityButton.setSelected(false);
+                });
+            }
+        }
     }
 }

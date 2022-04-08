@@ -48,10 +48,10 @@ public class DataSaverPreference extends Preference implements DataSaverBackend.
     }
 
     @Override
-    public void onAllowlistStatusChanged(int uid, boolean isAllowlisted) {
+    public void onWhitelistStatusChanged(int uid, boolean isWhitelisted) {
     }
 
     @Override
-    public void onDenylistStatusChanged(int uid, boolean isDenylisted) {
+    public void onBlacklistStatusChanged(int uid, boolean isBlacklisted) {
     }
 }

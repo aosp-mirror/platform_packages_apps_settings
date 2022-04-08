@@ -139,11 +139,9 @@ public class ConnectedDeviceGroupControllerTest {
     public void onStart_shouldRegisterUpdaters() {
         // register the callback in onStart()
         mConnectedDeviceGroupController.onStart();
-
         verify(mConnectedBluetoothDeviceUpdater).registerCallback();
         verify(mConnectedUsbDeviceUpdater).registerCallback();
         verify(mConnectedDockUpdater).registerCallback();
-        verify(mConnectedBluetoothDeviceUpdater).refreshPreference();
     }
 
     @Test

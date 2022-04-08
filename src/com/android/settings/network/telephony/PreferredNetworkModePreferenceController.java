@@ -18,6 +18,7 @@ package com.android.settings.network.telephony;
 
 import android.content.Context;
 import android.os.PersistableBundle;
+import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -79,13 +80,17 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     public boolean onPreferenceChange(Preference preference, Object object) {
         final int newPreferredNetworkMode = Integer.parseInt((String) object);
 
-        mTelephonyManager.setAllowedNetworkTypesForReason(
-                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER,
-                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode));
-
+        if (mTelephonyManager.setPreferredNetworkTypeBitmask(
+                MobileNetworkUtils.getRafFromNetworkType(newPreferredNetworkMode))) {
+            Settings.Global.putInt(mContext.getContentResolver(),
+                    Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
+                    newPreferredNetworkMode);
             final ListPreference listPreference = (ListPreference) preference;
             listPreference.setSummary(getPreferredNetworkModeSummaryResId(newPreferredNetworkMode));
             return true;
+        }
+
+        return false;
     }
 
     public void init(int subId) {
@@ -99,9 +104,9 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
     }
 
     private int getPreferredNetworkMode() {
-        return MobileNetworkUtils.getNetworkTypeFromRaf(
-                (int) mTelephonyManager.getAllowedNetworkTypesForReason(
-                        TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER));
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.PREFERRED_NETWORK_MODE + mSubId,
+                TelephonyManager.DEFAULT_PREFERRED_NETWORK_MODE);
     }
 
     private int getPreferredNetworkModeSummaryResId(int NetworkMode) {
@@ -148,7 +153,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
                 if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA
                         || mIsGlobalCdma
                         || MobileNetworkUtils.isWorldMode(mContext, mSubId)) {
-                    return R.string.preferred_network_mode_lte_cdma_evdo_gsm_wcdma_summary;
+                    return R.string.preferred_network_mode_global_summary;
                 } else {
                     return R.string.preferred_network_mode_lte_summary;
                 }
@@ -169,7 +174,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_GSM_WCDMA:
                 return R.string.preferred_network_mode_nr_lte_gsm_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_CDMA_EVDO_GSM_WCDMA:
-                return R.string.preferred_network_mode_global_summary;
+                return R.string.preferred_network_mode_nr_lte_cdma_evdo_gsm_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_WCDMA:
                 return R.string.preferred_network_mode_nr_lte_wcdma_summary;
             case TelephonyManagerConstants.NETWORK_MODE_NR_LTE_TDSCDMA:

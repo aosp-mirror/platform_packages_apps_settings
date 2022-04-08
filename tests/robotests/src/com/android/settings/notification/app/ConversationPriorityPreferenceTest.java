@@ -68,6 +68,10 @@ public class ConversationPriorityPreferenceTest {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(preference.getLayoutResource(), null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
         preference.setConfigurable(false);
         preference.setImportance(IMPORTANCE_DEFAULT);
@@ -77,6 +81,35 @@ public class ConversationPriorityPreferenceTest {
         assertThat(holder.itemView.findViewById(R.id.silence).isEnabled()).isFalse();
         assertThat(holder.itemView.findViewById(R.id.priority_group).isEnabled()).isFalse();
         assertThat(holder.itemView.findViewById(R.id.alert).isEnabled()).isFalse();
+
+        assertThat(holder.itemView.findViewById(R.id.priority_group).getBackground())
+                .isEqualTo(selected);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(unselected);
+
+        // other button
+        preference.setPriorityConversation(false);
+        holder = PreferenceViewHolder.createInstanceForTests(
+                inflater.inflate(preference.getLayoutResource(), null));
+        preference.onBindViewHolder(holder);
+
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(selected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.priority_group).getBackground())
+                .isEqualTo(unselected);
+
+        // other other button
+        preference.setImportance(IMPORTANCE_LOW);
+        holder = PreferenceViewHolder.createInstanceForTests(
+                inflater.inflate(preference.getLayoutResource(), null));
+        preference.onBindViewHolder(holder);
+
+        assertThat(holder.itemView.findViewById(R.id.priority_group).getBackground())
+                .isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground()).isEqualTo(selected);
     }
 
     @Test
@@ -86,6 +119,10 @@ public class ConversationPriorityPreferenceTest {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(preference.getLayoutResource(), null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
         preference.setConfigurable(true);
         preference.setImportance(IMPORTANCE_LOW);
@@ -93,8 +130,12 @@ public class ConversationPriorityPreferenceTest {
 
         preference.onBindViewHolder(holder);
 
-        assertThat(holder.itemView.findViewById(R.id.silence)
-                .findViewById(R.id.summary).getVisibility())
+        assertThat(holder.itemView.findViewById(R.id.priority_group).getBackground())
+                .isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(selected);
+        assertThat(holder.itemView.findViewById(R.id.silence_summary).getVisibility())
                 .isEqualTo(View.VISIBLE);
     }
 
@@ -105,6 +146,10 @@ public class ConversationPriorityPreferenceTest {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(preference.getLayoutResource(), null));
+        Drawable unselected = mock(Drawable.class);
+        Drawable selected = mock(Drawable.class);
+        preference.selectedBackground = selected;
+        preference.unselectedBackground = unselected;
 
         preference.setConfigurable(true);
         preference.setImportance(IMPORTANCE_DEFAULT);
@@ -115,6 +160,12 @@ public class ConversationPriorityPreferenceTest {
         View silenceButton = holder.itemView.findViewById(R.id.silence);
 
         silenceButton.callOnClick();
+
+        assertThat(holder.itemView.findViewById(R.id.alert).getBackground()).isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.priority_group).getBackground())
+                .isEqualTo(unselected);
+        assertThat(holder.itemView.findViewById(R.id.silence).getBackground())
+                .isEqualTo(selected);
 
         verify(preference, times(1)).callChangeListener(new Pair(IMPORTANCE_LOW, false));
     }

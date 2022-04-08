@@ -53,6 +53,14 @@ public class ZenAccessSettingObserverMixin extends ContentObserver implements Li
 
     @Override
     public void onStart() {
+        if (!ZenAccessController.isSupported(mContext.getSystemService(ActivityManager.class))) {
+            return;
+        }
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(
+                        Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES),
+                false /* notifyForDescendants */,
+                this /* observer */);
         mContext.getContentResolver().registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.ENABLED_NOTIFICATION_LISTENERS),
                 false /* notifyForDescendants */,
@@ -61,6 +69,9 @@ public class ZenAccessSettingObserverMixin extends ContentObserver implements Li
 
     @Override
     public void onStop() {
+        if (!ZenAccessController.isSupported(mContext.getSystemService(ActivityManager.class))) {
+            return;
+        }
         mContext.getContentResolver().unregisterContentObserver(this /* observer */);
     }
 }

@@ -19,6 +19,7 @@ package com.android.settings.homepage.contextualcards.conditional;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.PreciseDataConnectionState;
 import android.telephony.SubscriptionManager;
@@ -38,6 +39,7 @@ public class CellularDataConditionController implements ConditionalCardControlle
     private final Context mAppContext;
     private final ConditionManager mConditionManager;
     private final GlobalSettingsChangeListener mDefaultDataSubscriptionIdListener;
+    private final ConnectivityManager mConnectivityManager;
 
     private int mSubId;
     private TelephonyManager mTelephonyManager;
@@ -61,6 +63,8 @@ public class CellularDataConditionController implements ConditionalCardControlle
                 }
             }
         };
+        mConnectivityManager = appContext.getSystemService(
+                ConnectivityManager.class);
     }
 
     @Override
@@ -70,7 +74,7 @@ public class CellularDataConditionController implements ConditionalCardControlle
 
     @Override
     public boolean isDisplayable() {
-        if (!mTelephonyManager.isDataCapable()
+        if (!mConnectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)
                 || mTelephonyManager.getSimState() != TelephonyManager.SIM_STATE_READY) {
             return false;
         }

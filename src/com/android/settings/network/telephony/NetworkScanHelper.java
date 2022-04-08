@@ -21,13 +21,10 @@ import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellInfo;
 import android.telephony.NetworkScan;
 import android.telephony.NetworkScanRequest;
-import android.telephony.PhoneCapability;
 import android.telephony.RadioAccessSpecifier;
 import android.telephony.TelephonyManager;
 import android.telephony.TelephonyScanManager;
 import android.util.Log;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.telephony.CellNetworkScanResult;
 
@@ -40,7 +37,6 @@ import com.google.common.util.concurrent.SettableFuture;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.Executor;
@@ -115,14 +111,10 @@ public class NetworkScanHelper {
     public static final int NETWORK_SCAN_TYPE_INCREMENTAL_RESULTS = 2;
 
     /** The constants below are used in the async network scan. */
-    @VisibleForTesting
-    static final boolean INCREMENTAL_RESULTS = true;
-    @VisibleForTesting
-    static final int SEARCH_PERIODICITY_SEC = 5;
-    @VisibleForTesting
-    static final int MAX_SEARCH_TIME_SEC = 300;
-    @VisibleForTesting
-    static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
+    private static final boolean INCREMENTAL_RESULTS = true;
+    private static final int SEARCH_PERIODICITY_SEC = 5;
+    private static final int MAX_SEARCH_TIME_SEC = 300;
+    private static final int INCREMENTAL_RESULTS_PERIODICITY_SEC = 3;
 
     private final NetworkScanCallback mNetworkScanCallback;
     private final TelephonyManager mTelephonyManager;
@@ -141,8 +133,7 @@ public class NetworkScanHelper {
         mExecutor = executor;
     }
 
-    @VisibleForTesting
-    NetworkScanRequest createNetworkScanForPreferredAccessNetworks() {
+    private NetworkScanRequest createNetworkScanForPreferredAccessNetworks() {
         long networkTypeBitmap3gpp = mTelephonyManager.getPreferredNetworkTypeBitmask()
                 & TelephonyManager.NETWORK_STANDARDS_FAMILY_BITMASK_3GPP;
 
@@ -170,13 +161,14 @@ public class NetworkScanHelper {
         // a 5G network, which means that it shouldn't scan for 5G at the expense of battery as
         // part of the manual network selection process.
         //
-        if (networkTypeBitmap3gpp == 0
-                || (hasNrSaCapability()
-                && (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0)) {
-            radioAccessSpecifiers.add(
-                    new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
-            Log.d(TAG, "radioAccessSpecifiers add NGRAN.");
-        }
+        // FIXME(b/151119451): re-enable this code once there is a way to distinguish SA from NSA
+        // support in the modem.
+        //
+        // if (networkTypeBitmap3gpp == 0
+        //        || (networkTypeBitmap3gpp & TelephonyManager.NETWORK_CLASS_BITMASK_5G) != 0) {
+        //    radioAccessSpecifiers.add(
+        //            new RadioAccessSpecifier(AccessNetworkType.NGRAN, null, null));
+        // }
 
         return new NetworkScanRequest(
                 NetworkScanRequest.SCAN_TYPE_ONE_SHOT,
@@ -259,12 +251,6 @@ public class NetworkScanHelper {
 
     private void onError(int errCode) {
         mNetworkScanCallback.onError(errCode);
-    }
-
-    private boolean hasNrSaCapability() {
-        return Arrays.stream(
-                mTelephonyManager.getPhoneCapability().getDeviceNrCapabilities())
-                .anyMatch(i -> i == PhoneCapability.DEVICE_NR_CAPABILITY_SA);
     }
 
     /**

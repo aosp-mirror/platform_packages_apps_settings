@@ -36,7 +36,8 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
         when(mResources.getBoolean(com.android.internal.R.bool.config_volumeHushGestureEnabled))
                 .thenReturn(true);
         mController = new PreventRingingSwitchPreferenceController(mContext);
-        mController.mSwitch = mock(MainSwitchPreference.class);
+        mController.mSwitch = mock(SwitchBar.class);
     }
 
     @Test
@@ -88,7 +89,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(false);
+        verify(mController.mSwitch, times(1)).setChecked(false);
     }
 
     @Test
@@ -98,7 +99,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(true);
+        verify(mController.mSwitch, times(1)).setChecked(true);
     }
 
     @Test
@@ -108,7 +109,7 @@ public class PreventRingingSwitchPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mController.mSwitch, times(1)).updateStatus(true);
+        verify(mController.mSwitch, times(1)).setChecked(true);
     }
 
     @Test
@@ -160,13 +161,13 @@ public class PreventRingingSwitchPreferenceControllerTest {
     @Test
     public void testPreferenceClickListenerAttached() {
         PreferenceScreen preferenceScreen = mock(PreferenceScreen.class);
-        MainSwitchPreference preference = mock(MainSwitchPreference.class);
+        LayoutPreference mLayoutPreference = mock(LayoutPreference.class);
         when(preferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                preference);
+                mLayoutPreference);
 
         mController.displayPreference(preferenceScreen);
 
-        verify(preference, times(1))
+        verify(mLayoutPreference, times(1))
                 .setOnPreferenceClickListener(any());
     }
 }

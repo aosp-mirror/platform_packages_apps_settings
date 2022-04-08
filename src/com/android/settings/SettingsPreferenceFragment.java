@@ -44,6 +44,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.HighlightablePreferenceGroupAdapter;
 import com.android.settings.widget.LoadingViewController;
@@ -52,8 +54,6 @@ import com.android.settingslib.CustomEditTextPreferenceCompat;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
-
-import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.UUID;
 
@@ -110,8 +110,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @VisibleForTesting
     ViewGroup mPinnedHeaderFrameLayout;
-    private AppBarLayout mAppBarLayout;
+
     private LayoutPreference mHeader;
+
     private View mEmptyView;
     private LinearLayoutManager mLayoutManager;
     private ArrayMap<String, Preference> mPreferenceCache;
@@ -125,6 +126,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        SearchMenuController.init(this /* host */);
+        HelpMenuController.init(this /* host */);
 
         if (icicle != null) {
             mPreferenceHighlighted = icicle.getBoolean(SAVE_HIGHLIGHTED_KEY);
@@ -137,7 +140,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             Bundle savedInstanceState) {
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         mPinnedHeaderFrameLayout = root.findViewById(R.id.pinned_header);
-        mAppBarLayout = getActivity().findViewById(R.id.app_bar);
         return root;
     }
 
@@ -243,7 +245,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             return;
         }
         if (mAdapter != null) {
-            mAdapter.requestHighlight(getView(), getListView(), mAppBarLayout);
+            mAdapter.requestHighlight(getView(), getListView());
         }
     }
 
@@ -434,13 +436,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
      */
     protected Object getSystemService(final String name) {
         return getActivity().getSystemService(name);
-    }
-
-    /**
-     * Returns the specified system service from the owning Activity.
-     */
-    protected <T> T getSystemService(final Class<T> serviceClass) {
-        return getActivity().getSystemService(serviceClass);
     }
 
     /**

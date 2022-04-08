@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.Proxy;
 import android.net.ProxyInfo;
 import android.os.Bundle;
 import android.text.Selection;
@@ -40,11 +41,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.net.module.util.ProxyUtils;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 import com.android.settings.core.InstrumentedFragment;
-
-import java.util.Arrays;
 
 public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
@@ -153,7 +151,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
         if (proxy != null) {
             hostname = proxy.getHost();
             port = proxy.getPort();
-            exclList = ProxyUtils.exclusionListAsString(proxy.getExclusionList());
+            exclList = proxy.getExclusionListAsString();
         }
 
         if (hostname == null) {
@@ -187,18 +185,18 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
      * @return 0 on success, string resource ID on failure
      */
     public static int validate(String hostname, String port, String exclList) {
-        switch (ProxyUtils.validate(hostname, port, exclList)) {
-            case ProxyUtils.PROXY_VALID:
+        switch (Proxy.validate(hostname, port, exclList)) {
+            case Proxy.PROXY_VALID:
                 return 0;
-            case ProxyUtils.PROXY_HOSTNAME_EMPTY:
+            case Proxy.PROXY_HOSTNAME_EMPTY:
                 return R.string.proxy_error_empty_host_set_port;
-            case ProxyUtils.PROXY_HOSTNAME_INVALID:
+            case Proxy.PROXY_HOSTNAME_INVALID:
                 return R.string.proxy_error_invalid_host;
-            case ProxyUtils.PROXY_PORT_EMPTY:
+            case Proxy.PROXY_PORT_EMPTY:
                 return R.string.proxy_error_empty_port;
-            case ProxyUtils.PROXY_PORT_INVALID:
+            case Proxy.PROXY_PORT_INVALID:
                 return R.string.proxy_error_invalid_port;
-            case ProxyUtils.PROXY_EXCLLIST_INVALID:
+            case Proxy.PROXY_EXCLLIST_INVALID:
                 return R.string.proxy_error_invalid_exclusion_list;
             default:
                 // should neven happen
@@ -231,9 +229,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
                 return false;
             }
         }
-
-        ProxyInfo p = ProxyInfo.buildDirectProxy(
-                hostname, port, Arrays.asList(exclList.split(",")));
+        ProxyInfo p = new ProxyInfo(hostname, port, exclList);
         // FIXME: The best solution would be to make a better UI that would
         // disable editing of the text boxes if the user chooses to use the
         // default settings. i.e. checking a box to always use the default

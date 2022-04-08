@@ -159,7 +159,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
             keepEnabledPackages.add(euicc.packageName);
         }
 
-        keepEnabledPackages.addAll(getEnabledPackageAllowlist());
+        keepEnabledPackages.addAll(getEnabledPackageWhitelist());
 
         final LocationManager locationManager =
                 (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
@@ -170,7 +170,7 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         return keepEnabledPackages;
     }
 
-    private Set<String> getEnabledPackageAllowlist() {
+    private Set<String> getEnabledPackageWhitelist() {
         final Set<String> keepEnabledPackages = new ArraySet<>();
 
         // Keep Settings intelligence enabled, otherwise search feature will be disabled.
@@ -180,9 +180,6 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         // Keep Package Installer enabled.
         keepEnabledPackages.add(mContext.getString(R.string.config_package_installer_package_name));
 
-        if (mPm.getWellbeingPackageName() != null) {
-            keepEnabledPackages.add(mPm.getWellbeingPackageName());
-        }
         return keepEnabledPackages;
     }
 

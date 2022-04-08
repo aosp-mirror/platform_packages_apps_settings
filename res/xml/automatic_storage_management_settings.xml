@@ -23,12 +23,13 @@
             android:summary="%s"
             android:title="@string/automatic_storage_manager_days_title"
             android:entries="@array/automatic_storage_management_days"
-            android:entryValues="@array/automatic_storage_management_days_values" />
+            android:entryValues="@array/automatic_storage_management_days_values"
+            settings:allowDividerBelow="true" />
 
-        <com.android.settingslib.widget.FooterPreference
+        <Preference
             android:key="freed_bytes"
             android:persistent="false"
             android:selectable="false"
-            settings:searchable="false"/>
+            settings:allowDividerAbove="true" />
 
 </PreferenceScreen>

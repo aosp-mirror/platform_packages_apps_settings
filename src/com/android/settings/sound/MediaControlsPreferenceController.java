@@ -21,12 +21,10 @@ import static android.provider.Settings.Secure.MEDIA_CONTROLS_RESUME;
 import android.content.Context;
 import android.provider.Settings;
 
-import androidx.annotation.VisibleForTesting;
-
 import com.android.settings.core.TogglePreferenceController;
 
 /**
- * Toggle for media controls resumption setting
+ * Toggle for media controls settings
  */
 public class MediaControlsPreferenceController extends TogglePreferenceController {
 
@@ -34,15 +32,15 @@ public class MediaControlsPreferenceController extends TogglePreferenceControlle
         super(context, key);
     }
 
-    @VisibleForTesting
+    @Override
     public boolean isChecked() {
         int val = Settings.Secure.getInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, 1);
-        return val == 1;
+        return val == 0;
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        int val = isChecked ? 1 : 0;
+        int val = isChecked ? 0 : 1;
         return Settings.Secure.putInt(mContext.getContentResolver(), MEDIA_CONTROLS_RESUME, val);
     }
 

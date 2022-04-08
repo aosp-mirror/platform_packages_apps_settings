@@ -26,6 +26,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.widget.FooterPreference;
 
 /**
  * Footer for face settings showing the help text and help link.
@@ -41,9 +42,13 @@ public class FaceSettingsFooterPreferenceController extends BasePreferenceContro
         mProvider = FeatureFactory.getFactory(context).getFaceFeatureProvider();
     }
 
+    public FaceSettingsFooterPreferenceController(Context context) {
+        this(context, FooterPreference.KEY_FOOTER);
+    }
+
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE_UNSEARCHABLE;
+        return AVAILABLE;
     }
 
     @Override

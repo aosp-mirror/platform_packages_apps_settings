@@ -53,11 +53,9 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     UserInfo mUser;
     private @Nullable
     StorageItemPreference mStoragePreference;
-    private PreferenceGroup mPreferenceGroup;
     private Drawable mUserIcon;
     private long mSize;
     private long mTotalSizeBytes;
-    private boolean mIsVisible;
 
     /**
      * Adds the appropriate controllers to a controller list for handling all secondary users on
@@ -65,11 +63,9 @@ public class SecondaryUserController extends AbstractPreferenceController implem
      *
      * @param context     Context for initializing the preference controllers.
      * @param userManager UserManagerWrapper for figuring out which controllers to add.
-     * @param isWorkProfileOnly only shows secondary users of work profile.
-     *                          (e.g., it should be true in work profile tab)
      */
     public static List<AbstractPreferenceController> getSecondaryUserControllers(
-            Context context, UserManager userManager, boolean isWorkProfileOnly) {
+            Context context, UserManager userManager) {
 
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         UserInfo primaryUser = userManager.getPrimaryUser();
@@ -81,11 +77,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
                 continue;
             }
 
-            if (Utils.isProfileOf(primaryUser, info)) {
-                continue;
-            }
-
-            if (isWorkProfileOnly && !info.isManagedProfile()) {
+            if (info == null || Utils.isProfileOf(primaryUser, info)) {
                 continue;
             }
 
@@ -117,15 +109,16 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         if (mStoragePreference == null) {
             mStoragePreference = new StorageItemPreference(screen.getContext());
 
-            mPreferenceGroup = screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
+            PreferenceGroup group =
+                    screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
             mStoragePreference.setTitle(mUser.name);
             mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
             if (mSize != SIZE_NOT_SET) {
                 mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
             }
 
-            mPreferenceGroup.setVisible(mIsVisible);
-            mPreferenceGroup.addPreference(mStoragePreference);
+            group.setVisible(true);
+            group.addPreference(mStoragePreference);
             maybeSetIcon();
         }
     }
@@ -169,21 +162,9 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         mTotalSizeBytes = totalSizeBytes;
     }
 
-    /**
-     * Sets visibility of the PreferenceGroup of secondary user.
-     *
-     * @param visible Visibility of the PreferenceGroup.
-     */
-    public void setPreferenceGroupVisible(boolean visible) {
-        mIsVisible = visible;
-        if (mPreferenceGroup != null) {
-            mPreferenceGroup.setVisible(mIsVisible);
-        }
-    }
-
-    @Override
-    public void handleResult(SparseArray<StorageAsyncLoader.StorageResult> stats) {
-        final StorageAsyncLoader.StorageResult result = stats.get(getUser().id);
+    public void handleResult(SparseArray<StorageAsyncLoader.AppsStorageResult> stats) {
+        int userId = getUser().id;
+        StorageAsyncLoader.AppsStorageResult result = stats.get(userId);
         if (result != null) {
             setSize(result.externalStats.totalBytes);
         }

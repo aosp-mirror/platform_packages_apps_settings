@@ -48,8 +48,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.RestrictedLockUtils;
 
-import com.google.common.collect.ImmutableList;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,8 +57,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class ImportancePreferenceControllerTest {
@@ -98,7 +94,7 @@ public class ImportancePreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -106,7 +102,7 @@ public class ImportancePreferenceControllerTest {
     public void testIsAvailable_ifAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null, null);
+        mController.onResume(appRow, mock(NotificationChannel.class), null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -117,7 +113,7 @@ public class ImportancePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
         NotificationChannelGroup group = mock(NotificationChannelGroup.class);
         when(group.isBlocked()).thenReturn(true);
-        mController.onResume(appRow, channel, group, null, null, null, null);
+        mController.onResume(appRow, channel, group, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -126,7 +122,7 @@ public class ImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -136,7 +132,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         when(channel.getId()).thenReturn(DEFAULT_CHANNEL_ID);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -145,27 +141,8 @@ public class ImportancePreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredIn() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null,
-                ImmutableList.of(NotificationChannel.EDIT_IMPORTANCE));
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredOut() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        mController.onResume(appRow, channel, null, null, null, null, new ArrayList<>());
-        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -173,7 +150,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, mock(
-                RestrictedLockUtils.EnforcedAdmin.class), null);
+                RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new ImportancePreference(mContext, null);
         mController.updateState(pref);
@@ -187,7 +164,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ImportancePreference(mContext, null);
         mController.updateState(pref);
@@ -202,7 +179,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByOEM()).thenReturn(false);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ImportancePreference(mContext, null);
         mController.updateState(pref);
@@ -217,7 +194,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         Preference pref = new ImportancePreference(mContext, null);
         mController.updateState(pref);
@@ -229,7 +206,7 @@ public class ImportancePreferenceControllerTest {
     public void testUpdateState() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
 
         ImportancePreference pref = mock(ImportancePreference.class);
         mController.updateState(pref);
@@ -244,8 +221,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         channel.setSound(null, Notification.AUDIO_ATTRIBUTES_DEFAULT);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ImportancePreference pref = new ImportancePreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
@@ -263,8 +239,7 @@ public class ImportancePreferenceControllerTest {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         channel.setSound(null, Notification.AUDIO_ATTRIBUTES_DEFAULT);
-        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null,
-                null);
+        mController.onResume(new NotificationBackend.AppRow(), channel, null, null, null, null);
 
         ImportancePreference pref = new ImportancePreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);

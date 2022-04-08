@@ -91,11 +91,10 @@ public class LowBatteryDetectorTest {
     }
 
     @Test
-    public void testDetect_batterySaverOn_tipInvisible() {
+    public void testDetect_batterySaverOn_tipHandled() {
         mShadowPowerManager.setIsPowerSaveMode(true);
 
-        assertThat(mLowBatteryDetector.detect().getState())
-                .isEqualTo(BatteryTip.StateType.INVISIBLE);
+        assertThat(mLowBatteryDetector.detect().getState()).isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test

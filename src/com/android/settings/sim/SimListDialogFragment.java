@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +48,6 @@ import java.util.List;
  */
 public class SimListDialogFragment extends SimDialogFragment implements
         DialogInterface.OnClickListener {
-    private static final String TAG = "SimListDialogFragment";
     protected static final String KEY_INCLUDE_ASK_EVERY_TIME = "include_ask_every_time";
 
     protected SelectSubscriptionAdapter mAdapter;
@@ -103,13 +100,9 @@ public class SimListDialogFragment extends SimDialogFragment implements
 
     @Override
     public void updateDialog() {
-        Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
-
         List<SubscriptionInfo> currentSubscriptions = getCurrentSubscriptions();
         if (currentSubscriptions == null) {
-            if (!mWasDismissed) {
-                dismiss();
-            }
+            dismiss();
             return;
         }
         if (getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME)) {
@@ -186,7 +179,7 @@ public class SimListDialogFragment extends SimDialogFragment implements
                 icon.setImageTintList(
                         Utils.getColorAttr(mContext, android.R.attr.textColorSecondary));
             } else {
-                title.setText(SubscriptionUtil.getUniqueSubscriptionDisplayName(sub, mContext));
+                title.setText(sub.getDisplayName());
                 summary.setText(isMdnProvisioned(sub.getNumber()) ? sub.getNumber() : "");
                 icon.setImageBitmap(sub.createIconBitmap(mContext));
 

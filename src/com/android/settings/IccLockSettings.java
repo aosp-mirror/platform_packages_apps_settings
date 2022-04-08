@@ -30,7 +30,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
-import android.telephony.PinResult;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -56,7 +55,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.network.ProxySubscriptionManager;
-import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -311,8 +309,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
                 mTabHost.addTab(buildTabSpec(tag,
                         String.valueOf(subInfo == null
                                 ? getContext().getString(R.string.sim_editor_title, slot + 1)
-                                : SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                                        subInfo, getContext()))));
+                                : subInfo.getDisplayName())));
             }
 
             mTabHost.setCurrentTabByTag(getTagForSlotId(mSlotId));
@@ -535,25 +532,30 @@ public class IccLockSettings extends SettingsPreferenceFragment
         mPinToggle.setEnabled(false);
     }
 
-    private class SetIccLockEnabled extends AsyncTask<Void, Void, PinResult> {
+    private class SetIccLockEnabled extends AsyncTask<Void, Void, Void> {
         private final boolean mState;
-        private final String mPin;
+        private final String mPassword;
+        private int mAttemptsRemaining;
 
         private SetIccLockEnabled(boolean state, String pin) {
             mState = state;
-            mPin = pin;
+            mPassword = pin;
         }
 
         @Override
-        protected PinResult doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             mTelephonyManager =  mTelephonyManager.createForSubscriptionId(mSubId);
-            return mTelephonyManager.setIccLockEnabled(mState, mPin);
+            mAttemptsRemaining = mTelephonyManager.setIccLockEnabled(mState, mPassword);
+            return null;
         }
 
         @Override
-        protected void onPostExecute(PinResult pinResult) {
-            iccLockChanged(pinResult.getResult() == PinResult.PIN_RESULT_TYPE_SUCCESS /* success */,
-                    pinResult.getAttemptsRemaining() /* attemptsRemaining */);
+        protected void onPostExecute(Void aVoid) {
+            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
+                iccLockChanged(true, mAttemptsRemaining);
+            } else {
+                iccLockChanged(false, mAttemptsRemaining);
+            }
         }
     }
 
@@ -639,28 +641,33 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void tryChangePin() {
-        new ChangeIccLockPin(mOldPin, mNewPin).execute();
+        new ChangeIccLockPassword(mOldPin, mNewPin).execute();
     }
 
-    private class ChangeIccLockPin extends AsyncTask<Void, Void, PinResult> {
-        private final String mOldPin;
-        private final String mNewPin;
+    private class ChangeIccLockPassword extends AsyncTask<Void, Void, Void> {
+        private final String mOldPwd;
+        private final String mNewPwd;
+        private int mAttemptsRemaining;
 
-        private ChangeIccLockPin(String oldPin, String newPin) {
-            mOldPin = oldPin;
-            mNewPin = newPin;
+        private ChangeIccLockPassword(String oldPin, String newPin) {
+            mOldPwd = oldPin;
+            mNewPwd = newPin;
         }
 
         @Override
-        protected PinResult doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-            return mTelephonyManager.changeIccLockPin(mOldPin, mNewPin);
+            mAttemptsRemaining = mTelephonyManager.changeIccLockPassword(mOldPwd, mNewPwd);
+            return null;
         }
 
         @Override
-        protected void onPostExecute(PinResult pinResult) {
-            iccPinChanged(pinResult.getResult() == PinResult.PIN_RESULT_TYPE_SUCCESS /* success */,
-                    pinResult.getAttemptsRemaining() /* attemptsRemaining */);
+        protected void onPostExecute(Void aVoid) {
+            if (mAttemptsRemaining == TelephonyManager.CHANGE_ICC_LOCK_SUCCESS) {
+                iccPinChanged(true, mAttemptsRemaining);
+            } else {
+                iccPinChanged(false, mAttemptsRemaining);
+            }
         }
     }
 

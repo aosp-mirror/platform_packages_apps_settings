@@ -16,13 +16,9 @@
 package com.android.settings.system;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.UserManager;
 
-import androidx.preference.Preference;
-
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -48,15 +44,5 @@ public class FactoryResetPreferenceController extends AbstractPreferenceControll
     @Override
     public String getPreferenceKey() {
         return KEY_FACTORY_RESET;
-    }
-
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        if (KEY_FACTORY_RESET.equals(preference.getKey())) {
-            final Intent intent = new Intent(mContext, Settings.FactoryResetActivity.class);
-            mContext.startActivity(intent);
-            return true;
-        }
-        return false;
     }
 }

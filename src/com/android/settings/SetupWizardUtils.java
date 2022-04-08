@@ -19,7 +19,6 @@ package com.android.settings;
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_FIRST_RUN;
 import static com.google.android.setupcompat.util.WizardManagerHelper.EXTRA_IS_SETUP_FLOW;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.sysprop.SetupWizardProperties;
@@ -40,39 +39,25 @@ public class SetupWizardUtils {
         return theme;
     }
 
-    public static int getTheme(Context context, Intent intent) {
+    public static int getTheme(Intent intent) {
         String theme = getThemeString(intent);
         // TODO(yukl): Move to ThemeResolver and add any additional required attributes in
         // onApplyThemeResource using Theme overlays
         if (theme != null) {
             if (WizardManagerHelper.isAnySetupWizard(intent)) {
-                if (ThemeHelper.isSetupWizardDayNightEnabled(context)) {
-                    switch (theme) {
-                        case ThemeHelper.THEME_GLIF_V3_LIGHT:
-                        case ThemeHelper.THEME_GLIF_V3:
-                            return R.style.GlifV3Theme_DayNight;
-                        case ThemeHelper.THEME_GLIF_V2_LIGHT:
-                        case ThemeHelper.THEME_GLIF_V2:
-                            return R.style.GlifV2Theme_DayNight;
-                        case ThemeHelper.THEME_GLIF_LIGHT:
-                        case ThemeHelper.THEME_GLIF:
-                            return R.style.GlifTheme_DayNight;
-                    }
-                } else {
-                    switch (theme) {
-                        case ThemeHelper.THEME_GLIF_V3_LIGHT:
-                            return R.style.GlifV3Theme_Light;
-                        case ThemeHelper.THEME_GLIF_V3:
-                            return R.style.GlifV3Theme;
-                        case ThemeHelper.THEME_GLIF_V2_LIGHT:
-                            return R.style.GlifV2Theme_Light;
-                        case ThemeHelper.THEME_GLIF_V2:
-                            return R.style.GlifV2Theme;
-                        case ThemeHelper.THEME_GLIF_LIGHT:
-                            return R.style.GlifTheme_Light;
-                        case ThemeHelper.THEME_GLIF:
-                            return R.style.GlifTheme;
-                    }
+                switch (theme) {
+                    case ThemeHelper.THEME_GLIF_V3_LIGHT:
+                        return R.style.GlifV3Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V3:
+                        return R.style.GlifV3Theme;
+                    case ThemeHelper.THEME_GLIF_V2_LIGHT:
+                        return R.style.GlifV2Theme_Light;
+                    case ThemeHelper.THEME_GLIF_V2:
+                        return R.style.GlifV2Theme;
+                    case ThemeHelper.THEME_GLIF_LIGHT:
+                        return R.style.GlifTheme_Light;
+                    case ThemeHelper.THEME_GLIF:
+                        return R.style.GlifTheme;
                 }
             } else {
                 switch (theme) {
@@ -91,30 +76,17 @@ public class SetupWizardUtils {
         return R.style.GlifTheme;
     }
 
-    public static int getTransparentTheme(Context context, Intent intent) {
-        int transparentTheme;
-        final int suwTheme = getTheme(context, intent);
-        if (ThemeHelper.isSetupWizardDayNightEnabled(context)) {
-            transparentTheme = R.style.GlifV2Theme_DayNight_Transparent;
-        } else {
-            transparentTheme = R.style.GlifV2Theme_Light_Transparent;
-        }
-        if (suwTheme == R.style.GlifV3Theme_DayNight) {
-            transparentTheme = R.style.GlifV3Theme_DayNight_Transparent;
+    public static int getTransparentTheme(Intent intent) {
+        final int suwTheme = getTheme(intent);
+        int transparentTheme = R.style.GlifV2Theme_Light_Transparent;
+        if (suwTheme == R.style.GlifV3Theme) {
+            transparentTheme = R.style.GlifV3Theme_Transparent;
         } else if (suwTheme == R.style.GlifV3Theme_Light) {
             transparentTheme = R.style.GlifV3Theme_Light_Transparent;
-        } else if (suwTheme == R.style.GlifV2Theme_DayNight) {
-            transparentTheme = R.style.GlifV2Theme_DayNight_Transparent;
-        } else if (suwTheme == R.style.GlifV2Theme_Light) {
-            transparentTheme = R.style.GlifV2Theme_Light_Transparent;
-        } else if (suwTheme == R.style.GlifTheme_DayNight) {
-            transparentTheme = R.style.SetupWizardTheme_DayNight_Transparent;
-        } else if (suwTheme == R.style.GlifTheme_Light) {
-            transparentTheme = R.style.SetupWizardTheme_Light_Transparent;
-        } else if (suwTheme == R.style.GlifV3Theme) {
-            transparentTheme = R.style.GlifV3Theme_Transparent;
         } else if (suwTheme == R.style.GlifV2Theme) {
             transparentTheme = R.style.GlifV2Theme_Transparent;
+        } else if (suwTheme == R.style.GlifTheme_Light) {
+            transparentTheme = R.style.SetupWizardTheme_Light_Transparent;
         } else if (suwTheme == R.style.GlifTheme) {
             transparentTheme = R.style.SetupWizardTheme_Transparent;
         }

@@ -20,11 +20,14 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="smart_battery_detail"
     android:title="@string/smart_battery_manager_title"
-    settings:keywords="@string/keywords_battery_adaptive_preferences">
+    settings:searchable="false">
 
-    <com.android.settingslib.widget.IllustrationPreferencee
+    <com.android.settings.widget.VideoPreference
         android:key="auto_awesome_battery"
-        settings:lottie_rawRes="@raw/auto_awesome_battery_lottie" />
+        android:title="@string/summary_placeholder"
+        settings:animation="@raw/auto_awesome_battery"
+        settings:preview="@drawable/auto_awesome_battery"
+        settings:controller="com.android.settings.widget.VideoPreferenceController"/>
 
     <SwitchPreference
         android:key="smart_battery"

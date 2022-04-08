@@ -39,7 +39,6 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.Settings.CreateShortcutActivity;
-import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         final PackageManager pm = context.getPackageManager();
         managedProfileSetup(context, pm, broadcast, userInfo);
         webviewSettingSetup(context, pm, userInfo);
-        ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
+        refreshExistingShortcuts(context);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -143,4 +142,5 @@ public class SettingsInitialize extends BroadcastReceiver {
         }
         shortcutManager.updateShortcuts(updates);
     }
+
 }

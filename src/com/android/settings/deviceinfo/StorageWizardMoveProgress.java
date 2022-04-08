@@ -19,6 +19,8 @@ package com.android.settings.deviceinfo;
 import static android.content.Intent.EXTRA_TITLE;
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.MoveCallback;
 import android.os.Bundle;
@@ -30,8 +32,6 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 public class StorageWizardMoveProgress extends StorageWizardBase {
-    private static final String TAG = "StorageWizardMoveProgress";
-
     private int mMoveId;
 
     @Override

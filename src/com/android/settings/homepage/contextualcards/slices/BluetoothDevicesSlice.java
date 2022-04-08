@@ -206,7 +206,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         return PendingIntent
                 .getActivity(mContext, device.hashCode() /* requestCode */,
                         subSettingLauncher.toIntent(),
-                        PendingIntent.FLAG_IMMUTABLE);
+                        0  /* flags */);
     }
 
     @VisibleForTesting
@@ -236,8 +236,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .setClass(mContext, SliceBroadcastReceiver.class)
                 .putExtra(EXTRA_ENABLE_BLUETOOTH, true);
         final SliceAction action = SliceAction.create(PendingIntent.getBroadcast(mContext,
-                0 /* requestCode */, intent, PendingIntent.FLAG_IMMUTABLE), icon,
-                ListBuilder.ICON_IMAGE, title);
+                0 /* requestCode */, intent, 0 /* flags */), icon, ListBuilder.ICON_IMAGE, title);
 
         return new ListBuilder.RowBuilder()
                 .setTitleItem(icon, ListBuilder.ICON_IMAGE)
@@ -253,7 +252,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
         final IconCompat icon = Utils.createIconWithDrawable(drawable);
         final CharSequence title = mContext.getText(R.string.bluetooth_devices);
         final PendingIntent primaryActionIntent = PendingIntent.getActivity(mContext,
-                0 /* requestCode */, getIntent(), PendingIntent.FLAG_IMMUTABLE);
+                0 /* requestCode */, getIntent(), 0 /* flags */);
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryActionIntent, icon,
                 ListBuilder.ICON_IMAGE, title);
 
@@ -275,7 +274,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .setSourceMetricsCategory(SettingsEnums.BLUETOOTH_PAIRING)
                 .toIntent();
         final PendingIntent pi = PendingIntent.getActivity(mContext, intent.hashCode(), intent,
-                PendingIntent.FLAG_IMMUTABLE);
+                0 /* flags */);
         return SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE, title);
     }
 
@@ -342,8 +341,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
                 .putExtra(BLUETOOTH_DEVICE_HASH_CODE, bluetoothDevice.hashCode());
 
         return SliceAction.create(
-                PendingIntent.getBroadcast(mContext, bluetoothDevice.hashCode(), intent,
-                        PendingIntent.FLAG_IMMUTABLE),
+                PendingIntent.getBroadcast(mContext, bluetoothDevice.hashCode(), intent, 0),
                 getBluetoothDeviceIcon(bluetoothDevice),
                 ListBuilder.ICON_IMAGE,
                 bluetoothDevice.getName());

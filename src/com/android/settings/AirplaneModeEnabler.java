@@ -192,4 +192,3 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         return WirelessUtils.isAirplaneModeOn(mContext);
     }
 }
-

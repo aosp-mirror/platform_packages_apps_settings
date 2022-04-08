@@ -16,10 +16,8 @@
 
 package com.android.settings.notification.app;
 
-import android.app.people.IPeopleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.ServiceManager;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -35,14 +33,7 @@ public class ConversationListSettings extends DashboardFragment {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     NotificationBackend mBackend = new NotificationBackend();
-    IPeopleManager mPs;
-
     protected List<AbstractPreferenceController> mControllers = new ArrayList<>();
-
-    public ConversationListSettings() {
-        mPs = IPeopleManager.Stub.asInterface(
-                ServiceManager.getService(Context.PEOPLE_SERVICE));
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -62,10 +53,9 @@ public class ConversationListSettings extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mControllers = new ArrayList<>();
-        mControllers.add(new NoConversationsPreferenceController(context, mBackend, mPs));
+        mControllers.add(new NoConversationsPreferenceController(context, mBackend));
         mControllers.add(new PriorityConversationsPreferenceController(context, mBackend));
         mControllers.add(new AllConversationsPreferenceController(context, mBackend));
-        mControllers.add(new RecentConversationsPreferenceController(context, mBackend, mPs));
         return new ArrayList<>(mControllers);
     }
 }

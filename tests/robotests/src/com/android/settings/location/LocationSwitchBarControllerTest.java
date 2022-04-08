@@ -24,11 +24,11 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.widget.Switch;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -45,9 +45,9 @@ import org.robolectric.util.ReflectionHelpers;
 public class LocationSwitchBarControllerTest {
 
     @Mock
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
     @Mock
-    private Switch mSwitch;
+    private ToggleSwitch mSwitch;
     @Mock
     private LocationEnabler mEnabler;
 
@@ -132,22 +132,22 @@ public class LocationSwitchBarControllerTest {
     public void onLocationModeChanged_locationOn_shouldCheckSwitch() {
         doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
         doReturn(false).when(mEnabler).hasShareLocationRestriction(anyInt());
-        when(mSwitchBar.isChecked()).thenReturn(false);
+        when(mSwitch.isChecked()).thenReturn(false);
         doReturn(true).when(mEnabler).isEnabled(anyInt());
 
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
-        verify(mSwitchBar).setChecked(true);
+        verify(mSwitch).setChecked(true);
     }
 
     @Test
     public void onLocationModeChanged_locationOff_shouldUncheckSwitch() {
         doReturn(null).when(mEnabler).getShareLocationEnforcedAdmin(anyInt());
         doReturn(false).when(mEnabler).hasShareLocationRestriction(anyInt());
-        when(mSwitchBar.isChecked()).thenReturn(true);
+        when(mSwitch.isChecked()).thenReturn(true);
 
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_OFF, false);
 
-        verify(mSwitchBar).setChecked(false);
+        verify(mSwitch).setChecked(false);
     }
 }

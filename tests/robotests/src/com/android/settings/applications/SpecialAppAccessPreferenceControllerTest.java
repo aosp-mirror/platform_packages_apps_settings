@@ -93,7 +93,7 @@ public class SpecialAppAccessPreferenceControllerTest {
         entry.hasLauncherEntry = true;
         entry.info = new ApplicationInfo();
         entry.extraInfo = new AppStateDataUsageBridge.DataUsageState(
-                true /* allowlisted */, false /* denylisted */);
+                true /* whitelisted */, false /* blacklisted */);
         apps.add(entry);
         when(mSession.getAllApps()).thenReturn(apps);
 

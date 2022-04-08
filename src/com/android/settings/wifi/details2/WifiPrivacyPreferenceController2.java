@@ -28,6 +28,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.wifi.WifiDialog2;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -68,13 +69,12 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
     public void updateState(Preference preference) {
         final DropDownPreference dropDownPreference = (DropDownPreference) preference;
         final int randomizationLevel = getRandomizationValue();
-        final boolean isSelectable = mWifiEntry.canSetPrivacy();
-        preference.setSelectable(isSelectable);
         dropDownPreference.setValue(Integer.toString(randomizationLevel));
         updateSummary(dropDownPreference, randomizationLevel);
 
-        // If the preference cannot be selectable, display a temporary network in the summary.
-        if (!isSelectable) {
+        // Makes preference not selectable, when this is a ephemeral network.
+        if (!mWifiEntry.canSetPrivacy()) {
+            preference.setSelectable(false);
             dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
         }
     }

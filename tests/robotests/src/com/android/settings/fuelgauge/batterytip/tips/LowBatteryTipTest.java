@@ -36,7 +36,7 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class LowBatteryTipTest {
 
-    private static final CharSequence SUMMARY = "Turn on Battery Saver to extend battery life";
+    private static final CharSequence SUMMARY = "Only 15 minutes left";
 
     @Mock
     private MetricsFeatureProvider mMetricsFeatureProvider;
@@ -48,7 +48,8 @@ public class LowBatteryTipTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mLowBatteryTip = new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */);
+        mLowBatteryTip = new LowBatteryTip(BatteryTip.StateType.NEW, false /* powerSaveModeOn */,
+                SUMMARY);
     }
 
     @Test
@@ -64,10 +65,10 @@ public class LowBatteryTipTest {
     }
 
     @Test
-    public void getSummary_tipNew_showTitle() {
-        mLowBatteryTip.mState = BatteryTip.StateType.NEW;
+    public void getSummary_tipHandled_showSummary() {
+        mLowBatteryTip.mState = BatteryTip.StateType.HANDLED;
 
-        assertThat(mLowBatteryTip.getTitle(mContext)).isEqualTo("Battery level low");
+        assertThat(mLowBatteryTip.getSummary(mContext)).isEqualTo("Some features may be limited");
     }
 
     @Test

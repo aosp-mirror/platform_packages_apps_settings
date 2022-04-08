@@ -19,7 +19,6 @@ package com.android.settings.network.telephony;
 import static android.telephony.SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
 
 import android.content.Context;
-import android.telephony.AccessNetworkConstants.AccessNetworkType;
 import android.telephony.CellIdentity;
 import android.telephony.CellIdentityGsm;
 import android.telephony.CellIdentityLte;
@@ -38,7 +37,6 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
-import com.android.internal.telephony.OperatorInfo;
 import com.android.settings.R;
 
 import java.util.List;
@@ -106,19 +104,12 @@ public class NetworkOperatorPreference extends Preference {
     }
 
     /**
-     * Return true when this preference is for forbidden network
-     */
-    public boolean isForbiddenNetwork() {
-        return ((mForbiddenPlmns != null) && mForbiddenPlmns.contains(getOperatorNumeric()));
-    }
-
-    /**
      * Refresh the NetworkOperatorPreference by updating the title and the icon.
      */
     public void refresh() {
         String networkTitle = getOperatorName();
 
-        if (isForbiddenNetwork()) {
+        if ((mForbiddenPlmns != null) && mForbiddenPlmns.contains(getOperatorNumeric())) {
             if (DBG) Log.d(TAG, "refresh forbidden network: " + networkTitle);
             networkTitle += " "
                     + getContext().getResources().getString(R.string.forbidden_network);
@@ -134,8 +125,10 @@ public class NetworkOperatorPreference extends Preference {
         final CellSignalStrength signalStrength = getCellSignalStrength(mCellInfo);
         final int level = signalStrength != null ? signalStrength.getLevel() : LEVEL_NONE;
         if (DBG) Log.d(TAG, "refresh level: " + String.valueOf(level));
-        mLevel = level;
-        updateIcon(mLevel);
+        if (mLevel != level) {
+            mLevel = level;
+            updateIcon(mLevel);
+        }
     }
 
     /**
@@ -182,15 +175,6 @@ public class NetworkOperatorPreference extends Preference {
         return CellInfoUtil.getNetworkTitle(mCellId, getOperatorNumeric());
     }
 
-    /**
-     * Operator info of this cell
-     */
-    public OperatorInfo getOperatorInfo() {
-        return new OperatorInfo(Objects.toString(mCellId.getOperatorAlphaLong(), ""),
-                Objects.toString(mCellId.getOperatorAlphaShort(), ""),
-                getOperatorNumeric(), getAccessNetworkTypeFromCellInfo(mCellInfo));
-    }
-
     private int getIconIdForCell(CellInfo ci) {
         if (ci instanceof CellInfoGsm) {
             return R.drawable.signal_strength_g;
@@ -231,25 +215,6 @@ public class NetworkOperatorPreference extends Preference {
             return ((CellInfoNr) ci).getCellSignalStrength();
         }
         return null;
-    }
-
-    private int getAccessNetworkTypeFromCellInfo(CellInfo ci) {
-        if (ci instanceof CellInfoGsm) {
-            return AccessNetworkType.GERAN;
-        }
-        if (ci instanceof CellInfoCdma) {
-            return AccessNetworkType.CDMA2000;
-        }
-        if ((ci instanceof CellInfoWcdma) || (ci instanceof CellInfoTdscdma)) {
-            return AccessNetworkType.UTRAN;
-        }
-        if (ci instanceof CellInfoLte) {
-            return AccessNetworkType.EUTRAN;
-        }
-        if (ci instanceof CellInfoNr) {
-            return AccessNetworkType.NGRAN;
-        }
-        return AccessNetworkType.UNKNOWN;
     }
 
     private void updateIcon(int level) {

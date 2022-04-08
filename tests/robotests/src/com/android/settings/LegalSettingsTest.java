@@ -46,6 +46,6 @@ public class LegalSettingsTest {
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.about_legal);
 
-        assertThat(keys).containsAtLeastElementsIn(niks);
+        assertThat(keys).containsAllIn(niks);
     }
 }

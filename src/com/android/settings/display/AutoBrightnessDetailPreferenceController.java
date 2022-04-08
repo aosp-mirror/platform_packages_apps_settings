@@ -17,18 +17,8 @@
 package com.android.settings.display;
 
 import android.content.Context;
-import android.widget.Switch;
 
-import androidx.preference.PreferenceScreen;
-
-import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
-
-/**
- * Controller that updates the adaptive brightness.
- */
-public class AutoBrightnessDetailPreferenceController extends
-        AutoBrightnessPreferenceController implements OnMainSwitchChangeListener {
+public class AutoBrightnessDetailPreferenceController extends AutoBrightnessPreferenceController {
 
     public AutoBrightnessDetailPreferenceController(Context context, String key) {
         super(context, key);
@@ -45,22 +35,5 @@ public class AutoBrightnessDetailPreferenceController extends
     @Override
     public boolean isPublicSlice() {
         return true;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        SettingsMainSwitchPreference pref = (SettingsMainSwitchPreference) screen.findPreference(
-                getPreferenceKey());
-        pref.addOnSwitchChangeListener(this);
-        pref.setChecked(isChecked());
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (isChecked != isChecked()) {
-            setChecked(isChecked);
-        }
     }
 }

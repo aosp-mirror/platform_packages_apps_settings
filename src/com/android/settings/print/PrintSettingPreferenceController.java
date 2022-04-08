@@ -60,7 +60,6 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
     @Override
     public int getAvailabilityStatus() {
         return mPackageManager.hasSystemFeature(PackageManager.FEATURE_PRINTING)
-                && mPrintManager != null
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
@@ -72,16 +71,12 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
 
     @Override
     public void onStart() {
-        if (mPrintManager != null) {
-            mPrintManager.addPrintJobStateChangeListener(this);
-        }
+        mPrintManager.addPrintJobStateChangeListener(this);
     }
 
     @Override
     public void onStop() {
-        if (mPrintManager != null) {
-            mPrintManager.removePrintJobStateChangeListener(this);
-        }
+        mPrintManager.removePrintJobStateChangeListener(this);
     }
 
     @Override

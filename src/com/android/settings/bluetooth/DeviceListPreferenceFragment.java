@@ -229,18 +229,14 @@ public abstract class DeviceListPreferenceFragment extends
     @VisibleForTesting
     void enableScanning() {
         // BluetoothAdapter already handles repeated scan requests
-        if (!mScanEnabled) {
-            startScanning();
-            mScanEnabled = true;
-        }
+        startScanning();
+        mScanEnabled = true;
     }
 
     @VisibleForTesting
     void disableScanning() {
-        if (mScanEnabled) {
-            stopScanning();
-            mScanEnabled = false;
-        }
+        stopScanning();
+        mScanEnabled = false;
     }
 
     @Override

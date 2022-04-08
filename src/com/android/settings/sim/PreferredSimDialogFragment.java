@@ -23,7 +23,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +30,6 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
-import com.android.settings.network.SubscriptionUtil;
 
 /**
  * Presents a dialog asking the user if they want to update all services to use a given "preferred"
@@ -82,20 +80,13 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
     }
 
     private void updateDialog(AlertDialog dialog) {
-        Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
-
         final SubscriptionInfo info = getPreferredSubscription();
-        if (mWasDismissed) {
-            return;
-        }
         if (info == null) {
             dismiss();
             return;
         }
         final String message =
-                getContext().getString(
-                        R.string.sim_preferred_message,
-                        SubscriptionUtil.getUniqueSubscriptionDisplayName(info, getContext()));
+                getContext().getString(R.string.sim_preferred_message, info.getDisplayName());
         dialog.setMessage(message);
     }
 

@@ -16,11 +16,7 @@
 package com.android.settings.connecteddevice;
 
 import android.app.settings.SettingsEnums;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.os.Bundle;
-
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -35,9 +31,6 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
 
     private static final String TAG = "PreConnectedDeviceFrag";
     static final String KEY_PREVIOUSLY_CONNECTED_DEVICES = "saved_device_list";
-
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
 
     @Override
     public int getHelpResource() {
@@ -60,29 +53,9 @@ public class PreviouslyConnectedDeviceDashboardFragment extends DashboardFragmen
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         use(SavedDeviceGroupController.class).init(this);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        enableBluetoothIfNecessary();
-    }
-
-    @VisibleForTesting
-    void enableBluetoothIfNecessary() {
-        if (mBluetoothAdapter != null && !mBluetoothAdapter.isEnabled()) {
-            mBluetoothAdapter.enable();
-        }
     }
 
     /**

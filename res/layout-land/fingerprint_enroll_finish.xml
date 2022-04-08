@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<com.google.android.setupdesign.GlifLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/setup_wizard_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout="@layout/sud_glif_blank_template"
+    style="?attr/fingerprint_layout_theme">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            style="@style/SudContentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:clipChildren="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/sud_layout_icon"
+                    style="@style/SudGlifIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="?attr/sudGlifHeaderGravity"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_fingerprint_header"/>
+
+                <TextView
+                    android:id="@+id/suc_layout_title"
+                    style="@style/SudGlifHeaderTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"/>
+
+                <TextView
+                    android:id="@+id/sud_layout_description"
+                    style="@style/SudDescription.Glif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
+
+            </LinearLayout>
+
+            <com.google.android.setupdesign.view.FillContentLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/fingerprint_in_app_indicator"
+                    style="@style/SudContentIllustration"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@android:string/fingerprint_icon_content_description"
+                    android:src="@drawable/fingerprint_enroll_finish" />
+
+            </com.google.android.setupdesign.view.FillContentLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</com.google.android.setupdesign.GlifLayout>

@@ -61,11 +61,6 @@ public class MinImportancePreferenceController extends NotificationPreferenceCon
     }
 
     @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE);
-    }
-
-    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mChannel != null) {
             preference.setEnabled(mAdmin == null && !mChannel.isImportanceLockedByOEM());

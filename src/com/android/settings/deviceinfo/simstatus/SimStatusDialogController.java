@@ -16,8 +16,6 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static androidx.lifecycle.Lifecycle.Event;
-
 import android.annotation.Nullable;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -38,12 +36,12 @@ import android.telephony.CellBroadcastIntents;
 import android.telephony.CellBroadcastService;
 import android.telephony.CellSignalStrength;
 import android.telephony.ICellBroadcastService;
+import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
@@ -56,23 +54,21 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-/**
- * Controller for Sim Status information within the About Phone Settings page.
- */
-public class SimStatusDialogController implements LifecycleObserver {
+public class SimStatusDialogController implements LifecycleObserver, OnResume, OnPause {
 
     private final static String TAG = "SimStatusDialogCtrl";
 
@@ -144,7 +140,6 @@ public class SimStatusDialogController implements LifecycleObserver {
 
     private SubscriptionInfo mSubscriptionInfo;
     private TelephonyDisplayInfo mTelephonyDisplayInfo;
-    private ServiceState mPreviousServiceState;
 
     private final int mSlotIndex;
     private TelephonyManager mTelephonyManager;
@@ -157,7 +152,6 @@ public class SimStatusDialogController implements LifecycleObserver {
     private final Context mContext;
 
     private boolean mShowLatestAreaInfo;
-    private boolean mIsRegisteredListener = false;
 
     private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
@@ -170,8 +164,7 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
     };
 
-    @VisibleForTesting
-    protected SimStatusDialogTelephonyCallback mTelephonyCallback;
+    private PhoneStateListener mPhoneStateListener;
 
     private CellBroadcastServiceConnection mCellBroadcastServiceConnection;
 
@@ -234,9 +227,8 @@ public class SimStatusDialogController implements LifecycleObserver {
         if (mSubscriptionInfo == null) {
             return;
         }
-        mTelephonyManager =
-            mTelephonyManager.createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
-        mTelephonyCallback = new SimStatusDialogTelephonyCallback();
+
+        mPhoneStateListener = getPhoneStateListener();
         updateLatestAreaInfo();
         updateSubscriptionStatus();
     }
@@ -244,8 +236,6 @@ public class SimStatusDialogController implements LifecycleObserver {
     private void updateSubscriptionStatus() {
         updateNetworkProvider();
 
-        // getServiceState() may return null when the subscription is inactive
-        // or when there was an error communicating with the phone process.
         final ServiceState serviceState = mTelephonyManager.getServiceState();
         final SignalStrength signalStrength = mTelephonyManager.getSignalStrength();
 
@@ -271,17 +261,18 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
     }
 
-    /**
-     * OnResume lifecycle event, resume listening for phone state or subscription changes.
-     */
-    @OnLifecycleEvent(Event.ON_RESUME)
+    @Override
     public void onResume() {
         if (mSubscriptionInfo == null) {
             return;
         }
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(
                 mSubscriptionInfo.getSubscriptionId());
-        mTelephonyManager.registerTelephonyCallback(mContext.getMainExecutor(), mTelephonyCallback);
+        mTelephonyManager.listen(mPhoneStateListener,
+                PhoneStateListener.LISTEN_DATA_CONNECTION_STATE
+                        | PhoneStateListener.LISTEN_SIGNAL_STRENGTHS
+                        | PhoneStateListener.LISTEN_SERVICE_STATE
+                        | PhoneStateListener.LISTEN_DISPLAY_INFO_CHANGED);
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mOnSubscriptionsChangedListener);
         registerImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
@@ -291,31 +282,17 @@ public class SimStatusDialogController implements LifecycleObserver {
             mContext.registerReceiver(mAreaInfoReceiver,
                     new IntentFilter(CellBroadcastIntents.ACTION_AREA_INFO_UPDATED));
         }
-
-        mIsRegisteredListener = true;
     }
 
-    /**
-     * onPause lifecycle event, no longer listen for phone state or subscription changes.
-     */
-    @OnLifecycleEvent(Event.ON_PAUSE)
+    @Override
     public void onPause() {
         if (mSubscriptionInfo == null) {
-            if (mIsRegisteredListener) {
-                mSubscriptionManager.removeOnSubscriptionsChangedListener(
-                        mOnSubscriptionsChangedListener);
-                mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
-                if (mShowLatestAreaInfo) {
-                    mContext.unregisterReceiver(mAreaInfoReceiver);
-                }
-                mIsRegisteredListener = false;
-            }
             return;
         }
 
         unregisterImsRegistrationCallback(mSubscriptionInfo.getSubscriptionId());
         mSubscriptionManager.removeOnSubscriptionsChangedListener(mOnSubscriptionsChangedListener);
-        mTelephonyManager.unregisterTelephonyCallback(mTelephonyCallback);
+        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
 
         if (mShowLatestAreaInfo) {
             mContext.unregisterReceiver(mAreaInfoReceiver);
@@ -328,8 +305,7 @@ public class SimStatusDialogController implements LifecycleObserver {
         mDialog.setText(NETWORK_PROVIDER_VALUE_ID, carrierName);
     }
 
-    @VisibleForTesting
-    protected void updatePhoneNumber() {
+    private void updatePhoneNumber() {
         // If formattedNumber is null or empty, it'll display as "Unknown".
         mDialog.setText(PHONE_NUMBER_VALUE_ID,
                 DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext, mSubscriptionInfo));
@@ -449,9 +425,6 @@ public class SimStatusDialogController implements LifecycleObserver {
         final int state = Utils.getCombinedServiceState(serviceState);
         if (!Utils.isInService(serviceState)) {
             resetSignalStrength();
-        } else if (!Utils.isInService(mPreviousServiceState)) {
-            // If ServiceState changed from out of service -> in service, update signal strength.
-            updateSignalStrength(mTelephonyManager.getSignalStrength());
         }
 
         String serviceStateValue;
@@ -499,7 +472,7 @@ public class SimStatusDialogController implements LifecycleObserver {
         }
 
         ServiceState serviceState = mTelephonyManager.getServiceState();
-        if (!Utils.isInService(serviceState)) {
+        if (serviceState == null || !Utils.isInService(serviceState)) {
             return;
         }
 
@@ -549,11 +522,8 @@ public class SimStatusDialogController implements LifecycleObserver {
             voiceNetworkTypeName = getNetworkTypeName(actualVoiceNetworkType);
         }
 
-        final boolean isOverrideNwTypeNrAdvancedOrNsa =
-                overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_ADVANCED
-                        || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA;
-        if (actualDataNetworkType == TelephonyManager.NETWORK_TYPE_LTE
-                && isOverrideNwTypeNrAdvancedOrNsa) {
+        if (overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE
+                || overrideNetworkType == TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NR_NSA) {
             dataNetworkTypeName = "NR NSA";
         }
 
@@ -578,10 +548,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     private void updateRoamingStatus(ServiceState serviceState) {
-        // If the serviceState is null, we assume that roaming is disabled.
-        if (serviceState == null) {
-            mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_unknown));
-        } else if (serviceState.getRoaming()) {
+        if (serviceState.getRoaming()) {
             mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_roaming_in));
         } else {
             mDialog.setText(ROAMING_INFO_VALUE_ID, mRes.getString(R.string.radioInfo_roaming_not));
@@ -609,7 +576,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    protected void requestForUpdateEid() {
+    void requestForUpdateEid() {
         ThreadUtils.postOnBackgroundThread(() -> {
             final AtomicReference<String> eid = getEid(mSlotIndex);
             ThreadUtils.postOnMainThread(() -> updateEid(eid));
@@ -617,7 +584,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    protected AtomicReference<String> getEid(int slotIndex) {
+    AtomicReference<String> getEid(int slotIndex) {
         boolean shouldHaveEid = false;
         String eid = null;
         if (mTelephonyManager.getActiveModemCount() > MAX_PHONE_COUNT_SINGLE_SIM) {
@@ -655,7 +622,7 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    protected void updateEid(AtomicReference<String> eid) {
+    void updateEid(AtomicReference<String> eid) {
         if (eid == null) {
             mDialog.removeSettingFromScreen(EID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(EID_INFO_VALUE_ID);
@@ -770,35 +737,32 @@ public class SimStatusDialogController implements LifecycleObserver {
     }
 
     @VisibleForTesting
-    class SimStatusDialogTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.DataConnectionStateListener,
-            TelephonyCallback.SignalStrengthsListener,
-            TelephonyCallback.ServiceStateListener,
-            TelephonyCallback.DisplayInfoListener {
-        @Override
-        public void onDataConnectionStateChanged(int state, int networkType) {
-            updateDataState(state);
-            updateNetworkType();
-        }
+    PhoneStateListener getPhoneStateListener() {
+        return new PhoneStateListener() {
+            @Override
+            public void onDataConnectionStateChanged(int state) {
+                updateDataState(state);
+                updateNetworkType();
+            }
 
-        @Override
-        public void onSignalStrengthsChanged(SignalStrength signalStrength) {
-            updateSignalStrength(signalStrength);
-        }
+            @Override
+            public void onSignalStrengthsChanged(SignalStrength signalStrength) {
+                updateSignalStrength(signalStrength);
+            }
 
-        @Override
-        public void onServiceStateChanged(ServiceState serviceState) {
-            updateNetworkProvider();
-            updateServiceState(serviceState);
-            updateRoamingStatus(serviceState);
-            mPreviousServiceState = serviceState;
-        }
+            @Override
+            public void onServiceStateChanged(ServiceState serviceState) {
+                updateNetworkProvider();
+                updateServiceState(serviceState);
+                updateRoamingStatus(serviceState);
+            }
 
-        @Override
-        public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
-            mTelephonyDisplayInfo = displayInfo;
-            updateNetworkType();
-        }
+            @Override
+            public void onDisplayInfoChanged(@NonNull TelephonyDisplayInfo displayInfo) {
+                mTelephonyDisplayInfo = displayInfo;
+                updateNetworkType();
+            }
+        };
     }
 
     @VisibleForTesting

@@ -16,24 +16,15 @@
 
 package com.android.settings.wifi;
 
-import static com.android.settings.wifi.WifiUtils.getWifiEntrySecurity;
-
-import static java.util.stream.Collectors.toList;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager.NetworkRequestMatchCallback;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Process;
-import android.os.SimpleClock;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,13 +41,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.preference.internal.PreferenceImageView;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
-import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiPickerTracker;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
-import java.time.Clock;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,9 +56,7 @@ import java.util.List;
  * happens, {@link NetworkRequestErrorDialogFragment} will be called to display error message.
  */
 public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragment implements
-        DialogInterface.OnClickListener, WifiPickerTracker.WifiPickerTrackerCallback {
-
-    private static final String TAG = "NetworkRequestDialogFragment";
+        DialogInterface.OnClickListener{
 
     /**
      * Spec defines there should be 5 wifi ap on the list at most or just show all if {@code
@@ -77,48 +65,15 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
     private static final int MAX_NUMBER_LIST_ITEM = 5;
     private boolean mShowLimitedItem = true;
 
-    @VisibleForTesting List<WifiEntry> mFilteredWifiEntries = new ArrayList<>();
-    @VisibleForTesting List<ScanResult> mMatchedScanResults = new ArrayList<>();
-    private WifiEntryAdapter mDialogAdapter;
+    private List<AccessPoint> mAccessPointList;
+    @VisibleForTesting
+    FilterWifiTracker mFilterWifiTracker;
+    private AccessPointAdapter mDialogAdapter;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
-
-    @VisibleForTesting WifiPickerTracker mWifiPickerTracker;
-    // Worker thread used for WifiPickerTracker work.
-    private HandlerThread mWorkerThread;
-    // Max age of tracked WifiEntries.
-    private static final long MAX_SCAN_AGE_MILLIS = 15_000;
-    // Interval between initiating WifiPickerTracker scans.
-    private static final long SCAN_INTERVAL_MILLIS = 10_000;
 
     public static NetworkRequestDialogFragment newInstance() {
         NetworkRequestDialogFragment dialogFragment = new NetworkRequestDialogFragment();
         return dialogFragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mWorkerThread = new HandlerThread(
-                TAG + "{" + Integer.toHexString(System.identityHashCode(this)) + "}",
-                Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        final Clock elapsedRealtimeClock = new SimpleClock(ZoneOffset.UTC) {
-            @Override
-            public long millis() {
-                return SystemClock.elapsedRealtime();
-            }
-        };
-        final Context context = getContext();
-        mWifiPickerTracker = FeatureFactory.getFactory(context)
-                .getWifiTrackerLibProvider()
-                .createWifiPickerTracker(getSettingsLifecycle(), context,
-                        new Handler(Looper.getMainLooper()),
-                        mWorkerThread.getThreadHandler(),
-                        elapsedRealtimeClock,
-                        MAX_SCAN_AGE_MILLIS,
-                        SCAN_INTERVAL_MILLIS,
-                        this);
     }
 
     @Override
@@ -139,8 +94,8 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         progressBar.setVisibility(View.VISIBLE);
 
         // Prepares adapter.
-        mDialogAdapter = new WifiEntryAdapter(context,
-                R.layout.preference_access_point, mFilteredWifiEntries);
+        mDialogAdapter = new AccessPointAdapter(context,
+                R.layout.preference_access_point, getAccessPointList());
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCustomTitle(customTitle)
@@ -152,8 +107,9 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
         // Clicking list item is to connect wifi ap.
         final AlertDialog dialog = builder.create();
-        dialog.getListView().setOnItemClickListener(
-                (parent, view, position, id) -> this.onClick(dialog, position));
+        dialog.getListView()
+                .setOnItemClickListener(
+                        (parent, view, position, id) -> this.onClick(dialog, position));
 
         // Don't dismiss dialog when touching outside. User reports it is easy to touch outside.
         // This causes dialog to close.
@@ -165,12 +121,21 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             neutralBtn.setVisibility(View.GONE);
             neutralBtn.setOnClickListener(v -> {
                 mShowLimitedItem = false;
-                updateWifiEntries();
-                updateUi();
+                renewAccessPointList(null /* scanResults */);
+                notifyAdapterRefresh();
                 neutralBtn.setVisibility(View.GONE);
             });
         });
         return dialog;
+    }
+
+    @NonNull
+    List<AccessPoint> getAccessPointList() {
+        // Initials list for adapter, in case of display crashing.
+        if (mAccessPointList == null) {
+            mAccessPointList = new ArrayList<>();
+        }
+        return mAccessPointList;
     }
 
     private BaseAdapter getDialogAdapter() {
@@ -179,35 +144,53 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (mFilteredWifiEntries.size() == 0 || which >= mFilteredWifiEntries.size()) {
+        final List<AccessPoint> accessPointList = getAccessPointList();
+        if (accessPointList.size() == 0) {
             return;  // Invalid values.
         }
         if (mUserSelectionCallback == null) {
             return; // Callback is missing or not ready.
         }
 
-        final WifiEntry wifiEntry = mFilteredWifiEntries.get(which);
-        WifiConfiguration config = wifiEntry.getWifiConfiguration();
-        if (config == null) {
-            config = WifiUtils.getWifiConfig(wifiEntry, null /* scanResult */);
+        if (which < accessPointList.size()) {
+            final AccessPoint selectedAccessPoint = accessPointList.get(which);
+            WifiConfiguration wifiConfig = selectedAccessPoint.getConfig();
+            if (wifiConfig == null) {
+                wifiConfig = WifiUtils.getWifiConfig(selectedAccessPoint, /* scanResult */
+                        null, /* password */ null);
+            }
+
+            if (wifiConfig != null) {
+                mUserSelectionCallback.select(wifiConfig);
+            }
         }
-        mUserSelectionCallback.select(config);
     }
 
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
-
         if (mUserSelectionCallback != null) {
             mUserSelectionCallback.reject();
         }
     }
 
     @Override
-    public void onDestroy() {
-        mWorkerThread.quit();
+    public void onPause() {
+        super.onPause();
 
+        if (mFilterWifiTracker != null) {
+            mFilterWifiTracker.onPause();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
+
+        if (mFilterWifiTracker != null) {
+            mFilterWifiTracker.onDestroy();
+            mFilterWifiTracker = null;
+        }
     }
 
     private void showAllButton() {
@@ -234,65 +217,22 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
         }
     }
 
-    /** Called when the state of Wifi has changed. */
     @Override
-    public void onWifiStateChanged() {
-        if (mMatchedScanResults.size() == 0) {
-            return;
+    public void onResume() {
+        super.onResume();
+
+        if (mFilterWifiTracker == null) {
+            mFilterWifiTracker = new FilterWifiTracker(getContext(), getSettingsLifecycle());
         }
-        updateWifiEntries();
-        updateUi();
+        mFilterWifiTracker.onResume();
     }
 
-    /**
-     * Update the results when data changes
-     */
-    @Override
-    public void onWifiEntriesChanged() {
-        if (mMatchedScanResults.size() == 0) {
-            return;
-        }
-        updateWifiEntries();
-        updateUi();
-    }
-
-    @Override
-    public void onNumSavedSubscriptionsChanged() {
-        // Do nothing.
-    }
-
-    @Override
-    public void onNumSavedNetworksChanged() {
-        // Do nothing.
-    }
-
-    @VisibleForTesting
-    void updateWifiEntries() {
-        final List<WifiEntry> wifiEntries = new ArrayList<>();
-        if (mWifiPickerTracker.getConnectedWifiEntry() != null) {
-            wifiEntries.add(mWifiPickerTracker.getConnectedWifiEntry());
-        }
-        wifiEntries.addAll(mWifiPickerTracker.getWifiEntries());
-
-        mFilteredWifiEntries.clear();
-        mFilteredWifiEntries.addAll(wifiEntries.stream().filter(entry -> {
-            for (ScanResult matchedScanResult : mMatchedScanResults) {
-                if (TextUtils.equals(entry.getSsid(), matchedScanResult.SSID)
-                        && entry.getSecurity() == getWifiEntrySecurity(matchedScanResult)) {
-                    return true;
-                }
-            }
-            return false;
-        }).limit(mShowLimitedItem ? MAX_NUMBER_LIST_ITEM : Long.MAX_VALUE)
-                .collect(toList()));
-    }
-
-    private class WifiEntryAdapter extends ArrayAdapter<WifiEntry> {
+    private class AccessPointAdapter extends ArrayAdapter<AccessPoint> {
 
         private final int mResourceId;
         private final LayoutInflater mInflater;
 
-        WifiEntryAdapter(Context context, int resourceId, List<WifiEntry> objects) {
+        public AccessPointAdapter(Context context, int resourceId, List<AccessPoint> objects) {
             super(context, resourceId, objects);
             mResourceId = resourceId;
             mInflater = LayoutInflater.from(context);
@@ -308,18 +248,18 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
                 divider.setVisibility(View.GONE);
             }
 
-            final WifiEntry wifiEntry = getItem(position);
+            final AccessPoint accessPoint = getItem(position);
 
             final TextView titleView = view.findViewById(android.R.id.title);
             if (titleView != null) {
                 // Shows whole SSID for better UX.
                 titleView.setSingleLine(false);
-                titleView.setText(wifiEntry.getTitle());
+                titleView.setText(accessPoint.getTitle());
             }
 
             final TextView summary = view.findViewById(android.R.id.summary);
             if (summary != null) {
-                final String summaryString = wifiEntry.getSummary();
+                final String summaryString = accessPoint.getSettingsSummary();
                 if (TextUtils.isEmpty(summaryString)) {
                     summary.setVisibility(View.GONE);
                 } else {
@@ -329,7 +269,7 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
             }
 
             final PreferenceImageView imageView = view.findViewById(android.R.id.icon);
-            final int level = wifiEntry.getLevel();
+            final int level = accessPoint.getLevel();
             if (imageView != null) {
                 final Drawable drawable = getContext().getDrawable(
                         Utils.getWifiIconResource(level));
@@ -350,23 +290,137 @@ public class NetworkRequestDialogFragment extends NetworkRequestDialogBaseFragme
 
     @Override
     public void onMatch(List<ScanResult> scanResults) {
-        mMatchedScanResults = scanResults;
-        updateWifiEntries();
-        updateUi();
+        // Shouldn't need to renew cached list, since input result is empty.
+        if (scanResults != null && scanResults.size() > 0) {
+            renewAccessPointList(scanResults);
+
+            notifyAdapterRefresh();
+        }
+    }
+
+    // Updates internal AccessPoint list from WifiTracker. scanResults are used to update key list
+    // of AccessPoint, and could be null if there is no necessary to update key list.
+    private void renewAccessPointList(List<ScanResult> scanResults) {
+        if (mFilterWifiTracker == null) {
+            return;
+        }
+
+        // TODO(b/119846365): Checks if we could escalate the converting effort.
+        // Updates keys of scanResults into FilterWifiTracker for updating matched AccessPoints.
+        if (scanResults != null) {
+            mFilterWifiTracker.updateKeys(scanResults);
+        }
+
+        // Re-gets matched AccessPoints from WifiTracker.
+        final List<AccessPoint> list = getAccessPointList();
+        list.clear();
+        list.addAll(mFilterWifiTracker.getAccessPoints());
     }
 
     @VisibleForTesting
-    void updateUi() {
-        // Update related UI buttons
-        if (mShowLimitedItem && mFilteredWifiEntries.size() >= MAX_NUMBER_LIST_ITEM) {
-            showAllButton();
-        }
-        if (mFilteredWifiEntries.size() > 0) {
-            hideProgressIcon();
-        }
-
+    void notifyAdapterRefresh() {
         if (getDialogAdapter() != null) {
             getDialogAdapter().notifyDataSetChanged();
+        }
+    }
+
+    @VisibleForTesting
+    final class FilterWifiTracker {
+        private final List<String> mAccessPointKeys;
+        private final WifiTracker mWifiTracker;
+        private final Context mContext;
+
+        public FilterWifiTracker(Context context, Lifecycle lifecycle) {
+            mWifiTracker = WifiTrackerFactory.create(context, mWifiListener,
+                    lifecycle, /* includeSaved */ true, /* includeScans */ true);
+            mAccessPointKeys = new ArrayList<>();
+            mContext = context;
+        }
+
+        /**
+         * Updates key list from input. {@code onMatch()} may be called in multi-times according
+         * wifi scanning result, so needs patchwork here.
+         */
+        public void updateKeys(List<ScanResult> scanResults) {
+            for (ScanResult scanResult : scanResults) {
+                final String key = AccessPoint.getKey(mContext, scanResult);
+                if (!mAccessPointKeys.contains(key)) {
+                    mAccessPointKeys.add(key);
+                }
+            }
+        }
+
+        /**
+         * Returns only AccessPoints whose key is in {@code mAccessPointKeys}.
+         *
+         * @return List of matched AccessPoints.
+         */
+        public List<AccessPoint> getAccessPoints() {
+            final List<AccessPoint> allAccessPoints = mWifiTracker.getAccessPoints();
+            final List<AccessPoint> result = new ArrayList<>();
+
+            // The order should be kept, because order means wifi score (sorting in WifiTracker).
+            int count = 0;
+            for (AccessPoint accessPoint : allAccessPoints) {
+                final String key = accessPoint.getKey();
+                if (mAccessPointKeys.contains(key)) {
+                    result.add(accessPoint);
+
+                    count++;
+                    // Limits how many count of items could show.
+                    if (mShowLimitedItem && count >= MAX_NUMBER_LIST_ITEM) {
+                        break;
+                    }
+                }
+            }
+
+            // Update related UI buttons
+            if (mShowLimitedItem && (count >= MAX_NUMBER_LIST_ITEM)) {
+                showAllButton();
+            }
+            if (count > 0) {
+                hideProgressIcon();
+            }
+
+            return result;
+        }
+
+        @VisibleForTesting
+        WifiTracker.WifiListener mWifiListener = new WifiTracker.WifiListener() {
+
+            @Override
+            public void onWifiStateChanged(int state) {
+                notifyAdapterRefresh();
+            }
+
+            @Override
+            public void onConnectedChanged() {
+                notifyAdapterRefresh();
+            }
+
+            @Override
+            public void onAccessPointsChanged() {
+                renewAccessPointList(null /* scanResults */);
+                notifyAdapterRefresh();
+            }
+        };
+
+        public void onDestroy() {
+            if (mWifiTracker != null) {
+                mWifiTracker.onDestroy();
+            }
+        }
+
+        public void onResume() {
+            if (mWifiTracker != null) {
+                mWifiTracker.onStart();
+            }
+        }
+
+        public void onPause() {
+            if (mWifiTracker != null) {
+                mWifiTracker.onStop();
+            }
         }
     }
 }

@@ -88,6 +88,6 @@ public class CurrentDreamPreferenceController extends BasePreferenceController {
         }
         final GearPreference gearPref = (GearPreference) preference;
         gearPref.setIconSize(RestrictedPreference.ICON_SIZE_SMALL);
-        gearPref.setIcon(Utils.getSafeIcon(mBackend.getActiveIcon()));
+        Utils.setSafeIcon(gearPref, mBackend.getActiveIcon());
     }
 }

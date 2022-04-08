@@ -29,7 +29,6 @@ import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.telephony.ims.ImsManager;
 import android.telephony.ims.ImsMmTelManager;
@@ -56,15 +55,14 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
-import com.android.settings.widget.SettingsMainSwitchBar;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settings.widget.SwitchBar;
 
 /**
  * This is the inner class of {@link WifiCallingSettings} fragment.
  * The preference screen lets you enable/disable Wi-Fi Calling and change Wi-Fi Calling mode.
  */
 public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener,
+        implements SwitchBar.OnSwitchChangeListener,
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiCallingForSub";
 
@@ -87,7 +85,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     public static final int LAUCH_APP_UPDATE = 1;
 
     //UI objects
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
+    private Switch mSwitch;
     private ListWithEntrySummaryPreference mButtonWfcMode;
     private ListWithEntrySummaryPreference mButtonWfcRoamingMode;
     private Preference mUpdateAddress;
@@ -103,10 +102,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     private ProvisioningManager mProvisioningManager;
     private TelephonyManager mTelephonyManager;
 
-    private final PhoneTelephonyCallback mTelephonyCallback = new PhoneTelephonyCallback();
-
-    private class PhoneTelephonyCallback extends TelephonyCallback implements
-            TelephonyCallback.CallStateListener {
+    private final PhoneStateListener mPhoneStateListener = new PhoneStateListener() {
         /*
          * Enable/disable controls when in/out of a call and depending on
          * TTY mode and TTY support over VoLTE.
@@ -114,7 +110,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
          * java.lang.String)
          */
         @Override
-        public void onCallStateChanged(int state) {
+        public void onCallStateChanged(int state, String incomingNumber) {
             final SettingsActivity activity = (SettingsActivity) getActivity();
             final boolean isNonTtyOrTtyOnVolteEnabled =
                     queryImsState(WifiCallingSettingsForSub.this.mSubId).isAllowUserControl();
@@ -153,7 +149,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                         && isCallStateIdle);
             }
         }
-    }
+    };
 
     /*
      * Launch carrier emergency address managemnent activity
@@ -194,6 +190,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         mSwitchBar = getView().findViewById(R.id.switch_bar);
         mSwitchBar.show();
+        mSwitch = mSwitchBar.getSwitch();
     }
 
     @Override
@@ -299,7 +296,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         mButtonWfcMode = findPreference(BUTTON_WFC_MODE);
         mButtonWfcMode.setOnPreferenceChangeListener(this);
 
-        mButtonWfcRoamingMode = findPreference(BUTTON_WFC_ROAMING_MODE);
+        mButtonWfcRoamingMode =  findPreference(BUTTON_WFC_ROAMING_MODE);
         mButtonWfcRoamingMode.setOnPreferenceChangeListener(this);
 
         mUpdateAddress = findPreference(PREFERENCE_EMERGENCY_ADDRESS);
@@ -402,11 +399,11 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                     res.getStringArray(R.array.wifi_calling_mode_summaries_without_wifi_only));
         }
 
-        // NOTE: Buttons will be enabled/disabled in mTelephonyCallback
+        // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
         final WifiCallingQueryImsState queryIms = queryImsState(mSubId);
         final boolean wfcEnabled = queryIms.isEnabledByUser()
                 && queryIms.isAllowUserControl();
-        mSwitchBar.setChecked(wfcEnabled);
+        mSwitch.setChecked(wfcEnabled);
         final int wfcMode = mImsMmTelManager.getVoWiFiModeSetting();
         final int wfcRoamingMode = mImsMmTelManager.getVoWiFiRoamingModeSetting();
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
@@ -420,16 +417,16 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         updateBody();
 
-        final Context context = getActivity();
         if (queryImsState(mSubId).isWifiCallingSupported()) {
-            getTelephonyManagerForSub(mSubId).registerTelephonyCallback(
-                    context.getMainExecutor(), mTelephonyCallback);
+            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
+                    PhoneStateListener.LISTEN_CALL_STATE);
 
             mSwitchBar.addOnSwitchChangeListener(this);
 
             mValidListener = true;
         }
 
+        final Context context = getActivity();
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
         final Intent intent = getActivity().getIntent();
@@ -450,7 +447,8 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         if (mValidListener) {
             mValidListener = false;
 
-            getTelephonyManagerForSub(mSubId).unregisterTelephonyCallback(mTelephonyCallback);
+            getTelephonyManagerForSub(mSubId).listen(mPhoneStateListener,
+                    PhoneStateListener.LISTEN_NONE);
 
             mSwitchBar.removeOnSwitchChangeListener(this);
         }

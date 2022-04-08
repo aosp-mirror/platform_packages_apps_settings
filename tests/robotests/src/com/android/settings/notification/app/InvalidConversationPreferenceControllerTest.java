@@ -16,6 +16,10 @@
 
 package com.android.settings.notification.app;
 
+import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+import static android.app.NotificationManager.IMPORTANCE_HIGH;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -41,8 +45,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
-import com.google.common.collect.ImmutableList;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,8 +56,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
@@ -102,7 +102,7 @@ public class InvalidConversationPreferenceControllerTest {
         appRow.pkg = "hi";
         appRow.uid = 0;
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -112,7 +112,7 @@ public class InvalidConversationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "hi";
         appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -122,29 +122,8 @@ public class InvalidConversationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "hi";
         appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredIn() {
-        when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.pkg = "hi";
-        appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null, ImmutableList.of(
-                NotificationChannel.EDIT_CONVERSATION));
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_filteredOut() {
-        when(mBackend.isInInvalidMsgState(anyString(), anyInt())).thenReturn(true);
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.pkg = "hi";
-        appRow.uid = 0;
-        mController.onResume(appRow, null, null, null, null, null, new ArrayList<>());
-        assertFalse(mController.isAvailable());
     }
 
     @Test
@@ -153,7 +132,7 @@ public class InvalidConversationPreferenceControllerTest {
         appRow.pkg = "hi";
         appRow.uid = 0;
         mController.onResume(appRow, null, null,
-                null, null, mock(RestrictedLockUtils.EnforcedAdmin.class), null);
+                null, null, mock(RestrictedLockUtils.EnforcedAdmin.class));
 
         Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
@@ -165,7 +144,7 @@ public class InvalidConversationPreferenceControllerTest {
     public void testUpdateState_notChecked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "pkg";
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         when(mBackend.hasUserDemotedInvalidMsgApp(anyString(), anyInt())).thenReturn(false);
 
@@ -178,7 +157,7 @@ public class InvalidConversationPreferenceControllerTest {
     public void testUpdateState_checked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "pkg";
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         when(mBackend.hasUserDemotedInvalidMsgApp(anyString(), anyInt())).thenReturn(true);
 
@@ -191,7 +170,7 @@ public class InvalidConversationPreferenceControllerTest {
     public void testOnPreferenceChange_toggleEnabled() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "pkg";
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         when(mBackend.hasUserDemotedInvalidMsgApp(anyString(), anyInt())).thenReturn(true);
 
@@ -210,7 +189,7 @@ public class InvalidConversationPreferenceControllerTest {
     public void testOnPreferenceChange_toggleDisabled() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.pkg = "pkg";
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
 
         when(mBackend.hasUserDemotedInvalidMsgApp(anyString(), anyInt())).thenReturn(false);
 

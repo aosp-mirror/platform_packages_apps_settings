@@ -49,8 +49,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
-import java.util.ArrayList;
-
 @RunWith(RobolectricTestRunner.class)
 public class ConversationHeaderPreferenceControllerTest {
 
@@ -90,7 +88,7 @@ public class ConversationHeaderPreferenceControllerTest {
 
     @Test
     public void testIsAvailable_notIfNull() {
-        mController.onResume(null, null, null, null, null, null, null);
+        mController.onResume(null, null, null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
@@ -98,15 +96,7 @@ public class ConversationHeaderPreferenceControllerTest {
     public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
-        mController.onResume(appRow, null, null, null, null, null, null);
-        assertTrue(mController.isAvailable());
-    }
-
-    @Test
-    public void testIsAvailable_ignoresFilter() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.banned = true;
-        mController.onResume(appRow, null, null, null, null, null, new ArrayList<>());
+        mController.onResume(appRow, null, null, null, null, null);
         assertTrue(mController.isAvailable());
     }
 
@@ -115,11 +105,11 @@ public class ConversationHeaderPreferenceControllerTest {
         ShortcutInfo si = mock(ShortcutInfo.class);
         when(si.getLabel()).thenReturn("hello");
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        mController.onResume(appRow, null, null, null, si, null, null);
+        mController.onResume(appRow, null, null, null, si, null);
         assertEquals(si.getLabel(), mController.getLabel());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertEquals(channel.getName(), mController.getLabel());
     }
 
@@ -127,25 +117,25 @@ public class ConversationHeaderPreferenceControllerTest {
     public void testGetSummary() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.label = "bananas";
-        mController.onResume(appRow, null, null, null, null, null, null);
+        mController.onResume(appRow, null, null, null, null, null);
         assertEquals("", mController.getSummary());
 
         NotificationChannelGroup group = new NotificationChannelGroup("id", "name");
-        mController.onResume(appRow, null, group, null, null, null, null);
+        mController.onResume(appRow, null, group, null, null, null);
         assertEquals(appRow.label, mController.getSummary());
 
         NotificationChannel channel = new NotificationChannel("cid", "cname", IMPORTANCE_NONE);
-        mController.onResume(appRow, channel, group, null, null, null, null);
+        mController.onResume(appRow, channel, group, null, null, null);
         assertTrue(mController.getSummary().toString().contains(group.getName()));
         assertTrue(mController.getSummary().toString().contains(appRow.label));
 
-        mController.onResume(appRow, channel, null, null, null, null, null);
+        mController.onResume(appRow, channel, null, null, null, null);
         assertFalse(mController.getSummary().toString().contains(group.getName()));
         assertTrue(mController.getSummary().toString().contains(appRow.label));
 
         NotificationChannel defaultChannel = new NotificationChannel(
                 NotificationChannel.DEFAULT_CHANNEL_ID, "", IMPORTANCE_NONE);
-        mController.onResume(appRow, defaultChannel, null, null, null, null, null);
+        mController.onResume(appRow, defaultChannel, null, null, null, null);
         assertEquals("", mController.getSummary());
     }
 }

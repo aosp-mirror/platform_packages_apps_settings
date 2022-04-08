@@ -16,11 +16,10 @@
 
 package com.android.settings.notification.app;
 
-import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.widget.Switch;
@@ -30,11 +29,11 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.widget.SettingsMainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.widget.LayoutPreference;
 
 public class BlockPreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin, OnMainSwitchChangeListener {
+        implements PreferenceControllerMixin, SwitchBar.OnSwitchChangeListener {
 
     private static final String KEY_BLOCK = "block";
     private NotificationSettings.DependentFieldListener mDependentFieldListener;
@@ -56,22 +55,16 @@ public class BlockPreferenceController extends NotificationPreferenceController
         if (mAppRow == null) {
             return false;
         }
-        if (mPreferenceFilter != null && !isIncludedInFilter()) {
-            return false;
-        }
         return true;
     }
 
-    @Override
-    boolean isIncludedInFilter() {
-        return mPreferenceFilter.contains(NotificationChannel.EDIT_IMPORTANCE);
-    }
-
     public void updateState(Preference preference) {
-        SettingsMainSwitchPreference bar = (SettingsMainSwitchPreference) preference;
+        LayoutPreference pref = (LayoutPreference) preference;
+        pref.setSelectable(false);
+        SwitchBar bar = pref.findViewById(R.id.switch_bar);
         if (bar != null) {
             String switchBarText = getSwitchBarText();
-            bar.setTitle(switchBarText);
+            bar.setSwitchBarText(switchBarText, switchBarText);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(this);
@@ -81,16 +74,16 @@ public class BlockPreferenceController extends NotificationPreferenceController
             bar.setDisabledByAdmin(mAdmin);
 
             if (mChannel != null && !isChannelBlockable()) {
-                bar.setSwitchBarEnabled(false);
+                bar.setEnabled(false);
             }
 
             if (mChannelGroup != null && !isChannelGroupBlockable()) {
-                bar.setSwitchBarEnabled(false);
+                bar.setEnabled(false);
             }
 
             if (mChannel == null && mAppRow.systemApp
                     && (!mAppRow.banned || mAppRow.lockedImportance)) {
-                bar.setSwitchBarEnabled(false);
+                bar.setEnabled(false);
             }
 
             if (mChannel != null) {
@@ -113,11 +106,8 @@ public class BlockPreferenceController extends NotificationPreferenceController
             // It's always safe to override the importance if it's meant to be blocked or if
             // it was blocked and we are unblocking it.
             if (blocked || originalImportance == IMPORTANCE_NONE) {
-                final int importance = blocked
-                        ? IMPORTANCE_NONE
-                        : isDefaultChannel()
-                                ? IMPORTANCE_UNSPECIFIED
-                                : Math.max(mChannel.getOriginalImportance(), IMPORTANCE_LOW);
+                final int importance = blocked ? IMPORTANCE_NONE
+                        : isDefaultChannel() ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_DEFAULT;
                 mChannel.setImportance(importance);
                 saveChannel();
             }
@@ -140,7 +130,7 @@ public class BlockPreferenceController extends NotificationPreferenceController
     String getSwitchBarText() {
         if (mChannel != null) {
             return mContext.getString(R.string.notification_content_block_title);
-        } else {
+        } else  {
             CharSequence fieldContextName;
             if (mChannelGroup != null) {
                 fieldContextName = mChannelGroup.getName();

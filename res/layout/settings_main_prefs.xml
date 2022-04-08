@@ -22,11 +22,11 @@
               android:layout_height="match_parent"
               android:layout_width="match_parent">
 
-    <com.android.settings.widget.SettingsMainSwitchBar
+    <com.android.settings.widget.SwitchBar
         android:id="@+id/switch_bar"
-        android:visibility="gone"
+        android:layout_height="?android:attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:theme="?attr/switchBarTheme"/>
 
     <FrameLayout
         android:id="@+id/main_content"

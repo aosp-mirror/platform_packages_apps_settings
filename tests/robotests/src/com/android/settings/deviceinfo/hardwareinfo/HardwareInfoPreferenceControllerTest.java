@@ -24,6 +24,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deviceinfo.HardwareInfoPreferenceController;
 
@@ -78,6 +79,8 @@ public class HardwareInfoPreferenceControllerTest {
     }
 
     private boolean containBuildModel(CharSequence result) {
-        return result.toString().contains(Build.MODEL);
+        final String oracle = mContext.getResources().getString(R.string.model_summary,
+                Build.MODEL);
+        return result.toString().contains(oracle);
     }
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2016 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="apps_and_notification_screen"
+    android:title="@string/app_and_notification_dashboard_title"
+    settings:initialExpandedChildrenCount="4">
+    <!-- the initial count should include the dynamic tiles -->
+
+    <Preference
+        android:key="all_app_info"
+        android:title="@string/applications_settings"
+        android:order="-999"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:controller="com.android.settings.applications.AllAppsInfoPreferenceController"
+        settings:keywords="@string/keywords_applications_settings"/>
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="recent_open_apps"
+        android:title="@string/recent_app_category_title"
+        android:layout="@layout/app_entities_header"
+        android:selectable="false"
+        android:order="-998"
+        settings:allowDividerBelow="true"
+        settings:controller="com.android.settings.applications.RecentAppsPreferenceController"/>
+
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="recent_apps_divider"
+        android:layout="@layout/preference_category_no_label"
+        android:order="-997"/>
+
+    <Preference
+        android:key="conversations"
+        android:title="@string/conversations_category_title"
+        android:order="-550"
+        settings:controller="com.android.settings.notification.ConversationListSummaryPreferenceController"
+        android:fragment="com.android.settings.notification.app.ConversationListSettings"
+    />
+
+    <Preference
+        android:key="configure_notification_settings"
+        android:title="@string/configure_notification_settings"
+        android:summary="@string/notification_screen_summary"
+        android:order="-440"
+        android:fragment="com.android.settings.notification.ConfigureNotificationSettings"/>
+
+    <!-- Notifications (appears before manage_perms), default apps (appears after) -->
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="10"/>
+
+    <Preference
+        android:key="default_apps"
+        android:title="@string/app_default_dashboard_title"
+        android:order="11"
+        settings:controller="com.android.settings.applications.DefaultAppsPreferenceController">
+        <intent android:action="android.settings.MANAGE_DEFAULT_APPS_SETTINGS"/>
+    </Preference>
+
+    <Preference
+        android:key="manage_perms"
+        android:title="@string/app_permissions"
+        android:summary="@string/runtime_permissions_summary_control_app_access"
+        android:order="12"
+        settings:keywords="@string/keywords_app_permissions">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+    </Preference>
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="app_and_notif_cell_broadcast_settings"
+        android:title="@string/cell_broadcast_settings"
+        android:order="15"
+        settings:useAdminDisabledSummary="true">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="@string/cell_broadcast_receiver_package"
+            android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings"/>
+    </com.android.settingslib.RestrictedPreference>
+
+    <Preference
+        android:key="special_access"
+        android:fragment="com.android.settings.applications.specialaccess.SpecialAccessSettings"
+        android:title="@string/special_access"
+        android:order="20"
+        settings:controller="com.android.settings.applications.SpecialAppAccessPreferenceController"/>
+
+</PreferenceScreen>

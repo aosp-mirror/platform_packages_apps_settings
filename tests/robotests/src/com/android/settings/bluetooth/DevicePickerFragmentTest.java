@@ -82,7 +82,7 @@ public class DevicePickerFragmentTest {
         mFragment.onDeviceBondStateChanged(cachedDevice, BluetoothDevice.BOND_BONDED);
 
         verify(mContext).sendBroadcast(intentCaptor.capture(),
-                eq("android.permission.BLUETOOTH_CONNECT"));
+                eq("android.permission.BLUETOOTH_ADMIN"));
         assertThat(intentCaptor.getValue().getComponent().getPackageName())
                 .isEqualTo(mFragment.mLaunchPackage);
     }

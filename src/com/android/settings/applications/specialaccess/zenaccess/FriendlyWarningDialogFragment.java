@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -40,12 +39,10 @@ public class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
         return SettingsEnums.DIALOG_ZEN_ACCESS_REVOKE;
     }
 
-    public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label,
-            Fragment target) {
+    public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
         Bundle args = new Bundle();
         args.putString(KEY_PKG, pkg);
         args.putString(KEY_LABEL, TextUtils.isEmpty(label) ? pkg : label.toString());
-        setTargetFragment(target, 0);
         setArguments(args);
         return this;
     }
@@ -61,8 +58,6 @@ public class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
                 R.string.zen_access_revoke_warning_dialog_title, label);
         final String summary = getResources()
                 .getString(R.string.zen_access_revoke_warning_dialog_summary);
-
-        ZenAccessDetails parent = (ZenAccessDetails) getTargetFragment();
         return new AlertDialog.Builder(getContext())
                 .setMessage(summary)
                 .setTitle(title)
@@ -71,7 +66,6 @@ public class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
                         (dialog, id) -> {
                             ZenAccessController.deleteRules(getContext(), pkg);
                             ZenAccessController.setAccess(getContext(), pkg, false);
-                            parent.refreshUi();
                         })
                 .setNegativeButton(R.string.cancel,
                         (dialog, id) -> {

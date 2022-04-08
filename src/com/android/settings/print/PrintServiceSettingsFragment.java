@@ -59,8 +59,8 @@ import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.widget.SettingsMainSwitchBar;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
+import com.android.settings.widget.SwitchBar;
+import com.android.settings.widget.ToggleSwitch;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -71,7 +71,7 @@ import java.util.Map;
  * Fragment with print service settings.
  */
 public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
-        implements OnMainSwitchChangeListener,
+        implements SwitchBar.OnSwitchChangeListener,
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
 
     private static final String LOG_TAG = "PrintServiceSettings";
@@ -96,7 +96,8 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     };
 
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
+    private ToggleSwitch mToggleSwitch;
 
     private String mPreferenceKey;
 
@@ -165,14 +166,14 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
     }
 
     private void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        ((PrintManager) getContext().getSystemService(Context.PRINT_SERVICE))
+        ((PrintManager)getContext().getSystemService(Context.PRINT_SERVICE))
                 .setPrintServiceEnabled(mComponentName, enabled);
     }
 
     private void updateEmptyView() {
         ViewGroup contentRoot = (ViewGroup) getListView().getParent();
         View emptyView = getEmptyView();
-        if (!mSwitchBar.isChecked()) {
+        if (!mToggleSwitch.isChecked()) {
             if (emptyView != null) {
                 contentRoot.removeView(emptyView);
                 emptyView = null;
@@ -234,12 +235,11 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
         mSwitchBar = activity.getSwitchBar();
-        mSwitchBar.setTitle(
-                getContext().getString(R.string.default_print_service_main_switch_title));
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
 
-        mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
+        mToggleSwitch = mSwitchBar.getSwitch();
+        mToggleSwitch.setOnBeforeCheckedChangeListener((toggleSwitch, checked) -> {
             onPreferenceToggled(mPreferenceKey, checked);
             return false;
         });
@@ -388,7 +388,6 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                                 R.string.print_search_box_shown_utterance));
                     }
                 }
-
                 @Override
                 public void onViewDetachedFromWindow(View view) {
                     Activity activity = getActivity();
@@ -566,7 +565,7 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                     TypedValue value = new TypedValue();
                     getActivity().getTheme().resolveAttribute(android.R.attr.disabledAlpha, value,
                             true);
-                    icon.setAlpha((int) (value.getFloat() * 255));
+                    icon.setAlpha((int)(value.getFloat() * 255));
                 }
                 iconView.setImageDrawable(icon);
             } else {

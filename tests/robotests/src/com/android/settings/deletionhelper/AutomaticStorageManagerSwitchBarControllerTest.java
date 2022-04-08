@@ -34,7 +34,7 @@ import androidx.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.SettingsMainSwitchBar;
+import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -50,7 +50,7 @@ import org.robolectric.RuntimeEnvironment;
 public class AutomaticStorageManagerSwitchBarControllerTest {
 
     private Context mContext;
-    private SettingsMainSwitchBar mSwitchBar;
+    private SwitchBar mSwitchBar;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     private Preference mPreference;
 
@@ -64,7 +64,7 @@ public class AutomaticStorageManagerSwitchBarControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mSwitchBar = new SettingsMainSwitchBar(mContext);
+        mSwitchBar = new SwitchBar(mContext);
 
         mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mPreference = new Preference(mContext);

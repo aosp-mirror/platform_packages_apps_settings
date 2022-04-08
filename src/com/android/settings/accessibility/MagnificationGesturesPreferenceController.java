@@ -14,7 +14,6 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.icu.text.MessageFormat;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -94,12 +93,8 @@ public class MagnificationGesturesPreferenceController extends TogglePreferenceC
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
         extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
                 R.string.accessibility_screen_magnification_gestures_title);
-
-        String summary =  context.getString(R.string.accessibility_screen_magnification_summary);
-        final Object[] numberArguments = {1, 2, 3, 4, 5};
-        summary = MessageFormat.format(summary, numberArguments);
-        extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, summary);
-
+        extras.putCharSequence(AccessibilitySettings.EXTRA_HTML_DESCRIPTION,
+                context.getText(R.string.accessibility_screen_magnification_summary));
         extras.putInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID,
                 R.raw.accessibility_screen_magnification);
     }

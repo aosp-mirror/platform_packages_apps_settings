@@ -16,22 +16,22 @@
 
 package com.android.settings.datausage;
 
-import static android.content.pm.PackageManager.FEATURE_WIFI;
+import static android.net.ConnectivityManager.TYPE_WIFI;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.NetworkTemplate;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -104,7 +104,7 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    private PackageManager mPm;
+    private ConnectivityManager mConnectivityManager;
 
     private DataUsageInfoController mDataInfoController;
 
@@ -138,9 +138,10 @@ public class DataUsageSummaryPreferenceControllerTest {
         doReturn(mTelephonyManager).when(mActivity).getSystemService(TelephonyManager.class);
         doReturn(mTelephonyManager).when(mTelephonyManager)
                 .createForSubscriptionId(mDefaultSubscriptionId);
-        doReturn(mPm).when(mActivity).getPackageManager();
-        doReturn(false).when(mPm).hasSystemFeature(eq(FEATURE_WIFI));
+        when(mActivity.getSystemService(Context.CONNECTIVITY_SERVICE))
+                .thenReturn(mConnectivityManager);
         doReturn(TelephonyManager.SIM_STATE_READY).when(mTelephonyManager).getSimState();
+        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(false);
 
         mController = spy(new DataUsageSummaryPreferenceController(
                 mDataUsageController,
@@ -183,10 +184,9 @@ public class DataUsageSummaryPreferenceControllerTest {
         CharSequence value = captor.getValue();
         assertThat(value.toString()).isEqualTo("512 MB data warning / 1.00 GB data limit");
 
-        // TODO (b/170330084): return intent instead of null for mSummaryPreference
         verify(mSummaryPreference).setUsageInfo((info.cycleEnd / 1000) * 1000,
                 now - UPDATE_BACKOFF_MS,
-                CARRIER_NAME, 1 /* numPlans */, null /* launchIntent */);
+                CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
         verify(mSummaryPreference).setWifiMode(false /* isWifiMode */, null /* usagePeriod */,
                 false /* isSingleWifi */);
@@ -362,7 +362,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         final int subscriptionId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
         mController.init(subscriptionId);
         mController.mDataUsageController = mDataUsageController;
-        doReturn(true).when(mPm).hasSystemFeature(eq(FEATURE_WIFI));
+        when(mConnectivityManager.isNetworkSupported(TYPE_WIFI)).thenReturn(true);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
@@ -385,6 +385,7 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         verify(mHeaderController)
                 .setRecyclerView(any(RecyclerView.class), any(Lifecycle.class));
+        verify(mHeaderController).styleActionBar(any(Activity.class));
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

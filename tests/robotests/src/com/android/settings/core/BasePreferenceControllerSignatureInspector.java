@@ -28,13 +28,13 @@ import java.util.List;
 
 public class BasePreferenceControllerSignatureInspector extends CodeInspector {
 
-    private final List<String> mExemptList;
+    private final List<String> grandfather;
 
     public BasePreferenceControllerSignatureInspector(List<Class<?>> classes) {
         super(classes);
-        mExemptList = new ArrayList<>();
-        initializeExemptList(mExemptList,
-                "exempt_invalid_base_preference_controller_constructor");
+        grandfather = new ArrayList<>();
+        initializeGrandfatherList(grandfather,
+                "grandfather_invalid_base_preference_controller_constructor");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
                 continue;
             }
             final String className = c.getName();
-            if (mExemptList.remove(className)) {
+            if (grandfather.remove(className)) {
                 continue;
             }
             final Constructor[] constructors = c.getDeclaredConstructors();
@@ -76,10 +76,10 @@ public class BasePreferenceControllerSignatureInspector extends CodeInspector {
                 .that(badClasses.toString())
                 .isEmpty();
 
-        assertWithMessage("Something in the exempt list is no longer relevant. Please remove"
+        assertWithMessage("Something in the grandfather list is no longer relevant. Please remove"
             + "it from packages/apps/Settings/tests/robotests/assets/"
-            + "exempt_invalid_base_preference_controller_constructor")
-                .that(mExemptList)
+            + "grandfather_invalid_base_preference_controller_constructor")
+                .that(grandfather)
                 .isEmpty();
     }
 

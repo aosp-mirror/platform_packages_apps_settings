@@ -19,7 +19,6 @@ package com.android.settings.applications.manageapplications;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +37,9 @@ import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
-    @VisibleForTesting
-    final TextView mAppName;
+    private final TextView mAppName;
+    private final ImageView mAppIcon;
+
     @VisibleForTesting
     final TextView mSummary;
     @VisibleForTesting
@@ -48,8 +48,6 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     final ViewGroup mWidgetContainer;
     @VisibleForTesting
     final Switch mSwitch;
-
-    private final ImageView mAppIcon;
 
     ApplicationViewHolder(View itemView) {
         super(itemView);
@@ -72,7 +70,7 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         if (twoTarget) {
             if (widgetFrame != null) {
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.preference_widget_primary_switch, widgetFrame, true);
+                        .inflate(R.layout.preference_widget_master_switch, widgetFrame, true);
 
                 View divider = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.preference_two_target_divider, view, false);
@@ -97,16 +95,11 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         itemView.setEnabled(isEnabled);
     }
 
-    void setTitle(CharSequence title, CharSequence contentDescription) {
+    void setTitle(CharSequence title) {
         if (title == null) {
             return;
         }
         mAppName.setText(title);
-
-        if (TextUtils.isEmpty(contentDescription)) {
-            return;
-        }
-        mAppName.setContentDescription(contentDescription);
     }
 
     void setIcon(int drawableRes) {
@@ -155,13 +148,9 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void updateSwitch(Switch.OnCheckedChangeListener listener, boolean enabled, boolean checked) {
+    void updateSwitch(View.OnClickListener listener, boolean enabled, boolean checked) {
         if (mSwitch != null && mWidgetContainer != null) {
-            mWidgetContainer.setFocusable(false);
-            mWidgetContainer.setClickable(false);
-            mSwitch.setFocusable(true);
-            mSwitch.setClickable(true);
-            mSwitch.setOnCheckedChangeListener(listener);
+            mWidgetContainer.setOnClickListener(listener);
             mSwitch.setChecked(checked);
             mSwitch.setEnabled(enabled);
         }

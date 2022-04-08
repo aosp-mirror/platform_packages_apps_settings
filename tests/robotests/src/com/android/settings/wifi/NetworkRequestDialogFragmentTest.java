@@ -18,18 +18,19 @@ package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.net.wifi.WifiManager.NetworkRequestUserSelectionCallback;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,13 +40,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
-import com.android.wifitrackerlib.WifiEntry;
-import com.android.wifitrackerlib.WifiPickerTracker;
+import com.android.settingslib.wifi.AccessPoint;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InOrder;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -64,6 +65,8 @@ public class NetworkRequestDialogFragmentTest {
 
     private FragmentActivity mActivity;
     private NetworkRequestDialogFragment networkRequestDialogFragment;
+    private Context mContext;
+    private WifiTracker mWifiTracker;
 
     @Before
     public void setUp() {
@@ -71,7 +74,10 @@ public class NetworkRequestDialogFragmentTest {
                 new Intent().putExtra(NetworkRequestDialogFragment.EXTRA_APP_NAME,
                         TEST_APP_NAME)).setup().get();
         networkRequestDialogFragment = spy(NetworkRequestDialogFragment.newInstance());
-        networkRequestDialogFragment.mWifiPickerTracker = mock(WifiPickerTracker.class);
+        mContext = spy(RuntimeEnvironment.application);
+
+        mWifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(mWifiTracker);
     }
 
     @Test
@@ -87,7 +93,7 @@ public class NetworkRequestDialogFragmentTest {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
 
-        final String targetTitle = RuntimeEnvironment.application.getString(
+        final String targetTitle = mContext.getString(
                 R.string.network_connection_request_dialog_title, TEST_APP_NAME);
         final TextView view = alertDialog.findViewById(R.id.network_request_title_text);
         assertThat(view.getText()).isEqualTo(targetTitle);
@@ -107,95 +113,124 @@ public class NetworkRequestDialogFragmentTest {
     }
 
     @Test
-    public void onClick_validSelection_shouldCallSelect() {
+    public void onUserSelectionCallbackRegistration_onClick_shouldCallSelect() {
         final int indexClickItem = 3;
-        final List<WifiEntry> wifiEntryList = createWifiEntryList();
-        final WifiEntry clickedWifiEntry = wifiEntryList.get(indexClickItem);
-        final WifiConfiguration wifiConfig = new WifiConfiguration();
-        when(clickedWifiEntry.getWifiConfiguration()).thenReturn(wifiConfig);
-        networkRequestDialogFragment.mFilteredWifiEntries = wifiEntryList;
-        final NetworkRequestUserSelectionCallback selectionCallback = mock(
+        List<AccessPoint> accessPointList = createAccessPointList();
+        AccessPoint clickedAccessPoint = accessPointList.get(indexClickItem);
+        clickedAccessPoint.generateOpenNetworkConfig();
+        when(networkRequestDialogFragment.getAccessPointList()).thenReturn(accessPointList);
+
+        NetworkRequestUserSelectionCallback selectionCallback = mock(
                 NetworkRequestUserSelectionCallback.class);
-        final AlertDialog dialog = mock(AlertDialog.class);
+        AlertDialog dialog = mock(AlertDialog.class);
         networkRequestDialogFragment.onUserSelectionCallbackRegistration(selectionCallback);
 
+        // Act.
         networkRequestDialogFragment.onClick(dialog, indexClickItem);
 
-        verify(selectionCallback, times(1)).select(wifiConfig);
+        // Check.
+        verify(selectionCallback, times(1)).select(clickedAccessPoint.getConfig());
     }
 
     @Test
-    public void onMatch_shouldUpdateWifiEntries() {
-        final InOrder inOrder = inOrder(networkRequestDialogFragment);
+    public void onMatch_shouldUpdatedList() {
+        when(networkRequestDialogFragment.getContext()).thenReturn(mContext);
+        Context applicationContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        when(mContext.getApplicationContext()).thenReturn(applicationContext);
+        WifiManager wifiManager = mock(WifiManager.class);
+        when(applicationContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
+        networkRequestDialogFragment.onResume();
 
-        networkRequestDialogFragment.onMatch(new ArrayList<ScanResult>());
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
 
-        inOrder.verify(networkRequestDialogFragment).updateWifiEntries();
-        inOrder.verify(networkRequestDialogFragment).updateUi();
-    }
-
-    @Test
-    public void onWifiStateChanged_nonEmptyMatchedScanResults_shouldUpdateWifiEntries() {
-        final InOrder inOrder = inOrder(networkRequestDialogFragment);
-
-        final List<ScanResult> scanResults = new ArrayList<>();
-        networkRequestDialogFragment.mMatchedScanResults = scanResults;
+        final String ssidAp1 = "Test AP 1";
+        final String ssidAp2 = "Test AP 2";
+        List<ScanResult> scanResults = new ArrayList<>();
         ScanResult scanResult = mock(ScanResult.class);
-        networkRequestDialogFragment.mMatchedScanResults.add(scanResult);
+        scanResult.SSID = ssidAp1;
+        scanResult.capabilities = "WEP";
+        scanResults.add(scanResult);
+        scanResult = mock(ScanResult.class);
+        scanResult.SSID = ssidAp2;
+        scanResult.capabilities = "WEP";
+        scanResults.add(scanResult);
+
+        // Act.
         networkRequestDialogFragment.onMatch(scanResults);
 
-        inOrder.verify(networkRequestDialogFragment).updateWifiEntries();
-        inOrder.verify(networkRequestDialogFragment).updateUi();
+        // Check.
+        List<AccessPoint> returnList = networkRequestDialogFragment.getAccessPointList();
+        assertThat(returnList).isNotEmpty();
+        assertThat(returnList.size()).isEqualTo(2);
+        assertThat(returnList.get(0).getSsid()).isEqualTo(ssidAp1);
+        assertThat(returnList.get(1).getSsid()).isEqualTo(ssidAp2);
     }
 
     @Test
-    public void onWifiEntriesChanged_nonEmptyMatchedScanResults_shouldUpdateWifiEntries() {
-        final InOrder inOrder = inOrder(networkRequestDialogFragment);
+    public void onAccessPointsChanged_shouldUpdatedList() {
+        when(networkRequestDialogFragment.getContext()).thenReturn(mContext);
+        Context applicationContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        when(mContext.getApplicationContext()).thenReturn(applicationContext);
+        WifiManager wifiManager = mock(WifiManager.class);
+        when(applicationContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(wifiManager);
+        networkRequestDialogFragment.onResume();
 
-        final List<ScanResult> scanResults = new ArrayList<>();
-        networkRequestDialogFragment.mMatchedScanResults = scanResults;
+        List<AccessPoint> accessPointList = new ArrayList<>();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
+
+        final String ssidAp1 = "Test AP 1";
+        List<ScanResult> scanResults = new ArrayList<>();
         ScanResult scanResult = mock(ScanResult.class);
-        networkRequestDialogFragment.mMatchedScanResults.add(scanResult);
+        scanResult.SSID = ssidAp1;
+        scanResult.capabilities = "WEP";
+        scanResults.add(scanResult);
+
+        // Act.
         networkRequestDialogFragment.onMatch(scanResults);
 
-        inOrder.verify(networkRequestDialogFragment).updateWifiEntries();
-        inOrder.verify(networkRequestDialogFragment).updateUi();
+        accessPointList = createAccessPointList();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
+
+        // Act.
+        networkRequestDialogFragment.mFilterWifiTracker.mWifiListener.onAccessPointsChanged();
+
+        // Check.
+        List<AccessPoint> returnList = networkRequestDialogFragment.getAccessPointList();
+        assertThat(returnList).isNotEmpty();
+        assertThat(returnList.size()).isEqualTo(1);
+        assertThat(returnList.get(0).getSsid()).isEqualTo(ssidAp1);
     }
 
-    private List<WifiEntry> createWifiEntryList() {
-        List<WifiEntry> wifiEntryList = spy(new ArrayList<>());
+    private List<AccessPoint> createAccessPointList() {
+        List<AccessPoint> accessPointList = spy(new ArrayList<>());
+        Bundle bundle = new Bundle();
 
-        final WifiEntry wifiEntry1 = mock(WifiEntry.class);
-        when(wifiEntry1.getSsid()).thenReturn("Test AP 1");
-        when(wifiEntry1.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
-        wifiEntryList.add(wifiEntry1);
+        bundle.putString(KEY_SSID, "Test AP 1");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        final WifiEntry wifiEntry2 = mock(WifiEntry.class);
-        when(wifiEntry2.getSsid()).thenReturn("Test AP 2");
-        when(wifiEntry2.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
-        wifiEntryList.add(wifiEntry2);
+        bundle.putString(KEY_SSID, "Test AP 2");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        final WifiEntry wifiEntry3 = mock(WifiEntry.class);
-        when(wifiEntry3.getSsid()).thenReturn("Test AP 3");
-        when(wifiEntry3.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
-        wifiEntryList.add(wifiEntry3);
+        bundle.putString(KEY_SSID, "Test AP 3");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        final WifiEntry wifiEntry4 = mock(WifiEntry.class);
-        when(wifiEntry4.getSsid()).thenReturn("Test AP 4");
-        when(wifiEntry4.getSecurity()).thenReturn(WifiEntry.SECURITY_NONE);
-        wifiEntryList.add(wifiEntry4);
+        bundle.putString(KEY_SSID, "Test AP 4");
+        bundle.putInt(KEY_SECURITY, 0 /* NONE */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        final WifiEntry wifiEntry5 = mock(WifiEntry.class);
-        when(wifiEntry5.getSsid()).thenReturn("Test AP 5");
-        when(wifiEntry5.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
-        wifiEntryList.add(wifiEntry5);
+        bundle.putString(KEY_SSID, "Test AP 5");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        final WifiEntry wifiEntry6 = mock(WifiEntry.class);
-        when(wifiEntry6.getSsid()).thenReturn("Test AP 6");
-        when(wifiEntry6.getSecurity()).thenReturn(WifiEntry.SECURITY_WEP);
-        wifiEntryList.add(wifiEntry6);
+        bundle.putString(KEY_SSID, "Test AP 6");
+        bundle.putInt(KEY_SECURITY, 1 /* WEP */);
+        accessPointList.add(new AccessPoint(mContext, bundle));
 
-        return wifiEntryList;
+        return accessPointList;
     }
 
     @Test
@@ -212,10 +247,8 @@ public class NetworkRequestDialogFragmentTest {
     public void onMatchManyResult_showNeutralButton() {
         networkRequestDialogFragment.show(mActivity.getSupportFragmentManager(), /* tag */ null);
         final AlertDialog alertDialog = ShadowAlertDialogCompat.getLatestAlertDialog();
-        List<WifiEntry> wifiEntryList = createWifiEntryList();
-        final WifiPickerTracker wifiPickerTracker = mock(WifiPickerTracker.class);
-        when(wifiPickerTracker.getWifiEntries()).thenReturn(wifiEntryList);
-        networkRequestDialogFragment.mWifiPickerTracker = wifiPickerTracker;
+        List<AccessPoint> accessPointList = createAccessPointList();
+        when(mWifiTracker.getAccessPoints()).thenReturn(accessPointList);
 
         final String ssidAp = "Test AP ";
         final List<ScanResult> scanResults = new ArrayList<>();

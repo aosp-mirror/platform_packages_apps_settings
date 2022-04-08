@@ -37,13 +37,12 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.biometrics.BiometricEnrollBase;
-import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
@@ -67,8 +66,6 @@ public class FaceSettings extends DashboardFragment {
     private UserManager mUserManager;
     private FaceManager mFaceManager;
     private int mUserId;
-    private int mSensorId;
-    private long mChallenge;
     private byte[] mToken;
     private FaceSettingsAttentionPreferenceController mAttentionController;
     private FaceSettingsRemoveButtonPreferenceController mRemoveController;
@@ -149,8 +146,6 @@ public class FaceSettings extends DashboardFragment {
         mUserManager = context.getSystemService(UserManager.class);
         mFaceManager = context.getSystemService(FaceManager.class);
         mToken = getIntent().getByteArrayExtra(KEY_TOKEN);
-        mSensorId = getIntent().getIntExtra(BiometricEnrollBase.EXTRA_KEY_SENSOR_ID, -1);
-        mChallenge = getIntent().getLongExtra(BiometricEnrollBase.EXTRA_KEY_CHALLENGE, 0L);
 
         mUserId = getActivity().getIntent().getIntExtra(
                 Intent.EXTRA_USER_ID, UserHandle.myUserId());
@@ -160,11 +155,6 @@ public class FaceSettings extends DashboardFragment {
             getActivity().setTitle(getActivity().getResources().getString(
                     R.string.security_settings_face_profile_preference_title));
         }
-
-        mLockscreenController = Utils.isMultipleBiometricsSupported(context)
-                ? use(BiometricLockscreenBypassPreferenceController.class)
-                : use(FaceSettingsLockscreenBypassPreferenceController.class);
-        mLockscreenController.setUserId(mUserId);
 
         Preference keyguardPref = findPreference(FaceSettingsKeyguardPreferenceController.KEY);
         Preference appPref = findPreference(FaceSettingsAppPreferenceController.KEY);
@@ -200,22 +190,28 @@ public class FaceSettings extends DashboardFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        mLockscreenController = use(FaceSettingsLockscreenBypassPreferenceController.class);
+        mLockscreenController.setUserId(mUserId);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
         if (mToken == null && !mConfirmingPassword) {
-            final ChooseLockSettingsHelper.Builder builder =
-                    new ChooseLockSettingsHelper.Builder(getActivity(), this);
-            final boolean launched = builder.setRequestCode(CONFIRM_REQUEST)
-                    .setTitle(getString(R.string.security_settings_face_preference_title))
-                    .setRequestGatekeeperPasswordHandle(true)
-                    .setUserId(mUserId)
-                    .setForegroundOnly(true)
-                    .setReturnCredentials(true)
-                    .show();
+            // Generate challenge in onResume instead of onCreate, since FaceSettings can be
+            // created while Keyguard is showing, in which case the resetLockout revokeChallenge
+            // will invalidate the too-early created challenge here.
+            final long challenge = mFaceManager.generateChallenge();
+            ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(getActivity(), this);
 
             mConfirmingPassword = true;
-            if (!launched) {
+            if (!helper.launchConfirmationActivity(CONFIRM_REQUEST,
+                    getString(R.string.security_settings_face_preference_title),
+                    null, null, challenge, mUserId, true /* foregroundOnly */)) {
                 Log.e(TAG, "Password not set");
                 finish();
             }
@@ -236,31 +232,30 @@ public class FaceSettings extends DashboardFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (mToken == null && !BiometricUtils.containsGatekeeperPasswordHandle(data)) {
-            Log.e(TAG, "No credential");
-            finish();
-        }
-
         if (requestCode == CONFIRM_REQUEST) {
+            mConfirmingPassword = false;
             if (resultCode == RESULT_FINISHED || resultCode == RESULT_OK) {
+                mFaceManager.setActiveUser(mUserId);
                 // The pin/pattern/password was set.
-                mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
-                    mToken = BiometricUtils.requestGatekeeperHat(getPrefContext(), data, mUserId,
-                            challenge);
-                    mSensorId = sensorId;
-                    mChallenge = challenge;
-                    BiometricUtils.removeGatekeeperPasswordHandle(getPrefContext(), data);
-                    mAttentionController.setToken(mToken);
-                    mEnrollController.setToken(mToken);
-                    mConfirmingPassword = false;
-                });
+                if (data != null) {
+                    mToken = data.getByteArrayExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE_TOKEN);
+                    if (mToken != null) {
+                        mAttentionController.setToken(mToken);
+                        mEnrollController.setToken(mToken);
+                    }
+                }
             }
         } else if (requestCode == ENROLL_REQUEST) {
             if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
             }
+        }
+
+        if (mToken == null) {
+            // Didn't get an authentication, finishing
+            finish();
         }
     }
 
@@ -272,7 +267,10 @@ public class FaceSettings extends DashboardFragment {
                 && !mConfirmingPassword) {
             // Revoke challenge and finish
             if (mToken != null) {
-                mFaceManager.revokeChallenge(mSensorId, mUserId, mChallenge);
+                final int result = mFaceManager.revokeChallenge();
+                if (result < 0) {
+                    Log.w(TAG, "revokeChallenge failed, result: " + result);
+                }
                 mToken = null;
             }
             finish();
@@ -289,7 +287,7 @@ public class FaceSettings extends DashboardFragment {
         if (!isFaceHardwareDetected(context)) {
             return null;
         }
-        mControllers = buildPreferenceControllers(context);
+        mControllers = buildPreferenceControllers(context, getSettingsLifecycle());
         // There's no great way of doing this right now :/
         for (AbstractPreferenceController controller : mControllers) {
             if (controller instanceof FaceSettingsAttentionPreferenceController) {
@@ -308,12 +306,14 @@ public class FaceSettings extends DashboardFragment {
         return mControllers;
     }
 
-    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FaceSettingsKeyguardPreferenceController(context));
         controllers.add(new FaceSettingsAppPreferenceController(context));
         controllers.add(new FaceSettingsAttentionPreferenceController(context));
         controllers.add(new FaceSettingsRemoveButtonPreferenceController(context));
+        controllers.add(new FaceSettingsFooterPreferenceController(context));
         controllers.add(new FaceSettingsConfirmPreferenceController(context));
         controllers.add(new FaceSettingsEnrollButtonPreferenceController(context));
         return controllers;
@@ -326,7 +326,7 @@ public class FaceSettings extends DashboardFragment {
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     if (isFaceHardwareDetected(context)) {
-                        return buildPreferenceControllers(context);
+                        return buildPreferenceControllers(context, null /* lifecycle */);
                     } else {
                         return null;
                     }

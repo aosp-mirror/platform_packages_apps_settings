@@ -16,8 +16,6 @@
 
 package com.android.settings.testutils.shadow;
 
-import static org.robolectric.shadow.api.Shadow.newInstanceOf;
-
 import android.app.Activity;
 import android.content.Context;
 import android.nfc.NfcAdapter;
@@ -26,18 +24,16 @@ import android.os.Bundle;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.Resetter;
+import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.util.ReflectionHelpers.ClassParameter;
 
 /**
  * Shadow of {@link NfcAdapter}.
  */
-@Implements(value = NfcAdapter.class)
-public class ShadowNfcAdapter extends org.robolectric.shadows.ShadowNfcAdapter {
+@Implements(NfcAdapter.class)
+public class ShadowNfcAdapter {
     private static boolean sReaderModeEnabled;
-    private static Object sNfcAdapter = newInstanceOf("android.nfc.NfcAdapter");
-
     private boolean mIsNfcEnabled = false;
-    private int mState = NfcAdapter.STATE_ON;
-    private boolean mIsSecureNfcSupported = false;
 
     @Implementation
     protected void enableReaderMode(Activity activity, NfcAdapter.ReaderCallback callback,
@@ -47,34 +43,13 @@ public class ShadowNfcAdapter extends org.robolectric.shadows.ShadowNfcAdapter {
 
     @Implementation
     protected static NfcAdapter getDefaultAdapter(Context context) {
-        return (NfcAdapter) sNfcAdapter;
+        return ReflectionHelpers.callConstructor(
+                NfcAdapter.class, ClassParameter.from(Context.class, context));
     }
 
     @Implementation
     protected boolean isEnabled() {
         return mIsNfcEnabled;
-    }
-
-    public void setEnabled(boolean enable) {
-        mIsNfcEnabled = enable;
-    }
-
-    @Implementation
-    protected int getAdapterState() {
-        return mState;
-    }
-
-    public void setAdapterState(int state) {
-        this.mState = state;
-    }
-
-    @Implementation
-    protected boolean isSecureNfcSupported() {
-        return mIsSecureNfcSupported;
-    }
-
-    public void setSecureNfcSupported(boolean supported) {
-        this.mIsSecureNfcSupported = supported;
     }
 
     @Implementation

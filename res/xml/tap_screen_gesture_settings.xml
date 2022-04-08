@@ -17,20 +17,20 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/ambient_display_tap_screen_title">
 
-    <com.android.settingslib.widget.IllustrationPreference
+    <com.android.settings.widget.VideoPreference
         android:key="gesture_tap_screen_video"
-        settings:searchable="false"
-        app:lottie_rawRes="@raw/lottie_tap_to_check_phone"/>
+        app:animation="@raw/gesture_ambient_tap_screen"
+        app:preview="@drawable/gesture_ambient_tap_screen" />
 
     <SwitchPreference
         android:key="gesture_tap"
         android:title="@string/ambient_display_tap_screen_title"
         android:summary="@string/ambient_display_tap_screen_summary"
         app:keywords="@string/keywords_gesture"
-        app:controller="com.android.settings.gestures.TapScreenGesturePreferenceController" />
+        app:controller="com.android.settings.gestures.TapScreenGesturePreferenceController"
+        app:allowDividerAbove="true" />
 
 </PreferenceScreen>

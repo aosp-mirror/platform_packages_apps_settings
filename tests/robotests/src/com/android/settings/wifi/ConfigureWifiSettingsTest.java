@@ -36,6 +36,6 @@ public class ConfigureWifiSettingsTest {
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
         assertThat(keys).isNotNull();
-        assertThat(niks).containsAtLeastElementsIn(keys);
+        assertThat(niks).containsAllIn(keys);
     }
 }

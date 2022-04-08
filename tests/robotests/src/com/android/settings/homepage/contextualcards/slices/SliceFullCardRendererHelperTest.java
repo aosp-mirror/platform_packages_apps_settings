@@ -48,6 +48,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Collections;
+
 @RunWith(RobolectricTestRunner.class)
 public class SliceFullCardRendererHelperTest {
 
@@ -136,7 +138,7 @@ public class SliceFullCardRendererHelperTest {
                 mActivity,
                 title.hashCode() /* requestCode */,
                 new Intent("test action"),
-                PendingIntent.FLAG_IMMUTABLE);
+                0  /* flags */);
         final SliceAction action
                 = SliceAction.createDeeplink(pendingIntent, icon, ListBuilder.SMALL_IMAGE, title);
         return new ListBuilder(mActivity, TEST_SLICE_URI, ListBuilder.INFINITY)

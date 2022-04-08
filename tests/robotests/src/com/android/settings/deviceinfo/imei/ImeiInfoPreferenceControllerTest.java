@@ -39,7 +39,6 @@ import android.telephony.TelephonyManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -69,8 +68,6 @@ public class ImeiInfoPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private Fragment mFragment;
-    @Mock
-    private PreferenceCategory mCategory;
 
     private Context mContext;
     private ImeiInfoPreferenceController mController;
@@ -85,8 +82,6 @@ public class ImeiInfoPreferenceControllerTest {
         doReturn(AVAILABLE).when(mController).getAvailabilityStatus();
         when(mScreen.getContext()).thenReturn(mContext);
         doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
-        final String categoryKey = "device_detail_category";
-        when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         final String prefKey = mController.getPreferenceKey();
@@ -102,7 +97,7 @@ public class ImeiInfoPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(mSecondSimPreference);
+        verify(mScreen).addPreference(mSecondSimPreference);
     }
 
     @Test

@@ -21,7 +21,6 @@ import static android.app.slice.Slice.HINT_TITLE;
 import static android.app.slice.SliceItem.FORMAT_TEXT;
 
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -153,7 +152,7 @@ public class WifiCallingSliceHelperTest {
         mQueryImsState.setIsEnabledByUser(false);
         mQueryImsState.setIsTtyOnVolteEnabled(false);
         when(mMockCarrierConfigManager.getConfigForSubId(1)).thenReturn(null);
-        mWfcSliceHelper.setActivationAppIntent(new Intent()); // unused Intent
+        mWfcSliceHelper.setActivationAppIntent(new Intent()); // dummy Intent
 
         final Slice slice  = mWfcSliceHelper.createWifiCallingSlice(
                 CustomSliceRegistry.WIFI_CALLING_URI);
@@ -397,15 +396,14 @@ public class WifiCallingSliceHelperTest {
         final Intent intent = new Intent(action);
         intent.setClass(mContext, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     private PendingIntent getActivityIntent(String action) {
         final Intent intent = new Intent(action);
         intent.setPackage(SETTINGS_PACKAGE_NAME);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_IMMUTABLE);
+        return PendingIntent.getActivity(mContext, 0 /* requestCode */, intent, 0 /* flags */);
     }
 
     private void assertTitle(List<SliceItem> sliceItems, String title) {

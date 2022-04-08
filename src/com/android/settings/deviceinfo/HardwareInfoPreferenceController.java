@@ -49,7 +49,7 @@ public class HardwareInfoPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return getDeviceModel();
+        return mContext.getResources().getString(R.string.model_summary, getDeviceModel());
     }
 
     public static String getDeviceModel() {

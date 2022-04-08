@@ -22,7 +22,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -103,7 +102,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
 
         final Preference preference = argumentCaptor.getValue();
-        assertThat(preference.getSummary()).isEqualTo("10 MB");
+        assertThat(preference.getSummary()).isEqualTo("0.01 GB");
     }
 
     @Test
@@ -113,8 +112,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                false /* isWorkProfileOnly */);
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.
@@ -124,17 +122,15 @@ public class SecondaryUserControllerTest {
     @Test
     public void getSecondaryUserControllers_notWorkProfile_addSecondaryUserController() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
-        final UserInfo secondaryUser = spy(new UserInfo());
+        final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
         secondaryUser.profileGroupId = 101010; // this just has to be something not 0
-        when(secondaryUser.isManagedProfile()).thenReturn(false);
         userInfos.add(mPrimaryUser);
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                false /* isWorkProfileOnly */);
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
@@ -143,39 +139,18 @@ public class SecondaryUserControllerTest {
     @Test
     public void getSecondaryUserControllers_workProfile_addNoSecondaryUserController() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
-        final UserInfo secondaryUser = spy(new UserInfo());
+        final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
         secondaryUser.profileGroupId = 101010; // this just has to be something not 0
-        when(secondaryUser.isManagedProfile()).thenReturn(true);
         userInfos.add(mPrimaryUser);
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                false /* isWorkProfileOnly */);
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
-    }
-
-    @Test
-    public void getSecondaryUserControllers_notWorkProfileWorkProfileOnly_addNoSecondController() {
-        final ArrayList<UserInfo> userInfos = new ArrayList<>();
-        final UserInfo secondaryUser = spy(new UserInfo());
-        secondaryUser.id = 10;
-        secondaryUser.profileGroupId = 101010; // this just has to be something not 0
-        when(secondaryUser.isManagedProfile()).thenReturn(false);
-        userInfos.add(mPrimaryUser);
-        userInfos.add(secondaryUser);
-        when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
-        when(mUserManager.getUsers()).thenReturn(userInfos);
-        final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                true /* isWorkProfileOnly */);
-
-        assertThat(controllers).hasSize(1);
-        assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
     }
 
     @Test
@@ -189,8 +164,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
 
         final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                false /* isWorkProfileOnly */);
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
@@ -201,9 +175,9 @@ public class SecondaryUserControllerTest {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
         mController.displayPreference(mScreen);
-        final StorageAsyncLoader.StorageResult userResult =
-                new StorageAsyncLoader.StorageResult();
-        final SparseArray<StorageAsyncLoader.StorageResult> result = new SparseArray<>();
+        final StorageAsyncLoader.AppsStorageResult userResult =
+                new StorageAsyncLoader.AppsStorageResult();
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
         userResult.externalStats =
                 new StorageStatsSource.ExternalStorageStats(
                         MEGABYTE_IN_BYTES * 30,
@@ -217,7 +191,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
         final Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("30 MB");
+        assertThat(preference.getSummary()).isEqualTo("0.03 GB");
     }
 
     @Test
@@ -232,8 +206,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
-                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                false /* isWorkProfileOnly */);
+                SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.

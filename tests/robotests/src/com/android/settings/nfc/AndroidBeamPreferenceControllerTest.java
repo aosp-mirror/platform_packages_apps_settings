@@ -31,7 +31,6 @@ import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 
@@ -42,20 +41,19 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowNfcAdapter.class)
 public class AndroidBeamPreferenceControllerTest {
 
     Context mContext;
     @Mock
-    NfcManager mNfcManager;
+    private NfcAdapter mNfcAdapter;
+    @Mock
+    NfcManager mManager;
     @Mock
     private UserManager mUserManager;
     @Mock
@@ -65,19 +63,18 @@ public class AndroidBeamPreferenceControllerTest {
 
     private RestrictedPreference mAndroidBeamPreference;
     private AndroidBeamPreferenceController mAndroidBeamController;
-    private ShadowNfcAdapter mShadowNfcAdapter;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mShadowNfcAdapter = Shadow.extract(NfcAdapter.getDefaultAdapter(mContext));
 
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mNfcManager);
+        when(mContext.getSystemService(Context.NFC_SERVICE)).thenReturn(mManager);
         when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(false);
+        when(NfcAdapter.getDefaultAdapter(mContext)).thenReturn(mNfcAdapter);
 
         mAndroidBeamController = new AndroidBeamPreferenceController(mContext,
                 AndroidBeamPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
@@ -98,13 +95,13 @@ public class AndroidBeamPreferenceControllerTest {
 
     @Test
     public void isAvailable_hasNfc_shouldReturnTrue() {
-        mShadowNfcAdapter.setEnabled(true);
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
         assertThat(mAndroidBeamController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_noNfcFeature_shouldReturnFalse() {
-        mShadowNfcAdapter.setEnabled(true);
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_NFC_BEAM)).thenReturn(false);
         assertThat(mAndroidBeamController.isAvailable()).isFalse();
     }
@@ -117,7 +114,7 @@ public class AndroidBeamPreferenceControllerTest {
 
     @Test
     public void isBeamEnable_disAllowBeam_shouldReturnFalse() {
-        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_OFF);
+        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
 
         when(RestrictedLockUtilsInternal.hasBaseUserRestriction(mContext,
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId())).thenReturn(true);
@@ -128,7 +125,7 @@ public class AndroidBeamPreferenceControllerTest {
 
     @Test
     public void isBeamEnable_nfcStateOn_shouldReturnTrue() {
-        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_ON);
+        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_ON);
         try {
             mAndroidBeamController.onResume();
         } catch (NullPointerException e) {
@@ -140,22 +137,22 @@ public class AndroidBeamPreferenceControllerTest {
 
     @Test
     public void isBeamEnable_nfcStateNotOn_shouldReturnFalse() {
-        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_OFF);
+        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_OFF);
         mAndroidBeamController.onResume();
         assertThat(mAndroidBeamPreference.isEnabled()).isFalse();
 
-        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_ON);
+        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_ON);
         mAndroidBeamController.onResume();
         assertThat(mAndroidBeamPreference.isEnabled()).isFalse();
 
-        mShadowNfcAdapter.setAdapterState(NfcAdapter.STATE_TURNING_OFF);
+        when(mNfcAdapter.getAdapterState()).thenReturn(NfcAdapter.STATE_TURNING_OFF);
         mAndroidBeamController.onResume();
         assertThat(mAndroidBeamPreference.isEnabled()).isFalse();
     }
 
     @Test
     public void updateNonIndexableKeys_available_shouldNotUpdate() {
-        mShadowNfcAdapter.setEnabled(true);
+        when(mNfcAdapter.isEnabled()).thenReturn(true);
         final List<String> keys = new ArrayList<>();
 
         mAndroidBeamController.updateNonIndexableKeys(keys);

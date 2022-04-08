@@ -34,13 +34,13 @@ import java.util.Set;
  */
 public class InstrumentableFragmentCodeInspector extends CodeInspector {
 
-    private final List<String> mNotImplementingInstrumentableExemptList;
+    private final List<String> grandfather_notImplementingInstrumentable;
 
     public InstrumentableFragmentCodeInspector(List<Class<?>> classes) {
         super(classes);
-        mNotImplementingInstrumentableExemptList = new ArrayList<>();
-        initializeExemptList(mNotImplementingInstrumentableExemptList,
-                "exempt_not_implementing_instrumentable");
+        grandfather_notImplementingInstrumentable = new ArrayList<>();
+        initializeGrandfatherList(grandfather_notImplementingInstrumentable,
+                "grandfather_not_implementing_instrumentable");
     }
 
     @Override
@@ -53,11 +53,11 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             }
             final String className = clazz.getName();
             // If it's a fragment, it must also be instrumentable.
-            final boolean allowlisted =
-                    mNotImplementingInstrumentableExemptList.remove(className);
+            final boolean whitelisted =
+                    grandfather_notImplementingInstrumentable.remove(className);
             if (Fragment.class.isAssignableFrom(clazz)
                     && !Instrumentable.class.isAssignableFrom(clazz)
-                    && !allowlisted) {
+                    && !whitelisted) {
                 broken.add(className);
             }
         }
@@ -67,7 +67,7 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             sb.append(c).append("\n");
         }
         assertWithMessage(sb.toString()).that(broken.isEmpty()).isTrue();
-        assertNoObsoleteInExemptList("exempt_not_implementing_instrumentable",
-                mNotImplementingInstrumentableExemptList);
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_instrumentable",
+                grandfather_notImplementingInstrumentable);
     }
 }
