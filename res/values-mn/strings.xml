@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Аппын хэл"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Апп тус бүрд хэл тохируулна уу"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Аппын хэл"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Аппыг шинэчилнэ үү"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Та аппаа хамгийн сүүлийн үеийн боломжтой хэлээр шинэчлэх шаардлагатай"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Одоо шинэчлэх"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Санал болгосон хэл"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бүх хэл"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системийн хэл"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Системийн өгөгдмөл - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"Аппыг өгөгдмөлөөр <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> гэж тохируулсан бөгөөд энэ нь олон хэлийг дэмждэггүй."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Та энэ аппад Тохиргоо хэсгээс хэл сонгох боломжгүй байна."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Сонгосон хэлийг хасах уу?</item>
       <item quantity="one">Сонгосон хэлийг хасах уу?</item>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Та болон таны хүүхэд хүссэн үедээ Тохиргоо хэсэгт түүний хурууны хээний зураг болон загварыг устгах эсвэл Хурууны хээгээр түгжээ тайлах онцлогийг унтраах боломжтой. Хурууны хээний зураг болон загварыг устгах хүртэл утсанд хадгална."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Таны утсыг хэн нэгэн хуруунд тань барьж хүргэх зэргээр түгжээг нь санамсаргүйгээр тайлах боломжтой."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Таны хүүхдийн утсыг хэн нэгэн хуруунд нь барьж хүргэх зэргээр түгжээг нь санамсаргүйгээр тайлах боломжтой."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Хамгийн сайн үр дүнд хүрэхийн тулд Made for Google-р баталгаажсан дэлгэц хамгаалагчийг ашиглана уу. Бусад дэлгэц хамгаалагчийг ашиглах үед таны хурууны хээг танихгүй байж болзошгүй."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Хамгийн сайн үр дүнд хүрэхийн тулд Made for Google-р баталгаажсан дэлгэц хамгаалагчийг ашиглана уу. Бусад дэлгэц хамгаалагчийг ашиглах үед таны хүүхдийн хурууны хээг танихгүй байж болзошгүй."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Хурууныхаа байрлалыг тухай бүрд бага зэрэг өөрчилнө үү"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Дүрс тэмдэг дээр хурууныхаа хээг голлуулж тавина уу"</string>
@@ -507,7 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Хурууныхаа хээг бүрэн гаргахын тулд хуруугаа ахин дахин хөндийрүүлж хүргэнэ үү"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Хурууны хээний дүрс тэмдэг хөдлөх бүрд удаан дарна уу. Энэ нь таны хурууны хээний илүү их зургийг авахад тусална."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Хурууныхаа үзүүрийг мэдрэгч дээр байрлуулна уу"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Эцэст нь хурууныхаа өндөгний захын хээг ашиглана уу"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Хурууныхаа зүүн ирмэгийг байрлуулна уу"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Хурууныхаа баруун ирмэгийг байрлуулна уу"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Хурууныхаа хээний хажуу талыг мэдрэгч дээр удаан байрлуулж, дараа нь нөгөө тал руу сэлгэнэ үү"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Энэ нь таны хурууны хээний илүү их зургийг авахад тусална"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Хурууны хээ бүртгүүлэх явц <xliff:g id="PERCENTAGE">%d</xliff:g> хувь"</string>
@@ -1905,8 +1912,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Google Play-н систем шинэчлэлтийн лиценз"</string>
     <string name="terms_title" msgid="2071742973672326073">"Ерөнхий нөхцлүүд"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Системийн WebView-ийн лиценз"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Дэлгэцийн зураг дээрх оролцогчид"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Сансрын зураг нийлүүлэгчид: \n © 2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Гар ажиллагаатай"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Гар ажиллагааг ачаалах явцад алдаа гарлаа."</string>
@@ -2057,8 +2063,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Идэвхжүүлэх"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Хадгалах санг цэвэрлэх"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Шинэчлэлтүүдийг устгах"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Хязгаарлагдсан тохиргоог зөвшөөрөх"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Таны сонгосон зарим үйл ажиллагааг энэ аппад өгөгдмөлөөр нээдэг."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Та энэ апп-д виджэт үүсгэж өгөгдөлд нь хандалт хийхийг зөвшөөрсөн."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Үндсэн тохиргоог хийгээгүй."</string>
@@ -2093,9 +2098,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Дотоод сан"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Хэмжээг дахин тооцоолж байна…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Апп өгөгдлийг устгах уу?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Энэ аппын өгөгдлийг бүрмөсөн устгана. Үүнд файл, тохиргоо, өгөгдлийн бааз болон бусад аппын өгөгдөл багтана."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Энэ төхөөрөмжөөс аппын файл, тохиргоо зэрэг өгөгдлийг бүрмөсөн устгах болно"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Цуцлах"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Устгах"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Суулгасан апп-уудын жагсаалтад тус апп байхгүй байна."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Аппын санг устгаж чадсангүй."</string>
@@ -2450,7 +2456,7 @@
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Төрөл бүрийн хэрэглээний чичиргээний хүчийг хянах"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Төхөөрөмжийг чимээгүй болгож тохируулсан тул тохиргоог идэвхгүй болгосон"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Дуудлагууд"</string>
-    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Мэдэгдэл болон сэрэмжлүүлэг"</string>
+    <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Мэдэгдэл болон сэрүүлэг"</string>
     <string name="accessibility_interactive_haptics_category_title" msgid="3162855291184592021">"Интерактив мэдрэхүй"</string>
     <string name="accessibility_vibration_primary_switch_title" msgid="6162579254864450592">"Чичиргээ болон хүртэхүйг ашиглах"</string>
     <string name="accessibility_alarm_vibration_title" msgid="4661294337828522745">"Сэрүүлгийн чичиргээ"</string>
@@ -4401,8 +4407,8 @@
       <item quantity="one">Ашиглаагүй <xliff:g id="COUNT_0">%d</xliff:g> апп</item>
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Хэрэглээгүй аппын тохиргоо"</string>
-    <string name="unused_apps_switch" msgid="2979882622987847195">"Аппын үйл ажиллагааг түр зогсоох"</string>
-    <string name="unused_apps_switch_summary" msgid="6971069728614582344">"Зөвшөөрлийг хасаж, түр зуурын файлуудыг устгаж, ашиглаагүй бол мэдэгдлийг зогсооно"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Ашигладаггүй бол аппын үйл ажиллагааг түр зогсоох"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Зөвшөөрлийг хасаж, түр зуурын файлыг устгаж мөн мэдэгдлийг зогсооно"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Бүх апп"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Суулгасан апп"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Шуурхай апп"</string>
@@ -5058,10 +5064,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Энэ төхөөрөмжийг <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> удирддаг"</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Дэлгэрэнгүй үзэх"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Хязгаарлагдсан тохиргоо"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"<xliff:g id="APP_NAME">%s</xliff:g>-д хязгаарлагдсан тохиргоог зөвшөөрсөн"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Таны аюулгүй байдлын үүднээс энэ тохиргоо одоогоор боломжгүй байна."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Зээлээр авсан төхөөрөмжийн мэдээлэл"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Таны зээл олгогч энэ төхөөрөмжийн тохиргоог өөрчилж, программ хангамж суулгах боломжтой.\n\nХэрэв та төлбөрөө хоцроосон бол таны төхөөрөмжийг түгжих болно.\n\nНэмэлт мэдээлэл авахын тулд зээлийн үйлчилгээ үзүүлэгчтэйгээ холбогдоно уу."</string>
@@ -5544,6 +5548,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Түгжигдсэн дэлгэцээс гадаад төхөөрөмжүүдийн хяналтыг харуулна уу"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Түгжигдсэн төхөөрөмжөөс хянах"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Төхөөрөмжийн хяналтын аппаас зөвшөөрсөн тохиолдолд утас эсвэл таблетынхаа түгжээг тайлахгүйгээр гадаад төхөөрөмжүүдийг хянана уу"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Ашиглахын тулд эхлээд \"Төхөөрөмжийн хяналтыг харуулах\"-г асаана уу"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Боломжтой үед нь хоёр зураастай цаг харуулах"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Хоёр зураастай цаг"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>

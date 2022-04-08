@@ -221,11 +221,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Мови додатків"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Виберіть мову для кожного додатка"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Мова додатка"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Оновіть додаток"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"Щоб використовувати найновіший набір мов, оновіть додаток"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Оновити зараз"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Пропоновані мови"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усі мови"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова системи"</string>
     <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"За умовчанням – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"У додатку вибрано таку мову за умовчанням: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>. Кілька мов одночасно не підтримується."</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
+    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Вибрати мову для цього додатка в налаштуваннях не можна."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Видалити вибрані мови?</item>
       <item quantity="few">Видалити вибрані мови?</item>
@@ -462,6 +466,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ви та дитина будь-коли можете видалити зображення й модель відбитка пальця або вимкнути цю функцію в налаштуваннях. Зображення й моделі відбитків пальців зберігаються на телефоні, доки ви їх не видалите."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Ваш телефон можна розблокувати навіть тоді, коли ви цього не плануєте. Наприклад, якщо хтось піднесе його до вашого пальця."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефон дитини можна розблокувати випадково, наприклад якщо хтось прикладе пристрій до її пальця."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця може не розпізнаватися."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця дитини може не розпізнаватися."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Щоразу дещо змінюйте положення пальця"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Прикладіть палець так, щоб значок був по його центру"</string>
@@ -515,7 +521,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Піднімайте палець, щоб додати різні частини відбитка"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Натискайте й утримуйте кожного разу, коли значок відбитка пальця рухається. Це допоможе записати відбиток більшої площі пальця."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Прикладіть кінчик пальця до датчика"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Тепер прикладіть краї пальця"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Прикладіть лівий край пальця"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Прикладіть правий край пальця"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Прикладіть до датчика і трохи потримайте одну сторону кінчика пальця, а потім зробіть те саме з іншою стороною"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Це допоможе записати відбиток більшої площі пальця"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Реєстрацію відбитка пальця завершено на стільки відсотків: <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
@@ -1381,7 +1388,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс білого для екрана"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавне відображення"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично збільшує частоту оновлення певного вмісту з 60 до 90 Гц. Підвищує використання заряду акумулятора."</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Автоматично збільшує частоту оновлення певного контенту з 60 до 90 Гц. Підвищує використання заряду акумулятора."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Примусово найбільша частота оновлення"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Найвища частота оновлення для кращого реагування на дотики й вищої якості анімації. Підвищує використання заряду акумулятора."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Адаптивний сплячий режим"</string>
@@ -1949,8 +1956,7 @@
     <string name="module_license_title" msgid="8705484239826702828">"Ліцензії оновлень системи Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Заг. положення й умови"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Ліцензія компонента WebView"</string>
-    <!-- no translation found for wallpaper_attributions (4323659759250650736) -->
-    <skip />
+    <string name="wallpaper_attributions" msgid="4323659759250650736">"Показувати авторів фонових малюнків"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Постачальники супутникових зображень:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Посібник"</string>
     <string name="settings_manual_activity_unavailable" msgid="2514549851682321576">"Не вдалося завантажити посібник."</string>
@@ -2105,8 +2111,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Увімкнути"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Очистити пам’ять"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Видалити оновлення"</string>
-    <!-- no translation found for app_restricted_settings_lockscreen_title (5993061278264872648) -->
-    <skip />
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Дозволити налаштування з обмеженнями"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Деякі вибрані дії запускаються в цьому додатку за умовчанням."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Ви вирішили дозволити цій програмі створювати віджети й отримувати доступ до їх даних."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Значення не встановлені."</string>
@@ -2141,9 +2146,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Внутр. пам\'ять"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Повт. обчисл. розм…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Видалити дані додатка?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"Дані цього додатка буде назавжди видалено. До них належать файли, налаштування, бази даних тощо."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"Дані додатка, зокрема файли та налаштування, буде назавжди видалено з цього пристрою"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Скасувати"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Видалити"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"Програму не знайдено в списку встановлених програм."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Не вдалося очистити пам’ять для додатка."</string>
@@ -2370,7 +2376,7 @@
     <string name="accessibility_screen_magnification_navbar_title" msgid="480853328665484528">"Збільшувати кнопкою/жестом"</string>
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Збільшувати кнопкою й потрійним дотиком"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Про сервіс <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
-    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Розмір елементів на екрані й оформлення тексту"</string>
+    <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Масштаб елементів і оформлення тексту"</string>
     <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Змініть параметри відображення тексту"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Тема: Проекти повітряних куль"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Від: Борис"</string>
@@ -3462,8 +3468,7 @@
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Робочий профіль не налаштовано"</string>
     <string name="user_admin" msgid="4024553191395768119">"Адміністратор"</string>
     <string name="user_you" msgid="3070562015202859996">"Ви (<xliff:g id="NAME">%s</xliff:g>)"</string>
-    <!-- no translation found for user_add_max_count (3328539978480663740) -->
-    <skip />
+    <string name="user_add_max_count" msgid="3328539978480663740">"Ви додали максимальну кількість користувачів. Щоб додати нового користувача, вилучіть наявного."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"Лише власник планшетного ПК може керувати користувачами."</string>
     <string name="user_cannot_manage_message" product="default" msgid="6434662649769855494">"Лише власник телефону може керувати користувачами."</string>
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Обмежені профілі не можуть додавати облікові записи"</string>
@@ -4527,12 +4532,9 @@
       <item quantity="many"><xliff:g id="COUNT_1">%d</xliff:g> додатків, що не використовуються</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> додатка, що не використовується</item>
     </plurals>
-    <!-- no translation found for unused_apps_category (8954930958175500851) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch (2979882622987847195) -->
-    <skip />
-    <!-- no translation found for unused_apps_switch_summary (6971069728614582344) -->
-    <skip />
+    <string name="unused_apps_category" msgid="8954930958175500851">"Налаштування невикористовуваних додатків"</string>
+    <string name="unused_apps_switch" msgid="7595419855882245772">"Призупинити дії в неактивному додатку"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Вилучити дозволи, видалити тимчасові файли та зупинити сповіщення"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Усі додатки"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установлені додатки"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Додатки з миттєвим запуском"</string>
@@ -5226,10 +5228,8 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"Цим пристроєм керує <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Докладніше"</string>
-    <!-- no translation found for blocked_by_restricted_settings_title (7334715011474037399) -->
-    <skip />
-    <!-- no translation found for toast_allows_restricted_settings_successfully (1219116121291466102) -->
-    <skip />
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Налаштування з обмеженнями"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Для додатка <xliff:g id="APP_NAME">%s</xliff:g> дозволено налаштування з обмеженнями"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"З міркувань безпеки це налаштування наразі недоступне."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Інформація про пристрій, куплений у кредит"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваш кредитор може змінювати налаштування та встановлювати програмне забезпечення на цьому пристрої.\n\nЯкщо ви пропустите платіж, ваш пристрій буде заблоковано.\n\nЩоб дізнатися більше, зв\'яжіться з кредитором."</string>
@@ -5726,7 +5726,8 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Елементи керування зовнішніми пристроями відображатимуться на заблокованому екрані"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Керування із заблокованого пристрою"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Керуйте зовнішніми пристроями, не розблоковуючи телефон або планшет, якщо це дозволено додатком для керування пристроєм"</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показувати двосторонній годинник за наявності"</string>
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"Щоб використовувати елементи керування, спершу ввімкніть опцію \"Показувати елементи керування пристроями\""</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Показувати дворядковий годинник, коли можливо"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Дворядковий годинник"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
@@ -5743,10 +5744,8 @@
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Безстроковий доступ."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Дозволити показ поверх інших вікон у налаштуваннях"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Дозволити додаткам, що можуть показуватися поверх інших додатків, накладатися на екрани налаштувань"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Дозволити тестовий модем"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Цьому пристрою буде дозволено запускати сервіс тестового модема для інструментального тестування. Не вмикайте цю функцію у звичайному режимі роботи телефона."</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медіа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Закріпити медіапрогравач"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Щоб швидко відновлювати відтворення, медіапрогравач залишається відкритим у швидких налаштуваннях"</string>
@@ -5832,8 +5831,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Використовувати закріплення додатка"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Використовувати Параметри розробника"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Використовувати сервіс друку"</string>
-    <!-- no translation found for multiple_users_main_switch_title (6686858308083037810) -->
-    <skip />
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволити кілька користувачів"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Використовувати налагодження через Wi-Fi"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Використовувати параметри графічного драйвера"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Використовувати режим енергозбереження"</string>
@@ -5899,12 +5897,9 @@
     <string name="tare_modifiers" msgid="8919975635360280820">"Модифікатори"</string>
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Дії (вартість виконання)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Дії (основна ціна)"</string>
-    <!-- no translation found for tare_rewards_instantaneous (8358683519945340874) -->
-    <skip />
-    <!-- no translation found for tare_rewards_ongoing (8641416948811152109) -->
-    <skip />
-    <!-- no translation found for tare_rewards_max (5283055625642837010) -->
-    <skip />
+    <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Винагороди за кожну подію"</string>
+    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Винагороди за весь час події"</string>
+    <string name="tare_rewards_max" msgid="5283055625642837010">"Максимальна кількість винагород на день"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Перші дії"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Сповіщення переглянуто"</string>
     <string name="tare_notification_seen_15_min" msgid="832174185809497764">"Сповіщення переглянуто впродовж 15 хв"</string>
@@ -5935,20 +5930,16 @@
     <string name="dream_preview_button_title" msgid="6637456541851795952">"Переглянути"</string>
     <string name="dream_picker_category" msgid="7726447836872744867">"Виберіть заставку"</string>
     <string name="dream_complications_toggle_title" msgid="4273232303027449163">"Показувати додаткову інформацію"</string>
-    <!-- no translation found for dream_complications_toggle_summary (4742579722349951711) -->
-    <skip />
+    <string name="dream_complications_toggle_summary" msgid="4742579722349951711">"Відображення часу, дати, погоди, якості повітря та даних Cast на заставці"</string>
     <string name="dream_more_settings_category" msgid="3119192146760773748">"Інші налаштування"</string>
-    <!-- no translation found for dream_setup_title (2458303874255396142) -->
-    <skip />
-    <!-- no translation found for dream_setup_description (7508547154038580296) -->
-    <skip />
+    <string name="dream_setup_title" msgid="2458303874255396142">"Виберіть заставку"</string>
+    <string name="dream_setup_description" msgid="7508547154038580296">"Виберіть, що має відображатися на екрані, коли планшет не використовується. Коли використовується заставка, ваш пристрій може споживати більше енергії."</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Налаштувати"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="6412591361284929149">"Щоб увімкнути підтримку довільного формату, перезапустіть пристрій."</string>
     <string name="reboot_dialog_force_desktop_mode" msgid="2021839270403432948">"Щоб примусово застосувати режим робочого столу на додаткових екранах, перезапустіть пристрій."</string>
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезапустити зараз"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезапустити пізніше"</string>
-    <!-- no translation found for bluetooth_details_spatial_audio_title (1368071116994002707) -->
-    <skip />
+    <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Просторове звучання"</string>
     <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук із сумісних носіїв стає реалістичнішим"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Відстеження рухів голови"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Коли ви рухаєте головою, звучання стає природнішим"</string>
