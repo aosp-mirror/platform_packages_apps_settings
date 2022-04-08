@@ -78,7 +78,7 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
         if (mStorageEntry != null && mStorageEntry.isMounted() && mStorageEntry.isPrivate()) {
             StorageCacheHelper.StorageCache cachedData = mStorageCacheHelper.retrieveCachedSize();
             mTotalBytes = cachedData.totalSize;
-            mUsedBytes = cachedData.usedSize;
+            mUsedBytes = cachedData.totalUsedSize;
             mIsUpdateStateFromSelectedStorageEntry = true;
             updateState(mUsageProgressBarPreference);
         }
