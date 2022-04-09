@@ -141,7 +141,8 @@ public class SelectableSubscriptions implements Callable<List<SubscriptionAnnota
     protected List<SubscriptionInfo> getSubInfoList(Context context,
             Function<SubscriptionManager, List<SubscriptionInfo>> convertor) {
         SubscriptionManager subManager = getSubscriptionManager(context);
-        return (subManager == null) ? Collections.emptyList() : convertor.apply(subManager);
+        List<SubscriptionInfo> result = (subManager == null) ? null : convertor.apply(subManager);
+        return (result == null) ? Collections.emptyList() : result;
     }
 
     protected SubscriptionManager getSubscriptionManager(Context context) {
