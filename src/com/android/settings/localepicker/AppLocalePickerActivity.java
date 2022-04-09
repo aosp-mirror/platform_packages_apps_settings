@@ -73,6 +73,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         UserHandle userHandle = UserHandle.getUserHandleForUid(uid);
         mContextAsUser = createContextAsUser(userHandle, 0);
 
+        setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
