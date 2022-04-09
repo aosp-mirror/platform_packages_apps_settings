@@ -115,6 +115,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
             mCustomizeButton.setVisibility(
                     item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+            mCustomizeButton.setSelected(false);
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
