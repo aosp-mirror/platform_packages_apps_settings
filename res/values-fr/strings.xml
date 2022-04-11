@@ -141,7 +141,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Autoriser la tablette à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Autoriser l\'appareil à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Autoriser le téléphone à communiquer avec les appareils Bluetooth à proximité"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement du matériel Bluetooth A2DP"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Redémarrer ?"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Vous devez redémarrer l\'appareil pour modifier ce paramètre."</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Redémarrer"</string>
@@ -1187,7 +1187,7 @@
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Lorsqu\'il n\'y a aucun appareil connecté"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Étendre la compatibilité"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Aide d\'autres appareils à détecter ce point d\'accès. Réduit la vitesse de connexion du point d\'accès."</string>
-    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. Accroît l\'utilisation de la batterie."</string>
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. La batterie est davantage sollicitée."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> est actif"</string>
@@ -1335,7 +1335,7 @@
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmenter automatiquement la fréquence d\'actualisation de 60 à 90 Hz pour certains contenus. La batterie est davantage sollicitée."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forcer la fréquence d\'actualisation crête"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Fréquence d\'actualisation la plus élevée pour améliorer la réactivité au toucher et la qualité d\'animation. Accroît l\'utilisation de la batterie."</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Fréquence d\'actualisation la plus élevée pour améliorer la réactivité au toucher et la qualité d\'animation. La batterie est davantage sollicitée."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Regard sur écran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activé - L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Désactivé"</string>
@@ -2031,7 +2031,7 @@
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Compatibilité de l\'écran"</string>
     <string name="permissions_label" msgid="1708927634370314404">"Autorisations"</string>
     <string name="cache_header_label" msgid="2441967971921741047">"Cache"</string>
-    <string name="clear_cache_btn_text" msgid="8597272828928143723">"Vider le cache"</string>
+    <string name="clear_cache_btn_text" msgid="8597272828928143723">"Effacer du cache"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Cache"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
       <item quantity="one">%d élément</item>
@@ -2051,7 +2051,7 @@
     <string name="install_text" msgid="4558333621516996473">"Installer"</string>
     <string name="disable_text" msgid="5146002260857428005">"Désactiver"</string>
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
-    <string name="clear_user_data_text" msgid="6773186434260397947">"Vider l\'espace de stockage"</string>
+    <string name="clear_user_data_text" msgid="6773186434260397947">"Effacer du stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller les mises à jour"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette appli par défaut."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Vous avez choisi de permettre à cette application de créer des widgets et d\'accéder à leurs données."</string>
@@ -2377,7 +2377,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
-    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Grand curseur de la souris"</string>
+    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Agrandir le curseur"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
     <string name="accessibility_toggle_primary_mono_title" msgid="7587152099472946571">"Audio mono"</string>
     <string name="accessibility_toggle_primary_mono_summary" msgid="1935283927319407303">"Combiner les canaux quand de l\'audio est lu"</string>
@@ -5067,7 +5067,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Suspendre les notifications pour rester concentré"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Fonctionnalité non disponible"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Cette fonctionnalité a été désactivée, car elle ralentit votre téléphone"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Toujours afficher une boîte de dialogue en cas de plantage"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Toujours afficher la boîte de dialogue de plantage"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Afficher une boîte de dialogue chaque fois qu\'une application plante"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Sélectionner une application compatible avec ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Aucune application compatible avec ANGLE n\'est définie"</string>

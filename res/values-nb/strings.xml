@@ -141,7 +141,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Tillat at nettbrettet ditt kommuniserer med Bluetooth-enheter i nærheten"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Tillat at enheten din kommuniserer med Bluetooth-enheter i nærheten"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Tillat at telefonen din kommuniserer med Bluetooth-enheter i nærheten"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Slå av Bluetooth A2DP hardware offload"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Slå av maskinvareavlastning for Bluetooth A2DP"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Start enhet på nytt?"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Du må starte enheten din på nytt for å endre innstillingen."</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Start på nytt"</string>
@@ -1334,8 +1334,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Smooth Display"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Øker oppdateringsfrekvensen automatisk fra 60 til 90 Hz for noe innhold. Øker batteribruken."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Tving høyeste oppdateringsfrekvens"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Den høyeste oppdateringsfrekvensen for å oppnå bedre trykkfølsomhet og animasjonskvalitet. Øker batteribruken."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Maks oppdateringsfrekvens"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Maksimal oppdateringsfrekvens for bedre trykkfølsomhet og animasjonskvalitet. Øker batteribruken."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Skjermoppmerksomhet"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"På / skjermen slås ikke av hvis du ser på den"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Av"</string>
@@ -2294,11 +2294,11 @@
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Forstørr hele skjermen eller et bestemt område, eller bytt mellom de to alternativene."</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Fullskjerm"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"En del av skjermen"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Bytt mellom hele skjermen og en del av den"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Bytt mellom hele og en del av skjermen"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Velg hvordan du vil forstørre"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Forstørr hele skjermen"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Forstørr en del av skjermen"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Bytt mellom hele skjermen og en del av den"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Bytt mellom hele og en del av skjermen"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Trykk på Bytt-knappen for å bytte mellom alternativene"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Vil du bytte til en Tilgjengelighet-knapp?"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Hvis du bruker trippeltrykk for å forstørre en del av skjermen, blir skriving og andre handlinger forsinket.\n\nTilgjengelighet-knappen flyter over andre apper på skjermen. Trykk på den for å forstørre."</string>
@@ -2317,7 +2317,7 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er slått på, kan du zoome inn på skjermen.\n\n"<b>"For å zoome"</b>", start forstørring og trykk hvor som helst på skjermen.\n"<ul><li>"Dra to eller flere fingre for å rulle"</li>\n<li>"Knip to eller flere fingre for å justere zoomen"</li></ul>\n\n<b>"For å zoome midlertidig"</b>", start forstørring og trykk og hold hvor som helst på skjermen.\n"<ul><li>"Dra for å bevege deg rundt på skjermen"</li>\n<li>"Løft fingeren for å zoome ut"</li></ul>\n\n"Du kan ikke zoome inn på tastaturet eller navigasjonsraden."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Side <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Bruk Tilgjengelighet-knappen for å åpne"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold inne volumtastene for å åpne"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Hold volumtastene for å åpne"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Trippeltrykk på skjermen for å åpne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Bruk bevegelse for å åpne"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Bruk tilgjengelighetsbevegelse"</string>
@@ -2469,8 +2469,8 @@
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Om ekstra dimmet"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Gjør skjermen mørkere enn den laveste lysstyrken på telefonen"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Gjør skjermen mørkere enn den laveste lysstyrken på nettbrettet"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Gjør skjermen mørkere, slik at det er mer komfortabelt å lese.&lt;br/&gt;&lt;br/&gt; Dette kan være nyttig når &lt;ol&gt; &lt;li&gt; den laveste vanlige lysstyrken på telefonen er for lys&lt;/li&gt; &lt;li&gt; du bruker telefonen i mørke omgivelser, for eksempel om natten eller i et mørkt rom før leggetid&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Gjør skjermen mørkere, slik at det er mer komfortabelt å lese.&lt;br/&gt;&lt;br/&gt; Dette kan være nyttig når &lt;ol&gt; &lt;li&gt; standard laveste lysstyrke på nettbrettet fremdeles er for lys&lt;/li&gt; &lt;li&gt; du bruker nettbrettet i mørke omgivelser, for eksempel om natten eller i et mørkt rom før leggetid&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Gjør skjermen mørkere så det blir mer komfortabelt å lese.&lt;br/&gt;&lt;br/&gt; Dette kan være nyttig når &lt;ol&gt; &lt;li&gt; den laveste vanlige lysstyrken på telefonen er for lys&lt;/li&gt; &lt;li&gt; du bruker telefonen i mørke omgivelser, for eksempel om natten eller i et mørkt rom før leggetid&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"Gjør skjermen mørkere så det blir mer komfortabelt å lese.&lt;br/&gt;&lt;br/&gt; Dette kan være nyttig når &lt;ol&gt; &lt;li&gt; standard laveste lysstyrke på nettbrettet fremdeles er for lys&lt;/li&gt; &lt;li&gt; du bruker nettbrettet i mørke omgivelser, for eksempel om natten eller i et mørkt rom før leggetid&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensitet"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Mørkere"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Lysere"</string>
@@ -4678,8 +4678,8 @@
     <string name="configure" msgid="1499586749829665889">"Konfigurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Andre apper som er inkludert i bruken"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apper kan bruke ubegrenset med data når Datasparing er på</item>
-      <item quantity="one">1 app kan bruke ubegrenset med data når Datasparing er på</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> apper kan bruke ubegrenset data når datasparing er på</item>
+      <item quantity="one">1 app kan bruke ubegrenset data når datasparing er på</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Primære data"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi‑Fi-data"</string>
@@ -4706,7 +4706,7 @@
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Bakgrunnsdata er slått av"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"På"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Av"</string>
-    <string name="data_saver_switch_title" msgid="7111538580123722959">"Bruk Datasparing"</string>
+    <string name="data_saver_switch_title" msgid="7111538580123722959">"Bruk datasparing"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Ubegrenset databruk"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Tillat ubegrenset datatilgang når Datasparing er på"</string>
     <string name="home_app" msgid="6056850504746902747">"Startsideapp"</string>
@@ -5049,8 +5049,8 @@
     <string name="location_category" msgid="3496759112306219062">"Posisjon"</string>
     <string name="location_indicator_settings_title" msgid="6655916258720093451">"Statusfelt for posisjonsindikator"</string>
     <string name="location_indicator_settings_description" msgid="2888022085372804021">"Vis for alle posisjoner, inkludert nettverk og tilkobling"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Tving fullstendige GNSS-målinger"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Spor alle GNSS-konstellasjoner og -frekvenser uten syklus for oppgaver"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1206679951510243341">"Bruk uavbrutt GNSS-måling"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Spor alle GNSS-konstellasjoner og -frekvenser uten målingssyklus (pulsbredde)"</string>
     <string name="device_theme" msgid="5027604586494772471">"Enhetstema"</string>
     <string name="default_theme" msgid="4815428567082263639">"Standard"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Nettverksnavn"</string>
@@ -5415,7 +5415,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyring"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk og hold på av/på-knappen"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk på og hold av/på-knappen"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Trykk og hold for assistenten"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Trykk og hold for av/på-menyen"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Trykk og hold er slått av"</string>
@@ -5499,7 +5499,7 @@
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
     <string name="wifi_scan_notify_message" msgid="4130641837826688879">"For å forbedre brukeropplevelsen på enheten kan apper og tjenester søke etter Wi-Fi-nettverk når som helst – også når Wi-Fi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Wi-Fi-skanning. "<annotation id="link">"Endre"</annotation></string>
-    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Tilkoblet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen tilkobling"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Mobildata kobler ikke til automatisk"</string>
