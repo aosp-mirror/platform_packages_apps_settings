@@ -34,6 +34,12 @@
         <item name="android:colorBackground">@*android:color/surface_dark</item>
     </style>
 
+    <style name="Theme.AlertDialog.Base.Material3" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@*android:color/primary_device_default_settings</item>
+        <item name="colorAccent">@*android:color/accent_device_default_dark</item>
+        <item name="android:colorBackground">@*android:color/surface_dark</item>
+    </style>
+
     <!-- Material theme for the pages containing TabLayout and ViewPager -->
     <style name="Theme.TabTheme" parent="@style/Theme.MaterialComponents.DayNight">
         <item name="colorPrimary">@*android:color/edge_effect_device_default_dark</item>
