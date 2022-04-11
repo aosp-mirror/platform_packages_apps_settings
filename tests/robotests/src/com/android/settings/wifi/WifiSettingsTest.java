@@ -277,6 +277,11 @@ public class WifiSettingsTest {
 
     @Test
     public void onWifiEntriesChanged_shouldChangeNextButtonState() {
+        final FragmentActivity activity = mock(FragmentActivity.class);
+        doReturn(false).when(activity).isFinishing();
+        doReturn(false).when(activity).isDestroyed();
+        doReturn(activity).when(mWifiSettings).getActivity();
+
         mWifiSettings.onWifiEntriesChanged();
 
         verify(mWifiSettings).changeNextButtonState(anyBoolean());
