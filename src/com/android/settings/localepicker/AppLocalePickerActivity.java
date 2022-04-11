@@ -88,12 +88,6 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mLocalePickerWithRegion.getListView().addHeaderView(launchAppLocaleDetailsPage());
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             super.onBackPressed();
@@ -136,7 +130,19 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     void launchLocalePickerPage() {
         // LocalePickerWithRegion use android.app.ListFragment. Thus, it can not use
         // getSupportFragmentManager() to add this into container.
-        getFragmentManager().beginTransaction()
+        android.app.FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.registerFragmentLifecycleCallbacks(
+                new android.app.FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentResumed(
+                            android.app.FragmentManager fm,
+                            android.app.Fragment f) {
+                        super.onFragmentResumed(fm, f);
+                        mLocalePickerWithRegion.getListView()
+                                .addHeaderView(launchAppLocaleDetailsPage());
+                    }
+                }, true);
+        fragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.content_frame, mLocalePickerWithRegion)
                 .commit();
