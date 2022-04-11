@@ -953,4 +953,15 @@
         <item name="android:background">@drawable/data_bytes_editor_spinner_background</item>
         <item name="android:dropDownVerticalOffset">36dp</item>
     </style>
+
+    <style name="BroadcastActionButton" parent="@android:style/Widget.Material.Button">
+        <item name="android:background">@drawable/broadcast_button_outline</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">20sp</item>
+        <item name="android:fontFamily">@*android:string/config_bodyFontFamilyMedium</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>
