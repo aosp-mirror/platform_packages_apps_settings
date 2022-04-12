@@ -21,6 +21,7 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,7 +33,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -182,7 +182,7 @@ public final class ConvertUtils {
             }
 
             // Collects all keys in these three time slot records as all populations.
-            final Set<String> allBatteryHistEntryKeys = new HashSet<>();
+            final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
             allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
