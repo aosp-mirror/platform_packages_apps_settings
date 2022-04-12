@@ -157,7 +157,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             }
         }
 
-        setupDefaultShortcutIfNecessary(getPrefContext());
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
             final PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
@@ -226,6 +225,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (mNeedsQSTooltipReshow) {
             getView().post(this::showQuickSettingsTooltipIfNeeded);
         }
+
+        writeDefaultShortcutTargetServiceToSettingsIfNeeded(getPrefContext());
     }
 
     @Override
@@ -792,8 +793,22 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     /**
      * Setups a configurable default if the setting has never been set.
+     *
+     * TODO(b/228562075): Remove this function when correcting the format in config file
+     * `config_defaultAccessibilityService`.
      */
-    private static void setupDefaultShortcutIfNecessary(Context context) {
+    private void writeDefaultShortcutTargetServiceToSettingsIfNeeded(Context context) {
+        if (mComponentName == null) {
+            return;
+        }
+
+        final ComponentName defaultService = ComponentName.unflattenFromString(context.getString(
+                com.android.internal.R.string.config_defaultAccessibilityService));
+        // write default accessibility service only when user enter into corresponding page.
+        if (!mComponentName.equals(defaultService)) {
+            return;
+        }
+
         final String targetKey = Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
         String targetString = Settings.Secure.getString(context.getContentResolver(), targetKey);
         if (!TextUtils.isEmpty(targetString)) {
