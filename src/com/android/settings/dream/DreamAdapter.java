@@ -177,4 +177,11 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             notifyDataSetChanged();
         }
     }
+
+    /**
+     * Gets the enabled state of all items.
+     */
+    public boolean getEnabled() {
+        return mEnabled;
+    }
 }
