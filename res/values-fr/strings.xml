@@ -147,7 +147,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Autoriser la tablette à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Autoriser l\'appareil à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Autoriser le téléphone à communiquer avec les appareils Bluetooth à proximité"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement du matériel Bluetooth A2DP"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Désactiver le déchargement du matériel Bluetooth LE AUDIO"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Redémarrer l\'appareil ?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Vous devez redémarrer l\'appareil pour modifier ce paramètre."</string>
@@ -1199,7 +1199,7 @@
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Lorsqu\'il n\'y a aucun appareil connecté"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Étendre la compatibilité"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Aide d\'autres appareils à détecter ce point d\'accès. Réduit la vitesse de connexion du point d\'accès."</string>
-    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. Accroît l\'utilisation de la batterie."</string>
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Aide d\'autres appareils à détecter ce point d\'accès. La batterie est davantage sollicitée."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Partage de connexion non disponible"</string>
@@ -1355,7 +1355,7 @@
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Affichage fluide"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Augmenter automatiquement la fréquence d\'actualisation de 60 à 90 Hz pour certains contenus. La batterie est davantage sollicitée."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forcer la fréquence d\'actualisation crête"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Fréquence d\'actualisation la plus élevée pour améliorer la réactivité au toucher et la qualité d\'animation. Accroît l\'utilisation de la batterie."</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Fréquence d\'actualisation la plus élevée pour améliorer la réactivité au toucher et la qualité d\'animation. La batterie est davantage sollicitée."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Regard sur écran"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activé - L\'écran ne s\'éteint pas pendant que vous le regardez"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Désactivé"</string>
@@ -2046,7 +2046,7 @@
     <string name="screen_compatibility_label" msgid="7549658546078613431">"Compatibilité de l\'écran"</string>
     <string name="permissions_label" msgid="1708927634370314404">"Autorisations"</string>
     <string name="cache_header_label" msgid="2441967971921741047">"Cache"</string>
-    <string name="clear_cache_btn_text" msgid="8597272828928143723">"Vider le cache"</string>
+    <string name="clear_cache_btn_text" msgid="8597272828928143723">"Effacer du cache"</string>
     <string name="cache_size_label" msgid="313456088966822757">"Cache"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="8212425823423508096">
       <item quantity="one">%d élément</item>
@@ -2066,7 +2066,7 @@
     <string name="install_text" msgid="4558333621516996473">"Installer"</string>
     <string name="disable_text" msgid="5146002260857428005">"Désactiver"</string>
     <string name="enable_text" msgid="8570798764647110430">"Activer"</string>
-    <string name="clear_user_data_text" msgid="6773186434260397947">"Vider l\'espace de stockage"</string>
+    <string name="clear_user_data_text" msgid="6773186434260397947">"Effacer du stockage"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Désinstaller les mises à jour"</string>
     <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Autoriser les paramètres restreints"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Certaines activités que vous avez sélectionnées s\'ouvrent dans cette appli par défaut."</string>
@@ -2415,7 +2415,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Mise à jour auto de la loupe"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Bouton Marche/Arrêt pour raccrocher"</string>
-    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Grand curseur de la souris"</string>
+    <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Agrandir le curseur"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Rendre le pointeur de la souris plus visible"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduire les mouvements à l\'écran"</string>
@@ -2477,7 +2477,7 @@
     <string name="accessibility_color_correction_qs_tooltip_content" msgid="3258628434235475205">"Vous pouvez aussi ajouter la correction des couleurs aux Réglages rapides depuis le haut de l\'écran"</string>
     <string name="accessibility_color_inversion_auto_added_qs_tooltip_content" msgid="7267618234972101725">"Inversion des couleurs ajoutée aux Réglages rapides. Balayez vers le bas pour l\'activer ou la désactiver à tout moment."</string>
     <string name="accessibility_color_inversion_qs_tooltip_content" msgid="5046332142185711869">"Vous pouvez aussi ajouter l\'inversion des couleurs aux Réglages rapides depuis le haut de l\'écran"</string>
-    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Fonctionnalité Encore moins lumineux ajoutée aux Réglages rapides. Balayez vers le bas pour l\'activer ou la désactiver à tout moment."</string>
+    <string name="accessibility_reduce_bright_colors_auto_added_qs_tooltip_content" msgid="1906588335786328512">"Fonctionnalité \"encore moins lumineux\" ajoutée aux Réglages rapides. Balayez vers le bas pour l\'activer ou la désactiver à tout moment."</string>
     <string name="accessibility_reduce_bright_colors_qs_tooltip_content" msgid="7522121299176176785">"Vous pouvez aussi ajouter la fonctionnalité Encore moins lumineux aux Réglages rapides depuis le haut de l\'écran"</string>
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"Mode une main ajouté aux Réglages rapides. Balayez vers le bas pour l\'activer ou le désactiver à tout moment."</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"Vous pouvez aussi ajouter le mode une main aux Réglages rapides depuis le haut de l\'écran"</string>
@@ -2542,7 +2542,7 @@
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Diminuer encore la luminosité minimale du téléphone"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Diminuer encore la luminosité minimale de la tablette"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Réduisez la luminosité de l\'écran pour une meilleure lisibilité"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"La fonctionnalité Encore moins lumineux peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"La fonctionnalité \"encore moins lumineux\" peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"La fonctionnalité Encore moins lumineux peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre tablette est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre tablette dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensité"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Moins lumineux"</string>
@@ -3728,7 +3728,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Sous-titres automatiques"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Haut-parleur du téléphone"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Casque filaire"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"La fonctionnalité Son spatial, disponible qu\'avec certains contenus multimédias, crée un son immersif qui semble provenir de tout autour de vous."</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"Le Son spatial crée un son immersif qui semble provenir de tout autour de vous. Compatible avec certains contenus multimédias uniquement."</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Désactivé"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activé - <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activé - <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> et <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -4958,7 +4958,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Balayer l\'écran vers le bas pour"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Utiliser le raccourci vers"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Déroulez la moitié supérieure de l\'écran pour y accéder plus facilement avec une main"</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Utiliser le mode une main"</b>\n" • Assurez-vous que la navigation par gestes est sélectionnée dans les paramètres de navigation du système\n • Balayez l\'écran vers le bas depuis le bord inférieur de l\'écran"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Utiliser le mode une main"</b>\n" • Assurez-vous que la navigation par gestes est sélectionnée dans les paramètres de navigation du système\n • Balayez l\'écran vers le bas près du bord inférieur de l\'écran"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Tirer sur l\'écran pour l\'avoir à portée"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Le haut de l\'écran se déplacera pour être à portée de votre pouce."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Afficher les notifications"</string>
@@ -5176,7 +5176,7 @@
     <string name="zen_suggestion_summary" msgid="1984990920503217">"Suspendre les notifications pour rester concentré"</string>
     <string name="disabled_feature" msgid="7151433782819744211">"Fonctionnalité non disponible"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Cette fonctionnalité a été désactivée, car elle ralentit votre téléphone"</string>
-    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Toujours afficher une boîte de dialogue en cas de plantage"</string>
+    <string name="show_first_crash_dialog" msgid="1696584857732637389">"Toujours afficher la boîte de dialogue de plantage"</string>
     <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Afficher une boîte de dialogue chaque fois qu\'une application plante"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Sélectionner une application compatible avec ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"Aucune application compatible avec ANGLE n\'est définie"</string>
@@ -5572,7 +5572,7 @@
     <string name="overlay_settings_title" msgid="1032863083496396365">"Autoriser superpositions d\'écran dans paramètres"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Autoriser les applications pouvant se superposer à d\'autres à se superposer aux écrans de paramètres"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Autoriser le service de modem fictif"</string>
-    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Autorisez cet appareil à exécuter le service de modem fictif pour les tests d\'instrumentation. Ne l\'activez pas pendant l\'utilisation normale du téléphone"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Autoriser cet appareil à exécuter le service de modem fictif pour les tests d\'instrumentation. Ne pas l\'activer lors d\'une utilisation normale du téléphone"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Multimédia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Épingler le lecteur multimédia"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Pour reprendre rapidement la lecture, le lecteur multimédia reste ouvert dans les réglages rapides"</string>
@@ -5698,8 +5698,6 @@
     <string name="location_toggle_title" msgid="5229867700421750868">"Accès à la position"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"Pour les applis et services"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"Pour les applis et services. Si ce paramètre est désactivé, il est cependant possible que les données du micro soient partagées lorsque vous appelez un numéro d\'urgence."</string>
-    <string name="game_settings_title" msgid="1028178627743422090">"Paramètres de jeu"</string>
-    <string name="game_settings_summary" msgid="8623110986485071064">"Activer le raccourci Tableau de bord Jeux, etc."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Précédent"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Suivant"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Aperçu de la couleur"</string>
