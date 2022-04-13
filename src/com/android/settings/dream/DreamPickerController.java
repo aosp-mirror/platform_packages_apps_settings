@@ -158,7 +158,7 @@ public class DreamPickerController extends BasePreferenceController implements
 
         @Override
         public boolean isActive() {
-            if (mActiveDream == null) {
+            if (!mAdapter.getEnabled() || mActiveDream == null) {
                 return false;
             }
             return mDreamInfo.componentName.equals(mActiveDream.componentName);
