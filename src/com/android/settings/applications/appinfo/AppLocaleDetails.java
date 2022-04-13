@@ -208,13 +208,9 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         LocaleList packageLocaleList = getPackageLocales();
         String[] assetLocaleList = getAssetLocales();
         // TODO add apended url string, "Learn more", to these both sentenses.
-        if (packageLocaleList == null && assetLocaleList.length == 0) {
-            // There is no locale info from PackageManager amd AssetManager.
+        if ((packageLocaleList != null && packageLocaleList.isEmpty())
+                || (packageLocaleList == null && assetLocaleList.length == 0)) {
             return R.string.desc_no_available_supported_locale;
-        } else if (packageLocaleList != null && packageLocaleList.isEmpty()) {
-            // LocaleConfig is empty, and this means only allow user modify language
-            // by the application.
-            return R.string.desc_disallow_locale_change_in_settings;
         }
         return -1;
     }
