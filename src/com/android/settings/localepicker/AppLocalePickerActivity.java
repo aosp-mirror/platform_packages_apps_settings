@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.LocalePickerWithRegion;
@@ -49,6 +50,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
     private LocalePickerWithRegion mLocalePickerWithRegion;
     private AppLocaleDetails mAppLocaleDetails;
     private Context mContextAsUser;
+    private View mAppLocaleDetailContainer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
                 false /* translate only */,
                 mPackageName);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
-
+        mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
         launchLocalePickerPage();
     }
@@ -134,12 +136,14 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         fragmentManager.registerFragmentLifecycleCallbacks(
                 new android.app.FragmentManager.FragmentLifecycleCallbacks() {
                     @Override
-                    public void onFragmentResumed(
+                    public void onFragmentViewCreated(
                             android.app.FragmentManager fm,
-                            android.app.Fragment f) {
-                        super.onFragmentResumed(fm, f);
-                        mLocalePickerWithRegion.getListView()
-                                .addHeaderView(launchAppLocaleDetailsPage());
+                            android.app.Fragment f, View v, Bundle s) {
+                        super.onFragmentViewCreated(fm, f, v, s);
+                        ListView listView = (ListView) v.findViewById(android.R.id.list);
+                        if (listView != null) {
+                            listView.addHeaderView(mAppLocaleDetailContainer);
+                        }
                     }
                 }, true);
         fragmentManager.beginTransaction()
