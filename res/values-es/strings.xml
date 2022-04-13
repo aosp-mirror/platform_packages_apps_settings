@@ -142,7 +142,7 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Permite que tu tablet se comunique con dispositivos Bluetooth cercanos"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permite que tu dispositivo se comunique con dispositivos Bluetooth cercanos"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permite que tu teléfono se comunique con dispositivos Bluetooth cercanos"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Inhabilitar descarga hardware A2DP BT"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Inhabilitar descarga de hardware Bluetooth A2DP"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"¿Reiniciar dispos.?"</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Debes reiniciar el dispositivo para cambiar este ajuste."</string>
     <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Reiniciar"</string>
@@ -916,7 +916,7 @@
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> quiere activar la conexión Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> quiere desactivar la conexión Wi-Fi"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Verificar bytecode de aplicaciones depurables"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permitir que ART verifique el bytecode de aplicaciones depurables"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"Permite que el ART verifique el bytecode de aplicaciones depurables"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Mostrar tasa de refresco"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Muestra la tasa de refresco de la pantalla"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -946,7 +946,7 @@
     <string name="wifi_sap_no_channel_error" msgid="2126487622024749402">"Banda de 5 GHz no disponible en este país"</string>
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"Modo avión"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Notificar si hay redes públicas"</string>
-    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Recibir una notificación si hay una red pública de alta calidad disponible"</string>
+    <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Recibe una notificación si hay una red pública de alta calidad disponible"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"Activar Wi-Fi automáticamente"</string>
     <string name="wifi_wakeup_summary" msgid="5778059083790221465">"La conexión Wi-Fi se volverá a activar automáticamente cerca de las redes de alta calidad guardadas, como la de tu casa"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"No está disponible porque la ubicación no está activada. Activa la "<annotation id="link">"ubicación"</annotation>"."</string>
@@ -960,7 +960,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="2299284032301667622">"Para usar esta función, selecciona un proveedor de valoración de redes"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="1780306481499369913">"Para usar esta función, selecciona un proveedor de valoración de redes compatible"</string>
     <string name="wifi_install_credentials" msgid="5192903644606839972">"Instalar certificados"</string>
-    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Para mejorar la precisión de la ubicación, las aplicaciones y los servicios podrán buscar redes Wi‑Fi en cualquier momento aunque la conexión Wi-Fi esté desactivada. De este modo, se pueden mejorar los servicios y las funciones basados en la ubicación, por ejemplo. Puedes cambiarlo en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="wifi_scan_notify_text" msgid="7163137260385995873">"Para mejorar la precisión de la ubicación, las aplicaciones y los servicios podrán buscar redes Wi‑Fi en cualquier momento aunque la conexión Wi-Fi esté desactivada. De este modo, se pueden mejorar los servicios y las funciones basados en la ubicación, por ejemplo. Puedes cambiar esto en los <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>ajustes de búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="7439201783168213149">"Para mejorar la precisión de la ubicación, activa la <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>búsqueda de redes Wi-Fi<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="8436897497968907701">"No volver a mostrar"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="6285374200292675649">"Usar Wi-Fi en suspensión"</string>
@@ -1038,12 +1038,12 @@
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Ver o cambiar la suscripción"</string>
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Dirección MAC aleatoria"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Añade un dispositivo"</string>
-    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Encuadra el código QR abajo para añadir el dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centra el código QR de abajo para añadir el dispositivo a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Escanea el código QR"</string>
-    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Encuadra el código QR abajo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centra el código QR de abajo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Escanea el código QR para conectarte a la red Wi‑Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Compartir Wi‑Fi"</string>
-    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Escanea el código QR con otro dispositivo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
+    <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Escanea este código QR con otro dispositivo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Escanea este código QR con otro dispositivo para conectarte a \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Vuelve a intentarlo. Si el problema persiste, ponte en contacto con el fabricante del dispositivo"</string>
     <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Ha habido un error"</string>
@@ -1340,8 +1340,8 @@
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Pantalla fluida"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automáticamente la tasa de refresco de 60 a 90 Hz en determinados tipos de contenido. Aumenta el uso de la batería."</string>
-    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forzar frecuencia máxima de actualización"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Se utiliza la mayor frecuencia de actualización posible para mejorar la capacidad de respuesta a toques y la calidad de las animaciones. Aumenta el uso de batería."</string>
+    <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forzar tasa de refresco máxima"</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Se la tasa de refresco más alta posible para mejorar la capacidad de respuesta táctil y la calidad de las animaciones. Aumenta el uso de batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Pantalla atenta"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado / La pantalla no se apagará si estás mirándola"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Desactivado"</string>
@@ -1818,7 +1818,7 @@
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Compartir conexión por Ethernet"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Comparte la conexión a Internet del teléfono por Ethernet"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Utiliza el punto de acceso y la conexión compartida para que otros dispositivos puedan conectarse a Internet a través de tu conexión de datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Utiliza Compartir Internet para que otros dispositivos puedan conectarse a Internet a través de tu red Wi‑Fi o tus datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Usa Compartir Internet para que otros dispositivos puedan conectarse a Internet a través de tu red Wi‑Fi o de datos móviles. Las aplicaciones también pueden crear un punto de acceso para compartir contenido con dispositivos cercanos."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Ayuda"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Red móvil"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Plan móvil"</string>
@@ -2317,8 +2317,8 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Si la ampliación está activada, puedes ampliar la pantalla.\n\n"<b>"Para ampliar"</b>", inicia la ampliación y toca la parte de la pantalla que quieras ampliar.\n"<ul><li>"Arrastra al menos dos dedos para desplazarte."</li>\n<li>"Pellizca la pantalla con al menos dos dedos para ajustar el zoom."</li></ul>\n\n<b>"Para ampliar elementos temporalmente"</b>", inicia la ampliación y mantén pulsada cualquier parte de la pantalla.\n"<ul><li>"Arrastra un dedo para desplazarte por la pantalla."</li>\n<li>"Levanta el dedo para reducir la imagen."</li></ul>\n\n"El teclado y la barra de navegación no se pueden ampliar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Página <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> de <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Usa el botón Accesibilidad para abrir"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén pulsadas las teclas de volumen para abrirla"</string>
-    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Tocar tres veces la pantalla para abrir"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Mantén pulsadas las teclas de volumen para abrir"</string>
+    <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Toca tres veces la pantalla para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Usar gesto para abrir"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usa el nuevo gesto de accesibilidad"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para usar esta función, toca el botón de accesibilidad <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g>, situado en la parte inferior de la pantalla.\n\nPara pasar de una función a otra, mantén pulsado el botón de accesibilidad."</string>
@@ -2343,10 +2343,10 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"Más opciones"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"Más información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"Mantener teclas de volumen"</string>
-    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantén pulsadas las teclas de volumen"</string>
+    <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"mantener pulsadas las teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Mantén pulsadas las dos teclas de volumen"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"Triple toque en la pantalla"</string>
-    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"toca tres veces la pantalla"</string>
+    <string name="accessibility_shortcut_triple_tap_keyword" msgid="6863958573135995927">"tocar tres veces la pantalla"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_triple_tap" msgid="2102327956423320536">"Toca la pantalla {0,number,integer} veces rápidamente. Esta acción puede hacer que tu dispositivo funcione más lento."</string>
     <string name="accessibility_shortcut_edit_dialog_title_advance" msgid="4567868630655591506">"Ajustes avanzados"</string>
     <string name="accessibility_screen_magnification_navbar_configuration_warning" msgid="266736851606791552">"Se ha definido <xliff:g id="SERVICE">%1$s</xliff:g> como preferencia de Accesibilidad. Para utilizar la ampliación, mantén pulsado el botón Accesibilidad y selecciona esa opción."</string>
@@ -2459,7 +2459,7 @@
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensidad"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Más tenue"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Más brillante"</string>
-    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantener activado después de reiniciar el dispositivo"</string>
+    <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Mantener después de reiniciar el dispositivo"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="other">Breve (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> segundos)</item>
       <item quantity="one">Breve (<xliff:g id="CLICK_DELAY_LABEL_0">%1$s</xliff:g> segundo)</item>
@@ -2645,7 +2645,7 @@
     <string name="advanced_battery_title" msgid="3005993394776555079">"Uso de batería"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detalles del historial"</string>
     <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Uso de batería"</string>
-    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ver uso durante las últimas 24 horas"</string>
+    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta el uso durante las últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Consulta el uso desde la última carga de la batería"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Uso de batería"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
@@ -2855,7 +2855,7 @@
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Basado en tu rutina"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Se activará según tu rutina"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Según el porcentaje"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Ahorro de batería se activa si es probable que te quedes sin batería antes de tu próxima carga normal."</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"Ahorro de batería se activa si es probable que te quedes sin batería antes de tu próxima carga normal"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Se activará cuando llegue al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Programar"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Amplía la duración de la batería"</string>
@@ -2884,7 +2884,7 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"En segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Los datos de uso de la batería son aproximados y no miden el uso que se hace cuando el teléfono se está cargando"</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Los datos de uso de batería estarán disponibles tras haber usado el teléfono unas horas"</string>
+    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Los datos de uso de batería estarán disponibles después de haber usado el teléfono unas horas"</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Gráfico del uso de batería"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas técnicas sobre procesos en ejecución"</string>
@@ -3731,7 +3731,7 @@
     <string name="zen_onboarding_current_setting_summary" msgid="8864567406905990095">"(Configuración actual)"</string>
     <string name="zen_onboarding_dnd_visual_disturbances_header" msgid="8639698336231314609">"¿Quieres cambiar los ajustes de las notificaciones del modo No molestar?"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sonidos del perfil de trabajo"</string>
-    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utilizar sonidos del perfil personal"</string>
+    <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Usar sonidos del perfil personal"</string>
     <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Utiliza los mismos sonidos que tu perfil personal"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Tono de llamada del teléfono de trabajo"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Sonido de notificación de trabajo predeterminado"</string>
@@ -4655,8 +4655,8 @@
     <string name="configure" msgid="1499586749829665889">"Configurar"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Otras aplicaciones incluidas en el uso"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicaciones pueden usar datos sin restricción cuando el ahorro de datos está activado</item>
-      <item quantity="one">1 aplicación puede usar datos sin restricción cuando el ahorro de datos está activado</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> aplicaciones pueden usar datos sin restricción cuando Ahorro de datos está activado</item>
+      <item quantity="one">1 aplicación puede usar datos sin restricción cuando Ahorro de datos está activado</item>
     </plurals>
     <string name="data_usage_title" msgid="4039024073687469094">"Datos primarios"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Datos Wi‑Fi"</string>
@@ -4803,9 +4803,9 @@
     <string name="gesture_preference_summary" product="default" msgid="7941981260703379398">"Gestos rápidos para controlar el teléfono"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4031666250963488007">"Gestos rápidos para controlar el tablet"</string>
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"Gestos rápidos para controlar el dispositivo"</string>
-    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir la cámara rápidamente"</string>
+    <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Abrir cámara rápidamente"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Pulsa dos veces el botón de encendido para abrir la cámara rápidamente. Funciona desde cualquier pantalla."</string>
-    <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Abrir la cámara rápidamente"</string>
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Abrir cámara rápidamente"</string>
     <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Cambiar de cámara para hacer selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Hacer selfies más rápido"</string>
@@ -5044,7 +5044,7 @@
     <string name="disabled_feature" msgid="7151433782819744211">"Función no disponible"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"Esta función se ha desactivado porque ralentiza el teléfono"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"Mostrar siempre el cuadro de diálogo de fallos"</string>
-    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Muestra el cuadro de diálogo cada vez que una aplicación falla"</string>
+    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"Muestra un cuadro de diálogo cada vez que una aplicación falla"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"Seleccionar una aplicación para usar ANGLE"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"No se ha seleccionado ninguna aplicación para usar ANGLE"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"Aplicación para usar ANGLE: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5189,7 +5189,7 @@
     <string name="calls_preference" msgid="2166481296066890129">"Preferencia de llamadas"</string>
     <string name="sms_preference" msgid="7742964962568219351">"Preferencia de SMS"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Preguntar siempre"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Añadir una red"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Añade una red"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> tarjetas SIM</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> tarjeta SIM</item>
@@ -5319,9 +5319,9 @@
     <string name="mobile_data_ap_mode_disabled" msgid="6067959496888990983">"No están disponibles en modo avión"</string>
     <string name="force_desktop_mode" msgid="1336913605091334238">"Forzar modo de escritorio"</string>
     <string name="force_desktop_mode_summary" msgid="4587416867846930479">"Fuerza el modo de escritorio experimental en pantallas secundarias"</string>
-    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Habilitar tamaño no modificable en multiventana"</string>
+    <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Habilitar aplicaciones de tamaño no modificable en multiventana"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Permite que las aplicaciones de tamaño no modificable se muestren en multiventana"</string>
-    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Forzar el modo oscuro"</string>
+    <string name="hwui_force_dark_title" msgid="4256904905631994219">"Forzar modo oscuro"</string>
     <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Fuerza el modo oscuro para que esté siempre activo"</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Privacidad"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Permisos, actividad de la cuenta, datos personales"</string>
@@ -5469,7 +5469,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"llamadas"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"datos móviles"</string>
-    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
+    <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conectado"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sin conexión"</string>
     <string name="mobile_data_off_summary" msgid="1884248776904165539">"Los datos móviles no se conectarán automáticamente"</string>
