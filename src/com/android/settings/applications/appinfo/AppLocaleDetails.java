@@ -146,6 +146,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
                 .setUid(mApplicationInfo.uid)
                 .setHasAppInfoLink(true)
                 .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
+                .setOrder(10)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }
