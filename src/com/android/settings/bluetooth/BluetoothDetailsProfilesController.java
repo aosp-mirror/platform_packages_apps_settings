@@ -20,6 +20,7 @@ import android.bluetooth.BluetoothCsipSetCoordinator;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -31,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LeAudioProfile;
@@ -70,6 +72,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private List<CachedBluetoothDevice> mAllOfCachedDevices;
     private Map<String, List<CachedBluetoothDevice>> mProfileDeviceMap =
             new HashMap<String, List<CachedBluetoothDevice>>();
+    private boolean mIsLeContactSharingEnabled = false;
 
     @VisibleForTesting
     PreferenceCategory mProfilesContainer;
@@ -88,6 +91,8 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     protected void init(PreferenceScreen screen) {
         mProfilesContainer = (PreferenceCategory)screen.findPreference(getPreferenceKey());
         mProfilesContainer.setLayoutResource(R.layout.preference_bluetooth_profile_category);
+        mIsLeContactSharingEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_LE_AUDIO_CONTACT_SHARING_ENABLED, false);
         // Call refresh here even though it will get called later in onResume, to avoid the
         // list of switches appearing to "pop" into the page.
         refresh();
@@ -119,21 +124,11 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     private void refreshProfilePreference(SwitchPreference profilePref,
             LocalBluetoothProfile profile) {
         BluetoothDevice device = mCachedDevice.getDevice();
-        boolean isLeAudioEnabled = false;
+        boolean isLeAudioEnabled = isLeAudioEnabled();
         if (profile instanceof A2dpProfile || HEADSET_CLIENT.equals(profile.toString())) {
-            LocalBluetoothProfile leAudio = mProfileManager.getLeAudioProfile();
-            if (leAudio != null) {
-                List<CachedBluetoothDevice> leAudioDeviceList = mProfileDeviceMap.get(
-                        leAudio.toString());
-                if (leAudioDeviceList != null
-                        && leAudioDeviceList.stream()
-                        .anyMatch(item -> leAudio.isEnabled(item.getDevice()))) {
-                    isLeAudioEnabled = true;
-                }
-            }
             if (isLeAudioEnabled) {
                 // If the LeAudio profile is enabled on the LeAudio devices, then the
-                // SwitchPreferences of A2dp profile and Hfp profile are graied out.
+                // SwitchPreferences of A2dp profile and Hfp profile are grayed out.
                 profilePref.setEnabled(false);
             } else {
                 List<CachedBluetoothDevice> deviceList = mProfileDeviceMap.get(
@@ -145,12 +140,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         } else if (profile instanceof LeAudioProfile) {
             List<CachedBluetoothDevice> leAudioDeviceList = mProfileDeviceMap.get(
                     profile.toString());
-            boolean isLeAudioProfileEnable =
-                    leAudioDeviceList != null && leAudioDeviceList.stream().anyMatch(
-                            item -> profile.isEnabled(item.getDevice()));
             boolean isBusy = leAudioDeviceList != null
                     && leAudioDeviceList.stream().anyMatch(item -> item.isBusy());
-            if (isLeAudioProfileEnable && !isBusy) {
+            if (isLeAudioEnabled && !isBusy) {
                 LocalBluetoothProfile a2dp = mProfileManager.getA2dpProfile();
                 LocalBluetoothProfile hfp = mProfileManager.getHfpClientProfile();
                 // If the LeAudio profile is enabled on the LeAudio devices, then the
@@ -169,6 +161,10 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 }
             }
             profilePref.setEnabled(!isBusy);
+        } else if (profile instanceof PbapServerProfile
+                && isLeAudioEnabled
+                && !mIsLeContactSharingEnabled) {
+            profilePref.setEnabled(false);
         } else {
             profilePref.setEnabled(!mCachedDevice.isBusy());
         }
@@ -201,6 +197,20 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
                 }
             }
         }
+    }
+
+    private boolean isLeAudioEnabled(){
+        LocalBluetoothProfile leAudio = mProfileManager.getLeAudioProfile();
+        if (leAudio != null) {
+            List<CachedBluetoothDevice> leAudioDeviceList = mProfileDeviceMap.get(
+                    leAudio.toString());
+            if (leAudioDeviceList != null
+                    && leAudioDeviceList.stream()
+                    .anyMatch(item -> leAudio.isEnabled(item.getDevice()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
