@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
+
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -72,9 +74,12 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
         mId = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_ID);
         if (mId == null) {
-            Log.w(TAG, "rule id is null");
-            toastAndFinish();
-            return;
+            mId = intent.getStringExtra(EXTRA_AUTOMATIC_RULE_ID);
+            if (mId == null) {
+                Log.w(TAG, "rule id is null");
+                toastAndFinish();
+                return;
+            }
         }
 
         if (DEBUG) Log.d(TAG, "mId=" + mId);
