@@ -148,7 +148,7 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"デバイスが付近の Bluetooth デバイスと通信することを許可する"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"スマートフォンが付近の Bluetooth デバイスと通信することを許可する"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP ハードウェア オフロードの無効化"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO ハードウェア オフロードを無効にする"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO ハードウェア オフロードの無効化"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"デバイスを再起動しますか？"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"この設定を変更するには、デバイスの再起動が必要です。"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"再起動"</string>
@@ -342,8 +342,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"セキュリティ ステータス"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"画面ロック、デバイスを探す、アプリのセキュリティ"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"セキュリティ、プライバシー"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"アプリのセキュリティ、デバイスのロック、権限"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"顔を追加済みです"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"タップして顔を設定してください"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"顔認証"</string>
@@ -587,14 +586,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 画面ロックの設定が無効になっています。詳しくは、組織の管理者にお問い合わせください。"<annotation id="admin_details">"詳細"</annotation>\n\n"購入やアプリアクセスの許可には指紋を使用できます。"<annotation id="url">"詳細"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"指紋認証センサーを使用できません。修理業者に調整を依頼してください"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"その他のセキュリティの設定"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"仕事用プロファイルのロック、暗号化など"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"暗号化、認証情報など"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"セキュリティ, その他 セキュリティ 設定, その他 設定, 詳細 セキュリティ 設定"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"最大で<xliff:g id="COUNT">%d</xliff:g>個の指紋を追加できます"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"追加された指紋の数が上限に達しました"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"これ以上、指紋を追加できません"</string>
@@ -2309,7 +2304,7 @@
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"拡大"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"拡大のショートカット"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"入力しながら拡大"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"入力にあわせて拡大鏡が文字のサイズを調整します"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"文字の入力にあわせて拡大鏡が移動します"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"拡大について"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"拡大の詳細"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"拡大の種類"</string>
@@ -2380,7 +2375,7 @@
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture_talkback" msgid="84483464524360845">"3 本の指で画面の下から上にスワイプします。\n\n機能を切り替えるには、3 本指で上にスワイプしたまま長押しします。"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_floating" msgid="4459254227203203324"><annotation id="link">"その他のオプション"</annotation></string>
     <string name="footer_learn_more_content_description" msgid="8843798273152131341">"「<xliff:g id="SERVICE">%1$s</xliff:g>」の詳細"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"音量キーを長押し"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="2356853121810443026">"音量ボタンを長押し"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="3921915304537166064">"音量大と音量小の両方のボタンを長押し"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"音量大と音量小の両方のボタンを長押しします"</string>
     <string name="accessibility_shortcut_edit_dialog_title_triple_tap" msgid="6672798007229795841">"画面をトリプルタップ"</string>
@@ -2443,9 +2438,9 @@
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色反転のショートカット"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"色反転機能を利用すると、明るい画面が暗くなり、暗い画面が明るくなります。"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;注意点&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; メディアや画像の色が変わります&lt;/li&gt; &lt;li&gt; 色反転機能はすべてのアプリでご利用いただけます&lt;/li&gt; &lt;li&gt; 背景を暗くするには、代わりにダークモードを使うこともできます&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動クリック（静止時間）"</string>
-    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"自動クリック（静止時間）について"</string>
-    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"自動クリック（静止時間）の詳細"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"自動クリック（一定時間の静止）"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"自動クリック（一定時間の静止）について"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"自動クリック（一定時間の静止）の詳細"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"カーソルの動きが一定の時間静止したときに、接続されているマウスを自動的にクリックするよう設定できます"</string>
     <string name="accessibility_autoclick_description" msgid="6695732131412361101">"自動クリックは、マウスをクリックしにくい場合に役立ちます"</string>
     <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"自動クリック OFF"</string>
@@ -2484,8 +2479,8 @@
     <string name="accessibility_one_handed_mode_auto_added_qs_tooltip_content" msgid="7914554254280416532">"「片手モード」をクイック設定に追加しました。下にスワイプすると、いつでも ON と OFF を切り替えられます。"</string>
     <string name="accessibility_one_handed_mode_qs_tooltip_content" msgid="2754332083184384603">"画面の上部からクイック設定に「片手モード」を追加することもできます"</string>
     <string name="accessibility_quick_settings_tooltip_dismiss" msgid="3269120277643884190">"閉じる"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"スマートフォンで色をどのように表示するかを調整できます"</string>
-    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"タブレットで色をどのように表示するかを調整できます"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"スマートフォンでの色表示を補正できます"</string>
+    <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"スマートフォンでの色表示を補正できます"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"色補正を使用"</string>
     <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"色補正のショートカット"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"色補正について"</string>
@@ -2501,7 +2496,7 @@
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"メディアアプリによっては、これらの字幕設定に対応していない場合があります"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"ユーザー補助機能ボタン"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"画面の下から上に 2 本の指でスワイプ"</string>
-    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"音量キーを長押し"</string>
+    <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"音量ボタンを長押し"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"画面をトリプルタップ"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"続行"</string>
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"補聴器"</string>
@@ -2725,7 +2720,7 @@
     <string name="advanced_battery_title" msgid="3005993394776555079">"バッテリー使用量"</string>
     <string name="history_details_title" msgid="8628584613889559355">"履歴の詳細"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"バッテリー使用量"</string>
-    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を表示する"</string>
+    <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"前回のフル充電からの使用状況を表示する"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"電池の使用状況"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"使用状況の詳細"</string>
@@ -2934,7 +2929,7 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"更新"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"メディアサーバー"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"アプリの最適化"</string>
-    <string name="battery_saver" msgid="7737147344510595864">"バッテリーセーバー"</string>
+    <string name="battery_saver" msgid="7737147344510595864">"バッテリー セーバー"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"自動的に ON"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"スケジュールなし"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"普段の充電パターンを基に自動で ON"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"削除"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"このセッションでのアプリとデータはすべて削除されます。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"削除"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"ゲスト（自分）"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"ユーザー"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"その他のユーザー"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ゲストのアクティビティを削除"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"通話をON"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
@@ -3726,7 +3714,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"常にバイブレーションを使用"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"バイブレーションから着信音"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"その他の音"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"空間音声"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"空間オーディオ"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"画面ロックの音"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電時の音とバイブレーション"</string>
@@ -4677,7 +4665,7 @@
     <string name="display_summary" msgid="5526061030874717172">"操作が行われない状態で <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>経過するとスリープ状態になります"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"ダークモード、フォントサイズ、明るさ"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"操作が行われない状態で 10 分経過するとスリープ状態になります"</string>
-    <string name="memory_summary" msgid="8221954450951651735">"平均で<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>のうち<xliff:g id="USED_MEMORY">%1$s</xliff:g>を使用しています"</string>
+    <string name="memory_summary" msgid="8221954450951651735">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> のうち平均で <xliff:g id="USED_MEMORY">%1$s</xliff:g> を使用"</string>
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g>としてログイン中"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g>がデフォルトで設定されています"</string>
     <string name="backup_disabled" msgid="4503062265560959320">"バックアップは無効です"</string>
@@ -5193,7 +5181,7 @@
     <string name="disabled_feature" msgid="7151433782819744211">"この機能はご利用いただけません"</string>
     <string name="disabled_feature_reason_slow_down_phone" msgid="5743569256308510404">"この機能はスマートフォンのパフォーマンスを低下させるため OFF になっています"</string>
     <string name="show_first_crash_dialog" msgid="1696584857732637389">"クラッシュ ダイアログを常に表示"</string>
-    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"アプリのクラッシュが発生するごとにダイアログを表示します"</string>
+    <string name="show_first_crash_dialog_summary" msgid="4692334286984681111">"アプリのクラッシュが発生するごとにダイアログを表示する"</string>
     <string name="angle_enabled_app" msgid="6044941043384239076">"ANGLE 対応のアプリを選択してください"</string>
     <string name="angle_enabled_app_not_set" msgid="4472572224881726067">"ANGLE 対応のアプリは設定されていません"</string>
     <string name="angle_enabled_app_set" msgid="7811829383833353021">"ANGLE 対応のアプリ: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -5785,7 +5773,15 @@
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"ヘッド トラッキング"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"より自然なサウンドになるよう頭の動きに合わせて音声が変化します"</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"ネットワーク ダウンロード速度制限"</string>
-    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"インターネット接続を提供するすべてのネットワークに適用する、ネットワーク帯域幅の内向きの速度制限を設定します。"</string>
+    <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"インターネット接続を提供するすべてのネットワークに対して、受信速度を制限します。"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"ネットワーク ダウンロード速度制限の設定"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"制限なし"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ブロードキャスト"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"近くで再生されているブロードキャストを聴きます"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"近くにあるデバイスにメディアをブロードキャストするか、または他のユーザーのブロードキャストを聴きます"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ブロードキャスト"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"聴く"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ブロードキャストを探す"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ブロードキャストを終了"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR コードをスキャン"</string>
 </resources>
