@@ -276,9 +276,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         final Context contextAsUser = context.createContextAsUser(userHandle, 0);
         Locale appLocale = getAppDefaultLocale(contextAsUser, entry.info.packageName);
         if (appLocale == null) {
-            Locale systemLocale = Locale.getDefault();
-            return context.getString(R.string.preference_of_system_locale_summary,
-                    systemLocale.getDisplayName(systemLocale));
+            return context.getString(R.string.preference_of_system_locale_summary);
         } else {
             return appLocale.getDisplayName(appLocale);
         }
