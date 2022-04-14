@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -115,12 +116,11 @@ public class ConfirmDialogFragment extends BaseDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
                 .setPositiveButton(posBtnString, this)
                 .setNegativeButton(negBtnString, this);
+        View content = LayoutInflater.from(getContext()).inflate(
+                R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
 
-        if (list != null && !list.isEmpty()) {
+        if (list != null && !list.isEmpty() && content != null) {
             Log.i(TAG, "list =" + list.toString());
-
-            View content = LayoutInflater.from(getContext()).inflate(
-                    R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
 
             if (!TextUtils.isEmpty(title)) {
                 View titleView = LayoutInflater.from(getContext()).inflate(
@@ -133,6 +133,7 @@ public class ConfirmDialogFragment extends BaseDialogFragment
             TextView dialogMessage = content.findViewById(R.id.msg);
             if (!TextUtils.isEmpty(message) && dialogMessage != null) {
                 dialogMessage.setText(message);
+                dialogMessage.setVisibility(View.VISIBLE);
             }
 
             final ArrayAdapter<String> arrayAdapterItems = new ArrayAdapter<String>(
@@ -140,8 +141,8 @@ public class ConfirmDialogFragment extends BaseDialogFragment
                     R.layout.sim_confirm_dialog_item_multiple_enabled_profiles_supported, list);
             final ListView lvItems = content.findViewById(R.id.carrier_list);
             if (lvItems != null) {
+                lvItems.setVisibility(View.VISIBLE);
                 lvItems.setAdapter(arrayAdapterItems);
-                lvItems.setChoiceMode(ListView.CHOICE_MODE_NONE);
                 lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -157,6 +158,10 @@ public class ConfirmDialogFragment extends BaseDialogFragment
                         }
                     }
                 });
+            }
+            final LinearLayout infoOutline = content.findViewById(R.id.info_outline_layout);
+            if (infoOutline != null) {
+                infoOutline.setVisibility(View.VISIBLE);
             }
             builder.setView(content);
         } else {
