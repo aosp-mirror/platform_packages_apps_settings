@@ -45,7 +45,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     private final String CUSTOM_BEHAVIOR_KEY = "zen_custom_setting";
 
-    protected Context mContext;
     protected boolean mDisableListeners;
     protected AutomaticZenRule mRule;
     protected String mId;
@@ -60,9 +59,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     abstract protected void updateControlsInternal();
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        mContext = getActivity();
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         final Intent intent = getActivity().getIntent();
         if (DEBUG) Log.d(TAG, "onCreate getIntent()=" + intent);
@@ -83,7 +81,14 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         }
 
         if (DEBUG) Log.d(TAG, "mId=" + mId);
-        if (refreshRuleOrFinish()) {
+        refreshRuleOrFinish();
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        if (isFinishingOrDestroyed()) {
             return;
         }
 
@@ -133,15 +138,12 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected void updateHeader() {
         final PreferenceScreen screen = getPreferenceScreen();
 
-        mSwitch.onResume(mRule, mId);
         mSwitch.displayPreference(screen);
         updatePreference(mSwitch);
 
-        mHeader.onResume(mRule, mId);
         mHeader.displayPreference(screen);
         updatePreference(mHeader);
 
-        mActionButtons.onResume(mRule, mId);
         mActionButtons.displayPreference(screen);
         updatePreference(mActionButtons);
     }
@@ -162,6 +164,9 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     private boolean refreshRuleOrFinish() {
         mRule = getZenRule();
         if (DEBUG) Log.d(TAG, "mRule=" + mRule);
+        mHeader.setRule(mRule);
+        mSwitch.setIdAndRule(mId, mRule);
+        mActionButtons.setIdAndRule(mId, mRule);
         if (!setRule(mRule)) {
             toastAndFinish();
             return true;
