@@ -454,7 +454,7 @@ public class UiccSlotUtilTest {
     @Test
     public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsAToPsimAndPort0_logicalSlot1() {
         // There is only one enabled esimPort0 before user enables the psim.
-        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
         Collection<SubscriptionInfo> activeSubscriptionInfoList =
                 createActiveSubscriptionInfoListOneSim(0, 0);
         SubscriptionInfo removedSubInfo = null;
@@ -469,7 +469,7 @@ public class UiccSlotUtilTest {
     @Test
     public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsBToPsimAndPort1_logicalSlot1() {
         // There is only one enabled esimPort1 before user enables the psim.
-        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
         Collection<SubscriptionInfo> activeSubscriptionInfoList =
                 createActiveSubscriptionInfoListOneSim(0, 1);
         SubscriptionInfo removedSubInfo = null;
@@ -484,7 +484,7 @@ public class UiccSlotUtilTest {
     @Test
     public void getExcludedLogicalSlotIndex_oneEsimAndFromDualPortsBToPsimAndPort0_logicalSlot0() {
         // There is only one enabled esimPort0 before user enables the psim.
-        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingPsimAndPort1();
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
         Collection<SubscriptionInfo> activeSubscriptionInfoList =
                 createActiveSubscriptionInfoListOneSim(1, 0);
         SubscriptionInfo removedSubInfo = null;
@@ -544,6 +544,48 @@ public class UiccSlotUtilTest {
         Collection<SubscriptionInfo> activeSubscriptionInfoList =
                 createActiveSubscriptionInfoListTwoSims(0, 1, 1, 0);
         SubscriptionInfo removedSubInfo = createSubscriptionInfo(0, 1);
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_noEsimAndFromDualPortsAToPsimAndPort1_logicalSlot0() {
+        // There is no profiles enabled on either esim port before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsA();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList = new ArrayList<>();
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_noEsimAndFromDualPortsBToPsimAndPort0_logicalSlot0() {
+        // There is no profiles enabled on either esim port before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsB();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList = new ArrayList<>();
+        SubscriptionInfo removedSubInfo = null;
+        int verifyExcludedLogicalSlotIndex = 0;
+
+        int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
+                uiccSlotMappings, activeSubscriptionInfoList, removedSubInfo, true);
+
+        assertThat(testExcludedLogicalSlotIndex).isEqualTo(verifyExcludedLogicalSlotIndex);
+    }
+
+    @Test
+    public void getExcludedLogicalSlotIndex_noEsimNoOrdingFromDualPortsBToPsimAndPort1_logical0() {
+        // There is no profiles enabled on either esim port before user enables the psim.
+        Collection<UiccSlotMapping> uiccSlotMappings = createUiccSlotMappingDualPortsBNoOrding();
+        Collection<SubscriptionInfo> activeSubscriptionInfoList = new ArrayList<>();
+        SubscriptionInfo removedSubInfo = null;
         int verifyExcludedLogicalSlotIndex = 0;
 
         int testExcludedLogicalSlotIndex = UiccSlotUtil.getExcludedLogicalSlotIndex(
@@ -656,7 +698,13 @@ public class UiccSlotUtilTest {
 
         return slotMap;
     }
+    private List<UiccSlotMapping> createUiccSlotMappingDualPortsBNoOrding() {
+        List<UiccSlotMapping> slotMap = new ArrayList<>();
+        slotMap.add(new UiccSlotMapping(0, ESIM_PHYSICAL_SLOT, 1));
+        slotMap.add(new UiccSlotMapping(1, ESIM_PHYSICAL_SLOT, 0));
 
+        return slotMap;
+    }
     /**
      * The "oneSimSlotDevice" has below cases
      * 1) The device is one psim slot and no esim slot
