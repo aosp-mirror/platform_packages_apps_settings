@@ -916,7 +916,7 @@
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды күйгүзгөнү жатат"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды өчүргөнү жатат"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Мүчлштктрдү оңдгуч колд байт-кодун ырсто"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART ырастагычына мүчүлүштүктөрдү оңдогуч колдонмолордогу байт-кодду ырастоого уруксат берүү"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART\'га мүчүлүштүктөрдү аныктаган колдонмолордун байт кодун текшерүүгө уруксат берилет"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Жаңыруу жыштыгы"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Экрандын учурдагы жаңыруу жыштыгы көрүнөт"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -1193,7 +1193,7 @@
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Түзмөктөр туташпай турганда"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Кеңейтүүнүн шайкештиги"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет. Бирок байланыш түйүнү аркылуу туташуу ылдамдыгы азаят."</string>
-    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет Батареянын колдонулушун жогорулатат."</string>
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет. Бул учурда батарея тез отуруп калат."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Байланыш түйүнү жандырылууда…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Байланыш түйүнү өчүрүлүүдө…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> иштеп жатат"</string>
@@ -1480,7 +1480,7 @@
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Системанын жаңыртуулары"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android версиясы"</string>
-    <string name="security_patch" msgid="4071756145347865382">"Android\'дин коопсуздук тутумун жаңыртуу"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android\'дин коопсуздук системасын жаңыртуу"</string>
     <string name="model_info" msgid="8997566254717810904">"Үлгүсү"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Түзмөктүн үлгүсү/аппараттык камсыздалышы"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Аппараттын версиясы"</string>
@@ -1501,7 +1501,7 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"USB сактагычты ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="storage_settings_summary" product="default" msgid="267557695753980969">"SD картаны ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM-карта оюкчасы %1$d)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"Көрүү үчүн, сакталган тармакты тандаңыз"</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"Көрүү үчүн сакталган тармакты тандаңыз"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
     <string name="status_number" product="default" msgid="8407999629121682207">"Телефон номери"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (SIM-карта оюкчасы %1$d)"</string>
@@ -1818,7 +1818,7 @@
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet модем режими"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Телефондогу Интернетти Ethernet аркылуу бөлүшөсүз"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Башка түзмөктөрдү мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Колдонмолор да жакын жердеги түзмөктөр менен мазмун бөлүшүү үчүн байланыш түйүнүн түзө алышат."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Башка түзмөктөрдү Wi‑Fi же мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Ошондой эле, колдонмолор жакын жердеги түзмөктөр менен кандайдыр бир нерселерди бөлүшүү үчүн, байланыш түйүндөрүн түзө алышат."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Башка түзмөктөрдү Wi‑Fi же мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Ошондой эле, колдонмолор жакын жердеги түзмөктөр менен кандайдыр бир нерселерди бөлүшүү үчүн байланыш түйүндөрүн түзө алышат."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Жардам"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Мобилдик тармак"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Тарифтик план"</string>
@@ -1895,9 +1895,9 @@
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Коопсуздук жана стандарттарга жооп берүү"</string>
     <string name="copyright_title" msgid="83245306827757857">"Автордук укук"</string>
     <string name="license_title" msgid="8745742085916617540">"Уруксаттама"</string>
-    <string name="module_license_title" msgid="8705484239826702828">"Google Play тутумун жаңыртуу уруксаттамалары"</string>
+    <string name="module_license_title" msgid="8705484239826702828">"Google Play системасын жаңыртуу уруксаттамалары"</string>
     <string name="terms_title" msgid="2071742973672326073">"Пайдалануу шарттары"</string>
-    <string name="webview_license_title" msgid="5832692241345780517">"WebView тутум уруксаттамасы"</string>
+    <string name="webview_license_title" msgid="5832692241345780517">"System WebView уруксаттамасы"</string>
     <string name="wallpaper_attributions" msgid="3080339190260272255">"Тушкагаздар"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Спутник сүрөттөрү:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Кол менен"</string>
@@ -2294,11 +2294,11 @@
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Экранды толук же анын бөлүгүн чоңойтуп же экөөнүн бирөөсүн тандасаңыз болот"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Толук экран"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"Жарым экран"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Толук экрандан жарым экранга которулуу"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Толук экрандан экрандын кандайдыр бир бөлүгүнө которуласыз"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Чоңойтуу жолун тандаңыз"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Толук экранда ачуу"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Экрандын бир бөлүгүн чоңойтуу"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Толук экрандан жарым экранга которулуу"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Толук экрандан экрандын кандайдыр бир бөлүгүнө которуласыз"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Экөөнүн бирөөсүнө өтүү үчүн которгучту басыңыз"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Атайын мүмкүнчүлүктөр баскычына которуласызбы?"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Экранды чоңойтуу үчүн үч жолу басканда терүү же башка аракеттер кечигүү менен аткарылат.\n\nАтайын мүмкүнчүлүктөр баскычы башка колдонмолордун үстүнөн көрүнөт. Чоңойтуу үчүн басыңыз."</string>
@@ -4619,7 +4619,7 @@
     <string name="color_temperature_desc" msgid="6713259535885669622">"Салкыныраак дисплей түстөрүн колдонуңуз"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"Түс өзгөртүүлөрүн күчүнө киргизүү үчүн, экранды өчүрүңүз"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"Камеранын лазердик сенсору"</string>
-    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Тутум автоматтык түрдө жаңырып турат"</string>
+    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Система автоматтык түрдө жаңырып турат"</string>
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"Жаңыртуулар түзмөк өчүрүлүп-күйгүзүлгөндө орнотулат"</string>
     <string name="usage" msgid="287782903846013936">"Дайындардын өткөрүлүшү"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"Мобилдик трафик"</string>
@@ -4644,7 +4644,7 @@
       <item quantity="one">1 чектөө</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Байланыш операторунун статистикасы түзмөгүңүздүн статистикасынан айырмаланышы мүмкүн."</string>
-    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Байланыш операторунун тармактары колдонгон дайын-даректерден тышкары"</string>
+    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Байланыш операторунун тармактары колдонгон нерселерден тышкары"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> колдонулду"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Трафик тууралуу эскертүү"</string>
     <string name="data_warning" msgid="2925054658166062884">"Эскертүүлөр"</string>
@@ -4771,7 +4771,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батареяны үнөмдөөгө жардам берет"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Иштеп чыгуучунун ыкчам жөндөөлөр такталары"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb авторизацияларынын мөөнөттөрүн өчүрүү"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Демейки шарт боюнча белгиленген мөөнөттүн (7 күн) же колдонуучу белгилеген убакыттын (кеминде 1 күн) ичинде кайра туташпаган тутумдарда adb авторизациясын автоматтык түрдө артка кайтаруу мүмкүнчүлүгү өчүрүлөт."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Демейки шарт боюнча белгиленген мөөнөттүн (7 күн) же колдонуучу белгилеген убакыттын (кеминде 1 күн) ичинде кайра туташпаган системаларда adb авторизациясын автоматтык түрдө артка кайтаруу мүмкүнчүлүгү өчүрүлөт."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope көз салуусу"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сенсорлорду өчүрүү"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Жумуш профилинин жөндөөлөрү"</string>
@@ -5416,7 +5416,7 @@
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"2 SIM-карта колдонулганда бул түзмөк 4G тармагына гана туташа алат. "<annotation id="url">"Кеңири маалымат"</annotation></string>
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Кештелген колдонмолордун иштетилишин убактылуу токтотуу"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Колдонмолорду жөндөөлөрдүн үстүнө коюуга уруксат берүү"</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"Башка колдонмолордун үстүнөн көрүнгөн колдонмолорго Жөндөөлөр экранынын үстүнөн да көрүнүүгө уруксат берүү"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Башка колдонмолордун үстүнөн көрүнгөн колдонмолорго Жөндөөлөр экрандарынын үстүнөн да көрүнүүгө уруксат берилет"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Медиа ойноткучту кадап коюу"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Угуп жаткан нерсени оңой улантып кетүү үчүн медиа ойноткуч Ыкчам жөндөөлөрдө ачылып турат"</string>
