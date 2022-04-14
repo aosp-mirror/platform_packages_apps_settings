@@ -71,6 +71,8 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
+import com.android.settings.vpn2.AdvancedVpnFeatureProvider;
+import com.android.settings.vpn2.AdvancedVpnFeatureProviderImpl;
 import com.android.settings.wifi.WifiTrackerLibProvider;
 import com.android.settings.wifi.WifiTrackerLibProviderImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -106,6 +108,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
+    private AdvancedVpnFeatureProvider mAdvancedVpnFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -333,5 +336,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAccessibilityMetricsFeatureProvider = new AccessibilityMetricsFeatureProviderImpl();
         }
         return mAccessibilityMetricsFeatureProvider;
+    }
+
+    @Override
+    public AdvancedVpnFeatureProvider getAdvancedVpnFeatureProvider() {
+        if (mAdvancedVpnFeatureProvider == null) {
+            mAdvancedVpnFeatureProvider = new AdvancedVpnFeatureProviderImpl();
+        }
+        return mAdvancedVpnFeatureProvider;
     }
 }
