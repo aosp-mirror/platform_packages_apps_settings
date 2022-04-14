@@ -881,9 +881,13 @@
             android:exported="true"
             android:icon="@drawable/ic_settings_language">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.settings.LANGUAGE_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.VOICE_LAUNCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.language.LanguageAndInputSettings"/>
@@ -1103,6 +1107,10 @@
                   android:label="@string/wallpaper_settings_fragment_title"
                   android:icon="@drawable/ic_wallpaper"
                   android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.WALLPAPER_SETTINGS"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.wallpaper.WallpaperTypeSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
