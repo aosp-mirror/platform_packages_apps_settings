@@ -21,14 +21,13 @@ import android.app.PendingIntent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
-import android.telephony.UiccSlotMapping;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.telephony.EuiccOperationSidecar;
 
-import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,11 +94,11 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
 
         // To check whether the esim slot's port is active. If yes, skip setSlotMapping. If no,
         // set this slot+port into setSimSlotMapping.
-        mPort = (port < 0) ? getTargetPortId(removedSubInfo, targetSlot) : port;
+        mPort = (port < 0) ? getTargetPortId(removedSubInfo) : port;
         mRemovedSubInfo = removedSubInfo;
         Log.d(TAG,
-                String.format("set esim into the Slot%d SubId%d:Port%d",
-                        targetSlot, mSubId, mPort));
+                String.format("set esim into the SubId%d Slot%d:Port%d",
+                        mSubId, targetSlot, mPort));
 
         if (mTelephonyManager.isMultiSimEnabled() && removedSubInfo != null
                 && removedSubInfo.isEmbedded()) {
@@ -115,7 +114,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
     }
 
-    private int getTargetPortId(SubscriptionInfo removedSubInfo, int targetSlot) {
+    private int getTargetPortId(SubscriptionInfo removedSubInfo) {
         if (!mTelephonyManager.isMultiSimEnabled() || !isMultipleEnabledProfilesSupported()) {
             // In the 'SS mode' or 'DSDS+no MEP', the port is 0.
             return 0;
@@ -128,20 +127,25 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
 
         // In DSDS+MEP mode, the removedSubInfo is psim or is null, it means this esim needs
-        // another port in the esim slot.
-        // To find another esim's port and value is from 0.
+        // a new corresponding port in the esim slot.
         // For example:
         // 1) If there is no enabled esim and the user add new esim. This new esim's port is 0.
-        // 2) If there is one enabled esim and the user add new esim. This new esim's port is 1.
+        // 2) If there is one enabled esim in port0 and the user add new esim. This new esim's
+        // port is 1.
+        // 3) If there is one enabled esim in port1 and the user add new esim. This new esim's
+        // port is 0.
+
         int port = 0;
-        Collection<UiccSlotMapping> uiccSlotMappings = mTelephonyManager.getSimSlotMapping();
-        for (UiccSlotMapping uiccSlotMapping :
-                uiccSlotMappings.stream()
-                        .filter(
-                                uiccSlotMapping -> uiccSlotMapping.getPhysicalSlotIndex()
-                                        == targetSlot)
-                        .collect(Collectors.toList())) {
-            if (uiccSlotMapping.getPortIndex() == port) {
+        SubscriptionManager subscriptionManager = getContext().getSystemService(
+                SubscriptionManager.class);
+        List<SubscriptionInfo> activeEsimSubInfos =
+                SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
+                        .stream()
+                        .filter(i -> i.isEmbedded())
+                        .sorted(Comparator.comparingInt(SubscriptionInfo::getPortIndex))
+                        .collect(Collectors.toList());
+        for (SubscriptionInfo subscriptionInfo : activeEsimSubInfos) {
+            if (subscriptionInfo.getPortIndex() == port) {
                 port++;
             }
         }
