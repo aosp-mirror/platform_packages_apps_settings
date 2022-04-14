@@ -956,7 +956,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"Über öffentliche Netzwerke informieren"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"Benachrichtigen, wenn ein leistungsstarkes öffentliches Netzwerk verfügbar ist"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"WLAN automatisch aktivieren"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist, wird die WLAN-Funktion automatisch wieder eingeschaltet"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"Die WLAN-Funktion wird automatisch eingeschaltet, wenn du in den Abdeckungsbereich gespeicherter WLANs kommst und die Signalqualität gut ist."</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"Nicht verfügbar, weil die Einstellung \"Standort\" deaktiviert ist. Aktiviere die Einstellung "<annotation id="link">"Standort"</annotation>"."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"Nicht verfügbar, weil WLAN-Suche deaktiviert ist"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"Für diese Funktion musst du zuerst einen Anbieter von Netzwerkbewertungen auswählen"</string>
@@ -2447,11 +2447,11 @@
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Die Farbumkehr macht helle Displays dunkel. Und sie macht dunkle Displays hell."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Hinweis&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Das führt zu einer veränderten Wiedergabe der Farben in Medien und Bildern&lt;/li&gt; &lt;li&gt; Die Farbumkehr funktioniert in allen Apps&lt;/li&gt; &lt;li&gt; Ein dunkler Hintergrund kann stattdessen mit dem dunklen Design angezeigt werden&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatischer Klick (Verweildauer)"</string>
-    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatische Klicks (Verweildauer)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Über automatischer Klick (Verweildauer)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Weitere Informationen zu automatischen Klicks (Verweildauer)"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Du kannst eine verbundene Maus so einstellen, dass sie automatisch klickt, wenn sich der Cursor für eine bestimmte Zeit nicht bewegt"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatische Klicks können nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatische Klicks deaktivieren"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Automatischer Klick kann nützlich sein, wenn es schwierig ist, mit der Maus zu klicken"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Automatischer Klick deaktivieren"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Kurz"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 Sekunden"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Mittel"</string>
@@ -2541,7 +2541,7 @@
     <string name="daltonizer_mode_protanomaly_summary" msgid="4617032854982040748">"Rot-Sehschwäche"</string>
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2428218320118180070">"Tritanomalie"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extradunkel"</string>
-    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Display extradunkel machen"</string>
+    <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Display extradunkel aktivieren"</string>
     <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Kurzbefehl für Extradunkel"</string>
     <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Über die Funktion „Extradunkel“"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Das Display dunkler machen als die niedrigste Helligkeit deines Smartphones"</string>
@@ -5341,7 +5341,7 @@
     <string name="calls_preference" msgid="2166481296066890129">"Anrufeinstellung"</string>
     <string name="sms_preference" msgid="7742964962568219351">"SMS-Einstellung"</string>
     <string name="calls_and_sms_ask_every_time" msgid="3178743088737726677">"Jedes Mal fragen"</string>
-    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Netz hinzufügen"</string>
+    <string name="mobile_network_summary_add_a_network" msgid="9079866102827526779">"Netzwerk hinzufügen"</string>
     <plurals name="mobile_network_summary_count" formatted="false" msgid="5173633860800230925">
       <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> SIM-Karten</item>
       <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> SIM-Karte</item>
@@ -5791,4 +5791,20 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Damit kannst du die Ratenbegrenzung für eingehenden Traffic über die Netzwerkbandbreite konfigurieren, die für alle Netzwerke angewendet wird, die eine Internetverbindung zur Verfügung stellen."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Ratenbegrenzung für Downloads im Netzwerk konfigurieren"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Keine Begrenzung"</string>
+    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
+    <skip />
+    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
+    <skip />
+    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
+    <skip />
 </resources>

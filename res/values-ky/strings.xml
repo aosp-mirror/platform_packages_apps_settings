@@ -225,7 +225,7 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Сунушталган тилдер"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бардык тилдер"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Тутумдун тили"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Тутумдун демейки жөндөөлөрү ‒ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Демейки шартта ‒ <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Бул колдонмонун тилин Жөндөөлөрдөн тандоого болбойт."</string>
     <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Бул колдонмонун тилин Жөндөөлөрдөн тандай албайсыз."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
@@ -916,7 +916,7 @@
     <string name="wifi_ask_enable" msgid="6860056048266810769">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды күйгүзгөнү жатат"</string>
     <string name="wifi_ask_disable" msgid="1663208096020309639">"<xliff:g id="REQUESTER">%s</xliff:g> бул түзмөктө WiFi\'ды өчүргөнү жатат"</string>
     <string name="art_verifier_for_debuggable_title" msgid="1926445785190030479">"Мүчлштктрдү оңдгуч колд байт-кодун ырсто"</string>
-    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART ырастагычына мүчүлүштүктөрдү оңдогуч колдонмолордогу байт-кодду ырастоого уруксат берүү"</string>
+    <string name="art_verifier_for_debuggable_summary" msgid="4802875841862652879">"ART\'га мүчүлүштүктөрдү аныктаган колдонмолордун байт кодун текшерүүгө уруксат берилет"</string>
     <string name="show_refresh_rate" msgid="5742688821872354973">"Жаңыруу жыштыгы"</string>
     <string name="show_refresh_rate_summary" msgid="3558118122374609663">"Экрандын учурдагы жаңыруу жыштыгы көрүнөт"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
@@ -1194,7 +1194,7 @@
     <string name="wifi_hotspot_auto_off_summary" msgid="8283656069997871354">"Түзмөктөр туташпай турганда"</string>
     <string name="wifi_hotspot_maximize_compatibility" msgid="6494125684420024058">"Кеңейтүүнүн шайкештиги"</string>
     <string name="wifi_hotspot_maximize_compatibility_single_ap_summary" msgid="383355687431591441">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет. Бирок байланыш түйүнү аркылуу туташуу ылдамдыгы азаят."</string>
-    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет Батареянын колдонулушун жогорулатат."</string>
+    <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Башка түзмөктөргө бул байланыш түйүнүн табууга жардам берет. Бул учурда батарея тез отуруп калат."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Байланыш түйүнү жандырылууда…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Байланыш түйүнү өчүрүлүүдө…"</string>
     <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Байланыш түйүнү жеткиликсиз"</string>
@@ -1497,7 +1497,7 @@
     <string name="system_update_settings_list_item_title" msgid="3398346836439366350">"Системанын жаңыртуулары"</string>
     <string name="system_update_settings_list_item_summary" msgid="6703752298349642101"></string>
     <string name="firmware_version" msgid="1606901586501447275">"Android версиясы"</string>
-    <string name="security_patch" msgid="4071756145347865382">"Android\'дин коопсуздук тутумун жаңыртуу"</string>
+    <string name="security_patch" msgid="4071756145347865382">"Android\'дин коопсуздук системасын жаңыртуу"</string>
     <string name="model_info" msgid="8997566254717810904">"Үлгүсү"</string>
     <string name="hardware_info" msgid="7035211991066637019">"Түзмөктүн үлгүсү/аппараттык камсыздалышы"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Аппараттын версиясы"</string>
@@ -1518,7 +1518,7 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3858049818577638926">"USB сактагычты ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="storage_settings_summary" product="default" msgid="267557695753980969">"SD картаны ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="imei_multi_sim" msgid="71477088017585479">"IMEI (SIM-карта оюкчасы %1$d)"</string>
-    <string name="view_saved_network" msgid="1232387673095080910">"Көрүү үчүн, сакталган тармакты тандаңыз"</string>
+    <string name="view_saved_network" msgid="1232387673095080910">"Көрүү үчүн сакталган тармакты тандаңыз"</string>
     <string name="status_number" product="tablet" msgid="3597945414666253183">"MDN"</string>
     <string name="status_number" product="default" msgid="8407999629121682207">"Телефон номери"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="6582203988975619529">"MDN (SIM-карта оюкчасы %1$d)"</string>
@@ -1834,7 +1834,7 @@
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Ethernet модем режими"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Телефондогу Интернетти Ethernet аркылуу бөлүшөсүз"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"Башка түзмөктөрдү мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Колдонмолор да жакын жердеги түзмөктөр менен мазмун бөлүшүү үчүн байланыш түйүнүн түзө алышат."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Башка түзмөктөрдү Wi‑Fi же мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Ошондой эле, колдонмолор жакын жердеги түзмөктөр менен кандайдыр бир нерселерди бөлүшүү үчүн, байланыш түйүндөрүн түзө алышат."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Башка түзмөктөрдү Wi‑Fi же мобилдик Интернетке туташтыруу үчүн байланыш түйүнүн же модем режимин колдонуңуз. Ошондой эле, колдонмолор жакын жердеги түзмөктөр менен кандайдыр бир нерселерди бөлүшүү үчүн байланыш түйүндөрүн түзө алышат."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Жардам"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Мобилдик тармак"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Тарифтик план"</string>
@@ -1911,9 +1911,9 @@
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Коопсуздук жана стандарттарга жооп берүү"</string>
     <string name="copyright_title" msgid="83245306827757857">"Автордук укук"</string>
     <string name="license_title" msgid="8745742085916617540">"Уруксаттама"</string>
-    <string name="module_license_title" msgid="8705484239826702828">"Google Play тутумун жаңыртуу уруксаттамалары"</string>
+    <string name="module_license_title" msgid="8705484239826702828">"Google Play системасын жаңыртуу уруксаттамалары"</string>
     <string name="terms_title" msgid="2071742973672326073">"Пайдалануу шарттары"</string>
-    <string name="webview_license_title" msgid="5832692241345780517">"WebView тутум уруксаттамасы"</string>
+    <string name="webview_license_title" msgid="5832692241345780517">"System WebView уруксаттамасы"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"Тушкагаздын авторлору"</string>
     <string name="wallpaper_attributions_values" msgid="987277439026021925">"Спутник сүрөттөрү:\n©2014 CNES/Astrium, DigitalGlobe, Bluesky"</string>
     <string name="settings_manual_activity_title" msgid="1682978148920788484">"Кол менен"</string>
@@ -2304,25 +2304,25 @@
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Чоңойтуу"</string>
     <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Чоңойтуу ыкчам баскычы"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Терген текстти чоңойтуу"</string>
-    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Чоңойткуч сиз терген тексте жылып турат"</string>
+    <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"Чоңойткуч терилип жаткан текстти ээрчип жыла берет"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Чоңойтуу тууралуу"</string>
     <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Чоңойтуу тууралуу кеңири маалымат"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Чоңойтуунун түрү"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Экранды толук же анын бөлүгүн чоңойтуп же экөөнүн бирөөсүн тандасаңыз болот"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Толук экран"</string>
     <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"Жарым экран"</string>
-    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Толук экрандан жарым экранга которулуу"</string>
+    <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"Толук экрандан экрандын кандайдыр бир бөлүгүнө которуласыз"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"Чоңойтуу жолун тандаңыз"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"Толук экранда ачуу"</string>
     <string name="accessibility_magnification_mode_dialog_option_window" msgid="4492443201099153362">"Экрандын бир бөлүгүн чоңойтуу"</string>
-    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Толук экрандан жарым экранга которулуу"</string>
+    <string name="accessibility_magnification_mode_dialog_option_switch" msgid="561043521011229424">"Толук экрандан экрандын кандайдыр бир бөлүгүнө которуласыз"</string>
     <string name="accessibility_magnification_area_settings_mode_switch_summary" msgid="2885238806099080966">"Экөөнүн бирөөсүнө өтүү үчүн которгучту басыңыз"</string>
     <string name="accessibility_magnification_switch_shortcut_title" msgid="3671432048806533079">"Атайын мүмкүнчүлүктөр баскычына которуласызбы?"</string>
     <string name="accessibility_magnification_switch_shortcut_message" msgid="7718653917415163833">"Экранды чоңойтуу үчүн үч жолу басканда терүү же башка аракеттер кечигүү менен аткарылат.\n\nАтайын мүмкүнчүлүктөр баскычы башка колдонмолордун үстүнөн көрүнөт. Чоңойтуу үчүн басыңыз."</string>
     <string name="accessibility_magnification_switch_shortcut_positive_button" msgid="2446942190957296957">"Атайын мүмкүнчүлүктөр баскычына которулуу"</string>
     <string name="accessibility_magnification_switch_shortcut_negative_button" msgid="7115794462123071594">"Үч жолу басууну колдонуу"</string>
-    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Бул баскычтобуңузду жайлатышы мүмкүн"</string>
-    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Экрандын бир бөлүгүн чоңойтуп көрүү үчүн үч жолу басканда, баскычтопто маселелер байкалышы мүмкүн.\n\nМунун алдын алуу үчүн чоңойтуп көрүү ыкчам баскычын үч жолу басуудан башка вариантка өзгөртсөңүз болот.\n"<annotation id="link">"Жөндөөнү өзгөртүү"</annotation></string>
+    <string name="accessibility_magnification_triple_tap_warning_title" msgid="8484669851397296597">"Баскычтобуңуз жайыраак иштеп калышы мүмкүн"</string>
+    <string name="accessibility_magnification_triple_tap_warning_message" msgid="2008671502848936410">"Үч жолу басып экрандын кандайдыр бир бөлүгүн чоңойткондо, баскычтоп жакшы иштебей калышы мүмкүн.\n\nАндыктан экранды чоңойтуу үчүн башка ыкчам баскычты колдонуңуз.\n"<annotation id="link">"Өзгөртүү"</annotation></string>
     <string name="accessibility_magnification_triple_tap_warning_positive_button" msgid="8712304035901450010">"Баары бир улантуу"</string>
     <string name="accessibility_magnification_triple_tap_warning_negative_button" msgid="2028849736366584733">"Жок"</string>
     <string name="accessibility_magnification_service_settings_title" msgid="3531350704632316017">"Чоңойтуу жөндөөлөрү"</string>
@@ -2340,12 +2340,12 @@
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Текст менен экрандын өлчөмү баштапкы абалга кайтарылат"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Баштапкы абалга келтирүү"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Дем алышка пландар барбы?"</string>
-    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Кум жээкке баратам. Кошуласызбы?"</string>
+    <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Көлгө барганы жатабыз. Кошуласыңарбы?"</string>
     <string name="accessibility_screen_option" msgid="8465307075278878145">"Параметрлер"</string>
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Экран чоңоет"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Өлчөмүн өзгөртүү үчүн 3 жолу таптаңыз"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Чоңойтуп/кичирейтүү үчүн баскычты басыңыз"</string>
-    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Контентти чоңойтуу үчүн экранды тез жакындатыңыз"</string>
+    <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Экранды оңой чоңойто аласыз"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Жакындатуу үчүн:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Чоңойтуу режимин иштетүү үчүн ыкчам баскычты басыңыз&lt;br/&gt; {1,number,integer}. Экранды басыңыз&lt;br/&gt; {2,number,integer}. Экрандын башка бөлүгүнө 2 манжаңыз менен жылыңыз&lt;br/&gt; {3,number,integer}. Чоңойтуп/кичирейтүү үчүн 2 манжаңызды бириктириңиз&lt;br/&gt; {4,number,integer}. Чоңойтуу режиминен чыгуу үчүн ыкчам баскычты басыңыз&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Убактылуу жакындатуу үчүн:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Чоңойтуу режими толук экранга орнотулганын текшериңиз&lt;br/&gt; {1,number,integer}. Чоңойтуу режимин иштетүү үчүн ыкчам баскычты басыңыз&lt;br/&gt; {2,number,integer}. Экрандын бир жерин коё бербей басып туруңуз&lt;br/&gt; {3,number,integer}. Экрандын башка бөлүгүнө манжаңыз менен жылыңыз&lt;br/&gt; {4,number,integer}. Чоңойтуу режиминен чыгуу үчүн манжаңызды көтөрүп коюңуз"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Бул функциянын жардамы менен, экрандагы нерсени чоңойтуп, кичирейте аласыз.\n\n"<b>"Чоңойткуңуз келсе"</b>", кызматты иштетип туруп, экрандын бир жерин басыңыз.\n"<ul><li>"Чоңойгон жерди ары-бери жылдырып көргүңүз келсе, экранды эки же үч манжаңыз менен сүрүңүз."</li>\n<li>"Чоңойтуп/кичирейтүү үчүн эки же үч манжаңызды бириктирип/ажыратыңыз."</li></ul>\n\n<b>"Убактылуу чоңойтуп/кичирейтүү үчүн"</b>" кызматты иштетип, экрандын бир жерин коё бербей басып туруңуз.\n"<ul><li>"Экранды жылдырып көрүү үчүн аны манжаңыз менен сүрүңүз."</li>\n<li>"Кызматты өчүрүү үчүн манжаңызды көтөрүңүз."</li></ul>\n\n"Баскычтопто же чабыттоо тилкесинде көрүнүш чоңойбойт."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g> ичинен <xliff:g id="CURRENT_PAGE">%1$d</xliff:g>-барак"</string>
@@ -2442,8 +2442,8 @@
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Автоматтык түрдө чыкылдатуу (кечигүү убакыты) тууралуу"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Автоматтык түрдө чыкылдатуу (кечигүү убакыты) тууралуу кеңири маалымат"</string>
     <string name="accessibility_autoclick_intro_text" msgid="8959680635470639347">"Курсор белгилүү бир убакыт ордунан жылбай турганда, туташкан чычканды автоматтык түрдө басыла тургандай кылып тууралай аласыз"</string>
-    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Чычканды чыкылдатуу оор болуп жатса, автоматтык түрдө чыкылдатуу жардам бериши мүмкүн"</string>
-    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Автоматтык түрө чыкылдатуу өчүк"</string>
+    <string name="accessibility_autoclick_description" msgid="6695732131412361101">"Бул функцияны чычкандын баскычын баса албаган адамдар колдонсо болот"</string>
+    <string name="accessibility_autoclick_default_title" msgid="2024730028293793490">"Автоматтык түрдө чыкылдатуу өчүк"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Кыска"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 секунд"</string>
     <string name="accessibility_autoclick_medium_title" msgid="3134175117576834320">"Орто"</string>
@@ -3720,7 +3720,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Кубаттоо үндөрү жана дирилдөө"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Жалгаштыруу үндөрү"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Экранга тийгенде чыккан үндөр"</string>
-    <string name="vibrate_icon_title" msgid="1281100105045362530">"Дирилдөө режиминде сүрөтчө ар дайым көрсөтүлсүн"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Дирилдөө режиминде сүрөтчө ар дайым көрүнсүн"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Док катуу сүйлөткүч ойнотот"</string>
     <string name="dock_audio_media_disabled" msgid="8499927008999532341">"Бардык аудио"</string>
     <string name="dock_audio_media_enabled" msgid="4039126523653131281">"Медиа аудио гана"</string>
@@ -3732,7 +3732,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматтык коштомо жазуулар"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Телефондун динамиги"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Зымдуу гарнитура"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Мейкиндиктүү үн ар тараптан келип жаткандай угулган сүңгүтүүчү үндү жаратат. Айрым медиа менен гана иштейт."</string>
+    <string name="spatial_audio_text" msgid="3273982964342449273">"Мейкиндиктүү үн ар тараптан келип жаткандай угулган сүңгүтүүчү үндү жаратат. Айрым медиа материалдарда гана иштейт."</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Өчүк"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Күйүк/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Күйүк/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> жана <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
@@ -4734,7 +4734,7 @@
     <string name="color_temperature_desc" msgid="6713259535885669622">"Салкыныраак дисплей түстөрүн колдонуңуз"</string>
     <string name="color_temperature_toast" msgid="7611532183532407342">"Түс өзгөртүүлөрүн күчүнө киргизүү үчүн, экранды өчүрүңүз"</string>
     <string name="camera_laser_sensor_switch" msgid="7097842750947187671">"Камеранын лазердик сенсору"</string>
-    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Тутум автоматтык түрдө жаңырып турат"</string>
+    <string name="ota_disable_automatic_update" msgid="1953894421412420231">"Система автоматтык түрдө жаңырып турат"</string>
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"Жаңыртуулар түзмөк өчүрүлүп-күйгүзүлгөндө орнотулат"</string>
     <string name="usage" msgid="287782903846013936">"Дайындардын өткөрүлүшү"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"Мобилдик трафик"</string>
@@ -4759,7 +4759,7 @@
       <item quantity="one">1 чектөө</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Байланыш операторунун статистикасы түзмөгүңүздүн статистикасынан айырмаланышы мүмкүн."</string>
-    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Байланыш операторунун тармактары колдонгон дайын-даректерден тышкары"</string>
+    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Байланыш операторунун тармактары колдонгон нерселерден тышкары"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> колдонулду"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Трафик тууралуу эскертүү"</string>
     <string name="data_warning" msgid="2925054658166062884">"Эскертүүлөр"</string>
@@ -4884,7 +4884,7 @@
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батареяны үнөмдөөгө жардам берет"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Иштеп чыгуучунун ыкчам жөндөөлөр такталары"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb авторизацияларынын мөөнөттөрүн өчүрүү"</string>
-    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Демейки шарт боюнча белгиленген мөөнөттүн (7 күн) же колдонуучу белгилеген убакыттын (кеминде 1 күн) ичинде кайра туташпаган тутумдарда adb авторизациясын автоматтык түрдө артка кайтаруу мүмкүнчүлүгү өчүрүлөт."</string>
+    <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Демейки шарт боюнча белгиленген мөөнөттүн (7 күн) же колдонуучу белгилеген убакыттын (кеминде 1 күн) ичинде кайра туташпаган системаларда adb авторизациясын автоматтык түрдө артка кайтаруу мүмкүнчүлүгү өчүрүлөт."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope көз салуусу"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"Сенсорлорду өчүрүү"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"Жумуш профилинин жөндөөлөрү"</string>
@@ -5163,7 +5163,7 @@
     <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="3841463141138247167">"Иштөө цикли өчүрүлүп, бардык GNSS топторуна жана жыштыктарга көз салынат"</string>
     <string name="input_method_category" msgid="2252659253631639005">"Киргизүү ыкмасы"</string>
     <string name="stylus_handwriting" msgid="2154591374132794563">"Стилус менен жазуу"</string>
-    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Түзөтүүчү күйүп турса, колдонулганда киргизүү ыкмасында MotionEvent иштетилет."</string>
+    <string name="stylus_handwriting_summary" msgid="6333425895172696950">"Функция күйгүзүлүп, түзөтүүчүгө өтсөңүз, учурдагы текст киргизүү ыкмасында стилусту колдонууга болот"</string>
     <string name="device_theme" msgid="5027604586494772471">"Түзмөктүн темасы"</string>
     <string name="default_theme" msgid="4815428567082263639">"Демейки"</string>
     <string name="show_operator_name_title" msgid="3355910331531144028">"Тармактын аталышы"</string>
@@ -5574,7 +5574,7 @@
     <string name="blob_never_expires_text" msgid="7293376386620106623">"Мөөнөтү бүтпөйт."</string>
     <string name="accessor_never_expires_text" msgid="4647624492147788340">"Ижаранын мөөнөтү бүтпөйт."</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Колдонмолорду жөндөөлөрдүн үстүнө коюуга уруксат берүү"</string>
-    <string name="overlay_settings_summary" msgid="2745336273786148166">"Башка колдонмолордун үстүнөн көрүнгөн колдонмолорго Жөндөөлөр экранынын үстүнөн да көрүнүүгө уруксат берүү"</string>
+    <string name="overlay_settings_summary" msgid="2745336273786148166">"Башка колдонмолордун үстүнөн көрүнгөн колдонмолорго Жөндөөлөр экрандарынын үстүнөн да көрүнүүгө уруксат берилет"</string>
     <string name="allow_mock_modem" msgid="3832264806530479214">"Mock Modem\'ге уруксат берүү"</string>
     <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Аспаптарды сыноо үчүн бул түзмөккө Mock Modem кызматын иштетүүгө уруксат бериңиз. Телефон кадимкидей колдонулуп жатканда муну иштетпеңиз"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Медиа"</string>
@@ -5776,4 +5776,20 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Интернет байланышын камсыздаган бардык тармактарга колдонула турган тармактын өткөрүү жөндөмдүүлүгүнүн кирүү жыштыгынын чегин конфигурациялаңыз."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Тармактан жүктөп алуу ылдамдыгынын чегин конфигурациялаңыз"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Чек жок"</string>
+    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
+    <skip />
+    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
+    <skip />
+    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
+    <skip />
+    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
+    <skip />
 </resources>
