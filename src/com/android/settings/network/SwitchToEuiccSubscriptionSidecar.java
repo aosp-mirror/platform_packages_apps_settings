@@ -69,20 +69,15 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
     }
 
-    /** Starts calling EuiccManager#switchToSubscription to enable/disable the eSIM profile. */
-    // ToDo: delete this api and refactor the related code.
-    public void run(int subscriptionId) {
-        setState(State.RUNNING, Substate.UNUSED);
-        mCallbackIntent = createCallbackIntent();
-        mEuiccManager.switchToSubscription(subscriptionId, mCallbackIntent);
-    }
-
     /**
      * Starts calling EuiccManager#switchToSubscription to enable/disable the eSIM profile.
      *
      * @param subscriptionId the esim's subscriptionId.
-     * @param port the esim's portId. If user wants to inactivate esim, then user must to assign the
-     *             the port. If user wants to activate esim, then the port can be -1.
+     * @param port the esim's portId. If user wants to inactivate esim, then user must to assign
+     *             the corresponding port. If user wants to activate esim, then the port can be
+     *             {@link UiccSlotUtil#INVALID_PORT_ID}. When it is
+     *             {@link UiccSlotUtil#INVALID_PORT_ID}, the system will reassign a corresponding
+     *             port id.
      * @param removedSubInfo if the all of slots have sims, it should remove the one of active sim.
      *                       If the removedSubInfo is null, then use the default value.
      *                       The default value is the esim slot and portId 0.

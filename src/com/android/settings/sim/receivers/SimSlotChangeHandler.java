@@ -210,10 +210,11 @@ public class SimSlotChangeHandler {
         }
 
         List<SubscriptionInfo> groupedEmbeddedSubscriptions = getGroupedEmbeddedSubscriptions();
-
         if (groupedEmbeddedSubscriptions.size() == 0 || !removableSlotInfo.getPorts().stream()
                 .findFirst().get().isActive()) {
-            Log.i(TAG, "eSIM slot is active or no subscriptions exist. Do nothing.");
+            Log.i(TAG, "eSIM slot is active or no subscriptions exist. Do nothing."
+                            + " The removableSlotInfo: " + removableSlotInfo
+                            + ", groupedEmbeddedSubscriptions: " + groupedEmbeddedSubscriptions);
             return;
         }
 
