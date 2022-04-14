@@ -208,13 +208,9 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         LocaleList packageLocaleList = getPackageLocales();
         String[] assetLocaleList = getAssetLocales();
         // TODO add apended url string, "Learn more", to these both sentenses.
-        if (packageLocaleList == null && assetLocaleList.length == 0) {
-            // There is no locale info from PackageManager amd AssetManager.
+        if ((packageLocaleList != null && packageLocaleList.isEmpty())
+                || (packageLocaleList == null && assetLocaleList.length == 0)) {
             return R.string.desc_no_available_supported_locale;
-        } else if (packageLocaleList != null && packageLocaleList.isEmpty()) {
-            // LocaleConfig is empty, and this means only allow user modify language
-            // by the application.
-            return R.string.desc_disallow_locale_change_in_settings;
         }
         return -1;
     }
@@ -276,9 +272,7 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         final Context contextAsUser = context.createContextAsUser(userHandle, 0);
         Locale appLocale = getAppDefaultLocale(contextAsUser, entry.info.packageName);
         if (appLocale == null) {
-            Locale systemLocale = Locale.getDefault();
-            return context.getString(R.string.preference_of_system_locale_summary,
-                    systemLocale.getDisplayName(systemLocale));
+            return context.getString(R.string.preference_of_system_locale_summary);
         } else {
             return appLocale.getDisplayName(appLocale);
         }

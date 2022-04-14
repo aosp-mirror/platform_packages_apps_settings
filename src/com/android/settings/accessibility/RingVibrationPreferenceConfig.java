@@ -42,21 +42,6 @@ public class RingVibrationPreferenceConfig extends VibrationPreferenceConfig {
     }
 
     @Override
-    public int readIntensity() {
-        final int vibrateWhenRinging = Settings.System.getInt(mContentResolver,
-                Settings.System.VIBRATE_WHEN_RINGING, ON);
-
-        if ((vibrateWhenRinging == OFF)
-                && !mAudioManager.isRampingRingerEnabled()) {
-            // VIBRATE_WHEN_RINGING is deprecated but should still be applied if the user has
-            // turned it off and has not enabled the ramping ringer (old three-state setting).
-            return Vibrator.VIBRATION_INTENSITY_OFF;
-        }
-
-        return super.readIntensity();
-    }
-
-    @Override
     public boolean updateIntensity(int intensity) {
         final boolean success = super.updateIntensity(intensity);
 

@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -49,6 +50,7 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.SelectorWithWidgetPreference;
@@ -319,6 +321,39 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return SystemNavigationPreferenceController.isGestureAvailable(context);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final Resources res = context.getResources();
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_GESTURAL_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.edge_to_edge_navigation_title);
+                        data.key = KEY_SYSTEM_NAV_GESTURAL;
+                        result.add(data);
+                    }
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_2BUTTON_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.swipe_up_to_switch_apps_title);
+                        data.key = KEY_SYSTEM_NAV_2BUTTONS;
+                        result.add(data);
+                    }
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_3BUTTON_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.legacy_navigation_title);
+                        data.key = KEY_SYSTEM_NAV_3BUTTONS;
+                        result.add(data);
+                    }
+
+                    return result;
                 }
             };
 
