@@ -16,12 +16,9 @@
 
 package com.android.settings.dream;
 
-import static com.android.settings.dream.DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.widget.Switch;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -35,8 +32,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
-import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,8 +39,7 @@ import java.util.stream.Collectors;
 /**
  * Controller for the dream picker where the user can select a screensaver.
  */
-public class DreamPickerController extends BasePreferenceController implements
-        OnMainSwitchChangeListener {
+public class DreamPickerController extends BasePreferenceController {
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -92,10 +86,13 @@ public class DreamPickerController extends BasePreferenceController implements
                 new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
+    }
 
-        final Preference mainSwitchPref = screen.findPreference(MAIN_SWITCH_PREF_KEY);
-        if (mainSwitchPref instanceof MainSwitchPreference) {
-            ((MainSwitchPreference) mainSwitchPref).addOnSwitchChangeListener(this);
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mAdapter != null) {
+            mAdapter.setEnabled(preference.isEnabled());
         }
     }
 
@@ -106,13 +103,6 @@ public class DreamPickerController extends BasePreferenceController implements
                 .filter(d -> d.isActive)
                 .findFirst()
                 .orElse(null);
-    }
-
-    @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        if (mAdapter != null) {
-            mAdapter.setEnabled(isChecked);
-        }
     }
 
     private class DreamItem implements IDreamItem {
