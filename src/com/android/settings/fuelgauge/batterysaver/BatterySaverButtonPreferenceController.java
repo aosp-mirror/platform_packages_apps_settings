@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.provider.SettingsSlicesContract;
 import android.widget.Switch;
 
@@ -101,6 +102,11 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        // Cancel preference's check state once it's first time launch
+        if (isChecked && (Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED, 0) == 0)) {
+            mPreference.setChecked(false);
+        }
         setChecked(isChecked);
     }
 
