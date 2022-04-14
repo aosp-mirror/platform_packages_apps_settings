@@ -87,6 +87,7 @@ public class SimListDialogFragment extends SimDialogFragment {
         final ListView lvItems = content != null ? content.findViewById(R.id.carrier_list) : null;
         if (lvItems != null) {
             setAdapter(lvItems);
+            lvItems.setVisibility(View.VISIBLE);
             lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
