@@ -369,6 +369,7 @@ public class UiccSlotUtil {
                     }
                     return true;
                 })
+                .sorted(Comparator.comparingInt(UiccSlotMapping::getLogicalSlotIndex))
                 .mapToInt(uiccSlotMapping -> uiccSlotMapping.getLogicalSlotIndex())
                 .findFirst()
                 .orElse(INVALID_LOGICAL_SLOT_ID);
