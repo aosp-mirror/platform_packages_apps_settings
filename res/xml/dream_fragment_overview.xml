@@ -26,28 +26,25 @@
         settings:searchable="false"/>
 
     <PreferenceCategory
-        android:key="dream_main_category">
-        <PreferenceCategory
-            android:title="@string/dream_picker_category">
-            <com.android.settingslib.widget.LayoutPreference
-                android:key="dream_picker"
-                android:selectable="false"
-                android:layout="@layout/dream_picker_layout"
-                settings:controller="com.android.settings.dream.DreamPickerController"/>
-        </PreferenceCategory>
+        android:title="@string/dream_picker_category">
+        <com.android.settingslib.widget.LayoutPreference
+            android:key="dream_picker"
+            android:selectable="false"
+            android:layout="@layout/dream_picker_layout"
+            settings:controller="com.android.settings.dream.DreamPickerController"/>
+    </PreferenceCategory>
 
-        <PreferenceCategory
-            android:title="@string/dream_more_settings_category">
-            <SwitchPreference
-                android:key="dream_complications_toggle"
-                android:title="@string/dream_complications_toggle_title"
-                android:summary="@string/dream_complications_toggle_summary"
-                settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
-            <Preference
-                android:key="when_to_start"
-                android:title="@string/screensaver_settings_when_to_dream"
-                android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
-        </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/dream_more_settings_category">
+        <SwitchPreference
+            android:key="dream_complications_toggle"
+            android:title="@string/dream_complications_toggle_title"
+            android:summary="@string/dream_complications_toggle_summary"
+            settings:controller="com.android.settings.dream.DreamComplicationPreferenceController"/>
+        <Preference
+            android:key="when_to_start"
+            android:title="@string/screensaver_settings_when_to_dream"
+            android:fragment="com.android.settings.dream.WhenToDreamPicker"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
