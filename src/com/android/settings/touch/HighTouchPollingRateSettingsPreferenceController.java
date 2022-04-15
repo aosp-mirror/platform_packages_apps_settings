@@ -22,7 +22,7 @@ import com.android.settings.core.BasePreferenceController;
 
 public class HighTouchPollingRateSettingsPreferenceController extends BasePreferenceController {
 
-    public static final String KEY = "high_touch_sensitivity_enable";
+    public static final String KEY = "high_touch_polling_rate_enable";
 
     private final LineageHardwareManager mHardware;
 
