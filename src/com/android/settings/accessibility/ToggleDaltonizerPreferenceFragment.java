@@ -185,8 +185,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_daltonizer_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_daltonizer_shortcut_title);
     }
 
     @Override
