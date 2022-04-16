@@ -105,13 +105,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             icon.setBounds(0, 0, iconSize, iconSize);
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
-            if (item.isActive()) {
-                mLastSelectedPos = position;
-                itemView.setSelected(true);
-            } else {
-                itemView.setSelected(false);
-            }
-
             mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
             mCustomizeButton.setVisibility(
                     item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
@@ -124,6 +117,15 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 notifyItemChanged(position);
             });
+
+            if (item.isActive()) {
+                mLastSelectedPos = position;
+                itemView.setSelected(true);
+                itemView.setClickable(false);
+            } else {
+                itemView.setSelected(false);
+                itemView.setClickable(true);
+            }
 
             setEnabledStateOnViews(itemView, mEnabled);
         }
