@@ -271,12 +271,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_title, mPackageName);
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
                 mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogType, dialogTitle,
+                        getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(mDialog);
                 return mDialog;
@@ -341,9 +339,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         switchPreference.setTitle(title);
     }
 
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
-        shortcutPreference.setTitle(title);
+    protected CharSequence getShortcutTitle() {
+        return getString(R.string.accessibility_shortcut_title, mPackageName);
     }
 
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -516,8 +513,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
-
-        updateShortcutTitle(mShortcutPreference);
+        mShortcutPreference.setTitle(getShortcutTitle());
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mShortcutPreference);
