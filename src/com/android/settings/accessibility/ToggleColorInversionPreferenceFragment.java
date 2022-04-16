@@ -75,8 +75,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_display_inversion_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_display_inversion_shortcut_title);
     }
 
     @Override

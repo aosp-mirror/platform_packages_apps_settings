@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
@@ -52,9 +53,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowUserManager.class)
 public class BluetoothDeviceDetailsFragmentTest {
 
     private static final String TEST_ADDRESS = "55:66:77:88:99:AA";
@@ -71,6 +75,8 @@ public class BluetoothDeviceDetailsFragmentTest {
     private LocalBluetoothManager mLocalManager;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+    @Mock
+    private UserManager mUserManager;
 
     @Before
     public void setUp() {
@@ -82,6 +88,7 @@ public class BluetoothDeviceDetailsFragmentTest {
         doReturn(mLocalManager).when(mFragment).getLocalBluetoothManager(any());
         doReturn(mCachedDevice).when(mFragment).getCachedDevice(any());
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
+        doReturn(mUserManager).when(mFragment).getUserManager();
 
         FragmentManager fragmentManager = mock(FragmentManager.class);
         when(mFragment.getFragmentManager()).thenReturn(fragmentManager);
