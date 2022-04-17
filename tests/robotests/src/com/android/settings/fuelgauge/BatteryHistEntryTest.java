@@ -57,7 +57,7 @@ public final class BatteryHistEntryTest {
         when(mockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
         when(mockBatteryEntry.getConsumedPower()).thenReturn(1.1);
-        mockBatteryEntry.percent = 0.3;
+        mockBatteryEntry.mPercent = 0.3;
         when(mockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
         when(mockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
         when(mockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
@@ -76,7 +76,7 @@ public final class BatteryHistEntryTest {
         assertBatteryHistEntry(
             new BatteryHistEntry(values),
             /*drainType=*/ expectedType,
-            /*percentOfTotal=*/ mockBatteryEntry.percent);
+            /*percentOfTotal=*/ mockBatteryEntry.mPercent);
     }
 
     @Test

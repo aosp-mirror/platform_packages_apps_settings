@@ -171,9 +171,9 @@ public class BatteryDiffEntry {
         // Checks whether we have cached data or not first before fetching.
         final BatteryEntry.NameAndIcon nameAndIcon = getCache();
         if (nameAndIcon != null) {
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
-            mAppIconId = nameAndIcon.iconId;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
+            mAppIconId = nameAndIcon.mIconId;
         }
         final Boolean validForRestriction = sValidForRestriction.get(getKey());
         if (validForRestriction != null) {
@@ -196,8 +196,8 @@ public class BatteryDiffEntry {
                     BatteryEntry.getNameAndIconFromUserId(
                         mContext, (int) mBatteryHistEntry.mUserId);
                 if (nameAndIconForUser != null) {
-                    mAppIcon = nameAndIconForUser.icon;
-                    mAppLabel = nameAndIconForUser.name;
+                    mAppIcon = nameAndIconForUser.mIcon;
+                    mAppLabel = nameAndIconForUser.mName;
                     sResourceCache.put(
                         getKey(),
                         new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
@@ -208,10 +208,10 @@ public class BatteryDiffEntry {
                     BatteryEntry.getNameAndIconFromPowerComponent(
                         mContext, mBatteryHistEntry.mDrainType);
                 if (nameAndIconForSystem != null) {
-                    mAppLabel = nameAndIconForSystem.name;
-                    if (nameAndIconForSystem.iconId != 0) {
-                        mAppIconId = nameAndIconForSystem.iconId;
-                        mAppIcon = mContext.getDrawable(nameAndIconForSystem.iconId);
+                    mAppLabel = nameAndIconForSystem.mName;
+                    if (nameAndIconForSystem.mIconId != 0) {
+                        mAppIconId = nameAndIconForSystem.mIconId;
+                        mAppIcon = mContext.getDrawable(nameAndIconForSystem.mIconId);
                     }
                     sResourceCache.put(
                         getKey(),
@@ -308,8 +308,8 @@ public class BatteryDiffEntry {
         if (packages == null || packages.length == 0) {
             final BatteryEntry.NameAndIcon nameAndIcon =
                 BatteryEntry.getNameAndIconFromUid(mContext, mAppLabel, uid);
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
         }
 
         final BatteryEntry.NameAndIcon nameAndIcon =
@@ -319,13 +319,13 @@ public class BatteryDiffEntry {
         // Clears BatteryEntry internal cache since we will have another one.
         BatteryEntry.clearUidCache();
         if (nameAndIcon != null) {
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
-            mDefaultPackageName = nameAndIcon.packageName;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
+            mDefaultPackageName = nameAndIcon.mPackageName;
             if (mDefaultPackageName != null
-                    && !mDefaultPackageName.equals(nameAndIcon.packageName)) {
+                    && !mDefaultPackageName.equals(nameAndIcon.mPackageName)) {
                 Log.w(TAG, String.format("found different package: %s | %s",
-                    mDefaultPackageName, nameAndIcon.packageName));
+                    mDefaultPackageName, nameAndIcon.mPackageName));
             }
         }
     }
