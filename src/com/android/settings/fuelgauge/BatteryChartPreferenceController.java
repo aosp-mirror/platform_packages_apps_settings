@@ -508,7 +508,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryKeys[mTrapezoidIndex * 2], mIs24HourFormat);
         final String toHour = ConvertUtils.utcToLocalTimeHour(mPrefContext,
             mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2], mIs24HourFormat);
-        return String.format("%s - %s", fromHour, toHour);
+        return mIs24HourFormat
+            ? String.format("%s–%s", fromHour, toHour)
+            : String.format("%s – %s", fromHour, toHour);
     }
 
     @VisibleForTesting
