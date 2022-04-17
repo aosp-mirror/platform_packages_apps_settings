@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Lugha zinazopendekezwa"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lugha zote"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Lugha ya mfumo"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Chaguomsingi la mfumo - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Chaguomsingi la mfumo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Chaguo la lugha kwa programu hii halipatikani kwenye Mipangilio."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Huwezi kuchagua lugha ya programu hii kwenye Mipangilio."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ungependa kuondoa lugha zilizochaguliwa?</item>
       <item quantity="one">Ungependa kuondoa lugha iliyochaguliwa?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Hali ya usalama"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Kufunga skrini, Tafuta Kifaa Changu, usalama wa programu"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Usalama na faragha"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Usalama wa programu, ufungaji wa kifaa, ruhusa"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Utambuzi wa uso umeongezwa"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Gusa ili uweke mipangilio ya uso"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Kufungua kwa uso"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Chaguo la kufunga skrini limezimwa. Wasiliana na msimamizi wa shirika lako ili upate maelezo zaidi "<annotation id="admin_details">"Pata maelezo zaidi"</annotation>\n\n"Bado unaweza kutumia alama ya kidole chako kuidhinisha ununuzi na kufikia programu. "<annotation id="url">"Pata maelezo zaidi"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Inua kidole, kisha gusa kitambuzi tena"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Imeshindwa kutumia kitambua alama ya kidole. Tembelea mtoa huduma za urekebishaji"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Mipangilio zaidi ya usalama"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Ufungaji wa wasifu wa kazini, usimbaji fiche na zaidi"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Usimbaji fiche, vitambulisho na zaidi"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"usalama, mipangilio zaidi ya usalama, mipangilio zaidi, mipangilio ya kina ya usalama"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Unaweza kuongeza hadi vitambulisho <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Umeongeza idadi ya juu inayoruhusiwa ya alama za kidole"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Haiwezi kuongeza alama zaidi za kidole"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS ya pili (isipokuwa ikibatilishwa na DNS ya Faragha)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Lango"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Urefu wa kiambishi awali cha mtandao"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Moja kwa moja"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Taarifa ya kifaa"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Kumbuka muunganisho huu"</string>
@@ -1424,7 +1417,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Skrini huzima"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Baada ya <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> za kutokuwa na shughuli"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Mandhari"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Mandhari na muundo"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Mandhari na mtindo"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Skrini ya kwanza, skrini iliyofungwa"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Chaguomsingi"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Maalum"</string>
@@ -2909,7 +2902,7 @@
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Jumla ya muda usiozidi dakika moja katika <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Imetumika chinichini kwa muda usiozidi dakika moja tangu ilipojazwa chaji mara ya mwisho"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Imetumika chinichini kwa muda usiozidi dakika moja katika saa 24 zilizopita"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Imetumika chinichini kwa muda usiozidi dakika moja katika <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Imetumika chinichini kwa muda usiozidi dakika moja kati ya <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="4685408616230899847">"Jumla ya <xliff:g id="TIME">^1</xliff:g> imetumiwa tangu ilipojazwa chaji mara ya mwisho"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"Jumla ya <xliff:g id="TIME">^1</xliff:g> katika saa 24 zilizopita"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Jumla ya <xliff:g id="TIME_0">^1</xliff:g> katika <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
@@ -4935,7 +4928,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Mratibu dijitali"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Telezesha kidole ili uombe programu ya mratibu dijitali"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Telezesha kidole juu kutoka kona ya chini ili uombe programu ya mratibu dijitali."</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Shikilia kitufe cha Ukurasa wa Kwanza ili uombe Mratibu"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Shikilia kitufe cha Mwanzo ili uombe Mratibu"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Bonyeza na ushikilie Kitufe cha ukurasa wa mwanzo ili uombe programu ya mratibu dijitali."</string>
     <string name="information_label" msgid="6939310810756569298">"Maelezo"</string>
     <string name="low_label" msgid="6525629096999711220">"Chini"</string>
@@ -4958,7 +4951,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Telezesha kidole chini ili"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Tumia njia ya mkato kutekeleza"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Vuta chini nusu ya sehemu ya juu ya skrini yako ili ufanye iwe rahisi kufikia kwa mkono mmoja"</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Jinsi ya kutumia kipengele cha hali ya kutumia kwa mkono mmoja"</b>\n" • Hakikisha kwamba usogezaji kwa kutumia ishara umechaguliwa katika mipangilio ya usogezaji kwenye mfumo\n • Telezesha kidole chini karibu na ukingo wa chini wa skrini."</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Jinsi ya kutumia kipengele cha hali ya kutumia kwa mkono mmoja"</b>\n" • Hakikisha kwamba usogezaji kwa kutumia ishara umechaguliwa katika mipangilio ya usogezaji kwenye mfumo\n • Telezesha kidole chini karibu na ukingo wa chini wa skrini"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Sogeza skrini karibu nawe"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Utaweza kufikia sehemu ya juu ya skrini ukitumia kidole gumba chako."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Onyesha arifa"</string>
@@ -5773,20 +5766,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Weka mipangilio ya kiwango cha kikomo cha uingiaji kipimo data cha mtandao ambacho kinatumika katika mitandao yote inayotoa muunganisho wa intaneti."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Weka mipangilio ya kiwango cha kikomo cha upakuaji wa mtandao"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Hakuna kikomo"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Tangazo"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Sikiliza matangazo yanayochezwa karibu nawe"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Tangaza maudhui kwenye vifaa vilivyo karibu nawe au usikilize tangazo la mtu mwingine"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Matangazo"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Unasikiliza"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Tafuta matangazo"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Ondoa tangazo"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Changanua msimbo wa QR"</string>
 </resources>
