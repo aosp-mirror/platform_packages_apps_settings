@@ -172,7 +172,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         launchArgs.mPackageName = entry.getDefaultPackageName();
         launchArgs.mAppLabel = entry.getLabel();
         launchArgs.mUid = entry.getUid();
-        launchArgs.mIconId = entry.iconId;
+        launchArgs.mIconId = entry.mIconId;
         launchArgs.mConsumedPower = (int) entry.getConsumedPower();
         launchArgs.mForegroundTimeMs = isValidToShowSummary ? entry.getTimeInForegroundMs() : 0;
         launchArgs.mBackgroundTimeMs = isValidToShowSummary ? entry.getTimeInBackgroundMs() : 0;
