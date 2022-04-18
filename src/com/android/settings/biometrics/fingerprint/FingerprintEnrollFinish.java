@@ -31,6 +31,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -46,8 +47,6 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     private static final String TAG = "FingerprintEnrollFinish";
     private static final String ACTION_FINGERPRINT_SETTINGS =
             "android.settings.FINGERPRINT_SETTINGS";
-    @VisibleForTesting
-    static final int REQUEST_ADD_ANOTHER = 1;
     @VisibleForTesting
     static final String FINGERPRINT_SUGGESTION_ACTIVITY =
             "com.android.settings.SetupFingerprintSuggestionActivity";
@@ -160,13 +159,13 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
     }
 
     private void onAddAnotherButtonClick(View view) {
-        startActivityForResult(getFingerprintEnrollingIntent(), REQUEST_ADD_ANOTHER);
+        startActivityForResult(getFingerprintEnrollingIntent(), BiometricUtils.REQUEST_ADD_ANOTHER);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateFingerprintSuggestionEnableState();
-        if (requestCode == REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
+        if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER && resultCode != RESULT_CANCELED) {
             setResult(resultCode, data);
             finish();
         } else {
