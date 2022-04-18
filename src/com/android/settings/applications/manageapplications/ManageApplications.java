@@ -315,16 +315,25 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_WIFI_ACCESS;
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
-        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+        } else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
             mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
+                || className.equals(
+                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
+            if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
+                // Special-case for a case where a user is directed to the all apps notification
+                // preferences page via a notification prompt to review permissions settings.
+                android.provider.Settings.Secure.putInt(getContext().getContentResolver(),
+                        android.provider.Settings.Secure.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
+                        1);  // USER_INTERACTED
+            }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             mListType = LIST_TYPE_APPS_LOCALE;
         } else {
@@ -915,7 +924,9 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             screenTitle = R.string.alarms_and_reminders_title;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
+                || className.equals(
+                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
             screenTitle = R.string.app_notifications_title;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
