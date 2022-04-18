@@ -101,7 +101,7 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_CONSUME_POWER,
                 Double.valueOf(entry.getConsumedPower()));
             values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                Double.valueOf(entry.percent));
+                Double.valueOf(entry.mPercent));
             values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInForegroundMs()));
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
