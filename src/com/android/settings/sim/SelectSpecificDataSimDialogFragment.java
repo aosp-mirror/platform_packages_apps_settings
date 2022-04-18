@@ -26,8 +26,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -88,10 +86,11 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
         if (subInfos == null || dds == null) {
             return null;
         }
-        return subInfos.stream().filter(subinfo -> subinfo != dds).findFirst().orElse(null);
+        return subInfos.stream().filter(subinfo -> subinfo.getSubscriptionId()
+                != dds.getSubscriptionId()).findFirst().orElse(null);
     }
 
-    private SubscriptionInfo getDefaultDataSubId() {
+    private SubscriptionInfo getDefaultDataSubInfo() {
         return getSubscriptionManager().getDefaultDataSubscriptionInfo();
     }
 
@@ -101,20 +100,22 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
             return;
         }
 
-        SubscriptionInfo activeSubInfo = getDefaultDataSubId();
-        SubscriptionInfo newSubInfo = getNonDefaultDataSubscriptionInfo(activeSubInfo);
+        SubscriptionInfo currentDataSubInfo = getDefaultDataSubInfo();
+        SubscriptionInfo newSubInfo = getNonDefaultDataSubscriptionInfo(currentDataSubInfo);
 
-        if (newSubInfo == null || activeSubInfo == null) {
+        if (newSubInfo == null || currentDataSubInfo == null) {
+            Log.d(TAG, "one of target SubscriptionInfos is null");
             dismiss();
             return;
         }
-
+        Log.d(TAG, "newSubId: " + newSubInfo.getSubscriptionId()
+                + "currentDataSubID: " + currentDataSubInfo.getSubscriptionId());
         setTargetSubscriptionInfo(newSubInfo);
 
         CharSequence newDataCarrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 newSubInfo, getContext());
         CharSequence currentDataCarrierName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                activeSubInfo, getContext());
+                currentDataSubInfo, getContext());
 
         String positive = getContext().getString(
                 R.string.select_specific_sim_for_data_button, newDataCarrierName);
@@ -123,18 +124,10 @@ public class SelectSpecificDataSimDialogFragment extends SimDialogFragment imple
 
         View content = LayoutInflater.from(getContext()).inflate(
                 R.layout.sim_confirm_dialog_multiple_enabled_profiles_supported, null);
-        TextView dialogMessage = content.findViewById(R.id.msg);
+        TextView dialogMessage = content != null ? content.findViewById(R.id.msg) : null;
         if (!TextUtils.isEmpty(message) && dialogMessage != null) {
             dialogMessage.setText(message);
-        }
-
-        final ListView lvItems = content.findViewById(R.id.carrier_list);
-        if (lvItems != null) {
-            lvItems.setVisibility(View.GONE);
-        }
-        final LinearLayout infoOutline = content.findViewById(R.id.info_outline_layout);
-        if (infoOutline != null) {
-            infoOutline.setVisibility(View.GONE);
+            dialogMessage.setVisibility(View.VISIBLE);
         }
         dialog.setView(content);
 

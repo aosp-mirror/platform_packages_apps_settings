@@ -77,7 +77,7 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
         doReturn(activity).when(mFragment).getActivity();
         doNothing().when(activity).onSubscriptionSelected(anyInt(), anyInt());
 
-        mFragment.onClick(alertDialog, 1);
+        mFragment.onClick(1);
         verify(activity).onSubscriptionSelected(dialogType, SIM2_ID);
     }
 
@@ -117,7 +117,7 @@ public class SimListDialogFragmentTest extends SimDialogFragmentTestBase<SimList
         doReturn(activity).when(mFragment).getActivity();
         doNothing().when(activity).onSubscriptionSelected(anyInt(), anyInt());
 
-        mFragment.onClick(alertDialog, 0);
+        mFragment.onClick(0);
         verify(activity).onSubscriptionSelected(dialogType,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
     }
