@@ -272,7 +272,7 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"A(z) <xliff:g id="TIME_TYPE">%1$s</xliff:g> kezdete: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. A(z) <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> ekkor kezdődik: <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. A(z) <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> ekkor kezdődik: <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>"</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"A következőt használja: <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Nincs nyári időszámítás."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Téli/nyári időszámítás"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Hivatalos idő"</string>
@@ -2875,8 +2875,8 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Akkumulátor töltöttségi szintje – legutóbbi 24 óra"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Alkalmazáshasználat – legutóbbi 24 óra"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Rendszerhasználat – legutóbbi 24 óra"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Rendszer használata erre: <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"Alkalmazás használata erre: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Rendszer használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Alkalmazás használata: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_time_am" msgid="7783773965475697655">"de."</string>
     <string name="battery_usage_time_pm" msgid="1534468528902328570">"du."</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Összesen: kevesebb mint egy perc"</string>
@@ -4825,7 +4825,7 @@
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Alapértelmezett kezdőalkalmazás cseréje"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Digitális asszisztens"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Csúsztassa ujját az asszisztens megnyitásához"</string>
-    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Csúsztassa ujját felfelé valamelyik alsó sarokból a digitálisasszisztens-alkalmazás megnyitásához."</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Csúsztassa ujját felfelé valamelyik alsó sarokból a digitális asszisztens megnyitásához."</string>
     <string name="information_label" msgid="6939310810756569298">"Információ"</string>
     <string name="low_label" msgid="6525629096999711220">"Alacsony"</string>
     <string name="high_label" msgid="357503396626018487">"Magas"</string>
@@ -4844,7 +4844,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Csúsztasson lefelé a következőhöz:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"A gyorsparancs segítségével a következőt hajthatja végre:"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Az egykezes mód használatához csúsztasson lefelé a képernyő aljától. A funkció használatához győződjön meg arról, hogy be van kapcsolva a kézmozdulat-alapú navigáció a rendszernavigációs beállítások között."</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Húzza lefelé a képernyőt, hogy elérhesse a műveletet"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Képernyő teteje elérhető legyen"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"A képernyő teteje a hüvelykujja számára elérhető közelségbe kerül."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Értesítések mutatása"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Megjelennek az értesítések és a beállítások."</string>
@@ -5210,7 +5210,7 @@
     <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"Inaktív / Letöltött SIM"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"SIM-kártya neve és színe"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"Név"</string>
-    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Szín (kompatibilis alkalmazásokhoz)"</string>
+    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"Szín (kompatibilis alkalmazásokban)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"Mentés"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"SIM-kártya használata"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"Ki"</string>
