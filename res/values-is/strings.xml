@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Tillögur að tungumálum"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Öll tungumál"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Tungumál kerfis"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Sjálfgildi kerfis – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sjálfgildi kerfis"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ekki er hægt að velja tungumál fyrir þetta forrit í stillingum."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Þú getur ekki valið tungumál fyrir þetta forrit í stillingum."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Fjarlægja valin tungumál?</item>
       <item quantity="other">Fjarlægja valin tungumál?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Öryggisstaða"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skjálás, „Finna tækið mitt“, forritaöryggi"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Öryggi og persónuvernd"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Öryggi forrita, tækjalás, heimildir"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Andliti bætt við"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Ýttu til að setja upp andlit"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Andlitskenni"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Þessi valkostur fyrir skjálás er óvirkur. Hafðu samband við kerfisstjóra fyrirtækisins til að fá frekari upplýsingar. "<annotation id="admin_details">"Frekari upplýsingar"</annotation>\n\n"Þú getur enn notað fingrafarið til að heimila innkaup og aðgang að forritum. "<annotation id="url">"Frekari upplýsingar"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lyftu fingrinum og snertu svo skynjarann aftur"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Ekki er hægt að nota fingrafaralesara. Þú verður að fara með hann á verkstæði"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Fleiri öryggisstillingar"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lás vinnusniðs, dulkóðun og fleira"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Dulkóðun, skilríki og fleira"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"öryggi, fleiri öryggisstillingar, fleiri stillingar, ítarlegar öryggisstillingar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Þú getur bætt við allt að <xliff:g id="COUNT">%d</xliff:g> fingraförum"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Þú hefur bætt við hámarksfjölda fingrafara"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Ekki er hægt að bæta fleiri fingraförum við"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (nema því sé hnekkt með lokuðu DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gátt"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Lengd netforskeytis"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Upplýsingar um tæki"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Muna þessa tengingu"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Andlitsgreining"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Aðlaga skjástefnuna sjálfkrafa þegar þú skiptir á milli skammsniðs og langsniðs í símanum"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Nánar um sjálfvirkan snúning"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skjáupplausn"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Há upplausn"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Hæsta upplausn"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Eyða"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Öllum forritum og gögnum í þessari lotu verður eytt."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Fjarlægja"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Gestur (þú)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Notendur"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Aðrir notendur"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Eyða aðgerðum úr gestalotu"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Eyða öllum forritum og gögnum úr gestalotu þegar gestastillingu er lokað"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Eyða aðgerðum úr gestalotu?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Forritum og gögnum úr þessari gestalotu verður eytt núna og öllum aðgerðum úr síðari gestalotum verður eytt í hvert skipti sem gestastillingu er lokað"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Kveikja á símtölum"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Kveikja á símtölum og SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Eyða notanda"</string>
@@ -4952,7 +4940,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Strjúktu til að ræsa hjálpara"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Strjúktu upp frá neðra horni skjásins til að ræsa stafrænt hjálparaforrit."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Haltu hnappinum „Heim“ inni til að opna Hjálparann"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Haltu inni heimahnappinum til að skipa forriti stafræna hjálparans."</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Haltu inni heimahnappinum til að kalla fram forrit stafræna hjálparans."</string>
     <string name="information_label" msgid="6939310810756569298">"Upplýsingar"</string>
     <string name="low_label" msgid="6525629096999711220">"Lítið"</string>
     <string name="high_label" msgid="357503396626018487">"Mikið"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Stilla inntaksmörk bandvíddar netkerfis sem notuð eru fyrir öll netkerfi sem veita nettengingu."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Stilla niðurhalsmörk netkerfis"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Engin takmörk"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Senda út"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Hlustaðu á útsendingar sem eru í gangi í nágrenni við þig"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Sendu út efni til nálægra tækja eða hlustaðu á útsendingar annarra"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Útsendingar"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Hlustar á"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Leita að útsendingum"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Loka útsendingu"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skanna QR-kóða"</string>
 </resources>

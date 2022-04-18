@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåede sprog"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle sprog"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprog"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Systemstandard – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Du kan ikke vælge et sprog for denne app i Indstillinger."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Sikkerhedsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skærmlås, Find min enhed, appsikkerhed"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sikkerhed og privatliv"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Appsikkerhed, enhedslås, tilladelser"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansigt tilføjet"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tryk for at konfigurere ansigtslås"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansigtslås"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Denne skærmlåsindstilling er deaktiveret. Kontakt din organisations administrator for at få flere oplysninger. "<annotation id="admin_details">"Få flere oplysninger"</annotation>\n\n"Du kan stadig bruge dit fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren, og tryk på sensoren igen"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Fingeraftrykslæseren kan ikke bruges. Få den repareret"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhedsindstillinger"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås til arbejdsprofil, kryptering og meget mere"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og meget mere"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhed, flere sikkerhedsindstillinger, flere indstillinger, avancerede sikkerhedsindstillinger"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har tilføjet det maksimale antal fingeraftryk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Du kan ikke tilføje flere fingeraftryk"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (undtagen ved tilsidesættelse med privat DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Længde på netværkspræfiks"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Oplysninger om enheden"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Husk denne forbindelse"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansigtsgenkendelse"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Juster automatisk skærmretningen, når du skifter mellem stående og liggende format på telefonen ved at bevæge den"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Få flere oplysninger om indstillingen Roter automatisk"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skærmopløsning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Høj opløsning"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Højeste opløsning"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Slet"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle apps og data i denne session slettes."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Fjern"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Gæst (dig)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Brugere"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Andre brugere"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Slet gæsteaktivitet"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Slet alle gæsteapps og -data ved afslutning af gæstetilstand"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gæsteaktiviteten?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apps og data fra denne gæstesession slettes nu, og al fremtidig gæsteaktivitet slettes, hver gang du afslutter gæstetilstand"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivér telefonopkald"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivér telefonopkald og sms"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slet bruger"</string>
@@ -4952,7 +4940,7 @@
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Stryg for at aktivere assistenten"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Stryg opad fra et af de nederste hjørner for at aktivere appen for din digitale assistent."</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Hold knappen Hjem nede for at aktivere Assistent"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Hold knappen Hjem nede for at aktivere appen for den digitale assistent"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Hold knappen Hjem nede for at aktivere appen for den digitale assistent."</string>
     <string name="information_label" msgid="6939310810756569298">"Oplysninger"</string>
     <string name="low_label" msgid="6525629096999711220">"Lav"</string>
     <string name="high_label" msgid="357503396626018487">"Høj"</string>
@@ -5555,7 +5543,7 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Du skal først konfigurere en skærmlås"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold nede for at aktivere Assistent"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Aktivér Assistent ved at holde afbryderknappen nede"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menu for afbryderknappen og menu for nødsituationer:\nTryk på afbryderknappen og knappen Lydstyrke op samtidig."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Menu for afbryderknappen og nødsituationer:\nTryk på afbryderknappen og knappen Lydstyrke op samtidig."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Deaktiver ringetoner:\nGenvejen findes i lydstyrkemenuen."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Tryklængde"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Juster følsomheden ved at vælge, hvor lang tid afbryderknappen skal holdes inde"</string>
@@ -5713,7 +5701,7 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonadgang"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"Lokationsadgang"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps og tjenester"</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"Apps og tjenester. Hvis denne indstilling er deaktiveret, deles mikrofondata muligvis stadig, når du ringer til et alarmnummer."</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"For apps og tjenester. Hvis denne indstilling er deaktiveret, deles mikrofondata muligvis stadig, når du ringer til et alarmnummer."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Forrige"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Næste"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Forhåndsvisning af farve"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurer grænsen for indgående båndbredde på netværket, som vil gælde for alle netværk, der leverer internetforbindelse."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurer grænsen for downloadhastighed på netværket"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Ubegrænset"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Udsendelse"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Lyt til udsendelser, der afspilles i nærheden"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Udsend medier til enheder i nærheden, eller lyt til andres udsendelser"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Udsendelser"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Lytter til"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Find udsendelser"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Forlad udsendelse"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scan QR-kode"</string>
 </resources>

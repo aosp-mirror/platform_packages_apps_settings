@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Gjuhët e sugjeruara"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Të gjitha gjuhët"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Gjuha e sistemit"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Parazgjedhja e sistemit - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Parazgjedhja e sistemit"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Zgjedhja e gjuhës për këtë aplikacion nuk ofrohet nga \"Cilësimet\"."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Nuk mund të zgjedhësh një gjuhë për këtë aplikacion nga \"Cilësimet\"."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Të hiqet gjuha e zgjedhur?</item>
       <item quantity="one">Të hiqet gjuha e zgjedhur?</item>
@@ -1158,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (përveçse nëse është anuluar nga DNS-ja private)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Porta e kalimit"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Gjatësia e prefiksit të rrjetit"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Informacioni i pajisjes"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Kujtoje këtë lidhje"</string>
@@ -1307,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Zbulimi i fytyrës"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Rregullo automatikisht orientimin e ekranit kur lëviz telefonin mes modalitetit të portretit dhe atij horizontal"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Mëso më shumë për rrotullimin automatik"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rezolucioni i ekranit"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Rezolucion i lartë"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Rezolucioni më i lartë"</string>
@@ -2411,7 +2411,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Ndrysho ngjyrën e tekstit në të zezë ose të bardhë. Maksimizon kontrastin me sfondin."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Përditëso auto. zmadhimin e ekranit"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Përditëso zmadhimin e ekranit në kalimet e apl."</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Butoni i fikjes mbyll telefonatën"</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Butoni i energjisë mbyll telefonatën"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Kursor mausi i madh"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Bëje treguesin e miut më të dukshëm"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Hiq animacionet"</string>
@@ -2686,7 +2686,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Nëse e kufizon aktivitetin në sfond për një aplikacion, mund të ketë çrregullime në funksionimin e tij"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Duke qenë se ky aplikacion nuk është caktuar për të optimizuar baterinë, nuk mund ta kufizosh atë.\n\nPër të kufizuar aplikacionin, në fillim aktivizo optimizimin e baterisë."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Pa kufizim"</string>
-    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"E optimizuar"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"I optimizuar"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"I kufizuar"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Lejo përdorimin e baterisë në sfond pa kufizime. Mund të përdoret më shumë bateri."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimizoje bazuar në përdorimin tënd. Rekomandohet për shumicën e aplikacioneve."</string>
@@ -4503,7 +4503,7 @@
     <string name="high_power_system" msgid="3966701453644915787">"Optimizimi i baterisë nuk ofrohet"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Mos zbato optimizimin e baterisë. Kjo mund ta shkarkojë baterinë më shpejt."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Të lejohet që aplikacioni të ekzekutohet gjithmonë në sfond?"</string>
-    <string name="high_power_prompt_body" msgid="6029266540782139941">"Nëse lejon që <xliff:g id="APP_NAME">%1$s</xliff:g> të ekzekutohet gjithmonë në sfond, kjo mund të zvogëlojë kohëzgjatjen e baterisë. \n\nKëtë mund ta ndryshosh më vonë nga Cilësimet &gt; Aplikacionet."</string>
+    <string name="high_power_prompt_body" msgid="6029266540782139941">"Nëse lejon që \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" të ekzekutohet gjithmonë në sfond, kjo mund të zvogëlojë kohëzgjatjen e baterisë. \n\nKëtë mund ta ndryshosh më vonë nga Cilësimet &gt; Aplikacionet."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> përdorim që prej karikimit të fundit të plotë"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> e përdorimit për 24 orët e fundit"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Asnjë përdorim i baterisë që prej karikimit të fundit të plotë"</string>
@@ -4959,7 +4959,7 @@
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Përdor modalitetin e përdorimit me një dorë"</string>
     <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Shkurtorja e modalitetit të përdorimit me një dorë"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"arritshmëria"</string>
-    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Rrëshqit shpejt poshtë te opsionet:"</string>
+    <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Me rrëshqitjen shpejt poshtë:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Përdor shkurtoren për"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Tërhiq poshtë gjysmën e sipërme të ekranit në mënyrë që të jetë më e lehtë për t\'u arritur me një dorë"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Si të përdorësh modalitetin e përdorimit me një dorë"</b>\n" • Sigurohu që navigimi me gjeste të jetë zgjedhur te cilësimet e navigimit të sistemit\n • Rrëshqit poshtë pranë skajit të poshtëm të ekranit"</string>
@@ -5621,7 +5621,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Rrjeti W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"KARTA SIM E SHKARKUAR"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM-ET E SHKARKUARA"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"KARTAT SIM TË SHKARKUARA"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Aktive"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Joaktive"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" / Parazgjedhja për <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5776,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfiguro kufirin e shpejtësisë së daljes së bandës së gjerë të rrjetit që zbatohet për të gjitha rrjetet që ofrojnë lidhje me internetin."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfiguro kufirin e shpejtësisë së shkarkimit në rrjet"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Pa kufi"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transmetimi"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Dëgjo transmetime që po luhen në afërsi"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Transmeto media në pajisjet në afërsi ose dëgjo transmetimin e dikujt tjetër"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Transmetimet"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Po dëgjon"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Gjej transmetime"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Largohu nga transmetimi"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skano kodin QR"</string>
 </resources>

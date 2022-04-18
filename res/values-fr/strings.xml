@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Langues suggérées"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Langue par défaut du système : <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Paramètre système par défaut"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection d\'une langue pour cette appli n\'est pas disponible depuis les paramètres."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Vous ne pouvez pas sélectionner de langue pour cette appli depuis les paramètres."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Supprimer la langue sélectionnée ?</item>
       <item quantity="other">Supprimer les langues sélectionnées ?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"État de la sécurité"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Verrouillage de l\'écran, Localiser mon appareil, sécurité des applications"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sécurité et confidentialité"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Sécurité de l\'appli, verrouillage appareil, autorisations"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Visage ajouté"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Appuyer pour configurer un visage"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Déverrouillage facial"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, contactez l\'administrateur de votre entreprise. "<annotation id="admin_details">"Plus d\'informations"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser des achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis reposez-le sur le lecteur"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible d\'utiliser le lecteur d\'empreinte digitale. Contactez un réparateur"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Paramètres de sécurité supplémentaires"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Verrouillage du profil professionnel, chiffrement et plus"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Chiffrement, identifiants et plus"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sécurité, paramètres de sécurité supplémentaires, paramètres supplémentaires, paramètres de sécurité avancés"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal autorisé d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter d\'autres empreintes digitales"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (sauf si un DNS privé a la priorité)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Passerelle"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Longueur du préfixe réseau"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Informations sur l\'appareil"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Mémoriser cette connexion"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Détection de visages"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajustez automatiquement l\'orientation de l\'écran lorsque vous basculez votre appareil de la position portrait en position paysage, et inversement"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"En savoir plus sur la rotation automatique"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Résolution d\'écran"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Haute résolution"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Résolution maximale"</string>
@@ -2396,7 +2391,7 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Autoriser le raccourci de la fonctionnalité à s\'activer à partir de l\'écran de verrouillage. Appuyer sur les deux touches de volume pendant quelques secondes."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Bouton Accessibilité"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Bouton et geste Accessibilité"</string>
-    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Accédez rapidement aux fonctionnalités d\'accessibilité depuis n\'importe quel écran"</string>
+    <string name="accessibility_button_intro_text" msgid="80993874471745687">"Accéder rapidement aux fonctionnalités d\'accessibilité depuis n\'importe quel écran"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"À propos du bouton Accessibilité"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Bouton et geste d\'accessibilité"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"En savoir plus sur le bouton et le geste d\'accessibilité"</string>
@@ -2497,7 +2492,7 @@
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Style et taille des sous-titres"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"Taille de la police : <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
     <string name="captioning_more_options_title" msgid="3484496882942539652">"Autres options"</string>
-    <string name="accessibility_caption_preference_intro" msgid="6662649135457507767">"Personnalisez la taille et le style des sous-titres pour faciliter leur lecture"</string>
+    <string name="accessibility_caption_preference_intro" msgid="6662649135457507767">"Personnaliser la taille et le style des sous-titres pour en faciliter la lecture"</string>
     <string name="accessibility_caption_preference_summary" msgid="632875702223135121">"Ces préférences pour les sous-titres ne fonctionnent pas avec toutes les applis multimédias"</string>
     <string name="accessibility_shortcut_type_software" msgid="2552732582767687515">"Bouton d\'accessibilité"</string>
     <string name="accessibility_shortcut_type_software_gesture" msgid="5608959693931019059">"Balayer l\'écran vers le haut avec deux doigts"</string>
@@ -2520,7 +2515,7 @@
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Réglage du son"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Audiodescription"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Écoutez une description de ce qui s\'affiche à l\'écran dans les films et séries compatibles"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"Entendre une description de ce qui se passe à l\'écran dans les films et séries compatibles"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"audiodescription, audio, description, déficience visuelle,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"Raccourci activé"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"Désactivé"</string>
@@ -2568,7 +2563,7 @@
     </plurals>
     <string name="accessibility_menu_item_settings" msgid="2652637954865389271">"Paramètres"</string>
     <string name="accessibility_feature_state_on" msgid="1777344331063467511">"Activé"</string>
-    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Désactivée"</string>
+    <string name="accessibility_feature_state_off" msgid="169119895905460512">"Désactivées"</string>
     <string name="captioning_preview_title" msgid="2888561631323180535">"Aperçu"</string>
     <string name="captioning_standard_options_title" msgid="5360264497750980205">"Options standards"</string>
     <string name="captioning_locale" msgid="5533303294290661590">"Langue"</string>
@@ -2905,22 +2900,22 @@
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gérer l\'utilisation de la batterie"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\ndepuis la dernière charge complète"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\n au cours des dernières 24 h"</string>
-    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\npour <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
+    <string name="battery_total_and_bg_usage_with_period" msgid="2809037516933951047">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\npour la période : <xliff:g id="TIME_PERIOD">^3</xliff:g>"</string>
     <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"Total de moins d\'une minute en arrière-plan depuis la dernière charge complète"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"Total de moins d\'une minute au cours des dernières 24 h"</string>
-    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Total de moins d\'une minute pour <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"Moins d\'une minute au total pour la période : <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"Moins d\'une minute en arrière-plan depuis la dernière charge complète"</string>
     <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"Moins d\'une minute en arrière-plan au cours des dernières 24 h"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Moins d\'une minute en arrière-plan entre <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Moins d\'une minute en arrière-plan pour la période : <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> au total depuis la dernière charge complète"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> au total au cours des dernières 24 h"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"Total de <xliff:g id="TIME_0">^1</xliff:g> pour <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> au total pour la période : <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> en arrière-plan depuis la dernière charge complète"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> en arrière-plan au cours des dernières 24 h"</string>
-    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> en arrière-plan entre <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> en arrière-plan pour la période : <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> au total • Moins d\'une minute en arrière-plan\ndepuis la dernière charge complète"</string>
     <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> au total • Moins d\'une minute en arrière-plan au cours des dernières 24 h\n"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> au total • Moins d\'une minute en arrière-plan\npour <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> au total • Moins d\'une minute en arrière-plan\npour la période : <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Pas d\'utilisation depuis la dernière charge complète"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Pas d\'utilisation au cours des dernières 24 h"</string>
     <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
@@ -2957,11 +2952,11 @@
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"niveau de la batterie : <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Pourcentage de la batterie"</string>
     <string name="battery_percentage_description" msgid="2321465139126125541">"Afficher dans la barre d\'état"</string>
-    <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveau de batterie - Dernières 24 h"</string>
+    <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Niveau de la batterie - Dernières 24 h"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Utilisation par appli - Dernières 24 h"</string>
-    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilisation du système - Dernières 24 h"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilisation par le système pour <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilisation par l\'appli pour <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Utilisation par le système - Dernières 24 h"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Utilisation par le système pour la période : <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Utilisation par l\'appli pour la période : <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total : moins d\'une min"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Arrière-plan : moins d\'une min"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total : <xliff:g id="TIME">%s</xliff:g>"</string>
@@ -3234,7 +3229,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Toutes les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre tablette.\n\nPour certains comptes, les modifications effectuées sur la tablette peuvent également être copiées automatiquement sur le Web. C\'est le principe d\'un compte Google."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Toutes les modifications que vous apportez à vos comptes sur le Web sont automatiquement copiées sur votre téléphone.\n\nPour certains comptes, les modifications effectuées sur le téléphone peuvent également être copiées automatiquement sur le Web. C\'est le principe d\'un compte Google."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Désactiver synchro auto données ?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Cette action limite la consommation des données et l\'utilisation de la batterie, mais vous devrez synchroniser manuellement chaque compte pour obtenir les dernières informations. Vous ne recevrez pas non plus de notifications en cas de mise à jour."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Cela limitera la consommation de données et l\'utilisation de la batterie, mais vous devrez synchroniser manuellement chaque compte pour récupérer les infos récentes. Et en cas de changement, vous n\'en serez pas averti."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Date de réinitialisation du cycle de consommation"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Jour du mois :"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Définir"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Supprimer"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Toutes les applications et les données de cette session seront supprimées."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Supprimer"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Invité (Vous)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Utilisateurs"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Autres utilisateurs"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Supprimer l\'activité"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Supprimer toutes les applis et données de la session lorsque vous quittez le mode Invité"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Supprimer l\'activité ?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et données de cette session Invité seront immédiatement supprimées, et toute l\'activité des futures sessions sera supprimée à chaque fois que vous quitterez le mode Invité"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activer les appels téléphoniques et les SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Supprimer un compte utilisateur"</string>
@@ -3816,7 +3804,7 @@
     <string name="zen_interruption_level_priority" msgid="4854123502362861192">"Prioritaires uniquement"</string>
     <string name="zen_mode_and_condition" msgid="8580896862841920031">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"Activé - <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Activé"</string>
+    <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"Activés"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"Toujours demander"</string>
     <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"Jusqu\'à la désactivation"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 heure}one{# heure}other{# heures}}"</string>
@@ -5633,7 +5621,7 @@
     <string name="carrier_wifi_network_title" msgid="5461382943873831770">"Réseau W+"</string>
     <string name="sim_category_title" msgid="2341314000964710495">"SIM"</string>
     <string name="downloaded_sim_category_title" msgid="8611467223348446658">"TÉLÉCHARGÉS"</string>
-    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"SIM TÉLÉCHARGÉ(E)S"</string>
+    <string name="downloaded_sims_category_title" msgid="8779223441781763315">"PROFILS SIM TÉLÉCHARGÉS"</string>
     <string name="sim_category_active_sim" msgid="1503823567818544012">"Actif"</string>
     <string name="sim_category_inactive_sim" msgid="4068899490133820881">"Inactif"</string>
     <string name="sim_category_default_active_sim" msgid="1208194173387987231">" - Valeur par défaut pour <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configurer la limitation du débit du réseau en entrée, qui s\'applique à tous les réseaux offrant une connexion Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configurer la limitation du débit de téléchargement du réseau"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Aucune limite"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Diffuser"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Écoutez les contenus diffusés à proximité"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Diffusez des contenus multimédias sur les appareils à proximité ou écoutez les contenus diffusés par d\'autres"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Diffusions"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"En écoute"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Rechercher des diffusions"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Quitter la diffusion"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scanner un code QR"</string>
 </resources>

@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"የተጠቆሙ ቋንቋዎች"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ሁሉም ቋንቋዎች"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"የስርዓት ቋንቋ"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"የሥርዓት ነባሪ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"የሥርዓት ነባሪ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ለዚህ መተግበሪያ የቋንቋ መረጣ ከቅንብሮች አይገኝም።"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ለዚህ መተግበሪያ ከቅንብሮች ቋንቋ መምረጥ አይችሉም።"</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">የተመረጡት ቋንቋዎች ይወገዱ?</item>
       <item quantity="other">የተመረጡት ቋንቋዎች ይወገዱ?</item>
@@ -1158,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"ዲኤንኤስ 2 (በግል ዲኤንኤስ ቅድሚያ ካልተወሰደበት በስተቀር)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"መውጫ"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"የአውታረ መረብ ቅድመ ቅጥያ ርዝመት"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"መሣሪያ መረጃ"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"ይህን ተያያዥ አስታውስ"</string>
@@ -1307,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"መልክ ማወቅ"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"ስልክዎን በቁም ፎቶ እና የመሬት ገጽታዎች መካከል ሲያንቀሳቅሱ የማያ ገጹን አቀማመጠ ገፅ በራስ-ሰር ያስተካክሉ"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ስለራስ-አዙር የበለጠ ይረዱ"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"የማያ ገጽ ጥራት"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ከፍተኛ ጥራት"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"ከፍተኛው ጥራት"</string>
@@ -5776,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"የበይነመረብ ግንኙነትን በሚሰጡ ሁሉም አውታረ መረቦች ላይ የሚተገበረውን የአውታረ መረብ መተላለፊያ ይዘት ማስገቢያ ፍጥነት ገደብ ያዋቅሩ።"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"የአውታረ መረብ የማውረድ ፍጥነት ገደብን ያዋቅሩ"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"ምንም ገደብ የለም"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ስርጭት"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"በአቅራቢያዎ የሚጫወቱ ስርጭቶችን ያዳምጡ"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"በአቅራቢያዎ ባሉ መሣሪያዎች ላይ ሚዲያን ያሰራጩ ወይም የሌላ ሰው ስርጭትን ያዳምጡ"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ስርጭቶች"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"ማዳመጥ"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ስርጭቶችን አግኝ"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ከስርጭት ውጣ"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR ኮድ ቃኝ"</string>
 </resources>

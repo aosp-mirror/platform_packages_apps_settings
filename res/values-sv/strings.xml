@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Föreslagna språk"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alla språk"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemets språkinställning"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Systemets standardinställning – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemets standardinställning"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Det går inte att välja språk för den här appen i Inställningar."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Du kan inte välja språk för den här appen i Inställningar."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vill du ta bort de valda språken?</item>
       <item quantity="one">Vill du ta bort det valda språket?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Säkerhetsstatus"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Skärmlås, Hitta min enhet, appsäkerhet"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Säkerhet och integritet"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Appsäkerhet, enhetslås, behörigheter"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Ansikte har lagts till"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tryck för att konfigurera ansiktslås"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ansiktslås"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Alternativet för skärmlås har inaktiverats. Kontakta organisationens administratör om du vill veta mer. "<annotation id="admin_details">"Mer information"</annotation>\n\n"Du kan fortfarande auktorisera köp och appåtkomst med fingeravtrycket. "<annotation id="url">"Läs mer"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lyft fingret och tryck sedan på sensorn igen"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Det går inte att använda fingeravtryckssensorn. Besök ett reparationsställe"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Fler säkerhetsinställningar"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås för jobbprofilen, kryptering med mera"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, användaruppgifter med mera"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"säkerhet, fler säkerhetsinställningar, fler inställningar, avancerade säkerhetsinställningar"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan lägga till upp till <xliff:g id="COUNT">%d</xliff:g> fingeravtryck"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt till det högsta tillåtna antalet fingeravtryck"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Det går inte att lägga till fler fingeravtryck"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (om det inte åsidosätts av Privat DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Nätverksprefixets längd"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wifi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wifi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wifi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wifi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Enhetsinformation"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Kom ihåg anslutningen"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansiktsigenkänning"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Justera skärmriktningen automatiskt när du vänder telefonen mellan stående och liggande läge"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Läs mer om automatisk rotation"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skärmupplösning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hög upplösning"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Högsta möjliga upplösning"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Ta bort"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alla appar och data i denna session kommer att raderas."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Ta bort"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Gäst (du)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Användare"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Andra användare"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Radera gästaktivitet"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Radera alla appar och all data för gästen när gästläget avslutas"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vill du radera gästaktivitet?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Appar och data från den här gästsessionen raderas nu och i fortsättningen raderas all gästaktivitet när du avslutar gästläget"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Aktivera telefonsamtal"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Aktivera telefonsamtal och sms"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Radera användare"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurera den inkommande bandbredden i nätverket som ska gälla för alla nätverk med internetanslutning."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurera gräns för nedladdningshastighet i nätverket"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Ingen begränsning"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Utsändning"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Lyssna på utsändningar i närheten"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Sänd ut media till enheter i närheten eller lyssna på någon annans utsändning"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Utsändningar"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Lyssnar på"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Hitta utsändningar"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Lämna utsändning"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skanna QR-kod"</string>
 </resources>

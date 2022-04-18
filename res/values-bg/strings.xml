@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Предложени езици"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Всички езици"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системен език"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Стандартен за системата – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Стандартно за системата"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избирането на език за това приложение не е налице от настройките."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Можете да изберете език за това приложение от настройките."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Да се премахнат ли избраните езици?</item>
       <item quantity="one">Да се премахне ли избраният език?</item>
@@ -292,7 +293,7 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> започва на <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g>: започва на <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer" msgid="7004693956837388129">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g>: започва на <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>"</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Използва <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Няма лятно часово време."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Лятно часово време"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартно време"</string>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Състояние на сигурността"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Заключване на екрана, „Намиране на устройството ми“, сигурност на приложенията"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Сигурност и поверителност"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Сигурност на приложенията, заключване на у-вото, разрешения"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Добавено е лице"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Докоснете, за да настроите лице"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Отключване с лице"</string>
@@ -589,14 +589,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцията за заключване на екрана е деактивирана. За да научите повече, свържете се с администратора на организацията си. "<annotation id="admin_details">"Повече подробности"</annotation>\n\n"Пак можете да използвате отпечатъка си за оторизиране на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Вдигнете пръста, след което докоснете сензора отново"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Сензорът за отпечатъци не може да се използва. Посетете оторизиран сервиз."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Още настройки за сигурност"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Заключване на служебен потребителски профил, шифроване и др."</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифроване, идентификационни данни и др."</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"сигурност, още настройки за сигурност, още настройки, разширени настройки за сигурност"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Можете да добавите до <xliff:g id="COUNT">%d</xliff:g> отпечатъка"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Добавихте максималния брой отпечатъци"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Не могат да се добавят още отпечатъци"</string>
@@ -1048,7 +1044,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"За да добавите устройството към „<xliff:g id="SSID">%1$s</xliff:g>“, центрирайте по-долу QR кода"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Сканиране на QR кода"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"За да се свържете с „<xliff:g id="SSID">%1$s</xliff:g>“, центрирайте по-долу кода за бърза реакция"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Присъединете се към  Wi‑Fi мрежата, като сканирате код за бърза реакция"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Присъединете се към  Wi‑Fi мрежата, като сканирате QR код"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Споделяне на Wi‑Fi мрежата"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Сканирайте този QR код с друго устройство, за да се присъедините към <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Сканирайте този QR код, за да се свържете към „<xliff:g id="SSID">%1$s</xliff:g>“"</string>
@@ -1165,9 +1161,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (освен ако не се замени с частен DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Шлюз"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Дължина на мрежов префикс"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Информация за устройството"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Запомняне на тази връзка"</string>
@@ -1314,6 +1307,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Лицево разпознаване"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматично коригира ориентацията на екрана, когато завъртите телефона вертикално или хоризонтално"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Научете повече за автоматичното завъртане"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Разделит. способност на екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока разделителна способност"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Най-високата разделителна способност"</string>
@@ -2418,7 +2413,7 @@
     <string name="accessibility_toggle_high_text_contrast_preference_summary" msgid="5286411556836346180">"Променете цвета на текста на черен или бял. Така контрастът с фона се увеличава максимално."</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_title" msgid="4987009529235165664">"Авт. актуал. на увеличението на екрана"</string>
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="9034532513972547720">"Актуал. на увеличението на екрана при преходи на прилож."</string>
-    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Край на обажд.: Бутон за вкл./изкл."</string>
+    <string name="accessibility_power_button_ends_call_prerefence_title" msgid="8187306131979612144">"Край на обажд. с бутона за вкл./изкл."</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="5508351959249876801">"Голям курсор на мишката"</string>
     <string name="accessibility_toggle_large_pointer_icon_summary" msgid="1480527946039237705">"Промяна на курсора на мишката така, че да се вижда по-лесно"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Премахване на анимациите"</string>
@@ -2509,7 +2504,7 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Слухови апарати"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Няма свързани слухови апарати"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Добавяне на слухови апарати"</string>
-    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Слухов апарат: Сдвояване"</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Сдвояване на слухов апарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На следващия екран докоснете слуховия апарат. Може да се наложи да извършите отделно сдвояване за лявото и дясното ухо.\n\nУверете се, че слуховият ви апарат е включен и в готовност за сдвояване."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Устройството „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ е активно"</string>
     <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> – само ляво"</string>
@@ -3200,7 +3195,7 @@
     <string name="data_usage_cellular_data_summary" msgid="8139993171126153316">"На пауза след лимита"</string>
     <string name="account_settings_menu_auto_sync" msgid="1660484779001900562">"Авт. синхронизиране на данните"</string>
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Лични данни: Авт. синхрон."</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Служебни данни: Авт. синхрон."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Авт. синхрон. на служебни данни"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Промяна на цикъла…"</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ден от месец за възстанов. на цикъла за използване на данни:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Приложенията не са ползвали данни в този период."</string>
@@ -3411,20 +3406,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Изтриване"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Всички приложения и данни в тази сесия ще бъдат изтрити."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Премахване"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Гост (вие)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Потребители"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Други потребители"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Изтриване на активността като гост"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Изтриване на всички приложения и данни при изход от режима на гост"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Изтриване на активността като гост?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Приложенията и данните от тази сесия като гост ще бъдат изтрити сега, а цялата бъдеща активност като гост ще се изтрива всеки път, когато излезете от режима на гост"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Включване на телефонните обаждания"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включване на тел. обаждания и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Изтриване на потребителя"</string>
@@ -5560,7 +5548,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню за включване/изключване и при спешни случаи:\nНатиснете едновременно бутона за включване/изключване и този за увеличаване на силата на звука."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Предотвратяване на звъненето:\nВ менюто за силата на звука е налице пряк път."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Продължителност на натискането и задържането"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Коригирайте чувствителността, като изберете колко дълго да трябва да задържите натиснат бутона за захранване"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Коригирайте чувствителността, като изберете колко дълго трябва да задържите натиснат бутона за включване/изключване"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Кратко"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Продължително"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Показване на портфейла"</string>
@@ -5790,20 +5778,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Конфигуриране на ограничението за скорост на мрежовата пропускателна способност за входящи данни, което се прилага за всички мрежи, осигуряващи връзка с интернет."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Конфигуриране на ограничението за мрежата за скоростта при изтегляне"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Няма ограничение"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Предаване"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слушайте предавания, които се възпроизвеждат в близост"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Предавайте мултимедийно съдържание на устройствата в близост или слушайте предаването на друг човек"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Предавания"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Слуша се"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Намиране на предавания"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Напускане на предаването"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Сканиране на QR код"</string>
 </resources>

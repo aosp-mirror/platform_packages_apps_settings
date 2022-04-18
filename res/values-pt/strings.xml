@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos os idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma do sistema"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Padrão do sistema: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Padrão do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção de idioma para este app não está disponível nas configurações."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Não é possível selecionar um idioma para este app nas configurações."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Remover o idioma selecionado?</item>
       <item quantity="other">Remover idiomas selecionados?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Status da segurança"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueio de tela, Encontre Meu Dispositivo, Segurança dos apps"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Segurança e privacidade"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Segurança dos apps, bloqueio do dispositivo, permissões"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Rosto adicionado"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Toque para configurar o Desbloqueio facial"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueio facial"</string>
@@ -589,14 +589,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" A opção de bloqueio de tela está desativada. Para saber mais, entre em contato com o administrador da sua organização. "<annotation id="admin_details">"Mais detalhes"</annotation>\n\n"Você ainda pode usar sua impressão digital para autorizar compras e acessar apps. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levante o dedo e depois toque no sensor novamente"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Não foi possível usar o sensor de impressão digital. Entre em contato com uma assistência técnica"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Mais configurações de segurança"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueio do perfil de trabalho, criptografia e muito mais"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Criptografia, credenciais e muito mais"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"segurança, mais configurações de segurança, mais configurações, configurações avançadas de segurança"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"É possível adicionar até <xliff:g id="COUNT">%d</xliff:g> impressões digitais"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Você adicionou o número máximo de impressões digitais"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Não é possível adicionar mais impressões digitais"</string>
@@ -1039,7 +1035,7 @@
     <string name="wifi_ap_2G" msgid="4099628221864343015">"2,4 GHz"</string>
     <string name="wifi_ap_5G" msgid="3493942667238551207">"5 GHz"</string>
     <string name="wifi_ap_band_select_one" msgid="5221193733812493435">"Escolha pelo menos uma banda para o ponto de acesso Wi-Fi:"</string>
-    <string name="wifi_ip_settings" msgid="6420498748726599133">"Configurações de IP"</string>
+    <string name="wifi_ip_settings" msgid="6420498748726599133">"Configuração do IP"</string>
     <string name="wifi_privacy_settings" msgid="3283946009000725698">"Privacidade"</string>
     <string name="wifi_subscription" msgid="4432423938285430113">"Inscrição"</string>
     <string name="wifi_subscription_summary" msgid="18802471063384598">"Ver ou mudar inscrição"</string>
@@ -1165,9 +1161,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (a menos que substituído por um DNS particular)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Tamanho do prefixo de rede"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Informações do dispositivo"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Lembrar esta conexão"</string>
@@ -1314,6 +1307,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detecção facial"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajuste a orientação da tela automaticamente ao mover o smartphone entre os modos retrato e paisagem"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saiba mais sobre o giro automático"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolução da tela"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolução"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Resolução máxima"</string>
@@ -2962,7 +2957,7 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nível da bateria nas últimas 24h"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Uso do app nas últimas 24h"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso do sistema nas últimas 24h"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Uso do sistema em <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Uso do sistema entre <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_app_usage_for" msgid="7309909074935858949">"Uso do app em <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Total: menos de um minuto"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"Segundo plano: menos de um minuto"</string>
@@ -3411,20 +3406,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Excluir"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Todos os apps e dados nesta sessão serão excluídos."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Remover"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Visitante (você)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Usuários"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Outros usuários"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Excluir atividade de visitante"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Excluir todos os apps e dados do visitante ao sair do modo visitante"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Excluir atividade do visitante?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Os apps e dados desta Sessão de visitante serão excluídos agora e toda a atividade de visitante futura será excluída sempre que você sair do modo visitante"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Ativar chamadas telefônicas"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ativar chamadas telefônicas e SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Excluir usuário"</string>
@@ -4009,7 +3997,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Som e vibração desativados"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"O som e a vibração estão desativados, e o balão aparece na parte inferior da seção de conversa"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Podem vibrar ou tocar com base nas configurações do smartphone"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo estiver desbloqueado, mostrar notificações em um banner no topo da tela"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Quando o dispositivo está desbloqueado, mostra notificações em um banner no topo da tela"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"Todas as notificações de <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Todas as notificações do app <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Notificações adaptáveis"</string>
@@ -4056,13 +4044,13 @@
     <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, mensagens de texto e outras comunicações"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"Notificações"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"Pode vibrar ou tocar com base nas configurações"</string>
-    <string name="notif_type_silent" msgid="6273951794420331010">"Silenciosa"</string>
+    <string name="notif_type_silent" msgid="6273951794420331010">"Silenciosas"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"Notificações que nunca fazem o dispositivo tocar ou vibrar"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"Permitido"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"Não permitido"</string>
     <string name="notif_listener_excluded_app_title" msgid="6679316209330349730">"Ver todos os apps"</string>
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"Mude as configurações para cada app que envia notificações"</string>
-    <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps exibidos no dispositivo"</string>
+    <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"Apps que aparecem no dispositivo"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"O app não é compatível com as configurações avançadas."</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"Serviços de ajuda para RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Nenhum app instalado solicitou ser executado como serviço de ajuda para RV."</string>

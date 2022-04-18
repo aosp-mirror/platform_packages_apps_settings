@@ -86,8 +86,8 @@
     <string name="bluetooth_pairing_pref_title" msgid="3497193027590444598">"Yeni cihaz eşle"</string>
     <string name="keywords_add_bt_device" msgid="4533191164203174011">"bluetooth"</string>
     <string name="bluetooth_pair_other_ear_dialog_title" msgid="3814943511999984012">"Diğer kulağınızı eşleyin"</string>
-    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Soldaki işitme cihazınız bağlandı.\n\nSağdakini eşlemek için cihazın açık ve eşlemeye hazır olduğundan emin olun."</string>
-    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sağdaki işitme cihazınız bağlandı.\n\nSoldakini eşlemek için cihazın açık ve eşlemeye hazır olduğundan emin olun."</string>
+    <string name="bluetooth_pair_other_ear_dialog_left_ear_message" msgid="7936892941892347102">"Soldaki işitme cihazınız bağlandı.\n\nSağdakini eşlemek için cihazın açık ve eşlenmeye hazır olduğundan emin olun."</string>
+    <string name="bluetooth_pair_other_ear_dialog_right_ear_message" msgid="8242208936062915941">"Sağdaki işitme cihazınız bağlandı.\n\nSoldakini eşlemek için cihazın açık ve eşlenmeye hazır olduğundan emin olun."</string>
     <string name="bluetooth_pair_other_ear_dialog_right_ear_positive_button" msgid="533612082529204078">"Sağ kulağı eşle"</string>
     <string name="bluetooth_pair_other_ear_dialog_left_ear_positive_button" msgid="6500192653171220257">"Sol kulağı eşle"</string>
     <string name="bluetooth_screen_related" msgid="7976543255501825536">"Benzer"</string>
@@ -225,9 +225,11 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Önerilen diller"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Tüm diller"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistem dili"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Sistem varsayılanı: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
+    <skip />
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Ayarlar\'da bu uygulama için dil seçimi mevcut değil."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Bu uygulama için Ayarlar\'dan dil seçemezsiniz."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Seçilen diller kaldırılsın mı?</item>
       <item quantity="one">Seçilen dil kaldırılsın mı?</item>
@@ -342,8 +344,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Güvenlik durumu"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Ekran kilidi, Cihazımı Bul, uygulama güvenliği"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Güvenlik ve gizlilik"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Uygulama güvenliği, cihaz kilidi, izinler"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Yüz eklendi"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Yüz tanımayı kurmak için dokunun"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Yüz Tanıma Kilidi"</string>
@@ -587,14 +588,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekran kilidi seçeneği devre dışı bırakıldı. Daha fazla bilgi için kuruluşunuzdaki yöneticiyle iletişime geçin. "<annotation id="admin_details">"Daha fazla ayrıntı"</annotation>\n\n"Satın alma işlemlerini ve uygulama erişimini yetkilendirmek için parmak izinizi kullanmaya devam edebilirsiniz. "<annotation id="url">"Daha fazla bilgi"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Parmağınızı kaldırın ve sensöre tekrar dokunun"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Parmak izi sensörü kullanılamıyor. Bir onarım hizmeti sağlayıcıyı ziyaret edin"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Daha fazla güvenlik ayarı"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"İş profili kilidi, şifreleme ve daha fazlası"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Şifreleme, kimlik bilgisi ve daha fazlası"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"güvenlik, daha fazla güvenlik ayarı, daha fazla ayar, gelişmiş güvenlik ayarları"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> adede kadar parmak izi ekleyebilirsiniz"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Maksimum sayıda parmak izi eklediniz"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Daha fazla parmak izi eklenemez"</string>
@@ -1163,9 +1160,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (Gizli DNS tarafından geçersiz kılınmadığı sürece)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Ağ geçidi"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Ağ önek uzunluğu"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Kablosuz Doğrudan Bağlantı"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Cihaz bilgileri"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Bu bağlantıyı hatırla"</string>
@@ -1312,6 +1306,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Yüz Algılama"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Telefonunuzu dikey ile yatay mod arasında hareket ettirdiğinizde ekran yönü otomatik olarak ayarlanır"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Otomatik döndürme hakkında daha fazla bilgi edinin"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ekran çözünürlüğü"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Yüksek çözünürlük"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"En yüksek çözünürlük"</string>
@@ -2508,7 +2504,7 @@
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Bağlı işitme cihazı yok"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"İşitme cihazı ekle"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"İşitme cihazlarını eşleyin"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Sonraki ekranda işitme cihazlarınıza dokunun. Sol ve sağ kulağı ayrı ayrı eşlemeniz gerekebilir.\n\nİşitme cihazlarınızın açık ve eşlemeye hazır olduğundan emin olun."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Sonraki ekranda işitme cihazlarınıza dokunun. Sol ve sağ kulağı ayrı ayrı eşlemeniz gerekebilir.\n\nİşitme cihazlarınızın açık ve eşlenmeye hazır olduğundan emin olun."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> etkin"</string>
     <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, yalnızca sol"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, yalnızca sağ"</string>
@@ -3409,20 +3405,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Sil"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Bu oturumdaki tüm uygulamalar ve veriler silinecek."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Kaldır"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Misafir (Siz)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Kullanıcılar"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Diğer kullanıcılar"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Misafir etkinliğini silme"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Misafir modundan çıkarken tüm misafir uygulamalarını ve verilerini silin"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Misafir etkinliği silinsin mi?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Bu misafir oturumundaki uygulamalar ve veriler şimdi silinecektir. Bundan sonraki tüm misafir etkinlikleri ise misafir modundan her çıktığınızda silinir."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Telefon aramalarını aç"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefon aramalarını ve mesajları aç"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Kullanıcıyı sil"</string>
@@ -4003,7 +3992,7 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"Öncelikli"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Görüşme bölümünün üstünde gösterilir, kayan baloncuk olarak görünür, kilit ekranında profil resmini görüntüler"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>, çoğu görüşme özelliğini desteklemez. Görüşmeleri öncelikli olarak ayarlayamazsınız ve görüşmeler kayan baloncuk olarak görünmez."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"Aşağı açılır gölgede, bildirimleri tek satır olacak şekilde daraltır"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"Aşağı açılır gölgede, bildirimleri tek satır olacak şekilde daralt"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Sessiz veya titreşim yok"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Sessizdir veya titreşim yoktur ve görüşme bölümünün altında görünür"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Telefon ayarlarına bağlı olarak zili çalabilir veya titreyebilir"</string>
@@ -4040,7 +4029,7 @@
     <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> şu işlemleri yapabilecek:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Bildirimlerinizi okuma"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Kişiler, mesajlar ve fotoğraflar gibi kişisel bilgiler de dahil olmak üzere bildirimlerinizi okuyabilir."</string>
-    <string name="nls_feature_reply_title" msgid="7925455553821362039">"İletileri yanıtlama"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Mesajları yanıtlama"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Mesajları yanıtlamanın yanı sıra bildirimlerdeki düğmeleri kullanarak bildirimleri erteleme ya da kapatma ve aramaları yanıtlama gibi işlemleri gerçekleştirebilir."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Ayarları değiştirme"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Rahatsız Etmeyin özelliğini açıp kapatabilir ve ilgili ayarları değiştirebilir."</string>
@@ -5408,10 +5397,10 @@
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> cihazını kapat"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM\'i devre dışı bıraktığınızda hizmetiniz iptal edilmez"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Ağa bağlanıyor…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Aramalar ve mesajlar için <xliff:g id="CARRIER_NAME">%1$s</xliff:g> hizmetine geçiş yapılıyor…"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Aramalar ve mesajlar için <xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatörüne geçiş yapılıyor…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Operatöre geçiş yapılamıyor"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Bir hata nedeniyle operatöre geçiş yapılamıyor."</string>
-    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> kapatılsın mı?"</string>
+    <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> devre dışı bırakılsın mı?"</string>
     <string name="privileged_action_disable_sub_dialog_title_without_carrier" msgid="6518373229436331608">"SIM kapatılsın mı?"</string>
     <string name="privileged_action_disable_sub_dialog_progress" msgid="5900243067681478102">"SIM kapatılıyor<xliff:g id="ELLIPSIS">…</xliff:g>"</string>
     <string name="privileged_action_disable_fail_title" msgid="6689494935697043555">"Operatör devre dışı bırakılamıyor"</string>
@@ -5788,20 +5777,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"İnternet bağlantısı sağlayan tüm ağlarda geçerli ağ bant genişliği indirme hızı sınırını yapılandırın."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Ağ indirme hızı sınırını yapılandır"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Sınır yok"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Yayın"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Yakınınızda oynatılan yayınları dinleyin"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Yakınınızdaki cihazlarda medya yayınlayın veya başka bir kişinin yayınını dinleyin"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Yayınlar"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Dinleniyor"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Yayın bul"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Yayından ayrıl"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR kodunu tara"</string>
 </resources>

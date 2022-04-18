@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Προτεινόμενες γλώσσες"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Όλες οι γλώσσες"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Γλώσσα συστήματος"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Προεπιλογή συστήματος - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Προεπιλεγμένο από το σύστημα"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Η δυνατότητα επιλογής γλώσσας για αυτήν την εφαρμογή δεν είναι διαθέσιμη από τις Ρυθμίσεις."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Δεν είναι δυνατή η επιλογή κάποιας γλώσσας για αυτήν την εφαρμογή από τις Ρυθμίσεις."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Να αφαιρεθούν οι επιλεγμένες γλώσσες;</item>
       <item quantity="one">Να αφαιρεθεί η επιλεγμένη γλώσσα;</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Κατάσταση ασφάλειας"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Κλείδωμα οθόνης, Εύρεση συσκευής, ασφάλεια εφαρμογής"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Ασφάλεια και απόρρητο"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Ασφάλεια εφαρμογής, κλείδωμα συσκευής, άδειες"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Προστέθηκε πρόσωπο"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Πατήστε για ρύθμιση προσώπου"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Ξεκλείδωμα με το πρόσωπο"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Η επιλογή κλειδώματος οθόνης είναι απενεργοποιημένη. Για να μάθετε περισσότερα, επικοινωνήστε με τον διαχειριστή της εφαρμογής σας. "<annotation id="admin_details">"Περισσότερες λεπτομέρειες"</annotation>\n\n"Μπορείτε να εξακολουθήσετε να χρησιμοποιείτε το δακτυλικό αποτύπωμα για την εξουσιοδότηση αγορών και την πρόσβαση εφαρμογών. "<annotation id="url">"Μάθετε περισσότερα"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Σηκώστε το δάχτυλο και, στη συνέχεια, αγγίξτε ξανά τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Δεν είναι δυνατή η χρήση του αισθητήρα δακτ. αποτυπωμ. Επισκεφτείτε έναν πάροχο υπηρεσιών επισκευής."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Περισσότερες ρυθμίσεις ασφαλείας"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Κλείδωμα προφίλ εργασίας, κρυπτογράφηση και περισσότερα"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Κρυπτογράφηση, διαπιστευτήρια και περισσότερα"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"ασφάλεια, περισσότερες ρυθμίσεις ασφαλείας, περισσότερες ρυθμίσεις, σύνθετες ρυθμίσεις ασφαλείας"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Μπορείτε να προσθέσετε έως <xliff:g id="COUNT">%d</xliff:g> μοναδικά χαρακτηριστικά"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Έχετε προσθέσει τον μέγιστο αριθμό δακτυλικών αποτυπωμάτων"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Δεν είναι δυνατή η προσθήκη περισσότερων δακτυλικών αποτυπωμάτων"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (εκτός αν παρακάμπτεται από Ιδιωτικό DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Πύλη"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Μήκος προθέματος δικτύου"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Στοιχεία συσκευής"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Απομνημόνευση αυτής της σύνδεσης"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ανίχνευση προσώπων"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Αυτόματη προσαρμογή του προσανατολισμού της οθόνης όταν γυρνάτε το τηλέφωνο σε κατακόρυφο ή οριζόντιο προσανατολισμό"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Μάθετε περισσότερα σχετικά με την αυτόματη περιστροφή"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Ανάλυση οθόνης"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Υψηλή ανάλυση"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Υψηλότερη ανάλυση"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Διαγραφή"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Όλες οι εφαρμογές και τα δεδομένα αυτής της περιόδου σύνδεσης θα διαγραφούν."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Κατάργηση"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Επισκέπτης (Εσείς)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Χρήστες"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Άλλοι χρήστες"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Διαγραφή δραστηριότητας επισκέπτη"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Διαγραφή όλων των εφαρμογών και των δεδομένων επισκέπτη κατά την έξοδο από τη λειτουργία επισκέπτη"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Διαγραφή δραστηριότητας επισκέπτη;"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Οι εφαρμογές και τα δεδομένα από αυτήν την περίοδο σύνδεσης επισκέπτη θα διαγραφούν τώρα και όλη η μελλοντική δραστηριότητα επισκέπτη θα διαγράφεται κάθε φορά που εξέρχεστε από τη λειτουργία επισκέπτη"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Ενεργοποίηση τηλεφωνικών κλήσεων"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ενεργοποίηση κλήσεων και SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Διαγραφή χρήστη"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Διαμορφώστε το όριο του ρυθμού εισόδου εύρους ζώνης του δικτύου που εφαρμόζεται σε όλα τα δίκτυα που παρέχουν συνδεσιμότητα στο διαδίκτυο."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Διαμόρφωση ορίου ρυθμού λήψης δικτύου"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Κανένα όριο"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Μετάδοση"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Ακούστε μεταδόσεις που πραγματοποιούνται κοντά σας"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Μεταδώστε πολυμέσα σε συσκευές που βρίσκονται σε κοντινή απόσταση ή ακούστε τη μετάδοση κάποιου άλλου"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Μεταδόσεις"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Ακρόαση"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Εύρεση μεταδόσεων"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Αποχώρηση από μετάδοση"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Σάρωση κωδικού QR"</string>
 </resources>
