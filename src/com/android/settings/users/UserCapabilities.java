@@ -34,6 +34,7 @@ public class UserCapabilities {
     boolean mCanAddRestrictedProfile;
     boolean mIsAdmin;
     boolean mIsGuest;
+    boolean mIsEphemeral;
     boolean mUserSwitcherEnabled;
     boolean mCanAddGuest;
     boolean mDisallowAddUser;
@@ -56,6 +57,7 @@ public class UserCapabilities {
         final UserInfo myUserInfo = userManager.getUserInfo(UserHandle.myUserId());
         caps.mIsGuest = myUserInfo.isGuest();
         caps.mIsAdmin = myUserInfo.isAdmin();
+        caps.mIsEphemeral = myUserInfo.isEphemeral();
         DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
 
