@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Առաջարկվող լեզուներ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Բոլոր լեզուները"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Համակարգի լեզու"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Կանխադրված — <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Կանխադրված"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Լեզվի ընտրությունն այս հավելվածի համար հասանելի չէ Կարգավորումներում։"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Դուք չեք կարող այս հավելվածի համար լեզու ընտրել Կարգավորումներից։"</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Հեռացնե՞լ ընտրված լեզուն</item>
       <item quantity="other">Հեռացնե՞լ ընտրված լեզուները</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Անվտանգության կարգավիճակը"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Էկրանի կողպում, «Գտնել իմ սարքը» ծառայություն, հավելվածների անվտանգություն"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Անվտանգություն և գաղտնիություն"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Հավելվածների անվտանգություն, սարքի կողպում, թույլտվություններ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Դեմքն ավելացվեց"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Հպեք՝ դեմքով ապակողպումը կարգավորելու համար"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Դեմքով ապակողպում"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Էկրանի կողպման ընտրանքն անջատված է: Ավելին իմանալու համար դիմեք ձեր կազմակերպության ադմինիստրատորին: "<annotation id="admin_details">"Մանրամասներ"</annotation>\n\n"Գնումները և հավելվածների օգտագործումը թույլատրելու համար դուք կարող եք օգտագործել մատնահետքը: "<annotation id="url">"Իմանալ ավելին"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Բարձրացրեք մատը, ապա կրկին հպեք սենսորին"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Մատնահետքերի սկաները հնարավոր չէ օգտագործել։ Այցելեք սպասարկման կենտրոն։"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Անվտանգության այլ կարգավորումներ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Աշխատանքային պրոֆիլի կողպում, գաղտնագրում և ավելին"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Գաղտնագրում, մուտքի տվյալներ և ավելին"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"անվտանգություն, անվտանգության այլ կարգավորումներ, այլ կարգավորումներ, անվտանգության լրացուցիչ կարգավորումներ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Կարող եք ավելացնել առավելագույնը <xliff:g id="COUNT">%d</xliff:g> մատնահետք"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Դուք ավելացրել եք մատնահետքերի առավելագույն թույլատրելի քանակը"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Հնարավոր չէ ավելացնել այլ մատնահետքեր"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (եթե չի վրագրվել մասնավոր DNS-ի կողմից)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Անցախուց"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Ցանցի նախածանցի երկարություն"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Սարքի տեղեկություններ"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Հիշել այս կապը"</string>
@@ -2505,8 +2498,8 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"Լսողական ապարատ"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Որևէ լսողական ապարատ միացված չէ"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Ավելացնել լսողական ապարատ"</string>
-    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Լսող․ սարքերի զուգակցում"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Հաջորդ էկրանին գտեք ձեր լսողական սարքերը և հպեք դրանց։ Հնարավոր է, որ անհրաժեշտ լինի զուգակցել ձախ և աջ ականջներն առանձին-առանձին։\n\nՀամոզվեք, որ ձեր լսողական սարքերը միացված են և պատրաստ զուգակցման։"</string>
+    <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Լսողական սարքի զուգակցում"</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"Հաջորդ էկրանին հպեք ձեր լսողական սարքին։ Հնարավոր է, որ անհրաժեշտ լինի առանձին-առանձին զուգակցել ձախ և աջ ականջները։\n\nՀամոզվեք, որ ձեր լսողական սարքը միացված է և պատրաստ զուգակցման։"</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"«<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» սարքը ակտիվ է"</string>
     <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, միայն ձախ"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, միայն աջ"</string>
@@ -3232,13 +3225,13 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Համացանցում կատարած ցանկացած փոփոխություն ավտոմատ կպատճենվի ձեր պլանշետում:\n\nՈրոշ հաշիվներ կարող են պլանշետով կատարած փոփոխություններն ավտոմատ պատճենել համացանցում: Google հաշիվն աշխատում է հենց այդպես:"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Համացանցում կատարած ցանկացած փոփոխություն ավտոմատ կպատճենվի ձեր հեռախոսում:\n\nՈրոշ հաշիվներ կարող են հեռախոսով կատարած փոփոխություններն ավտոմատ պատճենել համացանցում: Google հաշիվն աշխատում է հենց այդպես:"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Անջատե՞լ ինքնահամաժամացումը"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Դա կկրճատի թրաֆիկն ու մարտկոցի օգտագործման չափը, սակայն նոր տվյալներ հավաքելու համար անհրաժեշտ կլինի ձեռքով համաժամացնել յուրաքանչյուր հաշիվ։ Թարմացումների մասին ծանուցումներ չեն ցուցադրվի։"</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Դա կկրճատի թրաֆիկն ու մարտկոցի օգտագործման չափը, սակայն նոր տվյալներ հավաքելու համար անհրաժեշտ կլինի ձեռքով համաժամացնել յուրաքանչյուր հաշիվը։ Թարմացումների մասին ծանուցումներ չեն ցուցադրվի։"</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Վիճակագրության զրոյացում"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Ամսվա օրը՝"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Պահել"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Սահմանել տվյալների օգտագործման նախազգուշացում"</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Սահմանել թրաֆիկի օգտագործման նախազգուշացում"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Թրաֆիկի օգտագործման սահմանը"</string>
-    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Սահմանափակել տվյալների օգտագործումը"</string>
+    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Թրաֆիկի օգտագործման սահմանափակում"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Նշված սահմանաչափն անցնելու դեպքում պլանշետը կանջատի բջջային ինտերնետը։\n\nՔանի որ տվյալների օգտագործումը չափում է պլանշետը, իսկ օպերատորի հաշվարկները կարող են տարբերվել, խորհուրդ ենք տալիս նշել նախատեսվածից ցածր սահմանաչափ։"</string>
     <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Նշված սահմանաչափն անցնելու դեպքում հեռախոսում կանջատվի բջջային ինտերնետը։\n\nՕպերատորի վիճակագրությունը կարող է տարբերվել հեռախոսի տվյալներից, խորհուրդ ենք տալիս նշել նախատեսվածից ցածր սահմանաչափ։"</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Սահմանափակե՞լ հետնաշերտի տվյալները:"</string>
@@ -4935,7 +4928,7 @@
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Թվային օգնական"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Մատը սահեցնել՝ թվային օգնականը գործարկելու համար"</string>
     <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"Թվային օգնականը գործարկելու համար մատը ներքևի անկյունից սահեցրեք վերև։"</string>
-    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Օգնականը բացելու համար երկար սեղմեք «Գլխավոր էկրան» կոճակը"</string>
+    <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"Օգնականը բացելու համար սեղմած պահել «Գլխավոր էկրան» կոճակը"</string>
     <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"Սեղմեք և պահեք գլխավոր էկրանի կոճակը՝ թվային օգնական հավելվածը կանչելու համար։"</string>
     <string name="information_label" msgid="6939310810756569298">"Տեղեկություններ"</string>
     <string name="low_label" msgid="6525629096999711220">"Ցածր"</string>
@@ -5772,20 +5765,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Կարգավորեք մուտքային թրաֆիկի թողունակության սահմանաչափ։ Այս կարգավորումը կիրառվում է բոլոր ցանցերի նկատմամբ, որոնք տրամադրում են ինտերնետ կապ։"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Կարգավորեք մուտքային թրաֆիկի սահմանաչափ"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Առանց սահմանաչափի"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Հեռարձակում"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Լսեք հեռարձակումներ, որոնք նվագարկվում են ձեր մոտակայքում"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Հեռարձակեք մեդիա նյութեր մոտակայքում գտնվող սարքերին կամ լսեք մեկ ուրիշի հեռարձակումը"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Հեռարձակումներ"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Ունկնդրում"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Գտնել հեռարձակումներ"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Դուրս գալ հեռարձակումից"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Սկանավորել QR կոդը"</string>
 </resources>

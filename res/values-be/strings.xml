@@ -227,9 +227,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Прапанаваныя мовы"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усе мовы"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Сістэмная мова"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Стандартная сістэмная – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Стандартная сістэмная налада"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Выбар мовы для гэтай праграмы недаступны ў Наладах."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Мову для гэтай праграмы нельга выбраць у Наладах."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Выдаліць выбраныя мовы?</item>
       <item quantity="few">Выдаліць выбраныя мовы?</item>
@@ -348,8 +349,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Стан бяспекі"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Блакіроўка экрана, Знайсці прыладу, бяспека праграм"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Бяспека і прыватнасць"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Бяспека праграм, блакіроўка прылады, дазволы"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Твар дададзены"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Націсніце, каб наладзіць распазнаванне твару"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Распазнаванне твару"</string>
@@ -597,14 +597,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцыя блакіроўкі экрана выключана. Звяжыцеся з адміністратарам сваёй арганізацыі, каб даведацца больш. "<annotation id="admin_details">"Дадатковая інфармацыя"</annotation>\n\n"Вы па-ранейшаму можаце выкарыстоўваць адбіткі пальцаў для аўтарызацыі куплі і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Падыміце палец, потым дакраніцеся да сканера зноў"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не ўдалося скарыстаць сканер адбіткаў пальцаў. Звярніцеся ў сэрвісны цэнтр."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Іншыя налады бяспекі"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блакіроўка працоўнага профілю, шыфраванне і іншыя дзеянні"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шыфраванне, уліковыя даныя і іншыя звесткі"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"бяспека, іншыя налады бяспекі, іншыя налады, пашыраныя налады бяспекі"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Вы можаце дадаць да <xliff:g id="COUNT">%d</xliff:g> адбіткаў пальца"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы дадалі максімальную колькасць адбіткаў пальцаў"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Немагчыма дадаць больш адбіткаў пальцаў"</string>
@@ -1205,9 +1201,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (калі не перавызначана прыватным DNS-серверам)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Шлюз"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Даўжыня прэфікса сеткі"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Інфармацыя пра прыладу"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Запомніць гэтае злучэнне"</string>
@@ -2452,7 +2445,7 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Хуткі доступ да спецыяльных магчымасцей"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"Каб пачаць, выканайце наступныя дзеянні:"</b>\n"1. Перайдзіце да налад спецыяльных магчымасцей.\n2. Выберыце патрэбную функцыю і націсніце ярлык.\n3. Выберыце, як вы будзеце атрымліваць доступ да гэтай функцыі: праз кнопку ці праз жэст"</string>
     <string name="accessibility_button_description" msgid="1261273371298608222"><b>"Каб пачаць, выканайце наступныя дзеянні:"</b>\n"1. Перайдзіце да налад спецыяльных магчымасцей.\n2. Выберыце патрэбную функцыю і націсніце ярлык.\n3. Выберыце кнопку для доступу да функцыі"</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Скарыстаць кнопку ці жэст"</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Выкарыстоўваць кнопку або жэст"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Месцазнаходжанне"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Памер"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Дазволіць знікаць пры бяздзейнасці"</string>
@@ -4419,7 +4412,7 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Заблакіраваць прыладу падчас адмацавання"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Пацвярджаць выдаленне даных SIM"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Перш чым сціраць даныя спампаванай SIM, пацвердзіце, што гэта вы"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Гэты рабочы профіль знаходзіцца пад кіраваннем:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Гэты працоўны профіль знаходзіцца пад кіраваннем:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Пад кіраваннем <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Эксперыментальныя)"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Бяспечны запуск"</string>
@@ -5952,20 +5945,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Наладзьце абмежаванне ўваходнай паласы прапускання для ўсіх сетак, якія забяспечваюць падключэнне да інтэрнэту."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Наладзьце абмежаванне хуткасці спампоўвання праз сетку"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Без абмежаванняў"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляцыя"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слухайце трансляцыі, якія прайграюцца паблізу ад вас"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Трансліруйце мультымедыя на прылады паблізу або праслухвайце трансляцыі іншых карыстальнікаў"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Трансляцыі"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Праслухваецца"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Шукаць трансляцыі"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Выйсці з трансляцыі"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Сканіраваць QR-код"</string>
 </resources>
