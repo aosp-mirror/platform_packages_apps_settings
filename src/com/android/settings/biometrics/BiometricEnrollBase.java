@@ -254,6 +254,7 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
         intent.putExtra(EXTRA_FROM_SETTINGS_SUMMARY, mFromSettingsSummary);
         intent.putExtra(EXTRA_KEY_CHALLENGE, mChallenge);
         intent.putExtra(EXTRA_KEY_SENSOR_ID, mSensorId);
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         if (mUserId != UserHandle.USER_NULL) {
             intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
         }
