@@ -3320,6 +3320,22 @@
                        android:value="@string/menu_key_notifications"/>
         </activity>
 
+        <!-- Application-level notification settings page, same as above but only accessible
+             internally from system server -->
+        <activity android:name="Settings$NotificationReviewPermissionsActivity"
+                  android:label="@string/app_notifications_title"
+                  android:icon="@drawable/ic_notifications"
+                  android:exported="false">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ALL_APPS_NOTIFICATION_SETTINGS_FOR_REVIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_notifications"/>
+        </activity>
+
         <!-- Show application-level notification settings (app passed in as extras) -->
         <activity android:name="Settings$AppNotificationSettingsActivity"
                 android:exported="true">
