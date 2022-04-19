@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Mga iminumungkahing wika"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lahat ng wika"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Wika ng system"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Default ng system - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Default ng system"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Hindi available sa Mga Setting ang pagpili ng wika para sa app na ito."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Hindi ka puwedeng pumili ng wika para sa app na ito mula sa Mga Setting."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Alisin ang mga piniling wika?</item>
       <item quantity="other">Alisin ang mga piniling wika?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Status ng seguridad"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Lock ng screen, Hanapin ang Aking Device, seguridad ng app"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad at privacy"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad ng app, lock ng device, mga pahintulot"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Naidagdag ang mukha"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Mag-tap para i-set up ang mukha"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Pag-unlock Gamit ang Mukha"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Naka-disable ang opsyon ng lock ng screen. Upang matuto pa, makipag-ugnayan sa admin ng iyong organisasyon. "<annotation id="admin_details">"Higit pang detalye"</annotation>\n\n"Maaari mo pa ring gamitin ang fingerprint mo upang magpahintulot ng access ng app. "<annotation id="url">"Matuto pa"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Iangat ang daliri, pagkatapos ay pindutin ulit ang sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Hindi magamit ang sensor para sa fingerprint. Bumisita sa provider ng pag-aayos"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Higit pang setting ng seguridad"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lock ng profile sa trabaho, pag-encrypt, at higit pa"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Pag-encrypt, mga kredensyal, at higit pa"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, higit pang setting ng seguridad, higit pang setting, advanced na setting ng seguridad"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Naidagdag mo na ang maximum na bilang ng mga fingerprint"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Hindi na makapagdagdag ng higit pang fingerprint"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (maliban na lang kung mao-override ng Pribadong DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Haba ng prefix ng network"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Impormasyon ng device"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Tandaan ang koneksyong ito"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Pag-detect ng Mukha"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Awtomatikong isaayos ang orientation ng screen kapag inilipat mo ang iyong telepono sa pagitan ng portrait at landscape"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Matuto pa tungkol sa auto-rotate"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolusyon ng screen"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Mataas na resolution"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Pinakamataas na resolution"</string>
@@ -3409,20 +3404,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"I-delete"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Ide-delete ang lahat ng app at data sa session na ito."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Alisin"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Bisita (Ikaw)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Mga User"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Iba pang user"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"I-delete ang aktibidad ng bisita"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"I-delete ang lahat ng app at data ng bisita kapag umaalis sa guest mode"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"I-delete ang aktibidad ng bisita?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Made-delete na ngayon ang mga app at data mula sa session na ito ng bisita, at made-delete ang lahat ng aktibidad ng bisita sa hinaharap sa tuwing aalis ka ng guest mode"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"I-on ang mga pagtawag sa telepono"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"I-on ang mga pagtawag sa telepono at SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"I-delete ang user"</string>
@@ -4968,13 +4956,13 @@
     <string name="ambient_display_title" product="tablet" msgid="205744440641466921">"Mag-double tap upang suriin ang tablet"</string>
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Mag-double tap upang suriin ang device"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-hand mode"</string>
-    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gumamit ng one-handed mode"</string>
-    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Shortcut sa one-handed mode"</string>
+    <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gumamit ng one-hand mode"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Shortcut sa one-hand mode"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"reachability"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Mag-swipe pababa para"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gamitin ang shortcut sa"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Hilahin pababa ang itaas na bahagi ng iyong screen para mas madaling maabot gamit ang isang kamay"</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Paano gamitin ang one-handed mode"</b>\n" • Tiyaking pinili ang navigation gamit ang galaw sa mga setting sa pag-navigate ng system\n • Mag-swipe pababa malapit sa pinakaibaba ng screen"</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Paano gamitin ang one-hand mode"</b>\n" • Tiyaking pinili ang navigation gamit ang galaw sa mga setting sa pag-navigate ng system\n • Mag-swipe pababa malapit sa pinakaibaba ng screen"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Hilahin ang screen papunta sa abot"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Mapupunta ang itaas ng screen sa abot ng iyong hinlalaki."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Ipakita ang mga notification"</string>
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"I-configure ang limitasyon sa rate ng ingress ng bandwith ng network na inilalapat sa lahat ng network na nagbibigay ng koneksyon sa internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"I-configure ang limitasyon sa rate ng pag-download ng network"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Walang limitasyon"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Makinig sa mga broadcast na nagpe-play malapit sa iyo"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Mag-broadcast ng media sa mga device na malapit sa iyo, o makinig sa broadcast ng iba"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Mga Broadcast"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Nakikinig sa"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Maghanap ng mga broadcast"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Umalis sa broadcast"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"I-scan ang QR code"</string>
 </resources>

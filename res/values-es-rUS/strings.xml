@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos los idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Predeterminado del sistema: <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminado del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta app no está disponible en Configuración."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"No puedes seleccionar un idioma para esta app en Configuración."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">¿Quitar los idiomas seleccionados?</item>
       <item quantity="one">¿Quitar el idioma seleccionado?</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Estado de seguridad"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Bloqueo de pantalla, Encontrar mi dispositivo, seguridad de la app"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Seguridad y privacidad"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Seguridad de la app, bloqueo del dispositivo, permisos"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Se agregó el rostro"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Presiona para configurar Desbloqueo facial"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Desbloqueo facial"</string>
@@ -589,14 +589,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Esta opción de bloqueo de pantalla está inhabilitada. Para obtener más información, comunícate con el administrador de tu organización. "<annotation id="admin_details">"Más información"</annotation>\n\n"Aún puedes usar tu huella dactilar para autorizar compras y el acceso a apps."<annotation id="url">"Más información"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"No se puede usar el sensor de huellas dactilares. Consulta a un proveedor de reparaciones."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Más parámetros de configuración de seguridad"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueo del perfil de trabajo, encriptación y más"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptación, credenciales y más"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, más configuración de seguridad, más configuración, configuración avanzada de seguridad"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Agregaste la cantidad máxima permitida de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden agregar más huellas digitales"</string>
@@ -1165,9 +1161,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (a menos que lo anule un DNS privado)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Puerta de enlace"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Longitud de prefijo de red"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi directo"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Información del dispositivo"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Recordar esta conexión"</string>
@@ -1314,6 +1307,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detección de rostro"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajusta la orientación de la pantalla automáticamente cuando mueves el teléfono entre el modo vertical y el horizontal"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Más información sobre girar automáticamente"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Máxima resolución"</string>
@@ -3411,20 +3406,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Borrar"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Se eliminarán las aplicaciones y los datos de esta sesión."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Eliminar"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"Invitado (tú)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Usuarios"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Otros usuarios"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Borrar la actividad de invitado"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Borra todas las apps y los datos de invitado cuando salgas del modo de invitado"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"¿Borrar la actividad de invitado?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Las apps y los datos de esta sesión de invitado se borrarán ahora, y toda la actividad futura de invitado se borrará cada vez que salgas del modo de invitado"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activar llamadas telefónicas"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activar llamadas telefónicas y SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Borrar usuario"</string>
@@ -5790,20 +5778,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configura el límite de tasa de entrada de ancho de banda de la red, que se aplica a todas las redes que brindan conexión a Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configura el límite de tasa de descarga de la red"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Sin límite"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transmisión"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Escucha las transmisiones que se están reproduciendo cerca de ti"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Transmite contenido multimedia a dispositivos cercanos, o bien escucha la transmisión de alguien más"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Transmisiones"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Escuchando"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Buscar transmisiones"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Abandonar transmisión"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Escanear código QR"</string>
 </resources>

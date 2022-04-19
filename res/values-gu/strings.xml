@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"સૂચવેલી ભાષાઓ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"બધી ભાષાઓ"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"સિસ્ટમની ભાષા"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"સિસ્ટમ ડિફૉલ્ટ - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"સિસ્ટમ ડિફૉલ્ટ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"આ ઍપ માટે સેટિંગમાંથી ભાષા પસંદ કરી શકાતી નથી."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"તમે આ ઍપ માટે સેટિંગમાં જઈને ભાષા પસંદ કરી શકશો નહીં."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
       <item quantity="other">પસંદ કરેલ ભાષાઓને કાઢી નાખીએ?</item>
@@ -282,7 +283,7 @@
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24‑કલાકનું ફોર્મેટ"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-કલાક ફોર્મેટનો ઉપયોગ કરો"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"સમય"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"સમયનું ફોર્મેટ"</string>
+    <string name="time_format_category_title" msgid="7108616745509689991">"સમયનું ફૉર્મેટ"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"સમય ઝોન"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"સમય ઝોન પસંદ કરો"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"તારીખ"</string>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"સુરક્ષાની સ્થિતિ"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"સ્ક્રીન લૉક, Find My Device, ઍપ સુરક્ષા"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"સુરક્ષા અને પ્રાઇવસી"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"ઍપની સુરક્ષા, ડિવાઇસ લૉક, પરવાનગીઓ"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"ચહેરો ઉમેર્યો"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"ફેસ અનલૉક સુવિધાનું સેટઅપ કરવા ટૅપ કરો"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"ફેસ અનલૉક"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" સ્ક્રીન લૉક વિકલ્પ અક્ષમ કરેલ છે. વધુ જાણવા માટે, તમારી સંસ્થાના વ્યવસ્થાપકનો સંપર્ક કરો. "<annotation id="admin_details">"વધુ વિગતો"</annotation>\n\n"તમે ખરીદીઓ અને ઍપ્લિકેશનની ઍક્સેસ અધિકૃત કરવા માટે હજુ પણ તમારી ફિંગરપ્રિન્ટનો ઉપયોગ કરી શકો છો. "<annotation id="url">"વધુ જાણો"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"આંગળીને ઉંચકો, પછી ફરીથી સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"ફિંગરપ્રિન્ટ સેન્સરનો ઉપયોગ કરી શકાતો નથી. રિપેર કરવાની સેવા આપતા પ્રદાતાની મુલાકાત લો"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"સુરક્ષાના વધુ સેટિંગ"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"ઑફિસની પ્રોફાઇલનું લૉક, એન્ક્રિપ્શન અને બીજું ઘણું"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"એન્ક્રિપ્શન, લૉગ ઇન વિગતો અને બીજું ઘણું"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"સુરક્ષા, સુરક્ષાના વધુ સેટિંગ, વધુ સેટિંગ, સુરક્ષાના વિગતવાર સેટિંગ"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"તમે <xliff:g id="COUNT">%d</xliff:g> જેટલી ફિંગરપ્રિન્ટ્સ ઉમેરી શકો છો"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"તમે મહત્તમ ફિંગરપ્રિન્ટ્સ ઉમેર્યા છે"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"વધુ ફિંગરપ્રિન્ટ્સ ઉમેરી શકતાં નથી"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (સિવાય કે ખાનગી DNS દ્વારા ઓવરરાઇડ કર્યું હોય)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"ગેટવે"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"નેટવર્ક પ્રીફિક્સ લંબાઈ"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"વાઇ-ફાઇ 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"વાઇ-ફાઇ 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"વાઇ-ફાઇ 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"વાઇ-ફાઇ ડાયરેક્ટ"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"ઉપકરણ માહિતી"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"આ કનેક્શન યાદ રાખો"</string>
@@ -1312,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"ચહેરાની ઓળખ"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"જ્યારે તમે તમારા ફોનને પોર્ટ્રેટ અને લૅન્ડસ્કેપ સ્થિતિમાં ખસેડો, ત્યારે સ્ક્રીન ઓરિએન્ટેશનને ઑટોમૅટિક રીતે ગોઠવો."</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ઑટો રોટેટ (સ્ક્રીનની ઑટોમૅટિક રીતે ફરવાની ક્રિયા) વિશે વધુ જાણો"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"સ્ક્રીન રિઝોલ્યુશન"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"વધુ રિઝોલ્યુશન"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"સૌથી વધુ રિઝોલ્યુશન"</string>
@@ -3136,7 +3131,7 @@
     <string name="work_mode_label" msgid="1001415270126064436">"ઑફિસની પ્રોફાઇલ"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"તમારી સંસ્થા દ્વારા મેનેજ કરેલ"</string>
     <string name="work_mode_off_summary" msgid="4044568753909036134">"ઍપ અને નોટિફિકેશન બંધ છે"</string>
-    <string name="remove_managed_profile_label" msgid="1294933737673830431">"ઑફિસની પ્રોફાઇલ દૂર કરો"</string>
+    <string name="remove_managed_profile_label" msgid="1294933737673830431">"ઑફિસની પ્રોફાઇલ કાઢી નાખો"</string>
     <string name="background_data" msgid="321903213000101158">"બૅકગ્રાઉન્ડ ડેટા"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"ઍપ્લિકેશનો કોઈપણ સમયે ડેટાને સમન્વયિત, મોકલી અને પ્રાપ્ત કરી શકે છે"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"બૅકગ્રાઉન્ડ ડેટાને અક્ષમ કરીએ?"</string>
@@ -3165,7 +3160,7 @@
     <string name="header_add_an_account" msgid="3919151542338822661">"એકાઉન્ટ ઉમેરો"</string>
     <string name="really_remove_account_title" msgid="253097435885652310">"એકાઉન્ટ કાઢી નાખીએ?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="8893801622174947887">"આ એકાઉન્ટને દૂર કરવું તેનાં તમામ સંદેશા, સંપર્કો અને ટેબ્લેટમાંના અન્ય ડેટાને કાઢી નાંખશે!"</string>
-    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"આ એકાઉન્ટને કાઢી નાખવાથી તેના તમામ સંદેશા, સંપર્કો અને ફોનમાંના અન્ય ડેટાને કાઢી નાખવામાં આવશે!"</string>
+    <string name="really_remove_account_message" product="default" msgid="1217810840427479274">"આ એકાઉન્ટને કાઢી નાખવાથી તેના બધા મેસેજ, સંપર્કો અને ફોનમાંનો અન્ય ડેટા ડિલીટ થઈ જશે!"</string>
     <string name="really_remove_account_message" product="device" msgid="5241756807386611084">"આ એકાઉન્ટને કાઢી નાખવાથી તેના બધા સંદેશા, સંપર્કો તેમજ ઉપકરણમાંનો અન્ય ડેટા ડિલીટ થઈ જશે!"</string>
     <string name="remove_account_failed" msgid="3709502163548900644">"તમારા વ્યવસ્થાપકે આ ફેરફારની મંજૂરી આપી નથી"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"મેન્યુઅલી સમન્વયિત કરી શકાતું નથી"</string>
@@ -3230,7 +3225,7 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="5383874438677899255">"બૅકગ્રાઉન્ડ ડેટાને નિયંત્રિત કરીએ?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="5534272311979978297">"આ સુવિધાને કારણે બૅકગ્રાઉન્ડ ડેટા પર આધારિત હોય તે ઍપ્લિકેશન ફક્ત મોબાઇલ નેટવર્કો ઉપલબ્ધ હોય ત્યારે કામ કરતી બંધ થઈ શકે છે.\n\nતમે ઍપ્લિકેશનમાં ઉપલબ્ધ સેટિગ્સમાં વધુ ઉચિત ડેટા વપરાશ નિયંત્રણો મેળવી શકો છો."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="8599940395497268584">"તમે મોબાઇલ ડેટા મર્યાદા સેટ કરી હોય, માત્ર ત્યારે જ બૅકગ્રાઉન્ડ ડેટાને મર્યાદિત કરવું સંભવ છે."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"ડેટા સ્વતઃસમન્વયિત કરો ચાલુ કરીએ?"</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2048411447974361181">"ઑટો સિંક ડેટા ચાલુ કરીએ?"</string>
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"તમે વેબ પર તમારા એકાઉન્ટમાં કરો તે કોઈપણ ફેરફારોને ઑટોમૅટિક રીતે તમારા ફોન પર કૉપિ કરાશે.\n\nકેટલાક એકાઉન્ટ પણ તમે ટૅબ્લેટ પર કરો તે ફેરફારોની વેબ પર ઑટોમૅટિક રીતે કૉપિ કરશે. Google એકાઉન્ટ આ પ્રમાણે કાર્ય કરે છે."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"તમે વેબ પર તમારા એકાઉન્ટમાં કરો તે કોઈપણ ફેરફારોને ઑટોમૅટિક રીતે તમારા ફોન પર કૉપિ કરાશે.\n\nકેટલાક એકાઉન્ટ પણ તમે ફોન પર કરો તે ફેરફારોની વેબ પર ઑટોમૅટિક રીતે કૉપિ કરશે. Google એકાઉન્ટ આ પ્રમાણે કાર્ય કરે છે."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"ડેટા ઑટો-સિંક કરો બંધ કરીએ?"</string>
@@ -3398,31 +3393,24 @@
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"તમને પોતાને કાઢી નાખીએ?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"આ વપરાશકર્તા ડિલીટ કરીએ?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"આ પ્રોફાઇલ દૂર કરીએ?"</string>
-    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"ઑફિસની પ્રોફાઇલ દૂર કરીએ?"</string>
+    <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"ઑફિસની પ્રોફાઇલ કાઢી નાખીએ?"</string>
     <string name="user_confirm_remove_self_message" product="tablet" msgid="439222554798995592">"તમ તમારું સ્થાન અને ડેટા આ ટેબ્લેટ પરથી ગુમાવશો. તમે આ ક્રિયાને પૂર્વવત્ કરી શકતા નથી."</string>
     <string name="user_confirm_remove_self_message" product="default" msgid="5991495192044543230">"તમે આ ફોન પરથી તમારું સ્થાન અને ડેટા ગુમાવશો. તમે આ ક્રિયાને પૂર્વવત્ કરી શકતા નથી."</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"તમામ ઍપ અને ડેટા ડિલીટ કરવામાં આવશે."</string>
-    <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"જો તમે ચાલુ રાખો છો તો આ પ્રોફાઇલમાંની તમામ ઍપ્લિકેશનો અને ડેટા કાઢી નાખવામાં આવશે."</string>
+    <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"જો તમે આગળ વધો છો, તો આ પ્રોફાઇલમાંની તમામ ઍપ અને ડેટા ડિલીટ કરવામાં આવશે."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"તમામ ઍપ અને ડેટા ડિલીટ કરવામાં આવશે."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"નવો વપરાશકર્તા ઉમેરી રહ્યું છે ..."</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"વપરાશકર્તા કાઢી નાંખો"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"ડિલીટ કરો"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"આ સત્રમાંની તમામ ઍપ અને ડેટા કાઢી નાખવામાં આવશે."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"કાઢી નાખો"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"અતિથિ (તમે)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"વપરાશકર્તાઓ"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"અન્ય વપરાશકર્તાઓ"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"અતિથિ પ્રવૃત્તિ ડિલીટ કરો"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"અતિથિ મોડમાંથી બહાર નીકળતી વખતે તમામ અતિથિ ઍપ અને ડેટા ડિલીટ કરો"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"શું અતિથિની પ્રવૃત્તિ ડિલીટ કરીએ?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"આ અતિથિ સત્રમાંની તમામ ઍપ અને ડેટા હમણાં ડિલીટ કરવામાં આવશે તેમજ ભવિષ્યમાં જ્યારે પણ તમે અતિથિ મોડમાંથી બહાર નીકળો, ત્યારે તમામ અતિથિ પ્રવૃત્તિ ડિલીટ કરવામાં આવશે"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"ફોન કૉલ ચાલુ કરો"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ફોન કૉલ અને SMS ચાલુ કરો"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"વપરાશકર્તાને ડિલીટ કરો"</string>
@@ -4051,10 +4039,10 @@
     <string name="notif_type_ongoing" msgid="135675014223627555">"રીયલ ટાઇમ"</string>
     <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"ઉપયોગમાં છે તે ઍપમાંથી ચાલી રહેલો સંદેશાવ્યવહાર, નૅવિગેશન, ફોન કૉલ અને વધુ"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"વાતચીતો"</string>
-    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, ટેક્સ્ટ સંદેશા અને અન્ય સંદેશાવ્યવહાર"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS, ટેક્સ્ટ મેસેજ અને અન્ય કમ્યુનિકેશન"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"નોટિફિકેશન"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"ફોન સેટિંગના આધારે રિંગ અથવા વાઇબ્રેટ થઈ શકે છે"</string>
-    <string name="notif_type_silent" msgid="6273951794420331010">"સાયલન્ટ"</string>
+    <string name="notif_type_silent" msgid="6273951794420331010">"સાઇલન્ટ"</string>
     <string name="notif_type_silent_summary" msgid="7820923063105060844">"ક્યારેય સાઉન્ડ કે વાઇબ્રેશન ન કરતા નોટિફિકેશન"</string>
     <string name="notification_listener_allowed" msgid="5536962633536318551">"આ ઍપને મંજૂરી છે"</string>
     <string name="notification_listener_not_allowed" msgid="3352962779597846538">"આ ઍપને મંજૂરી નથી"</string>
@@ -4323,7 +4311,7 @@
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"ડિવાઇસને અનપિન કરતી વખતે લૉક કરો"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"સિમ કાર્ડને ડિલીટ કરવાનું કન્ફર્મ કરો"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"ડાઉનલોડ કરેલા સિમ કાર્ડને કાઢી નાખતા પહેલાં ચકાસણી કરો કે આ તમે જ છો"</string>
-    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"આ કાર્યાલયની પ્રોફાઇલ આમના દ્વારા મેનેજ થાય છે:"</string>
+    <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"આ ઑફિસની પ્રોફાઇલ આમના દ્વારા મેનેજ થાય છે:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> દ્વારા મેનેજ થયેલ"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(પ્રાયોગિક)"</string>
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"સુરક્ષિત પ્રારંભ"</string>
@@ -4901,7 +4889,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"સેન્સર બંધ છે"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"ઑફિસની પ્રોફાઇલના સેટિંગ"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"વ્યક્તિગત ઍપને ઑફિસની ડિરેક્ટરીનો ઉપયોગ કરીને સંપર્કો ઓળખવાની મંજૂરી આપો"</string>
-    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"તમારી શોધ અને ઇનકમિંગ કૉલ કદાચ તમારા IT વ્યવસ્થાપકને દેખાઈ શકે છે"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"તમારી શોધ અને ઇનકમિંગ કૉલ કદાચ તમારા IT ઍડમિનને દેખાઈ શકે છે"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"ક્રૉસ-પ્રોફાઇલ કૅલેન્ડર"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"તમારા વ્યક્તિગત કૅલેન્ડર પર કાર્યાલયની ઇવેન્ટ બતાવો"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -5788,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"ઇન્ટરનેટ કનેક્ટિવિટી પ્રદાન કરતા બધા નેટવર્ક પર લાગુ થતી નેટવર્ક બૅન્ડવિડ્થના પ્રવેશવાના દરની મર્યાદા ગોઠવો."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"નેટવર્કના ડાઉનલોડ કરવાના દરની મર્યાદા ગોઠવો"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"કોઈ મર્યાદા નથી"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"બ્રોડકાસ્ટ"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"તમારી નજીક ચલાવવામાં આવી રહેલા બ્રોડકાસ્ટ સાંભળો"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"તમારી નજીકના ડિવાઇસ પર મીડિયા બ્રોડકાસ્ટ કરો અથવા અન્ય કોઈએ કરેલું બ્રોડકાસ્ટ સાંભળો"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"બ્રોડકાસ્ટ"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"આ સાંભળું છું"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"બ્રોડકાસ્ટ શોધો"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"બ્રોડકાસ્ટ છોડી દો"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR કોડ સ્કૅન કરો"</string>
 </resources>

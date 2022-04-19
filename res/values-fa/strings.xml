@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"زبان‌های پیشنهادی"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"همه زبان‌ها"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"زبان سیستم"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"پیش‌فرض سیستم - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"پیش‌فرض سیستم"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"انتخاب زبان از «تنظیمات» برای این برنامه دردسترس نیست."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"نمی‌توانید از «تنظیمات» برای این برنامه زبان انتخاب کنید."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">زبان‌های انتخابی حذف شوند؟</item>
       <item quantity="other">زبان‌های انتخابی حذف شوند؟</item>
@@ -1158,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"ساناد ۲ (مگراینکه «ساناد خصوصی» آن را ملغی کند)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"دروازه"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"طول پیشوند شبکه"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"‏اتصال مستقیم Wi-Fi"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"اطلاعات دستگاه"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"به یادسپاری این ارتباط"</string>
@@ -1307,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"تشخیص چهره"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"وقتی تلفن را بین حالت افقی و عمودی جابه‌جا می‌کنید، جهت صفحه‌نمایش به‌طور خودکار تغییر می‌کند"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"درباره چرخش خودکار بیشتر بدانید"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"وضوح صفحه"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"وضوح بالا"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"بالاترین وضوح"</string>
@@ -5776,20 +5776,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"برای نرخ ورودی پهنای باند شبکه، محدودیت پیکربندی کنید. این محدودیت بر همه شبکه‌هایی که اتصال اینترنت ارائه می‌دهند اعمال می‌شود."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"پیکربندی محدودیت نرخ بارگیری شبکه"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"بدون محدودیت"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"همه‌فرستی"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"به همه‌فرستی‌هایی که اطراف شما درحال پخش هستند گوش دهید"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"در دستگاه‌های اطرافتان همه‌فرستی رسانه پخش کنید، یا به همه‌فرستی فرد دیگری گوش دهید"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"همه‌فرستی‌ها"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"درحال گوش دادن به"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"پیدا کردن همه‌فرستی‌ها"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"خروج از همه‌فرستی"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"اسکن رمزینه پاسخ‌سریع"</string>
 </resources>
