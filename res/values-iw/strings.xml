@@ -227,9 +227,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"השפות המוצעות"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"כל השפות"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"שפת המערכת"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"ברירת המחדל של המערכת – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"ברירת המחדל של המערכת"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"בחירות השפה לאפליקציה הזו לא זמינה בהגדרות."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"אי אפשר לבחור שפה לאפליקציה הזו בהגדרות."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="two">להסיר את השפות שנבחרו?</item>
       <item quantity="many">להסיר את השפות שנבחרו?</item>
@@ -348,8 +349,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"סטטוס אבטחה"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"נעילת מסך, איפה המכשיר שלי, אבטחת אפליקציות"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"אבטחה ופרטיות"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"אבטחת אפליקציה, נעילת מכשיר, הרשאות"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"הפנים נוספו"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"יש להקיש כדי להגדיר זיהוי פנים"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"פתיחה ע\"י זיהוי הפנים"</string>
@@ -597,14 +597,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" אפשרות נעילת המסך מושבתת. למידע נוסף ניתן לפנות למנהל המכשיר בארגון. "<annotation id="admin_details">"למידע נוסף"</annotation>\n\n"עדיין ניתן להשתמש בטביעת האצבע שלך כדי לאשר רכישות ולגשת לאפליקציות. "<annotation id="url">"למידע נוסף"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"יש להרים את האצבע ולגעת שוב בחיישן"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"לא ניתן להשתמש בחיישן טביעות האצבע. צריך ליצור קשר עם ספק תיקונים"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"הגדרות אבטחה נוספות"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"נעילת פרופיל העבודה, הצפנה ועוד"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"הצפנה, פרטי כניסה ועוד"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"אבטחה, הגדרות אבטחה נוספות, הגדרות נוספות, הגדרות אבטחה מתקדמות"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"אפשר להוסיף עד <xliff:g id="COUNT">%d</xliff:g> טביעות אצבע"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"הוספת את המספר המרבי של טביעות אצבע."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"לא ניתן להוסיף עוד טביעות אצבע"</string>
@@ -1205,9 +1201,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"‏DNS 2 (אלא אם בוטל על ידי שרת DNS פרטי)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"שער"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"אורך הקידומת של הרשת"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"‏Wi-Fi ישיר"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"מידע מהמכשיר"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"אני רוצה לזכור את החיבור הזה"</string>
@@ -2441,7 +2434,7 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"שירות קיצורי דרך"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"הגדרות של קיצורי דרך"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"מקש קיצור ממסך הנעילה"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות יפעל ממסך הנעילה. יש ללחוץ על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות הנגישות יפעל ממסך הנעילה. לוחצים על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"לחצן הנגישות"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"לחצן הנגישות ותנועות"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"גישה מהירה לתכונות הנגישות מכל מסך"</string>
@@ -3473,7 +3466,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"לא מוגדר"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"לא מוגדר – פרופיל מוגבל"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"לא מוגדר – פרופיל עבודה"</string>
-    <string name="user_admin" msgid="4024553191395768119">"מנהל מערכת"</string>
+    <string name="user_admin" msgid="4024553191395768119">"אדמין"</string>
     <string name="user_you" msgid="3070562015202859996">"את/ה (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="3328539978480663740">"לא ניתן להוסיף עוד משתמשים. צריך להסיר משתמש כדי להוסיף משתמש חדש."</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"רק הבעלים של הטאבלט יכול לנהל משתמשים."</string>
@@ -4887,7 +4880,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> של נתונים סלולריים"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"‏<xliff:g id="AMOUNT">^1</xliff:g> של נתוני Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"‏<xliff:g id="AMOUNT">^1</xliff:g> של נתוני Ethernet"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"אזהרות והגבלות של נתונים"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"אזהרות והגבלות לגבי נתונים"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"מחזור השימוש בחבילת הגלישה"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"אזהרה לגבי שימוש בנתונים: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"מגבלת נתונים: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -5952,20 +5945,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"הגדרת הגבלה לקצב של תעבורת הנתונים הנכנסת ברוחב הפס של הרשת. ההגבלה תחול על כל הרשתות שמאפשרות חיבור לאינטרנט."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"הגדרת הגבלה לקצב ההורדה ברשת"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"אין מגבלה"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"שידור"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"האזנה לפודקאסטים שמושמעים בסביבה שלך"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"שידור מדיה למכשירים בסביבה שלך, או האזנה לשידור של מישהו אחר"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"שידורים"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"האזנה ל"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"איתור שידורים"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"יציאה מהשידור"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"‏סריקת קוד QR"</string>
 </resources>

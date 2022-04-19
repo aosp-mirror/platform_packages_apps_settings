@@ -227,9 +227,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Рекомендуемые языки"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Все языки"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Язык системы"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"По умолчанию – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системные настройки по умолчанию"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Для этого приложения нельзя выбрать язык в настройках."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Удалить выбранные языки?</item>
       <item quantity="few">Удалить выбранные языки?</item>
@@ -348,8 +349,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Статус защиты"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Блокировка экрана, сервис \"Найти устройство\", безопасность приложений"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Защита и конфиденциальность"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Безопасность приложений, блокировка устройства и разрешения"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Изображение добавлено"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Нажмите, чтобы настроить фейсконтроль."</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Фейсконтроль"</string>
@@ -595,14 +595,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Настройка блокировки экрана отключена. За дополнительной информацией обращайтесь к администратору. "<annotation id="admin_details">"Подробнее…"</annotation>\n\n"Вы по-прежнему можете совершать покупки и открывать приложения с помощью отпечатка пальца. "<annotation id="url">"Подробнее…"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Поднимите палец и снова приложите его к сканеру."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Невозможно использовать сканер отпечатков пальцев. Обратитесь в сервисный центр."</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Дополнительные настройки безопасности"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блокировка рабочего профиля, шифрование и прочее"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрование, учетные данные и прочее"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"безопасность, дополнительные настройки безопасности, дополнительные настройки, расширенные настройки безопасности"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы уже добавили максимальное количество отпечатков"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Больше нельзя добавить отпечатки пальцев"</string>
@@ -1203,9 +1199,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (если не переопределен частным DNS-сервером)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Шлюз"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Длина префикса сети"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Информация об устройстве"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Запомнить это соединение"</string>
@@ -2554,7 +2547,7 @@
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"Нет подключенных слуховых аппаратов"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"Добавить слуховой аппарат"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"Подключите аппараты"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На следующем экране нажмите на свой слуховой аппарат. Возможно, потребуется подключить левый и правый слуховые аппараты отдельно.\n\nОни должны работать и быть готовы к подключению."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="581652489109350119">"На следующем экране нажмите на свой слуховой аппарат. Возможно, потребуется подключить левый и правый слуховые аппараты отдельно.\n\nОни должны быть в режиме подключения."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"Устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" активно"</string>
     <string name="accessibility_hearingaid_left_side_device_summary" msgid="1907302799168261001">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, только левое ухо"</string>
     <string name="accessibility_hearingaid_right_side_device_summary" msgid="148257064855054376">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>, только правое ухо"</string>
@@ -3034,13 +3027,13 @@
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Уровень заряда батареи за последние 24 часа"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Расход приложениями за 24 часа"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Расход системой за 24 часа"</string>
-    <string name="battery_system_usage_for" msgid="3248552137819897140">"Использование системой за <xliff:g id="SLOT">%s</xliff:g>"</string>
-    <string name="battery_app_usage_for" msgid="7309909074935858949">"Использование приложениями за <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_system_usage_for" msgid="3248552137819897140">"Использование системой в период <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_app_usage_for" msgid="7309909074935858949">"Использование приложениями в период <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_total_less_than_one_minute" msgid="1035425863251685509">"Всего: меньше минуты"</string>
     <string name="battery_usage_background_less_than_one_minute" msgid="3957971442554437909">"В фоновом режиме: меньше минуты"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Всего: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"В фоновом режиме: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данные указаны указано приблизительно. Расход во время зарядки не учитывается."</string>
+    <string name="battery_usage_screen_footer" msgid="7899907241146636817">"Данные указаны приблизительно. Расход во время зарядки не учитывается."</string>
     <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"Данные о расходе заряда станут доступны через несколько часов использования телефона."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"Диаграмма расхода заряда батареи"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Статистика процессов"</string>
@@ -3213,7 +3206,7 @@
     <string name="managed_profile_not_available_label" msgid="7500578232182547365">"Рабочий профиль пока не доступен"</string>
     <string name="work_mode_label" msgid="1001415270126064436">"Рабочий профиль"</string>
     <string name="work_mode_on_summary" msgid="2042885311126239961">"Управляется вашей организацией"</string>
-    <string name="work_mode_off_summary" msgid="4044568753909036134">"Приложения и уведомления отключены."</string>
+    <string name="work_mode_off_summary" msgid="4044568753909036134">"Приложения и уведомления отключены"</string>
     <string name="remove_managed_profile_label" msgid="1294933737673830431">"Удалить рабочий профиль"</string>
     <string name="background_data" msgid="321903213000101158">"Фоновая передача данных"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Синхронизация, отправка и получение данных доступны всегда"</string>
@@ -4120,11 +4113,11 @@
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Открыть приложению \"<xliff:g id="SERVICE">%1$s</xliff:g>\" доступ к уведомлениям?"</string>
     <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет читать все уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения). Кроме того, оно получит право временно отключать или закрывать уведомления и нажимать кнопки в них, например отвечать на звонки. \n\nПриложение сможет включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"Приложение \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\" сможет:"</string>
-    <string name="nls_feature_read_title" msgid="7629713268744220437">"Чтение уведомлений"</string>
+    <string name="nls_feature_read_title" msgid="7629713268744220437">"Читать уведомления"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Приложение может читать уведомления, в том числе содержащие личную информацию (например, имена контактов, фото и сообщения)."</string>
-    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Ответ на сообщения"</string>
+    <string name="nls_feature_reply_title" msgid="7925455553821362039">"Отвечать на сообщения"</string>
     <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Приложение может отвечать на звонки и сообщения, а также временно отключать или закрывать уведомления и нажимать кнопки в них."</string>
-    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Изменение настроек"</string>
+    <string name="nls_feature_settings_title" msgid="8208164329853194414">"Изменять настройки"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Приложение может включать и отключать режим \"Не беспокоить\", а также менять его настройки."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Если вы отключите доступ к уведомлениям для приложения \"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>\", также может быть отключен доступ к настройкам режима \"Не беспокоить\"."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Отключить"</string>
@@ -5084,7 +5077,7 @@
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Навигация жестами"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Чтобы перейти на главный экран, проведите по экрану снизу вверх. Чтобы переключиться между приложениями, проведите по экрану снизу вверх, задержите палец в этой точке и отпустите. Чтобы вернуться назад, проведите по экрану влево или вправо."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигация с помощью трех кнопок"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Чтобы вернуться назад, открыть главный экран или переключиться между приложениями, используйте кнопки в нижней части экрана"</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Чтобы вернуться назад, открыть главный экран или переключиться между приложениями, используйте кнопки в нижней части экрана."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"навигация в системе, навигация с помощью двух кнопок, навигация с помощью трех кнопок, навигация с помощью жестов, пролистывание"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Функция не поддерживается приложением для главного экрана, которое используется по умолчанию (<xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>)."</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Изменить приложение по умолчанию"</string>
@@ -5950,20 +5943,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Ограничить пропускную способность входящего трафика. Эта настройка применяется ко всем сетям, подключенным к интернету."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Настроить ограничение скорости скачивания"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Без ограничений"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляция"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Подключайтесь к трансляциям рядом с вами."</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Транслируйте медиаконтент на ближайшие устройства или подключайтесь к трансляциям других пользователей."</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Трансляции"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Сейчас воспроизводится"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Найти трансляцию"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Покинуть трансляцию"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Сканировать QR-код"</string>
 </resources>
