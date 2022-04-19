@@ -189,7 +189,7 @@ public final class UserDialogs {
             DialogInterface.OnClickListener onConfirmListener) {
         return new AlertDialog.Builder(context)
                 .setTitle(com.android.settingslib.R.string.guest_reset_guest_dialog_title)
-                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setMessage(com.android.settingslib.R.string.guest_exit_dialog_message)
                 .setPositiveButton(
                         com.android.settingslib.R.string.guest_reset_guest_confirm_button,
                         onConfirmListener)

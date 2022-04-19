@@ -101,8 +101,8 @@
     <string name="progress_scanning" msgid="2564746192843011826">"Mencari"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Tiada peranti Bluetooth ditemukan."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Permintaan gandingan Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Permintaan pasangan"</string>
-    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Sentuh untuk berpasangan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Permintaan penggandingan"</string>
+    <string name="bluetooth_notif_message" msgid="5584717784198086653">"Ketik untuk bergandingan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Fail yang diterima"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth dimatikan"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Ketik untuk menghidupkan Bluetooth"</string>
@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Bahasa yang dicadangkan"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Semua bahasa"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Bahasa sistem"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Ciri lalai sistem - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Lalai sistem"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Pemilihan bahasa untuk apl ini tidak tersedia daripada Tetapan."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Anda tidak dapat memilih bahasa untuk apl ini daripada Tetapan."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Alih keluar bahasa yang dipilih?</item>
       <item quantity="one">Alih keluar bahasa yang dipilih?</item>
@@ -843,7 +844,7 @@
     <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"Tiada peranti tersedia"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Sambung"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Putus sambungan"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Pasangkan &amp; sambung"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Gandingkan &amp; sambung"</string>
     <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Nyahpasangan"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Putuskan sambungan &amp; nyahpasangan"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Pilihan..."</string>
@@ -1158,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (melainkan dibatalkan oleh DNS Peribadi)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Get laluan"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Panjang awalan rangkaian"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Maklumat peranti"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Ingat sambungan ini"</string>
@@ -1763,7 +1761,7 @@
     <string name="main_clear_title" msgid="277664302144837723">"Padamkan semua data (tetapan semula kilang)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Padamkan semua data (tetapan semula kilang)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Tindakan ini akan memadamkan semua data daripada "<b>"storan dalaman"</b>" tablet anda, termasuk:\n\n"<li>"Akaun Google Anda"</li>\n<li>"Sistem dan data serta tetapan apl"</li>\n<li>"Apl yang telah dimuat turun"</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Tindakan ini akan memadamkan semua data daripada "<b>"storan dalaman"</b>" telefon anda, termasuk:\n\n"<li>"Akaun Google Anda"</li>\n<li>" Sistem dan data serta tetapan apl"</li>\n<li>"Apl yang dimuat turun"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Tindakan ini akan memadamkan semua data daripada "<b>"storan dalaman"</b>" telefon anda, termasuk:\n\n"<li>"Google Account Anda"</li>\n<li>" Sistem dan data serta tetapan apl"</li>\n<li>"Apl yang dimuat turun"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Anda dilog masuk ke dalam akaun berikut buat masa ini:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Terdapat pengguna lain pada peranti ini.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Muzik"</li>\n<li>"Foto"</li>\n<li>"Data pengguna yang lain"</li></string>
@@ -1909,7 +1907,7 @@
     <string name="safety_and_regulatory_info" msgid="8285048080439298528">"Manual keselamatan &amp; kawal selia"</string>
     <string name="copyright_title" msgid="83245306827757857">"Hak cipta"</string>
     <string name="license_title" msgid="8745742085916617540">"Lesen"</string>
-    <string name="module_license_title" msgid="8705484239826702828">"Lesen kemas kini sistem Google Play"</string>
+    <string name="module_license_title" msgid="8705484239826702828">"Lesen kemaskinian sistem Google Play"</string>
     <string name="terms_title" msgid="2071742973672326073">"Terma dan Syarat"</string>
     <string name="webview_license_title" msgid="5832692241345780517">"Lesen WebView Sistem"</string>
     <string name="wallpaper_attributions" msgid="4323659759250650736">"Penghargaan kertas dinding"</string>
@@ -5767,20 +5765,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigurasikan had kadar kemasukan lebar jalur rangkaian yang digunakan pada semua rangkaian yang menyediakan kesambungan Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigurasikan had kadar muat turun rangkaian"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Tiada had"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Siarkan"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Dengarkan siaran yang dimainkan berdekatan anda"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Siarkan media ke peranti berdekatan anda atau dengarkan siaran orang lain"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Siaran"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Mendengar"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Cari siaran"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Tinggalkan siaran"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Imbas kod QR"</string>
 </resources>
