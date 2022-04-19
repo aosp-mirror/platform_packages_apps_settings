@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"നിർദ്ദേശിച്ച ഭാഷകൾ"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"എല്ലാ ഭാഷകളും"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"സിസ്റ്റത്തിന്റെ ഭാഷ"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"സിസ്‌റ്റം ഡിഫോൾട്ട് - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"സിസ്‌റ്റം ഡിഫോൾട്ട്"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ക്രമീകരണത്തിൽ നിന്ന് ഈ ആപ്പിനുള്ള ഭാഷ തിരഞ്ഞെടുക്കാനുള്ള ഓപ്‌ഷൻ ലഭ്യമല്ല."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ക്രമീകരണത്തിൽ നിന്ന് ഈ ആപ്പിനുള്ള ഒരു ഭാഷ നിങ്ങൾക്ക് തിരഞ്ഞെടുക്കാനാകില്ല."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">തിരഞ്ഞെടുത്ത ഭാഷകൾ നീക്കംചെയ്യണോ?</item>
       <item quantity="one">തിരഞ്ഞെടുത്ത ഭാഷ നീക്കംചെയ്യണോ?</item>
@@ -1069,7 +1070,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"വൈഫൈ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"ഹോട്ട്‌സ്‌പോട്ടിന്റെ പാസ്‌വേഡ്: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"സ്വയമേവ കണ‌ക്റ്റ് ചെയ്യുക"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"പരിധിയിൽ വരുമ്പോൾ ഈ നെറ്റവർക്കിലേക്ക് കണക്ഷൻ അനുവദിക്കുക"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"പരിധിയിൽ വരുമ്പോൾ ഈ നെറ്റ്‍വർക്കിലേക്ക് കണക്ഷൻ അനുവദിക്കുക"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"ഉപകരണം ചേർക്കുക"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ഈ നെറ്റ്‌വർക്കിലേക്ക് ഒരു ഉപകരണം ചേർക്കാൻ ഒരു QR കോഡ് ഉപയോഗിക്കൂ"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR കോഡ് സാധുവായ ഫോർമാറ്റിലല്ല"</string>
@@ -1158,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (സ്വകാര്യ DNS അസാധുവാക്കിയില്ലെങ്കിൽ)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"ഗേറ്റ്‌വേ"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"നെറ്റ്‌വർക്ക് പ്രിഫിക്‌സ് ദൈർഘ്യം"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"വൈഫൈ 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"വൈഫൈ 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"വൈഫൈ 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi ഡയറക്‌ട്"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"ഉപകരണ വിവരം"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"ഈ കണക്ഷൻ ഓർക്കുക"</string>
@@ -4728,7 +4726,7 @@
     <string name="ota_disable_automatic_update" msgid="1953894421412420231">"സ്വയമേവയുള്ള സിസ്റ്റം അപ്ഡേറ്റുകൾ"</string>
     <string name="ota_disable_automatic_update_summary" msgid="7803279951533276841">"ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്യുമ്പോൾ അപ്‌ഡേറ്റുകൾ ബാധകമാക്കുക"</string>
     <string name="usage" msgid="287782903846013936">"ഉപയോഗം"</string>
-    <string name="cellular_data_usage" msgid="5874156338825285334">"മൊബൈൽ ഡാറ്റ ഉപയോഗം"</string>
+    <string name="cellular_data_usage" msgid="5874156338825285334">"മൊബൈൽ ഡാറ്റാ ഉപയോഗം"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"ആപ്പ് ഡാറ്റാ ഉപയോഗം"</string>
     <string name="wifi_data_usage" msgid="6868503699134605707">"വൈഫൈ ഡാറ്റാ ഉപയോഗം"</string>
     <string name="non_carrier_data_usage" msgid="6494603202578414755">"കാരിയർ ഇതര ഡാറ്റാ ഉപയോഗം"</string>
@@ -5767,20 +5765,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"ഇന്റർനെറ്റ് കണക്റ്റിവിറ്റി നൽകുന്ന എല്ലാ നെറ്റ്‌വർക്കുകൾക്കും ബാധകമായ നെറ്റ്‌വർക്ക് ബാൻഡ്‌വിഡ്‌ത് ഇൻഗ്രസ് നിരക്ക് പരിധി കോൺഫിഗർ ചെയ്യുക."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"നെറ്റ്‌വർക്ക് ഡൗൺലോഡ് നിരക്ക് പരിധി കോൺഫിഗർ ചെയ്യുക"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"പരിധിയില്ല"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ബ്രോഡ്‌കാസ്റ്റ്"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"നിങ്ങൾക്ക് സമീപം പ്ലേ ചെയ്യുന്ന ബ്രോഡ്‌കാസ്‌റ്റുകൾ കേൾക്കുക"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"നിങ്ങളുടെ സമീപത്തുള്ള ഉപകരണങ്ങളിലേക്ക് മീഡിയ ബ്രോഡ്‌കാസ്‌റ്റ് ചെയ്യുകയോ മറ്റൊരാളുടെ ബ്രോഡ്‌കാസ്‌റ്റ് കേൾക്കുകയോ ചെയ്യുക"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ബ്രോഡ്‌കാസ്‌റ്റുകൾ"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"ഇനിപ്പറയുന്നത് കേൾക്കുന്നു"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ബ്രോഡ്‌കാസ്‌റ്റുകൾ കണ്ടെത്തുക"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ബ്രോഡ്‌കാസ്‌റ്റിൽ നിന്ന് പുറത്ത് കടക്കൂ"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR കോഡ് സ്‌കാൻ ചെയ്യുക"</string>
 </resources>
