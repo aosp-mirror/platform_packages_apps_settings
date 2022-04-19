@@ -32,7 +32,6 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricManager.Authenticators;
 import android.hardware.biometrics.BiometricManager.BiometricError;
-import android.hardware.biometrics.SensorProperties;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.fingerprint.FingerprintManager;
@@ -211,12 +210,6 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
                 // required check if setup has completed instead.
                 final boolean isSettingUp = isSetupWizard || (mParentalOptionsRequired
                         && !WizardManagerHelper.isUserSetupComplete(this));
-                if (isSettingUp && isMultiSensor && mIsFaceEnrollable) {
-                    if (props.sensorStrength == SensorProperties.STRENGTH_CONVENIENCE) {
-                        Log.i(TAG, "Excluding face from SuW enrollment (STRENGTH_CONVENIENCE)");
-                        mIsFaceEnrollable = false;
-                    }
-                }
             }
         }
         if (mHasFeatureFingerprint) {
