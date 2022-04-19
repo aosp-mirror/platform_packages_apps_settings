@@ -3185,30 +3185,24 @@
     <string name="style_suggestion_title">Customize your phone</string>
     <!-- Styles and Wallpapers summary [CHAR_LIMIT=70] -->
     <string name="style_suggestion_summary">Try different styles, wallpapers, and more</string>
-    <!-- Display settings screen, trigger for screen saver options -->
+    <!-- Display settings screen, trigger for screen saver options [CHAR LIMIT=30] -->
     <string name="screensaver_settings_title">Screen saver</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_either_long">While charging or docked</string>
-    <!-- Dream settings screen, dialog option, activated when docked or asleep and charging -->
-    <string name="screensaver_settings_summary_either_short">Either</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_sleep">While charging</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated when docked  -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated when docked [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_dock">While docked</string>
-    <!-- Display settings screen, summary fragment for screen saver options, activated never  -->
+    <!-- Display settings screen, summary fragment for screen saver options, activated never [CHAR LIMIT=35] -->
     <string name="screensaver_settings_summary_never">Never</string>
-    <!-- Display settings screen, summary for screen saver options, screen saver is turned off -->
+    <!-- Display settings screen, summary for screen saver options, screen saver is turned off [CHAR LIMIT=20] -->
     <string name="screensaver_settings_summary_off">Off</string>
-    <!-- Dream settings screen, caption for when dreams are disabled -->
-    <string name="screensaver_settings_disabled_prompt">To control what happens when the phone is docked and/or sleeping, turn screen saver on.</string>
-    <!-- Dream settings screen, action label, when to dream -->
+    <!-- Dream settings screen, action label, when to dream [CHAR LIMIT=20] -->
     <string name="screensaver_settings_when_to_dream">When to start</string>
-    <!-- Dream settings screen, action label, current selected screen saver -->
+    <!-- Dream settings screen, action label, current selected screen saver [CHAR LIMIT=35] -->
     <string name="screensaver_settings_current">Current screen saver</string>
-    <!-- Dream settings screen, button label for settings for a specific screensaver -->
-    <string name="screensaver_settings_button">Settings</string>
     <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
     <string name="automatic_brightness">Automatic brightness</string>
     <!-- [CHAR LIMIT=40] Display settings screen, setting option name to change whether the device wakes up when a lift gesture is detected. -->
@@ -7709,6 +7703,22 @@
     <string name="user_exit_guest_confirm_message">All apps and data in this session will be deleted.</string>
     <!-- Label for button in confirmation dialog when exiting guest session [CHAR LIMIT=35] -->
     <string name="user_exit_guest_dialog_remove">Remove</string>
+    <!-- Title for guest category in guest mode [CHAR LIMIT=35] -->
+    <string name="guest_category_title">Guest (You)</string>
+    <!-- Title for users preference [CHAR LIMIT=35] -->
+    <string name="user_category_title">Users</string>
+    <!-- Title for users preference when in guest mode [CHAR LIMIT=35] -->
+    <string name="other_user_category_title">Other users</string>
+    <!-- Title of preference to remove guest on exit option[CHAR LIMIT=35] -->
+    <string name="remove_guest_on_exit">Delete guest activity</string>
+    <!-- Summary of preference to remove guest on exit option[CHAR LIMIT=NONE] -->
+    <string name="remove_guest_on_exit_summary">Delete all guest apps and data
+        when exiting guest mode</string>
+    <!-- Title of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=35] -->
+    <string name="remove_guest_on_exit_dialog_title">Delete guest activity?</string>
+    <!-- Message of dialog shown when remove_guest_on_exit toggle is ON [CHAR LIMIT=NONE] -->
+    <string name="remove_guest_on_exit_dialog_message">Apps and data from this guest session will be
+        deleted now, and all future guest activity will be deleted each time you exit guest mode</string>
 
     <!-- Title of preference to enable calling[CHAR LIMIT=40] -->
     <string name="user_enable_calling">Turn on phone calls</string>
@@ -13769,12 +13779,6 @@
     <string name="enable_2g_summary">2G is less secure, but may improve your connection in some locations. For emergency calls, 2G is always allowed.</string>
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
-
-
-    <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_label" translatable="false"></string>
-    <!-- Summary for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_summary" translatable="false"></string>
 
     <!-- Label for All Services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All Services</string>

@@ -225,9 +225,11 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Langues suggérées"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Paramètre système par défaut – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
+    <skip />
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection de la langue pour cette application n\'est pas accessible à partir des paramètres."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Vous ne pouvez pas sélectionner de langue pour cette application à partir des paramètres."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Supprimer la langue sélectionnée?</item>
       <item quantity="other">Supprimer les langues sélectionnées?</item>
@@ -342,8 +344,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"État de la sécurité"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Verrouillage d\'écran, Localiser mon appareil, sécurité des applications"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sécurité et confidentialité"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Sécurité applications, verrouillage appareil, autorisations"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Visage ajouté"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Touchez pour configurer le déverrouillage facial"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Déverrouillage facial"</string>
@@ -587,14 +588,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, communiquez avec l\'administrateur de votre organisation. "<annotation id="admin_details">"Plus de détails"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser les achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis touchez le capteur à nouveau"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible utiliser capteur empreintes digitales. Consultez un fournisseur de services de réparation"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Plus de paramètres de sécurité"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Verrouillage de profil professionnel, chiffrement et plus"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Chiffrement, authentifiants et plus"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sécurité, plus de paramètres de sécurité, plus de paramètres, paramètres de sécurité avancés"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter des empreintes digitales"</string>
@@ -1163,9 +1160,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (sauf si un DNS privé ignore ce paramètre)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Passerelle"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Longueur préfixe réseau"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Données relatives à l\'appareil utilisé"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Mémoriser cette connexion"</string>
@@ -4868,7 +4862,7 @@
     <string name="bluetooth_disabled" msgid="835838280837359514">"Désactivé"</string>
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"Connecté à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Connecté à plusieurs appareils"</string>
-    <string name="demo_mode" msgid="6566167465451386728">"Mode de démonstration de l\'interface système"</string>
+    <string name="demo_mode" msgid="6566167465451386728">"Mode Démo de l\'interface système"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Thème sombre"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Temporairement désactivé par l\'économiseur de pile"</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Temporairement désactivé par l\'économiseur de pile"</string>
@@ -5772,20 +5766,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configurez la limitation du taux d\'entrée sur la bande passante qui est appliquée à tous les réseaux qui fournissent une connectivité Internet."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configurer la limitation du taux de téléchargement sur le réseau"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Aucune limite"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Diffusion"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Écoutez les diffusions en cours à proximité"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Diffusez des contenus multimédias sur des appareils à proximité ou écoutez la diffusion de quelqu\'un d\'autre"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Diffusions"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Écoute de"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Trouver des diffusions"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Quitter la diffusion"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Numériser le code QR"</string>
 </resources>
