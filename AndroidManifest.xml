@@ -2227,6 +2227,7 @@
 
         <activity android:name=".biometrics.BiometricEnrollActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|smallestScreenSize|screenLayout|density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.BIOMETRIC_ENROLL" />
