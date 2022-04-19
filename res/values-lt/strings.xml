@@ -227,9 +227,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Siūlomos kalbos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Visos kalbos"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Sistemos kalba"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Numatytoji sistemos vertė – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Numatytoji sistemos vertė"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Šios programos kalbos pasirinkimas nepasiekiamas iš skilties „Nustatymai“."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Negalite pasirinkti šios programos kalbos iš skilties „Nustatymai“."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Pašalinti pasirinktas kalbas?</item>
       <item quantity="few">Pašalinti pasirinktas kalbas?</item>
@@ -348,8 +349,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Saugos būsena"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Ekrano užraktas, paslauga „Rasti įrenginį“, programos saugumas"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Sauga ir privatumas"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Programų saugumas, įrenginio užraktas, leidimai"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Veidas pridėtas"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Palieskite, kad nustatytumėte veidą"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Atrakinimas pagal veidą"</string>
@@ -595,14 +595,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekrano užrakto parinktis išjungta. Jei norite sužinoti daugiau, susisiekite su savo organizacijos administratoriumi. "<annotation id="admin_details">"Daugiau išsamios informacijos"</annotation>\n\n"Vis tiek galite naudoti savo piršto antspaudą ir įgalioti pirkinius bei prieigą prie programų. "<annotation id="url">"Sužinokite daugiau"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Patraukite pirštą, tada vėl palieskite jutiklį"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Negalima naudoti kontrolinio kodo jutiklio. Apsilankykite pas taisymo paslaugos teikėją"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Daugiau saugos nustatymų"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Darbo profilio užraktas, šifruotė ir kt."</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifruotė, prisijungimo duomenys ir kt."</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sauga, daugiau saugos nustatymų, daugiau nustatymų, išplėstiniai saugos nustatymai"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Galite pridėti iki <xliff:g id="COUNT">%d</xliff:g> kontrol. kod."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Pridėjote maksimalų skaičių kontrolinių kodų"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Negalima pridėti daugiau kontrolinių kodų"</string>
@@ -1203,9 +1199,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (nebent nepaisoma taikant privačią DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Tinklų sietuvas"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Tinklo kodo ilgis"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Tiesiog. „Wi-Fi“ r."</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Įrenginio informacija"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Atsiminti šį ryšį"</string>
@@ -2910,7 +2903,7 @@
     <string name="power_cell" msgid="7793805106954398186">"Mobiliojo ryšio tinklas"</string>
     <string name="power_phone" msgid="2768396619208561670">"Balso skambučiai"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Planšetinis kompiuteris neveikos būsenos"</string>
-    <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonas veikia laukimo režime"</string>
+    <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonas veikia laukimo režimu"</string>
     <string name="power_unaccounted" msgid="2160811497426475703">"Įvairus"</string>
     <string name="power_overcounted" msgid="3681101460287472876">"Per daug apskaičiuota"</string>
     <string name="usage_type_cpu" msgid="8544148642836549011">"Visas CPU laikas"</string>
@@ -5950,20 +5943,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Konfigūruokite tinklo pralaidumo įvesties rodiklio apribojimą, kuris taikomas visiems tinklams, teikiantiems interneto ryšį."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Konfigūruokite tinklo atsisiuntimo rodiklio apribojimą"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Nėra apribojimų"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transliacija"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Klausykite netoliese leidžiamų transliacijų"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Transliuokite mediją įrenginiuose netoliese arba klausykite kitų transliacijų"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Transliacijos"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Klausoma"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Rasti transliacijų"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Išeiti iš transliacijos"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Nuskaityti QR kodą"</string>
 </resources>

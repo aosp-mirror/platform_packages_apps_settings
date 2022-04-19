@@ -225,9 +225,9 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"შემოთავაზებული ენები"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"ყველა ენა"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"სისტემის ენა"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"სისტემის ნაგულისხმევი — <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"სისტემის ნაგულისხმევი"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ამ აპისთვის ენის არჩევა პარამეტრებიდან მიუწვდომელია."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"ამ აპისთვის ენას პარამეტრებიდან ვერ აირჩევთ."</string>
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ენა, შესაძლოა, განსხვავდებოდეს აპში ხელმისაწვდომი ენებისგან. ზოგიერთ აპს, შესაძლოა, არ ჰქონდეს ამ პარამეტრის მხარდაჭერა."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">გსურთ არჩეული ენების ამოშლა?</item>
       <item quantity="one">გსურთ არჩეული ენის ამოშლა?</item>
@@ -1158,9 +1158,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (სანამ არ არის უგულებელყოფილი პირადი DNS-ის მიერ)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"გეითვეი"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"ქსელის პრეფიქსის სიგრძე"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"ინფორმაცია მოწყობილობის შესახებ"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"დაიმახსოვრე ეს კავშირი"</string>
@@ -4879,7 +4876,7 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope-ის კვალის მიდევნება"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"სენსორების გამორთვა"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"სამსახურის პროფილის პარამეტრები"</string>
-    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"სამსახურის კატალოგის კონტაქტების ძიება პირადი აპებში"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"სამსახურის კატალოგის კონტაქტების ძიება პირად აპებში"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"თქვენს ძიებებსა და შემომავალ ზარებს შეიძლება თქვენი IT ადმინისტრატორი ხედავდეს"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"პროფილებსშორისი კალენდარი"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"პერსონალურ კალენდარში სამსახურის მოვლენების ჩვენება"</string>
@@ -5767,20 +5764,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"დააყენეთ შემავალი ქსელის გამტარუნარიანობის შეზღუდვა, რომელიც ეხება ინტერნეტთან კავშირის უზრუნველმყოფ ყველა ქსელს."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"დააყენეთ ქსელიდან ჩამოტვირთვისას სიჩქარის შეზღუდვა"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"ულიმიტო"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ტრანსლაცია"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"მოუსმინეთ ტრანსლაციებს თქვენთან ახლოს"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"მოახდინეთ მედიის ახლომდებარე მოწყობილობებზე ტრანსლაცია ან მოუსმინეთ სხვა პირის ტრანსლაციას"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ტრანსლაციები"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"უსმენთ"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ტრანსლაციის პოვნა"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ტრანსლაციის დატოვება"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR კოდის სკანირება"</string>
 </resources>
