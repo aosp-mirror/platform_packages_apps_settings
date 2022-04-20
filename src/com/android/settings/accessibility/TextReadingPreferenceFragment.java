@@ -23,6 +23,7 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -178,6 +179,9 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
         } else {
             mResetStateListeners.forEach(ResetStateListener::resetState);
         }
+
+        Toast.makeText(getPrefContext(), R.string.accessibility_text_reading_reset_message,
+                Toast.LENGTH_SHORT).show();
     }
 
     private List<ResetStateListener> getResetStateListeners() {
