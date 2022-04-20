@@ -62,8 +62,10 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
     @Override
     protected Intent getEnrollingIntent() {
         final Intent intent = new Intent(this, SetupFingerprintEnrollFindSensor.class);
+        BiometricUtils.copyMultiBiometricExtras(getIntent(), intent);
         if (BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
+            intent.putExtra(
+                    ChooseLockSettingsHelper.EXTRA_KEY_GK_PW_HANDLE,
                     BiometricUtils.getGatekeeperPasswordHandle(getIntent()));
         }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
@@ -118,18 +120,22 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         if (isKeyguardSecure()) {
             // If the keyguard is already set up securely (maybe the user added a backup screen
             // lock and skipped fingerprint), return RESULT_SKIP directly.
-            resultCode = RESULT_SKIP;
-            data = mAlreadyHadLockScreenSetup ? null : getMetricIntent(null);
+            if (!BiometricUtils.tryStartingNextBiometricEnroll(
+                    this, ENROLL_NEXT_BIOMETRIC_REQUEST, "cancel")) {
+                resultCode = RESULT_SKIP;
+                data = mAlreadyHadLockScreenSetup ? null : getMetricIntent(null);
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
         } else {
             resultCode = SetupSkipDialog.RESULT_SKIP;
-            data = null;
+            data = setSkipPendingEnroll(null);
+            setResult(resultCode, data);
+            finish();
         }
 
         // User has explicitly canceled enroll. Don't restart it automatically.
-        data = setSkipPendingEnroll(data);
-
-        setResult(resultCode, data);
-        finish();
     }
 
     /**

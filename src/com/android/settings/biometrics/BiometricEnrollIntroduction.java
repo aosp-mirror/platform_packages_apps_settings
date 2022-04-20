@@ -24,7 +24,6 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -303,9 +302,17 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final boolean cameFromMultiBioFpAuthAddAnother =
+                requestCode == BiometricUtils.REQUEST_ADD_ANOTHER
+                && BiometricUtils.isMultiBiometricFingerprintEnrollmentFlow(this);
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (isResultSkipOrFinished(resultCode)) {
+            if (isResultFinished(resultCode)) {
                 handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (isResultSkipped(resultCode)) {
+                if (!BiometricUtils.tryStartingNextBiometricEnroll(this,
+                        ENROLL_NEXT_BIOMETRIC_REQUEST, "BIOMETRIC_FIND_SENSOR_SKIPPED")) {
+                    handleBiometricResultSkipOrFinished(resultCode, data);
+                }
             } else if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
@@ -353,10 +360,22 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             }
         } else if (requestCode == LEARN_MORE_REQUEST) {
             overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
-        } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
-            Log.d(TAG, "ENROLL_NEXT_BIOMETRIC_REQUEST, result: " + resultCode);
-            if (isResultSkipOrFinished(resultCode)) {
+        } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST
+                || cameFromMultiBioFpAuthAddAnother) {
+            if (isResultFinished(resultCode)) {
                 handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (isResultSkipped(resultCode)) {
+                if (requestCode == BiometricUtils.REQUEST_ADD_ANOTHER) {
+                    // If we came from an add another request, it still might
+                    // be possible to add another biometric. Check if we can.
+                    if (checkMaxEnrolled() != 0) {
+                        // If we can't enroll any more biometrics, than skip
+                        // this one.
+                        handleBiometricResultSkipOrFinished(resultCode, data);
+                    }
+                } else {
+                    handleBiometricResultSkipOrFinished(resultCode, data);
+                }
             } else if (resultCode != RESULT_CANCELED) {
                 setResult(resultCode, data);
                 finish();
@@ -365,9 +384,17 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private static boolean isResultSkipped(int resultCode) {
+        return resultCode == RESULT_SKIP
+                || resultCode == SetupSkipDialog.RESULT_SKIP;
+    }
+
+    private static boolean isResultFinished(int resultCode) {
+        return resultCode == RESULT_FINISHED;
+    }
+
     private static boolean isResultSkipOrFinished(int resultCode) {
-        return resultCode == RESULT_SKIP || resultCode == SetupSkipDialog.RESULT_SKIP
-                || resultCode == RESULT_FINISHED;
+        return isResultSkipped(resultCode) || isResultFinished(resultCode);
     }
 
     private void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
@@ -375,6 +402,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 && data.getBooleanExtra(
                         MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, false)) {
             getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+            getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
         }
 
         if (resultCode == RESULT_SKIP) {
