@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建议语言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有语言"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系统语言"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"系统默认 - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系统默认设置"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"您无法从“设置”中选择此应用的语言。"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"您无法从“设置”中为此应用选择一个语言。"</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除所选语言吗？</item>
       <item quantity="one">要移除所选语言吗？</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"安全状态"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"屏幕锁定、查找我的设备、应用安全性"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"安全和隐私设置"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"应用安全性、设备锁定、权限"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已添加面孔"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"点按即可设置人脸解锁"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"人脸解锁"</string>
@@ -587,14 +587,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 屏幕锁定选项已停用。要了解详情，请与贵单位的管理员联系。"<annotation id="admin_details">"更多详情"</annotation>\n\n"您仍然可以使用指纹对购买交易进行授权以及登录应用。"<annotation id="url">"了解详情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"移开手指，然后再次触摸传感器"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"无法使用指纹传感器。请联系维修服务提供商"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"更多安全设置"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"工作资料锁定、加密等"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、凭据等"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"安全性, 更多安全设置, 更多设置, 高级安全设置, security, more security settings, more settings, advanced security settings"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"您最多可以添加 <xliff:g id="COUNT">%d</xliff:g> 个指纹"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您添加的指纹数量已达到上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"无法添加更多的指纹"</string>
@@ -1163,9 +1159,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2（除非已被专用 DNS 替换）"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"网关"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"网络前缀长度"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"WLAN 直连"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"设备信息"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"记住该连接"</string>
@@ -2313,7 +2306,7 @@
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"放大类型"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"放大整个屏幕或特定区域，也可在这两个选项之间切换"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"全屏"</string>
-    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"局部屏幕"</string>
+    <string name="accessibility_magnification_area_settings_window_screen_summary" msgid="9191632962955877019">"部分屏幕"</string>
     <string name="accessibility_magnification_area_settings_all_summary" msgid="8107511976748799455">"在全屏和部分屏幕之间切换"</string>
     <string name="accessibility_magnification_mode_dialog_title" msgid="9151027667059878578">"选择放大方式"</string>
     <string name="accessibility_magnification_mode_dialog_option_full_screen" msgid="4892487869954032029">"放大整个屏幕"</string>
@@ -3236,7 +3229,7 @@
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"流量消耗重置日期"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"每月重置日期："</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"设置"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"设置流量用量警告"</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"设置流量消耗警告"</string>
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"设置流量使用上限"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"限制流量用量"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"当移动数据流量的使用量达到您设置的上限时，您的平板电脑将关闭移动数据网络。\n\n由于流量用量是由您的平板电脑计算的，而您的运营商对流量用量的计算方式可能有所不同，因此建议您设置一个保守的上限值。"</string>
@@ -5772,20 +5765,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"配置网络带宽入站流量速率限制，此速率限制将应用到提供互联网连接的所有网络中。"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"配置网络下载速率限制"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"无限制"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"广播"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"收听在您附近播放的广播"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"向您附近的设备广播媒体内容，或收听别人的广播"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"广播"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"收听"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"查找广播"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"退出广播"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"扫描二维码"</string>
 </resources>
