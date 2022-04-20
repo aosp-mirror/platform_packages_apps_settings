@@ -228,8 +228,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Језик система"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Подразумевани системски"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избор језика за ову апликацију није доступан из Подешавања."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Језик може да се разликује од језика доступних у апликацији. Неке апликације можда не подржавају ово подешавање."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Желите ли да уклоните изабране језике?</item>
       <item quantity="few">Желите ли да уклоните изабране језике?</item>
@@ -1449,15 +1448,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Чувар екрана"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Користи чувар екрана"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Током пуњења или на базној станици"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Било које од ова два"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Током пуњења"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Док је на базној станици"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никада"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Искључено"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Да бисте контролисали шта се дешава када је телефон на базној станици и/или у стању спавања, укључите чувар екрана."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Када да почне"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Тренутни чувар екрана"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Подешавања"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Аутоматски ниво осветљености"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Подигни за активацију"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Амбијентални екран"</string>
@@ -2658,7 +2654,7 @@
     <string name="keywords_rtt" msgid="2429130928152514402">"оштећење слуха, губитак слуха, титл, телепринтер, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"Брзо упаривање"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Откривање Bluetooth уређ. за Брзо упарив. у близ."</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Откривање Bluetooth уређаја за Брзо упаривање у близини"</string>
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Потражи уређаје у близини"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Сачувани уређаји"</string>
     <string name="print_settings" msgid="8519810615863882491">"Штампање"</string>
@@ -2683,7 +2679,7 @@
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Додај услугу"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Додај штампач"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Претражи"</string>
-    <string name="print_searching_for_printers" msgid="5401413178028348800">"Претрага штампача"</string>
+    <string name="print_searching_for_printers" msgid="5401413178028348800">"Тражење штампача"</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"Услуга је онемогућена"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"Задаци за штампање"</string>
     <string name="print_print_job" msgid="8477859161886726608">"Задатак за штампање"</string>
@@ -3444,6 +3440,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Избриши"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Све апликације и подаци у овој сесији ће бити избрисани."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Уклони"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Гост (ви)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Корисници"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Остали корисници"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Избриши активности госта"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Избришите све апликације и податке госта при излазу из режима госта"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Избрисаћете активности госта?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Апликације и подаци из ове сесије госта биће одмах избрисане, а све будуће активности госта биће избрисане сваки пут када изађете из режима госта"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Укључи телефонске позиве"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Укључи телефонске позиве и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Избришите корисника"</string>
@@ -3473,8 +3476,8 @@
     <string name="nfc_payment_default" msgid="3769788268378614608">"Подразумевано за плаћање"</string>
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Није подешено"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
-    <string name="nfc_payment_use_default" msgid="6127665705799658860">"Користите подразумевану апликацију за плаћање"</string>
-    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Користите подразумевану за плаћање"</string>
+    <string name="nfc_payment_use_default" msgid="6127665705799658860">"Користи подразумевану апликацију за плаћање"</string>
+    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Користи подразумевану за плаћање"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Увек"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Осим кад је отворена друга апликација за плаћање"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"На терминалу за бесконтактно плаћање користиће се:"</string>
@@ -3965,7 +3968,7 @@
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Осетљива обавештења о пословном профилу"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Приказуј осетљив садржај пословног профила на закључаном екрану"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Прикажи сав садржај обавештења"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Прикажи осетљив садржај само када је откључано"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Прикажи осетљив садржај само када је откључан"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Не приказуј уопште обавештења"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Како желите да се приказује садржај на закључаном екрану?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Закључан екран"</string>
@@ -4580,7 +4583,7 @@
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Пренос датотека"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Преносите датотеке на други уређај"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
-    <string name="usb_transcode_files" msgid="2441954752105119109">"Конвертујте видео снимке у AVC"</string>
+    <string name="usb_transcode_files" msgid="2441954752105119109">"Конвертуј видео снимке у AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Видео снимци ће моћи да се пусте на више медија плејера, али ће им квалитет можда бити лошији"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Преносите слике или датотеке ако MTP није подржан (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"USB привезивање"</string>
@@ -5739,7 +5742,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Користи WiFi хотспот"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Користи качење апликација"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Користи опције за програмере"</string>
-    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Користите услугу штампања"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Користи услугу штампања"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Дозволи више корисника"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Користи бежично отклањање грешака"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Користи подешавања управљачког програма за графику"</string>
