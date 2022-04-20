@@ -132,17 +132,22 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @VisibleForTesting
     void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
+        final List<BasePreferenceController> baseControllers = new ArrayList<>();
         controllers.forEach(controller -> {
             if (controller instanceof BasePreferenceController.UiBlocker
                     && controller.isAvailable()) {
                 ((BasePreferenceController) controller).setUiBlockListener(this);
                 keys.add(controller.getPreferenceKey());
+                baseControllers.add((BasePreferenceController) controller);
             }
         });
 
         if (!keys.isEmpty()) {
             mBlockerController = new UiBlockerController(keys);
-            mBlockerController.start(() -> updatePreferenceVisibility(mPreferenceControllers));
+            mBlockerController.start(() -> {
+                updatePreferenceVisibility(mPreferenceControllers);
+                baseControllers.forEach(controller -> controller.setUiBlockerFinished(true));
+            });
         }
     }
 
@@ -250,11 +255,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             mListeningToCategoryChange = false;
         }
-        mControllers.forEach(controller -> {
-            if (controller instanceof BasePreferenceController.UiBlocker) {
-                ((BasePreferenceController) controller).revokeFirstLaunch();
-            }
-        });
     }
 
     @Override

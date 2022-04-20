@@ -225,9 +225,11 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Soovitatud keeled"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Kõik keeled"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Süsteemi keel"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"Süsteemi vaikeseade – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
+    <skip />
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Selle rakenduse jaoks pole seadetes keele valimine saadaval."</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"Te ei saa seadetes selle rakenduse jaoks keelt valida."</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Kas eemaldada valitud keeled?</item>
       <item quantity="one">Kas eemaldada valitud keel?</item>
@@ -342,8 +344,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Turvalisuse olek"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Ekraanilukk, Leia mu seade, rakenduse turvalisus"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Turvalisus ja privaatsus"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"Rakenduste turvalisus, seadme lukustus, load"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Nägu on lisatud"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Puudutage näo seadistamiseks"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Näoga avamine"</string>
@@ -589,14 +590,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Ekraaniluku valik on keelatud. Küsige lisateavet organisatsiooni administraatorilt. "<annotation id="admin_details">"Rohkem üksikasju"</annotation>\n\n"Saate ka edaspidi sõrmejäljega oste volitada ja rakendustele juurde pääseda. "<annotation id="url">"Lisateave"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Tõstke sõrme, seejärel puudutage sõrmejäljeandurit uuesti"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Sõrmejäljeandurit ei saa kasutada. Külastage remonditeenuse pakkujat"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"Rohkem turvaseadeid"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Tööprofiili lukustus, krüpteerimine ja muu"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Krüpteerimine, mandaat ja muu"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"turvalisus, rohkem turvaseadeid, rohkem seadeid, täpsemad turvaseaded"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Saate lisada kuni <xliff:g id="COUNT">%d</xliff:g> sõrmejälge"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Olete lisanud maksimaalse arvu sõrmejälgi"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Rohkem sõrmejälgi ei saa lisada"</string>
@@ -1165,9 +1162,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (kui privaatne DNS pole seda alistanud)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Lüüs"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Võrgu prefiksi pikkus"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"6. põlvkonna WiFi"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"5. põlvkonna WiFi"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"4. põlvkonna WiFi"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"WiFi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Seadme teave"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Pea see ühendus meeles"</string>
@@ -5774,20 +5768,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Seadistage võrgu ribalaiuse kasutusmäära limiit, mis rakendatakse kõikidele võrkudele, mis võrguühendust pakuvad."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Seadistage võrgu allalaadimiskiiruse limiit"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Piirangut pole"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Ülekanne"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Kuulake ülekandeid, mida teie läheduses esitatakse"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Edastage meediat teie läheduses olevatesse seadmetesse või kuulake kellegi teise ülekannet"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Ülekanded"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Kuulatakse:"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Otsi ülekandeid"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Sule ülekanne"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Skanni QR-kood"</string>
 </resources>
