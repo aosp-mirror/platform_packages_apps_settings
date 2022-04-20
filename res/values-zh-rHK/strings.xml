@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"建議的語言"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"所有語言"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系統語言"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"系統預設 - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系統預設"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"「設定」中不提供此應用程式的語言選擇。"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"您無法從「設定」選擇此應用程式所用的語言。"</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除選取的語言嗎？</item>
       <item quantity="one">要移除選取的語言嗎？</item>
@@ -342,8 +343,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"安全性狀態"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"螢幕鎖定, 尋找我的裝置, 應用程式安全性"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"安全性與私隱權"</string>
-    <!-- no translation found for safety_center_summary (3554867379951053869) -->
-    <skip />
+    <string name="safety_center_summary" msgid="3554867379951053869">"應用程式安全性、裝置鎖定、權限"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"已加入臉孔"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"輕按即可設定面孔"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"面孔解鎖"</string>
@@ -589,14 +589,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" 已停用螢幕鎖定選項。如需瞭解詳情，請聯絡您機構的管理員。"<annotation id="admin_details">"瞭解詳情"</annotation>\n\n"您仍可以使用指紋核准購物和應用程式存取權。"<annotation id="url">"瞭解詳情"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"提起手指，然後再次輕觸感應器"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"無法使用指紋感應器。請諮詢維修服務供應商"</string>
-    <!-- no translation found for security_advanced_settings (6260756619837834042) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_work_profile_settings_summary (7295451997961973175) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_no_work_profile_settings_summary (345336447137417638) -->
-    <skip />
-    <!-- no translation found for security_advanced_settings_keywords (5294945170370974974) -->
-    <skip />
+    <string name="security_advanced_settings" msgid="6260756619837834042">"更多安全性設定"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"工作設定檔鎖定、加密等"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、憑證等"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"安全性, 更多安全性設定, 更多設定, 進階安全性設定"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"你可以加入最多 <xliff:g id="COUNT">%d</xliff:g> 個指紋"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"您加入指紋的數目已達上限"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"無法加入更多指紋"</string>
@@ -1165,9 +1161,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (除非由私人 DNS 覆寫)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"閘道"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"網絡前置字元長度"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"裝置資訊"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"記住這個連線"</string>
@@ -1314,6 +1307,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"面孔偵測"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"當您以直向或橫向模式使用手機時，螢幕都會自動旋轉以調整方向"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"進一步了解自動旋轉"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"螢幕解像度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"最高解像度"</string>
@@ -2917,7 +2912,7 @@
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"<xliff:g id="TIME_PERIOD">^1</xliff:g> 這段期間內在背景使用電池的時間長度少於一分鐘"</string>
     <string name="battery_total_usage" msgid="4685408616230899847">"上次充滿電後使用電池的總時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"過去 24 小時使用電池的總時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g> 這段期間內使用電池的總時間長度為 <xliff:g id="TIME_0">^1</xliff:g>"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_PERIOD">^2</xliff:g>這段期間內使用電池的總時間長度為 <xliff:g id="TIME_0">^1</xliff:g>"</string>
     <string name="battery_bg_usage" msgid="548670902301883980">"上次充滿電後在背景使用電池的時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"過去 24 小時在背景使用電池的時間長度為 <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_PERIOD">^2</xliff:g> 這段期間內在背景使用電池的時間長度為 <xliff:g id="TIME_0">^1</xliff:g>"</string>
@@ -3412,20 +3407,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"刪除"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"這個工作階段中的所有應用程式和資料都會被刪除。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"移除"</string>
-    <!-- no translation found for guest_category_title (5562663588315329152) -->
-    <skip />
-    <!-- no translation found for user_category_title (4368580529662699083) -->
-    <skip />
-    <!-- no translation found for other_user_category_title (7089976887307643217) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit (8202972371459611066) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_summary (3969962695703280353) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_title (2310442892536079416) -->
-    <skip />
-    <!-- no translation found for remove_guest_on_exit_dialog_message (8112409834021851883) -->
-    <skip />
+    <string name="guest_category_title" msgid="5562663588315329152">"訪客 (您)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"使用者"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"其他使用者"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"刪除訪客活動"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"結束訪客模式時刪除所有訪客應用程式和資料"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"要刪除訪客活動嗎？"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"系統現在會刪除此訪客工作階段中的應用程式和資料；日後每次結束訪客模式時，系統都會刪除所有未來的訪客活動"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"開啟通話功能"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"開啟通話和短訊功能"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"刪除使用者"</string>
@@ -5791,20 +5779,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"設定網絡頻寬輸入頻率限制，這項設定會套用至提供互聯網連線的所有網絡。"</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"設定網絡下載頻率限制"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"無限制"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_title (9172775308463135884) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_find_message (6621660851669953883) -->
-    <skip />
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_message (6198264676009094495) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_title (5385985218699831970) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_summary (3907899428626210673) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast (1768337775649457586) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_leave (7881206581147104908) -->
-    <skip />
-    <!-- no translation found for bluetooth_find_broadcast_button_scan (3995664694641895189) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"廣播"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"收聽正在您附近播放的廣播"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"向您附近的裝置廣播媒體，或收聽其他人的廣播"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"廣播"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"正在收聽"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"尋找廣播"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"退出廣播"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"掃瞄 QR 碼"</string>
 </resources>

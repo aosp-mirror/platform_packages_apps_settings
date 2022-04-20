@@ -2227,6 +2227,7 @@
 
         <activity android:name=".biometrics.BiometricEnrollActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|smallestScreenSize|screenLayout|density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.BIOMETRIC_ENROLL" />
@@ -3004,13 +3005,6 @@
                        android:value="@string/menu_key_system"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <activity
-            android:name=".users.AddSupervisedUserActivity"
-            android:label="@*android:string/supervised_user_creation_label"
-            android:icon="@drawable/ic_settings_multiuser"
-            android:exported="true">
         </activity>
 
         <activity

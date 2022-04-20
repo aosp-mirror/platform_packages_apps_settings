@@ -126,7 +126,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @Nullable
     private UserHandle mWorkProfileUser;
     private int mMetricsCategory;
-    private boolean mIsFirstLaunch;
     private boolean mPrefVisibility;
 
     /**
@@ -198,7 +197,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);
         mPreferenceKey = preferenceKey;
-        mIsFirstLaunch = true;
         mPrefVisibility = true;
         if (TextUtils.isEmpty(mPreferenceKey)) {
             throw new IllegalArgumentException("Preference key must be set");
@@ -332,13 +330,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     }
 
     /**
-     * Set back the value of whether this is the first launch.
-     */
-    public void revokeFirstLaunch() {
-        mIsFirstLaunch = false;
-    }
-
-    /**
      * Launches the specified fragment for the work profile user if the associated
      * {@link Preference} is clicked.  Otherwise just forward it to the super class.
      *
@@ -454,7 +445,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * preference visibility.
      */
     protected void updatePreferenceVisibilityDelegate(Preference preference, boolean isVisible) {
-        if (mUiBlockerFinished || !mIsFirstLaunch) {
+        if (mUiBlockerFinished) {
             preference.setVisible(isVisible);
             return;
         }

@@ -225,9 +225,10 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"言語の候補"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"すべての言語"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"システムの言語"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"システムのデフォルト - <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"システムのデフォルト"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
-    <string name="desc_disallow_locale_change_in_settings" msgid="8355972147053068698">"このアプリの言語を [設定] から選択することはできません。"</string>
+    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">選択した言語を削除しますか？</item>
       <item quantity="one">選択した言語を削除しますか？</item>
@@ -1153,14 +1154,11 @@
     <string name="wifi_ip_settings_invalid_ip_address" msgid="3622891107865052307">"有効なIPアドレスを入力してください。"</string>
     <string name="wifi_ip_settings_invalid_gateway" msgid="1174931247370931239">"有効なゲートウェイアドレスを入力してください。"</string>
     <string name="wifi_ip_settings_invalid_dns" msgid="1757402215999845975">"有効なDNSアドレスを入力してください。"</string>
-    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"ネットワークプレフィックス長は0～32で指定します。"</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="5980808986926987299">"ネットワーク プレフィックス長は 0～32 で指定します。"</string>
     <string name="wifi_dns1" msgid="6764769531843748514">"DNS 1（プライベート DNS でオーバーライドされる場合を除く）"</string>
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2（プライベート DNS でオーバーライドされる場合を除く）"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"ゲートウェイ"</string>
-    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"ネットワークプレフィックス長"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi-Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi-Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi-Fi 4"</string>
+    <string name="wifi_network_prefix_length" msgid="1003365439352276622">"ネットワーク プレフィックス長"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"デバイス情報"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"この接続を保存"</string>
@@ -1307,6 +1305,8 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"顔検出"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"スマートフォンを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"自動回転の詳細"</string>
+    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
+    <skip />
     <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"最高解像度"</string>
@@ -2290,7 +2290,7 @@
     <string name="accessibility_color_and_motion_title" msgid="2323301706545305874">"色と動き"</string>
     <string name="accessibility_turn_screen_darker_title" msgid="5986223133285858349">"画面を暗くする"</string>
     <string name="interaction_control_category_title" msgid="2696474616743882372">"操作のコントロール"</string>
-    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングの管理"</string>
+    <string name="accessibility_tap_assistance_title" msgid="1058913033421048284">"タイミングの調節"</string>
     <string name="accessibility_system_controls_title" msgid="6403287349518987624">"システム操作"</string>
     <string name="user_installed_services_category_title" msgid="2639470729311439731">"ダウンロードしたアプリ"</string>
     <string name="experimental_category_title" msgid="898904396646344152">"試験運用機能"</string>
@@ -2399,12 +2399,12 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"ユーザー補助機能にすばやくアクセスできます"</string>
     <string name="accessibility_button_gesture_description" msgid="7507097717493960397"><b>"手順は次のとおりです。"</b>\n"1. ユーザー補助設定に移動します\n2. 機能を選んでショートカットをタップします\n3. 機能にアクセスするためにボタンを使うか、ジェスチャーを使うかを選択します"</string>
     <string name="accessibility_button_description" msgid="1261273371298608222"><b>"手順は次のとおりです。"</b>\n"1. ユーザー補助設定に移動します\n2. 機能を選んでショートカットをタップします\n3. 機能にアクセスするためのボタンを選択します"</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ボタンまたは操作を使用する"</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"ボタンまたはジェスチャーを選択"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"場所"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"サイズ"</string>
-    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"使用していないときの透過表示の設定"</string>
+    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"未使用時は透過表示"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"画面が見やすくなるよう数秒後に透過表示に切り替えます"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"使用していないときの透明度"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"未使用時の透明度"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"透明"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"非透明"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"高コントラスト テキスト"</string>
@@ -2515,7 +2515,7 @@
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音声の調整"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"音声による説明"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組で画面に表示されている内容の説明が読み上げられます"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"対応する映画や番組にて、画面の表示内容の説明を読み上げます"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"音声による説明, 音声, 説明, ロービジョン,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"ショートカットを ON にする"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"OFF"</string>
@@ -2692,7 +2692,7 @@
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"使用状況に基づいて最適化されます。ほとんどのアプリにおすすめです。"</string>
     <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"バックグラウンド時にバッテリーの使用が制限されます。アプリが正しく動作しない可能性や、通知が遅れる可能性があります。"</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"アプリによるバッテリーの利用方法を変更すると、パフォーマンスに影響することがあります。"</string>
-    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を<xliff:g id="STATE">%1$s</xliff:g>以外に設定できません。"</string>
+    <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"このアプリでは、バッテリーの使用を「<xliff:g id="STATE">%1$s</xliff:g>」以外に設定できません。"</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"制限なし"</string>
     <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"最適化"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"詳しくは、バッテリー使用量オプションについての説明をご覧ください"</string>
@@ -3646,7 +3646,7 @@
     <string name="keywords_wallet" msgid="3757421969956996972">"ウォレット"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"支払い, タップ, ペイメント"</string>
     <string name="keywords_backup" msgid="707735920706667685">"バックアップ, バック アップ"</string>
-    <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"操作"</string>
+    <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"ジェスチャー"</string>
     <string name="keywords_face_unlock" msgid="545338452730885392">"顔, フェイス, ロック解除, アンロック, 認証, ログイン, 顔認証"</string>
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"顔, ロック解除, 認証, ログイン, 指紋, 生体認証"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"IMEI, MEID, MIN, PRL バージョン, IMEI SV"</string>
@@ -4037,9 +4037,9 @@
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"キャンセル"</string>
     <string name="notification_listener_type_title" msgid="2791552789364336733">"許可されている通知の種類"</string>
     <string name="notif_type_ongoing" msgid="135675014223627555">"リアルタイム"</string>
-    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"使用中のアプリ、ナビ、着信などからの継続的な通信"</string>
+    <string name="notif_type_ongoing_summary" msgid="2348867528527573574">"使用中のアプリ、ナビ、着信などからの継続的な通知"</string>
     <string name="notif_type_conversation" msgid="4383931408641374979">"会話"</string>
-    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS、テキスト メッセージ、その他の通信"</string>
+    <string name="notif_type_conversation_summary" msgid="179142405410217101">"SMS やテキスト メッセージなどのコミュニケーション"</string>
     <string name="notif_type_alerting" msgid="4713073696855718576">"通知"</string>
     <string name="notif_type_alerting_summary" msgid="4681068287836313604">"スマートフォンの設定を基に着信音またはバイブレーションが有効になります"</string>
     <string name="notif_type_silent" msgid="6273951794420331010">"消音"</string>
@@ -4080,7 +4080,7 @@
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"このアプリは、個人用アプリである<xliff:g id="NAME">%1$s</xliff:g>内のデータにアクセスできます。"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"権限"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"このアプリは、位置情報、ストレージ、連絡先へのアクセスなどに個人用の<xliff:g id="NAME">%1$s</xliff:g>の権限を使用できます。"</string>
-    <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"接続されているアプリはありません"</string>
+    <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"アクセス可能なアプリはありません"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
       <item quantity="other">接続済みのアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個 </item>
       <item quantity="one">接続済みのアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
@@ -4938,9 +4938,9 @@
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"デフォルトのホームアプリを切り替える"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"デジタル アシスタント"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"スワイプしてアシスタントを起動"</string>
-    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"右下隅または左下隅から斜め上にスワイプしてデジタル アシスタント アプリを起動できます。"</string>
+    <string name="assistant_corner_gesture_summary" msgid="7279576276455168075">"右下隅または左下隅から斜め上にスワイプしてデジタル アシスタント アプリを起動します。"</string>
     <string name="assistant_long_press_home_gesture_title" msgid="4865972278738178753">"ホームボタンを長押ししてアシスタントを起動"</string>
-    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ホームボタンを長押しするとデジタル アシスタント アプリが起動します。"</string>
+    <string name="assistant_long_press_home_gesture_summary" msgid="592882226105081447">"ホームボタンを長押しすることでデジタル アシスタント アプリを起動します。"</string>
     <string name="information_label" msgid="6939310810756569298">"情報"</string>
     <string name="low_label" msgid="6525629096999711220">"低"</string>
     <string name="high_label" msgid="357503396626018487">"高"</string>
@@ -4961,7 +4961,7 @@
     <string name="keywords_one_handed" msgid="969440592493034101">"片手モード"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"下にスワイプ:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"ショートカットの使用:"</string>
-    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"画面の上半分を下にスワイプすると、片手で操作しやすくなります"</string>
+    <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"片手で操作しやすいよう、画面の上半分が下に移動します"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"片手モードの使い方"</b>\n" • システム ナビゲーションの設定でジェスチャー ナビゲーションが ON になっていることを確認してください\n • 画面の下端付近まで下にスワイプします"</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"片手操作用に画面を縮小する"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"親指が画面上部まで届くようになります。"</string>
@@ -5149,7 +5149,7 @@
       <item quantity="one">パスワード: <xliff:g id="COUNT_0">%1$d</xliff:g> 件</item>
     </plurals>
     <string name="autofill_keywords" msgid="8598763328489346438">"自動, 入力, 自動入力, パスワード"</string>
-    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、入力可能な情報を判別します。"</string>
+    <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;このアプリが信頼できることを確認してください&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; は画面上の内容に基づいて、自動入力可能な情報を判別します。"</string>
     <string name="debug_autofill_category" msgid="5998163555428196185">"自動入力"</string>
     <string name="autofill_logging_level_title" msgid="3733958845861098307">"ロギングレベル"</string>
     <string name="autofill_max_partitions" msgid="7342195529574406366">"セッションごとの最大リクエスト数"</string>
@@ -5355,7 +5355,7 @@
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> を有効にするにはタップします"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g> に切り替えますか？"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"ダウンロード型 SIM は一度に 1 つのみ有効にできます。\n\n<xliff:g id="CARRIER1">%1$s</xliff:g> に切り替えても、<xliff:g id="CARRIER2">%2$s</xliff:g> サービスが解約されることはありません。"</string>
-    <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> に切り替え"</string>
+    <string name="mobile_network_esim_swap_confirm_ok" msgid="8695772737522378095">"<xliff:g id="CARRIER">%1$s</xliff:g> に切り替える"</string>
     <string name="mobile_network_erase_sim" msgid="4629071168032714930">"SIM を消去"</string>
     <string name="mobile_network_erase_sim_error_dialog_title" msgid="6680959559589234726">"SIM を消去できません"</string>
     <string name="mobile_network_erase_sim_error_dialog_body" msgid="6401922869095572710">"エラーのため、この SIM を消去できません。\n\nデバイスを再起動してもう一度お試しください。"</string>
@@ -5392,7 +5392,7 @@
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ダウンロード型 SIM は一度に 1 つのみ有効にできます。\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> に切り替えても、<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> サービスが解約されることはありません。"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"SIM は一度に 1 つのみ有効にできます。\n\n切り替えても、<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> サービスが解約されることはありません。"</string>
     <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"同時に 2 つの SIM を試用できます。<xliff:g id="CARRIER_NAME">%1$s</xliff:g> を使用するには、別の SIM を OFF にしてください。"</string>
-    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> に切り替え"</string>
+    <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> に切り替える"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> を OFF にする"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM を OFF にしてもサービスが解約されることはありません"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ネットワークに接続しています…"</string>
@@ -5537,7 +5537,7 @@
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
     <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押し"</string>
-    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"長押しするとアシスタントが有効になります"</string>
+    <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"長押しすることでアシスタントを呼び出せます"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"長押しすると電源ボタン メニューが表示されます"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"長押しは無効です"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"使用するには、まず画面ロックを設定してください"</string>
@@ -5546,7 +5546,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"電源ボタンと緊急通報のメニュー:\n電源ボタンと音量大ボタンを同時に押してください。"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"着信音のミュート:\n音量メニューでショートカットを利用できます。"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"長押しの長さ"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"長さを選択して感度を調整し、電源ボタンを長押しします。"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"電源ボタンを長押しする長さを調節します"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短い"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長い"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ウォレットを表示"</string>
