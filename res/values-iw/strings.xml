@@ -164,7 +164,7 @@
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"מכשירים שהיו מחוברים בעבר"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"מכשירים שחוברו בעבר"</string>
     <string name="connected_device_bluetooth_turned_on_toast" msgid="144664089794199928">"‏Bluetooth הופעל"</string>
-    <string name="previous_connected_see_all" msgid="7759413145713251328">"הצגת כל הרשתות"</string>
+    <string name="previous_connected_see_all" msgid="7759413145713251328">"הצגת כל המכשירים"</string>
     <string name="date_and_time" msgid="1788358029823431692">"תאריך ושעה"</string>
     <string name="choose_timezone" msgid="1450780665958642147">"בחירת אזור זמן"</string>
     <!-- no translation found for intent_sender_data_label (1733806423295725392) -->
@@ -229,8 +229,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"שפת המערכת"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"ברירת המחדל של המערכת"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"בחירות השפה לאפליקציה הזו לא זמינה בהגדרות."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"השפה עשויה להיות שונה מהשפות הזמינות באפליקציה. יכול להיות שחלק מהאפליקציות לא תומכות בהגדרה הזו."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="two">להסיר את השפות שנבחרו?</item>
       <item quantity="many">להסיר את השפות שנבחרו?</item>
@@ -966,7 +965,7 @@
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"‏מוכן לשדר תוכן אפליקציה באמצעות NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"כבוי"</string>
-    <string name="nfc_disabled_summary" msgid="8737797364522502351">"‏לא זמינה כי ה-NFC כבוי"</string>
+    <string name="nfc_disabled_summary" msgid="8737797364522502351">"‏לא זמינה כי NFC כבוי"</string>
     <string name="android_beam_label" msgid="7168565080321110094">"Android Beam"</string>
     <string name="android_beam_explained" msgid="5684416131846701256">"‏כשתכונה זו מופעלת, אפשר לשדר תוכן מאפליקציה למכשיר אחר התומך ב-NFC על ידי החזקת המכשירים קרוב זה לזה. לדוגמה, אפשר לשדר דפי אינטרנט, סרטוני YouTube, אנשי קשר ועוד.\n\nפשוט מקרבים את המכשירים זה לזה (בדרך כלל גב אל גב) ולאחר מכן נוגעים במסך. האפליקציה תקבע מה ישודר."</string>
     <string name="wifi_quick_toggle_title" msgid="2737097538432862807">"Wi-Fi"</string>
@@ -1475,15 +1474,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"שומר מסך"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"שימוש בשומר מסך"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"במהלך טעינה או עגינה"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"בשני המצבים"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"במהלך טעינה"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"בזמן עגינה"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"אף פעם"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"כבוי"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"כדי לשלוט במה שקורה כאשר הטלפון בעגינה ו/או במצב שינה, הפעל את שומר המסך."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"מתי להפעיל"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"שומר המסך הנוכחי"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"הגדרות"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"בהירות אוטומטית"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"אפשר להרים כדי להוציא ממצב שינה"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"תצוגה רגישה לסביבה"</string>
@@ -2695,7 +2691,7 @@
     <string name="fast_pair_settings" msgid="3308819519080016185">"התאמה מהירה"</string>
     <string name="fast_pair_settings_summary" msgid="1786567691058982987">"‏זיהוי מכשירי Bluetooth עם התאמה מהירה בקרבת מקום."</string>
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"סריקה לאיתור מכשירים בקרבת מקום"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"התקנים שמורים"</string>
+    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"מכשירים שמורים"</string>
     <string name="print_settings" msgid="8519810615863882491">"הדפסה"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"כבוי"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -4022,7 +4018,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"הצגת תוכן רגיש כשהמכשיר נעול"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"התראות רגישות מפרופיל העבודה"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"הצגת תוכן רגיש מפרופיל העבודה כשהמכשיר נעול"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"תוכן ההתראות יופיע במלואו"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"הצגת תוכן ההתראות במלואו"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"הצגת תוכן רגיש רק כשהמכשיר לא נעול"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"לא להציג התראות בכלל"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"איך ברצונך להציג את מסך הנעילה?"</string>
@@ -5881,7 +5877,7 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"גישה למיקרופון"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"גישה למיקום"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"לאפליקציות ולשירותים"</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"לאפליקציות ולשירותים. אם ההגדרה מושבתת, נתוני המיקרופון ישותפו כשתתבצע שיחה למספר חירום."</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"לאפליקציות ולשירותים. אם ההגדרה מושבתת, ייתכן שנתוני המיקרופון ישותפו כשתתבצע שיחה למספר חירום."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"הקודם"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"הבא"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"תצוגה מקדימה של הצבע"</string>
