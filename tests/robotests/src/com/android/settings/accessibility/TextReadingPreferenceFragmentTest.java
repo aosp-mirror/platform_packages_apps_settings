@@ -47,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,5 +104,19 @@ public class TextReadingPreferenceFragmentTest {
 
         verify(listener1).resetState();
         verify(listener2).resetState();
+    }
+
+    @Test
+    public void onDialogPositiveButtonClicked_boldTextEnabled_showToast() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, BOLD_TEXT_ADJUSTMENT);
+        final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(
+                DialogEnums.DIALOG_RESET_SETTINGS);
+        dialog.show();
+
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+
+        assertThat(ShadowToast.getTextOfLatestToast())
+                .isEqualTo(mContext.getString(R.string.accessibility_text_reading_reset_message));
     }
 }
