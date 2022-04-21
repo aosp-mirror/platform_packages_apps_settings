@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
+import android.text.TextUtils;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -65,6 +66,10 @@ public class ManageStoragePreferenceController extends BasePreferenceController 
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
+        if (!TextUtils.equals(getPreferenceKey(), preference.getKey())) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+
         final MetricsFeatureProvider metricsFeatureProvider =
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
         metricsFeatureProvider.action(mContext, SettingsEnums.STORAGE_FREE_UP_SPACE_NOW);
