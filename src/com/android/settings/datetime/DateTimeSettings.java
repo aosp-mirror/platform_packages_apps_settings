@@ -85,8 +85,7 @@ public class DateTimeSettings extends DashboardFragment implements
 
         controllers.add(new TimeFormatPreferenceController(
                 activity, this /* UpdateTimeAndDateCallback */, isFromSUW));
-        controllers.add(new TimeZonePreferenceController(
-                activity, autoTimeZonePreferenceController));
+        controllers.add(new TimeZonePreferenceController(activity));
         controllers.add(new TimePreferenceController(
                 activity, this /* UpdateTimeAndDateCallback */, autoTimePreferenceController));
         controllers.add(new DatePreferenceController(
