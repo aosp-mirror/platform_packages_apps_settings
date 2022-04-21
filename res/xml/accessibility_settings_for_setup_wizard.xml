@@ -26,7 +26,8 @@
         android:key="text_reading_options"
         android:persistent="false"
         android:title="@string/accessibility_text_reading_options_title"
-        settings:keywords="text_reading_options" />
+        settings:keywords="text_reading_options"
+        settings:controller="com.android.settings.accessibility.TextReadingFragmentForSuwController"/>
 
     <Preference
         android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
