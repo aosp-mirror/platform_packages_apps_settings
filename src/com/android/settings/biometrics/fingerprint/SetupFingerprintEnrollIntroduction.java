@@ -74,6 +74,16 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        boolean hasEnrolledFace = false;
+        boolean hasEnrolledFingerprint = false;
+        if (data != null) {
+            hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
+            hasEnrolledFingerprint = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FINGERPRINT, false);
+            // If we've enrolled a face, we can remove the pending intent to launch FaceEnrollIntro.
+            if (hasEnrolledFace) {
+                removeEnrollNextBiometric();
+            }
+        }
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST && isKeyguardSecure()) {
             // if lock was already present, do not return intent data since it must have been
             // reported in previous attempts
@@ -85,6 +95,34 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
             if (resultCode == RESULT_FINISHED) {
                 data = setFingerprintCount(data);
             }
+
+            if (resultCode == RESULT_CANCELED && hasEnrolledFingerprint) {
+                // If we are coming from a back press from an already enrolled fingerprint,
+                // we can finish this activity.
+                setResult(resultCode, data);
+                finish();
+                return;
+            }
+        } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
+            // See if we can still enroll a fingerprint
+            boolean canEnrollFinger = checkMaxEnrolled() == 0;
+            // If we came from the next biometric flow and a user has either
+            // finished or skipped, we will also finish.
+            if (resultCode == RESULT_SKIP || resultCode == RESULT_FINISHED) {
+                // If user skips the enroll next biometric, we will also finish
+                setResult(RESULT_FINISHED, data);
+                finish();
+            } else if (resultCode == RESULT_CANCELED) {
+                // Note that result_canceled comes from onBackPressed.
+                // If we can enroll a finger, Stay on this page, else we cannot,
+                // and finish entirely.
+                if (!canEnrollFinger) {
+                    finish();
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+            return;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
