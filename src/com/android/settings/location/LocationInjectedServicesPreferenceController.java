@@ -19,7 +19,6 @@ import android.content.Context;
 import android.os.UserHandle;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.widget.RestrictedAppPreference;
@@ -41,8 +40,6 @@ public class LocationInjectedServicesPreferenceController
 
     @Override
     protected void injectLocationServices(PreferenceScreen screen) {
-        final PreferenceCategory categoryLocationServices =
-                screen.findPreference(getPreferenceKey());
         final Map<Integer, List<Preference>> prefs = getLocationServices();
         for (Map.Entry<Integer, List<Preference>> entry : prefs.entrySet()) {
             for (Preference pref : entry.getValue()) {
@@ -51,10 +48,7 @@ public class LocationInjectedServicesPreferenceController
                 }
             }
             if (entry.getKey() == UserHandle.myUserId()) {
-                if (categoryLocationServices != null) {
-                    LocationSettings.addPreferencesSorted(entry.getValue(),
-                            categoryLocationServices);
-                }
+                LocationSettings.addPreferencesSorted(entry.getValue(), screen);
             }
         }
     }

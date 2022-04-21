@@ -50,4 +50,9 @@ public class ProfileSelectLocationServicesFragment extends ProfileSelectFragment
     protected int getPreferenceScreenResId() {
         return R.xml.location_services_header;
     }
+
+    @Override
+    protected boolean forceUpdateHeight() {
+        return true;
+    }
 }
