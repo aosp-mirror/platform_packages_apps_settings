@@ -64,7 +64,6 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        use(SmartAutoRotateController.class).init(getLifecycle());
         DeviceStateAutoRotationHelper.initControllers(
                 getLifecycle(),
                 useAll(DeviceStateAutoRotateSettingController.class)
