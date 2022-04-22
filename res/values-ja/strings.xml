@@ -860,7 +860,7 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"このデバイスとのペア設定を解除しますか？"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"関連付けを削除"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"アプリの接続を解除しますか？"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"このスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定が解除されます"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"お使いのスマートフォンと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定が解除されます"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"このタブレットと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"このデバイスと <xliff:g id="DEVICE_NAME">%1$s</xliff:g> とのペア設定を解除します"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g> アプリは <xliff:g id="DEVICE_NAME">%2$s</xliff:g> に接続できなくなります。"</string>
@@ -1429,15 +1429,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"スクリーンセーバー"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"スクリーン セーバーを使用する"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電時またはドッキング時"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"いずれか"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"充電時"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"ドッキング時"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"なし"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"OFF"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"スマートフォンのドッキング時やスリープ時の動作を管理するには、スクリーン セーバーを ON にします。"</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"起動するタイミング"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"現在のスクリーンセーバー"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"設定"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"指を離してスリープ状態から復帰"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"アンビエント表示"</string>
@@ -2096,7 +2093,7 @@
     <string name="internal_storage" msgid="999496851424448809">"内部ストレージ"</string>
     <string name="recompute_size" msgid="1098091228370999128">"サイズを再計算中..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"アプリのデータを削除しますか？"</string>
-    <string name="clear_data_dlg_text" msgid="3440011276559762619">"このアプリのデータ（ファイル、設定など）はこのデバイスから完全に削除されます"</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"このアプリのデータ（ファイル、設定など）がデバイスから完全に削除されます"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"キャンセル"</string>
     <string name="dlg_delete" msgid="1790919205039397659">"削除"</string>
@@ -3400,6 +3397,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"削除"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"このセッションでのアプリとデータはすべて削除されます。"</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"削除"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"ゲスト（自分）"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"ユーザー"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"その他のユーザー"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"ゲストのアクティビティを削除"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"通話をON"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
@@ -5650,7 +5654,7 @@
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>
-    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスの使用"</string>
+    <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"印刷サービスを使用"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"複数のユーザーの許可"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ワイヤレス デバッグの使用"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"グラフィックス ドライバの設定の使用"</string>

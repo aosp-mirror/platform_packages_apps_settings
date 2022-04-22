@@ -225,8 +225,7 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Tavsiya etilgan tillar"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Barcha tillar"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Tizim tili"</string>
-    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
-    <skip />
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Tizim standarti"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Bu ilova uchun Sozlamalardan tilni tanlash imkonsiz"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Bu til ilovadagi tillardan farq qilishi mumkin. Ayrim ilovalarda bu sozlama ishlamaydi."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
@@ -1431,15 +1430,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Ekran lavhasi"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Ekran lavhasidan foydalanish"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Quvvat yoki dok-stansiya"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Har doim"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Quvvat olayotganda"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Dok-stansiyaga ulanganda"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Hech qachon"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Yoqilmagan"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefon dok-stansiyaga ulanganda yoki uyqu rejimiga o‘tganida uning ekranida nima ko‘rinishini sozlash uchun ekran lavhasini yoqing."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Qachon boshlansin"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Joriy ekran lavhasi"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Sozlamalar"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Avtomatik yorqinlik"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Tik holatda faollashtirish"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Sezgir ekran"</string>
@@ -1766,7 +1762,7 @@
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Telefonning "<b>"ichki xotirasidagi"</b>" hamma narsa tozalab tashlanadi, jumladan:\n\n"<li>"Google hisobingiz"</li>\n<li>"Tizim va ilovalar sozlamalari"</li>\n<li>"Yuklab olingan ilovalar"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Siz hozir tizimga quyidagi hisoblardan kirgansiz:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"Bu qurilmada boshqa foydalanuvchilar ham bor.\n"</string>
-    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musiqalar"</li>\n<li>"Rasmlar"</li>\n<li>"Foydalanuvchining boshqa ma\'lumotlari"</li></string>
+    <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Musiqalar"</li>\n<li>"Suratlar"</li>\n<li>"Foydalanuvchining boshqa ma\'lumotlari"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729"><li>"eSIM kartalar"</li></string>
     <string name="main_clear_desc_no_cancel_mobile_plan" msgid="369883568059127035">\n\n"Bunda, mobil aloqa xizmatiga hech narsa qilinmaydi."</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="4441604184663452046">\n\n"Musiqa, rasm va boshqa maʼlumotlarni tozalash uchun "<b>"USB xotirani"</b>" tozalash kerak."</string>
@@ -1863,7 +1859,7 @@
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Oxirgi kirish"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Hammasi"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Tafsilotlar"</string>
-    <string name="location_no_recent_apps" msgid="6814206631456177033">"Yaqin-orada hech qanday ilova joylashuv axborotini talab qilmadi"</string>
+    <string name="location_no_recent_apps" msgid="6814206631456177033">"Yaqin-orada hech qanday ilova joylashuv axborotini talab qilmagan"</string>
     <string name="location_no_recent_accesses" msgid="6031735777805464247">"Hech qanday ilova yaqinda joylashuv axborotidan foydalanmagan"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Yuqori batareya sarfi"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Batareya sarfi kam"</string>
@@ -3402,6 +3398,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"O‘chirib tashlash"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Ushbu seansdagi barcha ilovalar va ma’lumotlar o‘chirib tashlanadi."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Olib tashlash"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Mehmon (Siz)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Foydalanuvchilar"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Boshqa foydalanuvchilar"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Mehmon faoliyatini tozalash"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Mehmon rejimidan chiqishda barcha mehmon ilovalari va maʼlumotlarini oʻchirish"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Mehmon faoliyati tozalansinmi?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Joriy mehmon seansidagi ilova va maʼlumotlar hozir tozalanadi va har safar mehmon rejimidan chiqish vaqtida barcha keyingi mehmon faolliklari tozalanadi"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Telefon chaqiruvlari"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Telefon chaqiruvlari va SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Foydalanuvchini olib tashlash"</string>
