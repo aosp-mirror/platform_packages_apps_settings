@@ -317,7 +317,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Afficher infos de profil sur écran de verrouillage"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Comptes"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Localisation"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser la position"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser la localisation"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="one">Activée - <xliff:g id="COUNT_1">%1$d</xliff:g> application a accès à votre position</item>
@@ -813,7 +813,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"Gérer les connexions, configurer le nom et l\'identification de l\'appareil"</string>
-    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Associer avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
+    <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Code d\'association Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Saisissez le code d\'association, puis appuyez sur Retour ou Entrée."</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"Le code PIN contient des lettres ou des symboles."</string>
@@ -1429,15 +1429,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Économiseur d\'écran"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Dans les deux cas"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Lorsque l\'appareil est en charge"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"Lorsque l\'appareil est connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Jamais"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Désactivé"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Pour contrôler le comportement du téléphone lorsqu\'il se trouve sur une station d\'accueil et/ou lorsqu\'il est en veille, activez l\'économiseur d\'écran."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Quand l\'activer"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Économiseur d\'écran actuel"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Paramètres"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Ajuster automatiquement la luminosité"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Soulever pour activer"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
@@ -1852,7 +1849,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Services de localisation"</string>
     <string name="location_title" msgid="5819154746934945021">"Ma position"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Position du profil pro"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Autorisations de géolocalisation"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Accès des applis à votre position"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"La localisation est désactivée"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> application sur <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> a accès à votre position</item>
@@ -2629,7 +2626,7 @@
     <string name="keywords_rtt" msgid="2429130928152514402">"malentendant, perte d\'audition, sous-titres, téléscripteur, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"Association express"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Détection à proximité appareils Bluetooth Association express."</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Détection des appareils Bluetooth à Association express à proximité."</string>
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Rechercher des appareils à proximité"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Appareils enregistrés"</string>
     <string name="print_settings" msgid="8519810615863882491">"Impression"</string>
@@ -3400,6 +3397,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Supprimer"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Toutes les applications et les données de cette session seront supprimées."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Supprimer"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Invité (Vous)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Utilisateurs"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Autres utilisateurs"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Supprimer l\'activité"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Supprimer toutes les applis et données de la session lorsque vous quittez le mode Invité"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Supprimer l\'activité ?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et données de cette session Invité seront immédiatement supprimées, et toute l\'activité des futures sessions sera supprimée à chaque fois que vous quitterez le mode Invité"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activer les appels téléphoniques et les SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Supprimer un compte utilisateur"</string>
@@ -4517,7 +4521,7 @@
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Les vidéos seront lisibles sur un plus grand nombre de lecteurs multimédias, mais la qualité peut être réduite"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Transférer des photos ou des fichiers si MTP n\'est pas compatible (PTP)"</string>
     <string name="usb_use_tethering" msgid="2897063414491670531">"Partage de connexion via USB"</string>
-    <string name="usb_use_MIDI" msgid="8621338227628859789">"Mode MIDI"</string>
+    <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"Utiliser cet appareil en tant que MIDI"</string>
     <string name="usb_use" msgid="6783183432648438528">"Utiliser la connexion USB pour"</string>
     <string name="usb_default_label" msgid="3372838450371060750">"Configuration USB par défaut"</string>
