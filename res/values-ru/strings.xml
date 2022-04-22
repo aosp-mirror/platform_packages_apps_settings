@@ -229,8 +229,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Язык системы"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системные настройки по умолчанию"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Выбранный язык может быть недоступен в приложении. Некоторые приложения могут не поддерживать этот параметр."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Удалить выбранные языки?</item>
       <item quantity="few">Удалить выбранные языки?</item>
@@ -1469,15 +1468,12 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заставка"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Использовать заставку"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Во время зарядки и на док-станции"</string>
-    <string name="screensaver_settings_summary_either_short" msgid="2126139984738506920">"Всегда"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Во время зарядки"</string>
     <string name="screensaver_settings_summary_dock" msgid="6997766385189369733">"На док-станции"</string>
     <string name="screensaver_settings_summary_never" msgid="4988141393040918450">"Никогда"</string>
     <string name="screensaver_settings_summary_off" msgid="8720357504939106923">"Отключено"</string>
-    <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Чтобы настроить поведение телефона при подключении к док-станции и в спящем режиме, включите заставку."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Когда запускать"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Текущая заставка"</string>
-    <string name="screensaver_settings_button" msgid="6159236558934930238">"Настройки"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Автонастройка"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Активация в вертикальном положении"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Автоматич. включение экрана"</string>
@@ -3488,6 +3484,13 @@
     <string name="user_delete_button" msgid="3833498650182594653">"Удалить"</string>
     <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Все приложения и данные этого профиля будут удалены."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Удалить"</string>
+    <string name="guest_category_title" msgid="5562663588315329152">"Гость (вы)"</string>
+    <string name="user_category_title" msgid="4368580529662699083">"Пользователи"</string>
+    <string name="other_user_category_title" msgid="7089976887307643217">"Другие пользователи"</string>
+    <string name="remove_guest_on_exit" msgid="8202972371459611066">"Удалить историю гостевого сеанса"</string>
+    <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Удалять все приложения и данные при выходе из гостевого режима"</string>
+    <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Удалить историю гостевого сеанса?"</string>
+    <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Все данные и приложения этого гостевого сеанса будут удалены. В дальнейшем история будет очищаться каждый раз при выходе из гостевого режима."</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Включить звонки"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включить звонки и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Удалить пользователя"</string>
