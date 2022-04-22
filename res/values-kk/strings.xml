@@ -303,7 +303,7 @@
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Жүктелуде…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Маңайдағы құрылғыларды пайдалану рұқсаты бар қолданбалар телефонға жалғанған құрылғылардың тиісті орнын анықтай алады."</string>
-    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Қолданбалар мен қызметтер үшін локацияны пайдалану рұқсаты өшірулі. Сіз құтқару қызметінің нөміріне қоңырау шалған немесе мәтіндік хабар жіберген кезде, құрылғыңыздың локациясы бұрынғысынша құтқару қызметтеріне жіберілуі мүмкін."</string>
+    <string name="location_settings_footer_location_off" msgid="8568995909147566720">"Қолданбалар мен қызметтер үшін локацияны пайдалану рұқсаты өшірулі. Бірақ құтқару қызметіне қоңырау шалатын немесе хабар жіберетін болсаңыз, құрылғыңыздың локациясы беріледі."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Локация параметрлері туралы толығырақ ақпарат алыңыз."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Аккаунттар"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Қауіпсіздік"</string>
@@ -1834,7 +1834,7 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Барлығын көру"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Локация қызметтері"</string>
     <string name="location_title" msgid="5819154746934945021">"Mенің аймағым"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Жұмыс профилі үшін орналасу дерегі"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Жұмыс профиліндегі локация"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Қолданбалардың локацияны пайдалануы"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Локация өшірулі"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
@@ -2579,14 +2579,14 @@
     <string name="print_settings" msgid="8519810615863882491">"Басып шығару"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Өшірулі"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> басып шығару қызметі қосулы</item>
-      <item quantity="one">1 басып шығару қызметі қосулы</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> баспа қызметі қосулы</item>
+      <item quantity="one">1 баспа қызметі қосулы</item>
     </plurals>
     <plurals name="print_jobs_summary" formatted="false" msgid="3933688846338306536">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> басып шығару тапсырмасы</item>
       <item quantity="one">1 басып шығару тапсырмасы</item>
     </plurals>
-    <string name="print_settings_title" msgid="7680498284751129935">"Басып шығару қызметтері"</string>
+    <string name="print_settings_title" msgid="7680498284751129935">"Баспа қызметтері"</string>
     <string name="print_no_services_installed" msgid="7554057966540602692">"Ешқандай қызметтер орнатылмаған"</string>
     <string name="print_no_printers_found" msgid="4833082484646109486">"Ешқандай принтерлер табылмады"</string>
     <string name="print_menu_item_settings" msgid="8202755044784599740">"Параметрлер"</string>
@@ -3842,7 +3842,7 @@
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Құлыпты ашқан соң, бірден соңғы ашылған экранға өту"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Құлып экраны, құлыптаулы экран, өткізіп жіберу, өткізу"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Жұмыс профилі өшірулі болғанда"</string>
-    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Құлыптаулы экрандағы хабарландырулар"</string>
+    <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Құлып экранындағы хабарландыру"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Барлық хабарландыруды көрсету"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Үнсіз әңгімелерді және хабарландыруларды жасыру"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"Ешқандай хабарландыруды көрсетпеу"</string>
@@ -5566,8 +5566,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"UWB технологиясын пайдалану үшін ұшақ режимі өшіріледі."</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Камераны пайдалану"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Микрофонды пайдалану"</string>
-    <string name="cam_toggle_description" msgid="9212762204005146404">"Қолданбалар мен қызметтерге арналған."</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"Қолданбалар мен қызметтерге арналған. Бұл параметр өшірілсе де, құтқару қызметінің нөміріне қоңырау шалғанда, микрофон деректері жіберілуі мүмкін."</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Қолданбалар мен қызметтер үшін"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Қолданбалар мен қызметтер үшін таңдалады. Бұл параметр өшірілсе де, құтқару қызметінің нөміріне қоңырау шалғанда, микрофон деректері жіберілуі мүмкін."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Ойын параметрлері"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Ойын тақтасының таңбашасын қосу және т.б."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Алдыңғы"</string>
