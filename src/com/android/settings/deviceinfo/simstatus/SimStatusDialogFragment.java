@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -75,7 +76,12 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         mRootView = LayoutInflater.from(builder.getContext())
                 .inflate(R.layout.dialog_sim_status, null /* parent */);
         mController.initialize();
-        return builder.setView(mRootView).create();
+
+        Dialog dlg = builder.setView(mRootView).create();
+        dlg.getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
+                WindowManager.LayoutParams.FLAG_SECURE);
+
+        return dlg;
     }
 
     @Override
@@ -94,7 +100,7 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
     /**
      * View ID(s) which is digit format (instead of decimal number) text.
      **/
-    private static final int [] sViewIdsInDigitFormat = IntStream
+    private static final int[] sViewIdsInDigitFormat = IntStream
             .of(SimStatusDialogController.ICCID_INFO_VALUE_ID,
                     SimStatusDialogController.PHONE_NUMBER_VALUE_ID,
                     SimStatusDialogController.EID_INFO_VALUE_ID)
@@ -107,8 +113,7 @@ public class SimStatusDialogFragment extends InstrumentedDialogFragment {
         }
         if (TextUtils.isEmpty(text)) {
             text = getResources().getString(R.string.device_info_default);
-        }
-        else if (Arrays.binarySearch(sViewIdsInDigitFormat, viewId) >= 0) {
+        } else if (Arrays.binarySearch(sViewIdsInDigitFormat, viewId) >= 0) {
             text = PhoneNumberUtil.expandByTts(text);
         }
         textView.setText(text);
