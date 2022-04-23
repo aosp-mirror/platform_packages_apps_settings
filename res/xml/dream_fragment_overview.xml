@@ -17,7 +17,9 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/screensaver_settings_title">
+    android:key="screensaver_settings_screen"
+    android:title="@string/screensaver_settings_title"
+    settings:keywords="@string/keywords_screensaver">
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="dream_main_settings_switch"
