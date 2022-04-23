@@ -35,7 +35,6 @@ import android.provider.Settings;
 import android.service.rotationresolver.RotationResolverService;
 import android.text.TextUtils;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -80,10 +79,6 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
         mPowerManager = context.getSystemService(PowerManager.class);
         mDeviceStateAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(
                 context);
-    }
-
-    public void init(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
     }
 
     @Override
