@@ -101,8 +101,8 @@
     <string name="progress_scanning" msgid="2564746192843011826">"సెర్చ్ చేయడం"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"సమీపంలో బ్లూటూత్ పరికరాలేవీ దొరకలేదు."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"బ్లూటూత్ జత చేయడానికి రిక్వెస్ట్‌"</string>
-    <string name="bluetooth_notif_title" msgid="1196532269131348647">"జత చేయడానికి రిక్వెస్ట్‌"</string>
-    <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో జత చేయడానికి నొక్కండి."</string>
+    <string name="bluetooth_notif_title" msgid="1196532269131348647">"పెయిరింగ్ రిక్వెస్ట్‌"</string>
+    <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో పెయిర్ చేయడానికి ట్యాప్ చేయండి."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"స్వీకరించిన ఫైళ్లు"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"బ్లూటూత్ ఆఫ్‌లో ఉంది"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"దీన్ని ఆన్ చేయడానికి ట్యాప్ చేయండి"</string>
@@ -157,7 +157,7 @@
     <string name="connected_device_call_device_title" msgid="88732390601723608">"కాల్ పరికరాలు"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"ఇతర పరికరాలు"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"సేవ్ చేసిన పరికరాలు"</string>
-    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"జత చేయడం కోసం బ్లూటూత్ ఆన్ చేయబడుతుంది"</string>
+    <string name="connected_device_add_device_summary" msgid="8671009879957120802">"పెయిరింగ్ కోసం బ్లూటూత్ ఆన్ చేయబడుతుంది"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"కనెక్షన్ ప్రాధాన్యతలు"</string>
     <string name="connected_device_previously_connected_title" msgid="605808252622814415">"మునుపు కనెక్ట్ చేసిన పరికరాలు"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"ఇంతకు మునుపు కనెక్ట్ చేయబడినవి"</string>
@@ -225,11 +225,9 @@
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"సూచించిన భాషలు"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"అన్ని భాషలు"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"సిస్టమ్ భాష"</string>
-    <!-- no translation found for preference_of_system_locale_summary (5612241394431188535) -->
-    <skip />
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"సిస్టమ్ ఆటోమేటిక్ సెట్టింగ్"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ఈ యాప్ కోసం భాష ఎంపిక సెట్టింగ్‌లలో అందుబాటులో లేదు."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"యాప్‌లో అందుబాటులో ఉన్న భాషలకు భాష భిన్నంగా ఉండవచ్చు. కొన్ని యాప్‌లు ఈ సెట్టింగ్‌కు సపోర్ట్ చేయకపోవచ్చు."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">ఎంచుకున్న భాషలను తీసివేయాలా?</item>
       <item quantity="one">ఎంచుకున్న భాషను తీసివేయాలా?</item>
@@ -815,7 +813,7 @@
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"బ్లూటూత్"</string>
     <string name="bluetooth_settings_summary" msgid="6805458703566046784">"కనెక్షన్‌లను నిర్వహించండి, పరికరం పేరును &amp; కనిపించే సామర్థ్యాన్ని సెట్ చేయండి"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో పెయిర్ చేయాలా?"</string>
-    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"బ్లూటూత్ జత చేసే కోడ్"</string>
+    <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"బ్లూటూత్ పెయిరింగ్ కోడ్"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"జత చేసే కోడ్‌ను టైప్ చేసి, ఆపై Return లేదా Enter నొక్కండి"</string>
     <string name="bluetooth_enable_alphanumeric_pin" msgid="7256286571636950635">"పిన్‌ అక్షరాలను లేదా చిహ్నాలను కలిగి ఉంది"</string>
     <string name="bluetooth_pin_values_hint" msgid="2753202519050044670">"సాధారణంగా 0000 లేదా 1234"</string>
@@ -845,7 +843,7 @@
     <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"పరికరాలు ఏవీ అందుబాటులో లేవు"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"కనెక్ట్ చేయి"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"డిస్‌కనెక్ట్ చేయండి"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"జత చేసి &amp; కనెక్ట్ చేయి"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"పెయిర్ చేసి &amp; కనెక్ట్ చేయి"</string>
     <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"జతను తీసివేయి"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"డిస్‌కనెక్ట్ చేసి &amp; జతను తీసివేయి"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"ఆప్షన్‌లు…"</string>
@@ -3370,7 +3368,7 @@
     <string name="user_settings_title" msgid="6550866465409807877">"మల్టిపుల్ యూజర్‌లు"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"కొత్త వినియోగదారులను జోడించడం ద్వారా మీ పరికరాన్ని షేర్ చేయండి. మీ పరికరంలోని అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లు మరియు మరిన్నింటి కోసం ప్రతి వినియోగదారుకి వ్యక్తిగత స్థలం ఉంటుంది."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"కొత్త వినియోగదారులను జోడించడం ద్వారా మీ టాబ్లెట్‌ని షేర్ చేయండి. మీ టాబ్లెట్‌లోని అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లు మరియు మరిన్నింటి కోసం ప్రతి వినియోగదారుకి వ్యక్తిగత స్థలం ఉంటుంది."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"కొత్త యూజర్‌లను జోడించడం ద్వారా మీ ఫోన్‌ను షేర్ చేయండి. మీ ఫోన్‌లో అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లతో పాటు మరిన్నింటి కోసం ప్రతి యూజర్‌కు వ్యక్తిగత స్థలం ఉంటుంది."</string>
+    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"కొత్త యూజర్‌లను జోడించడం ద్వారా మీ ఫోన్‌ను షేర్ చేయండి. మీ ఫోన్‌లో అనుకూల హోమ్ స్క్రీన్‌లు, ఖాతాలు, యాప్‌ల సెట్టింగ్‌లతో పాటు మరిన్నింటి కోసం ప్రతి యూజర్‌కు వ్యక్తిగత స్పేస్ ఉంటుంది."</string>
     <string name="user_list_title" msgid="1387379079186123404">"వినియోగదారులు &amp; ప్రొఫైళ్లు"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"వినియోగదారు లేదా ప్రొఫైల్‌ను జోడించు"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"పరిమితం చేయబడిన ప్రొఫైల్"</string>
