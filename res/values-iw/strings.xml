@@ -1790,11 +1790,11 @@
     <string name="reset_network_complete_toast" msgid="1367872474130621115">"הגדרות הרשת אופסו"</string>
     <string name="reset_esim_error_title" msgid="4670073610967959597">"‏לא ניתן למחוק כרטיסי SIM"</string>
     <string name="reset_esim_error_msg" msgid="4441504470684307370">"‏עקב שגיאה, לא ניתן למחוק כרטיסי SIM שהורדת.\n\nצריך להפעיל מחדש את המכשיר ולנסות שוב."</string>
-    <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
-    <string name="main_clear_short_title" msgid="4752094765533020696">"מחיקת כל הנתונים (איפוס להגדרות המקוריות)"</string>
+    <string name="main_clear_title" msgid="277664302144837723">"מחיקת כל הנתונים (איפוס לנתוני היצרן)"</string>
+    <string name="main_clear_short_title" msgid="4752094765533020696">"מחיקת כל הנתונים (איפוס לנתוני היצרן)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"‏פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטאבלט, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"האפליקציות שהורדת"</li></string>
     <string name="main_clear_desc" product="default" msgid="6984348811887162647">"‏הפעולה הזו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטלפון, כולל:\n\n"<li>"חשבון Google שלך"</li>\n<li>"הנתונים וההגדרות של המערכת והאפליקציות"</li>\n<li>"אפליקציות שהורדת"</li></string>
-    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"החשבונות הבאים שלך פעילים כעת:\n"</string>
+    <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"החשבונות הבאים פעילים כרגע:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"קיימים משתמשים אחרים במכשיר זה.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"מוזיקה"</li>\n<li>"תמונות"</li>\n<li>"נתוני משתמשים אחרים"</li></string>
     <string name="main_clear_desc_also_erases_esim" msgid="4553469876411831729">"‏"<li>"כרטיסי eSIM"</li></string>
@@ -2405,7 +2405,7 @@
     <string name="accessibility_shortcut_service_title" msgid="6842883700702723355">"שירות קיצורי דרך"</string>
     <string name="accessibility_shortcut_settings" msgid="836783442658447995">"הגדרות של קיצורי דרך"</string>
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"מקש קיצור ממסך הנעילה"</string>
-    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות יפעל ממסך הנעילה. יש ללחוץ על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
+    <string name="accessibility_shortcut_description" msgid="2184693606202133549">"מקש הקיצור של תכונות הנגישות יפעל ממסך הנעילה. לוחצים על שני הלחצנים של עוצמת הקול למשך מספר שניות."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"לחצן הנגישות"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"לחצן הנגישות ותנועות"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"השימוש בלחצן הנגישות. התנועה אינה זמינה עם ניווט ב-3 לחצנים."</string>
@@ -3403,7 +3403,7 @@
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"לא מוגדר"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"לא מוגדר – פרופיל מוגבל"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"לא מוגדר – פרופיל עבודה"</string>
-    <string name="user_admin" msgid="4024553191395768119">"מנהל מערכת"</string>
+    <string name="user_admin" msgid="4024553191395768119">"אדמין"</string>
     <string name="user_you" msgid="3070562015202859996">"את/ה (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"אפשר להוסיף עד <xliff:g id="USER_COUNT">%1$d</xliff:g> משתמשים"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="3405022988077682357">"רק הבעלים של הטאבלט יכול לנהל משתמשים."</string>
@@ -3425,9 +3425,9 @@
     <string name="user_delete_user_description" msgid="7764153465503821011">"מחיקת משתמש"</string>
     <string name="user_delete_button" msgid="3833498650182594653">"מחיקה"</string>
     <string name="user_guest" msgid="4545590092001460388">"אורח/ת"</string>
-    <string name="user_exit_guest_title" msgid="2653103120908427236">"הסרת אורח/ת"</string>
+    <string name="user_exit_guest_title" msgid="2653103120908427236">"הסרת אורח"</string>
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"להסיר אורח?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"כל האפליקציות והנתונים בפעילות זו באתר יימחקו."</string>
+    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"כל האפליקציות והנתונים בסשן הזה יימחקו."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"הסרה"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"הפעלת שיחות טלפון"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"‏הפעלת שיחות טלפון ו-SMS"</string>
@@ -4776,7 +4776,7 @@
     <string name="cell_data_template" msgid="6077963976103260821">"<xliff:g id="AMOUNT">^1</xliff:g> של נתונים סלולריים"</string>
     <string name="wifi_data_template" msgid="935934798340307438">"‏<xliff:g id="AMOUNT">^1</xliff:g> של נתוני Wi-Fi"</string>
     <string name="ethernet_data_template" msgid="1429173767445201145">"‏<xliff:g id="AMOUNT">^1</xliff:g> של נתוני Ethernet"</string>
-    <string name="billing_cycle" msgid="6618424022653876279">"אזהרות והגבלות של נתונים"</string>
+    <string name="billing_cycle" msgid="6618424022653876279">"אזהרות והגבלות לגבי נתונים"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"מחזור השימוש בחבילת הגלישה"</string>
     <string name="cell_data_warning" msgid="5664921950473359634">"אזהרה לגבי שימוש בנתונים: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"מגבלת נתונים: <xliff:g id="ID_1">^1</xliff:g>"</string>

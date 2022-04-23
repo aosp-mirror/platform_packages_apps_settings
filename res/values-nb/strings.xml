@@ -95,7 +95,7 @@
     <string name="progress_scanning" msgid="2564746192843011826">"Søker"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"Finner ingen Bluetooth-enheter."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Forespørsel om Bluetooth-sammenkobling"</string>
-    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Paringsforespørsel"</string>
+    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Tilkoblingsforespørsel"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Trykk for å koble sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Mottatte filer"</string>
     <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Filer mottatt via Bluetooth"</string>
@@ -845,7 +845,7 @@
     <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"Ingen enheter er tilgjengelige"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Koble til"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Koble fra"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Par med og koble til"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Koble sammen"</string>
     <string name="bluetooth_device_context_unpair" msgid="7525735305244087162">"Koble fra"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="2001359431289794561">"Koble fra og fjern paring"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="934657460643490773">"Innstillinger…"</string>
@@ -860,7 +860,7 @@
     <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Vil du glemme enheten?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Fjern tilknytning"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Vil du koble fra appen?"</string>
-    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Telefonen din kommer ikke lenger til å være koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="4730377171981539265">"Telefonen din blir ikke lenger koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Nettbrettet ditt kommer ikke lenger til å være koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Enheten din kommer ikke lenger til å være koblet sammen med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"<xliff:g id="APP_NAME">%1$s</xliff:g>-appen kobler ikke lenger til <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
@@ -1039,7 +1039,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Tilfeldig valgt MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Legg til en enhet"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Midtstill QR-koden nedenfor for å legge til enheten i «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skann QR-koden"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skann QR-kode"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Midtstill QR-koden nedenfor for å koble til «<xliff:g id="SSID">%1$s</xliff:g>»"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Koble til Wi‑Fi ved å skanne en QR-kode"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Del Wi‑Fi"</string>
@@ -1839,7 +1839,7 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Se alle"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Posisjonstjenester"</string>
     <string name="location_title" msgid="5819154746934945021">"Min posisjon"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Sted for arbeidsprofil"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Sted for jobbprofil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Appenes posisjonstillatelser"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Posisjon er slått av"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
@@ -1850,7 +1850,7 @@
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Se alle"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"Se detaljer"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"Ingen apper har bedt om posisjonen din i det siste"</string>
-    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ingen apper har nylig brukt posisjon"</string>
+    <string name="location_no_recent_accesses" msgid="6031735777805464247">"Ingen apper har brukt posisjon nylig"</string>
     <string name="location_high_battery_use" msgid="4277318891200626524">"Høy batteribruk"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Lav batteribruk"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi‑Fi-skanning"</string>
@@ -2830,7 +2830,7 @@
     <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"Mindre enn ett minutt i bakgrunnen <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> totalt siden sist batteriet var fulladet"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"<xliff:g id="TIME">^1</xliff:g> totalt de siste 24 timene"</string>
-    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> totalt <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_with_period" msgid="2849061229625950626">"<xliff:g id="TIME_0">^1</xliff:g> i perioden <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen siden sist batteriet var fulladet"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> i bakgrunnen de siste 24 timene"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> i bakgrunnen <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
@@ -3159,7 +3159,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="6387714350903085918">"Alle endringene du gjør i kontoene dine på nettet, kopieres auto­matisk til nettbrettet ditt.\n\nNoen kontoer kan også auto­matisk kopiere endringer du gjør på nettbrettet til nettet. Google-kontoer fungerer på denne måten."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="6457107552266187107">"Alle endringene du gjør i kontoene dine på nettet, kopieres auto­matisk til telefonen din.\n\nNoen kontoer kan også auto­matisk kopiere endringer du gjør på telefonen, til nettet. Google-kontoer fungerer på denne måten."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="1783917145440587470">"Vil du slå av auto-synkronisering?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Dette gir lavere data- og batteribruk, men du må synkronisere hver konto manuelt for å hente ny informasjon. Og du får ikke varsler når det gjøres oppdateringer."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="6523112583569674837">"Dette gir lavere data- og batteribruk, men du må synkronisere hver konto manuelt for å hente ny informasjon. Og du får ikke varsler om oppdateringer."</string>
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Tilbakestillingsdato for brukssyklus"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Dato hver måned:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Angi"</string>
@@ -3167,7 +3167,7 @@
     <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Angi grense for databruk"</string>
     <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Begrensning av databruk"</string>
     <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Nettbrettet slår av mobildata når det har nådd grensen du har angitt.\n\nSiden databruken måles av nettbrettet, og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en konservativ grense."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Mobildata slås av når du har brukt mengden du har angitt.\n\nSiden databruken måles av telefonen og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en lav grense."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Mobildata slås av når du har brukt mengden du har angitt som grense.\n\nSiden databruken måles av telefonen og operatøren din kan beregne bruken annerledes, kan det være lurt å angi en lav grense."</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Vil du begrense bruken av bakgrunnsdata?"</string>
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"Hvis du begrenser mobildatabruk i bakgrunnen, er det enkelte apper og tjenester som ikke fungerer med mindre du er tilkoblet Wi-Fi.\n\nDenne innstillingen påvirker alle brukerne på dette nettbrettet."</string>
@@ -3305,14 +3305,14 @@
     <string name="user_settings_title" msgid="6550866465409807877">"Flere brukere"</string>
     <string name="user_settings_footer_text" product="device" msgid="7523914344521302179">"Del enheten din ved å legge til nye brukere. Hver bruker har et eget område på enheten din for blant annet egendefinerte startsider, kontoer, apper og innstillinger."</string>
     <string name="user_settings_footer_text" product="tablet" msgid="3730074318510244552">"Del nettbrettet ditt ved å legge til nye brukere. Hver bruker har et eget område på nettbrettet ditt for blant annet egendefinerte startsider, kontoer, apper og innstillinger."</string>
-    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Del telefonen din ved å legge til nye brukere. Hver bruker har et eget område på telefonen din for blant annet egendefinerte startsider, kontoer, apper og innstillinger."</string>
+    <string name="user_settings_footer_text" product="default" msgid="4420915712050349125">"Del telefonen din ved å legge til nye brukere. Hver bruker har et eget område på telefonen for blant annet egendefinerte startsider, kontoer, apper og innstillinger."</string>
     <string name="user_list_title" msgid="1387379079186123404">"Brukere og profiler"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"Legg til en bruker eller profil"</string>
     <string name="user_add_user_menu" msgid="6395904234221724625">"Legg til bruker"</string>
     <string name="user_summary_restricted_profile" msgid="451650609582185813">"Begrenset profil"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"Ikke konfigurert"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"Ikke konfigurert – begrenset profil"</string>
-    <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Ikke konfigurert – arbeidsprofil"</string>
+    <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"Ikke konfigurert – jobbprofil"</string>
     <string name="user_admin" msgid="4024553191395768119">"Administrator"</string>
     <string name="user_you" msgid="3070562015202859996">"Du (<xliff:g id="NAME">%s</xliff:g>)"</string>
     <string name="user_add_max_count" msgid="5739771048517070983">"Du kan legge til opptil <xliff:g id="USER_COUNT">%1$d</xliff:g> brukere"</string>
@@ -3337,7 +3337,7 @@
     <string name="user_guest" msgid="4545590092001460388">"Gjest"</string>
     <string name="user_exit_guest_title" msgid="2653103120908427236">"Fjern gjesten"</string>
     <string name="user_exit_guest_confirm_title" msgid="1284823459630164754">"Vil du fjerne gjesten?"</string>
-    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle appene og all informasjon i denne økten kommer til å slettes."</string>
+    <string name="user_exit_guest_confirm_message" msgid="8995296853928816554">"Alle apper og data i denne økten blir slettet."</string>
     <string name="user_exit_guest_dialog_remove" msgid="7067727314172605181">"Fjern"</string>
     <string name="user_enable_calling" msgid="264875360626905535">"Slå på telefonsamtaler"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
@@ -3892,7 +3892,7 @@
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Ingen lyd eller vibrering"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"Ingen lyd eller vibrering, og vises lavere i samtaledelen"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"Kan ringe eller vibrere basert på telefoninnstillingene"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner over toppen av skjermen"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"Når enheten låses opp, vises varsler som et banner øverst på skjermen"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"«<xliff:g id="APP_NAME">%1$s</xliff:g>»: alle varsler"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"<xliff:g id="APP_NAME">%1$s</xliff:g>: alle varsler"</string>
     <string name="default_notification_assistant" msgid="243718059890346442">"Varsler som kan tilpasses"</string>
@@ -3901,8 +3901,8 @@
       <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> varsel per dag</item>
     </plurals>
     <plurals name="notifications_sent_weekly" formatted="false" msgid="4913443431857170519">
-      <item quantity="other">~<xliff:g id="NUMBER_1">%d</xliff:g> varsler per uke</item>
-      <item quantity="one">~<xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
+      <item quantity="other">ca. <xliff:g id="NUMBER_1">%d</xliff:g> varsler per uke</item>
+      <item quantity="one">ca. <xliff:g id="NUMBER_0">%d</xliff:g> varsel per uke</item>
     </plurals>
     <string name="notifications_sent_never" msgid="9081278709126812062">"Aldri"</string>
     <string name="manage_notification_access_title" msgid="6481256069087219982">"Enhets- og appvarsler"</string>
@@ -4644,14 +4644,14 @@
       <item quantity="one">1 begrensning</item>
     </plurals>
     <string name="operator_warning" msgid="5672761970087591211">"Operatørens måling av databruk samsvarer ikke nødvendigvis med enhetens måling."</string>
-    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Ikke inkludert data brukt av operatørnettverk"</string>
+    <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Inkluderer ikke data brukt av operatørnettverk"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt"</string>
     <string name="set_data_warning" msgid="1685771882794205462">"Angi varsel om databruk"</string>
     <string name="data_warning" msgid="2925054658166062884">"Varsel om databruk"</string>
     <string name="data_warning_footnote" msgid="5991901765915710592">"Måling av databruk i forbindelse med advarsler gjøres av enheten din. Disse målingene kan avvike fra operatørens data."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Angi en datagrense"</string>
     <string name="data_limit" msgid="8731731657513652363">"Datagrense"</string>
-    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> er brukt <xliff:g id="ID_2">%2$s</xliff:g>"</string>
+    <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> brukt i perioden <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="configure" msgid="1499586749829665889">"Konfigurer"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"Andre apper som er inkludert i bruken"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="3316296488378947221">
@@ -5295,7 +5295,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"For å bruke mobildata, ringefunksjoner og SMS senere, gå til nettverksinnstillingene"</string>
     <string name="sim_card_label" msgid="5632157635124050923">"SIM-kort"</string>
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Vil du slette dette nedlastede SIM-kortet?"</string>
-    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du sletter dette SIM-kortet, fjernes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-tjenesten fra denne enheten.\n\nAbonnementet hos <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g> blir ikke sagt opp."</string>
+    <string name="erase_sim_dialog_text" msgid="753031064269699885">"Hvis du sletter dette SIM-kortet, fjernes <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>-tjenesten fra denne enheten.\n\n<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>-tjenesten blir ikke sagt opp."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Slett"</string>
     <string name="erasing_sim" msgid="7877703231075699139">"Sletter SIM-kortet …"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"Kan ikke slette SIM-kortet"</string>
@@ -5391,14 +5391,14 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhetsstyring"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk på og hold av/på-knappen"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"Trykk og hold av/på-knappen"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Trykk og hold for assistenten"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Trykk og hold for av/på-menyen"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"Trykk og hold er slått av"</string>
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Du må angi en skjermlås for å bruke denne funksjonen"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Hold for å starte assistenten"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Start assistenten ved å holde inne av/på-knappen"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Av/på- og nødmeny:\nTrykk på av/på og volum opp samtidig."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Av/på- og nødmeny:\nTrykk inn av/på og volum opp samtidig."</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Forhindre ringing:\nEn snarvei er tilgjengelig i volummenyen."</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Vis Wallet"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Gi tilgang til Wallet fra låseskjermen og hurtiginnstillingene"</string>
