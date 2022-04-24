@@ -295,7 +295,7 @@
     <string name="show_profile_info_on_lockscreen_label" msgid="5734739022887933365">"Mostra info profilo in schermata di blocco"</string>
     <string name="Accounts_settings_title" msgid="8434263183710375412">"Account"</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Geolocalizzazione"</string>
-    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usa posizione"</string>
+    <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Usa geolocalizzazione"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Off"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
       <item quantity="other">On - <xliff:g id="COUNT_1">%1$d</xliff:g> app hanno accesso alla posizione</item>
@@ -611,7 +611,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Blocco schermo"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Scegli un blocco schermo"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Scegli nuovo blocco schermo"</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Scegli un nuovo blocco schermo"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Scegli un blocco per le app di lavoro"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Scegli nuovo blocco profilo di lavoro"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Proteggi il tuo tablet"</string>
@@ -2596,7 +2596,7 @@
     <string name="print_menu_item_add_service" msgid="1549091062463044676">"Aggiungi servizio"</string>
     <string name="print_menu_item_add_printer" msgid="8711630848324870892">"Aggiungi stampante"</string>
     <string name="print_menu_item_search" msgid="5989979785203603169">"Cerca"</string>
-    <string name="print_searching_for_printers" msgid="5401413178028348800">"Ricerca di stampanti"</string>
+    <string name="print_searching_for_printers" msgid="5401413178028348800">"Ricerca di stampanti..."</string>
     <string name="print_service_disabled" msgid="9185935228930987786">"Servizio disabilitato"</string>
     <string name="print_print_jobs" msgid="2605944855933091183">"Processi di stampa"</string>
     <string name="print_print_job" msgid="8477859161886726608">"Processo di stampa"</string>
@@ -3514,7 +3514,7 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth, Android Auto, modalità Auto"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non disponibile perché NFC è disattivata"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non disponibile perché la tecnologia NFC è disattivata"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Per poter usare questa funzionalità, devi prima installare un\'app per i pagamenti"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"App e notifiche"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"App recenti, app predefinite"</string>
@@ -4212,8 +4212,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Off"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Blocco app su schermo"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"La funzionalità di blocco delle app su schermo ti consente di mantenere visibile l\'app in uso finché non decidi di sbloccarla. Questa funzionalità può essere usata, ad esempio, per consentire a un amico di cui ti fidi di giocare a un gioco specifico."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Un\'app bloccata potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Un\'app bloccata potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nSe vuoi condividere il tuo dispositivo con qualcuno in modo sicuro, prova a usare invece un utente ospite. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"Un\'app bloccata su schermo potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Un\'app bloccata su schermo potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nSe vuoi condividere il tuo dispositivo con qualcuno in modo sicuro, prova a usare invece un utente ospite. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quando un\'app è bloccata su schermo: \n\n•		I dati personali potrebbero essere accessibili (ad esempio i contatti o i contenuti delle email) \n\n•		Le app bloccate potrebbero aprire altre app \n\nUtilizza il blocco app su schermo solo con persone di cui ti fidi."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Richiedi sequenza di sblocco prima di sbloccare"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Richiedi il PIN per lo sblocco"</string>
@@ -4465,7 +4465,7 @@
     <string name="assist_access_context_title" msgid="5201495523514096201">"Utilizza testo sullo schermo"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Consenti all\'app di assistenza di accedere ai contenuti testuali sullo schermo"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Utilizza screenshot"</string>
-    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Consenti all\'app di assistenza di accedere a un\'immagine sullo schermo"</string>
+    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Consenti all\'app di assistenza di accedere a un\'immagine dello schermo"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Fai lampeggiare lo schermo"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Fai lampeggiare i bordi dello schermo quando l\'app di assistenza accede al testo sullo schermo o nello screenshot"</string>
     <string name="assist_footer" msgid="8248015363806299068">"Le app di assistenza possono aiutarti in base alle informazioni visualizzate nella schermata attiva. Alcune app supportano sia Avvio app sia i servizi di input vocale per offrirti assistenza integrata."</string>
