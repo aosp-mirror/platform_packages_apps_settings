@@ -54,8 +54,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Збільшуйте або зменшуйте текст на екрані."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Зменшити"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Збільшити"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Увімкнути автообертання"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Технологія розпізнавання облич використовує фронтальну камеру, щоб підвищувати точність автообертання. Зображення ніколи не зберігаються та не надсилаються на сервери Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Увімкнути автообертання"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Технологія розпізнавання облич використовує фронтальну камеру, щоб підвищувати точність автообертання. Зображення ніколи не зберігаються та не надсилаються на сервери Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Зразок тексту"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чарівник країни Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Дивовижне Смарагдове місто країни Оз"</string>
@@ -229,8 +229,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Мова системи"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Налаштування системи за умовчанням"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Вибір мови для цього додатка в налаштуваннях неможливий"</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова може відрізнятися від мов, доступних у додатку. Деякі додатки можуть не підтримувати це налаштування."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Видалити вибрані мови?</item>
       <item quantity="few">Видалити вибрані мови?</item>
@@ -1342,7 +1341,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Вимкнено"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Увімкнено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Увімкнути (за обличчям)"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Увімкнути розпізнавання облич"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Розпізнавання облич"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматичне обертання екрана, коли ви змінюєте орієнтацію телефона з портретної на альбомну та навпаки"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Докладніше про автообертання"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Змінення орієнтації з портретної на альбомну та навпаки"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Роздільна здатність екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока роздільна здатність"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Найвища роздільна здатність"</string>
@@ -2380,6 +2382,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Від: Борис"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброго ранку!\n\nПросто хотілося б дізнатися, як просуваються проекти. Чи будуть вони готові, щоб ми встигли з конструюванням?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Скинути налаштування"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Скинути налаштування масштабу й тексту?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Параметри масштабу й тексту буде скинуто до початкових налаштувань телефона"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Скинути"</string>
@@ -3976,7 +3980,7 @@
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Деякі розмови можуть з\'являтись у вигляді плаваючих значків поверх інших додатків"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Дозволити спливаючі чати для всіх розмов"</string>
     <string name="bubble_app_setting_selected" msgid="4324386074198040675">"Дозволити спливаючі чати для деяких розмов"</string>
-    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Чатам заборонено показувати спливаючі сповіщення"</string>
+    <string name="bubble_app_setting_none" msgid="8643594711863996418">"Заборонено показувати спливаючі чати"</string>
     <string name="bubble_app_setting_selected_conversation_title" msgid="3060958976857529933">"Розмови"</string>
     <string name="bubble_app_setting_excluded_conversation_title" msgid="324818960338773945">"Розмови, які не можна показувати як спливаючі чати"</string>
     <string name="bubble_app_setting_unbubble_conversation" msgid="1769789500566080427">"Вимкнути спливаючі сповіщення для розмови"</string>
@@ -4059,11 +4063,11 @@
     <string name="notification_importance_low" msgid="7562535765919565273">"Показувати без звукового сигналу"</string>
     <string name="notification_importance_default" msgid="7483906490369073043">"Зі звуком"</string>
     <string name="notification_importance_high" msgid="8453789143477210550">"Зі звуком і спливаючими вікнами"</string>
-    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Спливають на екрані"</string>
+    <string name="notification_importance_high_silent" msgid="8977232884004607985">"Спливати на екрані"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Згортати"</string>
     <string name="notification_importance_low_title" msgid="658158049378796947">"Звичайне сповіщення"</string>
     <string name="notification_importance_default_title" msgid="8875198696330289686">"Важливе сповіщення"</string>
-    <string name="notification_importance_high_title" msgid="394129291760607808">"Спливають на екрані"</string>
+    <string name="notification_importance_high_title" msgid="394129291760607808">"Спливати на екрані"</string>
     <string name="notification_block_title" msgid="7392909527700971673">"Заблокувати"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Без звуку"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"За умовчанням"</string>
@@ -4400,7 +4404,7 @@
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Увімкнено"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Вимкнено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Закріплення додатка"</string>
-    <string name="app_pinning_intro" msgid="6409063008733004245">"Ви бачитимете закріплений додаток на екрані, поки не відкрипите його. Цю функцію можна використовувати, наприклад, щоб дозволити другові зіграти в певну гру."</string>
+    <string name="app_pinning_intro" msgid="6409063008733004245">"Ви бачитимете закріплений додаток на екрані, поки не відкріпите його. Цю функцію можна використовувати, наприклад, щоб дозволити другові зіграти в певну гру."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Закріплений додаток матиме змогу відкривати інші додатки й отримувати доступ до персональних даних. \n\nЩоб використовувати закріплення додатка: 	\n1.	Увімкніть закріплення додатка 	\n2.	Відкрийте \"Огляд\" 	\n3.	Натисніть значок додатка вгорі екрана й виберіть \"Закріпити\""</string>
     <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Закріплений додаток матиме змогу відкривати інші додатки й отримувати доступ до персональних даних. \n\nЯкщо ви хочете без ризику надавати іншому користувачу доступ до пристрою, натомість використовуйте режим гостя. \n\nЩоб використовувати закріплення додатка: 	\n1.	Увімкніть закріплення додатка 	\n2.	Відкрийте \"Огляд\" 	\n3.	Натисніть значок додатка вгорі екрана й виберіть \"Закріпити\""</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Якщо додаток закріплено, він може: \n\n•		отримувати доступ до персональних даних \n		(наприклад, до контактів або електронних листів); \n•		відкривати інші додатки. \n\nВикористовуйте закріплення додатка лише спільно з людьми, яким довіряєте."</string>
