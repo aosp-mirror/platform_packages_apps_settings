@@ -64,18 +64,21 @@ public class LifecycleCallbackIntentReceiverTest implements LifecycleOwner {
 
         mHandler = new Handler(thread.getLooper());
         mConsumer = new TestConsumer();
-
-        mTarget = new TestObj(getLifecycle(), mContext,
-                mIntentFilter, TEST_INTENT_PERMISSION,
-                mHandler, mConsumer);
     }
 
     public Lifecycle getLifecycle() {
         return mRegistry;
     }
 
+    private void initEnvPerTestCase() {
+        mTarget = new TestObj(getLifecycle(), mContext,
+                mIntentFilter, TEST_INTENT_PERMISSION,
+                mHandler, mConsumer);
+    }
+
     @Test
     public void receiver_register_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         assertThat(mTarget.getCallbackActiveCount(true)
@@ -98,6 +101,7 @@ public class LifecycleCallbackIntentReceiverTest implements LifecycleOwner {
 
     @Test
     public void receiver_unregister_whenInActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
@@ -111,6 +115,7 @@ public class LifecycleCallbackIntentReceiverTest implements LifecycleOwner {
 
     @Test
     public void receiver_register_whenReActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
@@ -126,6 +131,7 @@ public class LifecycleCallbackIntentReceiverTest implements LifecycleOwner {
 
     @Test
     public void receiver_close_whenDestroy() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);

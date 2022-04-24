@@ -51,6 +51,9 @@ public class ServiceStateStatusTest implements LifecycleOwner {
         MockitoAnnotations.initMocks(this);
 
         mStatusStorage = new AtomicReference<ServiceState>();
+    }
+
+    private void initEnvPerTestCase() {
         mServiceStateStatus = new ServiceStateStatus(getLifecycle(), mTelMgr, null) {
             @Override
             protected void setValue(ServiceState status) {
@@ -65,6 +68,7 @@ public class ServiceStateStatusTest implements LifecycleOwner {
 
     @Test
     public void telephonyCallback_updateStatus_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         mServiceStateStatus.mServiceStateProducer.onServiceStateChanged(mTestData);
@@ -80,6 +84,7 @@ public class ServiceStateStatusTest implements LifecycleOwner {
 
     @Test
     public void telephonyCallback_updateStatusToNull_whenInActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 
