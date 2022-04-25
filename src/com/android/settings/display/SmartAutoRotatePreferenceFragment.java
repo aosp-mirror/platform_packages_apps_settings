@@ -71,13 +71,6 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        setupFooter();
-    }
-
-
-    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return DeviceStateAutoRotationHelper.createPreferenceControllers(context);
     }
@@ -91,6 +84,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
         final Preference footerPreference = findPreference(KEY_FOOTER_PREFERENCE);
         if (footerPreference != null) {
             footerPreference.setVisible(isRotationResolverServiceAvailable(activity));
+            setupFooter();
         }
         return view;
     }
@@ -135,7 +129,6 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
     void addHelpLink() {
         final FooterPreference pref = findPreference(KEY_FOOTER_PREFERENCE);
         if (pref != null) {
-            pref.setSelectable(false);
             pref.setLearnMoreAction(v -> {
                 startActivityForResult(HelpUtils.getHelpIntent(getContext(),
                         getString(getHelpResource()),
