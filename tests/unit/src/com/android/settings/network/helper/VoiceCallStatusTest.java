@@ -48,6 +48,9 @@ public class VoiceCallStatusTest implements LifecycleOwner {
         MockitoAnnotations.initMocks(this);
 
         mStatusStorage = new AtomicReference<Integer>();
+    }
+
+    private void initEnvPerTestCase() {
         mVoiceCallStatus = new VoiceCallStatus(getLifecycle(), mTelMgr, null) {
                 //ArchTaskExecutor.getMainThreadExecutor()) {
             @Override
@@ -63,6 +66,7 @@ public class VoiceCallStatusTest implements LifecycleOwner {
 
     @Test
     public void telephonyCallback_updateStatus_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         mVoiceCallStatus.mCallStateProducer.onCallStateChanged(
@@ -80,6 +84,7 @@ public class VoiceCallStatusTest implements LifecycleOwner {
 
     @Test
     public void telephonyCallback_updateStatusToNull_whenInActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 

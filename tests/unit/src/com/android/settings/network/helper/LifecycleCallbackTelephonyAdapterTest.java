@@ -58,17 +58,20 @@ public class LifecycleCallbackTelephonyAdapterTest implements LifecycleOwner {
 
         doNothing().when(mTelMgr).registerTelephonyCallback(null, mTestCallback);
         doNothing().when(mTelMgr).unregisterTelephonyCallback(mTestCallback);
-
-        mAdapter = new LifecycleCallbackTelephonyAdapter<Object>(getLifecycle(), mTelMgr,
-                mTestCallback, null, result -> mResult.set(result));
     }
 
     public Lifecycle getLifecycle() {
         return mRegistry;
     }
 
+    private void initEnvPerTestCase() {
+        mAdapter = new LifecycleCallbackTelephonyAdapter<Object>(getLifecycle(), mTelMgr,
+                mTestCallback, null, result -> mResult.set(result));
+    }
+
     @Test
     public void telephonyCallback_register_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         verify(mTelMgr, never()).registerTelephonyCallback(anyObject(), anyObject());
@@ -80,6 +83,7 @@ public class LifecycleCallbackTelephonyAdapterTest implements LifecycleOwner {
 
     @Test
     public void telephonyCallback_unregister_whenInActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 
         verify(mTelMgr, never()).unregisterTelephonyCallback(anyObject());
