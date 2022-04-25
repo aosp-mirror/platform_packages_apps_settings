@@ -224,6 +224,7 @@ public class Settings extends SettingsActivity {
             }
         }
     }
+    public static class PrivacyControlsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
