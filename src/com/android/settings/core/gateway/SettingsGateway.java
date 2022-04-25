@@ -152,6 +152,7 @@ import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.privacy.PrivacyControlsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -218,6 +219,7 @@ public class SettingsGateway {
             LocationSettings.class.getName(),
             WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
+            PrivacyControlsFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
