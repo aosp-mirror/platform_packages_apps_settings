@@ -306,6 +306,7 @@ public class AppDataUsageTest {
         final Context context = RuntimeEnvironment.application;
         final int testUid = 123123;
         final AppItem appItem = new AppItem(testUid);
+        appItem.addUid(testUid);
         appItem.category = AppItem.CATEGORY_APP;
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);

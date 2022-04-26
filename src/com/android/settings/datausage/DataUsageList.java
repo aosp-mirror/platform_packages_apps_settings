@@ -368,7 +368,7 @@ public class DataUsageList extends DataUsageBaseFragment
             final int collapseKey;
             final int category;
             final int userId = UserHandle.getUserId(uid);
-            if (UserHandle.isApp(uid)) {
+            if (UserHandle.isApp(uid) || Process.isSdkSandboxUid(uid)) {
                 if (profiles.contains(new UserHandle(userId))) {
                     if (userId != currentUserId) {
                         // Add to a managed user item.
@@ -376,8 +376,12 @@ public class DataUsageList extends DataUsageBaseFragment
                         largest = accumulate(managedKey, knownItems, bucket,
                             AppItem.CATEGORY_USER, items, largest);
                     }
-                    // Add to app item.
-                    collapseKey = uid;
+                    // Map SDK sandbox back to its corresponding app
+                    if (Process.isSdkSandboxUid(uid)) {
+                        collapseKey = Process.getAppUidForSdkSandboxUid(uid);
+                    } else {
+                        collapseKey = uid;
+                    }
                     category = AppItem.CATEGORY_APP;
                 } else {
                     // If it is a removed user add it to the removed users' key
@@ -415,6 +419,7 @@ public class DataUsageList extends DataUsageBaseFragment
             if (item == null) {
                 item = new AppItem(uid);
                 item.total = -1;
+                item.addUid(uid);
                 items.add(item);
                 knownItems.put(item.key, item);
             }
