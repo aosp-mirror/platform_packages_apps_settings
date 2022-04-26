@@ -176,7 +176,18 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
                 || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
         final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
                 || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
-        if (isEnrollRequest && isResultSkipOrFinished) {
+        boolean hasEnrolledFace = false;
+        if (data != null) {
+            hasEnrolledFace = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FACE, false);
+        }
+
+        if (resultCode == RESULT_CANCELED && hasEnrolledFace) {
+            setResult(resultCode, data);
+            finish();
+            return;
+        }
+
+        if (isEnrollRequest && isResultSkipOrFinished || hasEnrolledFace) {
             data = setSkipPendingEnroll(data);
         }
         super.onActivityResult(requestCode, resultCode, data);
