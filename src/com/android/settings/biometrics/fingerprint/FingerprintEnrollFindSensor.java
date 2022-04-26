@@ -289,6 +289,17 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        boolean enrolledFingerprint = false;
+        if (data != null) {
+            enrolledFingerprint = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FINGERPRINT, false);
+        }
+
+        if (resultCode == RESULT_CANCELED && enrolledFingerprint) {
+            setResult(resultCode, data);
+            finish();
+            return;
+        }
+
         if (requestCode == CONFIRM_REQUEST) {
             if (resultCode == RESULT_OK && data != null) {
                 throw new IllegalStateException("Pretty sure this is dead code");

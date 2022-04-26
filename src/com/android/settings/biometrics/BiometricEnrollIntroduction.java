@@ -302,6 +302,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO(b/229924331): Add tests for the enrollment flows.
         final boolean cameFromMultiBioFpAuthAddAnother =
                 requestCode == BiometricUtils.REQUEST_ADD_ANOTHER
                 && BiometricUtils.isMultiBiometricFingerprintEnrollmentFlow(this);
@@ -397,14 +398,20 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         return isResultSkipped(resultCode) || isResultFinished(resultCode);
     }
 
-    private void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
+    protected void removeEnrollNextBiometric() {
+        getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+        getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
+    }
+
+    protected void removeEnrollNextBiometricIfSkipEnroll(@Nullable Intent data) {
         if (data != null
                 && data.getBooleanExtra(
                         MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, false)) {
-            getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
-            getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FINGERPRINT);
+            removeEnrollNextBiometric();
         }
-
+    }
+    protected void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
+        removeEnrollNextBiometricIfSkipEnroll(data);
         if (resultCode == RESULT_SKIP) {
             onEnrollmentSkipped(data);
         } else if (resultCode == RESULT_FINISHED) {
