@@ -339,6 +339,11 @@ public class SliceBuilderUtils {
             inputRangeBuilder.setSubtitle(subtitleText);
         }
 
+        SliceAction endItemAction = sliderController.getSliceEndItem(context);
+        if (endItemAction != null) {
+            inputRangeBuilder.addEndItem(endItemAction);
+        }
+
         return new ListBuilder(context, sliceData.getUri(), ListBuilder.INFINITY)
                 .setAccentColor(color)
                 .addInputRange(inputRangeBuilder)
