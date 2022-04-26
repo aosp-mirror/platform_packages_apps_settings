@@ -79,9 +79,10 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
         updateFingerprintSuggestionEnableState();
+        Intent intent = getIntent().putExtra(EXTRA_FINISHED_ENROLL_FINGERPRINT, true);
+        setResult(RESULT_CANCELED, intent);
+        finish();
     }
 
     @Override

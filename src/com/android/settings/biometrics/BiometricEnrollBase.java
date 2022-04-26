@@ -60,6 +60,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     public static final String EXTRA_KEY_SENSOR_ID = "sensor_id";
     public static final String EXTRA_KEY_CHALLENGE = "challenge";
     public static final String EXTRA_KEY_MODALITY = "sensor_modality";
+    public static final String EXTRA_FINISHED_ENROLL_FACE = "finished_enrolling_face";
+    public static final String EXTRA_FINISHED_ENROLL_FINGERPRINT = "finished_enrolling_fingerprint";
 
     /**
      * Used by the choose fingerprint wizard to indicate the wizard is
