@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"文字の表示サイズを変更します。"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"拡大"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"自動回転を使用する"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"自動回転を使用する"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"顔検出は、前面カメラを使用して自動回転の精度を高めます。画像が Google に保存されたり送信されたりすることはありません。"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"サンプル テキスト"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"オズの魔法使い"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章: オズの不思議なエメラルド シティ"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"システムの言語"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"システムのデフォルト"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">選択した言語を削除しますか？</item>
       <item quantity="one">選択した言語を削除しますか？</item>
@@ -1302,7 +1301,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"OFF"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"ON"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"ON - 顔ベース"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"顔検出を有効にする"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"顔検出"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"スマートフォンを縦向きや横向きに動かすと、画面の向きが自動的に調整されます"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"自動回転の詳細"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"スマートフォンを動かして縦向きと横向きを切り替えたとき"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"画面の解像度"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"高解像度"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"最高解像度"</string>
@@ -2332,6 +2334,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"送信元: 大介"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"おはようございます。\n\nデザインの進捗はいかがでしょうか。新しいバルーンの制作を開始するまでに間に合いそうですか？"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"設定をリセット"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ディスプレイのサイズとテキストをリセットしますか？"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"ディスプレイのサイズとテキストの設定をスマートフォンの元の設定にリセットします"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"リセット"</string>
@@ -3019,7 +3023,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、バッテリーが長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ON"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"OFF"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
@@ -4544,11 +4548,11 @@
     <string name="background_check_pref" msgid="5304564658578987535">"バックグラウンド チェック"</string>
     <string name="background_check_title" msgid="225170874283229686">"バックグラウンドへのフルアクセス"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"画面のテキストを使用"</string>
-    <string name="assist_access_context_summary" msgid="6951814413185646275">"画面コンテンツのテキストにアクセスすることをアシストアプリに許可する"</string>
+    <string name="assist_access_context_summary" msgid="6951814413185646275">"画面コンテンツのテキストにアクセスすることをアシストアプリに許可します"</string>
     <string name="assist_access_screenshot_title" msgid="4395902231753643633">"スクリーンショットを使用"</string>
-    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"表示中の画像にアクセスすることをアシストアプリに許可する"</string>
+    <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"表示中の画像にアクセスすることをアシストアプリに許可します"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"画面の点滅"</string>
-    <string name="assist_flash_summary" msgid="3032289860177784594">"アシストアプリが画面のテキストやスクリーンショットにアクセスしたときに画面の端を点滅させる"</string>
+    <string name="assist_flash_summary" msgid="3032289860177784594">"アシストアプリが画面のテキストやスクリーンショットにアクセスしたときに画面の端を点滅させます"</string>
     <string name="assist_footer" msgid="8248015363806299068">"アシストアプリは、表示している画面の情報に基づいてアシスタントを提供します。一部のアプリはランチャーと音声入力サービスの両方に対応しており、統合されたアシスタントを提供します。"</string>
     <string name="average_memory_use" msgid="717313706368825388">"平均メモリ使用"</string>
     <string name="maximum_memory_use" msgid="2171779724001152933">"最大メモリ使用"</string>
@@ -5690,7 +5694,7 @@
     <string name="mic_toggle_title" msgid="265145278323852547">"マイクへのアクセス"</string>
     <string name="location_toggle_title" msgid="5229867700421750868">"位置情報へのアクセス"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"アプリとサービス"</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"アプリとサービス。この設定が OFF の場合、緊急通報番号に発信したときは、マイクのデータが共有されることがあります。"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"アプリとサービス。この設定が OFF の場合でも、緊急通報番号に発信するとマイクのデータが共有されることがあります。"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"前へ"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"次へ"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"色のプレビュー"</string>

@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Aumente ou diminua o texto no ecrã."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Diminuir"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Aumentar"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Usar rotação automática"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"A deteção facial utiliza a câmara frontal para melhorar a precisão da rotação automática. As imagens nunca são armazenadas nem enviadas à Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Use a rotação automática"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"A deteção facial usa a câmara frontal para melhorar a precisão da rotação automática. As imagens nunca são armazenadas nem enviadas à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplo de texto"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"O Maravilhoso Feiticeiro de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítulo 11: A Maravilhosa Cidade Esmeralda de Oz"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma do sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predefinição do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção do idioma para esta app não está disponível a partir das Definições."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"O idioma pode diferir dos idiomas disponíveis na app. Algumas apps podem não suportar esta definição."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remover os idiomas selecionados?</item>
       <item quantity="one">Remover o idioma selecionado?</item>
@@ -618,7 +617,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Bloqueio de ecrã"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Escolha um bloqueio de ecrã"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Esc. novo bloqueio de ecrã"</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolha um novo bloqueio de ecrã"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolha um bloqueio para apps de trabalho"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Esc. novo bloq. de trabalho"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Proteger o seu tablet"</string>
@@ -1302,7 +1301,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativado"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativado"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Ativada – Com base no rosto"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Ativar deteção facial"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Deteção facial"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajuste automaticamente a orientação do ecrã quando move o telemóvel entre o modo vertical e horizontal"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Saiba mais sobre a rotação automática"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Quando move o telemóvel entre o modo vertical e horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolução de ecrã"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolução"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Resolução mais alta"</string>
@@ -2332,6 +2334,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bom dia!\n\nQueria saber como estão os designs. Vão estar prontos antes de começarmos a criar os novos balões?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Repor definições"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Repor texto e tamanho da visualização?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"As suas preferências de texto e tamanho do ecrã vão ser repostas para as definições originais do telemóvel"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Repor"</string>
@@ -3922,7 +3926,7 @@
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar os conteúdos de todas as notificações"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Mostrar conteúdo confidencial apenas se desbloqueado"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar notificações"</string>
-    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como pretende que o ecrã de bloqueio seja apresentado?"</string>
+    <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como quer que o ecrã de bloqueio seja apresentado?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Ecrã de bloqueio"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Mostrar todo o conteúdo de notif. de trabalho"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ocultar conteúdo de trabalho confidencial"</string>
@@ -4543,9 +4547,9 @@
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI e fornecimento de energia"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Verificação em segundo plano"</string>
     <string name="background_check_title" msgid="225170874283229686">"Acesso completo em segundo plano"</string>
-    <string name="assist_access_context_title" msgid="5201495523514096201">"Utilizar o texto do ecrã"</string>
+    <string name="assist_access_context_title" msgid="5201495523514096201">"Usar texto do ecrã"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Permitir que a app de assistência aceda ao conteúdo do ecrã como texto"</string>
-    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Utilizar captura de ecrã"</string>
+    <string name="assist_access_screenshot_title" msgid="4395902231753643633">"Usar captura de ecrã"</string>
     <string name="assist_access_screenshot_summary" msgid="5276593070956201863">"Permitir que a app de assistência aceda a uma imagem do ecrã"</string>
     <string name="assist_flash_title" msgid="5449512572885550108">"Fazer piscar o ecrã"</string>
     <string name="assist_flash_summary" msgid="3032289860177784594">"Fazer piscar os limites do ecrã quando a app de assistência acede a texto do ecrã ou de capturas de ecrã"</string>
@@ -5648,7 +5652,7 @@
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Usar Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Utilizar Impedir o toque"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Usar zona Wi-Fi"</string>
-    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Utilizar fixação de apps"</string>
+    <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usar fixação de apps"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar opções de programador"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar serviço de impressão"</string>
     <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir vários utilizadores"</string>
