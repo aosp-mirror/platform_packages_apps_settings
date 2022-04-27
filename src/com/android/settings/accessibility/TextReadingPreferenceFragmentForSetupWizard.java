@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
 
     @Override
     public int getMetricsCategory() {
-        return super.getMetricsCategory();
+        return SettingsEnums.SUW_ACCESSIBILITY_TEXT_READING_OPTIONS;
     }
 
     @Override

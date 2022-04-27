@@ -71,9 +71,6 @@
     <!-- If the support features are enabled. -->
     <bool name="config_support_enabled">false</bool>
 
-    <!-- Whether to enable "show operator name in the status bar" setting -->
-    <bool name="config_showOperatorNameInStatusBar">false</bool>
-
     <!-- List containing the component names of pre-installed screen reader services. -->
     <string-array name="config_preinstalled_screen_reader_services" translatable="false">
         <!--
@@ -608,7 +605,7 @@
     </string-array>
 
     <!-- The ratio to use when using the two-pane settings layout -->
-    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.5</item>
+    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
 
     <!-- The number of visible app icons while entering app list related pages for preloading.
          Take the "Unrestricted data" page as the example, the visible app icons could be 15
@@ -618,4 +615,6 @@
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
 
+    <!-- Whether to put the apps with system UID into system component bucket or not -->
+    <bool name="config_battery_combine_system_components">false</bool>
 </resources>

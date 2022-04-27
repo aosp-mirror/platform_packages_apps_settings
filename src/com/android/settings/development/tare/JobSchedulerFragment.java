@@ -96,8 +96,11 @@ public class JobSchedulerFragment extends Fragment implements
                 resources.getString(R.string.tare_consumption_limits),
                 resources.getString(R.string.tare_balances),
                 // mResources.getString(R.string.tare_modifiers),
-                // mResources.getString(R.string.tare_actions),
-                // mResources.getString(R.string.tare_rewards)
+                resources.getString(R.string.tare_actions_ctp),
+                resources.getString(R.string.tare_actions_base_price),
+                resources.getString(R.string.tare_rewards_instantaneous),
+                // resources.getString(R.string.tare_rewards_ongoing),
+                resources.getString(R.string.tare_rewards_max)
         };
 
         mChildren = new String[][]{
@@ -105,8 +108,11 @@ public class JobSchedulerFragment extends Fragment implements
                 resources.getStringArray(R.array.tare_app_balance_subfactors),
                 // TODO: support
                 // mResources.getStringArray(R.array.tare_modifiers_subfactors),
-                // mResources.getStringArray(R.array.tare_job_scheduler_actions),
-                // mResources.getStringArray(R.array.tare_rewards_subfactors)
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_rewards_subfactors),
+                // {resources.getString(R.string.tare_top_activity)},
+                resources.getStringArray(R.array.tare_rewards_subfactors)
         };
 
         mKeys = new String[][]{
@@ -121,8 +127,47 @@ public class JobSchedulerFragment extends Fragment implements
                         EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP
                 },
                 // {},
-                // {},
-                // {},
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP
+                },
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE
+                },
+                {
+                        EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_MAX,
+                },
+                // {EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_ONGOING},
+                {
+                        EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_MAX,
+                }
         };
     }
 }

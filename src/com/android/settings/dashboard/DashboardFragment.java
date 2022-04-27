@@ -27,6 +27,7 @@ import android.util.Log;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
@@ -43,7 +44,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProviderTile;
 import com.android.settingslib.drawer.Tile;
@@ -132,17 +132,22 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @VisibleForTesting
     void checkUiBlocker(List<AbstractPreferenceController> controllers) {
         final List<String> keys = new ArrayList<>();
+        final List<BasePreferenceController> baseControllers = new ArrayList<>();
         controllers.forEach(controller -> {
             if (controller instanceof BasePreferenceController.UiBlocker
                     && controller.isAvailable()) {
                 ((BasePreferenceController) controller).setUiBlockListener(this);
                 keys.add(controller.getPreferenceKey());
+                baseControllers.add((BasePreferenceController) controller);
             }
         });
 
         if (!keys.isEmpty()) {
             mBlockerController = new UiBlockerController(keys);
-            mBlockerController.start(() -> updatePreferenceVisibility(mPreferenceControllers));
+            mBlockerController.start(() -> {
+                updatePreferenceVisibility(mPreferenceControllers);
+                baseControllers.forEach(controller -> controller.setUiBlockerFinished(true));
+            });
         }
     }
 
@@ -424,7 +429,14 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             for (AbstractPreferenceController controller : controllerList) {
                 final String key = controller.getPreferenceKey();
                 final Preference preference = findPreference(key);
-                if (preference != null) {
+                if (preference == null) {
+                    continue;
+                }
+                if (controller instanceof BasePreferenceController.UiBlocker) {
+                    final boolean prefVisible =
+                            ((BasePreferenceController) controller).getSavedPrefVisibility();
+                    preference.setVisible(visible && controller.isAvailable() && prefVisible);
+                } else {
                     preference.setVisible(visible && controller.isAvailable());
                 }
             }
@@ -496,6 +508,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onBlockerWorkFinished(BasePreferenceController controller) {
         mBlockerController.countDown(controller.getPreferenceKey());
+        controller.setUiBlockerFinished(mBlockerController.isBlockerFinished());
     }
 
     protected Preference createPreference(Tile tile) {
@@ -545,7 +558,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setTitle(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 
@@ -558,7 +571,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
 
         preference.setSummary(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 }

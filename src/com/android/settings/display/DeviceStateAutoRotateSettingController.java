@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -51,14 +52,22 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
     private final String mDeviceStateDescription;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public DeviceStateAutoRotateSettingController(Context context, int deviceState,
-            String deviceStateDescription, int order) {
+    @VisibleForTesting
+    DeviceStateAutoRotateSettingController(Context context, int deviceState,
+            String deviceStateDescription, int order,
+            MetricsFeatureProvider metricsFeatureProvider) {
         super(context, getPreferenceKeyForDeviceState(deviceState));
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = metricsFeatureProvider;
         mDeviceState = deviceState;
         mDeviceStateDescription = deviceStateDescription;
         mAutoRotateSettingsManager = DeviceStateRotationLockSettingsManager.getInstance(context);
         mOrder = order;
+    }
+
+    public DeviceStateAutoRotateSettingController(Context context, int deviceState,
+            String deviceStateDescription, int order) {
+        this(context, deviceState, deviceStateDescription, order,
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider());
     }
 
     void init(Lifecycle lifecycle) {
@@ -108,10 +117,20 @@ public class DeviceStateAutoRotateSettingController extends TogglePreferenceCont
     @Override
     public boolean setChecked(boolean isChecked) {
         boolean isRotationLocked = !isChecked;
-        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
-                isRotationLocked);
+        logSettingChanged(isChecked);
         mAutoRotateSettingsManager.updateSetting(mDeviceState, isRotationLocked);
         return true;
+    }
+
+    private void logSettingChanged(boolean isChecked) {
+        boolean isRotationLocked = !isChecked;
+        mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATION_LOCK,
+                isRotationLocked);
+
+        int actionCategory = isChecked
+                ? SettingsEnums.ACTION_ENABLE_AUTO_ROTATION_DEVICE_STATE
+                : SettingsEnums.ACTION_DISABLE_AUTO_ROTATION_DEVICE_STATE;
+        mMetricsFeatureProvider.action(mContext, actionCategory, /* value= */ mDeviceState);
     }
 
     @Override

@@ -73,7 +73,7 @@ public final class ActionDisabledByAdminDialogHelper {
                 mActivity.getSystemService(DevicePolicyManager.class);
 
         TextView title = mDialogView.findViewById(R.id.admin_support_dialog_title);
-        title.setText(devicePolicyManager.getString(DISABLED_BY_IT_ADMIN_TITLE,
+        title.setText(devicePolicyManager.getResources().getString(DISABLED_BY_IT_ADMIN_TITLE,
                 () -> mActivity.getString(R.string.disabled_by_policy_title)));
 
     }

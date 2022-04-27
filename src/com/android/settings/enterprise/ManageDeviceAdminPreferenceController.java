@@ -42,7 +42,7 @@ public class ManageDeviceAdminPreferenceController extends BasePreferenceControl
                 = mFeatureProvider.getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile();
 
         if (activeAdmins == 0) {
-            return mDevicePolicyManager.getString(NUMBER_OF_DEVICE_ADMINS_NONE,
+            return mDevicePolicyManager.getResources().getString(NUMBER_OF_DEVICE_ADMINS_NONE,
                     () -> mContext.getResources().getString(R.string.number_of_device_admins_none));
         }
 

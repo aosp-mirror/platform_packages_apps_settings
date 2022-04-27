@@ -89,7 +89,7 @@ public class StorageWizardMoveProgress extends StorageWizardBase {
             case PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE:
                 return getString(R.string.insufficient_storage);
             case PackageManager.MOVE_FAILED_DEVICE_ADMIN:
-                return getSystemService(DevicePolicyManager.class)
+                return getSystemService(DevicePolicyManager.class).getResources()
                         .getString(ERROR_MOVE_DEVICE_ADMIN,
                                 () -> getString(R.string.move_error_device_admin));
             case PackageManager.MOVE_FAILED_DOESNT_EXIST:

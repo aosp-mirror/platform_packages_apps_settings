@@ -19,6 +19,9 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
+
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
@@ -27,6 +30,7 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class HighTextContrastPreferenceController extends TogglePreferenceController implements
         TextReadingResetController.ResetStateListener {
+    private SwitchPreference mSwitchPreference;
 
     public HighTextContrastPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -55,7 +59,14 @@ public class HighTextContrastPreferenceController extends TogglePreferenceContro
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mSwitchPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
     public void resetState() {
         setChecked(false);
+        updateState(mSwitchPreference);
     }
 }

@@ -310,7 +310,7 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUser = findPreference(KEY_ADD_USER);
         if (!mUserCaps.mCanAddRestrictedProfile) {
             // Label should only mention adding a "user", not a "profile"
-            mAddUser.setTitle(R.string.user_add_user_menu);
+            mAddUser.setTitle(com.android.settingslib.R.string.user_add_user);
         }
         mAddUser.setOnPreferenceClickListener(this);
 
@@ -425,9 +425,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (isCurrentUserGuest()) {
             // No need to load profile information
             mMePreference.setIcon(getEncircledDefaultIcon());
-            mMePreference.setTitle(
-                    mGuestUserAutoCreated ? com.android.settingslib.R.string.guest_reset_guest
-                            : R.string.user_exit_guest_title);
+            mMePreference.setTitle(mGuestUserAutoCreated
+                    ? com.android.settingslib.R.string.guest_reset_guest
+                    : com.android.settingslib.R.string.guest_exit_guest);
             mMePreference.setSelectable(true);
             // removing a guest will result in switching back to the admin user
             mMePreference.setEnabled(canSwitchUserNow());
@@ -704,7 +704,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             case DIALOG_CONFIRM_EXIT_GUEST: {
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.user_exit_guest_confirm_title)
+                        .setTitle(com.android.settingslib.R.string.guest_remove_guest_dialog_title)
                         .setMessage(R.string.user_exit_guest_confirm_message)
                         .setPositiveButton(R.string.user_exit_guest_dialog_remove,
                                 new DialogInterface.OnClickListener() {
@@ -737,8 +737,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
             case DIALOG_CONFIRM_RESET_GUEST: {
-                return UserDialogs.createResetGuestDialog(getActivity(),
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
             }
             default:
                 return null;
@@ -1102,6 +1107,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.setTitle(R.string.user_list_title);
         } else {
             mUserListCategory.setTitle(null);
+            mUserListCategory.setLayoutResource(R.layout.empty_view);
         }
 
         // Remove everything from mUserListCategory and add new users.
@@ -1156,7 +1162,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mAddGuest.setIcon(centerAndTint(icon));
             mAddGuest.setSelectable(true);
             if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
-                mAddGuest.setTitle(com.android.settingslib.R.string.user_guest);
+                mAddGuest.setTitle(com.android.internal.R.string.guest_name);
                 mAddGuest.setSummary(R.string.guest_resetting);
                 mAddGuest.setEnabled(false);
             } else {
@@ -1198,8 +1204,7 @@ public class UserSettings extends SettingsPreferenceFragment
             addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
 
             if (!canAddMoreUsers) {
-                addUser.setSummary(
-                        getString(R.string.user_add_max_count, getRealUsersCount()));
+                addUser.setSummary(getString(R.string.user_add_max_count));
             } else {
                 addUser.setSummary(null);
             }
