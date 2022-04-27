@@ -87,8 +87,6 @@ public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
     private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME, CLASS_NAME);
-    private static final int ON = 1;
-    private static final int OFF = 0;
     private static final String EMPTY_STRING = "";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
@@ -244,37 +242,6 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(description).isEqualTo(DEFAULT_DESCRIPTION);
-    }
-
-    @Test
-    public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
-                singletonList(mServiceInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityServicePreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
-    }
-
-    @Test
-    public void createAccessibilityActivityPreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        setMockAccessibilityShortcutInfo(mShortcutInfo);
-        final List<AccessibilityShortcutInfo> infoList = new ArrayList<>(
-                singletonList(mShortcutInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityActivityPreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
     }
 
     @Test

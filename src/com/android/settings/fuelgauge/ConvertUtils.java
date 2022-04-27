@@ -21,6 +21,7 @@ import android.os.LocaleList;
 import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -32,7 +33,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -101,7 +101,7 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_CONSUME_POWER,
                 Double.valueOf(entry.getConsumedPower()));
             values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                Double.valueOf(entry.percent));
+                Double.valueOf(entry.mPercent));
             values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInForegroundMs()));
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
@@ -182,7 +182,7 @@ public final class ConvertUtils {
             }
 
             // Collects all keys in these three time slot records as all populations.
-            final Set<String> allBatteryHistEntryKeys = new HashSet<>();
+            final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
             allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());

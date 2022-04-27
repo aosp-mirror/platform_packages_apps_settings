@@ -121,22 +121,22 @@ public class RingVibrationIntensityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_vibrateWhenRingingAndRampingRingerOff_shouldDisplayAlwaysOff() {
+    public void updateState_vibrateWhenRingingAndRampingRingerOff_shouldDisplayRingIntensity() {
         when(mAudioManager.isRampingRingerEnabled()).thenReturn(false);
         updateSetting(Settings.System.VIBRATE_WHEN_RINGING, OFF);
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY,
                 Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
-        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(mPreference.getProgress()).isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
