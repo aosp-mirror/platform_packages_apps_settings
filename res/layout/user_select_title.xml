@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2011 The Android Open Source Project
+<!-- Copyright (C) 2022 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,12 +13,15 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/vpn_title">
-    <PreferenceCategory
-        android:key="advanced_vpn_group"/>
-
-    <PreferenceCategory
-        android:key="vpn_group"/>
-</PreferenceScreen>
+<com.android.internal.widget.DialogTitle
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?android:attr/windowTitleStyle"
+    android:id="@android:id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingTop="24dp"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:textAlignment="center"
+    android:textSize="24sp"/>
