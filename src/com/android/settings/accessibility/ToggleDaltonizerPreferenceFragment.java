@@ -166,6 +166,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (enabled == isEnabled) {
+            return;
+        }
+
         if (enabled) {
             showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
         }
@@ -185,8 +190,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_daltonizer_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_daltonizer_shortcut_title);
     }
 
     @Override
