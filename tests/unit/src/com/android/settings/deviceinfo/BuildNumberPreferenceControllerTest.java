@@ -16,13 +16,10 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -30,8 +27,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Looper;
 import android.os.UserManager;
@@ -53,7 +48,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -66,7 +60,6 @@ public class BuildNumberPreferenceControllerTest {
 
     private Context mContext;
     private UserManager mUserManager;
-    private ClipboardManager mClipboardManager;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
@@ -84,8 +77,6 @@ public class BuildNumberPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         mUserManager = (UserManager) spy(mContext.getSystemService(Context.USER_SERVICE));
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
-        mClipboardManager = (ClipboardManager) spy(mContext.getSystemService(CLIPBOARD_SERVICE));
-        doReturn(mClipboardManager).when(mContext).getSystemService(CLIPBOARD_SERVICE);
 
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
@@ -196,17 +187,5 @@ public class BuildNumberPreferenceControllerTest {
 
         assertThat(activityResultHandled).isTrue();
         assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    @UiThreadTest
-    public void copy_shouldCopyBuildNumberToClipboard() {
-        ArgumentCaptor<ClipData> captor = ArgumentCaptor.forClass(ClipData.class);
-        doNothing().when(mClipboardManager).setPrimaryClip(captor.capture());
-
-        mController.copy();
-
-        final ClipData data = captor.getValue();
-        assertThat(data.getItemAt(0).getText().toString()).isEqualTo(mController.getSummary());
     }
 }

@@ -22,7 +22,6 @@ import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOUR
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
 import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
 
-import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -74,8 +73,7 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
             SafetyEvent safetyEvent) {
         if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
             LockScreenSafetySource.setSafetySourceData(context,
-                    new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
-                    safetyEvent);
+                    new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
         }
 
         if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
@@ -85,8 +83,7 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
 
     private static void refreshAllSafetySources(Context context, SafetyEvent safetyEvent) {
         LockScreenSafetySource.setSafetySourceData(context,
-                new ScreenLockPreferenceDetailsUtils(context, SettingsEnums.SAFETY_CENTER),
-                safetyEvent);
+                new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
         BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
     }
 }

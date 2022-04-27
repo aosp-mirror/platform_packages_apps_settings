@@ -38,6 +38,7 @@ import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.vpn2.VpnUtils;
+import com.android.settingslib.utils.WorkPolicyUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -54,6 +55,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
     private final ConnectivityManager mCm;
     private final VpnManager mVm;
     private final Resources mResources;
+    private final WorkPolicyUtils mWorkPolicyUtils;
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
@@ -67,6 +69,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         mCm = cm;
         mVm = vm;
         mResources = resources;
+        mWorkPolicyUtils = new WorkPolicyUtils(mContext, mPm, mUm, mDpm);
     }
 
     @Override
@@ -228,25 +231,12 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
 
     @Override
     public boolean hasWorkPolicyInfo() {
-        return (getWorkPolicyInfoIntentDO() != null) || (getWorkPolicyInfoIntentPO() != null);
+        return mWorkPolicyUtils.hasWorkPolicy();
     }
 
     @Override
     public boolean showWorkPolicyInfo(Context activityContext) {
-        Intent intent = getWorkPolicyInfoIntentDO();
-        if (intent != null) {
-            activityContext.startActivity(intent);
-            return true;
-        }
-
-        intent = getWorkPolicyInfoIntentPO();
-        final UserInfo userInfo = getManagedProfileUserInfo();
-        if (intent != null && userInfo != null) {
-            activityContext.startActivityAsUser(intent, userInfo.getUserHandle());
-            return true;
-        }
-
-        return false;
+        return mWorkPolicyUtils.showWorkPolicyInfo(activityContext);
     }
 
     @Override
@@ -299,47 +289,6 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
             return userInfo.id;
         }
         return UserHandle.USER_NULL;
-    }
-
-    private Intent getWorkPolicyInfoIntentDO() {
-        final ComponentName ownerComponent = getDeviceOwnerComponent();
-        if (ownerComponent == null) {
-            return null;
-        }
-
-        // Only search for the required action in the Device Owner's package
-        final Intent intent =
-                new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName());
-        final List<ResolveInfo> activities = mPm.queryIntentActivities(intent, 0);
-        if (activities.size() != 0) {
-            return intent;
-        }
-
-        return null;
-    }
-
-    private Intent getWorkPolicyInfoIntentPO() {
-        final int userId = getManagedProfileUserId();
-        if (userId == UserHandle.USER_NULL) {
-            return null;
-        }
-
-        final ComponentName ownerComponent = mDpm.getProfileOwnerAsUser(userId);
-        if (ownerComponent == null) {
-            return null;
-        }
-
-        // Only search for the required action in the Profile Owner's package
-        final Intent intent =
-                new Intent(Settings.ACTION_SHOW_WORK_POLICY_INFO)
-                        .setPackage(ownerComponent.getPackageName());
-        final List<ResolveInfo> activities = mPm.queryIntentActivitiesAsUser(intent, 0, userId);
-        if (activities.size() != 0) {
-            return intent;
-        }
-
-        return null;
     }
 
     protected static class EnterprisePrivacySpan extends ClickableSpan {

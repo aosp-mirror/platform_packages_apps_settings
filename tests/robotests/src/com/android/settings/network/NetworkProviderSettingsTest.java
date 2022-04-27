@@ -15,6 +15,9 @@
  */
 package com.android.settings.network;
 
+import static com.android.settings.network.NetworkProviderSettings.MENU_ID_DISCONNECT;
+import static com.android.settings.network.NetworkProviderSettings.MENU_ID_FORGET;
+import static com.android.settings.network.NetworkProviderSettings.MENU_ID_SHARE;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_CONNECT;
 import static com.android.settings.wifi.WifiConfigUiBase2.MODE_MODIFY;
 
@@ -77,6 +80,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -117,6 +121,8 @@ public class NetworkProviderSettingsTest {
     private Preference mAirplaneModeMsgPreference;
     @Mock
     private LayoutPreference mResetInternetPreference;
+    @Mock
+    private ContextMenu mContextMenu;
     @Mock
     private MenuItem mMenuItem;
     @Mock
@@ -321,12 +327,10 @@ public class NetworkProviderSettingsTest {
         final View view = mock(View.class);
         when(view.getTag()).thenReturn(connectedWifiEntryPreference);
 
-        final ContextMenu menu = mock(ContextMenu.class);
-        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
 
-        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_FORGET), anyInt(), anyInt());
-        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_DISCONNECT), anyInt(),
-                anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_DISCONNECT), anyInt(), anyInt());
     }
 
     @Test
@@ -346,10 +350,9 @@ public class NetworkProviderSettingsTest {
         final View view = mock(View.class);
         when(view.getTag()).thenReturn(connectedWifiEntryPreference);
 
-        final ContextMenu menu = mock(ContextMenu.class);
-        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
 
-        verify(menu).add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
     }
 
     @Test
@@ -369,11 +372,9 @@ public class NetworkProviderSettingsTest {
         final View view = mock(View.class);
         when(view.getTag()).thenReturn(connectedWifiEntryPreference);
 
-        final ContextMenu menu = mock(ContextMenu.class);
-        mNetworkProviderSettings.onCreateContextMenu(menu, view, null /* info */);
+        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
 
-        verify(menu, never())
-                .add(anyInt(), eq(NetworkProviderSettings.MENU_ID_SHARE), anyInt(), anyInt());
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
     }
 
     @Test
@@ -678,6 +679,46 @@ public class NetworkProviderSettingsTest {
                 mNetworkProviderSettings.mUpdateWifiEntryPreferencesRunnable);
         verify(fragmentView).removeCallbacks(mNetworkProviderSettings.mHideProgressBarRunnable);
         verify(mAirplaneModeEnabler).stop();
+    }
+
+    @Test
+    public void addShareMenuIfSuitable_isAdmin_addMenu() {
+        mNetworkProviderSettings.mIsAdmin = true;
+        Mockito.reset(mContextMenu);
+
+        mNetworkProviderSettings.addShareMenuIfSuitable(mContextMenu);
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
+    public void addShareMenuIfSuitable_isNotAdmin_notAddMenu() {
+        mNetworkProviderSettings.mIsAdmin = false;
+        Mockito.reset(mContextMenu);
+
+        mNetworkProviderSettings.addShareMenuIfSuitable(mContextMenu);
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
+    }
+
+    @Test
+    public void addForgetMenuIfSuitable_isAdmin_addMenu() {
+        mNetworkProviderSettings.mIsAdmin = true;
+        Mockito.reset(mContextMenu);
+
+        mNetworkProviderSettings.addForgetMenuIfSuitable(mContextMenu);
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
+    }
+
+    @Test
+    public void addForgetMenuIfSuitable_isNotAdmin_notAddMenu() {
+        mNetworkProviderSettings.mIsAdmin = false;
+        Mockito.reset(mContextMenu);
+
+        mNetworkProviderSettings.addForgetMenuIfSuitable(mContextMenu);
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
     }
 
     @Implements(PreferenceFragmentCompat.class)

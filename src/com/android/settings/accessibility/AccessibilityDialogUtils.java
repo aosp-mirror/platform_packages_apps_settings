@@ -118,6 +118,11 @@ public class AccessibilityDialogUtils {
          * launch tutorial.
          */
         int LAUNCH_ACCESSIBILITY_TUTORIAL = 1008;
+
+        /**
+         * OPEN: Settings > Accessibility > Display size and text > Click 'Reset settings' button.
+         */
+        int DIALOG_RESET_SETTINGS = 1009;
     }
 
     /**
