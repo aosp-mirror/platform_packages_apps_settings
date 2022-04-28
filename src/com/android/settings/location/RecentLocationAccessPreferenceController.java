@@ -28,7 +28,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.applications.RecentAppOpsAccess;
@@ -41,8 +40,7 @@ import java.util.List;
 /**
  * Preference controller that handles the display of apps that access locations.
  */
-public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController
-        implements BasePreferenceController.UiBlocker {
+public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
     public static final int MAX_APPS = 3;
     @VisibleForTesting
     RecentAppOpsAccess mRecentLocationApps;
