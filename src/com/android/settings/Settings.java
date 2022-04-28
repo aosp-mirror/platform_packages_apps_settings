@@ -224,6 +224,7 @@ public class Settings extends SettingsActivity {
             }
         }
     }
+    public static class PrivacyControlsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
@@ -295,6 +296,7 @@ public class Settings extends SettingsActivity {
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
+    public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -358,6 +360,8 @@ public class Settings extends SettingsActivity {
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}

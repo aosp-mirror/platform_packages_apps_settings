@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Make the text on screen smaller or larger."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Make smaller"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Make larger"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Use auto-rotate"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Face detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Use auto-rotate"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Face detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Sample text"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"The Wonderful Wizard of Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapter 11: The Wonderful Emerald City of Oz"</string>
@@ -219,11 +219,15 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App languages"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Set the language for each app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"App language"</string>
+    <string name="warnings_title" msgid="613849105118598110">"Update the app"</string>
+    <string name="warnings_summary" msgid="5600524378302608542">"You need to update the app for the latest available languages"</string>
+    <string name="warnings_button_update" msgid="8819670776624561500">"Update now"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Suggested languages"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"All languages"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"System language"</string>
-    <string name="preference_of_system_locale_summary" msgid="7828965109093154187">"System default – <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g>"</string>
-    <string name="no_multiple_language_supported" msgid="1683023807955740826">"The app is set to <xliff:g id="DEFAULT_LANGUAGE">%1$s</xliff:g> by default and doesn’t support multiple languages."</string>
+    <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"System default"</string>
+    <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Language selection for this app isn’t available from Settings."</string>
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Language may differ from languages available in the app. Some apps may not support this setting."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remove selected languages?</item>
       <item quantity="one">Remove selected language?</item>
@@ -338,7 +342,7 @@
     <string name="security_status_title" msgid="6958004275337618656">"Security status"</string>
     <string name="security_dashboard_summary" msgid="7571035662779425918">"Screen lock, Find My Device, app security"</string>
     <string name="safety_center_title" msgid="7732397372178774777">"Security &amp; privacy"</string>
-    <string name="safety_center_summary" msgid="4297140049215322727">"Permissions, screen lock, app security"</string>
+    <string name="safety_center_summary" msgid="3554867379951053869">"App security, device lock, permissions"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Face added"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Tap to set up face"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Face Unlock"</string>
@@ -454,6 +458,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"You and your child can delete their fingerprint images and model, or turn off Fingerprint Unlock at any time in Settings. Fingerprint images and models are stored on the phone until they’re deleted."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Your phone can be unlocked when you don’t intend it to be; for example, if someone holds it up to your finger."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Your child’s phone can be unlocked when they don’t intend it to be; for example, if someone holds it up to their finger."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"For best results, use a screen protector that’s Made For Google certified. With other screen protectors, your fingerprint may not work."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"For best results, use a screen protector that’s Made For Google certified. With other screen protectors, your child’s fingerprint may not work."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_try_adjusting" msgid="3855444121278320304">"Change the position of your finger slightly each time"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_partially_detected" msgid="8330287007361798356">"Cover the icon with the centre of your fingerprint"</string>
@@ -505,9 +511,10 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"One more time"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Follow the fingerprint icon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Keep lifting your finger to add the different parts of your fingerprint"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch and hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Place the tip of your finger on the sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Finally, use the edges of your finger"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Place the left edge of your finger"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Place the right edge of your finger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"This helps capture more of your fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enrolling fingerprint <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
@@ -579,10 +586,10 @@
     <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" The screen lock option is disabled. To learn more, contact your organization\'s admin. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorize purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Can’t use fingerprint sensor. Visit a repair provider"</string>
-    <string name="security_advanced_settings" msgid="1750030247647385675">"Advanced settings"</string>
-    <string name="security_advanced_settings_work_profile_settings_summary" msgid="4953206043812472343">"Work profile lock, Smart Lock"</string>
-    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="3596485752607184790">"Smart Lock and more"</string>
-    <string name="security_advanced_settings_keywords" msgid="5428731800873497281">"Advanced settings"</string>
+    <string name="security_advanced_settings" msgid="6260756619837834042">"More security settings"</string>
+    <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Work profile lock, encryption and more"</string>
+    <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encryption, credentials and more"</string>
+    <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"security, more security settings, more settings, advanced security settings"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -1151,9 +1158,6 @@
     <string name="wifi_dns2" msgid="7273133202625326148">"DNS 2 (unless overridden by private DNS)"</string>
     <string name="wifi_gateway" msgid="3699227808616416759">"Gateway"</string>
     <string name="wifi_network_prefix_length" msgid="1003365439352276622">"Network prefix length"</string>
-    <string name="wifi_type_11AX" msgid="6594656203096598812">"Wi‑Fi 6"</string>
-    <string name="wifi_type_11AC" msgid="5290409766357395104">"Wi‑Fi 5"</string>
-    <string name="wifi_type_11N" msgid="4758480232958990793">"Wi‑Fi 4"</string>
     <string name="wifi_p2p_settings_title" msgid="1689918226469221870">"Wi‑Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="4304362679971797283">"Device information"</string>
     <string name="wifi_p2p_persist_network" msgid="7942929491568227945">"Remember this connection"</string>
@@ -1297,7 +1301,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Off"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"On"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"On – Face-based"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Enable face detection"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Face detection"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automatically adjust the screen orientation when you move your phone between portrait and landscape"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Learn more about auto-rotate"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"When you move your phone between portrait and landscape"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Screen resolution"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"High resolution"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Highest resolution"</string>
@@ -2091,9 +2098,10 @@
     <string name="internal_storage" msgid="999496851424448809">"Internal storage"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Recomputing size…"</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Delete app data?"</string>
-    <string name="clear_data_dlg_text" msgid="1107610960337399006">"This app’s data will be permanently deleted. This includes files, settings, databases and other app data."</string>
+    <string name="clear_data_dlg_text" msgid="3440011276559762619">"This app’s data, including files and settings, will be permanently deleted from this device"</string>
     <string name="dlg_ok" msgid="1421350367857960997">"OK"</string>
     <string name="dlg_cancel" msgid="5164705061530774899">"Cancel"</string>
+    <string name="dlg_delete" msgid="1790919205039397659">"Delete"</string>
     <string name="app_not_found_dlg_title" msgid="7122106240981109930"></string>
     <string name="app_not_found_dlg_text" msgid="8634675268730513704">"The app wasn\'t found in the list of installed apps."</string>
     <string name="clear_failed_dlg_text" msgid="6866741916836125732">"Couldn’t clear storage for app."</string>
@@ -2326,6 +2334,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"From: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Reset settings"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Display size and text settings have been reset"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Reset display size and text?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Your display size and text preferences will reset to the phone’s original settings"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Reset"</string>
@@ -2336,7 +2345,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tap 3 times to zoom"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tap a button to zoom"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Quickly zoom in on the screen to make content larger"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure that your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch &amp; hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;To zoom in:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Use shortcut to start magnification&lt;br/&gt; {1,number,integer}. Tap the screen&lt;br/&gt; {2,number,integer}. Drag two fingers to move around screen&lt;br/&gt; {3,number,integer}. Pinch with two fingers to adjust zoom&lt;br/&gt; {4,number,integer}. Use shortcut to stop magnification&lt;br/&gt;&lt;br/&gt; &lt;b&gt;To zoom in temporarily:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Make sure that your magnification type is set to full screen&lt;br/&gt; {1,number,integer}. Use shortcut to start magnification&lt;br/&gt; {2,number,integer}. Touch and hold anywhere on the screen&lt;br/&gt; {3,number,integer}. Drag finger to move around screen&lt;br/&gt; {4,number,integer}. Lift finger to stop magnification"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"When magnification is turned on, you can zoom in on your screen.\n\n"<b>"To zoom"</b>", start magnification, then tap anywhere on the screen.\n"<ul><li>"Drag 2 or more fingers to scroll"</li>\n<li>"Pinch 2 or more fingers to adjust zoom"</li></ul>\n\n<b>"To zoom temporarily"</b>", start magnification, then touch and hold anywhere on the screen.\n"<ul><li>"Drag to move around the screen"</li>\n<li>"Lift finger to zoom out"</li></ul>\n\n"You can’t zoom in on the keyboard or navigation bar."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> of <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Use accessibility button to open"</string>
@@ -3747,7 +3756,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"When notifications arrive, your phone won’t make a sound or vibrate."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"No visuals or sound from notifications"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"You won’t see or hear notifications"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Your phone won’t show, vibrate or make sound for new or existing notifications. Keep in mind: critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Your phone won’t show, vibrate or make sound for new or existing notifications. Bear in mind: critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Custom"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Enable custom setting"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remove custom setting"</string>
@@ -5540,8 +5549,7 @@
     <string name="lockscreen_privacy_controls_summary" msgid="2769166101644452893">"Show controls for external devices from the lock screen"</string>
     <string name="lockscreen_trivial_controls_setting_toggle" msgid="8211063535536295676">"Control from locked device"</string>
     <string name="lockscreen_trivial_controls_summary" msgid="680581904143387225">"Control external devices without unlocking your phone or tablet if allowed by the device controls app"</string>
-    <!-- no translation found for lockscreen_trivial_disabled_controls_summary (7593626010580689155) -->
-    <skip />
+    <string name="lockscreen_trivial_disabled_controls_summary" msgid="7593626010580689155">"To use, first turn on ‘Show device controls’"</string>
     <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Show double-line clock when available"</string>
     <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Double-line clock"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
@@ -5686,8 +5694,6 @@
     <string name="location_toggle_title" msgid="5229867700421750868">"Location access"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"For apps and services"</string>
     <string name="mic_toggle_description" msgid="484139688645092237">"For apps and services. If this setting is off, microphone data may still be shared when you call an emergency number."</string>
-    <string name="game_settings_title" msgid="1028178627743422090">"Game settings"</string>
-    <string name="game_settings_summary" msgid="8623110986485071064">"Turn on Game Dashboard shortcut, and more"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Previous"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"Next"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"Colour preview"</string>
@@ -5762,4 +5768,12 @@
     <string name="ingress_rate_limit_summary" msgid="1097811019742438371">"Configure the network bandwidth ingress rate limit which is applied to all networks that provide Internet connectivity."</string>
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configure network download rate limit"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"No limit"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Listen to broadcasts that are playing near you"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Broadcast media to devices near you, or listen to someone else’s broadcast"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Broadcasts"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Listening to"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Find broadcasts"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Leave broadcast"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scan QR code"</string>
 </resources>

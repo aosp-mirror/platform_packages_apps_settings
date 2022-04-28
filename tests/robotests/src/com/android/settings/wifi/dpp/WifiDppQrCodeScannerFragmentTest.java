@@ -19,11 +19,19 @@ package com.android.settings.wifi.dpp;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
+
+import androidx.fragment.app.FragmentActivity;
+
+import com.android.settingslib.wifi.WifiPermissionChecker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -49,6 +57,10 @@ public class WifiDppQrCodeScannerFragmentTest {
     WifiPickerTracker mWifiPickerTracker;
     @Mock
     WifiEntry mWifiEntry;
+    @Mock
+    WifiPermissionChecker mWifiPermissionChecker;
+    @Mock
+    FragmentActivity mActivity;
 
     WifiDppQrCodeScannerFragment mFragment;
 
@@ -57,8 +69,8 @@ public class WifiDppQrCodeScannerFragmentTest {
         when(mWifiEntry.getSsid()).thenReturn(WIFI_SSID);
         when(mWifiPickerTracker.getWifiEntries()).thenReturn(Arrays.asList(mWifiEntry));
 
-        mFragment = spy(new WifiDppQrCodeScannerFragment());
-        mFragment.mWifiPickerTracker = mWifiPickerTracker;
+        mFragment = spy(
+                new WifiDppQrCodeScannerFragment(mWifiPickerTracker, mWifiPermissionChecker));
     }
 
     @Test
@@ -83,5 +95,53 @@ public class WifiDppQrCodeScannerFragmentTest {
 
         assertThat(mFragment.canConnectWifi(WIFI_SSID)).isFalse();
         verify(mFragment).showErrorMessageAndRestartCamera(anyInt());
+    }
+
+    @Test
+    public void onSuccess_noWifiPermission_finishActivityWithoutSetResult() {
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mWifiPermissionChecker.canAccessWifiState()).thenReturn(false);
+        when(mWifiPermissionChecker.canAccessFineLocation()).thenReturn(false);
+
+        mFragment.onSuccess();
+
+        verify(mActivity).finish();
+        verify(mActivity, never()).setResult(eq(Activity.RESULT_OK), any());
+    }
+
+    @Test
+    public void onSuccess_hasAccessWifiStatePermissionOnly_finishActivityWithoutSetResult() {
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mWifiPermissionChecker.canAccessWifiState()).thenReturn(true);
+        when(mWifiPermissionChecker.canAccessFineLocation()).thenReturn(false);
+
+        mFragment.onSuccess();
+
+        verify(mActivity).finish();
+        verify(mActivity, never()).setResult(eq(Activity.RESULT_OK), any());
+    }
+
+    @Test
+    public void onSuccess_hasAccessFineLocationPermissionOnly_finishActivityWithoutSetResult() {
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mWifiPermissionChecker.canAccessWifiState()).thenReturn(false);
+        when(mWifiPermissionChecker.canAccessFineLocation()).thenReturn(true);
+
+        mFragment.onSuccess();
+
+        verify(mActivity).finish();
+        verify(mActivity, never()).setResult(eq(Activity.RESULT_OK), any());
+    }
+
+    @Test
+    public void onSuccess_hasRequiredPermissions_finishActivityWithSetResult() {
+        when(mFragment.getActivity()).thenReturn(mActivity);
+        when(mWifiPermissionChecker.canAccessWifiState()).thenReturn(true);
+        when(mWifiPermissionChecker.canAccessFineLocation()).thenReturn(true);
+
+        mFragment.onSuccess();
+
+        verify(mActivity).setResult(eq(Activity.RESULT_OK), any());
+        verify(mActivity).finish();
     }
 }

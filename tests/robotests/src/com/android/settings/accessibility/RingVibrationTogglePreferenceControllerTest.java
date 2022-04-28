@@ -116,22 +116,24 @@ public class RingVibrationTogglePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_vibrateWhenRingingAndRampingRingerOff_shouldDisplayAlwaysOff() {
+    public void updateState_vibrateWhenRingingAndRampingRingerOff_shouldIgnoreAndUseIntensity() {
+        // VIBRATE_WHEN_RINGING is deprecated and should have no effect on the ring vibration
+        // setting. The ramping ringer is also independent now, instead of a 3-state setting.
         when(mAudioManager.isRampingRingerEnabled()).thenReturn(false);
         updateSetting(Settings.System.VIBRATE_WHEN_RINGING, OFF);
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
         mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY,
                 Vibrator.VIBRATION_INTENSITY_MEDIUM);
         mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
         mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
 
         updateSetting(Settings.System.RING_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
         mController.updateState(mPreference);
