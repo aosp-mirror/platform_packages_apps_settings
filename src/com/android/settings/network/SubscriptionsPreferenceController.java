@@ -232,10 +232,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 connectCarrierNetwork();
                 return true;
             });
-
-            mSubsGearPref.setOnGearClickListener(p ->
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
         }
+
+        mSubsGearPref.setOnGearClickListener(p ->
+                MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
 
         if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
             mSubsGearPref.setGearEnabled(false);
