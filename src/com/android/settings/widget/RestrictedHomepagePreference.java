@@ -19,29 +19,45 @@ package com.android.settings.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.android.settings.R;
+import androidx.preference.PreferenceViewHolder;
+
 import com.android.settingslib.RestrictedTopLevelPreference;
 
 /** Homepage preference that can be disabled by a device admin using a user restriction. */
-public class RestrictedHomepagePreference extends RestrictedTopLevelPreference {
+public class RestrictedHomepagePreference extends RestrictedTopLevelPreference implements
+        HomepagePreferenceLayoutHelper.HomepagePreferenceLayout {
+
+    private final HomepagePreferenceLayoutHelper mHelper;
+
     public RestrictedHomepagePreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public RestrictedHomepagePreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public RestrictedHomepagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
     }
 
     public RestrictedHomepagePreference(Context context) {
         super(context);
-        setLayoutResource(R.layout.homepage_preference);
+        mHelper = new HomepagePreferenceLayoutHelper(this);
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        mHelper.onBindViewHolder(holder);
+    }
+
+    @Override
+    public HomepagePreferenceLayoutHelper getHelper() {
+        return mHelper;
     }
 }
