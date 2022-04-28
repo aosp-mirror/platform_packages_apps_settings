@@ -16,6 +16,12 @@
 
 package com.android.settings.development.tare;
 
+import static android.app.tare.EconomyManager.CAKE_IN_ARC;
+import static android.app.tare.EconomyManager.DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_BASE_PRICE_CAKES;
+import static android.app.tare.EconomyManager.DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_BASE_PRICE_CAKES;
+import static android.app.tare.EconomyManager.DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_CTP_CAKES;
+import static android.app.tare.EconomyManager.DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_BASE_PRICE_CAKES;
+import static android.app.tare.EconomyManager.parseCreditValue;
 import static android.provider.Settings.Global.TARE_ALARM_MANAGER_CONSTANTS;
 import static android.provider.Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS;
 
@@ -93,182 +99,180 @@ public class TareFactorController {
     private void initAlarmManagerMap() {
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_EXEMPTED,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_exempted),
-                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_EXEMPTED,
+                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_EXEMPTED_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_headless_app),
-                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
+                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MIN_SATIATED_BALANCE_OTHER_APP,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
-                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_OTHER_APP,
+                        EconomyManager.DEFAULT_AM_MIN_SATIATED_BALANCE_OTHER_APP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_MAX_SATIATED_BALANCE,
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
-                        EconomyManager.DEFAULT_AM_MAX_SATIATED_BALANCE,
+                        EconomyManager.DEFAULT_AM_MAX_SATIATED_BALANCE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_INITIAL_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
-                        EconomyManager.DEFAULT_AM_INITIAL_CONSUMPTION_LIMIT,
+                        EconomyManager.DEFAULT_AM_INITIAL_CONSUMPTION_LIMIT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_HARD_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
-                        EconomyManager.DEFAULT_AM_HARD_CONSUMPTION_LIMIT,
+                        EconomyManager.DEFAULT_AM_HARD_CONSUMPTION_LIMIT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
-                        EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
-        // TODO: Add support to handle floats
-        //  mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_ONGOING,
-        //          new TareFactorData(mResources.getString(R.string.tare_top_activity),
-        //                  EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_ONGOING));
+        mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_ONGOING,
+                new TareFactorData(mResources.getString(R.string.tare_top_activity),
+                        EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_ONGOING_CAKES,
+                        POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
-                        EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_MAX, POLICY_ALARM_MANAGER));
+                        EconomyManager.DEFAULT_AM_REWARD_TOP_ACTIVITY_MAX_CAKES,
+                        POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_ONGOING,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_ONGOING_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_MAX,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_MAX_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen_15_min),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen_15_min),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_ONGOING,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_ONGOING_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen_15_min),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_MAX,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_SEEN_WITHIN_15_MAX_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_ONGOING_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_NOTIFICATION_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_AM_REWARD_NOTIFICATION_INTERACTION_MAX_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_WIDGET_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_WIDGET_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_ONGOING_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_WIDGET_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_AM_REWARD_WIDGET_INTERACTION_MAX_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_OTHER_USER_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_INSTANT_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_OTHER_USER_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_ONGOING_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_REWARD_OTHER_USER_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_AM_REWARD_OTHER_USER_INTERACTION_MAX_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_wakeup_exact_idle),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_CTP,
+                        EconomyManager
+                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_wakeup_inexact_idle),
                         EconomyManager
-                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_CTP,
+                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_EXACT_WAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_wakeup_exact),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_CTP,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_WAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_wakeup_inexact),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_WAKEUP_CTP,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_WAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_nonwakeup_exact_idle),
                         EconomyManager
-                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_CTP,
+                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_EXACT_NONWAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_nonwakeup_exact),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_NONWAKEUP_CTP,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_NONWAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_nonwakeup_inexact_idle),
-                        EconomyManager
-                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_CTP,
+                        DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_NONWAKEUP_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_nonwakeup_inexact),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_NONWAKEUP_CTP,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_NONWAKEUP_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_ALARMCLOCK_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_ALARMCLOCK_CTP,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_ALARMCLOCK_CTP_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager
-                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_BASE_PRICE,
+                        DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager
-                                .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_BASE_PRICE,
+                        DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_WAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_EXACT_NONWAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_EXACT_NONWAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_EXACT_WAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(
                 EconomyManager.KEY_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager
-                            .DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_BASE_PRICE,
+                        DEFAULT_AM_ACTION_ALARM_ALLOW_WHILE_IDLE_INEXACT_NONWAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_INEXACT_NONWAKEUP_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_NONWAKEUP_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_INEXACT_NONWAKEUP_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
         mAlarmManagerMap.put(EconomyManager.KEY_AM_ACTION_ALARM_ALARMCLOCK_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_alarm_clock),
-                        EconomyManager.DEFAULT_AM_ACTION_ALARM_ALARMCLOCK_BASE_PRICE,
+                        EconomyManager.DEFAULT_AM_ACTION_ALARM_ALARMCLOCK_BASE_PRICE_CAKES,
                         POLICY_ALARM_MANAGER));
     }
 
@@ -279,180 +283,181 @@ public class TareFactorController {
     private void initJobSchedulerMap() {
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_EXEMPTED,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_exempted),
-                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_EXEMPTED,
+                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_EXEMPTED_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_headless_app),
-                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
+                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP,
                 new TareFactorData(mResources.getString(R.string.tare_min_balance_other_app),
-                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_OTHER_APP,
+                        EconomyManager.DEFAULT_JS_MIN_SATIATED_BALANCE_OTHER_APP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
                 new TareFactorData(mResources.getString(R.string.tare_max_satiated_balance),
-                        EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE,
+                        EconomyManager.DEFAULT_JS_MAX_SATIATED_BALANCE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_initial_consumption_limit),
-                        EconomyManager.DEFAULT_JS_INITIAL_CONSUMPTION_LIMIT,
+                        EconomyManager.DEFAULT_JS_INITIAL_CONSUMPTION_LIMIT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT,
                 new TareFactorData(mResources.getString(R.string.tare_hard_consumption_limit),
-                        EconomyManager.DEFAULT_JS_HARD_CONSUMPTION_LIMIT,
+                        EconomyManager.DEFAULT_JS_HARD_CONSUMPTION_LIMIT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
-                        EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_INSTANT,
+                        EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_INSTANT_CAKES,
                         POLICY_JOB_SCHEDULER));
-        // TODO: Add support to handle floats
-        //  mAlarmManagerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_ONGOING,
-        //          new TareFactorData(mResources.getString(R.string.tare_top_activity),
-        //                  EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_ONGOING));
+        mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_ONGOING,
+                new TareFactorData(mResources.getString(R.string.tare_top_activity),
+                        EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_ONGOING_CAKES,
+                        POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_top_activity),
-                        EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_MAX, POLICY_JOB_SCHEDULER));
+                        EconomyManager.DEFAULT_JS_REWARD_TOP_ACTIVITY_MAX_CAKES,
+                        POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_INSTANT,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_INSTANT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_ONGOING,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_ONGOING_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_notification_seen),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_MAX,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_SEEN_MAX_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_INSTANT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_ONGOING_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_notification_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_JS_REWARD_NOTIFICATION_INTERACTION_MAX_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_INSTANT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_ONGOING_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_widget_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_JS_REWARD_WIDGET_INTERACTION_MAX_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_INSTANT,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_INSTANT,
+                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_INSTANT_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_ONGOING,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_ONGOING,
+                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_ONGOING_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_MAX,
                 new TareFactorData(mResources.getString(R.string.tare_other_interaction),
-                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_MAX,
+                        EconomyManager.DEFAULT_JS_REWARD_OTHER_USER_INTERACTION_MAX_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MAX_START_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_max_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_START_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_START_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_max_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_RUNNING_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_RUNNING_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_high_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_START_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_START_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_high_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_RUNNING_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_RUNNING_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_default_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_START_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_START_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_default_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_RUNNING_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_RUNNING_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_LOW_START_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_low_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_START_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_START_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_low_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_RUNNING_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_RUNNING_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MIN_START_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_min_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_START_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_START_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_min_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_RUNNING_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_RUNNING_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP,
                 new TareFactorData(mResources.getString(R.string.tare_job_timeout_penalty),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MAX_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_max_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_START_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_START_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_max_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_high_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_START_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_START_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_high_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_default_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_default_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_LOW_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_low_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_START_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_START_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(
                 EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_low_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MIN_START_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_min_start),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_START_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_START_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_min_running),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
         mJobSchedulerMap.put(EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE,
                 new TareFactorData(mResources.getString(R.string.tare_job_timeout_penalty),
-                        EconomyManager.DEFAULT_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE,
+                        EconomyManager.DEFAULT_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE_CAKES,
                         POLICY_JOB_SCHEDULER));
     }
 
@@ -480,7 +485,7 @@ public class TareFactorController {
         for (int i = map.size() - 1; i >= 0; --i) {
             final String key = map.keyAt(i);
             final TareFactorData data = map.valueAt(i);
-            data.currentValue = mParser.getInt(key, data.defaultValue);
+            data.currentValue = parseCreditValue(mParser.getString(key, null), data.defaultValue);
         }
     }
 
@@ -513,7 +518,7 @@ public class TareFactorController {
      * @param key          the key of the factor you want to get the default value of
      * @param factorPolicy the policy you want the current value of
      */
-    private int getCurrentValue(String key, int factorPolicy) {
+    private long getCurrentValue(String key, int factorPolicy) {
         final ArrayMap<String, TareFactorData> currentMap = getMap(factorPolicy);
         return currentMap.get(key).currentValue;
     }
@@ -535,7 +540,7 @@ public class TareFactorController {
         return currentMap.get(key).factorPolicy;
     }
 
-    int getValue(String key) {
+    long getValue(String key) {
         final int policy = getFactorType(key);
         return getCurrentValue(key, policy);
     }
@@ -548,7 +553,7 @@ public class TareFactorController {
      * @param editedValue  the value entered by the user in the dialog
      * @param factorPolicy policy being updated
      */
-    public void updateValue(String key, int editedValue, int factorPolicy) {
+    public void updateValue(String key, long editedValue, int factorPolicy) {
         final ArrayMap<String, TareFactorData> map = getMap(factorPolicy);
 
         final TareFactorData data = map.get(key);
@@ -592,8 +597,16 @@ public class TareFactorController {
 
             constantsStringBuilder
                     .append(factorMap.keyAt(i))
-                    .append("=")
-                    .append(factor.currentValue);
+                    .append("=");
+            if (factor.currentValue % CAKE_IN_ARC == 0) {
+                constantsStringBuilder
+                        .append(factor.currentValue / CAKE_IN_ARC)
+                        .append("A");
+            } else {
+                constantsStringBuilder
+                        .append(factor.currentValue)
+                        .append("ck");
+            }
         }
 
         Settings.Global.putString(mContentResolver, settingsKey, constantsStringBuilder.toString());
@@ -615,11 +628,11 @@ public class TareFactorController {
      */
     private static class TareFactorData {
         public final String title;
-        public final int defaultValue;
+        public final long defaultValue;
         public final int factorPolicy;
-        public int currentValue;
+        public long currentValue;
 
-        TareFactorData(String title, int defaultValue, int factorPolicy) {
+        TareFactorData(String title, long defaultValue, int factorPolicy) {
             this.title = title;
             this.defaultValue = defaultValue;
             this.factorPolicy = factorPolicy;

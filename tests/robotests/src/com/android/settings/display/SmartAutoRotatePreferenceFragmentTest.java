@@ -16,7 +16,8 @@
 
 package com.android.settings.display;
 
-import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_SWITCH_PREFERENCE_ID;
+import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY;
+import static com.android.settings.display.SmartAutoRotatePreferenceFragment.AUTO_ROTATE_SWITCH_PREFERENCE_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -45,7 +46,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.ResolveInfoBuilder;
 import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowRotationPolicy;
-import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.devicestate.DeviceStateRotationLockSettingsManager;
 
@@ -71,8 +71,6 @@ public class SmartAutoRotatePreferenceFragmentTest {
 
     private SmartAutoRotatePreferenceFragment mFragment;
 
-    private SettingsMainSwitchBar mSwitchBar;
-
     @Mock
     private PackageManager mPackageManager;
 
@@ -86,6 +84,9 @@ public class SmartAutoRotatePreferenceFragmentTest {
     private Preference mRotateSwitchPreference;
     private Resources mResources;
     private Context mContext;
+
+    @Mock
+    private Preference mRotateMainSwitchPreference;
 
     @Before
     public void setUp() {
@@ -112,21 +113,21 @@ public class SmartAutoRotatePreferenceFragmentTest {
         when(mFragment.getContext()).thenReturn(mContext);
         doReturn(mView).when(mFragment).getView();
 
-        when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_ID)).thenReturn(
+        when(mFragment.findPreference(AUTO_ROTATE_SWITCH_PREFERENCE_KEY)).thenReturn(
                 mRotateSwitchPreference);
 
-        mSwitchBar = spy(new SettingsMainSwitchBar(mContext));
-        when(mActivity.getSwitchBar()).thenReturn(mSwitchBar);
-        doReturn(mSwitchBar).when(mView).findViewById(R.id.switch_bar);
-        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(false);
+
+        when(mFragment.findPreference(AUTO_ROTATE_MAIN_SWITCH_PREFERENCE_KEY)).thenReturn(
+                mRotateMainSwitchPreference);
     }
 
 
     @Test
     public void createHeader_faceDetectionSupported_switchBarIsEnabled() {
+        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(false);
         mFragment.createHeader(mActivity);
 
-        verify(mSwitchBar, times(1)).show();
+        verify(mRotateMainSwitchPreference, never()).setVisible(false);
         verify(mRotateSwitchPreference, times(1)).setVisible(false);
     }
 
@@ -137,7 +138,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
 
         mFragment.createHeader(mActivity);
 
-        verify(mSwitchBar, never()).show();
+        verify(mRotateMainSwitchPreference, times(1)).setVisible(false);
         verify(mRotateSwitchPreference, never()).setVisible(false);
     }
 
@@ -147,7 +148,7 @@ public class SmartAutoRotatePreferenceFragmentTest {
 
         mFragment.createHeader(mActivity);
 
-        verify(mSwitchBar, never()).show();
+        verify(mRotateMainSwitchPreference, times(1)).setVisible(false);
         verify(mRotateSwitchPreference, never()).setVisible(false);
     }
 
@@ -174,6 +175,19 @@ public class SmartAutoRotatePreferenceFragmentTest {
                 DeviceStateAutoRotateSettingController.class);
         assertThat(preferenceControllers.get(1)).isInstanceOf(
                 DeviceStateAutoRotateSettingController.class);
+    }
+
+    @Test
+    public void setupFooter_linkAddedWhenAppropriate() {
+        doReturn("").when(mFragment).getText(anyInt());
+        doReturn("").when(mFragment).getString(anyInt());
+        mFragment.setupFooter();
+        verify(mFragment, never()).addHelpLink();
+
+        doReturn("testString").when(mFragment).getText(anyInt());
+        doReturn("testString").when(mFragment).getString(anyInt());
+        mFragment.setupFooter();
+        verify(mFragment, times(1)).addHelpLink();
     }
 
     private void enableDeviceStateSettableRotationStates(String[] settableStates,

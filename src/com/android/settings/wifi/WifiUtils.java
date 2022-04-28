@@ -72,7 +72,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
                 }
             }
             configBuilder.setPassphrase(password, securityType);
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
