@@ -54,8 +54,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Выберите размер шрифта."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Уменьшить"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличить"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоповорот"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Функция \"Распознавание лиц\" улучшает точность автоповорота с помощью фронтальной камеры. Изображения никогда не сохраняются и не отправляются в Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Включить автоповорот"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Функция \"Распознавание лиц\" улучшает точность автоповорота с помощью фронтальной камеры. Изображения никогда не сохраняются и не отправляются в Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Пример текста"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Удивительный волшебник из страны Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Изумрудный Город страны Оз"</string>
@@ -189,7 +189,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="8886572276450900049">"Если поле хоста не заполнено, поле порта также следует оставить пустым."</string>
     <string name="proxy_error_invalid_port" msgid="2830054691770209166">"Указанный порт недействителен."</string>
     <string name="proxy_warning_limited_support" msgid="3277104160797351942">"Прокси-сервер HTTP используется только браузером."</string>
-    <string name="proxy_url_title" msgid="3502625766036404073">"URL автоконфигур. прокси: "</string>
+    <string name="proxy_url_title" msgid="3502625766036404073">"URL автоконфигурации прокси: "</string>
     <string name="radio_info_ping_hostname_v4" msgid="4790577760885127088">"Запрос ping для www.google.com, IPv4:"</string>
     <string name="radio_info_ping_hostname_v6" msgid="8327436534663560713">"Запрос ping для www.google.com, IPv6:"</string>
     <string name="radio_info_http_client_test" msgid="5673975677271544085">"Проверка клиента HTTP:"</string>
@@ -624,7 +624,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="1040265358906410746"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Блокировка экрана"</string>
-    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Выберите способ блокировки экрана"</string>
+    <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Способ разблокировки экрана"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Выберите блокировку экрана"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Блокировка для рабочего профиля"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Блокировка для раб. профиля"</string>
@@ -1341,7 +1341,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Отключить"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Включено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Включить (на основе распознавания лиц)"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Включить распознавание лиц"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Распознавание лиц"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"При смене положения телефона экран автоматически переключается из вертикального режима в горизонтальный."</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Подробнее об автоповороте"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Переключать ориентацию при изменении положения телефона"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Разрешение экрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Высокое разрешение"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Самое высокое разрешение"</string>
@@ -2379,6 +2382,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Борис"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Доброе утро!\n\nКак дела с дизайном? Он будет готов до того, как мы начнем разработку новых шаров?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Сбросить настройки"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Сбросить настройки текста и размера экрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Будут восстановлены исходные параметры текста и размера экрана, заданные на телефоне."</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Сбросить"</string>
@@ -2685,8 +2690,8 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"слабый слух, потеря слуха"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"слабый слух, потеря слуха, субтитры, телетайп"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Быстр. подключ."</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Находить рядом устр. Bluetooth с быстр. подключ."</string>
+    <string name="fast_pair_settings" msgid="3308819519080016185">"Быстрое подключение"</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Находить рядом устройства Bluetooth ­с быстрым подключением"</string>
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Искать устройства рядом"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Сохраненные устройства"</string>
     <string name="print_settings" msgid="8519810615863882491">"Печать"</string>
@@ -3471,7 +3476,7 @@
     <string name="user_cannot_add_accounts_message" msgid="2351326078338805337">"Пользователи с ограниченным доступом не могут добавлять аккаунты"</string>
     <string name="user_remove_user_menu" msgid="2183714948094429367">"Удалить пользователя <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="user_lockscreen_settings" msgid="4596612658981942092">"Заблокированный экран"</string>
-    <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Доб. пользов. на заблок. экране"</string>
+    <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Добавить пользователя ­на заблокированном экране"</string>
     <string name="switch_to_user_zero_when_docked" msgid="2554028721803481458">"Переключаться на администратора при подключении к док-станции"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Удалить ваш профиль?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Удалить пользователя?"</string>
@@ -3517,7 +3522,7 @@
     <string name="nfc_payment_default_not_set" msgid="6471905683119084622">"Не выбрано"</string>
     <string name="nfc_payment_app_and_desc" msgid="2607417639227030398">"<xliff:g id="APP">%1$s</xliff:g> – <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="nfc_payment_use_default" msgid="6127665705799658860">"Использовать основное платежное приложение"</string>
-    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Использовать осн. платежное приложение"</string>
+    <string name="nfc_payment_use_default_dialog" msgid="8556328090777785383">"Использовать основное ­платежное приложение"</string>
     <string name="nfc_payment_favor_default" msgid="4508491832174644772">"Всегда"</string>
     <string name="nfc_payment_favor_open" msgid="8554643344050373346">"Если не открыто другое платежное приложение"</string>
     <string name="nfc_payment_pay_with" msgid="3001320460566523453">"При бесконтактной оплате использовать:"</string>
@@ -4069,7 +4074,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"Разрешить оповещения"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"Важные разговоры"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Появляется в верхней части списка разговоров и как всплывающий чат, фото профиля показывается на заблок. экране"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"Появляется в верхней части списка разговоров и как всплывающий чат, фото профиля показывается на заблокированном экране"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"Приложение \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" не поддерживает большинство функций разговоров. Вы не можете отмечать разговоры как важные, и они не будут появляться в виде всплывающих чатов."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"Объединять уведомления в одну строку на панели уведомлений"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"Без звука и вибрации"</string>
