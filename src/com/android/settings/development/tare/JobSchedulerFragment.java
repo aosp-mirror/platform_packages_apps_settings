@@ -15,17 +15,16 @@
  */
 package com.android.settings.development.tare;
 
+import android.annotation.Nullable;
 import android.app.Fragment;
+import android.app.tare.EconomyManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.settings.R;
 
@@ -33,131 +32,142 @@ import com.android.settings.R;
  * Creates the JobScheduler fragment to display all the JobScheduler factors
  * when the JobScheduler policy is chosen in the dropdown TARE menu.
  */
-public class JobSchedulerFragment extends Fragment {
+public class JobSchedulerFragment extends Fragment implements
+        TareFactorController.DataChangeListener {
+
+    private TareFactorController mFactorController;
+
+    private TareFactorExpandableListAdapter mExpandableListAdapter;
+
+    private String[] mGroups;
+    private String[][] mChildren;
+    private String[][] mKeys;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mFactorController = TareFactorController.getInstance(getContext());
+        populateArrays();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.tare_policy_fragment, null);
         ExpandableListView elv = (ExpandableListView) v.findViewById(R.id.factor_list);
-        final SavedTabsListAdapter expListAdapter = new SavedTabsListAdapter();
+        mExpandableListAdapter = new TareFactorExpandableListAdapter(
+                mFactorController, LayoutInflater.from(getActivity()), mGroups, mChildren, mKeys);
         elv.setGroupIndicator(null);
-        elv.setAdapter(expListAdapter);
+        elv.setAdapter(mExpandableListAdapter);
         elv.setOnChildClickListener(new OnChildClickListener() {
             public boolean onChildClick(ExpandableListView parent, View v,
                     int groupPosition, int childPosition, long id) {
-                final String selected =
-                        (String) expListAdapter.getChild(groupPosition, childPosition);
-                Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT)
-                        .show();
+                final String key = mExpandableListAdapter.getKey(groupPosition, childPosition);
+                mFactorController.createDialog(key).show(getFragmentManager(), key);
                 return true;
             }
         });
+
         return v;
     }
 
-    /**
-     * Creates the expandable list containing all JobScheduler factors within the
-     * JobScheduler fragment.
-     */
-    public class SavedTabsListAdapter extends BaseExpandableListAdapter {
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFactorController.registerListener(this);
+    }
 
-        private final LayoutInflater mInflater;
-        private Resources mResources = getActivity().getResources();
+    @Override
+    public void onStop() {
+        mFactorController.unregisterListener(this);
+        super.onStop();
+    }
 
-        private String[] mGroups = {
-                mResources.getString(R.string.tare_max_circulation),
-                mResources.getString(R.string.tare_max_satiated_balance),
-                mResources.getString(R.string.tare_min_satiated_balance),
-                mResources.getString(R.string.tare_modifiers),
-                mResources.getString(R.string.tare_actions),
-                mResources.getString(R.string.tare_rewards)
+    @Override
+    public void onDataChanged() {
+        mExpandableListAdapter.notifyDataSetChanged();
+    }
+
+    private void populateArrays() {
+        final Resources resources = getResources();
+
+        mGroups = new String[]{
+                resources.getString(R.string.tare_consumption_limits),
+                resources.getString(R.string.tare_balances),
+                // mResources.getString(R.string.tare_modifiers),
+                resources.getString(R.string.tare_actions_ctp),
+                resources.getString(R.string.tare_actions_base_price),
+                resources.getString(R.string.tare_rewards_instantaneous),
+                resources.getString(R.string.tare_rewards_ongoing),
+                resources.getString(R.string.tare_rewards_max)
         };
 
-        /*
-         * First two are empty arrays because the first two factors have no subfactors (no
-         * children).
-         */
-        private String[][] mChildren = {
-                {},
-                {},
-                mResources.getStringArray(R.array.tare_min_satiated_balance_subfactors),
-                mResources.getStringArray(R.array.tare_modifiers_subfactors),
-                mResources.getStringArray(R.array.tare_job_scheduler_actions),
-                mResources.getStringArray(R.array.tare_rewards_subfactors)
+        mChildren = new String[][]{
+                resources.getStringArray(R.array.tare_consumption_limit_subfactors),
+                resources.getStringArray(R.array.tare_app_balance_subfactors),
+                // TODO: support
+                // mResources.getStringArray(R.array.tare_modifiers_subfactors),
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_job_scheduler_actions),
+                resources.getStringArray(R.array.tare_rewards_subfactors),
+                {resources.getString(R.string.tare_top_activity)},
+                resources.getStringArray(R.array.tare_rewards_subfactors)
         };
 
-        public SavedTabsListAdapter() {
-            mInflater = LayoutInflater.from(getActivity());
-        }
-
-        @Override
-        public int getGroupCount() {
-            return mGroups.length;
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return mChildren[groupPosition].length;
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return mGroups[groupPosition];
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return mChildren[groupPosition][childPosition];
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView,
-                ViewGroup parent) {
-            if (convertView == null) {
-                convertView = mInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
-            }
-            TextView factor = (TextView) convertView.findViewById(android.R.id.text1);
-            factor.setText(getGroup(groupPosition).toString());
-            return convertView;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
-                View convertView, ViewGroup parent) {
-            // Here a custom child item is used instead of android.R.simple_list_item_2 because it
-            // is more customizable for this specific UI
-            if (convertView == null) {
-                convertView = mInflater.inflate(R.layout.tare_child_item, null);
-            }
-            TextView factor = (TextView) convertView.findViewById(R.id.factor);
-            TextView value = (TextView) convertView.findViewById(R.id.factor_number);
-
-            // TODO: Replace these hardcoded values with either default or user inputted TARE values
-            factor.setText(getChild(groupPosition, childPosition).toString());
-            value.setText("500");
-
-            return convertView;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
+        mKeys = new String[][]{
+                {
+                        EconomyManager.KEY_JS_INITIAL_CONSUMPTION_LIMIT,
+                        EconomyManager.KEY_JS_HARD_CONSUMPTION_LIMIT
+                },
+                {
+                        EconomyManager.KEY_JS_MAX_SATIATED_BALANCE,
+                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_EXEMPTED,
+                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_HEADLESS_SYSTEM_APP,
+                        EconomyManager.KEY_JS_MIN_SATIATED_BALANCE_OTHER_APP
+                },
+                // {},
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_CTP,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_CTP
+                },
+                {
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MAX_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_HIGH_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_DEFAULT_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_LOW_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_START_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_MIN_RUNNING_BASE_PRICE,
+                        EconomyManager.KEY_JS_ACTION_JOB_TIMEOUT_PENALTY_BASE_PRICE
+                },
+                {
+                        EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_INSTANT,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_INSTANT,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_INSTANT,
+                        EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_INSTANT,
+                        EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_INSTANT,
+                },
+                {EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_ONGOING},
+                {
+                        EconomyManager.KEY_JS_REWARD_TOP_ACTIVITY_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_SEEN_MAX,
+                        EconomyManager.KEY_JS_REWARD_NOTIFICATION_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_WIDGET_INTERACTION_MAX,
+                        EconomyManager.KEY_JS_REWARD_OTHER_USER_INTERACTION_MAX,
+                }
+        };
     }
 }

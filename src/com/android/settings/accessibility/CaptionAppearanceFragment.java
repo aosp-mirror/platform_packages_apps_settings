@@ -16,12 +16,16 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
@@ -92,6 +96,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
 
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final View.OnLayoutChangeListener mLayoutChangeListener =
             new View.OnLayoutChangeListener() {
                 @Override
@@ -99,7 +104,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
                         int oldLeft, int oldTop, int oldRight, int oldBottom) {
                     // Remove the listener once the callback is triggered.
                     mPreviewViewport.removeOnLayoutChangeListener(this);
-                    refreshPreviewText();
+                    mHandler.post(() ->refreshPreviewText());
                 }
             };
 
@@ -397,6 +402,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
         }
 
         refreshPreviewText();
+        enableCaptioningManager();
     }
 
     @Override
@@ -406,14 +412,24 @@ public class CaptionAppearanceFragment extends DashboardFragment
             Settings.Secure.putString(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
             refreshPreviewText();
+            enableCaptioningManager();
         } else if (mFontSize == preference) {
             Settings.Secure.putFloat(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                     Float.parseFloat((String) value));
             refreshPreviewText();
+            enableCaptioningManager();
         }
 
         return true;
+    }
+
+    private void enableCaptioningManager() {
+        if (mCaptioningManager.isEnabled()) {
+            return;
+        }
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
     }
 
     @Override

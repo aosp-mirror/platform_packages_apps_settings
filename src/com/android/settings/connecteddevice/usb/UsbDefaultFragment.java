@@ -189,6 +189,8 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @Override
     public void onPause() {
         super.onPause();
+        mCurrentFunctions = mUsbBackend.getCurrentFunctions();
+        Log.d(TAG, "onPause() : current functions : " + mCurrentFunctions);
         mUsbBackend.setDefaultUsbFunctions(mCurrentFunctions);
     }
 

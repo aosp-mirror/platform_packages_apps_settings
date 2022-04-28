@@ -43,19 +43,21 @@ public class ButtonNavigationSettingsFragmentTest {
     }
 
     @Test
-    public void getNonIndexableKeys_twoButtonNavigationAvailable_allKeysIndexable() {
+    public void getNonIndexableKeys_twoButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),
                 NAV_BAR_MODE_2BUTTON_OVERLAY);
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                ApplicationProvider.getApplicationContext())).isEmpty();
+                ApplicationProvider.getApplicationContext())).containsExactly(
+                "gesture_power_menu_video");
     }
 
     @Test
-    public void getNonIndexableKeys_threeButtonNavigationAvailable_allKeysIndexable() {
+    public void getNonIndexableKeys_threeButtonNavigationAvailable_allKeysExceptAnimIndexable() {
         addPackageToPackageManager(ApplicationProvider.getApplicationContext(),
                 NAV_BAR_MODE_3BUTTON_OVERLAY);
         assertThat(ButtonNavigationSettingsFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                ApplicationProvider.getApplicationContext())).isEmpty();
+                ApplicationProvider.getApplicationContext())).containsExactly(
+                "gesture_power_menu_video");
     }
 
     private static void addPackageToPackageManager(Context context, String pkg) {

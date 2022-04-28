@@ -16,34 +16,74 @@
 
 package com.android.settings.safetycenter;
 
+import static android.content.Intent.ACTION_BOOT_COMPLETED;
+import static android.safetycenter.SafetyCenterManager.ACTION_REFRESH_SAFETY_SOURCES;
 import static android.safetycenter.SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCE_IDS;
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_DEVICE_REBOOTED;
+import static android.safetycenter.SafetyEvent.SAFETY_EVENT_TYPE_REFRESH_REQUESTED;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.safetycenter.SafetyCenterManager;
+import android.safetycenter.SafetyEvent;
+
+import com.android.settings.security.ScreenLockPreferenceDetailsUtils;
 
 import com.google.common.collect.ImmutableList;
+
+import java.util.List;
 
 /** Broadcast receiver for handling requests from Safety Center for fresh data. */
 public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
 
+    private static final SafetyEvent EVENT_DEVICE_REBOOTED =
+            new SafetyEvent.Builder(SAFETY_EVENT_TYPE_DEVICE_REBOOTED).build();
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (!SafetyCenterStatusHolder.get().isEnabled(context)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(context)) {
             return;
         }
 
-        String[] sourceIdsExtra = intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
-        if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
-            ImmutableList<String> sourceIds = ImmutableList.copyOf(sourceIdsExtra);
-
-            if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
-                LockScreenSafetySource.sendSafetyData(context);
+        if (ACTION_REFRESH_SAFETY_SOURCES.equals(intent.getAction())) {
+            String[] sourceIdsExtra =
+                    intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
+            if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
+                final String refreshBroadcastId = intent.getStringExtra(
+                        SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
+                final SafetyEvent safetyEvent = new SafetyEvent.Builder(
+                        SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                        .setRefreshBroadcastId(refreshBroadcastId).build();
+                refreshSafetySources(
+                        context,
+                        ImmutableList.copyOf(sourceIdsExtra),
+                        safetyEvent);
             }
-
-            if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
-                BiometricsSafetySource.sendSafetyData(context);
-            }
+            return;
         }
+
+
+        if (ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+            refreshAllSafetySources(context, EVENT_DEVICE_REBOOTED);
+        }
+    }
+
+    private static void refreshSafetySources(Context context, List<String> sourceIds,
+            SafetyEvent safetyEvent) {
+        if (sourceIds.contains(LockScreenSafetySource.SAFETY_SOURCE_ID)) {
+            LockScreenSafetySource.setSafetySourceData(context,
+                    new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
+        }
+
+        if (sourceIds.contains(BiometricsSafetySource.SAFETY_SOURCE_ID)) {
+            BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
+        }
+    }
+
+    private static void refreshAllSafetySources(Context context, SafetyEvent safetyEvent) {
+        LockScreenSafetySource.setSafetySourceData(context,
+                new ScreenLockPreferenceDetailsUtils(context), safetyEvent);
+        BiometricsSafetySource.setSafetySourceData(context, safetyEvent);
     }
 }
