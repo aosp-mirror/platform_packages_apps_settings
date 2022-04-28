@@ -47,10 +47,10 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
 
         try {
             Resources res = context.getPackageManager().getResourcesForApplication(
-                    "com.android.bluetooth");
+                    "com.android.bluetooth.services");
             mDefaultMaxConnectedAudioDevices = res.getInteger(res.getIdentifier(
                     "config_bluetooth_max_connected_audio_devices",
-                    "integer", "com.android.bluetooth"));
+                    "integer", "com.android.bluetooth.services"));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
