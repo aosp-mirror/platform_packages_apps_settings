@@ -34,7 +34,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TrustedCredentialsSettings.CertHolder;
+import com.android.settings.TrustedCredentialsFragment.CertHolder;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.security.cert.X509Certificate;

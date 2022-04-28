@@ -62,7 +62,8 @@ public class DreamPickerControllerTest {
     }
 
     private DreamPickerController buildController() {
-        final DreamPickerController controller = new DreamPickerController(mContext, mBackend);
+        final DreamPickerController controller = new DreamPickerController(mContext, "key",
+                mBackend);
         controller.displayPreference(mScreen);
         return controller;
     }

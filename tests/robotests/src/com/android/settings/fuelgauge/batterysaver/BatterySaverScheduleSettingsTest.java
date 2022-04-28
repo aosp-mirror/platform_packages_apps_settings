@@ -1,7 +1,5 @@
 package com.android.settings.fuelgauge.batterysaver;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -10,7 +8,6 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
-import android.util.Pair;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;

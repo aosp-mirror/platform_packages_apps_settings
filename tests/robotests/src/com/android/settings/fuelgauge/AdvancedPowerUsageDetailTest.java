@@ -181,7 +181,7 @@ public class AdvancedPowerUsageDetailTest {
         when(mBatteryEntry.getLabel()).thenReturn(APP_LABEL);
         when(mBatteryEntry.getTimeInBackgroundMs()).thenReturn(BACKGROUND_TIME_MS);
         when(mBatteryEntry.getTimeInForegroundMs()).thenReturn(FOREGROUND_TIME_MS);
-        mBatteryEntry.iconId = ICON_ID;
+        mBatteryEntry.mIconId = ICON_ID;
 
         mFragment.mHeaderPreference = mHeaderPreference;
         mFragment.mState = mState;
