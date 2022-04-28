@@ -491,7 +491,8 @@ public class AppStorageSettings extends AppInfoWithHeader
                 return new AlertDialog.Builder(getActivity())
                         .setTitle(getActivity().getText(R.string.clear_data_dlg_title))
                         .setMessage(getActivity().getText(R.string.clear_data_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.dlg_delete,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Clear user data here
                                 initiateClearUserData();

@@ -106,6 +106,7 @@ public class EnabledNetworkModePreferenceControllerTest {
         mPersistableBundle = new PersistableBundle();
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfig();
         doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_CARRIER_CONFIG_APPLIED_BOOL, true);
         mPreference = new ListPreference(mContext);
         mController = new EnabledNetworkModePreferenceController(mContext, KEY);
         mockAllowedNetworkTypes(ALLOWED_ALL_NETWORK_TYPE);
@@ -142,6 +143,14 @@ public class EnabledNetworkModePreferenceControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
 
         when(mServiceState.getRoaming()).thenReturn(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @UiThreadTest
+    @Test
+    public void getAvailabilityStatus_carrierConfigNotReady_returnUnavailable() {
+        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_CARRIER_CONFIG_APPLIED_BOOL, false);
+
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 

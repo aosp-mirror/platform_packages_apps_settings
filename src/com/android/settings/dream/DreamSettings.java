@@ -32,7 +32,7 @@ import android.widget.Button;
 import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceCategory;
+import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -57,10 +57,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
     static final String EITHER_CHARGING_OR_DOCKED = "either_charging_or_docked";
     static final String NEVER_DREAM = "never";
 
-    private static final String MAIN_PREF_CATEGORY = "dream_main_category";
-
     private MainSwitchPreference mMainSwitchPreference;
-    private PreferenceCategory mMainPrefCategory;
     private Button mPreviewButton;
     private RecyclerView mRecyclerView;
 
@@ -152,6 +149,22 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
         return controllers;
     }
 
+    private void setAllPreferencesEnabled(boolean isEnabled) {
+        getPreferenceControllers().forEach(controllers -> {
+            controllers.forEach(controller -> {
+                final String prefKey = controller.getPreferenceKey();
+                if (prefKey.equals(MAIN_SWITCH_PREF_KEY)) {
+                    return;
+                }
+                final Preference pref = findPreference(prefKey);
+                if (pref != null) {
+                    pref.setEnabled(isEnabled);
+                    controller.updateState(pref);
+                }
+            });
+        });
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -163,10 +176,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
             mMainSwitchPreference.addOnSwitchChangeListener(this);
         }
 
-        mMainPrefCategory = findPreference(MAIN_PREF_CATEGORY);
-        if (mMainPrefCategory != null) {
-            mMainPrefCategory.setEnabled(dreamBackend.isEnabled());
-        }
+        setAllPreferencesEnabled(dreamBackend.isEnabled());
     }
 
     @Override
@@ -194,7 +204,7 @@ public class DreamSettings extends DashboardFragment implements OnMainSwitchChan
 
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        mMainPrefCategory.setEnabled(isChecked);
+        setAllPreferencesEnabled(isChecked);
         mPreviewButton.setVisibility(isChecked ? View.VISIBLE : View.GONE);
         updatePaddingForPreviewButton();
     }
