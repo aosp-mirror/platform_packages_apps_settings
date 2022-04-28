@@ -93,7 +93,7 @@ public class NfcForegroundPreferenceController extends BasePreferenceController 
             return;
         }
         final ListPreference listPreference = (ListPreference) preference;
-        listPreference.setIconSpaceReserved(true);
+        listPreference.setIconSpaceReserved(false);
         listPreference.setValue(mListValues[mPaymentBackend.isForegroundMode() ? 1 : 0]);
     }
 

@@ -127,9 +127,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                         final int userId = UserHandle.getUserId(entry.getUid());
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUserManager.getBadgedIconForUser(entry.getIcon(), userHandle));
-                        pgp.setTitle(entry.name);
+                        pgp.setTitle(entry.mName);
                         if (entry.isAppEntry()) {
-                            pgp.setContentDescription(entry.name);
+                            pgp.setContentDescription(entry.mName);
                         }
                     }
                     break;
@@ -249,7 +249,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                             contentDescription, entry);
                     pref.setKey(key);
                 }
-                entry.percent = percentOfTotal;
+                entry.mPercent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
@@ -288,7 +288,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             final BatteryEntry entry = usageList.get(i);
             final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
                     entry.getConsumedPower(), totalPower, dischargePercentage);
-            entry.percent = percentOfTotal;
+            entry.mPercent = percentOfTotal;
         }
         return usageList;
     }
