@@ -396,16 +396,18 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 if (mIsManagedProfile) {
-                    textView.setText(mDpm.getString(WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
+                    textView.setText(mDpm.getResources().getString(
+                            WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
                             () -> getString(R.string.lock_settings_picker_profile_message)));
                 } else {
                     int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
                     if (mController.isScreenLockRestrictedByAdmin()
                             && profileUserId != UserHandle.USER_NULL) {
                         final StringBuilder description = new StringBuilder(
-                                mDpm.getString(WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK, () ->
-                                getString(
-                                R.string.lock_settings_picker_admin_restricted_personal_message)));
+                                mDpm.getResources().getString(
+                                        WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
+                                        () -> getString(
+                                                R.string.lock_settings_picker_admin_restricted_personal_message)));
                         final LinkifyUtils.OnClickListener clickListener = () -> {
                             final Bundle extras = new Bundle();
                             extras.putInt(Intent.EXTRA_USER_ID, profileUserId);

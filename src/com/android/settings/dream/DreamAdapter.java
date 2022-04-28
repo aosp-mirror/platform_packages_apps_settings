@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
+import com.android.settingslib.utils.ColorUtil;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @LayoutRes
     private final int mLayoutRes;
     private int mLastSelectedPos = -1;
+    private boolean mEnabled = true;
 
     /**
      * View holder for each {@link IDreamItem}.
@@ -54,6 +56,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private final ImageView mPreviewPlaceholderView;
         private final Button mCustomizeButton;
         private final Context mContext;
+        private final float mDisabledAlphaValue;
 
         DreamViewHolder(View view, Context context) {
             super(view);
@@ -63,6 +66,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mTitleView = view.findViewById(R.id.title_text);
             mSummaryView = view.findViewById(R.id.summary_text);
             mCustomizeButton = view.findViewById(R.id.customize_button);
+            mDisabledAlphaValue = ColorUtil.getDisabledAlpha(context);
         }
 
         /**
@@ -91,7 +95,7 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             final Drawable icon = item.isActive()
                     ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
-                    : item.getIcon();
+                    : item.getIcon().mutate();
             if (icon instanceof VectorDrawable) {
                 icon.setTintList(
                         mContext.getColorStateList(R.color.dream_card_icon_color_state_list));
@@ -101,15 +105,10 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             icon.setBounds(0, 0, iconSize, iconSize);
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
-            if (item.isActive()) {
-                mLastSelectedPos = position;
-                itemView.setSelected(true);
-            } else {
-                itemView.setSelected(false);
-            }
-
             mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-            mCustomizeButton.setVisibility(item.allowCustomization() ? View.VISIBLE : View.GONE);
+            mCustomizeButton.setVisibility(
+                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+            mCustomizeButton.setSelected(false);
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
@@ -118,6 +117,33 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 notifyItemChanged(position);
             });
+
+            if (item.isActive()) {
+                mLastSelectedPos = position;
+                itemView.setSelected(true);
+                itemView.setClickable(false);
+            } else {
+                itemView.setSelected(false);
+                itemView.setClickable(true);
+            }
+
+            setEnabledStateOnViews(itemView, mEnabled);
+        }
+
+        /**
+         * Makes sure the view (and any children) get the enabled state changed.
+         */
+        private void setEnabledStateOnViews(@NonNull View v, boolean enabled) {
+            v.setEnabled(enabled);
+
+            if (v instanceof ViewGroup) {
+                final ViewGroup vg = (ViewGroup) v;
+                for (int i = vg.getChildCount() - 1; i >= 0; i--) {
+                    setEnabledStateOnViews(vg.getChildAt(i), enabled);
+                }
+            } else {
+                v.setAlpha(enabled ? 1 : mDisabledAlphaValue);
+            }
         }
     }
 
@@ -142,5 +168,22 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
         return mItemList.size();
+    }
+
+    /**
+     * Sets the enabled state of all items.
+     */
+    public void setEnabled(boolean enabled) {
+        if (mEnabled != enabled) {
+            mEnabled = enabled;
+            notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Gets the enabled state of all items.
+     */
+    public boolean getEnabled() {
+        return mEnabled;
     }
 }

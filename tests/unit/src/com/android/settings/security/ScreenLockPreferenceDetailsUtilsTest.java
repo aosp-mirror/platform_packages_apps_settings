@@ -91,8 +91,7 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         when(featureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
 
-        mScreenLockPreferenceDetailsUtils =
-                new ScreenLockPreferenceDetailsUtils(mContext, SOURCE_METRICS_CATEGORY);
+        mScreenLockPreferenceDetailsUtils = new ScreenLockPreferenceDetailsUtils(mContext);
     }
 
     @Test
@@ -283,14 +282,15 @@ public class ScreenLockPreferenceDetailsUtilsTest {
 
     @Test
     public void openScreenLockSettings_shouldSendIntent() {
-        mScreenLockPreferenceDetailsUtils.openScreenLockSettings();
+        mScreenLockPreferenceDetailsUtils.openScreenLockSettings(SOURCE_METRICS_CATEGORY);
 
         assertFragmentLaunchRequested(ScreenLockSettings.class.getName());
     }
 
     @Test
     public void getLaunchScreenLockSettingsIntent_returnsIntent() {
-        final Intent intent = mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent();
+        final Intent intent = mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
+                SOURCE_METRICS_CATEGORY);
 
         assertFragmentLaunchIntent(intent, ScreenLockSettings.class.getName());
     }
@@ -299,7 +299,8 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     public void openChooseLockGenericFragment_noQuietMode_shouldSendIntent_shouldReturnTrue() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
-        assertThat(mScreenLockPreferenceDetailsUtils.openChooseLockGenericFragment()).isTrue();
+        assertThat(mScreenLockPreferenceDetailsUtils
+                .openChooseLockGenericFragment(SOURCE_METRICS_CATEGORY)).isTrue();
         assertFragmentLaunchRequested(ChooseLockGeneric.ChooseLockGenericFragment.class.getName());
     }
 
@@ -307,8 +308,8 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     public void getLaunchChooseLockGenericFragmentIntent_noQuietMode_returnsIntent() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
-        final Intent intent =
-                mScreenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent();
+        final Intent intent = mScreenLockPreferenceDetailsUtils
+                .getLaunchChooseLockGenericFragmentIntent(SOURCE_METRICS_CATEGORY);
 
         assertFragmentLaunchIntent(intent,
                 ChooseLockGeneric.ChooseLockGenericFragment.class.getName());

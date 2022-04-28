@@ -41,7 +41,8 @@
             android:icon="@drawable/ic_adaptive_font_download"
             android:key="text_reading_options"
             android:persistent="false"
-            android:title="@string/accessibility_text_reading_options_title" />
+            android:title="@string/accessibility_text_reading_options_title"
+            settings:controller="com.android.settings.accessibility.TextReadingFragmentForA11ySettingsController"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.ColorAndMotionFragment"
@@ -68,16 +69,6 @@
             android:title="@string/accessibility_screen_magnification_title"
             settings:keywords="@string/keywords_magnification"
             settings:controller="com.android.settings.accessibility.MagnificationPreferenceController"/>
-
-        <SwitchPreference
-            android:key="toggle_audio_description"
-            android:persistent="false"
-            android:icon="@drawable/ic_audio_description"
-            android:summary="@string/accessibility_audio_description_summary"
-            android:title="@string/accessibility_toggle_audio_description_preference_title"
-            settings:keywords="@string/keywords_audio_description"
-            settings:searchable="true"
-            settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
 
     </PreferenceCategory>
 
@@ -149,6 +140,16 @@
         android:key="audio_category"
         android:persistent="false"
         android:title="@string/audio_category_title">
+
+        <SwitchPreference
+            android:key="toggle_audio_description"
+            android:persistent="false"
+            android:icon="@drawable/ic_audio_description"
+            android:summary="@string/accessibility_audio_description_summary"
+            android:title="@string/accessibility_toggle_audio_description_preference_title"
+            settings:keywords="@string/keywords_audio_description"
+            settings:searchable="true"
+            settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
 
         <Preference
             android:key="hearing_aid_preference"

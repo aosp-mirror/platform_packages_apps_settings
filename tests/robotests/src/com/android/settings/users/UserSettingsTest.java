@@ -354,7 +354,8 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         verify(mAddUserPreference).setVisible(true);
-        verify(mAddUserPreference).setSummary("You can add up to 4 users");
+        verify(mAddUserPreference).setSummary(
+                "You can\u2019t add any more users. Remove a user to add a new one.");
         verify(mAddUserPreference).setEnabled(false);
         verify(mAddUserPreference).setSelectable(true);
     }

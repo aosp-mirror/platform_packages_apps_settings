@@ -39,7 +39,7 @@ class DeviceAdminStringProviderImpl implements DeviceAdminStringProvider {
 
     @Override
     public String getDefaultDisabledByPolicyTitle() {
-        return mDevicePolicyManager.getString(DISABLED_BY_IT_ADMIN_TITLE,
+        return mDevicePolicyManager.getResources().getString(DISABLED_BY_IT_ADMIN_TITLE,
                 () -> mContext.getString(R.string.disabled_by_policy_title));
     }
 
@@ -75,13 +75,13 @@ class DeviceAdminStringProviderImpl implements DeviceAdminStringProvider {
 
     @Override
     public String getDefaultDisabledByPolicyContent() {
-        return mDevicePolicyManager.getString(CONTACT_YOUR_IT_ADMIN,
+        return mDevicePolicyManager.getResources().getString(CONTACT_YOUR_IT_ADMIN,
                 () -> mContext.getString(R.string.default_admin_support_msg));
     }
 
     @Override
     public String getLearnMoreHelpPageUrl() {
-        return mDevicePolicyManager.getString(IT_ADMIN_POLICY_DISABLING_INFO_URL,
+        return mDevicePolicyManager.getResources().getString(IT_ADMIN_POLICY_DISABLING_INFO_URL,
                 () -> mContext.getString(R.string.help_url_action_disabled_by_it_admin));
     }
 

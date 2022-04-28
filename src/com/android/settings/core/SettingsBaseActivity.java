@@ -96,12 +96,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
             setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-            if (ThemeHelper.trySetDynamicColor(this)) {
-                final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                        ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
-                        : R.style.SudDynamicColorThemeSettings_SetupWizard;
-                setTheme(appliedTheme);
-            }
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+            ThemeHelper.trySetDynamicColor(this);
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {

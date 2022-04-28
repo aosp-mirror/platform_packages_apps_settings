@@ -209,8 +209,13 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                             }
                         });
             case DIALOG_CONFIRM_RESET_GUEST:
-                return UserDialogs.createResetGuestDialog(getActivity(),
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
     }
@@ -297,7 +302,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         !mDefaultGuestRestrictions.getBoolean(UserManager.DISALLOW_OUTGOING_CALLS));
                 mRemoveUserPref.setTitle(mGuestUserAutoCreated
                         ? com.android.settingslib.R.string.guest_reset_guest
-                        : R.string.user_exit_guest_title);
+                        : com.android.settingslib.R.string.guest_exit_guest);
                 if (mGuestUserAutoCreated) {
                     mRemoveUserPref.setEnabled((mUserInfo.flags & UserInfo.FLAG_INITIALIZED) != 0);
                 }
