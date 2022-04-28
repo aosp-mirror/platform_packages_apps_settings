@@ -47,6 +47,7 @@ import android.widget.Switch;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
@@ -206,12 +207,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createDisableDialog(getPrefContext(), info,
                                 this::onDialogButtonFromDisableToggleClicked);
                 return mWarningDialog;
-            case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                final Dialog dialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
             default:
                 return super.onCreateDialog(dialogId);
         }
@@ -245,12 +240,21 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    CharSequence getTileName() {
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         final ComponentName componentName = getTileComponentName();
         if (componentName == null) {
             return null;
         }
-        return loadTileLabel(getPrefContext(), componentName);
+
+        final CharSequence tileName = loadTileLabel(getPrefContext(), componentName);
+        if (tileName == null) {
+            return null;
+        }
+
+        final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_service_qs_tooltip_content
+                : R.string.accessibility_service_auto_added_qs_tooltip_content;
+        return getString(titleResId, tileName);
     }
 
     @Override
@@ -494,23 +498,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         mShortcutPreference.setChecked(false);
 
         mWarningDialog.dismiss();
-    }
-
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        showQuickSettingsTooltipIfNeeded();
-    }
-
-    @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        super.callOnAlertDialogCheckboxClicked(dialog, which);
-        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
     }
 
     void onDialogButtonFromShortcutClicked(View view) {

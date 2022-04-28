@@ -53,6 +53,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
     private PopupWindow.OnDismissListener mMockOnDismissListener;
 
     private static final String TEST_PACKAGE_NAME = "com.test.package";
+    private static final int TEST_RES_ID = 1234;
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private AccessibilityQuickSettingsTooltipWindow mTooltipView;
     private View mView;
@@ -66,8 +67,8 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
     @Test
     public void initTooltipView_atMostAvailableTextWidth() {
         final String quickSettingsTooltipsContent = mContext.getString(
-                R.string.accessibility_service_quick_settings_tooltips_content, TEST_PACKAGE_NAME);
-        mTooltipView.setup(quickSettingsTooltipsContent);
+                R.string.accessibility_service_qs_tooltip_content, TEST_PACKAGE_NAME);
+        mTooltipView.setup(quickSettingsTooltipsContent, TEST_RES_ID);
 
         final int getMaxWidth = mTooltipView.getAvailableWindowWidth();
         assertThat(mTooltipView.getWidth()).isAtMost(getMaxWidth);
@@ -75,7 +76,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
     @Test
     public void showTooltipView_success() {
-        mTooltipView.setup(TEST_PACKAGE_NAME);
+        mTooltipView.setup(TEST_PACKAGE_NAME, TEST_RES_ID);
         assertThat(getLatestPopupWindow()).isNull();
 
         mTooltipView.showAtTopCenter(mView);
@@ -85,7 +86,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
     @Test
     public void accessibilityClickActionOnTooltipViewShown_shouldInvokeCallbackAndNotShowing() {
-        mTooltipView.setup(TEST_PACKAGE_NAME);
+        mTooltipView.setup(TEST_PACKAGE_NAME, TEST_RES_ID);
         mTooltipView.setOnDismissListener(mMockOnDismissListener);
         mTooltipView.showAtTopCenter(mView);
 
@@ -101,7 +102,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
     @Test
     public void dismiss_tooltipViewShown_shouldInvokeCallbackAndNotShowing() {
-        mTooltipView.setup(TEST_PACKAGE_NAME);
+        mTooltipView.setup(TEST_PACKAGE_NAME, TEST_RES_ID);
         mTooltipView.setOnDismissListener(mMockOnDismissListener);
         mTooltipView.showAtTopCenter(mView);
 
@@ -113,7 +114,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
 
     @Test
     public void waitAutoCloseDelayTime_tooltipViewShown_shouldInvokeCallbackAndNotShowing() {
-        mTooltipView.setup(TEST_PACKAGE_NAME, /* closeDelayTimeMillis= */ 1);
+        mTooltipView.setup(TEST_PACKAGE_NAME, TEST_RES_ID, /* closeDelayTimeMillis= */ 1);
         mTooltipView.setOnDismissListener(mMockOnDismissListener);
         mTooltipView.showAtTopCenter(mView);
 

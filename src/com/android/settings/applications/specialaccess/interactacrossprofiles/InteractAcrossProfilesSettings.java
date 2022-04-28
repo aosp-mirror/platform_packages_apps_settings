@@ -95,7 +95,8 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     AppInfoBase.startAppInfoFragment(InteractAcrossProfilesDetails.class,
-                            mDevicePolicyManager.getString(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
+                            mDevicePolicyManager.getResources().getString(
+                                    CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
                                     () -> getString(R.string.interact_across_profiles_title)),
                             packageName,
                             appInfo.uid,

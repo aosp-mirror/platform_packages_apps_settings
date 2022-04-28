@@ -27,7 +27,7 @@ import com.android.net.module.util.NetworkStatsUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.NetworkCycleData;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 import java.time.ZonedDateTime;
 import java.util.Iterator;

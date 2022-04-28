@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
+import static com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -72,6 +73,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
@@ -204,7 +207,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        mFragment.showQuickSettingsTooltipIfNeeded();
+        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
 
         final Bundle savedInstanceState = new Bundle();
@@ -280,8 +283,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         }
 
         @Override
-        protected CharSequence getTileName() {
-            return PLACEHOLDER_PACKAGE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

@@ -20,11 +20,9 @@ import static com.android.settings.accessibility.AccessibilityStatsLogUtils.logA
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.app.ActivityOptions;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -43,6 +41,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
@@ -130,26 +129,21 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     }
 
     @Override
-    CharSequence getTileName() {
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
         final ComponentName componentName = getTileComponentName();
         if (componentName == null) {
             return null;
         }
-        return loadTileLabel(getPrefContext(), componentName);
-    }
 
-    @Override
-    public Dialog onCreateDialog(int dialogId) {
-        switch (dialogId) {
-            case AccessibilityDialogUtils.DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
-                final Dialog dialog = AccessibilityGestureNavigationTutorial
-                        .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
-                dialog.setCanceledOnTouchOutside(false);
-                return dialog;
-            default:
-                return super.onCreateDialog(dialogId);
+        final CharSequence tileName = loadTileLabel(getPrefContext(), componentName);
+        if (tileName == null) {
+            return null;
         }
+
+        final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_service_qs_tooltip_content
+                : R.string.accessibility_service_auto_added_qs_tooltip_content;
+        return getString(titleResId, tileName);
     }
 
     @Override
@@ -235,23 +229,5 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         return settingsIntent;
-    }
-
-    /**
-     * This method will be invoked when a button in the tutorial dialog is clicked.
-     *
-     * @param dialog The dialog that received the click
-     * @param which  The button that was clicked
-     */
-    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
-        dialog.dismiss();
-        showQuickSettingsTooltipIfNeeded();
-    }
-
-
-    @Override
-    protected void callOnAlertDialogCheckboxClicked(DialogInterface dialog, int which) {
-        super.callOnAlertDialogCheckboxClicked(dialog, which);
-        showQuickSettingsTooltipIfNeeded(getShortcutTypeCheckBoxValue());
     }
 }

@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums;
 import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_GENERAL_CATEGORY;
+import static com.android.settings.accessibility.ToggleFeaturePreferenceFragment.KEY_SAVED_QS_TOOLTIP_TYPE;
 
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -41,6 +42,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.utils.LocaleUtils;
 
@@ -70,6 +72,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     private CheckBox mHardwareTypeCheckBox;
     private AccessibilityQuickSettingsTooltipWindow mTooltipWindow;
     private boolean mNeedsQSTooltipReshow = false;
+    private int mNeedsQSTooltipType = QuickSettingsTooltipType.GUIDE_TO_EDIT;
 
     /** Returns the accessibility component name. */
     protected abstract ComponentName getComponentName();
@@ -80,8 +83,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     /** Returns the accessibility tile component name. */
     protected abstract ComponentName getTileComponentName();
 
-    /** Returns the accessibility tile feature name. */
-    protected abstract CharSequence getTileName();
+    /** Returns the accessibility tile tooltip content. */
+    protected abstract CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,9 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
             }
             if (savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_RESHOW)) {
                 mNeedsQSTooltipReshow = savedInstanceState.getBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW);
+            }
+            if (savedInstanceState.containsKey(KEY_SAVED_QS_TOOLTIP_TYPE)) {
+                mNeedsQSTooltipType = savedInstanceState.getInt(KEY_SAVED_QS_TOOLTIP_TYPE);
             }
         }
 
@@ -126,8 +132,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
+        mShortcutPreference.setTitle(getShortcutTitle());
 
-        updateShortcutTitle(mShortcutPreference);
         getPreferenceScreen().addPreference(mShortcutPreference);
 
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
@@ -142,7 +148,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Reshow tooltips when activity recreate, such as rotate device.
+        // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
             getView().post(this::showQuickSettingsTooltipIfNeeded);
         }
@@ -176,6 +182,7 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         }
         if (mTooltipWindow != null) {
             outState.putBoolean(KEY_SAVED_QS_TOOLTIP_RESHOW, mTooltipWindow.isShowing());
+            outState.putInt(KEY_SAVED_QS_TOOLTIP_TYPE, mNeedsQSTooltipType);
         }
         super.onSaveInstanceState(outState);
     }
@@ -185,20 +192,18 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         final Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_title, getLabelName());
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
                         AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
                 dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogType, dialogTitle,
+                        getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
                 return dialog;
             case DialogEnums.LAUNCH_ACCESSIBILITY_TUTORIAL:
                 dialog = AccessibilityGestureNavigationTutorial
                         .createAccessibilityTutorialDialog(getPrefContext(),
-                                getUserShortcutTypes());
+                                getUserShortcutTypes(), this::callOnTutorialDialogButtonClicked);
                 dialog.setCanceledOnTouchOutside(false);
                 return dialog;
             default:
@@ -206,9 +211,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         }
     }
 
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, getLabelName());
-        shortcutPreference.setTitle(title);
+    protected CharSequence getShortcutTitle() {
+        return getString(R.string.accessibility_shortcut_title, getLabelName());
     }
 
     @Override
@@ -297,6 +301,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
     };
 
     /**
+     * This method will be invoked when a button in the tutorial dialog is clicked.
+     *
+     * @param dialog The dialog that received the click
+     * @param which  The button that was clicked
+     */
+    private void callOnTutorialDialogButtonClicked(DialogInterface dialog, int which) {
+        dialog.dismiss();
+        showQuickSettingsTooltipIfNeeded();
+    }
+
+    /**
      * This method will be invoked when a button in the edit shortcut dialog is clicked.
      *
      * @param dialog The dialog that received the click
@@ -308,12 +323,21 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         }
 
         final int value = getShortcutTypeCheckBoxValue();
-
         saveNonEmptyUserShortcutType(value);
         AccessibilityUtil.optInAllValuesToSettings(getPrefContext(), value, getComponentName());
         AccessibilityUtil.optOutAllValuesFromSettings(getPrefContext(), ~value, getComponentName());
-        mShortcutPreference.setChecked(value != AccessibilityUtil.UserShortcutType.EMPTY);
+        final boolean shortcutAssigned = value != AccessibilityUtil.UserShortcutType.EMPTY;
+        mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
+
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
+
+        // Show the quick setting tooltip if the shortcut assigned in the first time
+        if (shortcutAssigned) {
+            showQuickSettingsTooltipIfNeeded();
+        }
     }
 
     @VisibleForTesting
@@ -452,7 +476,18 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
     }
 
-    protected void showQuickSettingsTooltipIfNeeded() {
+    /**
+     * Shows the quick settings tooltip if the quick settings feature is assigned. The tooltip only
+     * shows once.
+     *
+     * @param type The quick settings tooltip type
+     */
+    protected void showQuickSettingsTooltipIfNeeded(@QuickSettingsTooltipType int type) {
+        mNeedsQSTooltipType = type;
+        showQuickSettingsTooltipIfNeeded();
+    }
+
+    private void showQuickSettingsTooltipIfNeeded() {
         final ComponentName tileComponentName = getTileComponentName();
         if (tileComponentName == null) {
             // Returns if no tile service assigned.
@@ -465,16 +500,17 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
             return;
         }
 
-        final CharSequence tileName = getTileName();
-        if (TextUtils.isEmpty(tileName)) {
-            // Returns if no title of tile service assigned.
+        final CharSequence content = getTileTooltipContent(mNeedsQSTooltipType);
+        if (TextUtils.isEmpty(content)) {
+            // Returns if no content of tile tooltip assigned.
             return;
         }
 
-        final String title =
-                getString(R.string.accessibility_service_quick_settings_tooltips_content, tileName);
+        final int imageResId = mNeedsQSTooltipType == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.drawable.accessibility_qs_tooltip_illustration
+                : R.drawable.accessibility_auto_added_qs_tooltip_illustration;
         mTooltipWindow = new AccessibilityQuickSettingsTooltipWindow(getContext());
-        mTooltipWindow.setup(title);
+        mTooltipWindow.setup(content, imageResId);
         mTooltipWindow.showAtTopCenter(getView());
         AccessibilityQuickSettingUtils.optInValueToSharedPreferences(getContext(),
                 tileComponentName);

@@ -36,6 +36,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SettingsMainSwitchPreference;
@@ -147,7 +148,9 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         mColorDisplayManager.setReduceBrightColorsActivated(enabled);
     }
@@ -165,8 +168,8 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.reduce_bright_colors_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.reduce_bright_colors_shortcut_title);
     }
 
     @Override
@@ -181,8 +184,10 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.reduce_bright_colors_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                 ? R.string.accessibility_reduce_bright_colors_qs_tooltip_content
+                 : R.string.accessibility_reduce_bright_colors_auto_added_qs_tooltip_content);
     }
 
     @Override

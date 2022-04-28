@@ -27,10 +27,12 @@ import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -59,7 +61,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
                 super.onInitializeAccessibilityNodeInfo(host, info);
                 final AccessibilityAction clickAction = new AccessibilityAction(
                         AccessibilityNodeInfo.ACTION_CLICK,
-                        mContext.getString(R.string.accessibility_quick_settings_tooltips_dismiss));
+                        mContext.getString(R.string.accessibility_quick_settings_tooltip_dismiss));
                 info.addAction(clickAction);
             }
 
@@ -76,9 +78,10 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * Sets up {@link #AccessibilityQuickSettingsTooltipWindow}'s layout and content.
      *
      * @param text text to be displayed
+     * @param imageResId the resource ID of the image drawable
      */
-    public void setup(String text) {
-        this.setup(text, /* closeDelayTimeMillis= */ 0);
+    public void setup(CharSequence text, @DrawableRes int imageResId) {
+        this.setup(text, imageResId, /* closeDelayTimeMillis= */ 0);
     }
 
     /**
@@ -88,19 +91,22 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * close delay time is positive number. </p>
      *
      * @param text text to be displayed
+     * @param imageResId the resource ID of the image drawable
      * @param closeDelayTimeMillis how long the popup window be auto-closed
      */
-    public void setup(String text, long closeDelayTimeMillis) {
+    public void setup(CharSequence text, @DrawableRes int imageResId, long closeDelayTimeMillis) {
         this.mCloseDelayTimeMillis = closeDelayTimeMillis;
 
         setBackgroundDrawable(new ColorDrawable(mContext.getColor(android.R.color.transparent)));
         final LayoutInflater inflater = mContext.getSystemService(LayoutInflater.class);
         final View popupView =
-                inflater.inflate(R.layout.accessibility_qs_tooltips, /* root= */ null);
+                inflater.inflate(R.layout.accessibility_qs_tooltip, /* root= */ null);
         popupView.setFocusable(/* focusable= */ true);
         popupView.setAccessibilityDelegate(mAccessibilityDelegate);
         setContentView(popupView);
 
+        final ImageView imageView = getContentView().findViewById(R.id.qs_illustration);
+        imageView.setImageResource(imageResId);
         final TextView textView = getContentView().findViewById(R.id.qs_content);
         textView.setText(text);
         setWidth(getWindowWidthWith(textView));
@@ -173,7 +179,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
     @VisibleForTesting
     int getAvailableWindowWidth() {
         final Resources res = mContext.getResources();
-        final int padding = res.getDimensionPixelSize(R.dimen.accessibility_qs_tooltips_margin);
+        final int padding = res.getDimensionPixelSize(R.dimen.accessibility_qs_tooltip_margin);
         final int screenWidth = res.getDisplayMetrics().widthPixels;
         return screenWidth - padding * 2;
     }

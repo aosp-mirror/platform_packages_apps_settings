@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -165,7 +166,14 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        super.onPreferenceToggled(preferenceKey, enabled);
+        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (enabled == isEnabled) {
+            return;
+        }
+
+        if (enabled) {
+            showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+        }
         logAccessibilityServiceEnabled(mComponentName, enabled);
         Settings.Secure.putInt(getContentResolver(), ENABLED, enabled ? ON : OFF);
     }
@@ -182,8 +190,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_daltonizer_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_daltonizer_shortcut_title);
     }
 
     @Override
@@ -198,8 +206,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.accessibility_display_daltonizer_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_color_correction_qs_tooltip_content
+                : R.string.accessibility_color_correction_auto_added_qs_tooltip_content);
     }
 
     @Override

@@ -71,9 +71,6 @@
     <!-- If the support features are enabled. -->
     <bool name="config_support_enabled">false</bool>
 
-    <!-- Whether to enable "show operator name in the status bar" setting -->
-    <bool name="config_showOperatorNameInStatusBar">false</bool>
-
     <!-- List containing the component names of pre-installed screen reader services. -->
     <string-array name="config_preinstalled_screen_reader_services" translatable="false">
         <!--
@@ -447,6 +444,9 @@
     <!-- Whether top_level_battery should be shown or not. -->
     <bool name="config_show_top_level_battery">true</bool>
 
+    <!-- Whether to use compact battery status string. -->
+    <bool name="config_use_compact_battery_status">false</bool>
+
     <!-- Whether top_level_connected_devices should be shown or not. -->
     <bool name="config_show_top_level_connected_devices">true</bool>
 
@@ -542,9 +542,6 @@
     <!-- Whether to show Smart Storage toggle -->
     <bool name="config_show_smart_storage_toggle">true</bool>
 
-    <!-- Whether suw to support two panes -->
-    <bool name="config_suw_supported_two_panes">false</bool>
-
     <!-- Whether to support large screen -->
     <bool name="config_supported_large_screen">false</bool>
 
@@ -580,6 +577,18 @@
         -->
     </string-array>
 
+    <!-- The option list for switch screen resolution -->
+    <string-array name="config_screen_resolution_options_strings" translatable="false">
+        <item>@string/screen_resolution_option_high</item>
+        <item>@string/screen_resolution_option_highest</item>
+    </string-array>
+
+    <!-- The option summary list for screen resolution -->
+    <string-array name="config_screen_resolution_summaries_strings" translatable="false">
+        <item>@string/screen_resolution_summary_high</item>
+        <item>@string/screen_resolution_summary_highest</item>
+    </string-array>
+
     <!-- Whether to aggregate for network selection list-->
     <bool name="config_network_selection_list_aggregation_enabled">false</bool>
 
@@ -596,7 +605,7 @@
     </string-array>
 
     <!-- The ratio to use when using the two-pane settings layout -->
-    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.5</item>
+    <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
 
     <!-- The number of visible app icons while entering app list related pages for preloading.
          Take the "Unrestricted data" page as the example, the visible app icons could be 15
@@ -606,4 +615,6 @@
     <!-- Whether the dream setup activity should be enabled as part of setupwizard -->
     <bool name="dream_setup_supported">false</bool>
 
+    <!-- Whether to put the apps with system UID into system component bucket or not -->
+    <bool name="config_battery_combine_system_components">false</bool>
 </resources>

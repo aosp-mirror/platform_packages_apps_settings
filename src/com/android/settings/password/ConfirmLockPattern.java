@@ -16,11 +16,11 @@
 
 package com.android.settings.password;
 
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PATTERN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PATTERN;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PATTERN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PATTERN_REQUIRED;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import android.annotation.Nullable;
 import android.annotation.SuppressLint;
@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -271,11 +270,13 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             final boolean isStrongAuthRequired = isStrongAuthRequired();
             if (mIsManagedProfile) {
                 if (isStrongAuthRequired) {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_PATTERN_REQUIRED,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_PATTERN_REQUIRED,
                             () -> getString(
                                     R.string.lockpassword_strong_auth_required_work_pattern));
                 } else {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_CONFIRM_PATTERN,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PATTERN,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_pattern_generic_profile));
                 }
@@ -368,7 +369,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
             if (mFrp) return getString(R.string.lockpassword_confirm_your_pattern_header_frp);
 
             if (mIsManagedProfile) {
-                return mDevicePolicyManager.getString(
+                return mDevicePolicyManager.getResources().getString(
                         CONFIRM_WORK_PROFILE_PATTERN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pattern_header));
             }
@@ -521,8 +522,6 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                             public void onChecked(boolean matched, int timeoutMs) {
                                 mPendingLockCheck = null;
                                 if (matched && isInternalActivity() && mReturnCredentials) {
-                                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                                    StorageManager.CRYPT_TYPE_PATTERN);
                                     intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
                                                     pattern);
                                 }

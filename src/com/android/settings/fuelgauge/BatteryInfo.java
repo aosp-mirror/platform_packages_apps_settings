@@ -243,6 +243,8 @@ public class BatteryInfo {
             @NonNull BatteryUsageStats batteryUsageStats, Estimate estimate,
             long elapsedRealtimeUs, boolean shortString) {
         final long startTime = System.currentTimeMillis();
+        final boolean isCompactStatus = context.getResources().getBoolean(
+                com.android.settings.R.bool.config_use_compact_battery_status);
         BatteryInfo info = new BatteryInfo();
         info.mBatteryUsageStats = batteryUsageStats;
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
@@ -253,21 +255,21 @@ public class BatteryInfo {
                 BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
                 == BatteryManager.BATTERY_HEALTH_OVERHEAT;
 
-        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast, isCompactStatus);
         info.batteryStatus = batteryBroadcast.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
             updateBatteryInfoCharging(context, batteryBroadcast, batteryUsageStats,
-                    info);
+                    info, isCompactStatus);
         }
         BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", startTime);
         return info;
     }
 
     private static void updateBatteryInfoCharging(Context context, Intent batteryBroadcast,
-            BatteryUsageStats stats, BatteryInfo info) {
+            BatteryUsageStats stats, BatteryInfo info, boolean compactStatus) {
         final Resources resources = context.getResources();
         final long chargeTimeMs = stats.getChargeTimeRemainingMs();
         final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
@@ -291,7 +293,8 @@ public class BatteryInfo {
                     R.string.power_remaining_charging_duration_only, timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
         } else {
-            final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+            final String chargeStatusLabel =
+                    Utils.getBatteryStatus(context, batteryBroadcast, compactStatus);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,

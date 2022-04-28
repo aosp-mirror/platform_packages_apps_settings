@@ -508,7 +508,9 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mBatteryHistoryKeys[mTrapezoidIndex * 2], mIs24HourFormat);
         final String toHour = ConvertUtils.utcToLocalTimeHour(mPrefContext,
             mBatteryHistoryKeys[(mTrapezoidIndex + 1) * 2], mIs24HourFormat);
-        return String.format("%s - %s", fromHour, toHour);
+        return mIs24HourFormat
+            ? String.format("%s–%s", fromHour, toHour)
+            : String.format("%s – %s", fromHour, toHour);
     }
 
     @VisibleForTesting
@@ -617,6 +619,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         return true;
     }
 
+    /** Used for {@link AppBatteryPreferenceController}. */
     public static List<BatteryDiffEntry> getBatteryLast24HrUsageData(Context context) {
         final long start = System.currentTimeMillis();
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
@@ -636,6 +639,28 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 batteryHistoryMap,
                 /*purgeLowPercentageAndFakeData=*/ true);
         return batteryIndexedMap.get(BatteryChartView.SELECTED_INDEX_ALL);
+    }
+
+    /** Used for {@link AppBatteryPreferenceController}. */
+    public static BatteryDiffEntry getBatteryLast24HrUsageData(
+            Context context, String packageName, int userId) {
+        if (packageName == null) {
+            return null;
+        }
+        final List<BatteryDiffEntry> entries = getBatteryLast24HrUsageData(context);
+        if (entries == null) {
+            return null;
+        }
+        for (BatteryDiffEntry entry : entries) {
+            final BatteryHistEntry batteryHistEntry = entry.mBatteryHistEntry;
+            if (batteryHistEntry != null
+                    && batteryHistEntry.mConsumerType == ConvertUtils.CONSUMER_TYPE_UID_BATTERY
+                    && batteryHistEntry.mUserId == userId
+                    && packageName.equals(entry.getPackageName())) {
+                return entry;
+            }
+        }
+        return null;
     }
 
     private static long[] getBatteryHistoryKeys(
