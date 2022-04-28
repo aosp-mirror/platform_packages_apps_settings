@@ -98,6 +98,7 @@ public class AlarmManagerFragment extends Fragment implements
                 resources.getString(R.string.tare_actions_ctp),
                 resources.getString(R.string.tare_actions_base_price),
                 resources.getString(R.string.tare_rewards_instantaneous),
+                resources.getString(R.string.tare_rewards_ongoing),
                 resources.getString(R.string.tare_rewards_max)
         };
 
@@ -109,6 +110,7 @@ public class AlarmManagerFragment extends Fragment implements
                 resources.getStringArray(R.array.tare_alarm_manager_actions),
                 resources.getStringArray(R.array.tare_alarm_manager_actions),
                 resources.getStringArray(R.array.tare_rewards_subfactors),
+                {resources.getString(R.string.tare_top_activity)},
                 resources.getStringArray(R.array.tare_rewards_subfactors)
         };
 
@@ -150,12 +152,13 @@ public class AlarmManagerFragment extends Fragment implements
                         EconomyManager.KEY_AM_ACTION_ALARM_ALARMCLOCK_BASE_PRICE
                 },
                 {
-                        EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_MAX,
-                        EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_MAX,
-                        EconomyManager.KEY_AM_REWARD_NOTIFICATION_INTERACTION_MAX,
-                        EconomyManager.KEY_AM_REWARD_WIDGET_INTERACTION_MAX,
-                        EconomyManager.KEY_AM_REWARD_OTHER_USER_INTERACTION_MAX,
+                        EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_INSTANT,
+                        EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_INSTANT,
+                        EconomyManager.KEY_AM_REWARD_NOTIFICATION_INTERACTION_INSTANT,
+                        EconomyManager.KEY_AM_REWARD_WIDGET_INTERACTION_INSTANT,
+                        EconomyManager.KEY_AM_REWARD_OTHER_USER_INTERACTION_INSTANT,
                 },
+                {EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_ONGOING},
                 {
                         EconomyManager.KEY_AM_REWARD_TOP_ACTIVITY_MAX,
                         EconomyManager.KEY_AM_REWARD_NOTIFICATION_SEEN_MAX,
