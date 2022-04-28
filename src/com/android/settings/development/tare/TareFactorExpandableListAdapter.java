@@ -16,6 +16,8 @@
 
 package com.android.settings.development.tare;
 
+import static android.app.tare.EconomyManager.CAKE_IN_ARC;
+
 import android.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -130,10 +132,30 @@ public class TareFactorExpandableListAdapter extends BaseExpandableListAdapter {
         TextView value = convertView.findViewById(R.id.factor_number);
 
         factor.setText(getChild(groupPosition, childPosition).toString());
-        value.setText(String.valueOf(
+        value.setText(cakeToString(
                 mFactorController.getValue(getKey(groupPosition, childPosition))));
 
         return convertView;
+    }
+
+    @NonNull
+    private static String cakeToString(long cakes) {
+        // Resources.getQuantityString doesn't handle floating point numbers, so doing this manually
+        if (cakes == 0) {
+            return "0";
+        }
+        final long sub = cakes % CAKE_IN_ARC;
+        final long arcs = (int) (cakes / CAKE_IN_ARC);
+        if (arcs == 0) {
+            return sub + " c";
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(arcs);
+        if (sub > 0) {
+            sb.append(".").append(String.format("%03d", sub / (CAKE_IN_ARC / 1000)));
+        }
+        sb.append(" A");
+        return sb.toString();
     }
 
     @Override
