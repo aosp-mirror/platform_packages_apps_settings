@@ -62,8 +62,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
         mHost = host;
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        mScreenLockPreferenceDetailUtils =
-                new ScreenLockPreferenceDetailsUtils(context, host.getMetricsCategory());
+        mScreenLockPreferenceDetailUtils = new ScreenLockPreferenceDetailsUtils(context);
     }
 
     @Override
@@ -106,7 +105,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
         if (TextUtils.equals(p.getKey(), getPreferenceKey())) {
             mMetricsFeatureProvider.logClickedPreference(p,
                     p.getExtras().getInt(DashboardFragment.CATEGORY));
-            mScreenLockPreferenceDetailUtils.openScreenLockSettings();
+            mScreenLockPreferenceDetailUtils.openScreenLockSettings(mHost.getMetricsCategory());
         }
     }
 
@@ -115,7 +114,8 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        return mScreenLockPreferenceDetailUtils.openChooseLockGenericFragment();
+        return mScreenLockPreferenceDetailUtils.openChooseLockGenericFragment(
+                mHost.getMetricsCategory());
     }
 
     protected void updateSummary(Preference preference, int userId) {

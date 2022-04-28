@@ -19,6 +19,12 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/screensaver_settings_title">
 
+    <com.android.settingslib.widget.MainSwitchPreference
+        android:key="dream_main_settings_switch"
+        android:title="@string/screensaver_settings_toggle_title"
+        settings:controller="com.android.settings.dream.DreamMainSwitchPreferenceController"
+        settings:searchable="false"/>
+
     <PreferenceCategory
         android:title="@string/dream_picker_category">
         <com.android.settingslib.widget.LayoutPreference

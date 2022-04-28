@@ -1,0 +1,112 @@
+syntax = "proto2";
+
+package com.android.settings.intelligence;
+option java_multiple_files = false;
+option java_package = "com.android.settings.network.telephony";
+option java_outer_classname = "NetworkModeChoicesProto";
+
+// EnabledNetworks is a list which tries to categorized the entries of popup menu
+// based on carrier network types available to the end user.
+
+// Next tag: 13
+enum EnabledNetworks {
+    // No EnabledNetworks specified.
+    ENABLED_NETWORKS_UNSPECIFIED = 0;
+
+    // For the case where either unsupported or unable to categorized properly.
+    ENABLED_NETWORKS_UNKNOWN = 1;
+
+    // For the case where CDMA is supported and LTE is not prioritized over
+    // CDMA.
+    ENABLED_NETWORKS_CDMA_CHOICES = 2;
+
+    // For the case where CDMA is supported and LTE is not available.
+    ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES = 3;
+
+    // For the case where CDMA is supported and LTE is available.
+    ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES = 4;
+
+    // For the case where TDSCDMA is primary network type.
+    ENABLED_NETWORKS_TDSCDMA_CHOICES = 5;
+
+    // For the case where GSM and LTE options are removed from the menu.
+    ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES = 6;
+
+    // For the case where GSM and 4G options are removed from the menu.
+    ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES = 7;
+
+    // For the case where GSM is removed from the menu, and both 4G/LTE are not an
+    // option.
+    ENABLED_NETWORKS_EXCEPT_GSM_CHOICES = 8;
+
+    // For the case where LTE is disabled.
+    ENABLED_NETWORKS_EXCEPT_LTE_CHOICES = 9;
+
+    // For the case where GSM related carrier with 4G/LTE supported.
+    ENABLED_NETWORKS_4G_CHOICES = 10;
+
+    // For the case where GSM related carrier without 4G/LTE supported.
+    ENABLED_NETWORKS_CHOICES = 11;
+
+    // For the case where world mode is enabled.
+    PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE = 12;
+}
+
+// A request for popup menu.
+
+// Next tag: 4
+message UiOptions {
+    // Mapping to popup menu categories.
+    required EnabledNetworks type = 1;
+
+    // Resource which provides a list of network type values for this popup menu.
+    required int32 choices = 2;
+
+    // Presentation format of a continuous popop menu entries.
+    // Each format may contains any numbers of popop menu entries.
+
+    // Next tag: 12
+    enum PresentFormat {
+
+        // No PresentFormat specified.
+        PRESENT_FORMAT_UNSPECIFIED = 0;
+
+        // Append a CDMA 1x network option into popup menu.
+        add1xEntry = 1;
+
+        // Append a 2G network option into popup menu.
+        add2gEntry = 2;
+
+        // Append a 3G network option into popup menu.
+        add3gEntry = 3;
+
+        // Append a global mode option into popup menu.
+        addGlobalEntry = 4;
+
+        // Append a CDMA/LTE global mode option into popup menu.
+        addWorldModeCdmaEntry = 5;
+
+        // Append a GSM/LTE global mode option into popup menu.
+        addWorldModeGsmEntry = 6;
+
+        // Append a 4G network option into popup menu.
+        add4gEntry = 7;
+
+        // Append a LTE network option into popup menu.
+        addLteEntry = 8;
+
+        // Append a 5G network option into popup menu.
+        add5gEntry = 9;
+
+        // Append both 5G and 4G network options into popup menu.
+        add5gAnd4gEntry = 10;
+
+        // Append both 5G and LTE network options into popup menu.
+        add5gAndLteEntry = 11;
+    }
+
+    // Format of popup menu entries.
+    // The length of this entry need to be less than the network type values
+    // referenced from "choices" field.
+    repeated PresentFormat format = 3;
+}
