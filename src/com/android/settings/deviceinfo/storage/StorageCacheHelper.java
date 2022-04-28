@@ -26,7 +26,7 @@ public class StorageCacheHelper {
 
     private static final String SHARED_PREFERENCE_NAME = "StorageCache";
     private static final String TOTAL_SIZE_KEY = "total_size_key";
-    private static final String USED_SIZE_KEY = "used_size_key";
+    private static final String TOTAL_USED_SIZE_KEY = "total_used_size_key";
     private static final String IMAGES_SIZE_KEY = "images_size_key";
     private static final String VIDEOS_SIZE_KEY = "videos_size_key";
     private static final String AUDIO_SIZE_KEY = "audio_size_key";
@@ -35,6 +35,7 @@ public class StorageCacheHelper {
     private static final String DOCUMENTS_AND_OTHER_SIZE_KEY = "documents_and_other_size_key";
     private static final String TRASH_SIZE_KEY = "trash_size_key";
     private static final String SYSTEM_SIZE_KEY = "system_size_key";
+    private static final String USED_SIZE_KEY = "used_size_key";
 
     private final SharedPreferences mSharedPreferences;
 
@@ -69,14 +70,28 @@ public class StorageCacheHelper {
     }
 
     /**
-     * Cache total size and used size
+     * Cache total size and total used size
      */
-    public void cacheTotalSizeAndUsedSize(long totalSize, long usedSize) {
+    public void cacheTotalSizeAndTotalUsedSize(long totalSize, long totalUsedSize) {
         mSharedPreferences
                 .edit()
                 .putLong(TOTAL_SIZE_KEY, totalSize)
-                .putLong(USED_SIZE_KEY, usedSize)
+                .putLong(TOTAL_USED_SIZE_KEY, totalUsedSize)
                 .apply();
+    }
+
+    /**
+     * Cache used size info when a user is treated as a secondary user.
+     */
+    public void cacheUsedSize(long usedSize) {
+        mSharedPreferences.edit().putLong(USED_SIZE_KEY, usedSize).apply();
+    }
+
+    /**
+     * Returns used size for secondary user.
+     */
+    public long retrieveUsedSize() {
+        return mSharedPreferences.getLong(USED_SIZE_KEY, 0);
     }
 
     /**
@@ -85,7 +100,7 @@ public class StorageCacheHelper {
     public StorageCache retrieveCachedSize() {
         StorageCache result = new StorageCache();
         result.totalSize = mSharedPreferences.getLong(TOTAL_SIZE_KEY, 0);
-        result.usedSize = mSharedPreferences.getLong(USED_SIZE_KEY, 0);
+        result.totalUsedSize = mSharedPreferences.getLong(TOTAL_USED_SIZE_KEY, 0);
         result.imagesSize = mSharedPreferences.getLong(IMAGES_SIZE_KEY, 0);
         result.videosSize = mSharedPreferences.getLong(VIDEOS_SIZE_KEY, 0);
         result.audioSize = mSharedPreferences.getLong(AUDIO_SIZE_KEY, 0);
@@ -102,7 +117,7 @@ public class StorageCacheHelper {
      */
     public static class StorageCache {
         public long totalSize;
-        public long usedSize;
+        public long totalUsedSize;
         public long gamesSize;
         public long allAppsExceptGamesSize;
         public long audioSize;
