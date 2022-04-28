@@ -109,7 +109,7 @@ public class ControlsTrivialPrivacyPreferenceControllerTest {
         Settings.Secure.putInt(mContentResolver, DEPENDENCY_SETTING_KEY, 0);
 
         assertThat(mController.getSummary().toString()).isEqualTo(
-                mContext.getText(R.string.lockscreen_trivial_controls_summary));
+                mContext.getText(R.string.lockscreen_trivial_disabled_controls_summary));
     }
 
     @Test

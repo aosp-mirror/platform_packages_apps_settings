@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
-import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
@@ -179,7 +178,7 @@ public class LockScreenSafetySourceTest {
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_INFORMATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
     }
 
     @Test
@@ -200,7 +199,7 @@ public class LockScreenSafetySourceTest {
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_RECOMMENDATION);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION);
     }
 
     @Test
@@ -221,7 +220,7 @@ public class LockScreenSafetySourceTest {
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
     @Test
@@ -242,7 +241,7 @@ public class LockScreenSafetySourceTest {
         SafetySourceStatus safetySourceStatus = safetySourceData.getStatus();
 
         assertThat(safetySourceStatus.getSeverityLevel())
-                .isEqualTo(SafetySourceSeverity.LEVEL_UNSPECIFIED);
+                .isEqualTo(SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED);
     }
 
     @Test
@@ -289,7 +288,8 @@ public class LockScreenSafetySourceTest {
         assertThat(issue.getSummary().toString()).isEqualTo(
                 ResourcesUtils.getResourcesString(mApplicationContext,
                         "no_screen_lock_issue_summary"));
-        assertThat(issue.getSeverityLevel()).isEqualTo(SafetySourceSeverity.LEVEL_RECOMMENDATION);
+        assertThat(issue.getSeverityLevel()).isEqualTo(
+                SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION);
         assertThat(issue.getIssueTypeId()).isEqualTo(
                 LockScreenSafetySource.NO_SCREEN_LOCK_ISSUE_TYPE_ID);
         assertThat(issue.getIssueCategory()).isEqualTo(SafetySourceIssue.ISSUE_CATEGORY_DEVICE);
