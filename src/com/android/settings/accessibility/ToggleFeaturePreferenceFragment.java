@@ -157,7 +157,6 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
             }
         }
 
-        setupDefaultShortcutIfNecessary(getPrefContext());
         final int resId = getPreferenceScreenResId();
         if (resId <= 0) {
             final PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
@@ -226,6 +225,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         if (mNeedsQSTooltipReshow) {
             getView().post(this::showQuickSettingsTooltipIfNeeded);
         }
+
+        writeDefaultShortcutTargetServiceToSettingsIfNeeded(getPrefContext());
     }
 
     @Override
@@ -270,12 +271,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public Dialog onCreateDialog(int dialogId) {
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_title, mPackageName);
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? DialogType.EDIT_SHORTCUT_GENERIC_SUW : DialogType.EDIT_SHORTCUT_GENERIC;
                 mDialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogType, dialogTitle,
+                        getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(mDialog);
                 return mDialog;
@@ -340,9 +339,8 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         switchPreference.setTitle(title);
     }
 
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, mPackageName);
-        shortcutPreference.setTitle(title);
+    protected CharSequence getShortcutTitle() {
+        return getString(R.string.accessibility_shortcut_title, mPackageName);
     }
 
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
@@ -515,8 +513,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
-
-        updateShortcutTitle(mShortcutPreference);
+        mShortcutPreference.setTitle(getShortcutTitle());
 
         final PreferenceCategory generalCategory = findPreference(KEY_GENERAL_CATEGORY);
         generalCategory.addPreference(mShortcutPreference);
@@ -725,6 +722,10 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         mShortcutPreference.setChecked(shortcutAssigned);
         mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
 
+        if (mHardwareTypeCheckBox.isChecked()) {
+            AccessibilityUtil.skipVolumeShortcutDialogTimeoutRestriction(getPrefContext());
+        }
+
         // Show the quick setting tooltip if the shortcut assigned in the first time
         if (shortcutAssigned) {
             showQuickSettingsTooltipIfNeeded();
@@ -788,8 +789,22 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
     /**
      * Setups a configurable default if the setting has never been set.
+     *
+     * TODO(b/228562075): Remove this function when correcting the format in config file
+     * `config_defaultAccessibilityService`.
      */
-    private static void setupDefaultShortcutIfNecessary(Context context) {
+    private void writeDefaultShortcutTargetServiceToSettingsIfNeeded(Context context) {
+        if (mComponentName == null) {
+            return;
+        }
+
+        final ComponentName defaultService = ComponentName.unflattenFromString(context.getString(
+                com.android.internal.R.string.config_defaultAccessibilityService));
+        // write default accessibility service only when user enter into corresponding page.
+        if (!mComponentName.equals(defaultService)) {
+            return;
+        }
+
         final String targetKey = Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE;
         String targetString = Settings.Secure.getString(context.getContentResolver(), targetKey);
         if (!TextUtils.isEmpty(targetString)) {
