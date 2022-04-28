@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Agrandir ou réduire le texte affiché."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Rapetisser"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Utiliser la rotation automatique"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La technologie de détection des visages utilise l\'appareil photo avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude d\'Oz"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Paramètre système par défaut"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection de la langue pour cette application n\'est pas accessible à partir des paramètres."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La langue peut différer des langues offertes dans l\'application. Certaines applications peuvent ne pas prendre en charge ce paramètre."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Supprimer la langue sélectionnée?</item>
       <item quantity="other">Supprimer les langues sélectionnées?</item>
@@ -1302,10 +1301,13 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Désactivé"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activé"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Activé : en fonction du visage"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Activer la détection des visages"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Détection des visages"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"L\'orientation de l\'écran change automatiquement entre les modes portrait et paysage selon que vous tenez votre téléphone à la verticale ou à l\'horizontale"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"En savoir plus sur la rotation automatique"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Lorsque vous tenez votre téléphone en mode portrait ou paysage"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Résolution de l\'écran"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Haute résolution"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"La plus haute résolution"</string>
+    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Résolution maximale"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p HD+ intégrale"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
     <string name="screen_resolution_footer" msgid="2563830074752340045">"Le changement de la résolution peut entraîner la fermeture de certaines applications en cours d\'exécution."</string>
@@ -1468,7 +1470,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"Confirmez le nouveau NIP"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"NIP de la carte SIM"</string>
     <string name="sim_bad_pin" msgid="5416328363761048221">"NIP incorrect."</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"Les NIP ne correspondent pas."</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"Les NIP ne correspondent pas"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Impossible de modifier le NIP.\nLe NIP est peut-être incorrect."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"Le NIP de la carte SIM a été modifié."</string>
     <string name="sim_lock_failed" msgid="16360418201678317">"Impossible de changer l\'état de verrouillage de la carte SIM.\nLe NIP est peut-être incorrect."</string>
@@ -1939,8 +1941,8 @@
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Entrer de nouveau votre NIP"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Confirmer votre NIP professionnel"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Entrer votre NIP professionnel"</string>
-    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas."</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Les NIP ne correspondent pas."</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Les mots de passe ne correspondent pas"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Les NIP ne correspondent pas"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Tracer de nouveau votre schéma"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Mode de déverrouillage"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Le mot de passe a été défini."</string>
@@ -1981,7 +1983,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"Modifier le NIP de déverrouillage"</string>
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Dessinez un schéma de déverrouillage"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Appuyez sur Menu pour obtenir de l\'aide."</string>
-    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Retirez le doigt lorsque vous avez terminé."</string>
+    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Relevez le doigt lorsque vous avez terminé"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Veuillez réessayer."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Schéma enregistré"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Redessinez le schéma pour confirmer"</string>
@@ -2195,7 +2197,7 @@
     <string name="hardkeyboard_category" msgid="8729780593378161071">"Paramètres du clavier physique"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Appuyez deux fois sur la touche Espace pour insérer « . »"</string>
     <string name="show_password" msgid="7101900779571040117">"Afficher les mots de passe"</string>
-    <string name="show_password_summary" msgid="9025960283785111619">"Affichez les caractères brièvement lorsque que vous écrivez"</string>
+    <string name="show_password_summary" msgid="9025960283785111619">"Afficher les caractères brièvement pendant la saisie"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'application <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Paramètres"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
@@ -2332,6 +2334,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De : Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bonjour!\n\nJe voulais juste vérifier l\'avancement des conceptions. Seront-elles prêtes avant que nous commencions à construire les nouveaux ballons?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Réinitialiser paramètres"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Réinitialiser la taille d\'affichage et le texte?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Vos préférences de taille d\'affichage et de texte seront réinitialisées aux paramètres par défaut du téléphone"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Réinitialiser"</string>
@@ -4406,7 +4410,7 @@
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Paramètres des applications inutilisées"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Suspendre l\'activité appli si inutilisée"</string>
-    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Retirez les autorisations, supprimez les fichiers temporaires et arrêtez les notifications"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Retirer les autorisations, supprimer les fichiers temporaires et arrêter les notifications"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Toutes les applications"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Applications installées"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Applications instantanées"</string>
@@ -5491,7 +5495,7 @@
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Vous risquez de perdre l\'accès au temps ou aux données restants. Communiquez avec votre fournisseur de services avant de procéder au retrait."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"capture de contenu, contenu de l\'application"</string>
     <string name="content_capture" msgid="868372905432812238">"Contenu de l\'application"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"Autorisez les applications à envoyer du contenu au système Android"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"Autoriser les applications à envoyer du contenu au système Android"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"Capturer l\'empreinte de mémoire système"</string>
     <string name="reboot_with_mte_title" msgid="9167242803901899693">"Redémarrer avec l\'extension MTE"</string>
     <string name="reboot_with_mte_message" msgid="7675836625682561153">"Le système va redémarrer et vous permettra d\'expérimenter l\'extension MTE (Memory Tagging Extension). L\'extension MTE peut affecter la performance et la stabilité du système. Ce paramètre sera réinitialisé lors du prochain redémarrage."</string>
@@ -5680,7 +5684,7 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> requiert que la 2G soit activée"</string>
     <string name="app_info_all_services_label" msgid="3600929226735860271">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher l\'accès au presse-papiers"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Affichez un message lorsque les applications accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Afficher un message lorsque les applications accèdent à du texte, à des images ou à d\'autres contenus que vous avez copiés"</string>
     <string name="all_apps" msgid="3054120149509114789">"Toutes les applications"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"Ne pas autoriser"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (BUL)"</string>
