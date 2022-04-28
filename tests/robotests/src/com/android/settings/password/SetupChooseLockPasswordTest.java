@@ -46,7 +46,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -106,7 +105,6 @@ public class SetupChooseLockPasswordTest {
 
     @Test
     @Config(shadows = ShadowChooseLockGenericController.class)
-    @Ignore
     public void createActivity_withShowOptionsButtonExtra_buttonNotVisibleIfNoVisibleLockTypes() {
         SetupChooseLockPassword activity = createSetupChooseLockPassword();
         Button optionsButton = activity.findViewById(R.id.screen_lock_options);
@@ -206,7 +204,7 @@ public class SetupChooseLockPasswordTest {
     @Implements(ChooseLockGenericController.class)
     public static class ShadowChooseLockGenericController {
         @Implementation
-        protected List<ScreenLockType> getVisibleScreenLockTypes() {
+        protected List<ScreenLockType> getVisibleAndEnabledScreenLockTypes() {
             return Collections.emptyList();
         }
     }

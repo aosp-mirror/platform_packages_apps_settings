@@ -122,9 +122,9 @@ public class SubSettingLauncher {
         return this;
     }
 
-    /** Decide whether the next page is secondary layer page or not. */
-    public SubSettingLauncher setIsSecondaryLayerPage(boolean isSecondaryLayerPage) {
-        mLaunchRequest.mIsSecondaryLayerPage = isSecondaryLayerPage;
+    /** Decide whether the next page is second layer page or not. */
+    public SubSettingLauncher setIsSecondLayerPage(boolean isSecondLayerPage) {
+        mLaunchRequest.mIsSecondLayerPage = isSecondLayerPage;
         return this;
     }
 
@@ -176,8 +176,8 @@ public class SubSettingLauncher {
         intent.addFlags(mLaunchRequest.mFlags);
         intent.putExtra(SettingsBaseActivity.EXTRA_PAGE_TRANSITION_TYPE,
                 mLaunchRequest.mTransitionType);
-        intent.putExtra(SettingsActivity.EXTRA_IS_SECONDARY_LAYER_PAGE,
-                mLaunchRequest.mIsSecondaryLayerPage);
+        intent.putExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE,
+                mLaunchRequest.mIsSecondLayerPage);
 
         return intent;
     }
@@ -225,6 +225,6 @@ public class SubSettingLauncher {
         int mTransitionType;
         Bundle mArguments;
         Bundle mExtras;
-        boolean mIsSecondaryLayerPage;
+        boolean mIsSecondLayerPage;
     }
 }

@@ -272,7 +272,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
 
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(
+                    return mDevicePolicyManager.getResources().getString(
                             CONFIRM_WORK_PROFILE_PIN_HEADER,
                             () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
                 }
@@ -280,7 +280,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 return getString(R.string.lockpassword_confirm_your_pin_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(
+                    return mDevicePolicyManager.getResources().getString(
                             CONFIRM_WORK_PROFILE_PATTERN_HEADER,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_work_pattern_header));
@@ -289,7 +289,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 return getString(R.string.lockpassword_confirm_your_pattern_header);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(
+                    return mDevicePolicyManager.getResources().getString(
                             CONFIRM_WORK_PROFILE_PASSWORD_HEADER,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_work_password_header));
@@ -305,7 +305,7 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
         switch (credentialType) {
             case LockPatternUtils.CREDENTIAL_TYPE_PIN:
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_CONFIRM_PIN,
+                    return mDevicePolicyManager.getResources().getString(WORK_PROFILE_CONFIRM_PIN,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_pin_generic_profile));
                 }
@@ -313,7 +313,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 return getString(R.string.lockpassword_confirm_your_pin_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PATTERN:
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_CONFIRM_PATTERN,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PATTERN,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_pattern_generic_profile));
                 }
@@ -321,7 +322,8 @@ public class ConfirmDeviceCredentialActivity extends FragmentActivity {
                 return getString(R.string.lockpassword_confirm_your_pattern_generic);
             case LockPatternUtils.CREDENTIAL_TYPE_PASSWORD:
                 if (isEffectiveUserManagedProfile) {
-                    return mDevicePolicyManager.getString(WORK_PROFILE_CONFIRM_PASSWORD,
+                    return mDevicePolicyManager.getResources().getString(
+                            WORK_PROFILE_CONFIRM_PASSWORD,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_password_generic_profile));
                 }

@@ -16,15 +16,31 @@
 
 package com.android.settings.notification;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.media.MediaOutputIndicatorWorker;
+import com.android.settings.slices.CustomSliceRegistry;
+import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.media.MediaDevice;
 
 public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceController {
-
+    private static final String TAG = "MediaVolumePreCtrl";
     private static final String KEY_MEDIA_VOLUME = "media_volume";
+
+    private MediaOutputIndicatorWorker mWorker;
 
     public MediaVolumePreferenceController(Context context) {
         super(context, KEY_MEDIA_VOLUME);
@@ -65,5 +81,67 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
     @Override
     public int getMuteIcon() {
         return R.drawable.ic_media_stream_off;
+    }
+
+    private boolean isSupportEndItem() {
+        return getWorker() != null
+            && getWorker().getActiveLocalMediaController() != null
+            && isConnectedBLEDevice();
+    }
+
+    private boolean isConnectedBLEDevice() {
+        final MediaDevice device = getWorker().getCurrentConnectedMediaDevice();
+        if (device != null) {
+            return device.isBLEDevice();
+        }
+        return false;
+    }
+
+    @Override
+    public SliceAction getSliceEndItem(Context context) {
+        if (!isSupportEndItem()) {
+            Log.d(TAG, "The slice doesn't support end item");
+            return null;
+        }
+
+        final Intent intent = new Intent();
+        if (getWorker().isDeviceBroadcasting()) {
+            // TODO(b/229577323) : Get the intent action for the Media Output Broadcast Dialog
+            //  in SystemUI
+        } else {
+            // TODO(b/229577518) : Get the intent action of the Bluetooth Broadcast Dialog
+            //  for user to choose the action
+        }
+        final PendingIntent pi = PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        final IconCompat icon = getBroadcastIcon(context);
+
+        return SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE, getPreferenceKey());
+    }
+
+    private IconCompat getBroadcastIcon(Context context) {
+        final Drawable drawable = context.getDrawable(
+                com.android.settingslib.R.drawable.settings_input_antenna);
+        if (drawable != null) {
+            drawable.setTint(Utils.getColorAccentDefaultColor(context));
+            return Utils.createIconWithDrawable(drawable);
+        }
+        return null;
+    }
+
+    private MediaOutputIndicatorWorker getWorker() {
+        if (mWorker == null) {
+            mWorker = SliceBackgroundWorker.getInstance(getUri());
+        }
+        return mWorker;
+    }
+
+    private Uri getUri() {
+        return CustomSliceRegistry.VOLUME_MEDIA_URI;
+    }
+
+    @Override
+    public Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
+        return MediaOutputIndicatorWorker.class;
     }
 }

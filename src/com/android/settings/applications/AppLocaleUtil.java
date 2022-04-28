@@ -16,26 +16,35 @@
 
 package com.android.settings.applications;
 
+import android.annotation.NonNull;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
+
+import java.util.List;
 
 /** This class provides methods that help dealing with per app locale. */
 public class AppLocaleUtil {
     private static final String TAG = AppLocaleUtil.class.getSimpleName();
 
+    public static final Intent LAUNCHER_ENTRY_INTENT =
+            new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
     /**
      * Decides the UI display of per app locale.
      */
-    public static boolean canDisplayLocaleUi(Context context, AppEntry app) {
-        return !isDisallowedPackage(context, app.info.packageName)
-                && !isSignedWithPlatformKey(context, app.info.packageName)
-                && app.hasLauncherEntry;
+    public static boolean canDisplayLocaleUi(
+            @NonNull Context context,
+            @NonNull String packageName,
+            @NonNull List<ResolveInfo> infos) {
+        return !isDisallowedPackage(context, packageName)
+                && !isSignedWithPlatformKey(context, packageName)
+                && hasLauncherEntry(packageName, infos);
     }
 
     private static boolean isDisallowedPackage(Context context, String packageName) {
@@ -64,5 +73,10 @@ public class AppLocaleUtil {
             return false;
         }
         return packageInfo.applicationInfo.isSignedWithPlatformKey();
+    }
+
+    private static boolean hasLauncherEntry(String packageName, List<ResolveInfo> infos) {
+        return infos.stream()
+                .anyMatch(info -> info.activityInfo.packageName.equals(packageName));
     }
 }

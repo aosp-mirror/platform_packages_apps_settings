@@ -16,9 +16,13 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** Controller for "Vibration & haptics" settings page. */
@@ -34,5 +38,15 @@ public class VibrationPreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return mHasVibrator ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        final boolean isVibrateOn = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.VIBRATE_ON, ON) == ON;
+        return mContext.getText(
+                isVibrateOn
+                        ? R.string.accessibility_vibration_settings_state_on
+                        : R.string.accessibility_vibration_settings_state_off);
     }
 }
