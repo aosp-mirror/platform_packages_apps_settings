@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.homepage;
 
-import android.content.Context;
+/** A listener receiving the spilt layout change */
+public interface SplitLayoutListener {
 
-/**
- * Provider implementation for Game Settings related features.
- */
-public class GameSettingsFeatureProviderImpl implements
-        GameSettingsFeatureProvider {
-    @Override
-    public boolean isSupported(Context context) {
-        return false;
-    }
+    /**
+     * Called when the spilt layout is changed.
+     *
+     * @param isRegularLayout whether the layout should be regular or simplified
+     */
+    void onSplitLayoutChanged(boolean isRegularLayout);
 
-    @Override
-    public void launchGameSettings(Context context) {
-        return;
+    /**
+     * Notifies the listener whether the split layout is supported.
+     */
+    default void setSplitLayoutSupported(boolean supported) {
     }
 }

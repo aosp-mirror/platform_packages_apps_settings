@@ -254,7 +254,5 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         for (OnMainSwitchChangeListener listener : mSwitchChangeListeners) {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
-        mBeforeCheckedChangeListeners.clear();
-        mSwitchChangeListeners.clear();
     }
 }
