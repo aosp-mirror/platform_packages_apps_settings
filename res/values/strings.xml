@@ -5982,19 +5982,6 @@
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
     <string name="keywords_voice_access"></string>
 
-    <!-- Fast Pair settings -->
-    <skip />
-
-    <!-- Title in main settings screen for Fast Pair settings [CHAR LIMIT=15] -->
-    <string name="fast_pair_settings">Fast Pair</string>
-
-    <!-- Fast Pair setting summary in settings screen [CHAR LIMIT=50] -->
-    <string name="fast_pair_settings_summary">Nearby detection of Fast Pair bluetooth devices.</string>
-    <!-- Title for Fast Pair main switch preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_main_switch_title">Scan for nearby devices</string>
-    <!-- Title for Fast Pair saved devices preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_saved_devices_title">Saved devices</string>
-    <!-- Printing settings -->
     <skip />
 
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
@@ -8421,9 +8408,6 @@
 
     <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
-
-    <!-- List of synonyms for the Fast Pair setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_fast_pair">pair, earbuds, bluetooth</string>
 
     <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
@@ -13858,6 +13842,10 @@
     <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
      translated. [CHAR LIMIT=40] -->
     <string name="tare_settings">TARE Settings</string>
+    <!-- Summary for the TARE feature being on (ie. enabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_on">On</string>
+    <!-- Summary for the TARE feature being off (ie. disabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_off">Off</string>
     <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
     <string name="tare_revert">Revert to Default Settings</string>
     <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
@@ -13908,7 +13896,7 @@
     <string name="tare_rewards_instantaneous">Rewards per single event</string>
     <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
     implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
-    <string name="tare_rewards_ongoing">Rewards for total event duration</string>
+    <string name="tare_rewards_ongoing">Rewards per second of event duration</string>
     <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
     that benefit the user. [CHAR LIMIT=40]-->
     <string name="tare_rewards_max">Maximum Rewards Per Day</string>
@@ -14075,6 +14063,13 @@
     </string-array>
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
+    <!-- Array used to populate dropdown menu to select the units of the factor value. Not
+    translatable since they're base units. [CHAR LIMIT=40]-->
+    <string-array name="tare_units" translatable="false">
+        <item>ARC</item>
+        <item>Cake</item>
+    </string-array>
+
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
     <string name="dream_preview_button_title">Preview</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
