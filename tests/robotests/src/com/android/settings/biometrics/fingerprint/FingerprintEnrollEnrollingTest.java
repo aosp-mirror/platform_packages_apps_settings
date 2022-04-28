@@ -83,12 +83,12 @@ public class FingerprintEnrollEnrollingTest {
     }
 
     @Test
-    public void fingerprintUdfpsEnrollSuccessProgress_shouldVibrate() {
+    public void fingerprintUdfpsEnrollSuccessProgress_shouldNotVibrate() {
         initializeActivityFor(FingerprintSensorProperties.TYPE_UDFPS_OPTICAL);
 
         mActivity.onEnrollmentProgressChange(1, 1);
 
-        verify(mVibrator).vibrate(anyInt(), anyString(), any(), anyString(), any());
+        verify(mVibrator, never()).vibrate(anyInt(), anyString(), any(), anyString(), any());
     }
 
     @Test
