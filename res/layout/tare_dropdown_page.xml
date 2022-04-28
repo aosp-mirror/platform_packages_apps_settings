@@ -6,19 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".development.tare.DropdownActivity">
-  <com.android.settingslib.widget.settingsspinner.SettingsSpinner
+  <Spinner
       android:id="@+id/spinner"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:theme="@style/Widget.PopupWindow.Settings"
-      android:padding="10dp" />
+      android:theme="@style/Widget.PopupWindow.Settings" />
   <FrameLayout
       android:id="@+id/frame_layout"
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
+      app:layout_constrainedWidth="true"
+      app:layout_constrainedHeight="true"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

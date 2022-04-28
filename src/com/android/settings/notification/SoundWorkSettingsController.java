@@ -257,9 +257,9 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
     private void enableWorkSyncSettings() {
         mWorkUsePersonalSounds.setChecked(true);
 
-        String summary = mContext.getSystemService(DevicePolicyManager.class).getString(
-                WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_ACTIVE_SUMMARY,
-                () -> mContext.getString(R.string.work_sound_same_as_personal)
+        String summary = mContext.getSystemService(DevicePolicyManager.class).getResources()
+                .getString(WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_ACTIVE_SUMMARY,
+                        () -> mContext.getString(R.string.work_sound_same_as_personal)
         );
 
         if (mWorkPhoneRingtonePreference != null) {
@@ -355,10 +355,10 @@ public class SoundWorkSettingsController extends AbstractPreferenceController
                     context.getSystemService(DevicePolicyManager.class);
 
             return new AlertDialog.Builder(getActivity())
-                    .setTitle(devicePolicyManager.getString(
+                    .setTitle(devicePolicyManager.getResources().getString(
                             ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_TITLE,
                             () -> context.getString(R.string.work_sync_dialog_title)))
-                    .setMessage(devicePolicyManager.getString(
+                    .setMessage(devicePolicyManager.getResources().getString(
                             ENABLE_WORK_PROFILE_SYNC_WITH_PERSONAL_SOUNDS_DIALOG_MESSAGE,
                             () -> context.getString(R.string.work_sync_dialog_message)))
                     .setPositiveButton(R.string.work_sync_dialog_yes,

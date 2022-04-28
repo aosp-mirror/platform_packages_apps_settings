@@ -18,10 +18,7 @@ package com.android.settings.biometrics.combination;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,7 +39,6 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -96,7 +92,6 @@ public class CombinedBiometricStatusPreferenceControllerTest {
                 mContext, TEST_PREF_KEY, mLifecycle);
     }
 
-    @Ignore
     @Test
     public void updateState_parentalConsentRequired_preferenceDisabled() {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
@@ -106,16 +101,10 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         RestrictedLockUtils.EnforcedAdmin admin = mock(RestrictedLockUtils.EnforcedAdmin.class);
 
         mController.mPreference = restrictedPreference;
-        mController.updateStateInternal(admin, true, true);
+        mController.updateStateInternal(admin);
         verify(restrictedPreference).setDisabledByAdmin(eq(admin));
 
-        mController.updateStateInternal(admin, true, false);
-        verify(restrictedPreference).setDisabledByAdmin(eq(null));
-
-        mController.updateStateInternal(admin, false, true);
-        verify(restrictedPreference).setDisabledByAdmin(eq(null));
-
-        mController.updateStateInternal(admin, false, false);
+        mController.updateStateInternal(null);
         verify(restrictedPreference).setDisabledByAdmin(eq(null));
     }
 }
