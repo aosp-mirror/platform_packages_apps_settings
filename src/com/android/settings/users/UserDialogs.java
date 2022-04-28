@@ -196,4 +196,25 @@ public final class UserDialogs {
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
     }
+
+
+    /**
+     * Creates a dialog to confirm with the user if it's ok to remove the guest user, which will
+     * delete all the guest user's data.
+     *
+     * @param context a Context object
+     * @param onConfirmListener Callback object for positive action
+     * @return the created Dialog
+     */
+    public static Dialog createRemoveGuestDialog(Context context,
+            DialogInterface.OnClickListener onConfirmListener) {
+        return new AlertDialog.Builder(context)
+                .setTitle(com.android.settingslib.R.string.guest_remove_guest_dialog_title)
+                .setMessage(R.string.user_exit_guest_confirm_message)
+                .setPositiveButton(
+                        com.android.settingslib.R.string.guest_remove_guest_confirm_button,
+                        onConfirmListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+    }
 }

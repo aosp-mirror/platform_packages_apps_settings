@@ -98,10 +98,10 @@
     <string name="font_size_make_larger_desc">Make larger</string>
 
     <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
-    <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
+    <string name="auto_rotate_settings_primary_switch_title">Use auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
-    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.</string>
+    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -500,6 +500,15 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
+    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
+    <string name="warnings_title">Update the app</string>
+
+    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
+    <string name="warnings_summary">You need to update the app for the latest available languages</string>
+
+    <!-- Button text on warning message [CHAR LIMIT=20]-->
+    <string name="warnings_button_update">Update now</string>
+
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -510,10 +519,14 @@
     <string name="preference_of_system_locale_title">System language</string>
 
     <!-- Summary for preference of the system default locale. [CHAR LIMIT=50]-->
-    <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
+    <string name="preference_of_system_locale_summary">System default</string>
 
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
-    <string name="no_multiple_language_supported">The app is set to <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g> by default and doesn\u2019t support multiple languages.</string>
+    <string name="desc_no_available_supported_locale">Language selection for this app isn\u2019t available from Settings.</string>
+
+    <!-- Description for the disclaimer of per app language. [CHAR LIMIT=NONE]-->
+    <string name="desc_app_locale_disclaimer">Language may differ from languages available in the app. Some apps may not support this setting.</string>
+
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
         <item quantity="one">Remove selected language?</item>
@@ -770,8 +783,8 @@
     <!-- Main Settings screen setting title for the item that takes you to the safety center [CHAR LIMIT=60] -->
     <string name="safety_center_title">Security &amp; privacy</string>
     <!-- TODO(b/208624929): Update to an UX approved summary and char limit. -->
-    <!-- Main Settings screen setting summary for the item that takes you to the safety center [CHAR LIMIT=60] -->
-    <string name="safety_center_summary">Permissions, screen lock, app security</string>
+    <!-- Main Settings screen setting summary for the item that takes you to the privacy and security settings. [CHAR LIMIT=60] -->
+    <string name="safety_center_summary">App security, device lock, permissions</string>
 
     <!-- Face enrollment and settings --><skip />
     <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
@@ -1009,6 +1022,10 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5">Your phone can be unlocked when you don\u2019t intend to, like if someone holds it up to your finger.</string>
     <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5">Your child\u2019s phone can be unlocked when they don\u2019t intend to, like if someone holds it up to their finger.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your fingerprint may not work.</string>
+    <!-- Introduction description message shown in fingerprint enrollment introduction screen in setup wizard when asking for parental consent. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6">For best results, use a screen protector that\u2019s Made for Google certified. With other screen protectors, your child\u2019s fingerprint may not work.</string>
     <!-- Introduction detail message shown in fingerprint enrollment introduction to learn more about fingerprint [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more"></string>
 
@@ -1120,8 +1137,10 @@
     <string name="security_settings_udfps_enroll_repeat_message">Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint.</string>
     <!-- Title shown during fingerprint enrollment that instructs the user to enroll their fingertip [CHAR LIMIT=80] -->
     <string name="security_settings_udfps_enroll_fingertip_title">Place the tip of your finger on the sensor</string>
-    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=80] -->
-    <string name="security_settings_udfps_enroll_edge_title">Finally, use the edges of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the left edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_left_edge_title">Place the left edge of your finger</string>
+    <!-- Title shown during fingerprint enrollment that instructs the user to enroll the right edge of their finger [CHAR LIMIT=80] -->
+    <string name="security_settings_udfps_enroll_right_edge_title">Place the right edge of your finger</string>
     <!-- Message shown during fingerprint enrollment that instructs the user to enroll the edges of their finger [CHAR LIMIT=160] -->
     <string name="security_settings_udfps_enroll_edge_message">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Message shown in fingerprint enrollment asking users to repeat touching the fingerprint sensor. [CHAR LIMIT=160] -->
@@ -1269,14 +1288,14 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_bad_calibration">Can\u2019t use fingerprint sensor. Visit a repair provider</string>
-    <!-- Title for Advanced Security Settings [CHAR LIMIT=60] -->
-    <string name="security_advanced_settings">Advanced settings</string>
-    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is a work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_work_profile_settings_summary">Work profile lock, Smart Lock</string>
-    <!-- String for summary to be shown in Advanced settings tile in Security page, when there is no work profile set up on the device. Smart Lock is a brand name. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_no_work_profile_settings_summary">Smart Lock and more</string>
-    <!-- Search keywords for Advanced settings in Security page. [CHAR_LIMIT=NONE] -->
-    <string name="security_advanced_settings_keywords">Advanced settings</string>
+    <!-- Title for the section that has additional security settings. [CHAR LIMIT=60] -->
+    <string name="security_advanced_settings">More security settings</string>
+    <!-- String for the "More security settings" summary when a work profile is on the device. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_work_profile_settings_summary">Work profile lock, encryption, and more</string>
+    <!-- Summary string for the "More security settings" section. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_no_work_profile_settings_summary">Encryption, credentials, and more</string>
+    <!-- Search keywords for the "More security settings" section in security settings. [CHAR_LIMIT=NONE] -->
+    <string name="security_advanced_settings_keywords">security, more security settings, more settings, advanced security settings</string>
 
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
@@ -2503,12 +2522,6 @@
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
     <string name="wifi_network_prefix_length">Network prefix length</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11AX [CHAR LIMIT=50]-->
-    <string name="wifi_type_11AX">Wi\u2011Fi 6</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11AC [CHAR LIMIT=50]-->
-    <string name="wifi_type_11AC">Wi\u2011Fi 5</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11N  [CHAR LIMIT=50]-->
-    <string name="wifi_type_11N">Wi\u2011Fi 4</string>
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
@@ -2913,7 +2926,13 @@
     <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
     <string name="auto_rotate_option_face_based">On - Face-based</string>
     <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
-    <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
+    <string name="auto_rotate_switch_face_based">Face Detection</string>
+    <!-- Preference summary to enable auto rotate[CHAR_LIMIT=NONE]-->
+    <string name="auto_rotate_screen_summary">Automatically adjust the screen orientation when you move your phone between portrait and landscape</string>
+    <!-- Accessibility description for auto rotate learn more link [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_link_a11y">Learn more about auto-rotate</string>
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=60] -->
+    <string name="auto_rotate_summary_a11y">When you move your phone between portrait and landscape</string>
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
@@ -4316,7 +4335,7 @@
     <!-- About phone settings screen, setting option name to see licensing info for WebView component. [CHAR LIMIT=35] -->
     <string name="webview_license_title">System WebView License</string>
     <!-- About phone settings screen, setting option name to see wallpapers attributions -->
-    <string name="wallpaper_attributions">Wallpapers</string>
+    <string name="wallpaper_attributions">Wallpaper credits</string>
     <!-- About phone settings screen, setting option name to see wallpapers attributions values -->
     <string name="wallpaper_attributions_values">Satellite imagery providers:\n©2014 CNES / Astrium, DigitalGlobe, Bluesky</string>
 
@@ -4758,11 +4777,13 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete app data?</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">This app\u2019s data will be permanently deleted. This includes files, settings, databases, and other app data.</string>
-    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
+    <string name="clear_data_dlg_text">This app\u2019s data, including files and settings, will be permanently deleted from this device</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
     <string name="dlg_cancel">Cancel</string>
+    <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. [CHAR LIMIT=25] -->
+    <string name="dlg_delete">Delete</string>
     <!-- Manage applications, individual application dialog box title. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
@@ -5287,6 +5308,8 @@
     <string name="accessibility_text_reading_preview_mail_content">Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?</string>
     <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=25] -->
     <string name="accessibility_text_reading_reset_button_title">Reset settings</string>
+    <!-- Message for the toast after clicking the reset button of the dialog of the accessibility text reading page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_reset_message">Display size and text settings have been reset</string>
     <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_confirm_dialog_title">Reset display size and text?</string>
     <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
@@ -10453,10 +10476,10 @@
     <string name="unused_apps_category">Unused app settings</string>
 
     <!-- Label of a switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=40]-->
-    <string name="unused_apps_switch">Pause app activity</string>
+    <string name="unused_apps_switch">Pause app activity if unused</string>
 
     <!-- Summary of the switch preference that controls whether the system will pause app activity when the app has not been used for months [CHAR LIMIT=NONE]-->
-    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications if unused</string>
+    <string name="unused_apps_switch_summary">Remove permissions, delete temporary files, and stop notifications</string>
 
     <!-- Label for showing all apps in list [CHAR LIMIT=30] -->
     <string name="filter_all_apps">All apps</string>
@@ -12438,6 +12461,9 @@
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
 
+    <!-- Help URI, auto rotate page [DO NOT TRANSLATE] -->
+    <string name="help_url_auto_rotate_settings" translatable="false"></string>
+
     <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
     <string name="help_url_app_usage_settings" translatable="false"></string>
 
@@ -13461,6 +13487,8 @@
     <string name="lockscreen_trivial_controls_setting_toggle">Control from locked device</string>
     <!-- Trivial Device controls summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_trivial_controls_summary">Control external devices without unlocking your phone or tablet if allowed by the device controls app</string>
+    <!-- Trivial Device disabled controls summary [CHAR LIMIT=NONE] -->
+    <string name="lockscreen_trivial_disabled_controls_summary">To use, first turn on \u0022Show device controls\u0022</string>
     <!-- Lockscreen double-line clock summary [CHAR LIMIT=NONE] -->
     <string name="lockscreen_double_line_clock_summary">Show double-line clock when available</string>
     <!-- Lockscreen double-line clock toggle [CHAR LIMIT=60] -->
@@ -13753,12 +13781,6 @@
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
-
-    <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_label" translatable="false"></string>
-    <!-- Summary for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_summary" translatable="false"></string>
-
     <!-- Label for All Services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All Services</string>
 
@@ -13793,11 +13815,6 @@
     <string name="perm_toggle_description">For apps and services</string>
     <!-- Describes what is affected by the mic toggle [CHAR LIMIT=NONE] -->
     <string name="mic_toggle_description">For apps and services. If this setting is off, microphone data may still be shared when you call an emergency number.</string>
-
-    <!-- Title for Game settings entry. [CHAR_LIMIT=NONE] -->
-    <string name="game_settings_title">Game settings</string>
-    <!-- Summary for Game settings entry. [CHAR_LIMIT=NONE] -->
-    <string name="game_settings_summary">Turn on Game Dashboard shortcut, and more</string>
 
     <!-- Content description of the previous button to bring user to the previous preview page. -->
     <string name="previous_page_content_description">Previous</string>
@@ -14105,4 +14122,22 @@
     <string name="ingress_rate_limit_dialog_title">Configure network download rate limit</string>
     <!-- Developer Settings: Dialog ListPreference option to disable network bandwidth ingress rate limit [CHAR LIMIT=none] -->
     <string name="ingress_rate_limit_no_limit_entry">No limit</string>
+
+    <!-- BT LE Audio Device: Media Broadcast -->
+    <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
+    <!-- The message of the Media Broadcast Dialog for finding broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_find_message">Listen to broadcasts that are playing near you</string>
+    <!-- The message of the Media Broadcast Dialog for broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_broadcast_message">Broadcast media to devices near you, or listen to someone else’s broadcast</string>
+    <!-- The title of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_title">Broadcasts</string>
+    <!-- The summary of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_summary">Listening to</string>
+    <!-- The Button of the action to find broadcasts [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast">Find broadcasts</string>
+    <!-- The Button of the action to leave the broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_leave">Leave broadcast</string>
+    <!-- The Button of the action to scan QR code [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_scan">Scan QR code</string>
 </resources>
