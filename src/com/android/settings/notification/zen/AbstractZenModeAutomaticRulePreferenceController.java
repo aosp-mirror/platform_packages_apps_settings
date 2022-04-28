@@ -16,6 +16,8 @@
 
 package com.android.settings.notification.zen;
 
+import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
+
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
@@ -79,7 +81,8 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             ComponentName configurationActivity, String ruleId) {
         final Intent intent = new Intent()
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                .putExtra(ConditionProviderService.EXTRA_RULE_ID, ruleId);
+                .putExtra(ConditionProviderService.EXTRA_RULE_ID, ruleId)
+                .putExtra(EXTRA_AUTOMATIC_RULE_ID, ruleId);
         if (configurationActivity != null) {
             intent.setComponent(configurationActivity);
         } else {

@@ -37,7 +37,6 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.SparseArray;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -79,7 +78,6 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
      * user.
      */
     private final ArrayList<DeviceAdminListItem> mAdmins = new ArrayList<>();
-    private final SparseArray<ComponentName> mProfileOwnerComponents = new SparseArray<>();
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -118,6 +116,8 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         super.displayPreference(screen);
         mPreferenceGroup = screen.findPreference(getPreferenceKey());
         mFooterPreference = mPreferenceGroup.findPreference(KEY_DEVICE_ADMIN_FOOTER);
+
+        updateList();
     }
 
     @Override
@@ -125,19 +125,6 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mContext.registerReceiverAsUser(
                 mBroadcastReceiver, UserHandle.ALL, FILTER,
                 null /* broadcastPermission */, null /* scheduler */);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        mProfileOwnerComponents.clear();
-        final List<UserHandle> profiles = mUm.getUserProfiles();
-        final int profilesSize = profiles.size();
-        for (int i = 0; i < profilesSize; ++i) {
-            final int profileId = profiles.get(i).getIdentifier();
-            mProfileOwnerComponents.put(profileId, mDPM.getProfileOwnerAsUser(profileId));
-        }
-        updateList();
     }
 
     @Override

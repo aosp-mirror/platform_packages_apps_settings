@@ -124,7 +124,7 @@ public class LockAfterTimeoutPreferenceController extends AbstractPreferenceCont
     private void updateLockAfterPreferenceSummary(TimeoutListPreference preference) {
         final CharSequence summary;
         if (preference.isDisabledByAdmin()) {
-            summary = mDPM.getString(DISABLED_BY_IT_ADMIN_TITLE,
+            summary = mDPM.getResources().getString(DISABLED_BY_IT_ADMIN_TITLE,
                     () -> mContext.getString(R.string.disabled_by_policy_title));
         } else {
             // Update summary message with current value

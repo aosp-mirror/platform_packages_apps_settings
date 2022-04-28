@@ -31,21 +31,20 @@ import static org.mockito.Mockito.when;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
-import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
-import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.R;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.testutils.SliceTester;
+import com.android.settings.testutils.shadow.ShadowWifiSlice;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 
@@ -59,24 +58,32 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowBinder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = WifiSliceTest.ShadowSliceBackgroundWorker.class)
+@Config(shadows = {
+        WifiSliceTest.ShadowSliceBackgroundWorker.class,
+        ShadowWifiSlice.class})
 public class WifiSliceTest {
 
     private static final String AP1_NAME = "ap1";
     private static final String AP2_NAME = "ap2";
     private static final String AP3_NAME = "ap3";
+    private static final int USER_ID = 1;
 
     @Mock
     private WifiManager mWifiManager;
+    @Mock
+    private PackageManager mPackageManager;
+
 
     private Context mContext;
     private ContentResolver mResolver;
     private WifiSlice mWifiSlice;
+    private String mSIPackageName;
 
     @Before
     public void setUp() {
@@ -86,27 +93,46 @@ public class WifiSliceTest {
         doReturn(mResolver).when(mContext).getContentResolver();
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
 
+        mSIPackageName = mContext.getString(R.string.config_settingsintelligence_package_name);
+        ShadowBinder.setCallingUid(USER_ID);
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{mSIPackageName});
+        ShadowWifiSlice.setWifiPermissible(true);
         mWifiSlice = new WifiSlice(mContext);
     }
 
     @Test
-    public void getWifiSlice_shouldHaveTitleAndToggle() {
+    public void getWifiSlice_fromSIPackage_shouldHaveTitleAndToggle() {
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{mSIPackageName});
+        ShadowWifiSlice.setWifiPermissible(false);
+
         final Slice wifiSlice = mWifiSlice.getSlice();
 
-        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
-        assertThat(metadata.getTitle()).isEqualTo(mContext.getString(R.string.wifi_settings));
+        assertThat(wifiSlice).isNotNull();
+    }
 
-        final List<SliceAction> toggles = metadata.getToggles();
-        assertThat(toggles).hasSize(1);
+    @Test
+    public void getWifiSlice_notFromSIPackageAndWithWifiPermission_shouldHaveTitleAndToggle() {
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{"com.test"});
+        ShadowWifiSlice.setWifiPermissible(true);
 
-        final SliceAction primaryAction = metadata.getPrimaryAction();
-        final IconCompat expectedToggleIcon = IconCompat.createWithResource(mContext,
-                R.drawable.ic_settings_wireless);
-        assertThat(primaryAction.getIcon().toString()).isEqualTo(expectedToggleIcon.toString());
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        assertThat(wifiSlice).isNotNull();
+    }
+
+    @Test
+    public void getWifiSlice_notFromSIPackageAndWithoutWifiPermission_shouldNoSlice() {
+        when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{"com.test"});
+        ShadowWifiSlice.setWifiPermissible(false);
+
+        final Slice wifiSlice = mWifiSlice.getSlice();
+
+        assertThat(wifiSlice).isNull();
     }
 
     @Test
