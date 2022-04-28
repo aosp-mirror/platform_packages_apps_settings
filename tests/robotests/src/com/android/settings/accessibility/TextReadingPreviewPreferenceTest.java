@@ -16,7 +16,15 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.TextReadingPreviewController.PREVIEW_SAMPLE_RES_IDS;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -50,12 +58,11 @@ public class TextReadingPreviewPreferenceTest {
     @Before
     public void setUp() {
         final Context context = ApplicationProvider.getApplicationContext();
-        final int[] sampleResIds = new int[]{1, 2, 3, 4, 5, 6};
-        final Configuration[] configurations = createConfigurations(6);
+        final Configuration[] configurations = createConfigurations(PREVIEW_SAMPLE_RES_IDS.length);
         mTextReadingPreviewPreference = new TextReadingPreviewPreference(context);
         mPreviewPagerAdapter =
-                new PreviewPagerAdapter(context, /* isLayoutRtl= */ false, sampleResIds,
-                        configurations);
+                spy(new PreviewPagerAdapter(context, /* isLayoutRtl= */ false,
+                        PREVIEW_SAMPLE_RES_IDS, configurations));
         final LayoutInflater inflater = LayoutInflater.from(context);
         final View view =
                 inflater.inflate(mTextReadingPreviewPreference.getLayoutResource(),
@@ -87,7 +94,7 @@ public class TextReadingPreviewPreferenceTest {
 
     @Test
     public void setCurrentItem_success() {
-        final int currentItem = 3;
+        final int currentItem = 1;
         mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
         mTextReadingPreviewPreference.onBindViewHolder(mHolder);
 
@@ -102,6 +109,24 @@ public class TextReadingPreviewPreferenceTest {
         final int currentItem = 5;
 
         mTextReadingPreviewPreference.setCurrentItem(currentItem);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void updatePagerWithoutPreviewAdapter_throwNPE() {
+        final int index = 1;
+
+        mTextReadingPreviewPreference.notifyPreviewPagerChanged(index);
+    }
+
+    @Test
+    public void notifyPreviewPager_setPreviewLayer() {
+        final int index = 2;
+        mTextReadingPreviewPreference.setPreviewAdapter(mPreviewPagerAdapter);
+        mTextReadingPreviewPreference.onBindViewHolder(mHolder);
+
+        mTextReadingPreviewPreference.notifyPreviewPagerChanged(index);
+
+        verify(mPreviewPagerAdapter).setPreviewLayer(eq(index), anyInt(), anyInt(), anyBoolean());
     }
 
     private static Configuration[] createConfigurations(int count) {

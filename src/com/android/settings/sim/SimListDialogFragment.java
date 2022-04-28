@@ -116,6 +116,7 @@ public class SimListDialogFragment extends SimDialogFragment {
             final SimDialogActivity activity = (SimDialogActivity) getActivity();
             activity.onSubscriptionSelected(getDialogType(), subId);
         }
+        dismiss();
     }
 
     protected List<SubscriptionInfo> getCurrentSubscriptions() {
@@ -127,12 +128,13 @@ public class SimListDialogFragment extends SimDialogFragment {
     @Override
     public void updateDialog() {
         Log.d(TAG, "Dialog updated, dismiss status: " + mWasDismissed);
+        if (mWasDismissed) {
+            return;
+        }
 
         List<SubscriptionInfo> currentSubscriptions = getCurrentSubscriptions();
         if (currentSubscriptions == null) {
-            if (!mWasDismissed) {
-                dismiss();
-            }
+            dismiss();
             return;
         }
         boolean includeAskEveryTime = getArguments().getBoolean(KEY_INCLUDE_ASK_EVERY_TIME);

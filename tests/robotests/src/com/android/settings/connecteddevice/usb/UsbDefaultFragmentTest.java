@@ -205,6 +205,7 @@ public class UsbDefaultFragmentTest {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
                 UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
 
         mFragment.onPause();
 
@@ -229,6 +230,7 @@ public class UsbDefaultFragmentTest {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
                 UsbManager.FUNCTION_MTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
 
         mFragment.onPause();
 
@@ -241,6 +243,7 @@ public class UsbDefaultFragmentTest {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
                 UsbManager.FUNCTION_PTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_PTP);
 
         mFragment.onPause();
 
@@ -253,6 +256,7 @@ public class UsbDefaultFragmentTest {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
                 UsbManager.FUNCTION_MIDI, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MIDI);
 
         mFragment.onPause();
 
@@ -265,6 +269,7 @@ public class UsbDefaultFragmentTest {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected */ true,
                 UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NCM);
 
         mFragment.onPause();
 

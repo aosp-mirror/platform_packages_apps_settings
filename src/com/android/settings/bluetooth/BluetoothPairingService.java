@@ -98,7 +98,7 @@ public final class BluetoothPairingService extends Service {
             } else if (action.equals(ACTION_DISMISS_PAIRING)) {
                 Log.d(TAG, "Notification cancel " + " (" +
                         mDevice.getName() + ")");
-                mDevice.cancelPairing();
+                mDevice.cancelBondProcess();
             } else {
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                         BluetoothDevice.ERROR);
@@ -144,7 +144,7 @@ public final class BluetoothPairingService extends Service {
             createPairingNotification(intent);
         } else if (TextUtils.equals(action, ACTION_DISMISS_PAIRING)) {
             Log.d(TAG, "Notification cancel " + " (" + mDevice.getName() + ")");
-            mDevice.cancelPairing();
+            mDevice.cancelBondProcess();
             mNm.cancel(NOTIFICATION_ID);
             stopSelf();
         } else if (TextUtils.equals(action, ACTION_PAIRING_DIALOG)) {

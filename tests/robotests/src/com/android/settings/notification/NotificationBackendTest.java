@@ -37,7 +37,9 @@ import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 import android.net.MacAddress;
+import android.os.Build;
 import android.os.Parcel;
 import android.provider.Settings;
 
@@ -167,6 +169,51 @@ public class NotificationBackendTest {
         pi.applicationInfo = new ApplicationInfo();
         pi.applicationInfo.packageName = "test";
         pi.applicationInfo.uid = 123;
+
+        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), mock(RoleManager.class), pi);
+
+        assertFalse(appRow.systemApp);
+        assertFalse(appRow.lockedImportance);
+    }
+
+    @Test
+    public void testMarkAppRow_targetsT_noPermissionRequest() throws Exception {
+        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
+
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        pi.applicationInfo.uid = 123;
+        pi.applicationInfo.targetSdkVersion= Build.VERSION_CODES.TIRAMISU;
+        pi.requestedPermissions = new String[] {"something"};
+
+        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+
+        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
+                mock(PackageManager.class), mock(RoleManager.class), pi);
+
+        assertFalse(appRow.systemApp);
+        assertTrue(appRow.lockedImportance);
+    }
+
+    @Test
+    public void testMarkAppRow_targetsT_permissionRequest() throws Exception {
+        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
+
+        PackageInfo pi = new PackageInfo();
+        pi.packageName = "test";
+        pi.applicationInfo = new ApplicationInfo();
+        pi.applicationInfo.packageName = "test";
+        pi.applicationInfo.uid = 123;
+        pi.applicationInfo.targetSdkVersion= Build.VERSION_CODES.TIRAMISU;
+        pi.requestedPermissions = new String[] {"something",
+                android.Manifest.permission.POST_NOTIFICATIONS};
 
         when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
 

@@ -24,10 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 
 /** Grid layout manager that calculates the number of columns for the screen size. */
-final class AutoFitGridLayoutManager extends GridLayoutManager {
+public final class AutoFitGridLayoutManager extends GridLayoutManager {
     private final float mColumnWidth;
 
-    AutoFitGridLayoutManager(Context context) {
+    public AutoFitGridLayoutManager(Context context) {
         super(context, /* spanCount= */ 1);
         this.mColumnWidth = context
                 .getResources()

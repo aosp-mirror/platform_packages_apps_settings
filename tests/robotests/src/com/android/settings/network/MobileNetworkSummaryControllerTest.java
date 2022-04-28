@@ -44,6 +44,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.Settings.MobileNetworkActivity;
+import com.android.settings.network.helper.SubscriptionAnnotation;
+import com.android.settings.network.helper.SubscriptionGrouping;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -123,7 +125,6 @@ public class MobileNetworkSummaryControllerTest {
 
 
     @Test
-    @Ignore
     public void getSummary_noSubscriptions_correctSummaryAndClickHandler() {
         mController.displayPreference(mPreferenceScreen);
         mController.onResume();
@@ -209,23 +210,6 @@ public class MobileNetworkSummaryControllerTest {
                 MobileNetworkActivity.class.getName());
         assertThat(intent.getIntExtra(Settings.EXTRA_SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID)).isEqualTo(sub1.getSubscriptionId());
-    }
-
-    @Test
-    @Ignore
-    public void getSummary_providerModel_Enabled() {
-        final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
-        final SubscriptionInfo sub2 = mock(SubscriptionInfo.class);
-        when(sub1.getSubscriptionId()).thenReturn(1);
-        when(sub2.getSubscriptionId()).thenReturn(2);
-        when(sub1.getDisplayName()).thenReturn("sub1");
-        when(sub2.getDisplayName()).thenReturn("sub2");
-
-        SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        SubscriptionUtil.setActiveSubscriptionsForTesting(Arrays.asList(sub1, sub2));
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-        assertThat(mController.getSummary()).isEqualTo("sub1, sub2");
     }
 
     @Test
@@ -319,7 +303,6 @@ public class MobileNetworkSummaryControllerTest {
     }
 
     @Test
-    @Ignore
     public void onAirplaneModeChanged_oneSubscriptionAirplaneModeGetsTurnedOn_isDisabled() {
         final SubscriptionInfo sub1 = mock(SubscriptionInfo.class);
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Arrays.asList(sub1));

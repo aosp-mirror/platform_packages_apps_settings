@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -64,6 +65,7 @@ import java.util.List;
  */
 public class BatteryAppListPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy {
+    private static final String TAG = "BatteryAppListPreferenceController";
     @VisibleForTesting
     static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
@@ -103,9 +105,14 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
             PowerProfile powerProfile = new PowerProfile(context);
             // Cheap hack to try to figure out if the power_profile.xml was populated.
-            return powerProfile.getAveragePowerForOrdinal(
-                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0)
-                    >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            final double averagePowerForOrdinal = powerProfile.getAveragePowerForOrdinal(
+                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
+            final boolean shouldShowBatteryAttributionList =
+                    averagePowerForOrdinal >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            if (!shouldShowBatteryAttributionList) {
+                Log.w(TAG, "shouldShowBatteryAttributionList(): " + averagePowerForOrdinal);
+            }
+            return shouldShowBatteryAttributionList;
         }
     };
 
@@ -120,9 +127,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                         final int userId = UserHandle.getUserId(entry.getUid());
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUserManager.getBadgedIconForUser(entry.getIcon(), userHandle));
-                        pgp.setTitle(entry.name);
+                        pgp.setTitle(entry.mName);
                         if (entry.isAppEntry()) {
-                            pgp.setContentDescription(entry.name);
+                            pgp.setContentDescription(entry.mName);
                         }
                     }
                     break;
@@ -242,7 +249,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                             contentDescription, entry);
                     pref.setKey(key);
                 }
-                entry.percent = percentOfTotal;
+                entry.mPercent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
@@ -281,7 +288,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             final BatteryEntry entry = usageList.get(i);
             final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
                     entry.getConsumedPower(), totalPower, dischargePercentage);
-            entry.percent = percentOfTotal;
+            entry.mPercent = percentOfTotal;
         }
         return usageList;
     }

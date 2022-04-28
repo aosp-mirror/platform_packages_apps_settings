@@ -46,6 +46,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
@@ -125,9 +126,15 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes) {
+        return createAccessibilityTutorialDialog(context, shortcutTypes, mOnClickListener);
+    }
+
+    static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes,
+            @Nullable DialogInterface.OnClickListener negativeButtonListener) {
         return new AlertDialog.Builder(context)
                 .setView(createShortcutNavigationContentView(context, shortcutTypes))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
+                .setNegativeButton(R.string.accessibility_tutorial_dialog_button,
+                        negativeButtonListener)
                 .create();
     }
 

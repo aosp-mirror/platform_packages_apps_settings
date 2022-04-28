@@ -133,7 +133,9 @@ public class PaymentBackend {
                     appInfo.settingsComponent = null;
                 }
                 appInfo.description = service.getDescription();
-                appInfo.icon = pm.getUserBadgedIcon(service.loadIcon(pm), appInfo.userHandle);
+                Drawable icon = (service.loadBanner(pm) != null)
+                        ? service.loadBanner(pm) : service.loadIcon(pm);
+                appInfo.icon = pm.getUserBadgedIcon(icon, appInfo.userHandle);
 
                 appInfos.add(appInfo);
             }

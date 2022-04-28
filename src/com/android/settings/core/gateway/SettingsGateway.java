@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.TextReadingPreferenceFragmentForSetupWizard;
 import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
@@ -59,6 +60,8 @@ import com.android.settings.applications.specialaccess.notificationaccess.Notifi
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureDetails;
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureSettings;
 import com.android.settings.applications.specialaccess.premiumsms.PremiumSmsAccess;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnDetails;
+import com.android.settings.applications.specialaccess.turnscreenon.TurnScreenOnSettings;
 import com.android.settings.applications.specialaccess.vrlistener.VrListenerSettings;
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails;
 import com.android.settings.backup.PrivacySettings;
@@ -68,7 +71,9 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileSetti
 import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
+import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
@@ -147,6 +152,7 @@ import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.privacy.PrivacyControlsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -213,6 +219,7 @@ public class SettingsGateway {
             LocationSettings.class.getName(),
             WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
+            PrivacyControlsFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
@@ -222,6 +229,7 @@ public class SettingsGateway {
             AccessibilityDetailsSettingsFragment.class.getName(),
             AccessibilitySettings.class.getName(),
             AccessibilitySettingsForSetupWizard.class.getName(),
+            TextReadingPreferenceFragmentForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
             ToggleColorInversionPreferenceFragment.class.getName(),
@@ -313,6 +321,8 @@ public class SettingsGateway {
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
+            BluetoothBroadcastDialog.class.getName(),
+            BluetoothFindBroadcastsFragment.class.getName(),
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),
@@ -333,7 +343,9 @@ public class SettingsGateway {
             AutoBrightnessSettings.class.getName(),
             OneHandedSettings.class.getName(),
             MobileNetworkSettings.class.getName(),
-            AppLocaleDetails.class.getName()
+            AppLocaleDetails.class.getName(),
+            TurnScreenOnSettings.class.getName(),
+            TurnScreenOnDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

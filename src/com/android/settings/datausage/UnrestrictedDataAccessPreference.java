@@ -48,7 +48,6 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
             ApplicationsState applicationsState, DataSaverBackend dataSaverBackend,
             DashboardFragment parentFragment) {
         super(context);
-        setWidgetLayoutResource(R.layout.restricted_switch_widget);
         mHelper = new RestrictedPreferenceHelper(context, this, null);
         mEntry = entry;
         mDataUsageState = (AppStateDataUsageBridge.DataUsageState) mEntry.extraInfo;
@@ -88,7 +87,7 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
 
     @Override
     protected void onClick() {
-        if (mDataUsageState.isDataSaverDenylisted) {
+        if (mDataUsageState != null && mDataUsageState.isDataSaverDenylisted) {
             // app is denylisted, launch App Data Usage screen
             AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
                     R.string.data_usage_app_summary_title,
@@ -131,10 +130,6 @@ public class UnrestrictedDataAccessPreference extends AppSwitchPreference implem
         super.onBindViewHolder(holder);
 
         mHelper.onBindViewHolder(holder);
-        holder.findViewById(R.id.restricted_icon).setVisibility(
-                disabledByAdmin ? View.VISIBLE : View.GONE);
-        holder.findViewById(android.R.id.switch_widget).setVisibility(
-                disabledByAdmin ? View.GONE : View.VISIBLE);
     }
 
     @Override

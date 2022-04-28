@@ -17,11 +17,13 @@
 package com.android.settings.display.darkmode;
 
 import static android.provider.Settings.ACTION_BEDTIME_SETTINGS;
+import static android.util.FeatureFlagUtils.SETTINGS_APP_ALLOW_DARK_THEME_ACTIVATION_AT_BEDTIME;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.FeatureFlagUtils;
 
 import androidx.annotation.Nullable;
 
@@ -44,6 +46,10 @@ public final class BedtimeSettings {
      */
     @Nullable
     public Intent getBedtimeSettingsIntent() {
+        if (!FeatureFlagUtils.isEnabled(mContext,
+                SETTINGS_APP_ALLOW_DARK_THEME_ACTIVATION_AT_BEDTIME)) {
+            return null;
+        }
         Intent bedtimeSettingsIntent = new Intent(ACTION_BEDTIME_SETTINGS).setPackage(
                 mWellbeingPackage);
         ResolveInfo bedtimeSettingInfo = mPackageManager.resolveActivity(bedtimeSettingsIntent,

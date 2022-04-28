@@ -24,7 +24,7 @@ import androidx.preference.Preference;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 public class TopLevelSecurityEntryPreferenceController extends BasePreferenceController {
 
@@ -38,7 +38,7 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (!SafetyCenterStatusHolder.get().isEnabled(mContext)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(mContext)) {
             return AVAILABLE;
         }
         return CONDITIONALLY_UNAVAILABLE;
@@ -58,6 +58,7 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
                 new SubSettingLauncher(mContext)
                         .setDestination(alternativeFragmentClassname)
                         .setSourceMetricsCategory(getMetricsCategory())
+                        .setIsSecondLayerPage(true)
                         .launch();
                 return true;
             }

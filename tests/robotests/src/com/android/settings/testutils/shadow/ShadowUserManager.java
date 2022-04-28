@@ -44,6 +44,8 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
 
     private static boolean sIsSupportsMultipleUsers;
 
+    private static final int PRIMARY_USER_ID = 0;
+
     private final List<String> mBaseRestrictions = new ArrayList<>();
     private final List<String> mGuestRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
@@ -217,5 +219,11 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
         } else {
             mEnabledTypes.remove(type);
         }
+    }
+
+    @Implementation
+    protected UserInfo getPrimaryUser() {
+        return new UserInfo(PRIMARY_USER_ID, null, null,
+                UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_ADMIN | UserInfo.FLAG_PRIMARY);
     }
 }

@@ -68,16 +68,31 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
     public void onAttach(Context context) {
         super.onAttach(context);
         final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
-        if (profileType == ProfileSelectFragment.ProfileType.WORK) {
-            final UserManager userManager = UserManager.get(context);
-            final UserHandle workUser = Utils.getManagedProfile(userManager);
-            // get work userId
-            mUserId = Utils.getManagedProfileId(userManager, UserHandle.myUserId());
-            mUserAwareContext = context.createContextAsUser(workUser, 0);
-        } else {
-            mUserId = UserHandle.myUserId();
-            mUserAwareContext = context;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        final int currentUserId = UserHandle.myUserId();
+        final int newUserId;
+        final Context newUserAwareContext;
+        switch (profileType) {
+            case ProfileSelectFragment.ProfileType.WORK: {
+                // If the user is a managed profile user, use currentUserId directly. Or get the
+                // managed profile userId instead.
+                newUserId = userManager.isManagedProfile()
+                        ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
+                break;
+            }
+            case ProfileSelectFragment.ProfileType.PERSONAL: {
+                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
+                newUserId = primaryUser.getIdentifier();
+                newUserAwareContext = context.createContextAsUser(primaryUser, 0);
+                break;
+            }
+            default:
+                newUserId = currentUserId;
+                newUserAwareContext = context;
         }
+        mUserId = newUserId;
+        mUserAwareContext = newUserAwareContext;
     }
 
     @Override
@@ -140,7 +155,7 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
             // allowed by organization. Doing so will allow the user to disable the input method and
             // remain complaint with the organization's policy. Once disabled, the input method
             // cannot be re-enabled because it is not in the permitted list.
-            final boolean isAllowedByOrganization = permittedList.isEmpty()
+            final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName())
                     || enabledImis.contains(imi);
             final InputMethodPreference pref = new InputMethodPreference(prefContext, imi,

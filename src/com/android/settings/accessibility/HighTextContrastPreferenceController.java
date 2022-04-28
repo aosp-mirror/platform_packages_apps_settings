@@ -19,10 +19,23 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreference;
 
-public class HighTextContrastPreferenceController extends TogglePreferenceController {
+import com.android.settings.R;
+import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
+import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
+
+/**
+ * PreferenceController for displaying all text in high contrast style.
+ */
+public class HighTextContrastPreferenceController extends TogglePreferenceController implements
+        TextReadingResetController.ResetStateListener {
+    private SwitchPreference mSwitchPreference;
+
+    @EntryPoint
+    private int mEntryPoint;
 
     public HighTextContrastPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -41,6 +54,12 @@ public class HighTextContrastPreferenceController extends TogglePreferenceContro
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        SettingsStatsLog.write(
+                SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                AccessibilityStatsLogUtils.convertToItemKeyName(getPreferenceKey()),
+                isChecked ? 1 : 0,
+                AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
+
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, (isChecked ? 1 : 0));
     }
@@ -48,5 +67,26 @@ public class HighTextContrastPreferenceController extends TogglePreferenceContro
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mSwitchPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void resetState() {
+        setChecked(false);
+        updateState(mSwitchPreference);
+    }
+
+    /**
+     * The entry point is used for logging.
+     *
+     * @param entryPoint from which settings page
+     */
+    void setEntryPoint(@EntryPoint int entryPoint) {
+        mEntryPoint = entryPoint;
     }
 }

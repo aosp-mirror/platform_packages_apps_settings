@@ -18,6 +18,7 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_QS_TOOLTIP_RESHOW;
 import static com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment.KEY_SAVED_USER_SHORTCUT_TYPE;
+import static com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -40,6 +41,7 @@ import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -53,6 +55,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
@@ -70,6 +73,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
@@ -92,6 +97,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         when(mFragment.getContext()).thenReturn(mContext);
+        when(mFragment.getActivity()).thenReturn(Robolectric.setupActivity(FragmentActivity.class));
         mScreen = spy(new PreferenceScreen(mContext, null));
         when(mScreen.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mScreen).when(mFragment).getPreferenceScreen();
@@ -201,7 +207,7 @@ public class AccessibilityShortcutPreferenceFragmentTest {
     @Config(shadows = ShadowFragment.class)
     public void restoreValueFromSavedInstanceState_showTooltipView() {
         mContext.setTheme(R.style.Theme_AppCompat);
-        mFragment.showQuickSettingsTooltipIfNeeded();
+        mFragment.showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_EDIT);
         assertThat(getLatestPopupWindow().isShowing()).isTrue();
 
         final Bundle savedInstanceState = new Bundle();
@@ -277,8 +283,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         }
 
         @Override
-        protected CharSequence getTileName() {
-            return PLACEHOLDER_PACKAGE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

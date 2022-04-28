@@ -19,11 +19,10 @@ package com.android.settings.dream;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -41,31 +40,24 @@ import java.util.stream.Collectors;
  * Controller for the dream picker where the user can select a screensaver.
  */
 public class DreamPickerController extends BasePreferenceController {
-    private static final String KEY = "dream_picker";
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final List<DreamInfo> mDreamInfos;
-    private Button mPreviewButton;
     @Nullable
     private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
 
-    public DreamPickerController(Context context) {
-        this(context, DreamBackend.getInstance(context));
+    public DreamPickerController(Context context, String key) {
+        this(context, key, DreamBackend.getInstance(context));
     }
 
-    public DreamPickerController(Context context, DreamBackend backend) {
-        super(context, KEY);
+    public DreamPickerController(Context context, String key, DreamBackend backend) {
+        super(context, key);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
         mActiveDream = getActiveDreamInfo(mDreamInfos);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -74,29 +66,34 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
 
-        mAdapter = new DreamAdapter(mDreamInfos.stream()
-                .map(DreamItem::new)
-                .collect(Collectors.toList()));
+        mAdapter = new DreamAdapter(R.layout.dream_preference_layout,
+                mDreamInfos.stream()
+                        .map(DreamItem::new)
+                        .collect(Collectors.toList()));
 
-        final RecyclerView recyclerView =
-                ((LayoutPreference) preference).findViewById(R.id.dream_list);
+        mAdapter.setEnabled(mBackend.isEnabled());
+
+        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        if (pref == null) {
+            return;
+        }
+        final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
+        recyclerView.addItemDecoration(
+                new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
-
-        mPreviewButton = ((LayoutPreference) preference).findViewById(R.id.preview_button);
-        mPreviewButton.setVisibility(View.VISIBLE);
-        mPreviewButton.setOnClickListener(v -> mBackend.preview(mActiveDream));
-        updatePreviewButtonState();
     }
 
-    private void updatePreviewButtonState() {
-        final boolean hasDream = mActiveDream != null;
-        mPreviewButton.setClickable(hasDream);
-        mPreviewButton.setEnabled(hasDream);
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mAdapter != null) {
+            mAdapter.setEnabled(preference.isEnabled());
+        }
     }
 
     @Nullable
@@ -121,6 +118,11 @@ public class DreamPickerController extends BasePreferenceController {
         }
 
         @Override
+        public CharSequence getSummary() {
+            return mDreamInfo.description;
+        }
+
+        @Override
         public Drawable getIcon() {
             return mDreamInfo.icon;
         }
@@ -129,11 +131,9 @@ public class DreamPickerController extends BasePreferenceController {
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            updatePreviewButtonState();
-            mMetricsFeatureProvider.action(
-                    mContext,
-                    SettingsEnums.ACTION_DREAM_SELECT_TYPE,
-                    mDreamInfo.componentName.flattenToString());
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.PAGE_UNKNOWN,
+                    mDreamInfo.componentName.flattenToString(), 1);
         }
 
         @Override
@@ -148,7 +148,7 @@ public class DreamPickerController extends BasePreferenceController {
 
         @Override
         public boolean isActive() {
-            if (mActiveDream == null) {
+            if (!mAdapter.getEnabled() || mActiveDream == null) {
                 return false;
             }
             return mDreamInfo.componentName.equals(mActiveDream.componentName);

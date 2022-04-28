@@ -20,7 +20,9 @@ import static com.android.settings.dashboard.profileselector.ProfileSelectFragme
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -31,6 +33,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -43,6 +46,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.testutils.shadow.ShadowInputMethodManagerWithMethodList;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 
@@ -62,7 +66,8 @@ import java.util.List;
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowSecureSettings.class,
-        ShadowInputMethodManagerWithMethodList.class
+        ShadowInputMethodManagerWithMethodList.class,
+        ShadowUserManager.class
 })
 public class AvailableVirtualKeyboardFragmentTest {
 
@@ -170,6 +175,7 @@ public class AvailableVirtualKeyboardFragmentTest {
         when(mFragment.getPreferenceScreen()).thenReturn(mPreferenceScreen);
         when(mPreferenceManager.getContext()).thenReturn(mContext);
         when(mContext.getSystemService(InputMethodManager.class)).thenReturn(mInputMethodManager);
+        doReturn(mContext).when(mContext).createContextAsUser(any(UserHandle.class), anyInt());
     }
 
     private List<InputMethodInfo> createFakeInputMethodInfoList(final String name, int num) {

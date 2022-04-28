@@ -47,6 +47,7 @@ import android.widget.Switch;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.accessibility.AccessibilityUtils;
@@ -65,6 +66,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     private static final String EMPTY_STRING = "";
 
     private Dialog mWarningDialog;
+    private ComponentName mTileComponentName;
     private BroadcastReceiver mPackageRemovedReceiver;
     private boolean mDisabledStateLogged = false;
     private long mStartTimeMillsForLogging = 0;
@@ -168,9 +170,9 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     public Dialog onCreateDialog(int dialogId) {
+        final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
         switch (dialogId) {
-            case DialogEnums.ENABLE_WARNING_FROM_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+            case DialogEnums.ENABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
                     return null;
                 }
@@ -178,10 +180,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromEnableToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT_TOGGLE:
                 if (info == null) {
                     return null;
                 }
@@ -189,10 +189,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutToggleClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.ENABLE_WARNING_FROM_SHORTCUT:
                 if (info == null) {
                     return null;
                 }
@@ -200,23 +198,18 @@ public class ToggleAccessibilityServicePreferenceFragment extends
                         .createCapabilitiesDialog(getPrefContext(), info,
                                 this::onDialogButtonFromShortcutClicked,
                                 this::onDialogButtonFromUninstallClicked);
-                break;
-            }
-            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE: {
-                final AccessibilityServiceInfo info = getAccessibilityServiceInfo();
+                return mWarningDialog;
+            case DialogEnums.DISABLE_WARNING_FROM_TOGGLE:
                 if (info == null) {
                     return null;
                 }
                 mWarningDialog = AccessibilityServiceWarning
                         .createDisableDialog(getPrefContext(), info,
                                 this::onDialogButtonFromDisableToggleClicked);
-                break;
-            }
-            default: {
-                mWarningDialog = super.onCreateDialog(dialogId);
-            }
+                return mWarningDialog;
+            default:
+                return super.onCreateDialog(dialogId);
         }
-        return mWarningDialog;
     }
 
     @Override
@@ -243,12 +236,25 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     @Override
     ComponentName getTileComponentName() {
-        return null;
+        return mTileComponentName;
     }
 
     @Override
-    CharSequence getTileName() {
-        return null;
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        final ComponentName componentName = getTileComponentName();
+        if (componentName == null) {
+            return null;
+        }
+
+        final CharSequence tileName = loadTileLabel(getPrefContext(), componentName);
+        if (tileName == null) {
+            return null;
+        }
+
+        final int titleResId = type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_service_qs_tooltip_content
+                : R.string.accessibility_service_auto_added_qs_tooltip_content;
+        return getString(titleResId, tileName);
     }
 
     @Override
@@ -385,6 +391,12 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         // Get Accessibility service name.
         mPackageName = getAccessibilityServiceInfo().getResolveInfo().loadLabel(
                 getPackageManager());
+
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME)) {
+            final String tileServiceComponentName = arguments.getString(
+                    AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME);
+            mTileComponentName = ComponentName.unflattenFromString(tileServiceComponentName);
+        }
 
         mStartTimeMillsForLogging = arguments.getLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING);
     }

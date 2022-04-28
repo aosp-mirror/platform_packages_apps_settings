@@ -19,12 +19,9 @@ package com.android.settings.dream;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ComponentName;
 import android.content.Context;
-import android.widget.Button;
 
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +62,8 @@ public class DreamPickerControllerTest {
     }
 
     private DreamPickerController buildController() {
-        final DreamPickerController controller = new DreamPickerController(mContext, mBackend);
+        final DreamPickerController controller = new DreamPickerController(mContext, "key",
+                mBackend);
         controller.displayPreference(mScreen);
         return controller;
     }
@@ -92,20 +90,5 @@ public class DreamPickerControllerTest {
 
         RecyclerView view = mPreference.findViewById(R.id.dream_list);
         assertThat(view.getAdapter().getItemCount()).isEqualTo(1);
-    }
-
-    @Test
-    public void testPreviewButton() {
-        final DreamInfo mockDreamInfo = new DreamInfo();
-        mockDreamInfo.componentName = new ComponentName("package", "class");
-        mockDreamInfo.isActive = true;
-
-        when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mockDreamInfo));
-        final DreamPickerController controller = buildController();
-        controller.updateState(mPreference);
-
-        Button view = mPreference.findViewById(R.id.preview_button);
-        view.performClick();
-        verify(mBackend).preview(mockDreamInfo);
     }
 }
