@@ -19,6 +19,9 @@ package com.android.settings.deviceinfo.storage;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +38,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
@@ -219,7 +223,7 @@ public class StorageUtils {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
                     .setMessage(getContext().getString(R.string.storage_detail_dialog_system,
-                            Build.VERSION.RELEASE_OR_CODENAME))
+                            Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY))
                     .setPositiveButton(android.R.string.ok, null)
                     .create();
         }
@@ -230,5 +234,16 @@ public class StorageUtils {
         final Formatter.BytesResult result = Formatter.formatBytes(context.getResources(),
                 bytes, Formatter.FLAG_SHORTER);
         return context.getString(resId, result.value, result.units);
+    }
+
+    /** Gets icon for Preference of Free up space. */
+    public static Drawable getManageStorageIcon(Context context, int userId) {
+        ResolveInfo resolveInfo = context.getPackageManager().resolveActivityAsUser(
+                new Intent(StorageManager.ACTION_MANAGE_STORAGE), 0 /* flags */, userId);
+        if (resolveInfo == null || resolveInfo.activityInfo == null) {
+            return null;
+        }
+
+        return Utils.getBadgedIcon(context, resolveInfo.activityInfo.applicationInfo);
     }
 }

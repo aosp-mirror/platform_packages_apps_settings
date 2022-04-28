@@ -38,12 +38,6 @@ public class HapticFeedbackIntensityPreferenceController
         }
 
         @Override
-        public boolean isRestrictedByRingerModeSilent() {
-            // Touch feedback is disabled when the phone is in silent mode.
-            return true;
-        }
-
-        @Override
         public int readIntensity() {
             final int hapticFeedbackEnabled = Settings.System.getInt(mContentResolver,
                     Settings.System.HAPTIC_FEEDBACK_ENABLED, ON);

@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 /**
  * Dropdown activity to allow for the user to easily switch between the different TARE
@@ -42,7 +43,6 @@ public class DropdownActivity extends Activity {
     static final int POLICY_JOB_SCHEDULER = 1;
     private static final int DEFAULT_POLICY = POLICY_ALARM_MANAGER;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +58,8 @@ public class DropdownActivity extends Activity {
 
         String[] policies = getResources().getStringArray(R.array.tare_policies);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(DropdownActivity.this,
-                android.R.layout.simple_list_item_1, policies);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter = new SettingsSpinnerAdapter<String>(this);
+        arrayAdapter.addAll(policies);
         mSpinner.setAdapter(arrayAdapter);
 
         mSpinner.setSelection(policy);

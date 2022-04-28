@@ -121,4 +121,16 @@ public class AccessibilityFooterPreferenceControllerTest {
         assertThat(learnMoreView.getVisibility()).isEqualTo(View.GONE);
         assertThat(mPreference.isLinkEnabled()).isFalse();
     }
+
+    @Test
+    public void onBindViewHolder_setHelpResource_expectSummaryViewIsNonFocusable() {
+        mController.setupHelpLink(R.string.help_url_timeout, TEST_CONTENT_DESCRIPTION);
+        mController.displayPreference(mScreen);
+
+        mPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        final TextView summaryView = (TextView) mPreferenceViewHolder
+                .findViewById(android.R.id.title);
+        assertThat(summaryView.isFocusable()).isFalse();
+    }
 }

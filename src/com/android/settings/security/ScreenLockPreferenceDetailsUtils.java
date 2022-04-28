@@ -18,12 +18,14 @@ package com.android.settings.security;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 
 import androidx.annotation.StringRes;
 
+import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -44,16 +46,14 @@ public class ScreenLockPreferenceDetailsUtils {
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileChallengeUserId;
     private final UserManager mUm;
-    private final int mSourceMetricsCategory;
 
-    public ScreenLockPreferenceDetailsUtils(Context context, int sourceMetricsCategory) {
+    public ScreenLockPreferenceDetailsUtils(Context context) {
         mContext = context;
         mUm = context.getSystemService(UserManager.class);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
-        mSourceMetricsCategory = sourceMetricsCategory;
     }
 
     /**
@@ -82,20 +82,34 @@ public class ScreenLockPreferenceDetailsUtils {
     }
 
     /**
+     * Returns whether the lock pattern is secure.
+     */
+    public boolean isLockPatternSecure() {
+        return mLockPatternUtils.isSecure(mUserId);
+    }
+
+    /**
      * Returns whether the Gear Menu should be shown.
      */
     public boolean shouldShowGearMenu() {
-        return mLockPatternUtils.isSecure(mUserId);
+        return isLockPatternSecure();
     }
 
     /**
      * Launches the {@link ScreenLockSettings}.
      */
-    public void openScreenLockSettings() {
-        new SubSettingLauncher(mContext)
+    public void openScreenLockSettings(int sourceMetricsCategory) {
+        mContext.startActivity(getLaunchScreenLockSettingsIntent(sourceMetricsCategory));
+    }
+
+    /**
+     * Returns {@link Intent} to launch the {@link ScreenLockSettings}.
+     */
+    public Intent getLaunchScreenLockSettingsIntent(int sourceMetricsCategory) {
+        return new SubSettingLauncher(mContext)
                 .setDestination(ScreenLockSettings.class.getName())
-                .setSourceMetricsCategory(mSourceMetricsCategory)
-                .launch();
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .toIntent();
     }
 
     /**
@@ -104,7 +118,30 @@ public class ScreenLockPreferenceDetailsUtils {
      *
      * @return true if the {@link ChooseLockGenericFragment} is launching.
      */
-    public boolean openChooseLockGenericFragment() {
+    public boolean openChooseLockGenericFragment(int sourceMetricsCategory) {
+        final Intent quietModeDialogIntent = getQuietModeDialogIntent();
+        if (quietModeDialogIntent != null) {
+            mContext.startActivity(quietModeDialogIntent);
+            return false;
+        }
+        mContext.startActivity(getChooseLockGenericFragmentIntent(sourceMetricsCategory));
+        return true;
+    }
+
+    /**
+     * Returns {@link Intent} to launch an appropriate Settings screen.
+     *
+     * <p>If Quiet Mode is enabled for managed profile, returns {@link Intent} to launch a dialog
+     * to disable the Quiet Mode, otherwise returns {@link Intent} to launch
+     * {@link ChooseLockGenericFragment}.
+     */
+    public Intent getLaunchChooseLockGenericFragmentIntent(int sourceMetricsCategory) {
+        final Intent quietModeDialogIntent = getQuietModeDialogIntent();
+        return quietModeDialogIntent != null ? quietModeDialogIntent
+                : getChooseLockGenericFragmentIntent(sourceMetricsCategory);
+    }
+
+    private Intent getQuietModeDialogIntent() {
         // TODO(b/35930129): Remove once existing password can be passed into vold directly.
         // Currently we need this logic to ensure that the QUIET_MODE is off for any work
         // profile with unified challenge on FBE-enabled devices. Otherwise, vold would not be
@@ -112,17 +149,20 @@ public class ScreenLockPreferenceDetailsUtils {
         if (mProfileChallengeUserId != UserHandle.USER_NULL
                 && !mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)
                 && StorageManager.isFileEncryptedNativeOnly()) {
-            if (Utils.startQuietModeDialogIfNecessary(mContext, mUm, mProfileChallengeUserId)) {
-                return false;
+            if (mUm.isQuietModeEnabled(UserHandle.of(mProfileChallengeUserId))) {
+                return UnlaunchableAppActivity.createInQuietModeDialogIntent(
+                        mProfileChallengeUserId);
             }
         }
+        return null;
+    }
 
-        new SubSettingLauncher(mContext)
+    private Intent getChooseLockGenericFragmentIntent(int sourceMetricsCategory) {
+        return new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGenericFragment.class.getName())
-                .setSourceMetricsCategory(mSourceMetricsCategory)
+                .setSourceMetricsCategory(sourceMetricsCategory)
                 .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
-                .launch();
-        return true;
+                .toIntent();
     }
 
     @StringRes
