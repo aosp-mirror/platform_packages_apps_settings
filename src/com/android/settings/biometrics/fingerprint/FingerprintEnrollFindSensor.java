@@ -312,9 +312,10 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                 default:
                     FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
                     int enrolled = fpm.getEnrolledFingerprints().size();
-                    int max = getResources().getInteger(
-                            com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
-                    if (enrolled >= max) {
+                    final List<FingerprintSensorPropertiesInternal> props =
+                            fpm.getSensorPropertiesInternal();
+                    final int maxEnrollments = props.get(0).maxEnrollmentsPerUser;
+                    if (enrolled >= maxEnrollments) {
                         finish();
                     } else {
                         // We came back from enrolling but it wasn't completed, start again.

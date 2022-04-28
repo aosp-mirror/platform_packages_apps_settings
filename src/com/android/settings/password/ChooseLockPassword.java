@@ -18,13 +18,13 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PASSWORD_RECENTLY_USED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PIN_RECENTLY_USED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_INVALID_CHARACTERS;
@@ -389,7 +389,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(alphaHintForBiometrics);
                     } else if (isProfile) {
-                        return context.getSystemService(DevicePolicyManager.class)
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(alphaHintOverrideForProfile,
                                         () -> context.getString(alphaHintForProfile));
                     } else {
@@ -403,7 +403,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(numericHintForBiometrics);
                     } else if (isProfile) {
-                        return context.getSystemService(DevicePolicyManager.class)
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(numericHintOverrideForProfile,
                                         () -> context.getString(numericHintForProfile));
                     } else {
@@ -848,11 +848,11 @@ public class ChooseLockPassword extends SettingsActivity {
                         DevicePolicyManager devicePolicyManager =
                                 getContext().getSystemService(DevicePolicyManager.class);
                         if (mIsAlphaMode) {
-                            messages.add(devicePolicyManager.getString(
+                            messages.add(devicePolicyManager.getResources().getString(
                                     PASSWORD_RECENTLY_USED,
                                     () -> getString(R.string.lockpassword_password_recently_used)));
                         } else {
-                            messages.add(devicePolicyManager.getString(
+                            messages.add(devicePolicyManager.getResources().getString(
                                     PIN_RECENTLY_USED,
                                     () -> getString(R.string.lockpassword_pin_recently_used)));
                         }

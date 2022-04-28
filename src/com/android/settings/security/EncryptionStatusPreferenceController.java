@@ -44,11 +44,11 @@ public class EncryptionStatusPreferenceController extends BasePreferenceControll
     public int getAvailabilityStatus() {
         if (TextUtils.equals(getPreferenceKey(), PREF_KEY_ENCRYPTION_DETAIL_PAGE) &&
                 !mContext.getResources().getBoolean(
-                R.bool.config_show_encryption_and_credentials_encryption_status)) {
+                        R.bool.config_show_encryption_and_credentials_encryption_status)) {
             return UNSUPPORTED_ON_DEVICE;
         }
 
-        return mUserManager.isAdminUser() ? AVAILABLE : DISABLED_FOR_USER;
+        return AVAILABLE;
     }
 
     @Override

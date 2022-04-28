@@ -24,6 +24,7 @@ import static com.android.settings.applications.appinfo.AppButtonsPreferenceCont
 
 import android.app.ActionBar;
 import android.app.ActivityManager;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -64,8 +65,8 @@ import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.homepage.DeepLinkHomepageActivityInternal;
 import com.android.settings.homepage.SettingsHomepageActivity;
-import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -143,8 +144,7 @@ public class SettingsActivity extends SettingsBaseActivity
 
     public static final String EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting";
-    public static final String EXTRA_IS_SECONDARY_LAYER_PAGE =
-            ":settings:is_secondary_layer_page";
+    public static final String EXTRA_IS_SECOND_LAYER_PAGE = ":settings:is_second_layer_page";
 
     /**
      * Additional extra of Settings#ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK.
@@ -253,9 +253,8 @@ public class SettingsActivity extends SettingsBaseActivity
         getMetaData();
         final Intent intent = getIntent();
 
-        if (shouldShowTwoPaneDeepLink(intent)) {
-            launchHomepageForTwoPaneDeepLink(intent);
-            finishAndRemoveTask();
+        if (shouldShowTwoPaneDeepLink(intent) && tryStartTwoPaneDeepLink(intent)) {
+            finish();
             super.onCreate(savedState);
             return;
         }
@@ -372,12 +371,12 @@ public class SettingsActivity extends SettingsBaseActivity
         if (WizardManagerHelper.isAnySetupWizard(intent)) {
             return false;
         }
-        final boolean isSecondaryLayerPage =
-                intent.getBooleanExtra(EXTRA_IS_SECONDARY_LAYER_PAGE, false);
+        final boolean isSecondLayerPage =
+                intent.getBooleanExtra(EXTRA_IS_SECOND_LAYER_PAGE, false);
 
         // TODO: move Settings's ActivityEmbeddingUtils to SettingsLib.
         return !com.android.settingslib.activityembedding.ActivityEmbeddingUtils
-                        .shouldHideBackButton(this, isSecondaryLayerPage);
+                        .shouldHideNavigateUpButton(this, isSecondLayerPage);
     }
 
     private boolean isSubSettings(Intent intent) {
@@ -412,7 +411,7 @@ public class SettingsActivity extends SettingsBaseActivity
         return trampolineIntent;
     }
 
-    private void launchHomepageForTwoPaneDeepLink(Intent intent) {
+    private boolean tryStartTwoPaneDeepLink(Intent intent) {
         final Intent trampolineIntent;
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Get menu key for slice deep link case.
@@ -422,11 +421,18 @@ public class SettingsActivity extends SettingsBaseActivity
                 mHighlightMenuKey = highlightMenuKey;
             }
             trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
-            trampolineIntent.setClass(this, SliceDeepLinkHomepageActivity.class);
+            trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class);
         } else {
             trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
         }
-        startActivity(trampolineIntent);
+
+        try {
+            startActivity(trampolineIntent);
+        } catch (ActivityNotFoundException e) {
+            Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
+            return false;
+        }
+        return true;
     }
 
     private boolean shouldShowTwoPaneDeepLink(Intent intent) {
@@ -434,8 +440,11 @@ public class SettingsActivity extends SettingsBaseActivity
             return false;
         }
 
-        // If the activity is not the task root, it should not start trampoline for deep links.
-        if (!isTaskRoot()) {
+        // If the activity is task root, starting trampoline is needed in order to show two-pane UI.
+        // If FLAG_ACTIVITY_NEW_TASK is set, the activity will become the start of a new task on
+        // this history stack, so starting trampoline is needed in order to notify the homepage that
+        // the highlight key is changed.
+        if (!isTaskRoot() && (intent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) == 0) {
             return false;
         }
 

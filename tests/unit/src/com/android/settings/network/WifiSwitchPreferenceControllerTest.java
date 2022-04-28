@@ -18,9 +18,9 @@ package com.android.settings.network;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
@@ -31,38 +31,49 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.wifi.WifiEnabler;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 @RunWith(AndroidJUnit4.class)
 public class WifiSwitchPreferenceControllerTest {
+
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    WifiManager mWifiManager;
+    @Mock
+    WifiEnabler mWifiEnabler;
 
     private PreferenceScreen mScreen;
     private RestrictedSwitchPreference mPreference;
     private WifiSwitchPreferenceController mController;
 
-    @Mock
-    private WifiManager mWifiManager;
-
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        final Context context = spy(ApplicationProvider.getApplicationContext());
-        doReturn(mWifiManager).when(context).getSystemService(Context.WIFI_SERVICE);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
 
-        mController = new WifiSwitchPreferenceController(context, mock(Lifecycle.class));
+        mController = new WifiSwitchPreferenceController(mContext, mock(Lifecycle.class));
+        mController.mIsChangeWifiStateAllowed = true;
+        mController.mWifiEnabler = mWifiEnabler;
         if (Looper.myLooper() == null) {
             Looper.prepare();
         }
-        final PreferenceManager preferenceManager = new PreferenceManager(context);
-        mScreen = preferenceManager.createPreferenceScreen(context);
-        mPreference = new RestrictedSwitchPreference(context);
+        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        mScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreference = new RestrictedSwitchPreference(mContext);
         mPreference.setKey(WifiSwitchPreferenceController.KEY);
         mScreen.addPreference(mPreference);
     }
@@ -73,22 +84,87 @@ public class WifiSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void isChecked_wifiStateDisabled_returnFalse() {
-        doReturn(WifiManager.WIFI_STATE_DISABLED).when(mWifiManager).getWifiState();
+    public void displayPreference_wifiNotEnabled_preferenceNotChecked() {
+        when(mWifiManager.isWifiEnabled()).thenReturn(false);
 
         mController.displayPreference(mScreen);
-        mController.onStart();
 
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    public void isChecked_wifiStateEnabled_returnTrue() {
-        doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
+    public void displayPreference_wifiIsEnabled_preferenceIsChecked() {
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
 
         mController.displayPreference(mScreen);
-        mController.onStart();
 
         assertThat(mPreference.isChecked()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_disallowChangeWifiState_preferenceNotEnabled() {
+        mController.mIsChangeWifiStateAllowed = false;
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_allowChangeWifiState_preferenceIsEnabled() {
+        mController.mIsChangeWifiStateAllowed = true;
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void onStart_disallowChangeWifiState_wifiEnablerNotCreated() {
+        mController.mIsChangeWifiStateAllowed = false;
+        mController.displayPreference(mScreen);
+        mController.mWifiEnabler = null;
+
+        mController.onStart();
+
+        assertThat(mController.mWifiEnabler).isNull();
+    }
+
+    @Test
+    public void onStart_allowChangeWifiState_createWifiEnabler() {
+        mController.mIsChangeWifiStateAllowed = true;
+        mController.displayPreference(mScreen);
+        mController.mWifiEnabler = null;
+
+        mController.onStart();
+
+        assertThat(mController.mWifiEnabler).isNotNull();
+    }
+
+    @Test
+    public void onStop_wifiEnablerIsCreated_teardownWifiEnabler() {
+        mController.mWifiEnabler = mWifiEnabler;
+
+        mController.onStop();
+
+        verify(mWifiEnabler).teardownSwitchController();
+    }
+
+    @Test
+    public void onResume_wifiEnablerIsCreated_wifiEnablerResume() {
+        mController.mWifiEnabler = mWifiEnabler;
+
+        mController.onResume();
+
+        verify(mWifiEnabler).resume(mContext);
+    }
+
+    @Test
+    public void onPause_wifiEnablerIsCreated_wifiEnablerPause() {
+        mController.mWifiEnabler = mWifiEnabler;
+
+        mController.onPause();
+
+        verify(mWifiEnabler).pause();
     }
 }

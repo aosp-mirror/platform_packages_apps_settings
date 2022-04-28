@@ -33,7 +33,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,14 +48,14 @@ public class PrivacyDashboardActivityTest {
     private static final String DEFAULT_FRAGMENT_CLASSNAME = "DefaultFragmentClassname";
 
     @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
     private Settings.PrivacyDashboardActivity mActivity;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
         final Intent intent = new Intent();
         intent.setAction(android.provider.Settings.ACTION_PRIVACY_SETTINGS);
         intent.setClass(InstrumentationRegistry.getInstrumentation().getTargetContext(),
@@ -78,7 +78,7 @@ public class PrivacyDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterEnabled_redirectsToSafetyCenter() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(true);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
         mActivity.handleSafetyCenterRedirection();
@@ -89,7 +89,7 @@ public class PrivacyDashboardActivityTest {
 
     @Test
     public void onCreate_whenSafetyCenterDisabled_doesntRedirectToSafetyCenter() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
         mActivity.handleSafetyCenterRedirection();
 
         verify(mActivity, times(0)).startActivity(any());
