@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-package com.android.settings.testutils;
+package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 
-import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.slice.WifiSlice;
 
-public class FakeCopyableController extends BasePreferenceController {
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
-    public FakeCopyableController(Context context, String preferenceKey) {
-        super(context, preferenceKey);
+@Implements(WifiSlice.class)
+public class ShadowWifiSlice {
+
+    private static boolean sIsWifiPermissible;
+
+    @Implementation
+    protected static boolean isPermissionGranted(Context settingsContext) {
+        return sIsWifiPermissible;
     }
 
-    @Override
-    public int getAvailabilityStatus() {
-        return AVAILABLE;
-    }
-
-    @Override
-    public boolean isSliceable() {
-        return true;
-    }
-
-    @Override
-    public boolean isCopyableSlice() {
-        return true;
+    public static void setWifiPermissible(boolean isWifiPermissible) {
+        sIsWifiPermissible = isWifiPermissible;
     }
 }

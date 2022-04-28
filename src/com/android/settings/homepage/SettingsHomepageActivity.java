@@ -325,7 +325,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         final Window window = getWindow();
         final int color = mIsTwoPane
-                ? Utils.getColorAttrDefaultColor(this, com.android.internal.R.attr.colorSurface)
+                ? getColor(R.color.settings_two_pane_background_color)
                 : Utils.getColorAttrDefaultColor(this, android.R.attr.colorBackground);
 
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

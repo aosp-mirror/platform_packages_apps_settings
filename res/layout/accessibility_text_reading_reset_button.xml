@@ -27,14 +27,11 @@
         android:id="@+id/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|end"
+        android:layout_gravity="center_vertical|start"
         android:paddingVertical="14dp"
-        android:background="@null"
         android:drawableStart="@drawable/ic_history"
         android:drawablePadding="9dp"
-        android:drawableTint="?android:attr/colorAccent"
-        android:textColor="?android:attr/colorAccent"
-        android:textSize="16sp"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:text="@string/accessibility_text_reading_reset_button_title"/>
+        android:drawableTint="@color/settingslib_btn_colored_text_material"
+        android:text="@string/accessibility_text_reading_reset_button_title"
+        style="@style/ActionPrimaryButton"/>
 </FrameLayout>

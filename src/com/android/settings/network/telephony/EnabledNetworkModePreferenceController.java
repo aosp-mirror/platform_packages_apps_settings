@@ -87,7 +87,8 @@ public class EnabledNetworkModePreferenceController extends
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
-        } else if (carrierConfig == null) {
+        } else if (carrierConfig == null
+                || !CarrierConfigManager.isConfigForIdentifiedCarrier(carrierConfig)) {
             visible = false;
         } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
