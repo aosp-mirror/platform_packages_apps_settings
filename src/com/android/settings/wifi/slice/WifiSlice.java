@@ -26,13 +26,16 @@ import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Binder;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -49,8 +52,8 @@ import com.android.settings.network.WifiSwitchPreferenceController;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settings.slices.SliceBuilderUtils;
+import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.WifiDialogActivity;
-import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.wifitrackerlib.WifiEntry;
@@ -67,6 +70,7 @@ public class WifiSlice implements CustomSliceable {
 
     @VisibleForTesting
     static final int DEFAULT_EXPANDED_ROW_COUNT = 3;
+    private static final String TAG = "WifiSlice";
 
     protected final Context mContext;
     protected final WifiManager mWifiManager;
@@ -83,6 +87,12 @@ public class WifiSlice implements CustomSliceable {
 
     @Override
     public Slice getSlice() {
+        // If external calling package doesn't have Wi-Fi permission.
+        if (!Utils.isSettingsIntelligence(mContext) && !isPermissionGranted(mContext)) {
+            Log.i(TAG, "No wifi permissions to control wifi slice.");
+            return null;
+        }
+
         final boolean isWifiEnabled = isWifiEnabled();
         ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* wifiSliceItem */);
         if (!isWifiEnabled) {
@@ -118,6 +128,30 @@ public class WifiSlice implements CustomSliceable {
             }
         }
         return listBuilder.build();
+    }
+
+    private static boolean isPermissionGranted(Context settingsContext) {
+        final int callingUid = Binder.getCallingUid();
+        final String callingPackage = settingsContext.getPackageManager()
+                .getPackagesForUid(callingUid)[0];
+
+        Context packageContext;
+        try {
+            packageContext = settingsContext.createPackageContext(callingPackage, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot create Context for package: " + callingPackage);
+            return false;
+        }
+
+        // If app doesn't have related Wi-Fi permission, they shouldn't show Wi-Fi slice.
+        final boolean hasPermission = packageContext.checkPermission(
+                android.Manifest.permission.CHANGE_WIFI_STATE, Binder.getCallingPid(),
+                callingUid) == PackageManager.PERMISSION_GRANTED;
+        AppStateChangeWifiStateBridge.WifiSettingsState state =
+                new AppStateChangeWifiStateBridge(settingsContext, null, null)
+                        .getWifiSettingsInfo(callingPackage, callingUid);
+
+        return hasPermission && state.isPermissible();
     }
 
     protected boolean isApRowCollapsed() {
@@ -175,7 +209,7 @@ public class WifiSlice implements CustomSliceable {
             tint = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
         } else {
             tint = Utils.getDisabled(mContext, Utils.getColorAttrDefaultColor(mContext,
-                        android.R.attr.colorControlNormal));
+                    android.R.attr.colorControlNormal));
         }
 
         final Drawable drawable = mContext.getDrawable(
@@ -275,7 +309,7 @@ public class WifiSlice implements CustomSliceable {
         final String key = WifiSwitchPreferenceController.KEY;
 
         final Intent intent = SliceBuilderUtils.buildSearchResultPageIntent(mContext, className,
-                key, screenTitle, SettingsEnums.DIALOG_WIFI_AP_EDIT, this)
+                        key, screenTitle, SettingsEnums.DIALOG_WIFI_AP_EDIT, this)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
 

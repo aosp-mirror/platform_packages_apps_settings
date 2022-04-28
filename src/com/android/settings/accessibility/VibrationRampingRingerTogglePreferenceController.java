@@ -124,6 +124,12 @@ public class VibrationRampingRingerTogglePreferenceController
         if (isRingVibrationEnabled()) {
             // Don't update ramping ringer setting value if ring vibration is disabled.
             mAudioManager.setRampingRingerEnabled(isChecked);
+
+            if (isChecked) {
+                // Vibrate when toggle is enabled for consistency with all the other toggle/slides
+                // in the same screen.
+                mRingVibrationPreferenceConfig.playVibrationPreview();
+            }
         }
         return true;
     }

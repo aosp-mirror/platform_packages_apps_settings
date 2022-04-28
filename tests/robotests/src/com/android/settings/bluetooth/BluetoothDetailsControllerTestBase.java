@@ -76,7 +76,7 @@ public abstract class BluetoothDetailsControllerTestBase {
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = spy(new Lifecycle(mLifecycleOwner));
-        mBluetoothManager = new BluetoothManager(mContext);
+        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
     }
 

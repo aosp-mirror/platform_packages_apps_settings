@@ -101,7 +101,7 @@ public class SwitchToRemovableSlotSidecar extends EuiccOperationSidecar
             // Use INVALID_SUBSCRIPTION_ID to disable the only active profile.
             mSwitchToSubscriptionSidecar.run(SubscriptionManager.INVALID_SUBSCRIPTION_ID, 0, null);
         } else if (mTelephonyManager.isMultiSimEnabled() && mRemovedSubInfo != null) {
-            // In DSDS mode+MEP, if the replaced esim is active, then it should be disabled esim
+            // In DSDS mode+MEP, if the replaced esim is active, then it should disable that esim
             // profile before changing SimSlotMapping process.
             // Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
             mSwitchToSubscriptionSidecar.run(SubscriptionManager.INVALID_SUBSCRIPTION_ID,

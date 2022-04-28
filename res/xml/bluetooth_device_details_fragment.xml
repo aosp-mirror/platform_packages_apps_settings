@@ -34,14 +34,17 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.AdvancedBluetoothDetailsHeaderController"/>
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="le_audio_bluetooth_device_header"
+        android:layout="@layout/le_audio_bt_entity_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.bluetooth.LeAudioBluetoothDetailsHeaderController"/>
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>
-
-    <!-- Add SpacePreference to draw divider -->
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="0dp"
-        settings:allowDividerAbove="true" />
 
     <com.android.settings.slices.SlicePreference
         android:key="bt_device_slice"
@@ -51,6 +54,9 @@
 
     <PreferenceCategory
         android:key="device_companion_apps"/>
+
+    <PreferenceCategory
+        android:key="spatial_audio_group"/>
 
     <PreferenceCategory
         android:key="bluetooth_profiles"/>

@@ -17,6 +17,7 @@ package com.android.settings.wifi;
 
 import android.content.Context;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceViewHolder;
 
@@ -42,5 +43,24 @@ public class LongPressWifiEntryPreference extends WifiEntryPreference {
             view.itemView.setTag(this);
             view.itemView.setLongClickable(true);
         }
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        setEnabled(shouldEnabled());
+    }
+
+    @VisibleForTesting
+    boolean shouldEnabled() {
+        WifiEntry wifiEntry = getWifiEntry();
+        if (wifiEntry == null) return false;
+
+        boolean enabled = wifiEntry.canConnect();
+        // If Wi-Fi is connected or saved network, leave it enabled to disconnect or configure.
+        if (!enabled && (wifiEntry.canDisconnect() || wifiEntry.isSaved())) {
+            enabled = true;
+        }
+        return enabled;
     }
 }

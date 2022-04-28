@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.storage;
 
 import android.app.usage.StorageStatsManager;
 import android.content.Context;
+import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -47,11 +48,13 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
     private UsageProgressBarPreference mUsageProgressBarPreference;
     private StorageEntry mStorageEntry;
     boolean mIsUpdateStateFromSelectedStorageEntry;
+    private StorageCacheHelper mStorageCacheHelper;
 
     public StorageUsageProgressBarPreferenceController(Context context, String key) {
         super(context, key);
 
         mStorageStatsManager = context.getSystemService(StorageStatsManager.class);
+        mStorageCacheHelper = new StorageCacheHelper(context, UserHandle.myUserId());
     }
 
     /** Set StorageEntry to display. */
@@ -71,6 +74,15 @@ public class StorageUsageProgressBarPreferenceController extends BasePreferenceC
     }
 
     private void getStorageStatsAndUpdateUi() {
+        // Use cached data for both total size and used size.
+        if (mStorageEntry != null && mStorageEntry.isMounted() && mStorageEntry.isPrivate()) {
+            StorageCacheHelper.StorageCache cachedData = mStorageCacheHelper.retrieveCachedSize();
+            mTotalBytes = cachedData.totalSize;
+            mUsedBytes = cachedData.totalUsedSize;
+            mIsUpdateStateFromSelectedStorageEntry = true;
+            updateState(mUsageProgressBarPreference);
+        }
+        // Get the latest data from StorageStatsManager.
         ThreadUtils.postOnBackgroundThread(() -> {
             try {
                 if (mStorageEntry == null || !mStorageEntry.isMounted()) {
