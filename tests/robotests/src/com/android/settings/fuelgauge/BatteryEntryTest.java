@@ -158,8 +158,8 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY, 200, 100, 1000);
 
-        assertThat(entry.iconId).isEqualTo(R.drawable.ic_settings_aod);
-        assertThat(entry.name).isEqualTo("Ambient display");
+        assertThat(entry.mIconId).isEqualTo(R.drawable.ic_settings_aod);
+        assertThat(entry.mName).isEqualTo("Ambient display");
     }
 
     @Test
@@ -167,8 +167,8 @@ public class BatteryEntryTest {
         final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application,
                 BatteryConsumer.FIRST_CUSTOM_POWER_COMPONENT_ID + 42, "ABC", 200, 100);
 
-        assertThat(entry.iconId).isEqualTo(R.drawable.ic_power_system);
-        assertThat(entry.name).isEqualTo("ABC");
+        assertThat(entry.mIconId).isEqualTo(R.drawable.ic_power_system);
+        assertThat(entry.mName).isEqualTo("ABC");
     }
 
     @Test
@@ -261,16 +261,16 @@ public class BatteryEntryTest {
 
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUserId(
                 mContext, userId);
-        assertThat(nameAndIcon.name).isEqualTo(getString(
+        assertThat(nameAndIcon.mName).isEqualTo(getString(
                 R.string.running_process_item_removed_user_label));
-        assertThat(nameAndIcon.icon).isNull();
+        assertThat(nameAndIcon.mIcon).isNull();
     }
 
     @Test
     public void getNameAndIconFromUid_rerturnExpectedName() {
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
                 mContext, /* name */ null, /* uid */ 0);
-        assertThat(nameAndIcon.name).isEqualTo(getString(R.string.process_kernel_label));
+        assertThat(nameAndIcon.mName).isEqualTo(getString(R.string.process_kernel_label));
 
         assertNameAndIcon("mediaserver", R.string.process_mediaserver_label);
         assertNameAndIcon("dex2oat32", R.string.process_dex2oat_label);
@@ -312,14 +312,14 @@ public class BatteryEntryTest {
     private void assertNameAndIcon(String name, int stringId) {
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
                 mContext, name, /* uid */ 1000);
-        assertThat(nameAndIcon.name).isEqualTo(getString(stringId));
+        assertThat(nameAndIcon.mName).isEqualTo(getString(stringId));
     }
 
     private void assertNameAndIcon(int powerComponentId, int stringId, int iconId) {
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromPowerComponent(
                 mContext, powerComponentId);
-        assertThat(nameAndIcon.name).isEqualTo(getString(stringId));
-        assertThat(nameAndIcon.iconId).isEqualTo(iconId);
+        assertThat(nameAndIcon.mName).isEqualTo(getString(stringId));
+        assertThat(nameAndIcon.mIconId).isEqualTo(iconId);
     }
 
     private String getString(int stringId) {
