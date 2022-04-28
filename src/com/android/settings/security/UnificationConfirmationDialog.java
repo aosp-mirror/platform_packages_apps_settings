@@ -65,7 +65,7 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.lock_settings_profile_unification_dialog_title)
-                .setMessage(getContext().getSystemService(DevicePolicyManager.class)
+                .setMessage(getContext().getSystemService(DevicePolicyManager.class).getResources()
                         .getString(overrideMessageId, () -> getString(defaultMessageId)))
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm

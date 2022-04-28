@@ -78,7 +78,7 @@ public class ZenRulePreferenceControllerTest {
         assertTrue(mController.mRule == null);
         assertTrue(mController.mId == null);
 
-        mController.onResume(rule, id);
+        mController.setIdAndRule(id, rule);
 
         assertEquals(mController.mId, id);
         assertEquals(mController.mRule, rule);

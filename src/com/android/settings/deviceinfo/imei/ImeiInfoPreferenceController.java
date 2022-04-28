@@ -33,7 +33,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.deviceinfo.PhoneNumberSummaryPreference;
-import com.android.settings.slices.Sliceable;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
@@ -126,11 +125,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     @Override
     public boolean useDynamicSliceSummary() {
         return true;
-    }
-
-    @Override
-    public void copy() {
-        Sliceable.setCopyContent(mContext, getSummary(0), getTitle(0));
     }
 
     private void updatePreference(Preference preference, int simSlot) {

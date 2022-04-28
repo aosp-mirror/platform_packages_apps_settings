@@ -29,7 +29,7 @@ import android.os.Bundle;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -118,7 +118,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !SafetyCenterStatusHolder.get().isEnabled(context);
+                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }

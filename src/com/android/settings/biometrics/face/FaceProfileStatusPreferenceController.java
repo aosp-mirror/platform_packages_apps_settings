@@ -80,7 +80,7 @@ public class FaceProfileStatusPreferenceController extends FaceStatusPreferenceC
         super.updateState(preference);
 
         preference.setTitle(
-                mDevicePolicyManager.getString(FACE_SETTINGS_FOR_WORK_TITLE, () ->
+                mDevicePolicyManager.getResources().getString(FACE_SETTINGS_FOR_WORK_TITLE, () ->
                 mContext.getResources().getString(
                 R.string.security_settings_face_profile_preference_title)));
     }

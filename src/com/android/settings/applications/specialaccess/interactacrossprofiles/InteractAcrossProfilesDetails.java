@@ -156,7 +156,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
 
         preference.setSummary(
-                mDevicePolicyManager.getString(overrideKey,
+                mDevicePolicyManager.getResources().getString(overrideKey,
                         () -> getString(resource)));
     }
 
@@ -296,19 +296,20 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         final TextView dialogTitle = dialogView.findViewById(
                 R.id.interact_across_profiles_consent_dialog_title);
-        dialogTitle.setText(mDpm.getString(CONNECT_APPS_DIALOG_TITLE, () ->
+        dialogTitle.setText(mDpm.getResources().getString(CONNECT_APPS_DIALOG_TITLE, () ->
                 getString(R.string.interact_across_profiles_consent_dialog_title, mAppLabel),
                 mAppLabel));
 
         final TextView appDataSummary = dialogView.findViewById(R.id.app_data_summary);
         appDataSummary.setText(
-                mDpm.getString(APP_CAN_ACCESS_PERSONAL_DATA,
+                mDpm.getResources().getString(APP_CAN_ACCESS_PERSONAL_DATA,
                         () -> getString(
                                 R.string.interact_across_profiles_consent_dialog_app_data_summary,
                                 mAppLabel), mAppLabel));
 
         final TextView permissionsSummary = dialogView.findViewById(R.id.permissions_summary);
-        permissionsSummary.setText(mDpm.getString(APP_CAN_ACCESS_PERSONAL_PERMISSIONS,
+        permissionsSummary.setText(mDpm.getResources().getString(
+                APP_CAN_ACCESS_PERSONAL_PERMISSIONS,
                 () -> getString(
                         R.string.interact_across_profiles_consent_dialog_permissions_summary,
                         mAppLabel),
@@ -316,7 +317,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         final TextView dialogSummary =
                 dialogView.findViewById(R.id.interact_across_profiles_consent_dialog_summary);
-        dialogSummary.setText(mDpm.getString(CONNECT_APPS_DIALOG_SUMMARY,
+        dialogSummary.setText(mDpm.getResources().getString(CONNECT_APPS_DIALOG_SUMMARY,
                 () -> getString(
                         R.string.interact_across_profiles_consent_dialog_summary)));
 
@@ -445,7 +446,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
         if (!mInstalledInPersonal) {
             mInstallBanner.setTitle(
-                    mDpm.getString(INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT,
+                    mDpm.getResources().getString(INSTALL_IN_PERSONAL_PROFILE_TO_CONNECT_PROMPT,
                             () -> getString(
                                     R.string.interact_across_profiles_install_personal_app_title,
                                     mAppLabel),
@@ -459,7 +460,7 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         }
         if (!mInstalledInWork) {
             mInstallBanner.setTitle(
-                    mDpm.getString(INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT,
+                    mDpm.getResources().getString(INSTALL_IN_WORK_PROFILE_TO_CONNECT_PROMPT,
                             () -> getString(
                                     R.string.interact_across_profiles_install_work_app_title,
                                     mAppLabel),

@@ -29,7 +29,7 @@ import androidx.test.annotation.UiThreadTest;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -51,7 +51,7 @@ public class SecurityAdvancedSettingsTest {
     private SecurityAdvancedSettings mSecurityAdvancedSettings;
 
     @Mock
-    private SafetyCenterStatusHolder mSafetyCenterStatusHolder;
+    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
     @Before
     @UiThreadTest
@@ -61,7 +61,7 @@ public class SecurityAdvancedSettingsTest {
             Looper.prepare();
         }
 
-        SafetyCenterStatusHolder.sInstance = mSafetyCenterStatusHolder;
+        SafetyCenterManagerWrapper.sInstance = mSafetyCenterManagerWrapper;
         mContext = ApplicationProvider.getApplicationContext();
 
         mSecurityAdvancedSettings = spy(new SecurityAdvancedSettings());
@@ -76,7 +76,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenSafetyCenterIsEnabled_returnsSecurity() {
-        when(mSafetyCenterStatusHolder.isEnabled(any())).thenReturn(true);
+        when(mSafetyCenterManagerWrapper.isEnabled(any())).thenReturn(true);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
                 .isEqualTo(CategoryKey.CATEGORY_SECURITY_ADVANCED_SETTINGS);
@@ -84,7 +84,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenAlternativeFragmentPresented_returnsAlternative() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
         setupAlternativeFragment(true, ALTERNATIVE_CATEGORY_KEY);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
@@ -93,7 +93,7 @@ public class SecurityAdvancedSettingsTest {
 
     @Test
     public void getCategoryKey_whenNoAlternativeFragmentPresented_returnsLegacy() {
-        when(mSafetyCenterStatusHolder.isEnabled(any(Context.class))).thenReturn(false);
+        when(mSafetyCenterManagerWrapper.isEnabled(any(Context.class))).thenReturn(false);
         setupAlternativeFragment(false, null);
 
         assertThat(mSecurityAdvancedSettings.getCategoryKey())
