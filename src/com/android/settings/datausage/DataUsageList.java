@@ -48,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
@@ -498,6 +499,17 @@ public class DataUsageList extends DataUsageBaseFragment
             if (LOGD) {
                 Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="
                         + cycle.end + "]");
+            }
+
+            // Avoid from updating UI after #onStop.
+            if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                return;
+            }
+
+            // Avoid from updating UI when async query still on-going.
+            // This could happen when a request from #onMobileDataEnabledChange.
+            if (mCycleData == null) {
+                return;
             }
 
             // update chart to show selected cycle, and update detail data
