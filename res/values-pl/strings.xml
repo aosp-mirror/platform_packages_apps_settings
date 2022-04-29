@@ -229,8 +229,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Język systemu"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Ustawienie domyślne systemu"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Wybór języka tej aplikacji nie jest dostępny w Ustawieniach."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Język może się różnić od języków dostępnych w aplikacji. NIektóre aplikacje mogą nie obsługiwać tego ustawienia."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="few">Usunąć wybrane języki?</item>
       <item quantity="many">Usunąć wybrane języki?</item>
@@ -1345,8 +1344,7 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Wykrywanie twarzy"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automatycznie dostosuj orientację ekranu, gdy obracasz telefon do pionu lub poziomu"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Dowiedz się więcej o autoobracaniu"</string>
-    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
-    <skip />
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Gdy obracasz telefon do pionu lub poziomu"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rozdzielczość ekranu"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Wysoka rozdzielczość"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Najwyższa rozdzielczość"</string>
@@ -1471,6 +1469,8 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Dostosowywanie telefonu"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Wypróbuj różne style, tapety i inne elementy"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Wygaszacz ekranu"</string>
+    <!-- no translation found for keywords_screensaver (7249337959432229172) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Używaj wygaszacza ekranu"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Podczas ładowania lub po zadokowaniu"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Podczas ładowania"</string>
@@ -2381,6 +2381,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Nadawca: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Dzień dobry,\n\nczy prace przy projektach idą dobrze? Czy wszystko będzie gotowe, zanim zaczniemy budować nowe balony?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Resetuj ustawienia"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Zresetować rozmiar wyświetlacza i tekst?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Ustawienia rozmiaru wyświetlacza i tekstu zostaną zresetowane do ustawień fabrycznych telefonu"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetuj"</string>
@@ -5057,7 +5059,7 @@
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> sekundy</item>
       <item quantity="one">1 sekunda</item>
     </plurals>
-    <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Zarządzanie pamięcią"</string>
+    <string name="automatic_storage_manager_settings" msgid="519158151463974656">"Zarządzaj pamięcią"</string>
     <string name="automatic_storage_manager_text" msgid="6900593059927987273">"Aby pomóc zwolnić miejsce, Menedżer miejsca usuwa z urządzenia kopie zapasowe zdjęć i filmów."</string>
     <string name="automatic_storage_manager_days_title" msgid="5077286114860539367">"Usuń zdjęcia i filmy"</string>
     <string name="automatic_storage_manager_preference_title" msgid="3483357910142595444">"Menedżer miejsca"</string>
@@ -5610,7 +5612,7 @@
     <string name="erase_sim_dialog_title" msgid="881253002169177016">"Skasować dane z tej pobranej karty SIM?"</string>
     <string name="erase_sim_dialog_text" msgid="753031064269699885">"Wykasowanie danych z tej karty SIM spowoduje usunięcie sieci <xliff:g id="CARRIER_NAME_A">%1$s</xliff:g> z tego urządzenia.\n\nNie oznacza to jednak rezygnacji z usługi <xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"Skasuj"</string>
-    <string name="erasing_sim" msgid="7877703231075699139">"Kasuję dane z karty SIM…"</string>
+    <string name="erasing_sim" msgid="7877703231075699139">"Usuwam dane z karty SIM…"</string>
     <string name="erase_sim_fail_title" msgid="2024446702985862427">"Nie można wykasować danych z karty SIM"</string>
     <string name="erase_sim_fail_text" msgid="7870804401227483131">"Nie można wykasować danych z tej karty SIM z powodu błędu.\n\nUruchom urządzenie ponownie i spróbuj jeszcze raz."</string>
     <string name="network_connection_request_dialog_title" msgid="1896186380874289434">"Połącz z urządzeniem"</string>

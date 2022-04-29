@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemets språkinställning"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemets standardinställning"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Det går inte att välja språk för den här appen i Inställningar."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Alla språk kanske inte är tillgängliga i appen. Vissa appar kanske inte har stöd för denna inställning."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vill du ta bort de valda språken?</item>
       <item quantity="one">Vill du ta bort det valda språket?</item>
@@ -1305,8 +1304,7 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansiktsigenkänning"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Justera skärmriktningen automatiskt när du vänder telefonen mellan stående och liggande läge"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Läs mer om automatisk rotation"</string>
-    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
-    <skip />
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"När du vänder telefonen mellan stående och liggande läge"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skärmupplösning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Hög upplösning"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Högsta möjliga upplösning"</string>
@@ -1431,6 +1429,8 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Anpassa telefonen"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Testa olika format, bakgrunder med mera"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Skärmsläckare"</string>
+    <!-- no translation found for keywords_screensaver (7249337959432229172) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Använd skärmsläckare"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Vid laddning eller dockning"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Vid laddning"</string>
@@ -1469,7 +1469,7 @@
     <string name="sim_reenter_new" msgid="6131418271490374263">"Skriv in ny pinkod igen"</string>
     <string name="sim_change_pin" msgid="1104103818545005448">"PIN-kod för SIM-kort"</string>
     <string name="sim_bad_pin" msgid="5416328363761048221">"Fel PIN-kod"</string>
-    <string name="sim_pins_dont_match" msgid="1540348773896609260">"PIN-koderna matchar inte"</string>
+    <string name="sim_pins_dont_match" msgid="1540348773896609260">"Pinkoderna matchar inte"</string>
     <string name="sim_change_failed" msgid="316723087029061740">"Det går inte att ändra PIN-koden.\n Du kan ha angett fel PIN-kod."</string>
     <string name="sim_change_succeeded" msgid="3516905528149069739">"SIM-kortets PIN-kod har ändrats"</string>
     <string name="sim_lock_failed" msgid="16360418201678317">"Det gick inte att ändra SIM-kortets låsstatus.\nDu kan ha angett fel PIN-kod."</string>
@@ -1926,7 +1926,7 @@
     <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Ange ett lösenord för jobbet"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Ange en pinkod"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Ange en pinkod för jobbet"</string>
-    <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Ställ in ett mönster"</string>
+    <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Ange ett mönster"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Ställ in ett mönster för jobbet"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Lösenord krävs för fingeravtryck"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Mönster krävs för fingeravtryck"</string>
@@ -1941,7 +1941,7 @@
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Ange pinkoden för jobbet igen"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ange pinkoden för jobbprofilen"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Lösenorden matchar inte"</string>
-    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-koderna matchar inte"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Pinkoderna matchar inte"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rita mönstret igen"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Upplåsningsalternativ"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Lösenordet angavs"</string>
@@ -2333,6 +2333,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Från: Kalle"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"God morgon!\n\nJag ville bara kolla hur det går med designerna. Blir de färdiga innan vi börjar bygga de nya bubblorna?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Återställ inställningar"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vill du återställa skärmstorlek och text?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Inställningarna för skärmstorlek och text återställs till telefonens standardinställningar"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Återställ"</string>
