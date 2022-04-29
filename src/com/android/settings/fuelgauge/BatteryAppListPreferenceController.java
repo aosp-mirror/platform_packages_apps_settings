@@ -424,6 +424,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @VisibleForTesting
     void setUsageSummary(Preference preference, BatteryEntry entry) {
+        if (entry.getUid() == Process.SYSTEM_UID) {
+          return;
+        }
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = entry.getTimeInForegroundMs();
         if (shouldShowSummary(entry) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
