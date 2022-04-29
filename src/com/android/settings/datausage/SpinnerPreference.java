@@ -31,6 +31,8 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
     private AdapterView.OnItemSelectedListener mListener;
     private Object mCurrentObject;
     private int mPosition;
+    private View mItemView;
+    private boolean mItemViewVisible = false;
 
     public SpinnerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,10 +65,22 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        mItemView = holder.itemView;
+        mItemView.setVisibility(mItemViewVisible ? View.VISIBLE : View.INVISIBLE);
         Spinner spinner = (Spinner) holder.findViewById(R.id.cycles_spinner);
         spinner.setAdapter(mAdapter);
         spinner.setSelection(mPosition);
         spinner.setOnItemSelectedListener(mOnSelectedListener);
+    }
+
+    void setHasCycles(boolean hasData) {
+        setVisible(hasData);
+        if (hasData) {
+            mItemViewVisible = true;
+            if (mItemView != null) {
+                mItemView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
