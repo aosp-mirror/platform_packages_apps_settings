@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"ปรับขนาดข้อความบนหน้าจอให้เล็กลงหรือใหญ่ขึ้น"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"ทำให้เล็กลง"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"ทำให้ใหญ่ขึ้น"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"ใช้การหมุนอัตโนมัติ"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ ระบบจะไม่จัดเก็บหรือส่งรูปภาพไปยัง Google"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"ใช้การหมุนอัตโนมัติ"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"การตรวจจับใบหน้าใช้กล้องหน้าเพื่อเพิ่มความแม่นยำในการหมุนอัตโนมัติ ระบบจะไม่จัดเก็บหรือส่งรูปภาพไปยัง Google"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"ข้อความตัวอย่าง"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"พ่อมดมหัศจรรย์แห่งออซ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"บทที่ 11: เมืองมรกตมหัศจรรย์แห่งออซ"</string>
@@ -361,7 +361,7 @@
     <string name="security_settings_face_enroll_introduction_accessibility_diversity" msgid="2774962371839179206"></string>
     <string name="security_settings_face_enroll_introduction_accessibility_vision" msgid="7700394302162170363"></string>
     <string name="security_settings_face_enroll_introduction_cancel" msgid="7551159644361639436">"ยกเลิก"</string>
-    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"ไม่ล่ะ ขอบคุณ"</string>
+    <string name="security_settings_face_enroll_introduction_no_thanks" msgid="1820618982738898717">"ไม่เป็นไร"</string>
     <string name="security_settings_face_enroll_introduction_agree" msgid="6319476573697497750">"ยอมรับ"</string>
     <string name="security_settings_face_enroll_introduction_more" msgid="1970820298889710532">"เพิ่มเติม"</string>
     <string name="security_settings_face_enroll_introduction_title" msgid="7061610077237098046">"ปลดล็อกด้วยใบหน้า"</string>
@@ -641,7 +641,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="1699993191343299179">"เลือกวิธีที่จะล็อกหน้าจอ"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"ไม่มี"</string>
     <string name="unlock_set_unlock_off_summary" msgid="4578319976164001322"></string>
-    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"เลื่อน"</string>
+    <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"ปัด"</string>
     <string name="unlock_set_unlock_none_summary" msgid="641298008390890152">"ไม่มีการรักษาความปลอดภัย"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="8224895208452995332">"รูปแบบ"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="4482018884090552709">"ความปลอดภัยระดับปานกลาง"</string>
@@ -804,8 +804,8 @@
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"หากต้องการใช้ ให้ตั้งค่าการล็อกหน้าจอก่อน"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"ไม่มี"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="other">มีเอเจนต์ความน่าเชื่อถือ <xliff:g id="COUNT">%d</xliff:g> รายการ</item>
-      <item quantity="one">มีเอเจนต์ความน่าเชื่อถือ 1 รายการ</item>
+      <item quantity="other">เอเจนต์ความน่าเชื่อถือทำงานอยู่ <xliff:g id="COUNT">%d</xliff:g> รายการ</item>
+      <item quantity="one">เอเจนต์ความน่าเชื่อถือทำงานอยู่ 1 รายการ</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"บลูทูธ"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"เปิดบลูทูธ"</string>
@@ -1301,13 +1301,18 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"ปิด"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"เปิด"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"เปิด - ตามใบหน้า"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"เปิดใช้การตรวจจับใบหน้า"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"การตรวจจับใบหน้า"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"ปรับการวางแนวหน้าจอโดยอัตโนมัติเมื่อคุณหันโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการหมุนอัตโนมัติ"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"เมื่อคุณหันโทรศัพท์ไปมาระหว่างแนวตั้งและแนวนอน"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"ความละเอียดของหน้าจอ"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"ความละเอียดสูง"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"ความละเอียดสูงสุด"</string>
+    <!-- no translation found for screen_resolution_option_highest (9134161136319625840) -->
+    <skip />
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"การเปลี่ยนความละเอียดอาจปิดแอปที่กำลังทำงานอยู่บางแอป"</string>
+    <!-- no translation found for screen_resolution_footer (1576507061260060890) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"สี"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ธรรมชาติ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"บูสต์"</string>
@@ -2331,6 +2336,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"จาก: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"สวัสดี\n\nเราอยากรู้ว่าการออกแบบมีความคืบหน้าอย่างไรบ้าง และจะพร้อมใช้งานก่อนเริ่มสร้างบอลลูนใหม่ใช่ไหม"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"รีเซ็ตการตั้งค่า"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"รีเซ็ตการตั้งค่าขนาดที่แสดงและข้อความแล้ว"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"รีเซ็ตขนาดการแสดงผลและข้อความหรือไม่"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"ค่ากำหนดของขนาดการแสดงผลและข้อความของคุณจะเปลี่ยนกลับไปเป็นการตั้งค่าเดิมของโทรศัพท์"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"รีเซ็ต"</string>
@@ -2451,6 +2457,8 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"เวลาในการคลิกอัตโนมัติ"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"การสั่นและการโต้ตอบการสัมผัส"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"ควบคุมความแรงของการสั่นสำหรับการใช้งานที่แตกต่างกัน"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"เปิด"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"ปิด"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"การตั้งค่าถูกปิดใช้เนื่องจากอุปกรณ์ปิดเสียงอยู่"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"การโทร"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"การแจ้งเตือนและนาฬิกาปลุก"</string>
@@ -2627,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"มีปัญหาในการได้ยิน, สูญเสียการได้ยิน"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"มีปัญหาในการได้ยิน, สูญเสียการได้ยิน, คำบรรยายวิดีโอ, โทรพิมพ์, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"การจับคู่ด่วน"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"การตรวจหาอุปกรณ์บลูทูธที่อยู่ใกล้เคียงสำหรับการจับคู่ด่วน"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"สแกนหาอุปกรณ์ที่อยู่ใกล้เคียง"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"อุปกรณ์ที่บันทึกไว้"</string>
     <string name="print_settings" msgid="8519810615863882491">"การพิมพ์"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ปิด"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3657,7 +3661,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"หน้าจอ, เวลาล็อก, ระยะหมดเวลา, หน้าจอล็อก"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"หน่วยความจำ แคช ข้อมูล ลบ ล้าง เพิ่มพื้นที่ว่าง พื้นที่"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"เชื่อมต่อแล้ว, อุปกรณ์, หูฟัง, ชุดหูฟัง, ลำโพง, ไร้สาย, จับคู่, หูฟังเอียร์บัด, เพลง, สื่อ"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"จับคู่, หูฟังเอียร์บัด, บลูทูธ"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"พื้นหลัง ธีม ตารางกริด ปรับแต่ง ปรับเปลี่ยนในแบบของคุณ"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ไอคอน การเน้น สี"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"ค่าเริ่มต้น, ผู้ช่วย"</string>
@@ -4461,7 +4464,7 @@
     <string name="permit_usage_access" msgid="179630895262172674">"อนุญาตการเข้าถึงการใช้งาน"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"ค่ากำหนดการใช้งานแอป"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"เวลาอยู่หน้าจอ"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"การเข้าถึงการใช้งานทำให้แอปสามารถติดตามว่าคุณกำลังใช้แอปอื่นใดอยู่ ความถี่ในการใช้ รวมทั้งผู้ให้บริการ การตั้งค่าภาษา และรายละเอียดอื่นๆ"</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"การเข้าถึงการใช้งานทำให้แอปสามารถติดตามว่าคุณกำลังใช้​แอปอื่นใดอยู่ ความถี่ในการใช้ รวมทั้งผู้ให้บริการ การตั้งค่าภาษา และรายละเอียดอื่นๆ"</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"หน่วยความจำ"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"รายละเอียดหน่วยความจำ"</string>
     <string name="always_running" msgid="9012705720688200252">"ทำงานตลอดเวลา (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4591,11 +4594,11 @@
     <string name="allow_overlay_description" msgid="1607235723669496298">"อนุญาตให้แอปนี้แสดงทับแอปอื่นๆ ที่คุณกำลังใช้อยู่ แอปนี้จะเห็นจุดที่คุณแตะหรือเปลี่ยนแปลงสิ่งที่ปรากฏในหน้าจอได้"</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"การเข้าถึงไฟล์ทั้งหมด"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"อนุญาตให้เข้าถึงเพื่อจัดการไฟล์ทั้งหมด"</string>
-    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
+    <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"อนุญาตให้แอปนี้อ่าน แก้ไข และลบไฟล์ทั้งหมดในอุปกรณ์นี้หรือวอลุ่มของพื้นที่เก็บข้อมูลใดๆ ที่เชื่อมต่อ หากได้รับอนุญาต ​แอปอาจเข้าถึงไฟล์ได้โดยที่คุณไม่ทราบอย่างชัดแจ้ง"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"เข้าถึงไฟล์ทั้งหมดได้"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"แอปการจัดการสื่อ"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"อนุญาตให้แอปจัดการสื่อ"</string>
-    <string name="media_management_apps_description" msgid="8000565658455268524">"หากอนุญาต แอปนี้จะแก้ไขหรือลบไฟล์สื่อที่สร้างขึ้นด้วยแอปอื่นๆ โดยไม่ต้องถาม แอปต้องมีสิทธิ์เข้าถึงไฟล์และสื่อ"</string>
+    <string name="media_management_apps_description" msgid="8000565658455268524">"หากอนุญาต แอปนี้จะแก้ไขหรือลบไฟล์สื่อที่สร้างขึ้นด้วย​แอปอื่นๆ โดยไม่ต้องถาม แอปต้องมีสิทธิ์เข้าถึงไฟล์และสื่อ"</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"สื่อ ไฟล์ การจัดการ ตัวจัดการ จัดการ แก้ไข ตัวแก้ไข แอป แอปพลิเคชัน โปรแกรม"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"VR Virtual Reality Listener บริการตัวช่วยสเตอริโอ"</string>
     <string name="overlay_settings" msgid="2030836934139139469">"แสดงทับแอปอื่นๆ"</string>
@@ -5704,6 +5707,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"ไม่เชื่อมต่อ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"เชื่อมต่อ"</string>
     <string name="tare_settings" msgid="3788654800004869077">"การตั้งค่า TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"เปลี่ยนกลับไปเป็นการตั้งค่าเริ่มต้น"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"เปลี่ยนการตั้งค่ากลับเป็นค่าเริ่มต้นแล้ว"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"สมดุลที่อิ่มตัวสูงสุด"</string>
@@ -5715,7 +5722,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"การดำเนินการ (ต้นทุนในการผลิต)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"การดำเนินการ (ราคาฐาน)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"รางวัลต่อเหตุการณ์เดียว"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"รางวัลตลอดระยะเวลาของเหตุการณ์"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"รางวัลสูงสุดต่อวัน"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"กิจกรรมแรก"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"เห็นการแจ้งเตือนแล้ว"</string>

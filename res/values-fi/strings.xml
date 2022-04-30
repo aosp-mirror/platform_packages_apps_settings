@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Suurenna tai pienennä tekstiä näytöllä."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Pienennä"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Suurenna"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Käytä automaattista kääntöä"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Kasvojentunnistus käyttää etukameraa automaattisen kääntämisen tarkkuuden parantamiseksi. Kuvia ei koskaan tallenneta tai lähetetä Googlelle."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Käytä automaattista kääntöä"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Kasvojentunnistus käyttää etukameraa automaattisen kääntämisen tarkkuuden parantamiseksi. Kuvia ei koskaan tallenneta tai lähetetä Googlelle."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Esimerkkiteksti"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Ihmemaa Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Luku 11: Ozin ihastuttava smaragdikaupunki"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Järjestelmän kieli"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Järjestelmän oletusarvo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sovellukselle ei voi valita kieltä asetuksista."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kieli saattaa erota sovelluksessa saatavilla olevista kielistä. Jotkin sovellukset eivät ehkä tue tätä asetusta."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Poistetaanko valitut kielet?</item>
       <item quantity="one">Poistetaanko valittu kieli?</item>
@@ -392,7 +391,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> kasvoa"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Et voi lisätä useampia kasvoja"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Enimmäismäärä kasvoja lisätty"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Käyttöönottoa ei suoritettu loppuun asti"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Käyttöönottoa ei suoritettu loppuun"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Kasvojen rekisteröinnin aikaraja on saavutettu. Yritä uudelleen."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Kasvojen rekisteröinti epäonnistui."</string>
@@ -578,7 +577,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hups, anturi ei ole siinä."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kosketa puhelimen takaosan tunnistinta etusormella."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun asti"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Sormenjäljen käyttöönoton enimmäisaika ylittyi. Yritä uudelleen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Sormenjäljen rekisteröinti ei onnistunut. Yritä uudelleen tai käytä eri sormea."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lisää toinen"</string>
@@ -1302,13 +1301,18 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Ei käytössä"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Päällä"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Päällä – kasvojen perusteella"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Ota kasvojentunnistus käyttöön"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Kasvojentunnistus"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Mukauta näytön suunta automaattisesti kääntäessäsi puhelimen pystysuunnasta vaakasuuntaan tai toisin päin"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lue lisää automaattisesta käännöstä"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kun käännät puhelimen pysty- tai vaaka-asentoon"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Näytön resoluutio"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Korkea resoluutio"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Korkein resoluutio"</string>
+    <!-- no translation found for screen_resolution_option_highest (9134161136319625840) -->
+    <skip />
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p – FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p – QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"Jos muutat resoluutiota, jotkin tällä hetkellä käytössä olevat sovellukset voivat sulkeutua."</string>
+    <!-- no translation found for screen_resolution_footer (1576507061260060890) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Värit"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Luonnollinen"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Tehostettu"</string>
@@ -2332,6 +2336,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Lähettäjä: Mika"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Huomenta!\n\nHalusin vain tarkistaa, miten suunnitelmat etenevät. Ovatko ne valmiina ennen kuin alamme rakentaa uusia kuumailmapalloja?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nollaa asetukset"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Näytön koko ja tekstin asetukset on nollattu"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Nollataanko näytön koko ja teksti?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Näytön koko ja tekstiasetukset nollataan puhelimen alkuperäisiin asetuksiin"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nollaa"</string>
@@ -2452,6 +2457,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automaattisen klikkauksen aika"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Värinä ja haptinen palaute"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Muuta värinän voimakkuutta eri käyttötarkoituksille"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Asetus on poistettu käytöstä, koska laite on äänettömällä"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Puhelut"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Ilmoitukset ja hälytykset"</string>
@@ -2628,10 +2637,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"huonokuuloinen, kuulon heikkeneminen"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"huonokuuloinen, kuulon heikkeneminen, tekstitykset, kaukokirjoitin, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Pikapari"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Bluetooth-laitteiden havaitseminen lähellä."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Etsi laitteita lähistöltä"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Tallennetut laitteet"</string>
     <string name="print_settings" msgid="8519810615863882491">"Tulostus"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Pois päältä"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3658,7 +3663,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"näyttö, lukitusaika, aikakatkaisu, lukitusnäyttö"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"muisti, välimuisti, data, poista, tyhjennä, vapauta, tila"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"yhdistetty, laite, kuulokkeet, kuulokemikrofoni, kaiutin, langaton, pari, nappikuulokkeet, musiikki, media"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"parin muodostus, nappikuulokkeet, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"tausta, teema, ruudukko, muokkaus, personointi"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"kuvake, korostusväri, väri"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"oletus, assistant"</string>
@@ -4595,7 +4599,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Salli sovelluksen lukea, muokata ja poistaa kaikkia tiedostoja tällä laitteella ja yhdistetyillä tallennuslaitteilla. Jos sallit tämän, sovelluksella on pääsy tiedostoihin ilman, että sinulle ilmoitetaan asiasta erikseen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Voi päästä kaikkiin tiedostoihin"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Median hallinnointisovellukset"</string>
-    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Salli sovelluksen ylläpitää mediaa"</string>
+    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Salli sovelluksen hallinnoida mediaa"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Jos sallit tämän asetuksen, sovellus voi muokata ja poistaa muilla sovelluksilla luotuja mediatiedostoja ilman erillistä lupaasi. Sovelluksella on oltava lupa tiedostojen ja median käyttöön."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"media, tiedosto, hallinnointi, hallinnoija, ylläpito, muokata, muokkaaja, sovellus, ohjelma"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"VR virtuaalitodellisuus kuuntelija stereo avustinpalvelu"</string>
@@ -5705,6 +5709,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Älä yhdistä"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Yhdistä"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TAREn asetukset"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Palautetaanko oletusasetukset?"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Oletusasetukset palautettiin."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Enimmäistasapaino, kun laite on ladattu"</string>
@@ -5716,7 +5724,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Toiminnot (tuotannon hinta)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Toiminnot (perushinta)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Palkinnot yhtä tapahtumaa kohden"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Koko tapahtuman aikaiset palkinnot"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Enimmäispalkinnot päivää kohden"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Tärkein toiminta"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Ilmoitus nähty"</string>

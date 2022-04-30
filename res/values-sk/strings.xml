@@ -54,8 +54,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Zväčšite alebo zmenšite text na obrazovke."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zmenšiť"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zväčšiť"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Používať automatické otáčanie"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Rozpoznávanie tváre zlepšuje presnosť automatického otáčania pomocou prednej kamery. Obrázky sa nikdy neukladajú ani neodosielajú Googlu."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Používať automatické otáčanie"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Rozpoznávanie tváre zlepšuje presnosť automatického otáčania pomocou prednej kamery. Obrázky sa nikdy neukladajú ani neodosielajú Googlu."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Ukážka textu"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarodejník z krajiny Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. kapitola: Nádherné smaragdové mesto"</string>
@@ -304,7 +304,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrať podľa čas. posunu UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Dátum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Čas"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Uzamknúť po uplynutí časového limitu obrazovky"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Uzamknúť po časovom limite"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Okamžite po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -413,7 +413,7 @@
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Odomknutím tvárou:"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Pri používaní odomknutia tvárou"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vyžadovať otvorené oči"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Ak chcete odomknúť telefón, musíte mať otvorené oči"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Pri odomykaní telefónu vyžadovať otvorené oči"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Vždy vyžadovať potvrdenie"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Pri používaní odomknutia tvárou v aplikáciách vždy vyžad. potvrdenie"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Odstrániť model tváre"</string>
@@ -627,7 +627,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Zámka obrazovky"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Výber zámky obrazovky"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obraz."</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obrazovky"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vyberte zámku pre pracovné aplikácie"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vyberte novú pracovnú zámku"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Chráňte svoj tablet"</string>
@@ -1343,13 +1343,18 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Vypnuté"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Zapnuté"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Zapnuté – podľa tváre"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Povoliť rozpoznávanie tváre"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Rozpoznávanie tváre"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Automaticky upravujte orientáciu obrazovky pri otáčaní telefónu medzi orientáciou na výšku a na šírku"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Ďalšie informácie o automatickom otáčaní"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Keď telefón otočíte z režimu na výšku do režimu na šírku"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Rozlíšenie obrazovky"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Vysoké rozlíšenie"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Najvyššie rozlíšenie"</string>
+    <!-- no translation found for screen_resolution_option_highest (9134161136319625840) -->
+    <skip />
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"Po prepnutí rozlíšenia sa môžu niektoré aktuálne spustené aplikácie zavrieť."</string>
+    <!-- no translation found for screen_resolution_footer (1576507061260060890) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Farby"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodzené"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Zosilnené"</string>
@@ -2381,6 +2386,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Od: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Dobré ráno,\n\nchcem sa spýtať, ako ste pokročili s požadovanými návrhmi. Budú k dispozícii, než začneme konštruovať nové balóny?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Resetovať nastavenia"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Nastavenia veľkosti obrazovky a textu boli resetované"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Chcete resetovať veľkosť zobrazenia a textu?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Veľkosť zobrazenia a predvoľby textu budú resetované na pôvodné nastavenia telefónu"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetovať"</string>
@@ -2501,6 +2507,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Čas automatického kliknutia"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrácie a hmatová odozva"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Ovládajte silu vibrácií pre rôzne spôsoby použitia"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Nastavenie je vypnuté, pretože v zariadení je zapnutý tichý režim"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Hovory"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Upozornenia a budíky"</string>
@@ -2687,10 +2697,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"slabo počujúci, hluchota"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"slabo počujúci, hluchota, titulky, ďalekopisný stroj, textový telefón"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Rýchle párovanie"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Rozpoznávať zariadenia s rozhraním Bluetooth rýchleho párovania v okolí"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Hľadať zariadenia v okolí"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Uložené zariadenia"</string>
     <string name="print_settings" msgid="8519810615863882491">"Tlač"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Vypnutá"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3749,7 +3755,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"obrazovka, čas uzamknutia, časový limit, uzamknutá obrazovka"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"pamäť, vyrovnávacia pamäť, údaje, odstrániť, vymazať, voľné, miesto"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"pripojené, zariadenie, slúchadlá, slúchadlá s mikrofónom, reproduktor, bezdrôtové, párovať, slúchadlá do uší, hudba, médiá"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"párovanie, slúchadlá do uší, bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"pozadie, motív, mriežka, upraviť na mieru, prispôsobiť"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikona, zvýraznenie, farba"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"predvolené, asistent"</string>
@@ -3998,7 +4003,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Blikať"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Ochrana súkromia"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Preskakovať uzamknutú obrazovku"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odomknutí prejdite priamo na naposledy použitú obrazovku"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odomknutí prejsť priamo na poslednú používanú obrazovku"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Uzamknutá obrazovka, preskočiť, obísť"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Keď je prac. profil zamknutý"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Upozornenia na uzamknutej obrazovke"</string>
@@ -4403,11 +4408,11 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pripnutie aplikácie"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Pripnutie aplikácie umožňuje ponechať aktuálnu aplikáciu zobrazenú, než ju odopnete. Pomocou tejto funkcie môžete napríklad dôveryhodnému priateľovi umožniť hrať konkrétnu hru."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete zariadenie s niekým zdieľať bezpečne, skúste namiesto toho použiť hosťa. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete zariadenie s niekým zdieľať bezpečne, skúste namiesto toho použiť režim hosťa. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Keď je aplikácia pripnutá: \n\n•		Môžu byť sprístupnené osobné údaje \n		(napríklad kontakty a obsah správ) \n•		Pripnutá aplikácia môže otvárať ďalšie aplikácie \n\nPripnutie aplikácie používajte iba s ľuďmi, ktorým dôverujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pred uvoľnením žiadať bezpečnostný vzor"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pred odopnutím požiadať o PIN"</string>
-    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred uvoľnením požiadať o heslo"</string>
+    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred odopnutím požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Pri odopnutí zamknúť zariadenie"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdiť odstránenie SIM karty"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Pred vymazaním stiahnutej SIM karty overiť, že ste to vy"</string>
@@ -4533,7 +4538,7 @@
     </plurals>
     <string name="unused_apps_category" msgid="8954930958175500851">"Nastavenia nepoužívaných aplikácií"</string>
     <string name="unused_apps_switch" msgid="7595419855882245772">"Pozastaviť aktivitu v nepoužívaných apl."</string>
-    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Odstráňte povolenia, vymažte dočasné súbory a zastavte upozornenia"</string>
+    <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Odstrániť povolenia, vymazať dočasné súbory a zastaviť upozornenia"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Všetky aplikácie"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Nainštalované aplikácie"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Okamžité aplikácie"</string>
@@ -5884,6 +5889,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Nepripojiť"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Pripojiť"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Nastavenia TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Vrátiť na predvolené nastavenia"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Boli vrátené predvolené nastavenia."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max. rovnováha pri úplnom nabití zariad."</string>
@@ -5895,7 +5904,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Akcie (realizačné náklady)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Akcie (základná cena)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Odmeny za jednu udalosť"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Odmeny za celkové trvanie udalosti"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maximálny počet odmien za deň"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Najčastejšia aktivita"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Zhliadnutie upozornenia"</string>
