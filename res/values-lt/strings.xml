@@ -2178,7 +2178,7 @@
     <string name="app_disable_notifications_dlg_title" msgid="6686569904059411780">"Išjungti pranešimus?"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Parduotuvė"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Išsami programos informacija"</string>
-    <string name="app_install_details_summary" msgid="2013043219249992373">"Programa įdiegta iš „<xliff:g id="APP_STORE">%1$s</xliff:g>“"</string>
+    <string name="app_install_details_summary" msgid="2013043219249992373">"Programa įdiegta iš <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="417197491598208216">"Daugiau informacijos apie „<xliff:g id="APP_STORE">%1$s</xliff:g>“"</string>
     <string name="app_ops_running" msgid="6127474473137428721">"Vykdoma"</string>
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Niekada nenaudota)"</string>
@@ -2382,8 +2382,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Nuo: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Labas rytas!\n\nNoriu pasiteirauti, kaip sekasi kurti projektus. Ar jie bus parengti, kol pradėsime kurti naujus balionėlius?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nust. nustatymus iš naujo"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Pateikties dydžio ir teksto nustatymai nustatyti iš naujo"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Iš naujo nustatyti ekrano dydį ir tekstą?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Ekrano dydžio ir teksto nuostatos bus nustatytos iš naujo pagal pradinius telefono nustatymus"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nustatyti iš naujo"</string>
@@ -2504,6 +2503,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Automatinio paspaudimo laikas"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibravimas ir lietimo technologija"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Valdyti vibravimo stiprumą skirtingais naudojimo atvejais"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Nustatymas išjungtas, nes įrenginys nutildytas"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Skambučiai"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Pranešimai ir signalai"</string>
@@ -2690,10 +2693,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"neprigirdintis asmuo, klausos sutrikimai"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"neprigirdintis asmuo, klausos sutrikimai, subtitrai, teletaipas, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Spartusis susiejimas"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Sparčiojo susiejimo „Bluetooth“ įrenginių netoliese aptikimas."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Nuskaityti ieškant netoliese esančių įrenginių"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Išsaugoti įrenginiai"</string>
     <string name="print_settings" msgid="8519810615863882491">"Spausdinimas"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Išjungta"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3752,7 +3751,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"ekranas, užrakinimo laikas, skirtasis laikas, užrakinimo ekranas"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"atmintis, talpykla, duomenys, ištrinti, išvalyti, atlaisvinti, vieta"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"prijungtas, įrenginys, ausinės, virtualiosios realybės įrenginys, garsiakalbis, belaidis, susieti, ausinukas, muzika, medija"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"susieti, ausinės, „Bluetooth“"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"fonas, tema, tinklelis, tinkinti, suasmeninti"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"piktograma, paryškinimas, spalva"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"numatytasis, padėjėjas"</string>
@@ -5887,6 +5885,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Neprisijungti"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Susieti"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE nustatymai"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Grąžinti numatytuosius nustatymus"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Nustatymai grąžinti į numatytuosius."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Didžiausias visiško įkrovimo balansas"</string>
@@ -5898,7 +5900,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Veiksmai (gamybos mokestis)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Veiksmai (bazinė kaina)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Premijos per vieną įvykį"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Premijos per visą įvykio trukmę"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Didžiausias premijų skaičius per dieną"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Populiariausia veikla"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Pranešimas peržiūrėtas"</string>

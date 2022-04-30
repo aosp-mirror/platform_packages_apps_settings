@@ -496,7 +496,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"സെൻസർ സ്പർശിക്കുക"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് എങ്ങനെ സജ്ജീകരിക്കാം"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"ഫോണിന്റെ പിൻവശത്താണ് അതുള്ളത്. ചൂണ്ടുവിരൽ ഉപയോഗിക്കുക."</string>
-    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"വിരലടയാള സെൻസർ നിങ്ങളുടെ സ്ക്രീനിലുണ്ട്. അടുത്ത സ്ക്രീനിൽ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ക്യാപ്‌ചർ ചെയ്യും."</string>
+    <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"ഫിംഗർപ്രിന്റ് സെൻസർ നിങ്ങളുടെ സ്ക്രീനിലാണ്. അടുത്ത സ്ക്രീനിൽ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ക്യാപ്‌ചർ ചെയ്യും."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"ആരംഭിക്കുക"</string>
     <string name="security_settings_udfps_enroll_a11y" msgid="1899453114050362235">"സെൻസർ കണ്ടെത്താൻ സ്ക്രീനിലുടനീളം നിങ്ങളുടെ വിരൽ നീക്കുക. വിരലടയാള സെൻസറിൽ സ്‌പർശിച്ചുപിടിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"ഉപകരണത്തിലെ ചിത്രീകരണവും ഫിംഗർപ്രിന്റ് സെൻസർ ലൊക്കേഷനും"</string>
@@ -2455,6 +2455,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"സ്വയമേവ ക്ലിക്ക് ചെയ്യാനെടുക്കുന്ന സമയം"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"വെെബ്രേഷനും സ്പർശനവും"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"വ്യത്യസ്‌ത ഉപയോഗങ്ങൾക്കുള്ള വൈബ്രേഷൻ ദൃഢത നിയന്ത്രിക്കുക"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"ഉപകരണം നിശബ്ദ മോഡിൽ സജ്ജീകരിച്ചിരിക്കുന്നതിനാൽ ക്രമീകരണം പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"കോളുകൾ"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"അറിയിപ്പുകളും അലാറങ്ങളും"</string>
@@ -2631,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"കേൾവിക്ക് തകരാർ, കേൾവിക്കുറവ്"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"കേൾവിക്ക് തകരാർ, കേൾവിക്കുറവ്, അടിക്കുറിപ്പുകൾ ടെലിടൈപ്പ്, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"ഫാസ്റ്റ് പെയർ"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"സമീപത്തെ ഫാസ്റ്റ് പെയർ Bluetooth ഉപകരണം കണ്ടെത്തൽ."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"സമീപമുള്ള ഉപകരണങ്ങൾക്കായി തിരയുക"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"സംരക്ഷിച്ച ഉപകരണങ്ങൾ"</string>
     <string name="print_settings" msgid="8519810615863882491">"പ്രിന്റിംഗ്"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"ഓഫ്"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3661,7 +3661,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"സ്‌ക്രീൻ, ലോക്ക് സമയം, ടൈംഔട്ട്, ലോക്ക്‌സ്ക്രീൻ"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"മെമ്മറി, കാഷെ, ഡാറ്റ, ഇല്ലാതാക്കുക, മായ്ക്കുക, സൗജന്യം, സ്‌പെയ്‌സ്"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"കണക്‌റ്റ് ചെയ്‌തു, ഉപകരണം, ഹെഡ്‌ഫോണുകൾ, ഹെഡ്‌സെറ്റ്, സ്‌പീക്കർ, വയര്‍‌ലെസ്സ്, ജോടി, ഇയർ ബഡുകൾ, സംഗീതം, മീഡിയ"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"ജോഡിയാക്കൽ, ഇയർ ബഡുകൾ, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"പശ്ചാത്തലം, തീം, ഗ്രിഡ്, ഇഷ്ടാനുസൃതമാക്കുക, വ്യക്തിപരമാക്കുക"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ഐക്കൺ, ആക്സന്റ്, വർണ്ണം"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"ഡിഫോൾട്ട്, സഹായി"</string>
@@ -4598,7 +4597,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ഈ ഉപകരണത്തിലെയോ ഇതുമായി ബന്ധിപ്പിച്ചിട്ടുള്ള ഏതെങ്കിലും സ്‌റ്റോറേജുകളിലെയോ എല്ലാ ഫയലുകളും വായിക്കാനും പരിഷ്ക്കരിക്കാനും ഇല്ലാതാക്കാനും ഈ ആപ്പിനെ അനുവദിക്കുക. അനുമതി നൽകിയിട്ടുണ്ടെങ്കിൽ, നിങ്ങളുടെ അറിവില്ലാതെ തന്നെ ആപ്പ് ഫയലുകൾ ആക്സസ് ചെയ്തേക്കാം."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"എല്ലാ ഫയലുകളും ആക്സസ് ചെയ്യാനാവും"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"മീഡിയ മാനേജ്‌മെന്റ് ആപ്പുകൾ"</string>
-    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"മീഡിയ മാനേജ് ചെയ്യാൻ അപ്പിനെ അനുവദിക്കുക"</string>
+    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"മീഡിയ മാനേജ് ചെയ്യാൻ ആപ്പിനെ അനുവദിക്കുക"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"അനുവദിച്ചാൽ, നിങ്ങളോട് ചോദിക്കാതെ മറ്റ് ആപ്പുകൾ ഉപയോഗിച്ച് സൃഷ്‌ടിച്ച മീഡിയ ഫയലുകൾ പരിഷ്‌ക്കരിക്കാനോ ഇല്ലാതാക്കാനോ ഈ ആപ്പിന് കഴിയും. ഫയലുകളും മീഡിയയും ആക്‌സസ് ചെയ്യാൻ ആപ്പിന് അനുമതി ഉണ്ടായിരിക്കണം."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"മീഡിയ, ഫയൽ, മാനേജ്‌മെന്റ്, മാനേജർ, മാനേജ് ചെയ്യുക, എഡിറ്റ് ചെയ്യുക, എഡിറ്റർ, ആപ്പ്, അപ്ലിക്കേഷൻ, പ്രോഗ്രാം"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"vr വെർച്വൽ റിയാലിറ്റി ലിസണർ സ്റ്റീരിയോ സഹായി സേവനം"</string>
@@ -5708,6 +5707,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"കണക്റ്റ് ചെയ്യരുത്"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"കണക്റ്റ് ചെയ്യൂ"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE ക്രമീകരണം"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"ഡിഫോൾട്ട് ക്രമീകരണത്തിലേക്ക് പുനഃസ്ഥാപിക്കൂ"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"ക്രമീകരണം ഡിഫോൾട്ടായി പുനഃസ്ഥാപിച്ചു."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"ഉപകരണം ചാർജായാലുള്ള പരമാവധി ബാലൻസ്"</string>
@@ -5719,7 +5722,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"പ്രവർത്തനങ്ങൾ (നിർമ്മാണ ചെലവ്)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"പ്രവർത്തനങ്ങൾ (അടിസ്ഥാന നിരക്ക്)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"ഓരോ ഇവന്റിനുമുള്ള റിവാർഡുകൾ"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"മൊത്തം ഇവന്റ് കാലയളവിലെ റിവാർഡുകൾ"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"ഓരോ ദിവസത്തെയും പരമാവധി റിവാർഡുകൾ"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"മികച്ച പ്രവർത്തനം"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"അറിയിപ്പ് കണ്ടു"</string>
