@@ -383,8 +383,8 @@
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Бет тану функциясын қайта реттеу үшін сақталған бет үлгісін жойыңыз.\n\nБет үлгіңіз біржола әрі қауіпсіз жойылады.\n\nОны жойған соң, телефон құлпын ашу немесе қолданбаларда аутентификациядан өту үшін саусақ ізін, PIN кодын, өрнекті немесе құпия сөзді пайдалану керек болады."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Бет тану функциясы пайдаланылатын кездер"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Бет тану функциясын пайдаланған кезде"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Көзіңізді ашып тұрыңыз."</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Телефон құлпын ашу үшін көздеріңізді ашып тұрыңыз."</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Көз ашық тұруы керек"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Телефон құлпын ашу үшін көзіңізді ашып тұрыңыз."</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Әрқашан растауды сұрау"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Қолданбаларда бет тану функциясын пайдаланғанда, үнемі растау қадамын сұрау"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Бет үлгісін жою"</string>
@@ -563,13 +563,13 @@
     <string name="fingerprint_add_max" msgid="8639321019299347447">"<xliff:g id="COUNT">%d</xliff:g> дейін саусақ ізін қосуға болады"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Саусақ іздерінің максималды саны енгізілді"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Қосымша саусақ іздері енгізілмейді"</string>
-    <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Барлық саусақ іздерін жою керек пе?"</string>
+    <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Барлық саусақ іздері жойылсын ба?"</string>
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"\"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" жойылады"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Саусақ ізі жойылсын ба?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Бұл — құрылғыда сақталған \"<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>\" саусақ ізімен байланыстырылған саусақ ізі суреттерін және үлгісін жояды."</string>
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Телефон құлпын ашу немесе қолданбаларда жеке басыңызды растау үшін саусақ ізін пайдалана алмайсыз."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Жұмыс профилінің құлпын ашу, сатып алу транзакцияларын орындау немесе жұмыс қолданбаларына кіру үшін саусақ ізін пайдалана алмайсыз."</string>
-    <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Иә, жою"</string>
+    <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Иә, жойылсын"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Шифрлау"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Планшетті кодтау"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Телефонды шифрлау"</string>
@@ -1292,7 +1292,7 @@
     <string name="search_settings" msgid="7573686516434589771">"Іздеу"</string>
     <string name="display_settings" msgid="7197750639709493852">"Дисплей"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Экранды автоматты бұру"</string>
-    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Өшіру"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Өшірулі"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Қосулы"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Қосулы – Бет негізінде"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Бетті анықтауды қосу"</string>
@@ -3841,7 +3841,7 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Құлыптаулы экранды өткізу"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Құлыпты ашқан соң, бірден соңғы ашылған экранға өту"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Құлып экраны, құлыптаулы экран, өткізіп жіберу, өткізу"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Жұмыс профилі өшірулі болғанда"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Жұмыс профилі құлыпталғанда"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Құлып экранындағы хабарландыру"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Барлық хабарландыруды көрсету"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Үнсіз әңгімелерді және хабарландыруларды жасыру"</string>
@@ -3987,7 +3987,7 @@
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Байланыстырылған қолданбалар рұқсаттарды бөліседі және бір-бірінің деректерін пайдалана алады."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Жеке деректеріңізді әкімшімен бөліспейтін сенімді қолданбаларды ғана байланыстырыңыз."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Қолданбаларды құрылғының құпиялылық параметрлерінен кез келген уақытта ажырата аласыз."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Жеке деректеріңізді пайдаланатын <xliff:g id="NAME">%1$s</xliff:g> жұмыс қолданбасы сенімді ме?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Жеке деректеріңізді пайдаланатын <xliff:g id="NAME">%1$s</xliff:g> жұмыс қолданбасына рұқсат бересіз бе?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Жеке деректеріңізді әкімшімен бөліспейтін сенімді қолданбаларды ғана байланыстырыңыз."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Қолданба деректері"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Бұл қолданба жеке <xliff:g id="NAME">%1$s</xliff:g> қолданбасындағы деректерді пайдалана алады."</string>
@@ -4381,7 +4381,7 @@
     <string name="permit_usage_access" msgid="179630895262172674">"Пайдалану тарихына рұқсат беру"</string>
     <string name="app_usage_preference" msgid="7062447555623339120">"Қолданба пайдалану параметрлері"</string>
     <string name="time_spent_in_app_pref_title" msgid="25327097913383330">"Пайдаланылу уақыты"</string>
-    <string name="usage_access_description" msgid="8547716253713890707">"Пайдалану тарихын көру мүмкіндігі қолданбаға сіз пайдаланатын басқа қолданбаларды және қаншалықты жиі пайдаланатыңыз туралы ақпаратты, сондай-ақ операторды, тіл параметрлерін және басқа мәліметтерді бақылауға мүмкіндік береді."</string>
+    <string name="usage_access_description" msgid="8547716253713890707">"Пайдалану тарихын көру рұқсаты қолданбаға сіз пайдаланатын басқа қолданбаларды және қаншалықты жиі пайдаланатыңыз туралы ақпаратты, сондай-ақ операторды, тіл параметрлерін және басқа мәліметтерді бақылауға мүмкіндік береді."</string>
     <string name="memory_settings_title" msgid="6582588646363308430">"Жад"</string>
     <string name="memory_details_title" msgid="3048107441540417799">"Жад туралы мәліметтер"</string>
     <string name="always_running" msgid="9012705720688200252">"Әрдайым қосулы (<xliff:g id="PERCENTAGE">%s</xliff:g>)"</string>
@@ -4514,7 +4514,7 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Қолданбаға осы құрылғыдағы немесе жалғанған сыртқы жад құрылғыларындағы барлық файлды оқуға, өзгертуге немесе жоюға рұқсат береді. Егер осы рұқсат берілсе, қолданба файлдарды сіздің келісіміңізсіз пайдалана алады."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Барлық файлды пайдалана алатын қолданбалар"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Мультимедианы басқару қолданбалары"</string>
-    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Қолданбаға медиафайлды басқаруға рұқсат ету"</string>
+    <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Қолданбаға мультимедианы басқаруға рұқсат ету"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Рұқсат берілсе, бұл қолданба осы құрылғыдағы басқа қолданбалар жасаған медиафайлдарды сізден сұрамай өзгерте немесе жоя алады. Файлдар мен медиафайлдарды пайдалану үшін қолданбаның рұқсаты болуы керек."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"Мультимедиа, Файл, Басқару, Басқарушы, Өзгерту, Редактор, Қолданба, Бағдарлама"</string>
     <string name="keywords_vr_listener" msgid="902737490270081131">"виртуалды шындық тыңдаушысының стерео көмекші қызметі"</string>
@@ -4532,7 +4532,7 @@
     <string name="write_settings_title" msgid="3011034187823288557">"Жүйе параметрлерін өзгерте алады"</string>
     <string name="write_system_settings" msgid="5555707701419757421">"Жүйелік параметрлерді өзгерту"</string>
     <string name="permit_write_settings" msgid="3113056800709924871">"Жүйелік параметрлерді өзгертуге рұқсат ету"</string>
-    <string name="write_settings_description" msgid="1474881759793261146">"Бұл рұқсат қолданбаға жүйелік параметрлерді өзгертуге рұқсат етеді."</string>
+    <string name="write_settings_description" msgid="1474881759793261146">"Бұл рұқсат қолданбаға жүйелік параметрлерді өзгертуге мүмкіндік береді."</string>
     <string name="write_settings_on" msgid="8533286548451191112">"Иә"</string>
     <string name="write_settings_off" msgid="1781103034490679144">"Жоқ"</string>
     <string name="external_source_switch_title" msgid="101571983954849473">"Осы көзден орнатуға рұқсат беру"</string>
