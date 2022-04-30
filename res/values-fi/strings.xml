@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Järjestelmän kieli"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Järjestelmän oletusarvo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sovellukselle ei voi valita kieltä asetuksista."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kieli saattaa erota sovelluksessa saatavilla olevista kielistä. Jotkin sovellukset eivät ehkä tue tätä asetusta."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Poistetaanko valitut kielet?</item>
       <item quantity="one">Poistetaanko valittu kieli?</item>
@@ -392,7 +391,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> kasvoa"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Et voi lisätä useampia kasvoja"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Enimmäismäärä kasvoja lisätty"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Käyttöönottoa ei suoritettu loppuun asti"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Käyttöönottoa ei suoritettu loppuun"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Kasvojen rekisteröinnin aikaraja on saavutettu. Yritä uudelleen."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Kasvojen rekisteröinti epäonnistui."</string>
@@ -578,7 +577,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hups, anturi ei ole siinä."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kosketa puhelimen takaosan tunnistinta etusormella."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun asti"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Sormenjäljen käyttöönoton enimmäisaika ylittyi. Yritä uudelleen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Sormenjäljen rekisteröinti ei onnistunut. Yritä uudelleen tai käytä eri sormea."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lisää toinen"</string>
@@ -1305,8 +1304,7 @@
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Kasvojentunnistus"</string>
     <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Mukauta näytön suunta automaattisesti kääntäessäsi puhelimen pystysuunnasta vaakasuuntaan tai toisin päin"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Lue lisää automaattisesta käännöstä"</string>
-    <!-- no translation found for auto_rotate_summary_a11y (1505094100328581685) -->
-    <skip />
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Kun käännät puhelimen pysty- tai vaaka-asentoon"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Näytön resoluutio"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Korkea resoluutio"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Korkein resoluutio"</string>
@@ -1431,6 +1429,8 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Puhelimen yksilöiminen"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Kokeile eri tyylejä, taustakuvia ja muuta"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Näytönsäästäjä"</string>
+    <!-- no translation found for keywords_screensaver (7249337959432229172) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Käytä näytönsäästäjää"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Latauksen aikana tai telakoituna"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Latauksen aikana"</string>
@@ -2333,6 +2333,8 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Lähettäjä: Mika"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Huomenta!\n\nHalusin vain tarkistaa, miten suunnitelmat etenevät. Ovatko ne valmiina ennen kuin alamme rakentaa uusia kuumailmapalloja?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nollaa asetukset"</string>
+    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Nollataanko näytön koko ja teksti?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Näytön koko ja tekstiasetukset nollataan puhelimen alkuperäisiin asetuksiin"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nollaa"</string>
@@ -2630,7 +2632,7 @@
     <string name="keywords_rtt" msgid="2429130928152514402">"huonokuuloinen, kuulon heikkeneminen, tekstitykset, kaukokirjoitin, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
     <string name="fast_pair_settings" msgid="3308819519080016185">"Pikapari"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Bluetooth-laitteiden havaitseminen lähellä."</string>
+    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Bluetooth-laitteiden havaitseminen lähellä"</string>
     <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Etsi laitteita lähistöltä"</string>
     <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Tallennetut laitteet"</string>
     <string name="print_settings" msgid="8519810615863882491">"Tulostus"</string>

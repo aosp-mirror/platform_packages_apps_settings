@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -38,10 +37,6 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
-/**
- * TODO(b/223503670): Add unit test for AppLocalePickerActivity.
- * A activity to show the locale picker and information page.
- */
 public class AppLocalePickerActivity extends SettingsBaseActivity
         implements LocalePickerWithRegion.LocaleSelectedListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
@@ -128,8 +123,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         return appLocaleDetailsContainer;
     }
 
-    @VisibleForTesting
-    void launchLocalePickerPage() {
+    private void launchLocalePickerPage() {
         // LocalePickerWithRegion use android.app.ListFragment. Thus, it can not use
         // getSupportFragmentManager() to add this into container.
         android.app.FragmentManager fragmentManager = getFragmentManager();

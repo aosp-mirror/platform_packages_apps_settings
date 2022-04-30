@@ -17,13 +17,11 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/accelerometer_title" >
 
     <com.android.settingslib.widget.TopIntroPreference
-        android:title="@string/auto_rotate_screen_summary"
-        app:allowDividerAbove="false"/>
+        android:title="@string/auto_rotate_screen_summary"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
         android:key="auto_rotate_main_switch"
@@ -58,10 +56,9 @@
         settings:controller="com.android.settings.display.SmartAutoRotateController" />
 
     <com.android.settingslib.widget.FooterPreference
-        android:order="100"
         android:key="auto_rotate_footer_preference"
         android:title="@string/smart_rotate_text_headline"
-        android:selectable="true"
+        android:selectable="false"
         settings:searchable="false"/>
 
 </PreferenceScreen>
