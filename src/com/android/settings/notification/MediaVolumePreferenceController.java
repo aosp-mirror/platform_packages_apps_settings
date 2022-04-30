@@ -35,6 +35,7 @@ import com.android.settings.media.MediaOutputIndicatorWorker;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.media.MediaDevice;
+import com.android.settingslib.media.MediaOutputConstants;
 
 public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceController {
     private static final String TAG = "MediaVolumePreCtrl";
@@ -106,8 +107,10 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
 
         final Intent intent = new Intent();
         if (getWorker().isDeviceBroadcasting()) {
-            // TODO(b/229577323) : Get the intent action for the Media Output Broadcast Dialog
-            //  in SystemUI
+            intent.setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
+            intent.setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG);
+            intent.putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
+                    getWorker().getActiveLocalMediaController().getPackageName());
         } else {
             // TODO(b/229577518) : Get the intent action of the Bluetooth Broadcast Dialog
             //  for user to choose the action
