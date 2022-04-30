@@ -330,8 +330,8 @@ public class ManageApplications extends InstrumentedFragment
             if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
                 // Special-case for a case where a user is directed to the all apps notification
                 // preferences page via a notification prompt to review permissions settings.
-                android.provider.Settings.Secure.putInt(getContext().getContentResolver(),
-                        android.provider.Settings.Secure.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
+                android.provider.Settings.Global.putInt(getContext().getContentResolver(),
+                        android.provider.Settings.Global.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
                         1);  // USER_INTERACTED
             }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
