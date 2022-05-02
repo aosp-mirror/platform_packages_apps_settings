@@ -37,6 +37,7 @@ import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.qrcode.QrCamera;
 import com.android.settingslib.qrcode.QrDecorateView;
+import com.android.settingslib.wifi.WifiPermissionChecker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -117,9 +119,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private int mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_FAILURE_NONE;
 
-    @VisibleForTesting
-    WifiPickerTracker mWifiPickerTracker;
+    private WifiPickerTracker mWifiPickerTracker;
     private HandlerThread mWorkerThread;
+    private WifiPermissionChecker mWifiPermissionChecker;
 
     private final Handler mHandler = new Handler() {
         @Override
@@ -361,6 +363,15 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         super();
 
         mIsConfiguratorMode = true;
+    }
+
+    public WifiDppQrCodeScannerFragment(WifiPickerTracker wifiPickerTracker,
+            WifiPermissionChecker wifiPermissionChecker) {
+        super();
+
+        mIsConfiguratorMode = true;
+        mWifiPickerTracker = wifiPickerTracker;
+        mWifiPermissionChecker = wifiPermissionChecker;
     }
 
     /**
@@ -719,6 +730,28 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         resultIntent.putExtra(KEY_WIFI_CONFIGURATION, mEnrolleeWifiConfiguration);
 
         final Activity hostActivity = getActivity();
+        if (hostActivity == null) return;
+        if (mWifiPermissionChecker == null) {
+            mWifiPermissionChecker = new WifiPermissionChecker(hostActivity);
+        }
+
+        if (!mWifiPermissionChecker.canAccessWifiState()) {
+            Log.w(TAG, "Calling package does not have ACCESS_WIFI_STATE permission for result.");
+            EventLog.writeEvent(0x534e4554, "187176859",
+                    mWifiPermissionChecker.getLaunchedPackage(), "no ACCESS_WIFI_STATE permission");
+            hostActivity.finish();
+            return;
+        }
+
+        if (!mWifiPermissionChecker.canAccessFineLocation()) {
+            Log.w(TAG, "Calling package does not have ACCESS_FINE_LOCATION permission for result.");
+            EventLog.writeEvent(0x534e4554, "187176859",
+                    mWifiPermissionChecker.getLaunchedPackage(),
+                    "no ACCESS_FINE_LOCATION permission");
+            hostActivity.finish();
+            return;
+        }
+
         hostActivity.setResult(Activity.RESULT_OK, resultIntent);
         hostActivity.finish();
     }

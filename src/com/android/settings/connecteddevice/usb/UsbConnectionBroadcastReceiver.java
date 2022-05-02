@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPortStatus;
+import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -31,6 +32,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  */
 public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements LifecycleObserver,
         OnResume, OnPause {
+    private static final String TAG = "UsbBroadcastReceiver";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
     private Context mContext;
     private UsbConnectionListener mUsbConnectionListener;
     private boolean mListeningToUsbEvents;
@@ -54,6 +58,9 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (DEBUG) {
+            Log.d(TAG, "onReceive() action : " + intent.getAction());
+        }
         if (UsbManager.ACTION_USB_STATE.equals(intent.getAction())) {
             mConnected = intent.getExtras().getBoolean(UsbManager.USB_CONNECTED)
                     || intent.getExtras().getBoolean(UsbManager.USB_HOST_CONNECTED);

@@ -37,7 +37,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 /** Lock Screen Safety Source for Safety Center. */
 public final class LockScreenSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "LockScreen";
+    public static final String SAFETY_SOURCE_ID = "AndroidLockScreen";
     public static final String NO_SCREEN_LOCK_ISSUE_ID = "NoScreenLockIssue";
     public static final String NO_SCREEN_LOCK_ISSUE_TYPE_ID = "NoScreenLockIssueType";
     public static final String SET_SCREEN_LOCK_ACTION_ID = "SetScreenLockAction";

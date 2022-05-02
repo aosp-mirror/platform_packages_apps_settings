@@ -866,6 +866,7 @@
         <activity
             android:name=".localepicker.AppLocalePickerActivity"
             android:label="@string/app_locale_picker_title"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.settings.APP_LOCALE_SETTINGS" />
@@ -1451,7 +1452,8 @@
         <activity
             android:name=".datausage.AppDataUsageActivity"
             android:exported="true"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.IGNORE_BACKGROUND_DATA_RESTRICTIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1521,6 +1523,7 @@
         <activity-alias android:name=".applications.InstalledAppDetails"
                 android:label="@string/application_info_label"
                 android:exported="true"
+                android:permission="android.permission.QUERY_ALL_PACKAGES"
                 android:targetActivity=".applications.InstalledAppDetailsTop">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
@@ -1534,7 +1537,8 @@
 
         <activity android:name=".applications.InstalledAppOpenByDefaultActivity"
                   android:label="@string/application_info_label"
-                  android:exported="true">
+                  android:exported="true"
+                  android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APP_OPEN_BY_DEFAULT_SETTINGS" />
                 <!-- Also catch legacy "com." prefixed action. -->
@@ -1789,6 +1793,18 @@
                        android:value="true" />
         </activity>
 
+        <activity android:name="Settings$PrivacyControlsActivity"
+                  android:label="@string/privacy_controls_title"
+                  android:exported="true"
+                  android:icon="@drawable/ic_settings_privacy">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.PRIVACY_CONTROLS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.privacy.PrivacyControlsFragment" />
+        </activity>
+
         <activity android:name=".development.tare.TareHomePage"
                   android:label="@string/tare_settings"
                   android:exported="false" />
@@ -1893,7 +1909,8 @@
         <activity
             android:name="Settings$AppUsageAccessSettingsActivity"
             android:exported="true"
-            android:label="@string/usage_access_title">
+            android:label="@string/usage_access_title"
+            android:permission="android.permission.QUERY_ALL_PACKAGES">
             <intent-filter>
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -2226,6 +2243,7 @@
 
         <activity android:name=".biometrics.BiometricEnrollActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden|smallestScreenSize|screenLayout|density"
             android:theme="@style/GlifTheme.Light">
             <intent-filter>
                 <action android:name="android.settings.BIOMETRIC_ENROLL" />
@@ -3319,6 +3337,22 @@
                        android:value="@string/menu_key_notifications"/>
         </activity>
 
+        <!-- Application-level notification settings page, same as above but only accessible
+             internally from system server -->
+        <activity android:name="Settings$NotificationReviewPermissionsActivity"
+                  android:label="@string/app_notifications_title"
+                  android:icon="@drawable/ic_notifications"
+                  android:exported="false">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ALL_APPS_NOTIFICATION_SETTINGS_FOR_REVIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+            <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
+                       android:value="@string/menu_key_notifications"/>
+        </activity>
+
         <!-- Show application-level notification settings (app passed in as extras) -->
         <activity android:name="Settings$AppNotificationSettingsActivity"
                 android:exported="true">
@@ -4077,6 +4111,38 @@
                        android:value="@string/menu_key_connected_devices"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$BluetoothBroadcastActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MEDIA_BROADCAST_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothBroadcastsDialog" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$BluetoothFindBroadcastsActivity"
+            android:label="@string/bluetooth_find_broadcast_title"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.BLUTOOTH_FIND_BROADCASTS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothFindBroadcastsFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
         </activity>
 
         <activity android:name=".panel.SettingsPanelActivity"
