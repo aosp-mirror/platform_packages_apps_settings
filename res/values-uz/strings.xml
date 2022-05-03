@@ -486,7 +486,7 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Yana bir marta"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Barmoq izi belgisini kuzating"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Barmoq izingizni butunlay skanerlash uchun uni biroz suring"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Har safar barmoq izi belgisi harakatlanganda bosib turing. Bu barmoq izingizning toʻliq yozib olinishiga yordam beradi."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Har safar barmoq izi belgisi harakatlanganida barmoqni bosib turing. Bu barmoq izingizni koʻproq qayd qilishga yordam beradi."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Barmogʻingiz uchini sensorga joylang"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Endi barmoq chetlarini skanerlang"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Barmoq izingizning yonlarini sensorga joylashtiring va tutib turing, keyin boshqa yonga almashtiring"</string>
@@ -553,7 +553,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Tayyor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Obbo, bu sensor emas."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Telefonning orqasida joylashgan sensorga tegining. Ko‘rsatkich barmog‘ingizdan foydalaning."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Barmoq izini kiritish tugallanmadi"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Barmoq izi qayd qilinmadi"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Barmoq izini kiritish vaqti tugab qoldi. Qayta urinib ko‘ring."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Barmoq izini kiritish amalga oshmadi. Qayta urinib ko‘ring yoki boshqa barmoqdan foydalaning."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Yana qo‘shish"</string>
@@ -569,7 +569,7 @@
     <string name="fingerprint_delete_title" msgid="1469865327307917858">"“<xliff:g id="FINGERPRINT_ID">%1$s</xliff:g>” olib tashlansinmi?"</string>
     <string name="fingerprint_delete_message" msgid="1454995433333496541">"Bu barmoq izi o‘chirib tashlansinmi?"</string>
     <string name="fingerprint_v2_delete_message" msgid="4136720729608391131">"Bunda qurilmadagi <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> barmoq izi tasvirlari va modellari tozalanadi"</string>
-    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Telefonni qulfdan chiqarish yoki ilovalarda hisob tekshiruvi uchun barmoq izidan foydalana olmay qolasiz."</string>
+    <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Keyin barmoq izidan foydalanib telefon qulfini ocholmaysiz yoki ilovalarda shaxsingizni tasdiqlay olmaysiz."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Ishchi profilingizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ish uchun ilovalarga kirish uchun barmoq izingizdan foydalana olmay qolasiz"</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Ha, olib tashlansin"</string>
     <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Shifrlash"</string>
@@ -740,8 +740,8 @@
       <item quantity="one">Kamida <xliff:g id="COUNT_0">%d</xliff:g> ta belgi</item>
     </plurals>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">Kamida <xliff:g id="COUNT_1">%d</xliff:g> ta raqam</item>
-      <item quantity="one">Kamida <xliff:g id="COUNT_0">%d</xliff:g> ta raqam</item>
+      <item quantity="other">PIN kod uchun kamida <xliff:g id="COUNT_1">%d</xliff:g> ta raqam kiriting</item>
+      <item quantity="one">PIN kod uchun kamida <xliff:g id="COUNT_0">%d</xliff:g> ta raqam kiriting</item>
     </plurals>
     <string name="lockpassword_continue_label" msgid="2507983991979547816">"Davom etish"</string>
     <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
@@ -3843,7 +3843,7 @@
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ekran qulfini tashlab ketish"</string>
     <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Qulf yechilganda oxirgi ekranni oching"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran qulfi, qulflash, tashlab ketish, aylanib oʻtish"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ish profili qulflanganda"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ish profili qulfligida"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ekran qulfida bildirishnomalar"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Suhbatlarni chiqarish, standart holatda, sokin"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Sokin suhbatlar va bildirishnomalarni berkitish"</string>
@@ -3857,7 +3857,7 @@
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Bildirishnomalar chiqmasin"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Ekran qulfida nimalar chiqsin?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Ekran qulfi"</string>
-    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Ishchi bildirishnomalar butun chiqsin"</string>
+    <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Ish bildirishnomalarini toʻliq chiqarish"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="2183455323048921579">"Ish profili ma’lumotlari berkitilsin"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="1456262034599029028">"Qurilmangiz qulflanganda, profil bildirishnomalari qanday chiqsin?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="6950124772255324448">"Profil bildirishnomalari"</string>
@@ -4534,7 +4534,7 @@
     <string name="write_settings_title" msgid="3011034187823288557">"Tizim sozlamalarini o‘zgartirishi mumkin"</string>
     <string name="write_system_settings" msgid="5555707701419757421">"Tizim sozlamalarini o‘zgartirish"</string>
     <string name="permit_write_settings" msgid="3113056800709924871">"Tizim sozlamalarini o‘zgartirishga ruxsat"</string>
-    <string name="write_settings_description" msgid="1474881759793261146">"Bu ruxsatnoma ilovaga tizim sozlamalarini o‘zgaritish uchun ruxsat beradi."</string>
+    <string name="write_settings_description" msgid="1474881759793261146">"Bu ruxsat ilovaga tizim sozlamalarini oʻzgartirish imkonini beradi."</string>
     <string name="write_settings_on" msgid="8533286548451191112">"Ha"</string>
     <string name="write_settings_off" msgid="1781103034490679144">"Yo‘q"</string>
     <string name="external_source_switch_title" msgid="101571983954849473">"Bu manbaga ruxsat"</string>
