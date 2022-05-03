@@ -66,7 +66,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
-import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -77,7 +76,9 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -400,32 +401,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                             WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
                             () -> getString(R.string.lock_settings_picker_profile_message)));
                 } else {
-                    int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
-                    if (mController.isScreenLockRestrictedByAdmin()
-                            && profileUserId != UserHandle.USER_NULL) {
-                        final StringBuilder description = new StringBuilder(
-                                mDpm.getResources().getString(
-                                        WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
-                                        () -> getString(
-                                                R.string.lock_settings_picker_admin_restricted_personal_message)));
-                        final LinkifyUtils.OnClickListener clickListener = () -> {
-                            final Bundle extras = new Bundle();
-                            extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
-                            if (mUserPassword != null) {
-                                extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                        mUserPassword);
-                            }
-                            new SubSettingLauncher(getActivity())
-                                    .setDestination(ChooseLockGenericFragment.class.getName())
-                                    .setSourceMetricsCategory(getMetricsCategory())
-                                    .setArguments(extras)
-                                    .launch();
-                            finish();
-                        };
-                        LinkifyUtils.linkify(textView, description, clickListener);
-                    } else {
-                        textView.setText("");
-                    }
+                    textView.setText("");
                 }
             }
         }
@@ -630,10 +606,39 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void addPreferences() {
             addPreferencesFromResource(R.xml.security_settings_picker);
 
-            final Preference footer = findPreference(KEY_LOCK_SETTINGS_FOOTER);
+            int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
+            final FooterPreference footer = findPreference(KEY_LOCK_SETTINGS_FOOTER);
             if (!TextUtils.isEmpty(mCallerAppName) && !mIsCallingAppAdmin) {
                 footer.setVisible(true);
                 footer.setTitle(getFooterString());
+            } else if (!mForFace && !mForBiometrics && !mForFingerprint && !mIsManagedProfile
+                    && mController.isScreenLockRestrictedByAdmin()
+                    && profileUserId != UserHandle.USER_NULL) {
+                CharSequence description =
+                        mDpm.getResources().getString(WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
+                                () -> null);
+                if (description == null) {
+                    description = getText(
+                            R.string.lock_settings_picker_admin_restricted_personal_message);
+                }
+                final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
+                        AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, (view) -> {
+                    final Bundle extras = new Bundle();
+                    extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
+                    if (mUserPassword != null) {
+                        extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                mUserPassword);
+                    }
+                    new SubSettingLauncher(getActivity())
+                            .setDestination(ChooseLockGenericFragment.class.getName())
+                            .setSourceMetricsCategory(getMetricsCategory())
+                            .setArguments(extras)
+                            .launch();
+                    finish();
+                });
+                CharSequence footerText = AnnotationSpan.linkify(description, linkInfo);
+                footer.setVisible(true);
+                footer.setTitle(footerText);
             } else {
                 footer.setVisible(false);
             }
