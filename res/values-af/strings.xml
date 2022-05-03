@@ -512,7 +512,7 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Volg die vingerafdrukikoon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Hou aan om jou vinger op te lig om die verskillende dele van jou vingerafdruk by te voeg"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Raak en hou elke keer wanneer die vingerafdrukikoon skuif. Dit help om meer van jou vingerafdruk vas te vang."</string>
-    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plaas jou vingertop op die sensor"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Plaas jou vingerpunt op die sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Plaas jou vinger se linkerrand"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Plaas jou vinger se regterrand"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Plaas die kant van jou vingerafdruk op die sensor en hou; ruil dan om na die ander kant"</string>
@@ -2334,8 +2334,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Van: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Goeiemôre!\n\nEk wil net uitvind hoe die ontwerpe vorder. Sal hulle gereed wees voordat ons die nuwe ballonne begin bou?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Stel instellings terug"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skermgrootte- en teksinstellings is teruggestel"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Stel skermgrootte en teks terug?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Jou skermgrootte en teksvoorkeure sal na die foon se oorspronklike instellings teruggestel word"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Stel terug"</string>
@@ -2456,6 +2455,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Outokliktyd"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibrasie en fisiese terugvoer"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Beheer die vibrasiesterkte vir verskillende gebruike"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Instelling is gedeaktiveer omdat die toestel op stil gestel is"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Oproepe"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Kennisgewings en alarms"</string>
@@ -2632,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hardhorend, gehoorverlies"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hardhorend, gehoorverlies, onderskrifte, telesetter, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Kitsbind"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Bespeuring in die omtrek van Kitsbind-Bluetooth-toestelle."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Soek toestelle in die omtrek"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Gestoorde toestelle"</string>
     <string name="print_settings" msgid="8519810615863882491">"Druk"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Af"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3662,7 +3661,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"skerm, sluittyd, uitteltyd, sluitskerm"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"geheue, kas, data, vee uit, maak skoon, maak beskikbaar, spasie"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"gekoppel, toestel, oorfone, kopstuk, luidspreker, draadloos, bind saam, oorfoonknoppies, musiek, media"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"bind saam, oorfoonknoppies, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"agtergrond, tema, rooster, pasmaak, personaliseer"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikoon, aksent, kleur"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"verstek, assistent"</string>
@@ -4295,8 +4293,10 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Af"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Programvasspeld"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Deur programme vas te speld, kan jy die huidige program in sig hou totdat jy dit ontspeld. Hierdie kenmerk kan byvoorbeeld gebruik word om dit vir \'n vertroude vriend moontlik te maak om \'n spesifieke speletjie te speel."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Wanneer \'n program vasgespeld is, kan die vasgespelde program ander programme oopmaak en kan daar dalk toegang tot persoonlike data verkry word. \n\nOm programvasspeld te gebruik: 	\n1.	Skakel programvasspeld aan 	\n2.	Maak Oorsig oop 	\n3.	Tik op die programikoon boaan die skerm en tik dan op Speld Vas"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Wanneer \'n program vasgespeld is, kan die vasgespelde program ander programme oopmaak en kan daar dalk toegang tot persoonlike data verkry word. \n\nProbeer eerder \'n gasgebruiker gebruik as jy jou toestel veilig met iemand wil deel. \n\nOm programvasspeld te gebruik: 	\n1.	Skakel programvasspeld aan 	\n2.	Maak Oorsig oop 	\n3.	Tik op die programikoon boaan die skerm en tik dan op Speld Vas"</string>
+    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
+    <skip />
+    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
+    <skip />
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Wanneer program vasgespeld is: \n\n•	 Kan daar dalk toegang tot persoonlike data verkry word (soos kontakte en e-posinhoud) \n\n•	 Vasgespelde program kan ander programme oopmaak \n\nGebruik net programvasspeld met mense wat jy vertrou."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Vra ontsluitpatroon voordat jy ontspeld"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vra PIN voordat jy ontspeld"</string>
@@ -5709,6 +5709,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Moenie koppel nie"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Koppel"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE-instellings"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Stel terug na verstekinstellings"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Instellings is na verstek teruggestel."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimum versadigingsbalans"</string>
@@ -5720,7 +5724,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Handelinge (koste om te lewer)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Handelinge (basisprys)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Belonings per enkele geval"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Belonings vir totale gevaltydsduur"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maksimum belonings per dag"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Topaktiwiteit"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Kennisgewing gesien"</string>
