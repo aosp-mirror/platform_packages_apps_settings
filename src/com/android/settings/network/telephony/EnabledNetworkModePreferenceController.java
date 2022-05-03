@@ -80,9 +80,6 @@ public class EnabledNetworkModePreferenceController extends
     @Override
     public int getAvailabilityStatus(int subId) {
         boolean visible;
-        if (!isCallStateIdle()) {
-            return AVAILABLE_UNSEARCHABLE;
-        }
 
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -97,6 +94,8 @@ public class EnabledNetworkModePreferenceController extends
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = false;
+        } else if (!isCallStateIdle()) {
+            return AVAILABLE_UNSEARCHABLE;
         } else {
             visible = true;
         }
