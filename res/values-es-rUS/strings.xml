@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Aumenta o reduce el tamaño del texto en pantalla."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Reducir el tamaño"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Aumentar el tamaño"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Girar automáticamente"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"La detección de rostro usa la cámara frontal para mejorar la exactitud de la opción girar automáticamente. Las imágenes nunca se almacenan ni se envían a Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Girar automáticamente"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La detección de rostro usa la cámara frontal para mejorar la exactitud de la opción girar automáticamente. Las imágenes nunca se almacenan ni se envían a Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Texto de muestra"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"El maravilloso mago de Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítulo 11: La maravillosa Ciudad Esmeralda de Oz"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminado del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta app no está disponible en Configuración."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma difiera de los idiomas disponibles en la app. Algunas apps no son compatibles con este parámetro de configuración."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">¿Quitar los idiomas seleccionados?</item>
       <item quantity="one">¿Quitar el idioma seleccionado?</item>
@@ -394,8 +393,8 @@
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"No se pueden agregar más rostros"</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"No se completó la inscripción"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Aceptar"</string>
-    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Se alcanzó el límite de tiempo para el registro de rostros. Vuelve a intentarlo."</string>
-    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"No funcionó el registro de rostros."</string>
+    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Se alcanzó el límite de tiempo para inscribir el rostro. Vuelve a intentarlo."</string>
+    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"No funcionó la inscripción del rostro."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Ya terminaste. Está todo listo."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Listo"</string>
     <string name="security_settings_face_enroll_should_re_enroll_title" msgid="6835778900387289683">"Mejora el rendimiento de Desbloqueo facial"</string>
@@ -474,7 +473,7 @@
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Presionar para configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Se agregaron huellas dactilares y el rostro"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Se agregaron el rostro y la huella dactilar"</string>
-    <string name="biometric_settings_intro" msgid="4263069383955676756">"Si configuras Desbloqueo facial y Desbloqueo con huellas dactilares, el teléfono te pedirá la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura"</string>
+    <string name="biometric_settings_intro" msgid="4263069383955676756">"Si configuras el Desbloqueo facial y con huellas dactilares, el teléfono te solicitará la huella dactilar en caso de que tengas puesta una mascarilla o estés en una zona oscura."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Métodos de desbloqueo"</string>
     <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Desbloquear el teléfono"</string>
     <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Verificar tu identidad en las apps"</string>
@@ -512,7 +511,7 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Una vez más"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Sigue el ícono de huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Sigue levantando el dedo para agregar diferentes partes de la huella dactilar."</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén presionado cada vez que ícono de huella dactilar se mueva. Esto permite capturar más superficie de tu huella dactilar."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Mantén presionado cada vez que el ícono de huella dactilar se mueva. Esto permite capturar más superficie de tu huella dactilar."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Apoya la punta del dedo en el sensor"</string>
     <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Coloca el borde izquierdo de tu dedo"</string>
     <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Coloca el borde derecho de tu dedo"</string>
@@ -1304,13 +1303,18 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desactivada"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activada"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Activa - En función del rostro"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Habilitar detección de rostro"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Detección de rostro"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajusta la orientación de la pantalla automáticamente cuando mueves el teléfono entre el modo vertical y el horizontal"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Más información sobre girar automáticamente"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Cuando muevas el tel. entre el modo vertical y el horizontal"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Resolución de pantalla"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Alta resolución"</string>
-    <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Máxima resolución"</string>
+    <!-- no translation found for screen_resolution_option_highest (9134161136319625840) -->
+    <skip />
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="2563830074752340045">"Cambiar tu resolución podría causar que se cierren algunas apps actualmente en uso."</string>
+    <!-- no translation found for screen_resolution_footer (1576507061260060890) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Colores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturales"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Mejorados"</string>
@@ -2334,6 +2338,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"¡Buenos días!\n\nSolo quería saber cómo van los diseños. ¿Estarán listos antes de que empecemos a hacer los nuevos globos?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Restablecer configuración"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Se restableció la configuración del tamaño de visualización y del texto"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"¿Deseas restablecer el texto y el tamaño de la pantalla?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Se restablecerán las preferencias de texto y tamaño de la pantalla a las de la configuración original del teléfono"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Restablecer"</string>
@@ -2454,6 +2459,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tiempo de clic automático"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibración y tecnología táctil"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Controla la intensidad de la vibración para diferentes usos"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"El parámetro de configuración no está habilitado porque el dispositivo está configurado en silencio"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Llamadas"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notificaciones y alarmas"</string>
@@ -2630,10 +2639,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"persona con hipoacusia, pérdida de la audición"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"persona con hipoacusia, pérdida de la audición, subtítulos, Teletipo, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Vinc. rápida"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Detecta disp. Bluetooth cerca para vinc. rápida."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Busca dispositivos cercanos"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Dispositivos guardados"</string>
     <string name="print_settings" msgid="8519810615863882491">"Impresión"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Desactivado"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3660,7 +3665,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"pantalla, tiempo de bloqueo, tiempo de espera de la pantalla, bloqueo de pantalla"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memoria, caché, datos, eliminar, borrar, liberar, espacio"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"conectado, dispositivo, audífonos, auriculares, bocina, inalámbrico, vincular, auricular, música, multimedia"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"vinculación, auriculares, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"fondo, tema, cuadrícula, personalizar"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ícono, acento, color"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"predeterminado, asistente"</string>
@@ -5653,7 +5657,7 @@
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Usar fijación de apps"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"Usar opciones para desarrolladores"</string>
     <string name="default_print_service_main_switch_title" msgid="4697133737128324036">"Usar servicio de impresión"</string>
-    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permite varios usuarios"</string>
+    <string name="multiple_users_main_switch_title" msgid="6686858308083037810">"Permitir varios usuarios"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"Usar depuración inalámbrica"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"Usar las preferencias del controlador gráfico"</string>
     <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"Usar Ahorro de batería"</string>
@@ -5707,6 +5711,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"No conectar"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Conectar"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Configuración de TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Restablecer configuración predeterminada"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Config. predeterminada restablecida."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Saldo máx. cuando el disp. está cargado"</string>
@@ -5718,7 +5726,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Acciones (costo de producción)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Acciones (precio base)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Recompensas por cada evento"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Recompensas por la duración del evento"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Máximo de recompensas por día"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Actividad principal"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notificación vista"</string>
