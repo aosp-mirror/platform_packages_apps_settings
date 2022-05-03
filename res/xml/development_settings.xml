@@ -293,7 +293,7 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
-        <com.android.settingslib.RestrictedSwitchPreference
+        <com.android.settingslib.RestrictedPreference
             android:key="default_usb_configuration"
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
             android:title="@string/usb_default_label"/>
