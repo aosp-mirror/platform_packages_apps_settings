@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Намаляване или уголемяване на текста на екрана."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Намаляване на размера"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличаване на размера"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Използване на автоматичното завъртане"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Функцията за лицево разпознаване използва предната камера, за да подобри точността на автоматичното завъртане. Изображенията никога не се съхраняват и не се изпращат до Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Използване на автоматичното завъртане"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Функцията за лицево разпознаване използва предната камера, за да подобри точността на автоматичното завъртане. Изображенията никога не се съхраняват и не се изпращат до Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Примерен текст"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Вълшебникът от Оз"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11: Удивителният изумруден град на Оз"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системен език"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Стандартно за системата"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Избирането на език за това приложение не е налице от настройките."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Езикът може да се различава от езиците, налични в приложението. Възможно е някои приложения да не поддържат тази настройка."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Да се премахнат ли избраните езици?</item>
       <item quantity="one">Да се премахне ли избраният език?</item>
@@ -1304,7 +1303,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Изкл."</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Включено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вкл. – въз основа на лицето"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Вкл. на лицевото разпознаване"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Лицево разпознаване"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Автоматично коригира ориентацията на екрана, когато завъртите телефона вертикално или хоризонтално"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Научете повече за автоматичното завъртане"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Когато завъртите телефона си вертикално или хоризонтално"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Разделит. способност на екрана"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Висока разделителна способност"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Най-високата разделителна способност"</string>
@@ -1429,6 +1431,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Персонализиране на телефона ви"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Изпробвайте различни стилове, тапети и др."</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Скрийнсейвър"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"скрийнсейвър"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Използване на скрийнсейвър"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"При зареждане или връзка с докинг станция"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"При зареждане"</string>
@@ -1995,7 +1998,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Нека фигурата да е видима"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Фигурата за потребителския профил да е видима"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Вибриране при докосване"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Заключване веднага с бутона за захранване"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Заключване веднага с бутона за вкл./изкл."</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Задаване на фигура за отключване"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Промяна на фигурата за отключване"</string>
@@ -2331,6 +2334,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Иван"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добро утро!\n\nСамо исках да разбера как върви работата по дизайните. Ще бъдат ли готови, преди да започнем да правим новите балони?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Нулиране на настройките"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Настройките за размер на текста и елементите на екрана бяха нулирани"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се нулира ли размерът на текста и елементите на екрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Предпочитанията ви за размера на текста и елементите на екрана ще се нулират към оригиналните настройки на телефона"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Нулиране"</string>
@@ -2451,6 +2455,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Време на автоматично кликване"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вибриране и осезателна обратна връзка"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Управлявайте силата на вибрирането за различните случаи"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Настройката е деактивирана, защото за устройството е зададен тих режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Обаждания"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Известия и будилници"</string>
@@ -2627,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"увреден слух, загуба на слуха"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"увреден слух, загуба на слуха, надписи, телетайп, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Бързо сдвояване"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Откриване в близост на у-ва с Bluetooth с бързо сдвояв."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Сканиране за устройства в близост"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Запазени устройства"</string>
     <string name="print_settings" msgid="8519810615863882491">"Отпечатване"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Изключено"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3664,7 +3668,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"екран, време за заключване, време за изчакване, заключване на екрана"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"памет, кеш, данни, изтриване, изчистване, освобождаване, място"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"свързано, устройство, слушалки, слушалки, високоговорител, безжично, сдвояване, слушалки, музика, мултимедия"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"сдвояване, слушалки, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"фон, тема, решетка, персонализиране"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"икона, акцентиране, цвят"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"по подразбиране, Асистент"</string>
@@ -4365,8 +4368,8 @@
     </plurals>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Добавяне"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Отваря се в(ъв) <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"Използва/т се <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="979243131665635278">"вътрешно хранилище"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"Използва(т) се <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"вътрешното хранилище"</string>
     <string name="storage_type_external" msgid="125078274000280821">"външно хранилище"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"Пренос: <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Използвано хранилище"</string>
@@ -4451,7 +4454,7 @@
     <string name="default_for_work" msgid="537558180548617528">"По подразбиране за работа"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Помощник и гласово въвеждане"</string>
     <string name="default_assist_title" msgid="1182435129627493758">"Прилож. за дигитален асистент"</string>
-    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Дигитален асист.: Станд. прил."</string>
+    <string name="default_digital_assistant_title" msgid="5654663086385490838">"Дигитален асист.: станд. прил."</string>
     <string name="assistant_security_warning_title" msgid="6444187332360938730">"Искате ли <xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g> да е помощникът ви?"</string>
     <string name="assistant_security_warning" msgid="5623237187748811070">"Помощникът ще може да чете информацията за използваните в системата приложения, включително данните, видими на екрана или достъпни в тях."</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Приемам"</string>
@@ -4597,7 +4600,7 @@
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Разрешаване на показв. върху други приложения"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Разрешаване на приложението да се показва върху другите използвани от вас приложения. То ще може да вижда къде докосвате екрана и да избира какво да се показва на него."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Достъп до всички файлове"</string>
-    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешете достъп за управл. на всички файлове"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешаване на достъп за управл. на всички файлове"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Разрешете на това приложение да чете, променя и изтрива всички файлове на устройството или обемите на свързаните хранилища. Ако то получи разрешението, може да осъществява достъп до файловете без изричното ви знание."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да осъществява достъп до всички файлове"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Приложения за управление на мултимедията"</string>
@@ -5711,6 +5714,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Отказ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Свързване"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Настройки за TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Възстановяване на стандартните настройки"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Възстановени са стандартните настройки"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максимален баланс при заредена батерия"</string>
@@ -5722,7 +5729,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Действия (цена за извършване)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Действия (основна цена)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Награди за едно събитие"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Награди за времетраенето на събитието"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Максималният брой награди на ден"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Водеща активност"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Видяхте известие"</string>
