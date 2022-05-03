@@ -19,27 +19,30 @@ package com.android.settings.applications.managedomainurls;
 import android.content.Context;
 import android.content.pm.verify.domain.DomainVerificationManager;
 import android.content.pm.verify.domain.DomainVerificationUserState;
-import android.util.IconDrawableFactory;
+import android.graphics.drawable.Drawable;
+
+import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
 import com.android.settings.applications.intentpicker.IntentPickerUtils;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AppPreference;
 
 public class DomainAppPreference extends AppPreference {
 
+    private Drawable mCacheIcon;
+
     private final AppEntry mEntry;
     private final DomainVerificationManager mDomainVerificationManager;
-    private final IconDrawableFactory mIconDrawableFactory;
 
-    public DomainAppPreference(final Context context, IconDrawableFactory iconFactory,
-            AppEntry entry) {
+    public DomainAppPreference(final Context context, AppEntry entry) {
         super(context);
-        mIconDrawableFactory = iconFactory;
         mDomainVerificationManager = context.getSystemService(DomainVerificationManager.class);
         mEntry = entry;
         mEntry.ensureLabel(getContext());
-
+        mCacheIcon = AppUtils.getIconFromCache(mEntry);
         setState();
     }
 
@@ -54,7 +57,12 @@ public class DomainAppPreference extends AppPreference {
 
     private void setState() {
         setTitle(mEntry.label);
-        setIcon(mIconDrawableFactory.getBadgedIcon(mEntry.info));
+
+        if (mCacheIcon != null) {
+            setIcon(mCacheIcon);
+        } else {
+            setIcon(R.drawable.empty_icon);
+        }
         setSummary(getDomainsSummary(mEntry.info.packageName));
     }
 
@@ -68,5 +76,19 @@ public class DomainAppPreference extends AppPreference {
                 IntentPickerUtils.getDomainVerificationUserState(mDomainVerificationManager,
                         packageName);
         return userState == null ? false : userState.isLinkHandlingAllowed();
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        if (mCacheIcon == null) {
+            ThreadUtils.postOnBackgroundThread(() -> {
+                final Drawable icon = AppUtils.getIcon(getContext(), mEntry);
+                ThreadUtils.postOnMainThread(() -> {
+                    setIcon(icon);
+                    mCacheIcon = icon;
+                });
+            });
+        }
+        super.onBindViewHolder(view);
     }
 }
