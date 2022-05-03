@@ -577,7 +577,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Tapos na"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Naku, hindi iyan ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Pindutin ang sensor sa likod ng iyong telepono. Gamitin ang hintuturo mo."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Hindi nakumpleto ang pagpapatala"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Hindi nakumpleto ang pag-enroll"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Naabot na ang limitasyon sa oras ng pag-enroll ng fingerprint. Subukan ulit."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Hindi gumana ang pagpapatala ng fingerprint. Subukang muli o gumamit ng ibang daliri."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Magdagdag ng isa pa"</string>
@@ -2334,8 +2334,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Mula kay: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Magandang umaga!\n\nGusto ko lang mangumusta tungkol sa mga disenyo. Maihahanda ba ang mga ito bago simulang buuin ang mga bagong balloon?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"I-reset ang mga setting"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Na-reset ang laki ng display at mga setting ng text"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"I-reset ang laki ng display at text?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Mare-reset sa mga orihinal na setting ng telepono ang laki ng iyong display at mga kagustuhan sa text."</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"I-reset"</string>
@@ -2456,6 +2455,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Tagal ng auto click"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Pag-vibrate at haptics"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Kontrolin ang lakas ng pag-vibrate para sa iba\'t ibang paggamit"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Naka-disable ang setting dahil naka-silent ang device"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Mga Tawag"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Mga notification at alarm"</string>
@@ -2632,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"may problema sa pandinig, walang pandinig"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"may problema sa pandinig, walang pandinig, mga caption, Teletype, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Fast Pair"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Pagtukoy ng kalapit na Fast Pair bluetooth device."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Mag-scan ng mga kalapit na device"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Mga na-save na device"</string>
     <string name="print_settings" msgid="8519810615863882491">"Pag-print"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Naka-off"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3662,7 +3661,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"screen, oras ng pag-lock, timeout, lockscreen"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memory, cache, data, i-delete, i-clear, bakante, espasyo"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"nakakonekta, device, headphones, headset, speaker, wireless, ipares, earbuds, musika, media"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"pares, earbuds, bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"background, tema, grid, i-customize, i-personalize"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"icon, accent, kulay"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"default, assistant"</string>
@@ -5709,6 +5707,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Huwag kumonekta"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Kumonekta"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Mga Setting ng TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Bumalik sa Mga Default na Setting"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ibinalik sa default ang mga setting."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Max na Balanse Kapag Ganap na Na-charge"</string>
@@ -5720,7 +5722,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Mga Pagkilos (Halaga ng Paggawa)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Mga Pagkilos (Batayang Presyo)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Mga reward sa bawat iisang event"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Mga reward sa kabuuang tagal ng event"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maximum na Reward Kada Araw"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Nangungunang Aktibidad"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Nakita ang Notification"</string>
