@@ -20,6 +20,7 @@ import static com.android.settings.network.MobilePlanPreferenceController.MANAGE
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
@@ -29,6 +30,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.MobilePlanPreferenceController.MobilePlanPreferenceHost;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -44,7 +46,7 @@ import java.util.List;
 
 @SearchIndexable
 public class NetworkDashboardFragment extends DashboardFragment implements
-        MobilePlanPreferenceHost {
+        MobilePlanPreferenceHost, OnActivityResultListener {
 
     private static final String TAG = "NetworkDashboardFrag";
 
@@ -150,6 +152,17 @@ public class NetworkDashboardFragment extends DashboardFragment implements
             return SettingsEnums.DIALOG_MANAGE_MOBILE_PLAN;
         }
         return 0;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case AirplaneModePreferenceController.REQUEST_CODE_EXIT_ECM:
+                use(AirplaneModePreferenceController.class)
+                        .onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
