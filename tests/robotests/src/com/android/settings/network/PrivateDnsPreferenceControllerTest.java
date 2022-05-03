@@ -27,6 +27,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -36,6 +37,7 @@ import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
@@ -109,6 +111,8 @@ public class PrivateDnsPreferenceControllerTest {
     private Network mNetwork;
     @Mock
     private Preference mPreference;
+    @Mock
+    private UserManager mUserManager;
     @Captor
     private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
     private PrivateDnsPreferenceController mController;
@@ -127,6 +131,7 @@ public class PrivateDnsPreferenceControllerTest {
         mShadowContentResolver = Shadow.extract(mContentResolver);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doNothing().when(mConnectivityManager).registerDefaultNetworkCallback(
                 mCallbackCaptor.capture(), nullable(Handler.class));
 
@@ -171,6 +176,12 @@ public class PrivateDnsPreferenceControllerTest {
     @Config(qualifiers = "mcc999")
     public void getAvailabilityStatus_unsupportedWhenSet() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_disabledForGuestUser() {
+        doReturn(true).when(mUserManager).isGuestUser();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_FOR_USER);
     }
 
     @Test
