@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.slice.Slice;
@@ -56,6 +57,7 @@ import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settings.wifi.WifiDialogActivity;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 import com.android.wifitrackerlib.WifiEntry;
 
 import java.util.Arrays;
@@ -74,10 +76,17 @@ public class WifiSlice implements CustomSliceable {
 
     protected final Context mContext;
     protected final WifiManager mWifiManager;
+    protected final WifiRestriction mWifiRestriction;
 
     public WifiSlice(Context context) {
+        this(context, new WifiRestriction());
+    }
+
+    @VisibleForTesting
+    WifiSlice(Context context, WifiRestriction wifiRestriction) {
         mContext = context;
         mWifiManager = mContext.getSystemService(WifiManager.class);
+        mWifiRestriction = wifiRestriction;
     }
 
     @Override
@@ -167,20 +176,26 @@ public class WifiSlice implements CustomSliceable {
         final SliceAction primarySliceAction = SliceAction.createDeeplink(primaryAction, icon,
                 ListBuilder.ICON_IMAGE, title);
 
-        return new ListBuilder.RowBuilder()
+        final ListBuilder.RowBuilder builder = new ListBuilder.RowBuilder()
                 .setTitle(title)
                 .setPrimaryAction(primarySliceAction);
+
+        if (!mWifiRestriction.isChangeWifiStateAllowed(mContext)) {
+            builder.setSubtitle(mContext.getString(R.string.not_allowed_by_ent));
+        }
+        return builder;
     }
 
     private ListBuilder getListBuilder(boolean isWifiEnabled, WifiSliceItem wifiSliceItem) {
-        final PendingIntent toggleAction = getBroadcastIntent(mContext);
-        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
-                null /* actionTitle */, isWifiEnabled);
         final ListBuilder builder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
                 .setKeywords(getKeywords())
-                .addRow(getHeaderRow(isWifiEnabled, wifiSliceItem))
-                .addAction(toggleSliceAction);
+                .addRow(getHeaderRow(isWifiEnabled, wifiSliceItem));
+
+        if (mWifiRestriction.isChangeWifiStateAllowed(mContext)) {
+            builder.addAction(SliceAction.createToggle(
+                    getBroadcastIntent(mContext), null /* actionTitle */, isWifiEnabled));
+        }
         return builder;
     }
 
@@ -348,5 +363,13 @@ public class WifiSlice implements CustomSliceable {
     @Override
     public Class getBackgroundWorkerClass() {
         return WifiScanWorker.class;
+    }
+
+    @VisibleForTesting
+    static class WifiRestriction {
+        public boolean isChangeWifiStateAllowed(@Nullable Context context) {
+            if (context == null) return true;
+            return WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed(context);
+        }
     }
 }
