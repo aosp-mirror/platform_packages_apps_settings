@@ -59,6 +59,7 @@ import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Controller that update the battery header view
@@ -72,7 +73,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
 
-    private final String mPreferenceKey;
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
     private BatteryUsageStats mBatteryUsageStats;
@@ -83,6 +83,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private final PackageManager mPackageManager;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
+    private final Set<CharSequence> mNotAllowShowSummaryPackages;
+    private final String mPreferenceKey;
+
     private Context mPrefContext;
 
     /**
@@ -159,6 +162,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         mPackageManager = context.getPackageManager();
         mActivity = activity;
         mFragment = fragment;
+        mNotAllowShowSummaryPackages = Set.of(
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideApplicationSummary(context));
     }
 
     @Override
@@ -425,7 +432,13 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     @VisibleForTesting
     void setUsageSummary(Preference preference, BatteryEntry entry) {
         if (entry.getUid() == Process.SYSTEM_UID) {
-          return;
+            return;
+        }
+        String packageName = entry.getDefaultPackageName();
+        if (packageName != null
+                && mNotAllowShowSummaryPackages != null
+                && mNotAllowShowSummaryPackages.contains(packageName)) {
+            return;
         }
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = entry.getTimeInForegroundMs();
