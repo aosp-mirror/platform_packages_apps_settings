@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.display.PreviewPagerAdapter;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
 import org.junit.Before;
@@ -45,7 +46,7 @@ import java.util.List;
  * Tests for {@link TextReadingPreviewController}.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowChoreographer.class)
+@Config(shadows = {ShadowChoreographer.class, ShadowInteractionJankMonitor.class})
 public class TextReadingPreviewControllerTest {
     private static final String PREVIEW_KEY = "preview";
     private static final String FONT_SIZE_KEY = "font_size";

@@ -49,6 +49,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -87,6 +88,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -127,6 +129,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private static final String PREF_KEY_AIRPLANE_MODE_MSG = "airplane_mode_message";
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
+    @VisibleForTesting
+    static final String PREF_KEY_WIFI_TOGGLE = "main_toggle_wifi";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
     @VisibleForTesting
     static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
@@ -1236,26 +1240,54 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     };
 
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.network_provider_settings) {
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new SearchIndexProvider(R.xml.network_provider_settings);
 
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
+    @VisibleForTesting
+    static class SearchIndexProvider extends BaseSearchIndexProvider {
 
-                    final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-                    if (wifiManager == null) return keys;
+        private final WifiRestriction mWifiRestriction;
 
-                    if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
-                        keys.add(PREF_KEY_SAVED_NETWORKS);
-                    }
+        SearchIndexProvider(int xmlRes) {
+            super(xmlRes);
+            mWifiRestriction = new WifiRestriction();
+        }
 
-                    if (!DataUsageUtils.hasWifiRadio(context)) {
-                        keys.add(PREF_KEY_DATA_USAGE);
-                    }
-                    return keys;
-                }
-            };
+        @VisibleForTesting
+        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction) {
+            super(xmlRes);
+            mWifiRestriction = wifiRestriction;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            final List<String> keys = super.getNonIndexableKeys(context);
+
+            if (!mWifiRestriction.isChangeWifiStateAllowed(context)) {
+                keys.add(PREF_KEY_WIFI_TOGGLE);
+            }
+
+            final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+            if (wifiManager == null) return keys;
+
+            if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
+                keys.add(PREF_KEY_SAVED_NETWORKS);
+            }
+
+            if (!DataUsageUtils.hasWifiRadio(context)) {
+                keys.add(PREF_KEY_DATA_USAGE);
+            }
+            return keys;
+        }
+    }
+
+    @VisibleForTesting
+    static class WifiRestriction {
+        public boolean isChangeWifiStateAllowed(@Nullable Context context) {
+            if (context == null) return true;
+            return WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed(context);
+        }
+    }
 
     private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;
