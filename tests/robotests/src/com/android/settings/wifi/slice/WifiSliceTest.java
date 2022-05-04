@@ -25,7 +25,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -37,9 +36,12 @@ import android.net.wifi.WifiManager;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceItem;
+import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
 import androidx.slice.core.SliceQuery;
+import androidx.slice.widget.ListContent;
 import androidx.slice.widget.SliceLiveData;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 import com.android.settings.slices.SliceBackgroundWorker;
@@ -49,12 +51,14 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedState;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -74,26 +78,29 @@ public class WifiSliceTest {
     private static final String AP3_NAME = "ap3";
     private static final int USER_ID = 1;
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private WifiManager mWifiManager;
     @Mock
     private PackageManager mPackageManager;
-
-
-    private Context mContext;
+    @Mock
     private ContentResolver mResolver;
+    @Mock
+    private WifiSlice.WifiRestriction mWifiRestriction;
+
     private WifiSlice mWifiSlice;
     private String mSIPackageName;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mResolver = mock(ContentResolver.class);
         doReturn(mResolver).when(mContext).getContentResolver();
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(WifiManager.WIFI_STATE_ENABLED).when(mWifiManager).getWifiState();
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
+        when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);
 
         // Set-up specs for SliceMetadata.
         SliceProvider.setSpecs(SliceLiveData.SUPPORTED_SPECS);
@@ -102,7 +109,7 @@ public class WifiSliceTest {
         ShadowBinder.setCallingUid(USER_ID);
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{mSIPackageName});
         ShadowWifiSlice.setWifiPermissible(true);
-        mWifiSlice = new WifiSlice(mContext);
+        mWifiSlice = new WifiSlice(mContext, mWifiRestriction);
     }
 
     @Test
@@ -239,6 +246,30 @@ public class WifiSliceTest {
         // No scanning text
         SliceTester.assertNoSliceItemContainsSubtitle(sliceItems,
                 mContext.getString(R.string.wifi_empty_list_wifi_on));
+    }
+
+    @Test
+    public void getWifiSlice_disallowedChangeWifiState_addSubtitleAndNoToggle() {
+        when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(false);
+
+        final Slice slice = mWifiSlice.getSlice();
+
+        final ListContent listContent = SliceMetadata.from(mContext, slice).getListContent();
+        assertThat(slice).isNotNull();
+        assertThat(listContent.getHeader().getSubtitleItem()).isNotNull();
+        assertThat(listContent.getSliceActions()).isNull();
+    }
+
+    @Test
+    public void getWifiSlice_allowedChangeWifiState_noSubtitleAndAddToggle() {
+        when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);
+
+        final Slice slice = mWifiSlice.getSlice();
+
+        final ListContent listContent = SliceMetadata.from(mContext, slice).getListContent();
+        assertThat(slice).isNotNull();
+        assertThat(listContent.getHeader().getSubtitleItem()).isNull();
+        assertThat(listContent.getSliceActions()).isNotNull();
     }
 
     @Test
