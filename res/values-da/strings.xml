@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"Gør teksten på skærmen mindre eller større."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Formindsk"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Forstør"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Brug automatisk rotation"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Ansigtsgenkendelse bruger kameraet på forsiden for at forbedre nøjagtigheden af funktionen Roter automatisk. Billeder gemmes ikke, og de sendes aldrig til Google."</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Brug roter automatisk"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansigtsgenkendelse bruger kameraet på forsiden for at forbedre nøjagtigheden af indstillingen Roter automatisk. Billeder gemmes ikke, og de sendes aldrig til Google."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Eksempeltekst"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Den vidunderlige troldmand fra Oz"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitel 11: Den vidunderlige smaragdby i Oz"</string>
@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprog"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
-    <!-- no translation found for desc_app_locale_disclaimer (5295933110644789052) -->
-    <skip />
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
@@ -392,10 +391,10 @@
     <string name="face_add_max" msgid="4578405795494514876">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> ansigter"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du har tilføjet det maksimale antal ansigter"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Der kan ikke tilføjes flere ansigter"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registreringen kunne ikke gennemføres"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Scanningen kunne ikke gennemføres"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
-    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tidsgrænsen for registrering af ansigt blev overskredet. Prøv igen."</string>
-    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Registrering af ansigt mislykkedes."</string>
+    <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tidsgrænsen for ansigtsscanning blev overskredet. Prøv igen."</string>
+    <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Ansigtsscanningen mislykkedes."</string>
     <string name="security_settings_face_enroll_finish_title" msgid="5882322568359775393">"Så er du klar. Godt gået."</string>
     <string name="security_settings_face_enroll_done" msgid="3048687969498187442">"Udfør"</string>
     <string name="security_settings_face_enroll_should_re_enroll_title" msgid="6835778900387289683">"Gør ansigtslåsens registrering mere effektiv"</string>
@@ -514,8 +513,8 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Bliv ved med at løfte fingeren for at tilføje forskellige dele af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Hver gang fingeraftryksikonet flyttes, skal du holde fingeren på det. På den måde registrere en større del af dit fingeraftryk."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer din fingerspids på sensoren"</string>
-    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Placer venstre side af fingerspidsen på læseren"</string>
-    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Placer højre side af fingerspidsen på læseren"</string>
+    <string name="security_settings_udfps_enroll_left_edge_title" msgid="1944076382202470458">"Placer venstre side af fingerspidsen på sensoren"</string>
+    <string name="security_settings_udfps_enroll_right_edge_title" msgid="9036744264606447490">"Placer højre side af fingerspidsen på sensoren"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registrere en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
@@ -578,7 +577,7 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Udfør"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hov! Dette er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tryk på sensoren bagpå med pegefingeren."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registreringen kunne ikke gennemføres"</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Scanningen kunne ikke gennemføres"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Tidsgrænsen for registrering af fingeraftryk blev overskredet. Prøv igen."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering af fingeraftryk virkede ikke. Prøv igen, eller brug en anden finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tilføj endnu et"</string>
@@ -1302,7 +1301,10 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Fra"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Til"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Til – ansigtsbaseret"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Aktivér ansigtsgenkendelse"</string>
+    <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Ansigtsgenkendelse"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Juster automatisk skærmretningen, når du skifter mellem stående og liggende format på telefonen ved at bevæge den"</string>
+    <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"Få flere oplysninger om indstillingen Roter automatisk"</string>
+    <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Når du drejer telefonen til stående eller liggende format"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Skærmopløsning"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Høj opløsning"</string>
     <string name="screen_resolution_option_highest" msgid="7892101083236381555">"Højeste opløsning"</string>
@@ -1427,6 +1429,7 @@
     <string name="style_suggestion_title" msgid="1213747484782364775">"Tilpas din telefon"</string>
     <string name="style_suggestion_summary" msgid="4271131877800968159">"Prøv forskellige layout, baggrunde og meget mere"</string>
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Pauseskærm"</string>
+    <string name="keywords_screensaver" msgid="7249337959432229172">"pauseskærm"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Brug pauseskærm"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Når enheden oplades eller tilsluttes en dockingstation"</string>
     <string name="screensaver_settings_summary_sleep" msgid="6555922932643037432">"Under opladning"</string>
@@ -2329,6 +2332,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Fra: Jens"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Godmorgen\n\nJeg ville bare lige høre, hvordan det går med dine designs. Vil de være klar, inden vi går i gang med at bygge de nye balloner?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Nulstil indstillinger"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skærmindstillinger for størrelse og tekst er blevet nulstillet"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Skal indstillingerne for skærmstørrelse og tekst nulstilles?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Telefonens oprindelige skærmstørrelse og tekstpræferencer gendannes"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nulstil"</string>
@@ -2449,6 +2453,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Varighed af automatisk klik"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Vibration og berøringssensor"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Tilpas vibrationsstyrken til forskellige brugsformer"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Indstillingen er deaktiveret, fordi enheden er sat på lydløs"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Opkald"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Notifikationer og alarmer"</string>
@@ -2625,10 +2633,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"hørehæmmet, hørelsestab"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"hørehæmmet, hørelsestab, undertekster, teleprinter, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Hurtig sammenkobling"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Registrering af Bluetooth-enheder med Hurtig sammenkobling i nærheden"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Søg efter enheder i nærheden"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Gemte enheder"</string>
     <string name="print_settings" msgid="8519810615863882491">"Udskrivning"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Fra"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3662,7 +3666,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"skærm, låsetid, timeout, låseskærm"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"hukommelse, cache, data, slet, ryd, frigør, plads"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"forbundet, enhed, høretelefoner, headset, højttaler, trådløs, parre, øretelefoner, musik, medier"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"parring, øretelefoner, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"baggrund, tema, gitter, tilpas, tilpasning"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikon, kontrast, farve"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"standard, assistent"</string>
@@ -4057,8 +4060,8 @@
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Tillad integreret billede"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Giv tilladelse til at denne app opretter et vindue med integreret billede, mens appen er åben, eller efter du lukker den (f.eks. for at fortsætte med at se en video). Dette vindue vises oven på andre apps, du bruger."</string>
     <string name="interact_across_profiles_title" msgid="7285906999927669971">"Samlet appvisning"</string>
-    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Tilknyttet"</string>
-    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Ikke tilknyttet"</string>
+    <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Forbundet"</string>
+    <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"Ikke forbundet"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"Der er ingen forbundne apps"</string>
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"på tværs af profiler tilknyttet app apps arbejde og personlige"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"Samlet appvisning"</string>
@@ -5709,6 +5712,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Opret ikke forbindelse"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Opret forbindelse"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE-indstillinger"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Gendan standardindstillingerne"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Standardindstillingerne blev gendannet."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Maksimal balance ved fuld opladning"</string>
@@ -5720,7 +5727,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Handlinger (udførelsesomkostninger)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Handlinger (basispris)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Bonusser pr. forekomst af en hændelse"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Bonusser for samlet varighed af hændelse"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Maksimalt antal bonusser om dagen"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Topaktivitet"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Notifikationen blev set"</string>
