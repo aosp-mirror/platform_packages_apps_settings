@@ -35,6 +35,7 @@ public class AppLocaleUtil {
 
     public static final Intent LAUNCHER_ENTRY_INTENT =
             new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
+
     /**
      * Decides the UI display of per app locale.
      */
@@ -42,9 +43,15 @@ public class AppLocaleUtil {
             @NonNull Context context,
             @NonNull String packageName,
             @NonNull List<ResolveInfo> infos) {
-        return !isDisallowedPackage(context, packageName)
-                && !isSignedWithPlatformKey(context, packageName)
-                && hasLauncherEntry(packageName, infos);
+        boolean isDisallowedPackage = isDisallowedPackage(context, packageName);
+        boolean hasLauncherEntry = hasLauncherEntry(packageName, infos);
+        boolean isSignedWithPlatformKey = isSignedWithPlatformKey(context, packageName);
+        Log.i(TAG, "Can display preference - [" + packageName + "] :"
+                + " isDisallowedPackage : " + isDisallowedPackage
+                + " / isSignedWithPlatformKey : " + isSignedWithPlatformKey
+                + " / hasLauncherEntry : " + hasLauncherEntry);
+
+        return !isDisallowedPackage && !isSignedWithPlatformKey && hasLauncherEntry;
     }
 
     private static boolean isDisallowedPackage(Context context, String packageName) {
