@@ -19,33 +19,53 @@ package com.android.settings.bluetooth;
 import static android.bluetooth.BluetoothDevice.BOND_NONE;
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
+import android.app.AlertDialog;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeBroadcastAssistant;
+import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.le.ScanFilter;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 
 /**
  * This fragment allowed users to find the nearby broadcast sources.
  */
 public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment {
 
-    private static final String TAG = "BTFindBroadcastsFrg";
+    private static final String TAG = "BtFindBroadcastsFrg";
 
     public static final String KEY_DEVICE_ADDRESS = "device_address";
-
-    public static final String PREF_KEY_BROADCAST_SOURCE = "broadcast_source";
+    public static final String PREF_KEY_BROADCAST_SOURCE_LIST = "broadcast_source_list";
 
     @VisibleForTesting
     String mDeviceAddress;
@@ -53,6 +73,91 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     LocalBluetoothManager mManager;
     @VisibleForTesting
     CachedBluetoothDevice mCachedDevice;
+    @VisibleForTesting
+    PreferenceCategory mBroadcastSourceListCategory;
+    private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
+    private BluetoothBroadcastSourcePreference mSelectedPreference;
+    private Executor mExecutor;
+    private int mSourceId;
+
+    private BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
+            new BluetoothLeBroadcastAssistant.Callback() {
+                @Override
+                public void onSearchStarted(int reason) {
+                    Log.d(TAG, "onSearchStarted: " + reason);
+
+                    getActivity().runOnUiThread(
+                            () -> cacheRemoveAllPrefs(mBroadcastSourceListCategory));
+                }
+
+                @Override
+                public void onSearchStartFailed(int reason) {
+                    Log.d(TAG, "onSearchStartFailed: " + reason);
+
+                }
+
+                @Override
+                public void onSearchStopped(int reason) {
+                    Log.d(TAG, "onSearchStopped: " + reason);
+                }
+
+                @Override
+                public void onSearchStopFailed(int reason) {
+                    Log.d(TAG, "onSearchStopFailed: " + reason);
+                }
+
+                @Override
+                public void onSourceFound(@NonNull BluetoothLeBroadcastMetadata source) {
+                    Log.d(TAG, "onSourceFound:");
+                    getActivity().runOnUiThread(() -> updateListCategory(source, false));
+                }
+
+                @Override
+                public void onSourceAdded(@NonNull BluetoothDevice sink, int sourceId, int reason) {
+                    setSourceId(sourceId);
+                    if (mSelectedPreference == null) {
+                        Log.w(TAG, "onSourceAdded: mSelectedPreference == null!");
+                        return;
+                    }
+                    getActivity().runOnUiThread(() -> updateListCategory(
+                            mSelectedPreference.getBluetoothLeBroadcastMetadata(), true));
+                }
+
+                @Override
+                public void onSourceAddFailed(@NonNull BluetoothDevice sink,
+                        @NonNull BluetoothLeBroadcastMetadata source, int reason) {
+                    mSelectedPreference = null;
+                    Log.d(TAG, "onSourceAddFailed: clear the mSelectedPreference.");
+                }
+
+                @Override
+                public void onSourceModified(@NonNull BluetoothDevice sink, int sourceId,
+                        int reason) {
+                }
+
+                @Override
+                public void onSourceModifyFailed(@NonNull BluetoothDevice sink, int sourceId,
+                        int reason) {
+                }
+
+                @Override
+                public void onSourceRemoved(@NonNull BluetoothDevice sink, int sourceId,
+                        int reason) {
+                    Log.d(TAG, "onSourceRemoved:");
+                }
+
+                @Override
+                public void onSourceRemoveFailed(@NonNull BluetoothDevice sink, int sourceId,
+                        int reason) {
+                    Log.d(TAG, "onSourceRemoveFailed:");
+                }
+
+                @Override
+                public void onReceiveStateChanged(@NonNull BluetoothDevice sink, int sourceId,
+                        @NonNull BluetoothLeBroadcastReceiveState state) {
+                    Log.d(TAG, "onReceiveStateChanged:");
+                }
+            };
 
     public BluetoothFindBroadcastsFragment() {
         super(DISALLOW_CONFIG_BLUETOOTH);
@@ -75,12 +180,31 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         mDeviceAddress = getArguments().getString(KEY_DEVICE_ADDRESS);
         mManager = getLocalBluetoothManager(context);
         mCachedDevice = getCachedDevice(mDeviceAddress);
+        mLeBroadcastAssistant = getLeBroadcastAssistant();
+        mExecutor = Executors.newSingleThreadExecutor();
+
         super.onAttach(context);
-        if (mCachedDevice == null) {
+        if (mCachedDevice == null || mLeBroadcastAssistant == null) {
             //Close this page if device is null with invalid device mac address
-            Log.w(TAG, "onAttach() CachedDevice is null!");
+            //or if the device does not have LeBroadcastAssistant profile
+            Log.w(TAG, "onAttach() CachedDevice or LeBroadcastAssistant is null!");
             finish();
             return;
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        mBroadcastSourceListCategory = findPreference(PREF_KEY_BROADCAST_SOURCE_LIST);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mLeBroadcastAssistant != null) {
+            mLeBroadcastAssistant.registerServiceCallBack(mExecutor, mBroadcastAssistantCallback);
         }
     }
 
@@ -88,6 +212,18 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     public void onResume() {
         super.onResume();
         finishFragmentIfNecessary();
+        //check assistant status. Start searching...
+        if (mLeBroadcastAssistant != null && !mLeBroadcastAssistant.isSearchInProgress()) {
+            mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mLeBroadcastAssistant != null) {
+            mLeBroadcastAssistant.unregisterServiceCallBack(mBroadcastAssistantCallback);
+        }
     }
 
     @VisibleForTesting
@@ -124,5 +260,111 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                     mCachedDevice, lifecycle, mManager));
         }
         return controllers;
+    }
+
+    private LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+        if (mManager == null) {
+            Log.w(TAG, "getLeBroadcastAssistant: LocalBluetoothManager is null!");
+            return null;
+        }
+
+        LocalBluetoothProfileManager profileManager = mManager.getProfileManager();
+        if (profileManager == null) {
+            Log.w(TAG, "getLeBroadcastAssistant: LocalBluetoothProfileManager is null!");
+            return null;
+        }
+
+        return profileManager.getLeAudioBroadcastAssistantProfile();
+    }
+
+    private List<ScanFilter> getScanFilter() {
+        // Currently there is no function for setting the ScanFilter. It may have this function
+        // in the further.
+        return Collections.emptyList();
+    }
+
+    private void updateListCategory(BluetoothLeBroadcastMetadata source, boolean isConnected) {
+        BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
+                Integer.toString(source.getBroadcastId()));
+        if (item == null) {
+            item = createBluetoothBroadcastSourcePreference(source);
+            mBroadcastSourceListCategory.addPreference(item);
+        }
+        item.updateMetadataAndRefreshUi(source, isConnected);
+        item.setOrder(isConnected ? 0 : 1);
+    }
+
+    private BluetoothBroadcastSourcePreference createBluetoothBroadcastSourcePreference(
+            BluetoothLeBroadcastMetadata source) {
+        BluetoothBroadcastSourcePreference pref = new BluetoothBroadcastSourcePreference(
+                getContext(), source);
+        pref.setKey(Integer.toString(source.getBroadcastId()));
+        pref.setOnPreferenceClickListener(preference -> {
+            if (source.isEncrypted()) {
+                launchBroadcastCodeDialog(pref);
+            } else {
+                addSource(pref);
+            }
+            return true;
+        });
+        return pref;
+    }
+
+    private void addSource(BluetoothBroadcastSourcePreference pref) {
+        if (mLeBroadcastAssistant == null || mCachedDevice == null) {
+            Log.w(TAG, "addSource: LeBroadcastAssistant or CachedDevice is null!");
+            return;
+        }
+        if (mSelectedPreference != null) {
+            // The previous preference status set false after user selects the new Preference.
+            getActivity().runOnUiThread(
+                    () -> {
+                        mSelectedPreference.updateMetadataAndRefreshUi(
+                                mSelectedPreference.getBluetoothLeBroadcastMetadata(), false);
+                        mSelectedPreference.setOrder(1);
+                    });
+        }
+        mSelectedPreference = pref;
+        mLeBroadcastAssistant.addSource(mCachedDevice.getDevice(),
+                pref.getBluetoothLeBroadcastMetadata(), true);
+    }
+
+    private void addBroadcastCodeIntoPreference(BluetoothBroadcastSourcePreference pref,
+            String broadcastCode) {
+        BluetoothLeBroadcastMetadata metadata =
+                new BluetoothLeBroadcastMetadata.Builder(pref.getBluetoothLeBroadcastMetadata())
+                        .setBroadcastCode(broadcastCode.getBytes(StandardCharsets.UTF_8))
+                        .build();
+        pref.updateMetadataAndRefreshUi(metadata, false);
+    }
+
+    private void launchBroadcastCodeDialog(BluetoothBroadcastSourcePreference pref) {
+        final View layout = LayoutInflater.from(getContext()).inflate(
+                R.layout.bluetooth_find_broadcast_password_dialog, null);
+        final TextView broadcastName = layout.requireViewById(R.id.broadcast_name_text);
+        final EditText editText = layout.requireViewById(R.id.broadcast_edit_text);
+        broadcastName.setText(pref.getTitle());
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                .setTitle(R.string.find_broadcast_password_dialog_title)
+                .setView(layout)
+                .setNeutralButton(android.R.string.cancel, null)
+                .setPositiveButton(R.string.bluetooth_connect_access_dialog_positive,
+                        (d, w) -> {
+                            Log.d(TAG, "setPositiveButton: clicked");
+                            addBroadcastCodeIntoPreference(pref, editText.getText().toString());
+                            addSource(pref);
+                        })
+                .create();
+
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        alertDialog.show();
+    }
+
+    public int getSourceId() {
+        return mSourceId;
+    }
+
+    public void setSourceId(int sourceId) {
+        mSourceId = sourceId;
     }
 }
