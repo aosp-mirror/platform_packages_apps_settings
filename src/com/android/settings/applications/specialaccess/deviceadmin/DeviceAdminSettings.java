@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.specialaccess.deviceadmin;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGE_DEVICE_ADMIN_APPS;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.NO_DEVICE_ADMINS;
 
 import android.app.settings.SettingsEnums;
@@ -37,7 +38,8 @@ public class DeviceAdminSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // TODO: Replace PreferenceScreen title manage_device_admin/MANAGE_DEVICE_ADMIN_APPS
+        replaceEnterprisePreferenceScreenTitle(
+                MANAGE_DEVICE_ADMIN_APPS, R.string.manage_device_admin);
         replaceEnterpriseStringTitle("device_admin_footer",
                 NO_DEVICE_ADMINS, R.string.no_device_admins);
     }
