@@ -97,14 +97,13 @@ public class WifiSlice implements CustomSliceable {
     @Override
     public Slice getSlice() {
         // If external calling package doesn't have Wi-Fi permission.
-        if (!Utils.isSettingsIntelligence(mContext) && !isPermissionGranted(mContext)) {
-            Log.i(TAG, "No wifi permissions to control wifi slice.");
-            return null;
-        }
-
+        final boolean isPermissionGranted =
+                Utils.isSettingsIntelligence(mContext) || isPermissionGranted(mContext);
         final boolean isWifiEnabled = isWifiEnabled();
-        ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* wifiSliceItem */);
-        if (!isWifiEnabled) {
+        ListBuilder listBuilder = getListBuilder(isWifiEnabled, null /* wifiSliceItem */,
+                isPermissionGranted);
+        // If the caller doesn't have the permission granted, just return a slice without a toggle.
+        if (!isWifiEnabled || !isPermissionGranted) {
             return listBuilder.build();
         }
 
@@ -116,7 +115,8 @@ public class WifiSlice implements CustomSliceable {
 
         if (isFirstApActive) {
             // refresh header subtext
-            listBuilder = getListBuilder(true /* isWifiEnabled */, apList.get(0));
+            listBuilder = getListBuilder(
+                    true /* isWifiEnabled */, apList.get(0), true /* isWiFiPermissionGranted */);
         }
 
         if (isApRowCollapsed()) {
@@ -186,16 +186,21 @@ public class WifiSlice implements CustomSliceable {
         return builder;
     }
 
-    private ListBuilder getListBuilder(boolean isWifiEnabled, WifiSliceItem wifiSliceItem) {
+    private ListBuilder getListBuilder(boolean isWifiEnabled, WifiSliceItem wifiSliceItem,
+            boolean isWiFiPermissionGranted) {
         final ListBuilder builder = new ListBuilder(mContext, getUri(), ListBuilder.INFINITY)
                 .setAccentColor(COLOR_NOT_TINTED)
                 .setKeywords(getKeywords())
                 .addRow(getHeaderRow(isWifiEnabled, wifiSliceItem));
-
-        if (mWifiRestriction.isChangeWifiStateAllowed(mContext)) {
-            builder.addAction(SliceAction.createToggle(
-                    getBroadcastIntent(mContext), null /* actionTitle */, isWifiEnabled));
+        if (!isWiFiPermissionGranted || !mWifiRestriction.isChangeWifiStateAllowed(mContext)) {
+            return builder;
         }
+
+        final PendingIntent toggleAction = getBroadcastIntent(mContext);
+        final SliceAction toggleSliceAction = SliceAction.createToggle(toggleAction,
+                null /* actionTitle */, isWifiEnabled);
+        builder.addAction(toggleSliceAction);
+
         return builder;
     }
 
