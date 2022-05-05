@@ -18,10 +18,12 @@ package com.android.settings.wifi.tether;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
@@ -58,6 +60,8 @@ public class WifiTetherFooterPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mTetheringManager).when(mContext).getSystemService(TetheringManager.class);
         when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
