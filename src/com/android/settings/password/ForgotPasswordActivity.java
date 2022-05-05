@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyResources.Strings.Settings.FORGOT_PASSWORD_TEXT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FORGOT_PASSWORD_TITLE;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -63,6 +64,9 @@ public class ForgotPasswordActivity extends Activity {
                         .setTheme(R.style.SudGlifButton_Primary)
                         .build()
         );
+
+        layout.setHeaderText(devicePolicyManager.getResources().getString(
+                FORGOT_PASSWORD_TITLE, () -> getString(R.string.forgot_password_title)));
 
         UserManager.get(this).requestQuietModeEnabled(
                 false, UserHandle.of(userId), UserManager.QUIET_MODE_DISABLE_DONT_ASK_CREDENTIAL);
