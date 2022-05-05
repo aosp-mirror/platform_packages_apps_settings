@@ -98,10 +98,10 @@
     <string name="font_size_make_larger_desc">Make larger</string>
 
     <!-- Auto rotate switchbar title. [CHAR_LIMIT=NONE] -->
-    <string name="auto_rotate_settings_primary_switch_title">Use Auto-rotate</string>
+    <string name="auto_rotate_settings_primary_switch_title">Use auto-rotate</string>
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
-    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve Auto-rotate accuracy. Images are never stored or sent to Google.</string>
+    <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
     <string name="font_size_preview_text_headline">Sample text</string>
     <string name="font_size_preview_text_title"
             translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
@@ -519,13 +519,13 @@
     <string name="preference_of_system_locale_title">System language</string>
 
     <!-- Summary for preference of the system default locale. [CHAR LIMIT=50]-->
-    <string name="preference_of_system_locale_summary">System default - <xliff:g id="default_language" example="English (United States)">%1$s</xliff:g></string>
+    <string name="preference_of_system_locale_summary">System default</string>
 
     <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
     <string name="desc_no_available_supported_locale">Language selection for this app isn\u2019t available from Settings.</string>
 
-    <!-- Description for the app without any supported languages. [CHAR LIMIT=NONE]-->
-    <string name="desc_disallow_locale_change_in_settings">You can\u2019t select a language for this app from Settings.</string>
+    <!-- Description for the disclaimer of per app language. [CHAR LIMIT=NONE]-->
+    <string name="desc_app_locale_disclaimer">Language may differ from languages available in the app. Some apps may not support this setting.</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
@@ -2522,12 +2522,6 @@
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
     <string name="wifi_network_prefix_length">Network prefix length</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11AX [CHAR LIMIT=50]-->
-    <string name="wifi_type_11AX">Wi\u2011Fi 6</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11AC [CHAR LIMIT=50]-->
-    <string name="wifi_type_11AC">Wi\u2011Fi 5</string>
-    <!-- Summary for the WiFi Type WIFI_STANDARD_11N  [CHAR LIMIT=50]-->
-    <string name="wifi_type_11N">Wi\u2011Fi 4</string>
 
     <!-- Wi-Fi p2p / Wi-Fi Direct settings -->
     <!-- Used in the 1st-level settings screen to launch Wi-fi Direct settings [CHAR LIMIT=25] -->
@@ -2932,7 +2926,13 @@
     <!-- Sound & display settings screen, face-based rotation check box label [CHAR LIMIT=30] -->
     <string name="auto_rotate_option_face_based">On - Face-based</string>
     <!-- SmartAutoRotatePreferenceFragment settings screen, face-based rotation switch label [CHAR LIMIT=30] -->
-    <string name="auto_rotate_switch_face_based">Enable Face Detection</string>
+    <string name="auto_rotate_switch_face_based">Face Detection</string>
+    <!-- Preference summary to enable auto rotate[CHAR_LIMIT=NONE]-->
+    <string name="auto_rotate_screen_summary">Automatically adjust the screen orientation when you move your phone between portrait and landscape</string>
+    <!-- Accessibility description for auto rotate learn more link [CHAR LIMIT=NONE] -->
+    <string name="auto_rotate_link_a11y">Learn more about auto-rotate</string>
+    <!-- Accessibility summary text for auto rotate [CHAR LIMIT=60] -->
+    <string name="auto_rotate_summary_a11y">When you move your phone between portrait and landscape</string>
 
     <!-- Display settings screen, screen resolution settings title [CHAR LIMIT=30] -->
     <string name="screen_resolution_title">Screen resolution</string>
@@ -3347,8 +3347,6 @@
     <string name="security_patch">Android security update</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
-    <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
-    <string name="hardware_info">Model &amp; hardware</string>
     <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
     <string name="hardware_revision">Hardware version</string>
     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
@@ -5308,6 +5306,8 @@
     <string name="accessibility_text_reading_preview_mail_content">Good morning!\n\nI just wanted to check how the designs are coming. Will they be ready before we start building the new balloons?</string>
     <!-- Title for the reset button of the accessibility text reading page to reset all preferences state. [CHAR LIMIT=25] -->
     <string name="accessibility_text_reading_reset_button_title">Reset settings</string>
+    <!-- Message for the toast after clicking the reset button of the dialog of the accessibility text reading page. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_text_reading_reset_message">Display size and text settings have been reset</string>
     <!-- Title for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
     <string name="accessibility_text_reading_confirm_dialog_title">Reset display size and text?</string>
     <!-- Message for the confirm dialog of reset settings. [CHAR LIMIT=NONE] -->
@@ -5575,6 +5575,10 @@
     <string name="accessibility_vibration_settings_title">Vibration &amp; haptics</string>
     <!-- Summary for preference screen for configuring vibrations. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_settings_summary">Control the vibration strength for different usages</string>
+    <!-- "Vibration & haptics" preference's state when enabled. This text is shown next to the "Vibration & haptics" preference title. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_settings_state_on">On</string>
+    <!-- "Vibration & haptics" preference's state when disabled. This text is shown next to the "Vibration & haptics" preference title. [CHAR LIMIT=NONE] -->
+    <string name="accessibility_vibration_settings_state_off">Off</string>
     <!-- Summary for vibration preference shown when it is disabled because the device is in silent mode. [CHAR LIMIT=NONE] -->
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary">Setting disabled because device is set to silent</string>
     <!-- Title for the category of preferences to configure device vibrations related to calls. [CHAR LIMIT=NONE] -->
@@ -5976,19 +5980,6 @@
     <!-- List of synonyms used in the settings search bar to find the “Voice Access”. [CHAR LIMIT=NONE] -->
     <string name="keywords_voice_access"></string>
 
-    <!-- Fast Pair settings -->
-    <skip />
-
-    <!-- Title in main settings screen for Fast Pair settings [CHAR LIMIT=15] -->
-    <string name="fast_pair_settings">Fast Pair</string>
-
-    <!-- Fast Pair setting summary in settings screen [CHAR LIMIT=50] -->
-    <string name="fast_pair_settings_summary">Nearby detection of Fast Pair bluetooth devices.</string>
-    <!-- Title for Fast Pair main switch preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_main_switch_title">Scan for nearby devices</string>
-    <!-- Title for Fast Pair saved devices preferences. [CHAR LIMIT=50] -->
-    <string name="fast_pair_saved_devices_title">Saved devices</string>
-    <!-- Printing settings -->
     <skip />
 
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
@@ -8416,9 +8407,6 @@
     <!-- List of synonyms for the Bluetooth setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_bluetooth_settings">connected, device, headphones, headset, speaker, wireless, pair, earbuds, music, media </string>
 
-    <!-- List of synonyms for the Fast Pair setting, used to match in settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_fast_pair">pair, earbuds, bluetooth</string>
-
     <!-- List of synonyms for the Wallpaper picker setting, used to match in settings search [CHAR LIMIT=NONE] -->
     <string name="keywords_wallpaper">background, theme, grid, customize, personalize</string>
 
@@ -10205,18 +10193,18 @@
     <string name="screen_pinning_description">
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nTo use app pinning:
-        \t\n1.\tTurn on app pinning
-        \t\n2.\tOpen Overview
-        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+        \t\n1. Turn on app pinning
+        \t\n2. Open Overview
+        \t\n3. Tap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_guest_user_description">
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
-        \t\n1.\tTurn on app pinning
-        \t\n2.\tOpen Overview
-        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+        \t\n1. Turn on app pinning
+        \t\n2. Open Overview
+        \t\n3. Tap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=300] Screen pinning title -->
     <string name="screen_pinning_dialog_message">
@@ -12459,6 +12447,9 @@
     <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
     <string name="help_url_battery_saver_settings" translatable="false"></string>
 
+    <!-- Help URI, auto rotate page [DO NOT TRANSLATE] -->
+    <string name="help_url_auto_rotate_settings" translatable="false"></string>
+
     <!-- Help URI, app usage page [DO NOT TRANSLATE] -->
     <string name="help_url_app_usage_settings" translatable="false"></string>
 
@@ -13776,12 +13767,6 @@
     <!-- Title for if toggle access is disabled by carrier [CHAR LIMIT=NONE] -->
     <string name="enable_2g_summary_disabled_carrier"><xliff:g id="carrier_name_2g" example="Google Fi">%1$s</xliff:g> requires 2G to be available</string>
 
-
-    <!-- Label for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_label" translatable="false"></string>
-    <!-- Summary for extra app info settings for a specific app [CHAR LIMIT=40] -->
-    <string name="extra_app_info_summary" translatable="false"></string>
-
     <!-- Label for All Services preference in App info settings [CHAR LIMIT=40] -->
     <string name="app_info_all_services_label">All Services</string>
 
@@ -13816,11 +13801,6 @@
     <string name="perm_toggle_description">For apps and services</string>
     <!-- Describes what is affected by the mic toggle [CHAR LIMIT=NONE] -->
     <string name="mic_toggle_description">For apps and services. If this setting is off, microphone data may still be shared when you call an emergency number.</string>
-
-    <!-- Title for Game settings entry. [CHAR_LIMIT=NONE] -->
-    <string name="game_settings_title">Game settings</string>
-    <!-- Summary for Game settings entry. [CHAR_LIMIT=NONE] -->
-    <string name="game_settings_summary">Turn on Game Dashboard shortcut, and more</string>
 
     <!-- Content description of the previous button to bring user to the previous preview page. -->
     <string name="previous_page_content_description">Previous</string>
@@ -13860,6 +13840,10 @@
     <!-- TARE settings title in developer options; "TARE" is the name of the feature and cannot be
      translated. [CHAR LIMIT=40] -->
     <string name="tare_settings">TARE Settings</string>
+    <!-- Summary for the TARE feature being on (ie. enabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_on">On</string>
+    <!-- Summary for the TARE feature being off (ie. disabled) [CHAR LIMIT=NONE] -->
+    <string name="tare_off">Off</string>
     <!-- Allows user to revert the TARE settings to their default values [CHAR LIMIT=40] -->
     <string name="tare_revert">Revert to Default Settings</string>
     <!-- Allows user to view AlarmManager policy factors. Alarm in this context is referring to the
@@ -13910,7 +13894,7 @@
     <string name="tare_rewards_instantaneous">Rewards per single event</string>
     <!-- Title for the rewards apps can obtain for the total duration (in seconds) of an event that
     implies the user finds the app behavior useful. [CHAR LIMIT=40]-->
-    <string name="tare_rewards_ongoing">Rewards for total event duration</string>
+    <string name="tare_rewards_ongoing">Rewards per second of event duration</string>
     <!-- Title for the max rewards apps can obtain within a 24 hour period for different actions
     that benefit the user. [CHAR LIMIT=40]-->
     <string name="tare_rewards_max">Maximum Rewards Per Day</string>
@@ -14077,6 +14061,13 @@
     </string-array>
     <!-- TARE dialog button to proceed with a value change [CHAR LIMIT=none] -->
     <string name="tare_dialog_confirm_button_title">Confirm</string>
+    <!-- Array used to populate dropdown menu to select the units of the factor value. Not
+    translatable since they're base units. [CHAR LIMIT=40]-->
+    <string-array name="tare_units" translatable="false">
+        <item>ARC</item>
+        <item>Cake</item>
+    </string-array>
+
     <!-- Button to preview the selected screensaver in settings [CHAR LIMIT=40] -->
     <string name="dream_preview_button_title">Preview</string>
     <!-- The title of the category to show for the screensaver selector in settings [CHAR LIMIT=none] -->
@@ -14128,4 +14119,30 @@
     <string name="ingress_rate_limit_dialog_title">Configure network download rate limit</string>
     <!-- Developer Settings: Dialog ListPreference option to disable network bandwidth ingress rate limit [CHAR LIMIT=none] -->
     <string name="ingress_rate_limit_no_limit_entry">No limit</string>
+
+    <!-- BT LE Audio Device: Media Broadcast -->
+    <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
+    <!-- [CHAR LIMIT=NONE] Le audio broadcast dialog, switch to others app. -->
+    <string name="bluetooth_broadcast_dialog_broadcast_app">Broadcast <xliff:g id="currentApp" example="App Name 2">%1$s</xliff:g></string>
+    <!-- The message of the Media Broadcast Dialog for finding broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_find_message">Listen to broadcasts that are playing near you</string>
+    <!-- The message of the Media Broadcast Dialog for broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_broadcast_message">Broadcast media to devices near you, or listen to someone else’s broadcast</string>
+    <!-- The title of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_title">Broadcasts</string>
+    <!-- The summary of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_summary">Listening to</string>
+    <!-- The Button of the action to find broadcasts [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast">Find broadcasts</string>
+    <!-- The Button of the action to leave the broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_leave">Leave broadcast</string>
+    <!-- The Button of the action to scan QR code [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_scan">Scan QR code</string>
+    <!-- The title of enter password dialog in bluetooth find broadcast page. [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_title">Enter password</string>
+    <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_connection_error">Can\u2019t connect. Try again.</string>
+    <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_password_error">Wrong password</string>
 </resources>

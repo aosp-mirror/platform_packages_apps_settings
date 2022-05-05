@@ -198,38 +198,25 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
         return drawable;
     }
 
-    private int getBatteryTitleResource(int deviceId) {
-        if (deviceId == LEFT_DEVICE_ID) {
-            return R.id.bt_battery_left_title;
-        }
-        if (deviceId == RIGHT_DEVICE_ID) {
-            return R.id.bt_battery_right_title;
-        }
-        Log.d(TAG, "No resource id. The deviceId is " + deviceId);
-        return INVALID_RESOURCE_ID;
-    }
-
-    private int getBatterySummaryResource(int deviceId) {
-        if (deviceId == LEFT_DEVICE_ID) {
+    private int getBatterySummaryResource(int containerId) {
+        if (containerId == R.id.bt_battery_case) {
+            return R.id.bt_battery_case_summary;
+        } else if (containerId == R.id.bt_battery_left) {
             return R.id.bt_battery_left_summary;
-        }
-        if (deviceId == RIGHT_DEVICE_ID) {
+        } else if (containerId == R.id.bt_battery_right) {
             return R.id.bt_battery_right_summary;
         }
-        Log.d(TAG, "No resource id. The deviceId is " + deviceId);
+        Log.d(TAG, "No summary resource id. The containerId is " + containerId);
         return INVALID_RESOURCE_ID;
     }
 
     private void hideAllOfBatteryLayouts() {
         // hide the case
-        updateBatteryLayout(R.id.bt_battery_case_title, R.id.bt_battery_case_summary,
-                BluetoothUtils.META_INT_ERROR);
+        updateBatteryLayout(R.id.bt_battery_case, BluetoothUtils.META_INT_ERROR);
         // hide the left
-        updateBatteryLayout(R.id.bt_battery_left_title, R.id.bt_battery_left_summary,
-                BluetoothUtils.META_INT_ERROR);
+        updateBatteryLayout(R.id.bt_battery_left, BluetoothUtils.META_INT_ERROR);
         // hide the right
-        updateBatteryLayout(R.id.bt_battery_right_title, R.id.bt_battery_right_summary,
-                BluetoothUtils.META_INT_ERROR);
+        updateBatteryLayout(R.id.bt_battery_right, BluetoothUtils.META_INT_ERROR);
     }
 
     private List<CachedBluetoothDevice> getAllOfLeAudioDevices() {
@@ -285,36 +272,36 @@ public class LeAudioBluetoothDetailsHeaderController extends BasePreferenceContr
                     summary.setText(mCachedDevice.getConnectionSummary());
                 }
             } else if (isLeft) {
-                updateBatteryLayout(getBatteryTitleResource(LEFT_DEVICE_ID),
-                        getBatterySummaryResource(LEFT_DEVICE_ID), cachedDevice.getBatteryLevel());
+                updateBatteryLayout(R.id.bt_battery_left, cachedDevice.getBatteryLevel());
             } else if (isRight) {
-                updateBatteryLayout(getBatteryTitleResource(RIGHT_DEVICE_ID),
-                        getBatterySummaryResource(RIGHT_DEVICE_ID), cachedDevice.getBatteryLevel());
+                updateBatteryLayout(R.id.bt_battery_right, cachedDevice.getBatteryLevel());
             } else {
                 Log.d(TAG, "The device id is other Audio Location. Do nothing.");
             }
         }
     }
 
-    private void updateBatteryLayout(int titleResId, int summaryResId, int batteryLevel) {
-        final TextView batteryTitleView = mLayoutPreference.findViewById(titleResId);
-        final TextView batterySummaryView = mLayoutPreference.findViewById(summaryResId);
-        if (batteryTitleView == null || batterySummaryView == null) {
-            Log.e(TAG, "updateBatteryLayout: No TextView");
+    private void updateBatteryLayout(int resId, int batteryLevel) {
+        final View batteryView = mLayoutPreference.findViewById(resId);
+        if (batteryView == null) {
+            Log.e(TAG, "updateBatteryLayout: No View");
             return;
         }
         if (batteryLevel != BluetoothUtils.META_INT_ERROR) {
-            batteryTitleView.setVisibility(View.VISIBLE);
-            batterySummaryView.setVisibility(View.VISIBLE);
-            batterySummaryView.setText(
-                    com.android.settings.Utils.formatPercentage(batteryLevel));
+            batteryView.setVisibility(View.VISIBLE);
+            final TextView batterySummaryView =
+                    batteryView.requireViewById(getBatterySummaryResource(resId));
+            final String batteryLevelPercentageString =
+                    com.android.settings.Utils.formatPercentage(batteryLevel);
+            batterySummaryView.setText(batteryLevelPercentageString);
+            batterySummaryView.setContentDescription(mContext.getString(
+                    R.string.bluetooth_battery_level, batteryLevelPercentageString));
             batterySummaryView.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     createBtBatteryIcon(mContext, batteryLevel), /* top */ null,
                     /* end */ null, /* bottom */ null);
         } else {
             Log.d(TAG, "updateBatteryLayout: Hide it if it doesn't have battery information.");
-            batteryTitleView.setVisibility(View.GONE);
-            batterySummaryView.setVisibility(View.GONE);
+            batteryView.setVisibility(View.GONE);
         }
     }
 

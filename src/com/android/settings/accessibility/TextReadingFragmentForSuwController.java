@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.accessibility;
+
+import static com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint.SUW_VISION_SETTINGS;
 
 import android.content.Context;
 
 /**
- * Provider implementation for Game Settings related features.
+ * The controller for the {@link TextReadingPreferenceFragment} during the SetupWizard.
  */
-public class GameSettingsFeatureProviderImpl implements
-        GameSettingsFeatureProvider {
-    @Override
-    public boolean isSupported(Context context) {
-        return false;
-    }
-
-    @Override
-    public void launchGameSettings(Context context) {
-        return;
+public class TextReadingFragmentForSuwController extends TextReadingFragmentBaseController {
+    public TextReadingFragmentForSuwController(Context context, String preferenceKey) {
+        // Pass the fixed entry point to the parent controller for logging.
+        super(context, preferenceKey, SUW_VISION_SETTINGS);
     }
 }

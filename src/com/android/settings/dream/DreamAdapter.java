@@ -105,17 +105,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             icon.setBounds(0, 0, iconSize, iconSize);
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
-            if (item.isActive()) {
-                mLastSelectedPos = position;
-                itemView.setSelected(true);
-            } else {
-                itemView.setSelected(false);
-            }
-
-            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-            mCustomizeButton.setVisibility(
-                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
-
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
                 if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
@@ -123,6 +112,22 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 }
                 notifyItemChanged(position);
             });
+
+            if (item.isActive()) {
+                mLastSelectedPos = position;
+                itemView.setSelected(true);
+                itemView.setClickable(false);
+            } else {
+                itemView.setSelected(false);
+                itemView.setClickable(true);
+            }
+
+            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+            mCustomizeButton.setVisibility(
+                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+            // This must be called AFTER itemView.setSelected above, in order to keep the
+            // customize button in an unselected state.
+            mCustomizeButton.setSelected(false);
 
             setEnabledStateOnViews(itemView, mEnabled);
         }
@@ -175,5 +180,12 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mEnabled = enabled;
             notifyDataSetChanged();
         }
+    }
+
+    /**
+     * Gets the enabled state of all items.
+     */
+    public boolean getEnabled() {
+        return mEnabled;
     }
 }
