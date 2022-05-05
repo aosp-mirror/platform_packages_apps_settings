@@ -53,7 +53,6 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
     private Context mContext;
     private PackageManager mPackageManager;
     private UserManager mUserManager;
-    private DevicePolicyManager mDevicePolicyManager;
     private CrossProfileApps mCrossProfileApps;
     private IconDrawableFactory mIconDrawableFactory;
 
@@ -66,7 +65,6 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
         mUserManager = mContext.getSystemService(UserManager.class);
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
-        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
@@ -75,6 +73,9 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
 
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
+
+        replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
+                R.string.interact_across_profiles_title);
 
         final ArrayList<Pair<ApplicationInfo, UserHandle>> crossProfileApps =
                 collectConfigurableApps(mPackageManager, mUserManager, mCrossProfileApps);
