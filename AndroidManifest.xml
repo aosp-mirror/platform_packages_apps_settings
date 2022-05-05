@@ -1781,6 +1781,10 @@
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.settings.PRIVACY_ADVANCED_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter android:priority="1">
                 <action android:name="android.settings.REQUEST_ENABLE_CONTENT_CAPTURE" />
                 <category android:name="android.intent.category.DEFAULT" />
