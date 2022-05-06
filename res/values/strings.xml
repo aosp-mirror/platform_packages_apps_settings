@@ -1044,8 +1044,12 @@
     <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
-    <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps\n\n<annotation id="url">Learn more</annotation></string>
+    <!-- Message text only shown in fingerprint security settings home screen. (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device">Use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (phone) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
@@ -6627,10 +6631,14 @@
     <!-- Menu label for refreshing with latest usage numbers -->
     <string name="menu_stats_refresh">Refresh</string>
 
-    <!-- Label for mediaserver process in battery usage -->
+    <!-- Label for mediaserver process in battery usage [CHAR_LIMIT=NONE] -->
     <string name="process_mediaserver_label">Mediaserver</string>
     <!-- Label for dex2oat process in battery usage used for the optimization of one or more apps -->
     <string name="process_dex2oat_label">App optimization</string>
+    <!-- Label for network tethering UID label in battery usage [CHAR_LIMIT=NONE] -->
+    <string name="process_network_tethering">Tethering</string>
+    <!-- Label for removed apps UID lablel in battery usage [CHAR_LIMIT=NONE] -->
+    <string name="process_removed_apps">Removed apps</string>
 
     <!-- Battery saver: Label for feature, title + menu item [CHAR_LIMIT=40] -->
     <string name="battery_saver">Battery Saver</string>
@@ -7613,15 +7621,15 @@
         <item quantity="other">Trust or remove certificates</item>
     </plurals>
     <!-- Text of message to show to device owner user whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_info_message_device_owner">
-        <item quantity="one"><xliff:g id="managing_domain">%s</xliff:g> has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
-        <item quantity="other"><xliff:g id="managing_domain">%s</xliff:g> has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
-    </plurals>
+    <string name="ssl_ca_cert_info_message_device_owner"> {numberOfCertificates, plural,
+        =1 {{orgName} has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
+        other {{orgName} has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.}
+        }</string>
     <!-- Text of message to show to work profile users whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_info_message">
-        <item quantity="one"><xliff:g id="managing_domain">%s</xliff:g> has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
-        <item quantity="other"><xliff:g id="managing_domain">%s</xliff:g> has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
-    </plurals>
+    <string name="ssl_ca_cert_info_message">{numberOfCertificates, plural,
+        =1 {{orgName} has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
+        other {{orgName} has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.}
+        }</string>
     <!-- Text of warning to show to users that have a SSL CA Cert installed.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_warning_message">A third party is capable of monitoring your network activity, including emails, apps, and secure websites.\n\nA trusted credential installed on your device is making this possible.</string>
     <!-- Label on button that will take the user to the Trusted Credentials settings page.  [CHAR LIMIT=NONE]-->
