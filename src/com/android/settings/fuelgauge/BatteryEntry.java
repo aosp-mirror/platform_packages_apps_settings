@@ -550,6 +550,10 @@ public class BatteryEntry {
         Drawable icon = context.getDrawable(R.drawable.ic_power_system);
         if (uid == 0) {
             name = context.getResources().getString(R.string.process_kernel_label);
+        } else if (uid == BatteryUtils.UID_REMOVED_APPS) {
+            name = context.getResources().getString(R.string.process_removed_apps);
+        } else if (uid == BatteryUtils.UID_TETHERING) {
+            name = context.getResources().getString(R.string.process_network_tethering);
         } else if ("mediaserver".equals(name)) {
             name = context.getResources().getString(R.string.process_mediaserver_label);
         } else if ("dex2oat".equals(name) || "dex2oat32".equals(name) ||
