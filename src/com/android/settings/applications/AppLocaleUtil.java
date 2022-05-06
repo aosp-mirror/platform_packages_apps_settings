@@ -35,6 +35,7 @@ public class AppLocaleUtil {
 
     public static final Intent LAUNCHER_ENTRY_INTENT =
             new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER);
+
     /**
      * Decides the UI display of per app locale.
      */

@@ -243,7 +243,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                     continue;
                 }
 
-                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(entry.getUid()));
+                final int uid = entry.getUid();
+                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(uid));
                 final Drawable badgedIcon = mUserManager.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUserManager.getBadgedLabelForUser(
@@ -261,6 +262,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
                 pref.shouldShowAnomalyIcon(false);
+                pref.setEnabled(uid != BatteryUtils.UID_TETHERING
+                        && uid != BatteryUtils.UID_REMOVED_APPS);
                 setUsageSummary(pref, entry);
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
