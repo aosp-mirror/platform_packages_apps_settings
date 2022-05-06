@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -118,6 +119,9 @@ public class LocationInjectedServicesPreferenceControllerTest {
         final int fakeWorkProfileId = 123;
         ShadowUserManager.getShadow().setProfileIdsWithDisabled(
                 new int[]{UserHandle.myUserId(), fakeWorkProfileId});
+        ShadowUserManager.getShadow().addProfile(new UserInfo(UserHandle.myUserId(), "", 0));
+        ShadowUserManager.getShadow().addProfile(new UserInfo(fakeWorkProfileId, "",
+                UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE));
 
         // Mock RestrictedLockUtils.checkIfRestrictionEnforced and let it return non-null.
         final List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
