@@ -106,7 +106,7 @@ public class WifiTimeoutPreferenceController extends BasePreferenceController im
         String summary = "";
         if (timeoutDescription != null) {
             if (currentTimeout != 0)
-                summary = mContext.getString(R.string.wifi_timeout_summary, timeoutDescription);
+                summary = mContext.getString(R.string.wifi_timeout_summary1, timeoutDescription);
             else
                 summary = mContext.getString(R.string.wifi_timeout_summary2);
         }
