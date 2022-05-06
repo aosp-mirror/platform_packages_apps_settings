@@ -235,13 +235,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             public void onDataChanged() {
                 switch (method) {
                     case METHOD_GET_DYNAMIC_TITLE:
-                        refreshTitle(uri, pref);
+                        refreshTitle(uri, pref, this);
                         break;
                     case METHOD_GET_DYNAMIC_SUMMARY:
-                        refreshSummary(uri, pref);
+                        refreshSummary(uri, pref, this);
                         break;
                     case METHOD_IS_CHECKED:
-                        refreshSwitch(uri, pref);
+                        refreshSwitch(uri, pref, this);
                         break;
                 }
             }
@@ -262,19 +262,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI,
                     METHOD_GET_DYNAMIC_TITLE);
-            refreshTitle(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_TITLE, uri, preference);
         }
         return null;
     }
 
-    private void refreshTitle(Uri uri, Preference preference) {
+    private void refreshTitle(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String titleFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
             if (!TextUtils.equals(titleFromUri, preference.getTitle())) {
-                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+                observer.post(() -> preference.setTitle(titleFromUri));
             }
         });
     }
@@ -291,19 +290,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI,
                     METHOD_GET_DYNAMIC_SUMMARY);
-            refreshSummary(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_SUMMARY, uri, preference);
         }
         return null;
     }
 
-    private void refreshSummary(Uri uri, Preference preference) {
+    private void refreshSummary(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String summaryFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
             if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
-                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+                observer.post(() -> preference.setSummary(summaryFromUri));
             }
         });
     }
@@ -323,7 +321,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Uri isCheckedUri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SWITCH_URI,
                 METHOD_IS_CHECKED);
         setSwitchEnabled(preference, false);
-        refreshSwitch(isCheckedUri, preference);
         return createDynamicDataObserver(METHOD_IS_CHECKED, isCheckedUri, preference);
     }
 
@@ -350,12 +347,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         });
     }
 
-    private void refreshSwitch(Uri uri, Preference preference) {
+    private void refreshSwitch(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final boolean checked = TileUtils.getBooleanFromUri(mContext, uri, providerMap,
                     EXTRA_SWITCH_CHECKED_STATE);
-            ThreadUtils.postOnMainThread(() -> {
+            observer.post(() -> {
                 setSwitchChecked(preference, checked);
                 setSwitchEnabled(preference, true);
             });
