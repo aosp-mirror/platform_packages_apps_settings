@@ -56,7 +56,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_message);
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
