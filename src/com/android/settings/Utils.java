@@ -434,18 +434,20 @@ public final class Utils extends com.android.settingslib.Utils {
      * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      */
     public static UserHandle getManagedProfileWithDisabled(UserManager userManager) {
-        // TODO: Call getManagedProfileId from here once Robolectric supports
-        // API level 24 and UserManager.getProfileIdsWithDisabled can be Mocked (to avoid having
-        // yet another implementation that loops over user profiles in this method). In the meantime
-        // we need to use UserManager.getProfiles that is available on API 23 (the one currently
-        // used for Settings Robolectric tests).
-        final int myUserId = UserHandle.myUserId();
-        final List<UserInfo> profiles = userManager.getProfiles(myUserId);
+        return getManagedProfileWithDisabled(userManager, UserHandle.myUserId());
+    }
+
+    /**
+     * Returns the managed profile of the given user or {@code null} if none is found. Unlike
+     * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
+     */
+    private static UserHandle getManagedProfileWithDisabled(UserManager um, int parentUserId) {
+        final List<UserInfo> profiles = um.getProfiles(parentUserId);
         final int count = profiles.size();
         for (int i = 0; i < count; i++) {
             final UserInfo profile = profiles.get(i);
             if (profile.isManagedProfile()
-                    && profile.getUserHandle().getIdentifier() != myUserId) {
+                    && profile.getUserHandle().getIdentifier() != parentUserId) {
                 return profile.getUserHandle();
             }
         }
@@ -454,15 +456,14 @@ public final class Utils extends com.android.settingslib.Utils {
 
     /**
      * Retrieves the id for the given user's managed profile.
+     * Unlike {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      *
      * @return the managed profile id or UserHandle.USER_NULL if there is none.
      */
     public static int getManagedProfileId(UserManager um, int parentUserId) {
-        final int[] profileIds = um.getProfileIdsWithDisabled(parentUserId);
-        for (int profileId : profileIds) {
-            if (profileId != parentUserId) {
-                return profileId;
-            }
+        final UserHandle profile = getManagedProfileWithDisabled(um, parentUserId);
+        if (profile != null) {
+            return profile.getIdentifier();
         }
         return UserHandle.USER_NULL;
     }

@@ -18,16 +18,11 @@ package com.android.settings.applications;
 
 import static android.text.format.DateUtils.DAY_IN_MILLIS;
 
-import static com.android.settings.applications.AppStateNotificationBridge
-        .FILTER_APP_NOTIFICATION_BLOCKED;
-import static com.android.settings.applications.AppStateNotificationBridge
-        .FILTER_APP_NOTIFICATION_FREQUENCY;
-import static com.android.settings.applications.AppStateNotificationBridge
-        .FILTER_APP_NOTIFICATION_RECENCY;
-import static com.android.settings.applications.AppStateNotificationBridge
-        .FREQUENCY_NOTIFICATION_COMPARATOR;
-import static com.android.settings.applications.AppStateNotificationBridge
-        .RECENT_NOTIFICATION_COMPARATOR;
+import static com.android.settings.applications.AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED;
+import static com.android.settings.applications.AppStateNotificationBridge.FILTER_APP_NOTIFICATION_FREQUENCY;
+import static com.android.settings.applications.AppStateNotificationBridge.FILTER_APP_NOTIFICATION_RECENCY;
+import static com.android.settings.applications.AppStateNotificationBridge.FREQUENCY_NOTIFICATION_COMPARATOR;
+import static com.android.settings.applications.AppStateNotificationBridge.RECENT_NOTIFICATION_COMPARATOR;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -47,12 +42,12 @@ import android.app.usage.UsageEvents;
 import android.app.usage.UsageEvents.Event;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
 import android.os.Looper;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -71,6 +66,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -288,7 +284,8 @@ public class AppStateNotificationBridgeTest {
     @Test
     public void testLoadAllExtraInfo_multipleUsers() throws RemoteException {
         // has work profile
-        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{1});
+        when(mUserManager.getProfiles(anyInt())).thenReturn(Arrays.asList(
+                new UserInfo(1, "", UserInfo.FLAG_MANAGED_PROFILE | UserInfo.FLAG_PROFILE)));
         mBridge = new AppStateNotificationBridge(mContext, mState,
                 mock(AppStateBaseBridge.Callback.class), mUsageStats, mUserManager, mBackend);
 

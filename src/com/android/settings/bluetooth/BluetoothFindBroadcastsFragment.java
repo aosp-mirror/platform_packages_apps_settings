@@ -75,6 +75,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
     CachedBluetoothDevice mCachedDevice;
     @VisibleForTesting
     PreferenceCategory mBroadcastSourceListCategory;
+    BluetoothFindBroadcastsHeaderController mBluetoothFindBroadcastsHeaderController;
     private LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
     private BluetoothBroadcastSourcePreference mSelectedPreference;
     private Executor mExecutor;
@@ -93,7 +94,6 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 @Override
                 public void onSearchStartFailed(int reason) {
                     Log.d(TAG, "onSearchStartFailed: " + reason);
-
                 }
 
                 @Override
@@ -240,6 +240,28 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         return SettingsEnums.PAGE_UNKNOWN;
     }
 
+    /**
+     * Starts to scan broadcast source by the BluetoothLeBroadcastAssistant.
+     */
+    public void scanBroadcastSource() {
+        if (mLeBroadcastAssistant == null) {
+            Log.w(TAG, "scanBroadcastSource: LeBroadcastAssistant is null!");
+            return;
+        }
+        mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
+    }
+
+    /**
+     * Leaves the broadcast source by the BluetoothLeBroadcastAssistant.
+     */
+    public void leaveBroadcastSession() {
+        if (mLeBroadcastAssistant == null || mCachedDevice == null) {
+            Log.w(TAG, "leaveBroadcastSession: LeBroadcastAssistant or CachedDevice is null!");
+            return;
+        }
+        mLeBroadcastAssistant.removeSource(mCachedDevice.getDevice(), getSourceId());
+    }
+
     @Override
     protected String getLogTag() {
         return TAG;
@@ -256,13 +278,18 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
         if (mCachedDevice != null) {
             Lifecycle lifecycle = getSettingsLifecycle();
-            controllers.add(new BluetoothFindBroadcastsHeaderController(context, this,
-                    mCachedDevice, lifecycle, mManager));
+            mBluetoothFindBroadcastsHeaderController = new BluetoothFindBroadcastsHeaderController(
+                    context, this, mCachedDevice, lifecycle, mManager);
+            controllers.add(mBluetoothFindBroadcastsHeaderController);
         }
         return controllers;
     }
 
-    private LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
+    /**
+     * Gets the LocalBluetoothLeBroadcastAssistant
+     * @return the LocalBluetoothLeBroadcastAssistant
+     */
+    public LocalBluetoothLeBroadcastAssistant getLeBroadcastAssistant() {
         if (mManager == null) {
             Log.w(TAG, "getLeBroadcastAssistant: LocalBluetoothManager is null!");
             return null;
@@ -292,6 +319,11 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         }
         item.updateMetadataAndRefreshUi(source, isConnected);
         item.setOrder(isConnected ? 0 : 1);
+
+        //refresh the header
+        if (mBluetoothFindBroadcastsHeaderController != null) {
+            mBluetoothFindBroadcastsHeaderController.refreshUi();
+        }
     }
 
     private BluetoothBroadcastSourcePreference createBluetoothBroadcastSourcePreference(
