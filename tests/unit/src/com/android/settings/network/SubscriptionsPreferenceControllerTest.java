@@ -200,7 +200,7 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_airplaneModeOnWifiOffWithCarrierNetwork_availableTrue() {
+    public void isAvailable_airplaneModeOnWifiOffWithCarrierNetwork_availableFalse() {
         setupMockSubscriptions(1);
 
         when(mWifiManager.isWifiEnabled()).thenReturn(false);
@@ -212,7 +212,7 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_airplaneModeOff_availableFalse() {
+    public void isAvailable_airplaneModeOff_availableTrue() {
         setupMockSubscriptions(2);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -235,12 +235,11 @@ public class SubscriptionsPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub1");
     }
 
     @Test
     @UiThreadTest
-    public void displayPreference_providerAndHasMultiSim_showDataSubPreference() {
+    public void displayPreference_providerAndHasMultiSim_showOnePreference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
@@ -249,7 +248,6 @@ public class SubscriptionsPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
 
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub1");
     }
 
     @Test
@@ -437,7 +435,7 @@ public class SubscriptionsPreferenceControllerTest {
 
     @Test
     @UiThreadTest
-    public void dataSubscriptionChanged_providerAndHasMultiSim_showSubId1Preference() {
+    public void dataSubscriptionChanged_providerAndHasMultiSim_showOnePreference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
         doReturn(sub).when(mSubscriptionManager).getAvailableSubscriptionInfoList();
@@ -449,12 +447,11 @@ public class SubscriptionsPreferenceControllerTest {
 
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub1");
     }
 
     @Test
     @UiThreadTest
-    public void dataSubscriptionChanged_providerAndHasMultiSim_showSubId2Preference() {
+    public void dataSubscriptionChanged_providerAndHasMultiSim_showOnlyOnePreference() {
         final List<SubscriptionInfo> sub = setupMockSubscriptions(2);
         final int subId = sub.get(0).getSubscriptionId();
         doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
@@ -464,17 +461,12 @@ public class SubscriptionsPreferenceControllerTest {
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
 
-        assertThat(mController.isAvailable()).isTrue();
-        assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub1");
-
         doReturn(sub.get(1)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
 
         mController.mConnectionChangeReceiver.onReceive(mContext, intent);
 
         assertThat(mController.isAvailable()).isTrue();
         assertThat(mPreferenceCategory.getPreferenceCount()).isEqualTo(1);
-        assertThat(mPreferenceCategory.getPreference(0).getTitle()).isEqualTo("sub2");
     }
 
     @Test
