@@ -356,7 +356,7 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         addWorkPolicyInfoIntent(mOwner.getPackageName(), true, false);
         assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
 
-        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isFalse();
         verify(mContext, never()).startActivity(any());
     }
 
@@ -365,12 +365,12 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         // If the intent is not resolved, then there's no info to show for DO
         when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(mOwner);
         assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
-        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isFalse();
 
         // If the intent is resolved, then we can use it to launch the activity
         Intent intent = addWorkPolicyInfoIntent(mOwner.getPackageName(), true, false);
         assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
-        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isTrue();
         verify(mContext).startActivity(intentEquals(intent));
     }
 
@@ -382,12 +382,12 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         // If the intent is not resolved, then there's no info to show for PO
         assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
-        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isFalse();
 
         // If the intent is resolved, then we can use it to launch the activity in managed profile
         Intent intent = addWorkPolicyInfoIntent(mOwner.getPackageName(), false, true);
         assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
-        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isTrue();
         verify(mContext)
                 .startActivityAsUser(
                         intentEquals(intent),
@@ -402,12 +402,12 @@ public class EnterprisePrivacyFeatureProviderImplTest {
 
         // If the intent is not resolved, then there's no info to show for COMP
         assertThat(mProvider.hasWorkPolicyInfo()).isFalse();
-        assertThat(mProvider.showWorkPolicyInfo()).isFalse();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isFalse();
 
         // If the intent is resolved, then we can use it to launch the activity for device owner
         Intent intent = addWorkPolicyInfoIntent(mOwner.getPackageName(), true, true);
         assertThat(mProvider.hasWorkPolicyInfo()).isTrue();
-        assertThat(mProvider.showWorkPolicyInfo()).isTrue();
+        assertThat(mProvider.showWorkPolicyInfo(mContext)).isTrue();
         verify(mContext).startActivity(intentEquals(intent));
     }
 

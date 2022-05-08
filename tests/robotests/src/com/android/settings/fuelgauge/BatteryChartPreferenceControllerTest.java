@@ -103,7 +103,11 @@ public final class BatteryChartPreferenceControllerTest {
         resources.getConfiguration().setLocales(new LocaleList(new Locale("en_US")));
         doReturn(resources).when(mContext).getResources();
         doReturn(new String[] {"com.android.googlequicksearchbox"})
-            .when(resources).getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+            .when(mFeatureFactory.powerUsageFeatureProvider)
+            .getHideApplicationSummary(mContext);
+        doReturn(new String[] {"com.android.gms.persistent"})
+            .when(mFeatureFactory.powerUsageFeatureProvider)
+            .getHideApplicationEntries(mContext);
         mBatteryChartPreferenceController = createController();
         mBatteryChartPreferenceController.mPrefContext = mContext;
         mBatteryChartPreferenceController.mAppListPrefGroup = mAppListGroup;
@@ -339,14 +343,12 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
             mPowerGaugePreference)).isTrue();
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
-                });
+                .action(
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        SettingsEnums.ACTION_BATTERY_USAGE_SYSTEM_ITEM,
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        /* package name */ "none",
+                        /* percentage of total */ 0);
     }
 
     @Test
@@ -358,14 +360,12 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(mBatteryChartPreferenceController.handlePreferenceTreeClick(
             mPowerGaugePreference)).isTrue();
         verify(mMetricsFeatureProvider)
-            .action(
-                mContext,
-                SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
-                (Pair<Integer, Object>[]) new Pair[] {
-                    new Pair(ConvertUtils.METRIC_KEY_PACKAGE, null),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_LEVEL, 0),
-                    new Pair(ConvertUtils.METRIC_KEY_BATTERY_USAGE, null)
-                });
+                .action(
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        SettingsEnums.ACTION_BATTERY_USAGE_APP_ITEM,
+                        SettingsEnums.OPEN_BATTERY_USAGE,
+                        /* package name */ "none",
+                        /* percentage of total */ 0);
     }
 
     @Test
@@ -660,7 +660,7 @@ public final class BatteryChartPreferenceControllerTest {
 
         // Verifies the items which are defined in the array list.
         assertThat(mBatteryChartPreferenceController
-                .isValidToShowEntry("com.google.android.gms.persistent"))
+                .isValidToShowEntry("com.android.gms.persistent"))
             .isFalse();
     }
 

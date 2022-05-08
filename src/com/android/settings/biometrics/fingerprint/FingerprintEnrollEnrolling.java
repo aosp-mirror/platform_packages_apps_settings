@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.IntDef;
 import android.annotation.Nullable;
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
@@ -46,7 +47,6 @@ import android.view.animation.Interpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.IntDef;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
@@ -158,7 +158,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         mIsSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (mCanAssumeUdfps) {
-            updateTitleAndDescriptionForUdfps();
+            updateTitleAndDescription();
         } else {
             setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
         }
@@ -567,6 +567,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
     private final Animator.AnimatorListener mProgressAnimationListener =
             new Animator.AnimatorListener() {
+
                 @Override
                 public void onAnimationStart(Animator animation) { }
 

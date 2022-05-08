@@ -436,7 +436,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
         mRanking.getRanking(info.key, rank);
         info.alerted = rank.getLastAudiblyAlertedMillis() > 0;
-        info.visuallyInterruptive = rank.visuallyInterruptive();
+        info.visuallyInterruptive = rank.isTextChanged();
         info.channel = rank.getChannel();
         info.rankingExtra = generateRankingExtraText(info);
     }

@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
 import androidx.slice.Slice;
 
 import com.android.settings.R;
@@ -50,6 +51,8 @@ public interface Sliceable {
      * - Must be understandable as a stand-alone Setting.
      * <p>
      * This does not guarantee the setting is available.
+     * <p>
+     * {@link #getSliceHighlightMenuRes} should also be overridden when returning true.
      *
      * @return {@code true} if the controller should be used as a Slice.
      */
@@ -130,5 +133,19 @@ public interface Sliceable {
      */
     default Class<? extends SliceBackgroundWorker> getBackgroundWorkerClass() {
         return null;
+    }
+
+    /**
+     * Used to mark a {@link Sliceable} that has no highlight menu string resource.
+     */
+    int NO_RES = 0;
+
+    /**
+     * @return a string resource declared in res/values/menu_keys.xml that indicates which menu
+     * entry should be highlighted in two-pane mode, or {@link #NO_RES} representing highlighting is
+     * not applicable.
+     */
+    @StringRes default int getSliceHighlightMenuRes() {
+        return NO_RES;
     }
 }

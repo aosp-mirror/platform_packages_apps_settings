@@ -117,6 +117,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
             return;
         }
         use(AdvancedBluetoothDetailsHeaderController.class).init(mCachedDevice);
+        use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
                 context).getBluetoothFeatureProvider(context);

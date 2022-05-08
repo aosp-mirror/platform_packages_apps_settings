@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.view.RotationPolicy;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -155,6 +156,11 @@ public class SmartAutoRotateController extends TogglePreferenceController implem
                 CAMERA_AUTOROTATE,
                 isChecked ? 1 : 0);
         return true;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
     }
 
     static boolean isRotationResolverServiceAvailable(Context context) {

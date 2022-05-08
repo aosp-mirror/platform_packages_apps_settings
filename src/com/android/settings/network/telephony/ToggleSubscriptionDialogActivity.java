@@ -23,9 +23,11 @@ import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -39,7 +41,9 @@ import com.android.settings.sim.SimActivationNotifier;
 
 import com.google.common.collect.ImmutableList;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** This dialog activity handles both eSIM and pSIM subscriptions enabling and disabling. */
 public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogActivity
@@ -54,8 +58,15 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private static final int DIALOG_TAG_ENABLE_SIM_CONFIRMATION = 2;
     private static final int DIALOG_TAG_ENABLE_DSDS_CONFIRMATION = 3;
     private static final int DIALOG_TAG_ENABLE_DSDS_REBOOT_CONFIRMATION = 4;
+    private static final int DIALOG_TAG_ENABLE_SIM_CONFIRMATION_MEP = 5;
+
     // Number of SIMs for DSDS
     private static final int NUM_OF_SIMS_FOR_DSDS = 2;
+    // Support RTL mode
+    private static final String LINE_BREAK = "\n";
+    private static final int LINE_BREAK_OFFSET_ONE = 1;
+    private static final int LINE_BREAK_OFFSET_TWO = 2;
+    private static final String RTL_MARK = "\u200F";
 
     /**
      * Returns an intent of ToggleSubscriptionDialogActivity.
@@ -78,11 +89,12 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private boolean mEnable;
     private boolean mIsEsimOperation;
     private TelephonyManager mTelMgr;
+    private boolean isRtlMode;
+    private List<SubscriptionInfo> mActiveSubInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent intent = getIntent();
         int subId = intent.getIntExtra(ARG_SUB_ID, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mTelMgr = getSystemService(TelephonyManager.class);
@@ -100,6 +112,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             return;
         }
 
+        mActiveSubInfos = SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
         mSubInfo = SubscriptionUtil.getSubById(mSubscriptionManager, subId);
         mIsEsimOperation = mSubInfo != null && mSubInfo.isEmbedded();
         mSwitchToEuiccSubscriptionSidecar =
@@ -107,6 +120,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         mSwitchToRemovableSlotSidecar = SwitchToRemovableSlotSidecar.get(getFragmentManager());
         mEnableMultiSimSidecar = EnableMultiSimSidecar.get(getFragmentManager());
         mEnable = intent.getBooleanExtra(ARG_enable, true);
+        isRtlMode = getResources().getConfiguration().getLayoutDirection()
+                == View.LAYOUT_DIRECTION_RTL;
+        Log.i(TAG, "isMultipleEnabledProfilesSupported():" + isMultipleEnabledProfilesSupported());
 
         if (savedInstanceState == null) {
             if (mEnable) {
@@ -145,7 +161,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     @Override
-    public void onConfirm(int tag, boolean confirmed) {
+    public void onConfirm(int tag, boolean confirmed, int itemPosition) {
         if (!confirmed
                 && tag != DIALOG_TAG_ENABLE_DSDS_CONFIRMATION
                 && tag != DIALOG_TAG_ENABLE_DSDS_REBOOT_CONFIRMATION) {
@@ -153,14 +169,16 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             return;
         }
 
+        SubscriptionInfo removedSubInfo = null;
         switch (tag) {
             case DIALOG_TAG_DISABLE_SIM_CONFIRMATION:
                 if (mIsEsimOperation) {
                     Log.i(TAG, "Disabling the eSIM profile.");
                     showProgressDialog(
                             getString(R.string.privileged_action_disable_sub_dialog_progress));
+                    int port = mSubInfo != null ? mSubInfo.getPortIndex() : 0;
                     mSwitchToEuiccSubscriptionSidecar.run(
-                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID, port, null);
                     return;
                 }
                 Log.i(TAG, "Disabling the pSIM profile.");
@@ -192,6 +210,11 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 SimActivationNotifier.setShowSimSettingsNotification(this, true);
                 mTelMgr.switchMultiSimConfig(NUM_OF_SIMS_FOR_DSDS);
                 break;
+            case DIALOG_TAG_ENABLE_SIM_CONFIRMATION_MEP:
+                if (itemPosition != -1) {
+                    removedSubInfo = (mActiveSubInfos != null) ? mActiveSubInfos.get(itemPosition)
+                            : null;
+                }
             case DIALOG_TAG_ENABLE_SIM_CONFIRMATION:
                 Log.i(TAG, "User confirmed to enable the subscription.");
                 if (mIsEsimOperation) {
@@ -200,12 +223,15 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                                     R.string.sim_action_switch_sub_dialog_progress,
                                     SubscriptionUtil.getUniqueSubscriptionDisplayName(
                                             mSubInfo, this)));
-                    mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId());
+                    mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId(),
+                            UiccSlotUtil.INVALID_PORT_ID,
+                            removedSubInfo);
                     return;
                 }
                 showProgressDialog(
                         getString(R.string.sim_action_enabling_sim_without_carrier_name));
-                mSwitchToRemovableSlotSidecar.run(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID);
+                mSwitchToRemovableSlotSidecar.run(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID,
+                        removedSubInfo);
                 break;
             default:
                 Log.e(TAG, "Unrecognized confirmation dialog tag: " + tag);
@@ -216,8 +242,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private void handleSwitchToEuiccSubscriptionSidecarStateChange() {
         switch (mSwitchToEuiccSubscriptionSidecar.getState()) {
             case SidecarFragment.State.SUCCESS:
-                Log.i(
-                        TAG,
+                Log.i(TAG,
                         String.format(
                                 "Successfully %s the eSIM profile.",
                                 mEnable ? "enable" : "disable"));
@@ -226,8 +251,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 finish();
                 break;
             case SidecarFragment.State.ERROR:
-                Log.i(
-                        TAG,
+                Log.i(TAG,
                         String.format(
                                 "Failed to %s the eSIM profile.", mEnable ? "enable" : "disable"));
                 mSwitchToEuiccSubscriptionSidecar.reset();
@@ -281,7 +305,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         if (mIsEsimOperation) {
             Log.i(TAG, "DSDS enabled, start to enable profile: " + mSubInfo.getSubscriptionId());
             // For eSIM operations, we simply switch to the selected eSIM profile.
-            mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId());
+            mSwitchToEuiccSubscriptionSidecar.run(mSubInfo.getSubscriptionId(),
+                    UiccSlotUtil.INVALID_PORT_ID, null);
             return;
         }
 
@@ -296,10 +321,8 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             mSubscriptionManager.setUiccApplicationsEnabled(mSubInfo.getSubscriptionId(), mEnable);
             finish();
         } else {
-            Log.i(
-                    TAG,
-                    "The device does not support toggling pSIM. It is enough to just "
-                            + "enable the removable slot.");
+            Log.i(TAG, "The device does not support toggling pSIM. It is enough to just "
+                    + "enable the removable slot.");
         }
     }
 
@@ -310,7 +333,10 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             showEnableDsdsConfirmDialog();
             return;
         }
-        if (!mIsEsimOperation && mTelMgr.isMultiSimEnabled()) {
+        if (!mIsEsimOperation && mTelMgr.isMultiSimEnabled()
+                && isRemovableSimEnabled()) {
+            // This case is for switching on psim when device is not multiple enable profile
+            // supported.
             Log.i(TAG, "Toggle on pSIM, no dialog displayed.");
             handleTogglePsimAction();
             finish();
@@ -338,7 +364,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 getString(R.string.sim_action_restart_title),
                 getString(R.string.sim_action_enable_dsds_text),
                 getString(R.string.sim_action_reboot),
-                getString(R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     /* Displays the SIM toggling confirmation dialog. */
@@ -359,32 +385,61 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 title,
                 null,
                 getString(R.string.yes),
-                getString(R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     private void showEnableSimConfirmDialog() {
-        List<SubscriptionInfo> activeSubs =
-                SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
-        SubscriptionInfo activeSub = activeSubs.isEmpty() ? null : activeSubs.get(0);
-        if (activeSub == null) {
+        if (mActiveSubInfos == null || mActiveSubInfos.isEmpty()) {
             Log.i(TAG, "No active subscriptions available.");
             showNonSwitchSimConfirmDialog();
             return;
         }
-        Log.i(TAG, "Found active subscription.");
-        boolean isBetweenEsim = mIsEsimOperation && activeSub.isEmbedded();
-        if (mTelMgr.isMultiSimEnabled() && !isBetweenEsim) {
+        Log.i(TAG, "mActiveSubInfos:" + mActiveSubInfos);
+
+        boolean isSwitchingBetweenEsims = mIsEsimOperation
+                && mActiveSubInfos.stream().anyMatch(activeSubInfo -> activeSubInfo.isEmbedded());
+        boolean isMultiSimEnabled = mTelMgr.isMultiSimEnabled();
+        if (isMultiSimEnabled
+                && !isMultipleEnabledProfilesSupported()
+                && !isSwitchingBetweenEsims) {
+            // Showing the "no switch dialog" for below cases.
+            // DSDS mode + no MEP +
+            //     (there is the active psim -> esim switch on => active (psim + esim))
             showNonSwitchSimConfirmDialog();
             return;
         }
+
+        if (isMultiSimEnabled && isMultipleEnabledProfilesSupported()) {
+            if (mActiveSubInfos.size() < NUM_OF_SIMS_FOR_DSDS) {
+                // The sim can add into device directly, so showing the "no switch dialog".
+                // DSDS + MEP + (active sim < NUM_OF_SIMS_FOR_DSDS)
+                showNonSwitchSimConfirmDialog();
+            } else {
+                // The all of slots have sim, it needs to show the "MEP switch dialog".
+                // DSDS + MEP + two active sims
+                showMepSwitchSimConfirmDialog();
+            }
+            return;
+        }
+
+        // Showing the "switch dialog" for below cases.
+        // case1: SS mode + psim switch on from esim.
+        // case2: SS mode + esim switch from psim.
+        // case3: DSDS mode + No MEP + esim switch on from another esim.
+        SubscriptionInfo activeSub =
+                (isMultiSimEnabled && isSwitchingBetweenEsims)
+                        ? mActiveSubInfos.stream()
+                                .filter(activeSubInfo -> activeSubInfo.isEmbedded())
+                                .findFirst().get()
+                        : mActiveSubInfos.get(0);
         ConfirmDialogFragment.show(
                 this,
                 ConfirmDialogFragment.OnConfirmListener.class,
                 DIALOG_TAG_ENABLE_SIM_CONFIRMATION,
                 getSwitchSubscriptionTitle(),
-                getSwitchDialogBodyMsg(activeSub, isBetweenEsim),
+                getSwitchDialogBodyMsg(activeSub, isSwitchingBetweenEsims),
                 getSwitchDialogPosBtnText(),
-                getString(android.R.string.cancel));
+                getString(R.string.sim_action_cancel));
     }
 
     private void showNonSwitchSimConfirmDialog() {
@@ -395,7 +450,36 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 getEnableSubscriptionTitle(),
                 null /* msg */,
                 getString(R.string.yes),
-                getString(android.R.string.cancel));
+                getString(R.string.sim_action_cancel));
+    }
+
+    private void showMepSwitchSimConfirmDialog() {
+        Log.i(TAG, "showMepSwitchSimConfirmDialog");
+        final CharSequence displayName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                mSubInfo, this);
+        String title = getString(R.string.sim_action_switch_sub_dialog_mep_title, displayName);
+        final StringBuilder switchDialogMsg = new StringBuilder();
+        switchDialogMsg.append(
+                getString(R.string.sim_action_switch_sub_dialog_mep_text, displayName));
+        if (isRtlMode) {
+            /* There are two lines of message in the dialog, and the RTL symbols must be added
+             * before and after each sentence, so use the line break symbol to find the position.
+             * (Each message are all with two line break symbols)
+             */
+            switchDialogMsg.insert(0, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) - LINE_BREAK_OFFSET_ONE, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) + LINE_BREAK_OFFSET_TWO, RTL_MARK)
+                    .insert(switchDialogMsg.length(), RTL_MARK);
+        }
+        ConfirmDialogFragment.show(
+                this,
+                ConfirmDialogFragment.OnConfirmListener.class,
+                DIALOG_TAG_ENABLE_SIM_CONFIRMATION_MEP,
+                title,
+                switchDialogMsg.toString(),
+                null,
+                null,
+                getSwitchDialogBodyList());
     }
 
     private String getSwitchDialogPosBtnText() {
@@ -429,21 +513,47 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 mSubInfo, this);
         final CharSequence activeSubName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 activeSub, this);
+        final StringBuilder switchDialogMsg = new StringBuilder();
         if (betweenEsim && mIsEsimOperation) {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text_downloaded,
                     subInfoName,
-                    activeSubName);
+                    activeSubName));
         } else if (mIsEsimOperation) {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text,
                     subInfoName,
-                    activeSubName);
+                    activeSubName));
         } else {
-            return getString(
+            switchDialogMsg.append(getString(
                     R.string.sim_action_switch_sub_dialog_text_single_sim,
-                    activeSubName);
+                    activeSubName));
         }
+        if (isRtlMode) {
+            /* There are two lines of message in the dialog, and the RTL symbols must be added
+             * before and after each sentence, so use the line break symbol to find the position.
+             * (Each message are all with two line break symbols)
+             */
+            switchDialogMsg.insert(0, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) - LINE_BREAK_OFFSET_ONE, RTL_MARK)
+                    .insert(switchDialogMsg.indexOf(LINE_BREAK) + LINE_BREAK_OFFSET_TWO, RTL_MARK)
+                    .insert(switchDialogMsg.length(), RTL_MARK);
+        }
+        return switchDialogMsg.toString();
+    }
+
+    private ArrayList<String> getSwitchDialogBodyList() {
+        ArrayList<String> list = new ArrayList<String>(mActiveSubInfos.stream()
+                .map(subInfo -> {
+                    CharSequence subInfoName = SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                            subInfo, this);
+                    return getString(
+                            R.string.sim_action_switch_sub_dialog_carrier_list_item_for_turning_off,
+                            subInfoName);
+                })
+                .collect(Collectors.toList()));
+        list.add(getString(R.string.sim_action_cancel));
+        return list;
     }
 
     private boolean isDsdsConditionSatisfied() {
@@ -455,17 +565,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             Log.i(TAG, "Hardware does not support DSDS.");
             return false;
         }
-        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(mTelMgr);
-        boolean isRemovableSimEnabled =
-                slotInfos.stream()
-                        .anyMatch(
-                                slot ->
-                                        slot != null
-                                                && slot.isRemovable()
-                                                && slot.getPorts().stream().anyMatch(
-                                                        port -> port.isActive())
-                                                && slot.getCardStateInfo()
-                                                        == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
+        boolean isRemovableSimEnabled = isRemovableSimEnabled();
         if (mIsEsimOperation && isRemovableSimEnabled) {
             Log.i(TAG, "eSIM operation and removable SIM is enabled. DSDS condition satisfied.");
             return true;
@@ -474,13 +574,36 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                 SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager).stream()
                         .anyMatch(SubscriptionInfo::isEmbedded);
         if (!mIsEsimOperation && isEsimProfileEnabled) {
-            Log.i(
-                    TAG,
-                    "Removable SIM operation and eSIM profile is enabled. DSDS condition"
-                            + " satisfied.");
+            Log.i(TAG, "Removable SIM operation and eSIM profile is enabled. DSDS condition"
+                    + " satisfied.");
             return true;
         }
         Log.i(TAG, "DSDS condition not satisfied.");
         return false;
+    }
+
+    private boolean isRemovableSimEnabled() {
+        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(mTelMgr);
+        boolean isRemovableSimEnabled =
+                slotInfos.stream()
+                        .anyMatch(
+                                slot -> slot != null
+                                        && slot.isRemovable()
+                                        && slot.getPorts().stream().anyMatch(
+                                                port -> port.isActive())
+                                        && slot.getCardStateInfo()
+                                                == UiccSlotInfo.CARD_STATE_INFO_PRESENT);
+        Log.i(TAG, "isRemovableSimEnabled: " + isRemovableSimEnabled);
+        return isRemovableSimEnabled;
+    }
+
+    private boolean isMultipleEnabledProfilesSupported() {
+        List<UiccCardInfo> cardInfos = mTelMgr.getUiccCardsInfo();
+        if (cardInfos == null) {
+            Log.w(TAG, "UICC cards info list is empty.");
+            return false;
+        }
+        return cardInfos.stream().anyMatch(
+                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
     }
 }

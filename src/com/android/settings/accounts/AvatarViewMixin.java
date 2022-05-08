@@ -37,6 +37,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.utils.ThreadUtils;
@@ -104,6 +105,17 @@ public class AvatarViewMixin implements LifecycleObserver {
                 Log.w(TAG, "Cannot find any matching action VIEW_ACCOUNT intent.");
                 return;
             }
+
+            // Set a component name since activity embedding requires a component name for
+            // registering a rule.
+            intent.setComponent(matchedIntents.get(0).getComponentInfo().getComponentName());
+            ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                    mContext,
+                    intent.getComponent(),
+                    intent.getAction(),
+                    false /* finishPrimaryWithSecondary */,
+                    true /* finishSecondaryWithPrimary */,
+                    false /* clearTop */);
 
             FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_AVATAR_ICON, SettingsEnums.SETTINGS_HOMEPAGE);

@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Bikotetzeko eskaera"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin parekatzeko, sakatu hau."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Jasotako fitxategiak"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Bluetooth bidez jasotako fitxategiak"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth-a desaktibatuta dago"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Sakatu aktibatzeko"</string>
     <string name="device_picker" msgid="2427027896389445414">"Aukeratu Bluetooth bidezko gailua"</string>
@@ -143,10 +142,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Eman gailuari inguruko Bluetooth bidezko gailuekin komunikatzeko baimena"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Baimendu telefonoari inguruko Bluetooth bidezko gailuekin komunikatzea"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desgaitu Bluetooth A2DP hardwarea deskargatzeko aukera"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"Gailua berrabiarazi?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Ezarpen hau aldatzeko, gailua berrabiarazi egin behar duzu."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"Berrabiarazi"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"Utzi"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Desgaitu Bluetooth LE AUDIO-ren hardwarearen deskarga"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Gailua berrabiarazi nahi duzu?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ezarpen hau aldatzeko, gailua berrabiarazi behar duzu."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Berrabiarazi"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Utzi"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multimedia-gailuak"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Deiak jaso eta egiteko gailuak"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Beste gailu batzuk"</string>
@@ -310,9 +310,9 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Segurtasuna"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Enkriptatzea eta kredentzialak"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Enkriptatuta dago telefonoa"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Telefonoa ez dago enkriptatuta"</string>
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefonoa ez dago enkriptatuta"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Enkriptatuta dago gailua"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Gailua ez dago enkriptatuta"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Gailua ez dago enkriptatuta"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Pantaila blokeatua"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Zer erakutsi"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Ezarri Nire kokapena, pantailaren desblokeoa, SIM txartelaren blokeoa, kredentzialen biltegiaren blokeoa"</string>
@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -392,9 +393,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Erabili aurpegia telefonoa desblokeatzeko eta aplikazioetan autentifikatzeko; adibidez, saioa hastean edo erosketak onartzean.\n\nKontuan izan:\nAurpegi bakarra konfigura dezakezu aldiko. Beste aurpegi bat gehitzeko, ezabatu une honetan dagoena.\n\nTelefonoari begiratuz gero, baliteke hura desblokeatzea, horretarako asmorik ez baduzu ere.\n\nBeste norbaitek ere desblokea dezake telefonoa, zuri begira jartzen badu.\n\nZure antz handia dutenek ere desblokea dezakete telefonoa; esate baterako, biki batek."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Erabili aurpegia telefonoa desblokeatzeko eta aplikazioetan autentifikatzeko; adibidez, saioa hastean edo erosketak onartzean.\n\nKontuan izan:\nAurpegi bakarra konfigura dezakezu aldiko. Beste aurpegi bat gehitzeko, ezabatu une honetan dagoena.\n\nTelefonoari begiratuz gero, baliteke hura desblokeatzea, horretarako asmorik ez baduzu ere.\n\nBeste norbaitek ere desblokea dezake telefonoa, zuri begira jartzen badu, nahiz eta zure begiak itxita egon.\n\nZure antz handia dutenek ere desblokea dezakete telefonoa; esate baterako, biki batek."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Aurpegi-eredua ezabatu nahi duzu?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Aurpegi-eredua modu seguruan eta betiko ezabatuko da. Horren ondoren, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko edo aplikazioetan autentifikatzeko."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"Aurpegi-eredua ezabatu nahi duzu?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Aurpegi-eredua modu seguruan eta betiko ezabatuko da.\n\nHorren ondoren, hatz-marka, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko edo aplikazioetan autentifikatzeko."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Aurpegi-eredua modu seguruan eta betiko ezabatuko da.\n\nHorren ondoren, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko edo aplikazioetan autentifikatzeko."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Aurpegi-eredua betiko eta modu seguruan ezabatuko da.\n\nEzabatu ondoren, hatz-marka, PINa, eredua edo pasahitza beharko duzu telefonoa desblokeatzeko."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Erabili aurpegi bidez desblokeatzeko eginbidea telefonoa desblokeatzeko"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Hatz-marka digitala"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Lanerako hatz-marka"</string>
@@ -451,9 +451,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Aurpegia eta hatz-marka gehitu dira"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Aurpegi eta hatz-marka bidez desblokeatzeko eginbideak konfiguratzen badituzu, hatz-marka eskatuko dizu telefonoak maskara bat jantzita daukazunean edo argi gutxi dagoenean"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Desblokeatzeko moduak"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Erabili aurpegia eta hatz-marka hauek egiteko:"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Telefonoa desblokeatzeko"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Aplikazioetako autentifikazioa"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"Desblokeatu telefonoa"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"Egiaztatu zeu ari zarela aplikazioak erabiltzen"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Aurpegiaren bidez"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Hatz-markaren bidez"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Aurpegiaren edo hatz-markaren bidez"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Eman telefonoa guraso bati"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Ados"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Pantailaren blokeoa saltatu?"</string>
@@ -479,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Ezabatu"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Ukitu sentsorea"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Ezarri hatza sentsorean eta, dardara sentitzen duzunean, jaso ezazu"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Mantendu hatza sentsorearen gainean dardara sentitu arte"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Jarri hatz-marka lau-laua sentsorearen gainean eta manten ezazu dardara sentitu arte"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Eduki ukituta hatz-marken sentsorea"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Jaso hatza eta ukitu berriro"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Beste behin"</string>
@@ -487,7 +489,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Jarraitu hatza jasotzen, hatz-markaren zati guztiak gehitzeko"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Hatz-markaren ikonoa mugitzen den bakoitzean, eduki sakatuta sentsorea. Horrela, hatz-markaren eremu zabalagoa hartzen da."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Jarri hatzaren punta sentsorearen gainean"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Amaitzeko, jarri hatzaren alboak"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Amaitzeko, jarri hatzaren alboak"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Jarri hatz-markaren albo bat sentsorearen gainean eta eutsi horrela. Ondoren, egin gauza bera beste alboarekin."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Horrela, hatz-markaren eremu zabalagoa hartzen da"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Hatz-markaren ehuneko <xliff:g id="PERCENTAGE">%d</xliff:g> erregistratu da"</string>
@@ -567,46 +569,10 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Ezingo duzu erabili hatz-marka telefonoa desblokeatzeko edo aplikazioetan zeu zarela egiaztatzeko."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Ezingo duzu erabili hatz-marka laneko profila desblokeatzeko, erosketak baimentzeko edo laneko aplikazioetan saioa hasteko."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Bai, kendu"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Aurpegi eta hatz-marka bidez desblokeatzea"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"Sakatu konfiguratzeko"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Aurpegia soilik"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Hatz-marka soilik"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Aurpegia eta hatz-marka"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Aurpegi eta hatz-marka bidez desblokeatzeko eginbidea konfiguratzen baduzu, hatz-marka eskatuko dizu telefonoak maskara bat jantzita duzunean edo argi gutxi dagoenean"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Desblokeatzeko moduak"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Erabili aurpegia edo hatz-marka hau egiteko:"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Aplikazioetako autentifikazioa"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Enkriptatzea"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"Enkriptatu tableta"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"Enkriptatu telefonoa"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Enkriptatuta"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Kontuak, ezarpenak, deskargatutako aplikazioak eta euren datuak, multimedia-edukia eta bestelako fitxategiak enkripta ditzakezu. Tableta enkriptatu ondoren, pantaila blokeatzeko aukera konfiguratu baduzu, tableta pizten duzun bakoitzean pantaila desblokeatu beharko duzu (eredu bat marraztuta edo PIN bat edo pasahitz bat idatzita) gailuko edukia desenkriptatzeko. Desenkriptatzeko dagoen beste modu bakarra jatorrizko datuak berrezartzea da, ordura arte bildutako datu guztiak ezabatuta.\n\nDatuak enkriptatzeko ordubete behar da gutxienez. Prozesuak dirauen bitartean, bateriak kargatuta egon behar du eta tabletak entxufatuta. Prozesua eteten baduzu, datu batzuk edo guztiak galduko dituzu."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Kontuak, ezarpenak, deskargatutako aplikazioak eta haien datuak, multimedia-edukia eta bestelako fitxategiak enkripta ditzakezu. Telefonoa enkriptatu ondoren, pantaila blokeatzeko aukera konfiguratu baduzu, telefonoa pizten duzun bakoitzean pantaila desblokeatu beharko duzu (eredu bat marraztuta edo PIN bat edo pasahitz bat idatzita) gailuko edukia desenkriptatzeko. Desenkriptatzeko dagoen beste modu bakarra jatorrizko datuak berrezartzea da, ordura arte bildutako datu guztiak ezabatuta.\n\nDatuak enkriptatzeko ordubete behar da gutxienez. Prozesuak dirauen bitartean, bateriak kargatuta egon behar du eta telefonoak entxufatuta. Prozesua eteten baduzu, datu batzuk edo guztiak galduko dituzu."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"Enkriptatu tableta"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"Enkriptatu telefonoa"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"Kargatu bateria eta saiatu berriro."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"Entxufatu kargagailua eta saiatu berriro."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Pantaila desblokeatzeko PIN koderik edo pasahitzik ez"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Enkriptatzen hasi aurretik, pantaila desblokeatzeko PIN edo pasahitz bat zehaztu behar duzu."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"Enkriptatu nahi duzu?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Enkriptatze-eragiketa atzeraezina da eta eteten baduzu, datuak galduko dituzu. Enkriptatzeko ordubete edo gehiago behar izaten da eta, prozesuak dirauen bitartean, tableta hainbat aldiz berrabiaraziko da."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Enkriptatze-eragiketa atzeraezina da eta eteten baduzu, datuak galduko dituzu. Enkriptatzeko ordubete edo gehiago behar izaten da eta, prozesuak dirauen bitartean, telefonoa hainbat aldiz berrabiaraziko da."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Enkriptatzen"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Itxaron tableta enkriptatzen den bitartean. % <xliff:g id="PERCENT">^1</xliff:g> osatuta."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Itxaron telefonoa enkriptatzen den bitartean. % <xliff:g id="PERCENT">^1</xliff:g> osatuta."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Itxaron tableta enkriptatu arte. Falta den denbora: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Itxaron telefonoa enkriptatu arte. Falta den denbora: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Tableta desblokeatzeko, itzali eta piztu berriro."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Telefonoa desblokeatzeko, itzali eta piztu berriro."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Abisua: desblokeatzeko beste <xliff:g id="COUNT">^1</xliff:g> saiakera oker egiten badituzu, gailuko datu guztiak ezabatuko dira!"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"Idatzi pasahitza"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Ezin izan da enkriptatu"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Enkriptatzea eten da eta ezin da osatu. Ondorioz, ezin izango dituzu tabletako datuak atzitu.\n\nTableta erabiltzen jarraitzeko, jatorrizko datuak berrezarri behar dituzu. Datuak berrezarri ondoren tableta konfiguratzen duzunean, Google-ko kontuan gordetako babeskopiaren datuak leheneratu ahal izango dituzu."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Enkriptatzea eten da eta ezin da osatu. Ondorioz, ezin izango dituzu telefonoko datuak atzitu.\n\nTelefonoa erabiltzen jarraitzeko, jatorrizko datuak berrezarri behar dituzu. Datuak berrezarri ondoren telefonoa konfiguratzen duzunean, Google-ko kontuan gordetako babeskopien datuak leheneratu ahal izango dituzu."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Ezin izan da desenkriptatu"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Idatzi duzun pasahitza zuzena da, baina datuak hondatuta daude. \n\nTableta erabiltzen jarraitzeko, jatorrizko datuak berrezarri beharko dituzu. Berrezarri ondoren, tableta konfiguratzen duzunean, Google-ko kontuan egindako babeskopiak leheneratu ahal izango dituzu."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Idatzi duzun pasahitza zuzena da, baina datuak hondatuta daude. \n\nTelefonoa erabiltzen jarraitzeko, jatorrizko datuak berrezarri beharko dituzu. Berrezarri ondoren, telefonoa konfiguratzen duzunean, Google-ko kontuan egindako babeskopiak leheneratu ahal izango dituzu."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Aldatu idazketa-metodoa"</string>
+    <string name="encryption_settings_title" msgid="2848716008695618360">"Enkriptatzea"</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"Enkriptatu tableta"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"Enkriptatu telefonoa"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Enkriptatuta"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"Babestu telefonoa"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Ezarri pantailaren blokeoa tableta babesteko"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Ezarri pantailaren blokeoa gailua babesteko"</string>
@@ -867,7 +833,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Aurrerantzean, tableta ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Aurrerantzean, gailua ez da parekatuko <xliff:g id="DEVICE_NAME">%1$s</xliff:g> gailuarekin"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Aurrerantzean, <xliff:g id="APP_NAME">%1$s</xliff:g> ez da konektatuko <xliff:g id="DEVICE_NAME">%2$s</xliff:g> gailura"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Aurrerantzean, <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ez da parekatuko kontu hau lotuta duen inongo gailurekin"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Ahaztu gailua"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Deskonektatu aplikazioa"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Konektatu hona…"</string>
@@ -977,7 +942,7 @@
     <string name="wifi_limit_optimizations_summary" msgid="8461087338100462302">"Mugatu Wi‑Fi bidezko bateria-kontsumoa"</string>
     <string name="wifi_switch_away_when_unvalidated" msgid="681353878530696197">"Aldatu datu-konexiora Wi-Fi sareak Interneteko konexioa galtzen badu."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="2844653839490977040">"Aldatu datu-konexiora automatikoki"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Wi-Fi bidez ezin denean, erabili datu-konexioa Internetera konektatzeko. Agian datuen erabilera ordaindu beharko duzu."</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Wi-Fi bidez ezin denean, erabili datu-konexioa Internetera konektatzeko. Agian datu-erabilera ordaindu beharko duzu."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Gehitu sare bat"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wifi-sarearen hobespenak"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wifi-konexioa automatikoki aktibatuko da berriro"</string>
@@ -1105,7 +1070,7 @@
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Baliteke aplikazio eta zerbitzu batzuk ez funtzionatzea konexio mugatua dela eta. Hala ere erabili?"</string>
     <string name="no_internet_access_remember" msgid="5113610157731269258">"Ez galdetu berriro sarea hau bada"</string>
     <string name="lost_internet_access_title" msgid="9032463989950384698">"Wifi-sarea ez dago Internetera konektatuta"</string>
-    <string name="lost_internet_access_text" msgid="1535911323549496789">"Sare mugikorra erabil dezakezu Wi-Fi sareak konexio txarra badu. Agian datuen erabilera ordaindu beharko duzu."</string>
+    <string name="lost_internet_access_text" msgid="1535911323549496789">"Sare mugikorra erabil dezakezu Wi-Fi sareak konexio txarra badu. Agian datu-erabilera ordaindu beharko duzu."</string>
     <string name="lost_internet_access_switch" msgid="7935665847081706202">"Aldatu datu-konexiora"</string>
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Jarraitu Wi‑Fi konexioa erabiltzen"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Ez erakutsi berriro"</string>
@@ -1201,6 +1166,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Wifi-gune hau aurkitzen laguntzen die beste gailuei. Bateria-erabilera luzatzen du."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Wifi-gunea aktibatzen…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Wifi-gunea desaktibatzen…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Ez dago erabilgarri konexioa partekatzeko aukera"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"Horri buruzko xehetasunak lortzeko, jarri operadorearekin harremanetan"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"Aktibatu da <xliff:g id="NETWORK_SSID">%1$s</xliff:g>"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Wifi-gune eramangarriaren errorea gertatu da"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"Konfiguratu wifi-gunea"</string>
@@ -1429,6 +1396,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Telefonoa oinarrian edo inaktibo dagoenean zer gertatzen den kontrolatzeko, aktibatu pantaila-babeslea."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Noiz abiarazi"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Oraingo pantaila-babeslea"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Abiarazi"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Ezarpenak"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Distira automatikoa"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Aktibatu eskuetan hartzen denean"</string>
@@ -1560,8 +1528,8 @@
     <string name="sd_eject_summary" product="default" msgid="5151243312587186226">"Desmuntatu SD txartela, kentzeko prest egon dadin"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="9164545135649775664">"Sartu muntatu beharreko USB bidezko memoria"</string>
     <string name="sd_insert_summary" product="default" msgid="5949168259622002192">"Sartu muntatu beharreko SD txartela"</string>
-    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Muntatu USB memoria"</string>
-    <string name="sd_mount" product="default" msgid="5279813999455776169">"Muntatu SD txartela"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8305985249945415150">"Instalatu USB memoria"</string>
+    <string name="sd_mount" product="default" msgid="5279813999455776169">"Instalatu SD txartela"</string>
     <string name="sd_mount_summary" product="nosdcard" msgid="2190410240845521205"></string>
     <string name="sd_mount_summary" product="default" msgid="2190410240845521205"></string>
     <string name="sd_format" product="nosdcard" msgid="8657427883364711513">"Ezabatu USB memoria"</string>
@@ -1584,7 +1552,7 @@
     <string name="storage_low_title" msgid="8002650511493419567">"Memoria agortzen ari da"</string>
     <string name="storage_low_summary" msgid="7341022293583384506">"Baliteke sistemaren funtzio batzuk behar bezala ez funtzionatzea, esaterako, sinkronizazioa. Egin tokia memorian elementu batzuk ezabatuta edo desainguratuta; adibidez, aplikazioak edo multimedia-edukia."</string>
     <string name="storage_menu_rename" msgid="8549835371429159336">"Aldatu izena"</string>
-    <string name="storage_menu_mount" msgid="4760531872302820569">"Muntatu"</string>
+    <string name="storage_menu_mount" msgid="4760531872302820569">"Instalatu"</string>
     <string name="storage_menu_unmount" msgid="8171552487742912282">"Atera"</string>
     <string name="storage_menu_format" msgid="5454870642788909443">"Formateatu"</string>
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formateatu eramangarri gisa"</string>
@@ -1611,13 +1579,13 @@
     <string name="storage_size_large" msgid="1155308277890194878">"<xliff:g id="NUMBER">^1</xliff:g>"<small><small>" <xliff:g id="UNIT">^2</xliff:g>"</small></small>""</string>
     <string name="storage_volume_used" msgid="5031288167242496837">"Memoria osotik (<xliff:g id="TOTAL">%1$s</xliff:g>} erabilitakoa"</string>
     <string name="storage_mount_success" msgid="393972242641313135">"Muntatu da <xliff:g id="NAME">%1$s</xliff:g>"</string>
-    <string name="storage_mount_failure" msgid="3667915814876418011">"Ezin izan da muntatu <xliff:g id="NAME">%1$s</xliff:g>"</string>
+    <string name="storage_mount_failure" msgid="3667915814876418011">"Ezin izan da instalatu <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_success" msgid="6406298575402936148">"Atera da segurtasunez <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_unmount_failure" msgid="3796912279003790607">"Ezin izan da atera segurtasunez <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="storage_format_success" msgid="3028114521294256851">"Formateatu da <xliff:g id="NAME">%1$s</xliff:g> memoria-unitatea"</string>
     <string name="storage_format_failure" msgid="2042691589726261987">"Ezin izan da formateatu <xliff:g id="NAME">%1$s</xliff:g> memoria-unitatea"</string>
     <string name="storage_rename_title" msgid="5911285992205282312">"Aldatu memoriaren izena"</string>
-    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Segurtasunez kanporatu da <xliff:g id="NAME_0">^1</xliff:g>, baina oraindik erabilgarri dago.\n\n<xliff:g id="NAME_1">^1</xliff:g> erabiltzeko, lehenik eta behin, muntatu egin behar duzu."</string>
+    <string name="storage_dialog_unmounted" msgid="1187960789775910051">"Segurtasunez kanporatu da <xliff:g id="NAME_0">^1</xliff:g>, baina oraindik erabilgarri dago.\n\n<xliff:g id="NAME_1">^1</xliff:g> erabiltzeko, lehenik eta behin, instalatu egin behar duzu."</string>
     <string name="storage_dialog_unmountable" msgid="1761107904296941687">"<xliff:g id="NAME_0">^1</xliff:g> hondatuta dago. \n\n<xliff:g id="NAME_1">^1</xliff:g> erabiltzeko, lehenik eta behin, konfiguratu egin behar duzu."</string>
     <string name="storage_internal_format_details" msgid="8922023528848861812">"Formateatu ondoren, beste gailu batzuetan erabili ahal izango duzu <xliff:g id="NAME_0">^1</xliff:g>. \n\n<xliff:g id="NAME_1">^1</xliff:g> memoriako datu guztiak ezabatu egingo dira; beraz, aurretik babeskopia bat egitea gomendatzen dizugu. \n\n"<b>"Egin argazkien eta bestelako multimedia-fitxategien babeskopia"</b>\n"Eraman multimedia-fitxategiak gailu honetako beste memoria batzuetara, edo transferitu ordenagailu batera USB kable baten bidez. \n\n"<b>"Egin aplikazioen babeskopia"</b>\n"<xliff:g id="NAME_6">^1</xliff:g> memorian gordeta dauden aplikazio guztiak desinstalatu egingo dira eta horien datuak ezabatu egingo dira. Aplikazioak gordetzeko, eraman gailu honetako beste memoria batera."</string>
     <string name="storage_internal_unmount_details" msgid="487689543322907311"><b>"<xliff:g id="NAME_0">^1</xliff:g> memoria ateratzen duzunean, han gordetako aplikazioek funtzionatzeari utziko diote eta gordetako multimedia-fitxategiak ez dira erabilgarri egongo memoria berriro sartzen duzun arte."</b>\n\n"<xliff:g id="NAME_1">^1</xliff:g> memoria gailu honetan soilik funtzionatzeko formateatuta dago, eta ez du beste inon funtzionatuko."</string>
@@ -2294,7 +2262,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Pantaila-irakurgailua, ikusmen-arazoak dituztenentzat"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Sakatu pantailako elementuak eta zer diren entzungo duzu"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Azpitituluen hobespenak"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Azpitituluen hobespenei buruz"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Lortu informazio gehiago azpitituluen hobespenei buruz"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Lupa"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Luparen lasterbidea"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Lupari buruz"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Lortu informazio gehiago lupari buruz"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Lupa mota"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"Handitu pantaila osoa edo eremu zehatz bat, edo aldatu bi aukeren artean"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Pantaila osoa"</string>
@@ -2325,7 +2298,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"Irekitzeko, eduki sakatuta bolumen-botoiak"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"Irekitzeko, sakatu pantaila hiru aldiz"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Erabili keinua irekitzeko"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Erabili erabilerraztasun-keinu berria"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Erabili erabilerraztasun-keinua"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Eginbide hau erabiltzeko, sakatu pantailaren behealdeko <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> Erabilerraztasuna botoia.\n\nEginbide batetik bestera aldatzeko, eduki sakatuta Erabilerraztasuna botoia."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Eginbide hau erabiltzeko, sakatu pantailako Erabilerraztasuna botoia."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Eginbide hau erabiltzeko, eduki sakatuta bi bolumen-botoiak."</string>
@@ -2363,10 +2336,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Eman pantaila blokeatuko lasterbidearen bidez eginbidea aktibatzeko baimena. Eduki sakatuta bolumen-botoiak segundo batzuez."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Erabilerraztasuna botoia"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Erabilerraztasun-botoia eta -keinua"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Erabilerraztasuna botoiari buruz"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Erabilerraztasuna botoiari eta keinuari buruz"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Lortu informazio gehiago Erabilerraztasuna botoiari eta keinuari buruz"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Erabili erabilerraztasun-botoia. Keinuak ez du funtzionatzen hiru botoiko nabigazioarekin."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Atzitu bizkor erabilerraztasun-eginbideak"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Atzitu bizkor erabilerraztasun-eginbideak edozein pantailatan.\n\nHasteko, joan erabilerraztasun-ezarpenetara eta hautatu eginbide bat. Sakatu lasterbidea eta hautatu Erabilerraztasuna botoia.\n\nHorren ordez Erabilerraztasuna botoia nabigazio-barran erabiltzeko, aldatu bi botoiko nabigaziora edo hiru botoiko nabigaziora."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Atzitu bizkor erabilerraztasun-eginbideak edozein pantailatan. \n\nHasteko, joan erabilerraztasun-ezarpenetara eta hautatu eginbide bat. Sakatu lasterbidea eta, jarraian, sakatu Erabilerraztasuna botoia."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Atzitu bizkor erabilerraztasun-eginbideak edozein pantailatan.\n\nHasteko, joan erabilerraztasun-ezarpenetara eta hautatu eginbide bat. Sakatu lasterbidea eta, jarraian, sakatu Erabilerraztasuna botoia edo erabilerraztasun-keinua."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Atzitu bizkor erabilerraztasun-eginbideak edozein pantailatan.\n\nHasteko, joan erabilerraztasun-ezarpenetara eta hautatu eginbide bat. Sakatu lasterbidea eta hautatu Erabilerraztasuna botoia."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Erabili botoia edo keinua"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Kokapena"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Tamaina"</string>
@@ -2392,14 +2368,19 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minutu"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minutu"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Erabilerraztasun moduaren denbora-muga"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Zerbait egiteko denborari buruz (erabilerraztasunaren denbora-muga)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Lortu informazio gehiago zerbait egiteko denborari buruz (erabilerraztasunaren denbora-muga)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Zerbait egiteko denbora"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Aukeratu zenbat denboraz erakutsi behar diren mezuak, zerbait egiteko eskatzen badizute baina aldi baterako soilik badaude ikusgai.\n\nAplikazio guztiek ez dute onartzen ezarpen hau."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Sakatuta edukitzearen atzerapena"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Koloreen alderantzikatzea"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Erabili koloreen alderantzikatzea"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Kolorea alderantzikatzeko lasterbidea"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Koloreen alderantzikatzeak ilun bihurtzen ditu pantaila argiak.&lt;br/&gt;&lt;br/&gt; Oharra: &lt;ol&gt; &lt;li&gt; Koloreen alderantzikatzeak argi bihurtzen ditu pantaila ilunak ere.&lt;/li&gt; &lt;li&gt; Multimedia-edukien eta irudien koloreak aldatu egingo dira.&lt;/li&gt; &lt;li&gt; Gai iluna atzeko plano ilun bat bistaratzeko erabil daiteke. Aplikazio bateragarrietan funtzionatzen du gai ilunak; koloreen alderantzikatzeak, berriz, aplikazio guztietan.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Klik automatikoa (itxarote-denbora)"</string>
-    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Klik automatikoak erabiltzeko, sagu bat konektatu behar da. Denbora jakin batean geldirik egon ondoren automatikoki klik egin dezan konfigura dezakezu saguaren kurtsorea."</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatikoki klik egiteko eginbidea (itxarote-denbora)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Automatikoki klik egiteko eginbideari buruz (itxarote-denbora)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Lortu informazio gehiago automatikoki klik egiteko eginbideari buruz (itxarote-denbora)"</string>
+    <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Automatikoki klik egiteko eginbidea erabiltzeko, sagu bat konektatu behar da. Denbora jakin batean geldirik egon ondoren automatikoki klik egin dezan konfigura dezakezu saguaren kurtsorea."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"Desaktibatuta"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Laburra"</string>
     <string name="accessibility_autoclick_short_summary" msgid="4106953930081213514">"0,2 segundo"</string>
@@ -2418,6 +2399,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Erabili <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Ireki <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Erabili koloreen zuzenketa"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Kolorea zuzentzeko lasterbidea"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Koloreen zuzenketari buruz"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Lortu informazio gehiago koloreen zuzenketari buruz"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Koloreen alderantzikatzeari buruz"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Lortu informazio gehiago koloreen alderantzikatzeari buruz"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Erakutsi azpitituluak"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Bateragarriak diren aplikazioetarako bakarrik"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Azpitituluen tamaina eta estiloa"</string>
@@ -2457,6 +2443,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Urdin-horia"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Are ilunago"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Ilundu pantaila are gehiago"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Are gehiago iluntzeko lasterbidea"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Are ilunago eginbideari buruz"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Ilundu pantaila telefonoaren gutxieneko distiratik harago"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Ilundu pantaila tabletaren gutxieneko distiratik harago"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Ilundu pantaila, irakurtzeko erosoagoa izan dadin.&lt;br/&gt;&lt;br/&gt; Kasu hauetan izan daiteke lagungarria: &lt;ol&gt; &lt;li&gt; Gutxieneko balio lehenetsia ezarrita ere telefonoaren distira argiegia denean.&lt;/li&gt; &lt;li&gt; Telefonoa ilunpean erabiltzen ari zarenean (adibidez, gauez edo oheratu aurretik logela ilun dagoenean).&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -2526,11 +2514,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Gailua guztiz kontrolatzeko baimena eman nahi diozu <xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuari?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuak hauek egin behar ditu:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Aplikazio bat baimen-eskaera oztopatzen ari denez, ezarpenek ezin dute egiaztatu erantzuna."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"<xliff:g id="SERVICE">%1$s</xliff:g> aktibatzen baduzu, gailuak ez du pantailaren blokeoa erabiliko datuen enkriptatzea hobetzeko."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Erabilerraztasun-zerbitzua aktibatu duzunez, gailuak ez du pantailaren blokeoa erabiliko datuen enkriptatzea hobetzeko."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzua aktibatzeak datu-enkriptatzeari eragiten dionez, eredua berretsi behar duzu."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzua aktibatzeak datu-enkriptatzeari eragiten dionez, PINa berretsi behar duzu."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzua aktibatzeak datu-enkriptatzeari eragiten dionez, pasahitza berretsi behar duzu."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> zerbitzuak gailu honen kontrol osoa izan nahi du. Zerbitzuak pantaila irakur dezake, eta erabilerraztasun-beharrak dituzten erabiltzaileen ordez jardun. Kontrol-maila hau ez da egokia aplikazio gehienetarako."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Erabilerraztasun-beharrak asetzen dituzten aplikazioetan da egokia kontrol osoa, baina ez aplikazio gehienetan."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ikusi eta kontrolatu pantaila"</string>
@@ -2547,7 +2530,7 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Ez da hautatu zerbitzurik"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Ez da azalpenik eman."</string>
     <string name="settings_button" msgid="2195468788019730377">"Ezarpenak"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"argi-sentikortasuna, fotofobia, gai iluna, migraina, buruko mina, irakurtzeko modua, gau modua, murriztu argitasuna, puntu zuria"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"argi-sentikortasuna, fotofobia, gai iluna, migraina, buruko mina, irakurtzeko modua, gau modua, murriztu distira, puntu zuria"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"erabiltzeko erraztasuna, sartzeko erraztasuna, laguntza, erabilerraztasuna"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"leihoetarako lupa, zooma, lupa, ikusmen txarra, handitu, handiagotu"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
@@ -2649,7 +2632,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi garaiz"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Bateria-erabilera"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Historiaren xehetasunak"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Bateria-erabilera"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Bateria-erabilera"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ikusi azken 24 orduetako erabilera"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Ikusi erabilera bateria guztiz kargatu zenetik"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Bateria-erabilera"</string>
@@ -2725,6 +2708,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Erabili bateria-kudeatzailea"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Hauteman aplikazioak bateria agortzen ari direla"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Aplikazioak bateria agortzen ari diren hautematen"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Aplikazioak bateria agortzen ari diren hautematen"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desaktibatuta"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">%1$d aplikazio daude murriztuta</item>
@@ -2757,7 +2741,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Kamera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wifia"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth-a"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Sare mugikorra egonean"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Sare mugikorra"</string>
     <string name="power_phone" msgid="2768396619208561670">"Ahots-deiak"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Tableta inaktibo"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Telefonoa inaktibo"</string>
@@ -2847,6 +2831,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> guztira • Minutu bat baino gutxiago atzeko planoan <xliff:g id="TIME_PERIOD">^2</xliff:g> bitartean\n"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Erabilerarik ez bateria guztiz kargatu zenetik"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Erabilerarik ez azken 24 orduetan"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Gailuaren erabileran oinarritzen da gelditzen den bateriaren aurreikuspena"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Geratzen den denbora, gutxi gorabehera"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"guztiz kargatu arte"</string>
@@ -3033,7 +3018,7 @@
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Profil-kudeatzailea aktibatu nahi duzu?"</string>
     <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"Gainbegiratzeko baimena eman nahi duzu?"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"Aurrera eginez gero, administratzaileak kudeatuko dizu erabiltzaile-kontua, eta erlazionatutako datuak gorde ahal izango ditu zure datu pertsonalez gain.\n\nEra berean, erabiltzaile-kontu honekin erlazionatutako ezarpenak, sarbidea, aplikazioak eta datuak gainbegiratu eta kudeatu ahal izango ditu (esaterako, sareko jarduerak), baita gailuaren kokapen-informazioa ere."</string>
-    <string name="admin_disabled_other_options" msgid="8122039047419172139">"Gainerako aukerak desgaitu egin ditu administratzaileak"</string>
+    <string name="admin_disabled_other_options" msgid="8122039047419172139">"Administratzaileak gainerako aukerak desgaitu ditu"</string>
     <string name="admin_more_details" msgid="4928985331640193758">"Lortu informazio gehiago"</string>
     <string name="notification_log_title" msgid="2812594935014664891">"Jakinarazpenen erregistroa"</string>
     <string name="notification_history_title" msgid="8821060912502593309">"Jakinarazpenen historia"</string>
@@ -3063,7 +3048,7 @@
     <string name="background_data" msgid="321903213000101158">"Atzeko planoko datuak"</string>
     <string name="background_data_summary" msgid="6572245922513522466">"Aplikazioek datuak edonoiz sinkroniza, bidal eta jaso ditzakete"</string>
     <string name="background_data_dialog_title" msgid="1692005302993229867">"Atzeko datuak desgaitu?"</string>
-    <string name="background_data_dialog_message" msgid="7760280837612824670">"Atzeko planoko datuak desgaitzen badituzu, bateriaren iraupena areagotuko da eta datuen erabilera murriztuko da. Hala ere, aplikazio batzuek atzeko planoko datuen konexioa erabil dezakete."</string>
+    <string name="background_data_dialog_message" msgid="7760280837612824670">"Atzeko planoko datuak desgaitzen badituzu, bateriaren iraupena areagotuko da eta datu-erabilera murriztuko da. Hala ere, aplikazio batzuek atzeko planoko datuen konexioa erabil dezakete."</string>
     <string name="sync_automatically" msgid="4874122892765430304">"Sinkronizatu auto. aplikazio-datuak"</string>
     <string name="sync_enabled" msgid="5794103781356455043">"Sinkronizazioa AKTIBATUTA"</string>
     <string name="sync_disabled" msgid="1636223106968593391">"Sinkronizazioa desaktibatuta"</string>
@@ -3093,27 +3078,19 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Administratzaileak ez du eman aldaketa egiteko baimena"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Ezin da eskuz sinkronizatu"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Elementua ezin da une honetan desgaitu. Ezarpena aldatzeko, aktibatu atzeko planoko datuak eta sinkronizazio automatikoa aldi baterako."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Android-eko gailua abiarazteko, idatzi pasahitza"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Android-eko gailua abiarazteko, idatzi PINa"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Android-eko gailua abiarazteko, marraztu eredua"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Eredu okerra"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Pasahitz okerra"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"PINa okerra da"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Egiaztatzen…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Android abiarazten…"</string>
     <string name="delete" msgid="8330605554706263775">"Ezabatu"</string>
     <string name="misc_files" msgid="6598066985800749585">"Askotariko fitxategiak"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"<xliff:g id="NUMBER">%1$d</xliff:g>/<xliff:g id="TOTAL">%2$d</xliff:g> hautatuta"</string>
     <string name="misc_files_selected_count_bytes" msgid="7622766714974500289">"<xliff:g id="NUMBER">%1$s</xliff:g>/<xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="7898929601615536401">"Hautatu guztiak"</string>
-    <string name="data_usage_summary_title" msgid="394067070764360142">"Datuen erabilera"</string>
+    <string name="data_usage_summary_title" msgid="394067070764360142">"Datu-erabilera"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Datu- eta wifi-konexioa"</string>
     <string name="data_usage_accounting" msgid="6832015632699116754">"Beharbada operadoreak zenbatzen duen datu kopurua eta gailuak zenbatzen duena ez datoz bat."</string>
     <string name="data_usage_app" msgid="6367974637783240699">"Aplikazioen erabilera"</string>
     <string name="data_usage_app_info_label" msgid="3542220416056122841">"APLIKAZIOAREN INFORMAZIOA"</string>
     <string name="data_usage_cellular_data" msgid="1917226172511825849">"Datu-konexioa"</string>
     <string name="data_usage_data_limit" msgid="1120291692444009289">"Ezarri datuen muga"</string>
-    <string name="data_usage_cycle" msgid="6875568429140150029">"Datuen erabilera-zikloa"</string>
+    <string name="data_usage_cycle" msgid="6875568429140150029">"Datu-erabilera-zikloa"</string>
     <string name="data_usage_app_items_header_text" msgid="7513812163443595033">"Aplikazioen erabilera"</string>
     <string name="data_usage_menu_roaming" msgid="6864561338842056939">"Ibiltaritzako datuak"</string>
     <string name="data_usage_menu_restrict_background" msgid="1414574366645086133">"Mugatu atzeko planoko datuak"</string>
@@ -3131,7 +3108,7 @@
     <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sinkr. datu pertsonalak auto."</string>
     <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sinkronizatu laneko datuak auto."</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Aldatu zikloa…"</string>
-    <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Datuen erabilera-zikloa berrezarri beharreko hilabeteko eguna:"</string>
+    <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Datu-erabilera-zikloa berrezarri beharreko hilabeteko eguna:"</string>
     <string name="data_usage_empty" msgid="5619908658853726866">"Ez dago epean daturik erabili duen aplikaziorik."</string>
     <string name="data_usage_label_foreground" msgid="8782117644558473624">"Aurreko planoa"</string>
     <string name="data_usage_label_background" msgid="8862781660427421859">"Atzeko planoa"</string>
@@ -3169,11 +3146,11 @@
     <string name="data_usage_cycle_editor_title" msgid="2019035830921480941">"Erabilera-zikloa berrezartzeko data"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="1026234456777365545">"Hilabeteko eguna:"</string>
     <string name="data_usage_cycle_editor_positive" msgid="6110165528024717527">"Ezarri"</string>
-    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Ezarri datuen erabileraren abisua"</string>
-    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Ezarri datuen erabilera-muga"</string>
-    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Datuen erabilera mugatzea"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Zehaztu duzun mugara iristean, tabletak desaktibatu egingo du datu-konexioa.\n\nZentzuzko muga bat ezartzea gomendatzen dizugu, datuen erabilera tabletak neurtuko duelako eta litekeena delako operadoreak datuak bestela neurtzea."</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Zehaztu duzun mugara iristean, telefonoak desaktibatu egingo du datu-konexioa.\n\nZentzuzko muga bat ezartzea gomendatzen dizugu, datuen erabilera telefonoak neurtuko duelako eta litekeena delako operadoreak datuak bestela neurtzea."</string>
+    <string name="data_usage_warning_editor_title" msgid="5252748452973120016">"Ezarri datu-erabileraren abisua"</string>
+    <string name="data_usage_limit_editor_title" msgid="8826855902435008518">"Ezarri datu-erabilera-muga"</string>
+    <string name="data_usage_limit_dialog_title" msgid="2053134451707801439">"Datu-erabilera mugatzea"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="6000062970083379466">"Zehaztu duzun mugara iristean, tabletak desaktibatu egingo du datu-konexioa.\n\nZentzuzko muga bat ezartzea gomendatzen dizugu, datu-erabilera tabletak neurtuko duelako eta litekeena delako operadoreak datuak bestela neurtzea."</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4942895670789168024">"Zehaztu duzun mugara iristean, telefonoak desaktibatu egingo du datu-konexioa.\n\nZentzuzko muga bat ezartzea gomendatzen dizugu, datu-erabilera telefonoak neurtuko duelako eta litekeena delako operadoreak datuak bestela neurtzea."</string>
     <string name="data_usage_restrict_background_title" msgid="2745551538820692821">"Atzeko planoko datuak mugatu?"</string>
     <string name="data_usage_restrict_background" msgid="1893102079135282794">"Atzeko planoan datu-konexioa erabiltzeko aukera mugatzen baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko wifi-sare batera konektatu ezean."</string>
     <string name="data_usage_restrict_background_multiuser" product="tablet" msgid="5588623586867665419">"Atzeko planoan datu-konexioa erabiltzeko aukera mugatzen baduzu, aplikazio eta zerbitzu batzuek ez dute funtzionatuko wifi-sare batera konektatu ezean.\n\nTabletako erabiltzaile guztiei eragingo die ezarpen honek."</string>
@@ -3196,8 +3173,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Sare neurtua"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Neurtu gabekoa"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Operadoreak gailuak ez bezala zenbat litzake datuak."</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Larrialdi-deia"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Itzuli deira"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Izena"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Mota"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Zerbitzariaren helbidea"</string>
@@ -3233,7 +3208,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Konektatu <xliff:g id="PROFILE">%s</xliff:g> profilera"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"VPN saretik deskonektatu nahi duzu?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Deskonektatu"</string>
-    <string name="vpn_version" msgid="41856553718304367">"<xliff:g id="VERSION">%s</xliff:g> bertsioa"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Bertsioa"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Ahaztu VPN konexioa"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Dagoen VPN konexioa ordeztu nahi duzu?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"VPNa beti aktibatuta egoteko aukera ezarri nahi duzu?"</string>
@@ -3514,7 +3489,7 @@
     <string name="search_results_title" msgid="3360639917793022533">"Ezarpenak"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wi-fi, sareko konexioa, internet, haririk gabekoa, datuak, wi fi"</string>
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi konexioari buruzko jakinarazpena, wifi konexioari buruzko jakinarazpena"</string>
-    <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"datuen erabilera"</string>
+    <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"datu-erabilera"</string>
     <string name="keywords_vibrate_on_touch" msgid="8379369786860641429">"Geldiarazi dardara, sakatu, teklatua"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Erabili 24 orduko formatua"</string>
     <string name="keywords_storage_files" msgid="4509695858659705198">"Deskargatu"</string>
@@ -3571,7 +3546,7 @@
     <string name="keywords_biometric_unlock" msgid="8569545388717753692">"aurpegia, desblokeatu, autentifikatu, hasi saioa, hatz-marka, biometrikoa"</string>
     <string name="keywords_imei_info" msgid="8848791606402333514">"imei, meid, min, prl bertsioa, imei sv"</string>
     <string name="keywords_sim_status" msgid="8784456547742075508">"sarea, sare mugikorraren egoera, zerbitzuaren egoera, seinalearen indarra, sare mugikor mota, ibiltaritza, iccid, eid"</string>
-    <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serie-zenbakia, hardwarearen bertsioa"</string>
+    <string name="keywords_model_and_hardware" msgid="4723665865709965044">"serie-zenbakia, hardware-bertsioa"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android-en segurtasunaren adabaki-maila, oinarri-bandaren bertsioa, kernel bertsioa"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"gaia, argia, iluna, modua, argiarekiko sentikortasuna, fotofobia, ilundu, modu iluna, migraina"</string>
     <string name="keywords_systemui_theme" msgid="6341194275296707801">"gai iluna"</string>
@@ -3627,6 +3602,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Egin dar-dar beti"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Hasi dardararekin eta jo tonua pixkanaka"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Beste soinu batzuk"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"360°-ko audioa"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Markagailuaren tonuak"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Pantailaren blokeoaren soinua"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Kargatzearen soinuak eta dardara"</string>
@@ -4487,7 +4463,7 @@
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Bateriak luzeago irauteko gomendatzen da"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Bateriaren optimizazioei ez ikusi egiteko baimena eman nahi diozu <xliff:g id="APP">%s</xliff:g> aplikazioari?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Bat ere ez"</string>
-    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Administratzaileari aplikazio hau erabiltzeko gaitasuna kendu arren, administratzaileak aplikazioen datuen erabileraren jarraipena egiten jarraitu ahal izango du zure laneko profilean"</string>
+    <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Administratzaileari aplikazio hau erabiltzeko gaitasuna kendu arren, administratzaileak aplikazioen datu-erabileraren jarraipena egiten jarraitu ahal izango du zure laneko profilean"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"<xliff:g id="COUNT_0">%1$d</xliff:g>/<xliff:g id="COUNT_1">%2$d</xliff:g> karaktere erabili dira"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Bistaratu aplikazioen gainean"</string>
     <string name="system_alert_window_settings" msgid="6458633954424862521">"Bistaratu beste aplikazioen gainean"</string>
@@ -4633,9 +4609,9 @@
     <string name="usage" msgid="287782903846013936">"Erabilera"</string>
     <string name="cellular_data_usage" msgid="5874156338825285334">"Datu-konexioaren erabilera"</string>
     <string name="app_cellular_data_usage" msgid="7603292978956033926">"Aplikazioak erabilitako datuak"</string>
-    <string name="wifi_data_usage" msgid="6868503699134605707">"Wifi-sareko datuen erabilera"</string>
-    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Operadorearenak ez diren datuen erabilera"</string>
-    <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet datuen erabilera"</string>
+    <string name="wifi_data_usage" msgid="6868503699134605707">"Wifi-sareko datu-erabilera"</string>
+    <string name="non_carrier_data_usage" msgid="6494603202578414755">"Operadorearenak ez diren datu-erabilera"</string>
+    <string name="ethernet_data_usage" msgid="4552227880905679761">"Ethernet datu-erabilera"</string>
     <string name="wifi" msgid="2932584495223243842">"Wifia"</string>
     <string name="ethernet" msgid="4665162609974492983">"Ethernet"</string>
     <string name="cell_data_template" msgid="6077963976103260821">"Datu-konexioaren <xliff:g id="AMOUNT">^1</xliff:g>"</string>
@@ -4643,9 +4619,9 @@
     <string name="ethernet_data_template" msgid="1429173767445201145">"<xliff:g id="AMOUNT">^1</xliff:g> ethernet-konexioaren bidez"</string>
     <string name="billing_cycle" msgid="6618424022653876279">"Datuen abisua eta muga"</string>
     <string name="app_usage_cycle" msgid="341009528778520583">"Datu-konexioaren erabilera-zikloa"</string>
-    <string name="cell_data_warning" msgid="5664921950473359634">"Datuen erabileraren abisua: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_warning" msgid="5664921950473359634">"Datu-erabileraren abisua: <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="cell_data_limit" msgid="256855024790622112">"Datuen muga: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Datuen erabileraren abisua: <xliff:g id="ID_1">^1</xliff:g>. Datuen muga: <xliff:g id="ID_2">^2</xliff:g>."</string>
+    <string name="cell_data_warning_and_limit" msgid="8393200831986035724">"Datu-erabileraren abisua: <xliff:g id="ID_1">^1</xliff:g>. Datuen muga: <xliff:g id="ID_2">^2</xliff:g>."</string>
     <string name="billing_cycle_fragment_summary" msgid="6346655500491631357">"Hilean behin, <xliff:g id="ID_1">%1$s</xliff:g>. egunean"</string>
     <string name="network_restrictions" msgid="8385824604048229846">"Sarearen murriztapenak"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="3875128958788008975">
@@ -4655,9 +4631,9 @@
     <string name="operator_warning" msgid="5672761970087591211">"Agian ez dira bat etorriko gailuak eta operadoreak egindako datu-kontsumoen neurketak"</string>
     <string name="non_carrier_data_usage_warning" msgid="4707184871368847697">"Ez dira barne hartzen operadorearen sareek erabilitako datuak"</string>
     <string name="data_used_template" msgid="8229342096562327646">"<xliff:g id="ID_1">%1$s</xliff:g> erabilita"</string>
-    <string name="set_data_warning" msgid="1685771882794205462">"Ezarri datuen erabileraren abisua"</string>
-    <string name="data_warning" msgid="2925054658166062884">"Datuen erabileraren abisua"</string>
-    <string name="data_warning_footnote" msgid="5991901765915710592">"Gailuak neurtzen ditu datuen erabilera eta datuen muga. Baliteke informazio hori bat ez etortzea operadoreak egindako datuen neurketarekin."</string>
+    <string name="set_data_warning" msgid="1685771882794205462">"Ezarri datu-erabileraren abisua"</string>
+    <string name="data_warning" msgid="2925054658166062884">"Datu-erabileraren abisua"</string>
+    <string name="data_warning_footnote" msgid="5991901765915710592">"Gailuak neurtzen ditu datu-erabilera eta datuen muga. Baliteke informazio hori bat ez etortzea operadoreak egindako datuen neurketarekin."</string>
     <string name="set_data_limit" msgid="9010326815874642680">"Ezarri datuen muga"</string>
     <string name="data_limit" msgid="8731731657513652363">"Datuen muga"</string>
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_1">%1$s</xliff:g> erabili dira (<xliff:g id="ID_2">%2$s</xliff:g>)"</string>
@@ -4673,7 +4649,7 @@
     <string name="data_used_formatted" msgid="7913920278059077938">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g> erabilita"</string>
     <string name="data_overusage" msgid="3680477320458707259">"Muga baino <xliff:g id="ID_1">^1</xliff:g> gehiago"</string>
     <string name="data_remaining" msgid="6316251496381922837">"<xliff:g id="ID_1">^1</xliff:g> gelditzen dira"</string>
-    <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g> eta <xliff:g id="END_DATE">%2$s</xliff:g> arteko datuen erabilera erakusten duen grafikoa."</string>
+    <string name="data_usage_chart_brief_content_description" msgid="5548074070258881530">"<xliff:g id="START_DATE">%1$s</xliff:g> eta <xliff:g id="END_DATE">%2$s</xliff:g> arteko datu-erabilera erakusten duen grafikoa."</string>
     <string name="data_usage_chart_no_data_content_description" msgid="5481968839079467231">"Ez dago daturik data tarte horretan"</string>
     <plurals name="billing_cycle_days_left" formatted="false" msgid="661792524671718753">
       <item quantity="other">%d egun gelditzen dira</item>
@@ -4688,7 +4664,7 @@
     <string name="launch_mdp_app_text" msgid="8791816789749304897">"Ikusi plana"</string>
     <string name="launch_wifi_text" msgid="976421974332512894">"Ikusi xehetasunak"</string>
     <string name="data_saver_title" msgid="2593804270788863815">"Datu-aurrezlea"</string>
-    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Datuen erabilera mugagabea"</string>
+    <string name="unrestricted_data_saver" msgid="7922563266857367495">"Datu-erabilera mugagabea"</string>
     <string name="restrict_background_blocklisted" msgid="2308345280442438232">"Atzeko planoko datuak desaktibatuta daude"</string>
     <string name="data_saver_on" msgid="7848893946018448793">"Aktibatuta"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Desaktibatuta"</string>
@@ -4753,8 +4729,6 @@
       <item quantity="one">1 aplikaziok du datuak mugarik gabe erabiltzeko aukera</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Ikusi gehiago"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Ziur erabiltzailearen datu guztiak ezabatu nahi dituzula eta fitxategietan oinarritutako enkriptatzea gauzatu nahi duzula?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"Ezabatu eduki guztia eta enkriptatu"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Berrezarri ShortcutManager-en mugak"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Berrezarri dira ShortcutManager-en mugak"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Pantaila blokeatuko kontrolari buruzko informazioa"</string>
@@ -4849,6 +4823,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Sakatu birritan gailua bertan dagoela ikusteko"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Esku bakarreko modua"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Erabili esku bakarreko modua"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Esku bakarreko moduaren lasterbidea"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"irisgarritasuna"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Pasatu hatza beherantz hauek egiteko:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Erabili lasterbidea honetarako:"</string>
@@ -5249,7 +5224,7 @@
     <string name="register_automatically" msgid="5208258089316657167">"Erregistratze automatikoa…"</string>
     <string name="roaming_alert_title" msgid="9052791521868787985">"Datu-ibiltaritza erabiltzeko baimena eman nahi duzu?"</string>
     <string name="roaming_check_price_warning" msgid="5876977438036791361">"Eskatu prezioari buruzko informazioa sare-hornitzaileari."</string>
-    <string name="mobile_data_usage_title" msgid="2047864499317759728">"Aplikazioetako datuen erabilera"</string>
+    <string name="mobile_data_usage_title" msgid="2047864499317759728">"Aplikazioetako datu-erabilera"</string>
     <string name="mobile_network_mode_error" msgid="9222056129897416074">"<xliff:g id="NETWORKMODEID">%1$d</xliff:g> sare moduak ez du balio. Egin ez ikusi."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Sarbide-puntuen izenak"</string>
     <string name="manual_mode_disallowed_summary" msgid="4243142645520152175">"Ez dago erabilgarri <xliff:g id="CARRIER">%1$s</xliff:g> operadorera konektatuta egoteagatik"</string>
@@ -5280,6 +5255,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Bai"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"Berrabiarazi"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Ez, eskerrik asko"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Utzi"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Aldatu"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Ezin da aktibatu SIM txartela"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Kendu SIM txartela eta sar ezazu berriro. Arazoak badirau, berrabiarazi gailua."</string>
@@ -5417,6 +5393,8 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Eman diru-zorroa atzitzeko baimena pantaila blokeatuan eta ezarpen bizkorretan"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Erakutsi gailuak kontrolatzeko widgetak"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Atzitu kontrolatzeko aukerak gailua blokeatuta dagoenean"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Ahal denean, erakutsi erlojua bi lerrotan"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Bi lerroko erlojua"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5430,6 +5408,10 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Utzi cacheko aplikazioak exekutatzeari"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Eman pantailetan gainjartzeko baimena ezarpenetan"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Eman ezarpenen pantailetan gainjartzeko baimena aplikazioen gainean bistara daitezkeen aplikazioei"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Multimedia-edukia"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Ainguratu multimedia-erreproduzigailua"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Erreprodukzioari bizkor berrekin ahal izateko, multimedia-erreproduzigailua irekita gelditzen da Ezarpen bizkorrak menuan"</string>
@@ -5443,7 +5425,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Desaktibatuta"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"SIMak"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Aurkitu wifi-sareak eta konektatu haietara"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"hegaldia, hegaldietarako segurua"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Deiak eta SMSak"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Wifi bidezko deiak"</string>
@@ -5526,7 +5507,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Erabili bateria egokitua"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Erabili distira egokitua"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Erabili wifi bidezko deiak"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Erabili pantaila-babeslea"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Ikusi aplikazio guztiak"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Desbideratze adimenduna"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Gaitu da desbideratze adimenduna"</string>
@@ -5551,7 +5531,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"Desaktibatu hegaldi modua banda ultrazabala erabiltzeko"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Kamera atzitzeko baimena"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Mikrofonoa atzitzeko baimena"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Aplikazio eta zerbitzu guztietarako"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Aplikazio eta zerbitzuetarako"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Aplikazio eta zerbitzuetarako. Ezarpena desaktibatuta badago, agian mikrofonotik lortutako datuak partekatu egingo dira larrialdietarako zenbaki batera deitzen duzunean."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Jokoen ezarpenak"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"Aktibatu joko-paneleko lasterbidea, etab."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Aurrekoa"</string>

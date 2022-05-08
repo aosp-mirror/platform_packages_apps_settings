@@ -614,7 +614,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                 disableUnusablePreferences();
                 updatePreferenceText();
                 updateCurrentPreference();
-                updatePreferenceSummaryIfNeeded();
             } else if (!isRecreatingActivity) {
                 // Don't start the activity again if we are recreated for configuration change
                 updateUnlockMethodAndFinish(quality, false, true /* chooseLockSkipped */);
@@ -715,13 +714,6 @@ public class ChooseLockGeneric extends SettingsActivity {
             }
         }
 
-        private void setPreferenceSummary(ScreenLockType lock, @StringRes int summary) {
-            Preference preference = findPreference(lock.preferenceKey);
-            if (preference != null) {
-                preference.setSummary(summary);
-            }
-        }
-
         private void updateCurrentPreference() {
             String currentKey = getKeyForCurrent();
             Preference preference = findPreference(currentKey);
@@ -762,28 +754,6 @@ public class ChooseLockGeneric extends SettingsActivity {
                     }
                 }
             }
-        }
-
-        private void updatePreferenceSummaryIfNeeded() {
-            // On a default block encrypted device with accessibility, add a warning
-            // that your data is not credential encrypted
-            if (!StorageManager.isBlockEncrypted()) {
-                return;
-            }
-
-            if (StorageManager.isNonDefaultBlockEncrypted()) {
-                return;
-            }
-
-            if (AccessibilityManager.getInstance(getActivity()).getEnabledAccessibilityServiceList(
-                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK).isEmpty()) {
-                return;
-            }
-
-            setPreferenceSummary(ScreenLockType.PATTERN, R.string.secure_lock_encryption_warning);
-            setPreferenceSummary(ScreenLockType.PIN, R.string.secure_lock_encryption_warning);
-            setPreferenceSummary(ScreenLockType.PASSWORD, R.string.secure_lock_encryption_warning);
-            setPreferenceSummary(ScreenLockType.MANAGED, R.string.secure_lock_encryption_warning);
         }
 
         protected Intent getLockManagedPasswordIntent(LockscreenCredential password) {

@@ -89,4 +89,7 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public boolean isPublicSlice() {
         return false;
     }
+
+    @Override
+    public abstract int getSliceHighlightMenuRes();
 }

@@ -67,14 +67,14 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_camera_toggle"
         android:title="@string/camera_toggle_title"
-        android:summary="@string/sensor_toggle_description"
+        android:summary="@string/cam_toggle_description"
         settings:controller="com.android.settings.privacy.CameraToggleController"/>
 
     <!-- Microphone toggle -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="privacy_mic_toggle"
         android:title="@string/mic_toggle_title"
-        android:summary="@string/sensor_toggle_description"
+        android:summary="@string/mic_toggle_description"
         settings:controller="com.android.settings.privacy.MicToggleController"/>
 
     <!-- Show passwords -->

@@ -707,6 +707,7 @@ public class SettingsSliceProviderTest {
                 .setIcon(SliceTestUtils.FAKE_ICON)
                 .setFragmentName(SliceTestUtils.FAKE_FRAGMENT_NAME)
                 .setPreferenceControllerClassName(SliceTestUtils.FAKE_CONTROLLER_NAME)
+                .setHighlightMenuRes(SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES)
                 .build();
     }
 

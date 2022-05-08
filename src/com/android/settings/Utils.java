@@ -1013,7 +1013,8 @@ public final class Utils extends com.android.settingslib.Utils {
         Drawable safeIcon = icon;
 
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
-            safeIcon = getSafeDrawable(icon, 500, 500);
+            safeIcon = getSafeDrawable(icon,
+                    /* MAX_DRAWABLE_SIZE */ 600, /* MAX_DRAWABLE_SIZE */ 600);
         }
 
         return safeIcon;
@@ -1222,7 +1223,11 @@ public final class Utils extends com.android.settingslib.Utils {
         return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
     }
 
-    public static boolean isProviderModelEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    /**
+     * Returns the highlight color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColorHighlight(Context context) {
+        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondaryInverse);
     }
 }

@@ -27,13 +27,15 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
@@ -41,8 +43,10 @@ import android.widget.TextView;
 
 import androidx.annotation.AnimRes;
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
@@ -52,6 +56,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -63,17 +70,19 @@ import java.util.List;
  * accessibility services.
  */
 public final class AccessibilityGestureNavigationTutorial {
+    private static final String TAG = "AccessibilityGestureNavigationTutorial";
+
     /** IntDef enum for dialog type. */
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({
             DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON,
-            DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION,
+            DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE,
             DialogType.GESTURE_NAVIGATION_SETTINGS,
     })
 
     private @interface DialogType {
         int LAUNCH_SERVICE_BY_ACCESSIBILITY_BUTTON = 0;
-        int LAUNCH_SERVICE_BY_GESTURE_NAVIGATION = 1;
+        int LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE = 1;
         int GESTURE_NAVIGATION_SETTINGS = 2;
     }
 
@@ -82,13 +91,17 @@ public final class AccessibilityGestureNavigationTutorial {
     private static final DialogInterface.OnClickListener mOnClickListener =
             (DialogInterface dialog, int which) -> dialog.dismiss();
 
-    public static void showGestureNavigationSettingsTutorialDialog(Context context,
-            DialogInterface.OnDismissListener dismissListener) {
+    /**
+     * Displays a dialog that guides users to use accessibility features with accessibility
+     * gestures under system gesture navigation mode.
+     */
+    public static void showGestureNavigationTutorialDialog(Context context,
+            DialogInterface.OnDismissListener onDismissListener) {
         final AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setView(createTutorialDialogContentView(context,
                         DialogType.GESTURE_NAVIGATION_SETTINGS))
                 .setNegativeButton(R.string.accessibility_tutorial_dialog_button, mOnClickListener)
-                .setOnDismissListener(dismissListener)
+                .setOnDismissListener(onDismissListener)
                 .create();
 
         alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -107,8 +120,8 @@ public final class AccessibilityGestureNavigationTutorial {
         return alertDialog;
     }
 
-    static AlertDialog showGestureNavigationTutorialDialog(Context context) {
-        return createDialog(context, DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION);
+    static AlertDialog showAccessibilityGestureTutorialDialog(Context context) {
+        return createDialog(context, DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE);
     }
 
     static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes) {
@@ -119,7 +132,7 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     /**
-     * Get a content View for a dialog to confirm that they want to enable a service.
+     * Gets a content View for a dialog to confirm that they want to enable a service.
      *
      * @param context    A valid context
      * @param dialogType The type of tutorial dialog
@@ -136,40 +149,34 @@ public final class AccessibilityGestureNavigationTutorial {
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_service_by_accessibility_button, null);
                 break;
-            case DialogType.LAUNCH_SERVICE_BY_GESTURE_NAVIGATION:
+            case DialogType.LAUNCH_SERVICE_BY_ACCESSIBILITY_GESTURE:
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_service_by_gesture_navigation, null);
-                final TextureView gestureTutorialVideo = content.findViewById(
-                        R.id.gesture_tutorial_video);
-                final TextView gestureTutorialMessage = content.findViewById(
-                        R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
-                                ? R.raw.illustration_accessibility_gesture_three_finger
-                                : R.raw.illustration_accessibility_gesture_two_finger,
-                        gestureTutorialVideo);
-                gestureTutorialMessage.setText(AccessibilityUtil.isTouchExploreEnabled(context)
-                        ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture);
+                setupGestureNavigationTextWithImage(context, content);
                 break;
             case DialogType.GESTURE_NAVIGATION_SETTINGS:
                 content = inflater.inflate(
                         R.layout.tutorial_dialog_launch_by_gesture_navigation_settings, null);
-                final TextureView gestureSettingsTutorialVideo = content.findViewById(
-                        R.id.gesture_tutorial_video);
-                final TextView gestureSettingsTutorialMessage = content.findViewById(
-                        R.id.gesture_tutorial_message);
-                VideoPlayer.create(context, AccessibilityUtil.isTouchExploreEnabled(context)
-                                ? R.raw.illustration_accessibility_gesture_three_finger
-                                : R.raw.illustration_accessibility_gesture_two_finger,
-                        gestureSettingsTutorialVideo);
-                final int stringResId = AccessibilityUtil.isTouchExploreEnabled(context)
-                        ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
-                        : R.string.accessibility_tutorial_dialog_message_gesture_settings;
-                gestureSettingsTutorialMessage.setText(stringResId);
+                setupGestureNavigationTextWithImage(context, content);
                 break;
         }
 
         return content;
+    }
+
+    private static void setupGestureNavigationTextWithImage(Context context, View view) {
+        final boolean isTouchExploreEnabled = AccessibilityUtil.isTouchExploreEnabled(context);
+
+        final ImageView imageView = view.findViewById(R.id.image);
+        final int gestureSettingsImageResId =
+                isTouchExploreEnabled ? R.drawable.illustration_accessibility_gesture_three_finger
+                        : R.drawable.illustration_accessibility_gesture_two_finger;
+        imageView.setImageResource(gestureSettingsImageResId);
+
+        final TextView textView = view.findViewById(R.id.gesture_tutorial_message);
+        textView.setText(isTouchExploreEnabled
+                ? R.string.accessibility_tutorial_dialog_message_gesture_settings_talkback
+                : R.string.accessibility_tutorial_dialog_message_gesture_settings);
     }
 
     private static AlertDialog createDialog(Context context, int dialogType) {
@@ -238,7 +245,7 @@ public final class AccessibilityGestureNavigationTutorial {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            final View itemView = mTutorialPages.get(position).getImageView();
+            final View itemView = mTutorialPages.get(position).getIllustrationView();
             container.addView(itemView);
             return itemView;
         }
@@ -256,7 +263,7 @@ public final class AccessibilityGestureNavigationTutorial {
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position,
                 @NonNull Object object) {
-            final View itemView = mTutorialPages.get(position).getImageView();
+            final View itemView = mTutorialPages.get(position).getIllustrationView();
             container.removeView(itemView);
         }
     }
@@ -267,6 +274,34 @@ public final class AccessibilityGestureNavigationTutorial {
         imageView.setAdjustViewBounds(true);
 
         return imageView;
+    }
+
+    private static View createIllustrationView(Context context, @DrawableRes int imageRes) {
+        final View illustrationFrame = inflateAndInitIllustrationFrame(context);
+        final LottieAnimationView lottieView = illustrationFrame.findViewById(R.id.image);
+        lottieView.setImageResource(imageRes);
+
+        return illustrationFrame;
+    }
+
+    private static View createIllustrationViewWithImageRawResource(Context context,
+            @RawRes int imageRawRes) {
+        final View illustrationFrame = inflateAndInitIllustrationFrame(context);
+        final LottieAnimationView lottieView = illustrationFrame.findViewById(R.id.image);
+        lottieView.setFailureListener(
+                result -> Log.w(TAG, "Invalid image raw resource id: " + imageRawRes,
+                        result));
+        lottieView.setAnimation(imageRawRes);
+        lottieView.setRepeatCount(LottieDrawable.INFINITE);
+        lottieView.playAnimation();
+
+        return illustrationFrame;
+    }
+
+    private static View inflateAndInitIllustrationFrame(Context context) {
+        final LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
+
+        return inflater.inflate(R.layout.accessibility_lottie_animation_view, /* root= */ null);
     }
 
     private static View createShortcutNavigationContentView(Context context, int shortcutTypes) {
@@ -323,9 +358,8 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
-        final CharSequence title = context.getText(
-                R.string.accessibility_tutorial_dialog_title_button);
-        final ImageView image = createSoftwareImage(context);
+        final CharSequence title = getSoftwareTitle(context);
+        final View image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
@@ -337,8 +371,8 @@ public final class AccessibilityGestureNavigationTutorial {
     private static TutorialPage createHardwareTutorialPage(@NonNull Context context) {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
-        final ImageView image =
-                createImageView(context, R.drawable.accessibility_shortcut_type_hardware);
+        final View image =
+                createIllustrationView(context, R.drawable.accessibility_shortcut_type_hardware);
         final ImageView indicatorIcon =
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         final CharSequence instruction =
@@ -351,8 +385,9 @@ public final class AccessibilityGestureNavigationTutorial {
     private static TutorialPage createTripleTapTutorialPage(@NonNull Context context) {
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
-        final ImageView image =
-                createImageView(context, R.drawable.accessibility_shortcut_type_triple_tap);
+        final View image =
+                createIllustrationViewWithImageRawResource(context,
+                        R.raw.accessibility_shortcut_type_triple_tap);
         final CharSequence instruction =
                 context.getText(R.string.accessibility_tutorial_dialog_message_triple);
         final ImageView indicatorIcon =
@@ -381,19 +416,47 @@ public final class AccessibilityGestureNavigationTutorial {
         return tutorialPages;
     }
 
-    private static ImageView createSoftwareImage(Context context) {
-        final int resId = AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? R.drawable.accessibility_shortcut_type_software_floating
-                : R.drawable.accessibility_shortcut_type_software;
+    private static View createSoftwareImage(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.drawable.accessibility_shortcut_type_software_floating;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.drawable.accessibility_shortcut_type_software_gesture_talkback
+                    : R.drawable.accessibility_shortcut_type_software_gesture;
+        } else {
+            resId = R.drawable.accessibility_shortcut_type_software;
+        }
+        return createIllustrationView(context, resId);
+    }
 
-        return createImageView(context, resId);
+    private static CharSequence getSoftwareTitle(Context context) {
+        int resId;
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            resId = R.string.accessibility_tutorial_dialog_title_button;
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            resId = R.string.accessibility_tutorial_dialog_title_gesture;
+        } else {
+            resId = R.string.accessibility_tutorial_dialog_title_button;
+        }
+        return context.getText(resId);
     }
 
     private static CharSequence getSoftwareInstruction(Context context) {
-        return AccessibilityUtil.isFloatingMenuEnabled(context)
-                ? context.getText(R.string.accessibility_tutorial_dialog_message_floating_button)
-                : getSoftwareInstructionWithIcon(context,
-                        context.getText(R.string.accessibility_tutorial_dialog_message_button));
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        if (AccessibilityUtil.isFloatingMenuEnabled(context)) {
+            final int resId = R.string.accessibility_tutorial_dialog_message_floating_button;
+            sb.append(context.getText(resId));
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(context)) {
+            final int resId = AccessibilityUtil.isTouchExploreEnabled(context)
+                    ? R.string.accessibility_tutorial_dialog_message_gesture_talkback
+                    : R.string.accessibility_tutorial_dialog_message_gesture;
+            sb.append(context.getText(resId));
+        } else {
+            final int resId = R.string.accessibility_tutorial_dialog_message_button;
+            sb.append(getSoftwareInstructionWithIcon(context, context.getText(resId)));
+        }
+        return sb;
     }
 
     private static CharSequence getSoftwareInstructionWithIcon(Context context, CharSequence text) {
@@ -416,24 +479,26 @@ public final class AccessibilityGestureNavigationTutorial {
 
     private static class TutorialPage {
         private final CharSequence mTitle;
-        private final ImageView mImageView;
+        private final View mIllustrationView;
         private final ImageView mIndicatorIcon;
         private final CharSequence mInstruction;
 
-        TutorialPage(CharSequence title, ImageView imageView, ImageView indicatorIcon,
+        TutorialPage(CharSequence title, View illustrationView, ImageView indicatorIcon,
                 CharSequence instruction) {
             this.mTitle = title;
-            this.mImageView = imageView;
+            this.mIllustrationView = illustrationView;
             this.mIndicatorIcon = indicatorIcon;
             this.mInstruction = instruction;
+
+            setupIllustrationChildViewsGravity();
         }
 
         public CharSequence getTitle() {
             return mTitle;
         }
 
-        public ImageView getImageView() {
-            return mImageView;
+        public View getIllustrationView() {
+            return mIllustrationView;
         }
 
         public ImageView getIndicatorIcon() {
@@ -442,6 +507,23 @@ public final class AccessibilityGestureNavigationTutorial {
 
         public CharSequence getInstruction() {
             return mInstruction;
+        }
+
+        private void setupIllustrationChildViewsGravity() {
+            final View backgroundView = mIllustrationView.findViewById(R.id.image_background);
+            initViewGravity(backgroundView);
+
+            final View lottieView = mIllustrationView.findViewById(R.id.image);
+            initViewGravity(lottieView);
+        }
+
+        private void initViewGravity(@NonNull View view) {
+            final FrameLayout.LayoutParams layoutParams =
+                    new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT,
+                            FrameLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.gravity = Gravity.CENTER;
+
+            view.setLayoutParams(layoutParams);
         }
     }
 

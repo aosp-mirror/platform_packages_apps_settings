@@ -34,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.apphibernation.AppHibernationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
@@ -61,6 +62,8 @@ public class HibernationSwitchPreferenceControllerTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private AppHibernationManager mAppHibernationManager;
+    @Mock
     private SwitchPreference mPreference;
 
     private HibernationSwitchPreferenceController mController;
@@ -71,6 +74,8 @@ public class HibernationSwitchPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
+        when(mContext.getSystemService(AppHibernationManager.class))
+                .thenReturn(mAppHibernationManager);
         when(mPackageManager.getPackageUid(eq(VALID_PACKAGE_NAME), anyInt()))
                 .thenReturn(PACKAGE_UID);
         when(mPackageManager.getPackageUid(eq(INVALID_PACKAGE_NAME), anyInt()))
@@ -107,6 +112,15 @@ public class HibernationSwitchPreferenceControllerTest {
         mController.setPackage(VALID_PACKAGE_NAME);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void onPreferenceChange_unhibernatesWhenExempted() {
+        mController.setPackage(VALID_PACKAGE_NAME);
+        mController.onPreferenceChange(mPreference, false);
+
+        verify(mAppHibernationManager).setHibernatingForUser(VALID_PACKAGE_NAME, false);
+        verify(mAppHibernationManager).setHibernatingGlobally(VALID_PACKAGE_NAME, false);
     }
 
     @Test

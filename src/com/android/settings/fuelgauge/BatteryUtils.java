@@ -373,7 +373,7 @@ public class BatteryUtils {
             batteryUsageStats = systemService.getBatteryUsageStats(
                     new BatteryUsageStatsQuery.Builder().includeBatteryHistory().build());
         } catch (RuntimeException e) {
-            Log.e(TAG, "getBatteryInfo() error for getBatteryUsageStats()", e);
+            Log.e(TAG, "getBatteryInfo() error from getBatteryUsageStats()", e);
             // Use default BatteryUsageStats.
             batteryUsageStats =
                     new BatteryUsageStats.Builder(new String[0], /* includePowerModels */ false)

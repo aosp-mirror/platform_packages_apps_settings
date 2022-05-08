@@ -80,7 +80,8 @@ public class NrAdvancedCallingPreferenceControllerTest {
                 mTelephonyManager).setVoNrEnabled(anyBoolean());
         mCarrierConfig = new PersistableBundle();
         doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
-        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, true);
         mCarrierConfig.putIntArray(CarrierConfigManager.KEY_CARRIER_NR_AVAILABILITIES_INT_ARRAY,
                 new int[]{1, 2});
 
@@ -92,7 +93,8 @@ public class NrAdvancedCallingPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_vonrDisabled_returnUnavailable() {
+    public void getAvailabilityStatus_vonrEnabledAndVisibleDisable_returnUnavailable() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, false);
 
         mController.init(SUB_ID);
@@ -102,7 +104,30 @@ public class NrAdvancedCallingPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_vonrEnabled_returnAvailable() {
+    public void getAvailabilityStatus_vonrDisabledAndVisibleDisable_returnUnavailable() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, false);
+
+        mController.init(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_vonrDisabledAndVisibleEnable_returnUnavailable() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, false);
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, true);
+
+        mController.init(SUB_ID);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_vonrEnabledAndVisibleEnable_returnAvailable() {
+        mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_VONR_SETTING_VISIBILITY_BOOL, true);
 
         mController.init(SUB_ID);

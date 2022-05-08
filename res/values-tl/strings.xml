@@ -98,7 +98,6 @@
     <string name="bluetooth_notif_title" msgid="1196532269131348647">"Kahilingan sa pagpares"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"I-tap upang makipagpares sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Mga natanggap na file"</string>
-    <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Mga natanggap sa Bluetooth"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Naka-off ang Bluetooth"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"I-tap para i-on ito"</string>
     <string name="device_picker" msgid="2427027896389445414">"Pumili ng Bluetooth device"</string>
@@ -143,10 +142,11 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Pinapayagan ang iyong device na makipag-ugnayan sa mga kalapit na Bluetooth device"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Pinapayagan ang iyong teleponong makipag-ugnayan sa mga kalapit na Bluetooth device"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"I-disable ang Bluetooth A2DP hardware offload"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_title" msgid="8610420176339657720">"I-restart Ito?"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_message" msgid="8333029144800835996">"Kailangan mong i-restart ang device para mabago ang setting."</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_confirm" msgid="3488695418187553566">"I-restart"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload_dialog_cancel" msgid="4930826928585464191">"Kanselahin"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"I-disable ang Bluetooth LE AUDIO hardware offload"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"I-restart ang Device?"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Kailangan mong i-restart ang iyong device para mabago ang setting na ito."</string>
+    <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"I-restart"</string>
+    <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Kanselahin"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mga media device"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Mga device sa pagtawag"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Iba pang device"</string>
@@ -310,9 +310,9 @@
     <string name="security_settings_title" msgid="6710768415432791970">"Seguridad"</string>
     <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Pag-encrypt at mga kredensyal"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Naka-encrypt ang telepono"</string>
-    <string name="decryption_settings_summary" product="default" msgid="1742645256103613503">"Hindi naka-encrypt ang telepono"</string>
+    <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Hindi naka-encrypt ang telepono"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Device ay naka-encrypt"</string>
-    <string name="decryption_settings_summary" product="tablet" msgid="1864963068216544631">"Hindi naka-encrypt ang device"</string>
+    <string name="not_encrypted_summary" product="tablet" msgid="2374263654698719382">"Hindi naka-encrypt ang device"</string>
     <string name="lockscreen_settings_title" msgid="4086121748092341549">"Lock screen"</string>
     <string name="lockscreen_settings_what_to_show_category" msgid="9205490627927741254">"Ang ipapakita"</string>
     <string name="security_settings_summary" msgid="1627059516127354233">"Itakda ang Aking Lokasyon, pag-unlock ng screen, lock ng SIM card, lock ng storage ng kredensyal"</string>
@@ -354,6 +354,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
     <string name="security_settings_face_enroll_introduction_how_title" msgid="3680193263037835600"></string>
@@ -392,9 +393,8 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Gamitin ang iyong mukha para i-unlock ang telepono mo o para sa pag-authenticate sa mga app, tulad ng kapag nagsa-sign in ka o nag-aapruba ka ng pagbili.\n\nTandaan:\nIsang mukha lang ang puwedeng naka-set up sa iyo sa bawat pagkakataon. Para magdagdag pa ng mukha, i-delete ang kasalukuyang mukha.\n\nKapag tumingin ka sa telepono, puwede mong hindi sinasadyang ma-unlock ito.\n\nPuwedeng ma-unlock ng ibang tao ang telepono mo kung itatapat ito sa iyong mukha, kahit na nakapikit ka.\n\nPuwedeng ma-unlock ng isang taong may malaking pagkakahawig sa iyo ang telepono mo, gaya ng kapatid na kamukha mo."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"I-delete ang face model?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="3268144215619385299">"Permanente at secure na ide-delete ang iyong face model. Pagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
-    <string name="security_settings_face_settings_remove_model_dialog_title" msgid="7175068449513875691">"I-delete ang face model?"</string>
-    <string name="security_settings_face_settings_remove_model_dialog_details" msgid="7148069244593587389">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong fingerprint, PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo o para sa pag-authenticate sa mga app."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Permanente at secure na ide-delete ang iyong face model.\n\nPagkatapos ng pag-delete, kakailanganin mo ang iyong PIN, pattern, o password para i-unlock ang telepono mo."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Gamitin ang Pag-unlock Gamit ang Mukha para i-unlock ang iyong telepono"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingerprint"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingerprint sa trabaho"</string>
@@ -451,9 +451,11 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"Nagdagdag ng mukha at fingerprint"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"Kapag na-set up mo ang Pag-unlock Gamit ang Mukha at Pag-unlock Gamit ang Fingerprint, hihingin ng iyong telepono ang fingerprint mo kapag nakasuot ka ng mask o nasa madilim na lugar ka."</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"Mga paraan para mag-unlock"</string>
-    <string name="biometric_settings_category_ways_to_use" msgid="2730401752914580200">"Gamitin ang mukha at fingerprint para sa"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="2002278066540969480">"Pag-unlock sa phone"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="5251210618011579314">"Pag-authenticate sa mga app"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"I-unlock ang telepono mo"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"I-verify na ikaw ito sa mga app"</string>
+    <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Gamit ang mukha"</string>
+    <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Gamit ang fingerprint"</string>
+    <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Gamit ang mukha o fingerprint"</string>
     <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Ibigay ulit ang iyong telepono sa magulang mo"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Laktawan ang lock ng screen?"</string>
@@ -479,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"I-delete"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Pindutin ang sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Ilagay ang iyong daliri sa sensor at iangat ito pagkatapos mong makaramdam ng pag-vibrate"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="7534383192863798967">"Huwag alisin ang iyong daliri sa sensor hanggang sa may maramdaman kang pag-vibrate"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Huwag alisin ang iyong fingerprint sa sensor hanggang sa may maramdaman kang pag-vibrate"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Pindutin nang matagal ang sensor para sa fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Iangat, pindutin ulit"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Isa pa"</string>
@@ -487,7 +489,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Iangat nang iangat ang iyong daliri para idagdag ang iba\'t ibang bahagi ng fingerprint mo"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Pindutin nang matagal sa tuwing gagalaw ang icon ng fingerprint. Makakatulong itong mas makuha ang iyong fingerprint."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Ilagay ang tip ng iyong daliri sa sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="2969257985923971906">"Panghuli, ilagay ang mga dulo ng iyong daliri"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Panghuli, gamitin ang mga edge ng iyong daliri"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Ilagay ang gilid ng iyong fingerprint sa sensor nang matagal, pagkatapos ay ang kabilang gilid"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Makakatulong itong mas makuha ang iyong fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pag-enroll ng fingerprint: <xliff:g id="PERCENTAGE">%d</xliff:g> porsyento"</string>
@@ -567,46 +569,10 @@
     <string name="fingerprint_last_delete_message" msgid="7860374760549404410">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito sa mga app."</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Hindi mo magagamit ang iyong fingerprint para i-unlock ang profile mo sa trabaho, magpahintulot ng mga pagbili, o mag-sign in sa mga app para sa trabaho."</string>
     <string name="fingerprint_last_delete_confirm" msgid="3294910995598819259">"Oo, alisin"</string>
-    <string name="security_settings_biometrics_title" msgid="9156091890323967944">"Mukha at fingerprint na pag-unlock"</string>
-    <string name="security_settings_biometrics_summary_none" msgid="7832260410376805323">"I-tap para i-set up"</string>
-    <string name="security_settings_biometrics_summary_face" msgid="531544670908824943">"Mukha lang"</string>
-    <string name="security_settings_biometrics_summary_fingerprint" msgid="6815851804705508275">"Fingerprint lang"</string>
-    <string name="security_settings_biometrics_summary_both" msgid="7328638955127876021">"Mukha at fingerprint"</string>
-    <string name="security_settings_biometrics_description" msgid="1669340998063178097">"Kapag na-set up mo ang pag-unlock gamit ang mukha at pag-unlock gamit ang fingerprint, hihingin ng iyong telepono ang fingerprint mo kapag may suot kang mask o kapag nasa madilim kang lugar"</string>
-    <string name="security_settings_biometrics_types_category" msgid="4875227478250058267">"Mga paraan para mag-unlock"</string>
-    <string name="security_settings_biometrics_preferences_category" msgid="8289089775173952237">"Gamitin ang mukha o fingerprint para sa"</string>
-    <string name="security_settings_biometrics_preference_use_with_apps" msgid="4068551659594090167">"Pag-authenticate sa mga app"</string>
-    <string name="crypt_keeper_settings_title" msgid="4938812137822100044">"Pag-encrypt"</string>
-    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="7484150746479958376">"I-encrypt ang tablet"</string>
-    <string name="crypt_keeper_encrypt_title" product="default" msgid="8302873664348463041">"I-encrypt ang telepono"</string>
-    <string name="crypt_keeper_encrypted_summary" msgid="3866488451639592071">"Naka-encrypt"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="4103951371711323192">"Maaari mong i-encrypt ang iyong mga account, setting, na-download na app at ang data ng mga ito, media at iba pang mga file. Pagkatapos mong i-encrypt ang iyong telepono, ipagpalagay na nag-set up ka ng isang screen lock (iyon ay, isang pattern o numerong PIN o password), kakailanganin mong i-unlock ang screen upang ma-decrypt ang tablet sa bawat pagkakataon na io-on mo ito. Ang tanging iba pang paraan upang mag-decrypt ay magsagawa ng pag-reset ng factory data, na bubura sa lahat ng iyong data.\n\nUmaabot ng isang oras o higit pa ang pag-encrypt. Dapat kang magsimula nang may charge ang baterya at panatilihing nakasaksak ang iyong tablet sa kahabaan ng proseso. Kung pipigilan mo ito, mawawala sa iyo ang ilan sa o lahat ng iyong data"</string>
-    <string name="crypt_keeper_desc" product="default" msgid="6180866043921135548">"Maaari mong i-encrypt ang iyong mga account, setting, na-download na app at ang data ng mga ito, media at iba pang mga file. Pagkatapos mong i-encrypt ang iyong telepono, ipagpalagay na nag-set up ka ng isang screen lock (iyon ay, isang pattern o numerong PIN o password), kakailanganin mong i-unlock ang screen upang ma-decrypt ang telepono sa bawat pagkakataon na io-on mo ito. Ang tanging iba pang paraan upang mag-decrypt ay magsagawa ng pag-reset ng factory data, na bubura sa lahat ng iyong data.\n\nUmaabot ng isang oras o higit pa ang pag-encrypt. Dapat kang magsimula nang may charge ang baterya at panatilihing nakasaksak ang iyong telepono sa kahabaan ng proseso. Kung pipigilan mo ito, mawawala ang ilan sa o lahat ng iyong data."</string>
-    <string name="crypt_keeper_button_text" product="tablet" msgid="5551608011810921471">"I-encrypt ang tablet"</string>
-    <string name="crypt_keeper_button_text" product="default" msgid="6370330929679426136">"I-encrypt ang telepono"</string>
-    <string name="crypt_keeper_low_charge_text" msgid="4920087247177024521">"I-charge ang iyong baterya at subukang muli."</string>
-    <string name="crypt_keeper_unplugged_text" msgid="2709721134148651329">"I-plug in ang iyong charger at subukang muli."</string>
-    <string name="crypt_keeper_dialog_need_password_title" msgid="1847280235529858357">"Walang PIN o password sa pag-screen lock"</string>
-    <string name="crypt_keeper_dialog_need_password_message" msgid="7210616262954236042">"Kailangan mong magtakda ng PIN o password ng lock screen bago ka makakapagsimula sa pag-encrypt."</string>
-    <string name="crypt_keeper_confirm_title" msgid="8600000209722452230">"I-encrypt?"</string>
-    <string name="crypt_keeper_final_desc" product="tablet" msgid="3270587498436152259">"Hindi na mababawi ang pagpapatakbo ng pag-encrypt at kung aantalahin mo ito, maiwawala mo ang data. Tumatagal ang pag-encrypt nang isang oras o higit pa, kung kailan magre-restart ang tablet nang ilang beses."</string>
-    <string name="crypt_keeper_final_desc" product="default" msgid="3040428543349852419">"Hindi na mababawi ang pagpapatakbo ng pag-encrypt at kung aantalahin mo ito, mawawalan ka ng data. Tumatagal ang pag-encrypt nang isang oras o higit pa, kung kailan magre-restart ang telepono nang ilang beses."</string>
-    <string name="crypt_keeper_setup_title" msgid="3339725741305796680">"Pag-encrypt"</string>
-    <string name="crypt_keeper_setup_description" product="tablet" msgid="4417016995091289019">"Maghintay habang ine-encrypt ang iyong tablet. <xliff:g id="PERCENT">^1</xliff:g>% (na) kumpleto."</string>
-    <string name="crypt_keeper_setup_description" product="default" msgid="7902355422499500352">"Maghintay habang ine-encrypt ang iyong telepono. <xliff:g id="PERCENT">^1</xliff:g>% (na) kumpleto."</string>
-    <string name="crypt_keeper_setup_time_remaining" product="tablet" msgid="8348188415839917821">"Maghintay habang ine-encrypt ang iyong tablet. Natitirang oras: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_setup_time_remaining" product="default" msgid="8556105766597855198">"Maghintay habang ine-encrypt ang iyong telepono. Natitirang oras: <xliff:g id="DURATION">^1</xliff:g>"</string>
-    <string name="crypt_keeper_force_power_cycle" product="tablet" msgid="3832496715430327682">"Upang i-unlock ang iyong tablet, i-off ito at pagkatapos ay i-on."</string>
-    <string name="crypt_keeper_force_power_cycle" product="default" msgid="5070346039522135361">"Upang i-unlock ang iyong telepono, i-off ito at pagkatapos ay i-on."</string>
-    <string name="crypt_keeper_warn_wipe" msgid="8104921337301750394">"Babala: Mabubura ang iyong device pagkatapos ng <xliff:g id="COUNT">^1</xliff:g> pang hindi matagumpay na pagsubok na mag-unlock!"</string>
-    <string name="crypt_keeper_enter_password" msgid="1274917431075529732">"I-type ang iyong password"</string>
-    <string name="crypt_keeper_failed_title" msgid="8173654570682244149">"Hindi matagumpay ang pag-encrypt"</string>
-    <string name="crypt_keeper_failed_summary" product="tablet" msgid="5977961188966570342">"Nagambala at hindi makumpleto ang pag-encrypt. Bilang resulta, hindi na maa-access ang data sa iyong telepono. \n\nUpang patuloy na magamit ang iyong tablet, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong tablet pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong magbalik ng anumang data na na-back up sa iyong Google Account."</string>
-    <string name="crypt_keeper_failed_summary" product="default" msgid="1028716993071131029">"Nagambala at hindi makumpleto ang pag-encrypt. Bilang resulta, hindi na maa-access ang data sa iyong telepono. \n\nUpang patuloy na magamit ang iyong telepono, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaraoon ka ng pagkakataong magbalik ng anumang data na na-back up sa iyong Google Account."</string>
-    <string name="crypt_keeper_data_corrupt_title" msgid="5920153462176846037">"Hindi matagumpay ang pag-decrypt"</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="4420666705959562753">"Tama ang password na inilagay mo, ngunit sa kasamaang-palad ay sira ang iyong data. \n\nUpang maipagpatuloy ang paggamit sa iyong tablet, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong tablet pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong ipanumbalik ang anumang data na na-back up sa iyong Google Account."</string>
-    <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="3200498792238652367">"Tama ang password na inilagay mo, ngunit sa kasamaang-palad ay sira ang iyong data. \n\nUpang maipagpatuloy ang paggamit sa iyong telepono, kailangan mong magsagawa ng factory reset. Kapag na-set up mo ang iyong telepono pagkatapos ng pag-reset, magkakaroon ka ng pagkakataong ipanumbalik ang anumang data na na-back up sa iyong Google Account."</string>
-    <string name="crypt_keeper_switch_input_method" msgid="7712732134989470573">"Magpalit ng pamamaraan ng pag-input"</string>
+    <string name="encryption_settings_title" msgid="2848716008695618360">"Pag-encrypt"</string>
+    <string name="encrypt_title" product="tablet" msgid="6518642273119816435">"I-encrypt ang tablet"</string>
+    <string name="encrypt_title" product="default" msgid="7337365190988321100">"I-encrypt ang telepono"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Naka-encrypt"</string>
     <string name="suggested_lock_settings_title" msgid="7836065447159730217">"I-secure ang iyong telepono"</string>
     <string name="suggested_lock_settings_summary" product="tablet" msgid="3213718550422761562">"Magtakda ng lock ng screen para protektahan ang tablet"</string>
     <string name="suggested_lock_settings_summary" product="device" msgid="8479766049078378225">"Magtakda ng lock ng screen para protektahan ang device"</string>
@@ -867,7 +833,6 @@
     <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="3428463407231980054">"Hindi na ipapares ang iyong tablet sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_unpair_dialog_body" product="device" msgid="5117397433721336918">"Hindi na ipapares ang iyong device sa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Hindi na kokonekta ang <xliff:g id="APP_NAME">%1$s</xliff:g> app sa iyong <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
-    <string name="bluetooth_untethered_unpair_dialog_body" msgid="1938465582242297905">"Hindi na ipapares ang <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sa anumang device na naka-link sa account na ito"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Kalimutan ang device"</string>
     <string name="bluetooth_companion_app_remove_association_confirm_button" msgid="76323555527926915">"Idiskonekta ang app"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="1323072239637864488">"Kumonekta sa…"</string>
@@ -1201,6 +1166,8 @@
     <string name="wifi_hotspot_maximize_compatibility_dual_ap_summary" msgid="3579549223159056533">"Nakakatulong sa iba pang device na mahanap ang hotspot na ito. Pinapalakas ang paggamit ng baterya."</string>
     <string name="wifi_tether_starting" msgid="8879874184033857814">"Pag-on sa hotspot…"</string>
     <string name="wifi_tether_stopping" msgid="4416492968019409188">"Pag-off sa hotspot…"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_title" msgid="3089432578433978073">"Hindi available ang pag-tether"</string>
+    <string name="wifi_tether_carrier_unsupport_dialog_content" msgid="5920421547607921112">"Makipag-ugnayan sa iyong carrier para sa mga detalye"</string>
     <string name="wifi_tether_enabled_subtext" msgid="5085002421099821056">"Aktibo ang <xliff:g id="NETWORK_SSID">%1$s</xliff:g>"</string>
     <string name="wifi_tether_failed_subtext" msgid="437190628041885500">"Error sa portable na Wi-Fi hotspot"</string>
     <string name="wifi_tether_configure_ap_text" msgid="7072559431286459122">"I-set up ang Wi-Fi hotspot"</string>
@@ -1429,6 +1396,7 @@
     <string name="screensaver_settings_disabled_prompt" msgid="1166343194760238835">"Upang makontrol kung ano ang mangyayari kapag naka-dock o naka-sleep ang telepono, i-on ang screen saver."</string>
     <string name="screensaver_settings_when_to_dream" msgid="8145025742428940520">"Kailan magsisimula"</string>
     <string name="screensaver_settings_current" msgid="390472865895976891">"Kasalukuyang screen saver"</string>
+    <string name="screensaver_settings_dream_start" msgid="6486360145976995856">"Magsimula ngayon"</string>
     <string name="screensaver_settings_button" msgid="6159236558934930238">"Mga Setting"</string>
     <string name="automatic_brightness" msgid="4599827881929079513">"Awtomatikong pagliwanag"</string>
     <string name="lift_to_wake_title" msgid="8994218158737714046">"Angatin upang paganahin"</string>
@@ -2294,7 +2262,12 @@
     <string name="talkback_summary" msgid="5820927220378864281">"Screen reader na pangunahing nakalaan para sa mga taong bulag at malabo ang paningin"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Mag-tap ng mga item sa iyong screen upang marinig ang mga ito na binabasa nang malakas"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Mga kagustuhan sa caption"</string>
+    <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Tungkol sa mga kagustuhan sa caption"</string>
+    <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"Matuto pa tungkol sa mga kagustuhan sa caption"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Pag-magnify"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Shortcut ng pag-magnify"</string>
+    <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"Tungkol sa pag-magnify"</string>
+    <string name="accessibility_screen_magnification_footer_learn_more_content_description" msgid="924848332575978463">"Matuto pa tungkol sa pag-magnify"</string>
     <string name="accessibility_magnification_mode_title" msgid="8446475127807168063">"Uri ng pag-magnify"</string>
     <string name="accessibility_magnification_area_settings_message" msgid="8498648925928109462">"I-magnify ang iyong buong screen o ang partikular na bahagi, o magpalipat-lipat sa dalawang opsyon"</string>
     <string name="accessibility_magnification_area_settings_full_screen_summary" msgid="2728962784113713010">"Full screen"</string>
@@ -2325,7 +2298,7 @@
     <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"I-hold ang mga volume key para buksan"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"I-triple tap ang screen para buksan"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"Gumamit ng galaw para buksan"</string>
-    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Gamitin ang bagong galaw sa accessibility"</string>
+    <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="6800684770875867559">"Gamitin ang galaw para sa accessibility"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Para magamit ang feature na ito, i-tap ang button ng accessibility <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> sa ibaba ng iyong screen.\n\nPara magpalipat-lipat sa mga feature, pindutin nang matagal ang button ng accessibility."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Para gamitin ang feature na ito, i-tap ang button ng accessibility sa iyong screen."</string>
     <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Para magamit ang feature na ito, pindutin nang matagal ang parehong volume key."</string>
@@ -2363,10 +2336,13 @@
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Payagang mag-on ang shortcut ng feature mula sa lock screen. Pindutin nang matagal ang parehong volume key nang ilang segundo."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Button ng accessibility"</string>
     <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Button ng accessibility at galaw"</string>
+    <string name="accessibility_button_about_title" msgid="3581116105084067926">"Tungkol sa button ng accessibility"</string>
+    <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Tungkol sa button ng accessibility at paggalaw"</string>
+    <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Matuto pa tungkol sa button ng accessibility at paggalaw"</string>
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Paggamit sa button ng accessibility. Hindi available ang galaw sa 3-button na navigaton."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Madaling i-access ang mga feature ng accessibility"</string>
-    <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen.\n\nPara magsimula, pumunta sa mga setting ng accessibility at pumili ng feature. Mag-tap sa shortcut at piliin ang button o galaw ng accessibility.\n\nPara gamitin na lang ang button ng accessibility sa navigation bar, lumipat sa 2-button na navigation o 3-button na navigation."</string>
-    <string name="accessibility_button_description" msgid="7372405202698400339">"Mabilis na i-access ang mga feature sa pagiging naa-access mula sa anumang screen. \n\nPara magsimula, pumunta sa mga setting ng accessibility at pumili ng feature. I-tap ang shortcut at piliin ang button ng accessibility."</string>
+    <string name="accessibility_button_gesture_description" msgid="785178810659647474">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen. \n\nPara magsimula, pumunta sa mga setting ng pagiging naa-access at pumili ng feature. I-tap ang shortcut at piliin ang button o galaw ng pagiging accessible."</string>
+    <string name="accessibility_button_description" msgid="3664784100487881054">"Mabilis na i-access ang mga feature ng pagiging naa-access mula sa anumang screen.\n\nPara magsimula, pumunta sa mga setting ng pagiging accessible at pumili ng feature. I-tap ang shortcut at piliin ang button ng pagiging accessible."</string>
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Gamitin ang button o galaw"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Lokasyon"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Laki"</string>
@@ -2392,13 +2368,18 @@
     <string name="accessibility_timeout_1min" msgid="4804644263166961262">"1 minuto"</string>
     <string name="accessibility_timeout_2mins" msgid="7901692984522708679">"2 minuto"</string>
     <string name="accessibility_setting_item_control_timeout_title" msgid="1600516937989217899">"Tagal ng aksyon (Timeout ng accessibility)"</string>
+    <string name="accessibility_control_timeout_about_title" msgid="813588002683460837">"Tungkol sa tagal ng aksyon (Timeout ng accessibility)"</string>
+    <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"Matuto pa tungkol sa tagal ng aksyon (Timeout ng accessibility)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Tagal ng pag-aksyon"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Piliin kung gaano katagal ipapakita ang mga mensaheng humihiling sa iyong umaksyon, ngunit pansamantala lang makikita.\n\nHindi lahat ng app ay sumusuporta sa setting na ito."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Pindutin nang matagal ang delay"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Gamitin ang pag-invert ng kulay"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Shortcut ng pag-invert ng kulay"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Pinapadilim ng pag-invert ng kulay ang maliliwanag na screen.&lt;br/&gt;&lt;br/&gt; Tandaan: &lt;ol&gt; &lt;li&gt; Pinapaliwanag din ng pag-invert ng kulay ang madidilim na screen.&lt;/li&gt; &lt;li&gt; Magbabago ang mga kulay ng media at mga larawan.&lt;/li&gt; &lt;li&gt; Puwedeng gamitin ang Madilim na tema para maging madilim ang background. Gumagana ang madilim na tema sa mga sinusuportahang app. Gumagana ang pag-invert ng kulay sa lahat ng app.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Awtomatikong pag-click (oras ng pananatili)"</string>
+    <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Tungkol sa autoclick (dwell timing)"</string>
+    <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Matuto pa tungkol sa awtomatikong pag-click (oras ng pananatili)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"Gumagana ang awtomatikong pag-click sa konektadong mouse. Puwede mong itakdang awtomatikong mag-click ang cursor ng mouse kapag huminto sa paggalaw ang cursor sa loob ng partikular na tagal ng oras."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"I-off"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"Maikli"</string>
@@ -2418,6 +2399,11 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"Gamitin ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"Buksan ang <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Gumamit ng pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Shortcut ng pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"Tungkol sa pagtatama ng kulay"</string>
+    <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"Matuto pa tungkol sa pagtatama ng kulay"</string>
+    <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"Tungkol sa pag-invert ng kulay"</string>
+    <string name="accessibility_color_inversion_footer_learn_more_content_description" msgid="5382579548498952445">"Matuto pa tungkol sa pag-invert ng kulay"</string>
     <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"Ipakita ang mga caption"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"Para sa sinusuportahang app lang"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"Laki at istilo ng caption"</string>
@@ -2457,6 +2443,8 @@
     <string name="daltonizer_mode_tritanomaly_summary" msgid="2837137091067433059">"Asul-dilaw"</string>
     <string name="reduce_bright_colors_preference_title" msgid="2249314004651574997">"Extra dim"</string>
     <string name="reduce_bright_colors_switch_title" msgid="1751678397884065312">"Gawing extra dim ang screen"</string>
+    <string name="reduce_bright_colors_shortcut_title" msgid="495648157059202745">"Shortcut ng extra dim"</string>
+    <string name="reduce_bright_colors_about_title" msgid="503655452544934393">"Tungkol sa extra dim"</string>
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Padilimin ang screen nang lampas sa minimum na liwanag ng iyong telepono"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Padilimin ang screen nang lampas sa minimum na liwanag ng iyong tablet"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"Gawing mas madilim ang iyong screen para maging mas kumportableng magbasa.&lt;br/&gt;&lt;br/&gt; Puwede itong makatulong kapag: &lt;ol&gt; &lt;li&gt; Masyado pa ring maliwanag ang default na minimum na liwanag ng iyong telepono&lt;/li&gt; &lt;li&gt; Ginagamit mo ang iyong telepono sa madidilim na sitwasyon, halimbawa, kapag gabi o sa madilim na kuwarto bago matulog&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -2526,11 +2514,6 @@
     <string name="enable_service_title" msgid="7231533866953706788">"Bigyan ang <xliff:g id="SERVICE">%1$s</xliff:g> ng ganap na kontrol sa iyong device?"</string>
     <string name="capabilities_list_title" msgid="1225853611983394386">"Kailangan ng <xliff:g id="SERVICE">%1$s</xliff:g> na:"</string>
     <string name="touch_filtered_warning" msgid="4225815157460318241">"Dahil pinipigilan ng isang app ang kahilingan ng pahintulot, hindi ma-verify ng Mga Setting ang iyong tugon."</string>
-    <string name="enable_service_encryption_warning" msgid="931082737770453755">"Kung io-on mo ang <xliff:g id="SERVICE">%1$s</xliff:g>, hindi gagamitin ng iyong device ang lock ng iyong screen upang pahusayin ang pag-encrypt ng data."</string>
-    <string name="secure_lock_encryption_warning" msgid="669152607190123579">"Dahil nag-on ka ng serbisyo sa accessibility, hindi gagamitin ng iyong device ang lock ng iyong screen upang pahusayin ang pag-encrypt ng data."</string>
-    <string name="enable_service_pattern_reason" msgid="6832846117817938536">"Dahil nakakaapekto ang pag-o-on ng <xliff:g id="SERVICE">%1$s</xliff:g> sa pag-encrypt ng data, kailangan mong kumpirmahin ang iyong pattern."</string>
-    <string name="enable_service_pin_reason" msgid="6040417014360237703">"Dahil nakakaapekto ang pag-o-on ng <xliff:g id="SERVICE">%1$s</xliff:g> sa pag-encrypt ng data, kailangan mong kumpirmahin ang iyong PIN."</string>
-    <string name="enable_service_password_reason" msgid="6962544350351734238">"Dahil nakakaapekto ang pag-o-on ng <xliff:g id="SERVICE">%1$s</xliff:g> sa pag-encrypt ng data, kailangan mong kumpirmahin ang iyong password."</string>
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Humihiling ang <xliff:g id="SERVICE">%1$s</xliff:g> ng ganap na kontrol sa device na ito. Maaaring basahin ng serbisyo ang screen at kumilos sa ngalan ng mga user na may mga pangangailangan sa accessibility. Hindi naaangkop ang ganitong antas ng kontrol para sa karamihan ng mga app."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Naaangkop ang ganap na kontrol sa mga app na tumutulong sa mga pangangailangan mo sa accessibility, pero hindi sa karamihan ng mga app."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Tingnan at kontrolin ang screen"</string>
@@ -2649,7 +2632,7 @@
     <string name="bluetooth_on_time" msgid="8424625554628450028">"Wi-Fi na nasa oras"</string>
     <string name="advanced_battery_title" msgid="3005993394776555079">"Paggamit ng baterya"</string>
     <string name="history_details_title" msgid="8628584613889559355">"Detalye ng history"</string>
-    <string name="advanced_battery_preference_title" msgid="3017771848679952419">"Paggamit ng Baterya"</string>
+    <string name="advanced_battery_preference_title" msgid="3790901207877260883">"Paggamit ng baterya"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Tingnan ang paggamit sa huling 24 oras"</string>
     <string name="advanced_battery_preference_summary" msgid="6088389774708000305">"Usage mula noong huling na-full charge"</string>
     <string name="battery_details_title" msgid="4531369291819754178">"Paggamit ng baterya"</string>
@@ -2725,6 +2708,7 @@
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Gumamit ng Battery Manager"</string>
     <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Tukuyin kapag umuubos ng baterya ang mga app"</string>
     <string name="battery_manager_summary" msgid="255708681438809287">"Dine-detect kapag umuubos ng baterya ang mga app"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Dine-detect kapag umuubos ng baterya ang mga app"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Naka-off"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="one">%1$d pinaghihigpitang app</item>
@@ -2757,7 +2741,7 @@
     <string name="power_camera" msgid="4778315081581293923">"Camera"</string>
     <string name="power_wifi" msgid="4614007837288250325">"Wi‑Fi"</string>
     <string name="power_bluetooth" msgid="5085900180846238196">"Bluetooth"</string>
-    <string name="power_cell" msgid="5507921058696341513">"Naka-standby ang mobile network"</string>
+    <string name="power_cell" msgid="7793805106954398186">"Mobile network"</string>
     <string name="power_phone" msgid="2768396619208561670">"Mga boses ng tawag"</string>
     <string name="power_idle" product="tablet" msgid="4689321599298911021">"Idle ang tablet"</string>
     <string name="power_idle" product="default" msgid="9132502722499465252">"Idle ang telepono"</string>
@@ -2847,6 +2831,7 @@
     <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> sa kabuuan • wala pang isang minutong nasa background\nnoong <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"Walang paggamit mula noong huling na-full charge"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"Walang paggamit sa nakalipas na 24 na oras"</string>
+    <string name="battery_usage_without_time" msgid="1346894834339420538"></string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"Nakabatay ang pagtatantya ng natitirang baterya sa paggamit ng iyong device"</string>
     <string name="estimated_time_left" msgid="948717045180211777">"Tinatayang natitirang oras"</string>
     <string name="estimated_charging_time_left" msgid="2287135413363961246">"Hanggang mapuno ang baterya"</string>
@@ -3093,14 +3078,6 @@
     <string name="remove_account_failed" msgid="3709502163548900644">"Hindi pinapahintulutan ng iyong admin ang pagbabagong ito"</string>
     <string name="cant_sync_dialog_title" msgid="2613000568881139517">"Hindi makapag-sync nang manual"</string>
     <string name="cant_sync_dialog_message" msgid="7612557105054568581">"Kasalukuyang naka-disable ang pag-sync para sa item na ito. Upang baguhin ang setting na ito, pansamantalang i-on ang data ng background at awtomatikong pag-sync."</string>
-    <string name="enter_password" msgid="6327051330258595331">"Upang magsimula sa Android, ilagay ang iyong password"</string>
-    <string name="enter_pin" msgid="1029287617551232681">"Upang magsimula sa Android, ilagay ang iyong PIN"</string>
-    <string name="enter_pattern" msgid="1747316785866742960">"Upang magsimula sa Android, iguhit ang iyong pattern"</string>
-    <string name="cryptkeeper_wrong_pattern" msgid="340747269176120242">"Maling Pattern"</string>
-    <string name="cryptkeeper_wrong_password" msgid="7295607881887114486">"Maling Password"</string>
-    <string name="cryptkeeper_wrong_pin" msgid="2347961593970714201">"Maling PIN"</string>
-    <string name="checking_decryption" msgid="6111642972615688237">"Sinusuri…"</string>
-    <string name="starting_android" msgid="6694154070215356186">"Sinisimulan ang Android…"</string>
     <string name="delete" msgid="8330605554706263775">"I-delete"</string>
     <string name="misc_files" msgid="6598066985800749585">"Misc na mga file"</string>
     <string name="misc_files_selected_count" msgid="5597802791672749532">"pinili <xliff:g id="NUMBER">%1$d</xliff:g> sa <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
@@ -3196,8 +3173,6 @@
     <string name="data_usage_metered_yes" msgid="4262598072030135223">"Nakametro"</string>
     <string name="data_usage_metered_no" msgid="1685828958417926268">"Hindi nakametro"</string>
     <string name="data_usage_disclaimer" msgid="3271450299386176770">"Maaaring iba ang accounting ng data ng carrier kumpara sa iyong device"</string>
-    <string name="cryptkeeper_emergency_call" msgid="8369322820475703306">"Emergency na tawag"</string>
-    <string name="cryptkeeper_return_to_call" msgid="3857250752781151232">"Balikan ang tawag"</string>
     <string name="vpn_name" msgid="3806456074909253262">"Pangalan"</string>
     <string name="vpn_type" msgid="5533202873260826663">"Uri"</string>
     <string name="vpn_server" msgid="2908816134941973935">"Address ng server"</string>
@@ -3233,7 +3208,7 @@
     <string name="vpn_connect_to" msgid="216709261691085594">"Kumonekta sa <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Putulin ang koneksyon ng VPN na ito?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Putulin ang koneksyon"</string>
-    <string name="vpn_version" msgid="41856553718304367">"Bersyon <xliff:g id="VERSION">%s</xliff:g>"</string>
+    <string name="vpn_version" msgid="6344167191984400976">"Bersyon"</string>
     <string name="vpn_forget_long" msgid="729132269203870205">"Kalimutan ang VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="3994226561866340280">"Gusto mo bang palitan ang dati nang VPN?"</string>
     <string name="vpn_set_vpn_title" msgid="1667539483005810682">"Gusto mo bang itakda ang VPN na palaging naka-on?"</string>
@@ -3627,6 +3602,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Palaging i-vibrate"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Mag-vibrate muna at mag-ring"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Iba pang mga tunog"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Spatial audio"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Mga tono ng dial pad"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Tunog ng pag-lock ng screen"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Tunog, vibration kapag charging"</string>
@@ -4753,8 +4729,6 @@
       <item quantity="other">May <xliff:g id="COUNT">%d</xliff:g> na app na maaaring gumamit ng walang limitasyong data</item>
     </plurals>
     <string name="special_access_more" msgid="132919514147475846">"Tumingin pa"</string>
-    <string name="confirm_convert_to_fbe_warning" msgid="3783325656948378111">"Talagang i-wipe ang data ng user at i-convert sa pag-encrypt ng file?"</string>
-    <string name="button_confirm_convert_fbe" msgid="339648921918438106">"I-wipe at i-convert"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"I-reset ang ShortcutManager na naglilimita ng rate"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Na-reset na ang ShortcutManager na naglilimita ng rate"</string>
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Kontrolin ang impormasyon sa lock screen"</string>
@@ -4849,6 +4823,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Mag-double tap upang suriin ang device"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"One-hand mode"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Gumamit ng one-handed mode"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Shortcut sa one-handed mode"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"reachability"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Mag-swipe pababa para"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Gamitin ang shortcut sa"</string>
@@ -5280,6 +5255,7 @@
     <string name="sim_action_yes" msgid="8076556020131395515">"Oo"</string>
     <string name="sim_action_reboot" msgid="3508948833333441538">"I-restart"</string>
     <string name="sim_action_no_thanks" msgid="435717748384544195">"Huwag na lang"</string>
+    <string name="sim_action_cancel" msgid="2668099867029610910">"Kanselahin"</string>
     <string name="sim_switch_button" msgid="1405772571706095387">"Lumipat"</string>
     <string name="dsds_activation_failure_title" msgid="4467364110584914794">"Hindi ma-activate ang SIM"</string>
     <string name="dsds_activation_failure_body_msg1" msgid="6303921196869256391">"Alisin ang SIM at ilagay ito ulit. Kung magpapatuloy ang problema, i-restart ang iyong device."</string>
@@ -5417,6 +5393,8 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Payagan ang pag-access sa wallet mula sa lock screen at mga mabilisang setting"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Ipakita ang mga kontrol ng device"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"I-access ang mga kontrol kapag naka-lock"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"Ipakita ang orasang may dalawang linya kapag available"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"Orasang may dalawang linya"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5430,6 +5408,10 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Suspindihin: pag-execute para sa naka-cache na app"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Payagan ang pag-overlay sa screen sa Mga Setting"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Payagang mag-overlay sa mga screen ng Mga Setting ang mga app na puwedeng lumabas sa ibabaw ng ibang app"</string>
+    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
+    <skip />
+    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
+    <skip />
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"I-pin ang media player"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Para mabilis na maipagpatuloy ang pag-playback, mananatiling bukas ang media player sa Mga Mabilisang Setting"</string>
@@ -5443,7 +5425,6 @@
     <string name="bluetooth_setting_off" msgid="4965493913199554789">"Naka-off"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Mga SIM"</string>
-    <string name="wifi_switch_summary" msgid="3577154777754849024">"Maghanap ng at kumonekta sa mga Wi‑Fi network"</string>
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"eroplano, ligtas gamitin sa eroplano"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"Mga Tawag at SMS"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"Pagtawag gamit ang Wi‑Fi"</string>
@@ -5526,7 +5507,6 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"Gamitin ang adaptive battery"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"Gamitin ang adaptive brightness"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"Gamitin ang pagtawag gamit ang Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"Gumamit ng screen saver"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"Tingnan ang lahat ng app"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"Smart na Pag-forward"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"Naka-enable ang Smart na Pag-forward"</string>
@@ -5551,7 +5531,8 @@
     <string name="uwb_settings_summary_airplane_mode" msgid="1328864888135086484">"I-off ang airplane mode para magamit ang UWB"</string>
     <string name="camera_toggle_title" msgid="8952668677727244992">"Access sa camera"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"Access sa mikropono"</string>
-    <string name="sensor_toggle_description" msgid="8248823248606795411">"Para sa lahat ng app at serbisyo"</string>
+    <string name="cam_toggle_description" msgid="9212762204005146404">"Para sa mga app at serbisyo"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"Para sa mga app at serbisyo. Kung naka-off ang setting na ito, posible pa ring ibahagi ang data ng mikropono kapag tumawag ka sa isang pang-emergency na numero."</string>
     <string name="game_settings_title" msgid="1028178627743422090">"Mga setting ng laro"</string>
     <string name="game_settings_summary" msgid="2548056479103747555">"I-on ang shortcut ng Game Dashboard, atbp."</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"Nakaraan"</string>

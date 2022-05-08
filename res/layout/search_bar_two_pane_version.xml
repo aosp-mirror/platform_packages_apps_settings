@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2021 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SearchBarStyle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_margin="@dimen/search_bar_margin">
+    <Toolbar
+        android:id="@+id/search_action_bar_two_pane"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_bar_height"
+        android:paddingStart="4dp"
+        android:background="@drawable/search_bar_selected_background"
+        android:contentInsetStartWithNavigation="@dimen/search_bar_content_inset"
+        android:navigationIcon="@drawable/ic_homepage_search">
+        <TextView
+            style="@style/TextAppearance.SearchBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="-4dp"
+            android:layout_gravity="start"
+            android:text="@string/search_menu"/>
+    </Toolbar>
+</com.google.android.material.card.MaterialCardView>
