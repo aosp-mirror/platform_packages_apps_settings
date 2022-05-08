@@ -97,7 +97,7 @@
     <string name="progress_scanning" msgid="2564746192843011826">"Vyhľadávanie"</string>
     <string name="bluetooth_no_devices_found" msgid="7704539337219953182">"V okolí nie sú žiadne zariadenia Bluetooth."</string>
     <string name="bluetooth_notif_ticker" msgid="209515545257862858">"Žiadosť o párovanie zariadenia Bluetooth"</string>
-    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Žiadosť na párovanie"</string>
+    <string name="bluetooth_notif_title" msgid="1196532269131348647">"Žiadosť o párovanie"</string>
     <string name="bluetooth_notif_message" msgid="5584717784198086653">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> spárujete klepnutím."</string>
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Prijaté súbory"</string>
     <string name="bluetooth_show_files_received_via_bluetooth" msgid="7097860463458492953">"Súbory prijaté cez Bluetooth"</string>
@@ -284,7 +284,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"Vybrať podľa čas. posunu UTC"</string>
     <string name="date_picker_title" msgid="646573308567782578">"Dátum"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"Čas"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"Uzamknúť po uplynutí časového limitu obrazovky"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"Uzamknúť po časovom limite"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"Okamžite po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> po uplynutí časového limitu, ak odomknutie nie je udržiavané funkciou <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
@@ -390,7 +390,7 @@
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Odomknutím tvárou:"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"Pri používaní odomknutia tvárou"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Vyžadovať otvorené oči"</string>
-    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Ak chcete odomknúť telefón, musíte mať otvorené oči"</string>
+    <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"Pri odomykaní telefónu vyžadovať otvorené oči"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Vždy vyžadovať potvrdenie"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Pri používaní odomknutia tvárou v aplikáciách vždy vyžad. potvrdenie"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Odstrániť model tváre"</string>
@@ -626,7 +626,7 @@
     <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="1040265358906410746"></string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Zámka obrazovky"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Výber zámky obrazovky"</string>
-    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obraz."</string>
+    <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Vyberte novú zámku obrazovky"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Vyberte zámku pre pracovné aplikácie"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Vyberte novú pracovnú zámku"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="1276283007274778191">"Chráňte svoj tablet"</string>
@@ -961,7 +961,7 @@
     <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Zapnutie NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"NFC posiela dáta medzi týmto zariadením a ďalšími zariadeniami alebo cieľmi v okolí, ako sú platobné terminály, čítačky prístupových médií a interaktívne reklamy alebo značky."</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Vyžadovať odomknutie zariadenia pre NFC"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Povoliť použitie NFC iba na odomknutej obrazovke"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Povoliť použitie NFC iba po odomknutí obrazovky"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"Pripravené na prenos obsahu aplikácie prostredníctvom NFC"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Vypnuté"</string>
@@ -1040,7 +1040,7 @@
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Zadajte SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Zabezpečenie"</string>
     <string name="wifi_hidden_network" msgid="6466834025375485596">"Skrytá sieť"</string>
-    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Ak váš smerovač nevysiela ID určitej siete, ale chcete sa k nej pripojiť v budúcnosti, môžete ju nastaviť ako skrytú.\n\nMôže tým vzniknúť bezpečnostné riziko, pretože váš telefón bude pravidelne vysielať signál, aby sieť našiel.\n\nNastavením danej siete ako skrytej nezmeníte nastavenia smerovača."</string>
+    <string name="wifi_hidden_network_warning" msgid="3937433813754746158">"Ak váš smerovač nevysiela ID určitej siete, ale chcete sa k nej pripojiť v budúcnosti, môžete ju nastaviť ako skrytú.\n\nMôže tým vzniknúť bezpečnostné riziko, pretože váš telefón bude pravidelne vysielať signál siete, aby ju našiel.\n\nNastavením danej siete ako skrytej nezmeníte nastavenia smerovača."</string>
     <string name="wifi_signal" msgid="4442182285304271424">"Sila signálu"</string>
     <string name="wifi_status" msgid="5349199188871002778">"Stav"</string>
     <string name="tx_wifi_speed" msgid="2368986629172050673">"Rýchlosť posielania dát"</string>
@@ -1793,7 +1793,7 @@
     <string name="main_clear_title" msgid="277664302144837723">"Vymazať dáta (obn. výr. nast.)"</string>
     <string name="main_clear_short_title" msgid="4752094765533020696">"Vymazať dáta (obn. výr. nast.)"</string>
     <string name="main_clear_desc" product="tablet" msgid="1651178880680056849">"Týmto vymažete všetky dáta v "<b>"internom úložisku"</b>" tabletu:\n\n"<li>"účet Google;"</li>\n<li>"dáta aj nastavenia systému a aplikácií;"</li>\n<li>"stiahnuté aplikácie."</li></string>
-    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Týmto vymažete všetky dáta v "<b>"internom úložisku"</b>" telefónu\n\n"<li>"účet Google"</li>\n<li>"dáta aj nastavenia systému a aplikácií"</li>\n<li>"stiahnuté aplikácie"</li></string>
+    <string name="main_clear_desc" product="default" msgid="6984348811887162647">"Týmto vymažete všetky dáta v "<b>"internom úložisku"</b>" telefónu:\n\n"<li>"účet Google"</li>\n<li>"dáta aj nastavenia systému a aplikácií"</li>\n<li>"stiahnuté aplikácie"</li></string>
     <string name="main_clear_accounts" product="default" msgid="7675859115108318537">\n\n"Momentálne ste prihlásený/-á do nasledujúcich účtov:\n"</string>
     <string name="main_clear_other_users_present" product="default" msgid="2672976674798019077">\n\n"V tomto zariadení sa nachádzajú ďalší používatelia.\n"</string>
     <string name="main_clear_desc_also_erases_external" msgid="3687911419628956693"><li>"Hudba"</li>\n<li>"Fotky"</li>\n<li>"Iné údaje používateľa"</li></string>
@@ -3853,7 +3853,7 @@
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Automaticky zoradiť upozornenia podľa relevancie"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Spätná väzba k prispôsobivým upozorneniam"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Uveďte úpravy upozornení a zobrazujte možnosť poskytnúť spätnú väzbu k systému"</string>
-    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Resetovanie dôležitosti upozornenia"</string>
+    <string name="asst_importance_reset_title" msgid="6191265591976440115">"Resetovať dôležitosť upozornenia"</string>
     <string name="asst_importance_reset_summary" msgid="684794589254282667">"Resetovanie nastavení dôležitosti zmenených používateľom a povolenie priorizácie v asistentovi upozornení"</string>
     <string name="asst_capabilities_actions_replies_title" msgid="4392470465646394289">"Navrhované akcie a odpovede"</string>
     <string name="asst_capabilities_actions_replies_summary" msgid="416234323365645871">"Automaticky zobrazovať navrhované akcie a odpovede"</string>
@@ -3908,7 +3908,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Blikať"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Ochrana súkromia"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Preskakovať uzamknutú obrazovku"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odomknutí prejdite priamo na naposledy použitú obrazovku"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Po odomknutí prejsť priamo na poslednú používanú obrazovku"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Uzamknutá obrazovka, preskočiť, obísť"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Keď je prac. profil zamknutý"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Upozornenia na uzamknutej obrazovke"</string>
@@ -4302,11 +4302,11 @@
     <string name="screen_pinning_title" msgid="6927227272780208966">"Pripnutie aplikácie"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Pripnutie aplikácie umožňuje ponechať aktuálnu aplikáciu zobrazenú, než ju odopnete. Pomocou tejto funkcie môžete napríklad dôveryhodnému priateľovi umožniť hrať konkrétnu hru."</string>
     <string name="screen_pinning_description" msgid="7289730998890213708">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete zariadenie s niekým zdieľať bezpečne, skúste namiesto toho použiť hosťa. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Pripnutá aplikácia môže otvárať ďalšie aplikácie a sprístupniť osobné údaje. \n\nAk chcete zariadenie s niekým zdieľať bezpečne, skúste namiesto toho použiť režim hosťa. \n\nAk chcete pripnúť aplikáciu, postupujte takto: 	\n1.	Zapnite pripnutie aplikácie. 	\n2.	Otvorte Prehľad. 	\n3.	Klepnite na ikonu aplikácie v hornej časti obrazovky a potom na Pripnúť."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Keď je aplikácia pripnutá: \n\n•		Môžu byť sprístupnené osobné údaje \n		(napríklad kontakty a obsah správ) \n•		Pripnutá aplikácia môže otvárať ďalšie aplikácie \n\nPripnutie aplikácie používajte iba s ľuďmi, ktorým dôverujete."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Pred uvoľnením žiadať bezpečnostný vzor"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Pred odopnutím požiadať o PIN"</string>
-    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred uvoľnením požiadať o heslo"</string>
+    <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Pred odopnutím požiadať o heslo"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Pri odopnutí zamknúť zariadenie"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdiť odstránenie SIM karty"</string>
     <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Pred vymazaním stiahnutej SIM karty overiť, že ste to vy"</string>
@@ -4654,7 +4654,7 @@
     <string name="camera_gesture_title" msgid="5559439253128696180">"Fotoaparát – dvakrát pokrúťte zápästím"</string>
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Otvorte aplikáciu fotoaparátu tak, že dvakrát pokrútite zápästím"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Fotoaparát dvojitým stlačením vypínača"</string>
-    <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Rýchlo otvárať fotoaparát bez odomknutia obrazovky"</string>
+    <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Rýchlo otvárať kameru bez odomknutia obrazovky"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Veľkosť zobrazenia"</string>
     <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Zväčšite alebo zmenšite položky na obrazovke"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"hustota obrazovky, priblíženie obrazovky, veľkosť, zmena veľkosti"</string>
@@ -4963,8 +4963,8 @@
     <string name="gesture_preference_summary" product="device" msgid="3520072325356373349">"Rýchle gestá na ovládanie zariadenia"</string>
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"Rýchlo spustiť kameru"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Rýchlo otvoriť kameru dvojitým stlačením vypínača. Funguje to na každej obrazovke."</string>
-    <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Rýchle spustenie fotoaparátu"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Otočiť fotoaparát na selfie"</string>
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"Rýchle spustenie kamery"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"Otočiť kameru na selfie"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"Rýchlejšie fotenie snímok selfie"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"Navigácia v systéme"</string>
@@ -5426,9 +5426,9 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Chcete zapnúť SIM kartu?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Chcete prepnúť na operátora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Chcete prepnúť na SIM kartu?"</string>
-    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"V jednej chvíli môže byť aktívna iba jedna stiahnutá SIM karta.\n\nPrepnutím na operátora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nezrušíte službu operátora <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"V jednej chvíli môže byť aktívna iba jedna SIM karta.\n\nPrepnutím na operátora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nezrušíte službu operátora <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"V jednej chvíli môže byť aktívna iba jedna stiahnutá SIM karta.\n\nPrepnutím na operátora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> nezrušíte službu operátora <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"V jednej chvíli môže byť aktívna iba jedna stiahnutá SIM karta.\n\nPrepnutím na operátora nezrušíte službu operátora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
+    <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"V jednej chvíli môže byť aktívna iba jedna SIM karta.\n\nPrepnutím nezrušíte službu operátora <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Prepnúť na operátora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Pripája sa k sieti…"</string>
     <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Prepína sa na operátora <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
@@ -5675,7 +5675,7 @@
     <string name="category_name_others" msgid="2366006298768550310">"Iné"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Všeobecné"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Použiť tmavý motív"</string>
-    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Použiť Bluetooth"</string>
+    <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Používať Bluetooth"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Vypnúť zvonenie"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Používať hotspot Wi‑Fi"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"Používať pripnutie aplikácie"</string>
