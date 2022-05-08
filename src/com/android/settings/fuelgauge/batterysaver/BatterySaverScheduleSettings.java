@@ -16,12 +16,14 @@
 
 package com.android.settings.fuelgauge.batterysaver;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
@@ -34,6 +36,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
@@ -58,6 +61,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     public BatterySaverScheduleRadioButtonsController mRadioButtonController;
     @VisibleForTesting
     Context mContext;
+    private int mSaverPercentage;
+    private String mSaverScheduleKey;
     private BatterySaverScheduleSeekBarController mSeekBarController;
 
     @VisibleForTesting
@@ -90,6 +95,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
                 Settings.Secure.getUriFor(Settings.Secure.LOW_POWER_WARNING_ACKNOWLEDGED),
                 false,
                 mSettingsObserver);
+        mSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        mSaverPercentage = getSaverPercentage();
     }
 
     @Override
@@ -107,6 +114,7 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     @Override
     public void onPause() {
         mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
+        AsyncTask.execute(() -> logPowerSaver());
         super.onPause();
     }
 
@@ -172,6 +180,26 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     @Override
     public int getMetricsCategory() {
         return 0;
+    }
+
+    private void logPowerSaver() {
+        final int currentSaverPercentage = getSaverPercentage();
+        final String currentSaverScheduleKey = mRadioButtonController.getDefaultKey();
+        if (mSaverScheduleKey.equals(currentSaverScheduleKey)
+                && mSaverPercentage == currentSaverPercentage) {
+            return;
+        }
+        FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
+                .action(SettingsEnums.FUELGAUGE_BATTERY_SAVER,
+                        SettingsEnums.FIELD_BATTERY_SAVER_SCHEDULE_TYPE,
+                        SettingsEnums.FIELD_BATTERY_SAVER_PERCENTAGE_VALUE,
+                        currentSaverScheduleKey,
+                        currentSaverPercentage);
+    }
+
+    private int getSaverPercentage() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, -1);
     }
 
     static class BatterySaverScheduleCandidateInfo extends CandidateInfo {

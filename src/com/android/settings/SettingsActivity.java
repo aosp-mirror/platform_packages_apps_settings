@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY;
+import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
+import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
+
 import static com.android.settings.applications.appinfo.AppButtonsPreferenceController.KEY_REMOVE_TASK_WHEN_FINISHING;
 
 import android.app.ActionBar;
@@ -29,6 +33,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
 import android.os.AsyncTask;
@@ -52,12 +57,15 @@ import androidx.preference.PreferenceManager;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
@@ -137,6 +145,12 @@ public class SettingsActivity extends SettingsBaseActivity
             ":settings:show_fragment_as_subsetting";
 
     /**
+     * Additional extra of Settings#ACTION_SETTINGS_LARGE_SCREEN_DEEP_LINK.
+     * Set true when the deep link intent is from a slice
+     */
+    public static final String EXTRA_IS_FROM_SLICE = "is_from_slice";
+
+    /**
      * Personal or Work profile tab of {@link ProfileSelectFragment}
      * <p>0: Personal tab.
      * <p>1: Work profile tab.
@@ -147,9 +161,13 @@ public class SettingsActivity extends SettingsBaseActivity
     public static final String META_DATA_KEY_FRAGMENT_CLASS =
             "com.android.settings.FRAGMENT_CLASS";
 
+    public static final String META_DATA_KEY_HIGHLIGHT_MENU_KEY =
+            "com.android.settings.HIGHLIGHT_MENU_KEY";
+
     private static final String EXTRA_UI_OPTIONS = "settings:ui_options";
 
     private String mFragmentClass;
+    private String mHighlightMenuKey;
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
@@ -229,18 +247,25 @@ public class SettingsActivity extends SettingsBaseActivity
 
     @Override
     protected void onCreate(Bundle savedState) {
+        // Should happen before any call to getIntent()
+        getMetaData();
+        final Intent intent = getIntent();
+
+        if (shouldShowTwoPaneDeepLink(intent)) {
+            launchHomepageForTwoPaneDeepLink(intent);
+            finishAndRemoveTask();
+            super.onCreate(savedState);
+            return;
+        }
+
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
+
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
-
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
 
-        // Should happen before any call to getIntent()
-        getMetaData();
-
-        final Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_UI_OPTIONS)) {
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
@@ -248,17 +273,11 @@ public class SettingsActivity extends SettingsBaseActivity
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getInitialFragmentName(intent);
 
-        // This is a "Sub Settings" when:
-        // - this is a real SubSettings
-        // - or :settings:show_fragment_as_subsetting is passed to the Intent
-        final boolean isSubSettings = this instanceof SubSettings ||
-                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
-
         // If this is a sub settings, then apply the SubSettings Theme for the ActionBar content
         // insets.
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
-        if (isSubSettings && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
+        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             setTheme(R.style.Theme_SubSettings);
         }
 
@@ -347,6 +366,99 @@ public class SettingsActivity extends SettingsBaseActivity
         }
     }
 
+    private boolean isSubSettings(Intent intent) {
+        return this instanceof SubSettings ||
+            intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, false);
+    }
+
+    /**
+     * Returns the deep link trampoline intent for large screen devices.
+     */
+    public static Intent getTrampolineIntent(Intent intent, String highlightMenuKey) {
+        final Intent detailIntent = new Intent(intent);
+        // It's a deep link intent, SettingsHomepageActivity will set SplitPairRule and start it.
+        final Intent trampolineIntent = new Intent(ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
+                .setPackage(Utils.SETTINGS_PACKAGE_NAME)
+                .replaceExtras(detailIntent);
+
+        // Relay detail intent data to prevent failure of Intent#ParseUri.
+        // If Intent#getData() is not null, Intent#toUri will return an Uri which has the scheme of
+        // Intent#getData() and it may not be the scheme of an Intent.
+        trampolineIntent.putExtra(
+                SettingsHomepageActivity.EXTRA_SETTINGS_LARGE_SCREEN_DEEP_LINK_INTENT_DATA,
+                detailIntent.getData());
+        detailIntent.setData(null);
+
+        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI,
+                detailIntent.toUri(Intent.URI_INTENT_SCHEME));
+
+        trampolineIntent.putExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY,
+                highlightMenuKey);
+        trampolineIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        return trampolineIntent;
+    }
+
+    private void launchHomepageForTwoPaneDeepLink(Intent intent) {
+        final Intent trampolineIntent;
+        if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
+            // Get menu key for slice deep link case.
+            final String highlightMenuKey = intent.getStringExtra(
+                    EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY);
+            if (!TextUtils.isEmpty(highlightMenuKey)) {
+                mHighlightMenuKey = highlightMenuKey;
+            }
+            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
+            trampolineIntent.setClass(this, SliceDeepLinkHomepageActivity.class);
+        } else {
+            trampolineIntent = getTrampolineIntent(intent, mHighlightMenuKey);
+        }
+        startActivity(trampolineIntent);
+    }
+
+    private boolean shouldShowTwoPaneDeepLink(Intent intent) {
+        if (!ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this)) {
+            return false;
+        }
+
+        // If the activity is not the task root, it should not start trampoline for deep links.
+        if (!isTaskRoot()) {
+            return false;
+        }
+
+        // Only starts trampoline for deep links. Should return false for all the cases that
+        // Settings app starts SettingsActivity or SubSetting by itself.
+        if (intent.getAction() == null) {
+            // Other apps should send deep link intent which matches intent filter of the Activity.
+            return false;
+        }
+
+        if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
+            // Slice deep link starts the Intent using SubSettingLauncher. Returns true to show
+            // 2-pane deep link.
+            return true;
+        }
+
+        if (isSubSettings(intent)) {
+            return false;
+        }
+
+        if (intent.getBooleanExtra(SettingsHomepageActivity.EXTRA_IS_FROM_SETTINGS_HOMEPAGE,
+                /* defaultValue */ false)) {
+            return false;
+        }
+
+        if (TextUtils.equals(intent.getAction(), Intent.ACTION_CREATE_SHORTCUT)) {
+            // Returns false to show full screen for Intent.ACTION_CREATE_SHORTCUT because
+            // - Launcher startActivityForResult for Intent.ACTION_CREATE_SHORTCUT and activity
+            //   stack starts from launcher, CreateShortcutActivity will not follows SplitPaitRule
+            //   registered by Settings.
+            // - There is no CreateShortcutActivity entry point from Settings app UI.
+            return false;
+        }
+
+        return true;
+    }
+
     /** Returns the initial fragment name that the activity will launch. */
     @VisibleForTesting
     public String getInitialFragmentName(Intent intent) {
@@ -407,6 +519,9 @@ public class SettingsActivity extends SettingsBaseActivity
                     return;
                 } catch (NameNotFoundException e) {
                     Log.w(LOG_TAG, "Could not find package" + initialTitleResPackageName);
+                } catch (Resources.NotFoundException resourceNotFound) {
+                    Log.w(LOG_TAG,
+                            "Could not find title resource in " + initialTitleResPackageName);
                 }
             } else {
                 setTitle(mInitialTitleResId);
@@ -716,6 +831,7 @@ public class SettingsActivity extends SettingsBaseActivity
                     PackageManager.GET_META_DATA);
             if (ai == null || ai.metaData == null) return;
             mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
+            mHighlightMenuKey = ai.metaData.getString(META_DATA_KEY_HIGHLIGHT_MENU_KEY);
         } catch (NameNotFoundException nnfe) {
             // No recovery
             Log.d(LOG_TAG, "Cannot get Metadata for: " + getComponentName().toString());

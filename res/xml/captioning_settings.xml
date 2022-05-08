@@ -21,12 +21,11 @@
     android:persistent="false"
     android:title="@string/accessibility_captioning_title">
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settingslib.widget.IllustrationPreference
         android:key="captions_preview"
-        android:layout="@layout/accessibility_captions_preview"
         android:persistent="false"
         android:selectable="false"
-        android:title="@string/summary_placeholder"
+        settings:lottie_rawRes="@drawable/accessibility_captions_banner"
         settings:searchable="false" />
 
     <com.android.settings.widget.SettingsMainSwitchPreference

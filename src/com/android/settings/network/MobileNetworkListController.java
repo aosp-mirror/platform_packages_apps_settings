@@ -45,7 +45,12 @@ import java.util.Map;
  * This populates the entries on a page which lists all available mobile subscriptions. Each entry
  * has the name of the subscription with some subtext giving additional detail, and clicking on the
  * entry brings you to a details page for that network.
+ *
+ * @deprecated This class will be removed in Android U, use
+ * {@link NetworkProviderSimsCategoryController} and
+ * {@link NetworkProviderDownloadedSimsCategoryController} instead.
  */
+@Deprecated
 public class MobileNetworkListController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "MobileNetworkListCtlr";

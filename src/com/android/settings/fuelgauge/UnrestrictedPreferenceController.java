@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.UNRESTRICTED;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -55,7 +53,8 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, unrestricted states only");
             ((RadioButtonPreference) preference).setChecked(true);
-        } else if (mBatteryOptimizeUtils.getAppUsageState() == UNRESTRICTED) {
+        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
+                == BatteryOptimizeUtils.MODE_UNRESTRICTED) {
             Log.d(TAG, "is unrestricted states");
             ((RadioButtonPreference) preference).setChecked(true);
         } else {
@@ -75,12 +74,6 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!KEY_UNRESTRICTED_PREF.equals(preference.getKey())) {
-            return false;
-        }
-
-        mBatteryOptimizeUtils.setAppUsageState(UNRESTRICTED);
-        Log.d(TAG, "Set unrestricted");
-        return true;
+        return getPreferenceKey().equals(preference.getKey());
     }
 }

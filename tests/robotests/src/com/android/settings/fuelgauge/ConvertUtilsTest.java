@@ -40,6 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -67,7 +68,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testConvert_returnsExpectedContentValues() {
+    public void convert_returnsExpectedContentValues() {
         final int expectedType = 3;
         when(mockBatteryEntry.getUid()).thenReturn(1001);
         when(mockBatteryEntry.getLabel()).thenReturn("Settings");
@@ -124,7 +125,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testConvert_nullBatteryEntry_returnsExpectedContentValues() {
+    public void convert_nullBatteryEntry_returnsExpectedContentValues() {
         final ContentValues values =
             ConvertUtils.convert(
                 /*entry=*/ null,
@@ -151,7 +152,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testGetIndexedUsageMap_nullOrEmptyHistoryMap_returnEmptyCollection() {
+    public void getIndexedUsageMap_nullOrEmptyHistoryMap_returnEmptyCollection() {
         final int timeSlotSize = 2;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
 
@@ -166,7 +167,7 @@ public final class ConvertUtilsTest {
             .isEmpty();
     }
     @Test
-    public void testGetIndexedUsageMap_returnsExpectedResult() {
+    public void getIndexedUsageMap_returnsExpectedResult() {
         // Creates the fake testing data.
         final int timeSlotSize = 2;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L, 104L, 105L};
@@ -278,7 +279,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testGetIndexedUsageMap_usageTimeExceed_returnsExpectedResult() {
+    public void getIndexedUsageMap_usageTimeExceed_returnsExpectedResult() {
         final int timeSlotSize = 1;
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap =
@@ -320,7 +321,7 @@ public final class ConvertUtilsTest {
     }
 
     @Test
-    public void testGetIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
+    public void getIndexedUsageMap_hideBackgroundUsageTime_returnsExpectedResult() {
         final long[] batteryHistoryKeys = new long[] {101L, 102L, 103L};
         final Map<Long, Map<String, BatteryHistEntry>> batteryHistoryMap = new HashMap<>();
         final BatteryHistEntry fakeEntry = createBatteryHistEntry(
@@ -339,8 +340,8 @@ public final class ConvertUtilsTest {
             "package3", "label3", 500, 5L, 3600000L, 7200000L);
         entryMap.put(entry.getKey(), entry);
         batteryHistoryMap.put(Long.valueOf(batteryHistoryKeys[2]), entryMap);
-        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeList(mContext))
-            .thenReturn(Arrays.asList((CharSequence) "package3"));
+        when(mPowerUsageFeatureProvider.getHideBackgroundUsageTimeSet(mContext))
+            .thenReturn(new HashSet(Arrays.asList((CharSequence) "package3")));
 
         final Map<Integer, List<BatteryDiffEntry>> purgedResultMap =
             ConvertUtils.getIndexedUsageMap(

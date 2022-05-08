@@ -153,7 +153,6 @@ public class NetworkProviderBackupCallingGroupTest {
     @Test
     public void
     shouldShowBackupCallingForSub_crossSimDisabled_returnFalse() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
         doReturn(false).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
                 mContext, SUB_ID_1);
 
@@ -163,7 +162,6 @@ public class NetworkProviderBackupCallingGroupTest {
 
     @Test
     public void shouldBackupCallingForSub_crossSimEnabled_returnTrue() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL, true);
         doReturn(true).when(mNetworkProviderBackupCallingGroup).isCrossSimEnabledByPlatform(
                 mContext, SUB_ID_1);
 

@@ -36,6 +36,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.SubSettings;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
@@ -73,6 +74,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isFinishing()) {
+            return;
+        }
         if (isLockTaskModePinned() && !isSettingsRunOnTop()) {
             Log.w(TAG, "Devices lock task mode pinned.");
             finish();
@@ -91,17 +95,14 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            int appliedTheme;
             if (ThemeHelper.trySetDynamicColor(this)) {
-                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
+                final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
                         ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
                         : R.style.SudDynamicColorThemeSettings_SetupWizard;
+                setTheme(appliedTheme);
             } else {
-                appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                        ? R.style.SubSettings_SetupWizard
-                        : R.style.SudThemeGlifV3_Light;
+                setTheme(SetupWizardUtils.getTheme(this, getIntent()));
             }
-            setTheme(appliedTheme);
         }
 
         if (isToolbarEnabled() && !isAnySetupWizard) {
@@ -186,19 +187,17 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     public void setTitle(CharSequence title) {
+        super.setTitle(title);
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(title);
-        } else {
-            super.setTitle(title);
         }
     }
 
     @Override
     public void setTitle(int titleId) {
+        super.setTitle(getText(titleId));
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(getText(titleId));
-        } else {
-            super.setTitle(titleId);
         }
     }
 

@@ -104,12 +104,34 @@ public class CombinedBiometricStatusPreferenceController extends
     private void updateStateInternal() {
         // This controller currently is shown if fingerprint&face exist on the device. If this
         // changes in the future, the modalities passed into the below will need to be updated.
-        updateStateInternal(ParentalControlsUtils.parentConsentRequired(mContext,
-                BiometricAuthenticator.TYPE_FACE | BiometricAuthenticator.TYPE_FINGERPRINT));
+
+        final RestrictedLockUtils.EnforcedAdmin faceAdmin = ParentalControlsUtils
+                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FACE);
+        final RestrictedLockUtils.EnforcedAdmin fpAdmin = ParentalControlsUtils
+                .parentConsentRequired(mContext, BiometricAuthenticator.TYPE_FINGERPRINT);
+
+        // If the admins are non-null, they are actually always the same. Just the helper class
+        // we create above always return the admin, instead of a boolean.
+        final boolean faceConsentRequired = faceAdmin != null;
+        final boolean fpConsentRequired = fpAdmin != null;
+        final RestrictedLockUtils.EnforcedAdmin admin = faceAdmin != null ? faceAdmin : fpAdmin;
+
+        updateStateInternal(admin, faceConsentRequired, fpConsentRequired);
     }
 
     @VisibleForTesting
-    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin) {
+    void updateStateInternal(@Nullable RestrictedLockUtils.EnforcedAdmin enforcedAdmin,
+            boolean faceConsentRequired, boolean fpConsentRequired) {
+        // Disable the preference (and show the consent flow) only if consent is required for all
+        // modalities. Otherwise, users will not be able to enter and modify settings for modalities
+        // which have already been consented. In any case, the controllers for the modalities which
+        // have not yet been consented will be disabled in the combined page anyway - users can
+        // go through the consent+enrollment flow from there.
+        final boolean disablePreference = faceConsentRequired && fpConsentRequired;
+        if (!disablePreference) {
+            enforcedAdmin = null;
+        }
+
         if (mPreference != null) {
             mPreference.setDisabledByAdmin(enforcedAdmin);
         }

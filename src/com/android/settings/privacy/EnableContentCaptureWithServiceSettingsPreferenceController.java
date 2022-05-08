@@ -28,8 +28,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.profileselector.UserAdapter;
 import com.android.settings.utils.ContentCaptureUtils;
@@ -86,6 +86,11 @@ public final class EnableContentCaptureWithServiceSettingsPreferenceController
         boolean available = ContentCaptureUtils.isFeatureAvailable()
                 && ContentCaptureUtils.getServiceSettingsComponentName() != null;
         return available ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_privacy;
     }
 
     private static final class ProfileSelectDialog {

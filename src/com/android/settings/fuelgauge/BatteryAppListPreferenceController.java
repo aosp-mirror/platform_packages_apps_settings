@@ -47,6 +47,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -101,7 +102,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             PowerProfile powerProfile = new PowerProfile(context);
-            return powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL)
+            // Cheap hack to try to figure out if the power_profile.xml was populated.
+            return powerProfile.getAveragePowerForOrdinal(
+                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0)
                     >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
         }
     };
@@ -440,8 +443,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private boolean shouldShowSummary(BatteryEntry entry) {
-        final CharSequence[] allowlistPackages = mContext.getResources()
-                .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        final CharSequence[] allowlistPackages =
+                FeatureFactory.getFactory(mContext)
+                        .getPowerUsageFeatureProvider(mContext)
+                        .getHideApplicationSummary(mContext);
         final String target = entry.getDefaultPackageName();
 
         for (CharSequence packageName : allowlistPackages) {

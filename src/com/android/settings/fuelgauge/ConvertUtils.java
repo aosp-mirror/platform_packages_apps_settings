@@ -302,10 +302,10 @@ public final class ConvertUtils {
     private static void purgeLowPercentageAndFakeData(
             final Context context,
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
-        final List<CharSequence> backgroundUsageTimeHideList =
+        final Set<CharSequence> backgroundUsageTimeHideList =
                 FeatureFactory.getFactory(context)
                         .getPowerUsageFeatureProvider(context)
-                        .getHideBackgroundUsageTimeList(context);
+                        .getHideBackgroundUsageTimeSet(context);
         for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
             final Iterator<BatteryDiffEntry> iterator = entries.iterator();
             while (iterator.hasNext()) {

@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 public class HighTextContrastPreferenceController extends TogglePreferenceController {
@@ -42,5 +43,10 @@ public class HighTextContrastPreferenceController extends TogglePreferenceContro
     public boolean setChecked(boolean isChecked) {
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, (isChecked ? 1 : 0));
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
     }
 }

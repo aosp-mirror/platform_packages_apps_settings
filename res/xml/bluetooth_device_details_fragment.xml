@@ -34,6 +34,14 @@
         settings:searchable="false"
         settings:controller="com.android.settings.bluetooth.AdvancedBluetoothDetailsHeaderController"/>
 
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="le_audio_bluetooth_device_header"
+        android:layout="@layout/le_audio_bt_entity_header"
+        android:selectable="false"
+        settings:allowDividerBelow="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.bluetooth.LeAudioBluetoothDetailsHeaderController"/>
+
     <com.android.settingslib.widget.ActionButtonsPreference
         android:key="action_buttons"
         settings:allowDividerBelow="true"/>

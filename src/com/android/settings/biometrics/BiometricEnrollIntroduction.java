@@ -203,11 +203,15 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
                 getMoreButtonTextRes(), this::onNextButtonClick);
         requireScrollMixin.setOnRequireScrollStateChangedListener(
                 scrollNeeded -> {
-                    // Update text of primary button from "More" to "Agree".
-                    final int primaryButtonTextRes = scrollNeeded
-                            ? getMoreButtonTextRes()
-                            : getAgreeButtonTextRes();
-                    getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+
+                    boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+                    if (!enrollmentCompleted) {
+                        // Update text of primary button from "More" to "Agree".
+                        final int primaryButtonTextRes = scrollNeeded
+                                ? getMoreButtonTextRes()
+                                : getAgreeButtonTextRes();
+                        getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+                    }
 
                     // Show secondary button once scroll is completed.
                     if (!scrollNeeded) {
@@ -257,8 +261,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             // Lock thingy is already set up, launch directly to the next page
             launchNextEnrollingActivity(mToken);
         } else {
-            setResult(RESULT_FINISHED);
-            finish();
+            boolean couldStartNextBiometric = BiometricUtils.tryStartingNextBiometricEnroll(this,
+                    ENROLL_NEXT_BIOMETRIC_REQUEST, "enrollIntroduction#onNextButtonClicked");
+            if (!couldStartNextBiometric) {
+                setResult(RESULT_FINISHED);
+                finish();
+            }
         }
     }
 

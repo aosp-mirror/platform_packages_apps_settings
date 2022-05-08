@@ -17,16 +17,22 @@
 package com.android.settings.accessibility;
 
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+import static android.view.WindowInsets.Type.displayCutout;
+import static android.view.WindowInsets.Type.systemBars;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Insets;
+import android.graphics.Rect;
 import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.IntDef;
@@ -388,6 +394,25 @@ final class AccessibilityUtil {
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, screenHeightDp,
                 resources.getDisplayMetrics()));
+    }
+
+    /**
+     * Gets the bounds of the display window excluding the insets of the system bar and display
+     * cut out.
+     *
+     * @param context the current context.
+     * @return the bounds of the display window.
+     */
+    public static Rect getDisplayBounds(Context context) {
+        final WindowManager windowManager = context.getSystemService(WindowManager.class);
+        final WindowMetrics metrics = windowManager.getCurrentWindowMetrics();
+
+        final Rect displayBounds = metrics.getBounds();
+        final Insets displayInsets = metrics.getWindowInsets().getInsetsIgnoringVisibility(
+                systemBars() | displayCutout());
+        displayBounds.inset(displayInsets);
+
+        return displayBounds;
     }
 
     /**

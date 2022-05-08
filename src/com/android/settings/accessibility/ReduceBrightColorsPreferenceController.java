@@ -95,6 +95,11 @@ public class ReduceBrightColorsPreferenceController extends TogglePreferenceCont
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_accessibility;
+    }
+
+    @Override
     public void onStart() {
         mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
                 Settings.Secure.REDUCE_BRIGHT_COLORS_ACTIVATED),

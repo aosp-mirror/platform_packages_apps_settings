@@ -94,12 +94,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
-        if (subs.size() > 1 || Utils.isProviderModelEnabled(mContext)) {
-            return AVAILABLE;
-        } else {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
+        return AVAILABLE;
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -162,7 +157,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
-        if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
+        if (subs.size() == 1) {
             mPreference.setEnabled(false);
             mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
                     subs.get(0), mContext));
@@ -190,6 +185,7 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
 
+        mPreference.setEnabled(true);
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 

@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilityDetailsSettingsFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
+import com.android.settings.accessibility.ToggleColorInversionPreferenceFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment;
 import com.android.settings.accounts.AccountDashboardFragment;
@@ -67,6 +68,7 @@ import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
@@ -119,6 +121,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.network.NetworkProviderSettings;
 import com.android.settings.network.apn.ApnEditor;
 import com.android.settings.network.apn.ApnSettings;
+import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.nfc.AndroidBeam;
 import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -141,7 +144,6 @@ import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
-import com.android.settings.security.CryptKeeperSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.shortcut.CreateShortcut;
@@ -175,6 +177,7 @@ public class SettingsGateway {
     public static final String[] ENTRY_FRAGMENTS = {
             AdvancedConnectedDeviceDashboardFragment.class.getName(),
             CreateShortcut.class.getName(),
+            BluetoothPairingDetail.class.getName(),
             WifiSettings.class.getName(),
             WifiNetworkDetailsFragment.class.getName(),
             ConfigureWifiSettings.class.getName(),
@@ -215,6 +218,7 @@ public class SettingsGateway {
             AccessibilitySettingsForSetupWizard.class.getName(),
             CaptionPropertiesFragment.class.getName(),
             ToggleDaltonizerPreferenceFragment.class.getName(),
+            ToggleColorInversionPreferenceFragment.class.getName(),
             ToggleReduceBrightColorsPreferenceFragment.class.getName(),
             TextToSpeechSettings.class.getName(),
             PrivateVolumeForget.class.getName(),
@@ -235,7 +239,6 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             SystemNavigationGestureSettings.class.getName(),
-            CryptKeeperSettings.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
@@ -317,6 +320,7 @@ public class SettingsGateway {
             InteractAcrossProfilesDetails.class.getName(),
             MediaControlsSettings.class.getName(),
             NetworkProviderSettings.class.getName(),
+            NetworkSelectSettings.class.getName(),
             AlarmsAndRemindersDetails.class.getName(),
             MediaManagementAppsDetails.class.getName(),
             AutoBrightnessSettings.class.getName()
@@ -341,6 +345,7 @@ public class SettingsGateway {
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
             Settings.NetworkProviderSettingsActivity.class.getName(),
+            Settings.NetworkSelectActivity.class.getName(),
             // Home page > Connected devices
             Settings.BluetoothSettingsActivity.class.getName(),
             Settings.WifiDisplaySettingsActivity.class.getName(),

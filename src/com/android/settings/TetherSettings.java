@@ -34,8 +34,6 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.EthernetManager;
-import android.net.EthernetManager.InterfaceState;
-import android.net.EthernetManager.Role;
 import android.net.IpConfiguration;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
@@ -650,8 +648,8 @@ public class TetherSettings extends RestrictedSettingsFragment
     }
 
     private final class EthernetListener implements EthernetManager.InterfaceStateListener {
-        public void onInterfaceStateChanged(@NonNull String iface, @InterfaceState int state,
-                @Role int role, @NonNull IpConfiguration configuration) {
+        public void onInterfaceStateChanged(@NonNull String iface, int state, int role,
+                @NonNull IpConfiguration configuration) {
             if (state == EthernetManager.STATE_LINK_UP) {
                 mAvailableInterfaces.add(iface);
             } else {

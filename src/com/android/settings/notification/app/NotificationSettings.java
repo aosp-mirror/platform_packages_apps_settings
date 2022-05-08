@@ -334,10 +334,10 @@ abstract public class NotificationSettings extends DashboardFragment {
                 }
                 continue;
             }
-            // TODO(78660939): This should actually start a new task
             mAppRow.settingsIntent = intent
                     .setPackage(null)
-                    .setClassName(activityInfo.packageName, activityInfo.name);
+                    .setClassName(activityInfo.packageName, activityInfo.name)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (mChannel != null) {
                 mAppRow.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
             }

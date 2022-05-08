@@ -67,11 +67,13 @@ public class BatteryAppListPreferenceControllerTest {
     private Context mContext;
     private PowerGaugePreference mPreference;
     private BatteryAppListPreferenceController mPreferenceController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
         final Resources resources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(resources);
@@ -79,9 +81,8 @@ public class BatteryAppListPreferenceControllerTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
-        when(resources.getTextArray(R.array.allowlist_hide_summary_in_battery_usage))
+        when(mFeatureFactory.powerUsageFeatureProvider.getHideApplicationSummary(mContext))
                 .thenReturn(new String[] {"com.android.googlequicksearchbox"});
-        FakeFeatureFactory.setupForTest();
 
         mPreference = new PowerGaugePreference(mContext);
 

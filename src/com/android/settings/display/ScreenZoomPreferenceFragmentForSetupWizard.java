@@ -18,7 +18,14 @@ package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
 
+import com.android.settings.R;
+
 public class ScreenZoomPreferenceFragmentForSetupWizard extends ScreenZoomSettings {
+
+    @Override
+    protected int getActivityLayoutResId() {
+        return R.layout.suw_screen_zoom_fragment;
+    }
 
     @Override
     public int getMetricsCategory() {
