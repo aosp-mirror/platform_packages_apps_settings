@@ -20,7 +20,7 @@ import android.annotation.NonNull;
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.safetycenter.SafetyCenterStatusHolder;
+import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 
 /** The preference controller for the top level privacy tile. */
 public class TopLevelPrivacyEntryPreferenceController  extends BasePreferenceController {
@@ -31,7 +31,7 @@ public class TopLevelPrivacyEntryPreferenceController  extends BasePreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (!SafetyCenterStatusHolder.get().isEnabled(mContext)) {
+        if (!SafetyCenterManagerWrapper.get().isEnabled(mContext)) {
             return AVAILABLE;
         }
         return CONDITIONALLY_UNAVAILABLE;

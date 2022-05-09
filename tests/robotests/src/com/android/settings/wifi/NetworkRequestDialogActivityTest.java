@@ -25,7 +25,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -42,9 +41,12 @@ import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -61,25 +63,26 @@ public class NetworkRequestDialogActivityTest {
     private static final String TEST_SSID = "testssid";
     private static final String TEST_CAPABILITY = "wep";
 
-    NetworkRequestDialogActivity mActivity;
+    @Rule
+    public MockitoRule mRule = MockitoJUnit.rule();
+    @Mock
     WifiManager mWifiManager;
-    Context mContext;
+    @Mock
+    NetworkRequestUserSelectionCallback mNetworkRequestUserSelectionCallback;
+
+    NetworkRequestDialogActivity mActivity;
+    List<ScanResult> mScanResults = new ArrayList<>();
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
         FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
         when(fakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
                 any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
                 .thenReturn(mock(WifiPickerTracker.class));
+        mScanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
 
-        NetworkRequestDialogActivity activity =
-            Robolectric.setupActivity(NetworkRequestDialogActivity.class);
-        mActivity = spy(activity);
-
-        mWifiManager = mock(WifiManager.class);
-        when(mActivity.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
+        mActivity = spy(Robolectric.setupActivity(NetworkRequestDialogActivity.class));
+        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
     }
 
     @Test
@@ -169,10 +172,7 @@ public class NetworkRequestDialogActivityTest {
     public void specifiedSsid_onMatch_shouldShowDialogFragment() {
         startSpecifiedActivity();
 
-        final List<ScanResult> scanResults = new ArrayList<>();
-        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
-
-        mActivity.onMatch(scanResults);
+        mActivity.onMatch(mScanResults);
 
         assertThat(mActivity.mProgressDialog).isNull();
         assertThat(mActivity.mDialogFragment).isNotNull();
@@ -193,9 +193,7 @@ public class NetworkRequestDialogActivityTest {
     public void onUserSelectionConnectFailure_shouldShowDialogFragment() {
         WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         startSpecifiedActivity();
-        final List<ScanResult> scanResults = new ArrayList<>();
-        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
-        mActivity.onMatch(scanResults);
+        mActivity.onMatch(mScanResults);
 
         mActivity.onUserSelectionConnectFailure(wifiConfiguration);
 
@@ -205,13 +203,9 @@ public class NetworkRequestDialogActivityTest {
 
     @Test
     public void onClickConnectButton_shouldShowProgressDialog() {
-        NetworkRequestUserSelectionCallback networkRequestUserSelectionCallback = mock(
-                NetworkRequestUserSelectionCallback.class);
         startSpecifiedActivity();
-        final List<ScanResult> scanResults = new ArrayList<>();
-        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
-        mActivity.onMatch(scanResults);
-        mActivity.onUserSelectionCallbackRegistration(networkRequestUserSelectionCallback);
+        mActivity.onMatch(mScanResults);
+        mActivity.onUserSelectionCallbackRegistration(mNetworkRequestUserSelectionCallback);
 
         mActivity.onClickConnectButton();
 
@@ -222,9 +216,7 @@ public class NetworkRequestDialogActivityTest {
     @Test
     public void onCancel_shouldCloseAllUI() {
         startSpecifiedActivity();
-        final List<ScanResult> scanResults = new ArrayList<>();
-        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
-        mActivity.onMatch(scanResults);
+        mActivity.onMatch(mScanResults);
 
         mActivity.onCancel();
 
@@ -239,5 +231,21 @@ public class NetworkRequestDialogActivityTest {
         mActivity.onUserSelectionConnectFailure(config);
 
         verify(mActivity).finish();
+    }
+
+    @Test
+    public void onUserSelectionCallbackRegistration_dismissDialogsAndDialogIsNull_shouldNotCrash() {
+        mActivity.dismissDialogs();
+
+        mActivity.onUserSelectionCallbackRegistration(mNetworkRequestUserSelectionCallback);
+    }
+
+    @Test
+    public void onMatch_dismissDialogsAndDialogIsNull_shouldNotCrash() {
+        mActivity.mIsSpecifiedSsid = false;
+        mActivity.mShowingErrorDialog = false;
+        mActivity.dismissDialogs();
+
+        mActivity.onMatch(mScanResults);
     }
 }

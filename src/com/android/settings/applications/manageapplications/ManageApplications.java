@@ -120,6 +120,7 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.fuelgauge.HighPowerDetail;
+import com.android.settings.localepicker.AppLocalePickerActivity;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.app.AppNotificationSettings;
@@ -135,7 +136,7 @@ import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 import com.android.settingslib.utils.ThreadUtils;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -171,6 +172,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
+    @VisibleForTesting
+    static final String EXTRA_SEARCH_QUERY = "search_query";
     @VisibleForTesting
     static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
@@ -252,6 +255,8 @@ public class ManageApplications extends InstrumentedFragment
     // Whether or not search view is expanded.
     @VisibleForTesting
     boolean mExpandSearch;
+    @VisibleForTesting
+    CharSequence mPreQuery;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -314,16 +319,25 @@ public class ManageApplications extends InstrumentedFragment
             mListType = LIST_TYPE_WIFI_ACCESS;
         } else if (className.equals(Settings.ManageExternalStorageActivity.class.getName())) {
             mListType = LIST_MANAGE_EXTERNAL_STORAGE;
-        }  else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
+        } else if (className.equals(Settings.MediaManagementAppsActivity.class.getName())) {
             mListType = LIST_TYPE_MEDIA_MANAGEMENT_APPS;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             mListType = LIST_TYPE_ALARMS_AND_REMINDERS;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
+                || className.equals(
+                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
             mListType = LIST_TYPE_NOTIFICATION;
             mUsageStatsManager = IUsageStatsManager.Stub.asInterface(
                     ServiceManager.getService(Context.USAGE_STATS_SERVICE));
             mNotificationBackend = new NotificationBackend();
             mSortOrder = R.id.sort_order_recent_notification;
+            if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
+                // Special-case for a case where a user is directed to the all apps notification
+                // preferences page via a notification prompt to review permissions settings.
+                android.provider.Settings.Global.putInt(getContext().getContentResolver(),
+                        android.provider.Settings.Global.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
+                        1);  // USER_INTERACTED
+            }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             mListType = LIST_TYPE_APPS_LOCALE;
         } else {
@@ -348,6 +362,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterType =
                     savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
             mExpandSearch = savedInstanceState.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
+            mPreQuery = savedInstanceState.getCharSequence(EXTRA_SEARCH_QUERY);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -532,12 +547,13 @@ public class ManageApplications extends InstrumentedFragment
         outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
         outState.putInt(EXTRA_FILTER_TYPE, mFilter.getFilterType());
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
-        outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
-        outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+            outState.putCharSequence(EXTRA_SEARCH_QUERY, mSearchView.getQuery());
         }
         if (mApplications != null) {
+            outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
+            outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
             mApplications.onSaveInstanceState(outState);
         }
     }
@@ -635,8 +651,10 @@ public class ManageApplications extends InstrumentedFragment
                         R.string.media_management_apps_title);
                 break;
             case LIST_TYPE_APPS_LOCALE:
-                startAppInfoFragment(AppLocaleDetails.class,
-                        R.string.app_locale_picker_title);
+                Intent intent = new Intent(getContext(), AppLocalePickerActivity.class);
+                intent.setData(Uri.parse("package:" + mCurrentPkgName));
+                intent.putExtra(AppInfoBase.ARG_PACKAGE_UID, mCurrentUid);
+                startActivity(intent);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
@@ -670,6 +688,9 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView.setOnQueryTextListener(this);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
+            }
+            if (!TextUtils.isEmpty(mPreQuery)) {
+                mSearchView.setQuery(mPreQuery, true);
             }
         }
 
@@ -912,7 +933,9 @@ public class ManageApplications extends InstrumentedFragment
             screenTitle = R.string.media_management_apps_title;
         } else if (className.equals(Settings.AlarmsAndRemindersActivity.class.getName())) {
             screenTitle = R.string.alarms_and_reminders_title;
-        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())) {
+        } else if (className.equals(Settings.NotificationAppListActivity.class.getName())
+                || className.equals(
+                        Settings.NotificationReviewPermissionsActivity.class.getName())) {
             screenTitle = R.string.app_notifications_title;
         } else if (className.equals(AppLocaleDetails.class.getName())) {
             screenTitle = R.string.app_locales_picker_menu_title;
@@ -1559,8 +1582,7 @@ public class ManageApplications extends InstrumentedFragment
                     holder.setSummary(MediaManagementAppsDetails.getSummary(mContext, entry));
                     break;
                 case LIST_TYPE_APPS_LOCALE:
-                    holder.setSummary(AppLocaleDetails
-                            .getSummary(mContext, entry.info.packageName));
+                    holder.setSummary(AppLocaleDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

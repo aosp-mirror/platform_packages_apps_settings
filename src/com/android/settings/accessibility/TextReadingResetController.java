@@ -19,25 +19,28 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.view.View;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settingslib.widget.LayoutPreference;
-
-import java.util.List;
 
 /**
  * The controller of the reset button in the text and reading options page.
  */
 class TextReadingResetController extends BasePreferenceController {
-    private final List<ResetStateListener> mListeners;
+    private final View.OnClickListener mOnResetClickListener;
+
+    @EntryPoint
+    private int mEntryPoint;
 
     TextReadingResetController(Context context, String preferenceKey,
-            @NonNull List<ResetStateListener> listeners) {
+            @Nullable View.OnClickListener listener) {
         super(context, preferenceKey);
-        mListeners = listeners;
+        mOnResetClickListener = listener;
     }
 
     @Override
@@ -51,7 +54,26 @@ class TextReadingResetController extends BasePreferenceController {
 
         final LayoutPreference layoutPreference = screen.findPreference(getPreferenceKey());
         final View view = layoutPreference.findViewById(R.id.reset_button);
-        view.setOnClickListener(v -> mListeners.forEach(ResetStateListener::resetState));
+        view.setOnClickListener(v -> {
+            if (mOnResetClickListener != null) {
+                mOnResetClickListener.onClick(v);
+
+                SettingsStatsLog.write(
+                        SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                        AccessibilityStatsLogUtils.convertToItemKeyName(getPreferenceKey()),
+                        /* reset */ -1,
+                        AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
+            }
+        });
+    }
+
+    /**
+     * The entry point is used for logging.
+     *
+     * @param entryPoint from which settings page
+     */
+    void setEntryPoint(@EntryPoint int entryPoint) {
+        mEntryPoint = entryPoint;
     }
 
     /**
