@@ -28,6 +28,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -37,9 +38,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link VibrationIntensityPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class VibrationIntensityPreferenceControllerTest {
 
     private static final String SETTING_KEY = Settings.System.NOTIFICATION_VIBRATION_INTENSITY;
