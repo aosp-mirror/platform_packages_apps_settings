@@ -24,6 +24,7 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.applications.AppIconCacheManager;
 import com.android.settingslib.search.SearchIndexable;
 
 /**
@@ -58,4 +59,10 @@ public class ManageDomainUrls extends DashboardFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.manage_domain_url_settings);
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        AppIconCacheManager.getInstance().release();
+    }
 }
