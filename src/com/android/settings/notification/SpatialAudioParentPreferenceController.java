@@ -57,7 +57,7 @@ public class SpatialAudioParentPreferenceController extends BasePreferenceContro
     @Override
     public CharSequence getSummary() {
         boolean speakerOn = mSpatialAudioPreferenceController.isAvailable()
-                && mSpatialAudioWiredHeadphonesController.isChecked();
+                && mSpatialAudioPreferenceController.isChecked();
         boolean wiredHeadphonesOn = mSpatialAudioWiredHeadphonesController.isAvailable()
                 && mSpatialAudioWiredHeadphonesController.isChecked();
         if (speakerOn && wiredHeadphonesOn) {

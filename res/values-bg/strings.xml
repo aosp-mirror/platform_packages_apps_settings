@@ -2336,8 +2336,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"От: Иван"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Добро утро!\n\nСамо исках да разбера как върви работата по дизайните. Ще бъдат ли готови, преди да започнем да правим новите балони?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Нулиране на настройките"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Настройките за размер на текста и елементите на екрана бяха нулирани"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се нулира ли размерът на текста и елементите на екрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Предпочитанията ви за размера на текста и елементите на екрана ще се нулират към оригиналните настройки на телефона"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Нулиране"</string>
@@ -2458,6 +2457,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Време на автоматично кликване"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Вибриране и осезателна обратна връзка"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Управлявайте силата на вибрирането за различните случаи"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Настройката е деактивирана, защото за устройството е зададен тих режим"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Обаждания"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Известия и будилници"</string>
@@ -2634,10 +2637,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"увреден слух, загуба на слуха"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"увреден слух, загуба на слуха, надписи, телетайп, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Бързо сдвояване"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Откриване в близост на у-ва с Bluetooth с бързо сдвояв."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Сканиране за устройства в близост"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Запазени устройства"</string>
     <string name="print_settings" msgid="8519810615863882491">"Отпечатване"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Изключено"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3664,7 +3663,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"екран, време за заключване, време за изчакване, заключване на екрана"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"памет, кеш, данни, изтриване, изчистване, освобождаване, място"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"свързано, устройство, слушалки, слушалки, високоговорител, безжично, сдвояване, слушалки, музика, мултимедия"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"сдвояване, слушалки, Bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"фон, тема, решетка, персонализиране"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"икона, акцентиране, цвят"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"по подразбиране, Асистент"</string>
@@ -4297,8 +4295,10 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Изключено"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Фиксиране на приложения"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Функцията за фиксиране на приложения ви дава възможност да задържите текущото приложение на преден план, докато не го премахнете. С нейна помощ можете например да позволите на доверен приятел да играе конкретна игра."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Когато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Когато дадено приложение е фиксирано, то може да отваря други приложения. Възможно е също някои лични данни да са достъпни. \n\nАко искате по сигурен начин да споделите устройството си с друг човек, използвайте режима на гост. \n\nЗа да използвате функцията за фиксиране на приложения: 	\n1.	Включете я. 	\n2.	Отворете екрана за общ преглед. 	\n3.	Докоснете иконата на приложението в горната част на екрана, след което изберете „Фиксиране“."</string>
+    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
+    <skip />
+    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
+    <skip />
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Когато дадено приложение е фиксирано: \n\n•		някои лични данни може да бъдат достъпни \n		(като например контактите и съдържанието на имейлите); \n•		то може да отваря други приложения. \n\nИзползвайте функцията само с хора, на които имате доверие."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Запитване за фигура за отключване преди освобождаване"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"ПИН код преди освобождаване"</string>
@@ -4365,8 +4365,8 @@
     </plurals>
     <string name="app_launch_supported_links_add" msgid="3271247750388016131">"Добавяне"</string>
     <string name="app_launch_supported_links_subtext" msgid="4268004019469184113">"Отваря се в(ъв) <xliff:g id="APP_LABEL">%s</xliff:g>"</string>
-    <string name="storage_summary_format" msgid="5721782272185284276">"Използва/т се <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
-    <string name="storage_type_internal" msgid="979243131665635278">"вътрешно хранилище"</string>
+    <string name="storage_summary_format" msgid="5721782272185284276">"Използва(т) се <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="STORAGE_TYPE">%2$s</xliff:g>"</string>
+    <string name="storage_type_internal" msgid="979243131665635278">"вътрешното хранилище"</string>
     <string name="storage_type_external" msgid="125078274000280821">"външно хранилище"</string>
     <string name="data_summary_format" msgid="8802057788950096650">"Пренос: <xliff:g id="SIZE">%1$s</xliff:g> от <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="storage_used" msgid="2591194906751432725">"Използвано хранилище"</string>
@@ -4597,7 +4597,7 @@
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Разрешаване на показв. върху други приложения"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Разрешаване на приложението да се показва върху другите използвани от вас приложения. То ще може да вижда къде докосвате екрана и да избира какво да се показва на него."</string>
     <string name="manage_external_storage_title" msgid="8024521099838816100">"Достъп до всички файлове"</string>
-    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешете достъп за управл. на всички файлове"</string>
+    <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешаване на достъп за управл. на всички файлове"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Разрешете на това приложение да чете, променя и изтрива всички файлове на устройството или обемите на свързаните хранилища. Ако то получи разрешението, може да осъществява достъп до файловете без изричното ви знание."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да осъществява достъп до всички файлове"</string>
     <string name="media_management_apps_title" msgid="8222942355578724582">"Приложения за управление на мултимедията"</string>
@@ -5711,6 +5711,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Отказ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Свързване"</string>
     <string name="tare_settings" msgid="3788654800004869077">"Настройки за TARE"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Възстановяване на стандартните настройки"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Възстановени са стандартните настройки"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Максимален баланс при заредена батерия"</string>
@@ -5722,7 +5726,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Действия (цена за извършване)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Действия (основна цена)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Награди за едно събитие"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Награди за времетраенето на събитието"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Максималният брой награди на ден"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Водеща активност"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Видяхте известие"</string>
