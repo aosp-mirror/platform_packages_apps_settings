@@ -22,7 +22,11 @@ import static com.android.settings.development.tare.DropdownActivity.POLICY_JOB_
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +44,9 @@ public class TareHomePage extends Activity {
     private Button mRevButton;
     private TextView mAlarmManagerView;
     private TextView mJobSchedulerView;
+    private ConfigObserver mConfigObserver;
+
+    private static final int SETTING_VALUE_DEFAULT = -1;
     private static final int SETTING_VALUE_OFF = 0;
     private static final int SETTING_VALUE_ON = 1;
 
@@ -53,14 +60,17 @@ public class TareHomePage extends Activity {
         mAlarmManagerView = findViewById(R.id.alarmmanager);
         mJobSchedulerView = findViewById(R.id.jobscheduler);
 
-        final boolean isTareEnabled = Settings.Global.getInt(getContentResolver(),
-                Settings.Global.ENABLE_TARE, Settings.Global.DEFAULT_ENABLE_TARE) == 1;
-        setEnabled(isTareEnabled);
+        mConfigObserver = new ConfigObserver(new Handler(Looper.getMainLooper()));
 
         mOnSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setEnabled(isChecked);
+                if (mConfigObserver.mEnableTareSetting == SETTING_VALUE_DEFAULT
+                        && isChecked == (Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON)) {
+                    // Don't bother writing something that's not new information. It would make
+                    // it hard to use DeviceConfig if we did.
+                    return;
+                }
                 Settings.Global.putInt(getContentResolver(),
                         Settings.Global.ENABLE_TARE,
                         isChecked ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
@@ -68,13 +78,27 @@ public class TareHomePage extends Activity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mConfigObserver.start();
+    }
+
+    @Override
+    protected void onPause() {
+        mConfigObserver.stop();
+        super.onPause();
+    }
+
     /** Reverts the TARE settings to the original default settings */
-    // TODO: Establish default TARE values and make this method revert all settings back to default.
     public void revertSettings(View v) {
         Toast.makeText(this, R.string.tare_settings_reverted_toast, Toast.LENGTH_LONG).show();
         Settings.Global.putString(getApplicationContext().getContentResolver(),
                 Settings.Global.ENABLE_TARE, null);
-        setEnabled(Settings.Global.DEFAULT_ENABLE_TARE == SETTING_VALUE_ON);
+        Settings.Global.putString(getApplicationContext().getContentResolver(),
+                Settings.Global.TARE_ALARM_MANAGER_CONSTANTS, null);
+        Settings.Global.putString(getApplicationContext().getContentResolver(),
+                Settings.Global.TARE_JOB_SCHEDULER_CONSTANTS, null);
     }
 
     /** Opens up the AlarmManager TARE policy page with its factors to view and edit */
@@ -97,5 +121,43 @@ public class TareHomePage extends Activity {
         mAlarmManagerView.setEnabled(tareStatus);
         mJobSchedulerView.setEnabled(tareStatus);
         mOnSwitch.setChecked(tareStatus);
+    }
+
+    private class ConfigObserver extends ContentObserver {
+        private int mEnableTareSetting;
+
+        ConfigObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void start() {
+            getContentResolver().registerContentObserver(
+                    Settings.Global.getUriFor(Settings.Global.ENABLE_TARE), false, this);
+            processEnableTareChange();
+        }
+
+        public void stop() {
+            getContentResolver().unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            processEnableTareChange();
+        }
+
+        private void processEnableTareChange() {
+            final String setting =
+                    Settings.Global.getString(getContentResolver(), Settings.Global.ENABLE_TARE);
+            if (setting == null ) {
+                mEnableTareSetting = SETTING_VALUE_DEFAULT;
+            } else {
+                try {
+                    mEnableTareSetting = Integer.parseInt(setting);
+                } catch (NumberFormatException e) {
+                    mEnableTareSetting = Settings.Global.DEFAULT_ENABLE_TARE;
+                }
+            }
+            setEnabled(mEnableTareSetting == SETTING_VALUE_ON);
+        }
     }
 }

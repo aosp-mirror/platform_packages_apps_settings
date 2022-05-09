@@ -36,6 +36,7 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(R.string.add_a_language);
 
         final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
                 this, LocalePickerWithRegionActivity.this, false /* translate only */);
