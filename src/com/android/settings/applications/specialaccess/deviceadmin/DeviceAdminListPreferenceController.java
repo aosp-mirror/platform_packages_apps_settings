@@ -92,6 +92,7 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
 
     private PreferenceGroup mPreferenceGroup;
     private FooterPreference mFooterPreference;
+    private boolean mFirstLaunch = true;
 
     static {
         FILTER.addAction(ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
@@ -118,6 +119,17 @@ public class DeviceAdminListPreferenceController extends BasePreferenceControlle
         mFooterPreference = mPreferenceGroup.findPreference(KEY_DEVICE_ADMIN_FOOTER);
 
         updateList();
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mFirstLaunch) {
+            mFirstLaunch = false;
+            // When first launch, updateList() is already be called in displayPreference().
+        } else {
+            updateList();
+        }
     }
 
     @Override
