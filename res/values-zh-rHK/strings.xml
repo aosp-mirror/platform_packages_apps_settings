@@ -227,7 +227,7 @@
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"系統語言"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"系統預設"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"「設定」中不提供此應用程式的語言選擇。"</string>
-    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，某些應用程式可能不支援這項設定。"</string>
+    <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"可用的語言可能與應用程式支援的語言不同，部分應用程式可能不支援此設定。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">要移除選取的語言嗎？</item>
       <item quantity="one">要移除選取的語言嗎？</item>
@@ -434,7 +434,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"使用您的指紋"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6100563481214337377">"使用指紋解鎖手機或驗證身分，例如用來登入應用程式或核准購買交易"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"允許子女使用指紋解鎖手機或驗證身分，例如登入應用程式、核准購買交易等。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"由您掌握"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"一切由您掌控"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"一切由您和子女做主"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"注意事項"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"「指紋」所記錄的資料會安全地儲存在您的手機上，絕不會外洩。您隨時可在「設定」刪除此資料。"</string>
@@ -2337,8 +2337,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"寄件人：Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"早晨！\n\n我想瞭解目前的設計進度，可以趕在製作新汽球前準備好嗎？"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"重設設定"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"已重設顯示大小和文字設定"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"要重設顯示大小和文字嗎？"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"顯示大小和文字偏好設定將重設為手機原始設定"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"重設"</string>
@@ -2459,6 +2458,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"自動點擊時間"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"震動和觸感反應"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"控制各種使用情況的震動強度"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"由於裝置已設為靜音，因此設定已停用"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通話"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知和鬧鐘"</string>
@@ -2635,10 +2638,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"聽障, 失聰"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"聽障, 失聰, 字幕, 電傳打字, tty"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"快速配對"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"偵測附近的快速配對藍牙裝置。"</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"掃瞄附近裝置"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"已儲存的裝置"</string>
     <string name="print_settings" msgid="8519810615863882491">"列印"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"關閉"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3665,7 +3664,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"螢幕, 鎖定時間, 逾時, 鎖定螢幕"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"記憶體, 快取, 資料, 刪除, 清除, 釋出, 空間"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"已連線, 裝置, 耳機, 耳機, 喇叭, 無線, 配對, 耳塞, 音樂, 媒體"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"配對, 耳塞, 藍牙"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"背景, 主題, 格線, 自訂, 個人化"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"圖示, 強調, 顏色"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"預設, 助理"</string>
@@ -4298,8 +4296,10 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"關閉"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"應用程式固定"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"應用程式固定功能可讓目前使用的應用程式持續在畫面上顯示，直到您取消固定為止。此功能可讓信任的朋友玩特定遊戲。"</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能	\n2.	開啟 [概覽]	\n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"固定應用程式後，該應用程式可開啟其他應用程式，亦能存取個人資料。\n\n如要安全地與他人共用裝置，建議您改用訪客使用者。\n\n使用應用程式固定功能的步驟如下：	\n1.	開啟應用程式固定功能 \n2.	開啟 [概覽]	\n3.	輕按畫面頂部的應用程式圖示，然後輕按 [固定]"</string>
+    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
+    <skip />
+    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
+    <skip />
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"固定應用程式後：\n\n•	 該應用程式可存取個人資料\n		(例如聯絡人和電郵內容)\n•	 固定的應用程式可開啟其他應用程式\n\n僅與您信任的人使用應用程式固定功能。"</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"取消固定時必須提供解鎖圖形"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"取消固定時必須輸入 PIN"</string>
@@ -5712,6 +5712,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連接"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連接"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE 設定"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"還原為預設設定"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"已還原為預設設定。"</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"裝置充滿電時的最大可用電量"</string>
@@ -5723,7 +5727,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"行動 (生產成本)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"行動 (基本價格)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"每個活動的個別獎賞"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"活動時間總長度的獎賞"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"每日獎賞上限"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"最上層顯示的活動"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"已查看通知"</string>

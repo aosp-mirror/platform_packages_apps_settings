@@ -61,6 +61,8 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
         if (DEBUG) {
             Log.d(TAG, "onReceive() action : " + intent.getAction());
         }
+        boolean isUsbConfigured = intent.getExtras() != null
+                ? intent.getExtras().getBoolean(UsbManager.USB_CONFIGURED) : false;
         if (UsbManager.ACTION_USB_STATE.equals(intent.getAction())) {
             mConnected = intent.getExtras().getBoolean(UsbManager.USB_CONNECTED)
                     || intent.getExtras().getBoolean(UsbManager.USB_HOST_CONNECTED);
@@ -98,7 +100,7 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
         }
         if (mUsbConnectionListener != null) {
             mUsbConnectionListener.onUsbConnectionChanged(mConnected, mFunctions, mPowerRole,
-                    mDataRole);
+                    mDataRole, isUsbConfigured);
         }
     }
 
@@ -142,6 +144,7 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
      * Interface definition for a callback to be invoked when usb connection is changed.
      */
     interface UsbConnectionListener {
-        void onUsbConnectionChanged(boolean connected, long functions, int powerRole, int dataRole);
+        void onUsbConnectionChanged(boolean connected, long functions, int powerRole, int dataRole,
+                boolean isUsbConfigured);
     }
 }
