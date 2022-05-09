@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
@@ -36,6 +37,7 @@ import com.android.settings.deviceinfo.StorageCategoryFragment;
 import com.android.settings.deviceinfo.VolumeOptionMenuController;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.DiskInitFragment;
+import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController;
@@ -71,6 +73,8 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
     private StorageSelectionPreferenceController mStorageSelectionController;
     private StorageUsageProgressBarPreferenceController mStorageUsageProgressBarController;
     private VolumeOptionMenuController mOptionMenuController;
+    private boolean mIsLoadedFromCache;
+    private StorageCacheHelper mStorageCacheHelper;
 
     private final StorageEventListener mStorageEventListener = new StorageEventListener() {
         @Override
@@ -246,11 +250,20 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
         }
 
         initializeOptionsMenu(activity);
+
+        if (mStorageCacheHelper.hasCachedSizeInfo()) {
+            mIsLoadedFromCache = true;
+            mStorageEntries.clear();
+            mStorageEntries.addAll(
+                    StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
+            refreshUi();
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mStorageCacheHelper = new StorageCacheHelper(getContext(), UserHandle.myUserId());
         use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
                 getFragmentManager());
         mStorageSelectionController = use(StorageSelectionPreferenceController.class);
@@ -281,9 +294,14 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
     public void onResume() {
         super.onResume();
 
-        mStorageEntries.clear();
-        mStorageEntries.addAll(StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
-        refreshUi();
+        if (mIsLoadedFromCache) {
+            mIsLoadedFromCache = false;
+        } else {
+            mStorageEntries.clear();
+            mStorageEntries.addAll(
+                    StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
+            refreshUi();
+        }
         mStorageManager.registerListener(mStorageEventListener);
     }
 

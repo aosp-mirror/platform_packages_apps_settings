@@ -34,9 +34,11 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -47,6 +49,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -85,6 +88,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -125,6 +129,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     private static final String PREF_KEY_AIRPLANE_MODE_MSG = "airplane_mode_message";
     private static final String PREF_KEY_EMPTY_WIFI_LIST = "wifi_empty_list";
+    @VisibleForTesting
+    static final String PREF_KEY_WIFI_TOGGLE = "main_toggle_wifi";
     // TODO(b/70983952): Rename these to use WifiEntry instead of AccessPoint.
     @VisibleForTesting
     static final String PREF_KEY_CONNECTED_ACCESS_POINTS = "connected_access_point";
@@ -204,6 +210,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
      * by the Test DPC tool in AFW mode.
      */
     protected boolean mIsRestricted;
+    @VisibleForTesting
+    boolean mIsAdmin = true;
 
     @VisibleForTesting
     AirplaneModeEnabler mAirplaneModeEnabler;
@@ -294,6 +302,13 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         addPreferences();
 
         mIsRestricted = isUiRestricted();
+        mIsAdmin = isAdminUser();
+    }
+
+    private boolean isAdminUser() {
+        final UserManager userManager = getSystemService(UserManager.class);
+        if (userManager == null) return true;
+        return userManager.isAdminUser();
     }
 
     private void addPreferences() {
@@ -566,7 +581,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
         if (mSelectedWifiEntry.canDisconnect()) {
             if (mSelectedWifiEntry.canShare()) {
-                menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+                addShareMenuIfSuitable(menu);
             }
             menu.add(Menu.NONE, MENU_ID_DISCONNECT, 1 /* order */,
                     R.string.wifi_disconnect_button_text);
@@ -575,7 +590,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         // "forget" for normal saved network. And "disconnect" for ephemeral network because it
         // could only be disconnected and be put in blocklists so it won't be used again.
         if (canForgetNetwork()) {
-            menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
+            addForgetMenuIfSuitable(menu);
         }
 
         WifiConfiguration config = mSelectedWifiEntry.getWifiConfiguration();
@@ -587,6 +602,23 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         if (mSelectedWifiEntry.isSaved() && mSelectedWifiEntry.getConnectedState()
                 != WifiEntry.CONNECTED_STATE_CONNECTED) {
             menu.add(Menu.NONE, MENU_ID_MODIFY, 0 /* order */, R.string.wifi_modify);
+        }
+    }
+
+    @VisibleForTesting
+    void addShareMenuIfSuitable(ContextMenu menu) {
+        if (mIsAdmin) {
+            menu.add(Menu.NONE, MENU_ID_SHARE, 0 /* order */, R.string.share);
+            return;
+        }
+        Log.w(TAG, "Don't add the Wi-Fi share menu because the user is not an admin.");
+        EventLog.writeEvent(0x534e4554, "206986392", -1 /* UID */, "User is not an admin");
+    }
+
+    @VisibleForTesting
+    void addForgetMenuIfSuitable(ContextMenu menu) {
+        if (mIsAdmin) {
+            menu.add(Menu.NONE, MENU_ID_FORGET, 0 /* order */, R.string.forget);
         }
     }
 
@@ -628,21 +660,32 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
 
         if (preference instanceof LongPressWifiEntryPreference) {
-            final WifiEntry selectedEntry =
-                    ((LongPressWifiEntryPreference) preference).getWifiEntry();
-
-            if (selectedEntry.shouldEditBeforeConnect()) {
-                launchConfigNewNetworkFragment(selectedEntry);
-                return true;
-            }
-
-            connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
+            onSelectedWifiPreferenceClick((LongPressWifiEntryPreference) preference);
         } else if (preference == mAddWifiNetworkPreference) {
             onAddNetworkPressed();
         } else {
             return super.onPreferenceTreeClick(preference);
         }
         return true;
+    }
+
+    @VisibleForTesting
+    void onSelectedWifiPreferenceClick(LongPressWifiEntryPreference preference) {
+        final WifiEntry selectedEntry = preference.getWifiEntry();
+
+        if (selectedEntry.shouldEditBeforeConnect()) {
+            launchConfigNewNetworkFragment(selectedEntry);
+            return;
+        }
+
+        if (selectedEntry.canConnect()) {
+            connect(selectedEntry, true /* editIfNoConfig */, true /* fullScreenEdit */);
+            return;
+        }
+
+        if (selectedEntry.isSaved()) {
+            launchNetworkDetailsFragment(preference);
+        }
     }
 
     private void launchWifiDppConfiguratorActivity(WifiEntry wifiEntry) {
@@ -984,7 +1027,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         return new FirstWifiEntryPreference(getPrefContext(), wifiEntry, this);
     }
 
-    private void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
+    @VisibleForTesting
+    void launchNetworkDetailsFragment(LongPressWifiEntryPreference pref) {
         final WifiEntry wifiEntry = pref.getWifiEntry();
         final Context context = getContext();
         final CharSequence title =
@@ -1196,26 +1240,54 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     };
 
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.network_provider_settings) {
+    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new SearchIndexProvider(R.xml.network_provider_settings);
 
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
+    @VisibleForTesting
+    static class SearchIndexProvider extends BaseSearchIndexProvider {
 
-                    final WifiManager wifiManager = context.getSystemService(WifiManager.class);
-                    if (wifiManager == null) return keys;
+        private final WifiRestriction mWifiRestriction;
 
-                    if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
-                        keys.add(PREF_KEY_SAVED_NETWORKS);
-                    }
+        SearchIndexProvider(int xmlRes) {
+            super(xmlRes);
+            mWifiRestriction = new WifiRestriction();
+        }
 
-                    if (!DataUsageUtils.hasWifiRadio(context)) {
-                        keys.add(PREF_KEY_DATA_USAGE);
-                    }
-                    return keys;
-                }
-            };
+        @VisibleForTesting
+        SearchIndexProvider(int xmlRes, WifiRestriction wifiRestriction) {
+            super(xmlRes);
+            mWifiRestriction = wifiRestriction;
+        }
+
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            final List<String> keys = super.getNonIndexableKeys(context);
+
+            if (!mWifiRestriction.isChangeWifiStateAllowed(context)) {
+                keys.add(PREF_KEY_WIFI_TOGGLE);
+            }
+
+            final WifiManager wifiManager = context.getSystemService(WifiManager.class);
+            if (wifiManager == null) return keys;
+
+            if (WifiSavedConfigUtils.getAllConfigsCount(context, wifiManager) == 0) {
+                keys.add(PREF_KEY_SAVED_NETWORKS);
+            }
+
+            if (!DataUsageUtils.hasWifiRadio(context)) {
+                keys.add(PREF_KEY_DATA_USAGE);
+            }
+            return keys;
+        }
+    }
+
+    @VisibleForTesting
+    static class WifiRestriction {
+        public boolean isChangeWifiStateAllowed(@Nullable Context context) {
+            if (context == null) return true;
+            return WifiEnterpriseRestrictionUtils.isChangeWifiStateAllowed(context);
+        }
+    }
 
     private class WifiEntryConnectCallback implements ConnectCallback {
         final WifiEntry mConnectWifiEntry;
@@ -1253,7 +1325,8 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
         }
     }
 
-    private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
+    @VisibleForTesting
+    void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
         bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());

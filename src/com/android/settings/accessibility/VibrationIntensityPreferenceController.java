@@ -73,11 +73,11 @@ public abstract class VibrationIntensityPreferenceController extends SliderPrefe
         mSettingsContentObserver.onDisplayPreference(this, preference);
         preference.setEnabled(mPreferenceConfig.isPreferenceEnabled());
         preference.setSummaryProvider(unused -> mPreferenceConfig.getSummary());
-        // TODO: remove setContinuousUpdates and replace with a different way to play the haptic
-        // preview without relying on the setting being propagated to the service.
-        preference.setContinuousUpdates(true);
         preference.setMin(getMin());
         preference.setMax(getMax());
+        // Haptics previews played by the Settings app don't bypass user settings to be played.
+        // The sliders continuously updates the intensity value so the previews can apply them.
+        preference.setContinuousUpdates(true);
     }
 
     @Override

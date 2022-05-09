@@ -34,6 +34,7 @@ import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 import android.net.EthernetManager;
+import android.net.IpConfiguration;
 import android.net.TetheringManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -42,10 +43,10 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
@@ -62,6 +63,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -97,7 +99,6 @@ public class TetherSettings extends RestrictedSettingsFragment
     private BroadcastReceiver mTetherChangeReceiver;
 
     private String[] mBluetoothRegexs;
-    private String mEthernetRegex;
     private AtomicReference<BluetoothPan> mBluetoothPan = new AtomicReference<>();
 
     private Handler mHandler = new Handler();
@@ -106,6 +107,7 @@ public class TetherSettings extends RestrictedSettingsFragment
     private EthernetManager mEm;
     private TetheringEventCallback mTetheringEventCallback;
     private EthernetListener mEthernetListener;
+    private final HashSet<String> mAvailableInterfaces = new HashSet<>();
 
     private WifiTetherPreferenceController mWifiTetherPreferenceController;
 
@@ -172,17 +174,17 @@ public class TetherSettings extends RestrictedSettingsFragment
         mDataSaverBackend.addListener(this);
 
         mCm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        mEm = (EthernetManager) getSystemService(Context.ETHERNET_SERVICE);
         mTm = (TetheringManager) getSystemService(Context.TETHERING_SERVICE);
+        // Some devices do not have available EthernetManager. In that case getSystemService will
+        // return null.
+        mEm = mContext.getSystemService(EthernetManager.class);
 
         mUsbRegexs = mTm.getTetherableUsbRegexs();
         mBluetoothRegexs = mTm.getTetherableBluetoothRegexs();
-        mEthernetRegex = mContext.getResources().getString(
-                com.android.internal.R.string.config_ethernet_iface_regex);
 
         final boolean usbAvailable = mUsbRegexs.length != 0;
         final boolean bluetoothAvailable = adapter != null && mBluetoothRegexs.length != 0;
-        final boolean ethernetAvailable = !TextUtils.isEmpty(mEthernetRegex);
+        final boolean ethernetAvailable = (mEm != null);
 
         if (!usbAvailable || Utils.isMonkeyRunning()) {
             getPreferenceScreen().removePreference(mUsbTether);
@@ -330,7 +332,7 @@ public class TetherSettings extends RestrictedSettingsFragment
 
         mEthernetListener = new EthernetListener();
         if (mEm != null)
-            mEm.addListener(mEthernetListener, r -> mHandler.post(r));
+            mEm.addInterfaceStateListener(r -> mHandler.post(r), mEthernetListener);
 
         updateUsbState();
         updateBluetoothAndEthernetState();
@@ -346,11 +348,10 @@ public class TetherSettings extends RestrictedSettingsFragment
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTm.unregisterTetheringEventCallback(mTetheringEventCallback);
         if (mEm != null)
-            mEm.removeListener(mEthernetListener);
+            mEm.removeInterfaceStateListener(mEthernetListener);
         mTetherChangeReceiver = null;
         mStartTetheringCallback = null;
         mTetheringEventCallback = null;
-        mEthernetListener = null;
     }
 
     @VisibleForTesting
@@ -415,8 +416,11 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (usbTethered) {
             mUsbTether.setEnabled(!mDataSaverEnabled);
             mUsbTether.setChecked(true);
-            mUsbTether.setDisabledByAdmin(
-                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
+            final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
+                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mUsbTether.setDisabledByAdmin(enforcedAdmin);
+            }
         } else {
             mUsbTether.setChecked(false);
             updateUsbPreference();
@@ -483,11 +487,11 @@ public class TetherSettings extends RestrictedSettingsFragment
         boolean isTethered = false;
 
         for (String s : available) {
-            if (s.matches(mEthernetRegex)) isAvailable = true;
+            if (mAvailableInterfaces.contains(s)) isAvailable = true;
         }
 
         for (String s : tethered) {
-            if (s.matches(mEthernetRegex)) isTethered = true;
+            if (mAvailableInterfaces.contains(s)) isTethered = true;
         }
 
         if (DEBUG) {
@@ -498,7 +502,7 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (isTethered) {
             mEthernetTether.setEnabled(!mDataSaverEnabled);
             mEthernetTether.setChecked(true);
-        } else if (isAvailable || (mEm != null && mEm.isAvailable())) {
+        } else if (mAvailableInterfaces.size() > 0) {
             mEthernetTether.setEnabled(!mDataSaverEnabled);
             mEthernetTether.setChecked(false);
         } else {
@@ -600,9 +604,9 @@ public class TetherSettings extends RestrictedSettingsFragment
                         keys.add(KEY_ENABLE_BLUETOOTH_TETHERING);
                     }
 
-                    final boolean ethernetAvailable = !TextUtils.isEmpty(
-                            context.getResources().getString(
-                                    com.android.internal.R.string.config_ethernet_iface_regex));
+                    final EthernetManager em =
+                            context.getSystemService(EthernetManager.class);
+                    final boolean ethernetAvailable = (em != null);
                     if (!ethernetAvailable) {
                         keys.add(KEY_ENABLE_ETHERNET_TETHERING);
                     }
@@ -646,9 +650,15 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
     }
 
-    private final class EthernetListener implements EthernetManager.Listener {
-        public void onAvailabilityChanged(String iface, boolean isAvailable) {
-            mHandler.post(() -> updateBluetoothAndEthernetState());
+    private final class EthernetListener implements EthernetManager.InterfaceStateListener {
+        public void onInterfaceStateChanged(@NonNull String iface, int state, int role,
+                @NonNull IpConfiguration configuration) {
+            if (state == EthernetManager.STATE_LINK_UP) {
+                mAvailableInterfaces.add(iface);
+            } else {
+                mAvailableInterfaces.remove(iface);
+            }
+            updateBluetoothAndEthernetState();
         }
     }
 }

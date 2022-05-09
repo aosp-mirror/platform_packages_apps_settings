@@ -354,7 +354,8 @@ public class UserSettingsTest {
         mFragment.updateUserList();
 
         verify(mAddUserPreference).setVisible(true);
-        verify(mAddUserPreference).setSummary("You can add up to 4 users");
+        verify(mAddUserPreference).setSummary(
+                "You can\u2019t add any more users. Remove a user to add a new one.");
         verify(mAddUserPreference).setEnabled(false);
         verify(mAddUserPreference).setSelectable(true);
     }
@@ -662,12 +663,12 @@ public class UserSettingsTest {
     public void onPreferenceClick_addGuestClicked_createGuestAndOpenDetails() {
         UserInfo createdGuest = getGuest(false);
         removeFlag(createdGuest, UserInfo.FLAG_INITIALIZED);
-        doReturn(createdGuest).when(mUserManager).createGuest(mActivity, "Guest");
+        doReturn(createdGuest).when(mUserManager).createGuest(mActivity);
         doReturn(mActivity).when(mFragment).getContext();
 
         mFragment.onPreferenceClick(mAddGuestPreference);
 
-        verify(mUserManager).createGuest(mActivity, "Guest");
+        verify(mUserManager).createGuest(mActivity);
         Intent startedIntent = shadowOf(mActivity).getNextStartedActivity();
         ShadowIntent shadowIntent = shadowOf(startedIntent);
         assertThat(shadowIntent.getIntentClass()).isEqualTo(SubSettings.class);

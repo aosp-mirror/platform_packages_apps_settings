@@ -62,6 +62,7 @@ public class ScreenTimeoutPreferenceController extends BasePreferenceController 
         if (admin != null) {
             preference.setEnabled(false);
             preference.setSummary(mContext.getSystemService(DevicePolicyManager.class)
+                    .getResources()
                     .getString(DISABLED_BY_IT_ADMIN_TITLE,
                             () -> mContext.getString(R.string.disabled_by_policy_title)));
             ((RestrictedPreference) preference).setDisabledByAdmin(admin);

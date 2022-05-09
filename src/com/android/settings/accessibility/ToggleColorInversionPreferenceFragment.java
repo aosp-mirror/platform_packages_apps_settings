@@ -51,6 +51,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (enabled == isEnabled) {
+            return;
+        }
+
         if (enabled) {
             showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
         }
@@ -75,8 +80,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_display_inversion_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_display_inversion_shortcut_title);
     }
 
     @Override
@@ -144,8 +149,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.accessibility_display_inversion_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_color_inversion_qs_tooltip_content
+                : R.string.accessibility_color_inversion_auto_added_qs_tooltip_content);
     }
 
     @Override
