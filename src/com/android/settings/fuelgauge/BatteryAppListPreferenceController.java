@@ -36,6 +36,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -47,6 +48,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -57,19 +59,20 @@ import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Controller that update the battery header view
  */
 public class BatteryAppListPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy {
+    private static final String TAG = "BatteryAppListPreferenceController";
     @VisibleForTesting
     static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
 
-    private final String mPreferenceKey;
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
     private BatteryUsageStats mBatteryUsageStats;
@@ -80,6 +83,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private final PackageManager mPackageManager;
     private final SettingsActivity mActivity;
     private final InstrumentedPreferenceFragment mFragment;
+    private final Set<CharSequence> mNotAllowShowSummaryPackages;
+    private final String mPreferenceKey;
+
     private Context mPrefContext;
 
     /**
@@ -101,8 +107,15 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             }
 
             PowerProfile powerProfile = new PowerProfile(context);
-            return powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL)
-                    >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            // Cheap hack to try to figure out if the power_profile.xml was populated.
+            final double averagePowerForOrdinal = powerProfile.getAveragePowerForOrdinal(
+                    PowerProfile.POWER_GROUP_DISPLAY_SCREEN_FULL, 0);
+            final boolean shouldShowBatteryAttributionList =
+                    averagePowerForOrdinal >= MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP;
+            if (!shouldShowBatteryAttributionList) {
+                Log.w(TAG, "shouldShowBatteryAttributionList(): " + averagePowerForOrdinal);
+            }
+            return shouldShowBatteryAttributionList;
         }
     };
 
@@ -117,9 +130,9 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                         final int userId = UserHandle.getUserId(entry.getUid());
                         final UserHandle userHandle = new UserHandle(userId);
                         pgp.setIcon(mUserManager.getBadgedIconForUser(entry.getIcon(), userHandle));
-                        pgp.setTitle(entry.name);
+                        pgp.setTitle(entry.mName);
                         if (entry.isAppEntry()) {
-                            pgp.setContentDescription(entry.name);
+                            pgp.setContentDescription(entry.mName);
                         }
                     }
                     break;
@@ -149,6 +162,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         mPackageManager = context.getPackageManager();
         mActivity = activity;
         mFragment = fragment;
+        mNotAllowShowSummaryPackages = Set.of(
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideApplicationSummary(context));
     }
 
     @Override
@@ -226,7 +243,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                     continue;
                 }
 
-                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(entry.getUid()));
+                final int uid = entry.getUid();
+                final UserHandle userHandle = new UserHandle(UserHandle.getUserId(uid));
                 final Drawable badgedIcon = mUserManager.getBadgedIconForUser(entry.getIcon(),
                         userHandle);
                 final CharSequence contentDescription = mUserManager.getBadgedLabelForUser(
@@ -239,11 +257,13 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
                             contentDescription, entry);
                     pref.setKey(key);
                 }
-                entry.percent = percentOfTotal;
+                entry.mPercent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
                 pref.setPercent(percentOfTotal);
                 pref.shouldShowAnomalyIcon(false);
+                pref.setEnabled(uid != BatteryUtils.UID_TETHERING
+                        && uid != BatteryUtils.UID_REMOVED_APPS);
                 setUsageSummary(pref, entry);
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
@@ -278,7 +298,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             final BatteryEntry entry = usageList.get(i);
             final double percentOfTotal = mBatteryUtils.calculateBatteryPercent(
                     entry.getConsumedPower(), totalPower, dischargePercentage);
-            entry.percent = percentOfTotal;
+            entry.mPercent = percentOfTotal;
         }
         return usageList;
     }
@@ -414,6 +434,15 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @VisibleForTesting
     void setUsageSummary(Preference preference, BatteryEntry entry) {
+        if (entry.getUid() == Process.SYSTEM_UID) {
+            return;
+        }
+        String packageName = entry.getDefaultPackageName();
+        if (packageName != null
+                && mNotAllowShowSummaryPackages != null
+                && mNotAllowShowSummaryPackages.contains(packageName)) {
+            return;
+        }
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = entry.getTimeInForegroundMs();
         if (shouldShowSummary(entry) && usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
@@ -440,8 +469,10 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private boolean shouldShowSummary(BatteryEntry entry) {
-        final CharSequence[] allowlistPackages = mContext.getResources()
-                .getTextArray(R.array.allowlist_hide_summary_in_battery_usage);
+        final CharSequence[] allowlistPackages =
+                FeatureFactory.getFactory(mContext)
+                        .getPowerUsageFeatureProvider(mContext)
+                        .getHideApplicationSummary(mContext);
         final String target = entry.getDefaultPackageName();
 
         for (CharSequence packageName : allowlistPackages) {
@@ -491,8 +522,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
         use = 450;
         for (int i = 0; i < 100; i++) {
-            builder.getOrCreateUidBatteryConsumerBuilder(
-                            new FakeUid(Process.FIRST_APPLICATION_UID + i))
+            builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + i)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND, 10000 + i * 1000)
                     .setTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND, 20000 + i * 2000)
                     .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, use);
@@ -500,18 +530,17 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
 
         // Simulate dex2oat process.
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(new FakeUid(Process.FIRST_APPLICATION_UID + 1))
+        builder.getOrCreateUidBatteryConsumerBuilder(Process.FIRST_APPLICATION_UID + 1)
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 1000.0)
                 .setPackageWithHighestDrain("dex2oat");
 
-        builder.getOrCreateUidBatteryConsumerBuilder(
-                        new FakeUid(UserHandle.getSharedAppGid(Process.LOG_UID)))
+        builder.getOrCreateUidBatteryConsumerBuilder(UserHandle.getSharedAppGid(Process.LOG_UID))
                 .setUsageDurationMillis(BatteryConsumer.POWER_COMPONENT_CPU, 100000)
                 .setConsumedPower(BatteryConsumer.POWER_COMPONENT_CPU, 900.0);
 

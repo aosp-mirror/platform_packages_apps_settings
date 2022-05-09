@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -119,7 +120,14 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_security;
+    }
+
+    @Override
     public void onResume() {
-        mPreference.setVisible(isAvailable());
+        if (mPreference != null) {
+            mPreference.setVisible(isAvailable());
+        }
     }
 }
