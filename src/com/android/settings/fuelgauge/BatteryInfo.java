@@ -153,6 +153,7 @@ public class BatteryInfo {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
+                boolean shouldCloseBatteryUsageStats = false;
                 BatteryUsageStats stats;
                 if (batteryUsageStats != null) {
                     stats = batteryUsageStats;
@@ -160,6 +161,7 @@ public class BatteryInfo {
                     try {
                         stats = context.getSystemService(BatteryStatsManager.class)
                                 .getBatteryUsageStats();
+                        shouldCloseBatteryUsageStats = true;
                     } catch (RuntimeException e) {
                         Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
                         // Use default BatteryUsageStats.
@@ -168,10 +170,12 @@ public class BatteryInfo {
                 }
                 final BatteryInfo batteryInfo =
                         getBatteryInfo(context, stats, shortString);
-                try {
-                    stats.close();
-                } catch (Exception e) {
-                    Log.e(TAG, "BatteryUsageStats.close() failed", e);
+                if (shouldCloseBatteryUsageStats) {
+                    try {
+                        stats.close();
+                    } catch (Exception e) {
+                        Log.e(TAG, "BatteryUsageStats.close() failed", e);
+                    }
                 }
                 return batteryInfo;
             }
