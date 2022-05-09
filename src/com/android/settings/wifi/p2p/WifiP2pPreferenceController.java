@@ -15,18 +15,17 @@
  */
 package com.android.settings.wifi.p2p;
 
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.LocationManager;
 import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -70,6 +69,9 @@ public class WifiP2pPreferenceController extends AbstractPreferenceController
         super.displayPreference(screen);
         mWifiDirectPref = screen.findPreference(KEY_WIFI_DIRECT);
         togglePreferences();
+        if (!mIsWifiDirectAllow) {
+            mWifiDirectPref.setSummary(R.string.not_allowed_by_ent);
+        }
     }
 
     @Override
