@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.UserHandle;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,10 +63,12 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
 
     private static final String KEY_APP_DESCRIPTION = "app_locale_description";
     private static final String KEY_WARNINGS = "key_warnings";
+    private static final String KEY_APP_DISCLAIMER = "app_locale_disclaimer";
 
     private boolean mCreated = false;
     private String mPackageName;
     private LayoutPreference mPrefOfDescription;
+    private Preference mPrefOfDisclaimer;
     private ApplicationInfo mApplicationInfo;
 
     /**
@@ -91,8 +94,10 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         }
         addPreferencesFromResource(R.xml.app_locale_details);
         mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
+        mPrefOfDisclaimer = getPreferenceScreen().findPreference(KEY_APP_DISCLAIMER);
         mApplicationInfo = getApplicationInfo(mPackageName, getContext().getUserId());
         setWarningMessage();
+        setDisclaimerPreference();
     }
 
     // Override here so we don't have an empty screen
@@ -168,6 +173,13 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
             }
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception while retrieving the package installer of " + mPackageName, e);
+        }
+    }
+
+    private void setDisclaimerPreference() {
+        if (FeatureFlagUtils.isEnabled(
+                getContext(), FeatureFlagUtils.SETTINGS_APP_LOCALE_OPT_IN_ENABLED)) {
+            mPrefOfDisclaimer.setVisible(false);
         }
     }
 
