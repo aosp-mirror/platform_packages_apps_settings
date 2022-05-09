@@ -20,8 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.provider.Settings;
@@ -60,6 +63,8 @@ public class ShowOperatorNamePreferenceControllerTest {
         when(mConfigManager.getConfigForSubId(anyInt())).thenReturn(mConfig);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(mConfigManager);
 
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new ShowOperatorNamePreferenceController(mContext);
     }
 
