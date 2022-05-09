@@ -58,6 +58,7 @@ public class CategoryMixin implements LifecycleObserver {
     private final PackageReceiver mPackageReceiver = new PackageReceiver();
     private final List<CategoryListener> mCategoryListeners = new ArrayList<>();
     private int mCategoriesUpdateTaskCount;
+    private boolean mFirstOnResume = true;
 
     public CategoryMixin(Context context) {
         mContext = context;
@@ -75,6 +76,12 @@ public class CategoryMixin implements LifecycleObserver {
         filter.addDataScheme(DATA_SCHEME_PKG);
         mContext.registerReceiver(mPackageReceiver, filter);
 
+        if (mFirstOnResume) {
+            // Skip since all tiles have been refreshed in DashboardFragment.onCreatePreferences().
+            Log.d(TAG, "Skip categories update");
+            mFirstOnResume = false;
+            return;
+        }
         updateCategories();
     }
 
