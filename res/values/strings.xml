@@ -968,8 +968,12 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title">Allow fingerprint unlock</string>
     <!-- Introduction title shown in fingerprint enrollment to introduce the fingerprint feature, when fingerprint unlock is disabled by device admin [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled">Use your fingerprint</string>
-    <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_enroll_introduction_message">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device">Use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
+    <!-- Introduction detail message shown in fingerprint enrollment dialog (default) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps or approve a purchase.</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_consent_message">Allow your child to use their fingerprint to unlock their phone or verify it\u2019s them. This happens when they sign in to apps, approve a purchase, and more.</string>
     <!-- Introduction title shown in the bottom of fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
@@ -1044,8 +1048,12 @@
     <!-- Acquire message received during fingerprint enrollment to inform the user they've reached the maximum number of enrollments. [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts">You\u2019ve reached the maximum number of attempts</string>
 
-    <!-- Message shown in fingerprint security settings home screen. [CHAR LIMIT=NONE]-->
-    <string name="security_settings_fingerprint_v2_home_screen">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps\n\n<annotation id="url">Learn more</annotation></string>
+    <!-- Message text only shown in fingerprint security settings home screen. (tablet) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet">Use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (device) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device">Use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message text only shown in fingerprint security settings home screen. (phone) [CHAR LIMIT=NONE]-->
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default">Use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
 
     <!-- Biometric settings --><skip />
     <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
@@ -1149,8 +1157,12 @@
     <string name="security_settings_udfps_enroll_progress_a11y_message">Enrolling fingerprint <xliff:g id="percentage" example="10">%d</xliff:g> percent</string>
     <!-- Title shown in fingerprint enrollment dialog once enrollment is completed [CHAR LIMIT=29] -->
     <string name="security_settings_fingerprint_enroll_finish_title">Fingerprint added</string>
-    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed -->
-    <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (tablet) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet">Now you can use your fingerprint to unlock your tablet or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (device) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device">Now you can use your fingerprint to unlock your device or verify it\u2019s you, like when you sign in to apps</string>
+    <!-- Message shown in fingerprint enrollment dialog once enrollment is completed (default) [CHAR LIMIT=NONE] -->
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
     <!-- Accessibility message for fingerprint enrollment asking the user to place the tip of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
@@ -1402,7 +1414,7 @@
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
 
     <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
-    <string name="lock_settings_picker_admin_restricted_personal_message">This lock can\u2019t be reset by your IT admin. <xliff:g id="link_begin" example="">LINK_BEGIN</xliff:g>Set a separate work lock instead<xliff:g id="link_end" example="">LINK_END</xliff:g></string>
+    <string name="lock_settings_picker_admin_restricted_personal_message">If you forget your screen lock, your IT admin can\u2019t reset it. <annotation id="link">Set a separate work lock</annotation></string>
 
     <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
     <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
@@ -3347,8 +3359,6 @@
     <string name="security_patch">Android security update</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="model_info">Model</string>
-    <!-- About phone screen, dialog title for showing hardware information such as model, serial number, etc.[CHAR LIMIT=60] -->
-    <string name="hardware_info">Model &amp; hardware</string>
     <!-- Label for device's hardware revision value [CHAR LIMIT=40] -->
     <string name="hardware_revision">Hardware version</string>
     <!-- About phone screen, fcc equipment id label  [CHAR LIMIT=40] -->
@@ -6629,10 +6639,14 @@
     <!-- Menu label for refreshing with latest usage numbers -->
     <string name="menu_stats_refresh">Refresh</string>
 
-    <!-- Label for mediaserver process in battery usage -->
+    <!-- Label for mediaserver process in battery usage [CHAR_LIMIT=NONE] -->
     <string name="process_mediaserver_label">Mediaserver</string>
     <!-- Label for dex2oat process in battery usage used for the optimization of one or more apps -->
     <string name="process_dex2oat_label">App optimization</string>
+    <!-- Label for network tethering UID label in battery usage [CHAR_LIMIT=NONE] -->
+    <string name="process_network_tethering">Tethering</string>
+    <!-- Label for removed apps UID lablel in battery usage [CHAR_LIMIT=NONE] -->
+    <string name="process_removed_apps">Removed apps</string>
 
     <!-- Battery saver: Label for feature, title + menu item [CHAR_LIMIT=40] -->
     <string name="battery_saver">Battery Saver</string>
@@ -7615,15 +7629,15 @@
         <item quantity="other">Trust or remove certificates</item>
     </plurals>
     <!-- Text of message to show to device owner user whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_info_message_device_owner">
-        <item quantity="one"><xliff:g id="managing_domain">%s</xliff:g> has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
-        <item quantity="other"><xliff:g id="managing_domain">%s</xliff:g> has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
-    </plurals>
+    <string name="ssl_ca_cert_info_message_device_owner"> {numberOfCertificates, plural,
+        =1 {{orgName} has installed a certificate authority on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
+        other {{orgName} has installed certificate authorities on your device, which may allow them to monitor your device network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.}
+        }</string>
     <!-- Text of message to show to work profile users whose administrator has installed a SSL CA Cert.  [CHAR LIMIT=NONE] -->
-    <plurals name="ssl_ca_cert_info_message">
-        <item quantity="one"><xliff:g id="managing_domain">%s</xliff:g> has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.</item>
-        <item quantity="other"><xliff:g id="managing_domain">%s</xliff:g> has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.</item>
-    </plurals>
+    <string name="ssl_ca_cert_info_message">{numberOfCertificates, plural,
+        =1 {{orgName} has installed a certificate authority for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about this certificate, contact your admin.}
+        other {{orgName} has installed certificate authorities for your work profile, which may allow them to monitor work network activity, including emails, apps, and secure websites.\n\nFor more information about these certificates, contact your admin.}
+        }</string>
     <!-- Text of warning to show to users that have a SSL CA Cert installed.  [CHAR LIMIT=NONE] -->
     <string name="ssl_ca_cert_warning_message">A third party is capable of monitoring your network activity, including emails, apps, and secure websites.\n\nA trusted credential installed on your device is making this possible.</string>
     <!-- Label on button that will take the user to the Trusted Credentials settings page.  [CHAR LIMIT=NONE]-->
@@ -10195,18 +10209,18 @@
     <string name="screen_pinning_description">
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nTo use app pinning:
-        \t\n1.\tTurn on app pinning
-        \t\n2.\tOpen Overview
-        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+        \t\n1. Turn on app pinning
+        \t\n2. Open Overview
+        \t\n3. Tap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=none] Screen pinning description -->
     <string name="screen_pinning_guest_user_description">
         When an app is pinned, the pinned app may open other apps and personal data may be accessible.
         \n\nIf you want to securely share your device with someone, try using a guest user instead.
         \n\nTo use app pinning:
-        \t\n1.\tTurn on app pinning
-        \t\n2.\tOpen Overview
-        \t\n3.\tTap the app icon at the top of the screen, then tap Pin
+        \t\n1. Turn on app pinning
+        \t\n2. Open Overview
+        \t\n3. Tap the app icon at the top of the screen, then tap Pin
     </string>
     <!-- [CHAR LIMIT=300] Screen pinning title -->
     <string name="screen_pinning_dialog_message">
@@ -14125,6 +14139,8 @@
     <!-- BT LE Audio Device: Media Broadcast -->
     <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
     <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
+    <!-- [CHAR LIMIT=NONE] Le audio broadcast dialog, switch to others app. -->
+    <string name="bluetooth_broadcast_dialog_broadcast_app">Broadcast <xliff:g id="currentApp" example="App Name 2">%1$s</xliff:g></string>
     <!-- The message of the Media Broadcast Dialog for finding broadcast [CHAR LIMIT=none] -->
     <string name="bluetooth_broadcast_dialog_find_message">Listen to broadcasts that are playing near you</string>
     <!-- The message of the Media Broadcast Dialog for broadcast [CHAR LIMIT=none] -->
@@ -14139,4 +14155,10 @@
     <string name="bluetooth_find_broadcast_button_leave">Leave broadcast</string>
     <!-- The Button of the action to scan QR code [CHAR LIMIT=none] -->
     <string name="bluetooth_find_broadcast_button_scan">Scan QR code</string>
+    <!-- The title of enter password dialog in bluetooth find broadcast page. [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_title">Enter password</string>
+    <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_connection_error">Can\u2019t connect. Try again.</string>
+    <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
+    <string name="find_broadcast_password_dialog_password_error">Wrong password</string>
 </resources>

@@ -391,7 +391,7 @@
     <string name="face_add_max" msgid="4578405795494514876">"<xliff:g id="COUNT">%d</xliff:g> aurpegi gehi ditzakezu"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Iritsi zara onartzen den gehieneko aurpegi kopurura"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Ezin duzu gehitu beste aurpegirik"</string>
-    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Ezin izan da erregistratu"</string>
+    <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Ez da erregistratu"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Ados"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Aurpegiak erregistratzeko denbora-muga gainditu da. Saiatu berriro."</string>
     <string name="security_settings_face_enroll_error_generic_dialog_message" msgid="3186810411630091490">"Ezin izan da erregistratu aurpegia."</string>
@@ -2030,7 +2030,7 @@
     <string name="forgot_password_title" msgid="3967873480875239885">"Galdetu IKT saileko administratzaileari"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"PINa, eredua edo pasahitza berrezartzen lagunduko dizu"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tabletak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu haiek erabiltzeagatik tabletari gerta dakizkiokeen kalteen edo datu-galeren erantzulea zeu zarela."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Telefonoak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu haiek erabiltzeagatik telefonoari gerta dakizkiokeen kalteen edo datu-galeren erantzulea zeu zarela."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"Baliteke telefonoak eta datu pertsonalek aplikazio ezezagunen erasoak jasatea. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu zeu zarela haiek erabiltzeagatik telefonoari agian gertatuko zaizkion kalteen edo datu-galeren erantzulea."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Gailuak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Iturburu honetako aplikazioak instalatzen badituzu, onartu egingo duzu haiek erabiltzeagatik gailuari agian gertatuko zaizkion kalteen edo datu-galeren erantzulea zeu izango zarela."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Ezarpen aurreratuak"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Gaitu ezarpenen aukera gehiago"</string>
@@ -2334,8 +2334,7 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Igorlea: Aritz"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Egun on:\n\nDiseinuen garatze-prozesua nola doan jakin nahiko nuke. Prest egongo al dira globo berriak ekoizten hasi aurretik?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Berrezarri ezarpenak"</string>
-    <!-- no translation found for accessibility_text_reading_reset_message (824644303661026712) -->
-    <skip />
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Berrezarri dira bistaratzeko tamainaren eta testuaren ezarpenak"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Pantailaren tamaina eta testua berrezarri nahi dituzu?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Bistaratzeko tamainaren eta testuaren inguruko hobespenak leheneratu, eta telefonoaren jatorrizko ezarpenak berrezarriko dira"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Berrezarri"</string>
@@ -2456,6 +2455,10 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Sakatze automatikoaren denbora"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Dardara eta haptika"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Konfiguratu dardararen indarra erabileraren arabera"</string>
+    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
+    <skip />
+    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
+    <skip />
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Ezarpena desgaituta dago gailua modu isilean dagoelako"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Deiak"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Jakinarazpenak eta alarmak"</string>
@@ -2632,10 +2635,6 @@
     <string name="keywords_hearing_aids" msgid="524979615168196199">"entzumen txarra, entzumen-galera"</string>
     <string name="keywords_rtt" msgid="2429130928152514402">"entzumen txarra, entzumen-galera, azpitituluak, teletipoa, TTY"</string>
     <string name="keywords_voice_access" msgid="7807335263195876454"></string>
-    <string name="fast_pair_settings" msgid="3308819519080016185">"Parekatze bizkorra"</string>
-    <string name="fast_pair_settings_summary" msgid="1786567691058982987">"Parekatze bizkorra erabilita Bluetooth bidez konekta daitezkeen inguruko gailuak hautematea."</string>
-    <string name="fast_pair_main_switch_title" msgid="1439039801201425194">"Bilatu inguruko gailuak"</string>
-    <string name="fast_pair_saved_devices_title" msgid="3799803309073333082">"Gordetako gailuak"</string>
     <string name="print_settings" msgid="8519810615863882491">"Inprimatzea"</string>
     <string name="print_settings_summary_no_service" msgid="6721731154917653862">"Desaktibatuta"</string>
     <plurals name="print_settings_summary" formatted="false" msgid="1034273609054146099">
@@ -3484,10 +3483,10 @@
     <string name="contact_discovery_opt_in_dialog_title_no_carrier_defined" msgid="2028983133745990320">"Operadoreari kontaktuak bidali nahi dizkiozu?"</string>
     <string name="contact_discovery_opt_in_dialog_message" msgid="8818310894782757538">"Kontaktuen telefono-zenbakiak noizean behin bidaliko zaizkio <xliff:g id="CARRIER">%1$s</xliff:g> operadoreari.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Kontaktuek eginbide zehatz batzuk (adibidez, bideo-deiak edo zenbait mezularitza-eginbide) erabil ditzaketen adierazten du informazio horrek."</string>
+</xliff:g>Kontaktuek eginbide zehatz batzuk (adibidez, bideodeiak edo zenbait mezularitza-eginbide) erabil ditzaketen adierazten du informazio horrek."</string>
     <string name="contact_discovery_opt_in_dialog_message_no_carrier_defined" msgid="1914894516552445911">"Kontaktuen telefono-zenbakiak noizean behin bidaliko zaizkio operadoreari.<xliff:g id="EMPTY_LINE">
 
-</xliff:g>Kontaktuek eginbide zehatz batzuk (adibidez, bideo-deiak edo zenbait mezularitza-eginbide) erabil ditzaketen adierazten du informazio horrek."</string>
+</xliff:g>Kontaktuek eginbide zehatz batzuk (adibidez, bideodeiak edo zenbait mezularitza-eginbide) erabil ditzaketen adierazten du informazio horrek."</string>
     <string name="preferred_network_type_title" msgid="812509938714590857">"Sare mota lehenetsia"</string>
     <string name="preferred_network_type_summary" msgid="8786291927331323061">"LTE (gomendatua)"</string>
     <string name="mms_message_title" msgid="6624505196063391964">"MMS mezuak"</string>
@@ -3662,7 +3661,6 @@
     <string name="keywords_screen_timeout" msgid="8921857020437540572">"pantaila, blokeatzeko denbora, denbora-muga, pantaila blokeatua"</string>
     <string name="keywords_storage_settings" msgid="6018856193950281898">"memoria, cachea, datuak, ezabatu, garbitu, tokia egin, tokia"</string>
     <string name="keywords_bluetooth_settings" msgid="2588159530959868188">"konektatuta, gailua, aurikularrak, entzungailua, bozgorailua, hari gabekoak, parekatu, musika, multimedia-edukia"</string>
-    <string name="keywords_fast_pair" msgid="5422942398816611159">"parekatu, aurikularrak, bluetooth"</string>
     <string name="keywords_wallpaper" msgid="7332890404629446192">"atzeko planoa, gaia, sareta, pertsonalizatu"</string>
     <string name="keywords_styles" msgid="5291614313348476068">"ikonoa, nabarmentzeko kolorea"</string>
     <string name="keywords_assist_input" msgid="3086289530227075593">"lehenetsia, laguntzailea"</string>
@@ -4295,8 +4293,10 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Desaktibatuta"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Aplikazioak ainguratzea"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Ainguratuz gero, aplikazio hau begien bistan izango duzu beti, harik eta aingura kentzen diozun arte. Lagun fidagarri bati joko zehatz batean aritzea ahalbidetzeko erabil dezakezu, adibidez."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Aplikazio bat ainguratuta dagoenean, baliteke beste aplikazio batzuk irekitzeko gai izatea, eta haiek zure datu pertsonalak atzitu ahal izango dituzte agian. \n\nAplikazioak ainguratzeko aukera erabiltzeko: 	\n1.	Aktibatu aplikazioak ainguratzeko aukera. 	\n2.	Ireki Ikuspegi orokorra. 	\n3.	Sakatu pantailaren goialdean dagoen aplikazioaren ikonoa eta, ondoren, sakatu Ainguratu."</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Aplikazio bat ainguratuta dagoenean, baliteke beste aplikazio batzuk irekitzeko gai izatea, eta haiek zure datu pertsonalak atzitu ahal izango dituzte agian. \n\nGailua segurtasunez partekatu nahi baduzu beste norbaitekin, gonbidatuentzako erabiltzaile-profil bat ere erabil dezakezu. \n\nAplikazioak ainguratzeko aukera erabiltzeko: 	\n1.	Aktibatu aplikazioak ainguratzeko aukera. 	\n2.	Ireki Ikuspegi orokorra. 	\n3.	Sakatu pantailaren goialdean dagoen aplikazioaren ikonoa eta, ondoren, sakatu Ainguratu."</string>
+    <!-- no translation found for screen_pinning_description (4305370471370474846) -->
+    <skip />
+    <!-- no translation found for screen_pinning_guest_user_description (2465729370037556955) -->
+    <skip />
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Aplikazioa ainguratuta dagoenean: \n\n• Baliteke zure datu pertsonalak atzitzeko aukera egotea (adibidez, kontaktuak eta posta elektronikoko edukia). \n\n• Baliteke beste aplikazio batzuk irekitzeko gai izatea. \n\nPertsona fidagarriekin soilik erabili beharko zenuke aplikazioak ainguratzeko aukera."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Eskatu desblokeatzeko eredua aingura kendu aurretik"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Eskatu PINa aingura kendu aurretik"</string>
@@ -4594,7 +4594,7 @@
     <string name="system_alert_window_access_title" msgid="3074573819155116817">"Bistaratu beste aplikazioen gainean"</string>
     <string name="permit_draw_overlay" msgid="4468994037192804075">"Eman beste aplik. gainean bistaratzeko baimena"</string>
     <string name="allow_overlay_description" msgid="1607235723669496298">"Eman erabiltzen ari zaren aplikazioen gainean agertzeko baimena aplikazioari. Zerbait sakatzen baduzu edo pantailan ikusten dena aldatzen baduzu, aplikazioa hori ikusteko gai izango da."</string>
-    <string name="manage_external_storage_title" msgid="8024521099838816100">"Fitxategi orotarako sarbidea"</string>
+    <string name="manage_external_storage_title" msgid="8024521099838816100">"Fitxategi guztietarako sarbidea"</string>
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Eman fitxategi guztiak kudeatzeko baimena"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Eman gailuko edo konektatutako biltegiratze-unitateetako fitxategiak irakurtzeko, aldatzeko eta ezabatzeko baimena aplikazioari. Baimena emanez gero, baliteke aplikazioak fitxategiak atzitzea zuk jakin ez arren."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Fitxategi guztiak atzi ditzake"</string>
@@ -5214,7 +5214,7 @@
     <string name="my_device_info_device_identifiers_category_title" msgid="2197063484127704153">"Gailuaren identifikatzaileak"</string>
     <string name="change_wifi_state_title" msgid="5629648102837821525">"Wifi-konexioa kontrolatzeko aukera"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Eman wifi-konexioa kontrolatzeko baimena aplikazioari"</string>
-    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Eman wifi-konexioa aktibatzeko edo desaktibatzeko, wifi-sareak bilatzeko eta haietara konektatzeko, sareak gehitzeko edo kentzeko, edota wifi-gune lokalak sortzeko baimena aplikazioari"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Eman wifi-konexioa aktibatzeko edo desaktibatzeko, wifi-sareak bilatzeko eta haietara konektatzeko, sareak gehitzeko edo kentzeko, edota wifi-gune lokalak sortzeko baimena aplikazioari."</string>
     <string name="media_output_title" msgid="8283629315159510680">"Erreproduzitu multimedia-edukia hemen:"</string>
     <string name="media_output_label_title" msgid="4139048973886819148">"Erreproduzitu <xliff:g id="LABEL">%s</xliff:g> hemen:"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Gailu hau"</string>
@@ -5358,7 +5358,7 @@
     <string name="carrier_settings_euicc" msgid="1541279297111378907">"Operadorea"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Operadorearen ezarpenen bertsioa"</string>
     <string name="call_category" msgid="641461844504128789">"Deiak"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Operadorearen bideo-deiak"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Operadorearen bideodeiak"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Sistemaren hautapena"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Aldatu CDMA ibiltaritzaren modua"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Sistemaren hautapena"</string>
@@ -5709,6 +5709,10 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Ez konektatu"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Konektatu"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE ezarpenak"</string>
+    <!-- no translation found for tare_on (2386073225978684535) -->
+    <skip />
+    <!-- no translation found for tare_off (6305694402929756726) -->
+    <skip />
     <string name="tare_revert" msgid="3855325741125236638">"Berrezarri ezarpen lehenetsiak"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Ezarpen lehenetsiak berrezarri dira."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Gehieneko oreka asea"</string>
@@ -5720,7 +5724,8 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Ekintzak (gauzatzeko kostua)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Ekintzak (oinarrizko prezioa)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Gertaera bakoitzeko sariak"</string>
-    <string name="tare_rewards_ongoing" msgid="8641416948811152109">"Gertaeraren iraupen osoko sariak"</string>
+    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
+    <skip />
     <string name="tare_rewards_max" msgid="5283055625642837010">"Gehieneko sariak eguneko"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Jarduera nagusia"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Jakinarazpen bat ikusi da"</string>

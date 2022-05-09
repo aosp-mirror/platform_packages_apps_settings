@@ -145,6 +145,7 @@ public class FingerprintSettings extends SubSettings {
         private Drawable mHighlightDrawable;
         private int mUserId;
         private CharSequence mFooterTitle;
+        private View.OnClickListener mLearnMoreListener = null;
         private boolean mEnrollClicked;
 
         private long mChallenge;
@@ -372,9 +373,8 @@ public class FingerprintSettings extends SubSettings {
 
                 mFooterTitle = AnnotationSpan.linkify(footerText, linkInfo, adminLinkInfo);
             } else {
-                mFooterTitle = AnnotationSpan.linkify(
-                        getText(R.string.security_settings_fingerprint_v2_home_screen),
-                        linkInfo, adminLinkInfo);
+                mFooterTitle = getText(R.string.security_settings_fingerprint_v2_home_screen_text);
+                mLearnMoreListener = (v) -> activity.startActivityForResult(helpIntent, 0);
             }
 
 
@@ -474,8 +474,12 @@ public class FingerprintSettings extends SubSettings {
             if (context == null) {
                 return;
             }
-            root.addPreference(new FooterPreference.Builder(context).setTitle(
-                    mFooterTitle).build());
+            final FooterPreference footer = new FooterPreference.Builder(context)
+                    .setTitle(mFooterTitle).build();
+            if (mLearnMoreListener != null) {
+                footer.setLearnMoreAction(mLearnMoreListener);
+            }
+            root.addPreference(footer);
         }
 
         private static String genKey(int id) {
