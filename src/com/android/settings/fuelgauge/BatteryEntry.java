@@ -209,7 +209,8 @@ public class BatteryEntry {
                 if (packages != null && packages.length == 1) {
                     mDefaultPackageName = packages[0];
                 } else {
-                    mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
+                    mDefaultPackageName = isSystemUid(uid)
+                            ? PACKAGE_SYSTEM : uidBatteryConsumer.getPackageWithHighestDrain();
                 }
             }
             if (mDefaultPackageName != null) {
@@ -352,13 +353,8 @@ public class BatteryEntry {
         }
 
         final PackageManager pm = context.getPackageManager();
-        final String[] packages;
-        if (uid == Process.SYSTEM_UID) {
-            packages = new String[] {PACKAGE_SYSTEM};
-        } else {
-            packages = pm.getPackagesForUid(uid);
-        }
-
+        final String[] packages = isSystemUid(uid)
+                ? new String[] {PACKAGE_SYSTEM} : pm.getPackagesForUid(uid);
         if (packages != null) {
             final String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
@@ -614,5 +610,9 @@ public class BatteryEntry {
                 break;
         }
         return new NameAndIcon(name, null /* icon */, iconId);
+    }
+
+    private static boolean isSystemUid(int uid) {
+        return uid == Process.SYSTEM_UID;
     }
 }
