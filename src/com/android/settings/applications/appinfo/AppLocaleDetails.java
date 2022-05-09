@@ -18,7 +18,6 @@ package com.android.settings.applications.appinfo;
 import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 import android.app.Activity;
-import android.app.LocaleConfig;
 import android.app.LocaleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -44,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -206,49 +206,14 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     }
 
     private int getAppDescription() {
-        LocaleList packageLocaleList = getPackageLocales();
-        String[] assetLocaleList = getAssetLocales();
+        LocaleList packageLocaleList = AppLocaleUtil.getPackageLocales(getContext(), mPackageName);
+        String[] assetLocaleList = AppLocaleUtil.getAssetLocales(getContext(), mPackageName);
         // TODO add apended url string, "Learn more", to these both sentenses.
         if ((packageLocaleList != null && packageLocaleList.isEmpty())
                 || (packageLocaleList == null && assetLocaleList.length == 0)) {
             return R.string.desc_no_available_supported_locale;
         }
         return -1;
-    }
-
-    private String[] getAssetLocales() {
-        try {
-            PackageManager packageManager = getContext().getPackageManager();
-            String[] locales = packageManager.getResourcesForApplication(
-                    packageManager.getPackageInfo(mPackageName, PackageManager.MATCH_ALL)
-                            .applicationInfo).getAssets().getNonSystemLocales();
-            if (locales == null) {
-                Log.i(TAG, "[" + mPackageName + "] locales are null.");
-            }
-            if (locales.length <= 0) {
-                Log.i(TAG, "[" + mPackageName + "] locales length is 0.");
-                return new String[0];
-            }
-            String locale = locales[0];
-            Log.i(TAG, "First asset locale - [" + mPackageName + "] " + locale);
-            return locales;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "Can not found the package name : " + mPackageName + " / " + e);
-        }
-        return new String[0];
-    }
-
-    private LocaleList getPackageLocales() {
-        try {
-            LocaleConfig localeConfig =
-                    new LocaleConfig(getContext().createPackageContext(mPackageName, 0));
-            if (localeConfig.getStatus() == LocaleConfig.STATUS_SUCCESS) {
-                return localeConfig.getSupportedLocales();
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "Can not found the package name : " + mPackageName + " / " + e);
-        }
-        return null;
     }
 
     /** Gets per app's default locale */
