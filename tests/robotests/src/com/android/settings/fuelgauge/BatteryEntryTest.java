@@ -279,6 +279,22 @@ public class BatteryEntryTest {
     }
 
     @Test
+    public void getNameAndIconFromUid_tetheringUid_rerturnExpectedName() {
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
+                mContext, /* name */ null, /* uid */ BatteryUtils.UID_TETHERING);
+
+        assertThat(nameAndIcon.mName).isEqualTo(getString(R.string.process_network_tethering));
+    }
+
+    @Test
+    public void getNameAndIconFromUid_removedAppsUid_rerturnExpectedName() {
+        final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUid(
+                mContext, /* name */ null, /* uid */ BatteryUtils.UID_REMOVED_APPS);
+
+        assertThat(nameAndIcon.mName).isEqualTo(getString(R.string.process_removed_apps));
+    }
+
+    @Test
     public void getNameAndIconFromPowerComponent_rerturnExpectedNameAndIcon() {
         assertNameAndIcon(BatteryConsumer.POWER_COMPONENT_AMBIENT_DISPLAY,
                 R.string.ambient_display_screen_title,

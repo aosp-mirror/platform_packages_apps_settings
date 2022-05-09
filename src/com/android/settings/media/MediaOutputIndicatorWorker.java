@@ -161,7 +161,7 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 
-    String getPackageName() {
+    public String getPackageName() {
         return mPackageName;
     }
 
