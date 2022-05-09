@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.media.LocalMediaManager;
 
@@ -61,7 +62,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class})
+@Config(shadows = {ShadowBluetoothAdapter.class, ShadowInteractionJankMonitor.class})
 public class RemoteVolumeGroupControllerTest {
 
     private static final String KEY_REMOTE_VOLUME_GROUP = "remote_media_group";

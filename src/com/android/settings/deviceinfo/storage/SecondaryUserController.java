@@ -46,7 +46,6 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     // PreferenceGroupKey to try to add our preference onto.
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     private static final String PREFERENCE_KEY_BASE = "pref_user_";
-    private static final int USER_PROFILE_INSERTION_LOCATION = 6;
     private static final int SIZE_NOT_SET = -1;
 
     private @NonNull
@@ -58,6 +57,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
     private long mSize;
     private long mTotalSizeBytes;
     private boolean mIsVisible;
+    private StorageCacheHelper mStorageCacheHelper;
 
     /**
      * Adds the appropriate controllers to a controller list for handling all secondary users on
@@ -110,6 +110,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
         super(context);
         mUser = info;
         mSize = SIZE_NOT_SET;
+        mStorageCacheHelper = new StorageCacheHelper(context, info.id);
     }
 
     @Override
@@ -120,9 +121,7 @@ public class SecondaryUserController extends AbstractPreferenceController implem
             mPreferenceGroup = screen.findPreference(TARGET_PREFERENCE_GROUP_KEY);
             mStoragePreference.setTitle(mUser.name);
             mStoragePreference.setKey(PREFERENCE_KEY_BASE + mUser.id);
-            if (mSize != SIZE_NOT_SET) {
-                mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
-            }
+            setSize(mStorageCacheHelper.retrieveUsedSize(), false /* animate */);
 
             mPreferenceGroup.setVisible(mIsVisible);
             mPreferenceGroup.addPreference(mStoragePreference);
@@ -153,10 +152,10 @@ public class SecondaryUserController extends AbstractPreferenceController implem
      *
      * @param size Size in bytes.
      */
-    public void setSize(long size) {
+    public void setSize(long size, boolean animate) {
         mSize = size;
         if (mStoragePreference != null) {
-            mStoragePreference.setStorageSize(mSize, mTotalSizeBytes);
+            mStoragePreference.setStorageSize(mSize, mTotalSizeBytes, animate);
         }
     }
 
@@ -183,9 +182,15 @@ public class SecondaryUserController extends AbstractPreferenceController implem
 
     @Override
     public void handleResult(SparseArray<StorageAsyncLoader.StorageResult> stats) {
+        if (stats == null) {
+            setSize(mStorageCacheHelper.retrieveUsedSize(), false /* animate */);
+            return;
+        }
         final StorageAsyncLoader.StorageResult result = stats.get(getUser().id);
         if (result != null) {
-            setSize(result.externalStats.totalBytes);
+            setSize(result.externalStats.totalBytes, true /* animate */);
+            // TODO(b/171758224): Update the source of size info
+            mStorageCacheHelper.cacheUsedSize(result.externalStats.totalBytes);
         }
     }
 

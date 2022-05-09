@@ -73,6 +73,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_CLASS_NAME);
     private static final ComponentName PLACEHOLDER_TILE_COMPONENT_NAME = new ComponentName(
             PLACEHOLDER_PACKAGE_NAME, PLACEHOLDER_TILE_CLASS_NAME);
+    private static final String PLACEHOLDER_TILE_TOOLTIP_CONTENT =
+            PLACEHOLDER_PACKAGE_NAME + "tooltip_content";
     private static final String PLACEHOLDER_DIALOG_TITLE = "title";
 
     private static final String SOFTWARE_SHORTCUT_KEY =
@@ -281,8 +283,8 @@ public class AccessibilityShortcutPreferenceFragmentTest {
         }
 
         @Override
-        protected CharSequence getTileName() {
-            return PLACEHOLDER_PACKAGE_NAME;
+        protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+            return PLACEHOLDER_TILE_TOOLTIP_CONTENT;
         }
 
         @Override

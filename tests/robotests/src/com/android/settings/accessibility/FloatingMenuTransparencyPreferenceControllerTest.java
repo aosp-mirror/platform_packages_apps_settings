@@ -27,6 +27,7 @@ import static com.android.settings.core.BasePreferenceController.DISABLED_DEPEND
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,8 +35,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
@@ -47,9 +50,11 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link FloatingMenuTransparencyPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class FloatingMenuTransparencyPreferenceControllerTest {
 
     @Rule
@@ -60,11 +65,18 @@ public class FloatingMenuTransparencyPreferenceControllerTest {
     @Mock
     private ContentResolver mContentResolver;
     private FloatingMenuTransparencyPreferenceController mController;
+    private SeekBarPreference mSeekBarPreference;
+
+    @Mock
+    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         mController = new FloatingMenuTransparencyPreferenceController(mContext, "test_key");
+
+        mSeekBarPreference = new SeekBarPreference(mContext);
+        doReturn(mSeekBarPreference).when(mScreen).findPreference("test_key");
     }
 
     @Test
@@ -84,14 +96,67 @@ public class FloatingMenuTransparencyPreferenceControllerTest {
     }
 
     @Test
-    public void onChange_a11yBtnModeChangeToNavigationBar_preferenceDisabled() {
-        mController.mPreference = new SeekBarPreference(mContext);
+    public void displayPreference_floatingMenuMode_fadeEnabled_preferenceEnabled() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* ON */ 1);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mSeekBarPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_floatingMenuMode_fadeDisabled_preferenceDisabled() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* OFF */ 0);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mSeekBarPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_navigationBarMode_preferenceDisabled() {
         Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
                 ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR);
 
+        mController.displayPreference(mScreen);
+
+        assertThat(mSeekBarPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onChange_floatingMenuModeChangeToNavigationBar_preferenceDisabled() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* ON */ 1);
+        mController.displayPreference(mScreen);
+
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR);
         mController.mContentObserver.onChange(false);
 
-        assertThat(mController.mPreference.isEnabled()).isFalse();
+        assertThat(mSeekBarPreference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void onChange_navigationBarModeChangeToFloatingMenu_preferenceDisabled() {
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR);
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* ON */ 1);
+        mController.displayPreference(mScreen);
+
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+        mController.mContentObserver.onChange(false);
+
+        assertThat(mSeekBarPreference.isEnabled()).isTrue();
     }
 
     @Test

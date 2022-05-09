@@ -20,8 +20,12 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -66,6 +70,7 @@ public class LocationSettings extends DashboardFragment implements
     private LocationSwitchBarController mSwitchBarController;
     private LocationEnabler mLocationEnabler;
     private RecentLocationAccessPreferenceController mController;
+    private ContentObserver mContentObserver;
 
     @Override
     public int getMetricsCategory() {
@@ -82,6 +87,16 @@ public class LocationSettings extends DashboardFragment implements
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
         mLocationEnabler = new LocationEnabler(getContext(), this, getSettingsLifecycle());
+        mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                mController.updateShowSystem();
+            }
+        };
+        getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(
+                        Settings.Secure.LOCATION_SHOW_SYSTEM_OPS), /* notifyForDescendants= */
+                false, mContentObserver);
     }
 
     @Override
@@ -97,11 +112,9 @@ public class LocationSettings extends DashboardFragment implements
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (mController != null) {
-            mController.clearPreferenceList();
-        }
+    public void onDestroy() {
+        super.onDestroy();
+        getContentResolver().unregisterContentObserver(mContentObserver);
     }
 
     @Override

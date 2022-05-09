@@ -61,7 +61,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
                 super.onInitializeAccessibilityNodeInfo(host, info);
                 final AccessibilityAction clickAction = new AccessibilityAction(
                         AccessibilityNodeInfo.ACTION_CLICK,
-                        mContext.getString(R.string.accessibility_quick_settings_tooltips_dismiss));
+                        mContext.getString(R.string.accessibility_quick_settings_tooltip_dismiss));
                 info.addAction(clickAction);
             }
 
@@ -80,7 +80,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * @param text text to be displayed
      * @param imageResId the resource ID of the image drawable
      */
-    public void setup(String text, @DrawableRes int imageResId) {
+    public void setup(CharSequence text, @DrawableRes int imageResId) {
         this.setup(text, imageResId, /* closeDelayTimeMillis= */ 0);
     }
 
@@ -94,13 +94,13 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
      * @param imageResId the resource ID of the image drawable
      * @param closeDelayTimeMillis how long the popup window be auto-closed
      */
-    public void setup(String text, @DrawableRes int imageResId, long closeDelayTimeMillis) {
+    public void setup(CharSequence text, @DrawableRes int imageResId, long closeDelayTimeMillis) {
         this.mCloseDelayTimeMillis = closeDelayTimeMillis;
 
         setBackgroundDrawable(new ColorDrawable(mContext.getColor(android.R.color.transparent)));
         final LayoutInflater inflater = mContext.getSystemService(LayoutInflater.class);
         final View popupView =
-                inflater.inflate(R.layout.accessibility_qs_tooltips, /* root= */ null);
+                inflater.inflate(R.layout.accessibility_qs_tooltip, /* root= */ null);
         popupView.setFocusable(/* focusable= */ true);
         popupView.setAccessibilityDelegate(mAccessibilityDelegate);
         setContentView(popupView);
@@ -179,7 +179,7 @@ public class AccessibilityQuickSettingsTooltipWindow extends PopupWindow {
     @VisibleForTesting
     int getAvailableWindowWidth() {
         final Resources res = mContext.getResources();
-        final int padding = res.getDimensionPixelSize(R.dimen.accessibility_qs_tooltips_margin);
+        final int padding = res.getDimensionPixelSize(R.dimen.accessibility_qs_tooltip_margin);
         final int screenWidth = res.getDisplayMetrics().widthPixels;
         return screenWidth - padding * 2;
     }
