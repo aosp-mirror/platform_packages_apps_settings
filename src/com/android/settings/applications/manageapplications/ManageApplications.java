@@ -173,6 +173,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
     @VisibleForTesting
+    static final String EXTRA_SEARCH_QUERY = "search_query";
+    @VisibleForTesting
     static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
@@ -253,6 +255,8 @@ public class ManageApplications extends InstrumentedFragment
     // Whether or not search view is expanded.
     @VisibleForTesting
     boolean mExpandSearch;
+    @VisibleForTesting
+    CharSequence mPreQuery;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -330,8 +334,8 @@ public class ManageApplications extends InstrumentedFragment
             if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
                 // Special-case for a case where a user is directed to the all apps notification
                 // preferences page via a notification prompt to review permissions settings.
-                android.provider.Settings.Secure.putInt(getContext().getContentResolver(),
-                        android.provider.Settings.Secure.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
+                android.provider.Settings.Global.putInt(getContext().getContentResolver(),
+                        android.provider.Settings.Global.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
                         1);  // USER_INTERACTED
             }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
@@ -358,6 +362,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterType =
                     savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
             mExpandSearch = savedInstanceState.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
+            mPreQuery = savedInstanceState.getCharSequence(EXTRA_SEARCH_QUERY);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -544,6 +549,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+            outState.putCharSequence(EXTRA_SEARCH_QUERY, mSearchView.getQuery());
         }
         if (mApplications != null) {
             outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
@@ -682,6 +688,9 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView.setOnQueryTextListener(this);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
+            }
+            if (!TextUtils.isEmpty(mPreQuery)) {
+                mSearchView.setQuery(mPreQuery, true);
             }
         }
 

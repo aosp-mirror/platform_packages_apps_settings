@@ -105,11 +105,6 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             icon.setBounds(0, 0, iconSize, iconSize);
             mTitleView.setCompoundDrawablesRelative(icon, null, null, null);
 
-            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
-            mCustomizeButton.setVisibility(
-                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
-            mCustomizeButton.setSelected(false);
-
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
                 if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
@@ -126,6 +121,13 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 itemView.setSelected(false);
                 itemView.setClickable(true);
             }
+
+            mCustomizeButton.setOnClickListener(v -> item.onCustomizeClicked());
+            mCustomizeButton.setVisibility(
+                    item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);
+            // This must be called AFTER itemView.setSelected above, in order to keep the
+            // customize button in an unselected state.
+            mCustomizeButton.setSelected(false);
 
             setEnabledStateOnViews(itemView, mEnabled);
         }
