@@ -168,7 +168,8 @@ public class PictureInPictureSettings extends EmptyTextSettings {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     AppInfoBase.startAppInfoFragment(PictureInPictureDetails.class,
-                            R.string.picture_in_picture_app_detail_title, packageName, appInfo.uid,
+                            getString(R.string.picture_in_picture_app_detail_title),
+                            packageName, appInfo.uid,
                             PictureInPictureSettings.this, -1, getMetricsCategory());
                     return true;
                 }

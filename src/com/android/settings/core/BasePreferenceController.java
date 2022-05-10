@@ -121,10 +121,12 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     protected final String mPreferenceKey;
     protected UiBlockListener mUiBlockListener;
+    protected boolean mUiBlockerFinished;
     private boolean mIsForWork;
     @Nullable
     private UserHandle mWorkProfileUser;
     private int mMetricsCategory;
+    private boolean mPrefVisibility;
 
     /**
      * Instantiate a controller as specified controller type and user-defined key.
@@ -195,6 +197,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);
         mPreferenceKey = preferenceKey;
+        mPrefVisibility = true;
         if (TextUtils.isEmpty(mPreferenceKey)) {
             throw new IllegalArgumentException("Preference key must be set");
         }
@@ -378,6 +381,14 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         mUiBlockListener = uiBlockListener;
     }
 
+    public void setUiBlockerFinished(boolean isFinished) {
+        mUiBlockerFinished = isFinished;
+    }
+
+    public boolean getSavedPrefVisibility() {
+        return mPrefVisibility;
+    }
+
     /**
      * Listener to invoke when background job is finished
      */
@@ -427,5 +438,29 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @Nullable
     protected UserHandle getWorkProfileUser() {
         return mWorkProfileUser;
+    }
+
+    /**
+     * Used for {@link BasePreferenceController} that implements {@link UiBlocker} to control the
+     * preference visibility.
+     */
+    protected void updatePreferenceVisibilityDelegate(Preference preference, boolean isVisible) {
+        if (mUiBlockerFinished) {
+            preference.setVisible(isVisible);
+            return;
+        }
+
+        savePrefVisibility(isVisible);
+
+        // Preferences that should be invisible have a high priority to be updated since the
+        // whole UI should be blocked/invisible. While those that should be visible will be
+        // updated once the blocker work is finished. That's done in DashboardFragment.
+        if (!isVisible) {
+            preference.setVisible(false);
+        }
+    }
+
+    private void savePrefVisibility(boolean isVisible) {
+        mPrefVisibility = isVisible;
     }
 }

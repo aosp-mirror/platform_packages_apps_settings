@@ -27,20 +27,20 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 /**
  * This class controls the radio buttons for switching between
  * USB device and host mode.
  */
 public class UsbDetailsDataRoleController extends UsbDetailsController
-        implements RadioButtonPreference.OnClickListener {
+        implements SelectorWithWidgetPreference.OnClickListener {
 
     private PreferenceCategory mPreferenceCategory;
-    private RadioButtonPreference mDevicePref;
-    private RadioButtonPreference mHostPref;
+    private SelectorWithWidgetPreference mDevicePref;
+    private SelectorWithWidgetPreference mHostPref;
 
-    private RadioButtonPreference mNextRolePref;
+    private SelectorWithWidgetPreference mNextRolePref;
 
     private final Runnable mFailureCallback = () -> {
         if (mNextRolePref != null) {
@@ -97,7 +97,7 @@ public class UsbDetailsDataRoleController extends UsbDetailsController
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference preference) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         int role = UsbBackend.dataRoleFromString(preference.getKey());
         if (role != mUsbBackend.getDataRole() && mNextRolePref == null
                 && !Utils.isMonkeyRunning()) {
@@ -121,8 +121,9 @@ public class UsbDetailsDataRoleController extends UsbDetailsController
         return "usb_details_data_role";
     }
 
-    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        RadioButtonPreference pref = new RadioButtonPreference(mPreferenceCategory.getContext());
+    private SelectorWithWidgetPreference makeRadioPreference(String key, int titleId) {
+        SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(
+                mPreferenceCategory.getContext());
         pref.setKey(key);
         pref.setTitle(titleId);
         pref.setOnClickListener(this);

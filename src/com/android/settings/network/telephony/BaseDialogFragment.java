@@ -17,11 +17,11 @@
 package com.android.settings.network.telephony;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Base dialog fragment class with the functionality to make a fragment or an activity as a listener

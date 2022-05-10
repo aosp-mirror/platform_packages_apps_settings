@@ -44,7 +44,6 @@ public final class ChooseLockSettingsHelper {
 
     private static final String TAG = "ChooseLockSettingsHelper";
 
-    public static final String EXTRA_KEY_TYPE = "type";
     public static final String EXTRA_KEY_PASSWORD = "password";
     public static final String EXTRA_KEY_RETURN_CREDENTIALS = "return_credentials";
     // Force the verifyCredential path instead of checkCredential path. This will be removed
@@ -191,7 +190,7 @@ public final class ChooseLockSettingsHelper {
         /**
          * @param returnCredentials if true, puts the following credentials into intent for
          *                          onActivityResult with the following keys:
-         *                          {@link #EXTRA_KEY_TYPE}, {@link #EXTRA_KEY_PASSWORD},
+         *                          {@link #EXTRA_KEY_PASSWORD},
          *                          {@link #EXTRA_KEY_CHALLENGE_TOKEN},
          *                          {@link #EXTRA_KEY_GK_PW_HANDLE}
          *                          Note that if this is true, this can only be called internally.
