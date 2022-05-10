@@ -35,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -61,6 +62,7 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        mPreference.setEnabled(AppUtils.isAppInstalled(mAppEntry));
     }
 
     @Override
