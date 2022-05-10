@@ -17,6 +17,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -83,8 +84,11 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         final Context prefContext = mCategoryRecentLocationRequests.getContext();
         final List<RecentLocationApps.Request> recentLocationRequests = new ArrayList<>();
         final UserManager userManager = UserManager.get(mContext);
+        final boolean showSystem = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
+
         for (RecentLocationApps.Request request : mRecentLocationApps.getAppListSorted(
-                false /* systemApps */)) {
+                showSystem)) {
             if (isRequestMatchesProfileType(userManager, request, mType)) {
                 recentLocationRequests.add(request);
                 if (recentLocationRequests.size() == MAX_APPS) {

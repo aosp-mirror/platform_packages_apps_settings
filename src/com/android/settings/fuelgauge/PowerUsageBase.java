@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.Menu;
 
 import androidx.annotation.NonNull;
@@ -82,6 +83,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     public void onStop() {
         super.onStop();
         mBatteryBroadcastReceiver.unRegister();
+        closeBatteryUsageStatsIfNeeded();
     }
 
     protected void restartBatteryStatsLoader(int refreshType) {
@@ -119,12 +121,26 @@ public abstract class PowerUsageBase extends DashboardFragment {
         @Override
         public void onLoadFinished(Loader<BatteryUsageStats> loader,
                 BatteryUsageStats batteryUsageStats) {
+            closeBatteryUsageStatsIfNeeded();
             mBatteryUsageStats = batteryUsageStats;
             PowerUsageBase.this.onLoadFinished(mRefreshType);
         }
 
         @Override
         public void onLoaderReset(Loader<BatteryUsageStats> loader) {
+        }
+    }
+
+    private void closeBatteryUsageStatsIfNeeded() {
+        if (mBatteryUsageStats == null) {
+            return;
+        }
+        try {
+            mBatteryUsageStats.close();
+        } catch (Exception e) {
+            Log.e(TAG, "BatteryUsageStats.close() failed", e);
+        } finally {
+            mBatteryUsageStats = null;
         }
     }
 }
