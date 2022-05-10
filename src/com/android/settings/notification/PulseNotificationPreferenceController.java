@@ -28,6 +28,7 @@ import android.provider.Settings;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -84,6 +85,11 @@ public class PulseNotificationPreferenceController extends TogglePreferenceContr
     public boolean setChecked(boolean isChecked) {
         return Settings.System.putInt(mContext.getContentResolver(), NOTIFICATION_LIGHT_PULSE,
                 isChecked ? ON : OFF);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_notifications;
     }
 
     class SettingObserver extends ContentObserver {

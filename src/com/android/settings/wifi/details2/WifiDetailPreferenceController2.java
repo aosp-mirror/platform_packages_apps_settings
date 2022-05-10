@@ -42,7 +42,6 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -76,6 +75,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDialog2;
 import com.android.settings.wifi.WifiDialog2.WifiDialog2Listener;
 import com.android.settings.wifi.WifiUtils;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -434,9 +434,9 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
             mDataUsageSummaryPref = screen.findPreference(KEY_DATA_USAGE_HEADER);
             mDataUsageSummaryPref.setVisible(true);
             mSummaryHeaderController =
-                new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
-                        mLifecycle, (PreferenceFragmentCompat) mFragment,
-                        mWifiEntry.getTitle());
+                    new WifiDataUsageSummaryPreferenceController(mFragment.getActivity(),
+                            mLifecycle, (PreferenceFragmentCompat) mFragment,
+                            mWifiEntry.getWifiConfiguration().getAllNetworkKeys());
             return;
         }
 
@@ -768,32 +768,12 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
     }
 
     private void refreshWifiType() {
-        final ConnectedInfo connectedInfo = mWifiEntry.getConnectedInfo();
-        if (connectedInfo == null) {
-            mTypePref.setVisible(false);
-            return;
-        }
-
-        final int typeString = getWifiStandardTypeString(connectedInfo.wifiStandard);
-        if (typeString != -1) {
+        final String typeString = mWifiEntry.getStandardString();
+        if (!TextUtils.isEmpty(typeString)) {
             mTypePref.setSummary(typeString);
             mTypePref.setVisible(true);
         } else {
             mTypePref.setVisible(false);
-        }
-    }
-
-    private int getWifiStandardTypeString(int wifiStandardType) {
-        Log.d(TAG, "Wifi Type " + wifiStandardType);
-        switch (wifiStandardType) {
-            case ScanResult.WIFI_STANDARD_11AX:
-                return R.string.wifi_type_11AX;
-            case ScanResult.WIFI_STANDARD_11AC:
-                return R.string.wifi_type_11AC;
-            case ScanResult.WIFI_STANDARD_11N:
-                return R.string.wifi_type_11N;
-            default:
-                return -1;
         }
     }
 
@@ -1099,7 +1079,7 @@ public class WifiDetailPreferenceController2 extends AbstractPreferenceControlle
         refreshPage();
 
         // Refresh the Preferences in fragment.
-        ((WifiNetworkDetailsFragment2) mFragment).refreshPreferences();
+        ((WifiNetworkDetailsFragment) mFragment).refreshPreferences();
     }
 
     /**
