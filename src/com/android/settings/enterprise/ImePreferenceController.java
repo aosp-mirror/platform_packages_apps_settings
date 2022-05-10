@@ -14,6 +14,9 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ADMIN_ACTION_SET_INPUT_METHOD_NAME;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -37,9 +40,13 @@ public class ImePreferenceController extends AbstractPreferenceController implem
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(mContext.getResources().getString(
-                R.string.enterprise_privacy_input_method_name,
-                mFeatureProvider.getImeLabelIfOwnerSet()));
+        preference.setSummary(
+                mContext.getSystemService(DevicePolicyManager.class).getResources()
+                        .getString(ADMIN_ACTION_SET_INPUT_METHOD_NAME, () ->
+                                mContext.getResources().getString(
+                                        R.string.enterprise_privacy_input_method_name,
+                                        mFeatureProvider.getImeLabelIfOwnerSet()),
+                                mFeatureProvider.getImeLabelIfOwnerSet()));
     }
 
     @Override

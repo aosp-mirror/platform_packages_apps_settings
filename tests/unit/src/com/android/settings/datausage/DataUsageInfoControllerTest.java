@@ -101,8 +101,7 @@ public class DataUsageInfoControllerTest {
     }
 
     private NetworkPolicy getDefaultNetworkPolicy() {
-        NetworkTemplate template = NetworkTemplate.buildTemplateWifi(
-                NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */);
+        NetworkTemplate template = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
         int cycleDay  = -1;
         String cycleTimezone = "UTC";
         long warningBytes = -1;

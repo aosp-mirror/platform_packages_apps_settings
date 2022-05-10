@@ -16,8 +16,6 @@
 
 package com.android.settings.biometrics.fingerprint;
 
-import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -80,27 +78,6 @@ public class FingerprintProfileStatusPreferenceControllerTest {
     @Test
     public void getUserId_shouldReturnProfileId() {
         assertThat(mController.getUserId()).isEqualTo(FAKE_PROFILE_USER_ID);
-    }
-
-    @Test
-    public void isUserSupported_separateChallengeAllowed_true() {
-        when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(true);
-        assertThat(mController.isUserSupported()).isTrue();
-    }
-
-    @Test
-    public void isUserSupported_separateChallengeNotAllowed_false() {
-        when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(false);
-
-        assertThat(mController.isUserSupported()).isFalse();
-    }
-
-    @Test
-    public void getAvailabilityStatus_userNotSupported_DISABLED() {
-        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
-        when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(false);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_FOR_USER);
     }
 
     @Test

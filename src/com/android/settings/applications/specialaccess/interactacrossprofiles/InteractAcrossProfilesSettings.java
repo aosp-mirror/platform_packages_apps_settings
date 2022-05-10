@@ -15,9 +15,11 @@
  */
 package com.android.settings.applications.specialaccess.interactacrossprofiles;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
 import android.annotation.Nullable;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -72,6 +74,9 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
+        replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
+                R.string.interact_across_profiles_title);
+
         final ArrayList<Pair<ApplicationInfo, UserHandle>> crossProfileApps =
                 collectConfigurableApps(mPackageManager, mUserManager, mCrossProfileApps);
 
@@ -91,7 +96,9 @@ public class InteractAcrossProfilesSettings extends EmptyTextSettings {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     AppInfoBase.startAppInfoFragment(InteractAcrossProfilesDetails.class,
-                            R.string.interact_across_profiles_title,
+                            mDevicePolicyManager.getResources().getString(
+                                    CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
+                                    () -> getString(R.string.interact_across_profiles_title)),
                             packageName,
                             appInfo.uid,
                             InteractAcrossProfilesSettings.this/* source */,

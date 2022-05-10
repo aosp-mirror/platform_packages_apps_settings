@@ -37,21 +37,28 @@
         android:textAppearance="?android:attr/textAppearanceListItem"
         android:textColor="?android:attr/textColorPrimary" />
 
-    <SeekBar
-        android:id="@*android:id/seekbar"
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@android:id/title"
-        android:layout_gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:paddingStart="0dp"
-        android:paddingEnd="12dp"
-        style="@android:style/Widget.Material.SeekBar.Discrete" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAlignment="viewStart"
+        android:textColor="?android:attr/textColorSecondary" />
 
-    <LinearLayout
+    <include
+        layout="@layout/icon_discrete_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@*android:id/seekbar"
-        android:orientation="horizontal">
+        android:layout_below="@android:id/summary" />
+
+    <LinearLayout
+        android:id="@+id/label_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekbar_frame"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@android:id/text1"

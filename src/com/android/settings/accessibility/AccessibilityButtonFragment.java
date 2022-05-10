@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.os.Bundle;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -28,6 +29,14 @@ import com.android.settingslib.search.SearchIndexable;
 public class AccessibilityButtonFragment extends DashboardFragment {
 
     private static final String TAG = "AccessibilityButtonFragment";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(getPrefContext())
+                ? R.string.accessibility_button_gesture_title : R.string.accessibility_button_title;
+        getActivity().setTitle(titleResource);
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
