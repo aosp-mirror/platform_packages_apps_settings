@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -48,6 +49,7 @@ import android.os.IDeviceIdleController;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.ArraySet;
 
 import com.android.settingslib.fuelgauge.PowerAllowlistBackend;
 
@@ -193,7 +195,7 @@ public final class BatteryBackupHelperTest {
         doReturn(Arrays.asList(userInfo)).when(mUserManager).getProfiles(anyInt());
         doThrow(new RuntimeException())
                 .when(mIPackageManager)
-                .getInstalledApplications(anyInt(), anyInt());
+                .getInstalledApplications(anyLong(), anyInt());
 
         mBatteryBackupHelper.backupOptimizationMode(mBackupDataOutput, null);
 
@@ -369,7 +371,7 @@ public final class BatteryBackupHelperTest {
         doReturn(new ParceledListSlice<ApplicationInfo>(
                 Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3)))
             .when(mIPackageManager)
-            .getInstalledApplications(anyInt(), anyInt());
+            .getInstalledApplications(anyLong(), anyInt());
         // Sets the AppOpsManager for checkOpNoThrow() method.
         doReturn(AppOpsManager.MODE_ALLOWED)
                 .when(mAppOpsManager)
@@ -384,7 +386,7 @@ public final class BatteryBackupHelperTest {
                         applicationInfo2.uid,
                         applicationInfo2.packageName);
         mBatteryBackupHelper.mTestApplicationInfoList =
-                Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3);
+                new ArraySet<>(Arrays.asList(applicationInfo1, applicationInfo2, applicationInfo3));
     }
 
     @Implements(UserHandle.class)

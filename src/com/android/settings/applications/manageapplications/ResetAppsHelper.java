@@ -38,6 +38,7 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryOptimizeUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -152,6 +153,7 @@ public class ResetAppsHelper implements DialogInterface.OnClickListener,
                 } catch (RemoteException e) {
                 }
                 mAom.resetAllModes();
+                BatteryOptimizeUtils.resetAppOptimizationMode(mContext, mIPm, mAom);
                 final int[] restrictedUids = mNpm.getUidsWithPolicy(
                         POLICY_REJECT_METERED_BACKGROUND);
                 final int currentUserId = ActivityManager.getCurrentUser();

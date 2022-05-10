@@ -19,7 +19,15 @@ package com.android.settings.fuelgauge;
 import android.annotation.IntDef;
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.UserInfo;
 import android.os.AsyncTask;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -42,6 +50,15 @@ public class BatteryOptimizeUtils {
 
     private final String mPackageName;
     private final int mUid;
+
+    // If current user is admin, match apps from all users. Otherwise, only match the currect user.
+    private static final int RETRIEVE_FLAG_ADMIN =
+            PackageManager.MATCH_ANY_USER
+                | PackageManager.MATCH_DISABLED_COMPONENTS
+                | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS;
+    private static final int RETRIEVE_FLAG =
+            PackageManager.MATCH_DISABLED_COMPONENTS
+                | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS;
 
     // Optimization modes.
     static final int MODE_UNKNOWN = 0;
@@ -90,28 +107,20 @@ public class BatteryOptimizeUtils {
         return getAppOptimizationMode(mMode, mAllowListed);
     }
 
+    /** Resets optimization mode for all applications. */
+    public static void resetAppOptimizationMode(
+            Context context, IPackageManager ipm, AppOpsManager aom) {
+        resetAppOptimizationMode(context, ipm, aom,
+                PowerAllowlistBackend.getInstance(context), BatteryUtils.getInstance(context));
+    }
+
     /** Sets the {@link OptimizationMode} for associated app. */
     public void setAppUsageState(@OptimizationMode int mode) {
         if (getAppOptimizationMode(mMode, mAllowListed) == mode) {
             Log.w(TAG, "set the same optimization mode for: " + mPackageName);
             return;
         }
-
-        AsyncTask.execute(() -> {
-            switch (mode) {
-                case MODE_RESTRICTED:
-                    setAppOptimizationMode(AppOpsManager.MODE_IGNORED, /* allowListed */ false);
-                    break;
-                case MODE_UNRESTRICTED:
-                    setAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ true);
-                    break;
-                case MODE_OPTIMIZED:
-                    setAppOptimizationMode(AppOpsManager.MODE_ALLOWED, /* allowListed */ false);
-                    break;
-                default:
-                    Log.d(TAG, "set unknown app optimization mode.");
-            }
-        });
+        setAppUsageStateInternal(mode, mUid, mPackageName, mBatteryUtils, mPowerAllowListBackend);
     }
 
     /**
@@ -126,25 +135,111 @@ public class BatteryOptimizeUtils {
      */
     public boolean isSystemOrDefaultApp() {
         mPowerAllowListBackend.refreshList();
+        return isSystemOrDefaultApp(mPowerAllowListBackend, mPackageName);
+    }
 
-        return mPowerAllowListBackend.isSysAllowlisted(mPackageName)
-                || mPowerAllowListBackend.isDefaultActiveApp(mPackageName);
+    /**
+      * Gets the list of installed applications.
+      */
+    public static ArraySet<ApplicationInfo> getInstalledApplications(
+            Context context, IPackageManager ipm) {
+        final ArraySet<ApplicationInfo> applications = new ArraySet<>();
+        final UserManager um = context.getSystemService(UserManager.class);
+        for (UserInfo userInfo : um.getProfiles(UserHandle.myUserId())) {
+            try {
+                @SuppressWarnings("unchecked")
+                final ParceledListSlice<ApplicationInfo> infoList = ipm.getInstalledApplications(
+                        userInfo.isAdmin() ? RETRIEVE_FLAG_ADMIN : RETRIEVE_FLAG,
+                        userInfo.id);
+                if (infoList != null) {
+                    applications.addAll(infoList.getList());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "getInstalledApplications() is failed", e);
+                return null;
+            }
+        }
+        // Removes the application which is disabled by the system.
+        applications.removeIf(
+                info -> info.enabledSetting != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
+                    && !info.enabled);
+        return applications;
+    }
+
+    @VisibleForTesting
+    static void resetAppOptimizationMode(
+            Context context, IPackageManager ipm, AppOpsManager aom,
+            PowerAllowlistBackend allowlistBackend, BatteryUtils batteryUtils) {
+        final ArraySet<ApplicationInfo> applications = getInstalledApplications(context, ipm);
+        if (applications == null || applications.isEmpty()) {
+            Log.w(TAG, "no data found in the getInstalledApplications()");
+            return;
+        }
+
+        allowlistBackend.refreshList();
+        // Resets optimization mode for each application.
+        for (ApplicationInfo info : applications) {
+            final int mode = aom.checkOpNoThrow(
+                    AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, info.uid, info.packageName);
+            @OptimizationMode
+            final int optimizationMode = getAppOptimizationMode(
+                    mode, allowlistBackend.isAllowlisted(info.packageName));
+            // Ignores default optimized/unknown state or system/default apps.
+            if (optimizationMode == MODE_OPTIMIZED
+                    || optimizationMode == MODE_UNKNOWN
+                    || isSystemOrDefaultApp(allowlistBackend, info.packageName)) {
+                continue;
+            }
+
+            // Resets to the default mode: MODE_OPTIMIZED.
+            setAppUsageStateInternal(MODE_OPTIMIZED, info.uid, info.packageName, batteryUtils,
+                    allowlistBackend);
+        }
     }
 
     String getPackageName() {
         return mPackageName == null ? UNKNOWN_PACKAGE : mPackageName;
     }
 
-    private void setAppOptimizationMode(int appStandbyMode, boolean allowListed) {
+    private static boolean isSystemOrDefaultApp(
+            PowerAllowlistBackend powerAllowlistBackend, String packageName) {
+        return powerAllowlistBackend.isSysAllowlisted(packageName)
+                || powerAllowlistBackend.isDefaultActiveApp(packageName);
+    }
+
+    private static void setAppUsageStateInternal(
+            @OptimizationMode int mode, int uid, String packageName, BatteryUtils batteryUtils,
+            PowerAllowlistBackend powerAllowlistBackend) {
+        if (mode == MODE_UNKNOWN) {
+            Log.d(TAG, "set unknown app optimization mode.");
+            return;
+        }
+
+        // MODE_RESTRICTED = AppOpsManager.MODE_IGNORED + !allowListed
+        // MODE_UNRESTRICTED = AppOpsManager.MODE_ALLOWED + allowListed
+        // MODE_OPTIMIZED = AppOpsManager.MODE_ALLOWED + !allowListed
+        final int appOpsManagerMode =
+                mode == MODE_RESTRICTED ? AppOpsManager.MODE_IGNORED : AppOpsManager.MODE_ALLOWED;
+        final boolean allowListed = mode == MODE_UNRESTRICTED;
+
+        AsyncTask.execute(() -> {
+            setAppOptimizationModeInternal(appOpsManagerMode, allowListed, uid, packageName,
+                    batteryUtils, powerAllowlistBackend);
+        });
+    }
+
+    private static void setAppOptimizationModeInternal(
+            int appStandbyMode, boolean allowListed, int uid, String packageName,
+            BatteryUtils batteryUtils, PowerAllowlistBackend powerAllowlistBackend) {
         try {
-            mBatteryUtils.setForceAppStandby(mUid, mPackageName, appStandbyMode);
+            batteryUtils.setForceAppStandby(uid, packageName, appStandbyMode);
             if (allowListed) {
-                mPowerAllowListBackend.addApp(mPackageName);
+                powerAllowlistBackend.addApp(packageName);
             } else {
-                mPowerAllowListBackend.removeApp(mPackageName);
+                powerAllowlistBackend.removeApp(packageName);
             }
         } catch (Exception e) {
-            Log.e(TAG, "set OPTIMIZED failed for " + mPackageName, e);
+            Log.e(TAG, "set OPTIMIZATION MODE failed for " + packageName, e);
         }
     }
 
@@ -154,8 +249,6 @@ public class BatteryOptimizeUtils {
         mMode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mPackageName);
         Log.d(TAG, String.format("refresh %s state, allowlisted = %s, mode = %d",
-                mPackageName,
-                mAllowListed,
-                mMode));
+                mPackageName, mAllowListed, mMode));
     }
 }
