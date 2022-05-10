@@ -28,18 +28,20 @@ import android.text.TextUtils;
 
 import androidx.preference.Preference;
 
+import com.android.settings.network.CarrierConfigCache;
+
 /**
  * Preference controller for "Data service setup"
  */
 public class DataServiceSetupPreferenceController extends TelephonyBasePreferenceController {
 
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private TelephonyManager mTelephonyManager;
     private String mSetupUrl;
 
     public DataServiceSetupPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSetupUrl = Settings.Global.getString(mContext.getContentResolver(),
                 Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL);
@@ -47,7 +49,7 @@ public class DataServiceSetupPreferenceController extends TelephonyBasePreferenc
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         return subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 && carrierConfig != null
                 && !carrierConfig.getBoolean(

@@ -19,9 +19,6 @@ package com.android.settings.notification.zen;
 import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Slog;
-
-import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -38,20 +35,16 @@ abstract class AbstractZenCustomRulePreferenceController extends
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (mId != null) {
-            mRule = mBackend.getAutomaticZenRule(mId);
-        }
-    }
-
-    @Override
     public boolean isAvailable() {
         return mRule != null;
     }
 
-    public void onResume(AutomaticZenRule rule, String id) {
+    public void setIdAndRule(String id, AutomaticZenRule rule) {
         mId = id;
         mRule = rule;
+    }
+
+    public void onResume() {
     }
 
     Bundle createBundle() {

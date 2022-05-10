@@ -33,6 +33,21 @@ import com.android.settings.R;
  */
 public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduction {
 
+    /**
+     * List of string resources to log when recording the result of this activity in gms.
+     * This must be updated when any strings are added/removed.
+     */
+    public static final int[] CONSENT_STRING_RESOURCES = new int[] {
+            R.string.security_settings_fingerprint_enroll_consent_introduction_title,
+            R.string.security_settings_fingerprint_enroll_introduction_consent_message,
+            R.string.security_settings_fingerprint_enroll_introduction_footer_title_consent_1,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5,
+            R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +115,11 @@ public class FingerprintEnrollParentalConsent extends FingerprintEnrollIntroduct
     @StringRes
     protected int getFooterMessage5() {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5;
+    }
+
+    @StringRes
+    protected int getFooterMessage6() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6;
     }
 
     @Override
