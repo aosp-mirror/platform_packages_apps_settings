@@ -15,14 +15,24 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto">
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
+        orderingFromXml="false"
+        >
+
+        <!-- To limit the size (in height) of version Preference displayed here,
+             maximum height of TextView need to be set programmingly.
+             Therefore, this Preference got removed from here and will be added
+             dynamically through source code.
 
         <Preference
+                android:order="0"
                 android:key="version"
                 android:textColor="?android:attr/textColorSecondary"
                 android:selectable="false"/>
+        -->
 
         <com.android.settingslib.RestrictedSwitchPreference
+                android:order="10"
                 android:key="always_on_vpn"
                 android:title="@string/vpn_menu_lockdown"
                 android:defaultValue="false"
@@ -32,6 +42,7 @@
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
         <com.android.settingslib.RestrictedSwitchPreference
+                android:order="20"
                 android:key="lockdown_vpn"
                 android:title="@string/vpn_require_connection"
                 android:defaultValue="false"
@@ -41,6 +52,7 @@
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
         <com.android.settingslib.RestrictedPreference
+                android:order="30"
                 android:key="forget_vpn"
                 android:title="@string/vpn_forget_long"
                 android:icon="@drawable/ic_delete"

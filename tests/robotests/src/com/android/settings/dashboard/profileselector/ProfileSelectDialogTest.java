@@ -23,31 +23,40 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.widget.TextView;
 
+import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
+
+import com.google.android.collect.Lists;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class ProfileSelectDialogTest {
 
-    private static final UserHandle NORMAL_USER = UserHandle.of(1111);
-    private static final UserHandle REMOVED_USER = UserHandle.of(2222);
+    private static final UserHandle NORMAL_USER = new UserHandle(1111);
+    private static final UserHandle REMOVED_USER = new UserHandle(2222);
 
-    @Mock
-    private Context mContext;
+    @Spy
+    private Context mContext = ApplicationProvider.getApplicationContext();
+
     @Mock
     private UserManager mUserManager;
 
@@ -90,5 +99,19 @@ public class ProfileSelectDialogTest {
         assertThat(tile.userHandle.get(0).getIdentifier()).isEqualTo(NORMAL_USER.getIdentifier());
         verify(mUserManager, times(1)).getUserInfo(NORMAL_USER.getIdentifier());
         verify(mUserManager, times(2)).getUserInfo(REMOVED_USER.getIdentifier());
+    }
+
+    @Test
+    public void createDialog_showsCorrectTitle() {
+        mContext.setTheme(R.style.Theme_AppCompat);
+
+        Dialog dialog = ProfileSelectDialog.createDialog(mContext, Lists.newArrayList(NORMAL_USER),
+                (position) -> {
+                });
+        dialog.show();
+
+        TextView titleView = dialog.findViewById(R.id.topPanel).findViewById(android.R.id.title);
+        assertThat(titleView.getText().toString()).isEqualTo(
+                mContext.getText(com.android.settingslib.R.string.choose_profile).toString());
     }
 }

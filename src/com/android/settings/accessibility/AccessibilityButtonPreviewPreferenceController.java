@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
-import android.widget.ImageView;
+import android.view.accessibility.AccessibilityManager;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
@@ -33,7 +33,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.widget.LayoutPreference;
+import com.android.settingslib.widget.IllustrationPreference;
 
 /** Preference controller that controls the preview effect in accessibility button page. */
 public class AccessibilityButtonPreviewPreferenceController extends BasePreferenceController
@@ -46,10 +46,12 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     final ContentObserver mContentObserver;
-    private FloatingMenuLayerDrawable mFloatingMenuPreviewDrawable;
-
+    private AccessibilityLayerDrawable mAccessibilityPreviewDrawable;
     @VisibleForTesting
-    ImageView mPreview;
+    IllustrationPreference mIllustrationPreference;
+
+    private AccessibilityManager.TouchExplorationStateChangeListener
+            mTouchExplorationStateChangeListener;
 
     public AccessibilityButtonPreviewPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -59,6 +61,9 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
             public void onChange(boolean selfChange) {
                 updatePreviewPreference();
             }
+        };
+        mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
+            updatePreviewPreference();
         };
     }
 
@@ -70,14 +75,16 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        final LayoutPreference preference = screen.findPreference(getPreferenceKey());
-        mPreview = preference.findViewById(R.id.preview_image);
+        mIllustrationPreference = screen.findPreference(getPreferenceKey());
 
         updatePreviewPreference();
     }
 
     @Override
     public void onResume() {
+        final AccessibilityManager am = mContext.getSystemService(AccessibilityManager.class);
+        am.addTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         mContentResolver.registerContentObserver(
                 Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_MODE),
                 /* notifyForDescendants= */ false, mContentObserver);
@@ -91,6 +98,9 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
 
     @Override
     public void onPause() {
+        final AccessibilityManager am = mContext.getSystemService(AccessibilityManager.class);
+        am.removeTouchExplorationStateChangeListener(mTouchExplorationStateChangeListener);
+
         mContentResolver.unregisterContentObserver(mContentObserver);
     }
 
@@ -103,24 +113,29 @@ public class AccessibilityButtonPreviewPreferenceController extends BasePreferen
             final int floatingMenuIconId = (size == SMALL_SIZE)
                     ? R.drawable.accessibility_button_preview_small_floating_menu
                     : R.drawable.accessibility_button_preview_large_floating_menu;
-
-            mPreview.setImageDrawable(getFloatingMenuPreviewDrawable(floatingMenuIconId, opacity));
-            // Only change opacity(alpha) would not invoke redraw view, need to invalidate manually.
-            mPreview.invalidate();
+            mIllustrationPreference.setImageDrawable(
+                    getAccessibilityPreviewDrawable(floatingMenuIconId, opacity));
+        } else if (AccessibilityUtil.isGestureNavigateEnabled(mContext)) {
+            mIllustrationPreference.setImageDrawable(mContext.getDrawable(
+                    AccessibilityUtil.isTouchExploreEnabled(mContext)
+                            ? R.drawable.accessibility_button_preview_three_finger
+                            : R.drawable.accessibility_button_preview_two_finger));
         } else {
-            mPreview.setImageDrawable(
+            mIllustrationPreference.setImageDrawable(
                     mContext.getDrawable(R.drawable.accessibility_button_navigation));
         }
     }
 
-    private Drawable getFloatingMenuPreviewDrawable(int resId, int opacity) {
-        if (mFloatingMenuPreviewDrawable == null) {
-            mFloatingMenuPreviewDrawable = FloatingMenuLayerDrawable.createLayerDrawable(
+    private Drawable getAccessibilityPreviewDrawable(int resId, int opacity) {
+        if (mAccessibilityPreviewDrawable == null) {
+            mAccessibilityPreviewDrawable = AccessibilityLayerDrawable.createLayerDrawable(
                     mContext, resId, opacity);
         } else {
-            mFloatingMenuPreviewDrawable.updateLayerDrawable(mContext, resId, opacity);
+            mAccessibilityPreviewDrawable.updateLayerDrawable(mContext, resId, opacity);
+            // Only change alpha (opacity) value did not change drawable id. It needs to force to
+            // redraw.
+            mAccessibilityPreviewDrawable.invalidateSelf();
         }
-
-        return mFloatingMenuPreviewDrawable;
+        return mAccessibilityPreviewDrawable;
     }
 }

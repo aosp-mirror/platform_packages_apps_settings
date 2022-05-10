@@ -18,16 +18,12 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.service.notification.ConversationChannelWrapper;
-
-import com.android.settings.testutils.shadow.ShadowNotificationBackend;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +38,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowNotificationBackend.class)
 public class ConversationListSummaryPreferenceControllerTest {
 
     private ConversationListSummaryPreferenceController mController;

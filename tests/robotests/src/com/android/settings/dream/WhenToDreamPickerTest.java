@@ -18,12 +18,14 @@ package com.android.settings.dream;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.dream.DreamBackend;
@@ -43,19 +45,19 @@ public class WhenToDreamPickerTest {
     private WhenToDreamPicker mPicker;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Activity mActivity;
     @Mock
     private UserManager mUserManager;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        final Context context = spy(ApplicationProvider.getApplicationContext());
+
+        when(context.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         FakeFeatureFactory.setupForTest();
 
         mPicker = new WhenToDreamPicker();
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(context);
 
         ReflectionHelpers.setField(mPicker, "mBackend", mBackend);
     }

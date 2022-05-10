@@ -58,6 +58,7 @@ import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -194,6 +195,7 @@ public class WifiCallingSliceHelperTest {
     }
 
     @Test
+    @Ignore
     public void test_SliceBroadcastReceiver_toggleOnWifiCalling() {
         mQueryImsState.setIsProvisionedOnDevice(true);
         mQueryImsState.setIsEnabledByUser(false);

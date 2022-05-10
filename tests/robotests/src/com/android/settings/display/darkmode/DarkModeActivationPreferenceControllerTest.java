@@ -19,7 +19,6 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEA
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -54,12 +53,11 @@ public class DarkModeActivationPreferenceControllerTest {
     private DarkModeActivationPreferenceController mController;
     private String mPreferenceKey = "key";
 
-    @Mock
     private MainSwitchPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private Resources res;
+    private Resources mRes;
     @Mock
     private UiModeManager mService;
     @Mock
@@ -77,9 +75,10 @@ public class DarkModeActivationPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
+        mPreference = new MainSwitchPreference(mContext);
         mService = mock(UiModeManager.class);
-        when(mContext.getResources()).thenReturn(res);
-        when(res.getConfiguration()).thenReturn(mConfigNightNo);
+        when(mContext.getResources()).thenReturn(mRes);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightNo);
         when(mContext.getSystemService(UiModeManager.class)).thenReturn(mService);
         when(mContext.getSystemService(PowerManager.class)).thenReturn(mPM);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
@@ -101,10 +100,14 @@ public class DarkModeActivationPreferenceControllerTest {
                 R.string.dark_ui_summary_off_auto_mode_never)).thenReturn("summary_off_manual");
         when(mContext.getString(
                 R.string.dark_ui_summary_on_auto_mode_never)).thenReturn("summary_on_manual");
-        when(mContext.getString(
-                R.string.dark_ui_summary_on_auto_mode_custom)).thenReturn("summary_on_custom");
-        when(mContext.getString(
-                R.string.dark_ui_summary_off_auto_mode_custom)).thenReturn("summary_off_custom");
+        when(mContext.getString(R.string.dark_ui_summary_on_auto_mode_custom, "10:00 AM"))
+                .thenReturn("summary_on_custom");
+        when(mContext.getString(R.string.dark_ui_summary_off_auto_mode_custom, "10:00 AM"))
+                .thenReturn("summary_off_custom");
+        when(mContext.getString(R.string.dark_ui_summary_on_auto_mode_custom_bedtime))
+                .thenReturn("summary_on_custom_bedtime");
+        when(mContext.getString(R.string.dark_ui_summary_off_auto_mode_custom_bedtime))
+                .thenReturn("summary_off_custom_bedtime");
         mController = new DarkModeActivationPreferenceController(mContext, mPreferenceKey, mFormat);
         mController.displayPreference(mScreen);
         mConfigNightNo.uiMode = Configuration.UI_MODE_NIGHT_NO;
@@ -114,85 +117,95 @@ public class DarkModeActivationPreferenceControllerTest {
     }
 
     @Test
-    public void nightMode_toggleButton_offManual() {
+    public void nightMode_toggleButton_onManual() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
-        when(res.getConfiguration()).thenReturn(mConfigNightYes);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightYes);
 
         mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_on_manual");
     }
 
     @Test
-    public void nightMode_toggleButton_offCustom() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        when(res.getConfiguration()).thenReturn(mConfigNightYes);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
+    public void nightMode_toggleButton_offManual() {
+        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_NO);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightNo);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_off_manual");
     }
 
     @Test
     public void nightMode_toggleButton_onCustom() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
-        when(res.getConfiguration()).thenReturn(mConfigNightYes);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightYes);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_on_custom");
     }
 
     @Test
-    public void nightMode_toggleButton_onAutoWhenModeIsYes() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
-        when(res.getConfiguration()).thenReturn(mConfigNightNo);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext, null);
+    public void nightMode_toggleButton_offCustom() {
+        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightNo);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_off_custom");
     }
 
     @Test
-    public void nightMode_toggleButton_onAutoWhenModeIsAuto() {
+    public void nightMode_toggleButton_onCustomBedtime() {
+        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
+        when(mService.getNightModeCustomType())
+                .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightYes);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_on_custom_bedtime");
+    }
+
+    @Test
+    public void nightMode_toggleButton_offCustomBedtime() {
+        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
+        when(mService.getNightModeCustomType())
+                .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightNo);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_off_custom_bedtime");
+    }
+
+    @Test
+    public void nightMode_toggleButton_onAuto() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
-        when(res.getConfiguration()).thenReturn(mConfigNightNo);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightYes);
 
-        mController.updateState(preference);
+        mController.updateState(mPreference);
 
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_on_auto");
     }
 
     @Test
-    public void nightModeSummary_buttonText_onManual() {
-        when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_NO);
-        when(res.getConfiguration()).thenReturn(mConfigNightYes);
-
-        assertEquals(mController.getSummary(), mContext.getString(
-                R.string.dark_ui_summary_on_auto_mode_never));
-    }
-
-    @Test
-    public void nightModeSummary_buttonText_offAuto() {
+    public void nightMode_toggleButton_offAuto() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_AUTO);
-        when(res.getConfiguration()).thenReturn(mConfigNightNo);
+        when(mRes.getConfiguration()).thenReturn(mConfigNightNo);
 
-        assertEquals(mController.getSummary(), mContext.getString(
-                R.string.dark_ui_summary_off_auto_mode_auto));
-    }
+        mController.updateState(mPreference);
 
-    @Test
-    public void buttonVisisbility_hideButton_offWhenInPowerSaveMode() {
-        when(mPM.isPowerSaveMode()).thenReturn(true);
-        final MainSwitchPreference preference = new MainSwitchPreference(mContext);
-
-        mController.updateState(preference);
-        assertThat(preference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mController.getSummary().toString()).isEqualTo("summary_off_auto");
     }
 
     @Test

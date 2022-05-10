@@ -35,9 +35,8 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.network.helper.SelectableSubscriptions;
 import com.android.settings.network.helper.SubscriptionAnnotation;
-import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
@@ -127,20 +126,11 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
             }
             return mContext.getString(R.string.mobile_network_tap_to_activate, displayName);
         } else {
-            if (com.android.settings.Utils.isProviderModelEnabled(mContext)) {
-                return getSummaryForProviderModel(subs);
-            }
-            final int count = subs.size();
-            return mContext.getResources().getQuantityString(R.plurals.mobile_network_summary_count,
-                    count, count);
+            return subs.stream()
+                    .mapToInt(SubscriptionAnnotation::getSubscriptionId)
+                    .mapToObj(subId -> mStatusCache.getDisplayName(subId))
+                    .collect(Collectors.joining(", "));
         }
-    }
-
-    private CharSequence getSummaryForProviderModel(List<SubscriptionAnnotation> subs) {
-        return subs.stream()
-                .mapToInt(SubscriptionAnnotation::getSubscriptionId)
-                .mapToObj(subId -> mStatusCache.getDisplayName(subId))
-                .collect(Collectors.joining(", "));
     }
 
     private void logPreferenceClick(Preference preference) {
@@ -200,9 +190,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 SubscriptionAnnotation info = subs.get(0);
                 if (info.getSubInfo().isEmbedded() || info.isActive()
                         || mStatusCache.isPhysicalSimDisableSupport()) {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                    mContext.startActivity(intent);
+                    MobileNetworkUtils.launchMobileNetworkSettings(mContext,
+                            info.getSubInfo());
                     return true;
                 }
 

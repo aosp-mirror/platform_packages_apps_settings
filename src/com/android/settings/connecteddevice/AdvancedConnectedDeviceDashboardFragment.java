@@ -21,11 +21,11 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.AndroidBeamPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.uwb.UwbPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
@@ -43,6 +43,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     private static final String TAG = "AdvancedConnectedDeviceFrag";
 
     static final String KEY_BLUETOOTH = "bluetooth_settings";
+    static final String KEY_UWB = "uwb_settings";
 
     @Override
     public int getMetricsCategory() {
@@ -65,6 +66,15 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        UwbPreferenceController uwbPreferenceController = use(UwbPreferenceController.class);
+        if (uwbPreferenceController != null && getSettingsLifecycle() != null) {
+            getSettingsLifecycle().addObserver(uwbPreferenceController);
+        }
+    }
+
+    @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildControllers(context, getSettingsLifecycle());
     }
@@ -72,8 +82,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     private static List<AbstractPreferenceController> buildControllers(Context context,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
-        controllers.add(new BluetoothFilesPreferenceController(context));
 
         final PrintSettingPreferenceController printerController =
                 new PrintSettingPreferenceController(context);

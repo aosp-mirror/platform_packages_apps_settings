@@ -18,7 +18,6 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.util.ArrayMap;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -28,16 +27,16 @@ import com.android.settings.core.BasePreferenceController;
 
 import com.google.common.primitives.Ints;
 
+import java.util.Optional;
+
 /** Preference controller that controls the preferred location in accessibility button page. */
 public class AccessibilityButtonLocationPreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
-    private final ArrayMap<String, String> mValueTitleMap = new ArrayMap<>();
-    private int mDefaultLocation;
+    private Optional<Integer> mDefaultLocation = Optional.empty();
 
     public AccessibilityButtonLocationPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        initValueTitleMap();
     }
 
     @Override
@@ -68,22 +67,16 @@ public class AccessibilityButtonLocationPreferenceController extends BasePrefere
 
     private String getCurrentAccessibilityButtonMode() {
         final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, mDefaultLocation);
+                Settings.Secure.ACCESSIBILITY_BUTTON_MODE, getDefaultLocationValue());
         return String.valueOf(mode);
     }
 
-    private void initValueTitleMap() {
-        if (mValueTitleMap.size() == 0) {
-            final String[] values = mContext.getResources().getStringArray(
+    private int getDefaultLocationValue() {
+        if (!mDefaultLocation.isPresent()) {
+            final String[] valuesList = mContext.getResources().getStringArray(
                     R.array.accessibility_button_location_selector_values);
-            final String[] titles = mContext.getResources().getStringArray(
-                    R.array.accessibility_button_location_selector_titles);
-            final int mapSize = values.length;
-
-            mDefaultLocation = Integer.parseInt(values[0]);
-            for (int i = 0; i < mapSize; i++) {
-                mValueTitleMap.put(values[i], titles[i]);
-            }
+            mDefaultLocation = Optional.of(Integer.parseInt(valuesList[0]));
         }
+        return mDefaultLocation.get();
     }
 }

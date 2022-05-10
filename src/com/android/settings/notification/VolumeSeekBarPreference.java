@@ -16,6 +16,8 @@
 
 package com.android.settings.notification;
 
+import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_SLIDER;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioManager;
@@ -31,6 +33,7 @@ import android.widget.TextView;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
+import com.android.internal.jank.InteractionJankMonitor;
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
 
@@ -39,6 +42,8 @@ import java.util.Objects;
 /** A slider preference that directly controls an audio stream volume (no dialog) **/
 public class VolumeSeekBarPreference extends SeekBarPreference {
     private static final String TAG = "VolumeSeekBarPreference";
+
+    private final InteractionJankMonitor mJankMonitor = InteractionJankMonitor.getInstance();
 
     protected SeekBar mSeekBar;
     private int mStream;
@@ -143,6 +148,13 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
                 if (mCallback != null) {
                     mCallback.onStartTrackingTouch(sbv);
                 }
+                mJankMonitor.begin(InteractionJankMonitor.Configuration.Builder
+                        .withView(CUJ_SETTINGS_SLIDER, mSeekBar)
+                        .setTag(getKey()));
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBarVolumizer sbv) {
+                mJankMonitor.end(CUJ_SETTINGS_SLIDER);
             }
         };
         final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
