@@ -16,9 +16,6 @@
 
 package com.android.settings.notification;
 
-import static android.os.UserHandle.USER_SYSTEM;
-import static android.provider.Settings.*;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
@@ -37,11 +34,9 @@ import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PermissionInfo;
 import android.net.MacAddress;
 import android.os.Build;
 import android.os.Parcel;
-import android.provider.Settings;
 
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -117,9 +112,6 @@ public class NotificationBackendTest {
 
     @Test
     public void testMarkAppRow_fixedPermission_withRole() throws Exception {
-        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
@@ -141,9 +133,6 @@ public class NotificationBackendTest {
 
     @Test
     public void testMarkAppRow_fixedPermission() throws Exception {
-        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
@@ -161,9 +150,6 @@ public class NotificationBackendTest {
 
     @Test
     public void testMarkAppRow_notFixedPermission() throws Exception {
-        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
@@ -181,9 +167,6 @@ public class NotificationBackendTest {
 
     @Test
     public void testMarkAppRow_targetsT_noPermissionRequest() throws Exception {
-        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
@@ -203,9 +186,6 @@ public class NotificationBackendTest {
 
     @Test
     public void testMarkAppRow_targetsT_permissionRequest() throws Exception {
-        Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
