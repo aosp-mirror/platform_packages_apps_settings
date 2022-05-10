@@ -105,7 +105,7 @@ public class HighlightablePreferenceGroupAdapter extends PreferenceGroupAdapter 
         context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
                 outValue, true /* resolveRefs */);
         mNormalBackgroundRes = outValue.resourceId;
-        mHighlightColor = context.getColor(R.color.preference_highligh_color);
+        mHighlightColor = context.getColor(R.color.preference_highlight_color);
     }
 
     @Override

@@ -21,22 +21,16 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Objects;
 
 /** Preference controller which displays a financed preference for financed devices. */
-public class FinancedPrivacyPreferenceController extends AbstractPreferenceController implements
+public class FinancedPrivacyPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin {
 
-    private static final String PREF_KEY_FINANCED_PRIVACY = "financed_privacy";
     private final PrivacyPreferenceControllerHelper mPrivacyPreferenceControllerHelper;
-    private final String mPreferenceKey;
-
-    public FinancedPrivacyPreferenceController(Context context) {
-        this(Objects.requireNonNull(context), PREF_KEY_FINANCED_PRIVACY);
-    }
 
     public FinancedPrivacyPreferenceController(Context context, String key) {
         this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context), key);
@@ -45,10 +39,9 @@ public class FinancedPrivacyPreferenceController extends AbstractPreferenceContr
     @VisibleForTesting
     FinancedPrivacyPreferenceController(Context context,
             PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper, String key) {
-        super(Objects.requireNonNull(context));
+        super(Objects.requireNonNull(context), key);
         mPrivacyPreferenceControllerHelper = Objects.requireNonNull(
                 privacyPreferenceControllerHelper);
-        this.mPreferenceKey = key;
     }
 
     @Override
@@ -57,12 +50,9 @@ public class FinancedPrivacyPreferenceController extends AbstractPreferenceContr
     }
 
     @Override
-    public boolean isAvailable() {
-        return mPrivacyPreferenceControllerHelper.isFinancedDevice();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return mPreferenceKey;
+    public int getAvailabilityStatus() {
+        return mPrivacyPreferenceControllerHelper.isFinancedDevice()
+                ? AVAILABLE
+                : CONDITIONALLY_UNAVAILABLE;
     }
 }

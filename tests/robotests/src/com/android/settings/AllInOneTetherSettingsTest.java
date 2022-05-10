@@ -33,8 +33,10 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.EthernetManager;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.FeatureFlagUtils;
@@ -43,7 +45,6 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.FeatureFlags;
-import com.android.settings.testutils.shadow.ShadowWifiManager;
 import com.android.settings.wifi.tether.WifiTetherAutoOffPreferenceController;
 import com.android.settings.wifi.tether.WifiTetherSecurityPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -55,14 +56,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowWifiManager.class})
 public class AllInOneTetherSettingsTest {
     private static final String[] WIFI_REGEXS = {"wifi_regexs"};
     private static final String[] USB_REGEXS = {"usb_regexs"};
@@ -72,6 +71,8 @@ public class AllInOneTetherSettingsTest {
     private Context mContext;
     private AllInOneTetherSettings mAllInOneTetherSettings;
 
+    @Mock
+    private WifiManager mWifiManager;
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
@@ -84,16 +85,20 @@ public class AllInOneTetherSettingsTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private PreferenceGroup mWifiTetherGroup;
+    @Mock
+    private EthernetManager mEthernetManager;
 
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
 
         MockitoAnnotations.initMocks(this);
+        doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mConnectivityManager)
                 .when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
         doReturn(mTetheringManager)
                 .when(mContext).getSystemService(Context.TETHERING_SERVICE);
+        doReturn(mEthernetManager).when(mContext).getSystemService(EthernetManager.class);
         doReturn(WIFI_REGEXS).when(mTetheringManager).getTetherableWifiRegexs();
         doReturn(USB_REGEXS).when(mTetheringManager).getTetherableUsbRegexs();
         doReturn(BT_REGEXS).when(mTetheringManager).getTetherableBluetoothRegexs();

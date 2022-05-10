@@ -41,7 +41,6 @@ import androidx.appcompat.app.AlertDialog;
 import com.android.internal.net.VpnProfile;
 import com.android.net.module.util.ProxyUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 
 import java.net.InetAddress;
@@ -518,36 +517,31 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         String[] types = getContext().getResources().getStringArray(R.array.vpn_types);
         mTotalTypes = new ArrayList<>(Arrays.asList(types));
         mAllowedTypes = new ArrayList<>(Arrays.asList(types));
+
+        // Although FEATURE_IPSEC_TUNNELS should always be present in android S and beyond,
+        // keep this check here just to be safe.
         if (!getContext().getPackageManager().hasSystemFeature(
                 PackageManager.FEATURE_IPSEC_TUNNELS)) {
-            final List<String> typesList = new ArrayList<>(Arrays.asList(types));
+            Log.wtf(TAG, "FEATURE_IPSEC_TUNNELS missing from system");
+        }
+        // If the vpn is new or is not already a legacy type,
+        // don't allow the user to set the type to a legacy option.
 
-            // This must be removed from back to front in order to ensure index consistency
-            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_RSA);
-            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_PSK);
-            typesList.remove(VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS);
+        // Set the mProfile.type to TYPE_IKEV2_IPSEC_USER_PASS if the VPN not exist
+        if (!mExists) {
+            mProfile.type = VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS;
+        }
 
-            types = typesList.toArray(new String[0]);
-        } else if (Utils.isProviderModelEnabled(getContext())) {
-            // If the provider mode is enabled and the vpn is new or is not already a legacy type,
-            // don't allow the user to set the type to a legacy option.
-
-            // Set the mProfile.type to TYPE_IKEV2_IPSEC_USER_PASS if the VPN not exist
-            if (!mExists) {
-                mProfile.type = VpnProfile.TYPE_IKEV2_IPSEC_USER_PASS;
-            }
-
-            // Remove all types which are legacy types from the typesList
-            if (!VpnProfile.isLegacyType(mProfile.type)) {
-                for (int i = mAllowedTypes.size() - 1; i >= 0; i--) {
-                    // This must be removed from back to front in order to ensure index consistency
-                    if (VpnProfile.isLegacyType(i)) {
-                        mAllowedTypes.remove(i);
-                    }
+        // Remove all types which are legacy types from the typesList
+        if (!VpnProfile.isLegacyType(mProfile.type)) {
+            for (int i = mAllowedTypes.size() - 1; i >= 0; i--) {
+                // This must be removed from back to front in order to ensure index consistency
+                if (VpnProfile.isLegacyType(i)) {
+                    mAllowedTypes.remove(i);
                 }
-
-                types = mAllowedTypes.toArray(new String[0]);
             }
+
+            types = mAllowedTypes.toArray(new String[0]);
         }
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 getContext(), android.R.layout.simple_spinner_item, types);

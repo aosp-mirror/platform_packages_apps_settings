@@ -20,8 +20,6 @@ import android.os.UserHandle;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.android.settings.Settings;
-
 /**
  * Preference controller for biometrics settings page of work profile, controlling the ability to
  * unlock the phone with face and fingerprint.
@@ -52,7 +50,7 @@ public class CombinedBiometricProfileStatusPreferenceController extends
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override
@@ -62,11 +60,6 @@ public class CombinedBiometricProfileStatusPreferenceController extends
 
     @Override
     protected String getSettingsClassName() {
-        return Settings.CombinedBiometricProfileSettingsActivity.class.getName();
-    }
-
-    @Override
-    protected String getEnrollClassName() {
-        return Settings.CombinedBiometricProfileSettingsActivity.class.getName();
+        return mCombinedBiometricStatusUtils.getProfileSettingsClassName();
     }
 }

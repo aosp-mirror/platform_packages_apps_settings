@@ -17,10 +17,13 @@
 package com.android.settings.panel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
+
+    private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
 
     @Override
     public PanelContent getPanel(Context context, Bundle bundle) {
@@ -35,7 +38,12 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
         switch (panelType) {
             case Settings.Panel.ACTION_INTERNET_CONNECTIVITY:
-                return InternetConnectivityPanel.create(context);
+                // Redirect to the internet dialog in SystemUI.
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+                intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND)
+                        .setPackage(SYSTEMUI_PACKAGE_NAME);
+                context.sendBroadcast(intent);
+                return null;
             case Settings.Panel.ACTION_NFC:
                 return NfcPanel.create(context);
             case Settings.Panel.ACTION_WIFI:

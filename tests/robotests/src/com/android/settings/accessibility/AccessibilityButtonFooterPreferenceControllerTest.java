@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -46,7 +47,6 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
 
     @Rule
     public final MockitoRule mockito = MockitoJUnit.rule();
-
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Spy
@@ -75,5 +75,16 @@ public class AccessibilityButtonFooterPreferenceControllerTest {
 
         assertThat(mPreference.getTitle()).isEqualTo(
                 mContext.getText(R.string.accessibility_button_gesture_description));
+    }
+
+    @Test
+    public void displayPreference_navigationGestureDisabled_setCorrectTitle() {
+        when(mResources.getInteger(com.android.internal.R.integer.config_navBarInteractionMode))
+                .thenReturn(NAV_BAR_MODE_2BUTTON);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.getTitle()).isEqualTo(
+                mContext.getText(R.string.accessibility_button_description));
     }
 }

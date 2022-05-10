@@ -42,7 +42,7 @@ import java.util.Objects;
 
 public class FallbackHome extends Activity {
     private static final String TAG = "FallbackHome";
-    private static final int PROGRESS_TIMEOUT = 2000;
+    private int mProgressTimeout;
 
     private boolean mProvisioned;
     private WallpaperManager mWallManager;
@@ -76,6 +76,12 @@ public class FallbackHome extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mProgressTimeout = getResources().getInteger(
+            com.android.internal.R.integer.config_progressTimeoutFallbackHome);
+
+        if (mProgressTimeout <= 0) {
+            mProgressTimeout = 0;
+        }
 
         // Set ourselves totally black before the device is provisioned so that
         // we don't flash the wallpaper before SUW
@@ -107,7 +113,7 @@ public class FallbackHome extends Activity {
     protected void onResume() {
         super.onResume();
         if (mProvisioned) {
-            mHandler.postDelayed(mProgressTimeoutRunnable, PROGRESS_TIMEOUT);
+            mHandler.postDelayed(mProgressTimeoutRunnable, mProgressTimeout);
         }
     }
 

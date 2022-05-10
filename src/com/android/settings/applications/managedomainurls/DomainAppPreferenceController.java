@@ -20,7 +20,6 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.ArrayMap;
-import android.util.IconDrawableFactory;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -30,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.intentpicker.AppLaunchSettings;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -70,7 +70,8 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (preference instanceof DomainAppPreference) {
             ApplicationsState.AppEntry entry = ((DomainAppPreference) preference).getEntry();
-            AppInfoBase.startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label,
+            AppInfoBase.startAppInfoFragment(AppLaunchSettings.class,
+                    mContext.getString(R.string.auto_launch_label),
                     entry.info.packageName, entry.info.uid, mFragment,
                     INSTALLED_APP_DETAILS, mMetricsCategory);
             return true;
@@ -97,6 +98,10 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
         if (mContext == null) {
             return;
         }
+        // Preload top visible icons of app list.
+        AppUtils.preloadTopIcons(mContext, apps,
+                mContext.getResources().getInteger(R.integer.config_num_visible_app_icons));
+
         rebuildAppList(mDomainAppList, apps);
     }
 
@@ -156,13 +161,12 @@ public class DomainAppPreferenceController extends BasePreferenceController impl
         cacheAllPrefs(group);
         final int size = apps.size();
         final Context context = group.getContext();
-        final IconDrawableFactory iconDrawableFactory = IconDrawableFactory.newInstance(context);
         for (int i = 0; i < size; i++) {
             final AppEntry entry = apps.get(i);
             final String key = entry.info.packageName + "|" + entry.info.uid;
             DomainAppPreference preference = (DomainAppPreference) getCachedPreference(key);
             if (preference == null) {
-                preference = new DomainAppPreference(context, iconDrawableFactory, entry);
+                preference = new DomainAppPreference(context, entry);
                 preference.setKey(key);
                 group.addPreference(preference);
             } else {

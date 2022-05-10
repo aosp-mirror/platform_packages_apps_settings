@@ -24,15 +24,16 @@ import android.os.UserHandle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class DefaultUsbConfigurationPreferenceController extends
-        DeveloperOptionsPreferenceController {
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "default_usb_configuration";
 
-    private RestrictedSwitchPreference mPreference;
+    private RestrictedPreference mPreference;
 
     public DefaultUsbConfigurationPreferenceController(Context context) {
         super(context);
