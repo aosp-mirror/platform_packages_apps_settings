@@ -70,7 +70,6 @@ public class CarrierWifiTogglePreferenceControllerTest {
         mController = new CarrierWifiTogglePreferenceController(mContext,
                 CarrierWifiTogglePreferenceController.CARRIER_WIFI_TOGGLE_PREF_KEY);
         mController.init(mock(Lifecycle.class), SUB_ID);
-        mController.mIsProviderModelEnabled = true;
         mController.mIsCarrierProvisionWifiEnabled = true;
         doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
         doReturn(SSID).when(mWifiPickerTrackerHelper).getCarrierNetworkSsid();
@@ -90,13 +89,6 @@ public class CarrierWifiTogglePreferenceControllerTest {
                 CarrierWifiTogglePreferenceController.CARRIER_WIFI_NETWORK_PREF_KEY);
         mScreen.addPreference(mNetworkPreference);
         mController.mCarrierNetworkPreference = mNetworkPreference;
-    }
-
-    @Test
-    public void getAvailabilityStatus_providerModelDisable_returnUnavailable() {
-        mController.mIsProviderModelEnabled = false;
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

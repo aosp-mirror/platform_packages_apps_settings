@@ -16,6 +16,9 @@
 
 package com.android.settings.applications.autofill;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_PERSONAL_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_WORK_DATA;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.service.autofill.AutofillService.EXTRA_RESULT;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
@@ -113,6 +116,11 @@ public class PasswordsPreferenceController extends BasePreferenceController
         super.displayPreference(screen);
         final PreferenceGroup group = screen.findPreference(getPreferenceKey());
         addPasswordPreferences(screen.getContext(), getUser(), group);
+
+        replaceEnterpriseStringTitle(screen, "auto_sync_personal_account_data",
+                AUTO_SYNC_PERSONAL_DATA, R.string.account_settings_menu_auto_sync_personal);
+        replaceEnterpriseStringTitle(screen, "auto_sync_work_account_data",
+                AUTO_SYNC_WORK_DATA, R.string.account_settings_menu_auto_sync_work);
     }
 
     private void addPasswordPreferences(
@@ -133,7 +141,8 @@ public class PasswordsPreferenceController extends BasePreferenceController
                         new Intent(Intent.ACTION_MAIN)
                                 .setClassName(
                                         serviceInfo.packageName,
-                                        service.getPasswordsActivity());
+                                        service.getPasswordsActivity())
+                                .setFlags(FLAG_ACTIVITY_NEW_TASK);
                 prefContext.startActivityAsUser(intent, UserHandle.of(user));
                 return true;
             });

@@ -106,7 +106,7 @@ public class BluetoothPairingServiceTest {
 
         mBluetoothPairingService.onStartCommand(intent, /* flags */ 0, /* startId */ 0);
 
-        verify(mDevice).cancelPairing();
+        verify(mDevice).cancelBondProcess();
         verify(mNm).cancel(mBluetoothPairingService.NOTIFICATION_ID);
     }
 

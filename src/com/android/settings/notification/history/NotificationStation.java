@@ -436,7 +436,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         }
         mRanking.getRanking(info.key, rank);
         info.alerted = rank.getLastAudiblyAlertedMillis() > 0;
-        info.visuallyInterruptive = rank.visuallyInterruptive();
+        info.visuallyInterruptive = rank.isTextChanged();
         info.channel = rank.getChannel();
         info.rankingExtra = generateRankingExtraText(info);
     }
@@ -640,7 +640,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     .append(' ')
                     .append(bold(getString(R.string.notification_log_details_ashmem)))
                     .append(delim)
-                    .append(String.valueOf(p.getBlobAshmemSize()))
+                    .append(String.valueOf(p.getOpenAshmemSize()))
                     .append("\n");
         }
         return sb;

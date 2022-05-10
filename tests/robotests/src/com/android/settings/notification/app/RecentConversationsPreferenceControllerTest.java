@@ -36,6 +36,7 @@ import android.content.pm.ShortcutInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.text.SpannedString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -337,5 +338,37 @@ public class RecentConversationsPreferenceControllerTest {
         mController.populateList(list, outerContainer);
         // one for the preference, none for 'clear all'
         verify(outerContainer, times(1)).addPreference(any());
+    }
+
+    @Test
+    public void testSpans() {
+        ShortcutInfo si = mock(ShortcutInfo.class);
+        when(si.getLabel()).thenReturn(new SpannedString("hello"));
+        ConversationChannel ccw = new ConversationChannel(si, 6,
+                new NotificationChannel("hi", "hi", 4),
+                null, 7,
+                true /* hasactivenotifs */);
+        ShortcutInfo si2 = mock(ShortcutInfo.class);
+        when(si2.getLabel()).thenReturn("hello");
+        ConversationChannel ccw2 = new ConversationChannel(si2, 6,
+                new NotificationChannel("hi2", "hi2", 4),
+                null, 7,
+                true /* hasactivenotifs */);
+        // no crash
+        mController.mConversationComparator.compare(ccw, ccw2);
+    }
+
+    @Test
+    public void testNullSpans() {
+        ConversationChannel ccw = new ConversationChannel(mock(ShortcutInfo.class), 6,
+                new NotificationChannel("hi", "hi", 4),
+                null, 7,
+                true /* hasactivenotifs */);
+        ConversationChannel ccw2 = new ConversationChannel(mock(ShortcutInfo.class), 6,
+                new NotificationChannel("hi2", "hi2", 4),
+                null, 7,
+                true /* hasactivenotifs */);
+        // no crash
+        mController.mConversationComparator.compare(ccw, ccw2);
     }
 }
