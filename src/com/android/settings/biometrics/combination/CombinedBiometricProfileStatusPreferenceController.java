@@ -18,7 +18,7 @@ package com.android.settings.biometrics.combination;
 import android.content.Context;
 import android.os.UserHandle;
 
-import com.android.settings.Settings;
+import androidx.lifecycle.Lifecycle;
 
 /**
  * Preference controller for biometrics settings page of work profile, controlling the ability to
@@ -37,10 +37,20 @@ public class CombinedBiometricProfileStatusPreferenceController extends
         super(context, key);
     }
 
+    public CombinedBiometricProfileStatusPreferenceController(
+            Context context, Lifecycle lifecycle) {
+        super(context, KEY_BIOMETRIC_SETTINGS, lifecycle);
+    }
+
+    public CombinedBiometricProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
+    }
+
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override
@@ -50,11 +60,6 @@ public class CombinedBiometricProfileStatusPreferenceController extends
 
     @Override
     protected String getSettingsClassName() {
-        return Settings.CombinedBiometricProfileSettingsActivity.class.getName();
-    }
-
-    @Override
-    protected String getEnrollClassName() {
-        return Settings.CombinedBiometricProfileSettingsActivity.class.getName();
+        return mCombinedBiometricStatusUtils.getProfileSettingsClassName();
     }
 }

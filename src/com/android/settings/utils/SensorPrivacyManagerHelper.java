@@ -173,6 +173,27 @@ public class SensorPrivacyManagerHelper {
     }
 
     /**
+     * Sets the sensor privacy for the current profile group.
+     * @param source The source with which sensor privacy is toggled.
+     * @param sensor The sensor to set for
+     * @param blocked The state to set to
+     */
+    public void setSensorBlockedForProfileGroup(int source, int sensor, boolean blocked) {
+        mSensorPrivacyManager.setSensorPrivacyForProfileGroup(source, sensor, blocked);
+    }
+
+    /**
+     * Sets the sensor privacy for the given user's profile group.
+     * @param source The source with which sensor privacy is toggled.
+     * @param sensor The sensor to set for
+     * @param blocked The state to set to
+     */
+    public void setSensorBlockedForProfileGroup(int source, int sensor, boolean blocked,
+            int userId) {
+        mSensorPrivacyManager.setSensorPrivacyForProfileGroup(source, sensor, blocked, userId);
+    }
+
+    /**
      * Adds a listener for the state of the current user. If the current user changes and the state
      * of the new user is different, a callback will be received.
      * @param sensor The sensor to watch

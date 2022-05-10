@@ -68,7 +68,7 @@ public class SubscriptionGroupingTest {
         List<SubscriptionAnnotation> result = mTarget
                 .apply(Arrays.asList(subAnno2, subAnno1, subAnno3));
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0)).isEqualTo(subAnno3);
+        assertThat(result.get(0)).isEqualTo(subAnno1);
     }
 
     @Test

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
@@ -116,9 +117,11 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
             if (cardInfo == null) {
                 continue;
             }
-            if (!TextUtils.isEmpty(slotInfo.getCardId())
-                    || !TextUtils.isEmpty(cardInfo.getIccId())) {
-                isAllCardStringsEmpty = false;
+            for (UiccPortInfo portInfo : cardInfo.getPorts()) {
+                if (!TextUtils.isEmpty(slotInfo.getCardId())
+                        || !TextUtils.isEmpty(portInfo.getIccId())) {
+                    isAllCardStringsEmpty = false;
+                }
             }
         }
 
@@ -139,7 +142,7 @@ public class SimSlotChangeReceiver extends BroadcastReceiver {
             return null;
         }
         return cardInfos.stream()
-                .filter(info -> info.getSlotIndex() == physicalSlotIndex)
+                .filter(info -> info.getPhysicalSlotIndex() == physicalSlotIndex)
                 .findFirst()
                 .orElse(null);
     }

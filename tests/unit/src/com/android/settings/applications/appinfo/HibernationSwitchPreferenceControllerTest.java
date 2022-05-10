@@ -27,6 +27,8 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
@@ -34,6 +36,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.apphibernation.AppHibernationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.DeviceConfig;
@@ -42,6 +45,7 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,16 +65,21 @@ public class HibernationSwitchPreferenceControllerTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
+    private AppHibernationManager mAppHibernationManager;
+    @Mock
     private SwitchPreference mPreference;
 
     private HibernationSwitchPreferenceController mController;
     private Context mContext;
+    private String mOriginalPreSFlagValue;
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.APP_OPS_SERVICE)).thenReturn(mAppOpsManager);
+        when(mContext.getSystemService(AppHibernationManager.class))
+                .thenReturn(mAppHibernationManager);
         when(mPackageManager.getPackageUid(eq(VALID_PACKAGE_NAME), anyInt()))
                 .thenReturn(PACKAGE_UID);
         when(mPackageManager.getPackageUid(eq(INVALID_PACKAGE_NAME), anyInt()))
@@ -84,6 +93,16 @@ public class HibernationSwitchPreferenceControllerTest {
                 "true", true /* makeDefault */);
         mController = new HibernationSwitchPreferenceController(mContext, KEY);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+
+        mOriginalPreSFlagValue = DeviceConfig.getProperty(NAMESPACE_APP_HIBERNATION,
+                PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS);
+    }
+
+    @After
+    public void cleanUp() {
+        // Restore original device config values.
+        DeviceConfig.setProperty(NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS,
+                mOriginalPreSFlagValue, true /* makeDefault */);
     }
 
     @Test
@@ -110,43 +129,46 @@ public class HibernationSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_exemptedByDefaultPackage_shouldNotCheck() {
+    public void onPreferenceChange_unhibernatesWhenExempted() {
+        mController.setPackage(VALID_PACKAGE_NAME);
+        mController.onPreferenceChange(mPreference, false);
+
+        verify(mAppHibernationManager).setHibernatingForUser(VALID_PACKAGE_NAME, false);
+        verify(mAppHibernationManager).setHibernatingGlobally(VALID_PACKAGE_NAME, false);
+    }
+
+    @Test
+    public void isPackageHibernationExemptByUser_preSAppShouldBeExemptByDefault() {
         when(mAppOpsManager.unsafeCheckOpNoThrow(
                 eq(OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED), anyInt(), eq(EXEMPTED_PACKAGE_NAME)))
                 .thenReturn(MODE_DEFAULT);
         mController.setPackage(EXEMPTED_PACKAGE_NAME);
 
-        mController.updateState(mPreference);
-
-        verify(mPreference).setChecked(false);
+        assertTrue(mController.isPackageHibernationExemptByUser());
     }
 
     @Test
-    public void updateState_exemptedPackageOverrideByUser_shouldCheck() {
+    public void isPackageHibernationExemptByUser_preSAppShouldNotBeExemptWithUserSetting() {
         when(mAppOpsManager.unsafeCheckOpNoThrow(
                 eq(OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED), anyInt(), eq(EXEMPTED_PACKAGE_NAME)))
                 .thenReturn(MODE_ALLOWED);
         mController.setPackage(EXEMPTED_PACKAGE_NAME);
 
-        mController.updateState(mPreference);
-
-        verify(mPreference).setChecked(true);
+        assertFalse(mController.isPackageHibernationExemptByUser());
     }
 
     @Test
-    public void updateState_unexemptedPackageOverrideByUser_shouldNotCheck() {
+    public void isPackageHibernationExemptByUser_SAppShouldBeExemptWithUserSetting() {
         when(mAppOpsManager.unsafeCheckOpNoThrow(
                 eq(OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED), anyInt(), eq(UNEXEMPTED_PACKAGE_NAME)))
                 .thenReturn(MODE_IGNORED);
         mController.setPackage(UNEXEMPTED_PACKAGE_NAME);
 
-        mController.updateState(mPreference);
-
-        verify(mPreference).setChecked(false);
+        assertTrue(mController.isPackageHibernationExemptByUser());
     }
 
     @Test
-    public void updateState_exemptedByDefaultPackageOverriddenByPreSFlag_shouldCheck() {
+    public void isPackageHibernationExemptByUser_preSAppShouldNotBeExemptByDefaultWithPreSFlag() {
         DeviceConfig.setProperty(NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS,
                 "true", true /* makeDefault */);
         when(mAppOpsManager.unsafeCheckOpNoThrow(
@@ -154,8 +176,6 @@ public class HibernationSwitchPreferenceControllerTest {
                 .thenReturn(MODE_DEFAULT);
         mController.setPackage(EXEMPTED_PACKAGE_NAME);
 
-        mController.updateState(mPreference);
-
-        verify(mPreference).setChecked(true);
+        assertFalse(mController.isPackageHibernationExemptByUser());
     }
 }

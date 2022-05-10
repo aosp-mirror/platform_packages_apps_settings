@@ -17,6 +17,8 @@ package com.android.settings.biometrics.combination;
 
 import android.content.Context;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.android.settings.Utils;
 import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 
@@ -27,7 +29,12 @@ import com.android.settings.biometrics.face.FaceStatusPreferenceController;
 public class BiometricFaceStatusPreferenceController extends FaceStatusPreferenceController {
 
     public BiometricFaceStatusPreferenceController(Context context, String key) {
-        super(context, key);
+        super(context, key, null /* lifecycle */);
+    }
+
+    public BiometricFaceStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
     }
 
     @Override

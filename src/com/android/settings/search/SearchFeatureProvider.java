@@ -19,23 +19,28 @@ package com.android.settings.search;
 import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
 
 import android.annotation.NonNull;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toolbar;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.search.SearchIndexableResources;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
+
+import java.util.List;
 
 /**
  * FeatureProvider for Settings Search
@@ -59,6 +64,9 @@ public interface SearchFeatureProvider {
      */
     SearchIndexableResources getSearchIndexableResources();
 
+    /**
+     * @return a package name of settings intelligence.
+     */
     default String getSettingsIntelligencePkgName(Context context) {
         return context.getString(R.string.config_settingsintelligence_package_name);
     }
@@ -66,7 +74,7 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Activity activity, Toolbar toolbar, int pageId) {
+    default void initSearchToolbar(FragmentActivity activity, Toolbar toolbar, int pageId) {
         if (activity == null || toolbar == null) {
             return;
         }
@@ -89,22 +97,38 @@ public interface SearchFeatureProvider {
         navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         navView.setBackground(null);
 
+        final Context context = activity.getApplicationContext();
+        final Intent intent = buildSearchIntent(context, pageId)
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        final List<ResolveInfo> resolveInfos =
+                activity.getPackageManager().queryIntentActivities(intent,
+                        PackageManager.MATCH_DEFAULT_ONLY);
+        if (resolveInfos.isEmpty()) {
+            return;
+        }
+
+        final ComponentName searchComponentName = resolveInfos.get(0)
+                .getComponentInfo().getComponentName();
+        // Set a component name since activity embedding requires a component name for
+        // registering a rule.
+        intent.setComponent(searchComponentName);
+        ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                context,
+                searchComponentName,
+                intent.getAction(),
+                false /* finishPrimaryWithSecondary */,
+                true /* finishSecondaryWithPrimary */,
+                false /* clearTop */);
+
         toolbar.setOnClickListener(tb -> {
-            final Context context = activity.getApplicationContext();
-            final Intent intent = buildSearchIntent(context, pageId);
-
-            if (activity.getPackageManager().queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY).isEmpty()) {
-                return;
-            }
-
             FeatureFactory.getFactory(context).getSlicesFeatureProvider()
                     .indexSliceDataAsync(context);
 
             FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                     .logSettingsTileClick(KEY_HOMEPAGE_SEARCH_BAR, pageId);
+
             final Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(activity).toBundle();
-            activity.startActivityForResult(intent, REQUEST_CODE, bundle);
+            activity.startActivity(intent, bundle);
         });
     }
 

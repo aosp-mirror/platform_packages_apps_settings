@@ -16,14 +16,18 @@
 
 package com.android.settings.biometrics.fingerprint;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FINGERPRINT_UNLOCK_DISABLED;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,15 +35,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
+import com.android.settings.biometrics.MultiBiometricEnrollHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.span.LinkSpan;
 
 import java.util.List;
@@ -48,9 +56,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     private static final String TAG = "FingerprintIntro";
 
+    @VisibleForTesting
     private FingerprintManager mFingerprintManager;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
+
+    private DevicePolicyManager mDevicePolicyManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +73,8 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         }
 
         super.onCreate(savedInstanceState);
+
+        mDevicePolicyManager = getSystemService(DevicePolicyManager.class);
 
         final ImageView iconFingerprint = findViewById(R.id.icon_fingerprint);
         final ImageView iconDeviceLocked = findViewById(R.id.icon_device_locked);
@@ -78,15 +91,43 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerMessage3 = findViewById(R.id.footer_message_3);
         final TextView footerMessage4 = findViewById(R.id.footer_message_4);
         final TextView footerMessage5 = findViewById(R.id.footer_message_5);
+        final TextView footerMessage6 = findViewById(R.id.footer_message_6);
         footerMessage2.setText(getFooterMessage2());
         footerMessage3.setText(getFooterMessage3());
         footerMessage4.setText(getFooterMessage4());
         footerMessage5.setText(getFooterMessage5());
+        footerMessage6.setText(getFooterMessage6());
 
         final TextView footerTitle1 = findViewById(R.id.footer_title_1);
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
         footerTitle1.setText(getFooterTitle1());
         footerTitle2.setText(getFooterTitle2());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If user has skipped or finished enrolling, don't restart enrollment.
+        final boolean isEnrollRequest = requestCode == BIOMETRIC_FIND_SENSOR_REQUEST
+                || requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST;
+        final boolean isResultSkipOrFinished = resultCode == RESULT_SKIP
+                || resultCode == SetupSkipDialog.RESULT_SKIP || resultCode == RESULT_FINISHED;
+        if (isEnrollRequest && isResultSkipOrFinished) {
+            data = setSkipPendingEnroll(data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onCancelButtonClick(View view) {
+        // User has explicitly canceled enroll. Don't restart it automatically.
+        Intent data = setSkipPendingEnroll(new Intent());
+        setResult(RESULT_SKIP, data);
+        finish();
+    }
+
+    @Override
+    protected void onSkipButtonClick(View view) {
+        onCancelButtonClick(view);
     }
 
     @StringRes
@@ -124,6 +165,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
     }
 
+    @StringRes
+    protected int getFooterMessage6() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_6;
+    }
+
     @Override
     protected boolean isDisabledByAdmin() {
         return RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
@@ -146,8 +192,10 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected int getDescriptionResDisabledByAdmin() {
-        return R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled;
+    protected String getDescriptionDisabledByAdmin() {
+        return mDevicePolicyManager.getResources().getString(
+                FINGERPRINT_UNLOCK_DISABLED,
+                () -> getString(R.string.security_settings_fingerprint_enroll_introduction_message_unlock_disabled));
     }
 
     @Override
@@ -173,6 +221,9 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
 
     @Override
     protected int checkMaxEnrolled() {
+        final boolean isSetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
+        final boolean isDeferredSetupWizard =
+                WizardManagerHelper.isDeferredSetupWizard(getIntent());
         if (mFingerprintManager != null) {
             final List<FingerprintSensorPropertiesInternal> props =
                     mFingerprintManager.getSensorPropertiesInternal();
@@ -180,13 +231,24 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
             final int max = props.get(0).maxEnrollmentsPerUser;
             final int numEnrolledFingerprints =
                     mFingerprintManager.getEnrolledFingerprints(mUserId).size();
-            if (numEnrolledFingerprints >= max) {
+            final int maxFingerprintsEnrollableIfSUW =
+                    getApplicationContext()
+                            .getResources()
+                            .getInteger(R.integer.suw_max_fingerprints_enrollable);
+            if (isSetupWizard && !isDeferredSetupWizard) {
+                if (numEnrolledFingerprints >= maxFingerprintsEnrollableIfSUW) {
+                    return R.string.fingerprint_intro_error_max;
+                } else {
+                    return 0;
+                }
+            } else if (numEnrolledFingerprints >= max) {
                 return R.string.fingerprint_intro_error_max;
+            } else {
+                return 0;
             }
         } else {
             return R.string.fingerprint_intro_error_unknown;
         }
-        return 0;
     }
 
     @Override
@@ -244,6 +306,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
+    public @BiometricAuthenticator.Modality int getModality() {
+        return BiometricAuthenticator.TYPE_FINGERPRINT;
+    }
+
+    @Override
     @NonNull
     protected FooterButton getPrimaryFooterButton() {
         if (mPrimaryFooterButton == null) {
@@ -281,5 +348,14 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getMoreButtonTextRes() {
         return R.string.security_settings_face_enroll_introduction_more;
+    }
+
+    @NonNull
+    protected static Intent setSkipPendingEnroll(@Nullable Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        data.putExtra(MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, true);
+        return data;
     }
 }

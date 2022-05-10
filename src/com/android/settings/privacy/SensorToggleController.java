@@ -22,8 +22,11 @@ import android.content.Context;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
+import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.concurrent.Executor;
 
@@ -46,6 +49,10 @@ public abstract class SensorToggleController extends TogglePreferenceController 
      */
     public abstract int getSensor();
 
+    protected String getRestriction() {
+        return null;
+    }
+
     @Override
     public boolean isChecked() {
         return !mSensorPrivacyManagerHelper.isSensorBlocked(getSensor());
@@ -53,16 +60,30 @@ public abstract class SensorToggleController extends TogglePreferenceController 
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        mSensorPrivacyManagerHelper.setSensorBlocked(SETTINGS, getSensor(), !isChecked);
+        mSensorPrivacyManagerHelper.setSensorBlockedForProfileGroup(SETTINGS, getSensor(),
+                !isChecked);
         return true;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+
+        RestrictedSwitchPreference preference =
+                (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
+        if (preference != null) {
+            preference.setDisabledByAdmin(RestrictedLockUtilsInternal
+                    .checkIfRestrictionEnforced(mContext, getRestriction(), mContext.getUserId()));
+        }
+
         mSensorPrivacyManagerHelper.addSensorBlockedListener(
                 getSensor(),
                 (sensor, blocked) -> updateState(screen.findPreference(mPreferenceKey)),
                 mCallbackExecutor);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_privacy;
     }
 }

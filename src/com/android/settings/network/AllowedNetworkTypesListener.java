@@ -34,7 +34,6 @@ public class AllowedNetworkTypesListener extends TelephonyCallback implements
 
     @VisibleForTesting
     OnAllowedNetworkTypesListener mListener;
-    private long mAllowedNetworkType = -1;
     private Executor mExecutor;
 
     public AllowedNetworkTypesListener(Executor executor) {
@@ -70,14 +69,14 @@ public class AllowedNetworkTypesListener extends TelephonyCallback implements
 
     @Override
     public void onAllowedNetworkTypesChanged(int reason, long newAllowedNetworkType) {
-        if (reason != TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER) {
+        if (reason != TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER
+                && reason != TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER) {
             return;
         }
-        if (mListener != null && mAllowedNetworkType != newAllowedNetworkType) {
+        if (mListener != null) {
             mListener.onAllowedNetworkTypesChanged();
-            Log.d(LOG_TAG, "onAllowedNetworkChanged: " + mAllowedNetworkType);
+            Log.d(LOG_TAG, "onAllowedNetworkChanged: " + newAllowedNetworkType);
         }
-        mAllowedNetworkType = newAllowedNetworkType;
     }
 
     /**

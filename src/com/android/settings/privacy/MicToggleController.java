@@ -16,6 +16,8 @@
 
 package com.android.settings.privacy;
 
+import static android.os.UserManager.DISALLOW_MICROPHONE_TOGGLE;
+
 import static com.android.settings.utils.SensorPrivacyManagerHelper.MICROPHONE;
 
 import android.content.Context;
@@ -38,7 +40,11 @@ public class MicToggleController extends SensorToggleController {
     public int getAvailabilityStatus() {
         return mSensorPrivacyManagerHelper.supportsSensorToggle(getSensor())
                 && DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY, "mic_toggle_enabled",
-                true) ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+                true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
+    @Override
+    protected String getRestriction() {
+        return DISALLOW_MICROPHONE_TOGGLE;
+    }
 }

@@ -31,7 +31,7 @@ import java.util.List;
 public class DeleteEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     private static final String TAG = "DeleteEuiccSubscriptionSidecar";
     private static final String ACTION_DELETE_SUBSCRIPTION =
-            "com.android.settings.network.delete_subscription";
+            "com.android.settings.network.DELETE_SUBSCRIPTION";
 
     private List<SubscriptionInfo> mSubscriptions;
 

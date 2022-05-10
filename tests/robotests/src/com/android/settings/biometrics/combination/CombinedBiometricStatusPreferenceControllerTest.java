@@ -29,12 +29,14 @@ import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +49,8 @@ import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
 public class CombinedBiometricStatusPreferenceControllerTest {
+
+    private static final String TEST_PREF_KEY = "foo";
 
     @Mock
     private LockPatternUtils mLockPatternUtils;
@@ -63,11 +67,15 @@ public class CombinedBiometricStatusPreferenceControllerTest {
     private Context mContext;
     private CombinedBiometricStatusPreferenceController mController;
     private Preference mPreference;
+    private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FACE)).thenReturn(true);
@@ -80,7 +88,8 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {1234});
-        mController = new CombinedBiometricStatusPreferenceController(mContext);
+        mController = new CombinedBiometricStatusPreferenceController(
+                mContext, TEST_PREF_KEY, mLifecycle);
     }
 
     @Test
@@ -94,5 +103,8 @@ public class CombinedBiometricStatusPreferenceControllerTest {
         mController.mPreference = restrictedPreference;
         mController.updateStateInternal(admin);
         verify(restrictedPreference).setDisabledByAdmin(eq(admin));
+
+        mController.updateStateInternal(null);
+        verify(restrictedPreference).setDisabledByAdmin(eq(null));
     }
 }

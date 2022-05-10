@@ -18,6 +18,13 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PASSWORD_RECENTLY_USED;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PIN_RECENTLY_USED;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PASSWORD_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PIN_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_INVALID_CHARACTERS;
@@ -259,11 +266,13 @@ public class ChooseLockPassword extends SettingsActivity {
 
             Introduction(
                     R.string.lockpassword_choose_your_password_header, // password
+                    SET_WORK_PROFILE_PASSWORD_HEADER,
                     R.string.lockpassword_choose_your_profile_password_header,
                     R.string.lockpassword_choose_your_password_header_for_fingerprint,
                     R.string.lockpassword_choose_your_password_header_for_face,
                     R.string.lockpassword_choose_your_password_header_for_biometrics,
                     R.string.lockpassword_choose_your_pin_header, // pin
+                    SET_WORK_PROFILE_PIN_HEADER,
                     R.string.lockpassword_choose_your_profile_pin_header,
                     R.string.lockpassword_choose_your_pin_header_for_fingerprint,
                     R.string.lockpassword_choose_your_pin_header_for_face,
@@ -274,11 +283,13 @@ public class ChooseLockPassword extends SettingsActivity {
 
             NeedToConfirm(
                     R.string.lockpassword_confirm_your_password_header,
+                    REENTER_WORK_PROFILE_PASSWORD_HEADER,
                     R.string.lockpassword_reenter_your_profile_password_header,
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_password_header,
                     R.string.lockpassword_confirm_your_pin_header,
+                    REENTER_WORK_PROFILE_PIN_HEADER,
                     R.string.lockpassword_reenter_your_profile_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
                     R.string.lockpassword_confirm_your_pin_header,
@@ -289,11 +300,13 @@ public class ChooseLockPassword extends SettingsActivity {
 
             ConfirmWrong(
                     R.string.lockpassword_confirm_passwords_dont_match,
+                    UNDEFINED,
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_passwords_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
+                    UNDEFINED,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
                     R.string.lockpassword_confirm_pins_dont_match,
@@ -302,20 +315,31 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     R.string.lockpassword_confirm_label);
 
-            Stage(int hintInAlpha, int hintInAlphaForProfile,
-                    int hintInAlphaForFingerprint, int hintInAlphaForFace, int hintInAlphaForBiometrics,
-                    int hintInNumeric, int hintInNumericForProfile,
-                    int hintInNumericForFingerprint, int hintInNumericForFace, int hintInNumericForBiometrics,
+            Stage(int hintInAlpha,
+                    String hintOverrideInAlphaForProfile,
+                    int hintInAlphaForProfile,
+                    int hintInAlphaForFingerprint,
+                    int hintInAlphaForFace,
+                    int hintInAlphaForBiometrics,
+                    int hintInNumeric,
+                    String hintOverrideInNumericForProfile,
+                    int hintInNumericForProfile,
+                    int hintInNumericForFingerprint,
+                    int hintInNumericForFace,
+                    int hintInNumericForBiometrics,
                     int messageInAlphaForBiometrics,
                     int messageInNumericForBiometrics,
                     int nextButtonText) {
+
                 this.alphaHint = hintInAlpha;
+                this.alphaHintOverrideForProfile = hintOverrideInAlphaForProfile;
                 this.alphaHintForProfile = hintInAlphaForProfile;
                 this.alphaHintForFingerprint = hintInAlphaForFingerprint;
                 this.alphaHintForFace = hintInAlphaForFace;
                 this.alphaHintForBiometrics = hintInAlphaForBiometrics;
 
                 this.numericHint = hintInNumeric;
+                this.numericHintOverrideForProfile = hintOverrideInNumericForProfile;
                 this.numericHintForProfile = hintInNumericForProfile;
                 this.numericHintForFingerprint = hintInNumericForFingerprint;
                 this.numericHintForFace = hintInNumericForFace;
@@ -323,6 +347,7 @@ public class ChooseLockPassword extends SettingsActivity {
 
                 this.alphaMessageForBiometrics = messageInAlphaForBiometrics;
                 this.numericMessageForBiometrics = messageInNumericForBiometrics;
+
                 this.buttonText = nextButtonText;
             }
 
@@ -331,53 +356,72 @@ public class ChooseLockPassword extends SettingsActivity {
             public static final int TYPE_FACE = 2;
             public static final int TYPE_BIOMETRIC = 3;
 
-            // Password
+            // Password header
             public final int alphaHint;
+            public final String alphaHintOverrideForProfile;
             public final int alphaHintForProfile;
             public final int alphaHintForFingerprint;
             public final int alphaHintForFace;
             public final int alphaHintForBiometrics;
 
-            // PIN
+            // PIN header
             public final int numericHint;
+            public final String numericHintOverrideForProfile;
             public final int numericHintForProfile;
             public final int numericHintForFingerprint;
             public final int numericHintForFace;
             public final int numericHintForBiometrics;
 
+            // Password description
             public final int alphaMessageForBiometrics;
+
+            // PIN description
             public final int numericMessageForBiometrics;
+
             public final int buttonText;
 
-            public @StringRes int getHint(boolean isAlpha, int type, boolean isProfile) {
+            public String getHint(Context context, boolean isAlpha, int type, boolean isProfile) {
                 if (isAlpha) {
                     if (type == TYPE_FINGERPRINT) {
-                        return alphaHintForFingerprint;
+                        return context.getString(alphaHintForFingerprint);
                     } else if (type == TYPE_FACE) {
-                        return alphaHintForFace;
+                        return context.getString(alphaHintForFace);
                     } else if (type == TYPE_BIOMETRIC) {
-                        return alphaHintForBiometrics;
+                        return context.getString(alphaHintForBiometrics);
+                    } else if (isProfile) {
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
+                                .getString(alphaHintOverrideForProfile,
+                                        () -> context.getString(alphaHintForProfile));
                     } else {
-                        return isProfile ? alphaHintForProfile : alphaHint;
+                        return context.getString(alphaHint);
                     }
                 } else {
                     if (type == TYPE_FINGERPRINT) {
-                        return numericHintForFingerprint;
+                        return context.getString(numericHintForFingerprint);
                     } else if (type == TYPE_FACE) {
-                        return numericHintForFace;
+                        return context.getString(numericHintForFace);
                     } else if (type == TYPE_BIOMETRIC) {
-                        return numericHintForBiometrics;
+                        return context.getString(numericHintForBiometrics);
+                    } else if (isProfile) {
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
+                                .getString(numericHintOverrideForProfile,
+                                        () -> context.getString(numericHintForProfile));
                     } else {
-                        return isProfile ? numericHintForProfile : numericHint;
+                        return  context.getString(numericHint);
                     }
                 }
             }
 
             public @StringRes int getMessage(boolean isAlpha, int type) {
-                if (isAlpha) {
-                    return type != TYPE_NONE ? alphaMessageForBiometrics : 0;
-                } else {
-                    return type != TYPE_NONE ? numericMessageForBiometrics : 0;
+                switch (type) {
+                    case TYPE_FINGERPRINT:
+                    case TYPE_FACE:
+                    case TYPE_BIOMETRIC:
+                        return isAlpha ? alphaMessageForBiometrics : numericMessageForBiometrics;
+
+                    case TYPE_NONE:
+                    default:
+                        return 0;
                 }
             }
         }
@@ -469,13 +513,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mNextButton = mixin.getPrimaryButton();
 
             mMessage = view.findViewById(R.id.sud_layout_description);
-            if (mForFingerprint) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
-            } else if (mForFace) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_face_header));
-            } else if (mForBiometrics) {
-                mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
-            }
+            mLayout.setIcon(getActivity().getDrawable(R.drawable.ic_lock));
 
             mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mPasswordType
                     || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mPasswordType
@@ -545,8 +583,8 @@ public class ChooseLockPassword extends SettingsActivity {
 
             if (activity instanceof SettingsActivity) {
                 final SettingsActivity sa = (SettingsActivity) activity;
-                int title = Stage.Introduction.getHint(mIsAlphaMode, getStageType(),
-                        mIsManagedProfile);
+                String title = Stage.Introduction.getHint(
+                        getContext(), mIsAlphaMode, getStageType(), mIsManagedProfile);
                 sa.setTitle(title);
                 mLayout.setHeaderText(title);
             }
@@ -807,9 +845,17 @@ public class ChooseLockPassword extends SettingsActivity {
                         messages.add(getString(R.string.lockpassword_pin_no_sequential_digits));
                         break;
                     case RECENTLY_USED:
-                        messages.add(getString(mIsAlphaMode
-                                ? R.string.lockpassword_password_recently_used
-                                : R.string.lockpassword_pin_recently_used));
+                        DevicePolicyManager devicePolicyManager =
+                                getContext().getSystemService(DevicePolicyManager.class);
+                        if (mIsAlphaMode) {
+                            messages.add(devicePolicyManager.getResources().getString(
+                                    PASSWORD_RECENTLY_USED,
+                                    () -> getString(R.string.lockpassword_password_recently_used)));
+                        } else {
+                            messages.add(devicePolicyManager.getResources().getString(
+                                    PIN_RECENTLY_USED,
+                                    () -> getString(R.string.lockpassword_pin_recently_used)));
+                        }
                         break;
                     default:
                         Log.wtf(TAG, "unknown error validating password: " + error);
@@ -840,17 +886,22 @@ public class ChooseLockPassword extends SettingsActivity {
             } else {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
-                setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, getStageType(),
-                        mIsManagedProfile)));
+                setHeaderText(mUiStage.getHint(getContext(), mIsAlphaMode, getStageType(),
+                        mIsManagedProfile));
                 setNextEnabled(canInput && length >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE);
                 mSkipOrClearButton.setVisibility(toVisibility(canInput && length > 0));
             }
-            int message = mUiStage.getMessage(mIsAlphaMode, getStageType());
-            if (message != 0) {
-                mMessage.setVisibility(View.VISIBLE);
-                mMessage.setText(message);
+            final int stage = getStageType();
+            if (getStageType() != Stage.TYPE_NONE) {
+                int message = mUiStage.getMessage(mIsAlphaMode, stage);
+                if (message != 0) {
+                    mMessage.setVisibility(View.VISIBLE);
+                    mMessage.setText(message);
+                } else {
+                    mMessage.setVisibility(View.INVISIBLE);
+                }
             } else {
-                mMessage.setVisibility(View.INVISIBLE);
+                mMessage.setVisibility(View.GONE);
             }
 
             setNextText(mUiStage.buttonText);

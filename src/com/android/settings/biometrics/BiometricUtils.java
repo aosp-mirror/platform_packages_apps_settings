@@ -22,6 +22,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.hardware.biometrics.SensorProperties;
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.Surface;
@@ -244,7 +247,9 @@ public class BiometricUtils {
      * @return true if the next enrollment was started
      */
     public static boolean tryStartingNextBiometricEnroll(@NonNull Activity activity,
-            int requestCode) {
+            int requestCode, String debugReason) {
+
+        Log.d(TAG, "tryStartingNextBiometricEnroll, debugReason: " + debugReason);
         final PendingIntent pendingIntent = (PendingIntent) activity.getIntent()
                 .getExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
         if (pendingIntent != null) {
@@ -270,5 +275,28 @@ public class BiometricUtils {
      */
     public static boolean isReverseLandscape(@NonNull Context context) {
         return context.getDisplay().getRotation() == Surface.ROTATION_270;
+    }
+
+    /**
+     * @param faceManager
+     * @return True if at least one sensor is set as a convenience.
+     */
+    public static boolean isConvenience(@NonNull FaceManager faceManager) {
+        for (FaceSensorPropertiesInternal props : faceManager.getSensorPropertiesInternal()) {
+            if (props.sensorStrength == SensorProperties.STRENGTH_CONVENIENCE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns {@code true} if the screen is going into a landscape mode and the angle is equal to
+     * 90.
+     * @param context Context that we use to get the display this context is associated with
+     * @return True if the angle of the rotation is equal to 90.
+     */
+    public static boolean isLandscape(@NonNull Context context) {
+        return context.getDisplay().getRotation() == Surface.ROTATION_90;
     }
 }
