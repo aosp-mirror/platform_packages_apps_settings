@@ -84,22 +84,6 @@ public class LockUnificationPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_separateChallengeNotAllowed_false() {
-        when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(false);
-        init();
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void isAvailable_separateChallengeAllowed_true() {
-        when(mLockPatternUtils.isSeparateProfileChallengeAllowed(anyInt())).thenReturn(true);
-        init();
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
     public void getPreferenceKey_byDefault_returnsDefaultValue() {
         init();
 

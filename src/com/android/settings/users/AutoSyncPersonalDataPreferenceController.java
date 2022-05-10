@@ -18,14 +18,14 @@ package com.android.settings.users;
 import android.content.Context;
 import android.os.UserHandle;
 
-import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPreferenceController {
 
-    private static final String TAG = "AutoSyncPersonalData";
     private static final String KEY_AUTO_SYNC_PERSONAL_ACCOUNT = "auto_sync_personal_account_data";
 
-    public AutoSyncPersonalDataPreferenceController(Context context, Fragment parent) {
+    public AutoSyncPersonalDataPreferenceController(Context context,
+            PreferenceFragmentCompat parent) {
         super(context, parent);
     }
 

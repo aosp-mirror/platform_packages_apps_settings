@@ -135,6 +135,11 @@ public class WifiWakeupPreferenceController extends TogglePreferenceController i
         }
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
+    }
+
     @VisibleForTesting
     CharSequence getNoLocationSummary() {
         AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo("link", null);

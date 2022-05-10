@@ -111,8 +111,8 @@ public class InactiveApps extends SettingsPreferenceFragment
             p.setTitle(app.loadLabel(pm));
             p.setIcon(app.loadIcon(pm));
             p.setKey(packageName);
-            p.setEntries(bucketNames);
-            p.setEntryValues(bucketValues);
+            p.setEntries(getAllowableBuckets(packageName, bucketNames));
+            p.setEntryValues(getAllowableBuckets(packageName, bucketValues));
             updateSummary(p);
             // Don't allow Settings to change its own standby bucket.
             if (TextUtils.equals(packageName, settingsPackage)) {
@@ -122,6 +122,25 @@ public class InactiveApps extends SettingsPreferenceFragment
 
             screen.addPreference(p);
         }
+    }
+
+    private CharSequence[] getAllowableBuckets(String packageName, CharSequence[] possibleBuckets) {
+        final int minBucket = mUsageStats.getAppMinStandbyBucket(packageName);
+        if (minBucket > STANDBY_BUCKET_RESTRICTED) {
+            return possibleBuckets;
+        }
+        if (minBucket < STANDBY_BUCKET_ACTIVE) {
+            return new CharSequence[]{};
+        }
+        // Use FULL_SETTABLE_BUCKETS_VALUES since we're searching using the int value. The index
+        // should apply no matter which array we're going to copy from.
+        final int idx =
+                Arrays.binarySearch(FULL_SETTABLE_BUCKETS_VALUES, Integer.toString(minBucket));
+        if (idx < 0) {
+            // Include everything
+            return possibleBuckets;
+        }
+        return Arrays.copyOfRange(possibleBuckets, 0, idx + 1);
     }
 
     static String bucketToName(int bucket) {

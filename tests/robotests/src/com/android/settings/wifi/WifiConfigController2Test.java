@@ -19,8 +19,7 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -36,7 +35,6 @@ import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiEnterpriseConfig.Eap;
 import android.net.wifi.WifiEnterpriseConfig.Phase2;
 import android.net.wifi.WifiManager;
-import android.os.UserHandle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -86,6 +84,8 @@ public class WifiConfigController2Test {
     private WifiEntry mWifiEntry;
     @Mock
     private AndroidKeystoreAliasLoader mAndroidKeystoreAliasLoader;
+    @Mock
+    private WifiManager mWifiManager;
     private View mView;
     private Spinner mHiddenSettingsSpinner;
     private Spinner mEapCaCertSpinner;
@@ -127,6 +127,7 @@ public class WifiConfigController2Test {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(eq(WifiManager.class))).thenReturn(mWifiManager);
         when(mConfigUiBase.getContext()).thenReturn(mContext);
         when(mWifiEntry.getSecurity()).thenReturn(WifiEntry.SECURITY_PSK);
         mView = LayoutInflater.from(mContext).inflate(R.layout.wifi_dialog, null);
@@ -420,7 +421,7 @@ public class WifiConfigController2Test {
 
         private TestWifiConfigController2(
                 WifiConfigUiBase2 parent, View view, WifiEntry wifiEntry, int mode) {
-            super(parent, view, wifiEntry, mode);
+            super(parent, view, wifiEntry, mode, mWifiManager);
         }
 
         private TestWifiConfigController2(
