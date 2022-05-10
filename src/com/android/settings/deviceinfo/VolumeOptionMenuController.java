@@ -26,6 +26,7 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,6 +53,8 @@ import java.util.Objects;
  */
 public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOptionsMenu,
         OnPrepareOptionsMenu, OnOptionsItemSelected {
+
+    private static final String TAG = "VolumeOptionMenuController";
 
     @VisibleForTesting
     MenuItem mRename;
@@ -102,6 +105,17 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         mMigrate = menu.findItem(R.id.storage_migrate);
         mFree = menu.findItem(R.id.storage_free);
         mForget = menu.findItem(R.id.storage_forget);
+
+        updateOptionsMenu();
+    }
+
+    private void updateOptionsMenu() {
+        if (mRename == null || mMount == null || mUnmount == null || mFormat == null
+                || mFormatAsPortable == null || mFormatAsInternal == null || mMigrate == null
+                || mFree == null || mForget == null) {
+            Log.d(TAG, "Menu items are not available");
+            return;
+        }
 
         mRename.setVisible(false);
         mMount.setVisible(false);
@@ -253,5 +267,7 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
 
     public void setSelectedStorageEntry(StorageEntry storageEntry) {
         mStorageEntry = storageEntry;
+
+        updateOptionsMenu();
     }
 }
