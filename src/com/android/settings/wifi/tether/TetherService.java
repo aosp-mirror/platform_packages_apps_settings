@@ -119,7 +119,8 @@ public class TetherService extends Service {
         if (mExpectedProvisionResponseAction != null) unregisterReceiver(mReceiver);
 
         registerReceiver(mReceiver, new IntentFilter(responseAction),
-                android.Manifest.permission.TETHER_PRIVILEGED, null /* handler */);
+                android.Manifest.permission.TETHER_PRIVILEGED, null /* handler */,
+                Context.RECEIVER_EXPORTED);
         mExpectedProvisionResponseAction = responseAction;
         if (DEBUG) Log.d(TAG, "registerReceiver " + responseAction);
     }

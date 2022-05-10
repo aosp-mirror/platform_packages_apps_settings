@@ -53,7 +53,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         mTemplate = template;
         mSubId = subId;
         final DataUsageController controller = getDataUsageController();
-        if (mTemplate.isMatchRuleMobile()) {
+        if (mTemplate.getMatchRule() == NetworkTemplate.MATCH_MOBILE) {
             setTitle(R.string.app_cellular_data_usage);
         } else {
             final DataUsageController.DataUsageInfo usageInfo =
@@ -78,13 +78,14 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         final SubSettingLauncher launcher;
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
-        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, mTemplate.isMatchRuleMobile()
-            ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
+        args.putInt(DataUsageList.EXTRA_NETWORK_TYPE, mTemplate.getMatchRule()
+                == NetworkTemplate.MATCH_MOBILE
+                ? ConnectivityManager.TYPE_MOBILE : ConnectivityManager.TYPE_WIFI);
         launcher = new SubSettingLauncher(getContext())
             .setArguments(args)
             .setDestination(DataUsageList.class.getName())
             .setSourceMetricsCategory(SettingsEnums.PAGE_UNKNOWN);
-        if (mTemplate.isMatchRuleMobile()) {
+        if (mTemplate.getMatchRule() == NetworkTemplate.MATCH_MOBILE) {
             launcher.setTitleRes(R.string.app_cellular_data_usage);
         } else {
             launcher.setTitleRes(mTitleRes);

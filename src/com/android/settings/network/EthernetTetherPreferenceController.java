@@ -21,12 +21,13 @@ import android.net.EthernetManager;
 import android.net.TetheringManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.internal.annotations.VisibleForTesting;
+
+import java.util.HashSet;
 
 /**
  * This controller helps to manage the switch state and visibility of ethernet tether switch
@@ -34,40 +35,49 @@ import com.android.internal.annotations.VisibleForTesting;
  */
 public final class EthernetTetherPreferenceController extends TetherBasePreferenceController {
 
-    private final String mEthernetRegex;
+    private final HashSet<String> mAvailableInterfaces = new HashSet<>();
     private final EthernetManager mEthernetManager;
+
     @VisibleForTesting
-    EthernetManager.Listener mEthernetListener;
+    EthernetManager.InterfaceStateListener mEthernetListener;
 
     public EthernetTetherPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
-        mEthernetRegex = context.getString(
-                com.android.internal.R.string.config_ethernet_iface_regex);
-        mEthernetManager = (EthernetManager) context.getSystemService(Context.ETHERNET_SERVICE);
+        mEthernetManager = context.getSystemService(EthernetManager.class);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        mEthernetListener = new EthernetManager.Listener() {
-            @Override
-            public void onAvailabilityChanged(String iface, boolean isAvailable) {
-                new Handler(Looper.getMainLooper()).post(() -> updateState(mPreference));
+        mEthernetListener = (iface, state, role, configuration) -> {
+            if (state == EthernetManager.STATE_LINK_UP) {
+                mAvailableInterfaces.add(iface);
+            } else {
+                mAvailableInterfaces.remove(iface);
             }
+            updateState(mPreference);
         };
-        mEthernetManager.addListener(mEthernetListener);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        // Executor will execute to post the updateState event to a new handler which is created
+        // from the main looper when the {@link EthernetManager.Listener.onAvailabilityChanged}
+        // is triggerd.
+        if (mEthernetManager != null) {
+            mEthernetManager.addInterfaceStateListener(r -> handler.post(r), mEthernetListener);
+        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStop() {
-        mEthernetManager.removeListener(mEthernetListener);
-        mEthernetListener = null;
+        if (mEthernetManager != null) {
+            mEthernetManager.removeInterfaceStateListener(mEthernetListener);
+        }
     }
 
     @Override
     public boolean shouldEnable() {
+        ensureRunningOnMainLoopThread();
         String[] available = mTm.getTetherableIfaces();
         for (String s : available) {
-            if (s.matches(mEthernetRegex)) {
+            if (mAvailableInterfaces.contains(s)) {
                 return true;
             }
         }
@@ -76,11 +86,19 @@ public final class EthernetTetherPreferenceController extends TetherBasePreferen
 
     @Override
     public boolean shouldShow() {
-        return !TextUtils.isEmpty(mEthernetRegex);
+        return mEthernetManager != null;
     }
 
     @Override
     public int getTetherType() {
         return TetheringManager.TETHERING_ETHERNET;
+    }
+
+    private void ensureRunningOnMainLoopThread() {
+        if (Looper.getMainLooper().getThread() != Thread.currentThread()) {
+            throw new IllegalStateException(
+                    "Not running on main loop thread: "
+                            + Thread.currentThread().getName());
+        }
     }
 }

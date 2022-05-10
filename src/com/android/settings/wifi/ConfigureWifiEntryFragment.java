@@ -38,7 +38,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -238,6 +238,6 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
                         MAX_SCAN_AGE_MILLIS,
                         SCAN_INTERVAL_MILLIS,
                         getArguments().getString(
-                                WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY));
+                                WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY));
     }
 }

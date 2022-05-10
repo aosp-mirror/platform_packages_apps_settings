@@ -85,8 +85,8 @@ public class BatteryBroadcastReceiverTest {
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
                 .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
-                .isEqualTo(Utils.getBatteryStatus(mContext, mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
+                Utils.getBatteryStatus(mContext, mChargingIntent, /* compactStatus= */ false));
         verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
     }
 
@@ -134,7 +134,7 @@ public class BatteryBroadcastReceiverTest {
     public void testOnReceive_batteryDataNotChanged_listenerNotInvoked() {
         final String batteryLevel = Utils.getBatteryPercentage(mChargingIntent);
         final String batteryStatus =
-                Utils.getBatteryStatus(mContext, mChargingIntent);
+                Utils.getBatteryStatus(mContext, mChargingIntent, /* compactStatus= */ false);
         mBatteryBroadcastReceiver.mBatteryLevel = batteryLevel;
         mBatteryBroadcastReceiver.mBatteryStatus = batteryStatus;
 
@@ -159,8 +159,8 @@ public class BatteryBroadcastReceiverTest {
 
         assertThat(mBatteryBroadcastReceiver.mBatteryLevel)
                 .isEqualTo(Utils.getBatteryPercentage(mChargingIntent));
-        assertThat(mBatteryBroadcastReceiver.mBatteryStatus)
-                .isEqualTo(Utils.getBatteryStatus(mContext, mChargingIntent));
+        assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
+                Utils.getBatteryStatus(mContext, mChargingIntent, /* compactStatus= */ false));
         assertThat(mBatteryBroadcastReceiver.mBatteryHealth)
                 .isEqualTo(BatteryManager.BATTERY_HEALTH_UNKNOWN);
         // 2 times because register will force update the battery

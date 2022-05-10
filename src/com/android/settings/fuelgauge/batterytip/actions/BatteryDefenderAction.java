@@ -16,12 +16,10 @@
 
 package com.android.settings.fuelgauge.batterytip.actions;
 
-import android.app.settings.SettingsEnums;
 import android.content.Intent;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settingslib.HelpUtils;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Action to open the Support Center article
@@ -34,19 +32,12 @@ public class BatteryDefenderAction extends BatteryTipAction {
         mSettingsActivity = settingsActivity;
     }
 
-    /**
-     * Handle the action when user clicks positive button
-     */
     @Override
     public void handlePositiveAction(int metricsKey) {
-        mMetricsFeatureProvider.action(mContext,
-                SettingsEnums.ACTION_TIP_BATTERY_DEFENDER, metricsKey);
-        final Intent intent = HelpUtils.getHelpIntent(
-                mContext,
-                mContext.getString(R.string.help_url_battery_defender),
-                getClass().getName());
+        final Intent intent = FeatureFactory.getFactory(mContext)
+                .getPowerUsageFeatureProvider(mContext).getResumeChargeIntent();
         if (intent != null) {
-            mSettingsActivity.startActivityForResult(intent, 0);
+            mContext.sendBroadcast(intent);
         }
     }
 }

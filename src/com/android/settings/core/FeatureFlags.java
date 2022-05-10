@@ -28,4 +28,6 @@ public class FeatureFlags {
     public static final String CONDITIONAL_CARDS = "settings_conditionals";
     public static final String TETHER_ALL_IN_ONE = "settings_tether_all_in_one";
     public static final String CONTEXTUAL_HOME = "settings_contextual_home";
+    public static final String SETTINGS_SEARCH_ALWAYS_EXPAND =
+            "settings_search_always_expand";
 }

@@ -73,6 +73,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new AbstractBluetoothA2dpPreferenceControllerImpl(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
+        mController.mBluetoothAdapter = null;
         doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig(null);
         doNothing().when(mController).setCodecConfigPreference(any(), any());
         when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mBluetoothCodecConfig);
