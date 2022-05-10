@@ -21,13 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
 
 import androidx.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComponentInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -46,8 +46,6 @@ import java.util.Collections;
 public class ManageTrustAgentsPreferenceControllerTest {
 
     @Mock
-    private TrustAgentManager mTrustAgentManager;
-    @Mock
     private LockPatternUtils mLockPatternUtils;
 
     private FakeFeatureFactory mFeatureFactory;
@@ -62,9 +60,7 @@ public class ManageTrustAgentsPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))
                 .thenReturn(mLockPatternUtils);
-        when(mFeatureFactory.securityFeatureProvider.getTrustAgentManager())
-                .thenReturn(mTrustAgentManager);
-        mController = new ManageTrustAgentsPreferenceController(mContext);
+        mController = new ManageTrustAgentsPreferenceController(mContext, "key");
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
     }
@@ -94,8 +90,7 @@ public class ManageTrustAgentsPreferenceControllerTest {
     @Test
     public void updateState_isSecure_noTrustAgent_shouldShowGenericSummary() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
-        when(mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils))
-                .thenReturn(new ArrayList<>());
+        when(mLockPatternUtils.getEnabledTrustAgents(anyInt())).thenReturn(new ArrayList<>());
 
         mController.updateState(mPreference);
 
@@ -107,8 +102,8 @@ public class ManageTrustAgentsPreferenceControllerTest {
     @Test
     public void updateState_isSecure_hasTrustAgent_shouldShowDetailedSummary() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
-        when(mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils))
-                .thenReturn(Collections.singletonList(new TrustAgentComponentInfo()));
+        when(mLockPatternUtils.getEnabledTrustAgents(anyInt())).thenReturn(
+                Collections.singletonList(new ComponentName("packageName", "className")));
 
         mController.updateState(mPreference);
 
@@ -116,11 +111,6 @@ public class ManageTrustAgentsPreferenceControllerTest {
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getResources().getQuantityString(
                         R.plurals.manage_trust_agents_summary_on, 1, 1));
-    }
-
-    @Test
-    public void getPreferenceKey_byDefault_returnsDefaultValue() {
-        assertThat(mController.getPreferenceKey()).isEqualTo("manage_trust_agents");
     }
 
     @Test

@@ -22,6 +22,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -134,7 +135,7 @@ public class AccessibilityDetailsSettingsFragmentTest {
         final Intent intent = new Intent();
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, COMPONENT_NAME);
         doReturn(intent).when(mActivity).getIntent();
-        doReturn(false).when(mFragment).isServiceAllowed(any());
+        doReturn(false).when(mFragment).isServiceAllowed(anyInt(), any());
 
         mFragment.onCreate(Bundle.EMPTY);
 

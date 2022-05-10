@@ -175,17 +175,35 @@ public class PreferenceXmlParserUtilsTest {
     }
 
     @Test
+    public void extractHomepageMetadata_shouldContainKeyAndHighlightableMenuKey()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.top_level_settings,
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY);
+
+        assertThat(metadata).isNotEmpty();
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_KEY)).isNotNull();
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_HIGHLIGHTABLE_MENU_KEY))
+                    .isNotNull();
+        }
+    }
+
+    @Test
     @Config(qualifiers = "mcc999")
-    public void extractMetadata_shouldContainKeyAndControllerName()
+    public void extractMetadata_shouldContainKeyAndControllerNameAndHighlightableMenuKey()
             throws IOException, XmlPullParserException {
         List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
                 R.xml.location_settings,
-                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_PREF_CONTROLLER);
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_PREF_CONTROLLER
+                        | MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY);
 
         assertThat(metadata).isNotEmpty();
         for (Bundle bundle : metadata) {
             assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_KEY)).isNotNull();
             assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_CONTROLLER)).isNotNull();
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_HIGHLIGHTABLE_MENU_KEY))
+                    .isNotNull();
         }
     }
 
