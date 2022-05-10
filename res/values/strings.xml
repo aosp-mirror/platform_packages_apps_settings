@@ -1622,6 +1622,13 @@
         <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
         <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
     </plurals>
+    <!-- Hint shown in dialog screen when password is too short and only using numbers. [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_password_too_short_all_numeric">
+        {count, plural,
+            =1    {If using only numbers, must be at least 1 digit}
+            other {If using only numbers, must be at least # digits}
+        }
+    </string>
     <!-- Hint shown in dialog screen when PIN is too short -->
     <plurals name="lockpassword_pin_too_short">
         <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>
