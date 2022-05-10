@@ -23,6 +23,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE;
 
@@ -347,7 +348,10 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // it's an update.
                 updateExistingLock = mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 if (updateExistingLock) {
-                    getActivity().setTitle(R.string.lock_settings_picker_update_profile_lock_title);
+                    getActivity().setTitle(mDpm.getResources().getString(
+                            LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE,
+                            () -> getString(
+                                    R.string.lock_settings_picker_update_profile_lock_title)));
                 } else {
                     getActivity().setTitle(mDpm.getResources().getString(
                             LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE,
