@@ -1079,7 +1079,11 @@
     <!-- Message for a biometric preference toggle, indicating that an action can be performed by using either Face Unlock or Fingerprint Unlock. [CHAR LIMIT=50] -->
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary">Using face or fingerprint</string>
     <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
-    <string name="biometric_settings_hand_back_to_guardian">Hand the phone back to your parent</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet">Hand the tablet back to your parent</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian" product="device">Hand the device back to your parent</string>
+    <!-- Message shown during enrollment to prompt a child to give the device to a parent or guardian. [CHAR LIMIT=NONE]-->
+    <string name="biometric_settings_hand_back_to_guardian" product="default">Hand the phone back to your parent</string>
     <!-- Button text shown during enrollment to proceed after a child user has handed the device to a parent or guardian. [CHAR LIMIT=22] -->
     <string name="biometric_settings_hand_back_to_guardian_ok">OK</string>
 
