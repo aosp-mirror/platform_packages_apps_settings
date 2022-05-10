@@ -25,6 +25,7 @@ import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.R;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Comparator;
@@ -40,7 +41,8 @@ public class BatteryDiffEntry {
     // Caches app label and icon to improve loading performance.
     static final Map<String, BatteryEntry.NameAndIcon> sResourceCache = new HashMap<>();
     // Whether a specific item is valid to launch restriction page?
-    static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+    public static final Map<String, Boolean> sValidForRestriction = new HashMap<>();
 
     /** A comparator for {@link BatteryDiffEntry} based on consumed percentage. */
     public static final Comparator<BatteryDiffEntry> COMPARATOR =
@@ -51,6 +53,7 @@ public class BatteryDiffEntry {
     public double mConsumePower;
     // A BatteryHistEntry corresponding to this diff usage data.
     public final BatteryHistEntry mBatteryHistEntry;
+
     private double mTotalConsumePower;
     private double mPercentOfTotal;
 
@@ -112,7 +115,9 @@ public class BatteryDiffEntry {
     /** Gets the app icon {@link Drawable} for this entry. */
     public Drawable getAppIcon() {
         loadLabelAndIcon();
-        return mAppIcon;
+        return mAppIcon != null && mAppIcon.getConstantState() != null
+                ? mAppIcon.getConstantState().newDrawable()
+                : null;
     }
 
     /** Gets the app icon id for this entry. */
@@ -148,8 +153,16 @@ public class BatteryDiffEntry {
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 return true;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
-                return isSystemUid((int) mBatteryHistEntry.mUid)
-                    || mBatteryHistEntry.mIsHidden;
+                final int uid = (int) mBatteryHistEntry.mUid;
+                if (mBatteryHistEntry.mIsHidden
+                        || uid == BatteryUtils.UID_REMOVED_APPS
+                        || uid == BatteryUtils.UID_TETHERING) {
+                    return true;
+                }
+                final boolean combineSystemComponents =
+                        mContext.getResources().getBoolean(
+                                R.bool.config_battery_combine_system_components);
+                return combineSystemComponents && isSystemUid(uid);
         }
         return false;
     }
@@ -161,9 +174,9 @@ public class BatteryDiffEntry {
         // Checks whether we have cached data or not first before fetching.
         final BatteryEntry.NameAndIcon nameAndIcon = getCache();
         if (nameAndIcon != null) {
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
-            mAppIconId = nameAndIcon.iconId;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
+            mAppIconId = nameAndIcon.mIconId;
         }
         final Boolean validForRestriction = sValidForRestriction.get(getKey());
         if (validForRestriction != null) {
@@ -186,8 +199,8 @@ public class BatteryDiffEntry {
                     BatteryEntry.getNameAndIconFromUserId(
                         mContext, (int) mBatteryHistEntry.mUserId);
                 if (nameAndIconForUser != null) {
-                    mAppIcon = nameAndIconForUser.icon;
-                    mAppLabel = nameAndIconForUser.name;
+                    mAppIcon = nameAndIconForUser.mIcon;
+                    mAppLabel = nameAndIconForUser.mName;
                     sResourceCache.put(
                         getKey(),
                         new BatteryEntry.NameAndIcon(mAppLabel, mAppIcon, /*iconId=*/ 0));
@@ -198,10 +211,10 @@ public class BatteryDiffEntry {
                     BatteryEntry.getNameAndIconFromPowerComponent(
                         mContext, mBatteryHistEntry.mDrainType);
                 if (nameAndIconForSystem != null) {
-                    mAppLabel = nameAndIconForSystem.name;
-                    if (nameAndIconForSystem.iconId != 0) {
-                        mAppIconId = nameAndIconForSystem.iconId;
-                        mAppIcon = mContext.getDrawable(nameAndIconForSystem.iconId);
+                    mAppLabel = nameAndIconForSystem.mName;
+                    if (nameAndIconForSystem.mIconId != 0) {
+                        mAppIconId = nameAndIconForSystem.mIconId;
+                        mAppIcon = mContext.getDrawable(nameAndIconForSystem.mIconId);
                     }
                     sResourceCache.put(
                         getKey(),
@@ -298,8 +311,8 @@ public class BatteryDiffEntry {
         if (packages == null || packages.length == 0) {
             final BatteryEntry.NameAndIcon nameAndIcon =
                 BatteryEntry.getNameAndIconFromUid(mContext, mAppLabel, uid);
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
         }
 
         final BatteryEntry.NameAndIcon nameAndIcon =
@@ -309,13 +322,13 @@ public class BatteryDiffEntry {
         // Clears BatteryEntry internal cache since we will have another one.
         BatteryEntry.clearUidCache();
         if (nameAndIcon != null) {
-            mAppLabel = nameAndIcon.name;
-            mAppIcon = nameAndIcon.icon;
-            mDefaultPackageName = nameAndIcon.packageName;
+            mAppLabel = nameAndIcon.mName;
+            mAppIcon = nameAndIcon.mIcon;
+            mDefaultPackageName = nameAndIcon.mPackageName;
             if (mDefaultPackageName != null
-                    && !mDefaultPackageName.equals(nameAndIcon.packageName)) {
+                    && !mDefaultPackageName.equals(nameAndIcon.mPackageName)) {
                 Log.w(TAG, String.format("found different package: %s | %s",
-                    mDefaultPackageName, nameAndIcon.packageName));
+                    mDefaultPackageName, nameAndIcon.mPackageName));
             }
         }
     }
@@ -339,15 +352,16 @@ public class BatteryDiffEntry {
         return builder.toString();
     }
 
-    static void clearCache() {
+    /** Clears app icon and label cache data. */
+    public static void clearCache() {
         sResourceCache.clear();
         sValidForRestriction.clear();
     }
 
     private Drawable getBadgeIconForUser(Drawable icon) {
         final int userId = UserHandle.getUserId((int) mBatteryHistEntry.mUid);
-        final UserHandle userHandle = new UserHandle(userId);
-        return mUserManager.getBadgedIconForUser(icon, userHandle);
+        return userId == UserHandle.USER_OWNER ? icon :
+            mUserManager.getBadgedIconForUser(icon, new UserHandle(userId));
     }
 
     private static boolean isSystemUid(int uid) {

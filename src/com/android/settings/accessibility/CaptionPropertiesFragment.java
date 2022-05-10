@@ -34,8 +34,6 @@ import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
-import com.google.common.primitives.Floats;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +54,6 @@ public class CaptionPropertiesFragment extends DashboardFragment
     private Preference mMoreOptions;
 
     private final List<Preference> mPreferenceList = new ArrayList<>();
-    private float[] mFontSizeValuesArray;
 
     @Override
     public int getMetricsCategory() {
@@ -71,13 +68,12 @@ public class CaptionPropertiesFragment extends DashboardFragment
 
         initializeAllPreferences();
         installUpdateListeners();
-        initFontSizeValuesArray();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateAllPreferences();
+        mSwitch.setChecked(mCaptioningManager.isEnabled());
     }
 
     @Override
@@ -105,21 +101,6 @@ public class CaptionPropertiesFragment extends DashboardFragment
 
     }
 
-    private void initFontSizeValuesArray() {
-        final String[] fontSizeValuesStrArray = getPrefContext().getResources().getStringArray(
-                R.array.captioning_font_size_selector_values);
-        final int length = fontSizeValuesStrArray.length;
-        mFontSizeValuesArray = new float[length];
-        for (int i = 0; i < length; ++i) {
-            mFontSizeValuesArray[i] = Float.parseFloat(fontSizeValuesStrArray[i]);
-        }
-    }
-
-    private void updateAllPreferences() {
-        mSwitch.setChecked(mCaptioningManager.isEnabled());
-        mTextAppearance.setSummary(geTextAppearanceSummary(getPrefContext()));
-    }
-
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         final ContentResolver cr = getActivity().getContentResolver();
@@ -134,16 +115,6 @@ public class CaptionPropertiesFragment extends DashboardFragment
     @Override
     public int getHelpResource() {
         return R.string.help_url_caption;
-    }
-
-    private CharSequence geTextAppearanceSummary(Context context) {
-        final String[] fontSizeSummaries = context.getResources().getStringArray(
-                R.array.captioning_font_size_selector_summaries);
-
-        final float fontSize = mCaptioningManager.getFontScale();
-        final int idx = Floats.indexOf(mFontSizeValuesArray, fontSize);
-
-        return fontSizeSummaries[idx == /* not exist */ -1 ? 0 : idx];
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

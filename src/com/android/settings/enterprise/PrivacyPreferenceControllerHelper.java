@@ -17,6 +17,8 @@
 package com.android.settings.enterprise;
 
 import static android.app.admin.DevicePolicyManager.DEVICE_OWNER_TYPE_FINANCED;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_DEVICE_INFO_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MANAGED_DEVICE_INFO_SUMMARY_WITH_NAME;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -50,10 +52,16 @@ class PrivacyPreferenceControllerHelper {
 
         final String organizationName = mFeatureProvider.getDeviceOwnerOrganizationName();
         if (organizationName == null) {
-            preference.setSummary(R.string.enterprise_privacy_settings_summary_generic);
+            preference.setSummary(mDevicePolicyManager.getResources().getString(
+                    MANAGED_DEVICE_INFO_SUMMARY,
+                    () -> mContext.getString(
+                            R.string.enterprise_privacy_settings_summary_generic)));
         } else {
-            preference.setSummary(mContext.getResources().getString(
-                    R.string.enterprise_privacy_settings_summary_with_name, organizationName));
+            preference.setSummary(mDevicePolicyManager.getResources().getString(
+                    MANAGED_DEVICE_INFO_SUMMARY_WITH_NAME,
+                    () -> mContext.getResources().getString(
+                            R.string.enterprise_privacy_settings_summary_with_name,
+                            organizationName), organizationName));
         }
     }
 
