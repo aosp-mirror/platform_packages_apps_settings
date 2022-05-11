@@ -103,6 +103,7 @@ public class DataUsageListTest {
                 mMobileDataEnabledListener);
         ReflectionHelpers.setField(mDataUsageList, "services", mNetworkServices);
         doReturn(mLoaderManager).when(mDataUsageList).getLoaderManager();
+        mDataUsageList.mLoadingViewController = mock(LoadingViewController.class);
     }
 
     @Test
@@ -237,8 +238,6 @@ public class DataUsageListTest {
 
     @Test
     public void onLoadFinished_networkCycleDataCallback_shouldShowCycleSpinner() {
-        final LoadingViewController loadingViewController = mock(LoadingViewController.class);
-        mDataUsageList.mLoadingViewController = loadingViewController;
         final Spinner spinner = getSpinner(getHeader());
         spinner.setVisibility(View.INVISIBLE);
         mDataUsageList.mCycleSpinner = spinner;
