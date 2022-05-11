@@ -115,40 +115,27 @@ public class NotificationBackend {
 
     void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
             AppRow row) {
-        if (Settings.Secure.getIntForUser(context.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 0, USER_SYSTEM) != 0) {
-            try {
-                row.systemApp = row.lockedImportance =
-                        sINM.isPermissionFixed(app.packageName, row.userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Error calling NMS", e);
-            }
-            // The permission system cannot make role permissions 'fixed', so check for these
-            // roles explicitly
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = row.lockedImportance = true;
-            }
-            // if the app targets T but has not requested the permission, we cannot change the
-            // permission state
-            if (app.applicationInfo.targetSdkVersion > Build.VERSION_CODES.S_V2) {
-                if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
-                        .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
-                    row.lockedImportance = true;
-                }
-            }
 
-        } else {
-            row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = true;
+        try {
+            row.systemApp = row.lockedImportance =
+                    sINM.isPermissionFixed(app.packageName, row.userId);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling NMS", e);
+        }
+        // The permission system cannot make role permissions 'fixed', so check for these
+        // roles explicitly
+        List<String> roles = rm.getHeldRolesFromController(app.packageName);
+        if (roles.contains(RoleManager.ROLE_DIALER)
+                || roles.contains(RoleManager.ROLE_EMERGENCY)) {
+            row.systemApp = row.lockedImportance = true;
+        }
+        // if the app targets T but has not requested the permission, we cannot change the
+        // permission state
+        if (app.applicationInfo.targetSdkVersion > Build.VERSION_CODES.S_V2) {
+            if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
+                    .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
+                row.lockedImportance = true;
             }
-            final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
-            markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
         }
     }
 
