@@ -16,8 +16,12 @@
 
 package com.android.settings.network.telephony;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -27,14 +31,27 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
     private static final String TAG = "SubscriptionActionDialogActivity";
     // Arguments
     protected static final String ARG_SUB_ID = "sub_id";
-
     protected SubscriptionManager mSubscriptionManager;
+
+    public static final String SIM_ACTION_DIALOG_PREFS = "sim_action_dialog_prefs";
+    // Shared preference keys
+    public static final String KEY_PROGRESS_STATE = "progress_state";
+    public static final int PROGRESS_IS_NOT_SHOWING = 0;
+    public static final int PROGRESS_IS_SHOWING = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mSubscriptionManager = getSystemService(SubscriptionManager.class);
+        setProgressState(PROGRESS_IS_NOT_SHOWING);
+    }
+
+
+    @Override
+    public void finish() {
+        setProgressState(PROGRESS_IS_NOT_SHOWING);
+        super.finish();
     }
 
     /**
@@ -44,11 +61,13 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
      */
     protected void showProgressDialog(String message) {
         ProgressDialogFragment.show(getFragmentManager(), message, null);
+        setProgressState(PROGRESS_IS_SHOWING);
     }
 
     /** Dismisses the loading dialog. */
     protected void dismissProgressDialog() {
         ProgressDialogFragment.dismiss(getFragmentManager());
+        setProgressState(PROGRESS_IS_NOT_SHOWING);
     }
 
     /**
@@ -59,5 +78,11 @@ public class SubscriptionActionDialogActivity extends FragmentActivity {
      */
     protected void showErrorDialog(String title, String message) {
         AlertDialogFragment.show(this, title, message);
+    }
+
+    protected void setProgressState(int state) {
+        final SharedPreferences prefs = getSharedPreferences(SIM_ACTION_DIALOG_PREFS, MODE_PRIVATE);
+        prefs.edit().putInt(KEY_PROGRESS_STATE, state).apply();
+        Log.i(TAG, "setProgressState:" + state);
     }
 }
