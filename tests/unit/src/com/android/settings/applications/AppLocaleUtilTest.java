@@ -37,6 +37,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -71,6 +72,7 @@ public class AppLocaleUtilTest {
     }
 
     @Test
+    @Ignore("b/231904717")
     public void canDisplayLocaleUi_showUI() throws PackageManager.NameNotFoundException {
         setApplicationInfo(/*no platform key*/ false);
         setActivityInfo(mAllowedPackage);
@@ -79,6 +81,7 @@ public class AppLocaleUtilTest {
     }
 
     @Test
+    @Ignore("b/231904717")
     public void canDisplayLocaleUi_notShowUI_hasPlatformKey()
             throws PackageManager.NameNotFoundException {
         setApplicationInfo(/*has platform key*/ true);
@@ -88,6 +91,7 @@ public class AppLocaleUtilTest {
     }
 
     @Test
+    @Ignore("b/231904717")
     public void canDisplayLocaleUi_notShowUI_noLauncherEntry()
             throws PackageManager.NameNotFoundException {
         setApplicationInfo(/*no platform key*/false);
@@ -97,6 +101,7 @@ public class AppLocaleUtilTest {
     }
 
     @Test
+    @Ignore("b/231904717")
     public void canDisplayLocaleUi_notShowUI_matchDisallowedPackageList()
             throws PackageManager.NameNotFoundException {
         setApplicationInfo(/*no platform key*/false);

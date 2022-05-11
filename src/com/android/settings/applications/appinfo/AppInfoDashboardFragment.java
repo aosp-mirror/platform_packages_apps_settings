@@ -154,6 +154,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final TimeSpentInAppPreferenceController timeSpentInAppPreferenceController = use(
                 TimeSpentInAppPreferenceController.class);
         timeSpentInAppPreferenceController.setPackageName(packageName);
+        timeSpentInAppPreferenceController.setParentFragment(this);
         timeSpentInAppPreferenceController.initLifeCycleOwner(this);
 
         use(AppDataUsagePreferenceController.class).setParentFragment(this);

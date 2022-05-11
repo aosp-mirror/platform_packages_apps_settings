@@ -89,6 +89,7 @@ public class VideoCallingPreferenceControllerTest {
         mController.init(SUB_ID);
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         doReturn(mQueryVoLteState).when(mController).queryVoLteState(anyInt());
+        doReturn(true).when(mController).isImsSupported();
         mPreference.setKey(mController.getPreferenceKey());
 
         mQueryImsState.setIsEnabledByPlatform(true);
