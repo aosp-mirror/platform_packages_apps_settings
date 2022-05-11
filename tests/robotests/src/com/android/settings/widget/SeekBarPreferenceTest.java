@@ -34,6 +34,7 @@ import android.widget.SeekBar;
 
 import androidx.preference.PreferenceFragmentCompat;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsInternal;
 
 import org.junit.Before;
@@ -46,7 +47,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowRestrictedLockUtilsInternal.class)
+@Config(shadows = {ShadowRestrictedLockUtilsInternal.class, ShadowInteractionJankMonitor.class})
 public class SeekBarPreferenceTest {
 
     private static final int MAX = 75;

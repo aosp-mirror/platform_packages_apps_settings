@@ -17,46 +17,63 @@
 package com.android.settings.testutils;
 
 import android.os.ParcelFileDescriptor;
-import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AdbUtils {
+    public static String getCallerClassName() {
+        StackTraceElement[] stElements = Thread.currentThread().getStackTrace();
+        for (int i = 1; i < stElements.length; i++) {
+            StackTraceElement ste = stElements[i];
+            if (!ste.getClassName().equals(new Object() {
+            }.getClass().getEnclosingClass().getName()) && ste.getClassName().indexOf(
+                    "java.lang.Thread") != 0) {
+                return ste.getClassName();
+            }
+        }
+        return null;
+    }
+
     public static boolean checkStringInAdbCommandOutput(String logTag, String command,
             String prefix, String target, int timeoutInMillis) throws Exception {
         long start = System.nanoTime();
+
         //Sometimes the change do no reflect in adn output immediately, so need a wait and poll here
         while (System.nanoTime() - start < (timeoutInMillis * 1000000)) {
-            try (ParcelFileDescriptor.AutoCloseInputStream in =
-                         new ParcelFileDescriptor.AutoCloseInputStream(
-                                 InstrumentationRegistry.getInstrumentation()
-                                         .getUiAutomation()
-                                         .executeShellCommand(command))) {
-                try (BufferedReader br =
-                             new BufferedReader(
-                                     new InputStreamReader(in, StandardCharsets.UTF_8))) {
-                    Optional<String> resultOptional = br.lines().filter(line -> {
-                        Log.d(logTag, line);
-                        return TextUtils.isEmpty(prefix) || line.contains(prefix);
-                    }).findFirst();
-                    String result = resultOptional.get();
-                    if (result.contains(target)) {
-                        return true;
-                    } else {
-                        Thread.sleep(100);
-                    }
-                }
-            } catch (Exception e) {
-                throw e;
+            String result = shell(command);
+            if (result.contains(prefix == null ? "" : prefix)
+                    && result.contains(target == null ? "" : target)) {
+                return true;
+            } else {
+                Thread.sleep(100);
             }
         }
 
         return false;
+    }
+
+    public static String shell(String shellCommand) {
+        String returnValue = "";
+        try (ParcelFileDescriptor.AutoCloseInputStream in =
+                     new ParcelFileDescriptor.AutoCloseInputStream(
+                             InstrumentationRegistry.getInstrumentation()
+                                     .getUiAutomation()
+                                     .executeShellCommand(shellCommand))) {
+            try (BufferedReader br =
+                         new BufferedReader(
+                                 new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                returnValue = br.lines().collect(Collectors.joining());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return returnValue;
     }
 }

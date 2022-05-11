@@ -101,6 +101,11 @@ public class GameControllerPreferenceController extends TogglePreferenceControll
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_system;
+    }
+
+    @Override
     public void onInputDeviceAdded(int deviceId) {
         updateState(mPreference);
     }

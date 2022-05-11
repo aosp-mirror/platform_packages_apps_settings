@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
 
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
@@ -40,11 +41,21 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowBluetoothAdapter.class})
 public class BluetoothPairingControllerTest {
     private final BluetoothClass mBluetoothClass =
-            new BluetoothClass(BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE);
+            createBtClass(BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE);
     @Mock
     private BluetoothDevice mBluetoothDevice;
     private Context mContext;
     private BluetoothPairingController mBluetoothPairingController;
+
+    private BluetoothClass createBtClass(int deviceClass) {
+        Parcel p = Parcel.obtain();
+        p.writeInt(deviceClass);
+        p.setDataPosition(0); // reset position of parcel before passing to constructor
+
+        BluetoothClass bluetoothClass = BluetoothClass.CREATOR.createFromParcel(p);
+        p.recycle();
+        return bluetoothClass;
+    }
 
     @Before
     public void setUp() {

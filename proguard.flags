@@ -66,3 +66,8 @@
 -keepclasseswithmembers class * extends com.android.settings.slices.SliceBackgroundWorker {
     public <init>(android.content.Context, android.net.Uri);
 }
+
+# Keep WM Jetpack classes and callbacks
+-keep class androidx.window.extensions.** { *; }
+-dontwarn androidx.window.extensions.**
+-keep class androidx.window.** { *; }

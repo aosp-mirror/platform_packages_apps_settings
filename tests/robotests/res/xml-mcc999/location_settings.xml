@@ -24,6 +24,7 @@
         android:title="title"
         android:icon="@drawable/ic_android"
         android:summary="summary"
+        settings:highlightableMenuKey="menu_key"
         settings:controller="com.android.settings.slices.FakePreferenceController"
         settings:keywords="a, b, c"
         settings:unavailableSliceSubtitle="subtitleOfUnavailableSlice"/>
