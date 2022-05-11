@@ -25,7 +25,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.app.NotificationPreferenceController;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 public class VibrationPreferenceController extends NotificationPreferenceController
@@ -36,7 +35,7 @@ public class VibrationPreferenceController extends NotificationPreferenceControl
 
     public VibrationPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
-        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        mVibrator = context.getSystemService(Vibrator.class);
     }
 
     @Override

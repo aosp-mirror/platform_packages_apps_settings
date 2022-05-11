@@ -27,6 +27,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -70,6 +71,11 @@ public class ShowClipAccessNotificationPreferenceController
         super.displayPreference(screen);
 
         mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_privacy;
     }
 
     /**

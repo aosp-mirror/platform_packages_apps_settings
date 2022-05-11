@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -30,6 +31,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.MobileDataEnabledListener;
 import com.android.settings.network.ims.VolteQueryImsState;
 import com.android.settings.network.ims.VtQueryImsState;
@@ -48,7 +50,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
     private static final String TAG = "VideoCallingPreference";
 
     private Preference mPreference;
-    private CarrierConfigManager mCarrierConfigManager;
     private PhoneTelephonyCallback mTelephonyCallback;
     @VisibleForTesting
     Integer mCallState;
@@ -56,7 +57,6 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
 
     public VideoCallingPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
         mDataContentObserver = new MobileDataEnabledListener(context, this);
         mTelephonyCallback = new PhoneTelephonyCallback();
     }
@@ -130,6 +130,12 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         return queryImsState(mSubId).isEnabledByUser();
     }
 
+    @VisibleForTesting
+    protected boolean isImsSupported() {
+        return mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_IMS);
+    }
+
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
 
@@ -142,17 +148,8 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             return false;
         }
 
-        // When called within Settings Search, this variable may still be null.
-        if (mCarrierConfigManager == null) {
-            Log.e(TAG, "CarrierConfigManager set to null.");
-            mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
-            if (mCarrierConfigManager == null) {
-                Log.e(TAG, "Unable to reinitialize CarrierConfigManager.");
-                return false;
-            }
-        }
-
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig =
+                CarrierConfigCache.getInstance(mContext).getConfigForSubId(subId);
         if (carrierConfig == null) {
             return false;
         }
@@ -164,7 +161,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             return false;
         }
 
-        return queryImsState(subId).isReadyToVideoCall();
+        return isImsSupported() && queryImsState(subId).isReadyToVideoCall();
     }
 
     @Override

@@ -19,10 +19,10 @@ package com.android.settings.network.telephony;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.PersistableBundle;
-import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.network.CarrierConfigCache;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -65,6 +65,12 @@ public abstract class TelephonyTogglePreferenceController extends TogglePreferen
         return false;
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        // not needed since it's not sliceable
+        return NO_RES;
+    }
+
     /**
      * Get carrier config based on specific subscription id.
      *
@@ -76,9 +82,7 @@ public abstract class TelephonyTogglePreferenceController extends TogglePreferen
         if (!SubscriptionManager.isValidSubscriptionId(subId)) {
             return null;
         }
-        final CarrierConfigManager carrierConfigMgr =
-                mContext.getSystemService(CarrierConfigManager.class);
-        return carrierConfigMgr.getConfigForSubId(subId);
+        return CarrierConfigCache.getInstance(mContext).getConfigForSubId(subId);
     }
 
     /**

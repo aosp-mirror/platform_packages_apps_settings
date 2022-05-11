@@ -16,18 +16,22 @@
 
 package com.android.settings.inputmethod;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtilCompat;
 import com.android.settingslib.inputmethod.InputMethodPreference;
@@ -38,23 +42,57 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The fragment for on-screen keyboard settings which used to display user installed IMEs.
+ */
 @SearchIndexable
-public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
+public class AvailableVirtualKeyboardFragment extends DashboardFragment
         implements InputMethodPreference.OnSavePreferenceListener {
+    private static final String TAG = "AvailableVirtualKeyboardFragment";
 
-    private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
-    private InputMethodSettingValuesWrapper mInputMethodSettingValues;
-    private InputMethodManager mImm;
-    private DevicePolicyManager mDpm;
+    @VisibleForTesting
+    final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
+
+    @VisibleForTesting
+    InputMethodSettingValuesWrapper mInputMethodSettingValues;
+    private Context mUserAwareContext;
+    private int mUserId;
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.available_virtual_keyboard);
-        Activity activity = getActivity();
+        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(mUserAwareContext);
+    }
 
-        mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(activity);
-        mImm = activity.getSystemService(InputMethodManager.class);
-        mDpm = activity.getSystemService(DevicePolicyManager.class);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final int profileType = getArguments().getInt(ProfileSelectFragment.EXTRA_PROFILE);
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        final int currentUserId = UserHandle.myUserId();
+        final int newUserId;
+        final Context newUserAwareContext;
+        switch (profileType) {
+            case ProfileSelectFragment.ProfileType.WORK: {
+                // If the user is a managed profile user, use currentUserId directly. Or get the
+                // managed profile userId instead.
+                newUserId = userManager.isManagedProfile()
+                        ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
+                break;
+            }
+            case ProfileSelectFragment.ProfileType.PERSONAL: {
+                final UserHandle primaryUser = userManager.getPrimaryUser().getUserHandle();
+                newUserId = primaryUser.getIdentifier();
+                newUserAwareContext = context.createContextAsUser(primaryUser, 0);
+                break;
+            }
+            default:
+                newUserId = currentUserId;
+                newUserAwareContext = context;
+        }
+        mUserId = newUserId;
+        mUserAwareContext = newUserAwareContext;
     }
 
     @Override
@@ -67,11 +105,24 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.available_virtual_keyboard;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
     public void onSaveInputMethodPreference(final InputMethodPreference pref) {
         final boolean hasHardwareKeyboard = getResources().getConfiguration().keyboard
                 == Configuration.KEYBOARD_QWERTY;
-        InputMethodAndSubtypeUtilCompat.saveInputMethodSubtypeList(this, getContentResolver(),
-                mImm.getInputMethodList(), hasHardwareKeyboard);
+        InputMethodAndSubtypeUtilCompat.saveInputMethodSubtypeListForUser(this,
+                mUserAwareContext.getContentResolver(),
+                getContext().getSystemService(
+                        InputMethodManager.class).getInputMethodListAsUser(mUserId),
+                hasHardwareKeyboard, mUserId);
         // Update input method settings and preference list.
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
         for (final InputMethodPreference p : mInputMethodPreferenceList) {
@@ -84,14 +135,17 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         return SettingsEnums.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
-    private void updateInputMethodPreferenceViews() {
+    @VisibleForTesting
+    void updateInputMethodPreferenceViews() {
         mInputMethodSettingValues.refreshAllInputMethodAndSubtypes();
         // Clear existing "InputMethodPreference"s
         mInputMethodPreferenceList.clear();
-        List<String> permittedList = mDpm.getPermittedInputMethodsForCurrentUser();
-        final Context context = getPrefContext();
+        final List<String> permittedList = mUserAwareContext.getSystemService(
+                DevicePolicyManager.class).getPermittedInputMethods();
+        final Context prefContext = getPrefContext();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-        final List<InputMethodInfo> enabledImis = mImm.getEnabledInputMethodList();
+        final List<InputMethodInfo> enabledImis = getContext().getSystemService(
+                InputMethodManager.class).getEnabledInputMethodListAsUser(mUserId);
         final int numImis = (imis == null ? 0 : imis.size());
         for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);
@@ -104,9 +158,9 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName())
                     || enabledImis.contains(imi);
-            final InputMethodPreference pref = new InputMethodPreference(
-                    context, imi, true, isAllowedByOrganization, this);
-            pref.setIcon(imi.loadIcon(context.getPackageManager()));
+            final InputMethodPreference pref = new InputMethodPreference(prefContext, imi,
+                    isAllowedByOrganization, this, mUserId);
+            pref.setIcon(imi.loadIcon(mUserAwareContext.getPackageManager()));
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();

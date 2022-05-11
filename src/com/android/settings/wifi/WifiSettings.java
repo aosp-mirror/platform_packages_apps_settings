@@ -59,6 +59,7 @@ import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.RestrictedSettingsFragment;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.DataUsagePreference;
@@ -67,14 +68,13 @@ import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.MainSwitchBarController;
-import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
@@ -88,15 +88,20 @@ import java.util.Optional;
 /**
  * UI for Wi-Fi settings screen
  *
- * TODO(b/167474581): This file will be deprecated at Android S, please merge your WifiSettings
+ * @deprecated This file will be deprecated at Android S, please merge your WifiSettings
  * in change in {@link NetworkProviderSettings}.
  */
+@Deprecated
 @SearchIndexable
 public class WifiSettings extends RestrictedSettingsFragment
         implements Indexable, WifiPickerTracker.WifiPickerTrackerCallback,
         WifiDialog2.WifiDialog2Listener, DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiSettings";
+
+    // Set the Provider Model is always enabled
+    @VisibleForTesting
+    static Boolean IS_ENABLED_PROVIDER_MODEL = true;
 
     // IDs of context menu
     static final int MENU_ID_CONNECT = Menu.FIRST + 1;
@@ -184,6 +189,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     // Worker thread used for WifiPickerTracker work
     private HandlerThread mWorkerThread;
+    private Handler mMainHandler;
+    private Handler mWorkerHandler;
 
     @VisibleForTesting
     WifiPickerTracker mWifiPickerTracker;
@@ -231,7 +238,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)) {
+        if (IS_ENABLED_PROVIDER_MODEL) {
             final Intent intent = new Intent("android.settings.NETWORK_PROVIDER_SETTINGS");
             // Add FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK to avoid multiple
             // instances issue. (e.g. b/191956700)
@@ -265,9 +272,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         mStatusMessagePreference = findPreference(PREF_KEY_STATUS_MESSAGE);
         mDataUsagePreference = findPreference(PREF_KEY_DATA_USAGE);
         mDataUsagePreference.setVisible(DataUsageUtils.hasWifiRadio(getContext()));
-        mDataUsagePreference.setTemplate(
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */), 0 /*subId*/, null /*service*/);
+        mDataUsagePreference.setTemplate(new NetworkTemplate.Builder(
+                NetworkTemplate.MATCH_WIFI).build(), 0 /*subId*/, null /*service*/);
     }
 
     @Override
@@ -285,11 +291,13 @@ public class WifiSettings extends RestrictedSettingsFragment
                 return SystemClock.elapsedRealtime();
             }
         };
+
+        mMainHandler = new Handler(Looper.getMainLooper());
+        mWorkerHandler = mWorkerThread.getThreadHandler();
         mWifiPickerTracker = FeatureFactory.getFactory(context)
                 .getWifiTrackerLibProvider()
                 .createWifiPickerTracker(getSettingsLifecycle(), context,
-                        new Handler(Looper.getMainLooper()),
-                        mWorkerThread.getThreadHandler(),
+                        mMainHandler, mWorkerHandler,
                         elapsedRealtimeClock,
                         MAX_SCAN_AGE_MILLIS,
                         SCAN_INTERVAL_MILLIS,
@@ -361,6 +369,10 @@ public class WifiSettings extends RestrictedSettingsFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.teardownSwitchController();
         }
+
+        // remove all msg and callback in main handler and worker handler
+        mMainHandler.removeCallbacksAndMessages(null);
+        mWorkerHandler.removeCallbacksAndMessages(null);
         mWorkerThread.quit();
 
         super.onDestroyView();
@@ -645,7 +657,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     /** Called when the state of Wifi has changed. */
     @Override
     public void onWifiStateChanged() {
-        if (mIsRestricted) {
+        if (mIsRestricted || isFinishingOrDestroyed()) {
             return;
         }
         final int wifiState = mWifiPickerTracker.getWifiState();
@@ -683,6 +695,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged() {
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
+
         if (mIsWifiEntryListStale) {
             mIsWifiEntryListStale = false;
             updateWifiEntryPreferences();
@@ -844,11 +860,11 @@ public class WifiSettings extends RestrictedSettingsFragment
                         : context.getText(R.string.pref_title_network_details);
 
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY, wifiEntry.getKey());
 
         new SubSettingLauncher(context)
                 .setTitleText(title)
-                .setDestination(WifiNetworkDetailsFragment2.class.getName())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
                 .setArguments(bundle)
                 .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
@@ -1029,7 +1045,8 @@ public class WifiSettings extends RestrictedSettingsFragment
     @Override
     public void onScan(WifiDialog2 dialog, String ssid) {
         // Launch QR code scanner to join a network.
-        startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
+        startActivityForResult(
+                WifiDppUtils.getEnrolleeQrCodeScannerIntent(dialog.getContext(), ssid),
                 REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
     }
 
@@ -1067,6 +1084,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.wifi_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return !IS_ENABLED_PROVIDER_MODEL;
+                }
+
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
@@ -1121,7 +1143,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void launchConfigNewNetworkFragment(WifiEntry wifiEntry) {
         final Bundle bundle = new Bundle();
-        bundle.putString(WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY,
+        bundle.putString(WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY,
                 wifiEntry.getKey());
         new SubSettingLauncher(getContext())
                 .setTitleText(wifiEntry.getTitle())
