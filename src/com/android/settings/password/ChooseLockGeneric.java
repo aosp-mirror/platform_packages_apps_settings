@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK_ACTION;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE;
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
@@ -78,7 +79,6 @@ import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -621,15 +621,20 @@ public class ChooseLockGeneric extends SettingsActivity {
             } else if (!mForFace && !mForBiometrics && !mForFingerprint && !mIsManagedProfile
                     && mController.isScreenLockRestrictedByAdmin()
                     && profileUserId != UserHandle.USER_NULL) {
-                CharSequence description =
-                        mDpm.getResources().getString(WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
-                                () -> null);
-                if (description == null) {
-                    description = getText(
-                            R.string.lock_settings_picker_admin_restricted_personal_message);
-                }
-                final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
-                        AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION, (view) -> {
+                final StringBuilder description = new StringBuilder(
+                        mDpm.getResources().getString(
+                                WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
+                                () -> getString(
+                                R.string.lock_settings_picker_admin_restricted_personal_message)));
+                footer.setVisible(true);
+                footer.setTitle(description);
+
+                final StringBuilder setLockText = new StringBuilder(
+                        mDpm.getResources().getString(
+                                WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK_ACTION,
+                                () -> getString(
+                          R.string.lock_settings_picker_admin_restricted_personal_message_action)));
+                View.OnClickListener setLockClickListener = (v) -> {
                     final Bundle extras = new Bundle();
                     extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
                     if (mUserPassword != null) {
@@ -642,10 +647,9 @@ public class ChooseLockGeneric extends SettingsActivity {
                             .setArguments(extras)
                             .launch();
                     finish();
-                });
-                CharSequence footerText = AnnotationSpan.linkify(description, linkInfo);
-                footer.setVisible(true);
-                footer.setTitle(footerText);
+                };
+                footer.setLearnMoreText(setLockText);
+                footer.setLearnMoreAction(setLockClickListener);
             } else {
                 footer.setVisible(false);
             }
