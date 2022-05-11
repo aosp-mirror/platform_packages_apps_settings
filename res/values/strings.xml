@@ -1413,8 +1413,10 @@
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for biometrics. Users can choose to use this method to unlock the screen instead of biometrics, or when biometrics are not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
 
-    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
-    <string name="lock_settings_picker_admin_restricted_personal_message">If you forget your screen lock, your IT admin can\u2019t reset it. <annotation id="link">Set a separate work lock</annotation></string>
+    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message">If you forget your screen lock, your IT admin can\u2019t reset it.</string>
+    <!-- Text shown on the screen lock menu. This text is letting the user know that they can choose to set another lock that would be specifically for their work apps. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message_action">Set a separate work lock</string>
 
     <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
     <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
