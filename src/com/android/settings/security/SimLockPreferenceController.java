@@ -89,7 +89,8 @@ public class SimLockPreferenceController extends BasePreferenceController {
         for (SubscriptionInfo subInfo : subInfoList) {
             final int simState = mTelephonyManager.getSimState(subInfo.getSimSlotIndex());
             if ((simState != TelephonyManager.SIM_STATE_ABSENT)
-                    && (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
+                    && (simState != TelephonyManager.SIM_STATE_UNKNOWN)
+                    && (simState != TelephonyManager.SIM_STATE_PERM_DISABLED)) {
                 return true;
             }
         }
