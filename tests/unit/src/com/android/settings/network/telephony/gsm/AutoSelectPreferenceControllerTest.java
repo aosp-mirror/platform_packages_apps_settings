@@ -36,6 +36,7 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -58,7 +59,7 @@ public class AutoSelectPreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private ProgressDialog mProgressDialog;
     @Mock
@@ -78,14 +79,13 @@ public class AutoSelectPreferenceControllerTest {
 
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
-            mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
 
         mCarrierConfig = new PersistableBundle();
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL,
             true);
-        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
+        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
 
         mSwitchPreference = new SwitchPreference(mContext);
         mController = new AutoSelectPreferenceController(mContext, "auto_select");
@@ -136,7 +136,7 @@ public class AutoSelectPreferenceControllerTest {
 
     @Test
     public void init_carrierConfigNull_shouldNotCrash() {
-        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(null);
+        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(null);
 
         // Should not crash
         mController.init(mLifecycle, SUB_ID);

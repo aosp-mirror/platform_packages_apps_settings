@@ -22,6 +22,7 @@ import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -49,6 +50,11 @@ public class CellularFallbackPreferenceController extends TogglePreferenceContro
         // On: avoid bad wifi. Off: prompt.
         return Settings.Global.putString(mContext.getContentResolver(),
                 Settings.Global.NETWORK_AVOID_BAD_WIFI, isChecked ? "1" : null);
+    }
+
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
     }
 
     private boolean avoidBadWifiConfig() {

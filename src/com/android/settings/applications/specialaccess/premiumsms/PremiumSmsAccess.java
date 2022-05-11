@@ -68,13 +68,13 @@ public class PremiumSmsAccess extends EmptyTextSettings
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setLoading(true, false);
+        setEmptyText(R.string.premium_sms_none);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mSmsBackend.resume();
+        mSmsBackend.resume(true /* forceLoadAllApps */);
     }
 
     @Override
@@ -138,8 +138,6 @@ public class PremiumSmsAccess extends EmptyTextSettings
 
     private void updatePrefs(ArrayList<AppEntry> apps) {
         if (apps == null) return;
-        setEmptyText(R.string.premium_sms_none);
-        setLoading(false, true);
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
         screen.setOrderingAsAdded(true);

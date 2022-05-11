@@ -23,6 +23,7 @@ import static com.android.settings.development.DesktopModePreferenceController.S
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -31,6 +32,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.provider.Settings;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
@@ -52,6 +56,14 @@ public class DesktopModePreferenceControllerTest {
     private SwitchPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock
+    private FragmentActivity mActivity;
+    @Mock
+    private FragmentManager mFragmentManager;
+    @Mock
+    private FragmentTransaction mTransaction;
 
     private Context mContext;
     private DesktopModePreferenceController mController;
@@ -60,7 +72,10 @@ public class DesktopModePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new DesktopModePreferenceController(mContext);
+        doReturn(mTransaction).when(mFragmentManager).beginTransaction();
+        doReturn(mFragmentManager).when(mActivity).getSupportFragmentManager();
+        doReturn(mActivity).when(mFragment).getActivity();
+        mController = new DesktopModePreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
@@ -82,16 +97,18 @@ public class DesktopModePreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_switchEnabled_shouldEnableFreeformWindows() {
+    public void onPreferenceChange_switchEnabled_shouldEnableDesktopMode() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 DEVELOPMENT_FORCE_DESKTOP_MODE_ON_EXTERNAL_DISPLAYS, -1 /* default */);
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
+
+        verify(mTransaction).add(any(RebootConfirmationDialogFragment.class), any());
     }
 
     @Test
-    public void onPreferenceChange_switchDisabled_shouldDisableFreeformWindows() {
+    public void onPreferenceChange_switchDisabled_shouldDisableDesktopMode() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
