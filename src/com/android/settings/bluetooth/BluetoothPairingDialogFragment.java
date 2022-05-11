@@ -83,6 +83,12 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPairingController.onCancel();
+    }
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
 
