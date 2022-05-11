@@ -36,7 +36,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "slices_index.db";
     private static final String SHARED_PREFS_TAG = "slices_shared_prefs";
 
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
 
     public interface Tables {
         String TABLE_SLICES_INDEX = "slices_index";
@@ -103,39 +103,43 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
          * Whether the slice should be exposed publicly.
          */
         String PUBLIC_SLICE = "public_slice";
+
+        /**
+         * Resource ID for the menu entry of the setting.
+         */
+        String HIGHLIGHT_MENU_RESOURCE = "highlight_menu";
     }
 
     private static final String CREATE_SLICES_TABLE =
-            "CREATE VIRTUAL TABLE " + Tables.TABLE_SLICES_INDEX + " USING fts4" +
-                    "(" +
-                    IndexColumns.KEY +
-                    ", " +
-                    IndexColumns.SLICE_URI +
-                    ", " +
-                    IndexColumns.TITLE +
-                    ", " +
-                    IndexColumns.SUMMARY +
-                    ", " +
-                    IndexColumns.SCREENTITLE +
-                    ", " +
-                    IndexColumns.KEYWORDS +
-                    ", " +
-                    IndexColumns.ICON_RESOURCE +
-                    ", " +
-                    IndexColumns.FRAGMENT +
-                    ", " +
-                    IndexColumns.CONTROLLER +
-                    ", " +
-                    IndexColumns.SLICE_TYPE +
-                    ", " +
-                    IndexColumns.UNAVAILABLE_SLICE_SUBTITLE +
-                    ", "
-                    +
-                    IndexColumns.PUBLIC_SLICE
-                    +
-                    " INTEGER DEFAULT 0 "
-                    +
-                    ");";
+            "CREATE VIRTUAL TABLE " + Tables.TABLE_SLICES_INDEX + " USING fts4"
+                    + "("
+                    + IndexColumns.KEY
+                    + ", "
+                    + IndexColumns.SLICE_URI
+                    + ", "
+                    + IndexColumns.TITLE
+                    + ", "
+                    + IndexColumns.SUMMARY
+                    + ", "
+                    + IndexColumns.SCREENTITLE
+                    + ", "
+                    + IndexColumns.KEYWORDS
+                    + ", "
+                    + IndexColumns.ICON_RESOURCE
+                    + ", "
+                    + IndexColumns.FRAGMENT
+                    + ", "
+                    + IndexColumns.CONTROLLER
+                    + ", "
+                    + IndexColumns.SLICE_TYPE
+                    + ", "
+                    + IndexColumns.UNAVAILABLE_SLICE_SUBTITLE
+                    + ", "
+                    + IndexColumns.PUBLIC_SLICE
+                    + ", "
+                    + IndexColumns.HIGHLIGHT_MENU_RESOURCE
+                    + " INTEGER DEFAULT 0 "
+                    + ");";
 
     private final Context mContext;
 

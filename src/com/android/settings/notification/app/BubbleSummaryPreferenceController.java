@@ -63,7 +63,7 @@ public class BubbleSummaryPreferenceController extends NotificationPreferenceCon
                 return mAppRow != null;
             }
         }
-        return isGloballyEnabled() && mBackend.hasSentValidMsg(mAppRow.pkg, mAppRow.uid);
+        return isGloballyEnabled() && mBackend.hasSentValidBubble(mAppRow.pkg, mAppRow.uid);
     }
 
     @Override

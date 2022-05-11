@@ -17,6 +17,7 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -30,15 +31,45 @@
         android:clipChildren="false"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/error_text"
-            style="@style/TextAppearance.ErrorText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:accessibilityLiveRegion="polite"
-            android:gravity="center_horizontal"
-            android:visibility="invisible" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:orientation="vertical">
+
+          <FrameLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:clipChildren="false"
+              android:clipToPadding="false"
+              android:layout_gravity="center_horizontal|bottom">
+
+              <!-- Animation res MUST be set in code -->
+              <com.airbnb.lottie.LottieAnimationView
+                  android:id="@+id/illustration_lottie"
+                  android:layout_width="match_parent"
+                  android:layout_height="200dp"
+                  android:layout_marginTop="@dimen/udfps_lottie_translate_y"
+                  android:scaleType="centerInside"
+                  android:visibility="gone"
+                  app:lottie_autoPlay="true"
+                  app:lottie_loop="true"
+                  android:clipChildren="false"
+                  android:clipToPadding="false"
+                  app:lottie_speed=".85" />
+          </FrameLayout>
+
+          <TextView
+              android:id="@+id/error_text"
+              style="@style/TextAppearance.ErrorText"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_horizontal|bottom"
+              android:accessibilityLiveRegion="polite"
+              android:gravity="center_horizontal"
+              android:visibility="invisible" />
+      </LinearLayout>
     </LinearLayout>
 
 </com.google.android.setupdesign.GlifLayout>

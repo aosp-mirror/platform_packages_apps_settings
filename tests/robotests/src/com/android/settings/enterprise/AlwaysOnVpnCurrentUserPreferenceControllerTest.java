@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -36,6 +37,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
 
     private static final String VPN_SET_DEVICE = "VPN set";

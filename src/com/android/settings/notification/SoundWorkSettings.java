@@ -16,6 +16,13 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_ALARM_RINGTONE_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATION_RINGTONE_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_RINGTONE_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_USE_PERSONAL_SOUNDS_SUMMARY;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_USE_PERSONAL_SOUNDS_TITLE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -64,6 +71,20 @@ public class SoundWorkSettings extends DashboardFragment implements OnActivityRe
                 mRequestPreference = findPreference(selectedPreference);
             }
         }
+        replaceEnterprisePreferenceScreenTitle(
+                WORK_PROFILE_SOUND_SETTINGS_SECTION_HEADER, R.string.sound_work_settings);
+        replaceEnterpriseStringTitle("work_use_personal_sounds",
+                WORK_PROFILE_USE_PERSONAL_SOUNDS_TITLE, R.string.work_use_personal_sounds_title);
+        replaceEnterpriseStringSummary("work_use_personal_sounds",
+                WORK_PROFILE_USE_PERSONAL_SOUNDS_SUMMARY,
+                R.string.work_use_personal_sounds_summary);
+        replaceEnterpriseStringTitle("work_ringtone",
+                WORK_PROFILE_RINGTONE_TITLE, R.string.work_ringtone_title);
+        replaceEnterpriseStringTitle("work_alarm_ringtone",
+                WORK_PROFILE_ALARM_RINGTONE_TITLE, R.string.work_alarm_ringtone_title);
+        replaceEnterpriseStringTitle("work_notification_ringtone",
+                WORK_PROFILE_NOTIFICATION_RINGTONE_TITLE,
+                R.string.work_notification_ringtone_title);
     }
 
     @Override

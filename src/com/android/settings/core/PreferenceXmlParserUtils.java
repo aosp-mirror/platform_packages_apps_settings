@@ -73,7 +73,8 @@ public class PreferenceXmlParserUtils {
             MetadataFlag.FLAG_NEED_PREF_ICON,
             MetadataFlag.FLAG_NEED_SEARCHABLE,
             MetadataFlag.FLAG_UNAVAILABLE_SLICE_SUBTITLE,
-            MetadataFlag.FLAG_FOR_WORK})
+            MetadataFlag.FLAG_FOR_WORK,
+            MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface MetadataFlag {
 
@@ -89,6 +90,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_APPEND = 1 << 10;
         int FLAG_UNAVAILABLE_SLICE_SUBTITLE = 1 << 11;
         int FLAG_FOR_WORK = 1 << 12;
+        int FLAG_NEED_HIGHLIGHTABLE_MENU_KEY = 1 << 13;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -102,6 +104,7 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_APPEND = "staticPreferenceLocation";
     public static final String METADATA_UNAVAILABLE_SLICE_SUBTITLE = "unavailable_slice_subtitle";
     public static final String METADATA_FOR_WORK = "for_work";
+    public static final String METADATA_HIGHLIGHTABLE_MENU_KEY = "highlightable_menu_key";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -250,6 +253,10 @@ public class PreferenceXmlParserUtils {
                 preferenceMetadata.putBoolean(METADATA_FOR_WORK,
                         isForWork(preferenceAttributes));
             }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_HIGHLIGHTABLE_MENU_KEY)) {
+                preferenceMetadata.putString(METADATA_HIGHLIGHTABLE_MENU_KEY,
+                        getHighlightableMenuKey(preferenceAttributes));
+            }
             metadata.add(preferenceMetadata);
 
             preferenceAttributes.recycle();
@@ -312,6 +319,10 @@ public class PreferenceXmlParserUtils {
 
     private static String getController(TypedArray styledAttributes) {
         return styledAttributes.getString(R.styleable.Preference_controller);
+    }
+
+    private static String getHighlightableMenuKey(TypedArray styledAttributes) {
+        return styledAttributes.getString(R.styleable.Preference_highlightableMenuKey);
     }
 
     private static int getIcon(TypedArray styledAttributes) {
