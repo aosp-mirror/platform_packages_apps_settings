@@ -1291,11 +1291,9 @@
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_disclaimer">In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. <annotation id="url">Learn more</annotation></string>
     <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled">
-        The screen lock option is disabled. To learn more, contact your organization\'s admin.
-        <annotation id="admin_details">More details</annotation>\n\nYou can still use your
-        fingerprint to authorize purchases and app access.
-        <annotation id="url">Learn more</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1">The screen lock option is disabled. To learn more, contact your organization\u2019s admin.</string>
+    <!-- Text shown in fingerprint settings explaining what the fingerprint can be used for in the case unlocking is disabled [CHAR LIMIT=NONE] -->
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2">You can still use your fingerprint to authorize purchases and app access.</string>
     <!-- Text shown in fingerprint enroll when we didn't observe progress for a few seconds. [CHAR LIMIT=100] -->
     <string name="security_settings_fingerprint_enroll_lift_touch_again">Lift finger, then touch sensor again</string>
     <!-- Text shown during fingerprint enrollment to indicate bad sensor calibration. [CHAR LIMIT=100] -->
@@ -1413,8 +1411,10 @@
     <!-- Message shown in screen lock picker while setting up the backup/fallback screen lock method for biometrics. Users can choose to use this method to unlock the screen instead of biometrics, or when biometrics are not accepted. [CHAR LIMIT=80] [BACKUP_MESSAGE_ID=2799884038398627882] -->
     <string name="lock_settings_picker_biometric_message">Choose your backup screen lock method</string>
 
-    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it, and they can choose to set another lock that would be specifically for their work apps. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They mark a link to bring the user to enroll a work profile screen lock instead. [CHAR LIMIT=100] -->
-    <string name="lock_settings_picker_admin_restricted_personal_message">If you forget your screen lock, your IT admin can\u2019t reset it. <annotation id="link">Set a separate work lock</annotation></string>
+    <!-- Text shown on the screen lock menu. This text is letting the user know that their IT admin can't reset their screen lock if they forget it. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message">If you forget your screen lock, your IT admin can\u2019t reset it.</string>
+    <!-- Text shown on the screen lock menu. This text is letting the user know that they can choose to set another lock that would be specifically for their work apps. [CHAR LIMIT=100] -->
+    <string name="lock_settings_picker_admin_restricted_personal_message_action">Set a separate work lock</string>
 
     <!-- Message shown in screen lock picker for setting up a work profile screen lock. [CHAR LIMIT=80] -->
     <string name="lock_settings_picker_profile_message">If you forget this lock, ask your IT admin to reset it</string>
@@ -1622,6 +1622,13 @@
         <item quantity="one">Must contain at least <xliff:g id="count" example="1">%d</xliff:g> character</item>
         <item quantity="other">Must be at least <xliff:g id="count" example="3">%d</xliff:g> characters</item>
     </plurals>
+    <!-- Hint shown in dialog screen when password is too short and only using numbers. [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_password_too_short_all_numeric">
+        {count, plural,
+            =1    {If using only numbers, must be at least 1 digit}
+            other {If using only numbers, must be at least # digits}
+        }
+    </string>
     <!-- Hint shown in dialog screen when PIN is too short -->
     <plurals name="lockpassword_pin_too_short">
         <item quantity="one">PIN must contain at least <xliff:g id="count" example="1">%d</xliff:g> digit</item>

@@ -34,6 +34,7 @@ import android.os.Bundle;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
@@ -54,6 +55,8 @@ public class AppDataUsagePreferenceControllerTest {
     private LoaderManager mLoaderManager;
     @Mock
     private AppInfoDashboardFragment mFragment;
+    @Mock
+    private PreferenceScreen mScreen;
 
     private Context mContext;
     private AppDataUsagePreferenceController mController;
@@ -71,7 +74,7 @@ public class AppDataUsagePreferenceControllerTest {
         doReturn(true).when(mController).isBandwidthControlEnabled();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.AVAILABLE);
+                .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -79,13 +82,14 @@ public class AppDataUsagePreferenceControllerTest {
         doReturn(false).when(mController).isBandwidthControlEnabled();
 
         assertThat(mController.getAvailabilityStatus())
-            .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
     public void onResume_notAvailable_shouldNotRestartDataLoader() {
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
-        doReturn(BasePreferenceController.CONDITIONALLY_UNAVAILABLE).when(mController).getAvailabilityStatus();
+        doReturn(BasePreferenceController.CONDITIONALLY_UNAVAILABLE).when(
+                mController).getAvailabilityStatus();
 
         mController.onResume();
 
@@ -129,5 +133,46 @@ public class AppDataUsagePreferenceControllerTest {
         mController.updateState(preference);
 
         verify(preference).setSummary(any());
+    }
+
+    @Test
+    public void displayPreference_noEntry_preferenceShouldNotEnable() {
+        mController.mAppEntry = null;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+        doReturn(true).when(mController).isBandwidthControlEnabled();
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_appIsInstalled_preferenceShouldEnable() {
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = new ApplicationInfo();
+        appEntry.info.flags = ApplicationInfo.FLAG_INSTALLED;
+        mController.mAppEntry = appEntry;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+        doReturn(true).when(mController).isBandwidthControlEnabled();
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_appIsNotInstalled_preferenceShouldDisable() {
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = new ApplicationInfo();
+        mController.mAppEntry = appEntry;
+        Preference preference = new Preference(mContext);
+        when(mScreen.findPreference(any())).thenReturn(preference);
+        doReturn(true).when(mController).isBandwidthControlEnabled();
+
+        mController.displayPreference(mScreen);
+
+        assertThat(preference.isEnabled()).isFalse();
     }
 }
