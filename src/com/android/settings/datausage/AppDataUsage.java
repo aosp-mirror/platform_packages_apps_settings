@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
@@ -140,6 +141,14 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
         }
 
+        if (mAppItem.key > 0 && UserHandle.isApp(mAppItem.key)) {
+            // In case we've been asked data usage for an app, automatically
+            // include data usage of the corresponding SDK sandbox
+            final int appSandboxUid = Process.toSdkSandboxUid(mAppItem.key);
+            if (!mAppItem.uids.get(appSandboxUid)) {
+                mAppItem.addUid(appSandboxUid);
+            }
+        }
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
@@ -307,6 +316,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     private void addUid(int uid) {
+        if (Process.isSdkSandboxUid(uid)) {
+            // For a sandbox process, get the associated app UID
+            uid = Process.getAppUidForSdkSandboxUid(uid);
+        }
         String[] packages = mPackageManager.getPackagesForUid(uid);
         if (packages != null) {
             for (int i = 0; i < packages.length; i++) {
@@ -404,12 +417,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                     = NetworkCycleDataForUidLoader.builder(mContext);
                 builder.setRetrieveDetail(true)
                     .setNetworkTemplate(mTemplate);
-                if (mAppItem.category == AppItem.CATEGORY_USER) {
-                    for (int i = 0; i < mAppItem.uids.size(); i++) {
-                        builder.addUid(mAppItem.uids.keyAt(i));
-                    }
-                } else {
-                    builder.addUid(mAppItem.key);
+                for (int i = 0; i < mAppItem.uids.size(); i++) {
+                    builder.addUid(mAppItem.uids.keyAt(i));
                 }
                 if (mCycles != null) {
                     builder.setCycles(mCycles);
