@@ -31,12 +31,18 @@ import com.android.settings.biometrics.BiometricErrorDialog;
  */
 public class FingerprintErrorDialog extends BiometricErrorDialog {
     public static void showErrorDialog(BiometricEnrollBase host, int errMsgId) {
+        if (host.isFinishing()) {
+            return;
+        }
+
+        final FragmentManager fragmentManager = host.getSupportFragmentManager();
+        if (fragmentManager.isDestroyed() || fragmentManager.isStateSaved()) {
+            return;
+        }
+
         final CharSequence errMsg = host.getText(getErrorMessage(errMsgId));
         final FingerprintErrorDialog dialog = newInstance(errMsg, errMsgId);
-        final FragmentManager fragmentManager = host.getSupportFragmentManager();
-        if (!fragmentManager.isDestroyed()) {
-            dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
-        }
+        dialog.show(fragmentManager, FingerprintErrorDialog.class.getName());
     }
 
     private static int getErrorMessage(int errMsgId) {
@@ -45,7 +51,7 @@ public class FingerprintErrorDialog extends BiometricErrorDialog {
                 // This message happens when the underlying crypto layer decides to revoke the
                 // enrollment auth token.
                 return R.string.security_settings_fingerprint_enroll_error_timeout_dialog_message;
-            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBARTION:
+            case FingerprintManager.FINGERPRINT_ERROR_BAD_CALIBRATION:
                 return R.string.security_settings_fingerprint_bad_calibration;
             default:
                 // There's nothing specific to tell the user about. Ask them to try again.

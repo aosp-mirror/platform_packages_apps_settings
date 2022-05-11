@@ -39,6 +39,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
 import androidx.lifecycle.Lifecycle;
@@ -87,7 +88,8 @@ public class InternetUpdaterTest {
         mInternetUpdater.onResume();
 
         verify(mAirplaneModeEnabler).start();
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
+                any(int.class));
         verify(mConnectivityManager).registerDefaultNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
         // Unregister callbacks
@@ -193,5 +195,18 @@ public class InternetUpdaterTest {
         mInternetUpdater.updateInternetType();
 
         assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_ETHERNET);
+    }
+
+    @Test
+    public void updateInternetType_carrierWifiConnected_getInternetCellular() {
+        final WifiInfo wifiInfo = mock(WifiInfo.class);
+        doReturn(wifiInfo).when(mWifiManager).getConnectionInfo();
+        doReturn(true).when(wifiInfo).isCarrierMerged();
+        mInternetUpdater.mInternetAvailable = true;
+        mInternetUpdater.mTransport = TRANSPORT_WIFI;
+
+        mInternetUpdater.updateInternetType();
+
+        assertThat(mInternetUpdater.getInternetType()).isEqualTo(INTERNET_CELLULAR);
     }
 }

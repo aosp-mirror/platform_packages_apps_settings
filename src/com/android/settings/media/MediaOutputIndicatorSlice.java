@@ -93,6 +93,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_connected_devices;
+    }
+
+    @Override
     public Class getBackgroundWorkerClass() {
         return MediaOutputIndicatorWorker.class;
     }

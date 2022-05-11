@@ -52,7 +52,6 @@ import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.net.RouteInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiEnterpriseConfig;
 import android.net.wifi.WifiInfo;
@@ -76,6 +75,7 @@ import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.StringUtil;
@@ -84,7 +84,6 @@ import com.android.settingslib.widget.LayoutPreference;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
-import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -145,7 +144,7 @@ public class WifiDetailPreferenceController2Test {
     @Mock
     private WifiInfo mMockWifiInfo;
     @Mock
-    private WifiNetworkDetailsFragment2 mMockFragment;
+    private WifiNetworkDetailsFragment mMockFragment;
     @Mock
     private WifiManager mMockWifiManager;
     @Mock
@@ -942,22 +941,22 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    public void onConnectedNetwork_getKnownNetworkType_visibleWifiTypePref() {
+    public void onConnectedNetwork_getStandardString_visibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_11AX);
+        when(mMockWifiEntry.getStandardString()).thenReturn("Standard");
 
         displayAndResume();
 
-        verify(mMockTypePref).setSummary(R.string.wifi_type_11AX);
+        verify(mMockTypePref).setSummary("Standard");
         verify(mMockTypePref).setVisible(true);
     }
 
     @Test
-    public void onConnectedNetwork_getUnKnownNetworkType_invisibleWifiTypePref() {
+    public void onConnectedNetwork_getEmptyStandardString_invisibleWifiTypePref() {
         setUpForConnectedNetwork();
         setUpSpyController();
-        setWifiType(ScanResult.WIFI_STANDARD_UNKNOWN);
+        when(mMockWifiEntry.getStandardString()).thenReturn("");
 
         displayAndResume();
 
@@ -971,12 +970,6 @@ public class WifiDetailPreferenceController2Test {
         displayAndResume();
 
         verify(mMockTypePref).setVisible(false);
-    }
-
-    private void setWifiType(int type) {
-        ConnectedInfo connectedInfo = new ConnectedInfo();
-        connectedInfo.wifiStandard = type;
-        when(mMockWifiEntry.getConnectedInfo()).thenReturn(connectedInfo);
     }
 
     @Test

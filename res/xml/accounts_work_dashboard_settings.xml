@@ -28,6 +28,7 @@
         android:persistent="false"
         android:title="@string/autofill_passwords"
         settings:controller="com.android.settings.applications.autofill.PasswordsPreferenceController"
+        settings:forWork="true"
         settings:keywords="@string/autofill_keywords" />
 
     <com.android.settings.widget.WorkOnlyCategory

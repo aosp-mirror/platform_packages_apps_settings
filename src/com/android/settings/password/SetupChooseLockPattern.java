@@ -142,14 +142,8 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 mLeftButtonIsSkip = false;
             }
 
-            // Show generic pattern message when pattern lock screen launch in Setup wizard flow
-            // before fingerprint and face setup.
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
-            if (stage.message == ID_EMPTY_MESSAGE) {
-                layout.setDescriptionText("");
-            } else {
-                layout.setDescriptionText(stage.message);
-            }
+            layout.setDescriptionText("");
         }
 
         @Override

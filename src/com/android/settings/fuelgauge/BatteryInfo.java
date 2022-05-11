@@ -25,6 +25,7 @@ import android.os.BatteryStatsManager;
 import android.os.BatteryUsageStats;
 import android.os.SystemClock;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
 
 public class BatteryInfo {
+    private static final String TAG = "BatteryInfo";
 
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
@@ -151,14 +153,31 @@ public class BatteryInfo {
         new AsyncTask<Void, Void, BatteryInfo>() {
             @Override
             protected BatteryInfo doInBackground(Void... params) {
+                boolean shouldCloseBatteryUsageStats = false;
                 BatteryUsageStats stats;
                 if (batteryUsageStats != null) {
                     stats = batteryUsageStats;
                 } else {
-                    stats = context.getSystemService(BatteryStatsManager.class)
-                            .getBatteryUsageStats();
+                    try {
+                        stats = context.getSystemService(BatteryStatsManager.class)
+                                .getBatteryUsageStats();
+                        shouldCloseBatteryUsageStats = true;
+                    } catch (RuntimeException e) {
+                        Log.e(TAG, "getBatteryInfo() from getBatteryUsageStats()", e);
+                        // Use default BatteryUsageStats.
+                        stats = new BatteryUsageStats.Builder(new String[0]).build();
+                    }
                 }
-                return getBatteryInfo(context, stats, shortString);
+                final BatteryInfo batteryInfo =
+                        getBatteryInfo(context, stats, shortString);
+                if (shouldCloseBatteryUsageStats) {
+                    try {
+                        stats.close();
+                    } catch (Exception e) {
+                        Log.e(TAG, "BatteryUsageStats.close() failed", e);
+                    }
+                }
+                return batteryInfo;
             }
 
             @Override
@@ -204,7 +223,7 @@ public class BatteryInfo {
         }
         final long prediction = discharging ? batteryUsageStats.getBatteryTimeRemainingMs() : 0;
         final Estimate estimate = new Estimate(
-                PowerUtil.convertUsToMs(prediction),
+                prediction,
                 false, /* isBasedOnUsage */
                 EstimateKt.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         BatteryUtils.logRuntime(LOG_TAG, "time for regular BatteryInfo", startTime);
@@ -228,6 +247,8 @@ public class BatteryInfo {
             @NonNull BatteryUsageStats batteryUsageStats, Estimate estimate,
             long elapsedRealtimeUs, boolean shortString) {
         final long startTime = System.currentTimeMillis();
+        final boolean isCompactStatus = context.getResources().getBoolean(
+                com.android.settings.R.bool.config_use_compact_battery_status);
         BatteryInfo info = new BatteryInfo();
         info.mBatteryUsageStats = batteryUsageStats;
         info.batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
@@ -238,21 +259,21 @@ public class BatteryInfo {
                 BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN)
                 == BatteryManager.BATTERY_HEALTH_OVERHEAT;
 
-        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+        info.statusLabel = Utils.getBatteryStatus(context, batteryBroadcast, isCompactStatus);
         info.batteryStatus = batteryBroadcast.getIntExtra(
                 BatteryManager.EXTRA_STATUS, BatteryManager.BATTERY_STATUS_UNKNOWN);
         if (!info.mCharging) {
             updateBatteryInfoDischarging(context, shortString, estimate, info);
         } else {
             updateBatteryInfoCharging(context, batteryBroadcast, batteryUsageStats,
-                    info);
+                    info, isCompactStatus);
         }
         BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", startTime);
         return info;
     }
 
     private static void updateBatteryInfoCharging(Context context, Intent batteryBroadcast,
-            BatteryUsageStats stats, BatteryInfo info) {
+            BatteryUsageStats stats, BatteryInfo info, boolean compactStatus) {
         final Resources resources = context.getResources();
         final long chargeTimeMs = stats.getChargeTimeRemainingMs();
         final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
@@ -276,7 +297,8 @@ public class BatteryInfo {
                     R.string.power_remaining_charging_duration_only, timeString);
             info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
         } else {
-            final String chargeStatusLabel = Utils.getBatteryStatus(context, batteryBroadcast);
+            final String chargeStatusLabel =
+                    Utils.getBatteryStatus(context, batteryBroadcast, compactStatus);
             info.remainingLabel = null;
             info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
                     resources.getString(R.string.power_charging, info.batteryPercentString,

@@ -21,9 +21,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.util.Pair;
 
 import androidx.preference.Preference;
 
@@ -114,5 +116,11 @@ public class BatterySaverControllerTest {
         when(mPowerManager.isPowerSaveMode()).thenReturn(false);
 
         assertThat(mBatterySaverController.getSummary()).isEqualTo("Off");
+    }
+
+    @Test
+    public void getAvailabilityStatus_returnAvailable() {
+        assertThat(mBatterySaverController.getAvailabilityStatus())
+                .isEqualTo(BatterySaverController.AVAILABLE);
     }
 }

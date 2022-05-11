@@ -18,7 +18,7 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -43,7 +43,6 @@ import android.os.Process;
 import android.telephony.SubscriptionManager;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
-import android.view.View;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
@@ -96,6 +95,10 @@ public class AppDataUsageTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        ShadowEntityHeaderController.setUseMock(mHeaderController);
+        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
+        when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
     }
 
     @After
@@ -163,10 +166,6 @@ public class AppDataUsageTest {
 
     @Test
     public void bindAppHeader_allWorkApps_shouldNotShowAppInfoLink() {
-        ShadowEntityHeaderController.setUseMock(mHeaderController);
-        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
-        when(mHeaderController.setUid(anyInt())).thenReturn(mHeaderController);
-
         mFragment = spy(new AppDataUsage());
 
         when(mFragment.getPreferenceManager())
@@ -174,7 +173,7 @@ public class AppDataUsageTest {
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
 
-        mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
+        mFragment.addEntityHeader();
 
         verify(mHeaderController).setHasAppInfoLink(false);
     }
@@ -196,16 +195,13 @@ public class AppDataUsageTest {
         when(mPackageManager.getPackageUidAsUser(anyString(), anyInt()))
                 .thenReturn(fakeUserId);
 
-        ShadowEntityHeaderController.setUseMock(mHeaderController);
-        when(mHeaderController.setRecyclerView(any(), any())).thenReturn(mHeaderController);
-        when(mHeaderController.setUid(fakeUserId)).thenReturn(mHeaderController);
         when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
 
         when(mFragment.getPreferenceManager())
                 .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
-        mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());
+        mFragment.addEntityHeader();
 
         verify(mHeaderController).setHasAppInfoLink(true);
         verify(mHeaderController).setUid(fakeUserId);
@@ -268,7 +264,7 @@ public class AppDataUsageTest {
 
         mFragment.bindData(0 /* position */);
 
-        verify(cycle).setVisible(false);
+        verify(cycle).setHasCycles(false);
     }
 
     @Test
@@ -293,7 +289,7 @@ public class AppDataUsageTest {
 
         mFragment.bindData(0 /* position */);
 
-        verify(cycle).setVisible(true);
+        verify(cycle).setHasCycles(true);
         verify(totalPref).setSummary(
                 DataUsageUtils.formatDataUsage(context, backgroundBytes + foregroundBytes));
         verify(backgroundPref).setSummary(DataUsageUtils.formatDataUsage(context, backgroundBytes));
@@ -306,12 +302,12 @@ public class AppDataUsageTest {
         final Context context = RuntimeEnvironment.application;
         final int testUid = 123123;
         final AppItem appItem = new AppItem(testUid);
+        appItem.addUid(testUid);
         appItem.category = AppItem.CATEGORY_APP;
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */));
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build());
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
@@ -336,8 +332,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", context);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */));
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build());
         final long end = System.currentTimeMillis();
         final long start = end - (DateUtils.WEEK_IN_MILLIS * 4);
 
@@ -368,8 +363,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mCycles", testCycles);
         ReflectionHelpers.setField(mFragment, "mAppItem", appItem);
         ReflectionHelpers.setField(mFragment, "mTemplate",
-                NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
-                null /* subscriberId */));
+                new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build());
 
         final NetworkCycleDataForUidLoader loader = (NetworkCycleDataForUidLoader)
                 mFragment.mUidDataCallbacks.onCreateLoader(0 /* id */, Bundle.EMPTY /* args */);
@@ -441,8 +435,7 @@ public class AppDataUsageTest {
 
         assertThat(mFragment.mTemplate.getMatchRule())
                 .isEqualTo(NetworkTemplate.MATCH_WIFI);
-        assertNull(mFragment.mTemplate.getSubscriberId());
-        assertThat(mFragment.mTemplate.getNetworkId())
-                .isEqualTo(NetworkTemplate.WIFI_NETWORKID_ALL);
+        assertTrue(mFragment.mTemplate.getSubscriberIds().isEmpty());
+        assertTrue(mFragment.mTemplate.getWifiNetworkKeys().isEmpty());
     }
 }

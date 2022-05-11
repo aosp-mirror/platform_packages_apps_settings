@@ -19,6 +19,8 @@ package com.android.settings.biometrics.fingerprint;
 import android.content.Context;
 import android.os.UserHandle;
 
+import androidx.lifecycle.Lifecycle;
+
 public class FingerprintProfileStatusPreferenceController
         extends FingerprintStatusPreferenceController {
 
@@ -28,10 +30,23 @@ public class FingerprintProfileStatusPreferenceController
         super(context, KEY_FINGERPRINT_SETTINGS);
     }
 
+    public FingerprintProfileStatusPreferenceController(Context context, String key) {
+        super(context, key);
+    }
+
+    public FingerprintProfileStatusPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, KEY_FINGERPRINT_SETTINGS, lifecycle);
+    }
+
+    public FingerprintProfileStatusPreferenceController(
+            Context context, String key, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
+    }
+
     @Override
     protected boolean isUserSupported() {
         return mProfileChallengeUserId != UserHandle.USER_NULL
-                && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId);
+                && mUm.isManagedProfile(mProfileChallengeUserId);
     }
 
     @Override

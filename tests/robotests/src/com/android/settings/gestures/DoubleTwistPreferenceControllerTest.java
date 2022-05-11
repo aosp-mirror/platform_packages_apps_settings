@@ -19,10 +19,12 @@ package com.android.settings.gestures;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -61,6 +63,8 @@ public class DoubleTwistPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        doReturn(mock(DevicePolicyManager.class)).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         mController = new DoubleTwistPreferenceController(mContext, KEY_DOUBLE_TWIST);
     }
@@ -78,7 +82,7 @@ public class DoubleTwistPreferenceControllerTest {
         when(mContext.getResources().getString(anyInt())).thenReturn("test");
         when(mContext.getSystemService(Context.SENSOR_SERVICE)).thenReturn(mSensorManager);
         when(mSensorManager.getSensorList(anyInt())).thenReturn(sensorList);
-        when(sensorList.get(0).getName()).thenReturn("test");
+        when(sensorList.get(0).getStringType()).thenReturn("test");
         when(sensorList.get(0).getVendor()).thenReturn("test");
 
         assertThat(mController.isAvailable()).isTrue();
@@ -97,7 +101,7 @@ public class DoubleTwistPreferenceControllerTest {
         when(mContext.getResources().getString(anyInt())).thenReturn("test");
         when(mContext.getSystemService(Context.SENSOR_SERVICE)).thenReturn(mSensorManager);
         when(mSensorManager.getSensorList(anyInt())).thenReturn(sensorList);
-        when(sensorList.get(0).getName()).thenReturn("not_test");
+        when(sensorList.get(0).getStringType()).thenReturn("not_test");
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -105,9 +109,9 @@ public class DoubleTwistPreferenceControllerTest {
     @Test
     public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_name, "nonexistant name");
+                R.string.gesture_double_twist_sensor_type, "nonexistent type");
         SettingsShadowResources.overrideResource(
-                R.string.gesture_double_twist_sensor_vendor, "nonexistant vendor");
+                R.string.gesture_double_twist_sensor_vendor, "nonexistent vendor");
 
         assertThat(DoubleTwistPreferenceController.isSuggestionComplete(
                 RuntimeEnvironment.application, null /* prefs */))

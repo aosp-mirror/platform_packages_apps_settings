@@ -59,8 +59,8 @@ public class SettingsMainSwitchPreferenceTest {
     }
 
     @Test
-    public void updateStatus_isRestricted_restrictIconShouldDisplay() {
-        mPreference.updateStatus(true);
+    public void onBindViewHolder_isRestricted_restrictIconShouldDisplay() {
+        mPreference.onBindViewHolder(mHolder);
 
         final SettingsMainSwitchBar switchBar = mPreference.getSwitchBar();
         final ImageView restrictedIcon = switchBar.findViewById(
@@ -76,6 +76,7 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference.onBindViewHolder(mHolder);
 
         assertThat(mPreference.isShowing()).isTrue();
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -85,5 +86,6 @@ public class SettingsMainSwitchPreferenceTest {
         mPreference.onBindViewHolder(mHolder);
 
         assertThat(mPreference.isShowing()).isFalse();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 }

@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
+import static android.hardware.SensorPrivacyManager.Sources.DIALOG;
 
 import android.content.Context;
 import android.hardware.SensorPrivacyManager;
@@ -77,7 +78,7 @@ public class AdaptiveSleepCameraStatePreferenceController {
             mPreference.setSummary(R.string.adaptive_sleep_camera_lock_summary);
             mPreference.setPositiveButtonText(R.string.allow);
             mPreference.setPositiveButtonOnClickListener(
-                    p -> mPrivacyManager.setSensorPrivacy(CAMERA, false));
+                    p -> mPrivacyManager.setSensorPrivacy(DIALOG, CAMERA, false));
         }
     }
 }

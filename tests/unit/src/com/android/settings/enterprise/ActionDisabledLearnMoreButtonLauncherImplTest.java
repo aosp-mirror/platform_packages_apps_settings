@@ -88,7 +88,7 @@ public class ActionDisabledLearnMoreButtonLauncherImplTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         when(mActivity.getUserId()).thenReturn(CONTEXT_USER_ID);
-        when(mUserManager.getUserHandle()).thenReturn(CONTEXT_USER_ID);
+        when(mUserManager.getProcessUserId()).thenReturn(CONTEXT_USER_ID);
 
         mImpl = new ActionDisabledLearnMoreButtonLauncherImpl(mActivity, mBuilder);
     }
@@ -111,7 +111,7 @@ public class ActionDisabledLearnMoreButtonLauncherImplTest {
 
     @Test
     public void showHelpPage_works() {
-        mImpl.showHelpPage(mActivity, URL);
+        mImpl.showHelpPage(mActivity, URL, CONTEXT_USER);
 
         verify(mActivity).startActivityAsUser(mIntentCaptor.capture(), eq(CONTEXT_USER));
         assertActionViewIntent(mIntentCaptor.getValue());

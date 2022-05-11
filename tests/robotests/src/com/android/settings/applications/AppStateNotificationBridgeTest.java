@@ -53,6 +53,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.android.settings.R;
@@ -98,7 +99,7 @@ public class AppStateNotificationBridgeTest {
         when(mState.newSession(any())).thenReturn(mSession);
         when(mState.getBackgroundLooper()).thenReturn(mock(Looper.class));
         when(mBackend.getNotificationsBanned(anyString(), anyInt())).thenReturn(true);
-        when(mBackend.isSystemApp(any(), any())).thenReturn(true);
+        when(mBackend.enableSwitch(any(), any())).thenReturn(true);
         // most tests assume no work profile
         when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         mContext = RuntimeEnvironment.application.getApplicationContext();
@@ -244,7 +245,6 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentDaily).isEqualTo(1);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).avgSentWeekly).isEqualTo(0);
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).blocked).isTrue();
-        assertThat(((NotificationsSentState) apps.get(0).extraInfo).systemApp).isTrue();
         assertThat(((NotificationsSentState) apps.get(0).extraInfo).blockable).isTrue();
     }
 
@@ -375,7 +375,6 @@ public class AppStateNotificationBridgeTest {
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentDaily).isEqualTo(2);
         assertThat(((NotificationsSentState) entry.extraInfo).avgSentWeekly).isEqualTo(0);
         assertThat(((NotificationsSentState) entry.extraInfo).blocked).isTrue();
-        assertThat(((NotificationsSentState) entry.extraInfo).systemApp).isTrue();
         assertThat(((NotificationsSentState) entry.extraInfo).blockable).isTrue();
     }
 
@@ -550,12 +549,10 @@ public class AppStateNotificationBridgeTest {
     }
 
     @Test
-    public void testSwitchOnClickListener() {
-        ViewGroup parent = mock(ViewGroup.class);
+    public void testSwitchOnChangeListener() {
         Switch toggle = mock(Switch.class);
         when(toggle.isChecked()).thenReturn(true);
         when(toggle.isEnabled()).thenReturn(true);
-        when(parent.findViewById(anyInt())).thenReturn(toggle);
 
         AppEntry entry = mock(AppEntry.class);
         entry.info = new ApplicationInfo();
@@ -563,13 +560,12 @@ public class AppStateNotificationBridgeTest {
         entry.info.uid = 1356;
         entry.extraInfo = new NotificationsSentState();
 
-        ViewGroup.OnClickListener listener = mBridge.getSwitchOnClickListener(entry);
-        listener.onClick(parent);
+        CompoundButton.OnCheckedChangeListener listener = mBridge.getSwitchOnCheckedListener(entry);
+        listener.onCheckedChanged(toggle, false);
 
-        verify(toggle).toggle();
         verify(mBackend).setNotificationsEnabledForPackage(
-                entry.info.packageName, entry.info.uid, true);
-        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isFalse();
+                entry.info.packageName, entry.info.uid, false);
+        assertThat(((NotificationsSentState) entry.extraInfo).blocked).isTrue();
     }
 
     @Test

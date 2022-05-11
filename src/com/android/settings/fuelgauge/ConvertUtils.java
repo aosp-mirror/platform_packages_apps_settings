@@ -19,19 +19,20 @@ import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.LocaleList;
 import android.os.UserHandle;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.ArraySet;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.settings.overlay.FeatureFactory;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -41,6 +42,7 @@ import java.util.TimeZone;
 
 /** A utility class to convert data into another types. */
 public final class ConvertUtils {
+    private static final boolean DEBUG = false;
     private static final String TAG = "ConvertUtils";
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
@@ -75,19 +77,6 @@ public final class ConvertUtils {
     public static final int CONSUMER_TYPE_USER_BATTERY = 2;
     public static final int CONSUMER_TYPE_SYSTEM_BATTERY = 3;
 
-    // For language is changed.
-    @VisibleForTesting static Locale sLocale;
-    @VisibleForTesting static Locale sLocaleForHour;
-    // For time zone is changed.
-    @VisibleForTesting static String sZoneId;
-    @VisibleForTesting static String sZoneIdForHour;
-    private static boolean sIs24HourFormat;
-
-    @VisibleForTesting
-    static SimpleDateFormat sSimpleDateFormat;
-    @VisibleForTesting
-    static SimpleDateFormat sSimpleDateFormatForHour;
-
     private ConvertUtils() {}
 
     public static ContentValues convert(
@@ -112,7 +101,7 @@ public final class ConvertUtils {
             values.put(BatteryHistEntry.KEY_CONSUME_POWER,
                 Double.valueOf(entry.getConsumedPower()));
             values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                Double.valueOf(entry.percent));
+                Double.valueOf(entry.mPercent));
             values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
                 Long.valueOf(entry.getTimeInForegroundMs()));
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
@@ -135,36 +124,21 @@ public final class ConvertUtils {
 
     /** Converts UTC timestamp to human readable local time string. */
     public static String utcToLocalTime(Context context, long timestamp) {
-        final Locale currentLocale = getLocale(context);
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneId)
-                || !currentLocale.equals(sLocale)
-                || sSimpleDateFormat == null) {
-            sLocale = currentLocale;
-            sZoneId = currentZoneId;
-            sSimpleDateFormat =
-                new SimpleDateFormat("MMM dd,yyyy HH:mm:ss", currentLocale);
-        }
-        return sSimpleDateFormat.format(new Date(timestamp));
+        final Locale locale = getLocale(context);
+        final String pattern =
+            DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
+        return DateFormat.format(pattern, timestamp).toString();
     }
 
     /** Converts UTC timestamp to local time hour data. */
     public static String utcToLocalTimeHour(
             Context context, long timestamp, boolean is24HourFormat) {
-        final Locale currentLocale = getLocale(context);
-        final String currentZoneId = TimeZone.getDefault().getID();
-        if (!currentZoneId.equals(sZoneIdForHour)
-                || !currentLocale.equals(sLocaleForHour)
-                || sIs24HourFormat != is24HourFormat
-                || sSimpleDateFormatForHour == null) {
-            sLocaleForHour = currentLocale;
-            sZoneIdForHour = currentZoneId;
-            sIs24HourFormat = is24HourFormat;
-            sSimpleDateFormatForHour = new SimpleDateFormat(
-                    sIs24HourFormat ? "HH" : "h", currentLocale);
-        }
-        return sSimpleDateFormatForHour.format(new Date(timestamp))
-            .toLowerCase(currentLocale);
+        final Locale locale = getLocale(context);
+        // e.g. for 12-hour format: 9 pm
+        // e.g. for 24-hour format: 09:00
+        final String skeleton = is24HourFormat ? "HHm" : "ha";
+        final String pattern = DateFormat.getBestDateTimePattern(locale, skeleton);
+        return DateFormat.format(pattern, timestamp).toString().toLowerCase(locale);
     }
 
     /** Gets indexed battery usage data for each corresponding time slot. */
@@ -208,7 +182,7 @@ public final class ConvertUtils {
             }
 
             // Collects all keys in these three time slot records as all populations.
-            final Set<String> allBatteryHistEntryKeys = new HashSet<>();
+            final Set<String> allBatteryHistEntryKeys = new ArraySet<>();
             allBatteryHistEntryKeys.addAll(currentBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextBatteryHistMap.keySet());
             allBatteryHistEntryKeys.addAll(nextTwoBatteryHistMap.keySet());
@@ -259,10 +233,12 @@ public final class ConvertUtils {
                     foregroundUsageTimeInMs + backgroundUsageTimeInMs;
                 if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
                     final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
-                    Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
-                          Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
-                          Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
-                          currentEntry));
+                    if (DEBUG) {
+                        Log.w(TAG, String.format("abnormal usage time %d|%d for:\n%s",
+                                Duration.ofMillis(foregroundUsageTimeInMs).getSeconds(),
+                                Duration.ofMillis(backgroundUsageTimeInMs).getSeconds(),
+                                currentEntry));
+                    }
                     foregroundUsageTimeInMs =
                         Math.round(foregroundUsageTimeInMs * ratio);
                     backgroundUsageTimeInMs =
@@ -285,7 +261,7 @@ public final class ConvertUtils {
         }
         insert24HoursData(BatteryChartView.SELECTED_INDEX_ALL, resultMap);
         if (purgeLowPercentageAndFakeData) {
-            purgeLowPercentageAndFakeData(resultMap);
+            purgeLowPercentageAndFakeData(context, resultMap);
         }
         return resultMap;
     }
@@ -324,7 +300,12 @@ public final class ConvertUtils {
 
     // Removes low percentage data and fake usage data, which will be zero value.
     private static void purgeLowPercentageAndFakeData(
+            final Context context,
             final Map<Integer, List<BatteryDiffEntry>> indexedUsageMap) {
+        final Set<CharSequence> backgroundUsageTimeHideList =
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .getHideBackgroundUsageTimeSet(context);
         for (List<BatteryDiffEntry> entries : indexedUsageMap.values()) {
             final Iterator<BatteryDiffEntry> iterator = entries.iterator();
             while (iterator.hasNext()) {
@@ -332,6 +313,12 @@ public final class ConvertUtils {
                 if (entry.getPercentOfTotal() < PERCENTAGE_OF_TOTAL_THRESHOLD
                         || FAKE_PACKAGE_NAME.equals(entry.getPackageName())) {
                     iterator.remove();
+                }
+                final String packageName = entry.getPackageName();
+                if (packageName != null
+                        && !backgroundUsageTimeHideList.isEmpty()
+                        && backgroundUsageTimeHideList.contains(packageName)) {
+                  entry.mBackgroundUsageTimeInMs = 0;
                 }
             }
         }

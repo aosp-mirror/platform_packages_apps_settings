@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -36,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.SetupSkipDialog;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -54,6 +56,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private static final String TAG = "BiometricEnrollIntroduction";
 
     private static final String KEY_CONFIRMING_CREDENTIALS = "confirming_credentials";
+    private static final String KEY_SCROLLED_TO_BOTTOM = "scrolled";
 
     private UserManager mUserManager;
     private boolean mHasPassword;
@@ -61,6 +64,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     private TextView mErrorText;
     protected boolean mConfirmingCredentials;
     protected boolean mNextClicked;
+    private boolean mParentalConsentRequired;
+    private boolean mHasScrolledToBottom = false;
 
     @Nullable private PorterDuffColorFilter mIconColorFilter;
 
@@ -85,9 +90,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected abstract int getHeaderResDefault();
 
     /**
-     * @return the description resource for if the biometric has been disabled by a device admin
+     * @return the description for if the biometric has been disabled by a device admin
      */
-    protected abstract int getDescriptionResDisabledByAdmin();
+    protected abstract String getDescriptionDisabledByAdmin();
 
     /**
      * @return the cancel button
@@ -137,6 +142,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
      */
     public abstract void onClick(LinkSpan span);
 
+    public abstract @BiometricAuthenticator.Modality int getModality();
+
     protected interface GenerateChallengeCallback {
         void onChallengeGenerated(int sensorId, int userId, long challenge);
     }
@@ -147,6 +154,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
         if (savedInstanceState != null) {
             mConfirmingCredentials = savedInstanceState.getBoolean(KEY_CONFIRMING_CREDENTIALS);
+            mHasScrolledToBottom = savedInstanceState.getBoolean(KEY_SCROLLED_TO_BOTTOM);
         }
 
         Intent intent = getIntent();
@@ -160,7 +168,9 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mBiometricUnlockDisabledByAdmin = isDisabledByAdmin();
 
         setContentView(getLayoutResource());
-        if (mBiometricUnlockDisabledByAdmin) {
+        mParentalConsentRequired = ParentalControlsUtils.parentConsentRequired(this, getModality())
+                != null;
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
             setHeaderText(getHeaderResDisabledByAdmin());
         } else {
             setHeaderText(getHeaderResDefault());
@@ -189,22 +199,27 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
         mFooterBarMixin = layout.getMixin(FooterBarMixin.class);
         mFooterBarMixin.setPrimaryButton(getPrimaryFooterButton());
         mFooterBarMixin.setSecondaryButton(getSecondaryFooterButton(), true /* usePrimaryStyle */);
-        mFooterBarMixin.getSecondaryButton().setVisibility(View.INVISIBLE);
+        mFooterBarMixin.getSecondaryButton().setVisibility(
+                mHasScrolledToBottom ? View.VISIBLE : View.INVISIBLE);
 
         final RequireScrollMixin requireScrollMixin = layout.getMixin(RequireScrollMixin.class);
         requireScrollMixin.requireScrollWithButton(this, getPrimaryFooterButton(),
                 getMoreButtonTextRes(), this::onNextButtonClick);
         requireScrollMixin.setOnRequireScrollStateChangedListener(
                 scrollNeeded -> {
-                    // Update text of primary button from "More" to "Agree".
-                    final int primaryButtonTextRes = scrollNeeded
-                            ? getMoreButtonTextRes()
-                            : getAgreeButtonTextRes();
-                    getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+                    boolean enrollmentCompleted = checkMaxEnrolled() != 0;
+                    if (!enrollmentCompleted) {
+                        // Update text of primary button from "More" to "Agree".
+                        final int primaryButtonTextRes = scrollNeeded
+                                ? getMoreButtonTextRes()
+                                : getAgreeButtonTextRes();
+                        getPrimaryFooterButton().setText(this, primaryButtonTextRes);
+                    }
 
                     // Show secondary button once scroll is completed.
                     if (!scrollNeeded) {
                         getSecondaryFooterButton().setVisibility(View.VISIBLE);
+                        mHasScrolledToBottom = true;
                     }
                 });
     }
@@ -230,6 +245,7 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_CONFIRMING_CREDENTIALS, mConfirmingCredentials);
+        outState.putBoolean(KEY_SCROLLED_TO_BOTTOM, mHasScrolledToBottom);
     }
 
     @Override
@@ -250,8 +266,12 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             // Lock thingy is already set up, launch directly to the next page
             launchNextEnrollingActivity(mToken);
         } else {
-            setResult(RESULT_FINISHED);
-            finish();
+            boolean couldStartNextBiometric = BiometricUtils.tryStartingNextBiometricEnroll(this,
+                    ENROLL_NEXT_BIOMETRIC_REQUEST, "enrollIntroduction#onNextButtonClicked");
+            if (!couldStartNextBiometric) {
+                setResult(RESULT_FINISHED);
+                finish();
+            }
         }
     }
 
@@ -284,11 +304,11 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == BIOMETRIC_FIND_SENSOR_REQUEST) {
-            if (resultCode == RESULT_FINISHED || resultCode == RESULT_SKIP
-                    || resultCode == RESULT_TIMEOUT) {
+            if (isResultSkipOrFinished(resultCode)) {
+                handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (resultCode == RESULT_TIMEOUT) {
                 setResult(resultCode, data);
                 finish();
-                return;
             }
         } else if (requestCode == CHOOSE_LOCK_GENERIC_REQUEST) {
             mConfirmingCredentials = false;
@@ -335,12 +355,33 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
             overridePendingTransition(R.anim.sud_slide_back_in, R.anim.sud_slide_back_out);
         } else if (requestCode == ENROLL_NEXT_BIOMETRIC_REQUEST) {
             Log.d(TAG, "ENROLL_NEXT_BIOMETRIC_REQUEST, result: " + resultCode);
-            if (resultCode != RESULT_CANCELED) {
+            if (isResultSkipOrFinished(resultCode)) {
+                handleBiometricResultSkipOrFinished(resultCode, data);
+            } else if (resultCode != RESULT_CANCELED) {
                 setResult(resultCode, data);
                 finish();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private static boolean isResultSkipOrFinished(int resultCode) {
+        return resultCode == RESULT_SKIP || resultCode == SetupSkipDialog.RESULT_SKIP
+                || resultCode == RESULT_FINISHED;
+    }
+
+    private void handleBiometricResultSkipOrFinished(int resultCode, @Nullable Intent data) {
+        if (data != null
+                && data.getBooleanExtra(
+                        MultiBiometricEnrollHelper.EXTRA_SKIP_PENDING_ENROLL, false)) {
+            getIntent().removeExtra(MultiBiometricEnrollHelper.EXTRA_ENROLL_AFTER_FACE);
+        }
+
+        if (resultCode == RESULT_SKIP) {
+            onEnrollmentSkipped(data);
+        } else if (resultCode == RESULT_FINISHED) {
+            onFinishedEnrolling(data);
+        }
     }
 
     /**
@@ -360,7 +401,16 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     }
 
     protected void onSkipButtonClick(View view) {
-        setResult(RESULT_SKIP);
+        onEnrollmentSkipped(null /* data */);
+    }
+
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        setResult(RESULT_SKIP, data);
+        finish();
+    }
+
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        setResult(RESULT_FINISHED, data);
         finish();
     }
 
@@ -368,8 +418,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
     protected void initViews() {
         super.initViews();
 
-        if (mBiometricUnlockDisabledByAdmin) {
-            setDescriptionText(getDescriptionResDisabledByAdmin());
+        if (mBiometricUnlockDisabledByAdmin && !mParentalConsentRequired) {
+            setDescriptionText(getDescriptionDisabledByAdmin());
         }
     }
 

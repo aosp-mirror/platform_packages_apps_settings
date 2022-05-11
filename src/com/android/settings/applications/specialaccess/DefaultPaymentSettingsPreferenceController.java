@@ -82,7 +82,7 @@ public class DefaultPaymentSettingsPreferenceController extends BasePreferenceCo
                         PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)) {
             return UNSUPPORTED_ON_DEVICE;
         }
-        if (!mUserManager.isAdminUser()) {
+        if (mUserManager.isGuestUser()) {
             return DISABLED_FOR_USER;
         }
         if (mNfcAdapter == null) {

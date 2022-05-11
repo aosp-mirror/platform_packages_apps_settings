@@ -368,7 +368,12 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
         ActivityManager am = (ActivityManager)
                 getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-        boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        boolean res = false;
+        try {
+            res = am.clearApplicationUserData(packageName, mClearDataObserver);
+        } catch (SecurityException e) {
+            Log.i(TAG, "Failed to clear application user data: " + e);
+        }
         if (!res) {
             // Clearing data failed for some obscure reason. Just log error for now
             Log.i(TAG, "Couldn't clear application user data for package:" + packageName);
@@ -486,7 +491,8 @@ public class AppStorageSettings extends AppInfoWithHeader
                 return new AlertDialog.Builder(getActivity())
                         .setTitle(getActivity().getText(R.string.clear_data_dlg_title))
                         .setMessage(getActivity().getText(R.string.clear_data_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.dlg_delete,
+                                new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Clear user data here
                                 initiateClearUserData();

@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import static com.android.internal.util.CollectionUtils.filter;
 
-import android.companion.Association;
+import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
 import android.companion.ICompanionDeviceManager;
 import android.content.Context;
@@ -26,8 +26,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.UserHandle;
+import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +42,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.SettingsUIDeviceConfig;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -84,7 +89,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         mProfilesContainer.setLayoutResource(R.layout.preference_companion_app);
     }
 
-    private List<Association> getAssociations(String address) {
+    private List<AssociationInfo> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),
                 a -> Objects.equal(address, a.getDeviceMacAddress()));
@@ -122,8 +127,8 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
         try {
             java.util.Objects.requireNonNull(ICompanionDeviceManager.Stub.asInterface(
                     ServiceManager.getService(
-                            Context.COMPANION_DEVICE_SERVICE))).disassociate(
-                                    address, packageName);
+                            Context.COMPANION_DEVICE_SERVICE))).legacyDisassociate(
+                                    address, packageName, UserHandle.myUserId());
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -146,7 +151,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
     private List<String> getPreferencesNeedToShow(String address, PreferenceCategory container) {
         List<String> preferencesToRemove = new ArrayList<>();
         Set<String> packages = getAssociations(address)
-                .stream().map(Association::getPackageName)
+                .stream().map(AssociationInfo::getPackageName)
                 .collect(Collectors.toSet());
 
         for (int i = 0; i < container.getPreferenceCount(); i++) {
@@ -171,7 +176,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
      */
     @Override
     protected void refresh() {
-        updatePreferences(mContext, mCachedDevice.getAddress(), mProfilesContainer);
+        // Do nothing. More details in b/191992001
     }
 
     /**
@@ -179,6 +184,18 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
      */
     public void updatePreferences(Context context,
             String address, PreferenceCategory container) {
+        // If the device is FastPair, remove CDM companion apps.
+        final BluetoothFeatureProvider bluetoothFeatureProvider = FeatureFactory.getFactory(context)
+                .getBluetoothFeatureProvider(context);
+        final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
+                SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
+        final Uri settingsUri = bluetoothFeatureProvider.getBluetoothDeviceSettingsUri(
+                mCachedDevice.getDevice());
+        if (sliceEnabled && settingsUri != null) {
+            container.removeAll();
+            return;
+        }
+
         Set<String> addedPackages = new HashSet<>();
 
         for (String packageName : getPreferencesNeedToShow(address, container)) {

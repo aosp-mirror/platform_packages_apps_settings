@@ -16,13 +16,10 @@
 
 package com.android.settings.deviceinfo.imei;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-
-import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -31,7 +28,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.telephony.TelephonyManager;
@@ -39,6 +35,7 @@ import android.telephony.TelephonyManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -68,6 +65,8 @@ public class ImeiInfoPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock
     private Fragment mFragment;
+    @Mock
+    private PreferenceCategory mCategory;
 
     private Context mContext;
     private ImeiInfoPreferenceController mController;
@@ -82,6 +81,8 @@ public class ImeiInfoPreferenceControllerTest {
         doReturn(AVAILABLE).when(mController).getAvailabilityStatus();
         when(mScreen.getContext()).thenReturn(mContext);
         doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
+        final String categoryKey = "device_detail_category";
+        when(mScreen.findPreference(categoryKey)).thenReturn(mCategory);
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         final String prefKey = mController.getPreferenceKey();
@@ -97,7 +98,7 @@ public class ImeiInfoPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).addPreference(mSecondSimPreference);
+        verify(mCategory).addPreference(mSecondSimPreference);
     }
 
     @Test
@@ -170,20 +171,5 @@ public class ImeiInfoPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         verify(mFragment).getChildFragmentManager();
-    }
-
-    @Test
-    public void copy_shouldCopyImeiToClipboard() {
-        ReflectionHelpers.setField(mController, "mIsMultiSim", false);
-        final String meid = "125132215123";
-        when(mTelephonyManager.getCurrentPhoneType(anyInt())).thenReturn(PHONE_TYPE_CDMA);
-        when(mTelephonyManager.getMeid(anyInt())).thenReturn(meid);
-
-        mController.copy();
-
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
-        assertThat(data.toString()).isEqualTo(meid);
     }
 }

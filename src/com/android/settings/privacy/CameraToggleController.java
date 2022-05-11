@@ -16,6 +16,8 @@
 
 package com.android.settings.privacy;
 
+import static android.os.UserManager.DISALLOW_CAMERA_TOGGLE;
+
 import static com.android.settings.utils.SensorPrivacyManagerHelper.CAMERA;
 
 import android.content.Context;
@@ -38,6 +40,11 @@ public class CameraToggleController extends SensorToggleController {
     public int getAvailabilityStatus() {
         return mSensorPrivacyManagerHelper.supportsSensorToggle(getSensor())
                 && DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY, "camera_toggle_enabled",
-                true) ? AVAILABLE_UNSEARCHABLE : UNSUPPORTED_ON_DEVICE;
+                true) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    protected String getRestriction() {
+        return DISALLOW_CAMERA_TOGGLE;
     }
 }

@@ -54,7 +54,7 @@ public class AutoBrightnessDetailPreferenceController extends
         SettingsMainSwitchPreference pref = (SettingsMainSwitchPreference) screen.findPreference(
                 getPreferenceKey());
         pref.addOnSwitchChangeListener(this);
-        pref.updateStatus(isChecked());
+        pref.setChecked(isChecked());
     }
 
     @Override

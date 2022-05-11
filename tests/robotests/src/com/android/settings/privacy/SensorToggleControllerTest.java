@@ -18,11 +18,13 @@ package com.android.settings.privacy;
 
 import static android.hardware.SensorPrivacyManager.Sensors.CAMERA;
 import static android.hardware.SensorPrivacyManager.Sensors.MICROPHONE;
+import static android.hardware.SensorPrivacyManager.Sources.OTHER;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
@@ -31,6 +33,8 @@ import android.content.Context;
 import android.hardware.SensorPrivacyManager;
 import android.hardware.SensorPrivacyManager.OnSensorPrivacyChangedListener;
 import android.util.ArraySet;
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
 
 import com.android.settings.utils.SensorPrivacyManagerHelper;
 
@@ -52,10 +56,10 @@ public class SensorToggleControllerTest {
     private Context mContext;
     @Mock
     private SensorPrivacyManager mSensorPrivacyManager;
-    private boolean mMicState;
-    private boolean mCamState;
-    private Set<OnSensorPrivacyChangedListener> mMicListeners;
-    private Set<OnSensorPrivacyChangedListener> mCamListeners;
+    private SparseBooleanArray mMicState;
+    private SparseBooleanArray mCamState;
+    private SparseArray<Set<OnSensorPrivacyChangedListener>> mMicListeners;
+    private SparseArray<Set<OnSensorPrivacyChangedListener>> mCamListeners;
 
     @Before
     public void setUp() {
@@ -71,90 +75,152 @@ public class SensorToggleControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        mMicState = false;
-        mCamState = false;
-        mMicListeners = new ArraySet<>();
-        mCamListeners = new ArraySet<>();
+        mMicState = new SparseBooleanArray();
+        mCamState = new SparseBooleanArray();
+        mMicState.put(0, false);
+        mCamState.put(0, false);
+        mMicState.put(10, false);
+        mCamState.put(10, false);
+        mMicListeners = new SparseArray<>();
+        mCamListeners = new SparseArray<>();
+        mMicListeners.put(0, new ArraySet<>());
+        mMicListeners.put(10, new ArraySet<>());
+        mCamListeners.put(0, new ArraySet<>());
+        mCamListeners.put(10, new ArraySet<>());
 
         doReturn(0).when(mContext).getUserId();
         doReturn(mSensorPrivacyManager).when(mContext)
                 .getSystemService(SensorPrivacyManager.class);
 
-        doAnswer(invocation -> mMicState)
+        doAnswer(invocation -> mMicState.get(0))
                 .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(MICROPHONE));
-        doAnswer(invocation -> mCamState)
+        doAnswer(invocation -> mCamState.get(0))
                 .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(CAMERA));
+        doAnswer(invocation -> mMicState.get(invocation.getArgument(1)))
+                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(MICROPHONE), anyInt());
+        doAnswer(invocation -> mCamState.get(invocation.getArgument(1)))
+                .when(mSensorPrivacyManager).isSensorPrivacyEnabled(eq(CAMERA), anyInt());
 
         doAnswer(invocation -> {
-            mMicState = invocation.getArgument(1);
-            for (OnSensorPrivacyChangedListener listener : mMicListeners) {
-                listener.onSensorPrivacyChanged(MICROPHONE, mMicState);
+            mMicState.put(0, invocation.getArgument(2));
+            mMicState.put(10, invocation.getArgument(2));
+            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
+                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(0));
             }
             return null;
-        }).when(mSensorPrivacyManager).setSensorPrivacy(eq(MICROPHONE), anyBoolean());
+        }).when(mSensorPrivacyManager).setSensorPrivacy(anyInt(), eq(MICROPHONE), anyBoolean());
         doAnswer(invocation -> {
-            mCamState = invocation.getArgument(1);
-            for (OnSensorPrivacyChangedListener listener : mMicListeners) {
-                listener.onSensorPrivacyChanged(CAMERA, mMicState);
+            mCamState.put(0, invocation.getArgument(2));
+            mCamState.put(10, invocation.getArgument(2));
+            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
+                listener.onSensorPrivacyChanged(CAMERA, mMicState.get(0));
             }
             return null;
-        }).when(mSensorPrivacyManager).setSensorPrivacy(eq(CAMERA), anyBoolean());
+        }).when(mSensorPrivacyManager).setSensorPrivacy(anyInt(), eq(CAMERA), anyBoolean());
 
-        doAnswer(invocation -> mMicListeners.add(invocation.getArgument(1)))
+        doAnswer(invocation -> {
+            mMicState.put(0, invocation.getArgument(2));
+            mMicState.put(10, invocation.getArgument(2));
+            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(0)) {
+                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(0));
+            }
+            for (OnSensorPrivacyChangedListener listener : mMicListeners.get(10)) {
+                listener.onSensorPrivacyChanged(MICROPHONE, mMicState.get(10));
+            }
+            return null;
+        }).when(mSensorPrivacyManager)
+                .setSensorPrivacyForProfileGroup(anyInt(), eq(MICROPHONE), anyBoolean());
+        doAnswer(invocation -> {
+            mCamState.put(0, invocation.getArgument(2));
+            mCamState.put(10, invocation.getArgument(2));
+            for (OnSensorPrivacyChangedListener listener : mCamListeners.get(0)) {
+                listener.onSensorPrivacyChanged(CAMERA, mCamState.get(0));
+            }
+            for (OnSensorPrivacyChangedListener listener : mCamListeners.get(10)) {
+                listener.onSensorPrivacyChanged(CAMERA, mCamState.get(10));
+            }
+            return null;
+        }).when(mSensorPrivacyManager)
+                .setSensorPrivacyForProfileGroup(anyInt(), eq(CAMERA), anyBoolean());
+
+        doAnswer(invocation -> mMicListeners.get(0).add(invocation.getArgument(1)))
                 .when(mSensorPrivacyManager).addSensorPrivacyListener(eq(MICROPHONE), any());
-        doAnswer(invocation -> mCamListeners.add(invocation.getArgument(1)))
+        doAnswer(invocation -> mCamListeners.get(0).add(invocation.getArgument(1)))
                 .when(mSensorPrivacyManager).addSensorPrivacyListener(eq(CAMERA), any());
+
+        doAnswer(invocation -> mMicListeners.get(invocation.getArgument(2))
+                .add(invocation.getArgument(1))).when(mSensorPrivacyManager)
+                .addSensorPrivacyListener(eq(MICROPHONE), anyInt(), any());
+        doAnswer(invocation -> mCamListeners.get(invocation.getArgument(2))
+                .add(invocation.getArgument(1))).when(mSensorPrivacyManager)
+                .addSensorPrivacyListener(eq(CAMERA), anyInt(), any());
     }
 
     @Test
     public void isChecked_disableMicrophoneSensorPrivacy_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
         assertTrue(micToggleController.isChecked());
     }
 
     @Test
     public void isChecked_enableMicrophoneSensorPrivacy_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
         assertFalse(micToggleController.isChecked());
     }
 
     @Test
     public void isChecked_disableMicrophoneSensorPrivacyThenChanged_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
         assertFalse(micToggleController.isChecked());
     }
 
     @Test
     public void isChecked_enableMicrophoneSensorPrivacyThenChanged_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
         assertTrue(micToggleController.isChecked());
     }
 
     @Test
     public void isMicrophoneSensorPrivacyEnabled_uncheckMicToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
         micToggleController.setChecked(false);
-        assertTrue(mMicState);
+        assertTrue(mMicState.get(0));
     }
 
     @Test
     public void isMicrophoneSensorPrivacyEnabled_checkMicToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(MICROPHONE, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
         MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
         micToggleController.setChecked(true);
-        assertFalse(mMicState);
+        assertFalse(mMicState.get(0));
+    }
+
+    @Test
+    public void isMicrophoneSensorPrivacyEnabledForProfileUser_uncheckMicToggle_returnTrue() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, false);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+        micToggleController.setChecked(false);
+        assertTrue(mMicState.get(10));
+    }
+
+    @Test
+    public void isMicrophoneSensorPrivacyEnabledProfileUser_checkMicToggle_returnFalse() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, MICROPHONE, true);
+        MicToggleController micToggleController = new MicToggleController(mContext, "mic_toggle");
+        micToggleController.setChecked(true);
+        assertFalse(mMicState.get(10));
     }
 
     @Test
     public void isChecked_disableCameraSensorPrivacy_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
         assertTrue(camToggleController.isChecked());
@@ -162,7 +228,7 @@ public class SensorToggleControllerTest {
 
     @Test
     public void isChecked_enableCameraSensorPrivacy_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
         assertFalse(camToggleController.isChecked());
@@ -170,37 +236,55 @@ public class SensorToggleControllerTest {
 
     @Test
     public void isChecked_disableCameraSensorPrivacyThenChanged_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
         assertFalse(camToggleController.isChecked());
     }
 
     @Test
     public void isChecked_enableCameraSensorPrivacyThenChanged_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, true);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, false);
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
         assertTrue(camToggleController.isChecked());
     }
 
     @Test
-    public void isCameraSensorPrivacyEnabled_uncheckMicToggle_returnTrue() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, false);
+    public void isCameraSensorPrivacyEnabled_uncheckCanToggle_returnTrue() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
         camToggleController.setChecked(false);
-        assertTrue(mCamState);
+        assertTrue(mCamState.get(0));
     }
 
     @Test
-    public void isCameraSensorPrivacyEnabled_checkMicToggle_returnFalse() {
-        mSensorPrivacyManager.setSensorPrivacy(CAMERA, true);
+    public void isCameraSensorPrivacyEnabled_checkCamToggle_returnFalse() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
         CameraToggleController camToggleController =
                 new CameraToggleController(mContext, "cam_toggle");
         camToggleController.setChecked(true);
-        assertFalse(mCamState);
+        assertFalse(mCamState.get(0));
+    }
+
+    @Test
+    public void isCameraSensorPrivacyEnabledForProfileUser_uncheckCamToggle_returnTrue() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, false);
+        CameraToggleController camToggleController =
+                new CameraToggleController(mContext, "cam_toggle");
+        camToggleController.setChecked(false);
+        assertTrue(mCamState.get(10));
+    }
+
+    @Test
+    public void isCameraSensorPrivacyEnabledProfileUser_checkCamToggle_returnFalse() {
+        mSensorPrivacyManager.setSensorPrivacy(OTHER, CAMERA, true);
+        CameraToggleController camToggleController =
+                new CameraToggleController(mContext, "cam_toggle");
+        camToggleController.setChecked(true);
+        assertFalse(mCamState.get(10));
     }
 }

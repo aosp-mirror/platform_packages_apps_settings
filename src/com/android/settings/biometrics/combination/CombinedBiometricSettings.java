@@ -30,6 +30,8 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     private static final String TAG = "BiometricSettings";
     private static final String KEY_FACE_SETTINGS = "biometric_face_settings";
     private static final String KEY_FINGERPRINT_SETTINGS = "biometric_fingerprint_settings";
+    private static final String KEY_UNLOCK_PHONE = "biometric_settings_biometric_keyguard";
+    private static final String KEY_USE_IN_APPS = "biometric_settings_biometric_app";
 
     @Override
     public void onAttach(Context context) {
@@ -54,6 +56,16 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     }
 
     @Override
+    public String getUnlockPhonePreferenceKey() {
+        return KEY_UNLOCK_PHONE;
+    }
+
+    @Override
+    public String getUseInAppsPreferenceKey() {
+        return KEY_USE_IN_APPS;
+    }
+
+    @Override
     protected String getLogTag() {
         return TAG;
     }
@@ -64,5 +76,5 @@ public class CombinedBiometricSettings extends BiometricsSettingsBase {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.security_settings_combined_biometric);
+            new CombinedBiometricSearchIndexProvider(R.xml.security_settings_combined_biometric);
 }

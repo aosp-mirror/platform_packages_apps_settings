@@ -33,6 +33,21 @@ import com.android.settings.R;
  */
 public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
 
+    /**
+     * List of string resources to log when recording the result of this activity in gms.
+     * This must be updated when any strings are added/removed.
+     */
+    public static final int[] CONSENT_STRING_RESOURCES = new int[] {
+            R.string.security_settings_face_enroll_consent_introduction_title,
+            R.string.security_settings_face_enroll_introduction_consent_message,
+            R.string.security_settings_face_enroll_introduction_info_consent_glasses,
+            R.string.security_settings_face_enroll_introduction_info_consent_looking,
+            R.string.security_settings_face_enroll_introduction_info_consent_gaze,
+            R.string.security_settings_face_enroll_introduction_how_consent_message,
+            R.string.security_settings_face_enroll_introduction_control_consent_title,
+            R.string.security_settings_face_enroll_introduction_control_consent_message
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +63,16 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     @Override
     protected void onSkipButtonClick(View view) {
         onConsentResult(false /* granted */);
+    }
+
+    @Override
+    protected void onEnrollmentSkipped(@Nullable Intent data) {
+        onConsentResult(false /* granted */);
+    }
+
+    @Override
+    protected void onFinishedEnrolling(@Nullable Intent data) {
+        onConsentResult(true /* granted */);
     }
 
     private void onConsentResult(boolean granted) {
@@ -78,6 +103,12 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     @StringRes
     protected int getInfoMessageLooking() {
         return R.string.security_settings_face_enroll_introduction_info_consent_looking;
+    }
+
+    @Override
+    @StringRes
+    protected int getInfoMessageRequireEyes() {
+        return R.string.security_settings_face_enroll_introduction_info_consent_gaze;
     }
 
     @Override

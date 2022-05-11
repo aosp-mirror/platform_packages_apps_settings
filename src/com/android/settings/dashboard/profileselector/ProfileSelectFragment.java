@@ -16,15 +16,16 @@
 
 package com.android.settings.dashboard.profileselector;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
 import static android.content.Intent.EXTRA_USER_ID;
 
 import android.annotation.IntDef;
 import android.app.Activity;
-import android.content.Context;
+import android.app.admin.DevicePolicyManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,9 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -43,10 +44,10 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.Locale;
 
 /**
  * Base fragment class for profile settings.
@@ -95,9 +96,6 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * Used in fragment argument with Extra key {@link SettingsActivity.EXTRA_SHOW_FRAGMENT_TAB}
      */
     public static final int WORK_TAB = 1;
-    private static final int[] LABEL = {
-            R.string.category_personal, R.string.category_work
-    };
 
     private ViewGroup mContentView;
 
@@ -106,13 +104,19 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             Bundle savedInstanceState) {
         mContentView = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         final Activity activity = getActivity();
-        final int selectedTab = convertPosition(getTabId(activity, getArguments()));
+        final int titleResId = getTitleResId();
+        if (titleResId > 0) {
+            activity.setTitle(titleResId);
+        }
+        final int selectedTab = getTabId(activity, getArguments());
 
         final View tabContainer = mContentView.findViewById(R.id.tab_container);
-        final ViewPager viewPager = tabContainer.findViewById(R.id.view_pager);
+        final ViewPager2 viewPager = tabContainer.findViewById(R.id.view_pager);
         viewPager.setAdapter(new ProfileSelectFragment.ViewPagerAdapter(this));
         final TabLayout tabs = tabContainer.findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+        new TabLayoutMediator(tabs, viewPager,
+                (tab, position) -> tab.setText(getPageTitle(position))
+        ).attach();
         tabContainer.setVisibility(View.VISIBLE);
         final TabLayout.Tab tab = tabs.getTabAt(selectedTab);
         tab.select();
@@ -139,6 +143,14 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
      * {@link com.google.android.material.tabs.TabLayout}
      */
     public abstract Fragment[] getFragments();
+
+    /**
+     * Returns a resource ID of the title
+     * Override this if the title needs to be updated dynamically.
+     */
+    public int getTitleResId() {
+        return 0;
+    }
 
     @Override
     protected int getPreferenceScreenResId() {
@@ -172,38 +184,36 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
         return PERSONAL_TAB;
     }
 
-    static class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    private CharSequence getPageTitle(int position) {
+        final DevicePolicyManager devicePolicyManager =
+                getContext().getSystemService(DevicePolicyManager.class);
+
+        if (position == WORK_TAB) {
+            return devicePolicyManager.getResources().getString(WORK_CATEGORY_HEADER,
+                    () -> getContext().getString(R.string.category_work));
+        }
+
+        return devicePolicyManager.getResources().getString(PERSONAL_CATEGORY_HEADER,
+                () -> getContext().getString(R.string.category_personal));
+    }
+
+    static class ViewPagerAdapter extends FragmentStateAdapter {
 
         private final Fragment[] mChildFragments;
-        private final Context mContext;
 
         ViewPagerAdapter(ProfileSelectFragment fragment) {
-            super(fragment.getChildFragmentManager());
-            mContext = fragment.getContext();
+            super(fragment);
             mChildFragments = fragment.getFragments();
         }
 
         @Override
-        public Fragment getItem(int position) {
-            return mChildFragments[convertPosition(position)];
+        public Fragment createFragment(int position) {
+            return mChildFragments[position];
         }
 
         @Override
-        public int getCount() {
+        public int getItemCount() {
             return mChildFragments.length;
         }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mContext.getString(LABEL[convertPosition(position)]);
-        }
-    }
-
-    private static int convertPosition(int index) {
-        if (TextUtils.getLayoutDirectionFromLocale(Locale.getDefault())
-                == View.LAYOUT_DIRECTION_RTL) {
-            return LABEL.length - 1 - index;
-        }
-        return index;
     }
 }

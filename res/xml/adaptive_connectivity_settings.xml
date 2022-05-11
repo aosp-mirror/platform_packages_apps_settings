@@ -19,20 +19,18 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/adaptive_connectivity_title">
 
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="adaptive_connectivity_header"
-        android:layout="@layout/adaptive_connectivity_header"
-        android:persistent="false"
-        android:selectable="false"
-        android:title="@string/summary_placeholder"
-        settings:allowDividerBelow="true"
-        settings:searchable="false"/>
+    <com.android.settingslib.widget.TopIntroPreference
+        settings:searchable="false"
+        android:title="@string/adaptive_connectivity_summary"/>
 
-    <SwitchPreference
+    <com.android.settingslib.widget.IllustrationPreference
+        android:key="adaptive_connectivity_header"
+        settings:searchable="false"
+        settings:lottie_rawRes="@drawable/ic_enhanced_connectivity"/>
+
+    <com.android.settingslib.widget.MainSwitchPreference
         android:key="adaptive_connectivity"
         android:title="@string/adaptive_connectivity_title"
-        android:summary="@string/adaptive_connectivity_summary"
-        settings:allowDividerAbove="true"
         settings:controller="com.android.settings.network.AdaptiveConnectivityTogglePreferenceController"/>
 
 </PreferenceScreen>

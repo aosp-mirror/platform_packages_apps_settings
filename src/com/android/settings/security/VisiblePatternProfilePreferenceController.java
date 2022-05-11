@@ -28,6 +28,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -55,9 +56,15 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
         this(context, null /* lifecycle */);
     }
 
-    // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
     public VisiblePatternProfilePreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, KEY_VISIBLE_PATTERN_PROFILE);
+        this(context, lifecycle, KEY_VISIBLE_PATTERN_PROFILE);
+    }
+
+
+    // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
+    public VisiblePatternProfilePreferenceController(
+            Context context, Lifecycle lifecycle, String key) {
+        super(context, key);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider()
@@ -113,7 +120,14 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_security;
+    }
+
+    @Override
     public void onResume() {
-        mPreference.setVisible(isAvailable());
+        if (mPreference != null) {
+            mPreference.setVisible(isAvailable());
+        }
     }
 }

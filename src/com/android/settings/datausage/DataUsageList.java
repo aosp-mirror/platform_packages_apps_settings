@@ -14,11 +14,9 @@
 
 package com.android.settings.datausage;
 
+import static android.app.usage.NetworkStats.Bucket.UID_REMOVED;
+import static android.app.usage.NetworkStats.Bucket.UID_TETHERING;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-import static android.net.NetworkStatsHistory.FIELD_RX_BYTES;
-import static android.net.NetworkStatsHistory.FIELD_TX_BYTES;
-import static android.net.TrafficStats.UID_REMOVED;
-import static android.net.TrafficStats.UID_TETHERING;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -39,7 +37,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -51,6 +48,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.Lifecycle;
 import androidx.loader.app.LoaderManager.LoaderCallbacks;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
@@ -91,7 +89,6 @@ public class DataUsageList extends DataUsageBaseFragment
     private static final String KEY_APPS_GROUP = "apps_group";
     private static final String KEY_TEMPLATE = "template";
     private static final String KEY_APP = "app";
-    private static final String KEY_FIELDS = "fields";
 
     @VisibleForTesting
     static final int LOADER_CHART_DATA = 2;
@@ -142,12 +139,7 @@ public class DataUsageList extends DataUsageBaseFragment
         mChart = findPreference(KEY_CHART_DATA);
         mApps = findPreference(KEY_APPS_GROUP);
 
-        // TODO(b/167474581): This is a temporary solution to hide unnecessary warning
-        //  preference, when the provider model is completed, the following code should be removed.
-        final Preference unnecessaryWarningPreference =
-                FeatureFlagUtils.isEnabled(getContext(), FeatureFlagUtils.SETTINGS_PROVIDER_MODEL)
-                        ? findPreference("operator_warning")
-                        : findPreference("non_carrier_data_usage_warning");
+        final Preference unnecessaryWarningPreference = findPreference("operator_warning");
         if (unnecessaryWarningPreference != null) {
             unnecessaryWarningPreference.setVisible(false);
         }
@@ -304,7 +296,6 @@ public class DataUsageList extends DataUsageBaseFragment
         final Bundle args = new Bundle();
         args.putParcelable(KEY_TEMPLATE, template);
         args.putParcelable(KEY_APP, null);
-        args.putInt(KEY_FIELDS, FIELD_RX_BYTES | FIELD_TX_BYTES);
         return args;
     }
 
@@ -378,7 +369,7 @@ public class DataUsageList extends DataUsageBaseFragment
             final int collapseKey;
             final int category;
             final int userId = UserHandle.getUserId(uid);
-            if (UserHandle.isApp(uid)) {
+            if (UserHandle.isApp(uid) || Process.isSdkSandboxUid(uid)) {
                 if (profiles.contains(new UserHandle(userId))) {
                     if (userId != currentUserId) {
                         // Add to a managed user item.
@@ -386,8 +377,12 @@ public class DataUsageList extends DataUsageBaseFragment
                         largest = accumulate(managedKey, knownItems, bucket,
                             AppItem.CATEGORY_USER, items, largest);
                     }
-                    // Add to app item.
-                    collapseKey = uid;
+                    // Map SDK sandbox back to its corresponding app
+                    if (Process.isSdkSandboxUid(uid)) {
+                        collapseKey = Process.getAppUidForSdkSandboxUid(uid);
+                    } else {
+                        collapseKey = uid;
+                    }
                     category = AppItem.CATEGORY_APP;
                 } else {
                     // If it is a removed user add it to the removed users' key
@@ -425,6 +420,7 @@ public class DataUsageList extends DataUsageBaseFragment
             if (item == null) {
                 item = new AppItem(uid);
                 item.total = -1;
+                item.addUid(uid);
                 items.add(item);
                 knownItems.put(item.key, item);
             }
@@ -508,6 +504,17 @@ public class DataUsageList extends DataUsageBaseFragment
             if (LOGD) {
                 Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="
                         + cycle.end + "]");
+            }
+
+            // Avoid from updating UI after #onStop.
+            if (!getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+                return;
+            }
+
+            // Avoid from updating UI when async query still on-going.
+            // This could happen when a request from #onMobileDataEnabledChange.
+            if (mCycleData == null) {
+                return;
             }
 
             // update chart to show selected cycle, and update detail data

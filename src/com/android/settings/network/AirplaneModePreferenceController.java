@@ -17,6 +17,7 @@ package com.android.settings.network;
 
 import static android.provider.SettingsSlicesContract.KEY_AIRPLANE_MODE;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,11 +36,12 @@ import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class AirplaneModePreferenceController extends TogglePreferenceController
-        implements LifecycleObserver, OnStart, OnStop,
+        implements LifecycleObserver, OnStart, OnStop, OnDestroy,
         AirplaneModeEnabler.OnAirplaneModeChangedListener {
 
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -53,7 +55,6 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
             .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
             .appendPath(SettingsSlicesContract.KEY_AIRPLANE_MODE)
             .build();
-    private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
     private Fragment mFragment;
     private AirplaneModeEnabler mAirplaneModeEnabler;
@@ -120,6 +121,11 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
     }
 
     @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_network;
+    }
+
+    @Override
     public void onStart() {
         if (isAvailable()) {
             mAirplaneModeEnabler.start();
@@ -133,9 +139,15 @@ public class AirplaneModePreferenceController extends TogglePreferenceController
         }
     }
 
+    @Override
+    public void onDestroy() {
+        mAirplaneModeEnabler.close();
+    }
+
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
-            final boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
+            final boolean isChoiceYes = (resultCode == Activity.RESULT_OK);
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());

@@ -23,7 +23,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,14 +39,14 @@ public class OneHandedActionShowNotificationPrefControllerTest {
     private Context mContext;
     private OneHandedSettingsUtils mUtils;
     private OneHandedActionShowNotificationPrefController mController;
-    private RadioButtonPreference mPreference;
+    private SelectorWithWidgetPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUtils = new OneHandedSettingsUtils(mContext);
         mController = new OneHandedActionShowNotificationPrefController(mContext, KEY);
-        mPreference = new RadioButtonPreference(mContext);
+        mPreference = new SelectorWithWidgetPreference(mContext);
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 
@@ -100,6 +100,28 @@ public class OneHandedActionShowNotificationPrefControllerTest {
         SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "false");
         OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, true);
         mUtils.setNavigationBarMode(mContext, "2" /* fully gestural */);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    public void getAvailabilityStatus_setShortcutEnabled_shouldEnabled() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
+        mUtils.setNavigationBarMode(mContext, "0" /* 3-button mode */);
+        mUtils.setShortcutEnabled(mContext, true);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_setShortcutDisabled_shouldDisabled() {
+        SystemProperties.set(OneHandedSettingsUtils.SUPPORT_ONE_HANDED_MODE, "true");
+        OneHandedSettingsUtils.setOneHandedModeEnabled(mContext, false);
+        mUtils.setNavigationBarMode(mContext, "0" /* 3-button mode */);
+        mUtils.setShortcutEnabled(mContext, false);
 
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);

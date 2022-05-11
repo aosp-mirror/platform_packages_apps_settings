@@ -16,19 +16,20 @@
 
 package com.android.settings.gestures;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
+import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.widget.IllustrationPreference;
+import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * Fragment for One-handed mode settings
@@ -37,13 +38,35 @@ import com.android.settings.search.BaseSearchIndexProvider;
  * providing basic accessibility shortcut service setup.
  */
 public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
+
     private static final String ONE_HANDED_SHORTCUT_KEY = "one_handed_shortcuts_preference";
+    private static final String ONE_HANDED_ILLUSTRATION_KEY = "one_handed_header";
+    protected static final String ONE_HANDED_MAIN_SWITCH_KEY =
+            "gesture_one_handed_mode_enabled_main_switch";
     private String mFeatureName;
+    private OneHandedSettingsUtils mUtils;
 
     @Override
     protected void updatePreferenceStates() {
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
         super.updatePreferenceStates();
+
+        final IllustrationPreference illustrationPreference =
+                getPreferenceScreen().findPreference(ONE_HANDED_ILLUSTRATION_KEY);
+        final boolean isSwipeDownNotification =
+                OneHandedSettingsUtils.isSwipeDownNotificationEnabled(getContext());
+        illustrationPreference.setLottieAnimationResId(
+                isSwipeDownNotification ? R.raw.lottie_swipe_for_notifications
+                        : R.raw.lottie_one_hand_mode);
+
+        final MainSwitchPreference mainSwitchPreference =
+                getPreferenceScreen().findPreference(ONE_HANDED_MAIN_SWITCH_KEY);
+        mainSwitchPreference.addOnSwitchChangeListener((switchView, isChecked) -> {
+            switchView.setChecked(isChecked);
+            if (isChecked) {
+                showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
+            }
+        });
     }
 
     @Override
@@ -64,14 +87,31 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.one_handed_mode_shortcut_title);
+    }
+
+    @Override
     protected boolean showGeneralCategory() {
         return true;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public void onStart() {
+        super.onStart();
+        mUtils = new OneHandedSettingsUtils(this.getContext());
+        mUtils.registerToggleAwareObserver(uri -> {
+            Activity activity = getActivity();
+            if (activity != null) {
+                activity.runOnUiThread(() -> updatePreferenceStates());
+            }
+        });
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mUtils.unregisterToggleAwareObserver();
     }
 
     @Override
@@ -82,6 +122,18 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     @Override
     protected CharSequence getLabelName() {
         return mFeatureName;
+    }
+
+    @Override
+    protected ComponentName getTileComponentName() {
+        return AccessibilityShortcutController.ONE_HANDED_TILE_COMPONENT_NAME;
+    }
+
+    @Override
+    protected CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? getText(R.string.accessibility_one_handed_mode_qs_tooltip_content)
+                : getText(R.string.accessibility_one_handed_mode_auto_added_qs_tooltip_content);
     }
 
     @Override

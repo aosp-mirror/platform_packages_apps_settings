@@ -50,7 +50,7 @@ public class UsbDetailsFragment extends DashboardFragment {
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
     private UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, functions, powerRole, dataRole) -> {
+            (connected, functions, powerRole, dataRole, isUsbFigured) -> {
                 for (UsbDetailsController controller : mControllers) {
                     controller.refresh(connected, functions, powerRole, dataRole);
                 }
@@ -107,7 +107,7 @@ public class UsbDetailsFragment extends DashboardFragment {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return checkIfUsbDataSignalingIsDisabled(
-                            context, UserHandle.myUserId()) != null;
+                            context, UserHandle.myUserId()) == null;
                 }
 
                 @Override

@@ -50,13 +50,24 @@ public class ZenAccessController extends BasePreferenceController {
     }
 
     public static Set<String> getPackagesRequestingNotificationPolicyAccess() {
+        final String[] PERM = {
+                android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithManageNotifications() {
+        final String[] PERM = {
+                android.Manifest.permission.MANAGE_NOTIFICATIONS
+        };
+        return getPackagesWithPermissions(PERM);
+    }
+
+    public static Set<String> getPackagesWithPermissions(String[] permList) {
         final ArraySet<String> requestingPackages = new ArraySet<>();
         try {
-            final String[] PERM = {
-                    android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
-            };
             final ParceledListSlice list = AppGlobals.getPackageManager()
-                    .getPackagesHoldingPermissions(PERM, 0 /*flags*/,
+                    .getPackagesHoldingPermissions(permList, 0 /*flags*/,
                             ActivityManager.getCurrentUser());
             final List<PackageInfo> pkgs = list.getList();
             if (pkgs != null) {
@@ -86,17 +97,13 @@ public class ZenAccessController extends BasePreferenceController {
 
     public static void setAccess(final Context context, final String pkg, final boolean access) {
         logSpecialPermissionChange(access, pkg, context);
-        AsyncTask.execute(() -> {
-            final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-            mgr.setNotificationPolicyAccessGranted(pkg, access);
-        });
+        final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+        mgr.setNotificationPolicyAccessGranted(pkg, access);
     }
 
     public static void deleteRules(final Context context, final String pkg) {
-        AsyncTask.execute(() -> {
-            final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-            mgr.removeAutomaticZenRules(pkg);
-        });
+       final NotificationManager mgr = context.getSystemService(NotificationManager.class);
+       mgr.removeAutomaticZenRules(pkg);
     }
 
     @VisibleForTesting

@@ -16,19 +16,15 @@
 
 package com.android.settings.deviceinfo;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
-
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -40,7 +36,8 @@ import java.util.List;
 
 public class PhoneNumberPreferenceController extends BasePreferenceController {
 
-    private final static String KEY_PHONE_NUMBER = "phone_number";
+    private static final String KEY_PHONE_NUMBER = "phone_number";
+    private static final String KEY_PREFERENCE_CATEGORY = "basic_info_category";
 
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
@@ -66,6 +63,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
+        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
         mPreferenceList.add(preference);
 
         final int phonePreferenceOrder = preference.getOrder();
@@ -76,7 +74,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
             multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
             multiSimPreference.setSelectable(false);
-            screen.addPreference(multiSimPreference);
+            category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
     }
@@ -93,17 +91,6 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     @Override
     public boolean useDynamicSliceSummary() {
         return true;
-    }
-
-    @Override
-    public void copy() {
-        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
-                CLIPBOARD_SERVICE);
-        clipboard.setPrimaryClip(ClipData.newPlainText("text", getFirstPhoneNumber()));
-
-        final String toast = mContext.getString(R.string.copyable_slice_toast,
-                mContext.getText(R.string.status_number));
-        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 
     private CharSequence getFirstPhoneNumber() {
@@ -133,7 +120,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    SubscriptionInfo getSubscriptionInfo(int simSlot) {
+    protected SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
@@ -147,7 +134,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
+    protected CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
         final String phoneNumber = DeviceInfoUtils.getBidiFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
@@ -155,7 +142,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController {
     }
 
     @VisibleForTesting
-    Preference createNewPreference(Context context) {
-        return new Preference(context);
+    protected Preference createNewPreference(Context context) {
+        return new PhoneNumberSummaryPreference(context);
     }
 }

@@ -120,7 +120,7 @@ public class ZenModeSliceBuilder {
         final String screenTitle = context.getText(R.string.zen_mode_settings_title).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(context,
                 ZenModeSettings.class.getName(), ZEN_MODE_SLICE_KEY, screenTitle,
-                SettingsEnums.NOTIFICATION_ZEN_MODE)
+                SettingsEnums.NOTIFICATION_ZEN_MODE, R.string.menu_key_notifications)
                 .setClassName(context.getPackageName(), SubSettings.class.getName())
                 .setData(contentUri);
     }
@@ -150,6 +150,6 @@ public class ZenModeSliceBuilder {
         final Intent intent = new Intent(ACTION_ZEN_MODE_SLICE_CHANGED)
                 .setClass(context, SliceBroadcastReceiver.class);
         return PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
     }
 }

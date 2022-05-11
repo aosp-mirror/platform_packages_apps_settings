@@ -16,6 +16,9 @@
 
 package com.android.settings.applications.autofill;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_PERSONAL_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.AUTO_SYNC_WORK_DATA;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.service.autofill.AutofillService.EXTRA_RESULT;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_CREATE;
@@ -55,6 +58,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.AppPreference;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -67,6 +71,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PasswordsPreferenceController extends BasePreferenceController
         implements LifecycleObserver {
     private static final String TAG = "AutofillSettings";
+    private static final boolean DEBUG = false;
 
     private final PackageManager mPm;
     private final IconDrawableFactory mIconFactory;
@@ -75,28 +80,30 @@ public class PasswordsPreferenceController extends BasePreferenceController
     private LifecycleOwner mLifecycleOwner;
 
     public PasswordsPreferenceController(Context context, String preferenceKey) {
-        this(context, preferenceKey,
-                AutofillServiceInfo.getAvailableServices(context, UserHandle.myUserId()));
-    }
-
-    @VisibleForTesting
-    public PasswordsPreferenceController(
-            Context context, String preferenceKey, List<AutofillServiceInfo> availableServices) {
         super(context, preferenceKey);
         mPm = context.getPackageManager();
         mIconFactory = IconDrawableFactory.newInstance(mContext);
+        mServices = new ArrayList<>();
+    }
+
+    @OnLifecycleEvent(ON_CREATE)
+    void onCreate(LifecycleOwner lifecycleOwner) {
+        init(lifecycleOwner, AutofillServiceInfo.getAvailableServices(mContext, getUser()));
+    }
+
+    @VisibleForTesting
+    void init(LifecycleOwner lifecycleOwner, List<AutofillServiceInfo> availableServices) {
+        mLifecycleOwner = lifecycleOwner;
+
         for (int i = availableServices.size() - 1; i >= 0; i--) {
             final String passwordsActivity = availableServices.get(i).getPasswordsActivity();
             if (TextUtils.isEmpty(passwordsActivity)) {
                 availableServices.remove(i);
             }
         }
-        mServices = availableServices;
-    }
-
-    @OnLifecycleEvent(ON_CREATE)
-    void onCreate(LifecycleOwner lifecycleOwner) {
-        mLifecycleOwner = lifecycleOwner;
+        // TODO: Reverse the loop above and add to mServices directly.
+        mServices.clear();
+        mServices.addAll(availableServices);
     }
 
     @Override
@@ -108,8 +115,12 @@ public class PasswordsPreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final PreferenceGroup group = screen.findPreference(getPreferenceKey());
-        // TODO(b/169455298): Show work profile passwords too.
-        addPasswordPreferences(screen.getContext(), UserHandle.myUserId(), group);
+        addPasswordPreferences(screen.getContext(), getUser(), group);
+
+        replaceEnterpriseStringTitle(screen, "auto_sync_personal_account_data",
+                AUTO_SYNC_PERSONAL_DATA, R.string.account_settings_menu_auto_sync_personal);
+        replaceEnterpriseStringTitle(screen, "auto_sync_work_account_data",
+                AUTO_SYNC_WORK_DATA, R.string.account_settings_menu_auto_sync_work);
     }
 
     private void addPasswordPreferences(
@@ -125,9 +136,18 @@ public class PasswordsPreferenceController extends BasePreferenceController
                             serviceInfo.applicationInfo,
                             user);
             pref.setIcon(Utils.getSafeIcon(icon));
-            pref.setIntent(
-                    new Intent(Intent.ACTION_MAIN)
-                            .setClassName(serviceInfo.packageName, service.getPasswordsActivity()));
+            pref.setOnPreferenceClickListener(p -> {
+                final Intent intent =
+                        new Intent(Intent.ACTION_MAIN)
+                                .setClassName(
+                                        serviceInfo.packageName,
+                                        service.getPasswordsActivity())
+                                .setFlags(FLAG_ACTIVITY_NEW_TASK);
+                prefContext.startActivityAsUser(intent, UserHandle.of(user));
+                return true;
+            });
+            // Set a placeholder summary to avoid a UI flicker when the value loads.
+            pref.setSummary(R.string.autofill_passwords_count_placeholder);
 
             final MutableLiveData<Integer> passwordCount = new MutableLiveData<>();
             passwordCount.observe(
@@ -172,15 +192,18 @@ public class PasswordsPreferenceController extends BasePreferenceController
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             final IAutoFillService autofillService = IAutoFillService.Stub.asInterface(service);
-            // TODO check if debug is logged on user build.
-            Log.d(TAG, "Fetching password count from " + name);
+            if (DEBUG) {
+                Log.d(TAG, "Fetching password count from " + name);
+            }
             try {
                 autofillService.onSavedPasswordCountRequest(
                         new IResultReceiver.Stub() {
                             @Override
                             public void send(int resultCode, Bundle resultData) {
-                                Log.d(TAG, "Received password count result " + resultCode
-                                        + " from " + name);
+                                if (DEBUG) {
+                                    Log.d(TAG, "Received password count result " + resultCode
+                                            + " from " + name);
+                                }
                                 if (resultCode == 0 && resultData != null) {
                                     mData.postValue(resultData.getInt(EXTRA_RESULT));
                                 }
@@ -206,5 +229,10 @@ public class PasswordsPreferenceController extends BasePreferenceController
                 context.unbindService(this);
             }
         }
+    }
+
+    private int getUser() {
+        UserHandle workUser = getWorkProfileUser();
+        return workUser != null ? workUser.getIdentifier() : UserHandle.myUserId();
     }
 }

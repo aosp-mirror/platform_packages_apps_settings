@@ -126,7 +126,7 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                 // "Clear All Notifications" button
 
                 Intent deleteIntent = new Intent(BluetoothDevice.ACTION_CONNECTION_ACCESS_REPLY);
-                deleteIntent.setPackage("com.android.bluetooth");
+                deleteIntent.setPackage("com.android.bluetooth.services");
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
                 deleteIntent.putExtra(BluetoothDevice.EXTRA_CONNECTION_ACCESS_RESULT,
                         BluetoothDevice.CONNECTION_ACCESS_NO);
@@ -147,15 +147,13 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         title = context.getString(
                                 R.string.bluetooth_sim_card_access_notification_title);
                         message = context.getString(
-                                R.string.bluetooth_sim_card_access_notification_content,
-                                deviceAlias, deviceAlias);
+                                R.string.bluetooth_sim_card_access_notification_content);
                         break;
                     default:
                         title = context.getString(
                                 R.string.bluetooth_connect_access_notification_title);
                         message = context.getString(
-                                R.string.bluetooth_connect_access_notification_content,
-                                deviceAlias, deviceAlias);
+                                R.string.bluetooth_connect_access_notification_content);
                         break;
                 }
                 NotificationManager notificationManager =
@@ -293,6 +291,6 @@ public final class BluetoothPermissionRequest extends BroadcastReceiver {
                         : BluetoothDevice.CONNECTION_ACCESS_NO);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, mDevice);
         intent.putExtra(BluetoothDevice.EXTRA_ACCESS_REQUEST_TYPE, mRequestType);
-        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_ADMIN);
+        mContext.sendBroadcast(intent, android.Manifest.permission.BLUETOOTH_CONNECT);
     }
 }

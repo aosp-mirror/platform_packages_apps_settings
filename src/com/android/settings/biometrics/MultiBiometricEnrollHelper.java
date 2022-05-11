@@ -20,7 +20,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -38,6 +37,7 @@ public class MultiBiometricEnrollHelper {
     private static final int REQUEST_FINGERPRINT_ENROLL = 3001;
 
     public static final String EXTRA_ENROLL_AFTER_FACE = "enroll_after_face";
+    public static final String EXTRA_SKIP_PENDING_ENROLL = "skip_pending_enroll";
 
     @NonNull private final FragmentActivity mActivity;
     private final long mGkPwHandle;
@@ -106,12 +106,5 @@ public class MultiBiometricEnrollHelper {
             BiometricUtils.launchEnrollForResult(mActivity, intent, REQUEST_FINGERPRINT_ENROLL,
                     hardwareAuthToken, mGkPwHandle, mUserId);
         }));
-    }
-
-    void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "RequestCode: " + requestCode + " resultCode: " + resultCode);
-        BiometricUtils.removeGatekeeperPasswordHandle(mActivity, mGkPwHandle);
-        mActivity.setResult(resultCode);
-        mActivity.finish();
     }
 }

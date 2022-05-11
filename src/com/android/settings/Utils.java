@@ -85,7 +85,6 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -419,7 +418,7 @@ public final class Utils extends com.android.settingslib.Utils {
     public static UserHandle getManagedProfile(UserManager userManager) {
         final List<UserHandle> userProfiles = userManager.getUserProfiles();
         for (UserHandle profile : userProfiles) {
-            if (profile.getIdentifier() == userManager.getUserHandle()) {
+            if (profile.getIdentifier() == userManager.getProcessUserId()) {
                 continue;
             }
             final UserInfo userInfo = userManager.getUserInfo(profile.getIdentifier());
@@ -1013,7 +1012,8 @@ public final class Utils extends com.android.settingslib.Utils {
         Drawable safeIcon = icon;
 
         if ((icon != null) && !(icon instanceof VectorDrawable)) {
-            safeIcon = getSafeDrawable(icon, 500, 500);
+            safeIcon = getSafeDrawable(icon,
+                    /* MAX_DRAWABLE_SIZE */ 600, /* MAX_DRAWABLE_SIZE */ 600);
         }
 
         return safeIcon;
@@ -1158,13 +1158,17 @@ public final class Utils extends com.android.settingslib.Utils {
                 == ProfileSelectFragment.ProfileType.PERSONAL : false;
         final boolean isWork = args != null ? args.getInt(ProfileSelectFragment.EXTRA_PROFILE)
                 == ProfileSelectFragment.ProfileType.WORK : false;
-        if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
-                && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
-                && !isWork && !isPersonal) {
-            f = Fragment.instantiate(activity, ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName),
-                    args);
-        } else {
-            f = Fragment.instantiate(activity, fragmentName, args);
+        try {
+            if (activity.getSystemService(UserManager.class).getUserProfiles().size() > 1
+                    && ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName) != null
+                    && !isWork && !isPersonal) {
+                f = Fragment.instantiate(activity,
+                        ProfileFragmentBridge.FRAGMENT_MAP.get(fragmentName), args);
+            } else {
+                f = Fragment.instantiate(activity, fragmentName, args);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to get target fragment", e);
         }
         return f;
     }
@@ -1215,10 +1219,14 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     @ColorInt
     public static int getHomepageIconColor(Context context) {
-        return getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+        return getColorAttrDefaultColor(context, android.R.attr.textColorPrimary);
     }
 
-    public static boolean isProviderModelEnabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_PROVIDER_MODEL);
+    /**
+     * Returns the highlight color of homepage preference icons.
+     */
+    @ColorInt
+    public static int getHomepageIconColorHighlight(Context context) {
+        return context.getColor(R.color.accent_select_primary_text);
     }
 }

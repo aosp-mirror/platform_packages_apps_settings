@@ -50,7 +50,7 @@ public class SmartAutoRotateBatterySaverController extends BasePreferenceControl
             if (mPreference == null) {
                 return;
             }
-            mPreference.setVisible(isPowerSaveMode());
+            mPreference.setVisible(isAvailable());
             updateState(mPreference);
         }
     };

@@ -36,6 +36,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.SubSettings;
 import com.android.settings.core.CategoryMixin.CategoryHandler;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
@@ -58,6 +59,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     protected static final boolean DEBUG_TIMING = false;
     private static final String TAG = "SettingsBaseActivity";
     private static final int DEFAULT_REQUEST = -1;
+    private static final float TOOLBAR_LINE_SPACING_MULTIPLIER = 1.1f;
 
     protected CategoryMixin mCategoryMixin;
     protected CollapsingToolbarLayout mCollapsingToolbarLayout;
@@ -72,6 +74,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (isFinishing()) {
+            return;
+        }
         if (isLockTaskModePinned() && !isSettingsRunOnTop()) {
             Log.w(TAG, "Devices lock task mode pinned.");
             finish();
@@ -90,9 +95,8 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
         // Apply SetupWizard light theme during setup flow. This is for SubSettings pages.
         final boolean isAnySetupWizard = WizardManagerHelper.isAnySetupWizard(getIntent());
         if (isAnySetupWizard && this instanceof SubSettings) {
-            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SubSettings_SetupWizard : R.style.SudThemeGlifV3_Light;
-            setTheme(appliedTheme);
+            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+            setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
             ThemeHelper.trySetDynamicColor(this);
         }
 
@@ -100,6 +104,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
             super.setContentView(R.layout.collapsing_toolbar_base_layout);
             mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
             mAppBarLayout = findViewById(R.id.app_bar);
+            if (mCollapsingToolbarLayout != null) {
+                mCollapsingToolbarLayout.setLineSpacingMultiplier(TOOLBAR_LINE_SPACING_MULTIPLIER);
+            }
             disableCollapsingToolbarLayoutScrollingBehavior();
         } else {
             super.setContentView(R.layout.settings_base_layout);
@@ -175,19 +182,17 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
 
     @Override
     public void setTitle(CharSequence title) {
+        super.setTitle(title);
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(title);
-        } else {
-            super.setTitle(title);
         }
     }
 
     @Override
     public void setTitle(int titleId) {
+        super.setTitle(getText(titleId));
         if (mCollapsingToolbarLayout != null) {
             mCollapsingToolbarLayout.setTitle(getText(titleId));
-        } else {
-            super.setTitle(titleId);
         }
     }
 
@@ -238,6 +243,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private void disableCollapsingToolbarLayoutScrollingBehavior() {
+        if (mAppBarLayout == null) {
+            return;
+        }
         final CoordinatorLayout.LayoutParams params =
                 (CoordinatorLayout.LayoutParams) mAppBarLayout.getLayoutParams();
         final AppBarLayout.Behavior behavior = new AppBarLayout.Behavior();

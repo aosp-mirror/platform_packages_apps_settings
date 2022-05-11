@@ -70,6 +70,6 @@ public class PowerMenuPreferenceControllerTest {
                     .thenReturn(false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 }

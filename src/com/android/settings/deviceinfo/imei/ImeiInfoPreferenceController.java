@@ -27,11 +27,12 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.slices.Sliceable;
+import com.android.settings.deviceinfo.PhoneNumberSummaryPreference;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ import java.util.List;
  * Controller that manages preference for single and multi sim devices.
  */
 public class ImeiInfoPreferenceController extends BasePreferenceController {
+
+    private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
 
     private final boolean mIsMultiSim;
     private final TelephonyManager mTelephonyManager;
@@ -61,6 +64,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
+        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
 
         mPreferenceList.add(preference);
         updatePreference(preference, 0 /* simSlot */);
@@ -72,7 +76,7 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
             multiSimPreference.setKey(getPreferenceKey() + simSlotNumber);
-            screen.addPreference(multiSimPreference);
+            category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
             updatePreference(multiSimPreference, simSlotNumber);
         }
@@ -123,11 +127,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
         return true;
     }
 
-    @Override
-    public void copy() {
-        Sliceable.setCopyContent(mContext, getSummary(0), getTitle(0));
-    }
-
     private void updatePreference(Preference preference, int simSlot) {
         preference.setTitle(getTitle(simSlot));
         preference.setSummary(getSummary(simSlot));
@@ -158,6 +157,6 @@ public class ImeiInfoPreferenceController extends BasePreferenceController {
 
     @VisibleForTesting
     Preference createNewPreference(Context context) {
-        return new Preference(context);
+        return new PhoneNumberSummaryPreference(context);
     }
 }

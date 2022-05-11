@@ -19,6 +19,8 @@ package com.android.settings.wifi;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.IActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,11 +31,13 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.AlertActivity;
 import com.android.settings.R;
 
@@ -63,6 +67,8 @@ public class RequestToggleWiFiActivity extends AlertActivity
 
     private @NonNull WifiManager mWiFiManager;
     private @NonNull CharSequence mAppLabel;
+    @VisibleForTesting
+    protected IActivityManager mActivityManager = ActivityManager.getService();
 
     private int mState = STATE_UNKNOWN;
     private int mLastUpdateState = STATE_UNKNOWN;
@@ -75,20 +81,8 @@ public class RequestToggleWiFiActivity extends AlertActivity
 
         setResult(Activity.RESULT_CANCELED);
 
-        String packageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
-        if (TextUtils.isEmpty(packageName)) {
-            finish();
-            return;
-        }
-
-        try {
-            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
-                    packageName, 0);
-            mAppLabel = applicationInfo.loadSafeLabel(getPackageManager(),
-                    PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX, PackageItemInfo.SAFE_LABEL_FLAG_TRIM
-                            | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(LOG_TAG, "Couldn't find app with package name " + packageName);
+        mAppLabel = getAppLabel();
+        if (TextUtils.isEmpty(mAppLabel)) {
             finish();
             return;
         }
@@ -140,7 +134,6 @@ public class RequestToggleWiFiActivity extends AlertActivity
     @Override
     protected void onStart() {
         super.onStart();
-
         mReceiver.register();
 
         final int wifiState = mWiFiManager.getWifiState();
@@ -221,6 +214,32 @@ public class RequestToggleWiFiActivity extends AlertActivity
         mReceiver.unregister();
         unscheduleToggleTimeout();
         super.onStop();
+    }
+
+    @VisibleForTesting
+    protected CharSequence getAppLabel() {
+        String packageName;
+        try {
+            packageName = mActivityManager.getLaunchedFromPackage(getActivityToken());
+            if (TextUtils.isEmpty(packageName)) {
+                Log.d(LOG_TAG, "Package name is null");
+                return null;
+            }
+        } catch (RemoteException e) {
+            Log.e(LOG_TAG, "Can not get the package from activity manager");
+            return null;
+        }
+
+        try {
+            ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
+                    packageName, 0);
+            return applicationInfo.loadSafeLabel(getPackageManager(),
+                    PackageItemInfo.DEFAULT_MAX_LABEL_SIZE_PX, PackageItemInfo.SAFE_LABEL_FLAG_TRIM
+                            | PackageItemInfo.SAFE_LABEL_FLAG_FIRST_LINE);
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(LOG_TAG, "Couldn't find app with package name " + packageName);
+            return null;
+        }
     }
 
     private void updateUi() {

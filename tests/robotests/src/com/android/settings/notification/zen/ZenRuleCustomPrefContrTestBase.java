@@ -20,8 +20,6 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.service.notification.ZenPolicy;
 
-import com.android.settings.notification.zen.AbstractZenCustomRulePreferenceController;
-
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
@@ -37,6 +35,6 @@ abstract class ZenRuleCustomPrefContrTestBase {
 
     void updateControllerZenPolicy(ZenPolicy policy) {
         mRule.setZenPolicy(policy);
-        getController().onResume(mRule, RULE_ID);
+        getController().setIdAndRule(RULE_ID, mRule);
     }
 }

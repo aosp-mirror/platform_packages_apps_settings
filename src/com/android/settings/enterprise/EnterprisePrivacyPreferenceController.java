@@ -18,25 +18,24 @@ import android.content.Context;
 import androidx.preference.Preference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Objects;
 
-public class EnterprisePrivacyPreferenceController extends AbstractPreferenceController implements
+public class EnterprisePrivacyPreferenceController extends BasePreferenceController implements
         PreferenceControllerMixin {
 
-    private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
     private final PrivacyPreferenceControllerHelper mPrivacyPreferenceControllerHelper;
 
-    public EnterprisePrivacyPreferenceController(Context context) {
-        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context));
+    public EnterprisePrivacyPreferenceController(Context context, String key) {
+        this(Objects.requireNonNull(context), new PrivacyPreferenceControllerHelper(context), key);
     }
 
     @VisibleForTesting
-    EnterprisePrivacyPreferenceController(
-            Context context, PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper) {
-        super(Objects.requireNonNull(context));
+    EnterprisePrivacyPreferenceController(Context context,
+            PrivacyPreferenceControllerHelper privacyPreferenceControllerHelper, String key) {
+        super(Objects.requireNonNull(context), key);
         mPrivacyPreferenceControllerHelper = Objects.requireNonNull(
                 privacyPreferenceControllerHelper);
     }
@@ -47,13 +46,10 @@ public class EnterprisePrivacyPreferenceController extends AbstractPreferenceCon
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return mPrivacyPreferenceControllerHelper.hasDeviceOwner()
-                && !mPrivacyPreferenceControllerHelper.isFinancedDevice();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_ENTERPRISE_PRIVACY;
+                && !mPrivacyPreferenceControllerHelper.isFinancedDevice()
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 }

@@ -48,10 +48,8 @@ import android.widget.Toast;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.internal.app.LocalePicker;
-import com.android.internal.inputmethod.Completable;
-import com.android.internal.inputmethod.ResultCallbacks;
+import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.view.IInputMethodManager;
 import com.android.settings.R;
 import com.android.settings.development.WirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
@@ -200,7 +198,7 @@ public abstract class DevelopmentTiles extends TileService {
         static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
         private IBinder mSurfaceFlinger;
         private IWindowManager mWindowManager;
-        private IInputMethodManager mInputMethodManager;
+        private ImeTracing mImeTracing;
         private Toast mToast;
 
         @Override
@@ -208,8 +206,7 @@ public abstract class DevelopmentTiles extends TileService {
             super.onCreate();
             mWindowManager = WindowManagerGlobal.getWindowManagerService();
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-            mInputMethodManager = IInputMethodManager.Stub.asInterface(
-                    ServiceManager.getService("input_method"));
+            mImeTracing = ImeTracing.getInstance();
             Context context = getApplicationContext();
             CharSequence text = "Trace files written to /data/misc/wmtrace";
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
@@ -262,17 +259,8 @@ public abstract class DevelopmentTiles extends TileService {
             return false;
         }
 
-        @VisibleForTesting
-        boolean isImeTraceEnabled() {
-            try {
-                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
-                final Completable.Boolean value = Completable.createBoolean();
-                mInputMethodManager.isImeTraceEnabled(ResultCallbacks.of(value));
-                return Completable.getResult(value);
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not get ime trace status, defaulting to false.", e);
-            }
-            return false;
+        private boolean isImeTraceEnabled() {
+            return mImeTracing.isEnabled();
         }
 
         @Override
@@ -328,18 +316,11 @@ public abstract class DevelopmentTiles extends TileService {
             }
         }
 
-        protected void setImeTraceEnabled(boolean isEnabled) {
-            try {
-                // TODO(b/175742251): Get rid of dependency on IInputMethodManager
-                final Completable.Void value = Completable.createVoid();
-                if (isEnabled) {
-                    mInputMethodManager.startImeTrace(ResultCallbacks.of(value));
-                } else {
-                    mInputMethodManager.stopImeTrace(ResultCallbacks.of(value));
-                }
-                Completable.getResult(value);
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set ime trace status." + e.toString());
+        private void setImeTraceEnabled(boolean isEnabled) {
+            if (isEnabled) {
+                mImeTracing.startImeTrace();
+            } else {
+                mImeTracing.stopImeTrace();
             }
         }
 

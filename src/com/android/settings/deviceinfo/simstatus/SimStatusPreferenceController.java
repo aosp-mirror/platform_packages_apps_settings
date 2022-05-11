@@ -24,6 +24,7 @@ import android.telephony.TelephonyManager;
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -37,6 +38,7 @@ public class SimStatusPreferenceController extends
         AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_SIM_STATUS = "sim_status";
+    private static final String KEY_PREFERENCE_CATEGORY = "device_detail_category";
 
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
@@ -64,6 +66,7 @@ public class SimStatusPreferenceController extends
         if (!isAvailable() || preference == null || !preference.isVisible()) {
             return;
         }
+        final PreferenceCategory category = screen.findPreference(KEY_PREFERENCE_CATEGORY);
 
         mPreferenceList.add(preference);
 
@@ -74,7 +77,7 @@ public class SimStatusPreferenceController extends
             final Preference multiSimPreference = createNewPreference(screen.getContext());
             multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
             multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
-            screen.addPreference(multiSimPreference);
+            category.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
     }

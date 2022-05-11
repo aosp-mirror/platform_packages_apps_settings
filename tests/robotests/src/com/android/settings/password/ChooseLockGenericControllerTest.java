@@ -22,6 +22,7 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
+import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
@@ -190,6 +191,16 @@ public class ChooseLockGenericControllerTest {
     }
 
     @Test
+    public void isScreenLockEnabled_QualityManaged() {
+        setDevicePolicyPasswordQuality(PASSWORD_QUALITY_MANAGED);
+        assertThat(mController.isScreenLockEnabled(ScreenLockType.NONE)).isFalse();
+        assertThat(mController.isScreenLockEnabled(ScreenLockType.SWIPE)).isFalse();
+        assertThat(mController.isScreenLockEnabled(ScreenLockType.PATTERN)).isFalse();
+        assertThat(mController.isScreenLockEnabled(ScreenLockType.PIN)).isFalse();
+        assertThat(mController.isScreenLockEnabled(ScreenLockType.PASSWORD)).isFalse();
+    }
+
+    @Test
     public void isScreenLockEnabled_NoneComplexity() {
         when(mLockPatternUtils.getRequestedPasswordComplexity(anyInt(), anyBoolean()))
                 .thenReturn(PASSWORD_COMPLEXITY_NONE);
@@ -353,6 +364,9 @@ public class ChooseLockGenericControllerTest {
 
         when(mLockPatternUtils.getRequestedPasswordMetrics(anyInt(), anyBoolean()))
                 .thenReturn(policy.getMinMetrics());
+
+        when(mLockPatternUtils.isCredentialsDisabledForUser(anyInt()))
+                .thenReturn(quality == PASSWORD_QUALITY_MANAGED);
     }
 
     private ChooseLockGenericController.Builder createBuilder() {

@@ -27,8 +27,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
 
 import androidx.preference.PreferenceScreen;
 
@@ -117,6 +117,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
         }
         ArraySet<String> autoApproved = new ArraySet<>();
         autoApproved.addAll(mNoMan.getEnabledNotificationListenerPackages());
+        autoApproved.addAll(ZenAccessController.getPackagesWithManageNotifications());
         Collections.sort(apps, new PackageItemInfo.DisplayNameComparator(mPkgMan));
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
@@ -136,7 +137,7 @@ public class ZenAccessSettings extends EmptyTextSettings implements
             pref.setOnPreferenceClickListener(preference -> {
                 AppInfoBase.startAppInfoFragment(
                         ZenAccessDetails.class  /* fragment */,
-                        R.string.manage_zen_access_title /* titleRes */,
+                        getString(R.string.manage_zen_access_title) /* titleRes */,
                         pkg,
                         app.uid,
                         this /* source */,

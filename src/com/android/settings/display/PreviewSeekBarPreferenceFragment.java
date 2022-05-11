@@ -19,6 +19,8 @@ package com.android.settings.display;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.view.Choreographer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,14 +60,35 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     private View mLarger;
     private View mSmaller;
 
+    private static final long MIN_COMMIT_INTERVAL_MS = 800;
+    private long mLastCommitTime;
+
     private class onPreviewSeekBarChangeListener implements OnSeekBarChangeListener {
+        private static final long CHANGE_BY_SEEKBAR_DELAY_MS = 100;
+        private static final long CHANGE_BY_BUTTON_DELAY_MS = 300;
+
         private boolean mSeekByTouch;
+        private boolean mIsChanged;
+        private long mCommitDelayMs;
+
+        private final Choreographer.FrameCallback mCommit = f -> {
+            commit();
+            mLastCommitTime = SystemClock.elapsedRealtime();
+        };
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (mCurrentIndex == progress) {
+                mIsChanged = false;
+                return;
+            }
+            mIsChanged = true;
             setPreviewLayer(progress, false);
-            if (!mSeekByTouch) {
-                commit();
+            if (mSeekByTouch) {
+                mCommitDelayMs = CHANGE_BY_SEEKBAR_DELAY_MS;
+            } else {
+                mCommitDelayMs = CHANGE_BY_BUTTON_DELAY_MS;
+                commitOnNextFrame();
             }
         }
 
@@ -76,18 +99,39 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            if (mPreviewPagerAdapter.isAnimating()) {
-                mPreviewPagerAdapter.setAnimationEndAction(() -> commit());
-            } else {
-                commit();
-            }
             mSeekByTouch = false;
+            if (!mIsChanged) {
+                return;
+            }
+            if (mPreviewPagerAdapter.isAnimating()) {
+                mPreviewPagerAdapter.setAnimationEndAction(this::commitOnNextFrame);
+            } else {
+                commitOnNextFrame();
+            }
         }
+
+        private void commitOnNextFrame() {
+            if (SystemClock.elapsedRealtime() - mLastCommitTime < MIN_COMMIT_INTERVAL_MS) {
+                mCommitDelayMs += MIN_COMMIT_INTERVAL_MS;
+            }
+            final Choreographer choreographer = Choreographer.getInstance();
+            choreographer.removeFrameCallback(mCommit);
+            choreographer.postFrameCallbackDelayed(mCommit, mCommitDelayMs);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("mLastCommitTime", mLastCommitTime);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            mLastCommitTime = savedInstanceState.getLong("mLastCommitTime");
+        }
         final View root = super.onCreateView(inflater, container, savedInstanceState);
         final ViewGroup listContainer = root.findViewById(android.R.id.list_container);
         listContainer.removeAllViews();

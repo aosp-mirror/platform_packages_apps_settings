@@ -31,7 +31,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,7 +40,7 @@ import java.util.Map;
  * This class controls the radio buttons for choosing between different USB functions.
  */
 public class UsbDetailsFunctionsController extends UsbDetailsController
-        implements RadioButtonPreference.OnClickListener {
+        implements SelectorWithWidgetPreference.OnClickListener {
 
     private static final String TAG = "UsbFunctionsCtrl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -83,10 +83,10 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     /**
      * Gets a switch preference for the particular option, creating it if needed.
      */
-    private RadioButtonPreference getProfilePreference(String key, int titleId) {
-        RadioButtonPreference pref = mProfilesContainer.findPreference(key);
+    private SelectorWithWidgetPreference getProfilePreference(String key, int titleId) {
+        SelectorWithWidgetPreference pref = mProfilesContainer.findPreference(key);
         if (pref == null) {
-            pref = new RadioButtonPreference(mProfilesContainer.getContext());
+            pref = new SelectorWithWidgetPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
             pref.setSingleLineTitle(false);
@@ -108,7 +108,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             // Functions are only available in device mode
             mProfilesContainer.setEnabled(true);
         }
-        RadioButtonPreference pref;
+        SelectorWithWidgetPreference pref;
         for (long option : FUNCTIONS_MAP.keySet()) {
             int title = FUNCTIONS_MAP.get(option);
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
@@ -116,6 +116,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             if (mUsbBackend.areFunctionsSupported(option)) {
                 if (isAccessoryMode(functions)) {
                     pref.setChecked(UsbManager.FUNCTION_MTP == option);
+                } else if (functions == UsbManager.FUNCTION_NCM) {
+                    pref.setChecked(UsbManager.FUNCTION_RNDIS == option);
                 } else {
                     pref.setChecked(functions == option);
                 }
@@ -126,7 +128,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference preference) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
         final long previousFunction = mUsbBackend.getCurrentFunctions();
         if (DEBUG) {
@@ -140,15 +142,15 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             mPreviousFunction = previousFunction;
 
             //Update the UI in advance to make it looks smooth
-            final RadioButtonPreference prevPref =
-                    (RadioButtonPreference) mProfilesContainer.findPreference(
+            final SelectorWithWidgetPreference prevPref =
+                    (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
                             UsbBackend.usbFunctionsToString(mPreviousFunction));
             if (prevPref != null) {
                 prevPref.setChecked(false);
                 preference.setChecked(true);
             }
 
-            if (function == UsbManager.FUNCTION_RNDIS) {
+            if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
                 // We need to have entitlement check for usb tethering, so use API in
                 // TetheringManager.
                 mTetheringManager.startTethering(

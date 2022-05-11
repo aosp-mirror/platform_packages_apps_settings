@@ -16,7 +16,8 @@
 
 package com.android.settings.users;
 
-import android.annotation.NonNull;
+import static com.android.settingslib.Utils.getColorAttrDefaultColor;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -32,7 +33,9 @@ import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BlendMode;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,12 +43,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.RemoteException;
+import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -87,6 +92,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Screen that manages the list of users on the device.
@@ -111,8 +119,10 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_GUEST = "user_guest";
     private static final String KEY_ADD_GUEST = "guest_add";
     private static final String KEY_ADD_USER = "user_add";
+    private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
+    private static final String KEY_TIMEOUT_TO_USER_ZERO = "timeout_to_user_zero_preference";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -128,6 +138,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int DIALOG_USER_PROFILE_EDITOR = 9;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_USER = 10;
     private static final int DIALOG_USER_PROFILE_EDITOR_ADD_RESTRICTED_PROFILE = 11;
+    private static final int DIALOG_CONFIRM_RESET_GUEST = 12;
 
     private static final int MESSAGE_UPDATE_LIST = 1;
     private static final int MESSAGE_USER_CREATED = 2;
@@ -136,6 +147,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final int USER_TYPE_RESTRICTED_PROFILE = 2;
 
     private static final int REQUEST_CHOOSE_LOCK = 10;
+    private static final int REQUEST_EDIT_GUEST = 11;
+
+    static final int RESULT_GUEST_REMOVED = 100;
 
     private static final String KEY_ADD_USER_LONG_MESSAGE_DISPLAYED =
             "key_add_user_long_message_displayed";
@@ -157,9 +171,13 @@ public class UserSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     RestrictedPreference mAddUser;
     @VisibleForTesting
+    RestrictedPreference mAddSupervisedUser;
+    @VisibleForTesting
     SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private int mRemovingUserId = -1;
     private boolean mAddingUser;
+    private boolean mGuestUserAutoCreated;
+    private String mConfigSupervisedUserCreationPackage;
     private String mAddingUserName;
     private UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList = true;
@@ -172,7 +190,10 @@ public class UserSettings extends SettingsPreferenceFragment
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
+    private TimeoutToUserZeroPreferenceController mTimeoutToUserZeroPreferenceController;
     private UserCreatingDialog mUserCreatingDialog;
+    private final AtomicBoolean mGuestCreationScheduled = new AtomicBoolean();
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     private CharSequence mPendingUserName;
     private Drawable mPendingUserIcon;
@@ -240,15 +261,22 @@ public class UserSettings extends SettingsPreferenceFragment
             return;
         }
 
+        mGuestUserAutoCreated = getPrefContext().getResources().getBoolean(
+                        com.android.internal.R.bool.config_guestUserAutoCreated);
+
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
 
         mMultiUserTopIntroPreferenceController = new MultiUserTopIntroPreferenceController(activity,
                 KEY_MULTIUSER_TOP_INTRO);
 
+        mTimeoutToUserZeroPreferenceController = new TimeoutToUserZeroPreferenceController(activity,
+                KEY_TIMEOUT_TO_USER_ZERO);
+
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
+        mTimeoutToUserZeroPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
@@ -282,12 +310,17 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUser = findPreference(KEY_ADD_USER);
         if (!mUserCaps.mCanAddRestrictedProfile) {
             // Label should only mention adding a "user", not a "profile"
-            mAddUser.setTitle(R.string.user_add_user_menu);
+            mAddUser.setTitle(com.android.settingslib.R.string.user_add_user);
         }
         mAddUser.setOnPreferenceClickListener(this);
 
+        setConfigSupervisedUserCreationPackage();
+        mAddSupervisedUser = findPreference(KEY_ADD_SUPERVISED_USER);
+        mAddSupervisedUser.setOnPreferenceClickListener(this);
+
         activity.registerReceiverAsUser(
-                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler);
+                mUserChangeReceiver, UserHandle.ALL, USER_REMOVED_INTENT_FILTER, null, mHandler,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
 
         updateUI();
         mShouldUpdateUserList = false;
@@ -304,6 +337,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        mTimeoutToUserZeroPreferenceController.updateState(screen.findPreference(
+                mTimeoutToUserZeroPreferenceController.getPreferenceKey()));
 
         if (mShouldUpdateUserList) {
             updateUI();
@@ -343,7 +378,10 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int pos = 0;
-        if (!mUserCaps.mIsAdmin && canSwitchUserNow()) {
+        // TODO(b/191509236): The menu item does not need to be accessible for guest users,
+        //  regardless of mGuestUserAutoCreated
+        if (!mUserCaps.mIsAdmin && canSwitchUserNow() && !(isCurrentUserGuest()
+                && mGuestUserAutoCreated)) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -387,7 +425,9 @@ public class UserSettings extends SettingsPreferenceFragment
         if (isCurrentUserGuest()) {
             // No need to load profile information
             mMePreference.setIcon(getEncircledDefaultIcon());
-            mMePreference.setTitle(R.string.user_exit_guest_title);
+            mMePreference.setTitle(mGuestUserAutoCreated
+                    ? com.android.settingslib.R.string.guest_reset_guest
+                    : com.android.settingslib.R.string.guest_exit_guest);
             mMePreference.setSelectable(true);
             // removing a guest will result in switching back to the admin user
             mMePreference.setEnabled(canSwitchUserNow());
@@ -445,6 +485,9 @@ public class UserSettings extends SettingsPreferenceFragment
             if (resultCode != Activity.RESULT_CANCELED && hasLockscreenSecurity()) {
                 addUserNow(USER_TYPE_RESTRICTED_PROFILE);
             }
+        } else if (mGuestUserAutoCreated && requestCode == REQUEST_EDIT_GUEST
+                && resultCode == RESULT_GUEST_REMOVED) {
+            scheduleGuestCreation();
         } else {
             mEditUserInfoController.onActivityResult(requestCode, resultCode, data);
         }
@@ -467,6 +510,46 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
             }
         }
+    }
+
+    private void onAddSupervisedUserClicked() {
+        final Intent intent = new Intent()
+                .setAction(UserManager.ACTION_CREATE_SUPERVISED_USER)
+                .setPackage(mConfigSupervisedUserCreationPackage)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        // TODO(b/209659998): [to-be-removed] fallback activity for supervised user creation.
+        if (getActivity().getPackageManager().resolveActivity(intent, 0) == null) {
+            intent
+                .setClass(getContext(), AddSupervisedUserActivity.class)
+                .setPackage(null);
+        }
+
+        startActivity(intent);
+    }
+
+    private void onAddGuestClicked() {
+        final UserCreatingDialog guestCreatingDialog =
+                new UserCreatingDialog(getActivity(), /* isGuest= */ true);
+        guestCreatingDialog.show();
+
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
+            Trace.beginSection("UserSettings.addGuest");
+            final UserInfo guest = mUserManager.createGuest(getContext());
+            Trace.endSection();
+
+            ThreadUtils.postOnMainThread(() -> {
+                guestCreatingDialog.dismiss();
+                if (guest == null) {
+                    Toast.makeText(getContext(),
+                            com.android.settingslib.R.string.add_guest_failed,
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                openUserDetails(guest, true);
+            });
+        });
     }
 
     private void onRemoveUserClicked(int userId) {
@@ -507,13 +590,15 @@ public class UserSettings extends SettingsPreferenceFragment
         extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userInfo.id);
         extras.putBoolean(AppRestrictionsFragment.EXTRA_NEW_USER, newUser);
 
-        final Context context = getContext();
-        new SubSettingLauncher(context)
+        SubSettingLauncher launcher = new SubSettingLauncher(getContext())
                 .setDestination(UserDetailsSettings.class.getName())
                 .setArguments(extras)
-                .setTitleText(getUserName(context, userInfo))
-                .setSourceMetricsCategory(getMetricsCategory())
-                .launch();
+                .setTitleText(userInfo.name)
+                .setSourceMetricsCategory(getMetricsCategory());
+        if (mGuestUserAutoCreated && userInfo.isGuest()) {
+            launcher.setResultListener(this, REQUEST_EDIT_GUEST);
+        }
+        launcher.launch();
     }
 
     @Override
@@ -619,7 +704,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             case DIALOG_CONFIRM_EXIT_GUEST: {
                 Dialog dlg = new AlertDialog.Builder(context)
-                        .setTitle(R.string.user_exit_guest_confirm_title)
+                        .setTitle(com.android.settingslib.R.string.guest_remove_guest_dialog_title)
                         .setMessage(R.string.user_exit_guest_confirm_message)
                         .setPositiveButton(R.string.user_exit_guest_dialog_remove,
                                 new DialogInterface.OnClickListener() {
@@ -651,6 +736,15 @@ public class UserSettings extends SettingsPreferenceFragment
                 }
                 return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
+            case DIALOG_CONFIRM_RESET_GUEST: {
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
+            }
             default:
                 return null;
         }
@@ -675,7 +769,8 @@ public class UserSettings extends SettingsPreferenceFragment
                     if (newUserIcon != userIcon) {
                         ThreadUtils.postOnBackgroundThread(() ->
                                 mUserManager.setUserIcon(user.id,
-                                        UserIcons.convertToBitmap(newUserIcon)));
+                                        UserIcons.convertToBitmapAtUserIconSize(
+                                                activity.getResources(), newUserIcon)));
                         mMePreference.setIcon(newUserIcon);
                     }
 
@@ -727,6 +822,7 @@ public class UserSettings extends SettingsPreferenceFragment
             case DIALOG_NEED_LOCKSCREEN:
                 return SettingsEnums.DIALOG_USER_NEED_LOCKSCREEN;
             case DIALOG_CONFIRM_EXIT_GUEST:
+            case DIALOG_CONFIRM_RESET_GUEST:
                 return SettingsEnums.DIALOG_USER_CONFIRM_EXIT_GUEST;
             case DIALOG_USER_PROFILE_EDITOR:
             case DIALOG_USER_PROFILE_EDITOR_ADD_USER:
@@ -760,8 +856,8 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         try {
             getContext().getSystemService(UserManager.class)
-                    .removeUserOrSetEphemeral(UserHandle.myUserId(),
-                            /* evenWhenDisallowed= */ false);
+                    .removeUserWhenPossible(UserHandle.of(UserHandle.myUserId()),
+                            /* overrideDevicePolicy= */ false);
             ActivityManager.getService().switchUser(UserHandle.USER_SYSTEM);
         } catch (RemoteException re) {
             Log.e(TAG, "Unable to remove self user");
@@ -769,6 +865,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private void addUserNow(final int userType) {
+        Trace.beginAsyncSection("UserSettings.addUserNow", 0);
         synchronized (mUserLock) {
             mAddingUser = true;
             mAddingUserName = userType == USER_TYPE_USER
@@ -780,51 +877,69 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mUserCreatingDialog = new UserCreatingDialog(getActivity());
         mUserCreatingDialog.show();
-        ThreadUtils.postOnBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                UserInfo user;
-                String username;
+        ThreadUtils.postOnBackgroundThread(new AddUserNowImpl(userType, mAddingUserName));
+    }
 
-                synchronized (mUserLock) {
-                    username = mAddingUserName;
-                }
+    @VisibleForTesting
+    class AddUserNowImpl implements Runnable{
+        int mUserType;
+        String mImplAddUserName;
 
-                // Could take a few seconds
-                if (userType == USER_TYPE_USER) {
-                    user = mUserManager.createUser(username, 0);
-                } else {
-                    user = mUserManager.createRestrictedProfile(username);
-                }
+        AddUserNowImpl(final int userType, final String addUserName) {
+            mUserType = userType;
+            mImplAddUserName = addUserName;
+        }
 
-                synchronized (mUserLock) {
-                    if (user == null) {
-                        mAddingUser = false;
-                        mPendingUserIcon = null;
-                        mPendingUserName = null;
-                        ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
-                        return;
-                    }
+        @Override
+        public void run() {
+            runAddUser();
+            Trace.endAsyncSection("UserSettings.addUserNow", 0);
+        }
 
-                    Drawable newUserIcon = mPendingUserIcon;
-                    if (newUserIcon == null) {
-                        newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
-                    }
-                    mUserManager.setUserIcon(user.id, UserIcons.convertToBitmap(newUserIcon));
+        private void runAddUser() {
+            UserInfo user;
+            String username;
 
-                    if (userType == USER_TYPE_USER) {
-                        mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                    }
+            synchronized (mUserLock) {
+                username = mImplAddUserName;
+            }
 
-                    mHandler.sendMessage(mHandler.obtainMessage(
-                            MESSAGE_USER_CREATED, user.id, user.serialNumber));
+            // Could take a few seconds
+            if (mUserType == USER_TYPE_USER) {
+                user = mUserManager.createUser(username, 0);
+            } else {
+                user = mUserManager.createRestrictedProfile(username);
+            }
 
+            synchronized (mUserLock) {
+                if (user == null) {
+                    mAddingUser = false;
                     mPendingUserIcon = null;
                     mPendingUserName = null;
+                    ThreadUtils.postOnMainThread(() -> onUserCreationFailed());
+                    return;
                 }
+
+                Drawable newUserIcon = mPendingUserIcon;
+                if (newUserIcon == null) {
+                    newUserIcon = UserIcons.getDefaultUserIcon(getResources(), user.id, false);
+                }
+                mUserManager.setUserIcon(
+                        user.id, UserIcons.convertToBitmapAtUserIconSize(
+                                getResources(), newUserIcon));
+
+                if (mUserType == USER_TYPE_USER) {
+                    mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+                }
+
+                mHandler.sendMessage(mHandler.obtainMessage(
+                        MESSAGE_USER_CREATED, user.id, user.serialNumber));
+
+                mPendingUserIcon = null;
+                mPendingUserName = null;
             }
-        });
-    }
+        }
+    };
 
     /**
      * Erase the current user (guest) and switch to another user.
@@ -838,6 +953,54 @@ public class UserSettings extends SettingsPreferenceFragment
         mMetricsFeatureProvider.action(getActivity(),
                 SettingsEnums.ACTION_USER_GUEST_EXIT_CONFIRMED);
         removeThisUser();
+    }
+
+    /**
+     * Erase the current user (assuming it is a guest user), and create a new one in the background
+     */
+    @VisibleForTesting
+    void resetGuest() {
+        // Just to be safe
+        if (!isCurrentUserGuest()) {
+            return;
+        }
+        int guestUserId = UserHandle.myUserId();
+        // Using markGuestForDeletion allows us to create a new guest before this one is
+        // fully removed. This could happen if someone calls scheduleGuestCreation()
+        // immediately after calling this method.
+        boolean marked = mUserManager.markGuestForDeletion(guestUserId);
+        if (!marked) {
+            Log.w(TAG, "Couldn't mark the guest for deletion for user " + guestUserId);
+            return;
+        }
+        exitGuest();
+        scheduleGuestCreation();
+    }
+
+    /**
+     * Create a guest user in the background
+     */
+    @VisibleForTesting
+    void scheduleGuestCreation() {
+        // TODO(b/191067027): Move guest recreation to system_server
+        if (mGuestCreationScheduled.compareAndSet(/* expect= */ false, /* update= */ true)) {
+            // Once mGuestCreationScheduled=true, mAddGuest needs to be updated so that it shows
+            // "Resetting guest..."
+            mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            mExecutor.execute(() -> {
+                UserInfo guest = mUserManager.createGuest(getContext());
+                mGuestCreationScheduled.set(false);
+                if (guest == null) {
+                    Log.e(TAG, "Unable to automatically recreate guest user");
+                }
+                // The list needs to be updated whether or not guest creation worked. If guest
+                // creation failed, the list needs to update so that "Add guest" is displayed.
+                // Otherwise, the UX could be stuck in a state where there is no way to switch to
+                // the guest user (e.g. Guest would not be selectable, and it would be stuck
+                // saying "Resetting guest...")
+                mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
+            });
+        }
     }
 
     @VisibleForTesting
@@ -864,9 +1027,8 @@ public class UserSettings extends SettingsPreferenceFragment
             if (user.id == UserHandle.myUserId()) {
                 pref = mMePreference;
             } else {
-                final Context prefContext = getPrefContext();
-                pref = new UserPreference(prefContext, null, user.id);
-                pref.setTitle(getUserName(prefContext, user));
+                pref = new UserPreference(getPrefContext(), null, user.id);
+                pref.setTitle(user.name);
                 userPreferences.add(pref);
                 pref.setOnPreferenceClickListener(this);
                 pref.setEnabled(canOpenUserDetails);
@@ -945,6 +1107,7 @@ public class UserSettings extends SettingsPreferenceFragment
             mUserListCategory.setTitle(R.string.user_list_title);
         } else {
             mUserListCategory.setTitle(null);
+            mUserListCategory.setLayoutResource(R.layout.empty_view);
         }
 
         // Remove everything from mUserListCategory and add new users.
@@ -962,6 +1125,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
         updateAddGuest(context, users.stream().anyMatch(UserInfo::isGuest));
         updateAddUser(context);
+        updateAddSupervisedUser(context);
 
         if (!mUserCaps.mUserSwitcherEnabled) {
             return;
@@ -974,6 +1138,12 @@ public class UserSettings extends SettingsPreferenceFragment
 
     }
 
+    @VisibleForTesting
+    void setConfigSupervisedUserCreationPackage() {
+        mConfigSupervisedUserCreationPackage = getPrefContext().getString(
+                com.android.internal.R.string.config_supervisedUserCreationPackage);
+    }
+
     private boolean isCurrentUserGuest() {
         return mUserCaps.mIsGuest;
     }
@@ -984,38 +1154,81 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private void updateAddGuest(Context context, boolean isGuestAlreadyCreated) {
         if (!isGuestAlreadyCreated && mUserCaps.mCanAddGuest
+                && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_GUEST)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
             mAddGuest.setVisible(true);
-            mAddGuest.setIcon(getEncircledDefaultIcon());
-            mAddGuest.setEnabled(canSwitchUserNow());
+            Drawable icon = context.getDrawable(R.drawable.ic_account_circle);
+            mAddGuest.setIcon(centerAndTint(icon));
             mAddGuest.setSelectable(true);
+            if (mGuestUserAutoCreated && mGuestCreationScheduled.get()) {
+                mAddGuest.setTitle(com.android.internal.R.string.guest_name);
+                mAddGuest.setSummary(R.string.guest_resetting);
+                mAddGuest.setEnabled(false);
+            } else {
+                mAddGuest.setTitle(com.android.settingslib.R.string.guest_new_guest);
+                mAddGuest.setEnabled(canSwitchUserNow());
+            }
         } else {
             mAddGuest.setVisible(false);
         }
     }
 
     private void updateAddUser(Context context) {
+        updateAddUserCommon(context, mAddUser, mUserCaps.mCanAddRestrictedProfile);
+        Drawable icon = context.getDrawable(R.drawable.ic_account_circle_filled);
+        mAddUser.setIcon(centerAndTint(icon));
+    }
+
+    private void updateAddSupervisedUser(Context context) {
+        if (!TextUtils.isEmpty(mConfigSupervisedUserCreationPackage)) {
+            updateAddUserCommon(context, mAddSupervisedUser, false);
+            Drawable icon = context.getDrawable(R.drawable.ic_add_supervised_user);
+            mAddSupervisedUser.setIcon(centerAndTint(icon));
+        } else {
+            mAddSupervisedUser.setVisible(false);
+        }
+    }
+
+    private void updateAddUserCommon(Context context, RestrictedPreference addUser,
+            boolean canAddRestrictedProfile) {
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin)
                 && WizardManagerHelper.isDeviceProvisioned(context)
                 && mUserCaps.mUserSwitcherEnabled) {
-            mAddUser.setVisible(true);
-            mAddUser.setSelectable(true);
-            final boolean canAddMoreUsers = mUserManager.canAddMoreUsers();
-            mAddUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+            addUser.setVisible(true);
+            addUser.setSelectable(true);
+            final boolean canAddMoreUsers =
+                    mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_SECONDARY)
+                            || (canAddRestrictedProfile
+                            && mUserManager.canAddMoreUsers(UserManager.USER_TYPE_FULL_RESTRICTED));
+            addUser.setEnabled(canAddMoreUsers && !mAddingUser && canSwitchUserNow());
+
             if (!canAddMoreUsers) {
-                mAddUser.setSummary(
-                        getString(R.string.user_add_max_count, getRealUsersCount()));
+                addUser.setSummary(getString(R.string.user_add_max_count));
             } else {
-                mAddUser.setSummary(null);
+                addUser.setSummary(null);
             }
-            if (mAddUser.isEnabled()) {
-                mAddUser.setDisabledByAdmin(
+            if (addUser.isEnabled()) {
+                addUser.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
             }
         } else {
-            mAddUser.setVisible(false);
+            addUser.setVisible(false);
         }
+    }
+
+    private Drawable centerAndTint(Drawable icon) {
+        icon.setTintBlendMode(BlendMode.SRC_IN);
+        icon.setTint(getColorAttrDefaultColor(getContext(), android.R.attr.textColorPrimary));
+
+        Drawable bg = getContext().getDrawable(R.drawable.user_avatar_bg).mutate();
+        LayerDrawable ld = new LayerDrawable(new Drawable[] {bg, icon});
+        int size = getContext().getResources().getDimensionPixelSize(
+                R.dimen.multiple_users_avatar_size);
+        ld.setLayerSize(1, size, size);
+        ld.setLayerGravity(1, Gravity.CENTER);
+
+        return ld;
     }
 
     /**
@@ -1065,19 +1278,15 @@ public class UserSettings extends SettingsPreferenceFragment
         }
     }
 
-    /** Returns the user's name, or the appropriate string in the case of a Guest. */
-    public static String getUserName(Context context, @NonNull UserInfo userInfo) {
-        if (userInfo.isGuest()) {
-            return context.getString(R.string.user_guest);
-        }
-        return userInfo.name;
-    }
-
     @Override
     public boolean onPreferenceClick(Preference pref) {
         if (pref == mMePreference) {
             if (isCurrentUserGuest()) {
-                showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                if (mGuestUserAutoCreated) {
+                    showDialog(DIALOG_CONFIRM_RESET_GUEST);
+                } else {
+                    showDialog(DIALOG_CONFIRM_EXIT_GUEST);
+                }
             } else {
                 showDialog(DIALOG_USER_PROFILE_EDITOR);
             }
@@ -1095,18 +1304,15 @@ public class UserSettings extends SettingsPreferenceFragment
                 onAddUserClicked(USER_TYPE_USER);
             }
             return true;
+        } else if (pref == mAddSupervisedUser) {
+            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_SUPERVISED_ADD);
+            Trace.beginSection("UserSettings.addSupervisedUser");
+            onAddSupervisedUserClicked();
+            Trace.endSection();
+            return true;
         } else if (pref == mAddGuest) {
             mAddGuest.setEnabled(false); // prevent multiple tap issue
-            mMetricsFeatureProvider.action(getActivity(), SettingsEnums.ACTION_USER_GUEST_ADD);
-            UserInfo guest = mUserManager.createGuest(
-                    getContext(), getString(com.android.settingslib.R.string.user_guest));
-            if (guest == null) {
-                Toast.makeText(getContext(),
-                        com.android.settingslib.R.string.add_user_failed,
-                        Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            openUserDetails(guest, true);
+            onAddGuestClicked();
             return true;
         }
         return false;
@@ -1143,7 +1349,7 @@ public class UserSettings extends SettingsPreferenceFragment
         // Try finding the corresponding bitmap in the dark bitmap cache
         bitmap = sDarkDefaultUserBitmapCache.get(userId);
         if (bitmap == null) {
-            bitmap = UserIcons.convertToBitmap(
+            bitmap = UserIcons.convertToBitmapAtUserIconSize(resources,
                     UserIcons.getDefaultUserIcon(resources, userId, false));
             // Save it to cache
             sDarkDefaultUserBitmapCache.put(userId, bitmap);

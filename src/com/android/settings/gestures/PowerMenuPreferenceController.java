@@ -16,6 +16,9 @@
 
 package com.android.settings.gestures;
 
+import static com.android.settings.gestures.PowerMenuSettingsUtils.LONG_PRESS_POWER_ASSISTANT_VALUE;
+import static com.android.settings.gestures.PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS;
+
 import android.content.Context;
 
 import com.android.settings.R;
@@ -29,12 +32,21 @@ public class PowerMenuPreferenceController extends BasePreferenceController {
 
     @Override
     public CharSequence getSummary() {
-        return mContext.getText(R.string.power_menu_long_press_for_assist);
+        final int powerButtonValue = PowerMenuSettingsUtils.getPowerButtonSettingValue(mContext);
+        if (powerButtonValue == LONG_PRESS_POWER_ASSISTANT_VALUE) {
+            return mContext.getText(R.string.power_menu_summary_long_press_for_assist_enabled);
+        } else if (powerButtonValue == LONG_PRESS_POWER_GLOBAL_ACTIONS) {
+            return mContext.getText(
+                    R.string.power_menu_summary_long_press_for_assist_disabled_with_power_menu);
+        } else {
+            return mContext.getText(
+                    R.string.power_menu_summary_long_press_for_assist_disabled_no_action);
+        }
     }
 
     @Override
     public int getAvailabilityStatus() {
-        return isAssistInvocationAvailable() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return isAssistInvocationAvailable() ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     private boolean isAssistInvocationAvailable() {

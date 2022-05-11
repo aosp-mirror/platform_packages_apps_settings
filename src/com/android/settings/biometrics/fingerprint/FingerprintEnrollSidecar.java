@@ -19,28 +19,38 @@ package com.android.settings.biometrics.fingerprint;
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.hardware.fingerprint.FingerprintManager;
+import android.util.Log;
 
-import com.android.settings.Utils;
+import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
 /**
  * Sidecar fragment to handle the state around fingerprint enrollment.
  */
 public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
+    private static final String TAG = "FingerprintEnrollSidecar";
 
-    private FingerprintManager mFingerprintManager;
+    private FingerprintUpdater mFingerprintUpdater;
     private @FingerprintManager.EnrollReason int mEnrollReason;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+        mFingerprintUpdater = new FingerprintUpdater(activity);
     }
 
     @Override
     protected void startEnrollment() {
         super.startEnrollment();
-        mFingerprintManager.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
+
+        if (mToken == null) {
+            Log.e(TAG, "Null hardware auth token for enroll");
+            onEnrollmentError(FingerprintManager.FINGERPRINT_ERROR_HW_UNAVAILABLE,
+                    getString(R.string.fingerprint_intro_error_unknown));
+            return;
+        }
+
+        mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
                 mEnrollReason);
     }
 

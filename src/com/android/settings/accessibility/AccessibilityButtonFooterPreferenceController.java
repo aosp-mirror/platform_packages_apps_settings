@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import android.content.Context;
 
+import androidx.preference.PreferenceScreen;
+
 import com.android.settings.R;
 
 /**
@@ -31,7 +33,27 @@ public class AccessibilityButtonFooterPreferenceController extends
     }
 
     @Override
-    protected String getLabelName() {
-        return mContext.getString(R.string.accessibility_button_title);
+    protected String getLearnMoreContentDescription() {
+        return mContext.getString(
+            R.string.accessibility_button_gesture_footer_learn_more_content_description);
+    }
+
+    @Override
+    protected String getIntroductionTitle() {
+        return mContext.getString(R.string.accessibility_button_about_title);
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        // Need to update footerPreference's data before super.displayPreference(), then it will use
+        // data to update related property of footerPreference.
+        final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
+                ? R.string.accessibility_button_gesture_description
+                : R.string.accessibility_button_description;
+        final CharSequence footerText = mContext.getText(titleResource);
+        final AccessibilityFooterPreference footerPreference =
+                screen.findPreference(getPreferenceKey());
+        footerPreference.setTitle(footerText);
+        super.displayPreference(screen);
     }
 }

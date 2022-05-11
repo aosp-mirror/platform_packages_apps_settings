@@ -55,6 +55,7 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
         mSwitchPreference = new SwitchPreference(mPreferenceCategory.getContext());
         mSwitchPreference.setTitle(R.string.usb_transcode_files);
         mSwitchPreference.setOnPreferenceClickListener(this);
+        mSwitchPreference.setSummaryOn(R.string.usb_transcode_files_summary);
         mPreferenceCategory.addPreference(mSwitchPreference);
     }
 
@@ -76,6 +77,12 @@ public class UsbDetailsTranscodeMtpController extends UsbDetailsController
     public boolean onPreferenceClick(Preference preference) {
         SystemProperties.set(TRANSCODE_MTP_SYS_PROP_KEY,
                 Boolean.toString(mSwitchPreference.isChecked()));
+
+        final long previousFunctions = mUsbBackend.getCurrentFunctions();
+        // Toggle the MTP connection to reload file sizes for files shared via MTP clients
+        mUsbBackend.setCurrentFunctions(previousFunctions & ~UsbManager.FUNCTION_MTP);
+        mUsbBackend.setCurrentFunctions(previousFunctions);
+
         return true;
     }
 
