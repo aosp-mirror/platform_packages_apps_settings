@@ -99,7 +99,8 @@ public class AppLocaleUtil {
      * Check the function of per app language is supported by current application.
      */
     public static boolean isAppLocaleSupported(Context context, String packageName) {
-        if (getPackageLocales(context, packageName) != null) {
+        LocaleList localeList = getPackageLocales(context, packageName);
+        if (localeList != null && localeList.size() > 0) {
             return true;
         }
 
