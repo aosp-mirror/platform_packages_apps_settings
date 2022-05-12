@@ -91,7 +91,7 @@ public class UnrestrictedDataAccessPreferenceController extends BasePreferenceCo
 
     @Override
     public void onStart() {
-        mDataUsageBridge.resume();
+        mDataUsageBridge.resume(true /* forceLoadAllApps */);
     }
 
     @Override
