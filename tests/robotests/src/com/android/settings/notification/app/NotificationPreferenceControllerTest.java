@@ -284,23 +284,35 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAppBlockable_postMigration_locked() {
+    public void testIsAppBlockable_fixedPermission() {
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedImportance = true;
+        appRow.systemApp = true;
         appRow.banned = false;
         mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAppBlockable());
     }
 
     @Test
-    public void testIsAppBlockable_postMigration_locked_butAppOff() {
+    public void testIsAppBlockable_fixedPermission_butAppOff() {
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedImportance = true;
+        appRow.systemApp = true;
         appRow.banned = true;
+        mController.onResume(appRow, null, null, null, null, null, null);
+        assertTrue(mController.isAppBlockable());
+    }
+
+    @Test
+    public void testIsAppBlockable_notFixedButAppInBadState() {
+        mController = new TestPreferenceController(mContext, mBackend);
+
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.banned = true;
+        appRow.lockedImportance = true;
         mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAppBlockable());
     }
