@@ -86,7 +86,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private TopLevelSettings mMainFragment;
     private View mHomepageView;
-    private View mAppBar;
     private View mSuggestionView;
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
@@ -171,8 +170,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSplitController = SplitController.getInstance();
         mIsTwoPane = mSplitController.isActivityEmbedded(this);
 
-        mAppBar = findViewById(R.id.app_bar_container);
-        mAppBar.setMinimumHeight(getSearchBoxHeight());
+        updateAppBarMinHeight();
         initHomepageContainer();
         updateHomepageAppBar();
         updateHomepageBackground();
@@ -482,12 +480,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (!mIsEmbeddingActivityEnabled) {
             return;
         }
+        updateAppBarMinHeight();
         if (mIsTwoPane) {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);
             findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.suggestion_container_two_pane).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.VISIBLE);
             findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.GONE);
+            findViewById(R.id.suggestion_container_two_pane).setVisibility(View.GONE);
         }
     }
 
@@ -498,19 +499,20 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsTwoPane) {
             int padding = getResources().getDimensionPixelSize(
                     R.dimen.homepage_padding_horizontal_two_pane);
-            mAppBar.setPaddingRelative(padding, 0, padding, 0);
             mMainFragment.setPaddingHorizontal(padding);
         } else {
-            mAppBar.setPaddingRelative(0, 0, 0, 0);
             mMainFragment.setPaddingHorizontal(0);
         }
         mMainFragment.updatePreferencePadding(mIsTwoPane);
     }
 
-    private int getSearchBoxHeight() {
+    private void updateAppBarMinHeight() {
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
-        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
-        return searchBarHeight + searchBarMargin * 2;
+        final int margin = getResources().getDimensionPixelSize(
+                mIsEmbeddingActivityEnabled && mIsTwoPane
+                        ? R.dimen.homepage_app_bar_padding_two_pane
+                        : R.dimen.search_bar_margin);
+        findViewById(R.id.app_bar_container).setMinimumHeight(searchBarHeight + margin * 2);
     }
 
     private static class SuggestionFragCreator implements FragmentCreator {
