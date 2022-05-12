@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.network;
+package com.android.settings.network.telephony;
 
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
@@ -74,7 +74,10 @@ public class DataDuringCallsPreferenceControllerTest {
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         mSwitchPreference = new SwitchPreference(mContext);
         when(mPreferenceScreen.findPreference(PREF_KEY)).thenReturn(mSwitchPreference);
-        mController = new DataDuringCallsPreferenceController(mContext, PREF_KEY);
+        mController = new DataDuringCallsPreferenceController(mContext, PREF_KEY) {
+            @Override
+            protected boolean hasMobileData() { return true; }
+        };
         mController.init(mLifecycle, SUB_ID_1);
     }
 

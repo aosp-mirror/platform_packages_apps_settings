@@ -74,7 +74,7 @@ public class PremiumSmsAccess extends EmptyTextSettings
     @Override
     public void onResume() {
         super.onResume();
-        mSmsBackend.resume();
+        mSmsBackend.resume(true /* forceLoadAllApps */);
     }
 
     @Override

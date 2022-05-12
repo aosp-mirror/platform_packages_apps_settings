@@ -225,9 +225,6 @@ public class NotificationPreferenceControllerTest {
 
     @Test
     public void testIsChannelBlockable_postMigration_locked() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -240,9 +237,6 @@ public class NotificationPreferenceControllerTest {
 
     @Test
     public void testIsChannelBlockable_postMigration_locked_butChannelOff() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -255,9 +249,6 @@ public class NotificationPreferenceControllerTest {
 
     @Test
     public void testIsChannelBlockable_postMigration_locked_butChannelBlockable() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -271,9 +262,6 @@ public class NotificationPreferenceControllerTest {
 
     @Test
     public void testIsChannelGroupBlockable_postMigration_locked() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -285,9 +273,6 @@ public class NotificationPreferenceControllerTest {
 
     @Test
     public void testIsChannelGroupBlockable_postMigration_locked_butChannelGroupOff() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -299,57 +284,37 @@ public class NotificationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAppBlockable_postMigration_locked() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
+    public void testIsAppBlockable_fixedPermission() {
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedImportance = true;
+        appRow.systemApp = true;
         appRow.banned = false;
         mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAppBlockable());
     }
 
     @Test
-    public void testIsAppBlockable_postMigration_locked_butAppOff() {
-        Settings.Secure.putIntForUser(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 1, USER_SYSTEM);
-
+    public void testIsAppBlockable_fixedPermission_butAppOff() {
         mController = new TestPreferenceController(mContext, mBackend);
 
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.lockedImportance = true;
+        appRow.systemApp = true;
         appRow.banned = true;
         mController.onResume(appRow, null, null, null, null, null, null);
+        assertTrue(mController.isAppBlockable());
+    }
+
+    @Test
+    public void testIsAppBlockable_notFixedButAppInBadState() {
+        mController = new TestPreferenceController(mContext, mBackend);
+
+        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.systemApp = false;
+        appRow.banned = true;
+        appRow.lockedImportance = true;
+        mController.onResume(appRow, null, null, null, null, null, null);
         assertFalse(mController.isAppBlockable());
-    }
-
-    @Test
-    public void testIsBlockable_oemAllowlist() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-
-        mController.onResume(appRow, channel, null, null, null, null, null);
-        assertFalse(mController.isChannelBlockable());
-
-        when(channel.isImportanceLockedByOEM()).thenReturn(false);
-        mController.onResume(appRow, channel, null, null, null, null, null);
-        assertTrue(mController.isChannelBlockable());
-    }
-
-    @Test
-    public void testIsBlockable_defaultApp() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
-        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
-
-        mController.onResume(appRow, channel, null, null, null, null, null);
-        assertFalse(mController.isChannelBlockable());
     }
 
     @Test
@@ -407,30 +372,6 @@ public class NotificationPreferenceControllerTest {
 
         mController.onResume(appRow, null, group, null, null, null, null);
         assertTrue(mController.isChannelGroupBlockable());
-    }
-
-    @Test
-    public void testIsChannelBlockable_oemLocked() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = false;
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByOEM()).thenReturn(true);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
-
-        mController.onResume(appRow, channel, null, null, null, null, null);
-        assertFalse(mController.isChannelBlockable());
-    }
-
-    @Test
-    public void testIsChannelBlockable_criticalDeviceFunction() {
-        NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
-        appRow.systemApp = false;
-        NotificationChannel channel = mock(NotificationChannel.class);
-        when(channel.isImportanceLockedByCriticalDeviceFunction()).thenReturn(true);
-        when(channel.getImportance()).thenReturn(IMPORTANCE_DEFAULT);
-
-        mController.onResume(appRow, channel, null, null, null, null, null);
-        assertFalse(mController.isChannelBlockable());
     }
 
     @Test
