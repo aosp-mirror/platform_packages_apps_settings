@@ -22,9 +22,7 @@ import android.widget.SeekBar;
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
 /**
@@ -38,9 +36,6 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
     private ProgressInteractionListener mInteractionListener;
     private LabeledSeekBarPreference mSeekBarPreference;
 
-    @EntryPoint
-    private int mEntryPoint;
-
     private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
             new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -51,11 +46,6 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
                         mInteractionListener.onProgressChanged();
                     }
 
-                    SettingsStatsLog.write(
-                            SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
-                            AccessibilityStatsLogUtils.convertToItemKeyName(getPreferenceKey()),
-                            progress,
-                            AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
                 }
 
                 @Override
@@ -107,14 +97,6 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
         mSeekBarPreference.setProgress(defaultProgress);
     }
 
-    /**
-     * The entry point is used for logging.
-     *
-     * @param entryPoint from which settings page
-     */
-    void setEntryPoint(@EntryPoint int entryPoint) {
-        mEntryPoint = entryPoint;
-    }
 
     /**
      * Interface for callbacks when users interact with the seek bar.
