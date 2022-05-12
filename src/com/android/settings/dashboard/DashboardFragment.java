@@ -16,7 +16,6 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -57,6 +56,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Base fragment for dashboard style UI containing a list of static and dynamic setting items.
@@ -66,6 +67,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         BasePreferenceController.UiBlockListener {
     public static final String CATEGORY = "category";
     private static final String TAG = "DashboardFragment";
+    private static final long TIMEOUT_MILLIS = 50L;
 
     @VisibleForTesting
     final ArrayMap<String, List<DynamicDataObserver>> mDashboardTilePrefKeys = new ArrayMap<>();
@@ -461,8 +463,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Create a list to track which tiles are to be removed.
         final Map<String, List<DynamicDataObserver>> remove = new ArrayMap(mDashboardTilePrefKeys);
 
-        // Install dashboard tiles.
+        // Install dashboard tiles and collect pending observers.
         final boolean forceRoundedIcons = shouldForceRoundedIcon();
+        final List<DynamicDataObserver> pendingObservers = new ArrayList<>();
         for (Tile tile : tiles) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (TextUtils.isEmpty(key)) {
@@ -472,26 +475,30 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             if (!displayTile(tile)) {
                 continue;
             }
+            final List<DynamicDataObserver> observers;
             if (mDashboardTilePrefKeys.containsKey(key)) {
                 // Have the key already, will rebind.
                 final Preference preference = screen.findPreference(key);
-                mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(), this,
-                        forceRoundedIcons, preference, tile, key,
+                observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
+                        getActivity(), this, forceRoundedIcons, preference, tile, key,
                         mPlaceholderPreferenceController.getOrder());
             } else {
                 // Don't have this key, add it.
                 final Preference pref = createPreference(tile);
-                final List<DynamicDataObserver> observers =
-                        mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(getActivity(),
-                                this, forceRoundedIcons, pref, tile, key,
-                                mPlaceholderPreferenceController.getOrder());
+                observers = mDashboardFeatureProvider.bindPreferenceToTileAndGetObservers(
+                        getActivity(), this, forceRoundedIcons, pref, tile, key,
+                        mPlaceholderPreferenceController.getOrder());
                 screen.addPreference(pref);
                 registerDynamicDataObservers(observers);
                 mDashboardTilePrefKeys.put(key, observers);
             }
+            if (observers != null) {
+                pendingObservers.addAll(observers);
+            }
             remove.remove(key);
         }
-        // Finally remove tiles that are gone.
+
+        // Remove tiles that are gone.
         for (Map.Entry<String, List<DynamicDataObserver>> entry : remove.entrySet()) {
             final String key = entry.getKey();
             mDashboardTilePrefKeys.remove(key);
@@ -500,6 +507,20 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 screen.removePreference(preference);
             }
             unregisterDynamicDataObservers(entry.getValue());
+        }
+
+        // Wait for pending observers to update UI.
+        if (!pendingObservers.isEmpty()) {
+            final CountDownLatch mainLatch = new CountDownLatch(1);
+            new Thread(() -> {
+                pendingObservers.forEach(observer ->
+                        awaitObserverLatch(observer.getCountDownLatch()));
+                mainLatch.countDown();
+            }).start();
+            Log.d(tag, "Start waiting observers");
+            awaitObserverLatch(mainLatch);
+            Log.d(tag, "Stop waiting observers");
+            pendingObservers.forEach(DynamicDataObserver::updateUi);
         }
     }
 
@@ -545,5 +566,13 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             mRegisteredObservers.remove(observer);
             resolver.unregisterContentObserver(observer);
         });
+    }
+
+    private void awaitObserverLatch(CountDownLatch latch) {
+        try {
+            latch.await(TIMEOUT_MILLIS, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            // Do nothing
+        }
     }
 }
