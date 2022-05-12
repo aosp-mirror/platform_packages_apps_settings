@@ -1185,7 +1185,7 @@ public class ManageApplications extends InstrumentedFragment
                 mSession.onResume();
                 mLastSortMode = sort;
                 if (mExtraInfoBridge != null) {
-                    mExtraInfoBridge.resume();
+                    mExtraInfoBridge.resume(false /* forceLoadAllApps */);
                 }
                 rebuild();
             } else {
