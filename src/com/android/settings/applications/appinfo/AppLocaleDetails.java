@@ -21,12 +21,8 @@ import android.app.Activity;
 import android.app.LocaleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.InstallSourceInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.os.UserHandle;
@@ -34,7 +30,6 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -48,8 +43,6 @@ import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.widget.BannerMessagePreference;
-import com.android.settingslib.widget.BannerMessagePreference.AttentionLevel;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.Locale;
@@ -62,7 +55,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     private static final String TAG = "AppLocaleDetails";
 
     private static final String KEY_APP_DESCRIPTION = "app_locale_description";
-    private static final String KEY_WARNINGS = "key_warnings";
     private static final String KEY_APP_DISCLAIMER = "app_locale_disclaimer";
 
     private boolean mCreated = false;
@@ -96,7 +88,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
         mPrefOfDisclaimer = getPreferenceScreen().findPreference(KEY_APP_DISCLAIMER);
         mApplicationInfo = getApplicationInfo(mPackageName, getContext().getUserId());
-        setWarningMessage();
         setDisclaimerPreference();
     }
 
@@ -119,7 +110,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     }
 
     private void refreshUi() {
-        setWarningMessage();
         setDescription();
     }
 
@@ -156,26 +146,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         getPreferenceScreen().addPreference(pref);
     }
 
-    private void setWarningMessage() {
-        BannerMessagePreference warningPreference =
-                (BannerMessagePreference) getPreferenceScreen().findPreference(KEY_WARNINGS);
-        try {
-            InstallSourceInfo installSourceInfo =
-                    getContext().getPackageManager().getInstallSourceInfo(mPackageName);
-            if (mApplicationInfo.isSystemApp()
-                    && installSourceInfo.getInstallingPackageName() == null) {
-                warningPreference.setAttentionLevel(AttentionLevel.MEDIUM);
-                warningPreference.setPositiveButtonOnClickListener(mBannerButtonClickListener);
-                warningPreference.setPositiveButtonText(R.string.warnings_button_update);
-                warningPreference.setVisible(true);
-            } else {
-                warningPreference.setVisible(false);
-            }
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Exception while retrieving the package installer of " + mPackageName, e);
-        }
-    }
-
     private void setDisclaimerPreference() {
         if (FeatureFlagUtils.isEnabled(
                 getContext(), FeatureFlagUtils.SETTINGS_APP_LOCALE_OPT_IN_ENABLED)) {
@@ -190,19 +160,6 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
             TextView description = (TextView) mPrefOfDescription.findViewById(R.id.description);
             description.setText(getContext().getString(res));
         }
-    }
-
-    private OnClickListener mBannerButtonClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(getAppSearchIntent(mPackageName));
-        }
-    };
-
-    private static Intent getAppSearchIntent(String pkg) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=" + pkg));
-        return intent;
     }
 
     private ApplicationInfo getApplicationInfo(String packageName, int userId) {
