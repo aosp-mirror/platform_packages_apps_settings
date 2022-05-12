@@ -45,6 +45,7 @@ import com.android.settings.fuelgauge.BatteryUsageStatsLoader;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -71,9 +72,10 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     BatteryDiffEntry mBatteryDiffEntry;
     @VisibleForTesting
     boolean mIsChartGraphEnabled;
+    @VisibleForTesting
+    final AppInfoDashboardFragment mParent;
 
     private Preference mPreference;
-    private final AppInfoDashboardFragment mParent;
     private String mBatteryPercent;
     private final String mPackageName;
     private final int mUid;
@@ -107,6 +109,11 @@ public class AppBatteryPreferenceController extends BasePreferenceController
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         mPreference.setEnabled(false);
+        if (!AppUtils.isAppInstalled(mParent.getAppEntry())) {
+            mPreference.setSummary("");
+            return;
+        }
+
         loadBatteryDiffEntries();
     }
 
