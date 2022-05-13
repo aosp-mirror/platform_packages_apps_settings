@@ -500,15 +500,6 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
-    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
-    <string name="warnings_title">Update the app</string>
-
-    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
-    <string name="warnings_summary">You need to update the app for the latest available languages</string>
-
-    <!-- Button text on warning message [CHAR LIMIT=20]-->
-    <string name="warnings_button_update">Update now</string>
-
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -4753,7 +4744,7 @@
     <!-- [CHAR LIMIT=NONE] Manage applications screen, menu item.  Title of dialog to confirm resetting user's app preferences. -->
     <string name="reset_app_preferences_title">Reset app preferences?</string>
     <!-- [CHAR LIMIT=NONE] Manage applications screen, menu item.  Body of dialog to confirm resetting user's app preferences. -->
-    <string name="reset_app_preferences_desc">This will reset all preferences for:\n\n<li>Disabled apps</li>\n<li>Disabled app notifications</li>\n<li>Default applications for actions</li>\n<li>Background data restrictions for apps</li>\n<li>Any permission restrictions</li>\n\nYou will not lose any app data.</string>
+    <string name="reset_app_preferences_desc">This will reset all preferences for:\n\n<li>Disabled apps</li>\n<li>Disabled app notifications</li>\n<li>Default applications for actions</li>\n<li>Background data restrictions for apps</li>\n<li>Any permission restrictions</li>\n<li>Battery usage settings</li>\n\nYou will not lose any app data.</string>
     <!-- [CHAR LIMIT=25] Manage applications screen, menu item.  Confirmation button of dialog to confirm resetting user's app preferences. -->
     <string name="reset_app_preferences_button">Reset apps</string>
     <!-- Manage applications screen, individual app screen, button label when the user wants to manage the space taken up by an app. -->
@@ -7862,7 +7853,11 @@
     <string name="help_label">Help &amp; feedback</string>
 
     <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
-    <string name="support_summary">Help articles, phone &amp; chat</string>
+    <string name="support_summary" product="default">Help articles, phone &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="tablet">Help articles, tablet &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="device">Help articles, device &amp; chat</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
