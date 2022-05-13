@@ -132,7 +132,6 @@ public class VolumeOptionMenuController implements LifecycleObserver, OnCreateOp
         if (mStorageEntry.isPrivate()) {
             if (!mStorageEntry.isDefaultInternalStorage()) {
                 mRename.setVisible(true);
-                mUnmount.setVisible(true);
                 mFormatAsPortable.setVisible(true);
             }
 
