@@ -118,6 +118,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
+        Log.d(TAG, "setAppDefaultLocale: " + languageTag);
         LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
         if (localeManager == null) {
             Log.w(TAG, "LocaleManager is null, cannot set default app locale");
