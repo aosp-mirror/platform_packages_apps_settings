@@ -134,7 +134,7 @@ public class SmartAutoRotatePreferenceFragment extends DashboardFragment {
                         getString(getHelpResource()),
                         /*backupContext=*/ ""), /*requestCode=*/ 0);
             });
-            pref.setLearnMoreContentDescription(getString(R.string.auto_rotate_link_a11y));
+            pref.setLearnMoreText(getString(R.string.auto_rotate_link_a11y));
         }
     }
 

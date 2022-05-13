@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.settings.SettingsEnums;
 import android.app.backup.BackupManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -386,7 +386,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (helpIntent != null) {
             mFooterPreference.setLearnMoreAction(v ->
                     startActivityForResult(helpIntent, /*requestCode=*/ 0));
-            mFooterPreference.setLearnMoreContentDescription(
+            mFooterPreference.setLearnMoreText(
                     context.getString(R.string.manager_battery_usage_link_a11y));
         }
     }

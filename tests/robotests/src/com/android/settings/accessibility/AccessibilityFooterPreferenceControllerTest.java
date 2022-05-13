@@ -100,11 +100,11 @@ public class AccessibilityFooterPreferenceControllerTest {
     }
 
     @Test
-    public void setupHelpLink_setCorrectHelpLinkAndContentDescription() {
+    public void setupHelpLink_setCorrectHelpLinkAndLearnMoreText() {
         mController.setupHelpLink(TEST_HELP_ID, TEST_CONTENT_DESCRIPTION);
 
         assertThat(mController.getHelpResource()).isEqualTo(TEST_HELP_ID);
-        assertThat(mController.getLearnMoreContentDescription())
+        assertThat(mController.getLearnMoreText())
                 .isEqualTo(TEST_CONTENT_DESCRIPTION);
     }
 

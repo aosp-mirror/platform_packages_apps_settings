@@ -90,7 +90,7 @@ public class BatterySaverSettings extends DashboardFragment {
                         getString(R.string.help_url_battery_saver_settings),
                         /*backupContext=*/ ""), /*requestCode=*/ 0);
             });
-            pref.setLearnMoreContentDescription(getString(R.string.battery_saver_link_a11y));
+            pref.setLearnMoreText(getString(R.string.battery_saver_link_a11y));
         }
     }
 }

@@ -109,10 +109,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends
     private void updateFooterPreference() {
         final String title = getPrefContext().getString(
                 R.string.accessibility_screen_magnification_about_title);
-        final String learnMoreContentDescription = getPrefContext().getString(
+        final String learnMoreText = getPrefContext().getString(
                 R.string.accessibility_screen_magnification_footer_learn_more_content_description);
         mFooterPreferenceController.setIntroductionTitle(title);
-        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreText);
         mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
