@@ -20,6 +20,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -80,69 +81,17 @@ public class NotificationBackendTest {
     }
 
     @Test
-    public void testMarkAppRow_unblockablePackage() {
-        AppRow appRow = new AppRow();
-        String packageName = "foo.bar.unblockable";
-        appRow.pkg = packageName;
-        String[] nonBlockablePkgs = new String[2];
-        nonBlockablePkgs[0] = packageName;
-        nonBlockablePkgs[1] = "some.other.package";
-        NotificationBackend.markAppRowWithBlockables(nonBlockablePkgs, appRow, packageName);
-
-        // This package has a package lock but no locked channels
-        assertTrue(appRow.lockedImportance);
-    }
-
-    @Test
-    public void testMarkAppRow_defaultPackage() {
-        PackageInfo pi = new PackageInfo();
-        pi.packageName = "test";
-        pi.applicationInfo = new ApplicationInfo();
-        pi.applicationInfo.packageName = "test";
-        List<String> roles = new ArrayList<>();
-        roles.add(RoleManager.ROLE_DIALER);
-        RoleManager rm = mock(RoleManager.class);
-        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
-
-        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), rm, pi);
-
-        assertTrue(appRow.systemApp);
-    }
-
-    @Test
-    public void testMarkAppRow_fixedPermission_withRole() throws Exception {
+    public void testMarkAppRow_fixedImportance() throws Exception {
         PackageInfo pi = new PackageInfo();
         pi.packageName = "test";
         pi.applicationInfo = new ApplicationInfo();
         pi.applicationInfo.packageName = "test";
         pi.applicationInfo.uid = 123;
 
-        List<String> roles = new ArrayList<>();
-        roles.add(RoleManager.ROLE_DIALER);
-        RoleManager rm = mock(RoleManager.class);
-        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
-        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+        when(mInm.isImportanceLocked(pi.packageName, 123)).thenReturn(true);
 
         AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), rm, pi);
-
-        assertTrue(appRow.systemApp);
-        assertTrue(appRow.lockedImportance);
-    }
-
-    @Test
-    public void testMarkAppRow_fixedPermission() throws Exception {
-        PackageInfo pi = new PackageInfo();
-        pi.packageName = "test";
-        pi.applicationInfo = new ApplicationInfo();
-        pi.applicationInfo.packageName = "test";
-        pi.applicationInfo.uid = 123;
-
-        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(true);
-
-        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), mock(RoleManager.class), pi);
+                mock(PackageManager.class), pi);
 
         assertTrue(appRow.systemApp);
         assertTrue(appRow.lockedImportance);
@@ -156,10 +105,10 @@ public class NotificationBackendTest {
         pi.applicationInfo.packageName = "test";
         pi.applicationInfo.uid = 123;
 
-        when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
+        when(mInm.isImportanceLocked(anyString(), anyInt())).thenReturn(false);
 
         AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), mock(RoleManager.class), pi);
+                mock(PackageManager.class), pi);
 
         assertFalse(appRow.systemApp);
         assertFalse(appRow.lockedImportance);
@@ -178,7 +127,7 @@ public class NotificationBackendTest {
         when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
 
         AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), mock(RoleManager.class), pi);
+                mock(PackageManager.class), pi);
 
         assertFalse(appRow.systemApp);
         assertTrue(appRow.lockedImportance);
@@ -198,27 +147,10 @@ public class NotificationBackendTest {
         when(mInm.isPermissionFixed(pi.packageName, 0)).thenReturn(false);
 
         AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), mock(RoleManager.class), pi);
+                mock(PackageManager.class), pi);
 
         assertFalse(appRow.systemApp);
         assertFalse(appRow.lockedImportance);
-    }
-
-    @Test
-    public void testMarkAppRow_notDefaultPackage() {
-        PackageInfo pi = new PackageInfo();
-        pi.packageName = "test";
-        pi.applicationInfo = new ApplicationInfo();
-        pi.applicationInfo.packageName = "test";
-        List<String> roles = new ArrayList<>();
-        roles.add(RoleManager.ROLE_HOME);
-        RoleManager rm = mock(RoleManager.class);
-        when(rm.getHeldRolesFromController(anyString())).thenReturn(roles);
-
-        AppRow appRow = new NotificationBackend().loadAppRow(RuntimeEnvironment.application,
-                mock(PackageManager.class), rm, pi);
-
-        assertFalse(appRow.systemApp);
     }
 
     @Test
