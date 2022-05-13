@@ -142,7 +142,6 @@ public class VolumeOptionMenuControllerTest {
         mController.onPrepareOptionsMenu(mMenu);
 
         verify(mController.mRename, atLeastOnce()).setVisible(true);
-        verify(mController.mUnmount, atLeastOnce()).setVisible(true);
         verify(mController.mFormatAsPortable, atLeastOnce()).setVisible(true);
         verify(mController.mMount, never()).setVisible(true);
         verify(mController.mFormat, never()).setVisible(true);
