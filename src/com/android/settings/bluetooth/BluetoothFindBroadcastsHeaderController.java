@@ -134,7 +134,7 @@ public class BluetoothFindBroadcastsHeaderController extends BluetoothDetailsCon
     private void launchQrCodeScanner() {
         final Intent intent = new Intent(mContext, QrCodeScanModeActivity.class);
         intent.setAction(BluetoothBroadcastUtils.ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER)
-                .putExtra(BluetoothBroadcastUtils.EXTRA_BLUETOOTH_SINK_IS_GROUP, false)
+                .putExtra(BluetoothBroadcastUtils.EXTRA_BLUETOOTH_SINK_IS_GROUP, true)
                 .putExtra(BluetoothBroadcastUtils.EXTRA_BLUETOOTH_DEVICE_SINK,
                         mCachedDevice.getDevice());
         mContext.startActivity(intent);
