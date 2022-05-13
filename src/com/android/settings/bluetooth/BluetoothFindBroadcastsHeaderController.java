@@ -33,7 +33,6 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.qrcode.QrCodeScanModeActivity;
 import com.android.settingslib.widget.LayoutPreference;
 
 /**
