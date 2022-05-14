@@ -20,6 +20,8 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.net.Uri;
 
+import com.android.settingslib.bluetooth.BluetoothUtils;
+
 /**
  * Impl of {@link BluetoothFeatureProvider}
  */
@@ -36,5 +38,10 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
         final byte[] uriByte = bluetoothDevice.getMetadata(
                 BluetoothDevice.METADATA_ENHANCED_SETTINGS_UI_URI);
         return uriByte == null ? null : Uri.parse(new String(uriByte));
+    }
+
+    @Override
+    public String getBluetoothDeviceControlUri(BluetoothDevice bluetoothDevice) {
+        return BluetoothUtils.getControlUriMetaData(bluetoothDevice);
     }
 }
