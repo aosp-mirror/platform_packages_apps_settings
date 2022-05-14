@@ -20,6 +20,8 @@ import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
 
+import static com.android.settings.SettingsActivity.EXTRA_USER_HANDLE;
+
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
@@ -27,6 +29,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
@@ -449,7 +452,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 SplitRule.FINISH_ALWAYS,
                 SplitRule.FINISH_ALWAYS,
                 true /* clearTop */);
-        startActivity(targetIntent);
+
+        final UserHandle user = intent.getParcelableExtra(EXTRA_USER_HANDLE, UserHandle.class);
+        if (user != null) {
+            startActivityAsUser(targetIntent, user);
+        } else {
+            startActivity(targetIntent);
+        }
     }
 
     private String getHighlightMenuKey() {
