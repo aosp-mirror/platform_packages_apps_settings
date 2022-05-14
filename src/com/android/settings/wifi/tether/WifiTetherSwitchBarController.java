@@ -31,6 +31,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Switch;
 
 import androidx.annotation.VisibleForTesting;
@@ -47,6 +48,8 @@ import com.android.settingslib.widget.OnMainSwitchChangeListener;
  */
 public class WifiTetherSwitchBarController implements
         LifecycleObserver, OnStart, OnStop, DataSaverBackend.Listener, OnMainSwitchChangeListener {
+
+    private static final String TAG = "WifiTetherSBC";
     private static final IntentFilter WIFI_INTENT_FILTER;
 
     private final Context mContext;
@@ -63,8 +66,8 @@ public class WifiTetherSwitchBarController implements
                 @Override
                 public void onTetheringFailed() {
                     super.onTetheringFailed();
-                    mSwitchBar.setChecked(false);
-                    updateWifiSwitch();
+                    Log.e(TAG, "Failed to start Wi-Fi Tethering.");
+                    handleWifiApStateChanged(mWifiManager.getWifiApState());
                 }
             };
 
@@ -111,14 +114,26 @@ public class WifiTetherSwitchBarController implements
     }
 
     void stopTether() {
+        if (!isWifiApActivated()) return;
+
         mSwitchBar.setEnabled(false);
         mConnectivityManager.stopTethering(TETHERING_WIFI);
     }
 
     void startTether() {
+        if (isWifiApActivated()) return;
+
         mSwitchBar.setEnabled(false);
         mConnectivityManager.startTethering(TETHERING_WIFI, true /* showProvisioningUi */,
                 mOnStartTetheringCallback, new Handler(Looper.getMainLooper()));
+    }
+
+    private boolean isWifiApActivated() {
+        final int wifiApState = mWifiManager.getWifiApState();
+        if (wifiApState == WIFI_AP_STATE_ENABLED || wifiApState == WIFI_AP_STATE_ENABLING) {
+            return true;
+        }
+        return false;
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
