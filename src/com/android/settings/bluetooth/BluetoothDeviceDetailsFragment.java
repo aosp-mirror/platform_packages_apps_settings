@@ -246,6 +246,8 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     mCachedDevice, lifecycle));
             controllers.add(new BluetoothDetailsMacAddressController(context, this, mCachedDevice,
                     lifecycle));
+            controllers.add(new BluetoothDetailsRelatedToolsController(context, this, mCachedDevice,
+                    lifecycle));
         }
         return controllers;
     }
