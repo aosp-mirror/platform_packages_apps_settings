@@ -149,7 +149,10 @@ public abstract class FeatureFactory {
 
     public abstract ContextualCardFeatureProvider getContextualCardFeatureProvider(Context context);
 
-    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
+    /**
+     * Retrieves implementation for Bluetooth feature.
+     */
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider();
 
     public abstract AwareFeatureProvider getAwareFeatureProvider();
 

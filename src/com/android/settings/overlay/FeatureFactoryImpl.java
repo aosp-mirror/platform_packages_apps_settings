@@ -283,10 +283,9 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+    public BluetoothFeatureProvider getBluetoothFeatureProvider() {
         if (mBluetoothFeatureProvider == null) {
-            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
-                    context.getApplicationContext());
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(getAppContext());
         }
         return mBluetoothFeatureProvider;
     }
