@@ -631,7 +631,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Spriječite da druge osobe koriste ovaj uređaj bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Spriječite da druge osobe koriste ovaj telefon bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način zaključavanja ekrana"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"Ovo zaključavanje ne može poništiti IT administrator. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Postavite zasebno zaključavanje radnog profila<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"IT administrator ne može poništiti ovo zaključavanje. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Postavite zasebno zaključavanje radnog profila<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ako zaboravite ovo zaključavanje, tražite od IT administratora da ga poništi"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcije zaključavanja ekrana"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opcije zaključavanja ekrana"</string>
@@ -1860,7 +1860,7 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Prikaži sve"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"Usluge lokacije"</string>
     <string name="location_title" msgid="5819154746934945021">"Moja lokacija"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za poslovni profil"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokacija za radni profil"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Odobrenja lokacije za aplikacije"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokacija je isključena"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
@@ -2359,7 +2359,7 @@
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Pokret za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Prevucite prema gore s 2 prsta"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture_talkback" msgid="7422753388389160524">"Prevucite prema gore s 3 prsta"</string>
-    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Dodirnite dugme Pristupačnost"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_software" msgid="4796192466943479849">"Dodirnite dugme za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_by_gesture" msgid="3981188764050497346">"Korištenje pokreta za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software" msgid="5606196352833449600">"Dodirnite dugme Pristupačnost <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> na dnu ekrana.\n\nDa prebacujete između funkcija, dodirnite i zadržite dugme Pristupačnost."</string>
     <string name="accessibility_shortcut_edit_dialog_summary_software_gesture" msgid="8292555254353761635">"Prevucite s dva prsta prema gore s dna ekrana.\n\nDa prebacujete između funkcija, s dva prsta prevucite prema gore i zadržite."</string>
@@ -2558,7 +2558,7 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"Usluga <xliff:g id="SERVICE">%1$s</xliff:g> zahtijeva potpunu kontrolu ovog uređaja. Usluga može čitati sadržaj ekrana i djelovati u ime korisnika s potrebama za pristupačnost. Ovaj nivo kontrole nije prikladan za većinu aplikacija."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Puna kontrola je prikladna za aplikacije koje vam pomažu kod potreba pristupačnosti, ali nije za većinu aplikacija."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Prikaz i kontrola ekrana"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Može čitati sav sadržaj na ekranu i prikazivati sadržaj u drugim aplikacijama."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Može čitati sav sadržaj na ekranu i prikazivati sadržaj preko drugih aplikacija."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Prikaz i izvršavanje radnji"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Može pratiti vaše interakcije s aplikacijom ili hardverskim senzorom te ostvariti interakciju s aplikacijama umjesto vas."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Dozvoli"</string>
@@ -4251,8 +4251,8 @@
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Traži PIN prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Traži lozinku prije poništavanja kačenja"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Zaključaj uređaj kada se ekran otkači"</string>
-    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrdite brisanje SIM-a"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Potvrdite identitet prije potpunog brisanja preuzetog SIM-a"</string>
+    <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"Potvrda brisanja SIM-a"</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"Potvrdite svoj identitet prije potpunog brisanja preuzetog SIM-a"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ovim radnim profilom upravlja:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Profilom upravlja <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(Eksperimentalno)"</string>
@@ -4534,7 +4534,7 @@
     </plurals>
     <string name="running_frequency" msgid="7260225121706316639">"Frekvencija"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"Maksimalno korištenje"</string>
-    <string name="no_data_usage" msgid="4665617440434654132">"Nema korištenja podataka"</string>
+    <string name="no_data_usage" msgid="4665617440434654132">"Nema iskorištenih podataka"</string>
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"Dozvoliti da <xliff:g id="APP">%1$s</xliff:g> pristupa načinu rada Ne ometaj?"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"Aplikacija će biti u mogućnosti da uključi/isključi način rada Ne ometaj i da izmijeni povezane postavke."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"Mora ostati uključeno jer je uključen pristup obavještenjima"</string>
@@ -4812,7 +4812,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"urez ekrana, urez"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Zadana postavka uređaja"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Primjena preklapanja nije uspjela"</string>
-    <string name="special_access" msgid="1767980727423395147">"Poseban pristup aplikacijama"</string>
+    <string name="special_access" msgid="1767980727423395147">"Poseban pristup za aplikacije"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> aplikacija može koristiti neograničen prijenos podataka</item>
       <item quantity="few"><xliff:g id="COUNT">%d</xliff:g> aplikacije mogu koristiti neograničen prijenos podataka</item>
@@ -4895,9 +4895,9 @@
     <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Sigurnost i hitni pozivi"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Hitni pozivi, zdravstveni podaci, obavještenja"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Navigacija pokretima"</string>
-    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Za odlazak na početni ekran, prevucite prema gore s dna ekrana. Da prebacite aplikacije, prevucite prema gore s dna, zadržite, a zatim otpustite. Za vraćanje, prevucite s lijevog ili desnog ruba ekrana."</string>
+    <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"Da odete na početni ekran, prevucite prema gore s dna ekrana. Da prebacite s jedne aplikacije na drugu, prevucite prema gore s dna, zadržite, a zatim otpustite. Da idete nazad, prevucite s lijevog ili desnog ruba ekrana."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Navigacija pomoću 3 dugmeta"</string>
-    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Za vraćanje, otvaranje početnog ekrana i promjenu aplikacije, koristite dugmad na dnu ekrana."</string>
+    <string name="legacy_navigation_summary" msgid="5905301067778326433">"Da se vratite, odete na početni ekran i pebacite s jedne aplikacije na drugu, koristite dugmad u dnu ekrana."</string>
     <string name="keywords_system_navigation" msgid="3131782378486554934">"navigacija za sistem, navigacija pomoću 2 dugmeta, navigacija pomoću 3 dugmeta, navigacija pokretima, prevlačenje"</string>
     <string name="gesture_not_supported_dialog_message" msgid="5316512246119347889">"Nije podržano u vašoj zadanoj aplikaciji početnog ekrana, <xliff:g id="DEFAULT_HOME_APP">%s</xliff:g>"</string>
     <string name="gesture_not_supported_positive_button" msgid="7909969459977021893">"Promijeni zadanu aplik. početnog ekrana"</string>
@@ -4922,9 +4922,9 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Prevucite nadolje za:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Koristite prečicu za"</string>
     <string name="one_handed_mode_intro_text" msgid="4313074112548160836">"Da koristite način rada jednom rukom, prevucite prema dolje s gornjeg ruba ekrana. Da koristite ovu funkciju, provjerite je li navigacija pokretima uključena u postavkama navigacije sistema."</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Prevucite ekran da bude u dosegu"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Povlačenje ekrana da bude u dosegu"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Vrh ekrana će se pomjeriti da ga možete dosegnuti palcem."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Prikaži obavještenja"</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Prikaz obavještenja"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Obavještenja i postavke će se prikazati."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Da provjerite vrijeme, obavještenja i druge informacije, dvaput dodirnite ekran."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Provjera telefona podizanjem"</string>

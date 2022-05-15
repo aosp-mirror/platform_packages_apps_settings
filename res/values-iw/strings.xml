@@ -353,7 +353,7 @@
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"שימוש באימות פנים"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ניתן להשתמש בזיהוי פנים כדי לפתוח את הטלפון, לאשר רכישות או להיכנס אל אפליקציות."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"הרשאה לילד או לילדה להשתמש בזיהוי פנים כדי לבטל את הנעילה של הטלפון או לאמת את זהותם. הפעולה נדרשת בכניסה לאפליקציות, אישור רכישה ועוד."</string>
-    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"שימוש בפתיחה של הטלפון ע\"י זיהוי הפנים או לאשר רכישות.\n\nהערה: לא ניתן להשתמש בפנים כדי לבטל את הנעילה של המכשיר הזה. לקבלת מידע נוסף, אפשר לפנות למנהל המערכת של הארגון."</string>
+    <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"אפשר לפתוח את הטלפון או לאשר רכישות על ידי זיהוי הפנים.\n\nהערה: לא ניתן לבטל את נעילת המכשיר באמצעות הפנים. למידע נוסף, אפשר לפנות למנהל המערכת של הארגון."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"ניתן להשתמש בפתיחה ע\"י זיהוי הפנים, לאשר רכישות או להיכנס אל אפליקציות"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
     <string name="security_settings_face_enroll_introduction_info_glasses" msgid="2733870453868907471"></string>
@@ -637,7 +637,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"אפשר להפעיל את תכונות הגנת המכשיר כדי למנוע מאחרים להשתמש במכשיר הזה ללא אישורך. עליך לבחור בנעילת המסך שבה ברצונך להשתמש."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"תכונות הגנת המכשיר מאפשרות למנוע מאחרים להשתמש בטלפון הזה ללא אישורך. עליך לבחור בנעילת המסך שבה ברצונך להשתמש."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"יש לבחור את שיטת הגיבוי לנעילת המסך"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"‏מנהל ה-IT לא יכול לאפס את הנעילה הזו. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>במקום זאת, יש להגדיר נעילה נפרדת לפרופיל העבודה<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"‏מנהל ה-IT לא יכול לאפס את הנעילה הזו. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>עדיף להגדיר נעילה נפרדת לפרופיל העבודה<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"‏שכחת את הנעילה הזו? עליך לבקש ממנהל ה-IT לאפס אותה"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"אפשרויות לנעילת המסך"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"אפשרויות לנעילת המסך"</string>
@@ -841,10 +841,10 @@
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"כדי להשתמש בתכונה הזו, צריך קודם להגדיר נעילת מסך"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"ללא"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="5438047398376802735">
-      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> סביבות אמינות פעילות</item>
-      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> סביבות אמינות פעילות</item>
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> סביבות אמינות פעילות</item>
-      <item quantity="one"> סביבה אמינה פעילה אחת</item>
+      <item quantity="two"><xliff:g id="COUNT">%d</xliff:g> סביבות מהימנות פעילות</item>
+      <item quantity="many"><xliff:g id="COUNT">%d</xliff:g> סביבות מהימנות פעילות</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> סביבות מהימנות פעילות</item>
+      <item quantity="one"> סביבה מהימנה פעילה אחת</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="5955341060378240781">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5257744297562880017">"‏להפעלת Bluetooth"</string>
@@ -1442,7 +1442,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"כיבוי אוטומטי בשעה <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"הפעלה עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"כיבוי עד <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"העיצוב הכהה משתמש ברקע שחור במסכים מסוימים כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה מתוזמנת להתחיל לאחר שהמסך נכבה."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"העיצוב הכהה משתמש ברקע שחור כדי להאריך את חיי הסוללה. הפעלת העיצוב הכהה תתחיל לאחר כיבוי המסך והפעלתו מחדש."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"זמן קצוב לכיבוי המסך"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"כיבוי מסך"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"לאחר <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> של חוסר פעילות"</string>
@@ -2367,7 +2367,7 @@
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"כשההגדלה מופעלת, ניתן להתקרב למסך.\n\n"<b>"כדי להתקרב,"</b>", מתחילים בהגדלה ולאחר מכן מקישים במקום כלשהו במסך.\n"<ul><li>"גוררים שתי אצבעות או יותר כדי לגלול"</li>\n<li>"עושים תנועת צביטה עם שתי אצבעות או יותר כדי לשנות את מרחק התצוגה"</li></ul>\n\n<b>"כדי להתקרב באופן זמני"</b>", מתחילים בהגדלה ולאחר מכן, לוחצים לחיצה ארוכה במקום כלשהו במסך.\n"<ul><li>"גוררים כדי לנוע במסך"</li>\n<li>"מרימים את האצבע כדי להתרחק"</li></ul>\n\n"לא ניתן להתקרב באמצעות המקלדת או סרגל הניווט."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"דף <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> מתוך <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"שימוש בלחצן נגישות לצורך פתיחה"</string>
-    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"לוחצים ארוכה על לחצני עוצמת הקול כדי לפתוח"</string>
+    <string name="accessibility_tutorial_dialog_title_volume" msgid="494810949830845234">"לחיצה ארוכה על לחצני עוצמת הקול כדי לפתוח"</string>
     <string name="accessibility_tutorial_dialog_title_triple" msgid="7089562919284464400">"מקישים שלוש פעמים על המסך כדי לפתוח"</string>
     <string name="accessibility_tutorial_dialog_title_gesture" msgid="4965810097646659332">"שימוש בתנועה לצורך פתיחה"</string>
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"שימוש בתנועת נגישות חדשה"</string>
@@ -2509,8 +2509,8 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="1061317523242240222">"‏מסך מעומעם יותר מקל על הקריאה.&lt;br/&gt;&lt;br/&gt; ההגדרה הזו עשויה להיות שימושית במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית של הטלפון עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטלפון כשאין אור בסביבה, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="7839714100830254580">"‏מסך כהה יותר מקל על הקריאה.&lt;br/&gt;&lt;br/&gt; הגדרה זו עשויה להיות שימושית במקרים הבאים: &lt;ol&gt; &lt;li&gt; כשעוצמת הבהירות המינימלית של הטאבלט עדיין בהירה מדי&lt;/li&gt; &lt;li&gt; כשמשתמשים בטאבלט במצבים כהים, למשל בלילה או בחדר חשוך לפני השינה&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"עוצמה"</string>
-    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"עמעום"</string>
-    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"הגברה"</string>
+    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"עמום"</string>
+    <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"בהיר"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"שמירת ההגדרה לאחר הפעלה מחדש של המכשיר"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
       <item quantity="two">השהיה קצרה (<xliff:g id="CLICK_DELAY_LABEL_1">%1$s</xliff:g> שניות)</item>
@@ -3980,11 +3980,11 @@
     <string name="allow_interruption" msgid="5237201780159482716">"סוגי הפרעות שאפשר להפעיל"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"האפליקציה יכולה להפעיל צלילים ורטט ו/או להציג התראות קופצות במסך"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"בעדיפות גבוהה"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"מוצגת בחלק העליון של קטע התראות השיחה, מופיעה בבועה צפה, תוצג תמונת פרופיל במסך הנעילה"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"ההודעה מופיעה בחלק העליון של קטע התראות השיחה, בתוך בועה צפה, עם תמונת פרופיל במסך הנעילה"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"האפליקציה <xliff:g id="APP_NAME">%1$s</xliff:g> לא תומכת ברוב תכונות השיחה. אי אפשר להגדיר שיחות כשיחות בעדיפות גבוהה, ושיחות לא יופיעו כבועות צפות."</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"כיווץ ההתראות לשורה אחת בחלונית ההתראות"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"ללא צליל או רטט"</string>
-    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ללא צליל או רטט ומופיעה למטה בקטע התראות השיחה"</string>
+    <string name="notification_conversation_summary_low" msgid="6352818857388412326">"ללא צליל או רטט, ההודעה מופיעה למטה בקטע התראות השיחה"</string>
     <string name="notification_channel_summary_default" msgid="3674057458265438896">"ייתכן שיופעל צלצול או רטט בהתאם להגדרות הטלפון"</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"כשהמכשיר לא נעול, התראות יוצגו כבאנר בראש המסך"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"כל ההתראות של​ \'<xliff:g id="APP_NAME">%1$s</xliff:g>\'"</string>
@@ -4301,8 +4301,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"מושבתת"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"הצמדת אפליקציה"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"התכונה \'הצמדת אפליקציה\' מאפשרת לקבע את האפליקציה הנוכחית בתצוגה עד לביטול ההצמדה. אפשר להשתמש בתכונה, למשל, כשנותנים לחבר מהימן לשחק במשחק מסוים."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"לאחר הצמדת אפליקציה כלשהי, ייתכן שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: ←\n1.	מפעילים את הצמדת האפליקציה ←\n2.	פותחים את \'מסכים אחרונים\' ←\n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הצמדה\'"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"לאחר הצמדת אפליקציה כלשהי, ייתכן שייפתחו אפליקציות אחרות מאותה אפליקציה ושתתאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במקום זאת במשתמש אורח. \n\nכדי להשתמש בהצמדת אפליקציה: \n1.	מפעילים את התכונה \'הצמדת אפליקציה\' \n2.	פותחים את \'מסכים אחרונים\' \n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הצמדה\'"</string>
+    <string name="screen_pinning_description" msgid="7289730998890213708">"לאחר הצמדת אפליקציה כלשהי, האפליקציה יכולה לפתוח אפליקציות אחרות ולאפשר גישה למידע האישי. \n\nכדי להשתמש בהצמדת אפליקציה: ←\n1.	מפעילים את הצמדת האפליקציה ←\n2.	פותחים את \'מסכים אחרונים\' ←\n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הצמדה\'"</string>
+    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"לאחר הצמדת אפליקציה כלשהי, האפליקציה יכולה לפתוח אפליקציות אחרות ולאפשר גישה למידע האישי. \n\nכדי לשתף את המכשיר באופן מאובטח עם אדם אחר, כדאי להשתמש במקום זאת במשתמש אורח. \n\nכדי להשתמש בהצמדת אפליקציה: \n1.	מפעילים את התכונה \'הצמדת אפליקציה\' \n2.	פותחים את \'מסכים אחרונים\' \n3.	מקישים על סמל האפליקציה שמופיע בחלק העליון של המסך ואז מקישים על \'הצמדה\'"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"לאחר שמצמידים אפליקציה: \n\n•	 ייתכן שתתאפשר גישה למידע אישי \n		(כמו אנשי קשר ותוכן מהאימייל) \n•	 האפליקציה שהוצמדה עשויה לפתוח אפליקציות אחרות \n\nיש להשתמש בהצמדת אפליקציה רק עם אנשים מהימנים."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"בקשת קו ביטול נעילה לפני ביטול הצמדה"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"בקשת קוד גישה לפני ביטול הצמדה"</string>
