@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Appsprog"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Angiv sprog for hver app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Appsprog"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Opdater appen"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Opdater appen for at få de nyeste tilgængelige sprog"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Opdater nu"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Foreslåede sprog"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle sprog"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systemsprog"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
@@ -415,7 +414,7 @@
     <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Brug dit ansigt til at låse din telefon op eller til godkendelse i apps, f.eks. ved login eller godkendelse af et køb.\n\nHusk!\nDu kan kun have ét konfigureret ansigt ad gangen. Før du kan tilføje et nyt ansigt, skal du slette det aktuelle ansigt.\n\nDu kan komme til at låse telefonen op, hvis du kigger på den.\n\nDin telefon kan låses op af en anden, hvis den holdes op foran dit ansigt, også selvom dine øjne er lukkede.\n\nDin telefon kan låses op af en anden, der ligner dig meget, f.eks. en bror eller søster."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Skal ansigtsmodellen slettes?"</string>
-    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Din ansigtsmodel slettes permanent og på sikker vis.\n\n Når den er slettet, skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse din telefon op eller til godkendelse i apps."</string>
+    <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse din telefon op eller til godkendelse i apps."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Din ansigtsmodel slettes permanent og på sikker vis.\n\nNår den er slettet, skal du bruge dit fingeraftryk, din pinkode, dit mønster eller din adgangskode til at låse din telefon op."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Brug ansigtslås til at låse din telefon op"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeraftryk"</string>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Konfigurer dit fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Tillad oplåsning med fingeraftryk"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Brug dit fingeraftryk"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Brug dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Brug dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps eller godkender et køb."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Tillad, at dit barn bruger fingeraftryk til at låse telefonen op eller bekræfte sin identitet. Dette foregår, når barnet logger ind i apps, godkender et køb m.m."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Du bestemmer"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Du og dit barn har kontrollen"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Løft fingeren, når du mærker en vibration"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Gå et sted hen med mere dæmpet belysning, og prøv igen"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Du har nået grænsen for det maksimale antal forsøg"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Brug dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Brug dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Brug dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ansigtslås og oplåsning med fingeraftryk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tryk for at konfigurere"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Ansigt og fingeraftryk er tilføjet"</string>
@@ -529,12 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registrere en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nu kan du bruge dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nu kan du bruge dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nu kan du bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
@@ -598,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tilføj endnu et"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Næste"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Ud over at bruge fingeraftryk til at låse telefonen op kan du også bruge fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Denne skærmlåsindstilling er deaktiveret. Kontakt din organisations administrator for at få flere oplysninger. "<annotation id="admin_details">"Få flere oplysninger"</annotation>\n\n"Du kan stadig bruge dit fingeraftryk til at godkende køb og få adgang til apps. "<annotation id="url">"Få flere oplysninger"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Muligheden for skærmlås er deaktiveret. Kontakt administratoren af din organisation for at få flere oplysninger."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kan stadig bruge fingeraftryk til at godkende køb og få adgang til apps."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Løft fingeren, og tryk på sensoren igen"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Fingeraftrykslæseren kan ikke bruges. Få den repareret"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Flere sikkerhedsindstillinger"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås til arbejdsprofil, kryptering og mere"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og mere"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhed, flere sikkerhedsindstillinger, flere indstillinger, avancerede sikkerhedsindstillinger"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har tilføjet det maksimale antal fingeraftryk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Du kan ikke tilføje flere fingeraftryk"</string>
@@ -643,7 +638,9 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Du kan forhindre andre i at bruge denne enhed uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelser. Vælg den skærmlås, du vil bruge."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Du kan forhindre andre i at bruge denne telefon uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Vælg din alternative metode til skærmlåsning"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
+    <skip />
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
     <skip />
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Hvis du glemmer denne lås, kan du få din it-administrator til at nulstille den"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Valgmuligheder for skærmlås"</string>
@@ -755,6 +752,8 @@
       <item quantity="one">Skal indeholde mindst <xliff:g id="COUNT_1">%d</xliff:g> tegn</item>
       <item quantity="other">Skal indeholde mindst <xliff:g id="COUNT_1">%d</xliff:g> tegn</item>
     </plurals>
+    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
+    <skip />
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">Pinkoden skal bestå af mindst <xliff:g id="COUNT_1">%d</xliff:g> ciffer</item>
       <item quantity="other">Pinkoden skal bestå af mindst <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
@@ -1936,10 +1935,10 @@
     <string name="settings_safetylegal_activity_title" msgid="2218587051061093358">"Sikkerhedsoplysninger"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="6571695168138207587">"Du har ingen dataforbindelse. Se disse oplysninger nu ved at gå til %s på en computer, der har forbindelse til internettet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Indlæser..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Indstil en adgangskode"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Angiv en adgangskode"</string>
     <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Indstil en adgangskode til arbejdsprofilen"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Indstil en pinkode"</string>
-    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Indstil en pinkode til arbejdsprofilen"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Angiv en pinkode"</string>
+    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Angiv en pinkode til arbejdsprofilen"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Indstil et mønster"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Indstil et mønster til arbejdsprofilen"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Angiv adgangskode for at bruge fingeraftryk"</string>
@@ -2094,7 +2093,8 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Nødapp"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Nulstil app-præferencer"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Nulstil app-præferencer?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Dette nulstiller alle præferencer for:\n\n "<li>"Deaktiverede apps"</li>\n" "<li>"Deaktiverede appnotifikationer"</li>\n" "<li>"Standardapps til handlinger"</li>\n" "<li>"Begrænsning af baggrundsdata for apps"</li>\n<li>" "</li>"Eventuelle begrænsede tilladelser\n\n Du vil ikke miste nogen appdata."</string>
+    <!-- no translation found for reset_app_preferences_desc (8550782670650158299) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Nulstil apps"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Administrer plads"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
@@ -2221,7 +2221,7 @@
     <string name="add_virtual_keyboard" msgid="2515850206289352606">"Administrer tastaturer på skærmen"</string>
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Hjælp til tastaturet"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysisk tastatur"</string>
-    <string name="show_ime" msgid="4334255501724746849">"Brug tastaturet på skærmen"</string>
+    <string name="show_ime" msgid="4334255501724746849">"Brug skærmtastaturet"</string>
     <string name="show_ime_summary" msgid="7293345791727205975">"Behold det på skærmen, mens det fysiske tastatur er aktivt"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tastaturgenveje"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Vis tilgængelige genveje"</string>
@@ -2402,7 +2402,7 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"Genvej på låseskærmen"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"Tillad, at genvej til funktionen kan aktiveres via låseskærmen. Hold begge lydstyrkeknapper nede i et par sekunder."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"Knappen Hjælpefunktioner"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Knappen og bevægelsen Hjælpefunktioner"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"Knappen Hjælpefunktioner og bevægelser for hjælpefunktioner"</string>
     <string name="accessibility_button_intro_text" msgid="80993874471745687">"Få hurtigt adgang til hjælpefunktioner på enhver skærm"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"Om knappen Hjælpefunktioner"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"Om knappen Hjælpefunktioner og bevægelser for hjælpefunktioner"</string>
@@ -2939,10 +2939,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Opdater"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Medieserver"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Appoptimering"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Netdeling"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Fjernede apps"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Batterisparefunktion"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Aktivér automatisk"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Ingen tidsplan"</string>
@@ -3371,10 +3369,8 @@
       <item quantity="one">Tillad eller fjern certifikat</item>
       <item quantity="other">Tillad eller fjern certifikater</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter på din enhed, hvilket giver vedkommende mulighed for at overvåge netværksaktivitet på din enhed, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}one{{orgName} har installeret en certifikatautoritet for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites.\n\nKontakt din administrator for at få flere oplysninger om dette certifikat.}other{{orgName} har installeret certifikatautoriteter for din arbejdsprofil, hvilket giver vedkommende mulighed for at overvåge aktivitet på dit arbejdsnetværk, herunder mails, apps og sikre websites\n\nKontakt din administrator for at få flere oplysninger om disse certifikater.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"En tredjepart kan overvåge din netværksaktivitet, herunder e-mails, apps og sikre websites.\n\nPålidelige loginoplysninger, der er installeret på din enhed, gør dette muligt."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="one">Tjek certifikat</item>
@@ -3470,7 +3466,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Fjern begrænsninger"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Skift pinkode"</string>
     <string name="help_label" msgid="2896538416436125883">"Hjælp og feedback"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Support – artikler, telefon og chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Support – artikler, telefon og chat"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Konto til indhold"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-id"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ekstreme trusler"</string>
@@ -3747,7 +3747,7 @@
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Til/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer om vigtige personer og apps"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer fra vigtige personer og apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Begræns antallet af afbrydelser"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Aktivér Forstyr ikke"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Alarmer og medielyde kan afbryde"</string>
@@ -3865,6 +3865,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Styr notifikationer fra individuelle apps"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Generelt"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Arbejdsunderretninger"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Automatiske notifikationer"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Automatisk prioritetsniveau for notifikationer"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Angiv automatisk notifikationer med lavere prioritet som Diskret"</string>
@@ -4972,9 +4974,9 @@
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Brug genvejen til"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Træk den øverste halvdel af din skærm ned, så den er lettere at nå med én hånd"</string>
     <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Sådan bruger du enhåndstilstanden"</b>\n" • Sørg for, at navigation med bevægelser er valgt i indstillingerne for systemnavigation\n • Stryg nedad mod bunden af skærmen"</string>
-    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Træk skærmen inden for rækkevidde"</string>
+    <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Trække skærmen inden for rækkevidde"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Den øverste del af skærmen flyttes, så du kan nå den med din tommelfinger."</string>
-    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Vis notifikationer"</string>
+    <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Vise notifikationer"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Notifikationer og indstillinger vises."</string>
     <string name="ambient_display_summary" msgid="2650326740502690434">"Tryk to gange på skærmen for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Løft for at tjekke telefonen"</string>
@@ -5637,11 +5639,14 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"opkald"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"sms"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"For at forbedre brugeroplevelsen på enheden kan apps og tjenester stadig til enhver tid scanne efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i "<annotation id="link">"indstillingerne for Wi-Fi-scanning"</annotation>"."</string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Forbundet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Der er ingen forbindelse"</string>
-    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Der oprettes ikke automatisk mobildataforbindelse"</string>
+    <string name="mobile_data_off_summary" msgid="1884248776904165539">"Ingen automatisk mobildataforbindelse"</string>
     <string name="non_carrier_network_unavailable" msgid="9031567407964127997">"Der er ingen andre tilgængelige netværk"</string>
     <string name="all_network_unavailable" msgid="1163897808282057496">"Der er ingen tilgængelige netværk"</string>
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Vil du deaktivere mobildata?"</string>
@@ -5796,10 +5801,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Find udsendelser"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Forlad udsendelse"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scan QR-kode"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Angiv adgangskode"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Der kan ikke oprettes forbindelse. Prøv igen."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Forkert adgangskode"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>

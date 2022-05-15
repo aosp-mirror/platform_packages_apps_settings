@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Sovellusten kielet"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Valitse kieli kullekin sovellukselle"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Sovelluksen kieli"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Päivitä sovellus"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Päivitä sovellus, jotta uusimmat kielet tulevat saataville"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Päivitä nyt"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Kieliehdotukset"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Kaikki kielet"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Järjestelmän kieli"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Järjestelmän oletusarvo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sovellukselle ei voi valita kieltä asetuksista."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Kieli saattaa erota sovelluksessa saatavilla olevista kielistä. Jotkin sovellukset eivät ehkä tue tätä asetusta."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Poistetaanko valitut kielet?</item>
       <item quantity="one">Poistetaanko valittu kieli?</item>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Sormenjäljen käyttöönotto"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Salli sormenjälkiavaus"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Sormenjäljen käyttäminen"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Käytä sormenjälkeäsi tabletin lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin tai hyväksyessäsi ostoksen."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Käytä sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin tai hyväksyessäsi ostoksen."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Käytä sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin tai hyväksyessäsi ostoksen."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Anna lapselle lupa käyttää sormenjälkeään puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esimerkiksi hänen kirjautuessaan sovelluksiin tai hyväksyessään ostoksen."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Sinä päätät"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Sinä ja lapsesi päätätte"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Nosta sormesi, kun tunnet värähdyksen"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Siirry muualle pehmeämpään valoon ja yritä uudestaan"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Olet saavuttanut yritysten enimmäismäärän"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Käytä sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Käytä sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Käytä sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Kasvojentunnistus- ja sormenjälkiavaus"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Ota käyttöön napauttamalla"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Kasvot ja sormenjäljet lisättiin"</string>
@@ -516,7 +509,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Kosketa tunnistinta"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Aseta sormesi tunnistimelle ja nosta se, kun tunnet värähdyksen"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Pidä sormesi tunnistimella, kunnes tunnet värähdyksen"</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Kosketa pitkään sormenjälkitunnistinta"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Kosketa pitkään sor᠆menjälkitunnistinta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Nosta sormi ja kosketa taas"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Vielä kerran"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Seuraa sormenjälkikuvaketta"</string>
@@ -529,12 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tämä auttaa tallentamaan suuremman osan sormenjäljestäsi"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Sormenjäljen käyttöönotosta <xliff:g id="PERCENTAGE">%d</xliff:g> prosenttia valmiina"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sormenjälki lisätty"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Voit nyt käyttää sormenjälkeäsi tabletin lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Voit nyt käyttää sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Voit nyt käyttää sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Tee myöhemmin"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nosta sormi ja kosketa taas"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Aseta sormenjäljen reuna tunnistimen päälle ja pidä se siinä, ja tee sitten sama toiselle reunalle"</string>
@@ -598,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lisää toinen"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Seuraava"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Puhelimen lukituksen avaamisen lisäksi voit käyttää sormenjälkeä ostoksien ja sovelluksien käyttöoikeuksien vahvistamiseen. "<annotation id="url">"Lisätietoja"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Näytön lukitustapa on poistettu käytöstä. Kysy lisätietoja organisaatiosi järjestelmänvalvojalta. "<annotation id="admin_details">"Katso lisätietoja"</annotation>\n\n"Voit yhä valtuuttaa ostoksia ja käyttää sovelluksia sormenjälkesi avulla. "<annotation id="url">"Lisätietoja"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Näytön lukitus on pois päältä. Saat lisätietoa ottamalla yhteyttä organisaatiosi järjestelmänvalvojaan."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Voit kuitenkin yhä käyttää sormenjälkeäsi maksujen hyväksymiseen ja sovellusten käyttämiseen."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Nosta sormesi ja kosketa tunnistinta uudelleen"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Sormenjälkitunnistinta ei voi käyttää. Ota yhteys korjauspalveluun"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Lisää tietoturva-asetuksia"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Työprofiilin lukitus, salaus ja muuta"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Salaus, kirjautumistiedot ja muuta"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"tietoturva, lisää tietoturva-asetuksia, lisää asetuksia, tietoturvan lisäasetukset"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Voit lisätä korkeintaan <xliff:g id="COUNT">%d</xliff:g> sormenjälkeä"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Et voi lisätä useampia sormenjälkiä."</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Enempää sormenjälkiä ei voi lisätä."</string>
@@ -643,8 +638,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Estä laitteesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Estä puhelimesi luvaton käyttö ottamalla laitteen suojausominaisuudet käyttöön. Valitse näytön lukitusmenetelmä."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Valitse toissijainen näytönlukitustapa"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"IT-järjestelmänvalvoja ei voi nollata näytön lukituksen avaustapaa, jos unohdat sen."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Valitse erillinen työlukitus"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Jos unohdat tämän lukituksen, pyydä järjestelmänvalvojaa nollaamaan se"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Näytön lukitusvaihtoehdot"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Näytön lukitusvaihtoehdot"</string>
@@ -755,6 +750,8 @@
       <item quantity="other">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> merkkiä.</item>
       <item quantity="one">Salasanassa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> merkki.</item>
     </plurals>
+    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
+    <skip />
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">PIN-koodissa täytyy olla vähintään <xliff:g id="COUNT_1">%d</xliff:g> numeroa.</item>
       <item quantity="one">PIN-koodissa täytyy olla vähintään <xliff:g id="COUNT_0">%d</xliff:g> numero.</item>
@@ -1962,7 +1959,7 @@
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"PIN-koodi asetettu"</string>
     <string name="lockpassword_pattern_set_toast" msgid="3090582314362416762">"Kuvio on asetettu"</string>
     <string name="lockpassword_choose_your_password_header_for_face" msgid="622276003801157839">"Kasvojentunnistusavauksen varatapa"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Kasvojentunnistusavauksen varatapa"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" msgid="7333603579958317102">"Kasvojentunnistus᠆avauksen varatapa"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" msgid="704061826984851309">"Kasvojentunnistusavauksen varatapa"</string>
     <string name="lockpassword_choose_your_password_header_for_biometrics" msgid="2053366309272487015">"Lisää salasana kasvoja tai sormenjälkeä varten"</string>
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Lisää kuvio kasvoja tai sormenjälkeä varten"</string>
@@ -2094,7 +2091,8 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Hätäsovellus"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Nollaa sovellusasetukset"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Nollaa sovellusasetukset?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Kaikki seuraavien asetukset nollataan:\n\n"<li>"Käytöstä poistetut sovellukset"</li>\n<li>"Käytöstä poistetut sovellusilmoitukset"</li>\n<li>"Toimintojen oletussovellukset"</li>\n<li>" Sovellusten taustadatan käyttörajoitukset"</li>\n<li>"Käyttöoikeusrajoitukset"</li>\n\n"Et menetä mitään sovellusten dataa."</string>
+    <!-- no translation found for reset_app_preferences_desc (8550782670650158299) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Nollaa sovellukset"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Hallinnoi tallennustilaa"</string>
     <string name="filter" msgid="9039576690686251462">"Suodata"</string>
@@ -2939,10 +2937,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Päivitä"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Mediapalvelin"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Sovellusoptimointi"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Puhelimen käyttäminen modeemina"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Poistetut sovellukset"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Virransäästö"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Ota käyttöön automaattisesti"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Ei aikataulua"</string>
@@ -3371,10 +3367,8 @@
       <item quantity="other">Luota varmenteisiin tai poista niitä</item>
       <item quantity="one">Luota varmenteeseen tai poista se</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} on asentanut laitteellesi varmenteen myöntäjän, mikä mahdollistaa laitteen verkkotoiminnan (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen.\n\nSaat lisätietoja varmenteesta järjestelmänvalvojaltasi.}other{{orgName} on asentanut laitteellesi varmenteen myöntäjiä, mikä mahdollistaa laitteen verkkotoiminnan (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen.\n\nSaat lisätietoja varmenteista järjestelmänvalvojaltasi.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} on asentanut työprofiiliisi varmenteen myöntäjän, mikä mahdollistaa toimintasi (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa.\n\nSaat lisätietoja varmenteesta järjestelmänvalvojaltasi.}other{{orgName} on asentanut työprofiiliisi varmenteen myöntäjiä, mikä mahdollistaa toimintasi (esim. sähköpostin, sovellusten ja suojattujen verkkosivustojen käytön) seuraamisen työverkossa.\n\nSaat lisätietoja varmenteista järjestelmänvalvojaltasi.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Kolmas osapuoli pystyy seuraamaan toimiasi verkossa, esimerkiksi sähköpostiviestien, sovellusten ja turvallisten verkkosivustojen käyttöä.\n\nLaitteeseesi asennettu luotettu varmenne tekee tämän mahdolliseksi."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Tarkista varmenteet</item>
@@ -3470,7 +3464,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Poista rajoitukset"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Vaihda PIN-koodi"</string>
     <string name="help_label" msgid="2896538416436125883">"Ohjeet ja palaute"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Ohjeartikkelit, puhelin ja chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Ohjeartikkelit, puhelin ja chat"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Käytettävä tili"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Kuvatunnus"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Erittäin vakavat uhat"</string>
@@ -3865,6 +3863,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Muuta ilmoitusasetuksia suoraan sovelluksista"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Yleiset"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Työilmoitukset"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Mukautuvat ilmoitukset"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Mukautuva ilmoitusten tärkeys"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Aseta alemman prioriteetin ilmoitukset automaattisesti varovaisiksi."</string>
@@ -5637,7 +5637,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"puhelut"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"tekstiviestit"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiilidata"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Laitteen käyttökokemuksen parantamiseksi sovellukset ja palvelut voivat hakea Wi-Fi-verkkoja myös silloin, kun Wi-Fi on pois päältä. Näin voidaan esimerkiksi kehittää sijaintiin perustuvia ominaisuuksia ja palveluja. Voit muuttaa asetusta Wi-Fi-haun asetuksissa. "<annotation id="link">"Muuta"</annotation></string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Yhdistetty"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ei yhteyttä"</string>
@@ -5788,8 +5791,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Määritä verkon latausnopeuden rajoitus"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Ei rajoitusta"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Lähetä"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_app (1016617579194329005) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Lähetä <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Kuuntele lähellä olevia lähetyksiä"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Lähetä mediaa lähellä oleviin laitteisiin tai kuuntele jonkun toisen lähetystä"</string>
     <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Lähetykset"</string>
@@ -5797,10 +5799,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Etsi lähetyksiä"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Poistu lähetyksestä"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Lue QR-koodi"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Lisää salasana"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Ei yhteyttä. Yritä uudelleen."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Väärä salasana"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>
