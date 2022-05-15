@@ -111,6 +111,11 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
                     lottieAnimationView.setVisibility(View.GONE);
                     lottieAnimationViewPortrait.setVisibility(View.VISIBLE);
                     break;
+                case Surface.ROTATION_180:
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                    lottieAnimationView.setRotation(180);
+                    lottieAnimationViewPortrait.setVisibility(View.GONE);
+                    break;
                 case Surface.ROTATION_270:
                     lottieAnimationView.setVisibility(View.GONE);
                     lottieAnimationViewPortrait.setVisibility(View.VISIBLE);
@@ -342,10 +347,7 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             @Override
             public void onOrientationChanged(int orientation) {
                 final int currentRotation = getDisplay().getRotation();
-                if ((mPreviousRotation == Surface.ROTATION_90
-                        && currentRotation == Surface.ROTATION_270) || (
-                        mPreviousRotation == Surface.ROTATION_270
-                                && currentRotation == Surface.ROTATION_90)) {
+                if ((currentRotation + 2) % 4 == mPreviousRotation) {
                     mPreviousRotation = currentRotation;
                     recreate();
                 }
