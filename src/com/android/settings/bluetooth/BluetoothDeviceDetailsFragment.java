@@ -129,7 +129,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(LeAudioBluetoothDetailsHeaderController.class).init(mCachedDevice, mManager);
 
         final BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                context).getBluetoothFeatureProvider(context);
+                context).getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
 
@@ -141,7 +141,7 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
 
     private void updateExtraControlUri(int viewWidth) {
         BluetoothFeatureProvider featureProvider = FeatureFactory.getFactory(
-                getContext()).getBluetoothFeatureProvider(getContext());
+                getContext()).getBluetoothFeatureProvider();
         boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         Uri controlUri = null;
