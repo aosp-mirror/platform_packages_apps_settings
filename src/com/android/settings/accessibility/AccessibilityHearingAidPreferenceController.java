@@ -38,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
@@ -54,7 +55,7 @@ import java.util.concurrent.FutureTask;
  * Controller that shows and updates the bluetooth device name
  */
 public class AccessibilityHearingAidPreferenceController extends BasePreferenceController
-        implements LifecycleObserver, OnStart, OnStop {
+        implements LifecycleObserver, OnStart, OnStop, BluetoothCallback {
     private static final String TAG = "AccessibilityHearingAidPreferenceController";
     private Preference mHearingAidPreference;
 
@@ -109,11 +110,13 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
         filter.addAction(BluetoothHearingAid.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         mContext.registerReceiver(mHearingAidChangedReceiver, filter);
+        mLocalBluetoothManager.getEventManager().registerCallback(this);
     }
 
     @Override
     public void onStop() {
         mContext.unregisterReceiver(mHearingAidChangedReceiver);
+        mLocalBluetoothManager.getEventManager().unregisterCallback(this);
     }
 
     @Override
@@ -157,6 +160,17 @@ public class AccessibilityHearingAidPreferenceController extends BasePreferenceC
                         R.string.accessibility_hearingaid_left_side_device_summary, name)
                 : mContext.getString(
                         R.string.accessibility_hearingaid_right_side_device_summary, name);
+    }
+
+    @Override
+    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
+        if (activeDevice == null) {
+            return;
+        }
+
+        if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
+            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice);
+        }
     }
 
     public void setFragmentManager(FragmentManager fragmentManager) {
