@@ -86,9 +86,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 @Override
                 public void onSearchStarted(int reason) {
                     Log.d(TAG, "onSearchStarted: " + reason);
-
-                    getActivity().runOnUiThread(
-                            () -> cacheRemoveAllPrefs(mBroadcastSourceListCategory));
+                    getActivity().runOnUiThread(() -> handleSearchStarted());
                 }
 
                 @Override
@@ -109,7 +107,8 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 @Override
                 public void onSourceFound(@NonNull BluetoothLeBroadcastMetadata source) {
                     Log.d(TAG, "onSourceFound:");
-                    getActivity().runOnUiThread(() -> updateListCategory(source, false));
+                    getActivity().runOnUiThread(
+                            () -> updateListCategoryFromBroadcastMetadata(source, false));
                 }
 
                 @Override
@@ -119,7 +118,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                         Log.w(TAG, "onSourceAdded: mSelectedPreference == null!");
                         return;
                     }
-                    getActivity().runOnUiThread(() -> updateListCategory(
+                    getActivity().runOnUiThread(() -> updateListCategoryFromBroadcastMetadata(
                             mSelectedPreference.getBluetoothLeBroadcastMetadata(), true));
                 }
 
@@ -144,6 +143,7 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 public void onSourceRemoved(@NonNull BluetoothDevice sink, int sourceId,
                         int reason) {
                     Log.d(TAG, "onSourceRemoved:");
+                    getActivity().runOnUiThread(() -> handleSourceRemoved());
                 }
 
                 @Override
@@ -215,6 +215,8 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         //check assistant status. Start searching...
         if (mLeBroadcastAssistant != null && !mLeBroadcastAssistant.isSearchInProgress()) {
             mLeBroadcastAssistant.startSearchingForSources(getScanFilter());
+        } else {
+            addConnectedSourcePreference();
         }
     }
 
@@ -310,11 +312,13 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         return Collections.emptyList();
     }
 
-    private void updateListCategory(BluetoothLeBroadcastMetadata source, boolean isConnected) {
+    private void updateListCategoryFromBroadcastMetadata(BluetoothLeBroadcastMetadata source,
+            boolean isConnected) {
         BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
                 Integer.toString(source.getBroadcastId()));
         if (item == null) {
-            item = createBluetoothBroadcastSourcePreference(source);
+            item = createBluetoothBroadcastSourcePreference();
+            item.setKey(Integer.toString(source.getBroadcastId()));
             mBroadcastSourceListCategory.addPreference(item);
         }
         item.updateMetadataAndRefreshUi(source, isConnected);
@@ -326,13 +330,36 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
         }
     }
 
-    private BluetoothBroadcastSourcePreference createBluetoothBroadcastSourcePreference(
-            BluetoothLeBroadcastMetadata source) {
+    private void updateListCategoryFromBroadcastReceiveState(
+            BluetoothLeBroadcastReceiveState receiveState) {
+        BluetoothBroadcastSourcePreference item = mBroadcastSourceListCategory.findPreference(
+                Integer.toString(receiveState.getBroadcastId()));
+        if (item == null) {
+            item = createBluetoothBroadcastSourcePreference();
+            item.setKey(Integer.toString(receiveState.getBroadcastId()));
+            mBroadcastSourceListCategory.addPreference(item);
+        }
+        item.updateReceiveStateAndRefreshUi(receiveState);
+        item.setOrder(0);
+
+        setSourceId(receiveState.getSourceId());
+        mSelectedPreference = item;
+
+        //refresh the header
+        if (mBluetoothFindBroadcastsHeaderController != null) {
+            mBluetoothFindBroadcastsHeaderController.refreshUi();
+        }
+    }
+
+    private BluetoothBroadcastSourcePreference createBluetoothBroadcastSourcePreference() {
         BluetoothBroadcastSourcePreference pref = new BluetoothBroadcastSourcePreference(
-                getContext(), source);
-        pref.setKey(Integer.toString(source.getBroadcastId()));
+                getContext());
         pref.setOnPreferenceClickListener(preference -> {
-            if (source.isEncrypted()) {
+            if (pref.getBluetoothLeBroadcastMetadata() == null) {
+                Log.d(TAG, "BluetoothLeBroadcastMetadata is null, do nothing.");
+                return false;
+            }
+            if (pref.isEncrypted()) {
                 launchBroadcastCodeDialog(pref);
             } else {
                 addSource(pref);
@@ -383,6 +410,10 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
                 .setPositiveButton(R.string.bluetooth_connect_access_dialog_positive,
                         (d, w) -> {
                             Log.d(TAG, "setPositiveButton: clicked");
+                            if (pref.getBluetoothLeBroadcastMetadata() == null) {
+                                Log.d(TAG, "BluetoothLeBroadcastMetadata is null, do nothing.");
+                                return;
+                            }
                             addBroadcastCodeIntoPreference(pref, editText.getText().toString());
                             addSource(pref);
                         })
@@ -390,6 +421,30 @@ public class BluetoothFindBroadcastsFragment extends RestrictedDashboardFragment
 
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
         alertDialog.show();
+    }
+
+    private void handleSearchStarted() {
+        cacheRemoveAllPrefs(mBroadcastSourceListCategory);
+        addConnectedSourcePreference();
+    }
+
+    private void handleSourceRemoved() {
+        if (mSelectedPreference != null) {
+            if (mSelectedPreference.getBluetoothLeBroadcastMetadata() == null) {
+                mBroadcastSourceListCategory.removePreference(mSelectedPreference);
+            } else {
+                mSelectedPreference.clearReceiveState();
+            }
+        }
+        mSelectedPreference = null;
+    }
+
+    private void addConnectedSourcePreference() {
+        List<BluetoothLeBroadcastReceiveState> receiveStateList =
+                mLeBroadcastAssistant.getAllSources(mCachedDevice.getDevice());
+        if (!receiveStateList.isEmpty()) {
+            updateListCategoryFromBroadcastReceiveState(receiveStateList.get(0));
+        }
     }
 
     public int getSourceId() {
