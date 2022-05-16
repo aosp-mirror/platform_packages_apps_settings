@@ -46,6 +46,11 @@ public class DefaultRingtonePreference extends RingtonePreference {
 
     @Override
     protected void onSaveRingtone(Uri ringtoneUri) {
+        if (ringtoneUri == null) {
+            setActualDefaultRingtoneUri(ringtoneUri);
+            return;
+        }
+
         String mimeType = getContext().getContentResolver().getType(ringtoneUri);
         if (mimeType == null) {
             Log.e(TAG, "onSaveRingtone for URI:" + ringtoneUri
