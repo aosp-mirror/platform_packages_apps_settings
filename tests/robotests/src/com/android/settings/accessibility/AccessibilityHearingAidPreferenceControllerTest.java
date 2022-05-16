@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,12 +33,16 @@ import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.Utils;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
+import com.android.settingslib.bluetooth.BluetoothEventManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.HearingAidProfile;
@@ -59,6 +64,7 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Tests for {@link AccessibilityHearingAidPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityHearingAidPreferenceControllerTest {
@@ -83,6 +89,8 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private CachedBluetoothDeviceManager mCachedDeviceManager;
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
+    @Mock
+    private BluetoothEventManager mEventManager;
     @Mock
     private LocalBluetoothProfileManager mLocalBluetoothProfileManager;
     @Mock
@@ -221,6 +229,24 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         assertThat(mPreferenceController.getConnectedHearingAidDevice()).isNull();
     }
 
+    @Test
+    @Config(shadows = ShadowAlertDialogCompat.class)
+    public void onActiveDeviceChanged_hearingAidProfile_launchHearingAidPairingDialog() {
+        final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
+        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
+                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidProfile.DeviceSide.SIDE_LEFT);
+        mPreferenceController.setFragmentManager(mActivity.getSupportFragmentManager());
+
+        mPreferenceController.onActiveDeviceChanged(mCachedBluetoothDevice,
+                BluetoothProfile.HEARING_AID);
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog.isShowing()).isTrue();
+    }
+
     private void setupBluetoothEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
@@ -229,6 +255,7 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
         when(mLocalBluetoothManager.getProfileManager()).thenReturn(mLocalBluetoothProfileManager);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
+        doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
     }
 
     private void setupHearingAidEnvironment() {
@@ -239,7 +266,6 @@ public class AccessibilityHearingAidPreferenceControllerTest {
         mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
         when(mCachedDeviceManager.findDevice(mBluetoothDevice)).thenReturn(mCachedBluetoothDevice);
         when(mCachedBluetoothDevice.getName()).thenReturn(TEST_DEVICE_NAME);
-        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
     }
 
     private void sendIntent(Intent intent) {
