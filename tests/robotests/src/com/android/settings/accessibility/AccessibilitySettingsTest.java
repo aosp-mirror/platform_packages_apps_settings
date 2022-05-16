@@ -58,6 +58,7 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
@@ -93,6 +94,7 @@ public class AccessibilitySettingsTest {
     private static final String DEFAULT_LABEL = "default label";
     private static final Boolean SERVICE_ENABLED = true;
     private static final Boolean SERVICE_DISABLED = false;
+
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
     @Spy
@@ -114,6 +116,8 @@ public class AccessibilitySettingsTest {
     @Mock
     private AppOpsManager mAppOpsManager;
 
+    private Lifecycle mLifecycle;
+
     @Before
     public void setup() {
         mShadowAccessibilityManager = Shadow.extract(AccessibilityManager.getInstance(mContext));
@@ -127,6 +131,8 @@ public class AccessibilitySettingsTest {
         when(mContext.getSystemService(AppOpsManager.class)).thenReturn(mAppOpsManager);
         when(mAppOpsManager.noteOpNoThrow(eq(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS),
                 anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
     }
 
     @Test
