@@ -17,21 +17,20 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
 import android.content.Context;
 import android.net.Uri;
 
 import com.android.settingslib.bluetooth.BluetoothUtils;
+
+import java.util.List;
 
 /**
  * Impl of {@link BluetoothFeatureProvider}
  */
 public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
 
-    private Context mContext;
-
-    public BluetoothFeatureProviderImpl(Context context) {
-        mContext = context;
-    }
+    public BluetoothFeatureProviderImpl(Context context) {}
 
     @Override
     public Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice) {
@@ -43,5 +42,10 @@ public class BluetoothFeatureProviderImpl implements BluetoothFeatureProvider {
     @Override
     public String getBluetoothDeviceControlUri(BluetoothDevice bluetoothDevice) {
         return BluetoothUtils.getControlUriMetaData(bluetoothDevice);
+    }
+
+    @Override
+    public List<ComponentName> getRelatedTools() {
+        return null;
     }
 }
