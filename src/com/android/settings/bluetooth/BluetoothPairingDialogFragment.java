@@ -55,6 +55,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     private BluetoothPairingController mPairingController;
     private BluetoothPairingDialog mPairingDialogActivity;
     private EditText mPairingView;
+    private boolean mPositiveClicked = false;
     /**
      * The interface we expect a listener to implement. Typically this should be done by
      * the controller.
@@ -83,6 +84,14 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!mPositiveClicked) {
+            mPairingController.onCancel();
+        }
+    }
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
 
@@ -104,6 +113,7 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
+            mPositiveClicked = true;
             mPairingController.onDialogPositiveClick(this);
         } else if (which == DialogInterface.BUTTON_NEGATIVE) {
             mPairingController.onDialogNegativeClick(this);
