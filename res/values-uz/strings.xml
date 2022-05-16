@@ -624,7 +624,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Qurilmani himoyalash funksiyalarini faollashtirish orqali boshqalarning ushbu qurilmadan sizning ruxsatingizsiz foydalanishining oldini oling. Ekran qulfini tanlang."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Qurilmani himoyalash funksiyalarini faollashtirish orqali boshqalarning ushbu telefondan sizning ruxsatingizsiz foydalanishining oldini oling. Ekran qulfini tanlang."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Ekran qulfi uchun muqobil usulni tanlang"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"Bu qulfni AT administratoringiz tiklay olmaydi. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Oʻrniga alohida ishchi profil qulfini sozlang<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"Bu qulfni AT administratoringiz tiklay olmaydi. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Oʻrniga alohida ish profili qulfini sozlang<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Agar uni ochishni esdan chiqarsangiz, administratoringiz sizga yordam berishi mumkin"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Ekran qulfi parametrlari"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Ekran qulfi parametrlari"</string>
@@ -2199,7 +2199,7 @@
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Klaviatura yuzasidan yordam"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Tashqi klaviatura"</string>
     <string name="show_ime" msgid="4334255501724746849">"Ekrandagi klaviaturadan foydalanish"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Jismoniy klaviatura ulanganida ekranda chiqib turadi"</string>
+    <string name="show_ime_summary" msgid="7293345791727205975">"Tashqi klaviatura ulanganida ekranda chiqib turadi"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Tezkor tugmalar"</string>
     <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Tezkor tugmalarni ekranga chiqarish"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Ish profili klaviaturalari va vositalari"</string>
@@ -3661,7 +3661,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Avtomatik taglavha yaratish"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Hech qanday}=1{1 ta reja sozlangan}other{# ta reja sozlangan}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bezovta qilinmasin"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Faqat ishonchli odamlar va ilovalardan bildirishnoma kelsin"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Faqat muhim odamlar va ilovalardan bildirishnomalarni olish"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Bildirishnomalarni kamaytirish"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Bezovta qilinmasin rejimini yoqing"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Bezovta qilinmasin rejimi signal va media tovushlari uchun ishlamaydi"</string>
@@ -3841,7 +3841,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"Indikator"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"Maxfiylik"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"Ekran qulfini tashlab ketish"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Qulf yechilganda oxirgi ekranni oching"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"Qurilma qulfi ochilganidan keyin eng oxirgi ishlatilgan ekranga kirish"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Ekran qulfi, qulflash, tashlab ketish, aylanib oʻtish"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Ish profili qulfligida"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Ekran qulfida bildirishnomalar"</string>
@@ -5112,7 +5112,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"Wi-Fi aloqasini boshqarishga ruxsat"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"Bu ilovaga Wi-Fi aloqasini yoqish yoki faolsizlantirish, Wi-Fi tarmoqlarni aniqlash va ularga ulanish, tarmoqlar qo‘shish yoki olib tashlash yoki faqat mahalliy hotspot boshlash uchun ruxsat berish"</string>
     <string name="media_output_title" msgid="8283629315159510680">"Yoqish"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g> qurilmasida ijro qilish"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"<xliff:g id="LABEL">%s</xliff:g>: qayerda ijro etiladi"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"Shu qurilma"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"Telefon"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Planshet"</string>
