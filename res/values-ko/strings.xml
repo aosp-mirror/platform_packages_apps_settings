@@ -382,7 +382,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"현재 얼굴 모델을 삭제하고 얼굴 인식 잠금 해제를 다시 설정하세요.\n\n얼굴 모델이 영구적으로 안전하게 삭제됩니다.\n\n데이터가 삭제된 후 휴대전화를 잠금 해제하거나 앱 내에서 인증하려면 PIN, 패턴 또는 비밀번호가 필요합니다."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"현재 얼굴 모델을 삭제하고 얼굴 인식 잠금 해제를 다시 설정하세요.\n\n얼굴 모델이 영구적으로 안전하게 삭제됩니다.\n\n데이터가 삭제된 후 휴대전화를 잠금 해제하거나 앱 내에서 인증하려면 지문, PIN, 패턴 또는 비밀번호가 필요합니다."</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"다음에 얼굴 인식 잠금 해제 사용"</string>
-    <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"얼굴 인식 잠금 해제를 사용하는 경우"</string>
+    <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"얼굴 인식 잠금 해제 사용 시"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"눈을 뜨고 있어야 함"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"휴대전화를 잠금 해제하려면 눈을 뜨고 있어야 함"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"항상 확인 요청"</string>
@@ -1080,7 +1080,7 @@
     <string name="wifi_unchanged" msgid="8026045290856150191">"(변경 안함)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"선택하세요"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(여러 인증서가 추가됨)"</string>
-    <string name="wifi_use_system_certs" msgid="5587866698144996931">"시스템 인증 사용"</string>
+    <string name="wifi_use_system_certs" msgid="5587866698144996931">"시스템 인증서 사용"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"제공하지 않음"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"확인하지 않음"</string>
     <string name="wifi_ssid_too_long" msgid="5961719058705013875">"네트워크 이름이 너무 깁니다."</string>
@@ -1113,7 +1113,7 @@
     <string name="wifi_connecting" msgid="7450277833386859724">"연결 중…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"네트워크 연결 실패"</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"범위 안에 네트워크가 없음"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"저장 안함"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"삭제"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"수정"</string>
     <string name="wifi_failed_forget_message" msgid="8272732599235525880">"네트워크 기록 삭제 실패"</string>
     <string name="wifi_save" msgid="2312643132472226807">"저장"</string>
@@ -1341,7 +1341,7 @@
     <string name="display_white_balance_title" msgid="2624544323029364713">"디스플레이 화이트 밸런스"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"스무스 디스플레이"</string>
-    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"일부 콘텐츠의 새로고침 빈도를 자동으로 60Hz에서 90Hz로 늘립니다. 이렇게 하면 배터리 사용량이 증가합니다."</string>
+    <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"일부 콘텐츠의 화면 재생 빈도를 자동으로 60Hz에서 90Hz로 늘립니다. 이렇게 하면 배터리 사용량이 증가합니다."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"가장 높은 새로고침 빈도 강제 적용"</string>
     <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"향상된 터치 반응 속도 및 애니메이션 품질에 맞는 가장 높은 새로고침 빈도입니다. 배터리 사용량이 증가합니다."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"화면 시선 감지"</string>
@@ -1369,7 +1369,7 @@
     <string name="night_display_end_time_title" msgid="5243112480391192111">"종료 시간"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"상태"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"강도"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"자동으로 켜지 않음"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"자동으로 켜지지 않음"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 켜짐"</string>
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"일몰에 자동으로 켜짐"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"자동으로 끄지 않음"</string>
@@ -1392,9 +1392,9 @@
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"테마 적용 일정"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"없음"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"일몰부터 일출까지 켜짐"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"맞춤 시간에 켜기"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"맞춤 시간에 켜짐"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"상태"</string>
-    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"자동으로 켜지 않음"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"자동으로 켜지지 않음"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"일몰에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g>에 자동으로 켜짐"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"자동으로 끄지 않음"</string>
@@ -1587,7 +1587,7 @@
     <string name="storage_menu_format_public" msgid="5567214442727034630">"휴대용 저장소로 포맷"</string>
     <string name="storage_menu_format_private" msgid="3208326980027382079">"내부 저장소로 포맷"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"데이터 이전"</string>
-    <string name="storage_menu_forget" msgid="5154017890033638936">"저장 안함"</string>
+    <string name="storage_menu_forget" msgid="5154017890033638936">"삭제"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"설정"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"기기 여유 공간 확보"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"저장용량 관리"</string>
@@ -2415,7 +2415,7 @@
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> 사용"</string>
     <string name="accessibility_service_primary_open_title" msgid="8655108684769091154">"<xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g> 열기"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"색상 보정 사용"</string>
-    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"자막 보기"</string>
+    <string name="accessibility_caption_primary_switch_title" msgid="8901149325574757370">"자막 표시"</string>
     <string name="accessibility_caption_primary_switch_summary" msgid="2754071646412717674">"지원되는 앱만 해당"</string>
     <string name="captioning_caption_appearance_title" msgid="4501313548541670063">"자막 크기 및 스타일"</string>
     <string name="captioning_caption_appearance_summary" msgid="7340741178479381312">"텍스트 크기: <xliff:g id="ACCESSIBILITY_FONT_SIZE">%1$s</xliff:g>"</string>
@@ -2505,7 +2505,7 @@
     <string name="captioning_edge_color" msgid="6035818279902597518">"가장자리 색상"</string>
     <string name="captioning_edge_type" msgid="5281259280060811506">"가장자리 유형"</string>
     <string name="captioning_typeface" msgid="285325623518361407">"글꼴 모음"</string>
-    <string name="captioning_preview_text" msgid="4973475065545995704">"자막이 다음과 같이 표시됩니다."</string>
+    <string name="captioning_preview_text" msgid="4973475065545995704">"자막이 이렇게 표시됩니다"</string>
     <string name="captioning_preview_characters" msgid="7854812443613580460">"Aa"</string>
     <string name="locale_default" msgid="8948077172250925164">"기본값"</string>
     <string name="color_title" msgid="2511586788643787427">"색상"</string>
@@ -2621,7 +2621,7 @@
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"앱에서 배터리를 사용하는 방식을 변경하면 성능에 영향을 줄 수 있습니다."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"배터리 사용 \'<xliff:g id="STATE">%1$s</xliff:g>\' 설정이 필요한 앱입니다."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"제한 없음"</string>
-    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"최적화됨"</string>
+    <string name="manager_battery_usage_optimized_only" msgid="7121785281913056432">"최적화"</string>
     <string name="manager_battery_usage_link_a11y" msgid="374918091821438564">"배터리 사용량 옵션 자세히 알아보기"</string>
     <string name="device_screen_usage" msgid="1011630249648289909">"충전 완료 후 화면 사용 시간"</string>
     <string name="power_usage_list_summary" msgid="3237540201918492925">"충전 완료 후 배터리 사용량"</string>
@@ -2886,7 +2886,7 @@
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"총 시간: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_for_background_time" msgid="9109637210617095188">"백그라운드: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer" msgid="7899907241146636817">"배터리 사용량 데이터는 대략적인 수치이며 휴대전화가 충전 중일 때는 사용량이 측정되지 않습니다."</string>
-    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"휴대전화를 몇 시간 사용한 후 배터리 사용량을 확인할 수 있습니다."</string>
+    <string name="battery_usage_screen_footer_empty" msgid="115806339713068930">"배터리 사용 데이터는 휴대전화를 몇 시간 사용한 후에 확인할 수 있습니다."</string>
     <string name="battery_usage_chart" msgid="4114747521432440017">"배터리 사용량 차트"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"프로세스 통계"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"프로세스 실행에 관한 통계"</string>
@@ -4194,12 +4194,12 @@
     <string name="screen_pinning_description" msgid="7289730998890213708">"고정된 앱을 통해 다른 앱이 열리고 개인 정보가 표시될 수 있습니다. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
     <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"고정된 앱을 통해 다른 앱이 열리고 개인 정보가 표시될 수 있습니다. \n\n기기를 다른 사람과 안전하게 공유하고 싶다면 게스트 사용자를 대신 사용해 보세요. \n\n앱 고정을 사용하려면 다음 단계를 따르세요. 	\n1.	앱 고정을 사용 설정합니다. 	\n2.	최근 사용을 엽니다. 	\n3.	화면 상단의 앱 아이콘을 탭한 후 고정을 탭합니다."</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"앱이 고정되었을 때 다음 사항이 적용됩니다. \n\n•	 개인 데이터가 표시될 수 있습니다.\n		(연락처, 이메일 내용 등) \n•	 고정된 앱을 통해 다른 앱이 열릴 수 있습니다. \n\n신뢰할 수 있는 상대에게만 앱 고정을 사용하세요."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"고정 해제 이전에 잠금해제 패턴 요청"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"고정 해제 시 잠금 해제 패턴 요청"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"고정 해제 이전에 PIN 요청"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"고정 해제 이전에 비밀번호 요청"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"화면 고정 해제 시 기기 잠금"</string>
     <string name="confirm_sim_deletion_title" msgid="9199369003530237871">"SIM 삭제 확인"</string>
-    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"다운로드한 SIM을 삭제하기 전에 본인 확인을 진행하세요."</string>
+    <string name="confirm_sim_deletion_description" msgid="8937609409607338516">"다운로드한 SIM을 삭제하기 전에 본인 확인을 진행합니다."</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"다음에서 이 직장 프로필을 관리합니다."</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>에서 관리"</string>
     <string name="experimental_preference" msgid="869354050717870055">"(베타)"</string>

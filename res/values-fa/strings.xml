@@ -20,7 +20,7 @@
     <string name="no" msgid="5541738710521607130">"نه"</string>
     <string name="create" msgid="986997212165228751">"ایجاد"</string>
     <string name="allow" msgid="3763244945363657722">"اجازه دادن"</string>
-    <string name="deny" msgid="7326117222944479942">"مجاز نبودن"</string>
+    <string name="deny" msgid="7326117222944479942">"اجازه ندادن"</string>
     <string name="confirmation_turn_on" msgid="2979094011928347665">"روشن کردن"</string>
     <string name="device_info_default" msgid="1406619232867343310">"ناشناس"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="1646187747875476269">
@@ -2365,9 +2365,9 @@
     <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"استفاده از دکمه یا اشاره"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"مکان"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"اندازه"</string>
-    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"محو کردن هنگام عدم استفاده"</string>
+    <string name="accessibility_button_fade_title" msgid="8081993897680588829">"محو کردن وقتی استفاده نمی‌شود"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"بعد از چند ثانیه محو می‌شود تا بتوانید صفحه را بهتر ببینید"</string>
-    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"شفاف‌سازی هنگام عدم استفاده"</string>
+    <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"شفافیت وقتی استفاده نمی‌شود"</string>
     <string name="accessibility_button_low_label" msgid="4193015407828927741">"شفاف"</string>
     <string name="accessibility_button_high_label" msgid="9138077512008190896">"غیرشفاف"</string>
     <string name="accessibility_toggle_high_text_contrast_preference_title" msgid="1830189632458752698">"نوشتار با کنتراست بالا"</string>
@@ -2393,7 +2393,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"وارونگی رنگ"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"استفاده از وارونگی رنگ"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"‏«وارونگی رنگ» صفحه‌نمایش روشن را تیره می‌کند.&lt;br/&gt;&lt;br/&gt; توجه: &lt;ol&gt; &lt;li&gt; «وارونگی رنگ» صفحه‌نمایش تیره را نیز روشن می‌کند.&lt;/li&gt; &lt;li&gt; رنگ‌ها در رسانه‌ها و تصاویر تغییر می‌کنند.&lt;/li&gt; &lt;li&gt; برای نمایش پس‌زمینه تیره می‌توان از زمینه تیره استفاده کرد. «زمینه تیره» با برنامه‌های پشتیبانی‌شده کار می‌کند. وارونگی رنگ در همه برنامه‌ها کار می‌کند.&lt;/li&gt; &lt;/ol&gt;"</string>
-    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"کلیک خودکار (مدت توقف)"</string>
+    <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"کلیک خودکار (مدت ایست)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"«کلیک خودکار» با موشواره‌ای متصل کار می‌کند. می‌توانید نشانگر موشواره را طوری تنظیم کنید که وقتی برای مدت زمان مشخصی متوقف می‌شود، به‌طور خودکار کلیک کند."</string>
     <string name="accessibility_autoclick_default_title" msgid="752429113115293087">"خاموش"</string>
     <string name="accessibility_autoclick_short_title" msgid="7938302504358912984">"کوتاه"</string>
@@ -2611,7 +2611,7 @@
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"محدود کردن فعالیت پس‌زمینه برای برنامه ممکن است باعث عملکرد نادرست آن شود."</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"از آنجا که این برنامه برای بهینه کردن باتری تنظیم نشده است، نمی‌توانید آن را محدود کنید.\n\nبرای محدود کردن برنامه، ابتدا بهینه‌سازی باتری را روشن کنید."</string>
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"نامحدود"</string>
-    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"بهینه‌سازی شده"</string>
+    <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"بهینه‌سازی‌شده"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"محدودشده"</string>
     <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"مصرف باتری در پس‌زمینه بدون محدودیت مجاز می‌شود. ممکن است از شارژ باتری بیشتری استفاده کند."</string>
     <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"براساس مصرفتان بهینه‌سازی می‌شود. برای اکثر برنامه‌ها توصیه می‌شود."</string>
@@ -2825,18 +2825,18 @@
     <string name="battery_total_usage_less_minute" msgid="7614894994853812076">"در مجموع کمتر از یک دقیقه استفاده از آخرین شارژ کامل"</string>
     <string name="battery_total_usage_less_minute_24hr" msgid="699268449496083696">"مجموع کمتر از یک دقیقه در ۲۴ ساعت گذشته"</string>
     <string name="battery_total_usage_less_minute_with_period" msgid="571923652373556609">"مجموع کمتر از یک دقیقه در بازه <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
-    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"کمتر از یک دقیقه استفاده در پس‌زمینه از آخرین شارژ کامل"</string>
-    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"کمتر از یک دقیقه استفاده در پس‌زمینه در ۲۴ ساعت گذشته"</string>
-    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"کمتر از یک دقیقه استفاده در پس‌زمینه در بازه <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
+    <string name="battery_bg_usage_less_minute" msgid="3919299699317615641">"کمتراز یک دقیقه استفاده در پس‌زمینه از آخرین شارژ کامل"</string>
+    <string name="battery_bg_usage_less_minute_24hr" msgid="5016983623297552985">"کمتر از یک دقیقه استفاده در پس‌زمینه طی ۲۴ ساعت گذشته"</string>
+    <string name="battery_bg_usage_less_minute_with_period" msgid="7624741677867017430">"کمتر از یک دقیقه استفاده در پس‌زمینه طی <xliff:g id="TIME_PERIOD">^1</xliff:g>"</string>
     <string name="battery_total_usage" msgid="4685408616230899847">"<xliff:g id="TIME">^1</xliff:g> در مجموع از آخرین شارژ کامل"</string>
     <string name="battery_total_usage_24hr" msgid="3907495067623665787">"مجموع <xliff:g id="TIME">^1</xliff:g> در ۲۴ ساعت گذشته"</string>
     <string name="battery_total_usage_with_period" msgid="2849061229625950626">"مجموع <xliff:g id="TIME_0">^1</xliff:g> در بازه <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_bg_usage" msgid="548670902301883980">"<xliff:g id="TIME">^1</xliff:g> استفاده در پس‌زمینه از آخرین شارژ کامل"</string>
     <string name="battery_bg_usage_24hr" msgid="1999734910656674710">"<xliff:g id="TIME">^1</xliff:g> استفاده در پس‌زمینه در ۲۴ ساعت گذشته"</string>
     <string name="battery_bg_usage_with_period" msgid="992952174445045711">"<xliff:g id="TIME_0">^1</xliff:g> استفاده در پس‌زمینه در بازه <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"<xliff:g id="TIME">^1</xliff:g> در مجموع • کمتر از یک دقیقه استفاده در پس‌زمینه\nاز آخرین شارژ کامل"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"<xliff:g id="TIME">^1</xliff:g> در مجموع • کمتر از یک دقیقه استفاده در پس‌زمینه\nطی ۲۴ ساعت گذشته"</string>
-    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"<xliff:g id="TIME_0">^1</xliff:g> درمجموع • کمتر از یک دقیقه استفاده در پس‌زمینه\nدر بازه <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage" msgid="1460882261983325026">"در مجموع: <xliff:g id="TIME">^1</xliff:g> • کمتراز یک دقیقه استفاده در پس‌زمینه\nاز آخرین شارژ کامل"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_24hr" msgid="1721830675789709748">"در مجموع: <xliff:g id="TIME">^1</xliff:g> • کمتراز یک دقیقه استفاده در پس‌زمینه\nطی ۲۴ ساعت گذشته"</string>
+    <string name="battery_total_usage_and_bg_less_minute_usage_with_period" msgid="5943281928474598517">"درمجموع: <xliff:g id="TIME_0">^1</xliff:g> • کمتراز یک دقیقه استفاده در پس‌زمینه\nطی <xliff:g id="TIME_PERIOD">^2</xliff:g>"</string>
     <string name="battery_not_usage" msgid="1472275761547230196">"از آخرین شارژ کامل استفاده نشده است"</string>
     <string name="battery_not_usage_24hr" msgid="8397519536160741248">"در ۲۴ ساعت گذشته استفاده نشده است"</string>
     <string name="advanced_battery_graph_subtext" msgid="6816737986172678550">"شارژ باتری باقی‌مانده براساس مصرف دستگاه تخمین زده می‌شود"</string>
@@ -3636,7 +3636,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"رسانه زیرنویس خودکار"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{هیچ‌کدام}=1{۱ زمان‌بندی تنظیم شد}one{# زمان‌بندی تنظیم شده است}other{# زمان‌بندی تنظیم شده است}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"مزاحم نشوید"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"فقط در ارتباط با افراد و برنامه‌های مهم اعلان دریافت کنید"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"فقط از افراد و برنامه‌های مهم اعلان دریافت کنید"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"محدود کردن وقفه‌ها"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"روشن کردن «مزاحم نشوید»"</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"صداهای رسانه و هشدارها می‌توانند وقفه ایجاد کنند"</string>
@@ -3708,7 +3708,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{۱ ساعت}one{# ساعت}other{# ساعت}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{۱ دقیقه}one{# دقیقه}other{# دقیقه}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{خاموش}=1{خاموش / ۱ زمان‌بندی می‌تواند به‌طور خودکار روشن شود}one{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}other{خاموش / # زمان‌بندی می‌تواند به‌طور خودکار روشن شود}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"مواردی که می‌توانند در حالت «مزاحم نشوید» وقفه ایجاد کنند"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"چه چیزی می‌تواند در حالت «مزاحم نشوید» وقفه ایجاد کنند"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"افراد"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"برنامه‌ها"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"هشدارها و دیگر وقفه‌ها"</string>
@@ -3960,16 +3960,16 @@
     <string name="interact_across_profiles_keywords" msgid="5996472773111665049">"برنامه متصل بین‌‌نمایه‌ای برنامه‌های کاری و شخصی"</string>
     <string name="interact_across_profiles_app_detail_title" msgid="7776184211173575648">"برنامه‌های کاری و شخصی متصل"</string>
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"متصل"</string>
-    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"اتصال این برنامه‌ها"</string>
+    <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"متصل کردن این برنامه‌ها"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"برنامه‌های متصل از اجازه‌های مشترکی استفاده می‌کنند و می‌توانند به داده‌های یکدیگر دسترسی پیدا کنند."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"برای اینکه داده‌های شخصی با مدیر فناوری اطلاعات هم‌رسانی نشود، تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد داشته باشید."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"هرزمان خواستید می‌توانید اتصال برنامه‌ها را در تنظیمات حریم‌خصوصی دستگاه قطع کنید."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"به <xliff:g id="NAME">%1$s</xliff:g> کاری برای دسترسی به داده‌های شخصی‌تان اعتماد دارید؟"</string>
-    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"برای اینکه داده‌های شخصی با مدیر فناوری اطلاعات هم‌رسانی نشود، تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد داشته باشید."</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"به برنامه کاری <xliff:g id="NAME">%1$s</xliff:g> برای دسترسی به داده‌های شخصی‌تان اعتماد دارید؟"</string>
+    <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد دارید که داده‌های شخصی را با سرپرست فناوری اطلاعاتتان هم‌رسانی نمی‌کنند."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"داده‌های برنامه"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"این برنامه می‌تواند به داده‌های برنامه <xliff:g id="NAME">%1$s</xliff:g> شخصی شما دسترسی پیدا کند."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"این برنامه می‌تواند به داده‌های شخصی شما در برنامه <xliff:g id="NAME">%1$s</xliff:g> دسترسی پیدا کند."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"اجازه‌ها"</string>
-    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"این برنامه می‌تواند از اجازه‌های برنامه <xliff:g id="NAME">%1$s</xliff:g> شخصی شما (مثل دسترسی به مکان، فضای ذخیره‌سازی، و مخاطبین) استفاده کند."</string>
+    <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"این برنامه می‌تواند از اجازه‌های شخصی شما در برنامه <xliff:g id="NAME">%1$s</xliff:g> (مثلاً اجازه دسترسی به مکان، فضای ذخیره‌سازی، و مخاطبین) استفاده کند."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"هیچ برنامه‌ای متصل نیست"</string>
     <plurals name="interact_across_profiles_number_of_connected_apps" formatted="false" msgid="6991750455661974772">
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> برنامه متصل شده</item>
@@ -4466,7 +4466,7 @@
     </plurals>
     <string name="running_frequency" msgid="7260225121706316639">"تعداد دفعات اجرا"</string>
     <string name="memory_maximum_usage" msgid="2047013391595835607">"حداکثر مصرف"</string>
-    <string name="no_data_usage" msgid="4665617440434654132">"هیچ داده‌ای مصرف نشده است"</string>
+    <string name="no_data_usage" msgid="4665617440434654132">"از داده استفاده نشده"</string>
     <string name="zen_access_warning_dialog_title" msgid="6323325813123130154">"به دسترسی به حالت «مزاحم نشوید» برای <xliff:g id="APP">%1$s</xliff:g> اجازه می‌دهید؟"</string>
     <string name="zen_access_warning_dialog_summary" msgid="8468714854067428987">"برنامه می‌تواند حالت «مزاحم نشوید» را روشن/خاموش کند و تغییراتی در تنظیمات مرتبط ایجاد کند."</string>
     <string name="zen_access_disabled_package_warning" msgid="6565908224294537889">"چون دسترسی اعلان روشن است باید روشن بماند"</string>
@@ -5086,7 +5086,7 @@
     <string name="change_wifi_state_app_detail_switch" msgid="1385358508267180745">"‏اجازه دادن به برنامه برای کنترل Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="8230854855584217111">"‏به این برنامه اجازه دهید Wi-Fi را روشن یا خاموش کند، شبکه‌های Wi-Fi را اسکن کند و به آن‌ها متصل شود، شبکه‌ها را اضافه یا حذف کند یا نقطه اتصالی فقط محلی راه‌اندازی کند"</string>
     <string name="media_output_title" msgid="8283629315159510680">"پخش رسانه در"</string>
-    <string name="media_output_label_title" msgid="4139048973886819148">"پخش در <xliff:g id="LABEL">%s</xliff:g>"</string>
+    <string name="media_output_label_title" msgid="4139048973886819148">"پخش <xliff:g id="LABEL">%s</xliff:g> در"</string>
     <string name="media_output_default_summary" msgid="4200343059396412376">"این دستگاه"</string>
     <string name="media_output_summary" product="default" msgid="4760338801715262899">"تلفن"</string>
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"رایانه لوحی"</string>
@@ -5512,7 +5512,7 @@
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"استفاده از باتری تطبیقی"</string>
     <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"استفاده از روشنایی تطبیقی"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"‏استفاده از تماس ازطریق Wi-Fi"</string>
-    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"استفاده از محافظ صفحه‌نمایش"</string>
+    <string name="screen_saver_main_switch_title" msgid="256530705774121595">"استفاده از محافظ صفحه"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"مشاهده همه برنامه‌ها"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"بازارسال هوشمند"</string>
     <string name="smart_forwarding_summary_enabled" msgid="3341062878373185604">"«بازارسال هوشمند» فعال شد"</string>

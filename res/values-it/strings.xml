@@ -627,7 +627,7 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Impedisci ad altri di utilizzare il dispositivo senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Impedisci ad altri di utilizzare il telefono senza la tua autorizzazione attivando le funzioni di protezione del dispositivo. Scegli il blocco schermo che desideri utilizzare."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Scegli il metodo di blocco schermo alternativo"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"L\'amministratore IT non può reimpostare questo blocco. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Imposta blocco del profilo di lavoro separato<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"L\'amministratore IT non può reimpostare questo blocco. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Imposta blocco separato per le app di lavoro<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Se dimentichi questo blocco, chiedi all\'amministratore IT di reimpostarlo"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opzioni di blocco schermo"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opzioni di blocco schermo"</string>
@@ -2323,8 +2323,8 @@
     <string name="accessibility_tutorial_dialog_title_gesture_settings" msgid="8485448068531147828">"Usa il nuovo gesto di accessibilità"</string>
     <string name="accessibility_tutorial_dialog_message_button" msgid="7002398857479782303">"Per usare questa funzione, tocca il pulsante Accessibilità <xliff:g id="ACCESSIBILITY_ICON">%s</xliff:g> nella parte inferiore dello schermo.\n\nPer spostarti tra le funzioni, tocca e tieni premuto il pulsante Accessibilità."</string>
     <string name="accessibility_tutorial_dialog_message_floating_button" msgid="2551777208185138391">"Per usare questa funzionalità, tocca il pulsante Accessibilità sullo schermo."</string>
-    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Per usare questa funzione, tieni premuti entrambi i tasti del volume."</string>
-    <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Per avviare e interrompere Ingrandimento, tocca tre volte un punto qualsiasi dello schermo."</string>
+    <string name="accessibility_tutorial_dialog_message_volume" msgid="5033080515460519183">"Per usare questa funzionalità, tieni premuti entrambi i tasti del volume."</string>
+    <string name="accessibility_tutorial_dialog_message_triple" msgid="5219991116201165146">"Per avviare e interrompere l\'ingrandimento, tocca tre volte un punto qualsiasi dello schermo."</string>
     <string name="accessibility_tutorial_dialog_message_gesture" msgid="4148062210755434854">"Per usare questa funzione, scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra le funzioni, scorri verso l\'alto con due dita e tieni premuto."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_talkback" msgid="8142847782708562793">"Per usare questa funzione, scorri verso l\'alto dalla parte inferiore dello schermo con tre dita.\n\nPer spostarti tra le funzioni, scorri verso l\'alto con tre dita e tieni premuto."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Per usare una funzione di accessibilità, scorri verso l\'alto dalla parte inferiore dello schermo con due dita.\n\nPer spostarti tra le funzioni, scorri verso l\'alto con due dita e tieni premuto."</string>
@@ -2362,7 +2362,7 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accedi rapidamente alle funzioni di accessibilità"</string>
     <string name="accessibility_button_gesture_description" msgid="2516420653060025670">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata.\n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità.\n\nInvece per utilizzare il pulsante Accessibilità nella barra di navigazione, passa alla navigazione con due pulsanti o alla navigazione con tre pulsanti."</string>
     <string name="accessibility_button_description" msgid="7372405202698400339">"Accedi rapidamente alle funzioni di accessibilità da qualsiasi schermata. \n\nPer iniziare, vai alle impostazioni di accessibilità e seleziona una funzione. Tocca la scorciatoia e seleziona il pulsante Accessibilità."</string>
-    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usa il pulsante o il gesto"</string>
+    <string name="accessibility_button_or_gesture_title" msgid="3510075963401163529">"Usa pulsante o gesto"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Posizione"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Dimensioni"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Dissolvenza quando non in uso"</string>
@@ -2391,7 +2391,7 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="5283566580551714506">"Scegli per quanto tempo lasciare visibili i messaggi che ti chiedono di eseguire delle operazioni e che vengono mostrati solo temporaneamente.\n\nNon tutte le app supportano questa impostazione."</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Ritardo pressione prolungata"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversione dei colori"</string>
-    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usa inversione dei colori"</string>
+    <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Usa l\'inversione dei colori"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"L\'inversione dei colori rende scure le schermate chiare.&lt;br/&gt;&lt;br/&gt; Nota: &lt;ol&gt; &lt;li&gt; L\'inversione dei colori rende anche chiare le schermate scure.&lt;/li&gt; &lt;li&gt; I colori vengono modificati nei contenuti multimediali e nelle immagini.&lt;/li&gt; &lt;li&gt; Puoi anche usare il tema scuro per mostrare uno sfondo scuro. Il tema scuro funziona solo con app supportate. L\'inversione dei colori funziona invece in tutte le app.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatico (tempo di interazione)"</string>
     <string name="accessibility_autoclick_description" msgid="6827042379062255307">"La funzione Clic automatico richiede un mouse collegato. Puoi configurare il puntatore del mouse per fare clic automaticamente quando rimane fermo per un determinato periodo di tempo."</string>
@@ -3964,7 +3964,7 @@
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Le app collegate condividono le autorizzazioni e possono accedere reciprocamente ai dati."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Collega le app soltanto se hai la certezza che non condividono dati personali con l\'amministratore IT."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Puoi scollegare le app in qualsiasi momento nelle impostazioni sulla privacy del dispositivo."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Autorizzare l\'app di lavoro <xliff:g id="NAME">%1$s</xliff:g> ad accedere ai tuoi dati personali?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"Autorizzi l\'app di lavoro <xliff:g id="NAME">%1$s</xliff:g> ad accedere ai tuoi dati personali?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Collega le app soltanto se hai la certezza che non condividono dati personali con l\'amministratore IT."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"Dati app"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Questa app può accedere ai dati nella tua app personale <xliff:g id="NAME">%1$s</xliff:g>."</string>
@@ -4192,7 +4192,7 @@
     <string name="screen_pinning_description" msgid="7289730998890213708">"Un\'app bloccata su schermo potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
     <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Un\'app bloccata su schermo potrebbe aprire altre app e i dati personali potrebbero essere accessibili. \n\nSe vuoi condividere il tuo dispositivo con qualcuno in modo sicuro, prova a usare invece un utente ospite. \n\nPer usare la funzionalità di blocco app su schermo: 	\n1.	Attiva il blocco app su schermo 	\n2.	Apri Panoramica 	\n3.	Tocca l\'icona dell\'app nella parte superiore dello schermo, quindi tocca Blocca"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Quando un\'app è bloccata su schermo: \n\n•		I dati personali potrebbero essere accessibili (ad esempio i contatti o i contenuti delle email) \n\n•		Le app bloccate potrebbero aprire altre app \n\nUtilizza il blocco app su schermo solo con persone di cui ti fidi."</string>
-    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Richiedi sequenza di sblocco prima di sbloccare"</string>
+    <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Richiedi sequenza prima di sbloccare"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Richiedi il PIN per lo sblocco"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Richiedi password prima di sbloccare"</string>
     <string name="screen_pinning_unlock_none" msgid="2474959642431856316">"Blocca dispositivo dopo lo sblocco app"</string>
@@ -4405,7 +4405,7 @@
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"Rifiuto"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"Nessun trasferimento di dati"</string>
     <string name="usb_use_charging_only_desc" msgid="1234421230461847336">"Solo per la ricarica del dispositivo"</string>
-    <string name="usb_use_power_only" msgid="3408055485802114621">"Carica il dispositivo collegato"</string>
+    <string name="usb_use_power_only" msgid="3408055485802114621">"Carica il dispositivo connesso"</string>
     <string name="usb_use_file_transfers" msgid="483915710802018503">"Trasferimento di file"</string>
     <string name="usb_use_file_transfers_desc" msgid="1020257823387107336">"Trasferisci i file su un altro dispositivo"</string>
     <string name="usb_use_photo_transfers" msgid="4641181628966036093">"PTP"</string>
@@ -4685,7 +4685,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"Off"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usa Risparmio dati"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Uso dati senza limitazioni"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Consenti accesso senza limitazioni con Risparmio dati attivo"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Consenti accesso ai dati senza limitazioni con Risparmio dati attivo"</string>
     <string name="home_app" msgid="6056850504746902747">"Schermata home"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Nessuna Home predefinita"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"Avvio sicuro"</string>
