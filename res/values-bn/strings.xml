@@ -52,8 +52,8 @@
     <string name="font_size_summary" msgid="1296835853522566260">"স্ক্রিনের টেক্সট ছোট বা বড় করুন।"</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"আরো ছোট করুন"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"আরো বড় করুন"</string>
-    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"\'নিজে থেকে ঘুরবে\' সেটিং ব্যবহার করুন"</string>
-    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"\'নিজে থেকে ঘুরবে\' সেটিং আরও ভালভাবে কাজ করার জন্য সামনের দিকে ধরে রাখা ক্যামেরা \'ফেস ডিটেকশন\' ব্যবহার করবে। ছবি কখনও Google-এ সেভ করা বা পাঠানো হয় না।"</string>
+    <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"\'অটো রোটেট\' সেটিং ব্যবহার করুন"</string>
+    <string name="smart_rotate_text_headline" msgid="5878008933992951904">"\'অটো-রোটেট\' সেটিং আরও ভালভাবে কাজ করার জন্য সামনের দিকে ধরে রাখা ক্যামেরা \'ফেস ডিটেকশন\' ব্যবহার করবে। ছবি কখনও Google-এ সেভ করা বা পাঠানো হয় না।"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"স্যাম্পেল টেক্সট"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"দ্যা ওয়ান্ডারফুল উইজার্ড অফ অজ"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"অধ্যায় ১১: দ্যা ওয়ান্ডারফুল এমারল্ড সিটি অফ ওজ"</string>
@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"অ্যাপ ভাষা"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"প্রতিটি অ্যাপের জন্য ভাষা সেট করুন"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"অ্যাপ ভাষা"</string>
-    <string name="warnings_title" msgid="613849105118598110">"অ্যাপ আপডেট করুন"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"উপলভ্য লেটেস্ট ভাষাগুলি পেতে অ্যাপ আপডেট করতে হবে"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"এখনই আপডেট করুন"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"সাজেস্ট করা ভাষা"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"সব ভাষা"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"সিস্টেমের ভাষা"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"সিস্টেম ডিফল্ট"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"এই অ্যাপের জন্য \'সেটিংস\' থেকে ভাষা বেছে নেওয়ার সুবিধা উপলভ্য নেই।"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"অ্যাপে উপলভ্য থাকা ভাষা আলাদা হতে পারে। কিছু অ্যাপে এই সেটিং কাজ নাও করতে পারে।"</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">নির্বাচিত ভাষা সরাবেন?</item>
       <item quantity="other">নির্বাচিত ভাষা সরাবেন?</item>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"\'ফিঙ্গারপ্রিন্ট\' সেট আপ করুন"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"\'ফিঙ্গারপ্রিন্ট আনলক\' করতে অনুমতি"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"আঙ্গুলের ছাপ ব্যবহার করুন"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"অ্যাপে সাইন-ইন বা কেনাকাটায় অনুমোদন করার মতোই আঙ্গুলের ছাপ ব্যবহার করে ট্যাবলেট আনলক বা নিজের পরিচয় যাচাই করুন।"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"অ্যাপে সাইন-ইন বা কেনাকাটায় অনুমোদন করার মতোই ফিঙ্গারপ্রিন্ট ব্যবহার করে ডিভাইস আনলক বা নিজের পরিচয় যাচাই করুন।"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"অ্যাপে সাইন-ইন বা কেনাকাটায় অনুমোদন করার মতোই ফিঙ্গারপ্রিন্ট ব্যবহার করে ফোন আনলক বা নিজের পরিচয় যাচাই করুন।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"ফোন আনলক বা নিজের পরিচয় যাচাই করার জন্য আপনার সন্তানকে ফিঙ্গারপ্রিন্ট ব্যবহার করার অনুমতি দিন। কোনও অ্যাপে সে সাইন-ইন করার সময়, কেনাকাটায় অনুমতি দেওয়ার সময় এবং আরও অন্য ক্ষেত্রে এটি হয়ে থাকে।"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"নিয়ন্ত্রণ আপনার কাছেই আছে"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"আপনি ও আপনার সন্তান এটি নিয়ন্ত্রণ করছেন"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"ভাইব্রেশন অনুভব করলে আপনার আঙ্গুল তুলে নিন"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"ঠিকঠাক আলো রয়েছে এমন জায়গায় নিয়ে গিয়ে আবার চেষ্টা করুন"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"সর্বাধিক বার আপনি চেষ্টা করে ফেলেছেন"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"আপনার ট্যাবলেট আনলক করতে অথবা ব্যবহারকারী ব্যক্তি যে আপনিই তা যাচাই করাতে ফিঙ্গারপ্রিন্ট ব্যবহার করুন, যেমন, অ্যাপে সাইন-ইন করার সময় করে থাকেন"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"আপনার ডিভাইস আনলক করতে অথবা ব্যবহারকারী ব্যক্তি যে আপনিই তা যাচাই করাতে ফিঙ্গারপ্রিন্ট ব্যবহার করুন, যেমন, অ্যাপে সাইন-ইন করার সময় করে থাকেন"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"আপনার ফোন আনলক করতে অথবা ব্যবহারকারী ব্যক্তি যে আপনিই তা যাচাই করাতে ফিঙ্গারপ্রিন্ট ব্যবহার করুন, যেমন, অ্যাপে সাইন-ইন করার সময় করে থাকেন"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"ফেস ও ফিঙ্গারপ্রিন্ট আনলক"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"সেট আপ করতে ট্যাপ করুন"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"ফেস এবং আঙ্গুলের ছাপ যোগ করা হয়েছে"</string>
@@ -529,12 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"এইভাবে সহজে আপনার ফিঙ্গারপ্রিন্টের বেশিরভাগটাই ক্যাপচার করা যাবে"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"আঙ্গুলের ছাপ নথিভুক্ত করার কাজটি <xliff:g id="PERCENTAGE">%d</xliff:g> শতাংশ সম্পূর্ণ হয়েছে"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ফিঙ্গারপ্রিন্ট যোগ করা হয়েছে"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"অ্যাপে সাইন-ইন করার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে আপনি ট্যাবলেট আনলক বা নিজের পরিচয় যাচাই করতে পারবেন"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"অ্যাপে সাইন-ইন করার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে আপনি ডিভাইস আনলক বা নিজের পরিচয় যাচাই করতে পারবেন"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"অ্যাপে সাইন-ইন করার মতোই এখন ফিঙ্গারপ্রিন্ট ব্যবহার করে আপনি ফোন আনলক বা নিজের পরিচয় যাচাই করতে পারবেন"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"এটি পরে করুন"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"আঙ্গুল তুলুন, তারপর আবার স্পর্শ করুন"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"প্রথমে আপনার আঙুলের একটি কোণা সেন্সরে কিছুটা সময়ের জন্য রেখে ধরে থাকুন এবং তারপর অন্য দিক থেকে আবার একই জিনিস করুন"</string>
@@ -598,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"আরেকটি জুড়ুন"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"পরবর্তী"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"উপরন্তু আপনার ফোন আনলক করতে, কেনাকাটা এবং অ্যাপ্লিকেশান অ্যাক্সেস অনুমোদন করতে আপনি আপনার আঙ্গুলের ছাপও ব্যবহার করতে পারেন৷ "<annotation id="url">"আরো জানুন"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" স্ক্রিন লক বিকল্প নিষ্ক্রিয় করা হয়েছে। আরো জানতে, আপনার প্রতিষ্ঠানের প্রশাসকের সাথে যোগাযোগ করুন। "<annotation id="admin_details">"আরো বিবরণ"</annotation>\n\n"আপনি এখনও কেনাকাটা করতে এবং অ্যাপের অ্যাক্সেস দিতে আপনার আঙ্গুলের ছাপ ব্যবহার করতে পারেন। "<annotation id="url">"আরো জানুন"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"স্ক্রিন লক বিকল্প বন্ধ করে রাখা আছে। আরও জানতে আপনার প্রতিষ্ঠানের অ্যাডমিনের সাথে যোগাযোগ করুন।"</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"আপনি এখনও আঙ্গুলের ছাপ ব্যবহার করে কেনাকাটায় অনুমোদন এবং অ্যাপ অ্যাক্সেস করতে পারবেন।"</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"আঙ্গুল তুলুন, তারপরে আবার সেন্সরে স্পর্শ করুন"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"আঙ্গুলের ছাপের সেন্সর ব্যবহার করা যাচ্ছে না। একজন মেরামতি মিস্ত্রির কাছে যান"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"আরও নিরাপত্তা সেটিংস"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"অফিস প্রোফাইল লক, এনক্রিপশন এবং আরও অনেক কিছু"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"এনক্রিপশন, ক্রেডেনশিয়াল এবং আরও অনেক কিছু"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"নিরাপত্তা, আরও নিরাপত্তা সেটিংস, আরও সেটিংস, উন্নত নিরাপত্তা সেটিংস"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"আপনি <xliff:g id="COUNT">%d</xliff:g>টি পর্যন্ত আঙ্গুলের ছাপ যোগ করতে পারেন"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"আপনি অনুমোদিত সর্বোচ্চ সংখ্যক আঙ্গুলের ছাপ যোগ করেছেন"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"এর বেশি আঙ্গুলের ছাপ যোগ করা যাবে না"</string>
@@ -643,8 +638,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ডিভাইসটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রিন লক বেছে নিন৷"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"ডিভাইস সুরক্ষা বৈশিষ্ট্যগুলি সক্রিয় করার দ্বারা আপনার অনুমতি ছাড়া অন্যদের এই ফোনটি ব্যবহার করা থেকে আটকান৷ আপনি ব্যবহার করতে চান এমন স্ক্রিন লক বেছে নিন৷"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"আপনার ব্যাক-আপ স্ক্রিন লক পদ্ধতি বেছে নিন"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"আপনি স্ক্রিন লক ভুলে গেলে, আইটি অ্যাডমিন তা রিসেট করতে পারবেন না।"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"অন্য একটি অফিস লক সেট করুন"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"আপনি এই লকের প্যাটার্ন ভুলে গেলে, আপনার আইটি অ্যাডমিনকে এটা রিসেট করতে বলুন"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"স্ক্রিন লক-এর বিকল্প"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"স্ক্রিন লক-এর বিকল্পগুলি"</string>
@@ -755,6 +750,8 @@
       <item quantity="one">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি অক্ষর থাকতে হবে</item>
       <item quantity="other">কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g>টি অক্ষর থাকতে হবে</item>
     </plurals>
+    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
+    <skip />
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">পিনে কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g> সংখ্যা থাকতে হবে</item>
       <item quantity="other">পিনে কমপক্ষে <xliff:g id="COUNT_1">%d</xliff:g> সংখ্যা থাকতে হবে</item>
@@ -1868,7 +1865,7 @@
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"সবগুলি দেখুন"</string>
     <string name="location_category_location_services" msgid="8163798686832434284">"লোকেশন পরিষেবা"</string>
     <string name="location_title" msgid="5819154746934945021">"আমার লোকেশন"</string>
-    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"কাজের প্রোফাইলের জন্য লোকেশন"</string>
+    <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"অফিস প্রোফাইলের জন্য লোকেশন"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"অ্যাপ লোকেশনের অনুমতি"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"লোকেশন বন্ধ করা আছে"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
@@ -2360,7 +2357,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"জুম করতে ৩ বার ট্যাপ করুন"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"জুম করার জন্য বোতামে ট্যাপ করুন"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"কন্টেন্ট আরও বড় সাইজে দেখার জন্য, স্ক্রিনে দ্রুত জুম বাড়ান"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}। স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}। জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; &lt;b&gt;সাময়িকভাবে জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। আপনার \'বড় করে দেখা\' ফিচারের ধরন ফুল স্ক্রিনে সেট হয়েছে কিনা ভাল করে দেখে নিন&lt;br/&gt; {1,number,integer}। \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের যেকোনও জায়গা টাচ করে ধরে থাকুন&lt;br/&gt; {3,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {4,number,integer}. \'বড় করে দেখা\' ফিচার বন্ধ করতে স্ক্রিনের উপর থেকে আঙুল সরিয়ে নিন"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. \'বড় করে দেখা\' ফিচার চালু করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt; {1,number,integer}। স্ক্রিনে ট্যাপ করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে ২টি আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {3,number,integer}। জুম অ্যাডজাস্ট করার জন্য ২টি আঙুল দিয়ে পিঞ্চ করুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করার জন্য শর্টকাট ব্যবহার করুন&lt;br/&gt;&lt;br/&gt; &lt;b&gt;সাময়িকভাবে জুম ইন করতে:&lt;/b&gt;&lt;br/&gt; {0,number,integer}। আপনার \'বড় করে দেখা\' ফিচারের ধরন ফুল স্ক্রিনে সেট হয়েছে কিনা ভাল করে দেখে নিন&lt;br/&gt; {1,number,integer}। \'বড় করে দেখা\' ফিচার চালু করতে শর্টকাট ব্যবহার করুন&lt;br/&gt; {2,number,integer}। স্ক্রিনের যেকোনও জায়গা টাচ করে ধরে থাকুন&lt;br/&gt; {3,number,integer}। স্ক্রিনের চারদিকে ঘোরাতে আঙুল দিয়ে টেনে আনুন&lt;br/&gt; {4,number,integer}। \'বড় করে দেখা\' ফিচার বন্ধ করতে স্ক্রিনের উপর থেকে আঙুল সরিয়ে নিন"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"ম্যাগনিফিকেশন চালু করা থাকলে, আপনি স্ক্রিনে জুম বাড়াতে পারবেন।\n\n"<b>"জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় ট্যাপ করুন।\n"<ul><li>"• স্ক্রল করতে ২ বা তার বেশি আঙ্গুল দিয়ে টানুন"</li>\n<li>"• জুম অ্যাডজাস্ট করতে ২ বা তার বেশি আঙ্গুল দিয়ে পিঞ্চ করুন"</li></ul>\n\n<b>"সাময়িকভাবে জুম করতে"</b>", ম্যাগনিফিকেশন চালু করে স্ক্রিনের যেকোনও জায়গায় টাচ করে ধরে থাকুন।\n"<ul><li>"• টেনে স্ক্রিনের বিভিন্ন জায়গায় সরান"</li>\n<li>"• জুম কমাতে স্ক্রিন থেকে আঙ্গুল তুলে নিন"</li></ul>\n\n"কীবোর্ড বা নেভিগেশন বারে আপনি জুম করতে পারবেন না।"</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"<xliff:g id="NUM_PAGES">%2$d</xliff:g>টি মধ্যে <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> নম্বর পৃষ্ঠা"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"অ্যাক্সেসিবিলিটি বোতাম ব্যবহার করে খোলা"</string>
@@ -2941,10 +2938,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"রিফ্রেশ করুন"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"মিডিয়াসার্ভার"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"অ্যাপ অপটিমাইজেশান"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"টিথারিং"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"সরিয়ে দেওয়া অ্যাপ"</string>
     <string name="battery_saver" msgid="7737147344510595864">"ব্যাটারি সেভার"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"নিজে থেকে চালু হবে"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"কোনও সময়সূচি সেট করা নেই"</string>
@@ -3373,10 +3368,8 @@
       <item quantity="one">টি শংসাপত্রের উপরে ভরসা করুন বা সেগুলিকে সরান</item>
       <item quantity="other">টি শংসাপত্রের উপরে ভরসা করুন বা সেগুলিকে সরান</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} আপনার ডিভাইসে একটি সার্টিফিকেট অথরিটি ইনস্টল করেছে, যেটি তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ আপনার ডিভাইস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএই সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}one{{orgName} আপনার ডিভাইসে কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ আপনার ডিভাইস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}other{{orgName} আপনার ডিভাইসে কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ আপনার ডিভাইস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} আপনার অফিস প্রোফাইলের জন্য একটি সার্টিফিকেট অথরিটি ইনস্টল করেছে, যেটি তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএই সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}one{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}other{{orgName} আপনার অফিস প্রোফাইলের জন্য কিছু সার্টিফিকেট অথরিটি ইনস্টল করেছে, যা তাদেরকে ইমেল, অ্যাপ এবং নিরাপদ ওয়েবসাইট সহ অফিস নেটওয়ার্কের কার্যকলাপ নিরীক্ষণ করার অনুমতি দিতে পারে।\n\nএইসব সার্টিফিকেট সম্পর্কে আরও তথ্যের জন্য আপনার অ্যাডমিনের সাথে যোগাযোগ করুন।}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"একজন তৃতীয় পক্ষ ইমেল অ্যাপ্লিকেশান, এবং নিরাপদ ওয়েবসাইটগুলি সহ আপনার নেটওয়ার্ক ক্রিয়াকলাপ নিরীক্ষণ করতে সক্ষম হবে। \n\nআপনার ডিভাইসে ইনস্টল করা একটি বিশ্বস্ত ক্রেডেনশিয়াল এটিকে সম্ভব করছে।"</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="one">টি সার্টিফিকেট পরীক্ষা করুন</item>
@@ -3465,7 +3458,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"সীমাবদ্ধগুলি সরান"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"পিন পরিবর্তন করুন"</string>
     <string name="help_label" msgid="2896538416436125883">"সহায়তা ও মতামত"</string>
-    <string name="support_summary" msgid="6137136608018134563">"সহায়তা নিবন্ধ, ফোন এবং চ্যাট"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"সহায়তা নিবন্ধ, ফোন এবং চ্যাট"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"সামগ্রীর জন্য অ্যাকাউন্ট"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ফটো ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"চরম হুমকি"</string>
@@ -3860,6 +3857,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"প্রতিটি অ্যাপ থেকে বিজ্ঞপ্তি নিয়ন্ত্রণ করুন"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"সাধারণ"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"অফিস প্রোফাইলের বিজ্ঞপ্তি"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"অ্যাডাপটিভ বিজ্ঞপ্তি"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"অ্যাডাপটিভ বিজ্ঞপ্তির অগ্রাধিকার"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"কম অগ্রাধিকার সম্পন্ন বিজ্ঞপ্তি অটোমেটিক সাইলেন্ট মোডে সেট করা থাকে"</string>
@@ -5632,7 +5631,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"কল"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"এসএমএস"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"মোবাইল ডেটা"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"ডিভাইস সংক্রান্ত অভিজ্ঞতা আরও ভাল করতে, অ্যাপ ও পরিষেবা যেকোনও সময় আপনার ওয়াই-ফাই নেটওয়ার্ক স্ক্যান করতে পারবে, এমনকি ডিভাইসের ওয়াই-ফাই বন্ধ করা থাকলেও। যেমন, এটি লোকেশন-ভিত্তিক ফিচার ও পরিষেবার উন্নতির জন্য ব্যবহার করতে পারা যাবে। আপনি ওয়াই-ফাই স্ক্যানিং সেটিংস থেকে এটি পরিবর্তন করতে পারবেন। "<annotation id="link">"পরিবর্তন করুন"</annotation></string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"কানেক্ট করা আছে"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"কানেকশন নেই"</string>
@@ -5791,10 +5793,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ব্রডকাস্ট খুঁজুন"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ব্রডকাস্ট ছেড়ে বেরিয়ে যান"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR কোড স্ক্যান করুন"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"পাসওয়ার্ড লিখুন"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"কানেক্ট করা যায়নি। আবার চেষ্টা করুন।"</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"ভুল পাসওয়ার্ড লেখা হয়েছে"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>

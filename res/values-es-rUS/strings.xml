@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Idiomas de las apps"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Configura el idioma para cada app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Idioma de la app"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Actualiza la app"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Actualiza la app para ver los últimos idiomas disponibles"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Actualizar ahora"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Idiomas sugeridos"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Todos los idiomas"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Idioma del sistema"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminado del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta app no está disponible en Configuración."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma difiera de los idiomas disponibles en la app. Algunas apps no son compatibles con este parámetro de configuración."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">¿Quitar los idiomas seleccionados?</item>
       <item quantity="one">¿Quitar el idioma seleccionado?</item>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configura tu huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Desbloq. con huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa tus huellas dactilares"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Usa tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Usa tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps o apruebas compras."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Permite que tu hijo use su huella dactilar para desbloquear el teléfono o verificar su identidad. Eso le permitirá acceder a apps, aprobar compras y mucho más."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Tú tienes el control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Tanto tú como tu hijo tienen el control"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Levanta el dedo cuando sientas una vibración"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ve a un lugar donde la luz sea menos brillante y vuelve a intentarlo"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Alcanzaste la cantidad máxima de intentos"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Usa tu huella dactilar para desbloquear la tablet o verificar tu identidad, por ejemplo, cuando accedes a apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Usa tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, por ejemplo, cuando accedes a apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Usa tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Desbloqueo facial y con huellas dactilares"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Presionar para configurar"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Se agregaron huellas dactilares y el rostro"</string>
@@ -531,12 +524,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Ahora puedes usar tu huella dactilar para desbloquear la tablet o verificar tu identidad, como cuando accedes a apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Ahora puedes usar tu huella dactilar para desbloquear el dispositivo o verificar tu identidad, como cuando accedes a apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
@@ -600,13 +590,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra huella digital"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Además de desbloquear el teléfono, también puedes utilizar tu huella dactilar para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Esta opción de bloqueo de pantalla está inhabilitada. Para obtener más información, comunícate con el administrador de tu organización. "<annotation id="admin_details">"Más información"</annotation>\n\n"Aún puedes usar tu huella dactilar para autorizar compras y el acceso a apps."<annotation id="url">"Más información"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"La opción de bloqueo de pantalla está inhabilitada. Para obtener más información, comunícate con el administrador de la organización."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Todavía puedes usar la huella dactilar para autorizar compras y acceder a apps."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"No se puede usar el sensor de huellas dactilares. Consulta a un proveedor de reparaciones."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Más parámetros de seguridad"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueo del perfil de trabajo, encriptación y más"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptación, credenciales y más"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, más configuración de seguridad, más configuración, configuración avanzada de seguridad"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Agregaste la cantidad máxima permitida de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden agregar más huellas digitales"</string>
@@ -645,7 +640,9 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa las funciones de protección del dispositivo para impedir que terceros lo usen sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa las funciones de protección del dispositivo para impedir que terceros usen este teléfono sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Elige el método secundario de bloqueo de pantalla"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
+    <skip />
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
     <skip />
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si olvidas este bloqueo, pídele al administrador de TI que lo restablezca"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opciones de bloqueo de la pantalla"</string>
@@ -757,6 +754,8 @@
       <item quantity="other">Debe tener al menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
       <item quantity="one">Debe tener al menos <xliff:g id="COUNT_0">%d</xliff:g> carácter</item>
     </plurals>
+    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
+    <skip />
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">El PIN debe tener al menos <xliff:g id="COUNT_1">%d</xliff:g> dígitos</item>
       <item quantity="one">El PIN debe tener al menos <xliff:g id="COUNT_0">%d</xliff:g> dígito</item>
@@ -2226,9 +2225,9 @@
     <string name="keyboard_assistance_category" msgid="7320599809770932032">"Ayuda del teclado"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
     <string name="show_ime" msgid="4334255501724746849">"Usar teclado en pantalla"</string>
-    <string name="show_ime_summary" msgid="7293345791727205975">"Mantener en la pantalla cuando el teclado físico esté activo"</string>
+    <string name="show_ime_summary" msgid="7293345791727205975">"Mientras el teclado físico está activo"</string>
     <string name="keyboard_shortcuts_helper" msgid="2553221039203165344">"Combinaciones de teclas"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Mostrar accesos directos disponibles"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="8649760728213630156">"Mostrar combinaciones disponibles"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados y herramientas del perfil de trabajo"</string>
     <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado en pantalla para el trabajo"</string>
     <string name="default_keyboard_layout" msgid="8690689331289452201">"Predeterminadas"</string>
@@ -2943,10 +2942,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Actualizar"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Servidor de medios"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Optimización de las aplicaciones"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Conexión"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Apps que se quitaron"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Ahorro de batería"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Activar automáticamente"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Sin programa"</string>
@@ -3375,10 +3372,8 @@
       <item quantity="other">Confiar o quitar certificados</item>
       <item quantity="one">Confiar o quitar certificado</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} instaló una autoridad certificadora en tu dispositivo, lo que le permitirá supervisar la actividad de la red del dispositivo, incluidos los correos electrónicos, las apps y los sitios web seguros.\n\nPara obtener más información sobre este certificado, comunícate con tu administrador.}other{{orgName} instaló autoridades certificadoras en tu dispositivo, lo que le permitirá supervisar la actividad de la red del dispositivo, incluidos los correos electrónicos, las apps y los sitios web seguros.\n\nPara obtener más información sobre estos certificados, comunícate con tu administrador.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} instaló una autoridad certificadora para tu perfil de trabajo, lo que le permitirá supervisar la actividad de la red laboral, incluidos los correos electrónicos, las apps y los sitios web seguros.\n\nPara obtener más información sobre este certificado, comunícate con tu administrador.}other{{orgName} instaló autoridades certificadoras para tu perfil de trabajo, lo que les permitirá supervisar la actividad de la red laboral, como los correos electrónicos, las apps y los sitios web seguros.\n\nPara obtener más información sobre estos certificados, comunícate con tu administrador.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Un tercero puede supervisar tu actividad en la red, incluido el correo electrónico, las aplicaciones y los sitios web seguros.\n\nEsto ocurre porque hay una credencial de confianza instalada en el dispositivo."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Revisar certificados</item>
@@ -3467,7 +3462,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Eliminar restricciones"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambiar PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Ayuda y comentarios"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Artículos de ayuda, teléfono y chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Artículos de ayuda, teléfono y chat"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Cuenta para contenido"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID de foto"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Amenazas extremas"</string>
@@ -3862,6 +3861,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Controlar notificaciones de apps individuales"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"General"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificaciones de trabajo"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificaciones adaptables"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridad de notificación adaptable"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Configurar automáticamente las notificaciones de menor prioridad a silenciosas"</string>
@@ -5634,7 +5635,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"llamadas"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"datos móviles"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Para mejorar la experiencia con el dispositivo, las apps y los servicios pueden seguir buscando redes Wi-Fi en cualquier momento, incluso cuando la conexión Wi-Fi esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar este parámetro en la configuración de búsqueda de Wi-Fi. "<annotation id="link">"Cambiar"</annotation></string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conexión establecida"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sin conexión"</string>
@@ -5785,8 +5789,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configura el límite de tasa de descarga de la red"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Sin límite"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Transmisión"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_app (1016617579194329005) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Transmitir <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Escucha las transmisiones que se están reproduciendo cerca de ti"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Transmite contenido multimedia a dispositivos cercanos, o bien escucha la transmisión de alguien más"</string>
     <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Transmisiones"</string>
@@ -5794,10 +5797,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Buscar transmisiones"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Abandonar transmisión"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Escanear código QR"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ingresar contraseña"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"No se puede establecer conexión. Vuelve a intentarlo."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Contraseña incorrecta"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>
