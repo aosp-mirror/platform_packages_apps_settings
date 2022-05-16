@@ -30,7 +30,15 @@ import com.android.settingslib.R;
 import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.BluetoothUtils;
 
-//TODO (b/232365943): Add test case for tthe QrCode UI.
+/**
+ * Finding a broadcast through QR code.
+ *
+ * To use intent action {@link BluetoothBroadcastUtils#ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER},
+ * specify the bluetooth device sink of the broadcast to be provisioned in
+ * {@link BluetoothBroadcastUtils#EXTRA_BLUETOOTH_DEVICE_SINK} and check the operation for all
+ * coordinated set members throughout one session or not by
+ * {@link BluetoothBroadcastUtils#EXTRA_BLUETOOTH_SINK_IS_GROUP}.
+ */
 public class QrCodeScanModeActivity extends QrCodeScanModeBaseActivity {
     private static final boolean DEBUG = BluetoothUtils.D;
     private static final String TAG = "QrCodeScanModeActivity";
