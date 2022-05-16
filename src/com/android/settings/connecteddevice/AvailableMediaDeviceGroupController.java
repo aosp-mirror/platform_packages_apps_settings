@@ -17,22 +17,26 @@ package com.android.settings.connecteddevice;
 
 import static com.android.settingslib.Utils.isAudioModeOngoingCall;
 
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.HearingAidUtils;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -54,6 +58,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     @VisibleForTesting
     LocalBluetoothManager mLocalBluetoothManager;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    private FragmentManager mFragmentManager;
 
     public AvailableMediaDeviceGroupController(Context context) {
         super(context, KEY);
@@ -124,6 +129,7 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     }
 
     public void init(DashboardFragment fragment) {
+        mFragmentManager = fragment.getParentFragmentManager();
         mBluetoothDeviceUpdater = new AvailableMediaBluetoothDeviceUpdater(fragment.getContext(),
                 fragment, AvailableMediaDeviceGroupController.this);
     }
@@ -136,6 +142,18 @@ public class AvailableMediaDeviceGroupController extends BasePreferenceControlle
     @Override
     public void onAudioModeChanged() {
         updateTitle();
+    }
+
+    @Override
+    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
+        // exclude inactive device
+        if (activeDevice == null) {
+            return;
+        }
+
+        if (bluetoothProfile == BluetoothProfile.HEARING_AID) {
+            HearingAidUtils.launchHearingAidPairingDialog(mFragmentManager, activeDevice);
+        }
     }
 
     private void updateTitle() {
