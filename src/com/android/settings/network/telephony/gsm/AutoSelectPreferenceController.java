@@ -52,6 +52,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Preference controller for "Auto Select Network"
@@ -70,11 +72,17 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     ProgressDialog mProgressDialog;
     @VisibleForTesting
     SwitchPreference mSwitchPreference;
+    private AtomicBoolean mUpdatingConfig;
+    private int mCacheOfModeStatus;
+    private AtomicLong mRecursiveUpdate;
 
     public AutoSelectPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mRecursiveUpdate = new AtomicLong();
+        mUpdatingConfig = new AtomicBoolean();
+        mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
         mListeners = new ArrayList<>();
         mUiHandler = new Handler(Looper.getMainLooper());
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
@@ -88,7 +96,9 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
             displayPreference(mPreferenceScreen);
         }
         if (mSwitchPreference != null) {
+            mRecursiveUpdate.getAndIncrement();
             updateState(mSwitchPreference);
+            mRecursiveUpdate.decrementAndGet();
         }
     }
 
@@ -118,8 +128,13 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return mTelephonyManager.getNetworkSelectionMode()
-                == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
+        if (!mUpdatingConfig.get()) {
+            mCacheOfModeStatus = mTelephonyManager.getNetworkSelectionMode();
+            for (OnNetworkSelectModeListener lsn : mListeners) {
+                lsn.onNetworkSelectModeUpdated(mCacheOfModeStatus);
+            }
+        }
+        return mCacheOfModeStatus == TelephonyManager.NETWORK_SELECTION_MODE_AUTO;
     }
 
     @Override
@@ -147,6 +162,10 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        if (mRecursiveUpdate.get() != 0) {
+            // Changing from software are allowed and changing presentation only.
+            return true;
+        }
         if (isChecked) {
             setAutomaticSelectionMode();
         } else {
@@ -171,18 +190,17 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
         }
         return ThreadUtils.postOnBackgroundThread(() -> {
             // set network selection mode in background
+            mUpdatingConfig.set(true);
             mTelephonyManager.setNetworkSelectionModeAutomatic();
-            final int mode = mTelephonyManager.getNetworkSelectionMode();
+            mUpdatingConfig.set(false);
 
             //Update UI in UI thread
             final long durationMillis = SystemClock.elapsedRealtime() - startMillis;
             mUiHandler.postDelayed(() -> {
+                mRecursiveUpdate.getAndIncrement();
                 mSwitchPreference.setEnabled(true);
-                mSwitchPreference.setChecked(
-                        mode == TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-                for (OnNetworkSelectModeListener lsn : mListeners) {
-                    lsn.onNetworkSelectModeChanged();
-                }
+                mSwitchPreference.setChecked(isChecked());
+                mRecursiveUpdate.decrementAndGet();
                 dismissProgressBar();
             }, Math.max(MINIMUM_DIALOG_TIME_MILLIS - durationMillis, 0));
         });
@@ -232,11 +250,11 @@ public class AutoSelectPreferenceController extends TelephonyTogglePreferenceCon
     }
 
     /**
-     * Callback when network select mode is changed
+     * Callback when network select mode might get updated
      *
      * @see TelephonyManager#getNetworkSelectionMode()
      */
     public interface OnNetworkSelectModeListener {
-        void onNetworkSelectModeChanged();
+        void onNetworkSelectModeUpdated(int mode);
     }
 }
