@@ -19,30 +19,29 @@ package com.android.settings.wifi.tether;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.TetheringManager;
 import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
-import android.os.UserManager;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -56,53 +55,44 @@ public class WifiTetherPreferenceControllerTest {
 
     private static final String SSID = "Pixel";
 
-    private Context mContext;
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
+    @Mock
+    private Lifecycle mLifecycle;
     @Mock
     private TetheringManager mTetheringManager;
     @Mock
     private WifiManager mWifiManager;
     @Mock
-    private UserManager mUserManager;
-    @Mock
-    private Bundle mBundle;
-    @Mock
     private PreferenceScreen mScreen;
     private SoftApConfiguration mSoftApConfiguration;
 
     private WifiTetherPreferenceController mController;
-    private Lifecycle mLifecycle;
-    private LifecycleOwner mLifecycleOwner;
     private PrimarySwitchPreference mPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
-        mContext = spy(RuntimeEnvironment.application);
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
         FakeFeatureFactory.setupForTest();
-        mPreference = new PrimarySwitchPreference(RuntimeEnvironment.application);
+        mPreference = new PrimarySwitchPreference(mContext);
         when(mContext.getSystemService(Context.TETHERING_SERVICE)).thenReturn(mTetheringManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.getUserRestrictions()).thenReturn(mBundle);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mSoftApConfiguration = new SoftApConfiguration.Builder().setSsid(SSID).build();
         when(mWifiManager.getSoftApConfiguration()).thenReturn(mSoftApConfiguration);
 
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
-        mController = new WifiTetherPreferenceController(mContext, mLifecycle,
-                false /* initSoftApManager */);
-        mController.mIsWifiTetheringAllow = true;
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
+                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
         mController.displayPreference(mScreen);
     }
 
     @Test
     public void isAvailable_noTetherRegex_shouldReturnFalse() {
         when(mTetheringManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
-        mController = new WifiTetherPreferenceController(mContext, mLifecycle,
-                false /* initSoftApManager */);
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
+                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -114,16 +104,19 @@ public class WifiTetherPreferenceControllerTest {
 
     @Test
     public void displayPreference_wifiTetheringNotAllowed_shouldDisable() {
-        mController.mIsWifiTetheringAllow = false;
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
+                mTetheringManager, false /* initSoftApManager */, false /* isWifiTetheringAllow */);
 
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.getSummary()).isEqualTo("Not allowed by your organization");
     }
 
     @Test
     public void displayPreference_wifiTetheringAllowed_shouldEnable() {
-        mController.mIsWifiTetheringAllow = true;
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle, mWifiManager,
+                mTetheringManager, false /* initSoftApManager */, true /* isWifiTetheringAllow */);
 
         mController.displayPreference(mScreen);
 

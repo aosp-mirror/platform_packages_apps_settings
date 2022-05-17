@@ -18,6 +18,7 @@ package com.android.settings.applications.specialaccess.interactacrossprofiles;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_DATA;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.APP_CAN_ACCESS_PERSONAL_PERMISSIONS;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_APPS_SHARE_PERMISSIONS_AND_DATA;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECT_APPS_DIALOG_SUMMARY;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECT_APPS_DIALOG_TITLE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.HOW_TO_DISCONNECT_APPS;
@@ -81,7 +82,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
     private Context mContext;
     private CrossProfileApps mCrossProfileApps;
-    private DevicePolicyManager mDevicePolicyManager;
     private UserManager mUserManager;
     private RestrictedSwitchPreference mSwitchPref;
     private LayoutPreference mHeader;
@@ -101,7 +101,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         mContext = getContext();
         mCrossProfileApps = mContext.getSystemService(CrossProfileApps.class);
-        mDevicePolicyManager = mContext.getSystemService(DevicePolicyManager.class);
         mUserManager = mContext.getSystemService(UserManager.class);
         mPackageManager = mContext.getPackageManager();
 
@@ -115,6 +114,8 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
 
         addPreferencesFromResource(R.xml.interact_across_profiles_permissions_details);
 
+        replaceEnterprisePreferenceScreenTitle(CONNECTED_WORK_AND_PERSONAL_APPS_TITLE,
+                R.string.interact_across_profiles_title);
         replaceEnterpriseStringSummary("interact_across_profiles_summary_1",
                 CONNECTED_APPS_SHARE_PERMISSIONS_AND_DATA,
                 R.string.interact_across_profiles_summary_1);
@@ -145,19 +146,6 @@ public class InteractAcrossProfilesDetails extends AppInfoBase
         styleActionBar();
         maybeShowExtraSummary();
         logPageLaunchMetrics();
-    }
-
-    private void replaceEnterpriseStringSummary(
-            String preferenceKey, String overrideKey, int resource) {
-        Preference preference = findPreference(preferenceKey);
-        if (preference == null) {
-            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
-            return;
-        }
-
-        preference.setSummary(
-                mDevicePolicyManager.getResources().getString(overrideKey,
-                        () -> getString(resource)));
     }
 
     private void maybeShowExtraSummary() {

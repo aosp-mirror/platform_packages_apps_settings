@@ -45,6 +45,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
                     if (!mSeekByTouch && mInteractionListener != null) {
                         mInteractionListener.onProgressChanged();
                     }
+
                 }
 
                 @Override
@@ -95,6 +96,7 @@ class PreviewSizeSeekBarController extends BasePreferenceController implements
         final int defaultProgress = mSizeData.getValues().indexOf(mSizeData.getDefaultValue());
         mSeekBarPreference.setProgress(defaultProgress);
     }
+
 
     /**
      * Interface for callbacks when users interact with the seek bar.
