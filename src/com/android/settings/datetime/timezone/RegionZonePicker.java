@@ -16,6 +16,8 @@
 
 package com.android.settings.datetime.timezone;
 
+import static com.android.settingslib.datetime.ZoneGetter.capitalizeForStandaloneDisplay;
+
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
 import android.icu.text.Collator;
@@ -65,7 +67,8 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
         final LocaleDisplayNames localeDisplayNames = LocaleDisplayNames.getInstance(getLocale());
         final String regionId =
                 getArguments() == null ? null : getArguments().getString(EXTRA_REGION_ID);
-        mRegionName = regionId == null ? null : localeDisplayNames.regionDisplayName(regionId);
+        mRegionName = regionId == null ? null : capitalizeForStandaloneDisplay(
+                mLocale, localeDisplayNames.regionDisplayName(regionId));
     }
 
     @Override
