@@ -24,6 +24,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
@@ -171,7 +172,8 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return overrideCanConfigureValue;
         }
         if (mAppRow != null) {
-            return !mAppRow.systemApp && !mAppRow.lockedImportance;
+            boolean systemBlockable = !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
+            return systemBlockable && !mAppRow.lockedImportance;
         }
         return true;
     }
