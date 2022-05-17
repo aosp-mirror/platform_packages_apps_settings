@@ -38,7 +38,7 @@ import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
 public class AppLocalePickerActivity extends SettingsBaseActivity
-        implements LocalePickerWithRegion.LocaleSelectedListener {
+        implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
 
     private String mPackageName;
@@ -75,9 +75,10 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 mContextAsUser,
-                AppLocalePickerActivity.this,
+                this,
                 false /* translate only */,
-                mPackageName);
+                mPackageName,
+                this);
         mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
         mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
@@ -103,8 +104,21 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         finish();
     }
 
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
+        Log.d(TAG, "setAppDefaultLocale: " + languageTag);
         LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
         if (localeManager == null) {
             Log.w(TAG, "LocaleManager is null, cannot set default app locale");
