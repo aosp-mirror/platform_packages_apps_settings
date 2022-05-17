@@ -37,8 +37,9 @@ public class TelephonyDisplayInfoListener {
     private TelephonyManager mBaseTelephonyManager;
     private Callback mCallback;
     private Map<Integer, PhoneStateListener> mListeners;
+    private Map<Integer, TelephonyDisplayInfo> mDisplayInfos;
 
-    private TelephonyDisplayInfo mTelephonyDisplayInfo =
+    private static final TelephonyDisplayInfo mDefaultTelephonyDisplayInfo =
             new TelephonyDisplayInfo(TelephonyManager.NETWORK_TYPE_UNKNOWN,
                     TelephonyDisplayInfo.OVERRIDE_NETWORK_TYPE_NONE);
     /**
@@ -48,19 +49,20 @@ public class TelephonyDisplayInfoListener {
         /**
          * Used to notify TelephonyDisplayInfo change.
          */
-        void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo);
+        void onTelephonyDisplayInfoChanged(int subId, TelephonyDisplayInfo telephonyDisplayInfo);
     }
 
     public TelephonyDisplayInfoListener(Context context, Callback callback) {
         mBaseTelephonyManager = context.getSystemService(TelephonyManager.class);
         mCallback = callback;
         mListeners = new HashMap<>();
+        mDisplayInfos = new HashMap<>();
     }
     /**
      * Get TelephonyDisplayInfo.
      */
-    public TelephonyDisplayInfo getTelephonyDisplayInfo() {
-        return mTelephonyDisplayInfo;
+    public TelephonyDisplayInfo getTelephonyDisplayInfo(int subId) {
+        return mDisplayInfos.get(subId);
     }
 
     /** Resumes listening telephony display info changes to the set of ids from the last call to
@@ -85,15 +87,17 @@ public class TelephonyDisplayInfoListener {
         for (int idToRemove : Sets.difference(currentIds, ids)) {
             stopListening(idToRemove);
             mListeners.remove(idToRemove);
+            mDisplayInfos.remove(idToRemove);
         }
         for (int idToAdd : Sets.difference(ids, currentIds)) {
             PhoneStateListener listener = new PhoneStateListener() {
                 @Override
                 public void onDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
-                    mTelephonyDisplayInfo = telephonyDisplayInfo;
-                    mCallback.onTelephonyDisplayInfoChanged(telephonyDisplayInfo);
+                    mDisplayInfos.put(idToAdd, telephonyDisplayInfo);
+                    mCallback.onTelephonyDisplayInfoChanged(idToAdd, telephonyDisplayInfo);
                 }
             };
+            mDisplayInfos.put(idToAdd, mDefaultTelephonyDisplayInfo);
             mListeners.put(idToAdd, listener);
             startListening(idToAdd);
         }

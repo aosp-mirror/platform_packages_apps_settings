@@ -364,7 +364,8 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
-        mController.onTelephonyDisplayInfoChanged(telephonyDisplayInfo);
+        mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
+                telephonyDisplayInfo);
 
         assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
     }
@@ -388,7 +389,8 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
-        mController.onTelephonyDisplayInfoChanged(telephonyDisplayInfo);
+        mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
+                telephonyDisplayInfo);
 
         assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
     }
@@ -414,7 +416,8 @@ public class SubscriptionsPreferenceControllerTest {
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
-        mController.onTelephonyDisplayInfoChanged(telephonyDisplayInfo);
+        mController.onTelephonyDisplayInfoChanged(sub.get(0).getSubscriptionId(),
+                telephonyDisplayInfo);
 
         assertThat(mPreferenceCategory.getPreference(0).getSummary()).isEqualTo(expectedSummary);
     }
