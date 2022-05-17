@@ -489,7 +489,7 @@
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Допрете и задржете секој пат кога иконата за отпечаток ќе се премести. Ова помага за да се сними повеќе од отпечатокот."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Поставете го врвот на прстот на сензорот"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"За крај, користете ги рабовите на прстот"</string>
-    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечаток странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Поставете го отпечатокот странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Ова помага за да се сними повеќе од отпечатокот"</string>
     <!-- String.format failed for translation -->
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатокот е додаден"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Сега може да го користите отпечатокот за да го отклучите телефонот или да потврдите дека сте вие, како кога се најавувате на апликации"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Направи подоцна"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Подигнете и допрете повторно"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Поставете го отпечатокот странично на сензорот и задржете, а потоа направете исто со другата страна"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Да се прескокне поставувањето отпечаток?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Избравте да го користите отпечатокот како еден од начините на отклучување на телефонот. Ако го прескокнете сега, ќе треба да го поставите подоцна. За поставувањето ќе ви треба околу една минута."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-кодот го заштитува таблетот ако го изгубите или ви го украдат"</string>
@@ -1295,7 +1297,7 @@
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Исклучено"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Вклучено"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Вклучено - според лице"</string>
-    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Овозможи откривање лица"</string>
+    <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Овозможи „Откривање лица“"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природни"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Нагласени"</string>
@@ -3645,6 +3647,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Звуци и вибрации при полнење"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Звуци на држач со звучници"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Звуци при допир"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Секогаш прикажувај икона во режим на вибрации"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Вибрации при допир"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Повратни информации со допир за тастатура, допирање и друго"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Држач со звучници"</string>
@@ -4084,7 +4087,7 @@
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Алармот може да го игнорира времето на завршување"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Распоредот се исклучува кога ќе заѕвони аларм"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Однесување на „Не вознемирувај“"</string>
-    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Користете стандардни поставки"</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Користи стандардни поставки"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Создајте приспособени поставки за распоредов"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"За „<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>“"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
@@ -4409,8 +4412,8 @@
     <string name="high_power_off" msgid="317000444619279018">"Се оптимизира користењето на батеријата"</string>
     <string name="high_power_system" msgid="3966701453644915787">"Оптимизација на батеријата не е достапна"</string>
     <string name="high_power_desc" msgid="2753076899835765338">"Не применувајте оптимизација на батеријата. Може побрзо да ја истроши вашата батерија."</string>
-    <string name="high_power_prompt_title" msgid="2574478825228409124">"Да се извршува во заднина?"</string>
-    <string name="high_power_prompt_body" msgid="6460557929559616041">"Ако дозволите <xliff:g id="APP_NAME">%1$s</xliff:g> секогаш да се извршува во заднина, тоа може да го намали траењето на батеријата. \n\nОва може да го промените подоцна во „Поставки &gt; Апликации и известувања“."</string>
+    <string name="high_power_prompt_title" msgid="2574478825228409124">"Да работи во заднина?"</string>
+    <string name="high_power_prompt_body" msgid="6460557929559616041">"Ако дозволите <xliff:g id="APP_NAME">%1$s</xliff:g> секогаш да работи во заднина, тоа може да го намали траењето на батеријата. \n\nОва може да го промените подоцна во „Поставки &gt; Апликации и известувања“."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> употреба од последното целосно полнење"</string>
     <string name="battery_summary_24hr" msgid="7656033283282656551">"Користење од <xliff:g id="PERCENTAGE">%1$s</xliff:g> во минатите 24 часа"</string>
     <string name="no_battery_summary" msgid="5769159953384122003">"Нема употреба на батерија од последното целосно полнење"</string>

@@ -488,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Удалить"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Коснитесь сканера отпечатков"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Прикладывайте палец к сканеру и удерживайте, пока не почувствуете вибрацию."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Поместите палец на сканер и не убирайте его, пока не ощутите вибрацию."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Приложите палец к сканеру и не убирайте его, пока не почувствуете вибрацию."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Нажмите на сканер отпечатка пальца и удерживайте"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Коснитесь несколько раз"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Ещё раз"</string>
@@ -497,12 +497,14 @@
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Нажимайте и удерживайте значок каждый раз, когда он перемещается. Так отпечаток пальца будет более точным."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Коснитесь датчика и удерживайте его подушечкой пальца"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Осталось отсканировать края пальца"</string>
-    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Наклоните палец вбок, нажмите и удерживайте датчик. Затем поменяйте положение пальца и повторите действия."</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Наклоните палец набок, нажмите на датчик и удерживайте. Затем наклоните палец на другой бок и повторите действия."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Так отпечаток пальца будет более точным"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Процент выполнения задачи по добавлению отпечатка пальца: <xliff:g id="PERCENTAGE">%d</xliff:g>."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечаток добавлен"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Теперь вы можете использовать отпечаток пальца, чтобы разблокировать телефон или подтверждать свою личность для входа в приложения."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Поднимите палец и снова приложите его к сканеру"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Наклоните палец вбок, приложите к датчику и удерживайте. Затем наклоните палец в противоположную сторону и повторите действия."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Не настраивать доступ по отпечаткам?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Для разблокировки телефона вы выбрали сканирование отпечатка пальца. Настройка займет около минуты. Если вы пропустите ее сейчас, вам все равно придется сделать это позже."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-код защитит данные на планшете в случае его потери или кражи."</string>
@@ -1367,7 +1369,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"Не учитывать уровень освещенности"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"Батарея разряжается быстрее"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"Яркость регулируется с учетом уровня освещенности. При необходимости ее можно временно изменить."</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет настраиваться автоматически в зависимости от окружающих условий и ваших действий. Вы сможете регулировать ее и вручную, и тогда ваши предпочтения будут сохраняться."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"Яркость экрана будет настраиваться автоматически в зависимости от окружающих условий и ваших действий. Дополнительно ее можно регулировать вручную, чтобы система учитывала ваши предпочтения."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"Баланс белого на экране"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Плавный экран"</string>
@@ -1390,7 +1392,7 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"Для работы функции \"Распознавание лиц\" нужен доступ к камере. Нажмите, чтобы настроить разрешения для сервисов персонализации устройств."</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Управление разрешениями"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Ночная подсветка"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"С ночной подсветкой экран приобретает желтоватый оттенок. Это снижает напряжение глаз при тусклом свете и может помочь вам быстрее заснуть."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"С ночной подсветкой экран приобретает желтоватый оттенок. Это снижает напряжение глаз и может помочь вам быстрее заснуть."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Расписание"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Нет"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"В выбранное время"</string>
@@ -3695,9 +3697,9 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"оплата, по умолчанию"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"входящее уведомление"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB-модем, Bluetooth-модем, точка доступа Wi-Fi"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"осязание, вибрировать, экран, чувствительность"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"осязание, вибрация, телефон, звонок, чувствительность, вызов"</string>
-    <string name="keywords_notification_vibration" msgid="9162262178415439951">"осязание, вибрация, чувствительность"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"виброотклик, вибрировать, экран, чувствительность"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"виброотклик, вибрация, телефон, звонок, чувствительность, вызов"</string>
+    <string name="keywords_notification_vibration" msgid="9162262178415439951">"виброотклик, вибрация, чувствительность"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"энергосбережение, постоянная экономия заряда, батарея"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"программа, расписание, режим энергосбережения, экономия заряда, батарея, автоматически, процент"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"volte, расширенный вызов, звонки по сети 4g"</string>
@@ -3733,6 +3735,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Сигналы зарядки"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Звуки через док-динамик"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Звуки нажатия на экран"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Всегда показывать значок в режиме вибрации"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Вибрация при касании"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Виброотклик при нажатии кнопок, клавиш клавиатуры и т. д."</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Проигрывать через док-динамик"</string>
@@ -5597,8 +5600,8 @@
     <string name="lockscreen_privacy_not_secure" msgid="3251276389681975912">"Сначала необходимо настроить блокировку экрана"</string>
     <string name="power_menu_long_press_for_assist" msgid="2016813721240777737">"Запускать Ассистента долгим нажатием"</string>
     <string name="power_menu_long_press_for_assist_summary" msgid="8251928804984560312">"Нажмите и удерживайте кнопку питания для запуска Ассистента"</string>
-    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню кнопки питания и экстренных вызовов\nЧтобы его открыть, одновременно нажмите кнопки питания и увеличения громкости."</string>
-    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Отключение звука звонка\nБыстрый запуск функции доступен в меню регулировки громкости."</string>
+    <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"Меню кнопки питания и экстренных вызовов:\nЧтобы его открыть, одновременно нажмите кнопки питания и увеличения громкости."</string>
+    <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"Отключение звука звонка:\nБыстрый запуск функции доступен в меню регулировки громкости."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"Длительность нажатия и удержания"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Настройте чувствительность, выбрав длительность нажатия и удержания кнопки питания."</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Быстро"</string>

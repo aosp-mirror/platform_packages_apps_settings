@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Кішірек ету"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Үлкенірек ету"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"Автоматты бұруды пайдалану"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Автоматты бұру дәлдігін арттыру үшін бетті анықтау функциясында алдыңғы камера пайдаланылады. Суреттер Google-ға жіберілмейді немесе сақталмайды."</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"Автоматты бұру дәлдігін арттыру үшін бетті анықтау функциясында алдыңғы камера пайдаланылады. Суреттер еш уақытта сақталмайды және Google-ға жіберілмейді."</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Мәтін үлгісі"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"Оз елінің ғажап сиқыршысы"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11-тарау. Оз елінің Зубаржат қаласы"</string>
@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Саусақ ізі енгізілді"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Енді телефон құлпын ашу немесе жеке басыңызды растау үшін (мысалы, қолданбаларға кіргенде) саусақ ізін пайдалана аласыз."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Кейінірек"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Саусағыңызды алып, қайта түртіңіз."</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Саусақ ізінің бір жағын датчикке қойыңыз, сосын екінші жағына ауысыңыз."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Саусақ ізін орнатуды өткізіп жіберу керек пе?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Саусақ ізін пайдалануды телефон құлпын ашудың бір жолы ретінде таңдадыңыз. Қазір өткізіп жіберсеңіз, мұны кейінірек орнату керек. Орнату бір минутқа жақын уақыт алады."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Планшет жоғалған немесе ұрланған жағдайда, PIN коды оны қорғайды."</string>
@@ -1242,7 +1244,7 @@
     <string name="sound_settings" msgid="5514582720435174014">"Дыбыс"</string>
     <string name="all_volume_title" msgid="6196367642878437513">"Дыбыс қаттылығы"</string>
     <string name="musicfx_title" msgid="5458574743312283473">"Mузыка әсерлері"</string>
-    <string name="ring_volume_title" msgid="4869034595079914541">"Қоңыраулар мен хабарландырулардың дыбыс деңгейі"</string>
+    <string name="ring_volume_title" msgid="4869034595079914541">"Қоңырау мен хабарландырудың дыбыс деңгейі"</string>
     <string name="vibrate_in_silent_title" msgid="5076579100685867363">"Үнсіз кезінде тербеу"</string>
     <string name="notification_sound_title" msgid="8747567935870133157">"Бастапқы хабар дыбысы"</string>
     <string name="incoming_call_volume_title" msgid="8445408274513654261">"Қоңырау әуені"</string>
@@ -1291,7 +1293,7 @@
     <string name="display_settings" msgid="7197750639709493852">"Дисплей"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Экранды автоматты бұру"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Өшіру"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Қосу"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Қосулы"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Қосулы – Бет негізінде"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Бетті анықтауды қосу"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Түстер"</string>
@@ -1340,8 +1342,8 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"Камераны пайдалану рұқсаты керек"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"Зейінді экран функциясы үшін камераны пайдалану қажет. Құрылғыны жекелендіру қызметтеріне арналған рұқсаттарды басқару үшін түртіңіз."</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"Рұқсаттарды басқару"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Экранға қарап тұрған кезде, оның өшуіне жол бермейді."</string>
-    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"\"Зейінді экран\" функциясы алдыңғы камера арқылы адамның экранға қарап тұрғанын тани алады. Ол құрылғыда ғана жұмыс істейді. Суреттер Google жүйесінде сақталмайды және оған жіберілмейді."</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"Қарап тұрған кезде, экран өшпейді."</string>
+    <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"\"Зейінді экран\" функциясы алдыңғы камера арқылы адамның экранға қарап тұрғанын тани алады. Ол құрылғыда ғана жұмыс істейді. Суреттер еш уақытта Google-ға жіберілмейді."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"\"Зейінді экран\" функциясын қосу"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"Экранға қарап тұрғанда, ол өшпейді"</string>
     <string name="auto_rotate_camera_lock_title" msgid="5369003176695105872">"Камера құлыптаулы"</string>
@@ -1351,7 +1353,7 @@
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"Рұқсаттарды басқару"</string>
     <string name="night_display_title" msgid="8532432776487216581">"Түнгі жарық"</string>
     <string name="night_display_text" msgid="4789324042428095383">"\"Түнгі жарық\" функциясы экраныңызға ашық сары реңк береді. Бұл қараңғыда экранға қарауды жеңілдетеді әрі жылдам ұйықтауға да көмектесуі мүмкін."</string>
-    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Уақыт кестесі"</string>
+    <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Кесте"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Ешқашан"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Белгілі бір уақытта қосылады"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Күн батқаннан күн шыққанға дейін қосулы"</string>
@@ -1392,7 +1394,7 @@
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Автоматты түрде өшеді: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"<xliff:g id="ID_1">%1$s</xliff:g> дейін қосу"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"<xliff:g id="ID_1">%1$s</xliff:g> дейін өшіру"</string>
-    <string name="dark_ui_text" msgid="4392646155331126666">"Қараңғы батарея кейбір экрандарда батарея зарядын ұзаққа жеткізу үшін қара фонды пайдаланады. Экран өшпейінше, қараңғы тақырып кестелері қосылмайды."</string>
+    <string name="dark_ui_text" msgid="4392646155331126666">"Қараңғы батарея кейбір экрандарда батарея зарядын ұзаққа жеткізу үшін қара фонды пайдаланады. Экран өшпейінше, қараңғы режим кестелері қосылмайды."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Экранның өшуі"</string>
     <string name="screen_timeout_title" msgid="785134393520893049">"Экран өшеді"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"Әрекетсіз <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> тұрған соң"</string>
@@ -2396,7 +2398,7 @@
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Түс инверсиясы"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Түстер инверсиясын пайдалану"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Түс инверсиясы таңбашасы"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Түс инверсиясы жарық экранды қараңғыға ауыстырады.&lt;br/&gt;&lt;br/&gt; Ескертпе: &lt;ol&gt; &lt;li&gt; Қараңғы экранды жарыққа ауыстыру мүмкіндігі де бар.&lt;/li&gt; &lt;li&gt; Мультимедиа мен суреттердегі түстер өзгереді.&lt;/li&gt; &lt;li&gt; Қараңғы фонды көрсету үшін қараңғы тақырыпты қолдануға болады. Бірақ қараңғы тақырып қолдау көрсетілетін қолданбаларда ғана қосылады. Ал түстер инверсиясы кез келген қолданбада бар.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="6955835010409034745">"Түс инверсиясы жарық экранды қараңғыға ауыстырады.&lt;br/&gt;&lt;br/&gt; Ескертпе: &lt;ol&gt; &lt;li&gt; Қараңғы экранды жарыққа ауыстыру мүмкіндігі де бар.&lt;/li&gt; &lt;li&gt; Мультимедиа мен суреттердегі түстер өзгереді.&lt;/li&gt; &lt;li&gt; Қараңғы фонды көрсету үшін қараңғы режимты қолдануға болады. Бірақ қараңғы режим қолдау көрсетілетін қолданбаларда ғана қосылады. Ал түстер инверсиясы кез келген қолданбада бар.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Автоматты түрде басу (күту уақыты)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Автоматты басу (кідіру уақыты) туралы"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Автоматты басу (кідіру уақыты) туралы толығырақ"</string>
@@ -2555,7 +2557,7 @@
     <string name="accessibility_no_service_selected" msgid="1310596127128379897">"Ешқандай қызмет таңдалмаған"</string>
     <string name="accessibility_service_default_description" msgid="7801435825448138526">"Сипаттама ұсынылмаған"</string>
     <string name="settings_button" msgid="2195468788019730377">"Параметрлер"</string>
-    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"жарықсезгіштік, фотофобия, қараңғы тақырып, бас сақинасы ауруы, бас ауруы, оқу режимі, түнгі режим, жарықтықты азайту, ақ нүкте"</string>
+    <string name="keywords_reduce_bright_colors" msgid="1683190961013139183">"жарықсезгіштік, фотофобия, қараңғы режим, бас сақинасы ауруы, бас ауруы, оқу режимі, түнгі режим, жарықтықты азайту, ақ нүкте"</string>
     <string name="keywords_accessibility" msgid="4263443239404659143">"Оңай пайдалану, оңай кіру, көмек, көмекші"</string>
     <string name="keywords_magnification" msgid="3908145308269840862">"Терезені ұлғайтқыш, масштабтау, ұлғайту, нашар көру қабілеті, жақындату, үлкейту"</string>
     <string name="keywords_talkback" msgid="2816435437095102527"></string>
@@ -3584,7 +3586,7 @@
     <string name="keywords_model_and_hardware" msgid="4723665865709965044">"сериялық нөмір, жабдық нұсқасы"</string>
     <string name="keywords_android_version" msgid="1629882125290323070">"android қауіпсіздік түзетуінің деңгейі, тікелей тарату нұсқасы, ядро нұсқасы"</string>
     <string name="keywords_dark_ui_mode" msgid="6373999418195344014">"тақырып, жарық, қараңғы, режим, жарықсезгіштік, фотофобия, қараңғылау, қараңғы ету, қараңғы режим, бас сақинасы ауруы"</string>
-    <string name="keywords_systemui_theme" msgid="6341194275296707801">"күңгірт тақырып"</string>
+    <string name="keywords_systemui_theme" msgid="6341194275296707801">"қараңғы режим"</string>
     <string name="keywords_device_feedback" msgid="5489930491636300027">"қате"</string>
     <string name="keywords_ambient_display_screen" msgid="661492302323274647">"Қосулы экран, құлып экраны"</string>
     <string name="keywords_lock_screen_notif" msgid="6363144436467429932">"құлып экраны хабарландыруы, хабарландырулар"</string>
@@ -3605,9 +3607,9 @@
     <string name="keywords_default_payment_app" msgid="5162298193637362104">"төлем, әдепкі"</string>
     <string name="keywords_ambient_display" msgid="3149287105145443697">"кіріс хабарландыру"</string>
     <string name="keywords_hotspot_tethering" msgid="3688439689671232627">"USB арқылы қосу, Bluetooth арқылы қосу, Wi-Fi хотспоты"</string>
-    <string name="keywords_touch_vibration" msgid="1125291201902251273">"жанасу сезімталдығы, діріл, экран, сезімталдық"</string>
-    <string name="keywords_ring_vibration" msgid="1736301626537417541">"сенсорлар, діріл, телефон, қоңырау, сезгіштік"</string>
-    <string name="keywords_notification_vibration" msgid="9162262178415439951">"сенсорлар, діріл, сезгіштік"</string>
+    <string name="keywords_touch_vibration" msgid="1125291201902251273">"хептика, діріл, экран, сезгіштік"</string>
+    <string name="keywords_ring_vibration" msgid="1736301626537417541">"хептика, діріл, телефон, қоңырау, сезгіштік"</string>
+    <string name="keywords_notification_vibration" msgid="9162262178415439951">"хептика, діріл, сезгіштік"</string>
     <string name="keywords_battery_saver_sticky" msgid="1646191718840975110">"батареяны үнемдеу режимі, бекітілген, тұрақты, power saver, батарея"</string>
     <string name="keywords_battery_saver_schedule" msgid="8240483934368455930">"әрекеттер тізімі, кесте, батареяны үнемдеу режимі, қуат үнемдеу, батарея, автоматты, пайыз"</string>
     <string name="keywords_enhance_4g_lte" msgid="658889360486800978">"VoLTE, жетілдірілген қоңырау, 4g қоңырауы"</string>
@@ -3615,16 +3617,16 @@
     <string name="keywords_add_language" msgid="1882751300359939436">"тілді енгізу, тіл енгізу"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"мәтін өлшемі, үлкен жазу, үлкен қаріп, үлкен мәтін, нашар көру қабілеті, мәтінді ұлғайту, қаріпті ұлғайту"</string>
     <string name="default_sound" msgid="6604374495015245195">"Әдепкі дыбыс"</string>
-    <string name="sound_settings_summary" msgid="944761906531715109">"Қоңыраулар мен хабарландырулардың дыбыс деңгейі: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
+    <string name="sound_settings_summary" msgid="944761906531715109">"Қоңырау мен хабарландырудың дыбыс деңгейі: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Дыбыс деңгейі, діріл, Мазаламау режимі"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Қоңырау дірілдеу режиміне қойылған"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Қоңырау үнсіз режимге қойылған"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Қоңыраулар мен хабарландырулардың дыбыс деңгейі: 80%"</string>
+    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Қоңырау мен хабарландырудың дыбыс деңгейі: 80%"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Mультимeдианың дыбыс деңгейі"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Трансляцияның дыбыс деңгейі"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Сөйлесу кезіндегі дыбыс деңгейі"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Оятқыштың дыбыс деңгейі"</string>
-    <string name="ring_volume_option_title" msgid="1520802026403038560">"Қоңыраулар мен хабарландырулардың дыбыс деңгейі"</string>
+    <string name="ring_volume_option_title" msgid="1520802026403038560">"Қоңырау мен хабарландыру дыбысы"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Хабарландырудың дыбыс деңгейі"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Телефон рингтоны"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Әдепкі хабарландыру дыбысы"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Зарядтау кезіндегі дыбыс және діріл"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Док-станцияға қою дыбыстары"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Түрту дыбысы"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Діріл режимінде белгішені әрдайым көрсету"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Түрту дірілі"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Экранды түрту, түймелерді басу және т.б. кездегі діріл"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Док-станция динамигі ойнайды"</string>
@@ -3654,7 +3657,7 @@
     <string name="boot_sounds_title" msgid="5033062848948884111">"Дыбыстарды қосу"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Live Caption"</string>
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматты субтитр қосу"</string>
-    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Жоқ}=1{1 кесте қойылған.}other{# кесте қойылған.}}"</string>
+    <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Жоқ}=1{1 кесте қойылған}other{# кесте қойылған}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Мазаламау"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Хабарландыруды маңызды адамдардан және қолданбалардан ғана алу"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Хабарландыруларды шектеу"</string>
@@ -3679,7 +3682,7 @@
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Мазаламау режимі қосулы кезде"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Хабарландырулар дыбыссыз беріледі"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Хабарландырулар экранға шығады"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Хабарландырулар келіп түскенде, телефон дыбыс шығармайды не дірілдемейді."</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Хабарландырулар келіп түскенде, телефон дыбыс шығармайды және дірілдемейді."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Хабарландырулар визуалды не дыбыстық сигналсыз беріледі"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Хабарландырулар көрсетілмейді не естілмейді"</string>
     <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Жаңа немесе бұрыннан бар хабарландыруларды телефон көрсетпейді, дірілдемейді немесе дыбыс шығармайды. Бірақ телефон әрекетіне және күйіне қатысты маңызды хабарландырулар шыға береді.\n\nМазаламау режимін өшірген соң, ашылмаған хабарландыруларды көру үшін экранды жоғарыдан төмен қарай сырғытыңыз."</string>
@@ -4120,7 +4123,7 @@
     <string name="zen_calls_summary_contacts_repeat" msgid="2276432091940405376">"Контактілерден және қайта қоңырау шалушылардан"</string>
     <string name="zen_calls_summary_repeat_only" msgid="7748352153193832632">"Тек қайта қоңырау шалушылардан"</string>
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Ешқандай қоңырауға рұқсат жоқ"</string>
-    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Ешқандай хабарға рұқсат жоқ"</string>
+    <string name="zen_mode_none_messages" msgid="1386626352943268342">"Жоқ"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Оятқыштар"</string>
     <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Таймерден, оятқыштан, қауіпсіздік жүйесінен және басқа қолданбалардан шығатын дабыл"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"оятқыштар"</string>
@@ -4150,13 +4153,13 @@
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"Барлық хабарландыру"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"Кейбір хабарландырулар"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"Таңдалған адамдар қолданбада мазаламау режимі қосулы болса да сізге хабарласа алады."</string>
-    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ешқандай қолданба тоқтата алмайды}=1{{app_1} тоқтата алады}=2{{app_1} және {app_2} тоқтата алады}=3{{app_1}, {app_2} және {app_3} тоқтата алады}other{{app_1}, {app_2} және тағы # қолданба тоқтата алады}}"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{Ешқандай қолданба тоқтата алмайды.}=1{{app_1} тоқтата алады.}=2{{app_1} және {app_2} тоқтата алады}=3{{app_1}, {app_2} және {app_3} тоқтата алады.}other{{app_1}, {app_2} және тағы # қолданба тоқтата алады.}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"Қолданбалар"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"Барлық хабарландыру"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"Кейбір хабарландырулар"</string>
     <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"Тоқтата алатын хабарландырулар"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"Барлық хабарландыруға рұқсат ету"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Ештеңе тоқтата алмайды}=1{{sound_category_1} тоқтата алады}=2{{sound_category_1} және {sound_category_2} тоқтата алады}=3{{sound_category_1}, {sound_category_2} және {sound_category_3} тоқтата алады}other{{sound_category_1}, {sound_category_2} және тағы # дыбыс тоқтата алады}}"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Ештеңе тоқтата алмайды.}=1{{sound_category_1} тоқтата алады.}=2{{sound_category_1} және {sound_category_2} тоқтата алады.}=3{{sound_category_1}, {sound_category_2} және {sound_category_3} тоқтата алады.}other{{sound_category_1}, {sound_category_2} және тағы # дыбыс тоқтата алады.}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Ештеңе тоқтата алмайды"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Ешкім тоқтата алмайды"</string>
     <string name="zen_mode_people_some" msgid="9101872681298810281">"Кейбір адамдар тоқтата алады."</string>
@@ -4568,7 +4571,7 @@
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> пайдаланылды - <xliff:g id="FREE_SPACE">%2$s</xliff:g> бос"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Ішкі жад: <xliff:g id="PERCENTAGE">%1$s</xliff:g> пайдаланылды, <xliff:g id="FREE_SPACE">%2$s</xliff:g> бос"</string>
     <string name="display_summary" msgid="5526061030874717172">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> уақыт әрекетсіздіктен кейін ұйқы режиміне өту"</string>
-    <string name="display_dashboard_summary" msgid="1599453894989339454">"Қараңғы тақырып, қаріп өлшемі, жарықтық"</string>
+    <string name="display_dashboard_summary" msgid="1599453894989339454">"Қараңғы режим, қаріп өлшемі, жарықтық"</string>
     <string name="display_summary_example" msgid="4275121979039344438">"10 минут әрекетсіздіктен кейін ұйқы режиміне өту"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Орташа алғанда <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> ішінен <xliff:g id="USED_MEMORY">%1$s</xliff:g> жад пайдаланылған"</string>
     <string name="users_summary" msgid="8473589474976307510">"<xliff:g id="USER_NAME">%1$s</xliff:g> болып кірдіңіз"</string>
@@ -4780,14 +4783,14 @@
     <string name="bluetooth_connected_summary" msgid="8043167194934315712">"<xliff:g id="ID_1">%1$s</xliff:g> құрылғысына жалғанған"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Түрлі құрылғыларға қосылған"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Жүйе интерфейсінің демо режимі"</string>
-    <string name="dark_ui_mode" msgid="898146394425795281">"Қараңғы тақырып"</string>
+    <string name="dark_ui_mode" msgid="898146394425795281">"Қараңғы режим"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Батареяны үнемдеу режиміне байланысты уақытша өшірілген."</string>
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Батареяны үнемдеу режиміне байланысты уақытша өшірілген."</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Батареяны үнемдеу режимін өшіру"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Батареяны үнемдеу режиміне байланысты уақытша қосулы"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Қолдауға ие қолданбалар да қараңғы тақырыпқа ауысады."</string>
+    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Қолдауға ие қолданбалар да қараңғы режимге ауысады."</string>
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Түсінікті"</string>
-    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Қараңғы тақырыпты пайдаланып көру"</string>
+    <string name="dark_theme_slice_title" msgid="4684222119481114062">"Қараңғы режимді пайдаланып көру"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батарея жұмысын ұзартуға көмектеседі."</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Жылдам параметрлердің әзірлеушілерге арналған бөлшектері"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"adb авторизациясынан автоматты бас тартуды өшіру"</string>
@@ -5113,7 +5116,7 @@
     <string name="media_output_summary" product="tablet" msgid="5138101426462250247">"Планшет"</string>
     <string name="media_output_summary" product="device" msgid="3598300438694764381">"Құрылғы"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="475188726850090363">"Қоңыраулар кезінде қолжетімді емес"</string>
-    <string name="media_output_summary_unavailable" msgid="2695058965888813093">"Қолжетімді емес"</string>
+    <string name="media_output_summary_unavailable" msgid="2695058965888813093">"Қолжетімсіз"</string>
     <string name="media_output_group_panel_title" msgid="3086245179062913037">"Шығыстар қосу"</string>
     <string name="media_output_group" msgid="7918231774595274396">"Топ"</string>
     <string name="media_output_group_panel_single_device_summary" msgid="5027884071572180516">"1 құрылғы таңдалды"</string>
@@ -5343,7 +5346,7 @@
     <string name="enable_non_resizable_multi_window" msgid="6832903754625404477">"Өлшемі өзгермейтін қолданба мен көп терезелі режим"</string>
     <string name="enable_non_resizable_multi_window_summary" msgid="3275763753261901999">"Өлшемі өзгермейтін қолданбаларды көп терезелі режимде пайдалануға мүмкіндік береді."</string>
     <string name="hwui_force_dark_title" msgid="4256904905631994219">"Қараңғылауға жол бермеу"</string>
-    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Қараңғы тақырыпты мәжбүрлеп қойғанда, \"Әрдайым қосулы\" мәніне өзгертеді."</string>
+    <string name="hwui_force_dark_summary" msgid="6515748781487952769">"Қараңғы режимді мәжбүрлеп қойғанда, \"Әрдайым қосулы\" мәніне өзгертеді."</string>
     <string name="privacy_dashboard_title" msgid="6845403825611829558">"Құпиялылық"</string>
     <string name="privacy_dashboard_summary" msgid="5775090172422786808">"Рұқсаттар, аккаунт әрекеттері, жеке деректер"</string>
     <string name="contextual_card_dismiss_remove" msgid="8636557343011606722">"Өшіру"</string>
@@ -5467,7 +5470,7 @@
     <string name="calls_sms_preferred" msgid="6016477652522583496">"таңдалған"</string>
     <string name="calls_sms_calls_preferred" msgid="9004261125829377885">"қоңыраулар үшін басым провайдер"</string>
     <string name="calls_sms_sms_preferred" msgid="3855778890660922711">"SMS хабарлары үшін басым провайдер"</string>
-    <string name="calls_sms_unavailable" msgid="4055729705246556529">"қолжетімді емес"</string>
+    <string name="calls_sms_unavailable" msgid="4055729705246556529">"қолжетімсіз"</string>
     <string name="calls_sms_temp_unavailable" msgid="8602291749338757424">"Уақытша қолжетімді емес"</string>
     <string name="calls_sms_no_sim" msgid="2336377399761819718">"SIM картасы жоқ"</string>
     <string name="network_and_internet_preferences_title" msgid="8635896466814033405">"Желі параметрлері"</string>
@@ -5521,7 +5524,7 @@
     <string name="category_name_display_controls" msgid="7046581691184725216">"Дисплейдің өзге басқару элементтері"</string>
     <string name="category_name_others" msgid="2366006298768550310">"Басқалар"</string>
     <string name="category_name_general" msgid="7737273712848115886">"Жалпы"</string>
-    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Қараңғы тақырыпты пайдалану"</string>
+    <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"Қараңғы режимді пайдалану"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth-ты пайдалану"</string>
     <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"Қоңырау дыбысын өшіру"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi‑Fi хотспотын пайдалану"</string>

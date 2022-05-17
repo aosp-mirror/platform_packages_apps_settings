@@ -488,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"מחיקה"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"נגיעה בחיישן"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"יש להניח את האצבע על החיישן ולהרים אותה לאחר שמרגישים רטט"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"צריך לשמור שטביעת האצבע תהיה שטוחה על החיישן עד שמרגישים רטט"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"צריך להחזיק את האצבע כך שטביעת האצבע תהיה על החיישן, עד שמרגישים רטט"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"לחיצה ארוכה על חיישן טביעות האצבע"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"להרים ולגעת בחיישן שוב"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"ושוב…"</string>
@@ -496,7 +496,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"יש להרים את האצבע ולגעת בחיישן עם חלקים שונים של האצבע לקבלת טביעת אצבע מלאה"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"לוחצים לחיצה ארוכה בכל פעם שסמל טביעת האצבע זז. כך יתועד חלק גדול יותר מהאצבע."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"מניחים את קצה האצבע על החיישן"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"לבסוף, משתמשים בקצוות האצבע"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"יש לסובב את קצה האצבע"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"כך יתועד חלק גדול יותר מהאצבע"</string>
     <!-- String.format failed for translation -->
@@ -505,6 +505,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"טביעת האצבע שלך נקלטה"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"עכשיו אפשר להשתמש בטביעת האצבע כדי לבטל את הנעילה של הטלפון או לאמת את הזהות שלך, למשל בכניסה לאפליקציות"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"לא עכשיו"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"מרימים ונוגעים בחיישן שוב"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"מניחים צד אחד של האצבע על החיישן ומחזיקים. אחר כך עוברים לצד השני"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"האם לדלג על הגדרת טביעת אצבע?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"בחרת להשתמש בטביעת האצבע שלך כאחת מהדרכים שבהן תהיה לך אפשרות לבטל את הנעילה בטלפון. אם החלטתך תהיה לדלג על שלב זה עכשיו, יהיה עליך לבצע את ההגדרה בהמשך. ההגדרה לוקחת רק דקה או שתיים."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"קוד האימות מגן על הטאבלט במקרים של אובדן או גניבה"</string>
@@ -2463,7 +2465,7 @@
     <string name="accessibility_autoclick_longer_desc" msgid="2566025502981487443">"ארוך יותר"</string>
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"זמן לחיצה אוטומטית"</string>
     <string name="accessibility_vibration_settings_title" msgid="5198184603753129450">"עוצמת הרטט והמשוב הפיזי"</string>
-    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט ההתראות"</string>
+    <string name="accessibility_notification_vibration_title" msgid="6205679908785776478">"רטט של התראה"</string>
     <string name="accessibility_ring_vibration_title" msgid="4689811297654320885">"רטט הצלצול"</string>
     <string name="accessibility_touch_vibration_title" msgid="533931451319110741">"משוב מגע"</string>
     <string name="accessibility_service_primary_switch_title" msgid="437610853412159406">"שימוש באפליקציה <xliff:g id="ACCESSIBILITY_APP_NAME">%1$s</xliff:g>"</string>
@@ -3735,6 +3737,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"צלילים ורטט לטעינה"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"צלילים בעגינה"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"צלילי מגע"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"הסמל תמיד מוצג במצב רטט"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"רטט מגע"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"משוב פיזי להקשה, מקלדת ועוד"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"רמקול בעגינה מופעל"</string>
@@ -3803,7 +3806,7 @@
     <string name="zen_mode_other_options" msgid="3399967231522580421">"אפשרויות אחרות"</string>
     <string name="zen_mode_add" msgid="8789024026733232566">"הוספה"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="1971034397501675078">"הפעלה"</string>
-    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"הפעלה עכשיו"</string>
+    <string name="zen_mode_button_turn_on" msgid="6583862599681052347">"הפעלה"</string>
     <string name="zen_mode_button_turn_off" msgid="2060862413234857296">"כיבוי עכשיו"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8251503918238985549">"המצב \'נא לא להפריע\' מופעל עד <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="1436568478062106132">"המצב \'נא לא להפריע\' ימשיך לפעול עד שמכבים אותו"</string>
@@ -3820,7 +3823,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{שעה}two{שעתיים}many{# שעות}other{# שעות}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{דקה אחת}two{# דקות}many{# דקות}other{# דקות}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{מצב כבוי}=1{מצב כבוי. ניתן להפעיל לוח זמנים אחד באופן אוטומטי}two{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}many{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}other{מצב כבוי. ניתן להפעיל # לוחות זמנים באופן אוטומטי}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע לתכונה \'נא לא להפריע\'"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"מה יכול להפריע כשהמכשיר במצב \'נא לא להפריע\'"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"אנשים"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"אפליקציות"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"שעונים מעוררים והפרעות אחרות"</string>
@@ -4246,7 +4249,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"תזכורות"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"אירועים ביומן"</string>
-    <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים צפויים ביומן"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"מאירועים קרובים ביומן"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"אירועים"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"אירועים"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"ניתן לאפשר לאפליקציות לבטל הגדרה זו"</string>
@@ -5711,7 +5714,7 @@
     <string name="multiple_users_main_switch_title" msgid="2759849884417772712">"שימוש במשתמשים מרובים"</string>
     <string name="wireless_debugging_main_switch_title" msgid="8463499572781441719">"ניפוי באגים אלחוטי"</string>
     <string name="graphics_driver_main_switch_title" msgid="6125172901855813790">"שימוש בהעדפות של מנהל ההתקן לגרפיקה"</string>
-    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"שימוש במצב \'חיסכון בסוללה\'"</string>
+    <string name="battery_saver_main_switch_title" msgid="5072135547489779352">"מצב \'חיסכון בסוללה\'"</string>
     <string name="do_not_disturb_main_switch_title_on" msgid="6965566556539821313">"כיבוי"</string>
     <string name="do_not_disturb_main_switch_title_off" msgid="7088088515823752545">"הפעלה"</string>
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"שימוש בתאורת לילה"</string>

@@ -191,6 +191,12 @@
         android:title="@string/touch_sounds_title"
         android:order="-30"/>
 
+    <!-- Show vibrate icon in status bar -->
+    <SwitchPreference
+        android:key="vibrate_icon"
+        android:title="@string/vibrate_icon_title"
+        android:order="-27"/>
+
     <!-- Vibrate on touch -->
     <SwitchPreference
         android:key="vibrate_on_touch"

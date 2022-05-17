@@ -53,7 +53,7 @@
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"縮小"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"放大"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3151963020165952847">"使用自動旋轉"</string>
-    <string name="smart_rotate_text_headline" msgid="436277795183609578">"臉部偵測技術會使用前置鏡頭提高自動旋轉的準確度。系統不會將相關圖像儲存或傳送給 Google。"</string>
+    <string name="smart_rotate_text_headline" msgid="436277795183609578">"臉部偵測技術會使用前置鏡頭提高「自動旋轉」功能的準確度。系統不會儲存相關圖像，也不會將這類圖像傳送給 Google。"</string>
     <string name="font_size_preview_text_headline" msgid="1173103737980511652">"範例文字"</string>
     <string name="font_size_preview_text_title" msgid="6363561029914452382">"綠野仙蹤"</string>
     <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"第 11 章：奧茲國的翡翠城"</string>
@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋新增成功"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"現在只要使用自己的指紋就能解鎖手機或驗證身分，例如用來登入應用程式"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再說"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"要略過指紋設定程序嗎？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"你已選擇使用指紋做為其中一種手機解鎖方式。如果現在略過這項程序，你必須在稍後完成設定。設定程序只需要一分鐘左右。"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"平板電腦遺失或遭竊時，PIN 碼可以保護平板電腦"</string>
@@ -1329,7 +1331,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"不要根據環境光源調整亮度"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"開啟會使耗電量增加。"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"根據環境光源調整最佳亮度。開啟這項功能之後，你依然可以暫時調整亮度。"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿協助自動調整亮度功能記憶偏好的亮度。"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"系統會根據你的所在環境和從事的活動自動調整螢幕亮度。你可以手動移動滑桿，協助自動調整亮度功能記憶你所偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"螢幕白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流暢顯示"</string>
@@ -1374,7 +1376,7 @@
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"保持開啟狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"保持關閉狀態，直到<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"夜燈模式目前已關閉"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位模式，裝置才能判斷日落和日出的時間。"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"必須開啟定位功能，裝置才能判斷日落和日出的時間。"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"位置資訊設定"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"立即開啟"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"立即關閉"</string>
@@ -3645,6 +3647,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電音效和震動"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"座架插入音效"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"觸控音效"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"在震動模式下一律顯示「震動」圖示"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"觸控震動"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"輕觸、鍵盤等操作的觸動回饋"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"座架喇叭播放音效"</string>
@@ -5448,7 +5451,7 @@
     <string name="overlay_settings_summary" msgid="2745336273786148166">"允許可顯示在其他應用程式上的應用程式重疊顯示在「設定」畫面上"</string>
     <string name="media_controls_title" msgid="403271085636252597">"媒體"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"固定媒體播放器"</string>
-    <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速繼續播放"</string>
+    <string name="media_controls_resume_description" msgid="3163482266454802097">"讓快速設定中的媒體播放器保持開啟狀態，以便快速恢復播放"</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"顯示媒體推薦內容"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"根據你的活動"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"隱藏播放器"</string>

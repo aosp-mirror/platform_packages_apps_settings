@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Agora, você pode usar a impressão digital para desbloquear o smartphone ou confirmar sua identidade, como ao fazer login em apps."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Mais tarde"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Tire o dedo e toque novamente"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Pular configuração da impressão digital?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Você optou por usar a impressão digital como uma maneira de desbloquear seu smartphone. Se você pular agora, precisará fazer essa configuração mais tarde. A configuração demora aproximadamente um minuto."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"O uso de um PIN protege o tablet em caso de perda ou roubo"</string>
@@ -1363,7 +1365,7 @@
     <string name="night_display_temperature_title" msgid="857248782470764263">"Intensidade"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"Nunca será ativado automaticamente"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"Será ativada automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Será ativada automaticamente ao anoitecer"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Será ativado automaticamente ao anoitecer"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Nunca será desativado automaticamente"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Será desativado automaticamente às <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Será desativado automaticamente ao amanhecer"</string>
@@ -1381,13 +1383,13 @@
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Ativar até o amanhecer"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Desativar até anoitecer"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"Modo escuro"</string>
-    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Programar"</string>
-    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nenhum"</string>
+    <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Programação"</string>
+    <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Nenhuma"</string>
     <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Ativ. do anoitecer ao amanhecer"</string>
-    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Ativado nos horários definidos"</string>
+    <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Ativada nos horários definidos"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Nunca será ativado automaticamente"</string>
-    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Será ativada automaticamente ao anoitecer"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Será ativado automaticamente ao anoitecer"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Será ativado automaticamente: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Nunca será desativado automaticamente"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Será desativado automaticamente ao amanhecer"</string>
@@ -2061,8 +2063,8 @@
     <string name="ask_compatibility" msgid="8388397595148476565">"Perguntar ao iniciar"</string>
     <string name="enable_compatibility" msgid="1163387233622859712">"Dimensionar app"</string>
     <string name="unknown" msgid="8192160131923461175">"Desconhecido"</string>
-    <string name="sort_order_alpha" msgid="3400680865280266582">"Classificar por nome"</string>
-    <string name="sort_order_size" msgid="7731928486199737223">"Classificar por tamanho"</string>
+    <string name="sort_order_alpha" msgid="3400680865280266582">"Ordenar por nome"</string>
+    <string name="sort_order_size" msgid="7731928486199737223">"Ordenar por tamanho"</string>
     <string name="sort_order_recent_notification" msgid="1496198895330443073">"Mais recentes"</string>
     <string name="sort_order_frequent_notification" msgid="4063700985742284794">"Mais frequentes"</string>
     <string name="show_running_services" msgid="8666008279959853318">"Mostrar serviços em exec."</string>
@@ -2124,7 +2126,7 @@
     <string name="app_ops_never_used" msgid="9038133162371204506">"(Nunca usado)"</string>
     <string name="no_default_apps" msgid="8966319676910104570">"Nenhum app padrão."</string>
     <string name="storageuse_settings_title" msgid="3125650750657988194">"Uso do armazenamento"</string>
-    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Visualizar armazenamento usado pelos apps"</string>
+    <string name="storageuse_settings_summary" msgid="5001621552305431831">"Ver armazenamento usado pelos apps"</string>
     <string name="service_restarting" msgid="5104563288155809226">"Reiniciando"</string>
     <string name="cached" msgid="5379485147573438201">"Processo em segundo plano em cache"</string>
     <string name="no_running_services" msgid="9079738069349859373">"Nada em execução."</string>
@@ -2257,7 +2259,7 @@
     <string name="allow_bind_app_widget_activity_always_allow_bind" msgid="7268758525344468364">"Sempre permitir que <xliff:g id="WIDGET_HOST_NAME">%1$s</xliff:g> crie widgets e acesse os dados"</string>
     <string name="usage_stats_label" msgid="6523644917803320085">"Estatísticas de uso"</string>
     <string name="testing_usage_stats" msgid="4660643799010906365">"Estatísticas de uso"</string>
-    <string name="display_order_text" msgid="7120394778684605892">"Classificar por:"</string>
+    <string name="display_order_text" msgid="7120394778684605892">"Ordenar por:"</string>
     <string name="app_name_label" msgid="3809910527680143673">"App"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Última utilização"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Tempo de uso"</string>
@@ -3645,6 +3647,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sons e vibração ao carregar"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons da base"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons de toque"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Sempre mostrar o ícone no modo de vibração"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibrar ao tocar na tela"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Retorno tátil para toque, teclado e muito mais"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Repr. de alto-falante em base"</string>
@@ -3677,14 +3680,14 @@
     <string name="zen_mode_settings_category" msgid="3794956668816783447">"Permitir interrupções que emitem sons"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Bloquear perturbações visuais"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Permitir sinais visuais"</string>
-    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Exibir opções para notificações ocultas"</string>
+    <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Mostrar opções para notificações ocultas"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Quando o Não perturbe estiver ativado"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Desativar som de notificações"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Você verá as notificações na sua tela"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Quando houver notificações, o smartphone não emitirá nenhum som ou vibração."</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"O smartphone não vai emitir nenhum som ou vibrar ao receber notificações."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ocultar avisos visuais ou sonoros de notificações"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Você não verá nem ouvirá notificações"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Seu smartphone não mostrará notificações novas ou existentes nem emitirá sons ou vibrações para elas. Lembre-se de que as notificações essenciais à atividade e ao status do smartphone ainda serão exibidas.\n\nDepois de desativar o Não perturbe, deslize de cima para baixo na tela para ver as notificações perdidas."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Seu smartphone não vai mostrar notificações novas ou existentes nem emitir sons ou vibrações para elas. Lembre-se de que as notificações essenciais à atividade e ao status do smartphone ainda serão exibidas.\n\nDepois de desativar o Não perturbe, deslize de cima para baixo na tela para ver as notificações perdidas."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Personalizado"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Ativar configuração personalizada"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remover configuração personalizada"</string>
@@ -3849,7 +3852,7 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Mostrar conteúdo confidencial quando bloqueado"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Notificações confidenciais do perfil de trabalho"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Mostrar conteúdo confidencial do perfil de trabalho quando estiver bloqueado"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostra todo o conteúdo das notificações"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Mostrar todo o conteúdo das notificações"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Só mostrar conteúdo confidencial quando desbloqueado"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Não mostrar nenhuma notificação"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Como você quer que a tela de bloqueio seja exibida?"</string>
@@ -4014,7 +4017,7 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> categorias</item>
     </plurals>
     <string name="no_channels" msgid="4716199078612071915">"Este app não postou nenhuma notificação"</string>
-    <string name="app_settings_link" msgid="6725453466705333311">"Configurações adicionais no app"</string>
+    <string name="app_settings_link" msgid="6725453466705333311">"Configurações avançadas no app"</string>
     <string name="notification_screen_summary" msgid="5984915275134654822">"Histórico de notificações, balões, mensagens enviadas recentemente"</string>
     <string name="app_notification_listing_summary_zero" msgid="2988400013221120744">"Ativadas para todos os apps"</string>
     <plurals name="app_notification_listing_summary_others" formatted="false" msgid="1506127395400503717">
@@ -4475,8 +4478,8 @@
     <string name="memory_details" msgid="6133226869214421347">"Detalhes"</string>
     <string name="memory_use_summary" msgid="3915964794146424142">"<xliff:g id="SIZE">%1$s</xliff:g> de memória média usada nas últimas três horas"</string>
     <string name="no_memory_use_summary" msgid="6708111974923274436">"Nenhuma memória foi usada nas últimas três horas"</string>
-    <string name="sort_avg_use" msgid="4416841047669186903">"Classificar por uso médio"</string>
-    <string name="sort_max_use" msgid="3370552820889448484">"Classificar por uso máximo"</string>
+    <string name="sort_avg_use" msgid="4416841047669186903">"Ordenar por uso médio"</string>
+    <string name="sort_max_use" msgid="3370552820889448484">"Ordenar por uso máximo"</string>
     <string name="memory_performance" msgid="5448274293336927570">"Desempenho"</string>
     <string name="total_memory" msgid="5244174393008910567">"Memória total"</string>
     <string name="average_used" msgid="690235917394070169">"Média usada (%)"</string>

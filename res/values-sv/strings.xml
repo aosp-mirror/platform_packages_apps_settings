@@ -393,7 +393,7 @@
     <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Använd ansiktet för att låsa upp telefonen och för autentisering i appar, t.ex. när du loggar in i appar eller godkänner köp.\n\nTänk på detta:\nBara ett ansikte i taget kan vara konfigurerat. Radera det nuvarande ansiktet innan du lägger till ett nytt.\n\nOm du tittar på telefonen kan du oavsiktligt låsa upp den.\n\nAndra kan låsa upp telefonen om de håller upp den mot ditt ansikte, även om du inte har ögonen öppna.\n\nTelefonen kanske kan låsas upp av någon som är mycket lik dig, till exempel ett syskon."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Vill du radera ansiktsmodellen?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Ansiktsmodellen raderas permanent på ett säkert sätt.\n\nEfter borttagningen behöver du pinkod, lösenord eller mönster för att låsa upp telefonen och för autentisering i appar."</string>
-    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Ansiktsmodellen raderas permanent på ett säkert sätt.\n\nEfter borttagningen behöver du pinkod, lösenord eller grafiskt lösenord för att låsa upp telefonen."</string>
+    <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Ansiktsmodellen raderas permanent på ett säkert sätt.\n\nEfter borttagningen behöver du pinkod, lösenord eller mönster för att låsa upp telefonen."</string>
     <string name="security_settings_face_settings_context_subtitle" msgid="8284262560781442403">"Lås upp telefonen med ansiktslås"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Fingeravtryck"</string>
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Fingeravtr. för jobbet"</string>
@@ -481,7 +481,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Tryck på sensorn"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Lägg fingret på sensorn och ta bort det när du känner en vibration"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Håll fingret på sensorn tills du känner en vibration"</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Tryck länge på fingeravtryckssensorn"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Håll fingret på sensorn"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Lyft och tryck sedan igen"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"En gång till"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Följ ikonen för fingeravtryck"</string>
@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrycket är tillagt"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nu kan du låsa upp telefonen eller verifiera din identitet med ditt fingeravtryck, till exempel när du loggar in i appar"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gör det senare"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lyft och tryck sedan igen"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placera sidan av fingerspetsen på sensorn, håll kvar och byt sedan till andra sidan"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Hoppa över fingeravtryckskonfigurering?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valt att låsa upp mobilen med hjälp av ditt fingeravtryck. Om du hoppar över konfigureringen nu måste du slutföra den senare. Konfigureringen tar bara en minut eller två."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En pinkod skyddar surfplattan om den kommer bort eller blir stulen"</string>
@@ -1925,13 +1927,13 @@
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Ange lösenordet för jobbet igen"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ange lösenordet för jobbprofilen"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="4037701363240138651">"Bekräfta mönster"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ange det grafiska lösenordet"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ange mönstret"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="2241722970567131308">"Ange din pinkod igen"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Ange pinkoden för jobbet igen"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ange pinkoden för jobbprofilen"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Lösenorden matchar inte"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"PIN-koderna matchar inte"</string>
-    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rita det grafiska lösenordet igen"</string>
+    <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rita mönstret igen"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="5669348379247148696">"Upplåsningsalternativ"</string>
     <string name="lockpassword_password_set_toast" msgid="6615759749393973795">"Lösenordet angavs"</string>
     <string name="lockpassword_pin_set_toast" msgid="5415783847198570890">"PIN-koden angavs"</string>
@@ -1943,24 +1945,24 @@
     <string name="lockpassword_choose_your_pattern_header_for_biometrics" msgid="4038476475293734905">"Skapa ett mönster för fingeravtrycks- eller ansiktslås"</string>
     <string name="lockpassword_choose_your_pin_header_for_biometrics" msgid="9086039918921009380">"Skapa en pinkod för ansiktslås eller fingeravtryckslås"</string>
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Har du glömt lösenordet?"</string>
-    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Har du glömt det grafiska lösenordet?"</string>
+    <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Har du glömt mönstret?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Har du glömt pinkoden?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Ange det grafiska lösenordet för enheten om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"Ange mönstret för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"Ange pinkoden för enheten om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"Ange lösenordet för enheten om du vill fortsätta"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Ange det grafiska lösenordet för jobbprofilen om du vill fortsätta"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"Ange mönstret för jobbprofilen om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"Ange pinkoden för jobbprofilen om du vill fortsätta"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"Ange lösenordet för jobbprofilen om du vill fortsätta"</string>
-    <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Använd det grafiska lösenordet för enheten för att öka säkerheten"</string>
+    <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"Använd mönstret för enheten för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"Ange enhetens pinkod för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"Ange enhetens lösenord för att öka säkerheten."</string>
-    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Använd det grafiska lösenordet för jobbprofilen för att öka säkerheten"</string>
+    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"Använd mönstret för jobbprofilen för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"Ange pinkoden för jobbprofilen för att öka säkerheten"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"Ange lösenordet för jobbprofilen för att öka säkerheten"</string>
-    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Mobilen återställdes till standardinställningarna. Ange det tidigare grafiska lösenordet."</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"Mobilen återställdes till standardinställningarna. Ange det tidigare mönstret."</string>
     <string name="lockpassword_confirm_your_pin_details_frp" msgid="2128795640346033349">"Mobilen återställdes till standardinställningarna. Ange den tidigare pinkoden."</string>
     <string name="lockpassword_confirm_your_password_details_frp" msgid="4031863562975125016">"Mobilen återställdes till standardinställningarna. Ange det tidigare lösenordet."</string>
-    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Bekräfta det grafiska lösenordet"</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="5641858015891896427">"Bekräfta mönstret"</string>
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"Bekräfta pinkoden"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Bekräfta lösenordet"</string>
     <string name="lockpassword_invalid_pin" msgid="7530854476819820600">"Fel pinkod"</string>
@@ -1973,7 +1975,7 @@
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Tryck på Menu om du vill ha hjälp."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Lyft fingret när du är klar"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Anslut minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Försök igen."</string>
-    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Det grafiska lösenordet har registrerats"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Mönstret har registrerats"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Rita ditt grafiska lösenord igen för att bekräfta"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Ditt nya grafiska lösenord"</string>
     <string name="lockpattern_confirm_button_text" msgid="6122815520373044089">"Bekräfta"</string>
@@ -1984,7 +1986,7 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"Begär mönster"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"Måste rita mönster för att låsa upp skärmen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"Gör mönster synligt"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Gör det grafiska lösenordet för profilen synligt"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Gör mönstret för profilen synligt"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrera vid tryck"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Strömbrytaren låses direkt"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Utom när den hålls olåst av <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
@@ -2016,7 +2018,7 @@
       <item quantity="one">Visa alla appar</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontakta IT-administratören"</string>
-    <string name="forgot_password_text" msgid="2583194470767613163">"Administratören kan hjälpa dig att återställa pinkoden, lösenordet eller det grafiska lösenordet"</string>
+    <string name="forgot_password_text" msgid="2583194470767613163">"Administratören kan hjälpa dig att återställa pinkoden, lösenordet eller mönstret"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Surfplattan och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på surfplattan eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="install_all_warning" product="default" msgid="652516435709047343">"Mobilen och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på mobilen eller förlust av data som kan uppstå när du använder dessa appar."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Enheten och dina personliga uppgifter är mer sårbara när attackerna kommer från okända appar. Genom att installera appar från den här källan accepterar du att du är ansvarig för eventuella skador på enheten eller förlust av data som kan uppstå när du använder dessa appar."</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Laddningsljud och -vibration"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Ljud via dockningsstationen"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Ljud vid tryck"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Visa alltid en ikon i vibrationsläget"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibration vid tryck"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptisk återkoppling för tryck, tangentbord med mera"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Spela upp i dockade högtalare"</string>
@@ -4224,13 +4227,13 @@
     <string name="encryption_interstitial_header" msgid="4418014339568737685">"Säker start"</string>
     <string name="encryption_continue_button" msgid="3591796237625134622">"Fortsätt"</string>
     <string name="encryption_interstitial_message_pin" msgid="1413575143234269985">"Du kan skydda enheten ytterligare genom att kräva att pinkoden måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm. \n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att pinkoden ska krävas när enheten startar?"</string>
-    <string name="encryption_interstitial_message_pattern" msgid="726550613252236854">"Du kan skydda enheten ytterligare genom att kräva att det grafiska lösenordet måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm. \n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att det grafiska lösenordet ska krävas när enheten startar?"</string>
+    <string name="encryption_interstitial_message_pattern" msgid="726550613252236854">"Du kan skydda enheten ytterligare genom att kräva att mönstret måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm. \n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att mönstret ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_password" msgid="6051054565294909975">"Du kan skydda enheten ytterligare genom att kräva att lösenordet måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm. \n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att lösenordet ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="7152770518093102916">"Förutom att använda fingeravtryck kan du skydda enheten ytterligare genom att kräva att pinkoden måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att pinkoden ska krävas när enheten startar?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="6257856552043740490">"Förutom att använda fingeravtryck kan du skydda enheten ytterligare genom att kräva att det grafiska lösenordet måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att det grafiska lösenordet ska krävas när enheten startar?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="6257856552043740490">"Förutom att använda fingeravtryck kan du skydda enheten ytterligare genom att kräva att mönstret måste anges när den startas. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att mönstret ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="7710804822643612867">"Förutom att låsa upp enheten med fingeravtryck kan du skydda den med ett lösenord som måste anges vid start. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att lösenordet ska krävas när enheten startas?"</string>
     <string name="encryption_interstitial_message_pin_for_face" msgid="8577135499926738241">"Förutom att låsa upp enheten med ditt ansikte kan du skydda enheten ytterligare genom att kräva att pinkoden måste anges när den startas. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att pinkoden ska krävas när enheten startar?"</string>
-    <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"Förutom att låsa upp enheten med ditt ansikte kan du skydda enheten ytterligare genom att kräva att det grafiska lösenordet måste anges när den startas. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att det grafiska lösenordet ska krävas när enheten startar?"</string>
+    <string name="encryption_interstitial_message_pattern_for_face" msgid="5851725964283239644">"Förutom att låsa upp enheten med ditt ansikte kan du skydda enheten ytterligare genom att kräva att mönstret måste anges när den startas. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att mönstret ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_password_for_face" msgid="3553329272456428461">"Förutom att låsa upp enheten med ditt ansikte kan du skydda enheten ytterligare genom att kräva att lösenordet måste anges när den startas. Enheten kan inte ta emot samtal, meddelanden eller aviseringar (inklusive alarm) innan den har startats.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att lösenordet ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_pin_for_biometrics" msgid="4590004045791674901">"Förutom att låsa upp enheten med biometri kan du skydda den med pinkoden som måste anges vid start. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att pinkoden ska krävas när enheten startar?"</string>
     <string name="encryption_interstitial_message_pattern_for_biometrics" msgid="2697768285995352576">"Förutom att låsa upp enheten med biometri kan du skydda den med ett mönster som måste anges vid start. Innan enheten startar går det inte att ta emot samtal, meddelanden eller aviseringar, inklusive alarm.\n\nDetta gör det lättare att skydda data på borttappade eller stulna enheter. Vill du att mönster ska krävas när enheten startar?"</string>

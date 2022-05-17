@@ -484,7 +484,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dodirnite senzor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Stavite prst na senzor i podignite ga kad osjetite vibraciju"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Držite otisak prsta ravno na senzoru dok ne osjetite vibraciju"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Držite prst ravno na senzoru dok ne osjetite vibraciju"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Dodirnite i držite senzor za otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Još jednom"</string>
@@ -499,6 +499,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Dodan je otisak prsta"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Sada možete koristiti otisak prsta da otključate telefon ili potvrdite identitet, npr. kada se prijavljujete u aplikacije"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Uradit ću to kasnije"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranu prsta postavite na senzor i zadržite, a zatim ga prebacite na drugu stranu"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Preskočiti postavljanje otiska prsta?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Odabrali ste da koristite otisak prsta kao jedan od načina za otključavanja telefona. Ukoliko sada preskočite ovaj korak, morat ćete ga postaviti kasnije. Postavka traje otprilike samo jednu minutu."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN štiti tablet ako ga izgubite ili ga neko ukrade"</string>
@@ -1785,14 +1787,14 @@
     <string name="main_clear_progress_text" msgid="4636695115176327972">"Pričekajte…"</string>
     <string name="call_settings_title" msgid="2531072044177194164">"Postavke poziva"</string>
     <string name="call_settings_summary" msgid="8244293779053318053">"Postavite govornu poštu, prosljeđivanje poziva, poziv na čekanju, ID pozivaoca"</string>
-    <string name="tether_settings_title_usb" msgid="5926474044238409099">"Povezivanje mobitela USB-om"</string>
+    <string name="tether_settings_title_usb" msgid="5926474044238409099">"Dijeljenje internetske veze putem USB-a"</string>
     <string name="tether_settings_title_wifi" msgid="4327056146425282159">"Prijenosna pristupna tačka"</string>
-    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Dijeljenje Bluetooth veze"</string>
-    <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Povezivanje putem mobitela"</string>
-    <string name="tether_settings_title_all" msgid="6807525590937697228">"Pristupna tačka i povezivanje putem mobitela"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Pristupna tačka je uključena, povezivanje putem mobitela"</string>
+    <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Dijeljenje internetske veze putem Bluetootha"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Dijeljenje internetske veze"</string>
+    <string name="tether_settings_title_all" msgid="6807525590937697228">"Pristupna tačka i dijeljenje internetske veze"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Pristupna tačka je uključena, dijeljenje internetske veze"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Pristupna tačka je uključena"</string>
-    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Povezivanje putem mobitela"</string>
+    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Dijeljenje internetske veze"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Dok je upaljena Ušteda podataka nije moguće povezati uređaj niti koristiti prijenosne pristupne tačke"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Samo pristupna tačka"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"Samo USB"</string>
@@ -1810,7 +1812,7 @@
     <string name="tether_settings_summary_usb_and_bluetooth_and_ethernet" msgid="5880591133984166550">"USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_all" msgid="7565193614882005775">"Pristupna tačka, USB, Bluetooth, Ethernet"</string>
     <string name="tether_settings_summary_off" msgid="2526164899130351968">"Internet se ne dijeli s drugim uređajima"</string>
-    <string name="tethering_interface_options" msgid="7575535888135143650">"Povezivanje putem mobitela"</string>
+    <string name="tethering_interface_options" msgid="7575535888135143650">"Dijeljenje internetske veze"</string>
     <string name="disable_wifi_hotspot_title" msgid="2167985468585290478">"Ne koristi WiFi pristupnu tačku"</string>
     <string name="disable_wifi_hotspot_when_usb_on" msgid="220439059794714583">"Dijeljenje interneta isključivo putem USB-a"</string>
     <string name="disable_wifi_hotspot_when_bluetooth_on" msgid="4711723299880116345">"Dijeljenje interneta isključivo putem Bluetootha"</string>
@@ -1820,19 +1822,19 @@
     <string name="disable_wifi_hotspot_when_bluetooth_and_ethernet_on" msgid="2943464651349235967">"Dijeljenje interneta isključivo putem Bluetootha i Etherneta"</string>
     <string name="disable_wifi_hotspot_when_usb_and_bluetooth_and_ethernet_on" msgid="3934609816834760008">"Dijeljenje interneta isključivo putem USB-a, Bluetootha i Etherneta"</string>
     <string name="usb_title" msgid="1157283449840612901">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Povezivanje mobitela putem USB-a"</string>
+    <string name="usb_tethering_button_text" msgid="7364633823180913777">"Dijeljenje internetske veze putem USB-a"</string>
     <string name="usb_tethering_subtext" product="default" msgid="3168636595109044213">"Dijeljenje internetske veze telefona putem USB-a"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="1749659335004856576">"Dijeljenje internetske veze tableta putem USB-a"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Povezivanje mobitela putem Bluetootha"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="6108398414967813545">"Dijeljenje internetske veze putem Bluetootha"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="2023654677593885805">"Dijeljenje internetske veze tableta putem Bluetootha"</string>
     <string name="bluetooth_tethering_subtext" product="default" msgid="4322810060538179348">"Dijeljenje internetske veze telefona putem Bluetootha"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6941934844527406581">"Dijeljenje internetske veze uređaja <xliff:g id="DEVICE_NAME">%1$d</xliff:g> putem Bluetootha"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="5292358672240161566">"Nije se moguće povezati sa više od <xliff:g id="MAXCONNECTION">%1$d</xliff:g> uređaja."</string>
     <string name="bluetooth_untether_blank" msgid="5087548945727762308">"Prestat će se dijeliti veza s uređajem <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Povezivanje putem mobitela za Ethernet"</string>
+    <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"Dijeljenje internetske veze putem Etherneta"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"Dijeljenje internetske veze telefona putem etherneta"</string>
-    <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i povezivanje putem mobitela za pružanje interneta drugim uređajima putem WiFi mreže ili veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
+    <string name="tethering_footer_info" msgid="6782375845587483281">"Koristite pristupnu tačku i Dijeljenje internetske veze da pružite internet drugim uređajima putem veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"Koristite pristupnu tačku i dijeljenje internetske veze da pružite internet drugim uređajima putem WiFi mreže ili veze za prijenos podataka na mobilnoj mreži. Aplikacije također mogu kreirati pristupne tačke za dijeljenje sadržaja s uređajima u blizini."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"Pomoć"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"Mobilna mreža"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"Paket mobilne usluge"</string>
@@ -2034,9 +2036,9 @@
     <string name="install_applications_title" msgid="7890233747559108106">"Dopusti sve izvore aplikacija"</string>
     <string name="recent_app_category_title" msgid="189758417804427533">"Nedavno otvarane aplikacije"</string>
     <plurals name="see_all_apps_title" formatted="false" msgid="6864581406735745400">
-      <item quantity="one">Prikaz svih aplikacija, ukupno %1$d</item>
-      <item quantity="few">Prikaz svih aplikacija, ukupno %1$d</item>
-      <item quantity="other">Prikaz svih aplikacija, ukupno %1$d</item>
+      <item quantity="one">Prikaz svih aplikacija (njih %1$d)</item>
+      <item quantity="few">Prikaz svih aplikacija (njih %1$d)</item>
+      <item quantity="other">Prikaz svih aplikacija (njih %1$d)</item>
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Kontaktirajte IT administratora"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Može vam pomoći s poništavanjem PIN-a, uzorka ili lozinke"</string>
@@ -3688,6 +3690,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvukovi/vibracija prilikom punjenja"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Zvukovi priključne stanice"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Zvukovi dodira"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Uvijek prikaži ikonu u načinu rada vibracije"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibracija pri dodiru"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptičke povratne informacije za dodir, tastaturu i drugo"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Zvučnik priključne stanice reprodukuje zvuk"</string>
@@ -4191,7 +4194,7 @@
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"podsjetnici"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"Podsjetnici"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"Događaji u Kalendaru"</string>
-    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Obavještenja nadolazećih događaja iz kalendara"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Obavještenja o nadolazećim događajima iz kalendara"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"događaji"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Događaji"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Dozvolite aplikacijama da zanemaruju"</string>
@@ -4499,7 +4502,7 @@
     <string name="usb_transcode_files" msgid="2441954752105119109">"Konvertiraj videozapise u AVC"</string>
     <string name="usb_transcode_files_summary" msgid="307102635711961513">"Videozapisi će se reproducirati na više medija plejera, ali se kvalitet može smanjiti"</string>
     <string name="usb_use_photo_transfers_desc" msgid="7490250033610745765">"Prebacuje slike ili fajlove ukoliko MTP nije podržan (PTP)"</string>
-    <string name="usb_use_tethering" msgid="2897063414491670531">"Povezivanje mobitela putem USB-a"</string>
+    <string name="usb_use_tethering" msgid="2897063414491670531">"Dijeljenje internetske veze putem USB-a"</string>
     <string name="usb_use_MIDI" msgid="8621338227628859789">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="6464135515868405143">"Koristite uređaj u MIDI načinu"</string>
     <string name="usb_use" msgid="6783183432648438528">"Koristite USB za"</string>
@@ -4517,11 +4520,11 @@
     <string name="usb_summary_charging_only" msgid="678095599403565146">"Punjenje ovog uređaja"</string>
     <string name="usb_summary_power_only" msgid="4901734938857822887">"Punjenje povezanog uređaja"</string>
     <string name="usb_summary_file_transfers" msgid="5498487271972556431">"Prijenos fajlova"</string>
-    <string name="usb_summary_tether" msgid="2554569836525075702">"Povezivanje mobitela putem USB-a"</string>
+    <string name="usb_summary_tether" msgid="2554569836525075702">"Dijeljenje internetske veze putem USB-a"</string>
     <string name="usb_summary_photo_transfers" msgid="7331503733435780492">"PTP"</string>
     <string name="usb_summary_MIDI" msgid="2372443732675899571">"MIDI"</string>
     <string name="usb_summary_file_transfers_power" msgid="2788374660532868630">"Prijenos fajlova i napajanje"</string>
-    <string name="usb_summary_tether_power" msgid="4853034392919904792">"Povezivanje mobitela putem USB-a i napajanje"</string>
+    <string name="usb_summary_tether_power" msgid="4853034392919904792">"Dijeljenje internetske veze putem USB-a i napajanje"</string>
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP i napajanje"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI i napajanje"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Provjera u pozadini"</string>
@@ -4674,7 +4677,7 @@
     <string name="condition_battery_title" msgid="6395113995454385248">"Ušteda baterije je uključena"</string>
     <string name="condition_battery_summary" msgid="8436806157833107886">"Funkcije su ograničene"</string>
     <string name="condition_cellular_title" msgid="155474690792125747">"Prijenos podataka na mobilnoj mreži je isključen"</string>
-    <string name="condition_cellular_summary" msgid="1678098728303268851">"Internet je dostupan samo putem WiFi mreže"</string>
+    <string name="condition_cellular_summary" msgid="1678098728303268851">"Internet je dostupan samo putem WiFi-ja"</string>
     <string name="condition_bg_data_title" msgid="2719263664589753094">"Ušteda podataka"</string>
     <string name="condition_bg_data_summary" msgid="1736255283216193834">"Funkcije su ograničene"</string>
     <string name="condition_work_title" msgid="174326145616998813">"Radni profil je isključen"</string>
@@ -4947,12 +4950,12 @@
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Vrh ekrana će se pomjeriti nadohvat vašeg palca."</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Prikaži obavještenja"</string>
     <string name="one_handed_action_show_notification_summary" msgid="8281689861222000436">"Obavještenja i postavke će se prikazati."</string>
-    <string name="ambient_display_summary" msgid="2650326740502690434">"Dvaput dodirnite ekran da provjerite vrijeme, obavještenja i druge informacije."</string>
+    <string name="ambient_display_summary" msgid="2650326740502690434">"Da provjerite vrijeme, obavještenja i druge informacije, dvaput dodirnite ekran."</string>
     <string name="ambient_display_pickup_title" product="default" msgid="4418310591912877548">"Provjera telefona podizanjem"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Podignite za provjeru tableta"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Podignite za provjeru uređaja"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Aktiviranje ekrana"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Podignite telefon da provjerite vrijeme, obavještenja i druge informacije."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Da provjerite vrijeme, obavještenja i druge informacije, podignite telefon."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Da provjerite vrijeme, obavještenja i druge informacije, podignite tablet."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Da provjerite vrijeme, obavještenja i druge informacije, podignite uređaj."</string>
     <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Provjera telefona dodirom"</string>
@@ -5536,7 +5539,7 @@
     <string name="media_controls_title" msgid="403271085636252597">"Mediji"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Zakači medija plejer"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Da brzo nastavite reprodukciju, medija plejer će ostati otvoren u Brzim postavkama"</string>
-    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikaži preporuke za medijske fajlove"</string>
+    <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikaži preporuke medija"</string>
     <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Na osnovu vaše aktivnosti"</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Sakrij plejer"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži plejer"</string>

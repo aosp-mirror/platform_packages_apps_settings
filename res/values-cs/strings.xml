@@ -503,6 +503,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Odteď můžete pomocí otisku prstu odemykat telefon nebo ověřovat svoji totožnost, například při přihlašování do aplikací."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Přeskočit nastavení otisku prstu?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Jako jeden ze způsobů odemknutí telefonu jste se rozhodli používat otisk prstu. Pokud nastavení přeskočíte, bude třeba jej dokončit později. Nastavení trvá jen chviličku."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN chrání tablet v případě ztráty nebo odcizení"</string>
@@ -3713,7 +3715,7 @@
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitost médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitost odesílání"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitost hovoru"</string>
-    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíku"</string>
+    <string name="alarm_volume_option_title" msgid="6398641749273697140">"Hlasitost budíků"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Hlasitost vyzvánění a oznámení"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Hlasitost oznámení"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Vyzvánění telefonu"</string>
@@ -3733,6 +3735,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvuky a vibrace při nabíjení"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Zvuky při vložení do doku"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Zvuky při dotyku"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Vždy zobrazovat ikonu v režimu vibrací"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibrace dotykové obrazovky"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Hmatová odezva pro klepnutí, klávesnici a další"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Zvuk reproduktoru doku"</string>
@@ -4205,7 +4208,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Volání"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"hovory"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Hovory, které smí vyrušovat"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pokud chcete, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění."</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"Pokud chcete, aby povolená volání vydávala zvuk, zkontrolujte, zda je zařízení nastaveno na vyzvánění."</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí hovory. Nastavení můžete upravit, aby se vám dovolali kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Kontakty označené hvězdičkou"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Nikdo}=1{{contact_1}}=2{{contact_1} a {contact_2}}=3{{contact_1}, {contact_2} a {contact_3}}few{{contact_1}, {contact_2} a # další}many{{contact_1}, {contact_2} a # dalšího}other{{contact_1}, {contact_2} a # dalších}}"</string>
@@ -4214,7 +4217,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"zprávy"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Zprávy"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Zprávy, které smí vyrušovat"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Pokud chcete, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastavené na vyzvánění."</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"Pokud chcete, aby povolené zprávy vydávaly zvuk, zkontrolujte, zda je zařízení nastaveno na vyzvánění."</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"V plánu <xliff:g id="SCHEDULE_NAME">%1$s</xliff:g> jsou blokovány příchozí zprávy. Nastavení můžete upravit, aby se s vámi mohli spojit kamarádi, členové rodiny nebo jiné vybrané kontakty."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Zprávu vám může poslat kdokoli"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Může se vám dovolat kdokoli"</string>
