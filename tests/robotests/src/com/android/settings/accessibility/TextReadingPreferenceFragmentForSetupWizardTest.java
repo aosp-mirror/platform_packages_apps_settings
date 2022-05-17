@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.TextReadingPreferenceFragment.RESET_KEY;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -25,6 +27,7 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
 
@@ -51,6 +54,9 @@ public class TextReadingPreferenceFragmentForSetupWizardTest {
         MockitoAnnotations.initMocks(this);
 
         mFragment = spy(new TextReadingPreferenceFragmentForSetupWizard());
+        final LayoutPreference resetPreference =
+                new LayoutPreference(mContext, R.layout.accessibility_text_reading_reset_button);
+        doReturn(resetPreference).when(mFragment).findPreference(RESET_KEY);
     }
 
     @Test

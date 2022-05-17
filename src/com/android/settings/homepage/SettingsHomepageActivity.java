@@ -20,6 +20,8 @@ import static android.provider.Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY;
 import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
 
+import static com.android.settings.SettingsActivity.EXTRA_USER_HANDLE;
+
 import android.animation.LayoutTransition;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
@@ -27,6 +29,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
@@ -86,7 +89,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
     private TopLevelSettings mMainFragment;
     private View mHomepageView;
-    private View mAppBar;
     private View mSuggestionView;
     private View mTwoPaneSuggestionView;
     private CategoryMixin mCategoryMixin;
@@ -171,8 +173,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         mSplitController = SplitController.getInstance();
         mIsTwoPane = mSplitController.isActivityEmbedded(this);
 
-        mAppBar = findViewById(R.id.app_bar_container);
-        mAppBar.setMinimumHeight(getSearchBoxHeight());
+        updateAppBarMinHeight();
         initHomepageContainer();
         updateHomepageAppBar();
         updateHomepageBackground();
@@ -449,7 +450,13 @@ public class SettingsHomepageActivity extends FragmentActivity implements
                 SplitRule.FINISH_ALWAYS,
                 SplitRule.FINISH_ALWAYS,
                 true /* clearTop */);
-        startActivity(targetIntent);
+
+        final UserHandle user = intent.getParcelableExtra(EXTRA_USER_HANDLE, UserHandle.class);
+        if (user != null) {
+            startActivityAsUser(targetIntent, user);
+        } else {
+            startActivity(targetIntent);
+        }
     }
 
     private String getHighlightMenuKey() {
@@ -482,12 +489,15 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (!mIsEmbeddingActivityEnabled) {
             return;
         }
+        updateAppBarMinHeight();
         if (mIsTwoPane) {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.GONE);
             findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.suggestion_container_two_pane).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.homepage_app_bar_regular_phone_view).setVisibility(View.VISIBLE);
             findViewById(R.id.homepage_app_bar_two_pane_view).setVisibility(View.GONE);
+            findViewById(R.id.suggestion_container_two_pane).setVisibility(View.GONE);
         }
     }
 
@@ -498,19 +508,20 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         if (mIsTwoPane) {
             int padding = getResources().getDimensionPixelSize(
                     R.dimen.homepage_padding_horizontal_two_pane);
-            mAppBar.setPaddingRelative(padding, 0, padding, 0);
             mMainFragment.setPaddingHorizontal(padding);
         } else {
-            mAppBar.setPaddingRelative(0, 0, 0, 0);
             mMainFragment.setPaddingHorizontal(0);
         }
         mMainFragment.updatePreferencePadding(mIsTwoPane);
     }
 
-    private int getSearchBoxHeight() {
+    private void updateAppBarMinHeight() {
         final int searchBarHeight = getResources().getDimensionPixelSize(R.dimen.search_bar_height);
-        final int searchBarMargin = getResources().getDimensionPixelSize(R.dimen.search_bar_margin);
-        return searchBarHeight + searchBarMargin * 2;
+        final int margin = getResources().getDimensionPixelSize(
+                mIsEmbeddingActivityEnabled && mIsTwoPane
+                        ? R.dimen.homepage_app_bar_padding_two_pane
+                        : R.dimen.search_bar_margin);
+        findViewById(R.id.app_bar_container).setMinimumHeight(searchBarHeight + margin * 2);
     }
 
     private static class SuggestionFragCreator implements FragmentCreator {
