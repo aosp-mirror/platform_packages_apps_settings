@@ -74,6 +74,16 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_display_daltonizer_preference_title));
+        }
+    }
+
+    @Override
     public void onCheckedChanged(Preference preference) {
         for (AbstractPreferenceController controller : sControllers) {
             controller.updateState(preference);

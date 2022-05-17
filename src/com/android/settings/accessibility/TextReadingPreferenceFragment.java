@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.IntDef;
@@ -101,6 +102,16 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
 
         if (icicle != null && icicle.getBoolean(NEED_RESET_SETTINGS)) {
             mResetStateListeners.forEach(ResetStateListener::resetState);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_text_reading_options_title));
         }
     }
 
