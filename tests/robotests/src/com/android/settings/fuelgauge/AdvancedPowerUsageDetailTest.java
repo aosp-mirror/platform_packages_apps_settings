@@ -43,6 +43,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.util.Pair;
 
@@ -548,6 +549,7 @@ public class AdvancedPowerUsageDetailTest {
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
         when(mFragment.getArguments()).thenReturn(bundle);
+
         mFragment.initHeader();
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
@@ -560,7 +562,7 @@ public class AdvancedPowerUsageDetailTest {
     public void testInitHeader_totalUsageLessThanAMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeLessThanHalfMinute = 20000;
         final long foregroundTimeLessThanHalfMinute = 20000;
-        Bundle bundle = new Bundle(2);
+        Bundle bundle = new Bundle(3);
         bundle.putLong(
                 AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeLessThanHalfMinute);
         bundle.putLong(
@@ -580,7 +582,7 @@ public class AdvancedPowerUsageDetailTest {
     public void testInitHeader_TotalAMinBackgroundLessThanAMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeZero = 59999;
         final long foregroundTimeTwoMinutes = 1;
-        Bundle bundle = new Bundle(2);
+        Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
         bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
@@ -598,7 +600,7 @@ public class AdvancedPowerUsageDetailTest {
     public void testInitHeader_TotalAMinBackgroundZeroWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeZero = 0;
         final long foregroundTimeAMinutes = 60000;
-        Bundle bundle = new Bundle(2);
+        Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeZero);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeAMinutes);
         bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
@@ -616,17 +618,50 @@ public class AdvancedPowerUsageDetailTest {
     public void testInitHeader_foregroundTwoMinBackgroundFourMinWithSlotTime_hasCorrectSummary() {
         final long backgroundTimeFourMinute = 240000;
         final long foregroundTimeTwoMinutes = 120000;
-        Bundle bundle = new Bundle(2);
+        Bundle bundle = new Bundle(3);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, backgroundTimeFourMinute);
         bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, foregroundTimeTwoMinutes);
         bundle.putString(AdvancedPowerUsageDetail.EXTRA_SLOT_TIME, SLOT_TIME);
         when(mFragment.getArguments()).thenReturn(bundle);
+
         mFragment.initHeader();
 
         ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
         verify(mEntityHeaderController).setSummary(captor.capture());
         assertThat(captor.getValue().toString())
                 .isEqualTo("6 min total • 4 min background\nfor 12 am-2 am");
+    }
+
+    @Test
+    public void testInitHeader_systemUidWithChartIsDisabled_nullSummary() {
+        Bundle bundle = new Bundle(3);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, 240000);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, 120000);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_UID, Process.SYSTEM_UID);
+        when(mFragment.getArguments()).thenReturn(bundle);
+        when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mContext))
+                .thenReturn(false);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue()).isNull();
+    }
+
+    @Test
+    public void testInitHeader_systemUidWithChartIsEnabled_notNullSummary() {
+        Bundle bundle = new Bundle(3);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME, 240000);
+        bundle.putLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME, 120000);
+        bundle.putInt(AdvancedPowerUsageDetail.EXTRA_UID, Process.SYSTEM_UID);
+        when(mFragment.getArguments()).thenReturn(bundle);
+
+        mFragment.initHeader();
+
+        ArgumentCaptor<CharSequence> captor = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mEntityHeaderController).setSummary(captor.capture());
+        assertThat(captor.getValue()).isNotNull();
     }
 
     @Test
