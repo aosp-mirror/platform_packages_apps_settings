@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App-talen"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"De taal instellen voor elke app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"App-taal"</string>
-    <string name="warnings_title" msgid="613849105118598110">"App updaten"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Update de app om de nieuwste talen te gebruiken die beschikbaar zijn"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Nu updaten"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Voorgestelde talen"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Alle talen"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Systeemtaal"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systeemstandaard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Taalselectie voor deze app is niet beschikbaar via Instellingen."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"De taal kan verschillen van de beschikbare talen in de app. Sommige apps ondersteunen deze instelling mogelijk niet."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Geselecteerde talen verwijderen?</item>
       <item quantity="one">Geselecteerde taal verwijderen?</item>
@@ -328,7 +327,7 @@
     <string name="location_settings_footer_learn_more_content_description" msgid="5329024810729665156">"Meer informatie over locatie-instellingen."</string>
     <string name="account_settings_title" msgid="9138880127246241885">"Accounts"</string>
     <string name="security_settings_title" msgid="6710768415432791970">"Beveiliging"</string>
-    <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Versleuteling en gegevens"</string>
+    <string name="encryption_and_credential_settings_title" msgid="5856216318961482983">"Versleuteling en inloggegevens"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="5298195959570992363">"Telefoon versleuteld"</string>
     <string name="not_encrypted_summary" product="default" msgid="2251945842585788254">"Telefoon niet versleuteld"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="3776741531205406800">"Apparaat versleuteld"</string>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Je vingerafdruk instellen"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Ontgrendelen met vingerafdruk toestaan"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Je vingerafdruk gebruiken"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Gebruik je vingerafdruk om je tablet te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps of een aankoop goedkeurt."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Toestaan dat je kind een vingerafdruk gebruikt om de telefoon te ontgrendelen of voor verificatie. Dit gebeurt onder meer als je kind inlogt bij apps of een aankoop goedkeurt."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Jij hebt het voor het zeggen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Jij en je kind hebben de controle"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Til je vinger op zodra je een trilling voelt"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Ga naar een plek met zachter licht en probeer het opnieuw"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Je hebt het maximale aantal pogingen bereikt"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gebruik je vingerafdruk om je tablet te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gebruik je vingerafdruk om je apparaat te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of te bevestigen dat jij het bent als je inlogt bij apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Ontgrendelen via gezichtsherkenning en vingerafdruk"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tik om in te stellen"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Gezicht en vingerafdrukken toegevoegd"</string>
@@ -529,12 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Zo kan er meer van je vingerafdruk worden geregistreerd"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Vingerafdruk vastleggen: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk toegevoegd"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Je kunt nu je vingerafdruk gebruiken om je tablet te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Je kunt nu je vingerafdruk gebruiken om je apparaat te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Later doen"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Raak de sensor opnieuw aan"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
@@ -598,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Nog een toevoegen"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Volgende"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Behalve voor het ontgrendelen van je telefoon kun je je vingerafdruk ook gebruiken voor het autoriseren van aankopen en app-toegang. "<annotation id="url">"Meer informatie"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" De optie voor schermvergrendeling staat uit. Neem contact op met de beheerder van je organisatie voor meer informatie. "<annotation id="admin_details">"Meer informatie"</annotation>\n\n"Je kunt je vingerafdruk nog steeds gebruiken voor het autoriseren van aankopen en app-toegang. "<annotation id="url">"Meer informatie"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"De optie voor schermvergrendeling is uitgezet. Neem voor meer informatie contact op met de beheerder van je organisatie."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Je kunt je vingerafdruk wel gebruiken om aankopen en app-toegang goed te keuren."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Til je vinger op en raak de sensor opnieuw aan"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Kan vingerafdruksensor niet gebruiken. Ga naar een reparateur."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Meer beveiligingsinstellingen"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Werkprofielvergrendeling, versleuteling en meer"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Versleuteling, inloggegevens en meer"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"beveiliging, meer beveiligingsinstellingen, meer instellingen, geavanceerde beveiligingsinstellingen"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Je kunt maximaal <xliff:g id="COUNT">%d</xliff:g> vingerafdrukken toevoegen"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Je hebt het maximale aantal vingerafdrukken toegevoegd"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan geen extra vingerafdrukken toevoegen"</string>
@@ -643,7 +638,9 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen dit apparaat zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Stel apparaatbeschermingsfuncties in om te voorkomen dat anderen deze telefoon zonder je toestemming gebruiken. Kies de schermvergrendeling die je wilt gebruiken."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Kies je back-upmethode voor schermvergrendeling"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
+    <skip />
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
     <skip />
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Als je deze vergrendeling vergeet, kan je IT-beheerder deze resetten"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Schermvergrendelingsopties"</string>
@@ -755,6 +752,7 @@
       <item quantity="other">Moet ten minste <xliff:g id="COUNT_1">%d</xliff:g> tekens bevatten</item>
       <item quantity="one">Moet ten minste <xliff:g id="COUNT_0">%d</xliff:g> teken bevatten</item>
     </plurals>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Als je alleen cijfers gebruikt, moet het minstens 1 cijfer lang zijn}other{Als je alleen cijfers gebruikt, moet het minstens # cijfers lang zijn}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">Pincode moet ten minste <xliff:g id="COUNT_1">%d</xliff:g> cijfers bevatten</item>
       <item quantity="one">Pincode moet ten minste <xliff:g id="COUNT_0">%d</xliff:g> cijfer bevatten</item>
@@ -1313,7 +1311,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Persoonlijk account - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Zoeken"</string>
     <string name="display_settings" msgid="7197750639709493852">"Scherm"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Scherm autom. draaien"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Scherm automatisch draaien"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Uit"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aan"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Aan: op basis van gezicht"</string>
@@ -2451,7 +2449,7 @@
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Kleurinversie gebruiken"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Snelkoppeling voor kleurinversie"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Met Kleurinversie worden lichte schermen donker en donkere schermen licht"</string>
-    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Houd rekening met het volgende:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Kleuren worden gewijzigd in media en afbeeldingen.&lt;/li&gt; &lt;li&gt; Kleurinversie werkt voor alle apps.&lt;/li&gt; &lt;li&gt; Als je een donkere achtergrond wilt hebben, kun je in plaats daarvan het donkere thema gebruiken.&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;Houd rekening met het volgende:&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Kleuren in media en afbeeldingen veranderen.&lt;/li&gt; &lt;li&gt; Kleurinversie werkt voor alle apps.&lt;/li&gt; &lt;li&gt; Als je een donkere achtergrond wilt hebben, kun je in plaats daarvan het donkere thema gebruiken.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Automatisch klikken (rusttijd)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"Over automatisch klikken (rusttijd)"</string>
     <string name="accessibility_autoclick_footer_learn_more_content_description" msgid="7056189627042350691">"Meer informatie over automatisch klikken (rusttijd)"</string>
@@ -2558,7 +2556,7 @@
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"Extra dimmen kan handig zijn in de volgende situaties: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je telefoon is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je telefoon in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"Extra dimmen kan handig zijn in de volgende situaties: &lt;ol&gt; &lt;li&gt; De standaard minimumhelderheid van je tablet is te helder voor je.&lt;/li&gt; &lt;li&gt; Je gebruikt je tablet in een donkere omgeving, zoals \'s avonds laat of in een donkere kamer voordat je gaat slapen.&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensiteit"</string>
-    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Helderheid lager"</string>
+    <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Minder helder"</string>
     <string name="reduce_bright_colors_intensity_end_label" msgid="1422600205484299860">"Helderder"</string>
     <string name="reduce_bright_colors_persist_preference_title" msgid="4368829654993343354">"Aanhouden nadat het apparaat opnieuw is opgestart"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_short_delay" formatted="false" msgid="5354221071353645263">
@@ -2700,9 +2698,9 @@
     <string name="manager_battery_usage_unrestricted_title" msgid="2426486290463258032">"Onbeperkt"</string>
     <string name="manager_battery_usage_optimized_title" msgid="8080765739761921817">"Geoptimaliseerd"</string>
     <string name="manager_battery_usage_restricted_title" msgid="7702863764130323118">"Beperkt"</string>
-    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Sta batterijgebruik op de achtergrond toe zonder beperkingen. Dit kan meer batterijlading verbruiken"</string>
-    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimaliseer op basis van je gebruik. Aanbevolen voor de meeste apps"</string>
-    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Beperk batterijgebruik op de achtergrond. De app werkt misschien niet zoals verwacht. Meldingen kunnen vertraagd zijn"</string>
+    <string name="manager_battery_usage_unrestricted_summary" msgid="6819279865465667692">"Sta batterijgebruik op de achtergrond toe zonder beperkingen. Dit kan meer batterijlading verbruiken."</string>
+    <string name="manager_battery_usage_optimized_summary" msgid="1332545476428039900">"Optimaliseer op basis van je gebruik. Aanbevolen voor de meeste apps."</string>
+    <string name="manager_battery_usage_restricted_summary" msgid="8324695640704416905">"Beperk batterijgebruik op de achtergrond. De app werkt misschien niet zoals verwacht. Meldingen kunnen vertraagd zijn."</string>
     <string name="manager_battery_usage_footer" msgid="2635906573922553766">"Als je aanpast hoe een app de batterij kan gebruiken, kan dit de prestaties beïnvloeden."</string>
     <string name="manager_battery_usage_footer_limited" msgid="5180776148877306780">"Deze app vereist <xliff:g id="STATE">%1$s</xliff:g> batterijgebruik."</string>
     <string name="manager_battery_usage_unrestricted_only" msgid="3646162131339418216">"onbeperkt"</string>
@@ -2941,10 +2939,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Vernieuwen"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"App-optimalisatie"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Tethering"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Verwijderde apps"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Batterijbesparing"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Automatisch aanzetten"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Geen planning"</string>
@@ -3373,10 +3369,8 @@
       <item quantity="other">Certificaten vertrouwen of verwijderen</item>
       <item quantity="one">Certificaat vertrouwen of verwijderen</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} heeft een certificeringsinstantie (CA) op je apparaat geïnstalleerd, waardoor dit domein de netwerkactiviteit van je apparaat kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}other{{orgName} heeft certificeringsinstanties (CA\'s) op je apparaat geïnstalleerd, waardoor dit domein de netwerkactiviteit van je apparaat kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} heeft een certificeringsinstantie (CA) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}other{{orgName} heeft certificeringsinstanties (CA\'s) voor je werkprofiel geïnstalleerd, waardoor dit domein activiteit in het werknetwerk kan bijhouden, waaronder e-mails, apps en beveiligde websites.\n\nNeem contact op met je beheerder voor meer informatie.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Een derde partij kan je netwerkactiviteit, waaronder e-mails, apps en beveiligde websites, bijhouden.\n\nDit is mogelijk omdat je een vertrouwd certificaat op je apparaat hebt opgeslagen."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Certificaten controleren</item>
@@ -3465,7 +3459,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Beperkingen verwijderen"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Pincode wijzigen"</string>
     <string name="help_label" msgid="2896538416436125883">"Hulp en feedback"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Help-artikelen, telefoon en chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Help-artikelen, telefoon en chat"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Account voor content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Groot gevaar"</string>
@@ -3860,6 +3858,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Beheer meldingen van afzonderlijke apps"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Algemeen"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Werkmeldingen"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Aanpasbare meldingen"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Aanpasbare meldingsprioriteit"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Meldingen met lagere prioriteit automatisch instellen op Subtiel"</string>
@@ -4078,7 +4078,7 @@
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"Gekoppelde apps delen rechten en hebben toegang tot elkaars gegevens."</string>
     <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"Koppel apps alleen als je erop vertrouwt dat ze geen persoonsgegevens met je IT-beheerder delen."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"Je kunt apps op elk moment ontkoppelen via de privacyinstellingen van je apparaat."</string>
-    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"<xliff:g id="NAME">%1$s</xliff:g> voor het werk vertrouwen met je persoonlijke gegevens?"</string>
+    <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"<xliff:g id="NAME">%1$s</xliff:g> voor het werk vertrouwen met je persoonsgegevens?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"Koppel apps alleen als je erop vertrouwt dat ze geen persoonsgegevens met je IT-beheerder delen."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"App-gegevens"</string>
     <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"Deze app heeft altijd toegang tot je persoonlijke <xliff:g id="NAME">%1$s</xliff:g>-app."</string>
@@ -4308,7 +4308,7 @@
     <string name="app_pinning_intro" msgid="6409063008733004245">"Als je een app vastzet, kun je de huidige app in beeld houden totdat je deze losmaakt. Je kunt deze functie bijvoorbeeld gebruiken om een vriend die je vertrouwt, een specifieke game te laten spelen."</string>
     <string name="screen_pinning_description" msgid="4305370471370474846">"Als je een app hebt vastgezet, kan de vastgezette app mogelijk andere apps openen en zijn er misschien persoonsgegevens toegankelijk. \n\nZo zet je een app vast: 	\n1. Zet App vastzetten aan. 	\n2. Open Overzicht. 	\n3. Tik bovenaan het scherm op het app-icoon en daarna op Vastzetten."</string>
     <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Als je een app hebt vastgezet, kan de vastgezette app mogelijk andere apps openen en zijn er misschien persoonsgegevens toegankelijk. \n\nAls je je apparaat beveiligd met iemand wilt delen, probeer je een gastgebruiker. \n\nZo zet je een app vast: 	\n1. Zet App vastzetten aan. 	\n2. Open Overzicht. 	\n3. Tik bovenaan het scherm op het app-icoon en daarna op Vastzetten."</string>
-    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Als een app is vastgezet: \n\n•	 Persoonlijke gegevens kunnen toegankelijk zijn (zoals contacten en e-mailcontent).\n \n•	 De vastgezette app kan mogelijk andere apps openen. \n\nGebruik deze functie alleen met mensen die je vertrouwt."</string>
+    <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Als een app is vastgezet: \n\n•	 Persoonsgegevens kunnen toegankelijk zijn (zoals contacten en e-mails).\n \n•	 De vastgezette app kan mogelijk andere apps openen. \n\nGebruik deze functie alleen met mensen die je vertrouwt."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Vraag om ontgrendelingspatroon voor losmaken"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Vraag pin voor losmaken"</string>
     <string name="screen_pinning_unlock_password" msgid="4957969621904790573">"Vraag wachtwoord voor losmaken"</string>
@@ -4804,7 +4804,7 @@
     <string name="data_saver_off" msgid="5891210864117269045">"Uit"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Databesparing gebruiken"</string>
     <string name="unrestricted_app_title" msgid="7117585996574329284">"Onbeperkt datagebruik toestaan"</string>
-    <string name="unrestricted_app_summary" msgid="282698963532000403">"Sta onbep. datatoegang toe als databesparing aanstaat"</string>
+    <string name="unrestricted_app_summary" msgid="282698963532000403">"Sta onbeperkte datatoegang toe als databesparing aanstaat"</string>
     <string name="home_app" msgid="6056850504746902747">"Startscherm-app"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Geen standaard startscherm"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="4098653943835666086">"Beveiligd opstarten"</string>
@@ -5632,7 +5632,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"gesprekken"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"sms"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobiele data"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Apps en services kunnen nog steeds op elk moment scannen op wifi-netwerken, zelfs als wifi uitstaat, om de apparaatfunctionaliteit te verbeteren. Dit kan worden gebruikt om bijvoorbeeld locatiegebaseerde functies en services te verbeteren. Je kunt dit wijzigen in de "<annotation id="link">"instellingen voor wifi-scannen"</annotation>"."</string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>: <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Verbonden"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Geen verbinding"</string>
@@ -5791,10 +5794,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Uitzendingen vinden"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Uitzending verlaten"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR-code scannen"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Wachtwoord opgeven"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Kan geen verbinding maken. Probeer het opnieuw."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Onjuist wachtwoord"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>
