@@ -36,6 +36,8 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
     protected final BackgroundHandler mHandler;
     protected final MainHandler mMainHandler;
 
+    private boolean mForceLoadAllApps;
+
     public AppStateBaseBridge(ApplicationsState appState, Callback callback) {
         mAppState = appState;
         mAppSession = mAppState != null ? mAppState.newSession(this) : null;
@@ -48,13 +50,21 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
         mMainHandler = new MainHandler(Looper.getMainLooper());
     }
 
-    public void resume() {
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
-        mAppSession.onResume();
+    public void resume(boolean forceLoadAllApps) {
+        mForceLoadAllApps = forceLoadAllApps;
+        if (mForceLoadAllApps) {
+            mAppSession.onResume();
+        } else {
+            mAppSession.activateSession();
+        }
     }
 
     public void pause() {
-        mAppSession.onPause();
+        if (mForceLoadAllApps) {
+            mAppSession.onPause();
+        } else {
+            mAppSession.deactivateSession();
+        }
     }
 
     public void release() {
