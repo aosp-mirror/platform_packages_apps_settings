@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Mga Wika ng App"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Itakda ang wika para sa bawat app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Wika ng App"</string>
-    <string name="warnings_title" msgid="613849105118598110">"I-update ang app"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Kailangan mong i-update ang app para sa pinakabagong available na wika"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"I-update ngayon"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Mga iminumungkahing wika"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Lahat ng wika"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Wika ng system"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Default ng system"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Hindi available sa Mga Setting ang pagpili ng wika para sa app na ito."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Posibleng iba ang wika sa mga wikang available sa app. Posibleng hindi suportahan ng ilang app ang setting na ito."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Alisin ang mga piniling wika?</item>
       <item quantity="other">Alisin ang mga piniling wika?</item>
@@ -432,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"I-set up ang fingerprint mo"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Payagan ang pag-unlock gamit ang fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Gamitin ang iyong fingerprint"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Gamitin ang iyong fingerprint para i-unlock ang tablet mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Gamitin ang iyong fingerprint para i-unlock ang device mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Gamitin ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app o nag-aapruba ka ng pagbili."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Payagan ang iyong anak na gamitin ang kanyang fingerprint para i-unlock ang kanyang telepono o i-verify na siya ito. Nangyayari ito kapag nagsa-sign in siya sa mga app, nag-aapruba ng pagbili, at iba pa."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Ikaw ang may kontrol"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Ikaw at ang iyong anak ang may kontrol"</string>
@@ -473,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Iangat ang iyong daliri pagkatapos mong makaramdam ng pag-vibrate"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Lumipat sa hindi masyadong maliwanag na lugar at subukan ulit"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Naabot mo na ang maximum na bilang ng mga pagsubok"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Gamitin ang iyong fingerprint para i-unlock ang tablet mo o i-verify na ikaw ito, katulad ng pag-sign in mo sa mga app"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Gamitin ang iyong fingerprint para i-unlock ang device mo o i-verify na ikaw ito, katulad ng pag-sign in mo sa mga app"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Gamitin ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito, katulad ng pag-sign in mo sa mga app"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Pag-unlock Gamit ang Mukha &amp; Fingerprint"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"I-tap para i-set up"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Nagdagdag ng mukha at mga fingerprint"</string>
@@ -529,12 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Makakatulong itong mas makuha ang iyong fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pag-enroll ng fingerprint: <xliff:g id="PERCENTAGE">%d</xliff:g> porsyento"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Naidagdag na ang fingerprint"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Ngayon, magagamit mo na ang iyong fingerprint para i-unlock ang tablet mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Ngayon, magagamit mo na ang iyong fingerprint para i-unlock ang device mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Ngayon, magagamit mo na ang iyong fingerprint para i-unlock ang telepono mo o i-verify na ikaw ito, halimbawa, kapag nagsa-sign in ka sa mga app"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gawin ito sa ibang pagkakataon"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Iangat, pagkatpaos ay pindutin ulit"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Ilagay ang gilid ng iyong fingerprint sa sensor nang matagal, pagkatapos ay ang kabilang gilid"</string>
@@ -598,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Magdagdag ng isa pa"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Susunod"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Bukod pa sa pag-a-unlock ng iyong telepono, maaari mo ring gamitin ang iyong fingerprint upang pahintulutan ang mga pagbili at pag-access sa app. "<annotation id="url">"Matuto pa"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Naka-disable ang opsyon ng lock ng screen. Upang matuto pa, makipag-ugnayan sa admin ng iyong organisasyon. "<annotation id="admin_details">"Higit pang detalye"</annotation>\n\n"Maaari mo pa ring gamitin ang fingerprint mo upang magpahintulot ng access ng app. "<annotation id="url">"Matuto pa"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Naka-disable ang opsyong lock ng screen. Para matuto pa, makipag-ugnayan sa admin ng iyong organisasyon."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Magagamit mo pa rin ang iyong fingerprint para pahintulutan ang mga pagbili at access sa app."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Iangat ang daliri, pagkatapos ay pindutin ulit ang sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Hindi magamit ang sensor para sa fingerprint. Bumisita sa provider ng pag-aayos"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Higit pang setting ng seguridad"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lock ng profile sa trabaho, pag-encrypt, at higit pa"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Pag-encrypt, mga kredensyal, at higit pa"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, higit pang setting ng seguridad, higit pang setting, advanced na setting ng seguridad"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Maaari kang magdagdag ng hanggang <xliff:g id="COUNT">%d</xliff:g> (na) fingerprint"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Naidagdag mo na ang maximum na bilang ng mga fingerprint"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Hindi na makapagdagdag ng higit pang fingerprint"</string>
@@ -643,7 +638,9 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Pigilan ang ibang taong magamit ang device na ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Pigilan ang ibang taong magamit ang teleponong ito sa pamamagitan ng pag-a-activate sa mga feature ng proteksyon ng device. Piliin ang screen lock na gusto mong gamitin."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Piliin ang iyong backup na paraan ng pag-lock ng screen"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
+    <skip />
+    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
     <skip />
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Kung makalimutan mo ang lock na ito, ipa-reset ito sa iyong IT admin"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Mga opsyon sa lock ng screen"</string>
@@ -755,6 +752,7 @@
       <item quantity="one">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> character</item>
       <item quantity="other">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> na character</item>
     </plurals>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Kung mga numero lang ang ginagamit, dapat ay may kahit man lang 1 digit}one{Kung mga numero lang ang ginagamit, dapat ay may kahit man lang # digit}other{Kung mga numero lang ang ginagamit, dapat ay may kahit man lang # na digit}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> digit ang PIN</item>
       <item quantity="other">Dapat ay may kahit <xliff:g id="COUNT_1">%d</xliff:g> na digit ang PIN</item>
@@ -2094,7 +2092,8 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Emergency app"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"I-reset ang kagustuhan sa app"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"I-reset ang gusto sa app?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Ire-reset nito ang lahat ng kagustuhan para sa:\n\n"<li>"Mga naka-disable na app"</li>\n<li>"Mga naka-disable na notification ng app"</li>\n<li>"Mga default na application para sa mga pagkilos"</li>\n<li>"Mga paghihigpit sa data ng background para sa mga app"</li>\n<li>"Anumang paghihigpit sa pahintulot"</li>\n\n"Hindi ka mawawalan ng anumang data ng app."</string>
+    <!-- no translation found for reset_app_preferences_desc (8550782670650158299) -->
+    <skip />
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"I-reset ang apps"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Pamahalaan ang espasyo"</string>
     <string name="filter" msgid="9039576690686251462">"I-filter"</string>
@@ -2939,10 +2938,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"I-refresh"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Pag-optimize ng app"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Pag-tether"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Mga inalis na app"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Pantipid ng Baterya"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Awtomatikong i-on"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Walang iskedyul"</string>
@@ -3371,10 +3368,8 @@
       <item quantity="one">Pagkatiwalaan o alisin ang mga certificate</item>
       <item quantity="other">Pagkatiwalaan o alisin ang mga certificate</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Nag-install ang {orgName} ng awtoridad sa certificate sa iyong device, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng device mo, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa certificate na ito, makipag-ugnayan sa iyong admin.}one{Nag-install ang {orgName} ng mga awtoridad sa certificate sa iyong device, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng device mo, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}other{Nag-install ang {orgName} ng mga awtoridad sa certificate sa iyong device, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng device mo, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Nag-install ang {orgName} ng awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa certificate na ito, makipag-ugnayan sa iyong admin.}one{Nag-install ang {orgName} ng mga awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}other{Nag-install ang {orgName} ng mga awtoridad sa certificate para sa iyong profile sa trabaho, na puwedeng magbigay-daan ditong subaybayan ang aktibidad sa network ng trabaho, kabilang ang mga email, app, at secure na website.\n\nPara sa higit pang impormasyon tungkol sa mga certificate na ito, makipag-ugnayan sa iyong admin.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"May kakayahan ang isang third party na subaybayan ang aktibidad ng iyong network, kabilang ang mga email, apps, at mga secure website.\n\nGinagawa itong posible ng isang pinagkakatiwalaang credential na naka-install sa iyong device."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="one">Tingnan ang mga certificate</item>
@@ -3470,7 +3465,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Alisin ang paghihigpit"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Palitan ang PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Tulong at feedback"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Mga artikulo ng tulong, telepono at pakikipag-chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Mga artikulo ng tulong, telepono at pakikipag-chat"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Account para sa nilalaman"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Pinakamatitinding banta"</string>
@@ -3865,6 +3864,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Kontrolin ang mga notification mula sa mga indibidwal na app"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Pangkalahatan"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Mga notification sa trabaho"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Mga adaptive na notification"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Priyoridad ng adaptive na notification"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Awtomatikong itakda sa Malumanay ang mga notification na may mababang priyoridad"</string>
@@ -5637,7 +5638,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"mga tawag"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobile data"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Para pahusayin ang karanasan sa device, puwede pa ring mag-scan ng mga Wi-Fi network ang mga app at serbisyo anumang oras, kahit habang naka-off ang Wi‑Fi. Magagamit ito, halimbawa, para pahusayin ang mga feature at serbisyong batay sa lokasyon. Mababago mo ito sa mga setting ng pag-scan ng Wi-Fi. "<annotation id="link">"Baguhin"</annotation></string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Nakakonekta"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Walang koneksyon"</string>
@@ -5796,10 +5800,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Maghanap ng mga broadcast"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Umalis sa broadcast"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"I-scan ang QR code"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ilagay ang password"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Hindi makakonekta. Subukan ulit."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Maling password"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
     <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
     <skip />
 </resources>
