@@ -17,17 +17,32 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
+import android.os.Vibrator;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Accessibility settings for the vibration. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class VibrationSettings extends DashboardFragment {
 
     private static final String TAG = "VibrationSettings";
+
+    private static int getVibrationXmlResourceId(Context context) {
+        final int supportedIntensities = context.getResources().getInteger(
+                R.integer.config_vibration_supported_intensity_levels);
+        return supportedIntensities > 1
+                ? R.xml.accessibility_vibration_intensity_settings
+                : R.xml.accessibility_vibration_settings;
+
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -41,7 +56,7 @@ public class VibrationSettings extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_vibration_settings;
+        return getVibrationXmlResourceId(getContext());
     }
 
     @Override
@@ -50,5 +65,21 @@ public class VibrationSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_vibration_settings);
+            new BaseSearchIndexProvider() {
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getSystemService(Vibrator.class).hasVibrator();
+                }
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> resourceData = new ArrayList<>();
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = getVibrationXmlResourceId(context);
+                    resourceData.add(sir);
+                    return resourceData;
+                }
+            };
 }

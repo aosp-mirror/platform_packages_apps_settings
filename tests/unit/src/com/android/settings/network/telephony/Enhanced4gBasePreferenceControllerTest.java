@@ -35,6 +35,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -55,7 +56,7 @@ public class Enhanced4gBasePreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private ProvisioningManager mProvisioningManager;
 
@@ -73,15 +74,14 @@ public class Enhanced4gBasePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        when(mContext.getSystemService(CarrierConfigManager.class))
-                .thenReturn(mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
 
         mCarrierConfig = new PersistableBundle();
-        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_HIDE_ENHANCED_4G_LTE_BOOL, false);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_EDITABLE_ENHANCED_4G_LTE_BOOL, true);
         mCarrierConfig.putInt(CarrierConfigManager.KEY_ENHANCED_4G_LTE_TITLE_VARIANT_INT, 1);

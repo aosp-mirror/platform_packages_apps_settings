@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.atLeast;
@@ -31,6 +33,7 @@ import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
+import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -52,13 +55,14 @@ import androidx.test.core.app.ApplicationProvider;
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -84,14 +88,13 @@ public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
     private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME, CLASS_NAME);
-    private static final int ON = 1;
-    private static final int OFF = 0;
     private static final String EMPTY_STRING = "";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
     private static final String DEFAULT_LABEL = "default label";
     private static final Boolean SERVICE_ENABLED = true;
     private static final Boolean SERVICE_DISABLED = false;
+
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
     @Spy
@@ -110,6 +113,10 @@ public class AccessibilitySettingsTest {
     @Mock
     private PreferenceManager mPreferenceManager;
     private ShadowAccessibilityManager mShadowAccessibilityManager;
+    @Mock
+    private AppOpsManager mAppOpsManager;
+
+    private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
@@ -121,6 +128,11 @@ public class AccessibilitySettingsTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         mContext.setTheme(R.style.Theme_AppCompat);
+        when(mContext.getSystemService(AppOpsManager.class)).thenReturn(mAppOpsManager);
+        when(mAppOpsManager.noteOpNoThrow(eq(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS),
+                anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
     }
 
     @Test
@@ -134,27 +146,12 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
+    @Ignore
     public void getRawDataToIndex_isNull() {
         final List<SearchIndexableRaw> indexableRawList =
                 AccessibilitySettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true);
 
         assertThat(indexableRawList).isNull();
-    }
-
-    @Test
-    @Config(shadows = {ShadowDeviceConfig.class})
-    public void isRampingRingerEnabled_settingsFlagOn_Enabled() {
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, ON);
-        assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isTrue();
-    }
-
-    @Test
-    @Config(shadows = {ShadowDeviceConfig.class})
-    public void isRampingRingerEnabled_settingsFlagOff_Disabled() {
-        Settings.Global.putInt(
-                mContext.getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
-        assertThat(AccessibilitySettings.isRampingRingerEnabled(mContext)).isFalse();
     }
 
     @Test
@@ -254,37 +251,6 @@ public class AccessibilitySettingsTest {
     }
 
     @Test
-    public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
-                singletonList(mServiceInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityServicePreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
-    }
-
-    @Test
-    public void createAccessibilityActivityPreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        setMockAccessibilityShortcutInfo(mShortcutInfo);
-        final List<AccessibilityShortcutInfo> infoList = new ArrayList<>(
-                singletonList(mShortcutInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityActivityPreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
-    }
-
-    @Test
     @Config(shadows = {ShadowFragment.class, ShadowUserManager.class})
     public void onCreate_haveRegisterToSpecificUrisAndActions() {
         final ArgumentCaptor<IntentFilter> captor = ArgumentCaptor.forClass(IntentFilter.class);
@@ -296,10 +262,10 @@ public class AccessibilitySettingsTest {
         verify(mContentResolver).registerContentObserver(
                 eq(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS)),
                 anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mContentResolver).registerContentObserver(eq(Settings.Secure.getUriFor(
                 Settings.Secure.ACCESSIBILITY_SHORTCUT_TARGET_SERVICE)), anyBoolean(),
-                any(SettingsContentObserver.class));
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity, atLeast(1)).registerReceiver(any(PackageMonitor.class), captor.capture(),
                 isNull(), any());
         intentFilter = captor.getAllValues().get(/* first time */ 0);
@@ -316,7 +282,8 @@ public class AccessibilitySettingsTest {
 
         mFragment.onDestroy();
 
-        verify(mContentResolver).unregisterContentObserver(any(SettingsContentObserver.class));
+        verify(mContentResolver).unregisterContentObserver(
+                any(AccessibilitySettingsContentObserver.class));
         verify(mActivity).unregisterReceiver(any(PackageMonitor.class));
 
     }
@@ -382,6 +349,7 @@ public class AccessibilitySettingsTest {
 
     private void setMockAccessibilityShortcutInfo(AccessibilityShortcutInfo mockInfo) {
         final ActivityInfo activityInfo = Mockito.mock(ActivityInfo.class);
+        activityInfo.applicationInfo = new ApplicationInfo();
         when(mockInfo.getActivityInfo()).thenReturn(activityInfo);
         when(activityInfo.loadLabel(any())).thenReturn(DEFAULT_LABEL);
         when(mockInfo.loadSummary(any())).thenReturn(DEFAULT_SUMMARY);

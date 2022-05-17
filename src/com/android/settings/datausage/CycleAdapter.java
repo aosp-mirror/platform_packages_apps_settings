@@ -14,22 +14,13 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.net.NetworkPolicy;
-import android.net.NetworkPolicyManager;
-import android.net.NetworkStatsHistory;
-import android.text.format.DateUtils;
-import android.util.Pair;
 import android.widget.AdapterView;
 
 import com.android.settings.Utils;
-import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.NetworkCycleData;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
-import java.time.ZonedDateTime;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem> {
 
@@ -42,7 +33,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         mSpinner = spinner;
         mListener = listener;
         mSpinner.setAdapter(this);
-        mSpinner.setOnItemSelectedListener(mListener);
     }
 
     /**
@@ -62,98 +52,22 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         return 0;
     }
 
-    /**
-     * Rebuild list based on {@link NetworkPolicy} and available
-     * {@link NetworkStatsHistory} data. Always selects the newest item,
-     * updating the inspection range on chartData.
-     */
-    @Deprecated
-    public boolean updateCycleList(NetworkPolicy policy, ChartData chartData) {
-        // stash away currently selected cycle to try restoring below
-        final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
-                mSpinner.getSelectedItem();
+    void setInitialCycleList(List<Long> cycles, long selectedCycle) {
         clear();
-
-        final Context context = getContext();
-        NetworkStatsHistory.Entry entry = null;
-
-        long historyStart = Long.MAX_VALUE;
-        long historyEnd = Long.MIN_VALUE;
-        if (chartData != null) {
-            historyStart = chartData.network.getStart();
-            historyEnd = chartData.network.getEnd();
-        }
-
-        final long now = System.currentTimeMillis();
-        if (historyStart == Long.MAX_VALUE) historyStart = now;
-        if (historyEnd == Long.MIN_VALUE) historyEnd = now + 1;
-
-        boolean hasCycles = false;
-        if (policy != null) {
-            final Iterator<Pair<ZonedDateTime, ZonedDateTime>> it = NetworkPolicyManager
-                    .cycleIterator(policy);
-            while (it.hasNext()) {
-                final Pair<ZonedDateTime, ZonedDateTime> cycle = it.next();
-                final long cycleStart = cycle.first.toInstant().toEpochMilli();
-                final long cycleEnd = cycle.second.toInstant().toEpochMilli();
-
-                final boolean includeCycle;
-                if (chartData != null) {
-                    entry = chartData.network.getValues(cycleStart, cycleEnd, entry);
-                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
-                } else {
-                    includeCycle = true;
-                }
-
-                if (includeCycle) {
-                    add(new CycleAdapter.CycleItem(context, cycleStart, cycleEnd));
-                    hasCycles = true;
-                }
+        for (int i = 0; i < cycles.size() - 1; i++) {
+            add(new CycleAdapter.CycleItem(getContext(), cycles.get(i + 1), cycles.get(i)));
+            if (cycles.get(i) == selectedCycle) {
+                mSpinner.setSelection(i);
             }
         }
-
-        if (!hasCycles) {
-            // no policy defined cycles; show entry for each four-week period
-            long cycleEnd = historyEnd;
-            while (cycleEnd > historyStart) {
-                final long cycleStart = cycleEnd - (DateUtils.WEEK_IN_MILLIS * 4);
-
-                final boolean includeCycle;
-                if (chartData != null) {
-                    entry = chartData.network.getValues(cycleStart, cycleEnd, entry);
-                    includeCycle = (entry.rxBytes + entry.txBytes) > 0;
-                } else {
-                    includeCycle = true;
-                }
-
-                if (includeCycle) {
-                    add(new CycleAdapter.CycleItem(context, cycleStart, cycleEnd));
-                }
-                cycleEnd = cycleStart;
-            }
-        }
-
-        // force pick the current cycle (first item)
-        if (getCount() > 0) {
-            final int position = findNearestPosition(previousItem);
-            mSpinner.setSelection(position);
-
-            // only force-update cycle when changed; skipping preserves any
-            // user-defined inspection region.
-            final CycleAdapter.CycleItem selectedItem = getItem(position);
-            if (!Objects.equals(selectedItem, previousItem)) {
-                mListener.onItemSelected(null, null, position, 0);
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
      * Rebuild list based on network data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-    public boolean updateCycleList(List<? extends NetworkCycleData> cycleData) {
+    public void updateCycleList(List<? extends NetworkCycleData> cycleData) {
+        mSpinner.setOnItemSelectedListener(mListener);
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
                 mSpinner.getSelectedItem();
@@ -168,16 +82,7 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         if (getCount() > 0) {
             final int position = findNearestPosition(previousItem);
             mSpinner.setSelection(position);
-
-            // only force-update cycle when changed; skipping preserves any
-            // user-defined inspection region.
-            final CycleAdapter.CycleItem selectedItem = getItem(position);
-            if (!Objects.equals(selectedItem, previousItem)) {
-                mListener.onItemSelected(null, null, position, 0);
-                return false;
-            }
         }
-        return true;
     }
 
     /**
@@ -187,10 +92,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         public CharSequence label;
         public long start;
         public long end;
-
-        public CycleItem(CharSequence label) {
-            this.label = label;
-        }
 
         public CycleItem(Context context, long start, long end) {
             this.label = Utils.formatDateRange(context, start, end);

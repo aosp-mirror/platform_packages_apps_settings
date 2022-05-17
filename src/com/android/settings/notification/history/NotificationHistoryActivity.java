@@ -163,7 +163,7 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
             View viewForPackage = LayoutInflater.from(this)
                     .inflate(R.layout.notification_history_app_layout, null);
 
-            final View container = viewForPackage.findViewById(R.id.notification_list);
+            final View container = viewForPackage.findViewById(R.id.notification_list_wrapper);
             container.setVisibility(View.GONE);
             View header = viewForPackage.findViewById(R.id.app_header);
             NotificationExpandButton expand = viewForPackage.findViewById(
@@ -356,8 +356,10 @@ public class NotificationHistoryActivity extends CollapsingToolbarBaseActivity {
                 }
                 final int newState = isChecked ? 1 : 0;
                 if (oldState != newState) {
-                    Settings.Secure.putInt(getContentResolver(),
-                            NOTIFICATION_HISTORY_ENABLED, newState);
+                    for (int user : mUm.getProfileIds(ActivityManager.getCurrentUser(), false)) {
+                        Settings.Secure.putIntForUser(getContentResolver(),
+                                NOTIFICATION_HISTORY_ENABLED, newState, user);
+                    }
                     mUiEventLogger.log(isChecked ? NotificationHistoryEvent.NOTIFICATION_HISTORY_ON
                             : NotificationHistoryEvent.NOTIFICATION_HISTORY_OFF);
                     Log.d(TAG, "onSwitchChange history to " + isChecked);

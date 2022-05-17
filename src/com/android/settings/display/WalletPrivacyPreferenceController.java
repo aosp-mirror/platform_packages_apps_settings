@@ -72,6 +72,11 @@ public class WalletPrivacyPreferenceController extends TogglePreferenceControlle
         refreshSummary(preference);
     }
 
+    @Override
+    public int getSliceHighlightMenuRes() {
+        return R.string.menu_key_display;
+    }
+
     private boolean isEnabled() {
         return mClient.isWalletServiceAvailable();
     }

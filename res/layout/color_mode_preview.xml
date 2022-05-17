@@ -14,16 +14,55 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/color_mode_preview_height"
-        android:scaleType="centerCrop"
-        android:cropToPadding="true"
-        android:src="@drawable/color_mode_preview"
-        android:contentDescription="@null" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/color_mode_preview_height"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <FrameLayout
+            android:id="@+id/arrow_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingLeft="24dp"
+            android:layout_gravity="center_vertical|left"
+            android:contentDescription="@string/previous_page_content_description">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_color_arrow_left_lt"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/viewGroup"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="center"/>
+
+        <FrameLayout
+            android:id="@+id/arrow_next"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:paddingRight="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:contentDescription="@string/next_page_content_description">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_color_arrow_right_lt"/>
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>

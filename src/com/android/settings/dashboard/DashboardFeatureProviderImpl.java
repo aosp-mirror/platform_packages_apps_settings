@@ -59,9 +59,13 @@ import androidx.preference.SwitchPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
+import com.android.settings.activityembedding.ActivityEmbeddingUtils;
 import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
+import com.android.settings.homepage.TopLevelHighlightMixin;
+import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
@@ -123,7 +127,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
     @Override
     public List<DynamicDataObserver> bindPreferenceToTileAndGetObservers(FragmentActivity activity,
-            boolean forceRoundedIcon, int sourceMetricsCategory, Preference pref, Tile tile,
+            DashboardFragment fragment, boolean forceRoundedIcon, Preference pref, Tile tile,
             String key, int baseOrder) {
         if (pref == null) {
             return null;
@@ -149,6 +153,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         bindIcon(pref, tile, forceRoundedIcon);
 
         if (tile instanceof ActivityTile) {
+            final int sourceMetricsCategory = fragment.getMetricsCategory();
             final Bundle metadata = tile.getMetaData();
             String clsName = null;
             String action = null;
@@ -165,8 +170,25 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 if (action != null) {
                     intent.setAction(action);
                 }
+                // Register the rule for injected apps.
+                if (fragment instanceof TopLevelSettings) {
+                    ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                            mContext,
+                            new ComponentName(tile.getPackageName(), tile.getComponentName()),
+                            action,
+                            true /* clearTop */);
+                }
                 pref.setOnPreferenceClickListener(preference -> {
-                    launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory);
+                    TopLevelHighlightMixin highlightMixin = null;
+                    if (fragment instanceof TopLevelSettings
+                            && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
+                        // Highlight the preference whenever it's clicked
+                        final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
+                        topLevelSettings.setHighlightPreferenceKey(key);
+                        highlightMixin = topLevelSettings.getHighlightMixin();
+                    }
+                    launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
+                            highlightMixin);
                     return true;
                 });
             }
@@ -198,7 +220,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 .putExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY,
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY);
+        launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY,
+                /* highlightMixin= */ null);
     }
 
     private DynamicDataObserver createDynamicDataObserver(String method, Uri uri, Preference pref) {
@@ -212,13 +235,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             public void onDataChanged() {
                 switch (method) {
                     case METHOD_GET_DYNAMIC_TITLE:
-                        refreshTitle(uri, pref);
+                        refreshTitle(uri, pref, this);
                         break;
                     case METHOD_GET_DYNAMIC_SUMMARY:
-                        refreshSummary(uri, pref);
+                        refreshSummary(uri, pref, this);
                         break;
                     case METHOD_IS_CHECKED:
-                        refreshSwitch(uri, pref);
+                        refreshSwitch(uri, pref, this);
                         break;
                 }
             }
@@ -239,19 +262,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI,
                     METHOD_GET_DYNAMIC_TITLE);
-            refreshTitle(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_TITLE, uri, preference);
         }
         return null;
     }
 
-    private void refreshTitle(Uri uri, Preference preference) {
+    private void refreshTitle(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String titleFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
             if (!TextUtils.equals(titleFromUri, preference.getTitle())) {
-                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+                observer.post(() -> preference.setTitle(titleFromUri));
             }
         });
     }
@@ -268,19 +290,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI,
                     METHOD_GET_DYNAMIC_SUMMARY);
-            refreshSummary(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_SUMMARY, uri, preference);
         }
         return null;
     }
 
-    private void refreshSummary(Uri uri, Preference preference) {
+    private void refreshSummary(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String summaryFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
             if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
-                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+                observer.post(() -> preference.setSummary(summaryFromUri));
             }
         });
     }
@@ -300,7 +321,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Uri isCheckedUri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SWITCH_URI,
                 METHOD_IS_CHECKED);
         setSwitchEnabled(preference, false);
-        refreshSwitch(isCheckedUri, preference);
         return createDynamicDataObserver(METHOD_IS_CHECKED, isCheckedUri, preference);
     }
 
@@ -327,12 +347,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         });
     }
 
-    private void refreshSwitch(Uri uri, Preference preference) {
+    private void refreshSwitch(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final boolean checked = TileUtils.getBooleanFromUri(mContext, uri, providerMap,
                     EXTRA_SWITCH_CHECKED_STATE);
-            ThreadUtils.postOnMainThread(() -> {
+            observer.post(() -> {
                 setSwitchChecked(preference, checked);
                 setSwitchEnabled(preference, true);
             });
@@ -413,7 +433,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
-            int sourceMetricCategory) {
+            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
             return;
@@ -422,24 +442,26 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            activity.startActivityForResult(intent, 0);
+            activity.startActivity(intent);
         } else if (tile.userHandle.size() == 1) {
-            activity.startActivityForResultAsUser(intent, 0, tile.userHandle.get(0));
+            activity.startActivityAsUser(intent, tile.userHandle.get(0));
         } else {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                activity.startActivityForResultAsUser(intent, 0, userHandle);
+                activity.startActivityAsUser(intent, userHandle);
                 return;
             }
 
             final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
             if (resolvableUsers.size() == 1) {
-                activity.startActivityForResultAsUser(intent, 0, resolvableUsers.get(0));
+                activity.startActivityAsUser(intent, resolvableUsers.get(0));
                 return;
             }
 
             ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
-                    sourceMetricCategory);
+                    sourceMetricCategory, /* onShowListener= */ highlightMixin,
+                    /* onDismissListener= */ highlightMixin,
+                    /* onCancelListener= */ highlightMixin);
         }
     }
 

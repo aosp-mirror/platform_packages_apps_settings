@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
@@ -36,6 +37,7 @@ import com.android.settings.deviceinfo.StorageCategoryFragment;
 import com.android.settings.deviceinfo.VolumeOptionMenuController;
 import com.android.settings.deviceinfo.storage.AutomaticStorageManagementSwitchPreferenceController;
 import com.android.settings.deviceinfo.storage.DiskInitFragment;
+import com.android.settings.deviceinfo.storage.StorageCacheHelper;
 import com.android.settings.deviceinfo.storage.StorageEntry;
 import com.android.settings.deviceinfo.storage.StorageSelectionPreferenceController;
 import com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController;
@@ -71,6 +73,8 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
     private StorageSelectionPreferenceController mStorageSelectionController;
     private StorageUsageProgressBarPreferenceController mStorageUsageProgressBarController;
     private VolumeOptionMenuController mOptionMenuController;
+    private boolean mIsLoadedFromCache;
+    private StorageCacheHelper mStorageCacheHelper;
 
     private final StorageEventListener mStorageEventListener = new StorageEventListener() {
         @Override
@@ -80,10 +84,19 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
             }
 
             final StorageEntry changedStorageEntry = new StorageEntry(getContext(), volumeInfo);
-            switch (volumeInfo.getState()) {
+            final int volumeState = volumeInfo.getState();
+            switch (volumeState) {
+                case VolumeInfo.STATE_REMOVED:
+                case VolumeInfo.STATE_BAD_REMOVAL:
+                    // Remove removed storage from list and don't show it on spinner.
+                    if (!mStorageEntries.remove(changedStorageEntry)) {
+                        break;
+                    }
                 case VolumeInfo.STATE_MOUNTED:
                 case VolumeInfo.STATE_MOUNTED_READ_ONLY:
                 case VolumeInfo.STATE_UNMOUNTABLE:
+                case VolumeInfo.STATE_UNMOUNTED:
+                case VolumeInfo.STATE_EJECTING:
                     // Add mounted or unmountable storage in the list and show it on spinner.
                     // Unmountable storages are the storages which has a problem format and android
                     // is not able to mount it automatically.
@@ -91,24 +104,14 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
                     mStorageEntries.removeIf(storageEntry -> {
                         return storageEntry.equals(changedStorageEntry);
                     });
-                    mStorageEntries.add(changedStorageEntry);
+                    if (volumeState != VolumeInfo.STATE_REMOVED
+                            && volumeState != VolumeInfo.STATE_BAD_REMOVAL) {
+                        mStorageEntries.add(changedStorageEntry);
+                    }
                     if (changedStorageEntry.equals(mSelectedStorageEntry)) {
                         mSelectedStorageEntry = changedStorageEntry;
                     }
                     refreshUi();
-                    break;
-                case VolumeInfo.STATE_REMOVED:
-                case VolumeInfo.STATE_UNMOUNTED:
-                case VolumeInfo.STATE_BAD_REMOVAL:
-                case VolumeInfo.STATE_EJECTING:
-                    // Remove removed storage from list and don't show it on spinner.
-                    if (mStorageEntries.remove(changedStorageEntry)) {
-                        if (changedStorageEntry.equals(mSelectedStorageEntry)) {
-                            mSelectedStorageEntry =
-                                    StorageEntry.getDefaultInternalStorageEntry(getContext());
-                        }
-                        refreshUi();
-                    }
                     break;
                 default:
                     // Do nothing.
@@ -246,11 +249,20 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
         }
 
         initializeOptionsMenu(activity);
+
+        if (mStorageCacheHelper.hasCachedSizeInfo()) {
+            mIsLoadedFromCache = true;
+            mStorageEntries.clear();
+            mStorageEntries.addAll(
+                    StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
+            refreshUi();
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mStorageCacheHelper = new StorageCacheHelper(getContext(), UserHandle.myUserId());
         use(AutomaticStorageManagementSwitchPreferenceController.class).setFragmentManager(
                 getFragmentManager());
         mStorageSelectionController = use(StorageSelectionPreferenceController.class);
@@ -281,9 +293,14 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
     public void onResume() {
         super.onResume();
 
-        mStorageEntries.clear();
-        mStorageEntries.addAll(StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
-        refreshUi();
+        if (mIsLoadedFromCache) {
+            mIsLoadedFromCache = false;
+        } else {
+            mStorageEntries.clear();
+            mStorageEntries.addAll(
+                    StorageUtils.getAllStorageEntries(getContext(), mStorageManager));
+            refreshUi();
+        }
         mStorageManager.registerListener(mStorageEventListener);
     }
 

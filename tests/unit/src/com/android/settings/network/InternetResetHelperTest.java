@@ -29,6 +29,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
@@ -39,6 +40,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settingslib.connectivity.ConnectivitySubsystemsRecoveryManager;
+import com.android.settingslib.utils.HandlerInjector;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -71,12 +73,12 @@ public class InternetResetHelperTest {
 
     private FakeHandlerInjector mFakeHandlerInjector;
 
-    private static class FakeHandlerInjector extends InternetResetHelper.HandlerInjector {
+    private static class FakeHandlerInjector extends HandlerInjector {
 
         private Runnable mRunnable;
 
-        FakeHandlerInjector(Context context) {
-            super(context);
+        FakeHandlerInjector(Handler handler) {
+            super(handler);
         }
 
         @Override
@@ -104,7 +106,7 @@ public class InternetResetHelperTest {
         final Lifecycle lifecycle = mock(Lifecycle.class);
         mInternetResetHelper = new InternetResetHelper(mContext, lifecycle);
         mInternetResetHelper.mWorkerThread = mWorkerThread;
-        mFakeHandlerInjector = new FakeHandlerInjector(mContext);
+        mFakeHandlerInjector = new FakeHandlerInjector(mContext.getMainThreadHandler());
         mInternetResetHelper.mHandlerInjector = mFakeHandlerInjector;
         mInternetResetHelper.mConnectivitySubsystemsRecoveryManager =
                 mConnectivitySubsystemsRecoveryManager;
@@ -119,7 +121,8 @@ public class InternetResetHelperTest {
     public void onResume_registerReceiver() {
         mInternetResetHelper.onResume();
 
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
+                any(int.class));
     }
 
     @Test
@@ -217,7 +220,7 @@ public class InternetResetHelperTest {
         // Show resetting preference
         assertThat(mResettingPreference.isVisible()).isTrue();
         // Show Mobile Network controller
-        verify(mMobileNetworkController).hidePreference(false /* hide */, false /* immediately*/);
+        verify(mMobileNetworkController).hidePreference(false /* hide */, true /* immediately*/);
         // Hide Wi-Fi preferences
         assertThat(mWifiTogglePreferences.isVisible()).isFalse();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isFalse();
@@ -240,7 +243,7 @@ public class InternetResetHelperTest {
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
         // Hide Mobile Network controller
         verify(mMobileNetworkController, never())
-                .hidePreference(false /* hide */, false /* immediately*/);
+                .hidePreference(false /* hide */, true /* immediately*/);
     }
 
     @Test
@@ -251,7 +254,7 @@ public class InternetResetHelperTest {
         mInternetResetHelper.resumePreferences();
 
         // Show subsystem preferences
-        verify(mMobileNetworkController).hidePreference(false, false);
+        verify(mMobileNetworkController).hidePreference(false, true);
         assertThat(mWifiTogglePreferences.isVisible()).isTrue();
         assertThat(mConnectedWifiEntryPreferences.isVisible()).isTrue();
         assertThat(mWifiEntryPreferences.isVisible()).isTrue();
