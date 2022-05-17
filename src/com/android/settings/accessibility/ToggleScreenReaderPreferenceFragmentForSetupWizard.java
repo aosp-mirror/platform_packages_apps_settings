@@ -49,6 +49,8 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
         if (mTopIntroPreference != null) {
             mTopIntroPreference.setVisible(false);
         }
+
+        mToggleServiceSwitchPreference.applyPartnerCustomizationPaddingStyle();
     }
 
     @Override
