@@ -500,15 +500,6 @@
     <!-- Title for the App's locale picker activity. [CHAR LIMIT=50]-->
     <string name="app_locale_picker_title">App Language</string>
 
-    <!-- Title for the warning message of the locale picker activity. [CHAR LIMIT=50]-->
-    <string name="warnings_title">Update the app</string>
-
-    <!-- Summary for the warning message of the locale picker activity. [CHAR LIMIT=70]-->
-    <string name="warnings_summary">You need to update the app for the latest available languages</string>
-
-    <!-- Button text on warning message [CHAR LIMIT=20]-->
-    <string name="warnings_button_update">Update now</string>
-
     <!-- Category for the suggested app's locales. [CHAR LIMIT=50]-->
     <string name="suggested_app_locales_title">Suggested languages</string>
 
@@ -526,6 +517,9 @@
 
     <!-- Description for the disclaimer of per app language. [CHAR LIMIT=NONE]-->
     <string name="desc_app_locale_disclaimer">Language may differ from languages available in the app. Some apps may not support this setting.</string>
+
+    <!-- Description for introduction of the locale selection supported of app list [CHAR LIMIT=NONE]-->
+    <string name="desc_app_locale_selection_supported">Only apps that support language selection are shown here.</string>
 
     <!-- The title of the confirmation dialog shown when the user selects one / several languages and tries to remove them [CHAR LIMIT=60] -->
     <plurals name="dlg_remove_locales_title">
@@ -1306,7 +1300,10 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary">Encryption, credentials, and more</string>
     <!-- Search keywords for the "More security settings" section in security settings. [CHAR_LIMIT=NONE] -->
     <string name="security_advanced_settings_keywords">security, more security settings, more settings, advanced security settings</string>
-
+    <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
+    <string name="privacy_advanced_settings">More privacy settings</string>
+    <!-- Title for the section that has additional privacy settings. [CHAR LIMIT=60] -->
+    <string name="privacy_advanced_settings_summary">Autofill, activity controls, and more</string>
 
     <!-- Text shown when "Add fingerprint" button is disabled -->
     <string name="fingerprint_add_max">You can add up to <xliff:g id="count" example="5">%d</xliff:g> fingerprints</string>
@@ -7848,7 +7845,11 @@
     <string name="help_label">Help &amp; feedback</string>
 
     <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
-    <string name="support_summary">Help articles, phone &amp; chat</string>
+    <string name="support_summary" product="default">Help articles, phone &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="tablet">Help articles, tablet &amp; chat</string>
+    <!-- Summary text for support setting tile [CHAR LIMIT=None] -->
+    <string name="support_summary" product="device">Help articles, device &amp; chat</string>
 
     <!-- Help URI, Default [DO NOT TRANSLATE] -->
     <string name="help_uri_default" translatable="false"></string>
@@ -8977,6 +8978,9 @@
 
     <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
     <string name="profile_section_header">Work notifications</string>
+
+    <!-- Configure Notifications: Work profile section header [CHAR LIMIT=30] -->
+    <string name="profile_section_header_for_advanced_privacy">Work profile</string>
 
     <!-- Configure Notifications: section header for prioritizer settings  [CHAR LIMIT=80] -->
     <string name="smart_notifications_title">Adaptive notifications</string>
@@ -13654,7 +13658,9 @@
     <string name="default_active_sim_mobile_data">mobile data</string>
     <!-- Provider Model: Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
     scanning is on. To mark a link to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
-    <string name="wifi_scan_notify_message">To improve device experience, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi\u2011Fi scanning settings. <annotation id="link">Change</annotation></string>
+    <string name="wifi_scan_notify_message">To improve device experience, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi\u2011Fi scanning settings.</string>
+    <!-- Provider Model: Link text to bring the user to "scanning settings" screen. [CHAR LIMIT=NONE]-->
+    <string name="wifi_scan_change">Change</string>
 
     <!-- Summary text separator for preferences including a short description
          (eg. "Connected / 5G"). [CHAR LIMIT=50] -->
@@ -14168,4 +14174,11 @@
     <string name="find_broadcast_password_dialog_connection_error">Can\u2019t connect. Try again.</string>
     <!-- The error message of enter password dialog in bluetooth find broadcast page [CHAR LIMIT=none] -->
     <string name="find_broadcast_password_dialog_password_error">Wrong password</string>
+
+
+    <!-- [CHAR LIMIT=NONE] Le audio QR code scanner sub-title -->
+    <string name="bt_le_audio_scan_qr_code_scanner">To start listening, center the QR code below</string>
+    <!-- [CHAR LIMIT=NONE] Hint for QR code process failure -->
+    <string name="bt_le_audio_qr_code_is_not_valid_format">QR code isn\u0027t a valid format</string>
+
 </resources>
