@@ -186,7 +186,7 @@ public class BluetoothDetailsCompanionAppsController extends BluetoothDetailsCon
             String address, PreferenceCategory container) {
         // If the device is FastPair, remove CDM companion apps.
         final BluetoothFeatureProvider bluetoothFeatureProvider = FeatureFactory.getFactory(context)
-                .getBluetoothFeatureProvider(context);
+                .getBluetoothFeatureProvider();
         final boolean sliceEnabled = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_SETTINGS_UI,
                 SettingsUIDeviceConfig.BT_SLICE_SETTINGS_ENABLED, true);
         final Uri settingsUri = bluetoothFeatureProvider.getBluetoothDeviceSettingsUri(

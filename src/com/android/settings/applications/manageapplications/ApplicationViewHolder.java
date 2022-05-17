@@ -85,6 +85,14 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         return view;
     }
 
+    static View newHeader(ViewGroup parent, int resText) {
+        ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.preference_app_header, parent, false);
+        TextView textView = view.findViewById(R.id.apps_top_intro_text);
+        textView.setText(resText);
+        return view;
+    }
+
     void setSummary(CharSequence summary) {
         mSummary.setText(summary);
     }
