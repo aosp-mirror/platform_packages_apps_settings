@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Standardeinstellung des Systems"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Für diese App ist in den Einstellungen keine Sprachauswahl verfügbar."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Die Sprache kann von den in der App verfügbaren Sprachen abweichen. Einige Apps unterstützen diese Einstellung möglicherweise nicht."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Hier werden nur Apps angezeigt, die die Sprachauswahl unterstützen."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ausgewählte Sprachen entfernen?</item>
       <item quantity="one">Ausgewählte Sprache entfernen?</item>
@@ -431,7 +430,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Fingerabdruck einrichten"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Fingerabdruck zulassen"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Fingerabdruck verwenden"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Du kannst deinen Fingerabdruck zum Entsperren deines Tablets oder zum Bestätigen deiner Identität verwenden, z. B. um dich in Apps anzumelden oder einen Kauf zu autorisieren."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Du kannst deinen Fingerabdruck verwenden, um dein Tablet zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Du kannst deinen Fingerabdruck verwenden, um dein Gerät zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Du kannst deinen Fingerabdruck verwenden, um dein Smartphone zu entsperren oder dich in Apps zu authentifizieren, beispielsweise um dich anzumelden oder einen Kauf zu autorisieren."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Wenn du deinem Kind erlaubst, seinen Fingerabdruck zum Entsperren des Smartphones oder Bestätigen seiner Identität zu verwenden, kann es sich so z. B. in Apps anmelden oder Käufe autorisieren."</string>
@@ -574,7 +573,7 @@
     <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"Einrichtung für PIN, Gesicht &amp; Fingerabdruck überspringen?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Passworteinrichtung überspringen?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"Einrichtung für Passwort &amp; Gesicht überspringen?"</string>
-    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Einrichtung von Passwort &amp; Fingerabdruck überspringen?"</string>
+    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Einrichtung von Passwort und Fingerabdruck überspringen?"</string>
     <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Einrichtung von Passwort, Gesicht &amp; Fingerabdruck überspringen?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Mustereinrichtung überspringen?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Einrichtung für Muster &amp; Gesicht überspringen?"</string>
@@ -591,7 +590,7 @@
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Weiter"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Du kannst deinen Fingerabdruck nicht nur dazu verwenden, dein Smartphone zu entsperren, sondern mit ihm auch Käufe autorisieren und dich in Apps anmelden. "<annotation id="url">"Weitere Informationen"</annotation></string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Die Option „Displaysperre“ ist deaktiviert. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kannst deinen Fingerabdruck trotzdem zur Autorisierung von Zahlungen und zur Autorisierung des Zugriffs auf Apps verwenden."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Du kannst deinen Fingerabdruck trotzdem zur Autorisierung von Käufen und zur Autorisierung des Zugriffs auf Apps verwenden."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Hebe den Finger und berühre den Sensor dann noch einmal"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Der Fingerabdrucksensor kann nicht verwendet werden. Suche einen Reparaturdienstleister auf."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Weitere Sicher­heits­einstellungen"</string>
@@ -640,10 +639,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Du kannst verhindern, dass andere Personen dieses Gerät ohne deine Erlaubnis verwenden, indem du die Schutzfunktionen für dein Mobilgerät aktivierst. Wähle eine Displaysperre aus."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Du kannst verhindern, dass andere Personen dieses Smartphone ohne deine Erlaubnis verwenden, indem du die Schutzfunktionen für dein Mobilgerät aktivierst. Wähle eine Displaysperre aus."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Alternative Methode für die Displaysperre auswählen"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Wenn du deine Displaysperre vergessen hast, kann dein IT-Administrator sie nicht zurücksetzen."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Separate Sperre für geschäftliche Apps einrichten"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Wenn du diese Sperre vergisst, bitte deinen IT-Administrator, sie zurückzusetzen"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Optionen für die Displaysperre"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Optionen für die Displaysperre"</string>
@@ -754,8 +751,7 @@
       <item quantity="other">Muss mindestens <xliff:g id="COUNT_1">%d</xliff:g> Zeichen haben</item>
       <item quantity="one">Muss mindestens <xliff:g id="COUNT_0">%d</xliff:g> Zeichen haben</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Wenn du nur Zahlen verwendest, muss das Passwort mindestens 1 Zahl enthalten}other{Wenn du nur Zahlen verwendest, muss das Passwort mindestens # Zahlen enthalten}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">PIN muss mindestens <xliff:g id="COUNT_1">%d</xliff:g> Ziffern haben</item>
       <item quantity="one">PIN muss mindestens <xliff:g id="COUNT_0">%d</xliff:g> Ziffer haben</item>
@@ -2351,9 +2347,9 @@
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"Von: Bernd"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Hallo,\n\nwie geht es mit den Entwürfen voran? Werden sie fertig sein, bevor wir mit dem Erstellen der neuen Info-Pop-ups beginnen?"</string>
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Einstellungen zurücksetzen"</string>
-    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Anzeigeeinstellungen für Größe und Text wurden zurückgesetzt"</string>
-    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Anzeigegröße und -text zurücksetzen?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Deine Einstellungen für Anzeigegröße und -text werden auf die ursprünglichen Einstellungen des Smartphones zurückgesetzt"</string>
+    <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Einstellungen für Anzeigegröße und Text wurden zurückgesetzt"</string>
+    <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Anzeigegröße und Text zurücksetzen?"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Deine Einstellungen für Anzeigegröße und Text werden auf die ursprünglichen Einstellungen des Smartphones zurückgesetzt"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Zurücksetzen"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Hast du Pläne fürs Wochenende?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Ich will zum Strand. Kommst du mit?"</string>
