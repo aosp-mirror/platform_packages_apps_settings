@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Προεπιλογή συστήματος"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Η δυνατότητα επιλογής γλώσσας για αυτήν την εφαρμογή δεν είναι διαθέσιμη από τις Ρυθμίσεις."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Η γλώσσα μπορεί να διαφέρει από τις γλώσσες που είναι διαθέσιμες στην εφαρμογή. Ορισμένες εφαρμογές μπορεί να μην υποστηρίζουν αυτήν τη ρύθμιση."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Εδώ εμφανίζονται μόνο εφαρμογές που υποστηρίζουν την επιλογή γλώσσας."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Να αφαιρεθούν οι επιλεγμένες γλώσσες;</item>
       <item quantity="one">Να αφαιρεθεί η επιλεγμένη γλώσσα;</item>
@@ -431,7 +430,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Ρύθμιση δακτυλικού αποτυπώματος"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Επιτρέπεται ξεκλ. δακτ. αποτ."</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Χρήση δακτυλικού αποτυπώματος"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για να ξεκλειδώσετε το tablet σας ή να επαληθεύσετε την ταυτότητά σας, για παράδειγμα κατά τη σύνδεση σε εφαρμογές ή την έγκριση μιας αγοράς."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το tablet σας ή να επαληθεύετε την ταυτότητά σας, για παράδειγμα κατά τη σύνδεση σε εφαρμογές ή την έγκριση μιας αγοράς."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε τη συσκευή σας ή να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές ή εγκρίνετε κάποια αγορά."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Χρησιμοποιήστε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το τηλέφωνό σας ή να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές ή εγκρίνετε κάποια αγορά."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Επιτρέψτε στο παιδί σας να χρησιμοποιεί το δακτυλικό του αποτύπωμα του για να ξεκλειδώνει το τηλέφωνό του ή να επαληθεύει την ταυτότητά του. Αυτό συμβαίνει όταν συνδέεται σε εφαρμογές, όταν εγκρίνει μια αγορά και σε άλλες περιπτώσεις."</string>
@@ -638,10 +637,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Αποτρέψτε άλλους από τη χρήση αυτής της συσκευής χωρίς την άδειά σας ενεργοποιώντας τις λειτουργίες προστασίας συσκευής. Επιλέξτε το κλείδωμα οθόνης που θέλετε να χρησιμοποιήσετε."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Αποτρέψτε άλλους από τη χρήση αυτού του τηλεφώνου χωρίς την άδειά σας ενεργοποιώντας τις λειτουργίες προστασίας συσκευής. Επιλέξτε το κλείδωμα οθόνης που θέλετε να χρησιμοποιήσετε."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Επιλογή μεθόδου εφεδρικού κλειδώματος οθόνης"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Αν ξεχάσετε το κλείδωμα οθόνης, ο διαχειριστής IT δεν μπορεί να το επαναφέρει."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Ορίστε άλλο κλείδωμα για την εργασία"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Εάν ξεχάσετε αυτό το κλείδωμα, ζητήστε από τον διαχειριστή IT να το επαναφέρει"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Επιλογές κλειδώματος οθόνης"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Επιλογές κλειδώματος οθόνης"</string>
@@ -752,8 +749,7 @@
       <item quantity="other">Πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_1">%d</xliff:g> χαρακτήρες</item>
       <item quantity="one">Πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_0">%d</xliff:g> χαρακτήρα</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Εάν χρησιμοποιείτε μόνο αριθμούς, πρέπει να αποτελούνται από τουλάχιστον 1 ψηφίο}other{Εάν χρησιμοποιείτε μόνο αριθμούς, πρέπει να αποτελούνται από τουλάχιστον # ψηφία}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">Ο αριθμός PIN πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_1">%d</xliff:g> ψηφία</item>
       <item quantity="one">Ο αριθμός PIN πρέπει να περιέχει τουλάχιστον <xliff:g id="COUNT_0">%d</xliff:g> ψηφίο</item>

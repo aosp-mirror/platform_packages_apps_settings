@@ -226,8 +226,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Sistemski zadano"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Odabir jezika za ovu aplikaciju nije dostupan u Postavkama."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Jezik se može razlikovati od jezika dostupnih u aplikaciji. Neke aplikacije možda neće podržavati ovu postavku."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Ovdje su prikazane samo aplikacije koje podržavaju odabir jezika."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Ukloniti odabrane jezike?</item>
       <item quantity="few">Ukloniti odabrane jezike?</item>
@@ -600,10 +599,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Zaključavanje radnog profila, šifriranje i drugo"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Šifriranje, akreditivi i drugo"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sigurnost, više postavki sigurnosti, više postavki, napredne postavke sigurnosti"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Više postavki privatnosti"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Automatsko popunjavanje, kontrole aktivnosti i ostalo"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Možete dodati do <xliff:g id="COUNT">%d</xliff:g> otisaka prstiju"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Dodali ste maksimalan broj otisaka prstiju"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nije moguće dodati još otisaka prstiju"</string>
@@ -642,10 +639,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Spriječite da druge osobe koriste ovaj uređaj bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Spriječite da druge osobe koriste ovaj telefon bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način zaključavanja ekrana"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite radnju za zaključavanje zaslona, IT administrator ga ne može poništiti."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Postavite zasebno zaključavanje za poslovne aplikacije"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ako zaboravite ovo zaključavanje, tražite od IT administratora da ga poništi"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcije zaključavanja ekrana"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opcije zaključavanja ekrana"</string>
@@ -757,7 +752,7 @@
       <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
       <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znakova</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ako upotrebljavate samo brojeve, potrebna je najmanje jedna znamenka}one{Ako upotrebljavate samo brojeve, potrebna je najmanje # znamenka}few{Ako upotrebljavate samo brojeve, potrebne su najmanje # znamenke}other{Ako upotrebljavate samo brojeve, potrebno je najmanje # znamenki}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ako koristite samo brojeve, mora postojati najmanje 1 cifra}one{Ako koristite samo brojeve, mora postojati najmanje # cifra}few{Ako koristite samo brojeve, moraju postojati najmanje # cifre}other{Ako koristite samo brojeve, mora postojati najmanje # cifara}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifru</item>
       <item quantity="few">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
@@ -2116,8 +2111,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Aplikacija za hitne situacije"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Vrati postavke aplikacije na zadano"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Vratiti postavke aplikacije na zadano?"</string>
-    <!-- no translation found for reset_app_preferences_desc (8550782670650158299) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Sve sljedeće postavke vratit će se na zadano:\n\n"<li>"onemogućene aplikacije"</li>\n<li>"onemogućene obavijesti aplikacija"</li>\n<li>"zadane aplikacije za radnje"</li>\n<li>"ograničenja pozadinskih podataka za aplikacije"</li>\n<li>"sva ograničenja dopuštenja"</li>\n<li>"postavke potrošnje baterije."</li>\n\n"Nećete izgubiti podatke aplikacija."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Vrati aplikacije na zadano"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Upravljaj prostorom"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
@@ -3508,10 +3502,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Promijeni PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Pomoć i pov. inform."</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Članci za pomoć, telefon i chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Članci pomoći, tablet i chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Članci pomoći, uređaj i chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Račun za sadržaj"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID fotografije"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ekstremne prijetnje"</string>
@@ -3907,8 +3899,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Kontrolirajte obavještenja iz pojedinačnih aplikacija"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Opće"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Obavještenja za posao"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Poslovni profil"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Prilagodljiva obavještenja"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prilagodljivi prioritet obavještenja"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Obavještenja niskog prioriteta automatski će se postaviti na Diskretno"</string>
@@ -5725,10 +5716,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"pozivi"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"prijenos podataka na mobilnoj mreži"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Da bi se poboljšao doživljaj uređaja, aplikacije i usluge i dalje mogu tražiti Wi‑Fi mreže u bilo kojem trenutku, čak i kada je Wi‑Fi isključen. Time se primjerice mogu poboljšati značajke i usluge koje se temelje na lokaciji. To možete promijeniti u postavkama traženja Wi-Fija."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Promijeni"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Povezano"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Niste povezani s mrežom"</string>
@@ -5890,8 +5879,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Unesite lozinku"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Nije se moguće povezati. Pokušajte ponovo."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Pogrešna lozinka"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Da biste počeli slušati, centrirajte QR kôd u nastavku"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR kôd nije u važećem formatu"</string>
 </resources>

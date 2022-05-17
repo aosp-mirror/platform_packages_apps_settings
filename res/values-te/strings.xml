@@ -209,7 +209,7 @@
     <string name="sdcard_settings_scanning_status" product="default" msgid="3297316465982471437">"మీడియా కోసం SD కార్డుని స్కాన్ చేస్తోంది…"</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3444648373391629840">"USB నిల్వ చదవడానికి-మాత్రమే మౌంట్ చేయబడింది."</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="4338796260718910164">"SD కార్డు చదవడానికి-మాత్రమే మౌంట్ చేయబడింది."</string>
-    <string name="skip_label" msgid="6380034601349015895">"దాటవేయి"</string>
+    <string name="skip_label" msgid="6380034601349015895">"స్కిప్ చేయండి"</string>
     <string name="next_label" msgid="1248293387735652187">"తర్వాత"</string>
     <string name="language_picker_title" msgid="4271307478263345133">"భాషలు"</string>
     <string name="locale_remove_menu" msgid="3521546263421387474">"తీసివేయి"</string>
@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"సిస్టమ్ ఆటోమేటిక్ సెట్టింగ్"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ఈ యాప్ కోసం భాష ఎంపిక సెట్టింగ్‌లలో అందుబాటులో లేదు."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"యాప్‌లో అందుబాటులో ఉన్న భాషలకు భాష భిన్నంగా ఉండవచ్చు. కొన్ని యాప్‌లు ఈ సెట్టింగ్‌కు సపోర్ట్ చేయకపోవచ్చు."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"భాష ఎంపికను సపోర్ట్ చేసే యాప్‌లు మాత్రమే ఇక్కడ చూపబడతాయి."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">ఎంచుకున్న భాషలను తీసివేయాలా?</item>
       <item quantity="one">ఎంచుకున్న భాషను తీసివేయాలా?</item>
@@ -386,7 +385,7 @@
     <string name="security_settings_face_enroll_introduction_control_message" msgid="4818463420573540379"></string>
     <string name="security_settings_face_enroll_introduction_control_consent_message" msgid="4658082872829249850"></string>
     <string name="security_settings_face_enroll_repeat_title" msgid="4446229670377418717">"వృత్తం మధ్యలో వచ్చేలా మీ ముఖాన్ని ఉంచండి"</string>
-    <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"దాటవేయి"</string>
+    <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"స్కిప్ చేయండి"</string>
     <string name="face_add_max" msgid="4578405795494514876">"మీరు <xliff:g id="COUNT">%d</xliff:g> వరకు ముఖాలను జోడించవచ్చు"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"మీరు గరిష్ట సంఖ్యలో ముఖాలను జోడించారు"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"మరిన్ని ముఖాలను జోడించడం సాధ్యపడదు"</string>
@@ -494,7 +493,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"పరికర రక్షణ ఫీచర్‌లు ఆన్ చేయబడవు. ఈ ఫోన్ పోయినా లేదా దొంగిలించబడినా, దీనిని ఉపయోగించకుండా మీరు ఇతరులను నివారించలేరు."</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"ఏదేమైనా దాటవేయి"</string>
     <string name="go_back_button_label" msgid="6139455414099035594">"వెనుకకు వెళ్లు"</string>
-    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"దాటవేయి"</string>
+    <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"స్కిప్ చేయండి"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"రద్దు చేయండి"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"సెన్సార్‌ని తాకండి"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"మీ వేలిముద్రను ఎలా సెటప్ చేయాలి"</string>
@@ -596,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"వర్క్ ప్రొఫైల్ లాక్, ఎన్‌క్రిప్షన్, మరిన్ని"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"ఎన్‌క్రిప్షన్, ఆధారాలు, మరిన్ని"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"సెక్యూరిటీ, మరిన్ని సెక్యూరిటీ సెట్టింగ్‌లు, మరిన్ని సెట్టింగ్‌లు, అధునాతన సెక్యూరిటీ సెట్టింగ్‌లు"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"మరిన్ని గోప్యతా సెట్టింగ్‌లు"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"ఆటోఫిల్, యాక్టీవిటీ కంట్రోల్స్, ఇంకా మరిన్ని"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"మీరు గరిష్టంగా <xliff:g id="COUNT">%d</xliff:g> వేలిముద్రలను జోడించవచ్చు"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"మీరు గరిష్ట సంఖ్యలో వేలిముద్రలను జోడించారు"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"మరిన్ని వేలిముద్రలను జోడించడం సాధ్యపడదు"</string>
@@ -3862,8 +3859,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"ఒక్కో యాప్ నుండి వచ్చే నోటిఫికేషన్‌లను వేర్వేరుగా కంట్రోల్ చేయండి"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"సాధారణ సెట్టింగ్‌లు"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"వర్క్ నోటిఫికేషన్‌లు"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"వర్క్ ప్రొఫైల్"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"అనుకూల నోటిఫికేషన్‌లు"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"అనుకూల నోటిఫికేషన్ ప్రాధాన్యత"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"తక్కువ ప్రాధాన్యత నోటిఫికేషన్‌లను ఆటోమేటిక్‌గా సాధారణానికి సెట్ చేసి ఉంచుతుంది"</string>
@@ -3938,8 +3934,8 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"లాక్ అయినప్పుడు గోప్యమైన కంటెంట్‌ను చూపుతుంది"</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"గోప్యమైన వర్క్ ప్రొఫైల్ నోటిఫికేషన్‌లు"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"లాక్ అయినప్పుడు గోప్యమైన వర్క్ ప్రొఫైల్ కంటెంట్‌ను చూపుతుంది"</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"మొత్తం నోటిఫికేషన్ కంటెంట్‌ను చూపు"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"గోప్యమైన కంటెంట్‌ను అన్‌లాక్‌లో మాత్రమే చూపించు"</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"మొత్తం నోటిఫికేషన్ కంటెంట్‌ను చూపించండి"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"గోప్యమైన కంటెంట్‌ను అన్‌లాక్‌లో మాత్రమే చూపండి"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"ఎలాంటి నోటిఫికేషన్‌లను చూపవద్దు"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"మీ లాక్ స్క్రీన్ డిస్‌ప్లే ఎలా ఉండాలని అనుకుంటున్నారు?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"లాక్ స్క్రీన్"</string>
@@ -5636,10 +5632,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"కాల్స్"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"మొబైల్ డేటా"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"పరికర అనుభవాన్ని మెరుగుపరచడానికి Wi‑Fi ఆఫ్‌లో ఉన్నప్పుడు కూడా, ఏ సమయంలో అయినా ఇప్పటికీ Wi‑Fi నెట్‌వర్క్‌ల కోసం యాప్‌లు, సర్వీస్‌లు స్కాన్ చేయగలవు. ఉదాహరణకు, దీనిని ఉపయోగించి లొకేషన్ ఆధారిత ఫీచర్‌లు, సర్వీస్‌లను మెరుగుపరచవచ్చు. మీరు దీనిని Wi‑Fi స్కానింగ్ సెట్టింగ్‌లలో మార్చవచ్చు."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"మార్చండి"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"కనెక్ట్ చేయబడింది"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"కనెక్షన్ లేదు"</string>
@@ -5801,8 +5795,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"పాస్‌వర్డ్‌ను ఎంటర్ చేయండి"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"కనెక్ట్ చేయడం సాధ్యపడదు. మళ్లీ ట్రై చేయండి."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"పాస్‌వర్డ్ తప్పు"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"వినడం ప్రారంభించడానికి, కింద ఉన్న QR కోడ్‌ను మధ్యలో ఉంచండి"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR కోడ్ చెల్లుబాటు అయ్యే ఫార్మాట్‌లో లేదు"</string>
 </resources>
