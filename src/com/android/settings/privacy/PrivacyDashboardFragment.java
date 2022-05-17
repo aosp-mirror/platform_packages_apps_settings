@@ -25,6 +25,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -36,6 +37,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -72,12 +74,6 @@ public class PrivacyDashboardFragment extends DashboardFragment {
         replaceEnterpriseStringSummary("work_policy_info",
                 WORK_PROFILE_PRIVACY_POLICY_INFO_SUMMARY,
                 R.string.work_policy_privacy_settings_summary);
-
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.privacy_dashboard_settings;
     }
 
     @Override
@@ -88,6 +84,19 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return getPreferenceScreenResId(getContext());
+    }
+
+    private static int getPreferenceScreenResId(Context context) {
+        if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
+            return R.xml.privacy_advanced_settings;
+        } else {
+            return R.xml.privacy_dashboard_settings;
+        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -108,17 +117,19 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = getPreferenceScreenResId(context);
+                    return Arrays.asList(sir);
+                }
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null);
-                }
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    return !SafetyCenterManagerWrapper.get().isEnabled(context);
                 }
             };
 }
