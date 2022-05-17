@@ -219,15 +219,14 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Аппын хэл"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Апп тус бүрд хэл тохируулна уу"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Аппын хэл"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Аппыг шинэчилнэ үү"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Та аппаа хамгийн сүүлийн үеийн боломжтой хэлээр шинэчлэх шаардлагатай"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Одоо шинэчлэх"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Санал болгосон хэл"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Бүх хэл"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Системийн хэл"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системийн өгөгдмөл"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Энэ аппын хэлийг Тохиргоо хэсгээс сонгох боломжгүй байна."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Хэл нь аппад боломжтой хэлээс шалтгаалан харилцан адилгүй байж болно. Зарим апп энэ тохиргоог дэмждэггүй байж магадгүй."</string>
+    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
+    <skip />
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Сонгосон хэлийг хасах уу?</item>
       <item quantity="one">Сонгосон хэлийг хасах уу?</item>
@@ -432,7 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Хурууны хээгээ тохируулна уу"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Хурууны хээгээр түгжээ тайлахыг зөвшөөрөх"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Хурууныхаа хээг ашиглах"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message" msgid="6100563481214337377">"Утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалт зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Таблетынхаа түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх, худалдан авалтыг зөвшөөрөх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Хүүхдэдээ хурууны хээгээ ашиглан утасныхаа түжээх тайлах эсвэл өөрийгөө мөн болохыг баталгаажуулахыг зөвшөөрнө үү. Энэ нь түүнийг аппуудад нэвтрэх, худалдан авалтуудыг зөвшөөрөх болон бусад зүйлийг хийх үед тохиолдоно."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Хяналт таны гарт"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Хяналт танд болон таны хүүхдэд байна"</string>
@@ -468,7 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Та чичиргээ мэдэрснийхээ дараа хуруугаа өргөнө үү"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Илүү бүдэг гэрэлтэй газар очоод, дахин оролдоно уу"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Та хурууны хээ бүртгүүлэх оролдлогын дээд хязгаарт хүрсэн байна"</string>
-    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"Хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглана уу\n\n"<annotation id="url">"Нэмэлт мэдээлэл авах"</annotation></string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Таблетынхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэрэг үед өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад нэвтрэх зэрэг үед өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэрэг үед өөрийгөө мөн болохыг баталгаажуулахын тулд хурууны хээгээ ашиглана уу"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Царай, хурууны хээгээр түгжээ тайлах"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Тохируулахын тулд товшино уу"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Царай болон хурууны хээнүүд нэмсэн"</string>
@@ -519,7 +522,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Энэ нь таны хурууны хээний илүү их зургийг авахад тусална"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Хурууны хээ бүртгүүлэх явц <xliff:g id="PERCENTAGE">%d</xliff:g> хувь"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Хурууны хээ нэмсэн"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Одоо та хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Одоо та хурууны хээгээ таблетынхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Одоо та хурууны хээгээ төхөөрөмжийнхөө түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Одоо та хурууны хээгээ утасныхаа түгжээг тайлах эсвэл аппуудад нэвтрэх зэргээр өөрийгөө мөн болохыг баталгаажуулахын тулд ашиглах боломжтой"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Дараа хийх"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Хөндийрүүлээд, дахин хүрнэ үү"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Хурууныхаа хээний хажуу талыг мэдрэгч дээр удаан байрлуулж, дараа нь нөгөө тал руу сэлгэнэ үү"</string>
@@ -583,13 +588,18 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Өөрийг нэмэх"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Дараах"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Хурууны хээгээ ашиглан утасны түгжээг нээхээс гадна, худалдан авалт хийж, апп-д нэвтэрч болно. "<annotation id="url">"Дэлгэрэнгүй мэдээлэл"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Дэлгэцийн түгжээний сонголтыг цуцалсан. Дэлгэрэнгүй үзэхийн тулд байгууллагынхаа админтай холбогдоно уу. "<annotation id="admin_details">"Дэлгэрэнгүй мэдээлэл"</annotation>\n\n"Ta хурууны хээгээ ашиглан худалдан авалт болон аппын хандалтыг баталгаажуулах боломжтой. "<annotation id="url">"Дэлгэрэнгүй үзэх"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Дэлгэцийн түгжээний сонголтыг идэвхгүй болгосон. Нэмэлт мэдээлэл авахын тулд байгууллагынхаа админтай холбоо барина уу."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Та худалдан авалтын зөвшөөрөл олгох болон аппад хандахдаа хурууны хээгээ ашиглах боломжтой хэвээр байна."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Хуруугаа өргөөд мэдрэгч дээр дахин хүрнэ үү."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Хурууны хээ мэдрэгч ашиглах боломжгүй. Засварын үйлчилгээ үзүүлэгчид зочилно уу"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Аюулгүй байдлын бусад тохиргоо"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Ажлын профайлын түгжээ, шифрлэлт болон бусад"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрлэлт, мандат үнэмлэх болон бусад"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"аюулгүй байдал, аюулгүй байдлын бусад тохиргоо, бусад тохиргоо, аюулгүй байдлын нарийвчилсан тохиргоо"</string>
+    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
+    <skip />
+    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
+    <skip />
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Та <xliff:g id="COUNT">%d</xliff:g> хүртэлх хурууны хээ нэмж болно"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Таны зөвшөөрөгдсөн хурууны хээний тоо гүйцсэн байна"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Өөр хурууны хээ нэмэх боломжгүй байна"</string>
@@ -628,7 +638,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Төхөөрөмжийн хамгаалалтын функцийг идэвхжүүлж хэн нэгэн таны зөвшөөрөлгүйгээр энэ төхөөрөмжийг ашиглахаас сэргийлнэ үү. Өөрийн ашиглахыг хүссэн дэлгэцийн түгжээг сонгоно уу."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Төхөөрөмжийн хамгаалалтын функцийг идэвхжүүлж хэн нэгэн таны зөвшөөрөлгүйгээр энэ утсыг ашиглахаас сэргийлнэ үү. Өөрийн ашиглахыг хүссэн дэлгэцийн түгжээг сонгоно уу."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Дэлгэц түгжих нөөц аргачлалаа сонгох"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="7769526424722627301">"Энэ түгжээг танай IT админ шинэчлэх боломжгүй. <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Оронд нь тусдаа ажлын түгжээ тохируулна уу<xliff:g id="LINK_END_1">LINK_END</xliff:g>"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Та дэлгэцийн түгжээгээ мартсан бол таны IT админ үүнийг шинэчлэх боломжгүй."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Ажлын тусдаа түгжээ тохируулах"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Та энэ түгжээг мартсан тохиолдолд IT админаасаа үүнийг шинэчлэхийг хүснэ үү"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Дэлгэцийн түгжээний сонголт"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Дэлгэцийн түгжээний сонголт"</string>
@@ -739,6 +750,7 @@
       <item quantity="other">Хамгийн багадаа <xliff:g id="COUNT_1">%d</xliff:g> тэмдэгт байх ёстой</item>
       <item quantity="one">Хамгийн багадаа <xliff:g id="COUNT_0">%d</xliff:g> тэмдэгт агуулах ёстой</item>
     </plurals>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Хэрэв зөвхөн тоо оруулж байвал хамгийн багадаа 1 оронтой байх ёстой}other{Хэрэв зөвхөн тоо оруулж байвал хамгийн багадаа # оронтой байх ёстой}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">ПИН хамгийн багадаа <xliff:g id="COUNT_1">%d</xliff:g> цифр агуулах ёстой</item>
       <item quantity="one">ПИН хамгийн багдаа <xliff:g id="COUNT_0">%d</xliff:g> цифр агуулах ёстой</item>
@@ -1078,7 +1090,7 @@
     <string name="wifi_unchanged" msgid="8026045290856150191">"(өөрчлөгдөөгүй)"</string>
     <string name="wifi_unspecified" msgid="4561964943472312208">"Сонгоно уу"</string>
     <string name="wifi_multiple_cert_added" msgid="2151019652853383776">"(Олон сертификат нэмсэн)"</string>
-    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Системийн сертификат ашигла"</string>
+    <string name="wifi_use_system_certs" msgid="5587866698144996931">"Системийн сертификат ашиглах"</string>
     <string name="wifi_do_not_provide_eap_user_cert" msgid="6336636553673065145">"\"Бүү олго\""</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4673867078988209732">"Бүү хүчин төгөлдөр болго"</string>
     <string name="wifi_trust_on_first_use" msgid="7488431582505858774">"Эхний хэрэглээ дээр итгэх"</string>
@@ -1497,7 +1509,6 @@
     <string name="firmware_version" msgid="1606901586501447275">"Андройд хувилбар"</string>
     <string name="security_patch" msgid="4071756145347865382">"Android-н аюулгүй байдлын шинэчлэлт"</string>
     <string name="model_info" msgid="8997566254717810904">"Загвар"</string>
-    <string name="hardware_info" msgid="7035211991066637019">"Загвар, техник хангамж"</string>
     <string name="hardware_revision" msgid="3454709180861965025">"Техник хангамжийн хувилбар"</string>
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Төхөөрөмжийн ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Долгион баригчийн хувилбар"</string>
@@ -2455,10 +2466,8 @@
     <string name="accessibility_autoclick_seekbar_desc" msgid="8363959277814621118">"Автомат товшилтын хугацаа"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Чичиргээ болон хүртэхүй"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Төрөл бүрийн хэрэглээний чичиргээний хүчийг хянах"</string>
-    <!-- no translation found for accessibility_vibration_settings_state_on (5566026932372832502) -->
-    <skip />
-    <!-- no translation found for accessibility_vibration_settings_state_off (7946588741954981703) -->
-    <skip />
+    <string name="accessibility_vibration_settings_state_on" msgid="5566026932372832502">"Асаалттай"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="7946588741954981703">"Унтраалттай"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"Төхөөрөмжийг чимээгүй болгож тохируулсан тул тохиргоог идэвхгүй болгосон"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"Дуудлагууд"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"Мэдэгдэл болон сэрүүлэг"</string>
@@ -2928,6 +2937,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Дахин шинэчлэх"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Медиасервер"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Aпп-ийн оновчлол"</string>
+    <string name="process_network_tethering" msgid="6822671758152900766">"Модем болгох"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Хассан аппууд"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Батарей хэмнэгч"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Автоматаар асаах"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Хуваарь алга"</string>
@@ -3356,14 +3367,8 @@
       <item quantity="other">Сертификатад итгэх, эсвэл устгах</item>
       <item quantity="one">Сертификатад итгэх, эсвэл устгах</item>
     </plurals>
-    <plurals name="ssl_ca_cert_info_message_device_owner" formatted="false" msgid="2788832560436163252">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> сертификатын эрхийг таны төхөөрөмжид суулгасан бөгөөд үүнд имэйл, апп, аюулгүй веб хуудас зэрэг таны төхөөрөмжийн сүлжээний үйл ажиллагааг удирдах зөвшөөрлийг олгоно.\n\nЭдгээр сертификатын талаарх дэлгэрэнгүй мэдээлэл авахын тулд админтайгаа холбоо барина уу.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> сертификатын эрхийг таны төхөөрөмжид суулгасан бөгөөд тэдгээрт имэйл, апп, аюулгүй веб хуудас зэрэг таны төхөөрөмжийн сүлжээний үйл ажиллагааг удирдах зөвшөөрлийг олгоно.\n\nЭнэ сертификатын талаарх дэлгэрэнгүй мэдээлэл авахын тулд админтайгаа холбоо барина уу.</item>
-    </plurals>
-    <plurals name="ssl_ca_cert_info_message" formatted="false" msgid="3989916958347169622">
-      <item quantity="other"><xliff:g id="MANAGING_DOMAIN_1">%s</xliff:g> сертификатын эрхийг таны ажлын профайлд суулгасан бөгөөд үүнд имэйл, апп, аюулгүй веб хуудас зэрэг таны ажлын сүлжээний үйл ажиллагааг удирдах зөвшөөрлийг олгоно.\n\nЭдгээр сертификатын талаарх дэлгэрэнгүй мэдээлэл авахын тулд админтайгаа холбоо барина уу.</item>
-      <item quantity="one"><xliff:g id="MANAGING_DOMAIN_0">%s</xliff:g> сертификатын эрхийг таны ажлын профайлд суулгасан бөгөөд тэдгээрт имэйл, апп, аюулгүй веб хуудас зэрэг таны төхөөрөмжийн сүлжээний үйл ажиллагааг удирдах зөвшөөрлийг олгоно.\n\nЭнэ сертификатын талаарх дэлгэрэнгүй мэдээлэл авахын тулд админтайгаа холбоо барина уу.</item>
-    </plurals>
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} таны ажлын төхөөрөмжид сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп, аюулгүй вебсайт зэрэг таны төхөөрөмжийн сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно. \n\nЭнэ сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}other{{orgName} таны ажлын төхөөрөмжид сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп, аюулгүй вебсайт зэрэг таны төхөөрөмжийн сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно. \n\nЭдгээр сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} ажлын профайлд сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп болон аюулгүй вебсайт зэрэг ажлын сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно.\n\nЭнэ сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}other{{orgName} ажлын профайлд сертификатын зөвшөөрлийг суулгасан бөгөөд энэ нь түүнд имэйл, апп болон аюулгүй вебсайт зэрэг ажлын сүлжээний үйл ажиллагааг хянах зөвшөөрөл олгож болно.\n\nЭдгээр сертификатын талаар дэлгэрэнгүй мэдээлэл авах бол админтайгаа холбогдоно уу.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Гуравдагч талын этгээд таны имэйл, апп-ууд болон аюулгүй вебсайтууд гэх мэтийг оруулан таны сүлжээний үйл ажиллагааг хянах боломжтой.\n\nТаны төхөөрөмж дээр суулгасан итгэмжлэгдсэн жуухын тусламжтайгаар ингэх боломжтой."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="other">Сертификат шалгах</item>
@@ -3452,7 +3457,11 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Хязгаарлалтыг арилгах"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"ПИН өөрчлөх"</string>
     <string name="help_label" msgid="2896538416436125883">"Тусламж &amp; санал хүсэлт"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Тусламжийн нийтлэл, утас, чат"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Тусламжийн нийтлэл, утас, чат"</string>
+    <!-- no translation found for support_summary (6681247727996378252) -->
+    <skip />
+    <!-- no translation found for support_summary (1690554254039752541) -->
+    <skip />
     <string name="user_account_title" msgid="6389636876210834864">"Контентын бүртгэл"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Зургийн ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ноцтой аюул занал"</string>
@@ -3847,6 +3856,8 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Апп тус бүрийн мэдэгдлийг хянах"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Ерөнхий"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Ажлын мэдэгдэл"</string>
+    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
+    <skip />
     <string name="smart_notifications_title" msgid="8995288376897952015">"Орчинтой тохирсон мэдэгдлүүд"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Орчинтой тохирсон мэдэгдлийн давуу эрх"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Ач холбогдол багатай мэдэгдлүүдийг автоматаар Бага ач холбогдолтой гэж тохируулах"</string>
@@ -4293,8 +4304,8 @@
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Унтраалттай"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Апп бэхлэлт"</string>
     <string name="app_pinning_intro" msgid="6409063008733004245">"Та апп бэхлэх онцлогийг ашигласнаар одоогийн аппыг бэхэлснийг болиулах хүртлээ харагдах байдалд байлгах боломжтой. Энэ онцлогийг итгэдэг найздаа тодорхой тоглоом тоглохыг нь зөвшөөрөх гэх мэтээр ашиглах боломжтой."</string>
-    <string name="screen_pinning_description" msgid="7289730998890213708">"Аппыг бэхэлсэн үед бэхэлсэн апп бусад аппыг нээж, хувийн өгөгдөлд хандах боломжтой болж магадгүй. \n\nАпп бэхлэх онцлогийг ашиглахын тулд: 	\n1.	Апп бэхлэх онцлогийг асаана уу 	\n2.	Тоймыг нээнэ үү 	\n3.	Дэлгэцийн дээд хэсэгт байрлах аппын дүрс тэмдгийг товшиж, дараа нь Бэхлэх дээр товшино уу"</string>
-    <string name="screen_pinning_guest_user_description" msgid="5826264265872938958">"Аппыг бэхэлсэн үед бэхэлсэн апп бусад аппыг нээж, хувийн өгөгдөлд хандах боломжтой болж магадгүй. \n\nХэрэв та хэн нэгэнтэй төхөөрөмжөө аюулгүйгээр хуваалцахыг хүсвэл оронд нь зочин хэрэглэгчийг ашиглаж үзнэ үү. \n\nАпп бэхлэх онцлогийг ашиглахын тулд: 	\n1.	Апп бэхлэх онцлогийг асаана уу 	\n2.	Тоймыг нээнэ үү 	\n3.	Дэлгэцийн дээд хэсэгт байрлах аппын дүрс тэмдгийг товшиж, дараа нь Бэхлэх дээр товшино уу"</string>
+    <string name="screen_pinning_description" msgid="4305370471370474846">"Аппыг бэхэлсэн үед бэхэлсэн апп бусад аппыг нээж, хувийн өгөгдөлд хандах боломжтой болж болзошгүй. \n\nАпп бэхлэхийг ашиглахын тулд: 	\n1. Апп бэхлэхийг асаана уу 	\n2. Тоймыг нээнэ үү 	\n3. Дэлгэцийн дээд хэсгийн аппын дүрс тэмдгийг товшиж, дараа нь бэхлэх дээр товшино уу"</string>
+    <string name="screen_pinning_guest_user_description" msgid="2465729370037556955">"Аппыг бэхэлсэн үед бэхэлсэн апп бусад аппыг нээж, хувийн өгөгдөлд хандах боломжтой болж болзошгүй. \n\nХэрэв та хэн нэгэнтэй төхөөрөмжөө аюулгүйгээр хуваалцахыг хүсвэл оронд нь зочин хэрэглэгчийг ашиглаж үзнэ үү. \n\nАпп бэхлэхийг ашиглахын тулд: 	\n1. Апп бэхлэхийг асаана уу 	\n2. Тоймыг нээнэ үү 	\n3. Дэлгэцийн дээд хэсгийн аппын дүрс тэмдгийг товшиж, дараа нь бэхлэх дээр товшино уу"</string>
     <string name="screen_pinning_dialog_message" msgid="8144925258679476654">"Аппыг бэхэлсэн үед: \n\n•	 Хувийн өгөгдөлд хандах боломжтой байж болзошгүй \n		(харилцагчид болон имэйлийн контент зэрэг) \n•	 Бэхэлсэн апп бусад аппыг нээж болзошгүй \n\nАпп бэхлэхийг зөвхөн итгэдэг хүмүүстэйгээ ашиглаарай."</string>
     <string name="screen_pinning_unlock_pattern" msgid="1345877794180829153">"Бэхэлснийг болиулахаас өмнө түгжээ тайлах хээ асуух"</string>
     <string name="screen_pinning_unlock_pin" msgid="8716638956097417023">"Бэхэлснийг болиулахаасаа өмнө ПИН асуух"</string>
@@ -5619,7 +5630,10 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"дуудлага"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"мобайл дата"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Төхөөрөмжийн туршлагыг сайжруулахын тулд аппууд болон үйлчилгээнүүд нь Wi-Fi сүлжээг хүссэн үедээ буюу Wi-Fi-г унтраалттай байсан ч скан хийх боломжтой хэвээр байна. Үүнийг байршилд тулгуурласан онцлогууд болон үйлчилгээнүүдийг сайжруулах зэргээр ашиглаж болно. Та үүнийг Wi-Fi скан хийх тохиргоонд өөрчлөх боломжтой. "<annotation id="link">"Өөрчлөх"</annotation></string>
+    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
+    <skip />
+    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
+    <skip />
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Холбогдсон"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Холболт алга"</string>
@@ -5707,10 +5721,8 @@
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Бүү холбогд"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Холбогдох"</string>
     <string name="tare_settings" msgid="3788654800004869077">"TARE-н тохиргоо"</string>
-    <!-- no translation found for tare_on (2386073225978684535) -->
-    <skip />
-    <!-- no translation found for tare_off (6305694402929756726) -->
-    <skip />
+    <string name="tare_on" msgid="2386073225978684535">"Асаах"</string>
+    <string name="tare_off" msgid="6305694402929756726">"Унтраах"</string>
     <string name="tare_revert" msgid="3855325741125236638">"Өгөгдмөл тохиргоо руу буцаах"</string>
     <string name="tare_settings_reverted_toast" msgid="8189887409285176731">"Тохиргоог өгөгдмөл рүү буцаасан."</string>
     <string name="tare_max_satiated_balance" msgid="3914973999573150340">"Бүрэн цэнэглэгдсэн үеийн дээд үлдэгдэл"</string>
@@ -5722,8 +5734,7 @@
     <string name="tare_actions_ctp" msgid="5110104015354916401">"Үйлдэл (Үйлдвэрлэх зардал)"</string>
     <string name="tare_actions_base_price" msgid="3300967942666376589">"Үйлдэл (Үндсэн үнэ)"</string>
     <string name="tare_rewards_instantaneous" msgid="8358683519945340874">"Нэг үйл явдал тутамд урамшуулал"</string>
-    <!-- no translation found for tare_rewards_ongoing (7657030286658143416) -->
-    <skip />
+    <string name="tare_rewards_ongoing" msgid="7657030286658143416">"Үйл явдал үргэлжлэх секунд тутамд урамшуулалтай"</string>
     <string name="tare_rewards_max" msgid="5283055625642837010">"Урамшууллын өдрийн дээд хэмжээ"</string>
     <string name="tare_top_activity" msgid="7266560655483385757">"Шилдэг үйл ажиллагаа"</string>
     <string name="tare_notification_seen" msgid="7829963536020087742">"Мэдэгдлийг харсан"</string>
@@ -5773,6 +5784,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Тохируулах сүлжээг татаж авах үнэлгээний хязгаар"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Хязгааргүй"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Нэвтрүүлэлт"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"<xliff:g id="CURRENTAPP">%1$s</xliff:g>-г нэвтрүүлэх"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Таны ойролцоо тоглуулж буй нэвтрүүлэлтийг сонсоорой"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Ойролцоох төхөөрөмжүүд рүү медиа нэвтрүүлэх эсвэл өөр хэн нэгний нэвтрүүлэлтийг сонсоорой"</string>
     <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Нэвтрүүлэлт"</string>
@@ -5780,4 +5792,11 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Нэвтрүүлэлт олох"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Нэвтрүүлэлтээс гарах"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR код скан хийх"</string>
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Нууц үг оруулах"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Холбогдох боломжгүй байна. Дахин оролдоно уу."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Нууц үг буруу байна"</string>
+    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
+    <skip />
+    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
+    <skip />
 </resources>

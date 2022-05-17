@@ -28,6 +28,7 @@ import android.telephony.TelephonyManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settingslib.NetworkPolicyEditor;
 
@@ -63,6 +64,6 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return DataUsageUtils.hasMobileData(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 }
