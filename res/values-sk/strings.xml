@@ -598,7 +598,7 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Pridať ďalší"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Ďalej"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Okrem odomknutia svojho telefónu môžete pomocou odtlačku prsta schvaľovať nákupy a prístup aplikácií. "<annotation id="url">"Ďalšie informácie"</annotation></string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Možnosť zámky obrazovky je zakázaná. Ďalšie informácie vám poskytne správca vašej organizácie."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Možnosť zámky obrazovky je zakázaná. VIac sa dozviete od správcu svojej organizácie."</string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Naďalej môžete pomocou odtlačku prsta schvaľovať nákupy a prístup do aplikácií."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Zdvihnite prst, potom sa opäť dotknite senzora"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Senzor odtlačkov prstov nie je možné používať. Navštívte poskytovateľa opráv."</string>
@@ -648,10 +648,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Aktivujte funkcie ochrany zariadenia a zabráňte tak ostatným v používaní tohto zariadenia bez vášho povolenia. Vyberte zámku obrazovky, ktorú chcete používať."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Aktivujte funkcie ochrany zariadenia a zabráňte tak ostatným v používaní tohto telefónu bez vášho povolenia. Vyberte zámku obrazovky, ktorú chcete používať."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Zvoľte záložnú metódu zámky obrazovky"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ak zabudnete zámku obrazovky, váš správca IT ju nemôže resetovať."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Nastavte samostatnú pracovnú zámku"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ak túto zámku zabudnete, požiadajte správcu IT, aby ju resetoval"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Možnosti zámky obrazovky"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Možnosti zámky obrazovky"</string>
@@ -764,8 +762,7 @@
       <item quantity="other">Musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> znakov</item>
       <item quantity="one">Musí mať aspoň <xliff:g id="COUNT_0">%d</xliff:g> znak</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ak používate iba čísla, heslo musí mať aspoň jednu číslicu}few{Ak používate iba čísla, heslo musí mať aspoň # číslice}many{If using only numbers, must be at least # digits}other{Ak používate iba čísla, heslo musí mať aspoň # číslic}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="few">PIN musí mať aspoň <xliff:g id="COUNT_1">%d</xliff:g> číslice</item>
       <item quantity="many">PIN must be at least <xliff:g id="COUNT_1">%d</xliff:g> digits</item>
@@ -2341,7 +2338,7 @@
     <string name="accessibility_settings" msgid="4713215774904704682">"Dostupnosť"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Nastavenia dostupnosti"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Zobrazenie, interakcia, zvuk"</string>
-    <string name="vision_settings_title" msgid="8919983801864103069">"Pre slabozrakých"</string>
+    <string name="vision_settings_title" msgid="8919983801864103069">"Pre zrakovo postihnutých"</string>
     <string name="vision_settings_description" msgid="7614894785054441991">"Zariadenie môžete prispôsobiť, aby zodpovedalo vašim potrebám. Tieto funkcie dostupnosti môžete neskôr zmeniť v Nastaveniach."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Zmeniť veľkosť písma"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Čítačka obrazovky"</string>
@@ -2358,7 +2355,7 @@
     <string name="experimental_category_title" msgid="898904396646344152">"Experimentálne"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Experimentálne funkcie"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
-    <string name="talkback_summary" msgid="5820927220378864281">"Čítačka obrazovky je určená hlavne pre nevidiacich a slabozrakých ľudí"</string>
+    <string name="talkback_summary" msgid="5820927220378864281">"Čítačka obrazovky určená hlavne pre nevidiacich a slabozrakých"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Položky na obrazovke si môžete vypočuť nahlas klepnutím"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Nastavenia titulkov"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Predvoľby titulkov"</string>

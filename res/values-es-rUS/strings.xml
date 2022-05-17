@@ -540,7 +540,7 @@
     <string name="lock_screen_password_skip_message" product="device" msgid="9186075211441188900">"En caso de robo o extravío, una contraseña protege el dispositivo"</string>
     <string name="lock_screen_pin_skip_message" product="default" msgid="4301690296689572747">"En caso de robo o extravío, un PIN protege el teléfono"</string>
     <string name="lock_screen_pattern_skip_message" product="default" msgid="7387967847446084260">"En caso de robo o extravío, un patrón protege el teléfono"</string>
-    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"En caso de robo o extravío, una contraseña protege el teléfono"</string>
+    <string name="lock_screen_password_skip_message" product="default" msgid="6415788841227543063">"En caso de robo o extravío, la contraseña protege el teléfono"</string>
     <string name="lock_screen_pin_skip_fingerprint_message" product="tablet" msgid="2350062798056164403">"Se requiere un PIN para configurar la función Desbloqueo con huellas dactilares.\n\nEn caso de robo o extravío, un PIN protege la tablet."</string>
     <string name="lock_screen_pattern_skip_fingerprint_message" product="tablet" msgid="222574071926747300">"Se requiere un patrón para configurar la función Desbloqueo con huellas dactilares.\n\nEn caso de robo o extravío, un patrón protege la tablet."</string>
     <string name="lock_screen_password_skip_fingerprint_message" product="tablet" msgid="7780323831330724644">"Se requiere una contraseña para configurar la función Desbloqueo con huellas dactilares.\n\nEn caso de robo o extravío, una contraseña protege la tablet."</string>
@@ -640,10 +640,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa las funciones de protección del dispositivo para impedir que terceros lo usen sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa las funciones de protección del dispositivo para impedir que terceros usen este teléfono sin tu permiso. Elige el bloqueo de pantalla que quieres usar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Elige el método secundario de bloqueo de pantalla"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si olvidas tu bloqueo de pantalla, el administrador de TI no podrá restablecerlo."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Configura un bloqueo de trabajo independiente"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si olvidas este bloqueo, pídele al administrador de TI que lo restablezca"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opciones de bloqueo de la pantalla"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opciones de bloqueo de la pantalla"</string>
@@ -1946,7 +1944,7 @@
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Establecer un patrón"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Establecer un patrón de trabajo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Configura la contraseña de respaldo"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar tu huella configura un patrón"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar tu huella, configura un patrón"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por motivos de seguridad, establece un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Configura el PIN para usar la huella"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Vuelve a ingresar tu contraseña"</string>
@@ -2294,7 +2292,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configuración de accesibilidad"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Pantalla, interacción y audio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Configuración de visión"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Puedes personalizar este dispositivo para que se adapte a tus necesidades. Cambia estas funciones de accesibilidad más tarde en Configuración."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Personaliza este dispositivo para adaptarlo a tus necesidades. Puedes modificar las funciones de accesibilidad más tarde en Configuración."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Cambiar tamaño de fuente"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Lector de pantalla"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Subtítulos"</string>
@@ -2345,7 +2343,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ampliar con acceso directo y presionar tres veces"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Información sobre <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Tamaño y texto de la pantalla"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambia la forma en que se muestran los contactos"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambiar cómo se muestra el texto"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Asunto: Diseños de globos aerostáticos"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"¡Buenos días!\n\nSolo quería saber cómo van los diseños. ¿Estarán listos antes de que empecemos a hacer los nuevos globos?"</string>

@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Opción predeterminada do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A opción de seleccionar un idioma para esta aplicación non está dispoñible en Configuración."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"É posible que o idioma non estea dispoñible na aplicación. Pode que algunhas aplicacións non sexan compatibles con esta opción de configuración."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí só se mostran as aplicacións que admiten a selección de idioma."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Queres quitar os idiomas seleccionados?</item>
       <item quantity="one">Queres quitar o idioma seleccionado?</item>
@@ -572,7 +571,7 @@
     <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"Queres omitir a configuración do PIN, da cara e da impresión dixital?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Queres omitir a configuración do contrasinal?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"Omitir configuración (contrasinal e cara)?"</string>
-    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Omitir configuración (contrasinal e impresión)?"</string>
+    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Omitir configuración de contrasinal e impresión?"</string>
     <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Omitir axuste (contrasinal, cara e impresión)?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Queres omitir a configuración do padrón?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Omitir configuración (padrón e cara)?"</string>
@@ -643,7 +642,7 @@
     <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
     <skip />
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Se esqueces este bloqueo, pídelle ao teu administrador de TI que o restableza"</string>
-    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcións de bloqueo da pantalla"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcións de bloqueo de pantalla"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opcións de bloqueo de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Bloqueo de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5799070517574360310">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / inmediatamente despois de entrar en suspensión"</string>
@@ -1944,7 +1943,7 @@
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Define un padrón"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Define un padrón para o traballo"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Impresión dixital: contrasinal"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Impresión dixital: padrón"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Define un padrón para a impresión dixital"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por cuestións de seguranza, configura un PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Impresión dixital: PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6132312814563023990">"Volve introducir o teu contrasinal"</string>
@@ -2308,7 +2307,7 @@
     <string name="experimental_category_title" msgid="898904396646344152">"Experimental"</string>
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funcións experimentais"</string>
     <string name="talkback_title" msgid="8756080454514251327">"TalkBack"</string>
-    <string name="talkback_summary" msgid="5820927220378864281">"O lector de pantalla está destinado principalmente a persoas cegas e con pouca visión"</string>
+    <string name="talkback_summary" msgid="5820927220378864281">"Lector de pantalla destinado principalmente a persoas cegas e con pouca visión"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"Toca elementos na pantalla para escoitalos en voz alta"</string>
     <string name="accessibility_captioning_title" msgid="4561871958958925225">"Preferencias dos subtítulos"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"Acerca das preferencias dos subtítulos"</string>
@@ -2343,7 +2342,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"Ampliar con atallo e tres toques"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"Acerca de: <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"Texto e tamaño de visualización"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambia a maneira en que se mostra o texto"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"Cambiar a maneira en que se mostra o texto"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"Asunto: Deseños de globos aerostáticos"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"De: Bill"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"Bos días!\n\nQue tal van os deseños? Estarán listos antes de que comecemos a crear os novos globos?"</string>
@@ -4866,7 +4865,7 @@
     <string name="special_access_more" msgid="132919514147475846">"Ver máis"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Restablecer límite de velocidade de ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Restableceuse o límite de velocidade de ShortcutManager"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Información de control sobre a pantalla de bloqueo"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Controlar a información da pantalla de bloqueo"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Mostrar ou ocultar o contido das notificacións"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Todo"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Asistencia e consellos"</string>
