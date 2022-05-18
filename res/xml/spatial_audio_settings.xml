@@ -34,4 +34,9 @@
         android:title="@string/spatial_audio_wired_headphones"
         settings:controller="com.android.settings.notification.SpatialAudioWiredHeadphonesController"/>
 
+    <com.android.settingslib.widget.FooterPreference
+        android:key="spatial_audio_footer"
+        android:title="@string/spatial_audio_footer_title"
+        android:selectable="false"
+        settings:searchable="false"/>
 </PreferenceScreen>
