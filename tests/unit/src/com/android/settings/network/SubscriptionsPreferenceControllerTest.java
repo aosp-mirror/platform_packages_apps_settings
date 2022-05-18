@@ -20,12 +20,14 @@ import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GOOD;
 import static android.telephony.SignalStrength.SIGNAL_STRENGTH_GREAT;
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
+import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -55,7 +57,6 @@ import android.text.Html;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -78,12 +79,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class SubscriptionsPreferenceControllerTest {
     private static final String KEY = "preference_group";
+    private static final int SUB_ID = 1;
 
     @Mock
     private UserManager mUserManager;
@@ -105,6 +106,10 @@ public class SubscriptionsPreferenceControllerTest {
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     @Mock
     private WifiManager mWifiManager;
+    @Mock
+    private SignalStrength mSignalStrength;
+    @Mock
+    private ServiceState mServiceState;
 
     private LifecycleRegistry mLifecycleRegistry;
     private int mOnChildUpdatedCount;
@@ -116,6 +121,7 @@ public class SubscriptionsPreferenceControllerTest {
     private NetworkCapabilities mNetworkCapabilities;
     private FakeSubscriptionsPreferenceController mController;
     private static SubsPrefCtrlInjector sInjector;
+    private NetworkRegistrationInfo mNetworkRegistrationInfo;
 
     @Before
     public void setUp() {
@@ -131,6 +137,12 @@ public class SubscriptionsPreferenceControllerTest {
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
+        when(mSignalStrength.getLevel()).thenReturn(SIGNAL_STRENGTH_GREAT);
+        when(mTelephonyManager.getServiceState()).thenReturn(mServiceState);
+        mNetworkRegistrationInfo = createNetworkRegistrationInfo(false /* dateState */);
+        when(mServiceState.getNetworkRegistrationInfo(anyInt(), anyInt()))
+                .thenReturn(mNetworkRegistrationInfo);
+        when(mTelephonyManager.getSignalStrength()).thenReturn(mSignalStrength);
         when(mConnectivityManager.getActiveNetwork()).thenReturn(mActiveNetwork);
         when(mConnectivityManager.getNetworkCapabilities(mActiveNetwork))
                 .thenReturn(mNetworkCapabilities);
@@ -153,6 +165,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController =  new FakeSubscriptionsPreferenceController(mContext, mLifecycle,
                 mUpdateListener, KEY, 5);
         Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
+        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
     }
 
     @After
@@ -284,7 +297,6 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(networkType)
                 .when(sInjector).getNetworkType(any(), any(), any(), anyInt(), eq(true));
         doReturn(true).when(mWifiPickerTrackerHelper).isCarrierNetworkActive();
-        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
 
         mController.onResume();
         mController.displayPreference(mPreferenceScreen);
@@ -521,12 +533,7 @@ public class SubscriptionsPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
         Drawable actualIcon = mPreferenceCategory.getPreference(0).getIcon();
         ServiceState ss = mock(ServiceState.class);
-        NetworkRegistrationInfo regInfo = new NetworkRegistrationInfo.Builder()
-                .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
-                .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
-                .setRegistrationState(NetworkRegistrationInfo.REGISTRATION_STATE_HOME)
-                .setAccessNetworkTechnology(TelephonyManager.NETWORK_TYPE_LTE)
-                .build();
+        NetworkRegistrationInfo regInfo = createNetworkRegistrationInfo(true /* dataState */);
         doReturn(ss).when(mTelephonyManagerForSub).getServiceState();
         doReturn(regInfo).when(ss).getNetworkRegistrationInfo(
                 NetworkRegistrationInfo.DOMAIN_PS,
@@ -536,9 +543,42 @@ public class SubscriptionsPreferenceControllerTest {
     }
 
     @Test
+    @UiThreadTest
+    public void getIcon_carrierNetworkIsNotActive_useMobileDataLevel() {
+        // Fake mobile data active and level is SIGNAL_STRENGTH_GOOD(3)
+        mNetworkRegistrationInfo = createNetworkRegistrationInfo(true /* dateState */);
+        when(mServiceState.getNetworkRegistrationInfo(anyInt(), anyInt()))
+                .thenReturn(mNetworkRegistrationInfo);
+        when(mSignalStrength.getLevel()).thenReturn(SIGNAL_STRENGTH_GOOD);
+        // Fake carrier network not active and level is WIFI_LEVEL_MAX(4)
+        when(mWifiPickerTrackerHelper.isCarrierNetworkActive()).thenReturn(false);
+        when(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).thenReturn(WIFI_LEVEL_MAX);
+
+        mController.getIcon(SUB_ID);
+
+        verify(sInjector).getIcon(any(), eq(SIGNAL_STRENGTH_GOOD), anyInt(), anyBoolean());
+    }
+
+    @Test
+    @UiThreadTest
+    public void getIcon_carrierNetworkIsActive_useCarrierNetworkLevel() {
+        // Fake mobile data not active and level is SIGNAL_STRENGTH_GOOD(3)
+        mNetworkRegistrationInfo = createNetworkRegistrationInfo(false /* dateState */);
+        when(mServiceState.getNetworkRegistrationInfo(anyInt(), anyInt()))
+                .thenReturn(mNetworkRegistrationInfo);
+        when(mSignalStrength.getLevel()).thenReturn(SIGNAL_STRENGTH_GOOD);
+        // Fake carrier network active and level is WIFI_LEVEL_MAX(4)
+        when(mWifiPickerTrackerHelper.isCarrierNetworkActive()).thenReturn(true);
+        when(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).thenReturn(WIFI_LEVEL_MAX);
+
+        mController.getIcon(SUB_ID);
+
+        verify(sInjector).getIcon(any(), eq(WIFI_LEVEL_MAX), anyInt(), anyBoolean());
+    }
+
+    @Test
     public void connectCarrierNetwork_isDataEnabled_helperConnect() {
         when(mTelephonyManager.isDataEnabled()).thenReturn(true);
-        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
 
         mController.connectCarrierNetwork();
 
@@ -548,7 +588,6 @@ public class SubscriptionsPreferenceControllerTest {
     @Test
     public void connectCarrierNetwork_isNotDataEnabled_helperNeverConnect() {
         when(mTelephonyManager.isDataEnabled()).thenReturn(false);
-        mController.setWifiPickerTrackerHelper(mWifiPickerTrackerHelper);
 
         mController.connectCarrierNetwork();
 
@@ -561,18 +600,22 @@ public class SubscriptionsPreferenceControllerTest {
         doReturn(isActiveCellularNetwork).when(sInjector).isActiveCellularNetwork(mContext);
         doReturn(isDataEnable).when(mTelephonyManagerForSub).isDataEnabled();
         ServiceState ss = mock(ServiceState.class);
-        NetworkRegistrationInfo regInfo = new NetworkRegistrationInfo.Builder()
+        NetworkRegistrationInfo regInfo = createNetworkRegistrationInfo(dataState);
+        doReturn(ss).when(mTelephonyManagerForSub).getServiceState();
+        doReturn(servicestate).when(ss).getState();
+        doReturn(regInfo).when(ss).getNetworkRegistrationInfo(
+                NetworkRegistrationInfo.DOMAIN_PS,
+                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
+    }
+
+    private NetworkRegistrationInfo createNetworkRegistrationInfo(boolean dataState) {
+        return new NetworkRegistrationInfo.Builder()
                 .setDomain(NetworkRegistrationInfo.DOMAIN_PS)
                 .setTransportType(AccessNetworkConstants.TRANSPORT_TYPE_WWAN)
                 .setRegistrationState(dataState ? NetworkRegistrationInfo.REGISTRATION_STATE_HOME
                         : NetworkRegistrationInfo.REGISTRATION_STATE_NOT_REGISTERED_SEARCHING)
                 .setAccessNetworkTechnology(TelephonyManager.NETWORK_TYPE_LTE)
                 .build();
-        doReturn(ss).when(mTelephonyManagerForSub).getServiceState();
-        doReturn(servicestate).when(ss).getState();
-        doReturn(regInfo).when(ss).getNetworkRegistrationInfo(
-                NetworkRegistrationInfo.DOMAIN_PS,
-                AccessNetworkConstants.TRANSPORT_TYPE_WWAN);
     }
 
     private List<SubscriptionInfo> setupMockSubscriptions(int count) {
