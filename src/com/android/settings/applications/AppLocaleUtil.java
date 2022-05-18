@@ -49,17 +49,17 @@ public class AppLocaleUtil {
         boolean isDisallowedPackage = isDisallowedPackage(context, packageName);
         boolean hasLauncherEntry = hasLauncherEntry(packageName, infos);
         boolean isSignedWithPlatformKey = isSignedWithPlatformKey(context, packageName);
-        boolean isAppLocaleSupported = isAppLocaleSupported(context, packageName);
+        boolean canDisplay = !isDisallowedPackage
+                && !isSignedWithPlatformKey
+                && hasLauncherEntry
+                && isAppLocaleSupported(context, packageName);
+
         Log.i(TAG, "Can display preference - [" + packageName + "] :"
                 + " isDisallowedPackage : " + isDisallowedPackage
                 + " / isSignedWithPlatformKey : " + isSignedWithPlatformKey
                 + " / hasLauncherEntry : " + hasLauncherEntry
-                + " / isAppLocaleSupported : " + isAppLocaleSupported);
-
-        return !isDisallowedPackage
-                && !isSignedWithPlatformKey
-                && hasLauncherEntry
-                && isAppLocaleSupported;
+                + " / canDisplay : " + canDisplay);
+        return canDisplay;
     }
 
     private static boolean isDisallowedPackage(Context context, String packageName) {
