@@ -2855,7 +2855,7 @@
             android:name="Settings$BatterySaverSettingsActivity"
             android:label="@string/battery_saver"
             android:exported="true"
-            android:icon="@drawable/ic_settings_battery">
+            android:icon="@drawable/ic_homepage_battery">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2870,6 +2870,7 @@
 
         <activity android:name=".fuelgauge.BatterySaverModeVoiceActivity"
                 android:label="@string/power_usage_summary_title"
+                android:icon="@drawable/ic_homepage_battery"
                 android:theme="@*android:style/Theme.DeviceDefault.Light.Voice"
                 android:exported="true">
             <intent-filter>
