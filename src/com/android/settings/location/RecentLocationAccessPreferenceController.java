@@ -90,6 +90,7 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+        mLocationEnabler.refreshLocationMode();
         loadRecentAccesses();
     }
 
