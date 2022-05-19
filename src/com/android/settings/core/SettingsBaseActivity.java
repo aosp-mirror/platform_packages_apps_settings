@@ -260,6 +260,9 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     }
 
     private int getTransitionType(Intent intent) {
+        if (intent == null) {
+            return TransitionType.TRANSITION_NONE;
+        }
         return intent.getIntExtra(EXTRA_PAGE_TRANSITION_TYPE, TransitionType.TRANSITION_NONE);
     }
 }
