@@ -16,7 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothLeAudioContentMetadata;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
+import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.bluetooth.BluetoothLeBroadcastSubgroup;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -43,16 +45,15 @@ class BluetoothBroadcastSourcePreference extends Preference {
     private static final int RESOURCE_ID_ICON = R.drawable.settings_input_antenna;
 
     private BluetoothLeBroadcastMetadata mBluetoothLeBroadcastMetadata;
+    private BluetoothLeBroadcastReceiveState mBluetoothLeBroadcastReceiveState;
     private ImageView mFrictionImageView;
     private String mTitle;
     private boolean mStatus;
     private boolean mIsEncrypted;
 
-    BluetoothBroadcastSourcePreference(@NonNull Context context,
-            @NonNull BluetoothLeBroadcastMetadata source) {
+    BluetoothBroadcastSourcePreference(@NonNull Context context) {
         super(context);
         initUi();
-        updateMetadataAndRefreshUi(source, false);
     }
 
     @Override
@@ -68,7 +69,7 @@ class BluetoothBroadcastSourcePreference extends Preference {
     private void initUi() {
         setLayoutResource(R.layout.preference_access_point);
         setWidgetLayoutResource(R.layout.access_point_friction_widget);
-
+        mTitle = getContext().getString(RESOURCE_ID_UNKNOWN_PROGRAM_INFO);
         mStatus = false;
         final Drawable drawable = getContext().getDrawable(RESOURCE_ID_ICON);
         if (drawable != null) {
@@ -105,9 +106,20 @@ class BluetoothBroadcastSourcePreference extends Preference {
      */
     public void updateMetadataAndRefreshUi(BluetoothLeBroadcastMetadata source, boolean status) {
         mBluetoothLeBroadcastMetadata = source;
-        mTitle = getBroadcastMetadataProgramInfo();
+        mTitle = getProgramInfo();
         mIsEncrypted = mBluetoothLeBroadcastMetadata.isEncrypted();
-        mStatus = status;
+        mStatus = status || mBluetoothLeBroadcastReceiveState != null;
+
+        refresh();
+    }
+
+    /**
+     * Updates the title and status from BluetoothLeBroadcastReceiveState.
+     */
+    public void updateReceiveStateAndRefreshUi(BluetoothLeBroadcastReceiveState receiveState) {
+        mBluetoothLeBroadcastReceiveState = receiveState;
+        mTitle = getProgramInfo();
+        mStatus = true;
 
         refresh();
     }
@@ -124,7 +136,17 @@ class BluetoothBroadcastSourcePreference extends Preference {
         updateStatusButton();
     }
 
-    private String getBroadcastMetadataProgramInfo() {
+    private String getProgramInfo() {
+        if (mBluetoothLeBroadcastReceiveState != null) {
+            List<BluetoothLeAudioContentMetadata> bluetoothLeAudioContentMetadata =
+                    mBluetoothLeBroadcastReceiveState.getSubgroupMetadata();
+            if (!bluetoothLeAudioContentMetadata.isEmpty()) {
+                return bluetoothLeAudioContentMetadata.stream()
+                        .map(i -> i.getProgramInfo())
+                        .findFirst().orElse(
+                                getContext().getString(RESOURCE_ID_UNKNOWN_PROGRAM_INFO));
+            }
+        }
         if (mBluetoothLeBroadcastMetadata == null) {
             return getContext().getString(RESOURCE_ID_UNKNOWN_PROGRAM_INFO);
         }
@@ -137,5 +159,25 @@ class BluetoothBroadcastSourcePreference extends Preference {
                 .map(i -> i.getContentMetadata().getProgramInfo())
                 .filter(i -> !TextUtils.isEmpty(i))
                 .findFirst().orElse(getContext().getString(RESOURCE_ID_UNKNOWN_PROGRAM_INFO));
+    }
+
+    /**
+     * Whether the broadcast source is encrypted or not.
+     * @return If true, the broadcast source needs the broadcast code. If false, the broadcast
+     * source does not need the broadcast code.
+     */
+    public boolean isEncrypted() {
+        return mIsEncrypted;
+    }
+
+    /**
+     * Clear the BluetoothLeBroadcastReceiveState and reset the state when the user clicks the
+     * "leave broadcast" button.
+     */
+    public void clearReceiveState() {
+        mBluetoothLeBroadcastReceiveState = null;
+        mTitle = getProgramInfo();
+        mStatus = false;
+        refresh();
     }
 }

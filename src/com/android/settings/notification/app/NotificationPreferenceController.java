@@ -24,6 +24,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
@@ -64,7 +65,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     @Nullable
     protected ShortcutInfo mConversationInfo;
     protected List<String> mPreferenceFilter;
-    boolean mMigratedPermission;
 
     boolean overrideCanBlock;
     boolean overrideCanConfigure;
@@ -78,8 +78,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         mBackend = backend;
         mUm = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         mPm = mContext.getPackageManager();
-        mMigratedPermission = Settings.Secure.getIntForUser(context.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 0, USER_SYSTEM) != 0;
     }
 
     /**
@@ -155,9 +153,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return overrideCanConfigureValue;
         }
         if (channel != null && mAppRow != null) {
-            boolean locked = mMigratedPermission ? mAppRow.lockedImportance
-                    : channel.isImportanceLockedByCriticalDeviceFunction()
-                            || channel.isImportanceLockedByOEM();
+            boolean locked = mAppRow.lockedImportance;
             if (locked) {
                 return channel.isBlockable() || channel.getImportance() == IMPORTANCE_NONE;
             }
@@ -176,7 +172,8 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return overrideCanConfigureValue;
         }
         if (mAppRow != null) {
-            return !mAppRow.systemApp && !mAppRow.lockedImportance;
+            boolean systemBlockable = !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
+            return systemBlockable && !mAppRow.lockedImportance;
         }
         return true;
     }
@@ -186,8 +183,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return overrideCanConfigureValue;
         }
         if (channel != null && mAppRow != null) {
-            boolean locked = mMigratedPermission ? mAppRow.lockedImportance
-                    : channel.isImportanceLockedByOEM();
+            boolean locked = mAppRow.lockedImportance;
             return !locked || channel.isBlockable();
         }
         return false;

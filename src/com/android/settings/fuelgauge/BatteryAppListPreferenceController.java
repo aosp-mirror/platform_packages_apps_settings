@@ -434,7 +434,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @VisibleForTesting
     void setUsageSummary(Preference preference, BatteryEntry entry) {
-        if (entry.getUid() == Process.SYSTEM_UID) {
+        if (BatteryEntry.isSystemUid(entry.getUid())) {
             return;
         }
         String packageName = entry.getDefaultPackageName();
