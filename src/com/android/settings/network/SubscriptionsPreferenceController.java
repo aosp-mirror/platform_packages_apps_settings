@@ -456,7 +456,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
+    public void onTelephonyDisplayInfoChanged(int subId,
+            TelephonyDisplayInfo telephonyDisplayInfo) {
+        if (subId != mSubsPrefCtrlInjector.getDefaultDataSubscriptionId()) {
+            return;
+        }
         mTelephonyDisplayInfo = telephonyDisplayInfo;
         update();
     }
