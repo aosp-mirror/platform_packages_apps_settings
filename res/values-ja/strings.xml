@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"システムのデフォルト"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"ここには、選択した言語に対応するアプリのみが表示されます。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">選択した言語を削除しますか？</item>
       <item quantity="one">選択した言語を削除しますか？</item>
@@ -596,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"仕事用プロファイルのロック、暗号化など"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"暗号化、認証情報など"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"セキュリティ, その他 セキュリティ 設定, その他 設定, 詳細 セキュリティ 設定"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"プライバシーの詳細設定"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"自動入力、アクティビティ管理など"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"最大で<xliff:g id="COUNT">%d</xliff:g>個の指紋を追加できます"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"追加された指紋の数が上限に達しました"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"これ以上、指紋を追加できません"</string>
@@ -638,10 +635,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"このデバイスが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"このスマートフォンが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"予備の画面ロック方式を選択してください"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"画面ロックを忘れてしまった場合、IT 管理者はリセットできません。"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"仕事用のロックを別個に設定"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"このロックを忘れた場合は、IT 管理者にリセットを依頼してください"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"画面ロックの方法"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"画面ロックの方法"</string>
@@ -749,13 +744,13 @@
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"PIN をあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"パスワードをあと 1 回間違えると、仕事用プロファイルと関連データが削除されます"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 文字以上で作成してください</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 文字以上で作成してください</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 文字以上で設定してください</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 文字以上で設定してください</item>
     </plurals>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{数字のみ使用する場合は、1 桁以上にしてください}other{数字のみ使用する場合は、# 桁以上にしてください}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
-      <item quantity="other">PIN は <xliff:g id="COUNT_1">%d</xliff:g> 桁以上で作成してください</item>
-      <item quantity="one">PIN は <xliff:g id="COUNT_0">%d</xliff:g> 桁以上で作成してください</item>
+      <item quantity="other">PIN は <xliff:g id="COUNT_1">%d</xliff:g> 桁以上で設定してください</item>
+      <item quantity="one">PIN は <xliff:g id="COUNT_0">%d</xliff:g> 桁以上で設定してください</item>
     </plurals>
     <string name="lockpassword_continue_label" msgid="2507983991979547816">"次へ"</string>
     <plurals name="lockpassword_password_too_long" formatted="false" msgid="8118091957172967677">
@@ -2341,7 +2336,7 @@
     <string name="accessibility_screen_magnification_state_navbar_gesture" msgid="8067042663897802231">"ショートカットとトリプルタップで拡大"</string>
     <string name="accessibility_introduction_title" msgid="8834950581512452348">"<xliff:g id="SERVICE">%1$s</xliff:g>について"</string>
     <string name="accessibility_text_reading_options_title" msgid="3224648909213325563">"表示サイズとテキスト"</string>
-    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"テキストの表示方法の変更"</string>
+    <string name="accessibility_text_reading_options_suggestion_title" msgid="2492155642665312733">"テキストの表示方法を変更する"</string>
     <string name="accessibility_text_reading_preview_mail_subject" msgid="4597374768612733616">"件名: 熱気球の設計"</string>
     <string name="accessibility_text_reading_preview_mail_from" msgid="1797499780365288020">"送信元: 大介"</string>
     <string name="accessibility_text_reading_preview_mail_content" msgid="8078152365771951802">"おはようございます。\n\nデザインの進捗はいかがでしょうか。新しいバルーンの制作を開始するまでに間に合いそうですか？"</string>
@@ -3864,8 +3859,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"各アプリからの通知の管理"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"全般"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"仕事用プロファイルの通知"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"仕事用プロファイル"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"通知の自動調整"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"通知の自動調整の優先度"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"優先度の低い通知を自動的に通知音なしに設定します"</string>
@@ -5638,10 +5632,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"通話"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"モバイルデータ"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"デバイスの機能向上のため、アプリやサービスは、Wi-Fi が OFF の場合でも、いつでも Wi-Fi ネットワークをスキャンできます。この設定は、位置情報を使用する機能やサービスの改善などに役立ちます。この設定は Wi-Fi スキャンの設定で変更できます。"</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"変更"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"接続済み"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"接続なし"</string>
@@ -5803,8 +5795,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"パスワードの入力"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"接続できません。もう一度お試しください。"</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"パスワードが正しくありません"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"再生を開始するには、下の枠に QR コードを合わせてください"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR コードの形式が無効です"</string>
 </resources>
