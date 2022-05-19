@@ -433,7 +433,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utiliser votre empreinte digitale"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilisez votre empreinte digitale pour déverrouiller votre tablette ou confirmer votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilisez votre empreinte digitale pour déverrouiller votre appareil ou confirmer votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou confirmer votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou valider votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Autorisez votre enfant à utiliser son empreinte digitale pour déverrouiller son téléphone ou valider son identité, par exemple pour se connecter à des applis, approuver un achat, etc."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Vous avez le contrôle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Gardez le contrôle, vous et votre enfant"</string>
@@ -638,10 +638,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Choisissez une méthode secondaire pour déverrouiller l\'écran"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si vous oubliez le verrouillage de l\'écran, votre administrateur ne peut pas le réinitialiser."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Définir un autre verrouillage pour le profil pro"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si vous oubliez ce verrouillage, demandez à votre administrateur informatique de le réinitialiser"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Options de verrouillage de l\'écran"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Options de verrouillage de l\'écran"</string>
@@ -752,8 +750,7 @@
       <item quantity="one">Le mot de passe doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> caractère</item>
       <item quantity="other">Le mot de passe doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> caractères</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Si vous n\'utilisez que des chiffres, il faut au moins 1 chiffre}one{Si vous n\'utilisez que des chiffres, il faut au moins # chiffre}other{Si vous n\'utilisez que des chiffres, il faut au moins # chiffres}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">Le code doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> chiffre</item>
       <item quantity="other">Le code doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> chiffres</item>

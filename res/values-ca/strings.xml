@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Valor predeterminat del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selecció d\'idioma per a aquesta aplicació no està disponible des de Configuració."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"És possible que l\'idioma no coincideixi amb els que hi ha disponibles a l\'aplicació. Algunes aplicacions no admeten aquesta opció de configuració."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí només es mostren les aplicacions que admeten la selecció d\'idioma."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vols suprimir els idiomes seleccionats?</item>
       <item quantity="one">Vols suprimir l\'idioma seleccionat?</item>
@@ -432,7 +431,7 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Permet desbloqueig amb empremta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utilitzar l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilitza l\'empremta digital per desbloquejar la tauleta o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com quan inicies la sessió en aplicacions o aproves una compra."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilitza l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilitza l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions o aproves una compra."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Permet que el teu fill utilitzi l\'empremta digital per desbloquejar el telèfon o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Ets tu qui té el control"</string>
@@ -572,7 +571,7 @@
     <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"Vols ometre la configuració del PIN, la cara i l\'empremta digital?"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"No vols configurar la contrasenya?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"No vols configurar la contrasenya ni la cara?"</string>
-    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"No vols configurar la contrasenya ni l\'empremta?"</string>
+    <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Ometre configuració de contrasenya i d\'empremta?"</string>
     <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"No vols configurar la contrasenya, la cara ni l\'empremta digital?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"No vols configurar el patró?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Vols ometre la configuració del patró i la cara?"</string>
@@ -638,10 +637,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activa les funcions de protecció del dispositiu per impedir que altres persones el facin servir sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activa les funcions de protecció del dispositiu per impedir que altres persones utilitzin aquest telèfon sense permís. Tria el bloqueig de pantalla que vulguis utilitzar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Tria un mètode de bloqueig de pantalla alternatiu"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si oblides el bloqueig de pantalla, l\'administrador de TI no el pot restablir."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defineix un altre bloqueig per al treball"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si t\'oblides del bloqueig, demana a l\'administrador de TI que el restableixi"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcions de bloqueig de pantalla"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opcions de bloqueig de pantalla"</string>
@@ -752,8 +749,7 @@
       <item quantity="other">Ha de tenir com a mínim <xliff:g id="COUNT_1">%d</xliff:g> caràcters</item>
       <item quantity="one">Ha de tenir com a mínim <xliff:g id="COUNT_0">%d</xliff:g> caràcter</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Si només utilitzes números, han de tenir almenys 1 dígit}other{Si només utilitzes números, han de tenir almenys # dígits}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">El PIN ha de tenir com a mínim <xliff:g id="COUNT_1">%d</xliff:g> dígits</item>
       <item quantity="one">El PIN ha de tenir com a mínim <xliff:g id="COUNT_0">%d</xliff:g> dígit</item>
@@ -2292,7 +2288,7 @@
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Configuració d\'accessibilitat"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Pantalla, interacció i àudio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Configuració de visió"</string>
-    <string name="vision_settings_description" msgid="7614894785054441991">"Pots personalitzar el dispositiu perquè s\'adapti a les teves necessitats. Aquestes funcions d\'accessibilitat es poden canviar més endavant des de Configuració."</string>
+    <string name="vision_settings_description" msgid="7614894785054441991">"Pots personalitzar el dispositiu per adaptar-lo a les teves necessitats. Aquestes funcions d\'accessibilitat es poden canviar més endavant des de Configuració."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Canvia el cos de font"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Lector de pantalla"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Subtítols"</string>
