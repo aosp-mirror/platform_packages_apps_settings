@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,47 +34,49 @@ import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.BulletSpan;
-import android.text.style.QuoteSpan;
 import android.text.style.SubscriptSpan;
-import android.text.style.UnderlineSpan;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.NotificationBackend;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
 
 @RunWith(RobolectricTestRunner.class)
 public class ConversationListPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
+    private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private NotificationBackend mBackend;
+    @Spy
+    private PreferenceGroup mPreferenceGroup = new PreferenceCategory(mContext);
 
     private TestPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowApplication = ShadowApplication.getInstance();
-        mContext = RuntimeEnvironment.application;
         mController = new TestPreferenceController(mContext, mBackend);
+
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+        mPreferenceGroup.setKey(mController.getPreferenceKey());
+        preferenceScreen.addPreference(mPreferenceGroup);
+        mController.displayPreference(preferenceScreen);
     }
 
     @Test
@@ -84,39 +85,30 @@ public class ConversationListPreferenceControllerTest {
     }
 
     @Test
-    public void testPopulateList_hideIfNoConversations() {
-        PreferenceCategory outerContainer = mock(PreferenceCategory.class);
+    public void testUpdateList_hideIfNoConversations() {
+        boolean hasContent = mController.updateList(ImmutableList.of());
 
-        mController.populateList(new ArrayList<>(), outerContainer);
-
-        verify(outerContainer).setVisible(false);
-        verify(outerContainer, never()).addPreference(any());
+        assertThat(hasContent).isFalse();
+        verify(mPreferenceGroup).setVisible(false);
+        verify(mPreferenceGroup, never()).addPreference(any());
     }
 
     @Test
-    public void testPopulateList_validConversations() {
-        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        PreferenceScreen ps = preferenceManager.createPreferenceScreen(mContext);
-        PreferenceCategory outerContainer = spy(new PreferenceCategory(mContext));
-        ps.addPreference(outerContainer);
-
+    public void testUpdateList_validConversations() {
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         ccw.setNotificationChannel(mock(NotificationChannel.class));
         ccw.setPkg("pkg");
         ccw.setUid(1);
         ccw.setShortcutInfo(mock(ShortcutInfo.class));
 
-        ArrayList<ConversationChannelWrapper> list = new ArrayList<>();
-        list.add(ccw);
+        boolean hasContent = mController.updateList(ImmutableList.of(ccw));
 
-        mController.populateList(list, outerContainer);
-        verify(outerContainer, times(1)).addPreference(any());
+        assertThat(hasContent).isTrue();
+        verify(mPreferenceGroup, times(1)).addPreference(any());
     }
 
     @Test
     public void populateConversations() {
-        PreferenceCategory container = mock(PreferenceCategory.class);
-
         ConversationChannelWrapper ccw = new ConversationChannelWrapper();
         ccw.setNotificationChannel(mock(NotificationChannel.class));
         ccw.setPkg("pkg");
@@ -131,13 +123,9 @@ public class ConversationListPreferenceControllerTest {
         ccwDemoted.setUid(1);
         ccwDemoted.setShortcutInfo(mock(ShortcutInfo.class));
 
-        ArrayList<ConversationChannelWrapper> list = new ArrayList<>();
-        list.add(ccw);
-        list.add(ccwDemoted);
+        mController.populateConversations(ImmutableList.of(ccw, ccwDemoted));
 
-        mController.populateConversations(list, container);
-
-        verify(container, times(1)).addPreference(any());
+        verify(mPreferenceGroup, times(1)).addPreference(any());
     }
 
     @Test
@@ -240,7 +228,8 @@ public class ConversationListPreferenceControllerTest {
         assertThat(mController.mConversationComparator.compare(one, two)).isLessThan(0);
     }
 
-    private final class TestPreferenceController extends ConversationListPreferenceController {
+    private static final class TestPreferenceController extends
+            ConversationListPreferenceController {
 
         private TestPreferenceController(Context context, NotificationBackend backend) {
             super(context, backend);
