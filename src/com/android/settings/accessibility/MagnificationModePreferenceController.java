@@ -268,6 +268,7 @@ public class MagnificationModePreferenceController extends BasePreferenceControl
         final TextView messageView = contentView.findViewById(R.id.message);
         // TODO(b/225682559): Need to remove performClick() after refactoring accessibility dialog.
         final View.OnClickListener linkListener = view -> {
+            updateCapabilitiesAndSummary(mModeCache);
             mLinkPreference.performClick();
             dialog.dismiss();
         };

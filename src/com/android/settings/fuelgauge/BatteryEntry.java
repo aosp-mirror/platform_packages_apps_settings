@@ -209,7 +209,8 @@ public class BatteryEntry {
                 if (packages != null && packages.length == 1) {
                     mDefaultPackageName = packages[0];
                 } else {
-                    mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
+                    mDefaultPackageName = isSystemUid(uid)
+                            ? PACKAGE_SYSTEM : uidBatteryConsumer.getPackageWithHighestDrain();
                 }
             }
             if (mDefaultPackageName != null) {
@@ -352,13 +353,8 @@ public class BatteryEntry {
         }
 
         final PackageManager pm = context.getPackageManager();
-        final String[] packages;
-        if (uid == Process.SYSTEM_UID) {
-            packages = new String[] {PACKAGE_SYSTEM};
-        } else {
-            packages = pm.getPackagesForUid(uid);
-        }
-
+        final String[] packages = isSystemUid(uid)
+                ? new String[] {PACKAGE_SYSTEM} : pm.getPackagesForUid(uid);
         if (packages != null) {
             final String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
@@ -550,6 +546,10 @@ public class BatteryEntry {
         Drawable icon = context.getDrawable(R.drawable.ic_power_system);
         if (uid == 0) {
             name = context.getResources().getString(R.string.process_kernel_label);
+        } else if (uid == BatteryUtils.UID_REMOVED_APPS) {
+            name = context.getResources().getString(R.string.process_removed_apps);
+        } else if (uid == BatteryUtils.UID_TETHERING) {
+            name = context.getResources().getString(R.string.process_network_tethering);
         } else if ("mediaserver".equals(name)) {
             name = context.getResources().getString(R.string.process_mediaserver_label);
         } else if ("dex2oat".equals(name) || "dex2oat32".equals(name) ||
@@ -610,5 +610,9 @@ public class BatteryEntry {
                 break;
         }
         return new NameAndIcon(name, null /* icon */, iconId);
+    }
+
+    static boolean isSystemUid(int uid) {
+        return uid == Process.SYSTEM_UID;
     }
 }

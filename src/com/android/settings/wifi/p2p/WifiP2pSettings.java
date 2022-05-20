@@ -522,7 +522,7 @@ public class WifiP2pSettings extends DashboardFragment
             final LayoutInflater layoutInflater = LayoutInflater.from(getPrefContext());
             final View root = layoutInflater.inflate(R.layout.dialog_edittext, null /* root */);
             mDeviceNameText = root.findViewById(R.id.edittext);
-            mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
+            mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(22)});
             if (mSavedDeviceName != null) {
                 mDeviceNameText.setText(mSavedDeviceName);
                 mDeviceNameText.setSelection(mSavedDeviceName.length());
