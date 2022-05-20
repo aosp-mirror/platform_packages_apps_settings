@@ -27,9 +27,11 @@ import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.FeatureFlagUtils;
@@ -153,11 +155,6 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         return mMainFragment;
     }
 
-    /** Whether the activity is showing in two-pane */
-    public boolean isTwoPane() {
-        return mIsTwoPane;
-    }
-
     @Override
     public CategoryMixin getCategoryMixin() {
         return mCategoryMixin;
@@ -166,10 +163,26 @@ public class SettingsHomepageActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
+        if (mIsEmbeddingActivityEnabled) {
+            final UserManager um = getSystemService(UserManager.class);
+            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
+            if (userInfo.isManagedProfile()) {
+                final Intent intent = new Intent(getIntent())
+                        .setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                        .putExtra(EXTRA_USER_HANDLE, getUser());
+                intent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivityAsUser(intent, um.getPrimaryUser().getUserHandle());
+                finish();
+                return;
+            }
+        }
+
         setupEdgeToEdge();
         setContentView(R.layout.settings_homepage_container);
 
-        mIsEmbeddingActivityEnabled = ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this);
         mSplitController = SplitController.getInstance();
         mIsTwoPane = mSplitController.isActivityEmbedded(this);
 
@@ -423,7 +436,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // To prevent launchDeepLinkIntentToRight again for configuration change.
         intent.setAction(null);
 
-        targetIntent.setFlags(targetIntent.getFlags() & ~Intent.FLAG_ACTIVITY_NEW_TASK);
+        targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // Sender of intent may want to send intent extra data to the destination of targetIntent.
