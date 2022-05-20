@@ -34,6 +34,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.content.res.Resources.Theme;
 import android.graphics.drawable.Icon;
@@ -151,6 +152,8 @@ public class SettingsActivity extends SettingsBaseActivity
      * Set true when the deep link intent is from a slice
      */
     public static final String EXTRA_IS_FROM_SLICE = "is_from_slice";
+
+    public static final String EXTRA_USER_HANDLE = "user_handle";
 
     /**
      * Personal or Work profile tab of {@link ProfileSelectFragment}
@@ -427,7 +430,14 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         try {
-            startActivity(trampolineIntent);
+            final UserManager um = getSystemService(UserManager.class);
+            final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
+            if (userInfo.isManagedProfile()) {
+                trampolineIntent.putExtra(EXTRA_USER_HANDLE, getUser());
+                startActivityAsUser(trampolineIntent, um.getPrimaryUser().getUserHandle());
+            } else {
+                startActivity(trampolineIntent);
+            }
         } catch (ActivityNotFoundException e) {
             Log.e(LOG_TAG, "Deep link homepage is not available to show 2-pane UI");
             return false;

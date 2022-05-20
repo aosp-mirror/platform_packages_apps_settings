@@ -67,7 +67,6 @@ import com.android.settings.datausage.DataUsagePreference;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.location.WifiScanningFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
 import com.android.settings.wifi.ConfigureWifiEntryFragment;
@@ -829,12 +828,10 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
             return;
         }
         if (TextUtils.isEmpty(mWifiStatusMessagePreference.getTitle())) {
-            AnnotationSpan.LinkInfo info = new AnnotationSpan.LinkInfo(
-                AnnotationSpan.LinkInfo.DEFAULT_ANNOTATION,
-                v -> launchWifiScanningFragment());
-            CharSequence text = AnnotationSpan.linkify(
-                context.getText(R.string.wifi_scan_notify_message), info);
-            mWifiStatusMessagePreference.setTitle(text);
+            mWifiStatusMessagePreference.setTitle(R.string.wifi_scan_notify_message);
+            mWifiStatusMessagePreference.setLearnMoreText(
+                    context.getString(R.string.wifi_scan_change));
+            mWifiStatusMessagePreference.setLearnMoreAction(v -> launchWifiScanningFragment());
         }
         mWifiStatusMessagePreference.setVisible(true);
     }

@@ -2855,7 +2855,7 @@
             android:name="Settings$BatterySaverSettingsActivity"
             android:label="@string/battery_saver"
             android:exported="true"
-            android:icon="@drawable/ic_settings_battery">
+            android:icon="@drawable/ic_homepage_battery">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.BATTERY_SAVER_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2870,6 +2870,7 @@
 
         <activity android:name=".fuelgauge.BatterySaverModeVoiceActivity"
                 android:label="@string/power_usage_summary_title"
+                android:icon="@drawable/ic_homepage_battery"
                 android:theme="@*android:style/Theme.DeviceDefault.Light.Voice"
                 android:exported="true">
             <intent-filter>
@@ -4473,6 +4474,16 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.android.settings.bluetooth.QrCodeScanModeActivity"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.settings.BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

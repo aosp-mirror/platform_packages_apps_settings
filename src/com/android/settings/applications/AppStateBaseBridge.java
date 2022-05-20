@@ -52,7 +52,6 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
 
     public void resume(boolean forceLoadAllApps) {
         mForceLoadAllApps = forceLoadAllApps;
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
         if (mForceLoadAllApps) {
             mAppSession.onResume();
         } else {
