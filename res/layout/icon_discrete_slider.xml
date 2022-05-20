@@ -20,14 +20,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipChildren="false"
-    android:background="?android:colorBackground"
     android:gravity="center_vertical">
 
     <FrameLayout
         android:id="@+id/icon_start_frame"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clipChildren="false"
         android:focusable="true"
         android:visibility="gone">
 
@@ -36,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:adjustViewBounds="true"
             android:focusable="false"
             android:tint="?android:attr/textColorPrimary"
@@ -56,7 +56,7 @@
         android:id="@+id/icon_end_frame"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clipChildren="false"
         android:focusable="true"
         android:visibility="gone">
 
@@ -65,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:adjustViewBounds="true"
             android:focusable="false"
             android:tint="?android:attr/textColorPrimary"

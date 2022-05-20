@@ -232,10 +232,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 connectCarrierNetwork();
                 return true;
             });
-
-            mSubsGearPref.setOnGearClickListener(p ->
-                    MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
         }
+
+        mSubsGearPref.setOnGearClickListener(p ->
+                MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
 
         if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
             mSubsGearPref.setGearEnabled(false);
@@ -456,7 +456,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
+    public void onTelephonyDisplayInfoChanged(int subId,
+            TelephonyDisplayInfo telephonyDisplayInfo) {
+        if (subId != mSubsPrefCtrlInjector.getDefaultDataSubscriptionId()) {
+            return;
+        }
         mTelephonyDisplayInfo = telephonyDisplayInfo;
         update();
     }

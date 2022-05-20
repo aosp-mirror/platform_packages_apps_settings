@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -214,7 +216,8 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
-            if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
+                    && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
                     startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
                     finish();

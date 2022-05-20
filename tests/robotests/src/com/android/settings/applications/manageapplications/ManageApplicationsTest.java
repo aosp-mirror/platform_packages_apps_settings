@@ -189,6 +189,24 @@ public class ManageApplicationsTest {
     }
 
     @Test
+    public void onCreateOptionsMenu_hasPreQuery_shouldSetQuery() {
+        final SearchView searchView = mock(SearchView.class);
+        final MenuItem searchMenu = mock(MenuItem.class);
+        final MenuItem helpMenu = mock(MenuItem.class);
+        when(searchMenu.getActionView()).thenReturn(searchView);
+        when(mMenu.findItem(R.id.search_app_list_menu)).thenReturn(searchMenu);
+        when(mMenu.add(anyInt() /* groupId */, anyInt() /* itemId */, anyInt() /* order */,
+                anyInt() /* titleRes */)).thenReturn(helpMenu);
+        doReturn("Test").when(mFragment).getText(anyInt() /* resId */);
+        doNothing().when(mFragment).updateOptionsMenu();
+
+        mFragment.mPreQuery = "test";
+        mFragment.onCreateOptionsMenu(mMenu, mock(MenuInflater.class));
+
+        verify(searchView).setQuery("test", true);
+    }
+
+    @Test
     public void onQueryTextChange_shouldFilterSearchInApplicationsAdapter() {
         final ManageApplications.ApplicationsAdapter adapter =
                 mock(ManageApplications.ApplicationsAdapter.class);
@@ -516,6 +534,38 @@ public class ManageApplicationsTest {
 
         assertThat(bundle.containsKey(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isTrue();
         assertThat(bundle.getBoolean(ManageApplications.EXTRA_EXPAND_SEARCH_VIEW)).isFalse();
+    }
+
+    @Test
+    public void onSaveInstanceState_noSearchView_shouldNotSaveQuery() {
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_SEARCH_QUERY)).isFalse();
+    }
+
+    @Test
+    public void onSaveInstanceState_searchViewSet_shouldSaveQuery() {
+        final SearchView searchView = mock(SearchView.class);
+        final Bundle bundle = new Bundle();
+        ReflectionHelpers.setField(mFragment, "mResetAppsHelper", mock(ResetAppsHelper.class));
+        ReflectionHelpers.setField(mFragment, "mFilter", mock(AppFilterItem.class));
+        ReflectionHelpers.setField(mFragment, "mApplications",
+                mock(ManageApplications.ApplicationsAdapter.class));
+        ReflectionHelpers.setField(mFragment, "mSearchView", searchView);
+        when(searchView.isIconified()).thenReturn(true);
+        when(searchView.getQuery()).thenReturn("test");
+
+        mFragment.onSaveInstanceState(bundle);
+
+        assertThat(bundle.containsKey(ManageApplications.EXTRA_SEARCH_QUERY)).isTrue();
+        assertThat(bundle.getCharSequence(ManageApplications.EXTRA_SEARCH_QUERY))
+                .isEqualTo("test");
     }
 
     @Test
