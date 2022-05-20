@@ -14,6 +14,7 @@
 
 package com.android.settings.datausage;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,9 +29,12 @@ import com.android.settings.R;
 public class SpinnerPreference extends Preference implements CycleAdapter.SpinnerInterface {
 
     private CycleAdapter mAdapter;
+    @Nullable
     private AdapterView.OnItemSelectedListener mListener;
     private Object mCurrentObject;
     private int mPosition;
+    private View mItemView;
+    private boolean mItemViewVisible = false;
 
     public SpinnerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -63,10 +67,22 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+        mItemView = holder.itemView;
+        mItemView.setVisibility(mItemViewVisible ? View.VISIBLE : View.INVISIBLE);
         Spinner spinner = (Spinner) holder.findViewById(R.id.cycles_spinner);
         spinner.setAdapter(mAdapter);
         spinner.setSelection(mPosition);
         spinner.setOnItemSelectedListener(mOnSelectedListener);
+    }
+
+    void setHasCycles(boolean hasData) {
+        setVisible(hasData);
+        if (hasData) {
+            mItemViewVisible = true;
+            if (mItemView != null) {
+                mItemView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
@@ -74,19 +90,24 @@ public class SpinnerPreference extends Preference implements CycleAdapter.Spinne
         view.findViewById(R.id.cycles_spinner).performClick();
     }
 
-    private final AdapterView.OnItemSelectedListener mOnSelectedListener
-            = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if (mPosition == position) return;
-            mPosition = position;
-            mCurrentObject = mAdapter.getItem(position);
-            mListener.onItemSelected(parent, view, position, id);
-        }
+    private final AdapterView.OnItemSelectedListener mOnSelectedListener =
+            new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(
+                        AdapterView<?> parent, View view, int position, long id) {
+                    if (mPosition == position) return;
+                    mPosition = position;
+                    mCurrentObject = mAdapter.getItem(position);
+                    if (mListener != null) {
+                        mListener.onItemSelected(parent, view, position, id);
+                    }
+                }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            mListener.onNothingSelected(parent);
-        }
-    };
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    if (mListener != null) {
+                        mListener.onNothingSelected(parent);
+                    }
+                }
+            };
 }

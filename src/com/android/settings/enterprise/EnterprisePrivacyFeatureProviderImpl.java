@@ -69,7 +69,7 @@ public class EnterprisePrivacyFeatureProviderImpl implements EnterprisePrivacyFe
         mCm = cm;
         mVm = vm;
         mResources = resources;
-        mWorkPolicyUtils = new WorkPolicyUtils(mContext, mPm, mUm, mDpm);
+        mWorkPolicyUtils = new WorkPolicyUtils(mContext);
     }
 
     @Override

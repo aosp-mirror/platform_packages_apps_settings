@@ -18,7 +18,9 @@ package com.android.settings.applications.appinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -70,6 +72,21 @@ public class ButtonActionDialogFragmentTest {
         mFragment.onClick(null, 0);
 
         verify(mTargetFragment).handleDialogClick(anyInt());
+    }
+
+    @Test
+    public void testOnClick_forceStop_dismissDialog() {
+        ButtonActionDialogFragment fragment =
+                spy(ButtonActionDialogFragment.newInstance(FORCE_STOP_ID));
+        FragmentController.setupFragment(fragment, FragmentActivity.class, 0 /* containerViewId */,
+                null /* bundle */);
+        doReturn(mTargetFragment).when(fragment).getTargetFragment();
+        doNothing().when(mTargetFragment).handleDialogClick(anyInt());
+        final AlertDialog dialog = mock(AlertDialog.class);
+
+        fragment.onClick(dialog, 0);
+
+        verify(dialog).dismiss();
     }
 
     @Test
