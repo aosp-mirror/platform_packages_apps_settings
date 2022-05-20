@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predeterminado del sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La selección de idioma para esta app no está disponible en Configuración."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Puede que el idioma difiera de los idiomas disponibles en la app. Algunas apps no son compatibles con este parámetro de configuración."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Aquí se muestran solo las apps que admiten la selección de idioma."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">¿Quitar los idiomas seleccionados?</item>
       <item quantity="one">¿Quitar el idioma seleccionado?</item>
@@ -483,7 +482,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Con el rostro"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Con la huella dactilar"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Con el rostro o la huella dactilar"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Dale el teléfono a tu madre o padre"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Dale el teléfono a tu madre o padre"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"¿Omitir bloqueo de la pantalla?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"No se activarán las funciones de protección del dispositivo. No podrás evitar que otras personas usen esta tablet si la pierdes, te la roban o se restablece."</string>
@@ -591,17 +594,15 @@
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Además de desbloquear el teléfono, también puedes utilizar tu huella dactilar para autorizar compras y el acceso a aplicaciones. "<annotation id="url">"Más información"</annotation></string>
     <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"La opción de bloqueo de pantalla está inhabilitada. Para obtener más información, comunícate con el administrador de la organización."</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Todavía puedes usar la huella dactilar para autorizar compras y acceder a apps."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Todavía puedes usar tu huella dactilar para autorizar compras y acceder a apps."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Levanta el dedo y vuelve a tocar el sensor"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"No se puede usar el sensor de huellas dactilares. Consulta a un proveedor de reparaciones."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Más parámetros de seguridad"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueo del perfil de trabajo, encriptación y más"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptación, credenciales y más"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, más configuración de seguridad, más configuración, configuración avanzada de seguridad"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Más parámetros de privacidad"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Autocompletar, controles de actividad y más"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Agregaste la cantidad máxima permitida de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden agregar más huellas digitales"</string>
@@ -752,8 +753,7 @@
       <item quantity="other">Debe tener al menos <xliff:g id="COUNT_1">%d</xliff:g> caracteres</item>
       <item quantity="one">Debe tener al menos <xliff:g id="COUNT_0">%d</xliff:g> carácter</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Si solo se usan números, debe ser de al menos 1 dígito}other{Si solo se usan números, deben ser de al menos # dígitos}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">El PIN debe tener al menos <xliff:g id="COUNT_1">%d</xliff:g> dígitos</item>
       <item quantity="one">El PIN debe tener al menos <xliff:g id="COUNT_0">%d</xliff:g> dígito</item>
@@ -2376,7 +2376,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar una función de accesibilidad, desliza 2 dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de función, desliza 2 dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza 3 dedos hacia arriba desde la parte inferior de la pantalla.\n\nSi quieres cambiar de función, desliza 3 dedos hacia arriba y mantén presionada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
-    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de teclas de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
+    <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Combinación de accesibilidad de <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_dialog_title_software_gesture" msgid="8078659880723370597">"Deslizar dos dedos hacia arriba"</string>
@@ -3461,10 +3461,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambiar PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Ayuda y comentarios"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Artículos de ayuda, teléfono y chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Artículos de ayuda, tablet y chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Artículos de ayuda, dispositivo y chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Cuenta para contenido"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID de foto"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Amenazas extremas"</string>
@@ -3735,10 +3733,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitular automáticamente"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altavoz del teléfono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Audio espacial crea sonido envolvente para que sientas que viene de todo tu alrededor. Solo funciona con ciertos tipos de contenido multimedia."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"No"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Sí (<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>)"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Sí (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> y <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{Se estableció 1 programa}other{Se establecieron # programas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
@@ -3859,8 +3862,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Controlar notificaciones de apps individuales"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"General"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificaciones de trabajo"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Perfil de trabajo"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificaciones adaptables"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridad de notificación adaptable"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Configurar automáticamente las notificaciones de menor prioridad a silenciosas"</string>
@@ -4638,7 +4640,7 @@
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Botón de encendido dos veces para cámara"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Abre la cámara de forma rápida sin desbloquear la pantalla"</string>
     <string name="screen_zoom_title" msgid="6928045302654960559">"Tamaño de visualización"</string>
-    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Aumenta o reduce cualquier elemento de la pantalla"</string>
+    <string name="screen_zoom_short_summary" msgid="756254364808639194">"Amplía o reduce todo"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densidad de la pantalla, zoom de la pantalla, escala"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Aumenta o reduce el tamaño de los elementos en pantalla. Algunas apps pueden cambiar de posición."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Vista previa"</string>
@@ -5633,10 +5635,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"llamadas"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"datos móviles"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Para mejorar la experiencia con el dispositivo, las apps y los servicios pueden seguir buscando redes Wi-Fi en cualquier momento, incluso cuando la conexión Wi-Fi esté desactivada. Esta función puede usarse, por ejemplo, para mejorar las funciones y los servicios basados en la ubicación. Puedes cambiar este parámetro en la configuración de búsqueda de Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Cambiar"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Conexión establecida"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sin conexión"</string>
@@ -5798,8 +5798,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Ingresar contraseña"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"No se puede establecer conexión. Vuelve a intentarlo."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Contraseña incorrecta"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para comenzar a escuchar, centra el código QR a continuación"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"El código QR no es un formato válido"</string>
 </resources>

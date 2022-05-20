@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"የሥርዓት ነባሪ"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"ለዚህ መተግበሪያ የቋንቋ መረጣ ከቅንብሮች አይገኝም።"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"ቋንቋ በመተግበሪያው ውስጥ ካሉ ቋንቋዎች ሊለያይ ይችላል። አንዳንድ መተግበሪያዎች ይህን ቅንብር ላይደግፉ ይችላሉ።"</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"እዚህ የሚታዩት የቋንቋ ምርጫን የሚደግፉ መተግበሪያዎች ብቻ ናቸው።"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">የተመረጡት ቋንቋዎች ይወገዱ?</item>
       <item quantity="other">የተመረጡት ቋንቋዎች ይወገዱ?</item>
@@ -431,9 +430,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"የጣት አሻራዎን ያዋቅሩ"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"በጣት አሻራ መክፈትን ይፍቀዱ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"የጣት አሻራዎን ይጠቀሙ"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"የእርስዎን ጡባዊ ለመክፈት ወይም እርስዎ መሆንዎን ለማረጋገጥ፣ ለምሳሌ ወደ መተግበሪያዎች ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ፣ የጣት አሻራዎን ይጠቀሙ።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"መሣሪያዎን ለመክፈት ወይም እርስዎ መሆንዎን ለማረጋገጥ፣ ለምሳሌ ወደ መተግበሪያዎች ሲገቡ ወይም አንድ ግዢ ሲያጸድቁ፣ የጣት አሻራዎን ይጠቀሙ።"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"የእርስዎን ስልክ ለመክፈት ወይም እርስዎ መሆንዎን ለማረጋገጥ፣ ለምሳሌ ወደ መተግበሪያዎች ሲገቡ ወይም አንድን ግዢ ሲያጸድቁ፣ የጣት አሻራዎን ይጠቀሙ።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም ጡባዊዎትን ለመክፈት ይጠቀሙበት።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም መሣሪያዎትን ለመክፈት ይጠቀሙበት።"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"የጣት አሻራዎትን ለምሳሌ ግዢ ሲያጸድቁ አልያም ደግሞ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎትን ለማረጋገጥ ወይም ስልክዎትን ለመክፈት ይጠቀሙበት።"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"ልጅዎ ስልካቸውን ለመክፈት ወይም እነሱ መሆናቸውን እንዲያረጋግጡ የጣት አሻራቸውን እንዲጠቀሙ ይፍቀዱ። ይህ የሚሆነው ወደ መተግበሪያዎች ሲገቡ፣ ግዢን ሲያጸድቁ እና ሌሎችም ሲያደርጉ ነው"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"እርስዎ የሚቆጣጠሩት ነው"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"እርስዎ እና ልጅዎ ተቆጣጣሪ ናችሁ"</string>
@@ -483,7 +482,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"መልክን መጠቀም"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"የጣት አሻራን መጠቀም"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"መልክን ወይም የጣት አሻራን መጠቀም"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"ስልኩን መልሰው ለወላጅዎ ይስጡት"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"ስልኩን መልሰው ለወላጅዎ ይስጡት"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"እሺ"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"የማያ ገጽ መቆለፊያ ይዘለል?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"የመሣሪያ ጥበቃ ባህሪያት አይበሩም። ይህ ጡባዊ ቢጠፋ፣ ቢሰረቅ ወይም ዳግም እንዲቀናበር ቢደረግ ሌሎች እንዳይጠቀሙበት መከላከል አይችሉም።"</string>
@@ -522,9 +525,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ይህ ተጨማሪ የጣት አሻራዎን ክፍል እንዲይዝ ያግዛል"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"የጣት አሻራ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛን በመመዝገብ ላይ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"የጣት አሻራ ታክሏል"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎን ለማረጋገጥ ከአሁን በኋላ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎን ለማረጋገጥ ከአሁን በኋላ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች ሲገቡ እርስዎ መሆንዎን ለማረጋገጥ ከአሁን በኋላ የጣት አሻራዎን መጠቀም ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"አሁን የጣት አሻራዎትን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"አሁን የጣት አሻራዎትን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"አሁን የጣት አሻራዎትን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"በኋላ ላይ ያድርጉት"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ያንሱ፣ በመቀጠል መልሰው ይንኩ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"የጣት አሻራዎን ጎን በዳሳሹ ላይ አስቀምጠው ይያዙት፣ ከዚያ ወደ ሌላኛው ጎን ይቀይሩ"</string>
@@ -588,18 +591,16 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"ሌላ ያክሉ"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ቀጣይ"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"ስልክዎን ከማስከፈት በተጨማሪም እንዲሁም ግዢዎችን እና የመተግበሪያ መዳረሻን ለመፍቀድ የጣት አሻራዎንም መጠቀም ይችላሉ። "<annotation id="url">"ተጨማሪ ለመረዳት"</annotation></string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"የማያ ገጽ መቆለፊያ ምርጫው ተሰናክሏል። የበለጠ ለመረዳት የድርጅትዎን አስተዳዳሪ ያግኙ።"</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"ለግዢዎች እና ለመተግበሪያ መድረሻ ፈቃድ ለመስጠት አሁንም የጣት አሻራዎትን መጠቀም ይችላሉ።"</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"የማያ ገጽ መቆለፊያ አማራጩ ተሰናክሏል። የበለጠ ለመረዳት የድርጅትዎን አስተዳዳሪ ያነጋግሩ።"</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"አሁንም ለመተግበሪያዎች መዳረሻ እና ለግዢዎች ፈቃድ ለመስጠት የጣት አሻራዎትን መጠቀም ይችላሉ።"</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ጣትዎን ያንሱ፣ ከዚያ በድጋሚ ዳሳሽ ይንኩ"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"የጣት አሻራ ዳሳሽን መጠቀም አይቻልም። የጥገና አገልግሎት ሰጪን ይጎብኙ"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"ተጨማሪ የደህንነት ቅንብሮች"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"የስራ መገለጫ መቆለፊያ፣ ምስጠራ እና ሌሎችም"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"ምስጠራ፣ የመግቢያ ማስረጃዎች እና ሌሎችም"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"ደህንነት፣ ተጨማሪ የደህንነት ቅንብሮች፣ ተጨማሪ ቅንብሮች፣ የላቁ የደህንነት ቅንብሮች"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"ተጨማሪ የግላዊነት ቅንብሮች"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"ራስ-ሙላ፣ የእንቅስቃሴ መቆጣጠሪያዎች እና ሌሎችም"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"እስከ <xliff:g id="COUNT">%d</xliff:g> የሚደርሱ የጣት አሻራዎችን ማከል ይችላሉ"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"የሚፈቀደውን ከፍተኛ የጣት አሻራ ብዛት አክለዋል"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"ተጨማሪ የጣት አሻራዎችን ማከል አይቻልም"</string>
@@ -750,8 +751,7 @@
       <item quantity="one">ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> ቁምፊዎች መሆን አለበት</item>
       <item quantity="other">ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> ቁምፊዎች መሆን አለበት</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{በጥቅም ላይ ያለው ቁጥር ብቻ ከሆነ፣ ቢያንስ 1 አኃዝ መሆን አለበት}one{በጥቅም ላይ ያሉት ቁጥሮች ብቻ ከሆኑ፣ ቢያንስ # አኃዞች መሆን አለባቸው}other{በጥቅም ላይ ያሉት ቁጥሮች ብቻ ከሆኑ፣ ቢያንስ # አኃዞች መሆን አለባቸው}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">ፒን ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> አሃዞች መሆን አለበት</item>
       <item quantity="other">ፒን ቢያንስ <xliff:g id="COUNT_1">%d</xliff:g> አሃዞች መሆን አለበት</item>
@@ -3459,10 +3459,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"ፒን ቀይር"</string>
     <string name="help_label" msgid="2896538416436125883">"እገዛ እና ግብረመልስ"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"የእገዛ ጽሑፍ፣ ስልክ &amp; ውይይት"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"የእገዛ ጽሑፎች፣ መሣሪያ እና ውይይት"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"የእገዛ ጽሑፎች፣ መሣሪያ እና ውይይት"</string>
     <string name="user_account_title" msgid="6389636876210834864">"መለያ ለይዘት"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"የፎቶ መታወቂያ"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"እጅግ ከፍተኛ አደጋዎች"</string>
@@ -3733,10 +3731,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"ራስሰር የሥዕል መግለጫ ጽሑፍን ሚዲያ"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"የስልክ ድምጽ ማጉያ"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"ባለገመድ የጆሮ ማዳመጫ"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Spatial ኦዲዮ ከአካባቢዎ የሚመጣ የሚመስል መሳጭ ድምጽ ይፈጥራል። ከአንዳንድ ሚዲያዎች ጋር ብቻ ይሰራል።"</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"አጥፋ"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"በርቷል / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"በርቷል / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> እና <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ምንም}=1{1 መርሐግብር ተቀናብሯል}one{# መርሐግብሮች ተቀናብረዋል}other{# መርሐግብሮች ተቀናብረዋል}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"አይረብሹ"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"በአስፈላጊ ሰዎች እና መተግበሪያዎች ብቻ ማሳወቂያን ያግኙ"</string>
@@ -3857,8 +3860,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"ከተናጠል መተግበሪያዎች የሚመጡ ማሳወቂያዎችን ይቆጣጠሩ"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"ጠቅላላ"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"የስራ ማሳወቂያዎች"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"የስራ መገለጫ"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"እንደሁኔታው ተስማሚ ማሳወቂያዎች"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"ተስማሚ የማሳወቂያ ቅድሚያ ተሰጪ"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"ዝቅተኛ ቅድሚያ ተሰጪ ማሳወቂያዎችን ወደ ተረጋጋ በራስ ሰር አቀናብር"</string>
@@ -5631,10 +5633,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"ጥሪዎች"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"ኤስኤምኤስ"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"የተንቀሳቃሽ ስልክ ውሂብ"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"የመሣሪያ ተምክሮን ለማሻሻል መተግበሪያዎች እና አገልግሎቶች አሁንም በማንኛውም ሰዓት፣ Wi-Fi ጠፍቶም እንኳ የWi-Fi አውታረ መረቦችን መቃኘት ይችላሉ። ይህም ለምሳሌ አካባቢ ላይ የተመሠረቱ ባህሪያትን እና አገልግሎቶችን ለማሻሻል ስራ ላይ ሊውል ይችላል። ይህን በWi‑Fi ቅኝት ቅንብሮች ውስጥ መቀየር ይችላሉ።"</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"ቀይር"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"ተገናኝቷል"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"ግንኙነት የለም"</string>
@@ -5644,7 +5644,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"የተንቀሳቃሽ ስልክ ውሂብ ይጥፋ?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"በ<xliff:g id="CARRIER">%s</xliff:g> በኩል የውሂብ ወይም የበይነመረቡ መዳረሻ አይኖረዎትም። በይነመረብ በWi-Fi በኩል ብቻ ነው የሚገኝ የሚሆነው።"</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"የእርስዎ አገልግሎት አቅራቢ"</string>
-    <string name="not_allowed_by_ent" msgid="1958611623122304411">"በድርጅትዎ አይፈቀድም"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"በእርስዎ ድርጅት አልተፈቀደም"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"የመኝታ ሰዓት ሁነታ ስለበራ የማይገኝ"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"የማሳወቂያ አስፈላጊነት ዳግም አስጀምር ተጠናቅቋል።"</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"መተግበሪያዎች"</string>
@@ -5796,8 +5796,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"የይለፍ ቃል ያስገቡ"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"መገናኘት አይቻልም። እንደገና ይሞክሩ።"</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"የተሳሳተ የይለፍ ቃል"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"ማዳመጥ ለመጀመር ከታች ያለውን QR ኮድ መሃል ያድርጉት"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR ኮድ ልክ የሆነ ቅርጸት አይደለም"</string>
 </resources>

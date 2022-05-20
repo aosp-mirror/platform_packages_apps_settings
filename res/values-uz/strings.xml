@@ -431,7 +431,7 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Qulfni barmoq izi bilan ochish"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Barmoq izidan foydalanish"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Planshetingiz qulfini ochish, ilovalarda hisobingizga kirish yoki xaridni tasdiqlash kabi holatlarda shaxsingizni tasdiqlash uchun barmoq izingizdan foydalaning."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Qurilma qulfini ochish, ilovalarda hisobingizga kirish yoki xaridni tasdiqlash kabi holatlarda shaxsingizni tasdiqlash uchun barmoq izingizdan foydalaning."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Qurilma qulfini ochish, ilovalarda hisobingizga kirish yoki xaridni tasdiqlash kabi holatlarda barmoq izingiz yordamida shaxsingizni tasdiqlang."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Telefonni qulfdan chiqarish, ilovaga kirish yoki xaridni tasdiqlashda hisob tekshiruvi uchun barmoq izingizdan foydalaning."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Farzandingiz telefonni qulfdan chiqarish yoki shaxsini tasdiqlash uchun barmoq izidan foydalanishiga ruxsat bering. Bu ularning ilovalarga kirishi yoki xaridlarini tasdiqlashi va hokazo holatlarda yuz beradi."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Boshqaruv oʻz qoʻlingizda"</string>
@@ -482,7 +482,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Yuz orqali"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Barmoq izi orqali"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Yuz yoki barmoq izi orqali"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Telefonni ota-onangizga bering"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Telefonni ota-onangizga bering"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ekran qulfi sozlanmasinmi?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Qurilmani himoyalash funksiyalari yoqilmaydi. Agar planshetingiz yo‘qolsa, o‘g‘irlansa yoki asliga qaytarilsa, siz boshqalarning undan foydalanishiga to‘sqinlik qila olmaysiz."</string>
@@ -3457,10 +3461,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"PIN kodni o‘zgartirish"</string>
     <string name="help_label" msgid="2896538416436125883">"Yordam/fikr-mulohaza"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Yordam maqolalari, telefon va chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Yordam maqolalari, planshet va chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Yordam maqolalari, qurilma va chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Kontent uchun hisob"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Suratli hujjat"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Keskin tahdidlar"</string>
@@ -3731,10 +3733,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Avtomatik taglavha yaratish"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefon karnayi"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Simli quloqlik"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Qamrovli ovoz atrofingizdan kelayotgandek taʼsirli tovush yaratadi. Faqat ayrim mediakontent bilan ishlaydi."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Oʻchiq"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Yoniq / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Yoniq / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> va <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Hech qanday}=1{1 ta reja sozlangan}other{# ta reja sozlangan}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Bezovta qilinmasin"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Faqat muhim odamlar va ilovalardan bildirishnomalarni olish"</string>

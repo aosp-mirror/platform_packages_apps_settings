@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Språkvalg for denne appen er ikke tilgjengelig fra innstillingene."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Språket kan være forskjellig fra språkene som er tilgjengelige i appen. Noen apper støtter muligens ikke denne innstillingen."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Bare apper som støtter språkvalg, vises her."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Vil du fjerne de valgte språkene?</item>
       <item quantity="one">Vil du fjerne det valgte språket?</item>
@@ -483,7 +482,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Med ansiktet"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtrykket"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansiktet eller fingeravtrykket"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Gi telefonen tilbake til forelderen din"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Gi telefonen tilbake til forelderen din"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vil du hoppe over skjermlås?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Funksjoner for enhetsbeskyttelse blir ikke slått på. Du kommer ikke til å kunne forhindre at andre bruker dette nettbrettet hvis du mister det eller det blir stjålet eller tilbakestilt."</string>
@@ -596,10 +599,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås for jobbprofil, kryptering med mer"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, legitimasjon med mer"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhet, flere sikkerhetsinnstillinger, flere innstillinger, avanserte sikkerhetsinnstillinger"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Flere personverninnstillinger"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Autofyll, aktivitetslagring med mer"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan legge til opptil <xliff:g id="COUNT">%d</xliff:g> fingeravtrykk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har lagt til maksimalt antall fingeravtrykk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Kan ikke legge til flere fingeravtrykk"</string>
@@ -3458,10 +3459,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Endre PIN-koden"</string>
     <string name="help_label" msgid="2896538416436125883">"Hjelp og tilbakemelding"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Hjelpeartikler, telefon og chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Hjelpeartikler, nettbrett og chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Hjelpeartikler, enhet og chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Konto for innhold"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ekstreme trusler"</string>
@@ -3732,10 +3731,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatisk medieteksting"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefonhøyttaler"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Hodetelefoner med ledning"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Romlig lyd lager omsluttende lyd som virker som om den kommer fra alle kanter. Dette fungerer bare med enkelte medier."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Av"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"På / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"På / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angitt}other{# tidsplaner er angitt}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ikke forstyrr"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Bli bare varslet av viktige personer og apper"</string>
@@ -3856,8 +3860,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Kontrollér varsler fra enkeltapper"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Generelt"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Jobbvarsler"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Jobbprofil"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Varsler som kan tilpasses"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Tilpasset varselprioritet"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Angi varsler med lavere prioritet automatisk til Diskré"</string>
@@ -5630,10 +5633,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"anrop"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"For å forbedre brukeropplevelsen på enheten kan apper og tjenester søke etter Wi-Fi-nettverk når som helst – også når Wi-Fi er slått av. Dette kan for eksempel brukes til å forbedre posisjonsbaserte funksjoner og tjenester. Du kan endre dette i innstillingene for Wi-Fi-skanning."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Endre"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Tilkoblet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Ingen tilkobling"</string>
@@ -5795,8 +5796,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Skriv inn passordet"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Kan ikke koble til. Prøv på nytt."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Feil passord"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"For å begynne å lytte, midtstill QR-koden nedenfor"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-koden er ikke i et gyldig format"</string>
 </resources>
