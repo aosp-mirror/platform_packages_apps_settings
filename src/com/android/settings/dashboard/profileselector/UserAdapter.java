@@ -120,7 +120,7 @@ public class UserAdapter extends BaseAdapter {
     private void bindViewHolder(ViewHolder holder, int position) {
         UserDetails userDetails = getItem(position);
         holder.getIconView().setImageDrawable(userDetails.mIcon);
-        holder.getTitleView().setText(userDetails.mTitle);
+        holder.setTitle(userDetails.mTitle);
     }
 
     @Override
@@ -206,18 +206,19 @@ public class UserAdapter extends BaseAdapter {
     static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView mIconView;
         private final TextView mTitleView;
+        private final View mButtonView;
 
         private ViewHolder(View view) {
             super(view);
             mIconView = view.findViewById(android.R.id.icon);
             mTitleView = view.findViewById(android.R.id.title);
+            mButtonView = view.findViewById(R.id.button);
         }
 
         private ViewHolder(View view, OnClickListener onClickListener) {
             this(view);
-            View button = view.findViewById(R.id.button);
-            if (button != null) {
-                button.setOnClickListener(v -> onClickListener.onClick(getAdapterPosition()));
+            if (mButtonView != null) {
+                mButtonView.setOnClickListener(v -> onClickListener.onClick(getAdapterPosition()));
             }
         }
 
@@ -225,8 +226,11 @@ public class UserAdapter extends BaseAdapter {
             return mIconView;
         }
 
-        private TextView getTitleView() {
-            return mTitleView;
+        private void setTitle(CharSequence title) {
+            mTitleView.setText(title);
+            if (mButtonView != null) {
+                mButtonView.setContentDescription(title);
+            }
         }
     }
 

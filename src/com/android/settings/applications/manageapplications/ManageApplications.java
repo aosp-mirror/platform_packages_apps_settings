@@ -173,6 +173,8 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
     @VisibleForTesting
+    static final String EXTRA_SEARCH_QUERY = "search_query";
+    @VisibleForTesting
     static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
@@ -253,6 +255,8 @@ public class ManageApplications extends InstrumentedFragment
     // Whether or not search view is expanded.
     @VisibleForTesting
     boolean mExpandSearch;
+    @VisibleForTesting
+    CharSequence mPreQuery;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -330,8 +334,8 @@ public class ManageApplications extends InstrumentedFragment
             if (className.equals(Settings.NotificationReviewPermissionsActivity.class.getName())) {
                 // Special-case for a case where a user is directed to the all apps notification
                 // preferences page via a notification prompt to review permissions settings.
-                android.provider.Settings.Secure.putInt(getContext().getContentResolver(),
-                        android.provider.Settings.Secure.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
+                android.provider.Settings.Global.putInt(getContext().getContentResolver(),
+                        android.provider.Settings.Global.REVIEW_PERMISSIONS_NOTIFICATION_STATE,
                         1);  // USER_INTERACTED
             }
         } else if (className.equals(AppLocaleDetails.class.getName())) {
@@ -358,6 +362,7 @@ public class ManageApplications extends InstrumentedFragment
             mFilterType =
                     savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
             mExpandSearch = savedInstanceState.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
+            mPreQuery = savedInstanceState.getCharSequence(EXTRA_SEARCH_QUERY);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -544,6 +549,7 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
+            outState.putCharSequence(EXTRA_SEARCH_QUERY, mSearchView.getQuery());
         }
         if (mApplications != null) {
             outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
@@ -683,6 +689,9 @@ public class ManageApplications extends InstrumentedFragment
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
             }
+            if (!TextUtils.isEmpty(mPreQuery)) {
+                mSearchView.setQuery(mPreQuery, true);
+            }
         }
 
         updateOptionsMenu();
@@ -815,14 +824,16 @@ public class ManageApplications extends InstrumentedFragment
         if (mApplications == null) {
             return;
         }
-        final int position = mRecyclerView.getChildAdapterPosition(view);
+        final int applicationPosition =
+                ApplicationsAdapter.getApplicationPosition(
+                        mListType, mRecyclerView.getChildAdapterPosition(view));
 
-        if (position == RecyclerView.NO_POSITION) {
+        if (applicationPosition == RecyclerView.NO_POSITION) {
             Log.w(TAG, "Cannot find position for child, skipping onClick handling");
             return;
         }
-        if (mApplications.getApplicationCount() > position) {
-            ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
+        if (mApplications.getApplicationCount() > applicationPosition) {
+            ApplicationsState.AppEntry entry = mApplications.getAppEntry(applicationPosition);
             mCurrentPkgName = entry.info.packageName;
             mCurrentUid = entry.info.uid;
             startApplicationDetailsActivity();
@@ -1049,6 +1060,7 @@ public class ManageApplications extends InstrumentedFragment
         private static final String STATE_LAST_SCROLL_INDEX = "state_last_scroll_index";
         private static final int VIEW_TYPE_APP = 0;
         private static final int VIEW_TYPE_EXTRA_VIEW = 1;
+        private static final int VIEW_TYPE_APP_HEADER = 2;
 
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
@@ -1176,7 +1188,7 @@ public class ManageApplications extends InstrumentedFragment
                 mSession.onResume();
                 mLastSortMode = sort;
                 if (mExtraInfoBridge != null) {
-                    mExtraInfoBridge.resume();
+                    mExtraInfoBridge.resume(false /* forceLoadAllApps */);
                 }
                 rebuild();
             } else {
@@ -1220,7 +1232,11 @@ public class ManageApplications extends InstrumentedFragment
         @Override
         public ApplicationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             final View view;
-            if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
+            if (mManageApplications.mListType == LIST_TYPE_APPS_LOCALE
+                    && viewType == VIEW_TYPE_APP_HEADER) {
+                view = ApplicationViewHolder.newHeader(parent,
+                        R.string.desc_app_locale_selection_supported);
+            } else if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 view = ApplicationViewHolder.newView(parent, true /* twoTarget */);
             } else {
                 view = ApplicationViewHolder.newView(parent, false /* twoTarget */);
@@ -1230,6 +1246,9 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public int getItemViewType(int position) {
+            if (position == 0 && mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
+                return VIEW_TYPE_APP_HEADER;
+            }
             return VIEW_TYPE_APP;
         }
 
@@ -1461,36 +1480,59 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
 
+        /**
+         * Item count include all items. If UI has a header on the app list, it shall shift 1 to
+         * application count for the total item count.
+         */
         @Override
         public int getItemCount() {
-            if (mEntries == null) {
-                return 0;
+            int count = getApplicationCount();
+            if (count != 0 && mManageApplications.mListType == LIST_TYPE_APPS_LOCALE) {
+                count++;
             }
-            return mEntries.size();
+            return count;
         }
 
         public int getApplicationCount() {
             return mEntries != null ? mEntries.size() : 0;
         }
 
-        public AppEntry getAppEntry(int position) {
-            return mEntries.get(position);
+        public AppEntry getAppEntry(int applicationPosition) {
+            return mEntries.get(applicationPosition);
         }
 
+        /**
+         * Item Id follows all item on the app list. If UI has a header on the list, it shall
+         * shift 1 to the position for correct app entry.
+         */
         @Override
         public long getItemId(int position) {
-            if (position == mEntries.size()) {
+            int applicationPosition =
+                    getApplicationPosition(mManageApplications.mListType, position);
+            if (applicationPosition == mEntries.size()
+                    || applicationPosition == RecyclerView.NO_POSITION) {
                 return -1;
             }
-            return mEntries.get(position).id;
+            return mEntries.get(applicationPosition).id;
         }
 
+        /**
+         * Check item in the list shall enable or disable.
+         * @param position The item position in the list
+         */
         public boolean isEnabled(int position) {
-            if (getItemViewType(position) == VIEW_TYPE_EXTRA_VIEW
+            int itemViewType = getItemViewType(position);
+            if (itemViewType == VIEW_TYPE_EXTRA_VIEW || itemViewType == VIEW_TYPE_APP_HEADER
                     || mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
                 return true;
             }
-            ApplicationsState.AppEntry entry = mEntries.get(position);
+
+            int applicationPosition =
+                    getApplicationPosition(mManageApplications.mListType, position);
+            if (applicationPosition == RecyclerView.NO_POSITION) {
+                return true;
+            }
+            ApplicationsState.AppEntry entry = mEntries.get(applicationPosition);
 
             return !mBackend.isSysAllowlisted(entry.info.packageName)
                     && !mBackend.isDefaultActiveApp(entry.info.packageName);
@@ -1498,8 +1540,21 @@ public class ManageApplications extends InstrumentedFragment
 
         @Override
         public void onBindViewHolder(ApplicationViewHolder holder, int position) {
+            if (getItemViewType(position) == VIEW_TYPE_APP_HEADER) {
+                // It does not bind holder here, due to header view.
+                return;
+            }
+
+            int applicationPosition =
+                    getApplicationPosition(mManageApplications.mListType, position);
+            if (applicationPosition == RecyclerView.NO_POSITION) {
+                return;
+            }
             // Bind the data efficiently with the holder
-            final ApplicationsState.AppEntry entry = mEntries.get(position);
+            // If there is a header on the list, the position shall be shifted. Thus, it shall use
+            // #getApplicationPosition to get real application position for the app entry.
+            final ApplicationsState.AppEntry entry = mEntries.get(applicationPosition);
+
             synchronized (entry) {
                 mState.ensureLabelDescription(entry);
                 holder.setTitle(entry.label, entry.labelDescription);
@@ -1597,6 +1652,22 @@ public class ManageApplications extends InstrumentedFragment
                     }
                     break;
             }
+        }
+
+        /**
+         * Adjusts position if this list adds a header.
+         * TODO(b/232533002) Add a header view on adapter of RecyclerView may not a good idea since
+         * ManageApplication is a generic purpose. In the future, here shall look for
+         * a better way to add a header without using recyclerView or any other ways
+         * to achieve the goal.
+         */
+        public static int getApplicationPosition(int listType, int position) {
+            int applicationPosition = position;
+            // Adjust position due to header added.
+            if (listType == LIST_TYPE_APPS_LOCALE) {
+                applicationPosition = position > 0 ? position - 1 : RecyclerView.NO_POSITION;
+            }
+            return applicationPosition;
         }
 
         public static class OnScrollListener extends RecyclerView.OnScrollListener {

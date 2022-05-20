@@ -72,7 +72,8 @@
             android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
             android:key="text_reading_options"
             android:persistent="false"
-            android:title="@string/accessibility_text_reading_options_title" />
+            android:title="@string/accessibility_text_reading_options_title"
+            settings:controller="com.android.settings.accessibility.TextReadingFragmentForDisplaySettingsController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

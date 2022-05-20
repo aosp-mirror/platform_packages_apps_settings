@@ -83,7 +83,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         mDataSaverBackend.refreshAllowlist();
         mDataSaverBackend.refreshDenylist();
         mDataSaverBackend.addListener(this);
-        mDataUsageBridge.resume();
+        mDataUsageBridge.resume(true /* forceLoadAllApps */);
     }
 
     @Override
