@@ -443,7 +443,7 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"वाइब्रेशन महसूस होने पर उंगली को हटा लें"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"जहां ज़्यादा तेज़ रोशनी न हो वहां जाकर कोशिश करें"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"इस डिवाइस पर, और ज़्यादा फ़िंगरप्रिंट नहीं जोड़े जा सकते"</string>
-    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"फ़ोन अनलॉक करने के लिए, अपने फ़िंगरप्रिंट का इस्तेमाल करें. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी अपने फ़िंगरप्रिंट का इस्तेमाल किया जा सकता है\n\n"<annotation id="url">"ज़्यादा जानें"</annotation></string>
+    <string name="security_settings_fingerprint_v2_home_screen" msgid="1709655966777714761">"फ़ोन अनलॉक करने के लिए या किसी ऐप्लिकेशन में साइन इन करते समय अपनी पहचान की पुष्टि करने जैसे कामों के लिए, फ़िंगरप्रिंट का इस्तेमाल करें.\n\n"<annotation id="url">"ज़्यादा जानें"</annotation></string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"फ़िंगरप्रिंट और फ़ेस अनलॉक"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"सेट अप करने के लिए टैप करें"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"चेहरे का मॉडल और फ़िंगरप्रिंट जोड़े गए"</string>
@@ -942,7 +942,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"सार्वजनिक नेटवर्क मिलने की सूचना पाएं"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"अच्छी क्वालिटी का सार्वजनिक नेटवर्क मिलने पर सूचना पाएं"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"वाई-फ़ाई अपने-आप चालू हो जाए"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"वाई-फ़ाई, सेव किए गए अच्छी क्वालिटी के नेटवर्क पास होने पर अपने-आप चालू हो जाएगा, जैसे कि आपके घर का नेटवर्क"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"सेव किए गए अच्छी क्वालिटी के नेटवर्क पास होने पर, वाई-फ़ाई अपने-आप चालू हो जाएगा. जैसे, आपके घर का नेटवर्क"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"जगह की जानकारी का विकल्प बंद होने की वजह से अपने आप वाई-फ़ाई कनेक्ट होने की सुविधा उपलब्ध नहीं है. "<annotation id="link">"जगह की जानकारी"</annotation>" का विकल्प चालू करें."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"मौजूद नहीं है क्योंकि वाई-फ़ाई स्कैन करना बंद कर दिया गया है"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"उपयोग करने के लिए, कोई नेटवर्क रेटिंग कंपनी चुनें"</string>
@@ -1210,7 +1210,7 @@
     <string name="wifi_calling_settings_title" msgid="264665264535884440">"वाई-फ़ाई कॉलिंग"</string>
     <string name="wifi_calling_suggestion_title" msgid="4791435106729906727">"वाई-फ़ाई के ज़रिए कॉल करने की सुविधा चालू करें"</string>
     <string name="wifi_calling_suggestion_summary" msgid="5413024679599742858">"वाई-फ़ाई कॉलिंग चालू करके कॉल करने का एक और विकल्प पाएं"</string>
-    <string name="wifi_calling_mode_title" msgid="5145896168360825619">"कॉल करने का प्राथमिक तरीका"</string>
+    <string name="wifi_calling_mode_title" msgid="5145896168360825619">"कॉल करने के लिए आपकी पसंदीदा सेटिंग"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="944146521898592440">"कॉल से जुड़ी आपकी पसंद"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="7703305991991520773">"रोमिंग की प्राथमिकताएं"</string>
     <!-- no translation found for wifi_calling_roaming_mode_summary (6061631305384464179) -->
@@ -1813,7 +1813,7 @@
     <string name="ethernet_tether_checkbox_text" msgid="959743110824197356">"ईथरनेट टेदरिंग"</string>
     <string name="ethernet_tethering_subtext" product="default" msgid="5998100693350351694">"ईथरनेट से फ़ोन का इंटरनेट कनेक्शन शेयर करें"</string>
     <string name="tethering_footer_info" msgid="6782375845587483281">"अपने मोबाइल डेटा कनेक्शन से, दूसरे डिवाइस को इंटरनेट देने के लिए हॉटस्पॉट और टेदरिंग का इस्तेमाल करें. आस-पास के डिवाइस के साथ कॉन्टेंट शेयर करने के लिए, ऐप्लिकेशन भी हॉटस्पॉट बना सकते हैं."</string>
-    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"अपने वाई-फ़ाई और मोबाइल डेटा कनेक्शन से, दूसरे डिवाइस को इंटरनेट देने के लिए हॉटस्पॉट और टेदरिंग का इस्तेमाल करें. आस-पास के डिवाइस के साथ कॉन्टेंट शेयर करने के लिए, ऐप्लिकेशन भी हॉटस्पॉट बना सकते हैं."</string>
+    <string name="tethering_footer_info_sta_ap_concurrency" msgid="2079039077487477676">"दूसरे डिवाइस के साथ अपना वाई-फ़ाई और मोबाइल डेटा कनेक्शन शेयर करने के लिए हॉटस्पॉट और टेदरिंग का इस्तेमाल करें. आस-पास के डिवाइस के साथ कॉन्टेंट शेयर करने के लिए, ऐप्लिकेशन भी हॉटस्पॉट बना सकते हैं."</string>
     <string name="tethering_help_button_text" msgid="2823655011510912001">"सहायता"</string>
     <string name="network_settings_title" msgid="4663717899931613176">"मोबाइल नेटवर्क"</string>
     <string name="manage_mobile_plan_title" msgid="5616930513733409064">"मोबाइल प्लान"</string>
@@ -2357,7 +2357,7 @@
     <string name="accessibility_shortcut_service_on_lock_screen_title" msgid="3923122834058574478">"लॉक स्क्रीन पर दिखने वाले शॉर्टकट"</string>
     <string name="accessibility_shortcut_description" msgid="2184693606202133549">"सुविधा के शॉर्टकट को लॉक स्क्रीन से चालू करने की अनुमति दें. आवाज़ कम और ज़्यादा करने वाले दोनों बटन को कुछ सेकंड तक दबाकर रखें."</string>
     <string name="accessibility_button_title" msgid="5251235485581552614">"सुलभता बटन"</string>
-    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"सुलभता बटन और जेस्चर (हाव-भाव)"</string>
+    <string name="accessibility_button_gesture_title" msgid="3573456209050374139">"सुलभता बटन और हाथ के जेस्चर"</string>
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"सुलभता बटन के बारे में जानकारी"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"सुलभता बटन और हाथ के जेस्चर के बारे में जानकारी"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"सुलभता बटन और हाथ के जेस्चर के बारे में ज़्यादा जानें"</string>
@@ -2440,7 +2440,7 @@
     <string name="accessibility_hearingaid_title" msgid="427173678199203191">"कान की मशीन"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"कान की कोई भी मशीन जुड़ी हुई नहीं है"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"सुनने में मदद करने वाले डिवाइस जोड़ें"</string>
-    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"सुनने में मदद करने वाला डिवाइस जोड़ने के लिए, अगली स्क्रीन पर अपना डिवाइस ढूंढें और उस पर टैप करें. यह देख लें कि सुनने में आपकी मदद करने वाला डिवाइस दूसरे डिवाइस से जुड़ने वाले मोड में है."</string>
+    <string name="accessibility_hearingaid_pair_instructions_message" msgid="8913409742121315657">"कान की मशीन जोड़ने के लिए, अगली स्क्रीन पर उसे ढूंढें और उस पर टैप करें. यह देख लें कि कान की वह मशीन, दूसरे डिवाइस से जुड़ने वाले मोड में हो."</string>
     <string name="accessibility_hearingaid_active_device_summary" msgid="509703438222873967">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> चालू है"</string>
     <plurals name="show_number_hearingaid_count" formatted="false" msgid="776000580683647556">
       <item quantity="one">सुनने में मददगार <xliff:g id="NUMBER_DEVICE_COUNT_1">%1$d</xliff:g> डिवाइस सेव किए गए</item>
@@ -4152,7 +4152,7 @@
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"ऐप्लिकेशन जोड़ें"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"सभी सूचनाएं"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"कुछ सूचनाएं"</string>
-    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"अगर आपने ऐप्लिकेशन को \'परेशान न करें\' मोड में डाला है, तब भी चुने हुए लोग आपसे संपर्क कर सकते हैं"</string>
+    <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"अगर आपने ऐप्लिकेशन को \'परेशान न करें\' मोड पर सेट किया है, तब भी चुने हुए लोग आपसे संपर्क कर सकते हैं"</string>
     <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{कोई भी ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास नहीं कर सकता}=1{{app_1} \'परेशान न करें\' मोड को बायपास कर सकता है}=2{{app_1} और {app_2} \'परेशान न करें\' मोड को बायपास कर सकते हैं}=3{{app_1}, {app_2}, और {app_3} \'परेशान न करें\' मोड को बायपास कर सकते हैं}one{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}other{{app_1}, {app_2}, और # अन्य ऐप्लिकेशन \'परेशान न करें\' मोड को बायपास कर सकते हैं}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"ऐप्लिकेशन"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"सभी सूचनाएं"</string>
@@ -4886,7 +4886,7 @@
     <string name="ambient_display_tap_screen_summary" msgid="4480489179996521405">"समय, सूचनाएं, और दूसरी जानकारी देखने के लिए, फ़ोन की स्क्रीन पर टैप करें."</string>
     <string name="emergency_gesture_screen_title" msgid="3280543310204360902">"इमरजेंसी एसओएस"</string>
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"इमरजेंसी एसओएस की सुविधा इस्तेमाल करें"</string>
-    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> प्रबंधित करता है"</string>
+    <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> मैनेज करता है"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"नीचे बताई गई कार्रवाई शुरू करने के लिए, पावर बटन को पांच या इससे ज़्यादा बार तेज़ी से दबाएं"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"काउंटडाउन अलार्म चलाएं"</string>
     <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"इमरजेंसी एसओएस की सुविधा चालू होते समय, तेज़ आवाज़ चलाएं"</string>
@@ -5234,11 +5234,11 @@
     <string name="mobile_network_inactive_esim" msgid="2901035056727849007">"बंद / डाउनलोड किया गया सिम"</string>
     <string name="mobile_network_sim_name" msgid="3187192894150386537">"सिम का नाम और रंग"</string>
     <string name="mobile_network_sim_name_label" msgid="1452440641628369625">"नाम"</string>
-    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"रंग (ऐप्लिकेशन पर काम करने वाले)"</string>
+    <string name="mobile_network_sim_color_label" msgid="5293944087609632340">"रंग (ऐप्लिकेशन पर काम करने वाला)"</string>
     <string name="mobile_network_sim_name_rename" msgid="5967588549571582924">"सेव करें"</string>
     <string name="mobile_network_use_sim_on" msgid="7298332437547707908">"सिम का इस्तेमाल करें"</string>
     <string name="mobile_network_use_sim_off" msgid="6303281166199670639">"बंद"</string>
-    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"इस SIM को बंद करने के लिए, SIM कार्ड निकालें"</string>
+    <string name="mobile_network_disable_sim_explanation" msgid="2851862257846773796">"इस सिम को बंद करने के लिए, सिम कार्ड निकालें"</string>
     <string name="mobile_network_tap_to_activate" msgid="4139979375717958102">"<xliff:g id="CARRIER">%1$s</xliff:g> चालू करने के लिए टैप करें"</string>
     <string name="mobile_network_esim_swap_confirm_title" msgid="2762744961192218789">"<xliff:g id="CARRIER">%1$s</xliff:g> पर स्विच करें?"</string>
     <string name="mobile_network_esim_swap_confirm_body" msgid="8168680839542031781">"एक समय में डाउनलोड किया गया सिर्फ़ एक सिम इस्तेमाल किया जा सकता है. \n\n <xliff:g id="CARRIER1">%1$s</xliff:g> में स्विच करने से आपके <xliff:g id="CARRIER2">%2$s</xliff:g> की सेवा रद्द नहीं की जाएगी."</string>
@@ -5463,7 +5463,7 @@
     <string name="keywords_airplane_safe_networks" msgid="5902708537892978245">"हवाई जहाज़, हवाई जहाज़ सुरक्षित नेटवर्क"</string>
     <string name="calls_and_sms" msgid="1931855083959003306">"कॉल और एसएमएस"</string>
     <string name="calls_and_sms_category" msgid="3788238090898237767">"वाई-फ़ाई कॉलिंग"</string>
-    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"वाई-फ़ाई की मदद से कॉल करें और कॉल रिसीव करें"</string>
+    <string name="calls_sms_wfc_summary" msgid="3940529919408667336">"वाई-फ़ाई की मदद से कॉल करें और इनकमिंग कॉल का जवाब दें"</string>
     <string name="calls_sms_footnote" msgid="1003530944232362815">"वाई-फ़ाई कॉलिंग, आपको ऐसे नेटवर्क से कॉल करने और पाने की सुविधा देती है जो सिम का इस्तेमाल नहीं करते, जैसे कुछ वाई-फ़ाई नेटवर्क. "<annotation id="url">"ज़्यादा जानें"</annotation></string>
     <string name="calls_preference_title" msgid="7536882032182563800">"कॉल"</string>
     <string name="sms_preference_title" msgid="8392745501754864395">"एसएमएस"</string>
