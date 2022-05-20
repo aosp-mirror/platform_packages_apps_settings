@@ -221,15 +221,13 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Мовы праграмы"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Задаць мову для кожнай праграмы"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Мова праграмы"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Абнавіце праграму"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Каб дадаць у праграму новыя даступныя мовы, яе трэба абнавіць"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Абнавіць"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Прапанаваныя мовы"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Усе мовы"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Сістэмная мова"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Стандартная сістэмная налада"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Выбар мовы для гэтай праграмы недаступны ў Наладах."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Мова можа адрознівацца ад моў, даступных у праграме. Некаторыя праграмы могуць не падтрымліваць гэту наладу."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Тут паказаны толькі праграмы, якія падтрымліваюць выбар мовы."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Выдаліць выбраныя мовы?</item>
       <item quantity="few">Выдаліць выбраныя мовы?</item>
@@ -296,10 +294,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"Змена на <xliff:g id="TIME_TYPE">%1$s</xliff:g> пачынаецца <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <!-- no translation found for zone_info_footer_first_sentence (1326664252091302458) -->
-    <skip />
-    <!-- no translation found for zone_info_footer_second_sentence (6472889173541729110) -->
-    <skip />
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Выкарыстоўваецца <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"Пераход на <xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> пачынаецца <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Выкарыстоўваецца <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Без пераходу на летні час."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Летні час"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Стандартны час"</string>
@@ -443,12 +439,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Наладзьце адбітак пальца"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Дазволіць разблакіраванне адбіткам"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер адбіткаў пальцаў"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі планшэта ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі прылады ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі тэлефона ці спраўджання вашай асобы, напрыклад падчас уваходу ў праграмы ці ўхвалення куплі."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Дазвольце дзіцяці выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы. Гэта функцыя можа быць карыснай падчас уваходу ў праграмы, ухвалення куплі і іншых дзеянняў."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Усё пад кантролем"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Доступ ёсць у вас і вашага дзіцяці"</string>
@@ -484,12 +477,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Падніміце палец, як толькі адчуеце вібрацыю"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Перайдзіце ў месца з не такім яркім асвятленнем і паўтарыце спробу"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Вы дасягнулі максімальнай колькасці спроб"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі планшэта ці спраўджання асобы, напрыклад падчас уваходу ў праграмы"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі прылады ці спраўджання асобы, напрыклад падчас уваходу ў праграмы"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Адбітак пальца можна выкарыстоўваць для разблакіроўкі тэлефона ці спраўджання асобы, напрыклад падчас уваходу ў праграмы"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Распазнаванне твару і разблакіраванне адбіткам пальца"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Дакраніцеся, каб наладзіць"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Дададзены твар і адбіткі пальцаў"</string>
@@ -501,7 +491,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Выкарыстанне твару"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Выкарыстанне адбітка пальца"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Выкарыстанне твару ці адбітка пальца"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Дай тэлефон аднаму з бацькоў"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Дай тэлефон аднаму з бацькоў"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ОК"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Прапусціць наладжванне блакіроўкі экрана?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Функцыі абароны прылады не будуць уключаны. Вы не зможаце забараніць іншым карыстацца гэтым планшэтам у выпадку згубы, крадзяжу ці скіду налад."</string>
@@ -542,12 +536,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Адбітак пальца дададзены"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Цяпер вы можаце выкарыстоўваць адбітак пальца для разблакіроўкі планшэта ці спраўджання сваёй асобы, напрыклад падчас уваходу ў праграмы"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Цяпер вы можаце выкарыстоўваць адбітак пальца для разблакіроўкі прылады ці спраўджання сваёй асобы, напрыклад падчас уваходу ў праграмы"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Цяпер вы можаце выкарыстоўваць адбітак пальца для разблакіроўкі тэлефона ці спраўджання сваёй асобы, напрыклад падчас уваходу ў праграмы"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Пазней"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Падніміце і дакраніцеся зноў"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прыкладзіце палец да датчыка адным бокам і ўтрымлівайце яго, потым павярніце іншым бокам"</string>
@@ -611,13 +602,16 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Дадаць яшчэ адзін"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Далей"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Акрамя разблакіроўкі тэлефона вы можаце выкарыстоўваць свае адбіткі пальцаў для аўтарызацыі купляў і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" Опцыя блакіроўкі экрана выключана. Звяжыцеся з адміністратарам сваёй арганізацыі, каб даведацца больш. "<annotation id="admin_details">"Дадатковая інфармацыя"</annotation>\n\n"Вы па-ранейшаму можаце выкарыстоўваць адбіткі пальцаў для аўтарызацыі куплі і доступу да праграм. "<annotation id="url">"Даведацца больш"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"Гэты варыянт разблакіроўкі экрана выключаны. Каб даведацца больш, звярніцеся да адміністратара вашай арганізацыі."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Аднак вы можаце выкарыстоўваць адбітак пальца для аўтарызацыі падчас купляў і для доступу да праграм."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Падыміце палец, потым дакраніцеся да сканера зноў"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Не ўдалося скарыстаць сканер адбіткаў пальцаў. Звярніцеся ў сэрвісны цэнтр."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Іншыя налады бяспекі"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блакіроўка працоўнага профілю, шыфраванне і іншыя дзеянні"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шыфраванне, уліковыя даныя і іншыя звесткі"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"бяспека, іншыя налады бяспекі, іншыя налады, пашыраныя налады бяспекі"</string>
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Іншыя налады прыватнасці"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Аўтазапаўненне, адсочванне дзеянняў і іншыя функцыі"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Вы можаце дадаць да <xliff:g id="COUNT">%d</xliff:g> адбіткаў пальца"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы дадалі максімальную колькасць адбіткаў пальцаў"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Немагчыма дадаць больш адбіткаў пальцаў"</string>
@@ -656,8 +650,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Прадухіліце выкарыстанне гэтай прылады без вашага дазволу, актываваўшы функцыі абароны прылады. Выберыце спосаб блакіроўкі экрана, які вы хочаце выкарыстоўваць."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Прадухіліце выкарыстанне гэтага тэлефона без вашага дазволу, актываваўшы функцыі абароны прылады. Выберыце спосаб блакіроўкі экрана, які вы хочаце выкарыстоўваць."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Выберыце дадатковы спосаб блакіроўкі экрана"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Калі вы забудзеце спосаб разблакіроўкі экрана, IT-адміністратар не зможа вам дапамагчы."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Задайце для працоўнага профілю асобную блакіроўку"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Калі вы забылі гэты сродак блакіроўкі, папрасіце IT-адміністратара скінуць яго"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Параметры экрана блакіроўкі"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Параметры экрана блакіроўкі"</string>
@@ -770,6 +764,7 @@
       <item quantity="many">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвалаў</item>
       <item quantity="other">Пароль павінен змяшчаць не менш за <xliff:g id="COUNT_1">%d</xliff:g> сімвала</item>
     </plurals>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум 1 лічба}one{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічба}few{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбы}many{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбаў}other{Калі выкарыстоўваюцца толькі лічбы, павінна быць як мінімум # лічбы}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбу</item>
       <item quantity="few">PIN-код павінен утрымліваць не менш як <xliff:g id="COUNT_1">%d</xliff:g> лічбы</item>
@@ -2147,7 +2142,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Праграма для экстранных сітуацый"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Скінуць налады праграм"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Скінуць налады праграм?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"Будуць скінуты наступныя налады:\n\n"<li>" адключаныя праграмы;"</li>\n<li>"адключаныя апавяшчэнні праграм;"</li>\n<li>"стандартныя праграмы для дзеянняў;"</li>\n<li>"абмежаванні на фонавую перадачу даных для праграм;"</li>\n<li>"абмежаванні дазволаў."</li>\n\n"Даныя праграм не будуць выдалены."</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Будуць скінуты наступныя налады:\n\n"<li>" адключаныя праграмы;"</li>\n<li>"адключаныя апавяшчэнні праграм;"</li>\n<li>"стандартныя праграмы для дзеянняў;"</li>\n<li>"абмежаванні на фонавую перадачу даных для праграм;"</li>\n<li>"абмежаванні дазволаў;"</li>\n<li>"налады выкарыстання зараду."</li>\n\n"Даныя праграм не будуць выдалены."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Скінуць праграмы"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Кіраванне вольным месцам"</string>
     <string name="filter" msgid="9039576690686251462">"Фільтр"</string>
@@ -3020,10 +3015,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Абнавіць"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Сервер медыя"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Аптымізацыя дадаткаў"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Мадэм"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Выдаленыя праграмы"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Рэжым энергазберажэння"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Уключаць аўтаматычна"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Няма раскладу"</string>
@@ -3458,10 +3451,8 @@
       <item quantity="many">Давяраць сертыфікатам або выдаліць іх</item>
       <item quantity="other">Давяраць сертыфікатам або выдаліць іх</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікат ЦС, які дазваляе яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэты сертыфікат звяртайцеся да адміністратара.}one{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}few{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}many{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}other{Адміністратар дамена \"{orgName}\" усталяваў на вашай прыладзе сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікат ЦС, які дазваляе яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэты сертыфікат звяртайцеся да адміністратара.}one{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}few{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}many{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}other{Адміністратар дамена \"{orgName}\" усталяваў для вашага працоўнага профілю сертыфікаты ЦС, якія дазваляюць яму кантраляваць вашы дзеянні ў працоўнай сетцы, у тым ліку выкарыстанне электроннай пошты і праграм, а таксама наведванне бяспечных вэб-сайтаў.\n\nПа дадатковую інфармацыю пра гэтыя сертыфікаты звяртайцеся да адміністратара.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Трэцяя асоба мае магчымасць маніторынгу вашай сеткавай актыўнасці, у тым ліку электроннай пошты, дадаткаў і абароненых вэб-сайтаў.\n\nГэта магчыма з-за даверанага сертыфіката, усталяванага на вашай прыладзе."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="one">Праверыць сертыфікаты</item>
@@ -3559,7 +3550,9 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Выдаліць абмежаванні"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Змяніць PIN-код"</string>
     <string name="help_label" msgid="2896538416436125883">"Даведка і водгукі"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Даведачныя артыкулы, тэлефон і чат"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Даведачныя артыкулы, тэлефон і чат"</string>
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Даведачныя артыкулы, планшэт і чат"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Даведачныя артыкулы, прылада і чат"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Уліковы запіс для змесціва"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Iдэнтыфiкатар фота"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Надзвычайныя пагрозы"</string>
@@ -3814,7 +3807,7 @@
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Заўсёды ўключаць вібрацыю"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Вібрацыя, потым званок з ростам гучнасці"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Іншыя гукі"</string>
-    <string name="spatial_audio_title" msgid="6591051622375191603">"Аб\'ёмнае аўдыя"</string>
+    <string name="spatial_audio_title" msgid="6591051622375191603">"Прасторавае гучанне"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Гукі панэлі набору"</string>
     <string name="screen_locking_sounds_title" msgid="5695030983872787321">"Гук экрана блакіроўкі"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"Гукі і вібрацыя пры зарадцы"</string>
@@ -3832,10 +3825,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Аўтаматычна дадаваць субцітры"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Дынамік тэлефона"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Правадныя навушнікі"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Прасторавае гучанне стварае імерсіўны гук, які ідзе з усіх бакоў. Працуе толькі з пэўным мультымедыйным змесцівам."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Выключана"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Уключана / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Уключана / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> і <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ніводнага}=1{Зададзены 1 расклад}one{Зададзены # расклад}few{Зададзена # расклады}many{Зададзена # раскладаў}other{Зададзена # раскладу}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не турбаваць"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Атрымліваць апавяшчэнні толькі ад важных людзей і праграм"</string>
@@ -3956,6 +3954,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Кіраваць апавяшчэннямі з асобных праграм"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Агульныя налады"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Апавяшчэнні працоўнага профілю"</string>
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Працоўны профіль"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптыўныя апавяшчэнні"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Прыярытэт адаптыўных апавяшчэнняў"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Аўтаматычна пераводзіць апавяшчэнні з нізкім прыярытэтам у ціхі рэжым"</string>
@@ -4336,7 +4335,7 @@
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Будзільнікі"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Гукі мультымедыя"</string>
     <string name="zen_mode_media_summary" msgid="7174081803853351461">"Гукі з відэа, гульняў і іншых файлаў мультымедыя"</string>
-    <string name="zen_mode_media_list" msgid="2006413476596092020">"мультымедыя"</string>
+    <string name="zen_mode_media_list" msgid="2006413476596092020">"Мультымедыя"</string>
     <string name="zen_mode_media_list_first" msgid="7824427062528618442">"Мультымедыя"</string>
     <string name="zen_mode_system" msgid="7301665021634204942">"Гукі пры дотыку"</string>
     <string name="zen_mode_system_summary" msgid="7225581762792177522">"Гукі клавіятуры і іншых кнопак"</string>
@@ -5021,7 +5020,7 @@
     <string name="special_access_more" msgid="132919514147475846">"Яшчэ"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Скінуць абмежаванне частаты ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Абмежаванне частаты ShortcutManager было скінута"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Паказваць кантрольную інфармацыю на экране блакiроўцы"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Выбраць інфармацыю для паказу на заблакіраваным экране"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Паказваць ці хаваць змесціва апавяшчэнняў"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Усе"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Парады і падтрымка"</string>
@@ -5815,7 +5814,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"выклікі"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"мабільная перадача даных"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"Каб палепшыць працу прылады, вы можаце дазволіць праграмам і сэрвісам шукаць сеткі Wi-Fi, нават калі Wi‑Fi выключаны. Дзякуючы гэтаму палепшыцца праца функцый і сэрвісаў, звязаных з геалакацыяй. Змяніць гэты рэжым можна ў наладах пошуку сетак Wi-Fi. "<annotation id="link">"Змяніць"</annotation>"."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Каб палепшыць працу прылады, вы можаце дазволіць праграмам і сэрвісам шукаць сеткі Wi-Fi, нават калі Wi‑Fi выключаны. Дзякуючы гэтаму палепшыцца праца функцый і сэрвісаў, звязаных з геалакацыяй. Змяніць гэты рэжым можна ў наладах пошуку сетак Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Змяніць"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Падключана"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Няма падключэння"</string>
@@ -5966,8 +5966,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Наладзьце абмежаванне хуткасці спампоўвання праз сетку"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Без абмежаванняў"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Трансляцыя"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_app (1016617579194329005) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Трансліраваць праграму \"<xliff:g id="CURRENTAPP">%1$s</xliff:g>\""</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Слухайце трансляцыі, якія прайграюцца паблізу ад вас"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Трансліруйце мультымедыя на прылады паблізу або праслухвайце трансляцыі іншых карыстальнікаў"</string>
     <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Трансляцыі"</string>
@@ -5975,10 +5974,9 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Шукаць трансляцыі"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Выйсці з трансляцыі"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Сканіраваць QR-код"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
-    <skip />
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Увядзіце пароль"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Не ўдалося падключыцца. Паўтарыце спробу."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Няправільны пароль"</string>
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Каб пачаць праслухванне, памясціце ў цэнтр QR-код, які знаходзіцца ўнізе"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-код мае несапраўдны фармат"</string>
 </resources>
