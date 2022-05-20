@@ -432,7 +432,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Usa la tua impronta"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Usa l\'impronta per sbloccare il tablet o per verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Usa l\'impronta per sbloccare il dispositivo o verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa l\'impronta per sbloccare il telefono o verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Usa l\'impronta per sbloccare il telefono o per verificare la tua identità, ad esempio per accedere alle app o approvare un acquisto."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Consenti a tuo figlio di usare l\'impronta per sbloccare il suo telefono o verificare la sua identità. Questo si verifica quando accedono alle app, approvano un acquisto e altro ancora."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Sei tu ad avere il controllo"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Tu e tuo figlio avete il controllo"</string>
@@ -595,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Blocco del profilo di lavoro, crittografia e altro"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Crittografia, credenziali e altro"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sicurezza, altre impostazioni di sicurezza, altre impostazioni, impostazioni di sicurezza avanzate"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Altre impostazioni della privacy"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Compilazione automatica, Gestione attività e altro"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Puoi aggiungere fino a <xliff:g id="COUNT">%d</xliff:g> impronte digitali"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Hai aggiunto il numero massimo di impronte digitali"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossibile aggiungere ulteriori impronte digitali"</string>
@@ -749,8 +747,7 @@
       <item quantity="other">Deve essere lunga almeno <xliff:g id="COUNT_1">%d</xliff:g> caratteri</item>
       <item quantity="one">Deve essere lunga almeno <xliff:g id="COUNT_0">%d</xliff:g> carattere</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Se utilizzi solo numeri, la password deve avere almeno 1 cifra}other{Se utilizzi solo numeri, la password deve avere almeno # cifre}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">Il PIN deve essere lungo almeno <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
       <item quantity="one">Il PIN deve essere lungo almeno <xliff:g id="COUNT_0">%d</xliff:g> cifra</item>
@@ -3458,10 +3455,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Cambia PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Guida e feedback"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Articoli del Centro assistenza, telefono e chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Articoli del Centro assistenza, tablet e chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Articoli del Centro assistenza, dispositivo e chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account per i contenuti"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID foto"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Minacce estreme"</string>
@@ -3732,10 +3727,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Sottotitoli automatici"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altoparlante telefono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Cuffie con cavo"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"La funzionalità Audio spaziale crea un suono immersivo che sembra provenire dall\'ambiente intorno a te. È supportato soltanto con alcuni contenuti multimediali."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Off"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"On/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"On/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nessuna}=1{1 pianificazione impostata}other{# pianificazioni impostate}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Non disturbare"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ricevi soltanto le notifiche di app e persone importanti"</string>
@@ -3856,8 +3856,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Controlla le notifiche delle singole app"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Generali"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notifiche di lavoro"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Profilo di lavoro"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notifiche adattive"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Priorità per le notifiche adattive"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Imposta automaticamente le notifiche con priorità inferiore su Senza avvisi"</string>
@@ -5630,10 +5629,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"chiamate"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"dati mobili"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Per migliorare l\'esperienza con il dispositivo, le app e i servizi possono continuare a cercare reti Wi-Fi in qualsiasi momento, anche quando la connessione Wi-Fi non è attiva. Questo può essere utile, ad esempio, per migliorare funzionalità e servizi basati sulla posizione geografica. Puoi modificare questa preferenza nelle impostazioni relative alla ricerca di reti Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Modifica"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connessione attiva"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Nessuna connessione"</string>
@@ -5795,8 +5792,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Immetti password"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Impossibile connettersi. Riprova."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Password errata"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Per iniziare ad ascoltare, centra il codice QR qui sotto"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Il formato del codice QR non è valido"</string>
 </resources>
