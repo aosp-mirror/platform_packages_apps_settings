@@ -1480,6 +1480,10 @@ public class ManageApplications extends InstrumentedFragment
             }
         }
 
+        /**
+         * Item count include all items. If UI has a header on the app list, it shall shift 1 to
+         * application count for the total item count.
+         */
         @Override
         public int getItemCount() {
             int count = getApplicationCount();
@@ -1493,29 +1497,42 @@ public class ManageApplications extends InstrumentedFragment
             return mEntries != null ? mEntries.size() : 0;
         }
 
-        public AppEntry getAppEntry(int position) {
-            return mEntries.get(
-                    getApplicationPosition(mManageApplications.mListType, position));
+        public AppEntry getAppEntry(int applicationPosition) {
+            return mEntries.get(applicationPosition);
         }
 
+        /**
+         * Item Id follows all item on the app list. If UI has a header on the list, it shall
+         * shift 1 to the position for correct app entry.
+         */
         @Override
         public long getItemId(int position) {
             int applicationPosition =
                     getApplicationPosition(mManageApplications.mListType, position);
-            if (applicationPosition == mEntries.size()) {
+            if (applicationPosition == mEntries.size()
+                    || applicationPosition == RecyclerView.NO_POSITION) {
                 return -1;
             }
             return mEntries.get(applicationPosition).id;
         }
 
+        /**
+         * Check item in the list shall enable or disable.
+         * @param position The item position in the list
+         */
         public boolean isEnabled(int position) {
-            if (getItemViewType(position) == VIEW_TYPE_EXTRA_VIEW
+            int itemViewType = getItemViewType(position);
+            if (itemViewType == VIEW_TYPE_EXTRA_VIEW || itemViewType == VIEW_TYPE_APP_HEADER
                     || mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
                 return true;
             }
-            ApplicationsState.AppEntry entry =
-                    mEntries.get(
-                            getApplicationPosition(mManageApplications.mListType, position));
+
+            int applicationPosition =
+                    getApplicationPosition(mManageApplications.mListType, position);
+            if (applicationPosition == RecyclerView.NO_POSITION) {
+                return true;
+            }
+            ApplicationsState.AppEntry entry = mEntries.get(applicationPosition);
 
             return !mBackend.isSysAllowlisted(entry.info.packageName)
                     && !mBackend.isDefaultActiveApp(entry.info.packageName);
@@ -1528,10 +1545,16 @@ public class ManageApplications extends InstrumentedFragment
                 return;
             }
 
+            int applicationPosition =
+                    getApplicationPosition(mManageApplications.mListType, position);
+            if (applicationPosition == RecyclerView.NO_POSITION) {
+                return;
+            }
             // Bind the data efficiently with the holder
-            final ApplicationsState.AppEntry entry =
-                    mEntries.get(
-                            getApplicationPosition(mManageApplications.mListType, position));
+            // If there is a header on the list, the position shall be shifted. Thus, it shall use
+            // #getApplicationPosition to get real application position for the app entry.
+            final ApplicationsState.AppEntry entry = mEntries.get(applicationPosition);
+
             synchronized (entry) {
                 mState.ensureLabelDescription(entry);
                 holder.setTitle(entry.label, entry.labelDescription);
@@ -1641,8 +1664,8 @@ public class ManageApplications extends InstrumentedFragment
         public static int getApplicationPosition(int listType, int position) {
             int applicationPosition = position;
             // Adjust position due to header added.
-            if (position > 0 && listType == LIST_TYPE_APPS_LOCALE) {
-                applicationPosition = position - 1;
+            if (listType == LIST_TYPE_APPS_LOCALE) {
+                applicationPosition = position > 0 ? position - 1 : RecyclerView.NO_POSITION;
             }
             return applicationPosition;
         }
