@@ -20,7 +20,6 @@ import android.app.Application;
 import android.app.usage.UsageStats;
 import android.content.Context;
 import android.icu.text.RelativeDateTimeFormatter;
-import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 
@@ -63,10 +62,9 @@ public class AppsPreferenceController extends BasePreferenceController implement
     static final String KEY_SEE_ALL = "see_all_apps";
 
     private final ApplicationsState mApplicationsState;
-    private final int mUserId;
 
     @VisibleForTesting
-    List<UsageStats> mRecentApps;
+    List<RecentAppStatsMixin.UsageStatsWrapper> mRecentApps;
     @VisibleForTesting
     PreferenceCategory mRecentAppsCategory;
     @VisibleForTesting
@@ -83,7 +81,6 @@ public class AppsPreferenceController extends BasePreferenceController implement
         super(context, KEY_RECENT_APPS_CATEGORY);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) mContext.getApplicationContext());
-        mUserId = UserHandle.myUserId();
     }
 
     public void setFragment(Fragment fragment) {
@@ -156,7 +153,7 @@ public class AppsPreferenceController extends BasePreferenceController implement
     }
 
     @VisibleForTesting
-    List<UsageStats> loadRecentApps() {
+    List<RecentAppStatsMixin.UsageStatsWrapper> loadRecentApps() {
         final RecentAppStatsMixin recentAppStatsMixin = new RecentAppStatsMixin(mContext,
                 SHOW_RECENT_APP_COUNT);
         recentAppStatsMixin.loadDisplayableRecentApps(SHOW_RECENT_APP_COUNT);
@@ -187,26 +184,28 @@ public class AppsPreferenceController extends BasePreferenceController implement
             }
 
             int showAppsCount = 0;
-            for (UsageStats stat : mRecentApps) {
-                final String pkgName = stat.getPackageName();
+            for (RecentAppStatsMixin.UsageStatsWrapper statsWrapper : mRecentApps) {
+                final UsageStats stats = statsWrapper.mUsageStats;
+                final String pkgName = statsWrapper.mUsageStats.getPackageName();
+                final String key = pkgName + statsWrapper.mUserId;
                 final ApplicationsState.AppEntry appEntry =
-                        mApplicationsState.getEntry(pkgName, mUserId);
+                        mApplicationsState.getEntry(pkgName, statsWrapper.mUserId);
                 if (appEntry == null) {
                     continue;
                 }
 
                 boolean rebindPref = true;
-                Preference pref = existedAppPreferences.remove(pkgName);
+                Preference pref = existedAppPreferences.remove(key);
                 if (pref == null) {
                     pref = new AppPreference(mContext);
                     rebindPref = false;
                 }
 
-                pref.setKey(pkgName);
+                pref.setKey(key);
                 pref.setTitle(appEntry.label);
                 pref.setIcon(Utils.getBadgedIcon(mContext, appEntry.info));
                 pref.setSummary(StringUtil.formatRelativeTime(mContext,
-                        System.currentTimeMillis() - stat.getLastTimeUsed(), false,
+                        System.currentTimeMillis() - stats.getLastTimeUsed(), false,
                         RelativeDateTimeFormatter.Style.SHORT));
                 pref.setOrder(showAppsCount++);
                 pref.setOnPreferenceClickListener(preference -> {
