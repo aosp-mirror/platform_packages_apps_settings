@@ -17,11 +17,13 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -58,8 +60,11 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mShowSystem = Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
+        mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+            SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+            ? Settings.Secure.getInt(getContentResolver(),
+            Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+            : false;
     }
 
     @Override
