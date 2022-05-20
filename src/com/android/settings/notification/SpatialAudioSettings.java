@@ -17,11 +17,15 @@
 package com.android.settings.notification;
 
 import android.app.settings.SettingsEnums;
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.Settings;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.widget.FooterPreference;
 
 /**
  * Spatial audio settings located in the sound menu
@@ -30,6 +34,20 @@ import com.android.settingslib.search.SearchIndexable;
 public class SpatialAudioSettings extends DashboardFragment {
 
     private static final String TAG = "SpatialAudioSettings";
+    private static final String KEY_FOOTER = "spatial_audio_footer";
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+
+        FooterPreference footerPreference = findPreference(KEY_FOOTER);
+        if (footerPreference != null) {
+            footerPreference.setLearnMoreText(
+                    getString(R.string.spatial_audio_footer_learn_more_text));
+            footerPreference.setLearnMoreAction(
+                    view -> startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS)));
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
