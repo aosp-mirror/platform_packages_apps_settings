@@ -32,6 +32,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
 import com.android.settingslib.RestrictedPreferenceHelper;
+import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import com.google.android.setupdesign.util.LayoutStyler;
@@ -153,6 +154,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         super.setChecked(isChecked);
+        SettingsJankMonitor.detectToggleJank(getKey(), switchView);
     }
 
     /**
