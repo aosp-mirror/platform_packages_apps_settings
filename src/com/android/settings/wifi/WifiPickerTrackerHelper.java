@@ -155,6 +155,17 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
         return mergedCarrierEntry.getSsid();
     }
 
+    /** Return the carrier network level */
+    public int getCarrierNetworkLevel() {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry == null) return WifiEntry.WIFI_LEVEL_MIN;
+
+        int level = mergedCarrierEntry.getLevel();
+        // To avoid icons not found with WIFI_LEVEL_UNREACHABLE(-1), use WIFI_LEVEL_MIN(0) instead.
+        if (level < WifiEntry.WIFI_LEVEL_MIN) level = WifiEntry.WIFI_LEVEL_MIN;
+        return level;
+    }
+
     @VisibleForTesting
     void setWifiPickerTracker(@NonNull WifiPickerTracker wifiPickerTracker) {
         mWifiPickerTracker = wifiPickerTracker;
