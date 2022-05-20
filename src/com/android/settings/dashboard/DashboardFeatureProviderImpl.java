@@ -180,15 +180,17 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 }
                 pref.setOnPreferenceClickListener(preference -> {
                     TopLevelHighlightMixin highlightMixin = null;
+                    boolean isDuplicateClick = false;
                     if (fragment instanceof TopLevelSettings
                             && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
                         // Highlight the preference whenever it's clicked
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
                         topLevelSettings.setHighlightPreferenceKey(key);
                         highlightMixin = topLevelSettings.getHighlightMixin();
+                        isDuplicateClick = topLevelSettings.isDuplicateClick(preference);
                     }
                     launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
-                            highlightMixin);
+                            highlightMixin, isDuplicateClick);
                     return true;
                 });
             }
@@ -221,7 +223,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY,
-                /* highlightMixin= */ null);
+                /* highlightMixin= */ null, /* isDuplicateClick= */ false);
     }
 
     private DynamicDataObserver createDynamicDataObserver(String method, Uri uri, Preference pref) {
@@ -433,31 +435,45 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
-            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin) {
+            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin,
+            boolean isDuplicateClick) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
-        mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            activity.startActivity(intent);
+            if (!isDuplicateClick) {
+                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                activity.startActivity(intent);
+            }
         } else if (tile.userHandle.size() == 1) {
-            activity.startActivityAsUser(intent, tile.userHandle.get(0));
+            if (!isDuplicateClick) {
+                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                activity.startActivityAsUser(intent, tile.userHandle.get(0));
+            }
         } else {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                activity.startActivityAsUser(intent, userHandle);
+                if (!isDuplicateClick) {
+                    mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                    activity.startActivityAsUser(intent, userHandle);
+                }
                 return;
             }
 
             final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
             if (resolvableUsers.size() == 1) {
-                activity.startActivityAsUser(intent, resolvableUsers.get(0));
+                if (!isDuplicateClick) {
+                    mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                    activity.startActivityAsUser(intent, resolvableUsers.get(0));
+                }
                 return;
             }
 
+            // Show the profile select dialog regardless of the duplicate click.
+            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
                     sourceMetricCategory, /* onShowListener= */ highlightMixin,
                     /* onDismissListener= */ highlightMixin,
