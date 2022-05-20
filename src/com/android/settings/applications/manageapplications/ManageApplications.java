@@ -173,8 +173,6 @@ public class ManageApplications extends InstrumentedFragment
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
     private static final String EXTRA_FILTER_TYPE = "filterType";
     @VisibleForTesting
-    static final String EXTRA_SEARCH_QUERY = "search_query";
-    @VisibleForTesting
     static final String EXTRA_EXPAND_SEARCH_VIEW = "expand_search_view";
 
     // attributes used as keys when passing values to AppInfoDashboardFragment activity
@@ -255,8 +253,6 @@ public class ManageApplications extends InstrumentedFragment
     // Whether or not search view is expanded.
     @VisibleForTesting
     boolean mExpandSearch;
-    @VisibleForTesting
-    CharSequence mPreQuery;
 
     private View mRootView;
     private Spinner mFilterSpinner;
@@ -362,7 +358,6 @@ public class ManageApplications extends InstrumentedFragment
             mFilterType =
                     savedInstanceState.getInt(EXTRA_FILTER_TYPE, AppFilterRegistry.FILTER_APPS_ALL);
             mExpandSearch = savedInstanceState.getBoolean(EXTRA_EXPAND_SEARCH_VIEW);
-            mPreQuery = savedInstanceState.getCharSequence(EXTRA_SEARCH_QUERY);
         }
 
         mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
@@ -549,7 +544,6 @@ public class ManageApplications extends InstrumentedFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         if (mSearchView != null) {
             outState.putBoolean(EXTRA_EXPAND_SEARCH_VIEW, !mSearchView.isIconified());
-            outState.putCharSequence(EXTRA_SEARCH_QUERY, mSearchView.getQuery());
         }
         if (mApplications != null) {
             outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
@@ -688,9 +682,6 @@ public class ManageApplications extends InstrumentedFragment
             mSearchView.setOnQueryTextListener(this);
             if (mExpandSearch) {
                 searchMenuItem.expandActionView();
-            }
-            if (!TextUtils.isEmpty(mPreQuery)) {
-                mSearchView.setQuery(mPreQuery, true);
             }
         }
 
