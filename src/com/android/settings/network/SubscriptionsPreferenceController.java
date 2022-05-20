@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
@@ -65,6 +64,7 @@ import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.SignalStrengthUtil;
+import com.android.wifitrackerlib.WifiEntry;
 
 import java.util.Collections;
 import java.util.List;
@@ -282,16 +282,18 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
     }
 
-    private Drawable getIcon(int subId) {
+    @VisibleForTesting
+    Drawable getIcon(int subId) {
         final TelephonyManager tmForSubId = mTelephonyManager.createForSubscriptionId(subId);
         final SignalStrength strength = tmForSubId.getSignalStrength();
         int level = (strength == null) ? 0 : strength.getLevel();
         int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
         boolean isCarrierNetworkActive = isCarrierNetworkActive();
-        if (shouldInflateSignalStrength(subId) || isCarrierNetworkActive) {
-            level = isCarrierNetworkActive
-                    ? SignalStrength.NUM_SIGNAL_STRENGTH_BINS
-                    : (level + 1);
+        if (isCarrierNetworkActive) {
+            level = getCarrierNetworkLevel();
+            numLevels = WifiEntry.WIFI_LEVEL_MAX + 1;
+        } else if (shouldInflateSignalStrength(subId)) {
+            level += 1;
             numLevels += 1;
         }
 
@@ -486,6 +488,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     boolean isCarrierNetworkActive() {
         return mWifiPickerTrackerHelper != null
                 && mWifiPickerTrackerHelper.isCarrierNetworkActive();
+    }
+
+    private int getCarrierNetworkLevel() {
+        if (mWifiPickerTrackerHelper == null) return WifiEntry.WIFI_LEVEL_MIN;
+        return mWifiPickerTrackerHelper.getCarrierNetworkLevel();
     }
 
     /**
