@@ -69,20 +69,20 @@ public class RequestIgnoreBatteryOptimizations extends AlertActivity implements
             return;
         }
 
-        ApplicationInfo ai;
-        try {
-            ai = getPackageManager().getApplicationInfo(mPackageName, 0);
-        } catch (PackageManager.NameNotFoundException e) {
-            debugLog("Requested package doesn't exist: " + mPackageName);
-            finish();
-            return;
-        }
-
         if (getPackageManager().checkPermission(
                 Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, mPackageName)
                 != PackageManager.PERMISSION_GRANTED) {
             debugLog("Requested package " + mPackageName + " does not hold permission "
                     + Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            finish();
+            return;
+        }
+
+        ApplicationInfo ai;
+        try {
+            ai = getPackageManager().getApplicationInfo(mPackageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            debugLog("Requested package doesn't exist: " + mPackageName);
             finish();
             return;
         }

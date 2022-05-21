@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.BatteryUsageStats;
@@ -41,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -174,6 +176,26 @@ public class AppBatteryPreferenceControllerTest {
         mController.updateBatteryWithDiffEntry();
 
         assertThat(mBatteryPreference.getSummary()).isEqualTo("60% use for past 24 hours");
+    }
+
+    @Test
+    public void displayPreference_noEntry_preferenceShouldSetEmptySummary() {
+        mController.mParent.setAppEntry(null);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("");
+    }
+
+    @Test
+    public void displayPreference_appIsNotInstalled_preferenceShouldSetEmptySummary() {
+        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
+        appEntry.info = new ApplicationInfo();
+        mController.mParent.setAppEntry(appEntry);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mBatteryPreference.getSummary()).isEqualTo("");
     }
 
     @Test

@@ -40,7 +40,6 @@ import androidx.slice.widget.SliceLiveData;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeCopyableController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.FakeInvalidSliderController;
 import com.android.settings.testutils.FakeSliderController;
@@ -68,11 +67,7 @@ public class SliceBuilderUtilsTest {
     private final Class TOGGLE_CONTROLLER = FakeToggleController.class;
     private final Class SLIDER_CONTROLLER = FakeSliderController.class;
     private final Class INVALID_SLIDER_CONTROLLER = FakeInvalidSliderController.class;
-    private final Class COPYABLE_CONTROLLER = FakeCopyableController.class;
     private final Class CONTEXT_CONTROLLER = FakeContextOnlyPreferenceController.class;
-
-    private final String INTENT_PATH = SettingsSlicesContract.PATH_SETTING_INTENT + "/" + KEY;
-    private final String ACTION_PATH = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + KEY;
 
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
@@ -119,20 +114,6 @@ public class SliceBuilderUtilsTest {
                         data.getKey(),
                         0);
         SliceTester.testSettingsSliderSlice(mContext, slice, data);
-    }
-
-    @Test
-    public void buildCopyableSlice_returnsMatchingSlice() {
-        final SliceData mockData = getMockData(COPYABLE_CONTROLLER, -1);
-
-        final Slice slice = SliceBuilderUtils.buildSlice(mContext, mockData);
-        verify(mFeatureFactory.metricsFeatureProvider)
-                .action(SettingsEnums.PAGE_UNKNOWN,
-                        MetricsEvent.ACTION_SETTINGS_SLICE_REQUESTED,
-                        SettingsEnums.PAGE_UNKNOWN,
-                        mockData.getKey(),
-                        0);
-        SliceTester.testSettingsCopyableSlice(mContext, slice, mockData);
     }
 
     @Test

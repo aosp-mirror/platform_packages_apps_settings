@@ -71,7 +71,9 @@ import com.android.settings.biometrics.combination.CombinedBiometricProfileSetti
 import com.android.settings.biometrics.combination.CombinedBiometricSettings;
 import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.biometrics.fingerprint.FingerprintSettings;
+import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
+import com.android.settings.bluetooth.BluetoothFindBroadcastsFragment;
 import com.android.settings.bluetooth.BluetoothPairingDetail;
 import com.android.settings.bugreporthandler.BugReportHandlerPicker;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
@@ -150,6 +152,7 @@ import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
+import com.android.settings.privacy.PrivacyControlsFragment;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecurityAdvancedSettings;
@@ -216,6 +219,7 @@ public class SettingsGateway {
             LocationSettings.class.getName(),
             WifiScanningFragment.class.getName(),
             PrivacyDashboardFragment.class.getName(),
+            PrivacyControlsFragment.class.getName(),
             LocationServices.class.getName(),
             SecuritySettings.class.getName(),
             SecurityAdvancedSettings.class.getName(),
@@ -317,6 +321,8 @@ public class SettingsGateway {
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
+            BluetoothBroadcastDialog.class.getName(),
+            BluetoothFindBroadcastsFragment.class.getName(),
             DataUsageList.class.getName(),
             ToggleBackupSettingFragment.class.getName(),
             PreviouslyConnectedDeviceDashboardFragment.class.getName(),

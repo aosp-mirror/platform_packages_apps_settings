@@ -54,13 +54,8 @@ public abstract class WifiDppBaseActivity extends InstrumentedActivity {
     }
 
     private void applyTheme() {
-        if (ThemeHelper.trySetDynamicColor(this)) {
-            final int appliedTheme = ThemeHelper.isSetupWizardDayNightEnabled(this)
-                    ? R.style.SudDynamicColorThemeSettings_SetupWizard_DayNight
-                    : R.style.SudDynamicColorThemeSettings_SetupWizard;
-            setTheme(appliedTheme);
-        } else {
-            setTheme(SetupWizardUtils.getTheme(this, getIntent()));
-        }
+        setTheme(SetupWizardUtils.getTheme(this, getIntent()));
+        setTheme(R.style.SettingsPreferenceTheme_SetupWizard);
+        ThemeHelper.trySetDynamicColor(this);
     }
 }

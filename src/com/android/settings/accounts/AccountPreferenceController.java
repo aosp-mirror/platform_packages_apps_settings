@@ -623,6 +623,12 @@ public class AccountPreferenceController extends AbstractPreferenceController
             if (action.equals(Intent.ACTION_MANAGED_PROFILE_REMOVED)
                     || action.equals(Intent.ACTION_MANAGED_PROFILE_ADDED)) {
                 if (mFragment instanceof AccountWorkProfileDashboardFragment) {
+                    new SubSettingLauncher(context)
+                            .setDestination(AccountDashboardFragment.class.getName())
+                            .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                            .setTitleRes(-1)
+                            .setIsSecondLayerPage(true)
+                            .launch();
                     mFragment.getActivity().finish();
                 } else {
                     // Clean old state

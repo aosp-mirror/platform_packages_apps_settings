@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -400,6 +402,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
         }
 
         refreshPreviewText();
+        enableCaptioningManager();
     }
 
     @Override
@@ -409,14 +412,24 @@ public class CaptionAppearanceFragment extends DashboardFragment
             Settings.Secure.putString(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
             refreshPreviewText();
+            enableCaptioningManager();
         } else if (mFontSize == preference) {
             Settings.Secure.putFloat(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                     Float.parseFloat((String) value));
             refreshPreviewText();
+            enableCaptioningManager();
         }
 
         return true;
+    }
+
+    private void enableCaptioningManager() {
+        if (mCaptioningManager.isEnabled()) {
+            return;
+        }
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
     }
 
     @Override

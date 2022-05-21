@@ -38,7 +38,7 @@ import com.android.settingslib.RestrictedLockUtils;
 /** Combined Biometrics Safety Source for Safety Center. */
 public final class BiometricsSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "Biometrics";
+    public static final String SAFETY_SOURCE_ID = "AndroidBiometrics";
 
     private BiometricsSafetySource() {
     }

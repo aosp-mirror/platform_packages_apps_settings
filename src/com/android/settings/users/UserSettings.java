@@ -737,8 +737,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 return buildAddUserDialog(USER_TYPE_RESTRICTED_PROFILE);
             }
             case DIALOG_CONFIRM_RESET_GUEST: {
-                return UserDialogs.createResetGuestDialog(getActivity(),
+                if (mGuestUserAutoCreated) {
+                    return UserDialogs.createResetGuestDialog(getActivity(),
                         (dialog, which) -> resetGuest());
+                } else {
+                    return UserDialogs.createRemoveGuestDialog(getActivity(),
+                        (dialog, which) -> resetGuest());
+                }
             }
             default:
                 return null;
