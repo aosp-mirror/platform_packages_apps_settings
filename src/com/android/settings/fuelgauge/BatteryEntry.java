@@ -612,7 +612,7 @@ public class BatteryEntry {
         return new NameAndIcon(name, null /* icon */, iconId);
     }
 
-    private static boolean isSystemUid(int uid) {
+    static boolean isSystemUid(int uid) {
         return uid == Process.SYSTEM_UID;
     }
 }

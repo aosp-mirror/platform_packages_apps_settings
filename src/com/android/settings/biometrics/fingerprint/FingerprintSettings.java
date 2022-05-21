@@ -65,7 +65,6 @@ import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -73,6 +72,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.widget.FooterPreference;
 import com.android.settingslib.widget.TwoTargetPreference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,6 +114,13 @@ public class FingerprintSettings extends SubSettings {
 
     public static class FingerprintSettingsFragment extends SettingsPreferenceFragment
             implements OnPreferenceChangeListener, FingerprintPreference.OnDeleteClickListener {
+
+        private static class FooterColumn {
+            CharSequence mTitle = null;
+            CharSequence mLearnMoreOverrideText = null;
+            View.OnClickListener mLearnMoreClickListener = null;
+        }
+
         private static final int RESET_HIGHLIGHT_DELAY_MS = 500;
 
         private static final String TAG = "FingerprintSettings";
@@ -144,8 +151,7 @@ public class FingerprintSettings extends SubSettings {
         private boolean mLaunchedConfirm;
         private Drawable mHighlightDrawable;
         private int mUserId;
-        private CharSequence mFooterTitle;
-        private View.OnClickListener mLearnMoreListener = null;
+        private final List<FooterColumn> mFooterColumns = new ArrayList<>();
         private boolean mEnrollClicked;
 
         private long mChallenge;
@@ -352,32 +358,45 @@ public class FingerprintSettings extends SubSettings {
                 mLaunchedConfirm = true;
                 launchChooseOrConfirmLock();
             }
+            updateFooterColumns(activity);
+        }
 
+        private void updateFooterColumns(@NonNull Activity activity) {
             final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                     activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
-            final AnnotationSpan.LinkInfo adminLinkInfo = new AnnotationSpan.LinkInfo(
-                    ANNOTATION_ADMIN_DETAILS, (view) -> {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(activity, admin);
-            });
             final Intent helpIntent = HelpUtils.getHelpIntent(
                     activity, getString(getHelpResource()), activity.getClass().getName());
-            final AnnotationSpan.LinkInfo linkInfo = new AnnotationSpan.LinkInfo(
-                    activity, ANNOTATION_URL, helpIntent);
+            final View.OnClickListener learnMoreClickListener = (v) ->
+                    activity.startActivityForResult(helpIntent, 0);
 
+            mFooterColumns.clear();
             if (admin != null) {
-                DevicePolicyManager devicePolicyManager =
+                final DevicePolicyManager devicePolicyManager =
                         getSystemService(DevicePolicyManager.class);
-                String footerText = devicePolicyManager.getResources().getString(
+                final FooterColumn column1 = new FooterColumn();
+                column1.mTitle = devicePolicyManager.getResources().getString(
                         FINGERPRINT_UNLOCK_DISABLED_EXPLANATION,
-                        () -> getString(R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled));
+                        () -> getString(
+                                R.string.security_fingerprint_disclaimer_lockscreen_disabled_1
+                        )
+                );
+                column1.mLearnMoreClickListener = (v) -> RestrictedLockUtils
+                        .sendShowAdminSupportDetailsIntent(activity, admin);
+                column1.mLearnMoreOverrideText = getText(R.string.admin_support_more_info);
+                mFooterColumns.add(column1);
 
-                mFooterTitle = AnnotationSpan.linkify(footerText, linkInfo, adminLinkInfo);
+                final FooterColumn column2 = new FooterColumn();
+                column2.mTitle = getText(
+                        R.string.security_fingerprint_disclaimer_lockscreen_disabled_2
+                );
+                column2.mLearnMoreClickListener = learnMoreClickListener;
+                mFooterColumns.add(column2);
             } else {
-                mFooterTitle = getText(R.string.security_settings_fingerprint_v2_home_screen_text);
-                mLearnMoreListener = (v) -> activity.startActivityForResult(helpIntent, 0);
+                final FooterColumn column = new FooterColumn();
+                column.mTitle = getText(R.string.security_settings_fingerprint_v2_home_screen_text);
+                column.mLearnMoreClickListener = learnMoreClickListener;
+                mFooterColumns.add(column);
             }
-
-
         }
 
         private boolean isUdfps() {
@@ -474,12 +493,21 @@ public class FingerprintSettings extends SubSettings {
             if (context == null) {
                 return;
             }
-            final FooterPreference footer = new FooterPreference.Builder(context)
-                    .setTitle(mFooterTitle).build();
-            if (mLearnMoreListener != null) {
-                footer.setLearnMoreAction(mLearnMoreListener);
+            for (int i = 0; i < mFooterColumns.size(); ++i) {
+                final FooterColumn column = mFooterColumns.get(i);
+                final FooterPreference footer = new FooterPreference.Builder(context)
+                        .setTitle(column.mTitle).build();
+                if (i > 0) {
+                    footer.setIconVisibility(View.GONE);
+                }
+                if (column.mLearnMoreClickListener != null) {
+                    footer.setLearnMoreAction(column.mLearnMoreClickListener);
+                    if (!TextUtils.isEmpty(column.mLearnMoreOverrideText)) {
+                        footer.setLearnMoreText(column.mLearnMoreOverrideText);
+                    }
+                }
+                root.addPreference(footer);
             }
-            root.addPreference(footer);
         }
 
         private static String genKey(int id) {
