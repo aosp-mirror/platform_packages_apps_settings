@@ -84,10 +84,19 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
             }
 
             final StorageEntry changedStorageEntry = new StorageEntry(getContext(), volumeInfo);
-            switch (volumeInfo.getState()) {
+            final int volumeState = volumeInfo.getState();
+            switch (volumeState) {
+                case VolumeInfo.STATE_REMOVED:
+                case VolumeInfo.STATE_BAD_REMOVAL:
+                    // Remove removed storage from list and don't show it on spinner.
+                    if (!mStorageEntries.remove(changedStorageEntry)) {
+                        break;
+                    }
                 case VolumeInfo.STATE_MOUNTED:
                 case VolumeInfo.STATE_MOUNTED_READ_ONLY:
                 case VolumeInfo.STATE_UNMOUNTABLE:
+                case VolumeInfo.STATE_UNMOUNTED:
+                case VolumeInfo.STATE_EJECTING:
                     // Add mounted or unmountable storage in the list and show it on spinner.
                     // Unmountable storages are the storages which has a problem format and android
                     // is not able to mount it automatically.
@@ -95,24 +104,14 @@ public class ProfileSelectStorageFragment extends ProfileSelectFragment {
                     mStorageEntries.removeIf(storageEntry -> {
                         return storageEntry.equals(changedStorageEntry);
                     });
-                    mStorageEntries.add(changedStorageEntry);
+                    if (volumeState != VolumeInfo.STATE_REMOVED
+                            && volumeState != VolumeInfo.STATE_BAD_REMOVAL) {
+                        mStorageEntries.add(changedStorageEntry);
+                    }
                     if (changedStorageEntry.equals(mSelectedStorageEntry)) {
                         mSelectedStorageEntry = changedStorageEntry;
                     }
                     refreshUi();
-                    break;
-                case VolumeInfo.STATE_REMOVED:
-                case VolumeInfo.STATE_UNMOUNTED:
-                case VolumeInfo.STATE_BAD_REMOVAL:
-                case VolumeInfo.STATE_EJECTING:
-                    // Remove removed storage from list and don't show it on spinner.
-                    if (mStorageEntries.remove(changedStorageEntry)) {
-                        if (changedStorageEntry.equals(mSelectedStorageEntry)) {
-                            mSelectedStorageEntry =
-                                    StorageEntry.getDefaultInternalStorageEntry(getContext());
-                        }
-                        refreshUi();
-                    }
                     break;
                 default:
                     // Do nothing.

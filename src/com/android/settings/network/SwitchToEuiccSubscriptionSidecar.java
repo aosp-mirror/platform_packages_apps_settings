@@ -21,12 +21,14 @@ import android.app.PendingIntent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccSlotMapping;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.telephony.EuiccOperationSidecar;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,7 +96,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
 
         // To check whether the esim slot's port is active. If yes, skip setSlotMapping. If no,
         // set this slot+port into setSimSlotMapping.
-        mPort = (port < 0) ? getTargetPortId(removedSubInfo) : port;
+        mPort = (port < 0) ? getTargetPortId(targetSlot, removedSubInfo) : port;
         mRemovedSubInfo = removedSubInfo;
         Log.d(TAG,
                 String.format("set esim into the SubId%d Slot%d:Port%d",
@@ -114,10 +116,22 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
     }
 
-    private int getTargetPortId(SubscriptionInfo removedSubInfo) {
-        if (!mTelephonyManager.isMultiSimEnabled() || !isMultipleEnabledProfilesSupported()) {
-            // In the 'SS mode' or 'DSDS+no MEP', the port is 0.
+    private int getTargetPortId(int physicalEsimSlotIndex, SubscriptionInfo removedSubInfo) {
+        if (!isMultipleEnabledProfilesSupported()) {
+            Log.d(TAG, "The device is no MEP, port is 0");
             return 0;
+        }
+
+        if (!mTelephonyManager.isMultiSimEnabled()) {
+            // In the 'SS mode'
+            // If there is the esim slot is active, the port is from the current esim slot.
+            // If there is no esim slot in device, then the esim's port is 0.
+            Collection<UiccSlotMapping> uiccSlotMappings = mTelephonyManager.getSimSlotMapping();
+            Log.d(TAG, "In SS mode, the UiccSlotMapping: " + uiccSlotMappings);
+            return uiccSlotMappings.stream()
+                    .filter(i -> i.getPhysicalSlotIndex() == physicalEsimSlotIndex)
+                    .mapToInt(i -> i.getPortIndex())
+                    .findFirst().orElse(0);
         }
 
         // In the 'DSDS+MEP', if the removedSubInfo is esim, then the port is
