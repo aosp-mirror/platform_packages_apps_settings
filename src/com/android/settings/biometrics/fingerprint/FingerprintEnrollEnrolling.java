@@ -374,7 +374,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 break;
 
             case STAGE_LEFT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_left_edge_title);
                 if (!mHaveShownUdfpsLeftEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsLeftEdgeLottie = true;
                     setDescriptionText("");
@@ -393,7 +393,7 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 }
                 break;
             case STAGE_RIGHT_EDGE:
-                setHeaderText(R.string.security_settings_udfps_enroll_edge_title);
+                setHeaderText(R.string.security_settings_udfps_enroll_right_edge_title);
                 if (!mHaveShownUdfpsRightEdgeLottie && mIllustrationLottie != null) {
                     mHaveShownUdfpsRightEdgeLottie = true;
                     setDescriptionText("");
@@ -580,9 +580,10 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
                 mErrorText.setTranslationY(0f);
             }
         }
-        if (isResumed() && (mIsAccessibilityEnabled || !mCanAssumeUdfps)) {
+
+        if (isResumed() && mIsAccessibilityEnabled && !mCanAssumeUdfps) {
             mVibrator.vibrate(Process.myUid(), getApplicationContext().getOpPackageName(),
-                    VIBRATE_EFFECT_ERROR, "FingerprintEnrollEnrolling:showError",
+                    VIBRATE_EFFECT_ERROR, getClass().getSimpleName() + "::showError",
                     FINGERPRINT_ENROLLING_SONFICATION_ATTRIBUTES);
         }
     }

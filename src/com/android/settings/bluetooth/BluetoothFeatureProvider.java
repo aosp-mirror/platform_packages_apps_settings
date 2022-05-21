@@ -17,17 +17,37 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.content.ComponentName;
 import android.net.Uri;
 
+import java.util.List;
+
 /**
- * Provider for bluetooth related feature
+ * Provider for bluetooth related features.
  */
 public interface BluetoothFeatureProvider {
 
     /**
-     * Get the {@link Uri} that represents extra settings for a specific bluetooth device
+     * Gets the {@link Uri} that represents extra settings for a specific bluetooth device
+     *
      * @param bluetoothDevice bluetooth device
      * @return {@link Uri} for extra settings
      */
     Uri getBluetoothDeviceSettingsUri(BluetoothDevice bluetoothDevice);
+
+    /**
+     * Gets the {@link Uri} that represents extra control for a specific bluetooth device
+     *
+     * @param bluetoothDevice bluetooth device
+     * @return {@link String} uri string for extra control
+     */
+    String getBluetoothDeviceControlUri(BluetoothDevice bluetoothDevice);
+
+    /**
+     * Gets the {@link ComponentName} of services or activities that need to be shown in related
+     * tools.
+     *
+     * @return list of {@link ComponentName}
+     */
+    List<ComponentName> getRelatedTools();
 }

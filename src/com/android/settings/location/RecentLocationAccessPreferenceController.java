@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.icu.text.RelativeDateTimeFormatter;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.DeviceConfig;
 import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
@@ -27,8 +28,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
 import com.android.settingslib.applications.RecentAppOpsAccess;
@@ -41,8 +42,7 @@ import java.util.List;
 /**
  * Preference controller that handles the display of apps that access locations.
  */
-public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController
-        implements BasePreferenceController.UiBlocker {
+public class RecentLocationAccessPreferenceController extends LocationBasePreferenceController {
     public static final int MAX_APPS = 3;
     @VisibleForTesting
     RecentAppOpsAccess mRecentLocationApps;
@@ -84,14 +84,18 @@ public class RecentLocationAccessPreferenceController extends LocationBasePrefer
             RecentAppOpsAccess recentLocationApps) {
         super(context, key);
         mRecentLocationApps = recentLocationApps;
-        mShowSystem = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1;
+        mShowSystem = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_PRIVACY,
+                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED, false)
+                ? Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 0) == 1
+                : false;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mCategoryRecentLocationRequests = screen.findPreference(getPreferenceKey());
+        mLocationEnabler.refreshLocationMode();
         loadRecentAccesses();
     }
 

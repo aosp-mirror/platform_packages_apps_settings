@@ -74,15 +74,11 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
         final Context newUserAwareContext;
         switch (profileType) {
             case ProfileSelectFragment.ProfileType.WORK: {
-                final UserHandle workUser;
-                if (currentUserId == UserHandle.MIN_SECONDARY_USER_ID) {
-                    newUserId = currentUserId;
-                    workUser = UserHandle.of(currentUserId);
-                } else {
-                    newUserId = Utils.getManagedProfileId(userManager, currentUserId);
-                    workUser = Utils.getManagedProfile(userManager);
-                }
-                newUserAwareContext = context.createContextAsUser(workUser, 0);
+                // If the user is a managed profile user, use currentUserId directly. Or get the
+                // managed profile userId instead.
+                newUserId = userManager.isManagedProfile()
+                        ? currentUserId : Utils.getManagedProfileId(userManager, currentUserId);
+                newUserAwareContext = context.createContextAsUser(UserHandle.of(newUserId), 0);
                 break;
             }
             case ProfileSelectFragment.ProfileType.PERSONAL: {

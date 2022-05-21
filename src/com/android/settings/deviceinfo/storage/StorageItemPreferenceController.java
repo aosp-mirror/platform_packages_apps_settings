@@ -234,7 +234,9 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
 
         // If isValidPrivateVolume() is true, these preferences will become visible at
         // onLoadFinished.
-        if (!isValidPrivateVolume()) {
+        if (isValidPrivateVolume()) {
+            mIsDocumentsPrefShown = isDocumentsPrefShown();
+        } else {
             setPrivateStorageCategoryPreferencesVisibility(false);
         }
     }

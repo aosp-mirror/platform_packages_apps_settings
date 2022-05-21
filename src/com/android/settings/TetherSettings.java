@@ -416,8 +416,11 @@ public class TetherSettings extends RestrictedSettingsFragment
         if (usbTethered) {
             mUsbTether.setEnabled(!mDataSaverEnabled);
             mUsbTether.setChecked(true);
-            mUsbTether.setDisabledByAdmin(
-                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId()));
+            final RestrictedLockUtils.EnforcedAdmin enforcedAdmin =
+                    checkIfUsbDataSignalingIsDisabled(mContext, UserHandle.myUserId());
+            if (enforcedAdmin != null) {
+                mUsbTether.setDisabledByAdmin(enforcedAdmin);
+            }
         } else {
             mUsbTether.setChecked(false);
             updateUsbPreference();

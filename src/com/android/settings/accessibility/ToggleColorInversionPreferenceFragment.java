@@ -51,6 +51,11 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (enabled == isEnabled) {
+            return;
+        }
+
         if (enabled) {
             showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
         }
@@ -75,8 +80,8 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_display_inversion_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_display_inversion_shortcut_title);
     }
 
     @Override
@@ -109,10 +114,10 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private void updateFooterPreference() {
         final String title = getPrefContext().getString(
                 R.string.accessibility_color_inversion_about_title);
-        final String learnMoreContentDescription = getPrefContext().getString(
+        final String learnMoreText = getPrefContext().getString(
                 R.string.accessibility_color_inversion_footer_learn_more_content_description);
         mFooterPreferenceController.setIntroductionTitle(title);
-        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreText);
         mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 

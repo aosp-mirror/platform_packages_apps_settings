@@ -24,7 +24,7 @@
         android:order="4"
         android:title="@string/storage_free_up_space_title"
         android:summary="@string/storage_free_up_space_summary"
-        android:icon="@drawable/ic_files_go_round"/>
+        settings:controller="com.android.settings.deviceinfo.storage.ManageStoragePreferenceController"/>
     <!-- Preference order 100~200 are 'ONLY' for storage category preferences below. -->
     <Preference
         android:key="pref_public_storage"

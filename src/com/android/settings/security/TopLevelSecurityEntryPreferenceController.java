@@ -58,6 +58,7 @@ public class TopLevelSecurityEntryPreferenceController extends BasePreferenceCon
                 new SubSettingLauncher(mContext)
                         .setDestination(alternativeFragmentClassname)
                         .setSourceMetricsCategory(getMetricsCategory())
+                        .setIsSecondLayerPage(true)
                         .launch();
                 return true;
             }

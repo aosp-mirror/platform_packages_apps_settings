@@ -28,7 +28,6 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
@@ -70,7 +69,6 @@ public class MobileNetworkSwitchController extends BasePreferenceController impl
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mSwitchBar = (SettingsMainSwitchPreference) screen.findPreference(mPreferenceKey);
-        mSwitchBar.setTitle(mContext.getString(R.string.mobile_network_use_sim_on));
 
         mSwitchBar.setOnBeforeCheckedChangeListener((toggleSwitch, isChecked) -> {
             // TODO b/135222940: re-evaluate whether to use

@@ -27,7 +27,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil.QuickSettingsTooltipType;
-import com.android.settings.accessibility.ShortcutPreference;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.widget.IllustrationPreference;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -88,8 +87,8 @@ public class OneHandedSettings extends AccessibilityShortcutPreferenceFragment {
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.one_handed_mode_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.one_handed_mode_shortcut_title);
     }
 
     @Override

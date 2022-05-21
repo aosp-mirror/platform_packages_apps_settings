@@ -16,17 +16,24 @@
 
 package com.android.settings.homepage;
 
+import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
+
 import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -36,6 +43,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
@@ -44,22 +52,28 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.support.SupportPreferenceController;
 import com.android.settings.widget.HomepagePreference;
+import com.android.settings.widget.HomepagePreferenceLayoutHelper.HomepagePreferenceLayout;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.net.URISyntaxException;
+
 @SearchIndexable(forTarget = MOBILE)
-public class TopLevelSettings extends DashboardFragment implements
+public class TopLevelSettings extends DashboardFragment implements SplitLayoutListener,
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TAG = "TopLevelSettings";
     private static final String SAVED_HIGHLIGHT_MIXIN = "highlight_mixin";
+    private static final String SAVED_FIRST_PREFERENCE_CLICK = "first_pref_click";
     private static final String PREF_KEY_SUPPORT = "top_level_support";
 
     private boolean mIsEmbeddingActivityEnabled;
     private TopLevelHighlightMixin mHighlightMixin;
+    private int mPaddingHorizontal;
     private boolean mScrollNeeded = true;
     private boolean mFirstStarted = true;
+    private boolean mFirstDuplicateClickCheck = true;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -103,6 +117,10 @@ public class TopLevelSettings extends DashboardFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (isDuplicateClick(preference)) {
+            return true;
+        }
+
         // Register SplitPairRule for SubSettings.
         ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
                 true /* clearTop */);
@@ -136,6 +154,7 @@ public class TopLevelSettings extends DashboardFragment implements
 
         boolean activityEmbedded = SplitController.getInstance().isActivityEmbedded(getActivity());
         if (icicle != null) {
+            mFirstDuplicateClickCheck = icicle.getBoolean(SAVED_FIRST_PREFERENCE_CLICK);
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
             mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
             mHighlightMixin.setActivityEmbedded(activityEmbedded);
@@ -169,6 +188,7 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_FIRST_PREFERENCE_CLICK, mFirstDuplicateClickCheck);
         if (mHighlightMixin != null) {
             outState.putParcelable(SAVED_HIGHLIGHT_MIXIN, mHighlightMixin);
         }
@@ -177,23 +197,13 @@ public class TopLevelSettings extends DashboardFragment implements
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        final PreferenceScreen screen = getPreferenceScreen();
-        if (screen == null) {
-            return;
-        }
-        // Tint the homepage icons
-        final int tintColor = Utils.getHomepageIconColor(getContext());
-        final int count = screen.getPreferenceCount();
-        for (int i = 0; i < count; i++) {
-            final Preference preference = screen.getPreference(i);
-            if (preference == null) {
-                break;
-            }
-            final Drawable icon = preference.getIcon();
+        int tintColor = Utils.getHomepageIconColor(getContext());
+        iteratePreferences(preference -> {
+            Drawable icon = preference.getIcon();
             if (icon != null) {
                 icon.setTint(tintColor);
             }
-        }
+        });
     }
 
     @Override
@@ -203,10 +213,65 @@ public class TopLevelSettings extends DashboardFragment implements
     }
 
     @Override
+    public void onSplitLayoutChanged(boolean isRegularLayout) {
+        iteratePreferences(preference -> {
+            if (preference instanceof HomepagePreferenceLayout) {
+                ((HomepagePreferenceLayout) preference).getHelper().setIconVisible(isRegularLayout);
+            }
+        });
+    }
+
+    @Override
     public void highlightPreferenceIfNeeded() {
         if (mHighlightMixin != null) {
             mHighlightMixin.highlightPreferenceIfNeeded();
         }
+    }
+
+    @Override
+    public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
+            Bundle savedInstanceState) {
+        RecyclerView recyclerView = super.onCreateRecyclerView(inflater, parent,
+                savedInstanceState);
+        recyclerView.setPadding(mPaddingHorizontal, 0, mPaddingHorizontal, 0);
+        return recyclerView;
+    }
+
+    /** Sets the horizontal padding */
+    public void setPaddingHorizontal(int padding) {
+        mPaddingHorizontal = padding;
+        RecyclerView recyclerView = getListView();
+        if (recyclerView != null) {
+            recyclerView.setPadding(padding, 0, padding, 0);
+        }
+    }
+
+    /** Updates the preference internal paddings */
+    public void updatePreferencePadding(boolean isTwoPane) {
+        iteratePreferences(new PreferenceJob() {
+            private int mIconPaddingStart;
+            private int mTextPaddingStart;
+
+            @Override
+            public void init() {
+                mIconPaddingStart = getResources().getDimensionPixelSize(isTwoPane
+                        ? R.dimen.homepage_preference_icon_padding_start_two_pane
+                        : R.dimen.homepage_preference_icon_padding_start);
+                mTextPaddingStart = getResources().getDimensionPixelSize(isTwoPane
+                        ? R.dimen.homepage_preference_text_padding_start_two_pane
+                        : R.dimen.homepage_preference_text_padding_start);
+            }
+
+            @Override
+            public void doForEach(Preference preference) {
+                if (preference instanceof HomepagePreferenceLayout) {
+                    ((HomepagePreferenceLayout) preference).getHelper()
+                            .setIconPaddingStart(mIconPaddingStart);
+                    ((HomepagePreferenceLayout) preference).getHelper()
+                            .setTextPaddingStart(mTextPaddingStart);
+                }
+            }
+        });
     }
 
     /** Returns a {@link TopLevelHighlightMixin} that performs highlighting */
@@ -220,6 +285,41 @@ public class TopLevelSettings extends DashboardFragment implements
         if (mHighlightMixin != null && !TextUtils.equals(prefKey, PREF_KEY_SUPPORT)) {
             mHighlightMixin.setHighlightPreferenceKey(prefKey);
         }
+    }
+
+    /** Returns whether clicking the specified preference is considered as a duplicate click. */
+    public boolean isDuplicateClick(Preference pref) {
+        boolean firstCheck = mFirstDuplicateClickCheck;
+        mFirstDuplicateClickCheck = false;
+        /*
+         * Return false when
+         * 1. The device doesn't support activity embedding
+         * 2. The target preference is not highlighted
+         * 3. The current activity is not embedded
+         */
+        if (mHighlightMixin == null
+                || !TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
+                || !SplitController.getInstance().isActivityEmbedded(getActivity())) {
+            return false;
+        }
+
+        /*
+         * Return true when
+         * 1. This method has been called before
+         * 2. The preference doesn't have a target fragment, ex. Wallpaper and injections
+         */
+        if (!firstCheck || TextUtils.isEmpty(pref.getFragment())) {
+            return true;
+        }
+
+        /*
+         * Returns true when
+         * 1. The right pane fragment is not started by a deep link.
+         * 2. The target fragment equals the right pane fragment
+         */
+        String intentUri = getIntent().getStringExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
+        return TextUtils.isEmpty(intentUri)
+                || TextUtils.equals(pref.getFragment(), getIntentTargetFragment(intentUri));
     }
 
     /** Show/hide the highlight on the menu entry for the search page presence */
@@ -259,6 +359,52 @@ public class TopLevelSettings extends DashboardFragment implements
         if (mHighlightMixin != null) {
             mHighlightMixin.reloadHighlightMenuKey(getArguments());
         }
+    }
+
+    private String getIntentTargetFragment(String intentUri) {
+        Intent targetIntent;
+        try {
+            targetIntent = Intent.parseUri(intentUri, Intent.URI_INTENT_SCHEME);
+        } catch (URISyntaxException e) {
+            return null;
+        }
+
+        String fragment = targetIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
+        if (!TextUtils.isEmpty(fragment)) {
+            return fragment;
+        }
+
+        ActivityInfo info = targetIntent.resolveActivityInfo(getPackageManager(),
+                PackageManager.GET_META_DATA);
+        if (info == null || info.metaData == null) {
+            return null;
+        }
+        return info.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+    }
+
+    private void iteratePreferences(PreferenceJob job) {
+        if (job == null || getPreferenceManager() == null) {
+            return;
+        }
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen == null) {
+            return;
+        }
+
+        job.init();
+        int count = screen.getPreferenceCount();
+        for (int i = 0; i < count; i++) {
+            Preference preference = screen.getPreference(i);
+            if (preference == null) {
+                break;
+            }
+            job.doForEach(preference);
+        }
+    }
+
+    private interface PreferenceJob {
+        default void init() {}
+        void doForEach(Preference preference);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

@@ -168,8 +168,8 @@ public class ToggleReduceBrightColorsPreferenceFragment extends ToggleFeaturePre
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.reduce_bright_colors_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.reduce_bright_colors_shortcut_title);
     }
 
     @Override

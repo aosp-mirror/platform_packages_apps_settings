@@ -39,7 +39,8 @@ public class StorageCacheHelperTest {
     private static final long FAKE_TRASH_SIZE = 500L;
     private static final long FAKE_SYSTEM_SIZE = 2300L;
     private static final long FAKE_TOTAL_SIZE = 256000L;
-    private static final long FAKE_USED_SIZE = 50000L;
+    private static final long FAKE_TOTAL_USED_SIZE = 50000L;
+    private static final long FAKE_USED_SIZE = 6500L;
 
     private Context mContext;
     private StorageCacheHelper mHelper;
@@ -74,12 +75,19 @@ public class StorageCacheHelperTest {
 
     @Test
     public void cacheTotalSizeAndUsedSize_shouldSaveToSharedPreference() {
-        mHelper.cacheTotalSizeAndUsedSize(FAKE_TOTAL_SIZE, FAKE_USED_SIZE);
+        mHelper.cacheTotalSizeAndTotalUsedSize(FAKE_TOTAL_SIZE, FAKE_TOTAL_USED_SIZE);
 
         StorageCacheHelper.StorageCache storageCache = mHelper.retrieveCachedSize();
 
         assertThat(storageCache.totalSize).isEqualTo(FAKE_TOTAL_SIZE);
-        assertThat(storageCache.usedSize).isEqualTo(FAKE_USED_SIZE);
+        assertThat(storageCache.totalUsedSize).isEqualTo(FAKE_TOTAL_USED_SIZE);
+    }
+
+    @Test
+    public void cacheUsedSize_shouldSaveToSharedPreference() {
+        mHelper.cacheUsedSize(FAKE_USED_SIZE);
+
+        assertThat(mHelper.retrieveUsedSize()).isEqualTo(FAKE_USED_SIZE);
     }
 
     private StorageCacheHelper.StorageCache getFakeStorageCache() {

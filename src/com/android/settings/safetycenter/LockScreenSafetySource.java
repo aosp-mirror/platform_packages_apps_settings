@@ -26,7 +26,6 @@ import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
-import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 import android.safetycenter.SafetySourceStatus.IconAction;
 
@@ -38,7 +37,7 @@ import com.android.settingslib.RestrictedLockUtilsInternal;
 /** Lock Screen Safety Source for Safety Center. */
 public final class LockScreenSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "LockScreen";
+    public static final String SAFETY_SOURCE_ID = "AndroidLockScreen";
     public static final String NO_SCREEN_LOCK_ISSUE_ID = "NoScreenLockIssue";
     public static final String NO_SCREEN_LOCK_ISSUE_TYPE_ID = "NoScreenLockIssueType";
     public static final String SET_SCREEN_LOCK_ACTION_ID = "SetScreenLockAction";
@@ -71,9 +70,9 @@ public final class LockScreenSafetySource {
         final boolean isLockPatternSecure = screenLockPreferenceDetailsUtils.isLockPatternSecure();
         final int severityLevel = enabled
                 ? isLockPatternSecure
-                        ? SafetySourceSeverity.LEVEL_INFORMATION
-                        : SafetySourceSeverity.LEVEL_RECOMMENDATION
-                : SafetySourceSeverity.LEVEL_UNSPECIFIED;
+                        ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
+                        : SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION
+                : SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED;
 
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(
@@ -138,7 +137,7 @@ public final class LockScreenSafetySource {
                 NO_SCREEN_LOCK_ISSUE_ID,
                 context.getString(R.string.no_screen_lock_issue_title),
                 context.getString(R.string.no_screen_lock_issue_summary),
-                SafetySourceSeverity.LEVEL_RECOMMENDATION,
+                SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION,
                 NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
                 .addAction(action).build();

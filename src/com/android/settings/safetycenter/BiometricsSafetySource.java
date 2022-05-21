@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
-import android.safetycenter.SafetySourceSeverity;
 import android.safetycenter.SafetySourceStatus;
 
 import com.android.settings.R;
@@ -39,7 +38,7 @@ import com.android.settingslib.RestrictedLockUtils;
 /** Combined Biometrics Safety Source for Safety Center. */
 public final class BiometricsSafetySource {
 
-    public static final String SAFETY_SOURCE_ID = "Biometrics";
+    public static final String SAFETY_SOURCE_ID = "AndroidBiometrics";
 
     private BiometricsSafetySource() {
     }
@@ -122,8 +121,8 @@ public final class BiometricsSafetySource {
             Intent clickIntent, boolean enabled, boolean hasEnrolled, SafetyEvent safetyEvent) {
         final PendingIntent pendingIntent = createPendingIntent(context, clickIntent);
         final int severityLevel =
-                enabled && hasEnrolled ? SafetySourceSeverity.LEVEL_INFORMATION
-                        : SafetySourceSeverity.LEVEL_UNSPECIFIED;
+                enabled && hasEnrolled ? SafetySourceData.SEVERITY_LEVEL_INFORMATION
+                        : SafetySourceData.SEVERITY_LEVEL_UNSPECIFIED;
 
         final SafetySourceStatus status = new SafetySourceStatus.Builder(title, summary,
                 severityLevel).setPendingIntent(pendingIntent).setEnabled(enabled).build();

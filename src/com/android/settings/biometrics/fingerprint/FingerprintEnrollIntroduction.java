@@ -91,10 +91,12 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
         final TextView footerMessage3 = findViewById(R.id.footer_message_3);
         final TextView footerMessage4 = findViewById(R.id.footer_message_4);
         final TextView footerMessage5 = findViewById(R.id.footer_message_5);
+        final TextView footerMessage6 = findViewById(R.id.footer_message_6);
         footerMessage2.setText(getFooterMessage2());
         footerMessage3.setText(getFooterMessage3());
         footerMessage4.setText(getFooterMessage4());
         footerMessage5.setText(getFooterMessage5());
+        footerMessage6.setText(getFooterMessage6());
 
         final TextView footerTitle1 = findViewById(R.id.footer_title_1);
         final TextView footerTitle2 = findViewById(R.id.footer_title_2);
@@ -161,6 +163,11 @@ public class FingerprintEnrollIntroduction extends BiometricEnrollIntroduction {
     @StringRes
     protected int getFooterMessage5() {
         return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_5;
+    }
+
+    @StringRes
+    protected int getFooterMessage6() {
+        return R.string.security_settings_fingerprint_v2_enroll_introduction_footer_message_6;
     }
 
     @Override

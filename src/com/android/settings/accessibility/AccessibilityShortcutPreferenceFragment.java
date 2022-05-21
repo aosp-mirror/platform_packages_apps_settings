@@ -132,8 +132,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         mShortcutPreference.setPersistent(false);
         mShortcutPreference.setKey(getShortcutPreferenceKey());
         mShortcutPreference.setOnClickCallback(this);
+        mShortcutPreference.setTitle(getShortcutTitle());
 
-        updateShortcutTitle(mShortcutPreference);
         getPreferenceScreen().addPreference(mShortcutPreference);
 
         mTouchExplorationStateChangeListener = isTouchExplorationEnabled -> {
@@ -192,13 +192,11 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         final Dialog dialog;
         switch (dialogId) {
             case DialogEnums.EDIT_SHORTCUT:
-                final CharSequence dialogTitle = getPrefContext().getString(
-                        R.string.accessibility_shortcut_title, getLabelName());
                 final int dialogType = WizardManagerHelper.isAnySetupWizard(getIntent())
                         ? AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC_SUW :
                         AccessibilityDialogUtils.DialogType.EDIT_SHORTCUT_GENERIC;
                 dialog = AccessibilityDialogUtils.showEditShortcutDialog(
-                        getPrefContext(), dialogType, dialogTitle,
+                        getPrefContext(), dialogType, getShortcutTitle(),
                         this::callOnAlertDialogCheckboxClicked);
                 setupEditShortcutDialog(dialog);
                 return dialog;
@@ -213,9 +211,8 @@ public abstract class AccessibilityShortcutPreferenceFragment extends DashboardF
         }
     }
 
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        final CharSequence title = getString(R.string.accessibility_shortcut_title, getLabelName());
-        shortcutPreference.setTitle(title);
+    protected CharSequence getShortcutTitle() {
+        return getString(R.string.accessibility_shortcut_title, getLabelName());
     }
 
     @Override

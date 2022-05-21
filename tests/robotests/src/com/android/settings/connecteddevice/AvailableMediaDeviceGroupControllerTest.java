@@ -27,10 +27,13 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
@@ -40,25 +43,31 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.AvailableMediaBluetoothDeviceUpdater;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowAudioManager;
+import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothEventManager;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+/** Tests for {@link AvailableMediaDeviceGroupController}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothUtils.class})
+@Config(shadows = {ShadowAudioManager.class, ShadowBluetoothAdapter.class,
+        ShadowBluetoothUtils.class})
 public class AvailableMediaDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
@@ -77,6 +86,8 @@ public class AvailableMediaDeviceGroupControllerTest {
     private BluetoothEventManager mEventManager;
     @Mock
     private LocalBluetoothManager mLocalManager;
+    @Mock
+    private CachedBluetoothDevice mCachedBluetoothDevice;
 
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
@@ -93,25 +104,24 @@ public class AvailableMediaDeviceGroupControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
+        final FragmentActivity mActivity = Robolectric.setupActivity(FragmentActivity.class);
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
+        when(mDashboardFragment.getParentFragmentManager()).thenReturn(
+                mActivity.getSupportFragmentManager());
 
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
         mAudioManager = mContext.getSystemService(AudioManager.class);
         doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
 
-        mAvailableMediaDeviceGroupController = new AvailableMediaDeviceGroupController(mContext);
+        mAvailableMediaDeviceGroupController = spy(
+                new AvailableMediaDeviceGroupController(mContext));
         mAvailableMediaDeviceGroupController.
                 setBluetoothDeviceUpdater(mAvailableMediaBluetoothDeviceUpdater);
         mAvailableMediaDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
-    }
-
-    @After
-    public void tearDown() {
-        ShadowBluetoothUtils.reset();
     }
 
     @Test
@@ -221,5 +231,22 @@ public class AvailableMediaDeviceGroupControllerTest {
 
         // Shouldn't crash
         mAvailableMediaDeviceGroupController.onStop();
+    }
+
+    @Test
+    @Config(shadows = ShadowAlertDialogCompat.class)
+    public void onActiveDeviceChanged_hearingAidProfile_launchHearingAidPairingDialog() {
+        when(mCachedBluetoothDevice.isConnectedHearingAidDevice()).thenReturn(true);
+        when(mCachedBluetoothDevice.getDeviceMode()).thenReturn(
+                HearingAidProfile.DeviceMode.MODE_BINAURAL);
+        when(mCachedBluetoothDevice.getDeviceSide()).thenReturn(
+                HearingAidProfile.DeviceSide.SIDE_LEFT);
+        mAvailableMediaDeviceGroupController.init(mDashboardFragment);
+
+        mAvailableMediaDeviceGroupController.onActiveDeviceChanged(mCachedBluetoothDevice,
+                BluetoothProfile.HEARING_AID);
+
+        final AlertDialog dialog = ShadowAlertDialogCompat.getLatestAlertDialog();
+        assertThat(dialog.isShowing()).isTrue();
     }
 }

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPortStatus;
+import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -31,6 +32,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
  */
 public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements LifecycleObserver,
         OnResume, OnPause {
+    private static final String TAG = "UsbBroadcastReceiver";
+    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
+
     private Context mContext;
     private UsbConnectionListener mUsbConnectionListener;
     private boolean mListeningToUsbEvents;
@@ -54,6 +58,11 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (DEBUG) {
+            Log.d(TAG, "onReceive() action : " + intent.getAction());
+        }
+        boolean isUsbConfigured = intent.getExtras() != null
+                ? intent.getExtras().getBoolean(UsbManager.USB_CONFIGURED) : false;
         if (UsbManager.ACTION_USB_STATE.equals(intent.getAction())) {
             mConnected = intent.getExtras().getBoolean(UsbManager.USB_CONNECTED)
                     || intent.getExtras().getBoolean(UsbManager.USB_HOST_CONNECTED);
@@ -91,7 +100,7 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
         }
         if (mUsbConnectionListener != null) {
             mUsbConnectionListener.onUsbConnectionChanged(mConnected, mFunctions, mPowerRole,
-                    mDataRole);
+                    mDataRole, isUsbConfigured);
         }
     }
 
@@ -135,6 +144,7 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
      * Interface definition for a callback to be invoked when usb connection is changed.
      */
     interface UsbConnectionListener {
-        void onUsbConnectionChanged(boolean connected, long functions, int powerRole, int dataRole);
+        void onUsbConnectionChanged(boolean connected, long functions, int powerRole, int dataRole,
+                boolean isUsbConfigured);
     }
 }
