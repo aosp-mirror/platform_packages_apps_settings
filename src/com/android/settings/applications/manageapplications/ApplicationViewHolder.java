@@ -95,10 +95,17 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
 
     void setSummary(CharSequence summary) {
         mSummary.setText(summary);
+        updateSummaryVisibility();
     }
 
     void setSummary(@StringRes int summary) {
         mSummary.setText(summary);
+        updateSummaryVisibility();
+    }
+
+    private void updateSummaryVisibility() {
+        // Hide an empty summary and then title will be vertically centered.
+        mSummary.setVisibility(TextUtils.isEmpty(mSummary.getText()) ? View.GONE : View.VISIBLE);
     }
 
     void setEnabled(boolean isEnabled) {
