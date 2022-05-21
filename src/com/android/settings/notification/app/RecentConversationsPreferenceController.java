@@ -23,7 +23,6 @@ import android.app.people.IPeopleManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.pm.ShortcutInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -51,6 +50,7 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
 
     private static final String TAG = "RecentConversationsPC";
     private static final String KEY = "recent_conversations";
+    private static final String CLEAR_ALL_KEY_SUFFIX = "_clear_all";
     private List<ConversationChannel> mConversations;
     private final IPeopleManager mPs;
     private final NotificationBackend mBackend;
@@ -72,9 +72,11 @@ public class RecentConversationsPreferenceController extends AbstractPreferenceC
         return true;
     }
 
+    //TODO(b/233325816): Use ButtonPreference instead.
     LayoutPreference getClearAll(PreferenceGroup parent) {
         LayoutPreference pref = new LayoutPreference(
                 mContext, R.layout.conversations_clear_recents);
+        pref.setKey(getPreferenceKey() + CLEAR_ALL_KEY_SUFFIX);
         pref.setOrder(1);
         Button button = pref.findViewById(R.id.conversation_settings_clear_recents);
         button.setOnClickListener(v -> {
