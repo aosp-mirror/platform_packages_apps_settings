@@ -19,8 +19,8 @@ package com.android.settings.fuelgauge;
 import android.annotation.UserIdInt;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.settings.SettingsEnums;
 import android.app.backup.BackupManager;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -386,7 +386,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         if (helpIntent != null) {
             mFooterPreference.setLearnMoreAction(v ->
                     startActivityForResult(helpIntent, /*requestCode=*/ 0));
-            mFooterPreference.setLearnMoreContentDescription(
+            mFooterPreference.setLearnMoreText(
                     context.getString(R.string.manager_battery_usage_link_a11y));
         }
     }
@@ -525,20 +525,24 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final long foregroundTimeMs = bundle.getLong(EXTRA_FOREGROUND_TIME);
         final long backgroundTimeMs = bundle.getLong(EXTRA_BACKGROUND_TIME);
         final int consumedPower = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
+        final int uid = bundle.getInt(EXTRA_UID, 0);
         final String slotTime = bundle.getString(EXTRA_SLOT_TIME, null);
         final long totalTimeMs = foregroundTimeMs + backgroundTimeMs;
         final CharSequence usageTimeSummary;
-        final PowerUsageFeatureProvider powerFeatureProvider =
-                FeatureFactory.getFactory(getContext()).getPowerUsageFeatureProvider(getContext());
+        final boolean isChartGraphEnabled = FeatureFactory.getFactory(getContext())
+                .getPowerUsageFeatureProvider(getContext()).isChartGraphEnabled(getContext());
 
+        if (!isChartGraphEnabled && BatteryEntry.isSystemUid(uid)) {
+            return null;
+        }
         if (totalTimeMs == 0) {
             final int batteryWithoutUsageTime = consumedPower > 0
                     ? R.string.battery_usage_without_time : R.string.battery_not_usage_24hr;
-            usageTimeSummary = getText(powerFeatureProvider.isChartGraphEnabled(getContext())
+            usageTimeSummary = getText(isChartGraphEnabled
                     ? batteryWithoutUsageTime : R.string.battery_not_usage);
         } else if (slotTime == null) {
             // Shows summary text with past 24 hr or full charge if slot time is null.
-            usageTimeSummary = powerFeatureProvider.isChartGraphEnabled(getContext())
+            usageTimeSummary = isChartGraphEnabled
                     ? getAppPast24HrActiveSummary(foregroundTimeMs, backgroundTimeMs, totalTimeMs)
                     : getAppFullChargeActiveSummary(
                             foregroundTimeMs, backgroundTimeMs, totalTimeMs);
