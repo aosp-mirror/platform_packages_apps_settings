@@ -367,9 +367,9 @@ public class AppLaunchSettings extends AppInfoBase implements
             final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
             mContext.startActivity(intent);
         });
-        final String learnMoreContentDescription = mContext.getString(
+        final String learnMoreText = mContext.getString(
                 R.string.footer_learn_more_content_description, getLabelName());
-        footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
+        footerPreference.setLearnMoreText(learnMoreText);
     }
 
     private String getLabelName() {

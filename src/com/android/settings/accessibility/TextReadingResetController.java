@@ -23,7 +23,9 @@ import androidx.annotation.Nullable;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settingslib.widget.LayoutPreference;
 
 /**
@@ -31,6 +33,9 @@ import com.android.settingslib.widget.LayoutPreference;
  */
 class TextReadingResetController extends BasePreferenceController {
     private final View.OnClickListener mOnResetClickListener;
+
+    @EntryPoint
+    private int mEntryPoint;
 
     TextReadingResetController(Context context, String preferenceKey,
             @Nullable View.OnClickListener listener) {
@@ -52,8 +57,23 @@ class TextReadingResetController extends BasePreferenceController {
         view.setOnClickListener(v -> {
             if (mOnResetClickListener != null) {
                 mOnResetClickListener.onClick(v);
+
+                SettingsStatsLog.write(
+                        SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                        AccessibilityStatsLogUtils.convertToItemKeyName(getPreferenceKey()),
+                        /* reset */ -1,
+                        AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
             }
         });
+    }
+
+    /**
+     * The entry point is used for logging.
+     *
+     * @param entryPoint from which settings page
+     */
+    void setEntryPoint(@EntryPoint int entryPoint) {
+        mEntryPoint = entryPoint;
     }
 
     /**

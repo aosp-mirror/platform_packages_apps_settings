@@ -84,7 +84,44 @@ public class WifiTetherSwitchBarControllerTest {
     }
 
     @Test
+    public void startTether_wifiApIsActivated_doNothing() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_ENABLED);
+
+        mController.startTether();
+
+        verify(mConnectivityManager, never()).startTethering(anyInt(), anyBoolean(), any(), any());
+    }
+
+    @Test
+    public void startTether_wifiApNotActivated_startTethering() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_DISABLED);
+
+        mController.startTether();
+
+        verify(mConnectivityManager).startTethering(anyInt(), anyBoolean(), any(), any());
+    }
+
+    @Test
+    public void stopTether_wifiApIsActivated_stopTethering() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_ENABLED);
+
+        mController.stopTether();
+
+        verify(mConnectivityManager).stopTethering(anyInt());
+    }
+
+    @Test
+    public void stopTether_wifiApNotActivated_doNothing() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_DISABLED);
+
+        mController.stopTether();
+
+        verify(mConnectivityManager, never()).stopTethering(anyInt());
+    }
+
+    @Test
     public void startTether_fail_resetSwitchBar() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_DISABLED);
         when(mDataSaverBackend.isDataSaverEnabled()).thenReturn(false);
 
         mController.startTether();
@@ -130,6 +167,7 @@ public class WifiTetherSwitchBarControllerTest {
 
     @Test
     public void onSwitchChanged_isNotChecked_stopTethering() {
+        when(mWifiManager.getWifiApState()).thenReturn(WIFI_AP_STATE_ENABLED);
         when(mSwitch.isChecked()).thenReturn(false);
 
         mController.onSwitchChanged(mSwitch, mSwitch.isChecked());

@@ -60,6 +60,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
@@ -77,24 +78,33 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowToast;
 
+import java.util.List;
+
 @RunWith(RobolectricTestRunner.class)
 public class NetworkProviderSettingsTest {
 
+    private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final int NUM_NETWORKS = 4;
     private static final String FAKE_URI_STRING = "fakeuri";
 
+    @Rule
+    public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     private PowerManager mPowerManager;
     @Mock
@@ -107,7 +117,6 @@ public class NetworkProviderSettingsTest {
     private AirplaneModeEnabler mAirplaneModeEnabler;
     @Mock
     private DataUsagePreference mDataUsagePreference;
-    private Context mContext;
     private NetworkProviderSettings mNetworkProviderSettings;
     @Mock
     private WifiPickerTracker mMockWifiPickerTracker;
@@ -131,12 +140,11 @@ public class NetworkProviderSettingsTest {
     PreferenceCategory mConnectedWifiEntryPreferenceCategory;
     @Mock
     PreferenceCategory mFirstWifiEntryPreferenceCategory;
+    @Mock
+    NetworkProviderSettings.WifiRestriction mWifiRestriction;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-
         mNetworkProviderSettings = spy(new NetworkProviderSettings());
         doReturn(mContext).when(mNetworkProviderSettings).getContext();
         doReturn(mPreferenceManager).when(mNetworkProviderSettings).getPreferenceManager();
@@ -719,6 +727,28 @@ public class NetworkProviderSettingsTest {
         mNetworkProviderSettings.addForgetMenuIfSuitable(mContextMenu);
 
         verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
+    }
+
+    @Test
+    public void getNonIndexableKeys_allowedChangeWifiState_keyNotReturned() {
+        when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).doesNotContain(NetworkProviderSettings.PREF_KEY_WIFI_TOGGLE);
+    }
+
+    @Test
+    public void getNonIndexableKeys_disallowedChangeWifiState_keyReturned() {
+        when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(false);
+        NetworkProviderSettings.SearchIndexProvider searchIndexProvider =
+                new NetworkProviderSettings.SearchIndexProvider(XML_RES, mWifiRestriction);
+
+        final List<String> keys = searchIndexProvider.getNonIndexableKeys(mContext);
+
+        assertThat(keys).contains(NetworkProviderSettings.PREF_KEY_WIFI_TOGGLE);
     }
 
     @Implements(PreferenceFragmentCompat.class)
