@@ -19,6 +19,7 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 
@@ -26,7 +27,9 @@ import androidx.annotation.NonNull;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.display.PreviewPagerAdapter;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
@@ -38,6 +41,7 @@ import java.util.Objects;
  */
 class TextReadingPreviewController extends BasePreferenceController implements
         PreviewSizeSeekBarController.ProgressInteractionListener {
+    private static final String TAG = "TextReadingPreviewCtrl";
     static final int[] PREVIEW_SAMPLE_RES_IDS = new int[]{
             R.layout.accessibility_text_reading_preview_app_grid,
             R.layout.screen_zoom_preview_1,
@@ -57,6 +61,9 @@ class TextReadingPreviewController extends BasePreferenceController implements
     private TextReadingPreviewPreference mPreviewPreference;
     private LabeledSeekBarPreference mFontSizePreference;
     private LabeledSeekBarPreference mDisplaySizePreference;
+
+    @EntryPoint
+    private int mEntryPoint;
 
     private final Choreographer.FrameCallback mCommit = f -> {
         tryCommitFontSizeConfig();
@@ -92,8 +99,8 @@ class TextReadingPreviewController extends BasePreferenceController implements
                 /* message= */ "Display size preference is null, the preview controller"
                         + " couldn't get the info");
 
-        mLastFontProgress = mFontSizePreference.getProgress();
-        mLastDisplayProgress = mDisplaySizePreference.getProgress();
+        mLastFontProgress = mFontSizeData.getInitialIndex();
+        mLastDisplayProgress = mDisplaySizeData.getInitialIndex();
 
         final Configuration origConfig = mContext.getResources().getConfiguration();
         final boolean isLayoutRtl =
@@ -132,6 +139,15 @@ class TextReadingPreviewController extends BasePreferenceController implements
     }
 
     /**
+     * The entry point is used for logging.
+     *
+     * @param entryPoint from which settings page
+     */
+    void setEntryPoint(@EntryPoint int entryPoint) {
+        mEntryPoint = entryPoint;
+    }
+
+    /**
      * Avoids the flicker when switching to the previous or next level.
      *
      * <p><br>[Flickering problem steps] commit()-> snapshot in framework(old screenshot) ->
@@ -162,6 +178,16 @@ class TextReadingPreviewController extends BasePreferenceController implements
         if (fontProgress != mLastFontProgress) {
             mFontSizeData.commit(fontProgress);
             mLastFontProgress = fontProgress;
+
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, "Font size: " + fontProgress);
+            }
+
+            SettingsStatsLog.write(
+                    SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                    AccessibilityStatsLogUtils.convertToItemKeyName(mFontSizePreference.getKey()),
+                    fontProgress,
+                    AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
         }
     }
 
@@ -170,6 +196,17 @@ class TextReadingPreviewController extends BasePreferenceController implements
         if (displayProgress != mLastDisplayProgress) {
             mDisplaySizeData.commit(displayProgress);
             mLastDisplayProgress = displayProgress;
+
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
+                Log.d(TAG, "Display size: " + displayProgress);
+            }
+
+            SettingsStatsLog.write(
+                    SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                    AccessibilityStatsLogUtils.convertToItemKeyName(
+                            mDisplaySizePreference.getKey()),
+                    displayProgress,
+                    AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
         }
     }
 

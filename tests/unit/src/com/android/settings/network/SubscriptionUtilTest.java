@@ -69,6 +69,7 @@ public class SubscriptionUtilTest {
         when(mTelMgr.getUiccSlotsInfo()).thenReturn(null);
     }
 
+    @Ignore
     @Test
     public void getAvailableSubscriptions_nullInfoFromSubscriptionManager_nonNullResult() {
         when(mSubMgr.getAvailableSubscriptionInfoList()).thenReturn(null);
@@ -90,6 +91,7 @@ public class SubscriptionUtilTest {
         assertThat(subs).hasSize(1);
     }
 
+    @Ignore
     @Test
     public void getAvailableSubscriptions_twoSubscriptions_twoResults() {
         final SubscriptionInfo info1 = mock(SubscriptionInfo.class);
@@ -138,6 +140,7 @@ public class SubscriptionUtilTest {
         assertThat(subs).hasSize(2);
     }
 
+    @Ignore
     @Test
     public void getUniqueDisplayNames_uniqueCarriers_originalUsed() {
         // Each subscription's default display name is unique.
@@ -228,6 +231,7 @@ public class SubscriptionUtilTest {
         assertEquals(CARRIER_1 + " 4444", idNames.get(SUBID_2));
     }
 
+    @Ignore
     @Test
     public void getUniqueDisplayNames_phoneNumberBlocked_subscriptoinIdFallback() {
         // Both subscriptoins have the same display name.
@@ -295,6 +299,7 @@ public class SubscriptionUtilTest {
         assertEquals(CARRIER_1 + " 3", idNames.get(SUBID_3));
     }
 
+    @Ignore
     @Test
     public void getUniqueDisplayName_onlyOneSubscription_correctNameReturned() {
         // Each subscription's default display name is unique.
@@ -394,6 +399,7 @@ public class SubscriptionUtilTest {
         assertTrue(TextUtils.isEmpty(name));
     }
 
+    @Ignore
     @Test
     public void getUniqueDisplayName_fullSubscriptionInfo_correctNameReturned() {
         // Each subscription's default display name is unique.

@@ -58,14 +58,14 @@
         android:title="@string/wifi_security"
         android:selectable="false"/>
 
-    <DropDownPreference
+    <ListPreference
         android:key="metered"
         android:icon="@drawable/ic_attach_money_black_24dp"
         android:title="@string/wifi_metered_title"
         android:entries="@array/wifi_metered_entries"
         android:entryValues="@array/wifi_metered_values"/>
 
-    <DropDownPreference
+    <ListPreference
         android:key="privacy"
         android:icon="@drawable/ic_wifi_privacy_24dp"
         android:title="@string/wifi_privacy_settings"
