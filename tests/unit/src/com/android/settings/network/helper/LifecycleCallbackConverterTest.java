@@ -43,6 +43,9 @@ public class LifecycleCallbackConverterTest implements LifecycleOwner {
     public void setUp() {
         mTestData = new Object();
         mConsumer = new TestConsumer();
+    }
+
+    private void initEnvPerTestCase() {
         mConverter = new LifecycleCallbackConverter<Object>(getLifecycle(), mConsumer);
     }
 
@@ -52,6 +55,7 @@ public class LifecycleCallbackConverterTest implements LifecycleOwner {
 
     @Test
     public void converter_dropResult_whenInActive() {
+        initEnvPerTestCase();
         mConverter.postResult(mTestData);
 
         assertThat(mConsumer.getCallbackCount()).isEqualTo(0);
@@ -59,6 +63,7 @@ public class LifecycleCallbackConverterTest implements LifecycleOwner {
 
     @Test
     public void converter_callbackResult_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 
@@ -69,6 +74,7 @@ public class LifecycleCallbackConverterTest implements LifecycleOwner {
 
     @Test
     public void converter_dropResult_whenBackToInActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
@@ -79,6 +85,7 @@ public class LifecycleCallbackConverterTest implements LifecycleOwner {
 
     @Test
     public void converter_passResultToUiThread_whenActive() {
+        initEnvPerTestCase();
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
         mRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START);
 

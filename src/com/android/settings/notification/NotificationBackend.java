@@ -106,66 +106,26 @@ public class NotificationBackend {
         return row;
     }
 
-    public AppRow loadAppRow(Context context, PackageManager pm,
-            RoleManager roleManager, PackageInfo app) {
+    public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        recordCanBeBlocked(context, pm, roleManager, app, row);
+        recordCanBeBlocked(app, row);
         return row;
     }
 
-    void recordCanBeBlocked(Context context, PackageManager pm, RoleManager rm, PackageInfo app,
-            AppRow row) {
-        if (Settings.Secure.getIntForUser(context.getContentResolver(),
-                Settings.Secure.NOTIFICATION_PERMISSION_ENABLED, 0, USER_SYSTEM) != 0) {
-            try {
-                row.systemApp = row.lockedImportance =
-                        sINM.isPermissionFixed(app.packageName, row.userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Error calling NMS", e);
-            }
-            // The permission system cannot make role permissions 'fixed', so check for these
-            // roles explicitly
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = row.lockedImportance = true;
-            }
-            // if the app targets T but has not requested the permission, we cannot change the
-            // permission state
-            if (app.applicationInfo.targetSdkVersion > Build.VERSION_CODES.S_V2) {
-                if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
-                        .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
-                    row.lockedImportance = true;
-                }
-            }
-
-        } else {
-            row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
-            List<String> roles = rm.getHeldRolesFromController(app.packageName);
-            if (roles.contains(RoleManager.ROLE_DIALER)
-                    || roles.contains(RoleManager.ROLE_EMERGENCY)) {
-                row.systemApp = true;
-            }
-            final String[] nonBlockablePkgs = context.getResources().getStringArray(
-                    com.android.internal.R.array.config_nonBlockableNotificationPackages);
-            markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
+    void recordCanBeBlocked(PackageInfo app, AppRow row) {
+        try {
+            row.systemApp = row.lockedImportance =
+                    sINM.isImportanceLocked(app.packageName, app.applicationInfo.uid);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error calling NMS", e);
         }
-    }
 
-    @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
-            String packageName) {
-        if (nonBlockablePkgs != null) {
-            int N = nonBlockablePkgs.length;
-            for (int i = 0; i < N; i++) {
-                String pkg = nonBlockablePkgs[i];
-                if (pkg == null) {
-                    continue;
-                } else if (pkg.contains(":")) {
-                    // handled by NotificationChannel.isImportanceLockedByOEM()
-                    continue;
-                } else if (packageName.equals(nonBlockablePkgs[i])) {
-                    row.systemApp = row.lockedImportance = true;
-                }
+        // if the app targets T but has not requested the permission, we cannot change the
+        // permission state
+        if (app.applicationInfo.targetSdkVersion > Build.VERSION_CODES.S_V2) {
+            if (app.requestedPermissions == null || Arrays.stream(app.requestedPermissions)
+                    .noneMatch(p -> p.equals(android.Manifest.permission.POST_NOTIFICATIONS))) {
+                row.lockedImportance = true;
             }
         }
     }
@@ -204,10 +164,9 @@ public class NotificationBackend {
     public boolean enableSwitch(Context context, ApplicationInfo app) {
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(
-                    app.packageName, PackageManager.GET_SIGNATURES);
-            RoleManager rm = context.getSystemService(RoleManager.class);
+                    app.packageName, PackageManager.GET_PERMISSIONS);
             final AppRow row = new AppRow();
-            recordCanBeBlocked(context, context.getPackageManager(), rm, info, row);
+            recordCanBeBlocked(info, row);
             boolean systemBlockable = !row.systemApp || (row.systemApp && row.banned);
             return systemBlockable && !row.lockedImportance;
         } catch (PackageManager.NameNotFoundException e) {

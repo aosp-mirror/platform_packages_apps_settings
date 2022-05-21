@@ -176,7 +176,7 @@ public class BluetoothDevicesSlice implements CustomSliceable {
     List<CachedBluetoothDevice> getPairedBluetoothDevices() {
         final List<CachedBluetoothDevice> bluetoothDeviceList = new ArrayList<>();
 
-        // If Bluetooth is disable, skip getting the Bluetooth devices.
+        // If Bluetooth is disabled, skip getting the Bluetooth devices.
         if (!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
             Log.i(TAG, "Cannot get Bluetooth devices, Bluetooth is disabled.");
             return bluetoothDeviceList;
