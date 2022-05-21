@@ -33,6 +33,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -102,10 +103,16 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         return true;
     }
 
+    @VisibleForTesting
+    protected boolean hasMobileData() {
+        return DataUsageUtils.hasMobileData(mContext);
+    }
+
     @Override
     public int getAvailabilityStatus(int subId) {
         if (!SubscriptionManager.isValidSubscriptionId(subId)
-                || SubscriptionManager.getDefaultDataSubscriptionId() == subId) {
+                || SubscriptionManager.getDefaultDataSubscriptionId() == subId
+                || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return AVAILABLE;

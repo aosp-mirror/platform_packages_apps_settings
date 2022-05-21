@@ -1,13 +1,15 @@
 package com.android.settings.display;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static com.google.common.truth.Truth.assertThat;
 
-
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
@@ -17,6 +19,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,6 +59,8 @@ public class DisplayWhiteBalancePreferenceControllerTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
+    doReturn(mock(DevicePolicyManager.class)).when(mContext)
+            .getSystemService(Context.DEVICE_POLICY_SERVICE);
 
     mContentResolver = RuntimeEnvironment.application.getContentResolver();
     when(mContext.getContentResolver()).thenReturn(mContentResolver);

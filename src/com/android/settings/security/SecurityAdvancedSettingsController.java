@@ -16,6 +16,9 @@
 
 package com.android.settings.security;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.MORE_SECURITY_SETTINGS_WORK_PROFILE_SUMMARY;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.CrossProfileApps;
 
@@ -29,11 +32,13 @@ import com.android.settings.core.BasePreferenceController;
 public class SecurityAdvancedSettingsController extends BasePreferenceController {
 
     private final CrossProfileApps mCrossProfileApps;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public SecurityAdvancedSettingsController(Context context, String preferenceKey) {
         super(context, preferenceKey);
 
         mCrossProfileApps = context.getSystemService(CrossProfileApps.class);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
@@ -44,8 +49,10 @@ public class SecurityAdvancedSettingsController extends BasePreferenceController
     @Override
     public CharSequence getSummary() {
         return isWorkProfilePresent()
-                ? mContext.getResources().getString(
-                        R.string.security_advanced_settings_work_profile_settings_summary)
+                ? mDevicePolicyManager.getResources().getString(
+                        MORE_SECURITY_SETTINGS_WORK_PROFILE_SUMMARY,
+                    () -> mContext.getResources().getString(
+                            R.string.security_advanced_settings_work_profile_settings_summary))
                 : mContext.getResources().getString(
                         R.string.security_advanced_settings_no_work_profile_settings_summary);
     }
