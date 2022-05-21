@@ -10,6 +10,7 @@ import android.os.PowerManager;
 import android.provider.Settings;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -17,8 +18,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public final class BatterySaverScheduleSettingsTest {
 
     private Context mContext;
