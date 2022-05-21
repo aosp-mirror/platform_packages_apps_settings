@@ -33,7 +33,7 @@ public class AccessibilityButtonFooterPreferenceController extends
     }
 
     @Override
-    protected String getLearnMoreContentDescription() {
+    protected String getLearnMoreText() {
         return mContext.getString(
             R.string.accessibility_button_gesture_footer_learn_more_content_description);
     }

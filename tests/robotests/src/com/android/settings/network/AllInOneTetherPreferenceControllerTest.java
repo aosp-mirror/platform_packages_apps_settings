@@ -131,9 +131,11 @@ public class AllInOneTetherPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = ApplicationProvider.getApplicationContext();
+        mContext = spy(ApplicationProvider.getApplicationContext());
         MockitoAnnotations.initMocks(this);
-        mController = spy(AllInOneTetherPreferenceController.class);
+        doReturn(null).when(mContext)
+                .getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mController = spy(new AllInOneTetherPreferenceController(mContext, /* key= */ "test"));
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
         ReflectionHelpers.setField(mController, "mPreferenceKey", PREF_KEY);

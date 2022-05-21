@@ -153,13 +153,16 @@ public class BatteryDiffEntry {
             case ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY:
                 return true;
             case ConvertUtils.CONSUMER_TYPE_UID_BATTERY:
-                if (mBatteryHistEntry.mIsHidden) {
+                final int uid = (int) mBatteryHistEntry.mUid;
+                if (mBatteryHistEntry.mIsHidden
+                        || uid == BatteryUtils.UID_REMOVED_APPS
+                        || uid == BatteryUtils.UID_TETHERING) {
                     return true;
                 }
                 final boolean combineSystemComponents =
                         mContext.getResources().getBoolean(
                                 R.bool.config_battery_combine_system_components);
-                return combineSystemComponents && isSystemUid((int) mBatteryHistEntry.mUid);
+                return combineSystemComponents && isSystemUid(uid);
         }
         return false;
     }

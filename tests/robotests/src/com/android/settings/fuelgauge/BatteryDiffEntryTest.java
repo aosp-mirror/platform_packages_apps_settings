@@ -358,6 +358,24 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
+    public void testIsSystemEntry_uidBatteryWithTetheringProcess_returnTrue() {
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*uid=*/ BatteryUtils.UID_TETHERING, /*isHidden=*/ false);
+        assertThat(entry.isSystemEntry()).isTrue();
+    }
+
+    @Test
+    public void testIsSystemEntry_uidBatteryWithRemovedAppsProcess_returnTrue() {
+        final BatteryDiffEntry entry =
+            createBatteryDiffEntry(
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                /*uid=*/ BatteryUtils.UID_REMOVED_APPS, /*isHidden=*/ false);
+        assertThat(entry.isSystemEntry()).isTrue();
+    }
+
+    @Test
     public void testUpdateRestrictionFlagState_updateFlagAsExpected() throws Exception {
         final String expectedAppLabel = "fake app label";
         final String fakePackageName = "com.fake.google.com";

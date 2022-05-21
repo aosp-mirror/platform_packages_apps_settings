@@ -282,6 +282,21 @@ public class UiccSlotUtil {
     // 1. pSIM's logical slots always is [RIL 0].
     // 2. assign the new active port to the same stack that will be de-activated
     //    For example: mode#3->mode#4
+    // 3. Add an eSIM carrier or enable eSIM carrier. The cases are at the below.
+    //    1) 1   => 2 / 2.1 / 3 / 3.1
+    //    2) 2   => 1 / 3 / 3.2
+    //    3) 2.1 => 3.1 / 4
+    //    4) 3   => 4
+    //    5) 3.1 => 3.2
+    //    Note:
+    //        1) 2 <=> 2.1  blocked by LPA (reason: existing active port in SS so just re-use)
+    //        2) 3 <=> 3.1 blocked by LPA (reason: if pSIM+an active port, re-use the active port)
+    // 4. pSIM insertion or enabling
+    //     1) 2   => 1 / 3
+    //     2) 2.1 => 1 / 3.1
+    //     3) 3.2 => 3 / 3.1
+    //     4) 4   => 3 / 3.1
+
 
     @VisibleForTesting
     static Collection<UiccSlotMapping> prepareUiccSlotMappings(
