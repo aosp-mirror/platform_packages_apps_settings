@@ -55,7 +55,7 @@ public class ConnectedUsbDeviceUpdater {
 
     @VisibleForTesting
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, functions, powerRole, dataRole) -> {
+            (connected, functions, powerRole, dataRole, isUsbConfigured) -> {
                 if (connected) {
                     mUsbPreference.setSummary(getSummary(dataRole == DATA_ROLE_DEVICE
                                     ? functions : UsbManager.FUNCTION_NONE, powerRole));

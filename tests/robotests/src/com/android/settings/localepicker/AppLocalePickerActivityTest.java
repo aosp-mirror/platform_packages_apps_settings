@@ -18,6 +18,10 @@ package com.android.settings.localepicker;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.ApplicationPackageManager;
 import android.content.Context;
@@ -28,14 +32,15 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.telephony.TelephonyManager;
 
-import androidx.fragment.app.Fragment;
-
-import com.android.settings.R;
+import com.android.internal.app.LocaleStore;
 import com.android.settings.applications.AppInfoBase;
+
+import java.util.Locale;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.Robolectric;
@@ -55,6 +60,9 @@ import org.robolectric.shadows.ShadowTelephonyManager;
 public class AppLocalePickerActivityTest {
     private static final String TEST_PACKAGE_NAME = "com.android.settings";
     private static final Uri TEST_PACKAGE_URI = Uri.parse("package:" + TEST_PACKAGE_NAME);
+
+    @Mock
+    LocaleStore.LocaleInfo mLocaleInfo;
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -76,6 +84,38 @@ public class AppLocalePickerActivityTest {
 
         controller.create();
 
+        assertThat(controller.get().isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onLocaleSelected_getLocaleNotNull_getLanguageTag() {
+        ActivityController<TestAppLocalePickerActivity> controller =
+                initActivityController(true);
+        Locale locale = new Locale("en", "US");
+        when(mLocaleInfo.getLocale()).thenReturn(locale);
+        when(mLocaleInfo.isSystemLocale()).thenReturn(false);
+
+        controller.create();
+        AppLocalePickerActivity mActivity = controller.get();
+        mActivity.onLocaleSelected(mLocaleInfo);
+
+        verify(mLocaleInfo, times(2)).getLocale();
+        assertThat(mLocaleInfo.getLocale().toLanguageTag()).isEqualTo("en-US");
+        assertThat(controller.get().isFinishing()).isTrue();
+    }
+
+    @Test
+    public void onLocaleSelected_getLocaleNull_getEmptyLanguageTag() {
+        ActivityController<TestAppLocalePickerActivity> controller =
+                initActivityController(true);
+        when(mLocaleInfo.getLocale()).thenReturn(null);
+        when(mLocaleInfo.isSystemLocale()).thenReturn(false);
+
+        controller.create();
+        AppLocalePickerActivity mActivity = controller.get();
+        mActivity.onLocaleSelected(mLocaleInfo);
+
+        verify(mLocaleInfo, times(1)).getLocale();
         assertThat(controller.get().isFinishing()).isTrue();
     }
 

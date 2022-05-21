@@ -31,9 +31,12 @@ import androidx.slice.builders.SliceAction;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.bluetooth.BluetoothBroadcastDialog;
 import com.android.settings.media.MediaOutputIndicatorWorker;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.SliceBackgroundWorker;
+import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.media.BluetoothMediaDevice;
 import com.android.settingslib.media.MediaDevice;
 import com.android.settingslib.media.MediaOutputConstants;
 
@@ -42,6 +45,9 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
     private static final String KEY_MEDIA_VOLUME = "media_volume";
 
     private MediaOutputIndicatorWorker mWorker;
+    private MediaDevice mMediaDevice;
+    private static final String ACTION_LAUNCH_BROADCAST_DIALOG =
+            "android.settings.MEDIA_BROADCAST_DIALOG";
 
     public MediaVolumePreferenceController(Context context) {
         super(context, KEY_MEDIA_VOLUME);
@@ -91,9 +97,9 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
     }
 
     private boolean isConnectedBLEDevice() {
-        final MediaDevice device = getWorker().getCurrentConnectedMediaDevice();
-        if (device != null) {
-            return device.isBLEDevice();
+        mMediaDevice = getWorker().getCurrentConnectedMediaDevice();
+        if (mMediaDevice != null) {
+            return mMediaDevice.isBLEDevice();
         }
         return false;
     }
@@ -106,17 +112,32 @@ public class MediaVolumePreferenceController extends VolumeSeekBarPreferenceCont
         }
 
         final Intent intent = new Intent();
+        PendingIntent pi = null;
         if (getWorker().isDeviceBroadcasting()) {
             intent.setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
             intent.setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_BROADCAST_DIALOG);
             intent.putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                     getWorker().getActiveLocalMediaController().getPackageName());
+
+            pi = PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         } else {
-            // TODO(b/229577518) : Get the intent action of the Bluetooth Broadcast Dialog
-            //  for user to choose the action
+            final CachedBluetoothDevice bluetoothDevice =
+                    ((BluetoothMediaDevice) mMediaDevice).getCachedDevice();
+            if (bluetoothDevice == null) {
+                Log.d(TAG, "The bluetooth device is null");
+                return null;
+            }
+            intent.setAction(ACTION_LAUNCH_BROADCAST_DIALOG);
+            intent.putExtra(BluetoothBroadcastDialog.KEY_APP_LABEL,
+                    Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
+            intent.putExtra(BluetoothBroadcastDialog.KEY_DEVICE_ADDRESS,
+                    bluetoothDevice.getAddress());
+
+            pi = PendingIntent.getActivity(context, 0 /* requestCode */, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         }
-        final PendingIntent pi = PendingIntent.getBroadcast(context, 0 /* requestCode */, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+
         final IconCompat icon = getBroadcastIcon(context);
 
         return SliceAction.createDeeplink(pi, icon, ListBuilder.ICON_IMAGE, getPreferenceKey());
