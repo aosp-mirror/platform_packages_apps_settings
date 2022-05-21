@@ -48,6 +48,9 @@ public class SetupWizardUtils {
             if (WizardManagerHelper.isAnySetupWizard(intent)) {
                 if (ThemeHelper.isSetupWizardDayNightEnabled(context)) {
                     switch (theme) {
+                        // TODO(b/233032365): Create glif v4 theme for this case.
+                        case ThemeHelper.THEME_GLIF_V4_LIGHT:
+                        case ThemeHelper.THEME_GLIF_V4:
                         case ThemeHelper.THEME_GLIF_V3_LIGHT:
                         case ThemeHelper.THEME_GLIF_V3:
                             return R.style.GlifV3Theme_DayNight;
@@ -60,8 +63,11 @@ public class SetupWizardUtils {
                     }
                 } else {
                     switch (theme) {
+                        // TODO(b/233032365): Create glif v4 theme for this case.
+                        case ThemeHelper.THEME_GLIF_V4_LIGHT:
                         case ThemeHelper.THEME_GLIF_V3_LIGHT:
                             return R.style.GlifV3Theme_Light;
+                        case ThemeHelper.THEME_GLIF_V4:
                         case ThemeHelper.THEME_GLIF_V3:
                             return R.style.GlifV3Theme;
                         case ThemeHelper.THEME_GLIF_V2_LIGHT:
@@ -76,6 +82,9 @@ public class SetupWizardUtils {
                 }
             } else {
                 switch (theme) {
+                    // TODO(b/233032365): Create glif v4 theme for this case.
+                    case ThemeHelper.THEME_GLIF_V4_LIGHT:
+                    case ThemeHelper.THEME_GLIF_V4:
                     case ThemeHelper.THEME_GLIF_V3_LIGHT:
                     case ThemeHelper.THEME_GLIF_V3:
                         return R.style.GlifV3Theme;
