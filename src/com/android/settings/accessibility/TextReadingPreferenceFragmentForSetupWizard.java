@@ -27,8 +27,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.util.LayoutStyler;
+
 
 /**
  * A {@link androidx.preference.PreferenceFragmentCompat} that displays the settings page related
@@ -47,6 +50,8 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
         icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
         AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                 /* description= */ null, icon);
+
+        updateResetButtonPadding();
     }
 
     @Override
@@ -65,5 +70,15 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
     public int getHelpResource() {
         // Hides help center in action bar and footer bar in SuW
         return 0;
+    }
+
+    /**
+     * Updates the padding of the reset button to meet for SetupWizard style.
+     */
+    private void updateResetButtonPadding() {
+        final LayoutPreference resetPreference = (LayoutPreference) findPreference(RESET_KEY);
+        final ViewGroup parentView =
+                (ViewGroup) resetPreference.findViewById(R.id.reset_button).getParent();
+        LayoutStyler.applyPartnerCustomizationLayoutPaddingStyle(parentView);
     }
 }

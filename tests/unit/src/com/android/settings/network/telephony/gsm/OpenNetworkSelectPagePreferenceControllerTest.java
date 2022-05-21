@@ -93,15 +93,18 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
 
         mPreference = new Preference(mContext);
         mController = new OpenNetworkSelectPagePreferenceController(mContext,
-                "open_network_select");
+                "open_network_select") {
+            @Override
+            public void updateState(Preference preference) {
+                super.updateState(mPreference);
+            }
+        };
         mController.init(mLifecycle, SUB_ID);
     }
 
     @Test
     public void updateState_modeAuto_disabled() {
-        when(mTelephonyManager.getNetworkSelectionMode()).thenReturn(
-                TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-
+        mController.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();

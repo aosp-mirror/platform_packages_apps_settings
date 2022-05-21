@@ -16,6 +16,8 @@
 
 package com.android.settings.language;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_DICTIONARY_FOR_WORK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.SPELL_CHECKER_FOR_WORK;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_KEYBOARDS_AND_TOOLS;
 
 import android.app.Activity;
@@ -80,6 +82,12 @@ public class LanguageAndInputSettings extends DashboardFragment {
         replaceEnterpriseStringTitle("language_and_input_for_work_category",
                 WORK_PROFILE_KEYBOARDS_AND_TOOLS,
                 R.string.language_and_input_for_work_category_title);
+        replaceEnterpriseStringTitle("spellcheckers_settings_for_work_pref",
+                SPELL_CHECKER_FOR_WORK,
+                R.string.spellcheckers_settings_for_work_title);
+        replaceEnterpriseStringTitle("user_dictionary_settings_for_work_pref",
+                PERSONAL_DICTIONARY_FOR_WORK,
+                R.string.user_dict_settings_for_work_title);
     }
 
     @Override

@@ -69,22 +69,23 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
     @VisibleForTesting
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, functions, powerRole, dataRole) -> {
+            (connected, functions, powerRole, dataRole, isUsbConfigured) -> {
                 final long defaultFunctions = mUsbBackend.getDefaultUsbFunctions();
                 Log.d(TAG, "UsbConnectionListener() connected : " + connected + ", functions : "
                         + functions + ", defaultFunctions : " + defaultFunctions
-                        + ", mIsStartTethering : " + mIsStartTethering);
-                if (connected && !mIsConnected && (defaultFunctions == UsbManager.FUNCTION_RNDIS
+                        + ", mIsStartTethering : " + mIsStartTethering
+                        + ", isUsbConfigured : " + isUsbConfigured);
+                if (connected && !mIsConnected && ((defaultFunctions == UsbManager.FUNCTION_RNDIS
                         || defaultFunctions == UsbManager.FUNCTION_NCM)
+                        && defaultFunctions == functions)
                         && !mIsStartTethering) {
                     mCurrentFunctions = defaultFunctions;
                     startTethering();
                 }
 
-                if (mIsStartTethering && connected) {
+                if ((mIsStartTethering || isUsbConfigured) && connected) {
                     mCurrentFunctions = functions;
                     refresh(functions);
-                    mUsbBackend.setDefaultUsbFunctions(functions);
                     mIsStartTethering = false;
                 }
                 mIsConnected = connected;
