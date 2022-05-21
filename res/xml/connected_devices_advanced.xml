@@ -67,15 +67,6 @@
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.uwb.UwbPreferenceController"/>
 
-    <Preference
-        android:key="connected_device_fast_pair"
-        android:title="@string/fast_pair_settings"
-        android:summary="@string/fast_pair_settings_summary"
-        android:icon="@drawable/ic_fast_pair_24dp"
-        android:fragment="com.android.settings.nearby.FastPairSettingsFragment"
-        settings:controller="com.android.settings.nearby.FastPairPreferenceController"
-        android:order="-2"/>
-
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="-8"/>

@@ -49,9 +49,9 @@ public class SafetySourceBroadcastReceiver extends BroadcastReceiver {
         if (ACTION_REFRESH_SAFETY_SOURCES.equals(intent.getAction())) {
             String[] sourceIdsExtra =
                     intent.getStringArrayExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS);
-            if (sourceIdsExtra != null && sourceIdsExtra.length > 0) {
-                final String refreshBroadcastId = intent.getStringExtra(
-                        SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
+            final String refreshBroadcastId = intent.getStringExtra(
+                    SafetyCenterManager.EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID);
+            if (sourceIdsExtra != null && sourceIdsExtra.length > 0 && refreshBroadcastId != null) {
                 final SafetyEvent safetyEvent = new SafetyEvent.Builder(
                         SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
                         .setRefreshBroadcastId(refreshBroadcastId).build();
