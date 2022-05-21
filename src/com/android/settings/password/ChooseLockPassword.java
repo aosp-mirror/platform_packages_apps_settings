@@ -39,6 +39,7 @@ import static com.android.internal.widget.PasswordValidationError.NOT_ENOUGH_UPP
 import static com.android.internal.widget.PasswordValidationError.RECENTLY_USED;
 import static com.android.internal.widget.PasswordValidationError.TOO_LONG;
 import static com.android.internal.widget.PasswordValidationError.TOO_SHORT;
+import static com.android.internal.widget.PasswordValidationError.TOO_SHORT_WHEN_ALL_NUMERIC;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
@@ -91,6 +92,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.settingslib.utils.StringUtil;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -833,6 +835,11 @@ public class ChooseLockPassword extends SettingsActivity {
                                         ? R.plurals.lockpassword_password_too_short
                                         : R.plurals.lockpassword_pin_too_short,
                                 error.requirement, error.requirement));
+                        break;
+                    case TOO_SHORT_WHEN_ALL_NUMERIC:
+                        messages.add(
+                                StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                        R.string.lockpassword_password_too_short_all_numeric));
                         break;
                     case TOO_LONG:
                         messages.add(getResources().getQuantityString(
