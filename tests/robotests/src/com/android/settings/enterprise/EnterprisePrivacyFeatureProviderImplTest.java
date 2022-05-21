@@ -105,6 +105,10 @@ public class EnterprisePrivacyFeatureProviderImplTest {
         when(mContext.getApplicationContext()).thenReturn(mContext);
         resetAndInitializePackageManager();
         when(mUserManager.getProfiles(mUserId)).thenReturn(mProfiles);
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
+                .thenReturn(mDevicePolicyManager);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mProfiles.add(new UserInfo(mUserId, "", "", 0 /* flags */));
         mResources = RuntimeEnvironment.application.getResources();
 

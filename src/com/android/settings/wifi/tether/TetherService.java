@@ -256,6 +256,7 @@ public class TetherService extends Service {
     }
 
     private void disableTethering(final int tetheringType) {
+        Log.w(TAG, "Disable tethering, type:" + tetheringType);
         final TetheringManager tm = (TetheringManager) getSystemService(Context.TETHERING_SERVICE);
         tm.stopTethering(tetheringType);
     }
