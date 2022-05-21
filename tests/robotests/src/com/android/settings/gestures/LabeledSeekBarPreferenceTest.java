@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.LabeledSeekBarPreference;
 
@@ -56,7 +57,8 @@ import org.robolectric.annotation.Config;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
-        ShadowUserManager.class
+        ShadowUserManager.class,
+        ShadowInteractionJankMonitor.class,
 })
 public class LabeledSeekBarPreferenceTest {
 
