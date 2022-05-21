@@ -433,7 +433,8 @@ public class SettingsActivity extends SettingsBaseActivity
             final UserManager um = getSystemService(UserManager.class);
             final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
             if (userInfo.isManagedProfile()) {
-                trampolineIntent.putExtra(EXTRA_USER_HANDLE, getUser());
+                trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .putExtra(EXTRA_USER_HANDLE, getUser());
                 startActivityAsUser(trampolineIntent, um.getPrimaryUser().getUserHandle());
             } else {
                 startActivity(trampolineIntent);
