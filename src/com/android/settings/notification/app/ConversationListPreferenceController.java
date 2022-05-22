@@ -41,19 +41,13 @@ import java.util.List;
 
 public abstract class ConversationListPreferenceController extends AbstractPreferenceController {
 
-    private static final String KEY = "all_conversations";
-
+    private static final String SUMMARY_KEY_SUFFIX = "_summary";
     protected final NotificationBackend mBackend;
 
     public ConversationListPreferenceController(Context context,
             NotificationBackend backend) {
         super(context);
         mBackend = backend;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -72,6 +66,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
         if (containerGroup.getPreferenceCount() != 0) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
+                summaryPref.setKey(getPreferenceKey() + SUMMARY_KEY_SUFFIX);
                 containerGroup.addPreference(summaryPref);
             }
             containerGroup.setVisible(true);
