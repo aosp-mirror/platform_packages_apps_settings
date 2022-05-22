@@ -140,6 +140,10 @@ public class TopLevelHighlightMixin implements Parcelable, DialogInterface.OnSho
         }
     }
 
+    String getHighlightPreferenceKey() {
+        return mCurrentKey;
+    }
+
     void highlightPreferenceIfNeeded() {
         if (mTopLevelAdapter != null) {
             mTopLevelAdapter.requestHighlight();
