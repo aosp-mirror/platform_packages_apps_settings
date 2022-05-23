@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Predefinição do sistema"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"A seleção do idioma para esta app não está disponível a partir das Definições."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"O idioma pode diferir dos idiomas disponíveis na app. Algumas apps podem não suportar esta definição."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Apenas as apps que suportam a seleção do idioma são apresentadas aqui."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remover os idiomas selecionados?</item>
       <item quantity="one">Remover o idioma selecionado?</item>
@@ -596,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Bloqueio do perfil de trabalho, encriptação e muito mais"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encriptação, credenciais e muito mais"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"segurança, mais definições de segurança, mais definições, definições de segurança avançadas"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Mais definições de privacidade"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Preenchimento automático, controlos da atividade e mais"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Pode adicionar até <xliff:g id="COUNT">%d</xliff:g> impressões digitais"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Adicionou o número máximo de impressões digitais"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Não é possível adicionar mais impressões digitais"</string>
@@ -638,10 +635,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Impeça terceiros de utilizar este dispositivo sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Impeça terceiros de utilizar este telemóvel sem a sua autorização ao ativar as funcionalidades de proteção do dispositivo. Escolha o bloqueio de ecrã que pretende utilizar."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolha o método de bloqueio de ecrã de segurança"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (3532653662159888328) -->
-    <skip />
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message_action (5956615234246626264) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Caso se esqueça do bloqueio de ecrã, o administrador de TI não consegue repô-lo."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defina um bloqueio de trabalho separado"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Caso se esqueça deste bloqueio, peça ao seu administrador de TI para o repor"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opções de bloqueio de ecrã"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opções de bloqueio de ecrã"</string>
@@ -752,8 +747,7 @@
       <item quantity="other">Tem de ter, pelo menos, <xliff:g id="COUNT_1">%d</xliff:g> carateres.</item>
       <item quantity="one">Tem de incluir, pelo menos, <xliff:g id="COUNT_0">%d</xliff:g> caráter.</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Se usar só números, tem de ter, pelo menos, 1 dígito}other{Se usar só números, tem de ter, pelo menos, # dígitos}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_1">%d</xliff:g> dígitos</item>
       <item quantity="one">O PIN tem de incluir, pelo menos, <xliff:g id="COUNT_0">%d</xliff:g> dígito</item>
@@ -2616,7 +2610,7 @@
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"O controlo total é adequado para apps que ajudam nas necessidades de acessibilidade, mas não para a maioria das apps."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Ver e controlar o ecrã"</string>
     <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Pode ler todo o conteúdo do ecrã e sobrepor conteúdo a outras apps."</string>
-    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Veja e execute ações"</string>
+    <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Ver e executar ações"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Pode monitorizar as suas interações com uma app ou um sensor de hardware e interagir com apps em seu nome."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Permitir"</string>
     <string name="accessibility_dialog_button_deny" msgid="2037249860078259284">"Recusar"</string>
@@ -3461,10 +3455,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Alterar PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Ajuda e comentários"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Artigos de ajuda, telemóvel e chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Artigos de ajuda, tablet e chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Artigos de ajuda, dispositivo e chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Conta para conteúdo"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID da foto"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ameaças extremas"</string>
@@ -3735,10 +3727,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Multimédia com legendas automáticas"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altifalante do telemóvel"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auscultadores com fios"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"O Áudio espacial cria um som envolvente que dá a sensação de surgir de todas as direções. Funciona apenas com alguns conteúdos multimédia."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desativado"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Ativado/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhum}=1{1 horário definido}other{# horários definidos}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não incomodar"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receba notificações só de pessoas e apps importantes"</string>
@@ -3859,8 +3856,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Controle as notificações de apps individuais"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Geral"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notificações de trabalho"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Perfil de trabalho"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notificações adaptáveis"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioridade das notificações adaptável"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Defina automaticamente as notificações de prioridade mais baixa como discretas."</string>
@@ -4641,7 +4637,7 @@
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Aumente ou diminua o tamanho de todos os itens"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densidade de apresentação, zoom do ecrã, escala, dimensionamento"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Aumente ou diminua os itens no ecrã. Algumas apps no ecrã podem mudar de posição."</string>
-    <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Pré-visualizar"</string>
+    <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Pré-visualização"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Diminuir"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Aumentar"</string>
     <string name="screen_zoom_conversation_icon_alex" msgid="2896036059049355968">"A"</string>
@@ -4804,7 +4800,7 @@
     <string name="data_saver_on" msgid="7848893946018448793">"Ativada"</string>
     <string name="data_saver_off" msgid="5891210864117269045">"Desativada"</string>
     <string name="data_saver_switch_title" msgid="7111538580123722959">"Usar Poupança de dados"</string>
-    <string name="unrestricted_app_title" msgid="7117585996574329284">"Utilização dados sem restrições"</string>
+    <string name="unrestricted_app_title" msgid="7117585996574329284">"Uso de dados sem restrições"</string>
     <string name="unrestricted_app_summary" msgid="282698963532000403">"Permitir acesso de dados sem restrições com Poupança de dados ativada"</string>
     <string name="home_app" msgid="6056850504746902747">"Aplicação Página inicial"</string>
     <string name="no_default_home" msgid="3588073707316139318">"Sem Página inicial predefinida"</string>
@@ -5633,10 +5629,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"chamadas"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"dados móveis"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Para melhorar a experiência do dispositivo, as apps e os serviços podem continuar a procurar redes Wi-Fi em qualquer altura, mesmo quando o Wi-Fi está desativado. Pode usar esta opção, por exemplo, para melhorar as funcionalidades e os serviços baseados na localização. Pode alterar esta opção nas definições de procura de Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Alterar"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Ligado"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Sem ligação"</string>
@@ -5798,8 +5792,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Introduza a palavra-passe"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Não é possível ligar. Tente novamente."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Palavra-passe incorreta"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Para começar a ouvir, centre o código QR abaixo"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"O código QR não é um formato válido"</string>
 </resources>

@@ -229,8 +229,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"الإعداد التلقائي للنظام"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"لا تتوفَّر إمكانية اختيار لغة لهذا التطبيق من الإعدادات."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"قد تختلف اللغة عن اللغات المتوفّرة في التطبيق. قد لا تدعم بعض التطبيقات هذا الإعداد."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"تظهر هنا التطبيقات التي تدعم اختيار اللغة فقط."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="zero">هل تريد إزالة اللغة المحددة؟</item>
       <item quantity="two">هل تريد إزالة اللغتين المحددتين؟</item>
@@ -604,18 +603,16 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"إضافة بصمة إصبع أخرى"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"التالي"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"بالإضافة إلى فتح قفل هاتفك، يمكنك أيضًا استخدام بصمة إصبعك للسماح بعمليات الشراء والوصول إلى التطبيق. "<annotation id="url">"مزيد من المعلومات"</annotation></string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"تم إيقاف خيار قفل الشاشة. لمزيد من المعلومات، يمكنك التواصُل مع المشرف داخل مؤسستك."</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"لا يزال بإمكانك استخدام بصمة إصبعك للسماح بإجراء عمليات الشراء والوصول إلى التطبيقات."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"خيار قفل الشاشة غير مفعَّل. لمزيد من المعلومات، يمكنك التواصُل مع المشرف داخل مؤسستك."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"لا يزال بإمكانك استخدام بصمة إصبعك للسماح بعمليات الشراء ومنح تطبيق الإذن بالوصول."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ارفع إصبعك ثم المس زر الاستشعار مرة أخرى."</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"لا يمكن استخدام مستشعر بصمات الإصبع. يُرجى التواصل مع مقدِّم خدمات إصلاح."</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"المزيد من إعدادات الأمان"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"قفل الملف الشخصي للعمل، والتشفير، وغير ذلك"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"التشفير، وبيانات الاعتماد، وغير ذلك"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"الأمان، والمزيد من إعدادات الأمان، والمزيد من الإعدادات، وإعدادات أمان متقدِّمة"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"المزيد من إعدادات الخصوصية"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"الملء التلقائي وعناصر التحكُّم في النشاط وغير ذلك"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"يمكنك إضافة ما يصل إلى <xliff:g id="COUNT">%d</xliff:g> بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"لقد أضفت الحد الأقصى لعدد بصمات الإصبع"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"يتعذر إضافة مزيد من بصمات الإصبع"</string>
@@ -770,8 +767,7 @@
       <item quantity="other">يجب أن تحتوي كلمة المرور على <xliff:g id="COUNT_1">%d</xliff:g> حرف على الأقل.</item>
       <item quantity="one">يجب أن تحتوي كلمة المرور على حرف واحد (<xliff:g id="COUNT_0">%d</xliff:g>) على الأقل.</item>
     </plurals>
-    <!-- no translation found for lockpassword_password_too_short_all_numeric (4301294924022401502) -->
-    <skip />
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.}zero{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقم على الأقل.}two{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على رقمَين على الأقل.}few{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # أرقام على الأقل.}many{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقمًا على الأقل.}other{في حال استخدام الأرقام فقط، يجب أن تحتوي كلمة المرور على # رقم على الأقل.}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="zero">يجب أن يحتوي رقم التعريف الشخصي على <xliff:g id="COUNT_1">%d</xliff:g> رقم على الأقل.</item>
       <item quantity="two">يجب أن يحتوي رقم التعريف الشخصي على رقمين (<xliff:g id="COUNT_1">%d</xliff:g>) على الأقل.</item>
@@ -3627,10 +3623,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"‏تغيير رمز PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"المساعدة والملاحظات"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"مقالات المساعدة والهاتف والدردشة"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"مقالات المساعدة والجهاز اللوحي والدردشة"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"مقالات المساعدة والجهاز والدردشة"</string>
     <string name="user_account_title" msgid="6389636876210834864">"حساب المحتوى"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"معرف الصورة"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"التهديدات القصوى"</string>
@@ -3905,10 +3899,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"شرح تلقائي للوسائط"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"مكبّر صوت الهاتف"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"سماعات رأس سلكية"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"يصدر عن ميزة \"الصوت المكاني\" صوتًا غامرًا يجعلك تشعر وكأنه يأتي من كل مكان حولك. هذه الميزة غير متوافقة مع بعض الوسائط."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"إيقاف"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"مفعّلة / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"مفعّلة / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> و<xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{ما من جداول زمنية}=1{تم ضبط جدول زمني واحد}two{تم ضبط جدولين زمنيين}few{تم ضبط # جداول زمنية}many{تم ضبط # جدولاً زمنيًا}other{تم ضبط # جدول زمني}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"وضع \"عدم الإزعاج\""</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"ستصلك الإشعارات من الأشخاص المهمّين والتطبيقات المهمّة فقط"</string>
@@ -4029,8 +4028,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"التحكّم في الإشعارات من التطبيقات الفردية"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"إشعارات عامة"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"إشعارات العمل"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"الملف الشخصي للعمل"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"الإشعارات التكيّفية"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"أولوية الإشعارات التكيّفية"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"ضبط إشعارات الأولوية المنخفضة تلقائيًا على \"التنبيهات الهادئة\""</string>
@@ -5396,7 +5394,7 @@
     <string name="do_disclosure_with_name" msgid="867544298924410766">"تتم إدارة هذا الجهاز بواسطة <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>."</string>
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"مزيد من المعلومات"</string>
-    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"الإعداد المحظور"</string>
+    <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"الإعداد محظور"</string>
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"الإعدادات المحظورة مسموح بها للتطبيق <xliff:g id="APP_NAME">%s</xliff:g>."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"بهدف الحفاظ على أمانك، هذا الإعداد غير متاح الآن."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"معلومات الجهاز الممول"</string>
@@ -5979,10 +5977,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"المكالمات"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"الرسائل القصيرة"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"بيانات الجوّال"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"‏لتحسين تجربة استخدامك للجهاز، يظل بإمكان التطبيقات والخدمات البحث عن شبكات Wi‑Fi في أي وقت، حتى عند إيقاف ميزة Wi‑Fi. ويمكن استخدام هذا الإجراء لتحسين الميزات والخدمات المستندة إلى الموقع الجغرافي مثلاً. وبإمكانك تغيير هذا الخيار في إعدادات البحث عن شبكات Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"تغيير"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"متصلة بالإنترنت"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"لا يتوفّر اتصال بالإنترنت"</string>
@@ -6144,8 +6140,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"إدخال كلمة المرور"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"يتعذّر الاتصال. يُرجى إعادة المحاولة."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"كلمة مرور غير صحيحة"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"لبدء الاستماع، امسَح ضوئيًا رمز الاستجابة السريعة التالي."</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"تنسيق رمز الاستجابة السريعة غير صالح."</string>
 </resources>
