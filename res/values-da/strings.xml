@@ -225,8 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Systemstandard"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Sprogvalg for denne app er ikke tilgængeligt i Indstillinger."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Sproget kan adskille sig fra sprogene i appen. Nogle apps understøtter muligvis ikke denne indstilling."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Her vises kun apps, der understøtter sprogvalg."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Vil du fjerne det valgte sprog?</item>
       <item quantity="other">Vil du fjerne de valgte sprog?</item>
@@ -596,10 +595,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Lås til arbejdsprofil, kryptering og mere"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Kryptering, loginoplysninger og mere"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sikkerhed, flere sikkerhedsindstillinger, flere indstillinger, avancerede sikkerhedsindstillinger"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Flere privatlivsindstillinger"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Autofyld, Aktivitetsadministration m.m."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Du kan tilføje op til <xliff:g id="COUNT">%d</xliff:g> fingeraftryk"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Du har tilføjet det maksimale antal fingeraftryk"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Du kan ikke tilføje flere fingeraftryk"</string>
@@ -1879,9 +1876,9 @@
     <string name="location_high_battery_use" msgid="4277318891200626524">"Højt batteriforbrug"</string>
     <string name="location_low_battery_use" msgid="5218950289737996431">"Lavt batteriforbrug"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="5004781272733434794">"Wi-Fi-scanning"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Tillad, at apps og tjenester altid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre placeringsbaserede funktioner og tjenester."</string>
+    <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Tillad, at apps og tjenester altid kan søge efter Wi-Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-scanning"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Tillad, at apps og tjenester altid kan søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre placeringsbaserede funktioner og tjenester."</string>
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Tillad, at apps og tjenester altid kan søge efter enheder i nærheden, også selvom Bluetooth er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"Lokationstjenester"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Lokationstjenester"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Lokationstjenester til arbejdet"</string>
@@ -3458,10 +3455,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Skift pinkode"</string>
     <string name="help_label" msgid="2896538416436125883">"Hjælp og feedback"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Support – artikler, telefon og chat"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Hjælpeartikler, tablet og chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Hjælpeartikler, enhed og chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Konto til indhold"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Foto-id"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Ekstreme trusler"</string>
@@ -3732,10 +3727,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Undertekster til medier"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefonens højttaler"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Høretelefoner med ledning"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Rumlig lyd giver en fantastisk lydoplevelse, der giver et indtryk af, at lyden kommer fra alle vinkler. Fungerer kun sammen med nogle former for medier."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Fra"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Til/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Til/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer fra vigtige personer og apps"</string>
@@ -3856,8 +3856,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Styr notifikationer fra individuelle apps"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Generelt"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Arbejdsunderretninger"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Arbejdsprofil"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Automatiske notifikationer"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Automatisk prioritetsniveau for notifikationer"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Angiv automatisk notifikationer med lavere prioritet som Diskret"</string>
@@ -4421,7 +4420,7 @@
     <string name="unused_apps_switch" msgid="7595419855882245772">"Sæt appaktivitet på pause ved inaktivitet"</string>
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"Fjern tilladelser, slet midlertidige filer og stop notifikationer"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Alle apps"</string>
-    <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerede aps"</string>
+    <string name="filter_enabled_apps" msgid="8868356616126759124">"Installerede apps"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Instant-apps"</string>
     <string name="filter_notif_all_apps" msgid="2764590815789208306">"Apps: Alle"</string>
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Slået fra"</string>
@@ -5010,7 +5009,7 @@
     <string name="web_action_enable_summary" msgid="2658930257777545990">"Åbn links i apps – selv hvis de ikke er installeret"</string>
     <string name="web_action_section_title" msgid="994717569424234098">"Instant-apps"</string>
     <string name="instant_apps_settings" msgid="4280942494969957858">"Præferencer for Instant Apps"</string>
-    <string name="domain_url_section_title" msgid="9028890472923474958">"Installerede aps"</string>
+    <string name="domain_url_section_title" msgid="9028890472923474958">"Installerede apps"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="170508173207142665">"Din lagerplads administreres nu af lageradministratoren"</string>
     <string name="account_for_section_header" msgid="7466759342105251096">"Konti for <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="configure_section_header" msgid="3126887329521705210">"Konfigurer"</string>
@@ -5630,10 +5629,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"opkald"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"sms"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobildata"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"For at forbedre brugeroplevelsen på enheden kan apps og tjenester stadig til enhver tid scanne efter Wi‑Fi-netværk, også selvom Wi-Fi er deaktiveret. Dette kan f.eks. bruges til at forbedre lokationsbaserede funktioner og tjenester. Du kan ændre dette i indstillingerne for Wi-Fi-scanning."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Skift"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Forbundet"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Der er ingen forbindelse"</string>
@@ -5795,8 +5792,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Angiv adgangskode"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Der kan ikke oprettes forbindelse. Prøv igen."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Forkert adgangskode"</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Centrer QR-koden nedenfor for at gå i gang med at lytte"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR-koden har ikke et gyldigt format"</string>
 </resources>
