@@ -241,7 +241,8 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         // Run heavy RPCs before switching to UI thread
         final List<VpnProfile> vpnProfiles = loadVpnProfiles();
-        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true);
+        final List<AppVpnInfo> vpnApps = getVpnApps(context, /* includeProfiles */ true,
+                mFeatureProvider);
 
         final Map<String, LegacyVpnInfo> connectedLegacyVpns = getConnectedLegacyVpns();
         final Set<AppVpnInfo> connectedAppVpns = getConnectedAppVpns();
@@ -571,7 +572,15 @@ public class VpnSettings extends RestrictedSettingsFragment implements
         return result;
     }
 
-    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles) {
+    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles,
+            AdvancedVpnFeatureProvider featureProvider) {
+        return getVpnApps(context, includeProfiles, featureProvider,
+                context.getSystemService(AppOpsManager.class));
+    }
+
+    @VisibleForTesting
+    static List<AppVpnInfo> getVpnApps(Context context, boolean includeProfiles,
+            AdvancedVpnFeatureProvider featureProvider, AppOpsManager aom) {
         List<AppVpnInfo> result = Lists.newArrayList();
 
         final Set<Integer> profileIds;
@@ -584,8 +593,6 @@ public class VpnSettings extends RestrictedSettingsFragment implements
             profileIds = Collections.singleton(UserHandle.myUserId());
         }
 
-        // Fetch VPN-enabled apps from AppOps.
-        AppOpsManager aom = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         List<AppOpsManager.PackageOps> apps =
                 aom.getPackagesForOps(new int[] {OP_ACTIVATE_VPN, OP_ACTIVATE_PLATFORM_VPN});
         if (apps != null) {
@@ -603,7 +610,7 @@ public class VpnSettings extends RestrictedSettingsFragment implements
                         allowed = true;
                     }
                 }
-                if (allowed) {
+                if (allowed || isAdvancedVpn(featureProvider, pkg.getPackageName(), context)) {
                     result.add(new AppVpnInfo(userId, pkg.getPackageName()));
                 }
             }
@@ -611,6 +618,12 @@ public class VpnSettings extends RestrictedSettingsFragment implements
 
         Collections.sort(result);
         return result;
+    }
+
+    private static boolean isAdvancedVpn(AdvancedVpnFeatureProvider featureProvider,
+            String packageName, Context context) {
+        return featureProvider.isAdvancedVpnSupported(context)
+                && TextUtils.equals(packageName, featureProvider.getAdvancedVpnPackageName());
     }
 
     private static List<VpnProfile> loadVpnProfiles() {
