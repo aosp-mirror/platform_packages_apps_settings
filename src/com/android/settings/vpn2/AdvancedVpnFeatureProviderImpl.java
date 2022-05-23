@@ -41,4 +41,9 @@ public class AdvancedVpnFeatureProviderImpl implements AdvancedVpnFeatureProvide
     public String getVpnPreferenceGroupTitle(Context context) {
         return null;
     }
+
+    @Override
+    public boolean isAdvancedVpnRemovable() {
+        return true;
+    }
 }
