@@ -227,8 +227,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Системные настройки по умолчанию"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Для этого приложения не поддерживается выбор языка в настройках."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Выбранный язык может быть недоступен в приложении. Некоторые приложения могут не поддерживать этот параметр."</string>
-    <!-- no translation found for desc_app_locale_selection_supported (6149467826636295127) -->
-    <skip />
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Здесь показаны только приложения, которые поддерживают выбор языка."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Удалить выбранные языки?</item>
       <item quantity="few">Удалить выбранные языки?</item>
@@ -440,7 +439,7 @@
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Разблокировка по отпечатку"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Сканер отпечатков пальцев"</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Используйте отпечаток пальца, чтобы разблокировать планшет или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Используйте отпечаток пальца, чтобы разблокировать устройство или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Используйте отпечаток пальца, чтобы снимать блокировку устройства или подтверждать свою личность, например для входа в приложения и одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Используйте отпечаток пальца, чтобы разблокировать телефон или подтверждать свою личность, например для входа в приложения или одобрения покупок."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Разрешите ребенку использовать отпечаток пальца, чтобы разблокировать телефон и подтверждать личность, например для входа в приложения, одобрения покупок и не только."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Вы сами управляете данными"</string>
@@ -491,7 +490,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"С помощью фейсконтроля"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"С помощью отпечатка пальца"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"С помощью фейсконтроля или отпечатка пальца"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Верни телефон родителю."</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Верни телефон родителю."</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"ОК"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Не настраивать блокировку?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Защита устройства не будет активирована. В случае потери или кражи планшета либо сброса его настроек им смогут воспользоваться посторонние."</string>
@@ -604,10 +607,8 @@
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Блокировка рабочего профиля, шифрование и прочее"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Шифрование, учетные данные и прочее"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"безопасность, дополнительные настройки безопасности, дополнительные настройки, расширенные настройки безопасности"</string>
-    <!-- no translation found for privacy_advanced_settings (8828215456566937719) -->
-    <skip />
-    <!-- no translation found for privacy_advanced_settings_summary (2927281894237561935) -->
-    <skip />
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Дополнительные настройки конфиденциальности"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Автозаполнение, отслеживание действий и прочее"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Максимальное количество отпечатков пальца, которые можно добавить: <xliff:g id="COUNT">%d</xliff:g>"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Вы уже добавили максимальное количество отпечатков"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Больше нельзя добавить отпечатки пальцев"</string>
@@ -2138,8 +2139,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Тревожное оповещение"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Сбросить настройки приложений"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Сбросить настройки?"</string>
-    <!-- no translation found for reset_app_preferences_desc (8550782670650158299) -->
-    <skip />
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"Будут сброшены следующие настройки:\n\n"<li>"отключенные приложения;"</li>\n<li>"отключенные уведомления приложений;"</li>\n<li>"приложения по умолчанию;"</li>\n<li>"ограничения на передачу данных приложениями в фоновом режиме;"</li>\n<li>"все ограничения разрешений;"</li>\n<li>"настройки расхода заряда батареи."</li>\n\n"Данные приложений удалены не будут."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Сбросить"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Управление местом"</string>
     <string name="filter" msgid="9039576690686251462">"Фильтр"</string>
@@ -3548,10 +3548,8 @@
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Изменить PIN-код"</string>
     <string name="help_label" msgid="2896538416436125883">"Справка/отзыв"</string>
     <string name="support_summary" product="default" msgid="6137136608018134563">"Справочные статьи, поддержка по телефону и в чате"</string>
-    <!-- no translation found for support_summary (6681247727996378252) -->
-    <skip />
-    <!-- no translation found for support_summary (1690554254039752541) -->
-    <skip />
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Справочные статьи, помощь на планшете и в чате"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Справочные статьи, помощь на устройстве и в чате"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Аккаунт для контента"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Документ с фото"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Серьезные угрозы"</string>
@@ -3824,10 +3822,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Автоматически добавлять субтитры"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Встроенный динамик"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Проводные наушники"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Пространственное звучание создает эффект погружения. Поддерживается не для всего медиаконтента."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Отключено"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Включено/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Включено/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> и <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Нет настроенных расписаний}=1{Настроено 1 расписание}one{Настроено # расписание}few{Настроено # расписания}many{Настроено # расписаний}other{Настроено # расписания}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Не беспокоить"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Получать уведомления только от важных людей и приложений."</string>
@@ -3948,8 +3951,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Управление уведомлениями отдельных приложений"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Общие"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Рабочие уведомления"</string>
-    <!-- no translation found for profile_section_header_for_advanced_privacy (8385775428904838579) -->
-    <skip />
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Рабочий профиль"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Адаптивные уведомления"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Приоритет адаптивных уведомлений"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Автоматически назначать беззвучный режим для уведомлений с низким приоритетом"</string>
@@ -5015,7 +5017,7 @@
     <string name="special_access_more" msgid="132919514147475846">"Ещё"</string>
     <string name="reset_shortcut_manager_throttling" msgid="2183940254903144298">"Сброс счетчиков ShortcutManager"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="8949943009096885470">"Готово"</string>
-    <string name="notification_suggestion_title" msgid="6309263655965785411">"Выберите параметры для информации на заблоки­­рованном экране"</string>
+    <string name="notification_suggestion_title" msgid="6309263655965785411">"Настройка экрана блокировки"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Скрыть или показать содержание уведомлений"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"Все"</string>
     <string name="page_tab_title_support" msgid="3235725053332345773">"Помощь и советы"</string>
@@ -5810,10 +5812,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"Звонки"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"Мобильный интернет"</string>
-    <!-- no translation found for wifi_scan_notify_message (1331238142061476869) -->
-    <skip />
-    <!-- no translation found for wifi_scan_change (8438320311511852918) -->
-    <skip />
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Чтобы улучшать работу устройства (например, для более точного определения вашего местоположения), приложения и сервисы могут искать беспроводные сети в любое время, даже если вы отключили Wi‑Fi. Запретить это можно в настройках поиска сетей Wi-Fi."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Изменить настройки"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Подключено"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"Нет подключения"</string>
@@ -5956,7 +5956,7 @@
     <string name="reboot_dialog_reboot_now" msgid="235616015988522355">"Перезагрузить сейчас"</string>
     <string name="reboot_dialog_reboot_later" msgid="4261717094186904568">"Перезагрузить позже"</string>
     <string name="bluetooth_details_spatial_audio_title" msgid="1368071116994002707">"Пространственное звучание"</string>
-    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук с совместимых медиаустройств становится более выразительным."</string>
+    <string name="bluetooth_details_spatial_audio_summary" msgid="5026859623681482668">"Звук из поддерживаемых источников становится более выразительным"</string>
     <string name="bluetooth_details_head_tracking_title" msgid="5416972521040337799">"Отслеживание движений головы"</string>
     <string name="bluetooth_details_head_tracking_summary" msgid="3942238746595985395">"Звук меняется, когда вы двигаете головой, и становится более естественным."</string>
     <string name="ingress_rate_limit_title" msgid="2106694002836274350">"Ограничение скорости скачивания"</string>
@@ -5975,8 +5975,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Введите пароль"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Не удалось подключиться. Повторите попытку."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Пароль указан неверно."</string>
-    <!-- no translation found for bt_le_audio_scan_qr_code_scanner (7614569515419813053) -->
-    <skip />
-    <!-- no translation found for bt_le_audio_qr_code_is_not_valid_format (7821837654128137901) -->
-    <skip />
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Чтобы прослушать аудио, поместите QR-код в центр."</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Недопустимый формат QR-кода."</string>
 </resources>
