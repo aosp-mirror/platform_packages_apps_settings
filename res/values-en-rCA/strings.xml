@@ -219,15 +219,13 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"App languages"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Set the language for each app"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"App language"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Update the app"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"You need to update the app for the latest available languages"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Update now"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Suggested languages"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"All languages"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"System language"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"System default"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Language selection for this app isn’t available from Settings."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Language may differ from languages available in the app. Some apps may not support this setting."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Only apps that support language selection are shown here."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Remove selected languages?</item>
       <item quantity="one">Remove selected language?</item>
@@ -405,7 +403,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Set up Face Unlock"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone or for authentication in apps."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern or password to unlock your phone or for authentication in apps."</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Use Face Unlock for"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Use Face Unlock to"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"When using Face Unlock"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Require eyes to be open"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"To unlock the phone, your eyes must be open"</string>
@@ -433,12 +431,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Set up your fingerprint"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Allow Fingerprint Unlock"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Use your fingerprint"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps or approve a purchase."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps or approve a purchase."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps or approve a purchase."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Allow your child to use their fingerprint to unlock their phone or verify that it’s them. This happens when they sign in to apps, approve a purchase and more."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"You\'re in control"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"You and your child are in control"</string>
@@ -474,12 +469,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Lift your finger after you feel a vibration"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Move somewhere with gentler lighting and try again"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"You’ve reached the maximum number of attempts"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Face &amp; Fingerprint Unlock"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Tap to set up"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Face and fingerprints added"</string>
@@ -491,7 +483,11 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Using face"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Using fingerprint"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Using face or fingerprint"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Hand the phone back to your parent"</string>
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
+    <skip />
+    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
+    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Hand the phone back to your parent"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Skip screen lock?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Device protection features won’t be turned on. You won’t be able to prevent others from using this tablet if it’s lost, stolen or reset."</string>
@@ -530,12 +526,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"This helps capture more of your fingerprint"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enrolling fingerprint <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerprint added"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Now you can use your fingerprint to unlock your tablet or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Now you can use your fingerprint to unlock your device or verify that it’s you, like when you sign in to apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Now you can use your fingerprint to unlock your phone or verify that it’s you, like when you sign in to apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Do it later"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lift, then touch again"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
@@ -599,13 +592,16 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Add another"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Next"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"In addition to unlocking your phone, you can also use your fingerprint to authorize purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" The screen lock option is disabled. To learn more, contact your organization\'s admin. "<annotation id="admin_details">"More details"</annotation>\n\n"You can still use your fingerprint to authorize purchases and app access. "<annotation id="url">"Learn more"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"The screen lock option is disabled. To find out more, contact your organisation’s admin."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"You can still use your fingerprint to authorise purchases and app access."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Lift finger, then touch sensor again"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Can’t use fingerprint sensor. Visit a repair provider"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"More security settings"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Work profile lock, encryption and more"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Encryption, credentials and more"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"security, more security settings, more settings, advanced security settings"</string>
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"More privacy settings"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Auto-fill, Activity controls and more"</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"You can add up to <xliff:g id="COUNT">%d</xliff:g> fingerprints"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"You’ve added the maximum number of fingerprints"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Can’t add more fingerprints"</string>
@@ -644,8 +640,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Prevent others from using this device without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Prevent others from using this phone without your permission by activating device protection features. Choose the screen lock that you would like to use."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Choose your backup screen lock method"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"If you forget your screen lock, your IT admin can’t reset it."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Set a separate work lock"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"If you forget this lock, ask your IT admin to reset it"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Screen lock options"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Screen lock options"</string>
@@ -756,6 +752,7 @@
       <item quantity="other">Must be at least <xliff:g id="COUNT_1">%d</xliff:g> characters</item>
       <item quantity="one">Must contain at least <xliff:g id="COUNT_0">%d</xliff:g> character</item>
     </plurals>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{If using only numbers, must be at least 1 digit}other{If using only numbers, must be at least # digits}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">PIN must be at least <xliff:g id="COUNT_1">%d</xliff:g> digits</item>
       <item quantity="one">PIN must contain at least <xliff:g id="COUNT_0">%d</xliff:g> digit</item>
@@ -2095,7 +2092,7 @@
     <string name="default_emergency_app" msgid="1929974800666613803">"Emergency app"</string>
     <string name="reset_app_preferences" msgid="8861758340732716573">"Reset app preferences"</string>
     <string name="reset_app_preferences_title" msgid="8935136792316050759">"Reset app preferences?"</string>
-    <string name="reset_app_preferences_desc" msgid="6509978724602405805">"This will reset all preferences for:\n\n"<li>"Disabled apps"</li>\n<li>"Disabled app notifications"</li>\n<li>"Default applications for actions"</li>\n<li>"Background data restrictions for apps"</li>\n<li>"Any permission restrictions"</li>\n\n"You will not lose any app data."</string>
+    <string name="reset_app_preferences_desc" msgid="8550782670650158299">"This will reset all preferences for:\n\n"<li>"Disabled apps"</li>\n<li>"Disabled app notifications"</li>\n<li>"Default applications for actions"</li>\n<li>"Background data restrictions for apps"</li>\n<li>"Any permission restrictions"</li>\n<li>"Battery usage settings"</li>\n\n"You will not lose any app data."</string>
     <string name="reset_app_preferences_button" msgid="2591318711372850058">"Reset apps"</string>
     <string name="manage_space_text" msgid="9013414693633572277">"Manage space"</string>
     <string name="filter" msgid="9039576690686251462">"Filter"</string>
@@ -3467,7 +3464,9 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remove restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Change PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Help and feedback"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Help articles, phone &amp; chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Help articles, phone and chat"</string>
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Help articles, tablet &amp; chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Help articles, device &amp; chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account for content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Extreme threats"</string>
@@ -3738,10 +3737,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatically caption media"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Phone speaker"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Wired headphones"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Spatial Audio creates immersive sound that seems like it’s coming from all around you. Only works with some media."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Off"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"On/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"On / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> and <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{None}=1{1 schedule set}other{# schedules set}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Do Not Disturb"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Only get notified by important people and apps"</string>
@@ -3862,6 +3866,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Control notifications from individual apps"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"General"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Work notifications"</string>
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Work profile"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Adaptive notifications"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Adaptive notification priority"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Automatically set lower priority notifications to Gentle"</string>
@@ -5633,7 +5638,8 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"calls"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"mobile data"</string>
-    <string name="wifi_scan_notify_message" msgid="4130641837826688879">"To improve device experience, apps and services can still scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi‑Fi scanning settings. "<annotation id="link">"Change"</annotation></string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"To improve device experience, apps and services can still scan for Wi‑Fi networks at any time, even when Wi‑Fi is off. This can be used, for example, to improve location-based features and services. You can change this in Wi‑Fi scanning settings."</string>
+    <string name="wifi_scan_change" msgid="8438320311511852918">"Change"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connected"</string>
     <string name="mobile_data_no_connection" msgid="905897142426974030">"No connection"</string>
@@ -5795,4 +5801,6 @@
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Enter password"</string>
     <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Can’t connect. Try again."</string>
     <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Wrong password"</string>
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"To start listening, centre the QR code below"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"QR code isn\'t a valid format"</string>
 </resources>

@@ -21,6 +21,7 @@ import static android.view.View.VISIBLE;
 
 import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutType;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
@@ -57,6 +58,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieDrawable;
@@ -130,12 +132,29 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     static AlertDialog createAccessibilityTutorialDialog(Context context, int shortcutTypes,
-            @Nullable DialogInterface.OnClickListener negativeButtonListener) {
-        return new AlertDialog.Builder(context)
-                .setView(createShortcutNavigationContentView(context, shortcutTypes))
-                .setNegativeButton(R.string.accessibility_tutorial_dialog_button,
-                        negativeButtonListener)
+            @Nullable DialogInterface.OnClickListener actionButtonListener) {
+
+        final int category = SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS;
+        final DialogInterface.OnClickListener linkButtonListener =
+                (dialog, which) -> new SubSettingLauncher(context)
+                        .setDestination(AccessibilityButtonFragment.class.getName())
+                        .setSourceMetricsCategory(category)
+                        .launch();
+
+        final AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setNegativeButton(R.string.accessibility_tutorial_dialog_link_button,
+                        linkButtonListener)
+                .setPositiveButton(R.string.accessibility_tutorial_dialog_button,
+                        actionButtonListener)
                 .create();
+
+        final TutorialPageChangeListener.OnPageSelectedCallback callback =
+                type -> alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(
+                        type == UserShortcutType.SOFTWARE ? VISIBLE : GONE);
+
+        alertDialog.setView(createShortcutNavigationContentView(context, shortcutTypes, callback));
+
+        return alertDialog;
     }
 
     /**
@@ -311,7 +330,9 @@ public final class AccessibilityGestureNavigationTutorial {
         return inflater.inflate(R.layout.accessibility_lottie_animation_view, /* root= */ null);
     }
 
-    private static View createShortcutNavigationContentView(Context context, int shortcutTypes) {
+    private static View createShortcutNavigationContentView(Context context, int shortcutTypes,
+            TutorialPageChangeListener.OnPageSelectedCallback onPageSelectedCallback) {
+
         final LayoutInflater inflater = context.getSystemService(LayoutInflater.class);
         final View contentView = inflater.inflate(
                 R.layout.accessibility_shortcut_tutorial_dialog, /* root= */ null);
@@ -342,9 +363,10 @@ public final class AccessibilityGestureNavigationTutorial {
         viewPager.setImportantForAccessibility(tutorialPages.size() > 1
                 ? View.IMPORTANT_FOR_ACCESSIBILITY_YES
                 : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
-        viewPager.addOnPageChangeListener(
-                new TutorialPageChangeListener(context, viewPager, title, instruction,
-                        tutorialPages));
+
+        TutorialPageChangeListener listener = new TutorialPageChangeListener(context, viewPager,
+                title, instruction, tutorialPages);
+        listener.setOnPageSelectedCallback(onPageSelectedCallback);
 
         return contentView;
     }
@@ -365,6 +387,7 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static TutorialPage createSoftwareTutorialPage(@NonNull Context context) {
+        final int type = UserShortcutType.SOFTWARE;
         final CharSequence title = getSoftwareTitle(context);
         final View image = createSoftwareImage(context);
         final CharSequence instruction = getSoftwareInstruction(context);
@@ -372,10 +395,11 @@ public final class AccessibilityGestureNavigationTutorial {
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         indicatorIcon.setEnabled(false);
 
-        return new TutorialPage(title, image, indicatorIcon, instruction);
+        return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
     private static TutorialPage createHardwareTutorialPage(@NonNull Context context) {
+        final int type = UserShortcutType.HARDWARE;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_volume);
         final View image =
@@ -386,10 +410,11 @@ public final class AccessibilityGestureNavigationTutorial {
                 context.getText(R.string.accessibility_tutorial_dialog_message_volume);
         indicatorIcon.setEnabled(false);
 
-        return new TutorialPage(title, image, indicatorIcon, instruction);
+        return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
     private static TutorialPage createTripleTapTutorialPage(@NonNull Context context) {
+        final int type = UserShortcutType.TRIPLETAP;
         final CharSequence title =
                 context.getText(R.string.accessibility_tutorial_dialog_title_triple);
         final View image =
@@ -401,7 +426,7 @@ public final class AccessibilityGestureNavigationTutorial {
                 createImageView(context, R.drawable.ic_accessibility_page_indicator);
         indicatorIcon.setEnabled(false);
 
-        return new TutorialPage(title, image, indicatorIcon, instruction);
+        return new TutorialPage(type, title, image, indicatorIcon, instruction);
     }
 
     @VisibleForTesting
@@ -485,19 +510,25 @@ public final class AccessibilityGestureNavigationTutorial {
     }
 
     private static class TutorialPage {
+        private final int mType;
         private final CharSequence mTitle;
         private final View mIllustrationView;
         private final ImageView mIndicatorIcon;
         private final CharSequence mInstruction;
 
-        TutorialPage(CharSequence title, View illustrationView, ImageView indicatorIcon,
+        TutorialPage(int type, CharSequence title, View illustrationView, ImageView indicatorIcon,
                 CharSequence instruction) {
+            this.mType = type;
             this.mTitle = title;
             this.mIllustrationView = illustrationView;
             this.mIndicatorIcon = indicatorIcon;
             this.mInstruction = instruction;
 
             setupIllustrationChildViewsGravity();
+        }
+
+        public int getType() {
+            return mType;
         }
 
         public CharSequence getTitle() {
@@ -541,6 +572,7 @@ public final class AccessibilityGestureNavigationTutorial {
         private final TextSwitcher mInstruction;
         private final List<TutorialPage> mTutorialPages;
         private final ViewPager mViewPager;
+        private OnPageSelectedCallback mOnPageSelectedCallback;
 
         TutorialPageChangeListener(Context context, ViewPager viewPager, ViewGroup title,
                 ViewGroup instruction, List<TutorialPage> tutorialPages) {
@@ -549,6 +581,14 @@ public final class AccessibilityGestureNavigationTutorial {
             this.mTitle = (TextSwitcher) title;
             this.mInstruction = (TextSwitcher) instruction;
             this.mTutorialPages = tutorialPages;
+            this.mOnPageSelectedCallback = null;
+
+            this.mViewPager.addOnPageChangeListener(this);
+        }
+
+        public void setOnPageSelectedCallback(
+                OnPageSelectedCallback callback) {
+            this.mOnPageSelectedCallback = callback;
         }
 
         @Override
@@ -589,11 +629,22 @@ public final class AccessibilityGestureNavigationTutorial {
             mViewPager.setContentDescription(
                     mContext.getString(R.string.accessibility_tutorial_pager,
                             currentPageNumber, mTutorialPages.size()));
+
+            if (mOnPageSelectedCallback != null) {
+                mOnPageSelectedCallback.onPageSelected(mTutorialPages.get(position).getType());
+            }
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
             // Do nothing.
+        }
+
+        /** The interface that provides a callback method after tutorial page is selected. */
+        private interface OnPageSelectedCallback {
+
+            /** The callback method after tutorial page is selected. */
+            void onPageSelected(int type);
         }
     }
 }

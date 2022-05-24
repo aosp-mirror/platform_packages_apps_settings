@@ -23,14 +23,21 @@ import static com.android.settings.accessibility.AccessibilityUtil.UserShortcutT
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SubSettings;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,6 +46,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 /** Tests for {@link AccessibilityGestureNavigationTutorial}. */
@@ -103,26 +111,44 @@ public final class AccessibilityGestureNavigationTutorialTest {
     }
 
     @Test
-    public void performClickOnNegativeButton_turnOnSoftwareShortcut_dismiss() {
+    public void performClickOnPositiveButton_turnOnSoftwareShortcut_dismiss() {
         mShortcutTypes |= UserShortcutType.SOFTWARE;
         final AlertDialog alertDialog =
                 createAccessibilityTutorialDialog(mContext, mShortcutTypes);
         alertDialog.show();
 
-        alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
 
         assertThat(alertDialog.isShowing()).isFalse();
     }
 
     @Test
-    public void performClickOnNegativeButton_turnOnSoftwareShortcut_callOnClickListener() {
+    public void performClickOnPositiveButton_turnOnSoftwareShortcut_callOnClickListener() {
         mShortcutTypes |= UserShortcutType.SOFTWARE;
         final AlertDialog alertDialog =
                 createAccessibilityTutorialDialog(mContext, mShortcutTypes, mMockOnClickListener);
         alertDialog.show();
 
+        alertDialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+
+        verify(mMockOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_POSITIVE);
+    }
+
+    @Test
+    public void performClickOnNegativeButton_turnOnSoftwareShortcut_directToSettingsPage() {
+        mShortcutTypes |= UserShortcutType.SOFTWARE;
+        Activity activity = Robolectric.buildActivity(Activity.class).create().get();
+        final AlertDialog alertDialog =
+                createAccessibilityTutorialDialog(activity, mShortcutTypes, mMockOnClickListener);
+        alertDialog.show();
+
         alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE).performClick();
 
-        verify(mMockOnClickListener).onClick(alertDialog, DialogInterface.BUTTON_NEGATIVE);
+        final Intent intent = shadowOf(activity).peekNextStartedActivity();
+        assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AccessibilityButtonFragment.class.getName());
+        assertThat(intent.getIntExtra(MetricsFeatureProvider.EXTRA_SOURCE_METRICS_CATEGORY, -1))
+                .isEqualTo(SettingsEnums.SWITCH_SHORTCUT_DIALOG_ACCESSIBILITY_BUTTON_SETTINGS);
     }
 }
