@@ -168,8 +168,8 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
         if (subs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummaryProvider(pref ->
-                    SubscriptionUtil.getUniqueSubscriptionDisplayName(subs.get(0), mContext));
+            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    subs.get(0), mContext));
             return;
         }
 
