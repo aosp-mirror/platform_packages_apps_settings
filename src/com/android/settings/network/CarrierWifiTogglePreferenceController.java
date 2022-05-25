@@ -23,7 +23,6 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -65,7 +64,7 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return mWifiPickerTrackerHelper.isCarrierNetworkEnabled(mSubId);
+        return mWifiPickerTrackerHelper.isCarrierNetworkEnabled();
     }
 
     @Override
