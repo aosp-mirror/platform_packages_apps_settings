@@ -28,7 +28,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.view.View;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -70,10 +69,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         mChangeListener = new SubscriptionsChangeListener(context, this);
         mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
-    }
-
-    public void init(Lifecycle lifecycle) {
-        lifecycle.addObserver(this);
     }
 
     /** @return SubscriptionInfo for the default subscription for the service, or null if there
