@@ -45,6 +45,16 @@ public class ToggleColorInversionPreferenceFragment extends ToggleFeaturePrefere
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED;
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final View rootView = getActivity().getWindow().peekDecorView();
+        if (rootView != null) {
+            rootView.setAccessibilityPaneTitle(getString(
+                    R.string.accessibility_display_inversion_preference_title));
+        }
+    }
+
+    @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_COLOR_INVERSION_SETTINGS;
     }
