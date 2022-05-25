@@ -420,7 +420,7 @@
     <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Huella para el trabajo"</string>
     <string name="fingerprint_manage_category_title" msgid="1249349505688268850">"Adm. huellas digitales"</string>
     <string name="fingerprint_usage_category_title" msgid="8757959085075024856">"Usar huella dac. para"</string>
-    <string name="fingerprint_add_title" msgid="1837610443487902050">"Agregar una huella dactilar"</string>
+    <string name="fingerprint_add_title" msgid="1837610443487902050">"Agregar huella dactilar"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5451094461919440992">"bloqueo de pantalla"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="6897454766137108776">
       <item quantity="other">Se agregaron <xliff:g id="COUNT">%1$d</xliff:g> huellas dactilares</item>
@@ -599,7 +599,7 @@
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"seguridad, más configuración de seguridad, más configuración, configuración avanzada de seguridad"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Más parámetros de privacidad"</string>
     <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Autocompletar, controles de actividad y más"</string>
-    <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas digitales"</string>
+    <string name="fingerprint_add_max" msgid="8639321019299347447">"Puedes agregar hasta <xliff:g id="COUNT">%d</xliff:g> huellas dactilares"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Agregaste la cantidad máxima permitida de huellas digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"No se pueden agregar más huellas digitales"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"¿Quitar las huellas dactilares?"</string>
@@ -2040,7 +2040,7 @@
     <string name="forgot_password_title" msgid="3967873480875239885">"Comunícate con tu administrador de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Te puede ayudar a restablecer el PIN, el patrón o la contraseña"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Tu tablet y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra tu tablet y la pérdida de datos debido al uso de estas apps."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Tu teléfono y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra tu teléfono y la pérdida de datos debido al uso de estas apps."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"Tu teléfono y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra tu teléfono y la pérdida de datos que pueda derivar de su uso."</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"Tu dispositivo y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas apps de esta fuente, serás responsable de los daños que sufra el dispositivo o de la pérdida de datos que se pueda derivar de su uso."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Configuración avanzada"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Activar más opciones de configuración"</string>
@@ -3729,15 +3729,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitular automáticamente"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altavoz del teléfono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"El audio del contenido multimedia compatible se hace más envolvente"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"No"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Sí (<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>)"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Sí (<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> y <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>)"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"También puedes activar el audio espacial para dispositivos Bluetooth."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Parámetros de configuración de dispositivos conectados"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{Se estableció 1 programa}other{Se establecieron # programas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No interrumpir"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Solo recibe notificaciones de las personas y apps que más te interesan"</string>
@@ -4025,7 +4022,7 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Ninguna aplicación instalada solicitó acceso a las notificaciones."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acceso a las notificaciones"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"¿Quieres permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas reemplazaron a las notificaciones adaptables en Android 12. Esta función muestra respuestas y acciones sugeridas, y organiza tus notificaciones. \n\nLas notificaciones mejoradas pueden acceder a todo el contenido de notificaciones, lo que incluye información personal, como nombres de contactos y mensajes. También puede descartar o responder notificaciones (como atender llamadas) y controlar la función No interrumpir."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"Las notificaciones mejoradas reemplazaron a las notificaciones adaptables en Android 12. Esta función muestra respuestas y acciones sugeridas, y organiza tus notificaciones. \n\nLas notificaciones mejoradas pueden acceder a todo el contenido de notificaciones, lo que incluye información personal, como nombres de contactos y mensajes. También puede descartar o responder notificaciones (como contestar llamadas) y controlar la función No interrumpir."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"¿Deseas permitir que <xliff:g id="SERVICE">%1$s</xliff:g> tenga acceso a las notificaciones?"</string>
     <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá leer todas las notificaciones, incluidas las que contienen información personal, como los nombres de los contactos, las fotos y el texto de los mensajes que recibas. Esta app también podrá posponer o descartar notificaciones y realizar acciones en botones de notificaciones (por ejemplo, para responder llamadas). \n\nAdemás, podrá activar y desactivar No interrumpir y cambiar la configuración relacionada."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> podrá realizar lo siguiente:"</string>
