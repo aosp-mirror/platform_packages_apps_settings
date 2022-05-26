@@ -219,15 +219,13 @@
     <string name="app_locales_picker_menu_title" msgid="3412278173933199721">"Langue des applis"</string>
     <string name="app_locale_picker_summary" msgid="6742557329924446252">"Définir la langue pour chaque appli"</string>
     <string name="app_locale_picker_title" msgid="8423365003726200684">"Langue de l\'appli"</string>
-    <string name="warnings_title" msgid="613849105118598110">"Mettre à jour l\'appli"</string>
-    <string name="warnings_summary" msgid="5600524378302608542">"Vous devez mettre à jour l\'appli pour les nouvelles langues dispo"</string>
-    <string name="warnings_button_update" msgid="8819670776624561500">"Mettre à jour"</string>
     <string name="suggested_app_locales_title" msgid="8898358282377369405">"Langues suggérées"</string>
     <string name="all_supported_app_locales_title" msgid="5479289964316009026">"Toutes les langues"</string>
     <string name="preference_of_system_locale_title" msgid="8067226276038751504">"Langue du système"</string>
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Paramètre système par défaut"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"La sélection d\'une langue pour cette appli n\'est pas disponible depuis les paramètres."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"La langue peut différer de celles disponibles dans l\'appli. Certaines applis ne sont pas compatibles avec ce paramètre."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Seules les applis proposant la sélection d\'une langue sont affichées ici."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="one">Supprimer la langue sélectionnée ?</item>
       <item quantity="other">Supprimer les langues sélectionnées ?</item>
@@ -411,9 +409,9 @@
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"Toujours demander confirmation"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"Toujours confirmer le déverrouillage par reco. faciale dans applis"</string>
     <string name="security_settings_face_settings_remove_face_model" msgid="812920481303980846">"Supprimer l\'empreinte faciale"</string>
-    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configurer déver. par reco. faciale"</string>
-    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Utilisez votre visage pour déverrouiller votre téléphone ou vous authentifier dans les applis (pour vous connecter ou approuver un achat, par exemple).\n\nÀ savoir :\nVous ne pouvez configurer qu\'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.\n\nVous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.\n\nUne autre personne peut le déverrouiller en le tenant devant votre visage.\n\nQuelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
-    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Utilisez votre visage pour déverrouiller votre téléphone ou vous authentifier dans les applis (pour vous connecter ou approuver un achat, par exemple).\n\nÀ savoir :\nVous ne pouvez configurer qu\'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.\n\nVous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.\n\nUne autre personne peut le déverrouiller en le tenant devant votre visage, même si vous fermez les yeux.\n\nQuelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
+    <string name="security_settings_face_settings_enroll" msgid="3726313826693825029">"Configurer déverr. par reconn. faciale."</string>
+    <string name="security_settings_face_settings_footer" msgid="625696606490947189">"Utilisez votre visage pour déverrouiller votre téléphone ou valider votre identité dans les applis (pour vous connecter ou approuver un achat, par exemple).\n\nÀ savoir :\nVous ne pouvez configurer qu\'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.\n\nVous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.\n\nUne autre personne peut le déverrouiller en le tenant devant votre visage.\n\nQuelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
+    <string name="security_settings_face_settings_footer_attention_not_supported" msgid="2071065435536235622">"Utilisez votre visage pour déverrouiller votre téléphone ou valider votre identité dans les applis (pour vous connecter ou approuver un achat, par exemple).\n\nÀ savoir :\nVous ne pouvez configurer qu\'un seul visage à la fois. Supprimez le visage actuel pour en ajouter un.\n\nVous pouvez déverrouiller votre téléphone sans le vouloir, en le regardant.\n\nUne autre personne peut le déverrouiller en le tenant devant votre visage, même si vous fermez les yeux.\n\nQuelqu\'un qui vous ressemble beaucoup, comme votre jumeau/jumelle, peut aussi déverrouiller votre téléphone."</string>
     <string name="security_settings_face_settings_remove_dialog_title" msgid="2899669764446232715">"Supprimer l\'empreinte faciale ?"</string>
     <string name="security_settings_face_settings_remove_dialog_details" msgid="916131485988121592">"Votre empreinte faciale sera supprimée de façon définitive et sécurisée.\n\nVous devrez ensuite utiliser un code, un schéma ou un mot de passe pour déverrouiller votre téléphone ou pour vous authentifier dans les applis."</string>
     <string name="security_settings_face_settings_remove_dialog_details_convenience" msgid="475568135197468990">"Votre empreinte faciale sera supprimée de façon définitive et sécurisée.\n\nVous devrez ensuite utiliser un code, un schéma ou un mot de passe pour déverrouiller votre téléphone."</string>
@@ -432,12 +430,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="7931650601996313070">"Configurez votre empreinte"</string>
     <string name="security_settings_fingerprint_enroll_consent_introduction_title" msgid="2278592030102282364">"Autoriser le déver. par empr."</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="1911710308293783998">"Utiliser votre empreinte digitale"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (1533352560544756928) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (3570866595300511932) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_v2_message (8539442240212670385) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="tablet" msgid="1533352560544756928">"Utilisez votre empreinte digitale pour déverrouiller votre tablette ou confirmer votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="device" msgid="3570866595300511932">"Utilisez votre empreinte digitale pour déverrouiller votre appareil ou confirmer votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_v2_message" product="default" msgid="8539442240212670385">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou valider votre identité, par exemple pour vous connecter à des applis ou approuver un achat."</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Autorisez votre enfant à utiliser son empreinte digitale pour déverrouiller son téléphone ou valider son identité, par exemple pour se connecter à des applis, approuver un achat, etc."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Vous avez le contrôle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Gardez le contrôle, vous et votre enfant"</string>
@@ -473,12 +468,9 @@
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_fast" msgid="5891227328100822018">"Relevez le doigt dès qu\'il vibre"</string>
     <string name="security_settings_fingerprint_v2_enroll_acquire_too_bright" msgid="769646735950329315">"Allez dans un endroit moins éclairé et réessayez"</string>
     <string name="security_settings_fingerprint_v2_enroll_error_max_attempts" msgid="1464972470750764128">"Vous avez atteint le nombre maximal d\'essais"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (179325591887291180) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (2503218139575057099) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_home_screen_text (481286891358925579) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="tablet" msgid="179325591887291180">"Utilisez votre empreinte digitale pour déverrouiller votre tablette ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="device" msgid="2503218139575057099">"Utilisez votre empreinte digitale pour déverrouiller votre appareil ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
+    <string name="security_settings_fingerprint_v2_home_screen_text" product="default" msgid="481286891358925579">"Utilisez votre empreinte digitale pour déverrouiller votre téléphone ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
     <string name="security_settings_biometric_preference_title" msgid="298146483579539448">"Déverrouillage par reconnaissance faciale et empreinte digitale"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="6941188982863819389">"Appuyer pour configurer"</string>
     <string name="security_settings_biometric_preference_summary_both_fp_multiple" msgid="4821859306609955966">"Visage et empreintes digitales ajoutés"</string>
@@ -490,7 +482,7 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Avec le visage"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Avec l\'empreinte digitale"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Avec le visage ou l\'empreinte digitale"</string>
-    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Donne le téléphone à un parent"</string>
+    <string name="biometric_settings_hand_back_to_guardian" msgid="3747619291972376153">"Rends le téléphone à ton parent"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Ignorer verrouillage d\'écran ?"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1570832293693405757">"Les fonctionnalités de protection de l\'appareil ne seront pas activées. Vous ne pourrez pas empêcher d\'autres personnes d\'utiliser cette tablette en cas de perte, de vol ou de réinitialisation."</string>
@@ -529,12 +521,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Cela permet de mieux capturer votre empreinte"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enregistrement de l\'empreinte digitale à <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4372740782513990687) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6208711210125838327) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (4755651286485895622) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre tablette ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre appareil ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre téléphone ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Plus tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levez le doigt, puis reposez-le"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placez le côté de votre empreinte sur le capteur, maintenez-le, puis passez à l\'autre côté"</string>
@@ -598,13 +587,16 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Ajouter une empreinte"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Suivant"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"Votre empreinte digitale vous permet non seulement de déverrouiller votre téléphone, mais également d\'autoriser des achats et d\'accéder à des applications. "<annotation id="url">"En savoir plus"</annotation></string>
-    <string name="security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled" msgid="4260983700868889294">" L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, contactez l\'administrateur de votre entreprise. "<annotation id="admin_details">"Plus d\'informations"</annotation>\n\n"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser des achats et l\'accès aux applications. "<annotation id="url">"En savoir plus"</annotation></string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"L\'option de verrouillage de l\'écran est désactivée. Pour en savoir plus, contactez l\'administrateur de votre organisation."</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"Vous pouvez toujours utiliser votre empreinte digitale pour autoriser les achats et l\'accès aux applis."</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"Relevez le doigt, puis reposez-le sur le lecteur"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"Impossible d\'utiliser le lecteur d\'empreinte digitale. Contactez un réparateur"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"Autres paramètres de sécurité"</string>
     <string name="security_advanced_settings_work_profile_settings_summary" msgid="7295451997961973175">"Verrouillage du profil professionnel, chiffrement et plus"</string>
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"Chiffrement, identifiants et plus"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"sécurité, paramètres de sécurité supplémentaires, paramètres supplémentaires, paramètres de sécurité avancés"</string>
+    <string name="privacy_advanced_settings" msgid="8828215456566937719">"Autres paramètres de confidentialité"</string>
+    <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Saisie automatique, commandes relatives à l\'activité, etc."</string>
     <string name="fingerprint_add_max" msgid="8639321019299347447">"Vous pouvez ajouter jusqu\'à <xliff:g id="COUNT">%d</xliff:g> empreintes digitales."</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Vous avez ajouté le nombre maximal autorisé d\'empreintes digitales"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Impossible d\'ajouter d\'autres empreintes digitales"</string>
@@ -643,8 +635,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser cet appareil sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Activez les fonctionnalités de protection de l\'appareil pour empêcher d\'autres personnes d\'utiliser ce téléphone sans votre autorisation. Choisissez la méthode de verrouillage de l\'écran à utiliser."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Choisissez une méthode secondaire pour déverrouiller l\'écran"</string>
-    <!-- no translation found for lock_settings_picker_admin_restricted_personal_message (7243677143611276203) -->
-    <skip />
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si vous oubliez le verrouillage de l\'écran, votre administrateur ne peut pas le réinitialiser."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Définir un autre verrouillage pour le profil pro"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Si vous oubliez ce verrouillage, demandez à votre administrateur informatique de le réinitialiser"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Options de verrouillage de l\'écran"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Options de verrouillage de l\'écran"</string>
@@ -755,7 +747,7 @@
       <item quantity="one">Le mot de passe doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> caractère</item>
       <item quantity="other">Le mot de passe doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> caractères</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Si vous n'utilisez que des chiffres, il faut au moins 1 chiffre}one{Si vous n'utilisez que des chiffres, il faut au moins # chiffre}other{Si vous n'utilisez que des chiffres, il faut au moins # chiffres}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Si vous n\'utilisez que des chiffres, il faut au moins 1 chiffre}one{Si vous n\'utilisez que des chiffres, il faut au moins # chiffre}other{Si vous n\'utilisez que des chiffres, il faut au moins # chiffres}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">Le code doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> chiffre</item>
       <item quantity="other">Le code doit comporter au moins <xliff:g id="COUNT_1">%d</xliff:g> chiffres</item>
@@ -1319,7 +1311,7 @@
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activée"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Active - En fonction du visage"</string>
     <string name="auto_rotate_switch_face_based" msgid="9116123744601564320">"Détection de visages"</string>
-    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajustez automatiquement l\'orientation de l\'écran lorsque vous basculez votre appareil de la position portrait en position paysage, et inversement"</string>
+    <string name="auto_rotate_screen_summary" msgid="4547268203621754096">"Ajuster automatiquement l\'orientation de l\'écran lorsque vous basculez votre appareil de la position portrait en position paysage, et inversement"</string>
     <string name="auto_rotate_link_a11y" msgid="5146188567212233286">"En savoir plus sur la rotation automatique"</string>
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Quand vous basculez votre téléphone en mode portrait ou paysage"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Résolution d\'écran"</string>
@@ -1543,8 +1535,8 @@
     <string name="status_msid_number" msgid="3871958248824595774">"MSID"</string>
     <string name="status_prl_version" msgid="9002131357502714281">"Version de la liste d\'itinérance préférée"</string>
     <string name="meid_multi_sim" msgid="7645394486193991388">"MEID (emplacement SIM %1$d)"</string>
-    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activée"</string>
-    <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivée"</string>
+    <string name="scanning_status_text_on" msgid="3846571210578042940">"Activé"</string>
+    <string name="scanning_status_text_off" msgid="4002352668313705132">"Désactivé"</string>
     <string name="scanning_status_text_wifi_on_ble_on" msgid="7644609329607744714">"Les recherches Wi‑Fi et Bluetooth sont activées"</string>
     <string name="scanning_status_text_wifi_on_ble_off" msgid="7215007787287418186">"La recherche Wi‑Fi est activée, mais pas la recherche Bluetooth"</string>
     <string name="scanning_status_text_wifi_off_ble_on" msgid="1396882599556304165">"La recherche Bluetooth est activée, la recherche Wi-Fi est désactivée"</string>
@@ -2000,7 +1992,7 @@
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"Dessinez un schéma de déverrouillage"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"Appuyez sur Menu pour obtenir de l\'aide."</string>
     <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"Relevez le doigt lorsque vous avez terminé"</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points, puis réessayez."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Réessayez."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"Schéma enregistré"</string>
     <string name="lockpattern_need_to_confirm" msgid="6489499109451714360">"Redessinez le schéma pour le confirmer"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2969990617475456153">"Votre nouveau schéma de déverrouillage"</string>
@@ -2316,7 +2308,7 @@
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"À propos des préférences pour les sous-titres"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"En savoir plus sur les préférences pour les sous-titres"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"Agrandissement"</string>
-    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci de l\'agrandissement"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"Raccourci vers Agrandissement"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="6379517513916651560">"Agrandir la saisie"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2882250257391761678">"La loupe suit le texte au fur et à mesure de la saisie"</string>
     <string name="accessibility_screen_magnification_about_title" msgid="8857919020223505415">"À propos de l\'agrandissement"</string>
@@ -2361,7 +2353,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Appuyer trois fois pour zoomer"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Appuyer sur un bouton pour zoomer"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Faire un zoom avant rapide sur l\'écran pour agrandir le contenu"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour agrandir&lt;br/&gt; {1,number,integer}. Appuyez sur l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Pincez avec les deux doigts pour régler le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant temporaire :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini sur plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour agrandir&lt;br/&gt; {2,number,integer}. Appuyez de manière prolongée n\'importe où sur l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour vous déplacer sur l\'écran&lt;br/&gt; {4,number,integer}. Relevez le doigt pour arrêter l\'agrandissement"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour faire un zoom avant :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour démarrer l\'agrandissement&lt;br/&gt; {1,number,integer}. Appuyez sur l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour vous déplacer sur l\'écran&lt;br/&gt; {3,number,integer}. Pincez avec deux doigts pour régler le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pour faire un zoom avant temporaire :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini sur plein écran&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour démarrer l\'agrandissement&lt;br/&gt; {2,number,integer}. Appuyez de manière prolongée n\'importe où sur l\'écran&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour vous déplacer sur l\'écran&lt;br/&gt; {4,number,integer}. Relevez le doigt pour arrêter l\'agrandissement"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Lorsque l\'option \"Agrandissement\" est activée, vous pouvez effectuer un zoom avant sur votre écran.\n\n"<b>"Pour zoomer"</b>", activez l\'option \"Agrandissement\", puis appuyez n\'importe où sur l\'écran.\n"<ul><li>"Pour faire défiler l\'écran, faites glisser deux doigts ou plus dessus."</li>\n<li>"Pour régler le niveau de zoom, pincez l\'écran avec deux doigts ou plus."</li></ul>\n\n<b>"Pour faire un zoom temporaire"</b>", lancez l\'option \"Agrandissement\", puis appuyez de manière prolongée n\'importe où sur l\'écran.\n"<ul><li>"Pour vous déplacer sur l\'écran, faites glisser un doigt dessus."</li>\n<li>"Pour faire un zoom arrière, relevez le doigt."</li></ul>\n\n"Il est impossible de faire un zoom avant sur le clavier ni sur la barre de navigation."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sur <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Utiliser le bouton Accessibilité pour ouvrir"</string>
@@ -2446,12 +2438,12 @@
     <string name="accessibility_control_timeout_footer_learn_more_content_description" msgid="8118584413220542193">"En savoir plus sur le temps pour réagir (accessibilité)"</string>
     <string name="accessibility_control_timeout_preference_title" msgid="1443940538597464758">"Temps pour réagir"</string>
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Cette préférence pour le délai ne fonctionne pas avec toutes les applis"</string>
-    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Choisir pendant combien de temps afficher les messages temporaires qui vous demandant d\'agir"</string>
+    <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"Choisir pendant combien de temps afficher les messages temporaires qui vous demandent d\'agir"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Délai de l’appui prolongé"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Inversion des couleurs"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Utiliser l\'inversion des couleurs"</string>
-    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci d\'inversion des couleurs"</string>
-    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"L\'inversion des couleurs permet d\'assombrir ou d\'éclaircir l\'écran."</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Raccourci vers Inversion des couleurs"</string>
+    <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"Avec l\'inversion des couleurs, les écrans clairs deviennent sombres et les écrans sombres deviennent clairs."</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="4494767676482389509">"&lt;b&gt;À noter&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; Les contenus multimédias et les images changeront de couleur&lt;/li&gt; &lt;li&gt; L\'inversion des couleurs fonctionne dans toutes les applis&lt;/li&gt; &lt;li&gt; Pour afficher un fond noir, le thème sombre peut être utilisé à la place&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_autoclick_preference_title" msgid="2703143361605555752">"Clic automatique (temps d\'interaction)"</string>
     <string name="accessibility_autoclick_about_title" msgid="152923024405552594">"À propos clic auto (temps d\'interaction)"</string>
@@ -2499,7 +2491,7 @@
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="3636710237139542212">"Ajuster la façon dont les couleurs s\'affichent sur votre téléphone"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="3702653229533336133">"Ajustez l\'affichage des couleurs sur votre tablette"</string>
     <string name="accessibility_daltonizer_primary_switch_title" msgid="32064721588910540">"Utiliser la correction des couleurs"</string>
-    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Raccourci de correction des couleurs"</string>
+    <string name="accessibility_daltonizer_shortcut_title" msgid="7480360363995502369">"Raccourci vers Correction des couleurs"</string>
     <string name="accessibility_daltonizer_about_title" msgid="6063650804116981287">"À propos de correction des couleurs"</string>
     <string name="accessibility_daltonizer_footer_learn_more_content_description" msgid="2091679253892040910">"En savoir plus sur la correction des couleurs"</string>
     <string name="accessibility_color_inversion_about_title" msgid="8275754480247040136">"À propos de l\'inversion des couleurs"</string>
@@ -2556,7 +2548,7 @@
     <string name="reduce_bright_colors_preference_summary" product="default" msgid="7878756844769221647">"Diminuer encore la luminosité minimale du téléphone"</string>
     <string name="reduce_bright_colors_preference_summary" product="tablet" msgid="8959794720356934888">"Diminuer encore la luminosité minimale de la tablette"</string>
     <string name="reduce_bright_colors_preference_intro_text" msgid="3502290826747650566">"Rendre l’écran encore moins lumineux pour faciliter la lecture"</string>
-    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"La fonctionnalité \"encore moins lumineux\" peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
+    <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="8573408446901659333">"La fonctionnalité Encore moins lumineux peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre téléphone est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre téléphone dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5158211121482010799">"La fonctionnalité Encore moins lumineux peut être utile dans les cas suivants : &lt;ol&gt; &lt;li&gt; La luminosité minimale par défaut de votre tablette est encore trop forte&lt;/li&gt; &lt;li&gt; Vous utilisez votre tablette dans le noir (par exemple, la nuit ou dans une pièce sans éclairage avant de vous endormir)&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_intensity_preference_title" msgid="7455443033955118267">"Intensité"</string>
     <string name="reduce_bright_colors_intensity_start_label" msgid="930387498396426039">"Moins lumineux"</string>
@@ -2617,7 +2609,7 @@
     <string name="accessibility_service_warning" msgid="6779187188736432618">"<xliff:g id="SERVICE">%1$s</xliff:g> demande le contrôle total de cet appareil. Le service peut lire l\'écran et agir pour le compte des utilisateurs ayant des besoins en matière d\'accessibilité. Ce niveau de contrôle n\'est pas approprié pour la plupart des applications."</string>
     <string name="accessibility_service_warning_description" msgid="6573203795976134751">"Le contrôle total convient aux applications qui répondent à vos besoins d\'accessibilité. Il ne convient pas à la plupart des applications."</string>
     <string name="accessibility_service_screen_control_title" msgid="324795030658109870">"Afficher et contrôler l\'écran"</string>
-    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"L\'application peut lire l\'intégralité du contenu à l\'écran et afficher du contenu par-dessus d\'autres applications."</string>
+    <string name="accessibility_service_screen_control_description" msgid="8431940515157990426">"Le service peut lire l\'intégralité du contenu à l\'écran et afficher du contenu par-dessus d\'autres applications."</string>
     <string name="accessibility_service_action_perform_title" msgid="1449360056585337833">"Afficher et effectuer des actions"</string>
     <string name="accessibility_service_action_perform_description" msgid="7807832069800034738">"Le service peut suivre vos interactions avec une application ou un capteur matériel, et interagir avec les applications en votre nom."</string>
     <string name="accessibility_dialog_button_allow" msgid="8274918676473216697">"Autoriser"</string>
@@ -2942,10 +2934,8 @@
     <string name="menu_stats_refresh" msgid="6727628139586938835">"Actualiser"</string>
     <string name="process_mediaserver_label" msgid="6135260215912215092">"Serveur multimédia"</string>
     <string name="process_dex2oat_label" msgid="1190208677726583153">"Optimisation des applications"</string>
-    <!-- no translation found for process_network_tethering (6822671758152900766) -->
-    <skip />
-    <!-- no translation found for process_removed_apps (6544406592678476902) -->
-    <skip />
+    <string name="process_network_tethering" msgid="6822671758152900766">"Partage de connexion"</string>
+    <string name="process_removed_apps" msgid="6544406592678476902">"Applis supprimées"</string>
     <string name="battery_saver" msgid="7737147344510595864">"Économiseur de batterie"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"Activer automatiquement"</string>
     <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"Aucune programmation"</string>
@@ -3374,10 +3364,8 @@
       <item quantity="one">Considérer le certificat comme fiable ou le supprimer</item>
       <item quantity="other">Considérer les certificats comme fiables ou les supprimer</item>
     </plurals>
-    <!-- no translation found for ssl_ca_cert_info_message_device_owner (7528581447864707873) -->
-    <skip />
-    <!-- no translation found for ssl_ca_cert_info_message (3111724430981667845) -->
-    <skip />
+    <string name="ssl_ca_cert_info_message_device_owner" msgid="7528581447864707873">"{numberOfCertificates,plural, =1{{orgName} a installé un certificat CA sur votre appareil afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ce certificat, contactez votre administrateur.}one{{orgName} a installé un certificat CA sur votre appareil afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ce certificat, contactez votre administrateur.}other{{orgName} a installé des certificats CA sur votre appareil afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ces certificats, contactez votre administrateur.}}"</string>
+    <string name="ssl_ca_cert_info_message" msgid="3111724430981667845">"{numberOfCertificates,plural, =1{{orgName} a installé un certificat CA pour votre profil professionnel afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ce certificat, contactez votre administrateur.}one{{orgName} a installé un certificat CA pour votre profil professionnel afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ce certificat, contactez votre administrateur.}other{{orgName} a installé des certificats CA pour votre profil professionnel afin de contrôler l\'activité sur le réseau, y compris les e-mails, les applis et les sites Web sécurisés.\n\nPour en savoir plus sur ces certificats, contactez votre administrateur.}}"</string>
     <string name="ssl_ca_cert_warning_message" msgid="4374052724815563051">"Des tiers ont la possibilité de surveiller votre activité sur le réseau, y compris en ce qui concerne les e-mails, les applications et les sites Web sécurisés.\n\nUn certificat de confiance installé sur votre appareil rend cela possible."</string>
     <plurals name="ssl_ca_cert_settings_button" formatted="false" msgid="125941406175485894">
       <item quantity="one">Vérifier le certificat</item>
@@ -3466,7 +3454,9 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Annuler les restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Modifier le code PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Aide et commentaires"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Articles d\'aide, téléphone et chat"</string>
+    <string name="support_summary" product="default" msgid="6137136608018134563">"Articles d\'aide, téléphone et chat"</string>
+    <string name="support_summary" product="tablet" msgid="6681247727996378252">"Articles d\'aide, tablette et chat"</string>
+    <string name="support_summary" product="device" msgid="1690554254039752541">"Articles d\'aide, appareil et chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Compte pour contenu"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"ID de photo"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Menaces extrêmes"</string>
@@ -3737,10 +3727,15 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Sous-titrer automatiquement les contenus multimédias"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Haut-parleur du téléphone"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Casque filaire"</string>
-    <string name="spatial_audio_text" msgid="3273982964342449273">"Le Son spatial crée un son immersif qui semble provenir de tout autour de vous. Compatible avec certains contenus multimédias uniquement."</string>
+    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
+    <skip />
     <string name="spatial_summary_off" msgid="8272678804629774378">"Désactivé"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activé - <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activé - <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> et <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
+    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
+    <skip />
+    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
+    <skip />
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Aucun}=1{1 programme défini}one{# programme défini}other{# programmes définis}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne pas déranger"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Ne recevoir des notifications que des personnes et applications importantes"</string>
@@ -3861,6 +3856,7 @@
     <string name="app_notification_field_summary" msgid="5981393613897713471">"Contrôler les notifications d\'applis individuelles"</string>
     <string name="advanced_section_header" msgid="6478709678084326738">"Général"</string>
     <string name="profile_section_header" msgid="4970209372372610799">"Notifications pro"</string>
+    <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Profil professionnel"</string>
     <string name="smart_notifications_title" msgid="8995288376897952015">"Notifications intelligentes"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Priorité des notifications intelligentes"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Définir automatiquement les notifications à faible priorité sur Discret"</string>
@@ -3927,8 +3923,8 @@
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"Écran de verrouillage, verrouiller l\'écran, passer, ignorer"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"Quand le profil pro est verrouillé"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"Notifications sur l\'écran de verrouillage"</string>
-    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Afficher les conversations, par défaut et silencieuses"</string>
-    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Afficher les conversations, par défaut et silencieuses"</string>
+    <string name="lock_screen_notifs_show_all_summary" msgid="4226586018375762117">"Voir les notif. de conversations, par défaut et silencieuses"</string>
+    <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"Voir les notif. de conversations, par défaut et silencieuses"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"Masquer les conversations et les notifications silencieuses"</string>
     <string name="lock_screen_notifs_show_none" msgid="1941044980403067101">"N\'afficher aucune notification"</string>
     <string name="lock_screen_notifs_redact" msgid="9024158855454642296">"Notifications sensibles"</string>
@@ -4220,7 +4216,7 @@
     <string name="zen_mode_none_calls" msgid="2047166006414016327">"Aucun"</string>
     <string name="zen_mode_none_messages" msgid="1386626352943268342">"Aucun"</string>
     <string name="zen_mode_alarms" msgid="5989343060100771099">"Alarmes"</string>
-    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Sons des minuteurs, alarmes, systèmes de sécurité et autres applications"</string>
+    <string name="zen_mode_alarms_summary" msgid="3388679177457223967">"Minuteurs, alarmes, systèmes de sécurité et autres applications"</string>
     <string name="zen_mode_alarms_list" msgid="334782233067365405">"les alarmes"</string>
     <string name="zen_mode_alarms_list_first" msgid="2780418316613576610">"Les alarmes"</string>
     <string name="zen_mode_media" msgid="885017672250984735">"Sons des contenus multimédias"</string>
@@ -4232,11 +4228,11 @@
     <string name="zen_mode_system_list" msgid="2256218792042306434">"les sons des touches"</string>
     <string name="zen_mode_system_list_first" msgid="8590078626001067855">"Les sons des touches"</string>
     <string name="zen_mode_reminders" msgid="1970224691551417906">"Rappels"</string>
-    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Sons des tâches et rappels"</string>
+    <string name="zen_mode_reminders_summary" msgid="3961627037429412382">"Tâches et rappels"</string>
     <string name="zen_mode_reminders_list" msgid="3133513621980999858">"les rappels"</string>
     <string name="zen_mode_reminders_list_first" msgid="1130470396012190814">"Les rappels"</string>
     <string name="zen_mode_events" msgid="7425795679353531794">"Événements de l\'agenda"</string>
-    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Sons des événements d\'agenda à venir"</string>
+    <string name="zen_mode_events_summary" msgid="3241903481309766428">"Événements d\'agenda à venir"</string>
     <string name="zen_mode_events_list" msgid="7191316245742097229">"les événements"</string>
     <string name="zen_mode_events_list_first" msgid="7425369082835214361">"Les événements"</string>
     <string name="zen_mode_bypassing_apps" msgid="625309443389126481">"Autoriser des applications à ignorer ce mode"</string>
@@ -4301,8 +4297,8 @@
     <string name="restr_pin_enter_admin_pin" msgid="4435410646541671918">"Saisir le code d\'accès administrateur"</string>
     <string name="switch_on_text" msgid="5664542327776075105">"Activé"</string>
     <string name="switch_off_text" msgid="1315547447393646667">"Désactivé"</string>
-    <string name="nfc_setting_on" msgid="7701896496026725772">"Activé"</string>
-    <string name="nfc_setting_off" msgid="7142103438532732309">"Désactivé"</string>
+    <string name="nfc_setting_on" msgid="7701896496026725772">"Activée"</string>
+    <string name="nfc_setting_off" msgid="7142103438532732309">"Désactivée"</string>
     <string name="screen_pinning_switch_on_text" msgid="6971386830247542552">"Activé"</string>
     <string name="screen_pinning_switch_off_text" msgid="5032105155623003875">"Désactivé"</string>
     <string name="screen_pinning_title" msgid="6927227272780208966">"Épinglage d\'application"</string>
@@ -5633,7 +5629,7 @@
     <string name="default_active_sim_calls" msgid="2390973682556353558">"appels"</string>
     <string name="default_active_sim_sms" msgid="8041498593025994921">"SMS"</string>
     <string name="default_active_sim_mobile_data" msgid="6798083892814045301">"données mobiles"</string>
-    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Pour améliorer l'expérience sur l'appareil, les applis et services peuvent continuer de rechercher les réseaux Wi-Fi, même quand le Wi-Fi est désactivé. Cela peut servir, par exemple, à améliorer les fonctionnalités et services géolocalisés. Vous pouvez modifier cela dans les paramètres de recherche Wi-Fi."</string>
+    <string name="wifi_scan_notify_message" msgid="1331238142061476869">"Pour améliorer l\'expérience sur l\'appareil, les applis et services peuvent continuer de rechercher les réseaux Wi-Fi, même quand le Wi-Fi est désactivé. Cela peut servir, par exemple, à améliorer les fonctionnalités et services géolocalisés. Vous pouvez modifier cela dans les paramètres de recherche Wi-Fi."</string>
     <string name="wifi_scan_change" msgid="8438320311511852918">"Modifier"</string>
     <string name="preference_summary_default_combination" msgid="4643585915107796253">"<xliff:g id="STATE">%1$s</xliff:g>/<xliff:g id="NETWORKMODE">%2$s</xliff:g>"</string>
     <string name="mobile_data_connection_active" msgid="2422223108911581552">"Connecté"</string>
@@ -5785,8 +5781,7 @@
     <string name="ingress_rate_limit_dialog_title" msgid="5359461052422633789">"Configurer la limitation du débit de téléchargement du réseau"</string>
     <string name="ingress_rate_limit_no_limit_entry" msgid="8741098826008012163">"Aucune limite"</string>
     <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Diffuser"</string>
-    <!-- no translation found for bluetooth_broadcast_dialog_broadcast_app (1016617579194329005) -->
-    <skip />
+    <string name="bluetooth_broadcast_dialog_broadcast_app" msgid="1016617579194329005">"Diffuser <xliff:g id="CURRENTAPP">%1$s</xliff:g>"</string>
     <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Écoutez les contenus diffusés à proximité"</string>
     <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Diffusez des contenus multimédias sur les appareils à proximité ou écoutez les contenus diffusés par d\'autres"</string>
     <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Diffusions"</string>
@@ -5794,10 +5789,9 @@
     <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Rechercher des diffusions"</string>
     <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Quitter la diffusion"</string>
     <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scanner un code QR"</string>
-    <!-- no translation found for find_broadcast_password_dialog_title (3176988702535737484) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_connection_error (47873617983439400) -->
-    <skip />
-    <!-- no translation found for find_broadcast_password_dialog_password_error (243855327674765) -->
-    <skip />
+    <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Saisir le mot de passe"</string>
+    <string name="find_broadcast_password_dialog_connection_error" msgid="47873617983439400">"Connexion impossible. Réessayez."</string>
+    <string name="find_broadcast_password_dialog_password_error" msgid="243855327674765">"Mot de passe incorrect"</string>
+    <string name="bt_le_audio_scan_qr_code_scanner" msgid="7614569515419813053">"Pour commencer à écouter, centrez le code QR ci-dessous"</string>
+    <string name="bt_le_audio_qr_code_is_not_valid_format" msgid="7821837654128137901">"Le format de code QR n\'est pas valide"</string>
 </resources>
