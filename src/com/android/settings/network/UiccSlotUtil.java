@@ -249,7 +249,6 @@ public class UiccSlotUtil {
         if (slotId == INVALID_PHYSICAL_SLOT_ID) {
             for (int i = 0; i < slots.length; i++) {
                 if (slots[i].isRemovable()
-                        && !slots[i].getIsEuicc()
                         && !slots[i].getPorts().stream().findFirst().get().isActive()
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_ERROR
                         && slots[i].getCardStateInfo() != UiccSlotInfo.CARD_STATE_INFO_RESTRICTED) {
