@@ -92,6 +92,14 @@ public class UiccSlotUtilTest {
 
         assertThat(testSlot).isEqualTo(0);
     }
+    @Test
+    public void getEsimSlotId_twoSimSlotsDeviceAndRemovableEsimIsSlot1_returnTheCorrectEsimSlot() {
+        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
+                twoSimSlotsDeviceActivePsimActiveRemovableEsim());
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext);
+
+        assertThat(testSlot).isEqualTo(1);
+    }
 
     @Test
     public void getEsimSlotId_twoSimSlotsDeviceAndEsimIsSlot1_returnTheCorrectEsimSlot() {
@@ -727,6 +735,12 @@ public class UiccSlotUtilTest {
         return new UiccSlotInfo[]{
                 createUiccSlotInfo(false, true, 0, true),
                 createUiccSlotInfo(true, false, 1, true)};
+    }
+
+    private UiccSlotInfo[] twoSimSlotsDeviceActivePsimActiveRemovableEsim() {
+        return new UiccSlotInfo[]{
+                createUiccSlotInfo(false, true, 0, true),
+                createUiccSlotInfo(true, true, 1, true)};
     }
 
     private UiccSlotInfo[] twoSimSlotsDeviceActiveEsimActivePsim() {
