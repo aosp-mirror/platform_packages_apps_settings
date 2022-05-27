@@ -589,7 +589,6 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                         .anyMatch(
                                 slot -> slot != null
                                         && slot.isRemovable()
-                                        && !slot.getIsEuicc()
                                         && slot.getPorts().stream().anyMatch(
                                                 port -> port.isActive())
                                         && slot.getCardStateInfo()
