@@ -190,7 +190,8 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
         Set<Integer> activeRemovableLogicalSlotIds = new ArraySet<>();
         for (UiccSlotInfo info : infos) {
             for (UiccPortInfo portInfo :info.getPorts()) {
-                if (info != null && portInfo.isActive() && info.isRemovable()) {
+                if (info != null && portInfo.isActive() && info.isRemovable()
+                        && !info.getIsEuicc()) {
                     activeRemovableLogicalSlotIds.add(portInfo.getLogicalSlotIndex());
                 }
             }
