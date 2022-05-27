@@ -43,7 +43,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.settings.R;
-import com.android.settings.wifi.qrcode.QrCodeGenerator;
+import com.android.settingslib.qrcode.QrCodeGenerator;
 
 import com.google.zxing.WriterException;
 
