@@ -33,13 +33,9 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.permission.PermissionControllerManager;
 import android.provider.DeviceConfig;
-import android.text.TextUtils;
 import android.util.Slog;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -49,8 +45,7 @@ import com.google.common.annotations.VisibleForTesting;
  * A PreferenceController handling the logic for exempting hibernation of app
  */
 public final class HibernationSwitchPreferenceController extends AppInfoPreferenceControllerBase
-        implements LifecycleObserver, AppOpsManager.OnOpChangedListener,
-        Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "HibernationSwitchPrefController";
     private String mPackageName;
     private final AppOpsManager mAppOpsManager;
@@ -67,19 +62,6 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
         super(context, preferenceKey);
         mAppOpsManager = context.getSystemService(AppOpsManager.class);
         mPermissionControllerManager = context.getSystemService(PermissionControllerManager.class);
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {
-        if (mIsPackageSet) {
-            mAppOpsManager.startWatchingMode(
-                    OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, mPackageName, this);
-        }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {
-        mAppOpsManager.stopWatchingMode(this);
     }
 
     @Override
@@ -146,14 +128,6 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
                 OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, mPackageUid, mPackageName);
 
         return mode == MODE_DEFAULT ? mIsPackageExemptByDefault : mode != MODE_ALLOWED;
-    }
-
-    @Override
-    public void onOpChanged(String op, String packageName) {
-        if (OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED.equals(op)
-                && TextUtils.equals(mPackageName, packageName)) {
-            updateState(mPreference);
-        }
     }
 
     @Override
