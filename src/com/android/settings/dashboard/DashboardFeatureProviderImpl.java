@@ -185,9 +185,9 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                             && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
                         // Highlight the preference whenever it's clicked
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
-                        topLevelSettings.setHighlightPreferenceKey(key);
                         highlightMixin = topLevelSettings.getHighlightMixin();
                         isDuplicateClick = topLevelSettings.isDuplicateClick(preference);
+                        topLevelSettings.setHighlightPreferenceKey(key);
                     }
                     launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
                             highlightMixin, isDuplicateClick);
