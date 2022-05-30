@@ -173,6 +173,9 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_TITLE = "title";
     private static final String KEY_SUMMARY = "summary";
 
+    private static final String EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR =
+            "EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR";
+
     static {
         USER_REMOVED_INTENT_FILTER = new IntentFilter(Intent.ACTION_USER_REMOVED);
         USER_REMOVED_INTENT_FILTER.addAction(Intent.ACTION_USER_INFO_CHANGED);
@@ -286,6 +289,12 @@ public class UserSettings extends SettingsPreferenceFragment
         mSwitchBarController = new MultiUserSwitchBarController(activity,
                 new MainSwitchBarController(switchBar), this /* listener */);
         getSettingsLifecycle().addObserver(mSwitchBarController);
+
+        boolean openUserEditDialog = getIntent().getBooleanExtra(
+                EXTRA_OPEN_DIALOG_USER_PROFILE_EDITOR, false);
+        if (switchBar.isChecked() && openUserEditDialog) {
+            showDialog(DIALOG_USER_PROFILE_EDITOR);
+        }
     }
 
     @Override
