@@ -44,16 +44,16 @@ public class TimePreferenceController extends AbstractPreferenceController
 
     private static final String KEY_TIME = "time";
 
-    private final AutoTimePreferenceController mAutoTimePreferenceController;
+    private final DatePreferenceController mDatePreferenceController;
     private final TimePreferenceHost mHost;
 
 
     public TimePreferenceController(Context context,
             TimePreferenceHost callback,
-            AutoTimePreferenceController autoTimePreferenceController) {
+            DatePreferenceController datePreferenceController) {
         super(context);
         mHost = callback;
-        mAutoTimePreferenceController = autoTimePreferenceController;
+        mDatePreferenceController = datePreferenceController;
     }
 
     @Override
@@ -69,7 +69,8 @@ public class TimePreferenceController extends AbstractPreferenceController
         final Calendar now = Calendar.getInstance();
         preference.setSummary(DateFormat.getTimeFormat(mContext).format(now.getTime()));
         if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+            boolean enableManualTimeSelection = mDatePreferenceController.isEnabled();
+            preference.setEnabled(enableManualTimeSelection);
         }
     }
 
