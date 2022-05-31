@@ -120,7 +120,7 @@ public class SearchFeatureProviderImplTest {
         final Intent searchIntent = mProvider.buildSearchIntent(mActivity, SettingsEnums.TESTING);
         final Uri referrer = searchIntent.getParcelableExtra(Intent.EXTRA_REFERRER);
 
-        assertThat(referrer.toSafeString()).isEqualTo(
+        assertThat(referrer.toString()).isEqualTo(
                 "android-app://" + mActivity.getPackageName() + "/" + SettingsEnums.TESTING);
     }
 
