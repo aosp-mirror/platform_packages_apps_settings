@@ -18,6 +18,7 @@ package com.android.settings.applications.manageapplications;
 
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
+import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BLOCKED;
 import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_DISABLED;
@@ -37,8 +38,6 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.app.usage.IUsageStatsManager;
-import android.compat.annotation.ChangeId;
-import android.compat.annotation.LoggingOnly;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -189,16 +188,6 @@ public class ManageApplications extends InstrumentedFragment
     // Storage types. Used to determine what the extra item in the list of preferences is.
     public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
     public static final int STORAGE_TYPE_LEGACY = 1;  // Show apps even if they can be categorized.
-
-    /**
-     * Intents with action {@code android.settings.MANAGE_APP_OVERLAY_PERMISSION}
-     * and data URI scheme {@code package} don't go to the app-specific screen for managing the
-     * permission anymore. Instead, they redirect to this screen for managing all the apps that have
-     * requested such permission.
-     */
-    @ChangeId
-    @LoggingOnly
-    private static final long CHANGE_RESTRICT_SAW_INTENT = 135920175L;
 
     // sort order
     @VisibleForTesting
