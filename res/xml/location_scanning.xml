@@ -17,13 +17,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/location_scanning_screen_title">
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:title="@string/location_scanning_wifi_always_scanning_title"
             android:summary="@string/location_scanning_wifi_always_scanning_description"
             android:defaultValue="true"
             android:key="wifi_always_scanning" />
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:title="@string/location_scanning_bluetooth_always_scanning_title"
             android:summary="@string/location_scanning_bluetooth_always_scanning_description"
             android:defaultValue="true"
