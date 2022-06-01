@@ -108,6 +108,7 @@ class TextReadingPreviewController extends BasePreferenceController implements
         final PreviewPagerAdapter pagerAdapter = new PreviewPagerAdapter(mContext, isLayoutRtl,
                 PREVIEW_SAMPLE_RES_IDS, createConfig(origConfig));
         mPreviewPreference.setPreviewAdapter(pagerAdapter);
+        mPreviewPreference.setCurrentItem(isLayoutRtl ? PREVIEW_SAMPLE_RES_IDS.length - 1 : 0);
         pagerAdapter.setPreviewLayer(/* newLayerIndex= */ 0,
                 /* currentLayerIndex= */ 0,
                 /* currentFrameIndex= */ 0, /* animate= */ false);
