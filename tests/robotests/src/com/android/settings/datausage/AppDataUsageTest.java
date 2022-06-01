@@ -48,6 +48,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -240,6 +241,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mUnrestrictedData", unrestrictedDataPref);
         ReflectionHelpers.setField(mFragment, "mDataSaverBackend", dataSaverBackend);
         ReflectionHelpers.setField(mFragment.services, "mPolicyManager", networkPolicyManager);
+        when(mFragment.getListView()).thenReturn(mock(RecyclerView.class));
 
         ShadowRestrictedLockUtilsInternal.setRestricted(true);
         doReturn(NetworkPolicyManager.POLICY_NONE).when(networkPolicyManager)
