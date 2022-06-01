@@ -26,7 +26,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -118,11 +117,13 @@ public class OpenNetworkSelectPagePreferenceController extends
         }
     }
 
-    public OpenNetworkSelectPagePreferenceController init(Lifecycle lifecycle, int subId) {
+    /**
+     * Initialization based on given subscription id.
+     **/
+    public OpenNetworkSelectPagePreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        lifecycle.addObserver(this);
         return this;
     }
 

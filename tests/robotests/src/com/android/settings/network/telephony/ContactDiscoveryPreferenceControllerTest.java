@@ -105,7 +105,8 @@ public class ContactDiscoveryPreferenceControllerTest {
                 "ContactDiscovery");
         // Ensure subscriptionInfo check doesn't fail.
         SubscriptionUtil.setAvailableSubscriptionsForTesting(Collections.emptyList());
-        mPreferenceControllerUT.init(mFragmentManager, TEST_SUB_ID, mLifecycle);
+        mPreferenceControllerUT.init(mFragmentManager, TEST_SUB_ID);
+        mLifecycle.addObserver(mPreferenceControllerUT);
         mSwitchPreferenceUT = spy(new SwitchPreference(mContext));
         mSwitchPreferenceUT.setKey(mPreferenceControllerUT.getPreferenceKey());
         mPreferenceControllerUT.preference = mSwitchPreferenceUT;
