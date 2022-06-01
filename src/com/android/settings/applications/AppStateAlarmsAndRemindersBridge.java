@@ -57,7 +57,7 @@ public class AppStateAlarmsAndRemindersBridge extends AppStateBaseBridge {
         mAlarmManager = context.getSystemService(AlarmManager.class);
         final IPackageManager iPm = AppGlobals.getPackageManager();
         try {
-            mRequesterPackages = iPm.getAppOpPermissionPackages(PERMISSION);
+            mRequesterPackages = iPm.getAppOpPermissionPackages(PERMISSION, context.getUserId());
         } catch (RemoteException re) {
             Log.e(TAG, "Cannot reach package manager", re);
             mRequesterPackages = EmptyArray.STRING;

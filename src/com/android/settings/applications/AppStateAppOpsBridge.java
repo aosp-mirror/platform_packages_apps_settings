@@ -172,25 +172,25 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
      */
     private SparseArray<ArrayMap<String, PermissionState>> getEntries() {
         try {
-            Set<String> packagesSet = new HashSet<>();
-            for (String permission : mPermissions) {
-                String[] pkgs = mIPackageManager.getAppOpPermissionPackages(permission);
-                if (pkgs != null) {
-                    packagesSet.addAll(Arrays.asList(pkgs));
-                }
-            }
-
-            if (packagesSet.isEmpty()) {
-                // No packages are requesting permission as specified by mPermissions.
-                return null;
-            }
-
             // Create a sparse array that maps profileIds to an ArrayMap that maps package names to
             // an associated PermissionState object
             SparseArray<ArrayMap<String, PermissionState>> entries = new SparseArray<>();
             for (final UserHandle profile : mProfiles) {
-                final ArrayMap<String, PermissionState> entriesForProfile = new ArrayMap<>();
                 final int profileId = profile.getIdentifier();
+                final Set<String> packagesSet = new HashSet<>();
+                for (String permission : mPermissions) {
+                    final String[] pkgs = mIPackageManager.getAppOpPermissionPackages(
+                            permission, profileId);
+                    if (pkgs != null) {
+                        packagesSet.addAll(Arrays.asList(pkgs));
+                    }
+                }
+                if (packagesSet.isEmpty()) {
+                    // No packages are requesting permission as specified by mPermissions.
+                    continue;
+                }
+
+                final ArrayMap<String, PermissionState> entriesForProfile = new ArrayMap<>();
                 entries.put(profileId, entriesForProfile);
                 for (final String packageName : packagesSet) {
                     final boolean isAvailable = mIPackageManager.isPackageAvailable(packageName,
@@ -200,6 +200,9 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
                         entriesForProfile.put(packageName, newEntry);
                     }
                 }
+            }
+            if (entries.size() == 0) {
+                return null;
             }
 
             return entries;
