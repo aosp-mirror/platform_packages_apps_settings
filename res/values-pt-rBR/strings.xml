@@ -133,7 +133,7 @@
     <string name="bluetooth_connection_notif_message" msgid="6087344980352898209">"Toque para conectar-se a \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_connection_dialog_text" msgid="2537152772549874391">"Quer conectar-se ao \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="bluetooth_phonebook_request" msgid="1085102844577089889">"Solicitação de acesso à agenda telefônica"</string>
-    <string name="bluetooth_pb_acceptance_dialog_text" msgid="7153531868579789993">"O <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> deseja acessar seus contatos e seu histórico de chamadas. Quer conceder acesso ao <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>?"</string>
+    <string name="bluetooth_pb_acceptance_dialog_text" msgid="7153531868579789993">"O <xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> deseja acessar seus contatos e seu histórico de ligações. Quer conceder acesso ao <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>?"</string>
     <string name="bluetooth_remember_choice" msgid="173821849670438110">"Não perguntar novamente"</string>
     <string name="bluetooth_pb_remember_choice" msgid="2080511174185036562">"Não perguntar novamente"</string>
     <string name="bluetooth_map_request" msgid="8664081227240707479">"Solicitação de acesso a mensagens"</string>
@@ -437,7 +437,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" msgid="1833139688278350628">"Permita que a criança use a impressão digital para desbloquear o smartphone ou confirmar a identidade dela. Isso acontece quando ela faz login em apps, aprova uma compra, entre outras ocasiões."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_1" msgid="6808124116419325722">"Você no controle"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_title_consent_1" msgid="1122676690472680734">"Você e a criança estão no controle"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Lembre-se"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_footer_title_2" msgid="5663733424583416266">"Lembrete"</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_1" msgid="7817635368506064516">"Os dados gravados pelo Fingerprint são armazenados em segurança e nunca saem do smartphone. Você pode excluí-los a qualquer momento nas configurações."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_2" msgid="3507618608004123384">"Sua impressão digital pode ser menos segura que um padrão ou PIN forte."</string>
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"Às vezes, o smartphone usará as imagens recentes da sua impressão digital para criar modelos melhores dela."</string>
@@ -446,7 +446,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Agora não"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Aceito"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Pular impressão digital?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"A configuração da impressão digital leva apenas um ou dois minutos. Se você pular essa etapa, poderá adicionar sua impressão digital mais tarde nas configurações."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"A configuração da impressão digital leva apenas um ou dois minutos. Se você pular esta etapa, poderá adicionar sua impressão digital mais tarde nas configurações."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Ao ver esse ícone, use sua impressão digital para fazer a autenticação, da mesma forma que você faz em logins e aprovações de compras"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Observação importante"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"O uso da impressão digital para desbloquear o smartphone pode ser menos seguro que um padrão ou PIN fortes"</string>
@@ -483,10 +483,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Usando seu rosto"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Usando sua impressão digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usando seu rosto ou sua impressão digital"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Entregue o tablet ao seu familiar responsável"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Entregue o dispositivo ao seu familiar responsável"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Entregue o smartphone ao seu pai/mãe"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Pular bloqueio de tela?"</string>
@@ -513,7 +511,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Encoste o dedo no sensor e, após sentir uma vibração, tire o dedo"</string>
     <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantenha a impressão digital no sensor até sentir uma vibração"</string>
-    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque no sensor de impressão digital e o mantenha pressionado"</string>
+    <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Toque e mantenha pressionado o sensor de impressão digital"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Mais uma vez"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Siga o ícone de impressão digital"</string>
@@ -840,7 +838,7 @@
     <string name="bluetooth_paring_group_msg" msgid="4609515924670823316">"Confirme para parear com o conjunto coordenado"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1068123527866596779">"De:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Parear com este dispositivo?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="8672803845151786521">"Para parear com:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Digite no dispositivo:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>. Em seguida, pressione Voltar ou Entrar."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Permitir o acesso aos seus contatos e seu histórico de chamadas"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="4329325125260724843">"Permitir o acesso aos seus contatos e seu histórico de ligações"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Não foi possível conectar ao <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="3460316252463771851">"Procurar dispositivos"</string>
@@ -850,11 +848,11 @@
     <string name="bluetooth_preference_paired_dialog_title" msgid="1090131276572055841">"Dispositivo pareado"</string>
     <string name="bluetooth_preference_paired_dialog_internet_option" msgid="4337953030661626289">"Conexão à Internet"</string>
     <string name="bluetooth_preference_paired_dialog_keyboard_option" msgid="8247634441638919886">"Teclado"</string>
-    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="8194423860397844579">"Contatos e histórico de chamadas"</string>
+    <string name="bluetooth_preference_paired_dialog_contacts_option" msgid="8194423860397844579">"Contatos e histórico de ligações"</string>
     <string name="bluetooth_pairing_dialog_title" msgid="6106058683134173178">"Parear com este dispositivo?"</string>
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="5472835166206721325">"Compartilhar agenda telefônica?"</string>
-    <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quer acessar seus contatos e o histórico de chamadas."</string>
-    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quer parear com Bluetooth. Quando conectado, terá acesso a seus contatos e histórico de chamadas."</string>
+    <string name="bluetooth_pairing_dialog_contants_request" msgid="7516277926581535299">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quer acessar seus contatos e o histórico de ligações."</string>
+    <string name="bluetooth_pairing_dialog_paring_request" msgid="1545098121090892788">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> quer parear com Bluetooth. Quando conectado, terá acesso a seus contatos e histórico de ligações."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dispositivos encontrados"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="1331122763066030155">"Nenhum dispositivo disponível"</string>
     <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Conectar"</string>
@@ -1326,7 +1324,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Resolução máxima"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"A resolução máxima consome mais bateria. Trocar para essa resolução pode reiniciar alguns apps."</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturais"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Realçadas"</string>
@@ -2042,9 +2041,9 @@
     </plurals>
     <string name="forgot_password_title" msgid="3967873480875239885">"Entre em contato com o admin. de TI"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"Ele pode ajudar você a redefinir seu PIN, seu padrão ou sua senha"</string>
-    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Seu tablet e seus dados pessoais estão mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer dano causado ao seu tablet ou pela perda de dados que possa resultar do uso desses apps."</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"Seu smartphone e seus dados pessoais estão mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer dano causado ao seu smartphone ou pela perda de dados que possa resultar do uso desses apps."</string>
-    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Seus dados pessoais e do seu dispositivo são mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer dano causado ao seu dispositivo ou pela perda de dados que possa resultar do uso desses apps."</string>
+    <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"Seu tablet e seus dados pessoais estão mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer perda de dados ou dano ao dispositivo causados pelo uso desses apps."</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"Seu smartphone e seus dados pessoais estão mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer perda de dados ou dano ao dispositivo causados pelo uso desses apps."</string>
+    <string name="install_all_warning" product="device" msgid="2348262609815354500">"Seus dados pessoais e do seu dispositivo são mais vulneráveis a ataques de apps desconhecidos. Ao instalar apps dessa fonte, você concorda que é responsável por qualquer perda de dados ou dano ao dispositivo causados pelo uso desses apps."</string>
     <string name="advanced_settings" msgid="2368905204839169094">"Configurações avançadas"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"Ativa mais opções de configuração"</string>
     <string name="application_info_label" msgid="1015706497694165866">"Informações do app"</string>
@@ -2349,7 +2348,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Redefinir configurações"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"As definições de tamanho e texto da tela foram redefinidas"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Redefinir o texto e o tamanho da tela?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"As preferências de texto e tamanho da tela serão redefinidas para as configurações originais do smartphone"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"As preferências de texto e tamanho da tela serão redefinidas para as configurações originais do smartphone"</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Redefinir"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Algum plano para o fim de semana?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Vou para a praia. Quer ir também?"</string>
@@ -2375,6 +2376,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com dois dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com dois dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar um recurso de acessibilidade, deslize de baixo para cima na tela com três dedos.\n\nPara alternar entre recursos, deslize de baixo para cima com três dedos, sem soltar."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Ok"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Configurações do botão de acessibilidade"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Atalho para <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botão de acessibilidade"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de acessibilidade"</string>
@@ -3098,8 +3100,8 @@
     <string name="backup_configure_account_default_summary" msgid="5323225330966306690">"Nenhuma conta está armazenando o backup dos dados"</string>
     <string name="backup_erase_dialog_title" msgid="5892431263348766484"></string>
     <string name="backup_erase_dialog_message" msgid="2250872501409574331">"Interromper o backup de suas senhas de redes Wi-Fi, favoritos, outras configurações e dados de apps e apagar todas as cópias nos servidores do Google?"</string>
-    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Interromper o backup de dados do dispositivo (como senhas de Wi-Fi e histórico de chamadas) e de dados de apps (como configurações e arquivos armazenados por apps) e limpar todas as cópias em servidores remotos?"</string>
-    <string name="fullbackup_data_summary" msgid="971587401251601473">"Fazer backup automático de dados do dispositivo (como senhas de Wi-Fi e histórico de chamadas) e dados de apps (como configurações e arquivos armazenados por apps) remotamente.\n\nQuando você ativa o backup automático, os dados do dispositivo e de apps são salvos periodicamente de modo remoto. Dados de apps podem ser quaisquer dados que um app tenha salvo (com base nas configurações de desenvolvedores), incluindo dados potencialmente confidenciais, como contatos, mensagens e fotos."</string>
+    <string name="fullbackup_erase_dialog_message" msgid="2379053988557486162">"Interromper o backup de dados do dispositivo (como senhas de Wi-Fi e histórico de ligações) e de dados de apps (como configurações e arquivos armazenados por apps) e limpar todas as cópias em servidores remotos?"</string>
+    <string name="fullbackup_data_summary" msgid="971587401251601473">"Fazer backup automático de dados do dispositivo (como senhas de Wi-Fi e histórico de ligações) e dados de apps (como configurações e arquivos armazenados por apps) remotamente.\n\nQuando você ativa o backup automático, os dados do dispositivo e de apps são salvos periodicamente de modo remoto. Dados de apps podem ser quaisquer dados que um app tenha salvo (com base nas configurações de desenvolvedores), incluindo dados potencialmente confidenciais, como contatos, mensagens e fotos."</string>
     <string name="device_admin_settings_title" msgid="31392408594557070">"Configurações do administrador do dispositivo"</string>
     <string name="active_device_admin_msg" msgid="7744106305636543184">"App de administrador do dispositivo"</string>
     <string name="remove_device_admin" msgid="3143059558744287259">"Desativar este app de administrador do dispositivo"</string>
@@ -3421,9 +3423,9 @@
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Ativar chamadas telefônicas e SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Excluir usuário"</string>
     <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Ativar chamadas telefônicas?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"O histórico de chamadas será compartilhado com este usuário."</string>
+    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"O histórico de ligações será compartilhado com este usuário."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Ativar chamadas telefônicas e SMS?"</string>
-    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"O histórico de chamadas e SMS será compartilhado com este usuário."</string>
+    <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"O histórico de ligações e SMS será compartilhado com este usuário."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informações de emergência"</string>
     <string name="emergency_info_summary" msgid="8463622253016757697">"Informações e contatos de <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="open_app_button" msgid="5025229765547191710">"Abrir <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
@@ -3739,15 +3741,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Legendar mídias automaticamente"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Alto-falante do smartphone"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Fones de ouvido com fio"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"O áudio de dispositivos de mídia compatíveis fica mais imersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desativado"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Ativado / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Ativado / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> e <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Também é possível ativar o áudio espacial para dispositivos Bluetooth"</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Configurações de dispositivos conectados"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nenhuma}=1{1 programação definida}one{# programação definida}other{# programações definidas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Não perturbe"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Receber notificações apenas de pessoas e apps importantes"</string>
@@ -4035,14 +4034,14 @@
     <string name="no_notification_listeners" msgid="2839354157349636000">"Nenhum app instalado solicitou o acesso a notificações."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permitir acesso às notificações"</string>
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Permitir que o app <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
-    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"No Android 12, as notificações avançadas substituíram as notificações adaptáveis. Esse recurso exibe ações e respostas sugeridas, além de organizar suas notificações. \n\nAs notificações avançadas podem acessar o conteúdo das notificações, incluindo informações pessoais como nomes de contatos e mensagens. Elas também podem dispensar ou responder às notificações, como atender chamadas telefônicas e controlar o Não perturbe."</string>
+    <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"No Android 12, as notificações avançadas substituíram as notificações adaptáveis. Esse recurso exibe ações e respostas sugeridas, além de organizar suas notificações. \n\nAs notificações avançadas podem acessar o conteúdo das notificações, incluindo informações pessoais como nomes de contatos e mensagens. Elas também podem dispensar ou responder às notificações, como atender ligações telefônicas e controlar o Não perturbe."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Permitir que <xliff:g id="SERVICE">%1$s</xliff:g> acesse as notificações?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais como nomes de contatos, fotos e o texto das mensagens que você recebe. Ele também poderá adiar ou dispensar notificações ou acionar botões que elas contenham, inclusive para atender chamadas telefônicas. \n\nIsso também autoriza o app a ativar ou desativar o modo Não perturbe e mudar as configurações relacionadas."</string>
+    <string name="notification_listener_security_warning_summary" msgid="4317764112725749020">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá ler todas as notificações, incluindo informações pessoais como nomes de contatos, fotos e o texto das mensagens que você recebe. Ele também poderá adiar ou dispensar notificações ou acionar botões que elas contenham, inclusive para atender ligações telefônicas. \n\nIsso também autoriza o app a ativar ou desativar o modo Não perturbe e mudar as configurações relacionadas."</string>
     <string name="nls_warning_prompt" msgid="9143226910825830619">"O app <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> poderá fazer o seguinte:"</string>
     <string name="nls_feature_read_title" msgid="7629713268744220437">"Ler suas notificações"</string>
     <string name="nls_feature_read_summary" msgid="1064698238110273593">"Ele pode ler suas notificações, incluindo informações pessoais como contatos, mensagens e fotos."</string>
     <string name="nls_feature_reply_title" msgid="7925455553821362039">"Responder a mensagens"</string>
-    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ele pode responder a mensagens e acionar botões nas notificações, como ativar a soneca, dispensar notificações ou atender chamadas."</string>
+    <string name="nls_feature_reply_summary" msgid="4492543411395565556">"Ele pode responder a mensagens e acionar botões nas notificações, como ativar a soneca, dispensar notificações ou atender ligações."</string>
     <string name="nls_feature_settings_title" msgid="8208164329853194414">"Mudar configurações"</string>
     <string name="nls_feature_settings_summary" msgid="3770028705648985689">"Ele pode ativar ou ativar o modo Não perturbe e mudar as configurações relacionadas a ele."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Se você desativar o acesso a notificações para <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, é possível que o acesso ao Não perturbe também seja desativado."</string>
@@ -5578,7 +5577,7 @@
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
     <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"Parar transmissão"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"Desativar VoLTE?"</string>
-    <string name="volte_5G_limited_text" msgid="7150583768725182345">"Isso também desativa sua conexão 5G.\nDurante uma chamada de voz, não é possível usar a Internet, e alguns apps podem não funcionar."</string>
+    <string name="volte_5G_limited_text" msgid="7150583768725182345">"Isso também desativa sua conexão 5G.\nDurante uma ligação, não é possível usar a Internet, e alguns apps podem não funcionar."</string>
     <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"Ao usar dois chips, este smartphone será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="no_5g_in_dsds_text" product="tablet" msgid="4757328474425714624">"Ao usar dois chips, este tablet será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation></string>
     <string name="no_5g_in_dsds_text" product="device" msgid="6983783505032683314">"Ao usar dois chips, este dispositivo será limitado ao 4G. "<annotation id="url">"Saiba mais"</annotation></string>
@@ -5651,7 +5650,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Desativar os dados móveis?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Você não terá acesso a dados ou à Internet pela <xliff:g id="CARRIER">%s</xliff:g>. A Internet estará disponível apenas pelo Wi-Fi."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"sua operadora"</string>
-    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Não permitido pela sua organização"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Não permitido por sua organização"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Indisponível durante o Modo noite"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Redefinição da importância de notificações concluída."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Apps"</string>
