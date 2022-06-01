@@ -453,7 +453,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nie, vďaka"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Súhlasím"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Preskočiť odtlačok prsta?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Nastavenie odtlačku prsta trvá približne minútu. Ak tento krok preskočíte, môžete si odtlačok prsta pridať neskôr v Nastaveniach."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Nastavenie odtlačku prsta trvá približne minútu. Ak tento krok preskočíte, môžete si odtlačok prsta pridať neskôr v nastaveniach."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Keď uvidíte túto ikonu, overte svoju totožnosť odtlačkom prsta (napríklad keď sa prihlasujete do aplikácií alebo schvaľujete nákup)"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Upozornenie"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Odomykanie telefónu odtlačkom prsta môže byť menej bezpečné ako používanie silného vzoru či kódu PIN"</string>
@@ -490,10 +490,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Pomocou tváre"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Pomocou odtlačku prsta"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Pomocou tváre alebo odtlačku prsta"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Odovzdaj tablet späť rodičovi"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Odovzdaj telefón späť rodičovi"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Odovzdaj telefón späť rodičovi"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Preskočiť zámku obrazovky?"</string>
@@ -611,7 +609,7 @@
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"zabezpečenie, ďalšie nastavenia zabezpečenia, ďalšie nastavenia, rozšírené nastavenia zabezpečenia"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"Ďalšie nastavenia ochrany súkromia"</string>
     <string name="privacy_advanced_settings_summary" msgid="2927281894237561935">"Automatické dopĺňanie, Riadenie aktivity a ďalšie"</string>
-    <string name="fingerprint_add_max" msgid="8639321019299347447">"Môžete pridať ďalšie odtlačky (max. <xliff:g id="COUNT">%d</xliff:g>)"</string>
+    <string name="fingerprint_add_max" msgid="8639321019299347447">"Môžete pridať až <xliff:g id="COUNT">%d</xliff:g> odtlačkov"</string>
     <string name="fingerprint_intro_error_max" msgid="4431784409732135610">"Pridali ste maximálny počet odtlačkov prstov"</string>
     <string name="fingerprint_intro_error_unknown" msgid="877005321503793963">"Nie je možné pridať ďalšie odtlačky prstov"</string>
     <string name="fingerprint_last_delete_title" msgid="4081475675646514726">"Odstrániť všetky odtlačky prstov?"</string>
@@ -1352,7 +1350,7 @@
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Osobný účet – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Hľadať"</string>
     <string name="display_settings" msgid="7197750639709493852">"Obrazovka"</string>
-    <string name="accelerometer_title" msgid="7745991950833748909">"Automaticky otáčať obrazovku"</string>
+    <string name="accelerometer_title" msgid="7745991950833748909">"Automatické otáčanie obrazovky"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Vypnuté"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Zapnuté"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Zapnuté – podľa tváre"</string>
@@ -1365,7 +1363,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Plné rozlíšenie"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"Plné rozlíšenia využíva vo väčšej miere batériu. Ak prepnete na plné rozlíšenie, niektoré aplikácie sa môžu reštartovať."</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Farby"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodzené"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Zosilnené"</string>
@@ -2123,7 +2122,7 @@
     <string name="enable_text" msgid="8570798764647110430">"Aktivovať"</string>
     <string name="clear_user_data_text" msgid="6773186434260397947">"Vymazať obsah úložiska"</string>
     <string name="app_factory_reset" msgid="8974044931667015201">"Odinštalovať aktualizácie"</string>
-    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Povolenie obmedzených nastavení"</string>
+    <string name="app_restricted_settings_lockscreen_title" msgid="5993061278264872648">"Povoliť obmedzené nastavenia"</string>
     <string name="auto_launch_enable_text" msgid="8912714475823807798">"Niektoré aktivity, ktoré ste vybrali, sa predvolene otvoria v tejto aplikácii."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="2069415023986858324">"Tejto aplikácii ste povolili vytváranie miniaplikácií a pristupovanie k ich údajom."</string>
     <string name="auto_launch_disable_text" msgid="502648841250936209">"Nie sú nastavené žiadne predvolené"</string>
@@ -2396,7 +2395,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Resetovať nastavenia"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Nastavenia veľkosti obrazovky a textu boli resetované"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Chcete resetovať veľkosť zobrazenia a textu?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Veľkosť zobrazenia a predvoľby textu budú resetované na pôvodné nastavenia telefónu"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Veľkosť zobrazenia a predvoľby textu budú resetované na pôvodné nastavenia telefónu"</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetovať"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Máš nejaké plány na víkend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Chystám sa na pláž. Chceš sa pridať?"</string>
@@ -3824,15 +3825,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatické titulkovanie médií"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Reproduktor telefónu"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Slúchadlá s káblom"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk z kompatibilných médií bude strhujúcejší"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Vypnuté"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Zapnuté / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Zapnuté / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> a <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Pre zariadenia s rozhraním Bluetooth môžete zapnúť aj priestorový zvuk."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Nastavenia pripojených zariadení"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Žiadne}=1{Bol nastavený 1 plán}few{Boli nastavené # plány}many{# schedules set}other{Bolo nastavených # plánov}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Režim bez vyrušení"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Prijímajte upozornenia iba od dôležitých ľudí a z dôležitých aplikácií"</string>
@@ -5246,7 +5244,7 @@
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Ďalšie informácie"</string>
     <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Obmedzené nastavenie"</string>
-    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Obmedzené nastavenia boli povolené pre aplikáciu <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Povolené obmedzené nastavenia pre apl. <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"V rámci ochrany zabezpečenia toto nastavenie nie je momentálne k dispozícii."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informácie o financovanom zariadení"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Poskytovateľ úveru môže v tomto zariadení meniť nastavenia a inštalovať softvér.\n\nAk zmeškáte splátku, vaše zariadenie bude uzamknuté.\n\nViac sa dozviete od svojho poskytovateľa úveru."</string>
