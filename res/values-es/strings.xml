@@ -451,8 +451,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Importante"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Es posible que usar la huella digital para desbloquear el teléfono sea menos seguro que un buen patrón o PIN"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Cómo funciona"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Desbloqueo con Huella Digital crea un modelo único de tu huella digital para verificar tu identidad. Para crear este modelo de huella digital durante la configuración, se toman imágenes de tu huella en diferentes posiciones."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Desbloqueo con huella digital crea un modelo único de la huella digital de tu hijo/a para verificar su identidad. Para crear este modelo de huella digital durante la configuración, se toman imágenes de su huella desde diferentes posiciones."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Desbloqueo con Huella Digital crea un modelo único de tu huella digital para verificar que eres tú. Para crear este modelo de huella digital durante la configuración, se toman imágenes de tu huella en diferentes posiciones."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Desbloqueo con huella digital crea un modelo único de la huella digital de tu hijo/a para verificar que es él/ella. Para crear este modelo de huella digital durante la configuración, se toman imágenes de su huella desde diferentes posiciones."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_3" msgid="4729142136478078228">"Cuando usas Pixel Imprint, se utilizan imágenes para actualizar el modelo de tu huella digital. Las imágenes usadas para crear el modelo no se guardan nunca, pero el modelo en sí se almacena de manera segura en tu teléfono y nunca sale de él. Todos los procesos se llevan a cabo de forma segura en el teléfono."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Cuando usa Pixel Imprint, se utilizan imágenes para actualizar el modelo de su huella digital. Las imágenes usadas para crear el modelo de huella digital de tu hijo/a nunca se guardan, pero el modelo en sí se almacena de manera segura en el teléfono y nunca sale de él. Todos los procesos se llevan a cabo de forma segura en el teléfono."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Puedes eliminar las imágenes y el modelo de tu huella digital, o desactivar Desbloqueo con huella digital en cualquier momento desde Ajustes. Las imágenes y los modelos de huellas digitales se almacenan en el teléfono hasta que los eliminas."</string>
@@ -483,10 +483,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Usar la cara"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Usar la huella digital"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Usar la cara o la huella digital"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Pásale el tablet a tu padre o a tu madre"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Pásale el dispositivo a tu padre o a tu madre"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Pásale el teléfono a tu padre o a tu madre"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"Aceptar"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"¿Saltar bloqueo de pantalla?"</string>
@@ -1324,7 +1322,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Resolución completa"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"La resolución completa consume más batería. Cambiar a resolución completa puede provocar que algunas aplicaciones se reinicien."</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Colores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturales"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Mejorados"</string>
@@ -1364,7 +1363,7 @@
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"Pantalla fluida"</string>
     <string name="peak_refresh_rate_summary" msgid="1527087897198455042">"Aumenta automáticamente la tasa de refresco de 60 a 90 Hz en determinados tipos de contenido. Aumenta el uso de la batería."</string>
     <string name="force_high_refresh_rate_toggle" msgid="3325789621928312050">"Forzar tasa de refresco máxima"</string>
-    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Se la tasa de refresco más alta posible para mejorar la capacidad de respuesta táctil y la calidad de las animaciones. Aumenta el uso de batería."</string>
+    <string name="force_high_refresh_rate_desc" msgid="7794566420873814875">"Se la tasa de refresco más alta posible para mejorar la capacidad de respuesta táctil y la calidad de las animaciones. Aumenta el uso de la batería."</string>
     <string name="adaptive_sleep_title" msgid="2987961991423539233">"Pantalla atenta"</string>
     <string name="adaptive_sleep_summary_on" msgid="313187971631243800">"Activado / La pantalla no se apagará si estás mirándola"</string>
     <string name="adaptive_sleep_summary_off" msgid="5272156339202897523">"Desactivado"</string>
@@ -2347,7 +2346,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Restablecer ajustes"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"La configuración del tamaño y texto de la pantalla se ha restablecido"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"¿Restablecer el tamaño y texto de la pantalla?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Tus preferencias de tamaño y texto de la pantalla se restablecerán a las de la configuración original del teléfono"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Tus preferencias de tamaño y texto de la pantalla se restablecerán a las de la configuración original del teléfono"</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Restablecer"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"¿Tienes algún plan este fin de semana?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Iré a la playa. ¿Quieres venir?"</string>
@@ -2373,6 +2374,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Para usar una función de accesibilidad, desliza hacia arriba con dos dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con dos dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Para usar una función de accesibilidad, desliza hacia arriba con tres dedos desde la parte inferior de la pantalla.\n\nPara pasar de una función a otra, desliza hacia arriba con tres dedos y mantén pulsada la pantalla."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Entendido"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Ajustes del botón Accesibilidad"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Acceso directo a <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Botón de accesibilidad"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Gesto de accesibilidad"</string>
@@ -3736,15 +3738,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Subtitula automáticamente el contenido multimedia"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Altavoz del teléfono"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"El audio de los medios compatibles se hace más inmersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desactivado"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activado / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Activado / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> y <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"También puedes activar el audio espacial en dispositivos Bluetooth."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Ajustes de dispositivos conectados"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ninguno}=1{1 programación creada}other{# programaciones creadas}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"No molestar"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Recibe notificaciones solo de personas y aplicaciones importantes"</string>
@@ -5083,7 +5082,7 @@
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Más información"</string>
     <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Ajuste restringido"</string>
-    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Ajustes restringidos permitidos para <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Se permiten los ajustes restringidos para <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Por seguridad, este ajuste no está disponible actualmente."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Información sobre el dispositivo financiado"</string>
     <string name="financed_privacy_intro" msgid="7836497475568741579">"Tu entidad de crédito puede cambiar ajustes e instalar software en este dispositivo.\n\nSi olvidas un pago, tu entidad de crédito puede bloquear el dispositivo y cambiar sus ajustes.\n\nPide más información a tu entidad de crédito."</string>
@@ -5400,7 +5399,7 @@
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Solo puede haber una tarjeta SIM activa a la vez.\n\nSi cambias a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, no se cancelará tu servicio de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Solo puede haber una tarjeta SIM descargada activa a la vez.\n\nSi cambias a <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>, no se cancelará tu servicio de <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Solo puede haber una tarjeta SIM activa a la vez.\n\nEl cambio no cancelará tu servicio de <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>."</string>
-    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"No puedes usar 2 SIMs al mismo tiempo. Para usar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desactiva la otra SIM."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Puedes usar 2 SIMs al mismo tiempo. Para usar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, desactiva otra SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Cambiar a <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Desactivar <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
     <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Desactivar una SIM no hará que se cancele tu servicio"</string>

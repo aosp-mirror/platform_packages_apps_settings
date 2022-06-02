@@ -483,10 +483,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"使用人臉解鎖"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"使用指紋解鎖"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"使用人臉或指紋解鎖功能"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"請將平板電腦交還給家長"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"請將裝置交還給家長"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"請將手機交還給家長"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"確定"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"要略過螢幕鎖定設定程序嗎？"</string>
@@ -964,7 +962,7 @@
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"附近有公用網路時通知我"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"有高品質的公用網路時通知我"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"自動開啟 Wi‑Fi"</string>
-    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"位於已儲存的高品質 Wi‑Fi 網路範圍內 (例如家用網路) 時自動重新開啟 Wi‑Fi"</string>
+    <string name="wifi_wakeup_summary" msgid="5778059083790221465">"若偵測到已儲存且連線品質佳的 Wi‑Fi 網路 (例如家用網路)，系統會自動重新開啟 Wi‑Fi"</string>
     <string name="wifi_wakeup_summary_no_location" msgid="681323616606485096">"定位服務已關閉，因此無法使用。請開啟 [定位]"<annotation id="link"></annotation>"。"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="1771489741850119751">"掃描 Wi-Fi 功能已關閉，因此無法使用"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="3615120120960539780">"如要使用這項功能，請選取網路評分供應商"</string>
@@ -1326,7 +1324,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"全解析度"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"使用全解析度會比較耗電。如果切換成全解析度，部分應用程式可能要重新啟動。"</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"色彩"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"增強"</string>
@@ -1970,16 +1969,16 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"忘記密碼了嗎？"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"忘記解鎖圖案了嗎？"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"忘記 PIN 碼了嗎？"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"請畫出你的裝置解鎖圖案以繼續作業"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="7692794426682501482">"請用裝置解鎖圖案解鎖以繼續"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="9206928587904701094">"輸入裝置 PIN 碼即可繼續"</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="2616127423884477152">"請輸入你的裝置密碼以繼續作業"</string>
-    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"請畫出你的 Work 解鎖圖案以繼續作業"</string>
+    <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="9110305410672321714">"請用工作資料夾的解鎖圖案解鎖以繼續"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6524208128570235127">"請輸入你的工作資料夾 PIN 碼以繼續作業"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5918738487760814147">"請輸入你的 Work 密碼以繼續作業"</string>
     <string name="lockpassword_strong_auth_required_device_pattern" msgid="113817518413715557">"為了提升安全性，請使用裝置解鎖圖案"</string>
     <string name="lockpassword_strong_auth_required_device_pin" msgid="9163822166411129815">"為了提升安全性，請輸入裝置 PIN 碼"</string>
     <string name="lockpassword_strong_auth_required_device_password" msgid="8310047427464299337">"為了提升安全性，請輸入裝置密碼"</string>
-    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"為了提升安全性，請使用 Work 解鎖圖案"</string>
+    <string name="lockpassword_strong_auth_required_work_pattern" msgid="6803652050512161140">"為了提升安全性，請用工作資料夾的解鎖圖案解鎖"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="4208510396448713500">"為了提升安全性，請輸入 Work PIN 碼"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="6119482061429323090">"為了提升安全性，請輸入 Work 密碼"</string>
     <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6351784282865851482">"你的手機已恢復原廠設定。如要使用這支手機，請輸入先前設定的解鎖圖案。"</string>
@@ -2043,7 +2042,7 @@
     <string name="forgot_password_title" msgid="3967873480875239885">"請與 IT 管理員聯絡"</string>
     <string name="forgot_password_text" msgid="2583194470767613163">"IT 管理員可協助你重設 PIN 碼、解鎖圖案或密碼"</string>
     <string name="install_all_warning" product="tablet" msgid="7010749217925069520">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。安裝這個來源提供的應用程式集表示你同意，如因使用這些應用程式導致你的平板電腦受損或資料遺失，須自行負責。"</string>
-    <string name="install_all_warning" product="default" msgid="652516435709047343">"來歷不明的應用程式可能會損害你的手機和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的手機受損或資料遺失，須自行負責。"</string>
+    <string name="install_all_warning" product="default" msgid="652516435709047343">"來歷不明的應用程式較可能導致你的手機和個人資料遭到攻擊。安裝此來源提供的應用程式，即表示你同意如因使用此類應用程式導致手機受損或資料遺失，你將自行負責。"</string>
     <string name="install_all_warning" product="device" msgid="2348262609815354500">"來歷不明的應用程式可能會損害你的裝置和個人資料。安裝這個來源提供的應用程式即表示你同意，如因使用這些應用程式導致你的裝置受損或資料遺失，須自行負責。"</string>
     <string name="advanced_settings" msgid="2368905204839169094">"進階設定"</string>
     <string name="advanced_settings_summary" msgid="1823765348195530035">"啟用更多設定選項"</string>
@@ -2349,7 +2348,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"重設設定"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"已重設顯示大小和文字設定"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"要重設顯示大小和文字嗎？"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"顯示大小和文字偏好設定將重設為手機原始設定"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"顯示大小和文字偏好設定將重設為手機原始設定"</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"重設"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"週末有什麼計畫嗎？"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"我要去海邊玩，要一起去嗎？"</string>
@@ -2375,6 +2376,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"如要使用無障礙功能，請用 2 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 2 指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"如要使用無障礙功能，請用 3 指從螢幕底部向上滑動。\n\n如要切換不同的功能，請用 3 指向上滑動並按住。"</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"我知道了"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"無障礙工具按鈕設定"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"「<xliff:g id="SERVICE">%1$s</xliff:g>」快速鍵"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"無障礙工具按鈕"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"無障礙手勢"</string>
@@ -3738,15 +3740,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"自動產生媒體字幕"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"手機喇叭"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"有線耳罩式耳機"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"相容媒體裝置可提供更有臨場感的聲音體驗"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"已關閉"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"已開啟/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"已開啟/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g>和<xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"你也可以替藍牙裝置開啟空間音訊功能。"</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"已連結裝置設定"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{無}=1{已設定 1 個時間表}other{已設定 # 個時間表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"零打擾"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"僅接收重要聯絡人和應用程式的通知"</string>
