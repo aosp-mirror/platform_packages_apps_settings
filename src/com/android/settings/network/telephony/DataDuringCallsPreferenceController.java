@@ -25,7 +25,6 @@ import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -52,10 +51,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         super(context, preferenceKey);
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
+    void init(int subId) {
         this.mSubId = subId;
         mManager = mContext.getSystemService(TelephonyManager.class).createForSubscriptionId(subId);
-        lifecycle.addObserver(this);
     }
 
     @OnLifecycleEvent(ON_RESUME)
