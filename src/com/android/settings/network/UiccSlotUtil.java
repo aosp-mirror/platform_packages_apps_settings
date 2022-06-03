@@ -193,7 +193,7 @@ public class UiccSlotUtil {
                             if (slotInfo == null) {
                                 return false;
                             }
-                            return !slotInfo.isRemovable();
+                            return slotInfo.getIsEuicc();
                         })
                 .findFirst().orElse(-1);
 
