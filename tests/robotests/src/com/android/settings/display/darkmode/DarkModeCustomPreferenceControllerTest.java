@@ -15,6 +15,11 @@
 
 package com.android.settings.display.darkmode;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -71,68 +76,55 @@ public class DarkModeCustomPreferenceControllerTest {
     }
 
     @Test
-    public void nightMode_manualOn_hidePreference() {
+    public void getAvailabilityStatus_nightModeManualOn_unavailable() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_YES);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void nightMode_manualOff_hidePreference() {
+    public void getAvailabilityStatus_nightModeManualOff_unavailable() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_NO);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
-
     @Test
-    public void nightMode_customOn_showPreference() {
+    public void getAvailabilityStatus_nightModeCustomOn_available() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(true));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void nightMode_customOff_showPreference() {
+    public void getAvailabilityStatus_nightModeCustomOff_available() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(true));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @Test
-    public void nightMode_customBedtimeOn_hidePreference() {
+    public void getAvailabilityStatus_nightModeCustomBedtimeOn_unavailable() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
         when(mService.getNightModeCustomType())
                 .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_YES;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
-    public void nightMode_customBedtimeOff_hidePreference() {
+    public void getAvailabilityStatus_nightModeCustomBedtimeOff_unavailable() {
         when(mService.getNightMode()).thenReturn(UiModeManager.MODE_NIGHT_CUSTOM);
         when(mService.getNightModeCustomType())
                 .thenReturn(UiModeManager.MODE_NIGHT_CUSTOM_TYPE_BEDTIME);
         mConfig.uiMode = Configuration.UI_MODE_NIGHT_NO;
 
-        mController.refreshSummary(mPreference);
-
-        verify(mPreference).setVisible(eq(false));
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test
