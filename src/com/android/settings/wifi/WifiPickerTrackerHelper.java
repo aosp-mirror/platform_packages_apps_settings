@@ -117,16 +117,25 @@ public class WifiPickerTrackerHelper implements LifecycleObserver {
     }
 
     /** Return the enabled/disabled state of the carrier network */
-    public boolean isCarrierNetworkEnabled(int subId) {
-        return mWifiManager.isCarrierNetworkOffloadEnabled(subId, true /* merged */);
+    public boolean isCarrierNetworkEnabled() {
+        final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
+        if (mergedCarrierEntry == null) {
+            Log.e(TAG, "Failed to get MergedCarrierEntry to query enabled status");
+            return false;
+        }
+        final boolean isCarrierNetworkEnabled = mergedCarrierEntry.isEnabled();
+        Log.i(TAG, "isCarrierNetworkEnabled:" + isCarrierNetworkEnabled);
+        return isCarrierNetworkEnabled;
     }
 
     /** Enables/disables the carrier network */
     public void setCarrierNetworkEnabled(boolean enabled) {
         final MergedCarrierEntry mergedCarrierEntry = mWifiPickerTracker.getMergedCarrierEntry();
         if (mergedCarrierEntry == null) {
+            Log.e(TAG, "Unable to get MergedCarrierEntry to set enabled status");
             return;
         }
+        Log.i(TAG, "setCarrierNetworkEnabled:" + enabled);
         mergedCarrierEntry.setEnabled(enabled);
     }
 
