@@ -66,11 +66,13 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
     /**
      * Create a instance of AppLocaleDetails.
      * @param packageName Indicates which application need to show the locale picker.
+     * @param uid User id.
      */
-    public static AppLocaleDetails newInstance(String packageName) {
+    public static AppLocaleDetails newInstance(String packageName, int uid) {
         AppLocaleDetails appLocaleDetails = new AppLocaleDetails();
         Bundle bundle = new Bundle();
         bundle.putString(AppInfoBase.ARG_PACKAGE_NAME, packageName);
+        bundle.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
         appLocaleDetails.setArguments(bundle);
         return appLocaleDetails;
     }
@@ -81,13 +83,15 @@ public class AppLocaleDetails extends SettingsPreferenceFragment {
         Bundle bundle = getArguments();
         mPackageName = bundle.getString(AppInfoBase.ARG_PACKAGE_NAME, "");
         if (mPackageName.isEmpty()) {
-            Log.d(TAG, "No package name.");
+            Log.d(TAG, "There is no package name.");
             finish();
         }
+        int uid = bundle.getInt(AppInfoBase.ARG_PACKAGE_UID, getContext().getUserId());
+
         addPreferencesFromResource(R.xml.app_locale_details);
         mPrefOfDescription = getPreferenceScreen().findPreference(KEY_APP_DESCRIPTION);
         mPrefOfDisclaimer = getPreferenceScreen().findPreference(KEY_APP_DISCLAIMER);
-        mApplicationInfo = getApplicationInfo(mPackageName, getContext().getUserId());
+        mApplicationInfo = getApplicationInfo(mPackageName, uid);
         setDisclaimerPreference();
     }
 

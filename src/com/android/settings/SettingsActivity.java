@@ -466,6 +466,15 @@ public class SettingsActivity extends SettingsBaseActivity
             return false;
         }
 
+        // If the activity's launch mode is "singleInstance", it can't be embedded in Settings since
+        // it will be created in a new task.
+        ActivityInfo info = intent.resolveActivityInfo(getPackageManager(),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        if (info.launchMode == ActivityInfo.LAUNCH_SINGLE_INSTANCE) {
+            Log.w(LOG_TAG, "launchMode: singleInstance");
+            return false;
+        }
+
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Slice deep link starts the Intent using SubSettingLauncher. Returns true to show
             // 2-pane deep link.
