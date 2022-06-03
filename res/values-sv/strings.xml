@@ -482,10 +482,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Med ansikte"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Med fingeravtryck"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Med ansikte eller fingeravtryck"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Ge tillbaka surfplattan till din förälder"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Ge tillbaka telefonen till din förälder"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Ge tillbaka telefonen till din förälder"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"OK"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Vill du hoppa över skärmlås?"</string>
@@ -748,8 +746,8 @@
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="7086428013814722436">"Jobbprofilen och dess data raderas om du anger fel pinkod vid nästa försök"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="253673907244112643">"Din jobbprofil och dess data raderas om du anger fel lösenord vid nästa försök"</string>
     <plurals name="lockpassword_password_too_short" formatted="false" msgid="2192234965414232157">
-      <item quantity="other">Måste innehåll minst <xliff:g id="COUNT_1">%d</xliff:g> tecken</item>
-      <item quantity="one">Måste innehåll minst <xliff:g id="COUNT_0">%d</xliff:g> tecken</item>
+      <item quantity="other">Måste innehålla minst <xliff:g id="COUNT_1">%d</xliff:g> tecken</item>
+      <item quantity="one">Måste innehålla minst <xliff:g id="COUNT_0">%d</xliff:g> tecken</item>
     </plurals>
     <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Om du bara använder siffror måste det innehålla minst 1 siffra}other{Om du bara använder siffror måste det innehålla minst # siffror}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
@@ -989,7 +987,7 @@
     <string name="wifi_add_network" msgid="4178564862173751181">"Lägg till nätverk"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Inställningar för wifi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wifi återaktiveras automatiskt"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi‑Fi återaktiveras inte automatiskt"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wifi återaktiveras inte automatiskt"</string>
     <string name="wifi_access_points" msgid="5846755709207101844">"Wifi-nätverk"</string>
     <string name="wifi_menu_more_options" msgid="1236651929987819716">"Fler alternativ"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
@@ -1323,7 +1321,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Full upplösning"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"Full upplösning drar mer batteri. Om du byter till full upplösning kan vissa appar startas om."</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Färger"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturliga"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Förstärkta"</string>
@@ -2346,7 +2345,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Återställ inställningar"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Inställningarna för skärmstorlek och text har återställts"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vill du återställa skärmstorlek och text?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Inställningarna för skärmstorlek och text återställs till telefonens standardinställningar"</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Inställningarna för skärmstorlek och text återställs till telefonens standardinställningar"</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Återställ"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Några planer för helgen?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"På väg till stranden. Hänger du med?"</string>
@@ -3736,15 +3737,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Texta media automatiskt"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefonhögtalare"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Hörlurar med sladd"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Ljud från kompatibel media blir mer omgivande"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Av"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"På/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"På/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> och <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Du kan även aktivera rumsligt ljud för Bluetooth-enheter."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Inställningar för anslutna enheter"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Inga}=1{1 schema har ställts in}other{# scheman har ställts in}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Stör ej"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få bara aviseringar från viktiga personer och appar"</string>
