@@ -487,10 +487,8 @@
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"Pomoću lica"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"Pomoću otiska prsta"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"Pomoću lica ili otiska prsta"</string>
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (1498542470242509989) -->
-    <skip />
-    <!-- no translation found for biometric_settings_hand_back_to_guardian (3837001353226852511) -->
-    <skip />
+    <string name="biometric_settings_hand_back_to_guardian" product="tablet" msgid="1498542470242509989">"Vrati tablet roditelju"</string>
+    <string name="biometric_settings_hand_back_to_guardian" product="device" msgid="3837001353226852511">"Vrati uređaj roditelju"</string>
     <string name="biometric_settings_hand_back_to_guardian" product="default" msgid="3747619291972376153">"Vrati telefon roditelju"</string>
     <string name="biometric_settings_hand_back_to_guardian_ok" msgid="1763788801883247426">"U redu"</string>
     <string name="lock_screen_intro_skip_title" msgid="342553937472568925">"Želite li preskočiti zaključavanje zaslona?"</string>
@@ -1346,7 +1344,8 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Puna razlučivost"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 p QHD+"</string>
-    <string name="screen_resolution_footer" msgid="1576507061260060890">"Puna razlučivost više troši bateriju. Prelazak na punu razlučivost može uzrokovati ponovno pokretanje nekih aplikacija."</string>
+    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
+    <skip />
     <string name="color_mode_title" msgid="8666690832113906028">"Boje"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodno"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Pojačano"</string>
@@ -2373,7 +2372,9 @@
     <string name="accessibility_text_reading_reset_button_title" msgid="5960753279788187669">"Poništi postavke"</string>
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Postavke veličine zaslona i teksta vraćene su na zadano"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Želite li poništiti veličinu prikaza i tekst?"</string>
-    <string name="accessibility_text_reading_confirm_dialog_message" msgid="517090197003540264">"Vaše postavke veličine prikaza i teksta vratit će se na izvorne postavke telefona."</string>
+    <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Vaše postavke veličine prikaza i teksta vratit će se na izvorne postavke telefona."</string>
+    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
+    <skip />
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Poništi"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Što planiraš ovaj vikend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Idem na plažu. Ideš sa mnom?"</string>
@@ -2399,6 +2400,7 @@
     <string name="accessibility_tutorial_dialog_message_gesture_settings" msgid="40769674586981429">"Da biste koristili značajku pristupačnosti, prijeđite s dva prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s dva prsta prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_message_gesture_settings_talkback" msgid="7292969929578621958">"Da biste koristili značajku pristupačnosti, prijeđite s tri prsta prema gore od dna zaslona.\n\nDa biste prešli na neku drugu značajku, prijeđite s tri prsta prema gore i zadržite."</string>
     <string name="accessibility_tutorial_dialog_button" msgid="2031773187678948436">"Shvaćam"</string>
+    <string name="accessibility_tutorial_dialog_link_button" msgid="1624189347106713695">"Postavke gumba pristupačnosti"</string>
     <string name="accessibility_shortcut_title" msgid="8125867833704517463">"Prečac za uslugu <xliff:g id="SERVICE">%1$s</xliff:g>"</string>
     <string name="accessibility_shortcut_edit_summary_software" msgid="6405629977940618205">"Gumb za pristupačnost"</string>
     <string name="accessibility_shortcut_edit_summary_software_gesture" msgid="5489284264414421286">"Pokret za pristupačnost"</string>
@@ -3203,7 +3205,6 @@
     <string name="sync_gmail" msgid="228561698646018808">"Gmail"</string>
     <string name="sync_calendar" msgid="4603704438090387251">"Kalendar"</string>
     <string name="sync_contacts" msgid="2376465611511325472">"Kontakti"</string>
-    <string name="sync_plug" msgid="7956982719077985381"><font fgcolor="#ffffffff">"Dobro došli u Googleovu sinkronizaciju!"</font>\n"Googleov pristup sinkronizaciji podataka za mogućnost pristupa kontaktima, sastancima i drugim stavkama s bilo kojeg mjesta."</string>
     <string name="header_application_sync_settings" msgid="7427706834875419243">"Postavke sinkronizacije aplikacije"</string>
     <string name="header_data_and_synchronization" msgid="453920312552838939">"Podaci i sinkronizacija"</string>
     <string name="preference_change_password_title" msgid="5465821666939825972">"Promijeni zaporku"</string>
@@ -3782,15 +3783,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Automatski titlovi za medije"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Zvučnik telefona"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Žičane slušalice"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Zvuk iz kompatibilnih uređaja postaje sveobuhvatniji"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Isključeno"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Uključeno/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Uključeno / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> i <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Možete uključiti i prostorni zvuk za Bluetooth uređaje."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Postavke povezanih uređaja"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Nijedan}=1{Postavljen je jedan raspored}one{Postavljen je # raspored}few{Postavljena su # rasporeda}other{Postavljeno je # rasporeda}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Ne uznemiravaj"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Primajte obavijesti samo od važnih osoba i aplikacija"</string>
@@ -5738,7 +5736,7 @@
     <string name="mobile_data_disable_title" msgid="8438714772256088913">"Isključiti mobilne podatke?"</string>
     <string name="mobile_data_disable_message" msgid="7829414836454769970">"Nećete imati pristup podacima ni internetu putem usluge <xliff:g id="CARRIER">%s</xliff:g>. Internet će biti dostupan samo putem Wi-Fija."</string>
     <string name="mobile_data_disable_message_default_carrier" msgid="4449469407705838612">"mobilnog operatera"</string>
-    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Nije dopušteno u vašoj organizaciji"</string>
+    <string name="not_allowed_by_ent" msgid="1958611623122304411">"Vaša organizacija ne dopušta"</string>
     <string name="aware_summary_when_bedtime_on" msgid="2063856008597376344">"Nije dostupno jer je uključen način rada u vrijeme spavanja"</string>
     <string name="reset_importance_completed" msgid="3595536767426097205">"Dovršeno je vraćanje važnosti obavijesti na zadano."</string>
     <string name="apps_dashboard_title" msgid="3269953499954393706">"Aplikacije"</string>
