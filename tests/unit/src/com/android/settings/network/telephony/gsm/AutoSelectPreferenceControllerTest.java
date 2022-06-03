@@ -31,7 +31,6 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -62,8 +61,6 @@ public class AutoSelectPreferenceControllerTest {
     private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private ProgressDialog mProgressDialog;
-    @Mock
-    private Lifecycle mLifecycle;
 
     private PersistableBundle mCarrierConfig;
     private AutoSelectPreferenceController mController;
@@ -91,7 +88,7 @@ public class AutoSelectPreferenceControllerTest {
         mController = new AutoSelectPreferenceController(mContext, "auto_select");
         mController.mProgressDialog = mProgressDialog;
         mController.mSwitchPreference = mSwitchPreference;
-        mController.init(mLifecycle, SUB_ID);
+        mController.init(SUB_ID);
     }
 
     @Test
@@ -139,6 +136,6 @@ public class AutoSelectPreferenceControllerTest {
         when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(null);
 
         // Should not crash
-        mController.init(mLifecycle, SUB_ID);
+        mController.init(SUB_ID);
     }
 }
