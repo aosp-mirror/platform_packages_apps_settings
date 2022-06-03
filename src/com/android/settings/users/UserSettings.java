@@ -517,7 +517,7 @@ public class UserSettings extends SettingsPreferenceFragment
         int myUserId = UserHandle.myUserId();
         Bitmap b = mUserManager.getUserIcon(myUserId);
         if (b != null) {
-            mMePreference.setIcon(encircle(b));
+            mMePreference.setIcon(encircleUserIcon(b));
             mUserIcons.put(myUserId, b);
         }
     }
@@ -1397,7 +1397,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
                 icon.setTint(
                         getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
-                pref.setIcon(encircle(
+                pref.setIcon(encircleUserIcon(
                         UserIcons.convertToBitmapAtUserIconSize(
                                 getContext().getResources(), icon)));
             } else {
@@ -1563,7 +1563,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private Drawable getEncircledDefaultIcon() {
         if (mDefaultIconDrawable == null) {
-            mDefaultIconDrawable = encircle(
+            mDefaultIconDrawable = encircleUserIcon(
                     getDefaultUserIconAsBitmap(getContext().getResources(), UserHandle.USER_NULL));
         }
         return mDefaultIconDrawable;
@@ -1572,7 +1572,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private void setPhotoId(Preference pref, UserInfo user) {
         Bitmap bitmap = mUserIcons.get(user.id);
         if (bitmap != null) {
-            pref.setIcon(encircle(bitmap));
+            pref.setIcon(encircleUserIcon(bitmap));
         }
     }
 
@@ -1635,7 +1635,7 @@ public class UserSettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private Drawable encircle(Bitmap icon) {
+    private Drawable encircleUserIcon(Bitmap icon) {
         return new CircleFramedDrawable(
                 icon,
                 getActivity().getResources().getDimensionPixelSize(
