@@ -24,7 +24,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -135,14 +134,13 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void isCarrierNetworkEnabled_returnCorrect() {
-        doReturn(true).when(mWifiManager).isCarrierNetworkOffloadEnabled(SUB_ID, true /* merged */);
+        when(mMergedCarrierEntry.isEnabled()).thenReturn(true);
 
-        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled(SUB_ID)).isTrue();
+        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled()).isTrue();
 
-        doReturn(false).when(mWifiManager)
-                .isCarrierNetworkOffloadEnabled(SUB_ID, true /* merged */);
+        when(mMergedCarrierEntry.isEnabled()).thenReturn(false);
 
-        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled(SUB_ID)).isFalse();
+        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled()).isFalse();
     }
 
     @Test
