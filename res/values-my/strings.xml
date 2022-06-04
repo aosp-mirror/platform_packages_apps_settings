@@ -495,7 +495,7 @@
     <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3365990364131398523">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင် သို့မဟုတ် အခိုးခံရလျှင် ဤစက်ပစ္စည်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
     <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="4908278819257287536">"စက်ပစ္စည်းကာကွယ်ရန် ဝန်ဆောင်မှုများ ပွင့်မည်မဟုတ်ပါ။ ပျောက်ဆုံးသွားလျှင် သို့မဟုတ် အခိုးခံရလျှင် ဤဖုန်းကို အခြားသူများအသုံးပြုခြင်းမှ ကာကွယ်နိုင်မည်မဟုတ်ပါ။"</string>
     <string name="skip_anyway_button_label" msgid="3442274117023270068">"ကျော်လိုက်ပါ"</string>
-    <string name="go_back_button_label" msgid="6139455414099035594">"နောက်သို့ သွားပါ"</string>
+    <string name="go_back_button_label" msgid="6139455414099035594">"နောက်သို့"</string>
     <string name="skip_lock_screen_dialog_button_label" msgid="641984698150020591">"ကျော်ရန်"</string>
     <string name="cancel_lock_screen_dialog_button_label" msgid="1801132985957491690">"မလုပ်တော့"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"အာရုံခံကိရိယာကို ထိပါ"</string>
@@ -750,7 +750,7 @@
       <item quantity="other">အနည်းဆုံး အက္ခရာ <xliff:g id="COUNT_1">%d</xliff:g> လုံး ပါရမည်</item>
       <item quantity="one">အနည်းဆုံး အက္ခရာ <xliff:g id="COUNT_0">%d</xliff:g> လုံး ပါရမည်</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{နံပါတ်များသီးသန့်သုံးပါက အနည်းဆုံး ဂဏန်း 1 လုံးရှိရမည်}other{နံပါတ်များသီးသန့်သုံးပါက အနည်းဆုံး ဂဏန်း # လုံးရှိရမည်}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{နံပါတ်ကိုသာ သုံးပါက အနည်းဆုံး ဂဏန်း ၁ လုံးရှိရမည်}other{နံပါတ်ကိုသာ သုံးပါက အနည်းဆုံး ဂဏန်း # လုံးရှိရမည်}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="other">ပင်နံပါတ်တွင် အနည်းဆုံး ဂဏန်း <xliff:g id="COUNT_1">%d</xliff:g> လုံး ပါရမည်</item>
       <item quantity="one">ပင်နံပါတ်တွင် အနည်းဆုံး ဂဏန်း <xliff:g id="COUNT_0">%d</xliff:g> လုံး ပါရမည်</item>
@@ -1322,8 +1322,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"ပုံရိပ်ပြတ်သားကိန်းအပြည့်"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"ပုံရိပ်ပြတ်သားကိန်းအပြည့်သုံးပါက ဘက်ထရီ ပိုသုံးပါမည်။ သင့်ပုံရိပ်ပြတ်သားကိန်းသို့ ပြောင်းခြင်းက အချို့အက်ပ်များကို ပြန်စစေနိုင်သည်။"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"အရောင်များ"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"သဘာဝ"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"အရောင်တင်ထားသည်"</string>
@@ -2347,8 +2346,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"ပြကွက်အရွယ်အစားနှင့် စာသားဆက်တင်များကို ပြင်ဆင်သတ်မှတ်ထားသည်"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ပြကွက်အရွယ်နှင့် စာသားပြင်ဆင်သတ်မှတ်မလား။"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"သင့်ပြကွက်နှင့် စာသားသတ်မှတ်ချက်များကို ဖုန်း၏ မူလဆက်တင်များသို့ ပြင်ဆင်သတ်မှတ်ပါမည်"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ပြကွက်နှင့် စာသားရွေးချယ်မှုများကို တက်ဘလက်၏ မူလဆက်တင်များသို့ ပြင်ဆင်သတ်မှတ်မည်"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"ပြင်ဆင်သတ်မှတ်ရန်"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"စနေ၊ တနင်္ဂနွေမှာ တစ်ခုခုစီစဉ်ထားလား။"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ကမ်းခြေသွားမလို့။ လိုက်မလား။"</string>
@@ -4887,8 +4885,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"‘ဘက်ထရီ အားထိန်း’ ကြောင့် ယာယီပိတ်ထားသည်"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"ဘက်ထရီ အားထိန်း ပိတ်ရန်"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"\'ဘက်ထရီအားထိန်း\' ကြောင့် ယာယီဖွင့်ထားသည်"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"ပံ့ပိုးထားသော အက်ပ်များကိုလည်း မှောင်သည့် အပြင်အဆင်သို့ ပြောင်းပါမည်"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"ရပါပြီ"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"အမှောင်ဖြင့် စမ်းကြည့်ပါ"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"ဘက်ထရီသက်တမ်း ပိုတိုးစေသည်"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"ဆော့ဖ်ဝဲရေးသူ အကွက်များ အမြန်သတ်မှတ်ခြင်း"</string>
