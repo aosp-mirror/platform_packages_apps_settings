@@ -130,7 +130,6 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_GUEST_CATEGORY = "guest_category";
     private static final String KEY_GUEST_RESET = "guest_reset";
     private static final String KEY_GUEST_EXIT = "guest_exit";
-    private static final String KEY_GUEST_INFO = "guest_info";
     private static final String KEY_REMOVE_GUEST_ON_EXIT = "remove_guest_on_exit";
     private static final String KEY_GUEST_USER_CATEGORY = "guest_user_category";
 
@@ -188,8 +187,6 @@ public class UserSettings extends SettingsPreferenceFragment
     Preference mGuestResetPreference;
     @VisibleForTesting
     Preference mGuestExitPreference;
-    @VisibleForTesting
-    Preference mGuestInfoPreference;
     @VisibleForTesting
     UserPreference mMePreference;
     @VisibleForTesting
@@ -356,8 +353,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mGuestExitPreference = findPreference(KEY_GUEST_EXIT);
         mGuestExitPreference.setOnPreferenceClickListener(this);
 
-        mGuestInfoPreference = findPreference(KEY_GUEST_INFO);
-
         mGuestUserCategory = findPreference(KEY_GUEST_USER_CATEGORY);
 
         mAddGuest = findPreference(KEY_ADD_GUEST);
@@ -522,7 +517,7 @@ public class UserSettings extends SettingsPreferenceFragment
         int myUserId = UserHandle.myUserId();
         Bitmap b = mUserManager.getUserIcon(myUserId);
         if (b != null) {
-            mMePreference.setIcon(encircle(b));
+            mMePreference.setIcon(encircleUserIcon(b));
             mUserIcons.put(myUserId, b);
         }
     }
@@ -1338,7 +1333,6 @@ public class UserSettings extends SettingsPreferenceFragment
         mGuestCategory.setVisible(false);
         mGuestResetPreference.setVisible(false);
         mGuestExitPreference.setVisible(false);
-        mGuestInfoPreference.setVisible(false);
         if (!isCurrentUserGuest()) {
             return;
         }
@@ -1346,25 +1340,24 @@ public class UserSettings extends SettingsPreferenceFragment
         mGuestExitPreference.setVisible(true);
         if (isEnableGuestModeUxChanges()) {
             mGuestResetPreference.setVisible(true);
-            mGuestInfoPreference.setVisible(true);
 
             boolean isGuestFirstLogin = Settings.Secure.getIntForUser(
                                             getContext().getContentResolver(),
                                             SETTING_GUEST_HAS_LOGGED_IN,
                                             0,
                                             UserHandle.myUserId()) <= 1;
-            String guestInfoText;
+            String guestExitSummary;
             if (mUserCaps.mIsEphemeral) {
-                guestInfoText = getContext().getString(
+                guestExitSummary = getContext().getString(
                                     R.string.guest_notification_ephemeral);
             } else if (isGuestFirstLogin) {
-                guestInfoText = getContext().getString(
+                guestExitSummary = getContext().getString(
                                     R.string.guest_notification_non_ephemeral);
             } else {
-                guestInfoText = getContext().getString(
+                guestExitSummary = getContext().getString(
                                     R.string.guest_notification_non_ephemeral_non_first_login);
             }
-            mGuestInfoPreference.setSummary(guestInfoText);
+            mGuestExitPreference.setSummary(guestExitSummary);
         } else {
             mGuestExitPreference.setIcon(getEncircledDefaultIcon());
             mGuestExitPreference.setTitle(
@@ -1401,7 +1394,12 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setEnabled(canOpenUserDetails);
             pref.setSelectable(true);
             if (isEnableGuestModeUxChanges()) {
-                pref.setIcon(getContext().getDrawable(R.drawable.ic_account_circle));
+                Drawable icon = getContext().getDrawable(R.drawable.ic_account_circle_outline);
+                icon.setTint(
+                        getColorAttrDefaultColor(getContext(), android.R.attr.colorControlNormal));
+                pref.setIcon(encircleUserIcon(
+                        UserIcons.convertToBitmapAtUserIconSize(
+                                getContext().getResources(), icon)));
             } else {
                 pref.setIcon(getEncircledDefaultIcon());
             }
@@ -1565,7 +1563,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private Drawable getEncircledDefaultIcon() {
         if (mDefaultIconDrawable == null) {
-            mDefaultIconDrawable = encircle(
+            mDefaultIconDrawable = encircleUserIcon(
                     getDefaultUserIconAsBitmap(getContext().getResources(), UserHandle.USER_NULL));
         }
         return mDefaultIconDrawable;
@@ -1574,7 +1572,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private void setPhotoId(Preference pref, UserInfo user) {
         Bitmap bitmap = mUserIcons.get(user.id);
         if (bitmap != null) {
-            pref.setIcon(encircle(bitmap));
+            pref.setIcon(encircleUserIcon(bitmap));
         }
     }
 
@@ -1637,9 +1635,11 @@ public class UserSettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private Drawable encircle(Bitmap icon) {
-        Drawable circled = CircleFramedDrawable.getInstance(getActivity(), icon);
-        return circled;
+    private Drawable encircleUserIcon(Bitmap icon) {
+        return new CircleFramedDrawable(
+                icon,
+                getActivity().getResources().getDimensionPixelSize(
+                        R.dimen.multiple_users_user_icon_size));
     }
 
     @Override
