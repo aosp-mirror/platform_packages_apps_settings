@@ -89,9 +89,6 @@
     <!-- Content description for dot pager indicator for preview pager. [CHAR LIMIT=NONE] -->
     <string name="preview_page_indicator_content_description">Preview, page <xliff:g id="current_page" example="3">%1$d</xliff:g> of <xliff:g id="num_pages" example="9">%2$d</xliff:g></string>
 
-    <!-- Summary of font size setting screen. [CHAR LIMIT=NONE] -->
-    <string name="font_size_summary">Make the text on screen smaller or larger.</string>
-
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
     <string name="font_size_make_smaller_desc">Make smaller</string>
     <!-- Description for the button that makes interface elements larger. [CHAR_LIMIT=NONE] -->
@@ -102,30 +99,6 @@
 
     <!-- Disclaimer for camera based rotate [CHAR_LIMIT=NONE] -->
     <string name="smart_rotate_text_headline">Face Detection uses the front-facing camera to improve auto-rotate accuracy. Images are never stored or sent to Google.</string>
-    <string name="font_size_preview_text_headline">Sample text</string>
-    <string name="font_size_preview_text_title"
-            translation_description="Title text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        The Wonderful Wizard of Oz
-    </string>
-    <string name="font_size_preview_text_subtitle"
-            translation_description="Subtitle text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        Chapter 11: The Wonderful Emerald City of Oz</string>
-    <string name="font_size_preview_text_body"
-            translation_description="Text in sample text used to illustrate how the currently selected font size will appear to the user. NOTE: Translate manually. No not adopt any copyrighted material for translation.">
-        Even with eyes protected by the green spectacles Dorothy and her friends were at first dazzled by the brilliancy of the wonderful City.
-        The streets were lined with beautiful houses all built of green marble and studded everywhere with sparkling emeralds.
-        They walked over a pavement of the same green marble, and where the blocks were joined together were rows of emeralds, set closely, and glittering in the brightness of the sun.
-        The window panes were of green glass; even the sky above the City had a green tint, and the rays of the sun were green.
-        \n\nThere were many people, men, women and children, walking about, and these were all dressed in green clothes and had greenish skins.
-        They looked at Dorothy and her strangely assorted company with wondering eyes, and the children all ran away and hid behind their mothers when they saw the Lion; but no one spoke to them.
-        Many shops stood in the street, and Dorothy saw that everything in them was green.
-        Green candy and green pop-corn were offered for sale, as well as green shoes, green hats and green clothes of all sorts.
-        At one place a man was selling green lemonade, and when the children bought it Dorothy could see that they paid for it with green pennies.
-        \n\nThere seemed to be no horses nor animals of any kind; the men carried things around in little green carts, which they pushed before them.
-        Everyone seeemed happy and contented and prosperous.
-    </string>
-    <!-- Button. Chosen when they want to save the chosen text size. -->
-    <string name="font_size_save">OK</string>
 
     <!-- Title for a notification shown. [CHAR LIMIT=25] -->
     <string name="sdcard_setting" product="nosdcard">USB storage</string>
@@ -7972,10 +7945,6 @@
     <string name="help_url_manage_storage" translatable="false"></string>
     <!-- Help URL, Android is upgrading [DO NOT TRANSLATE] -->
     <string name="help_url_upgrading" translatable="false"></string>
-    <!-- Help URL, Font size [DO NOT TRANSLATE] -->
-    <string name="help_url_font_size" translatable="false"></string>
-    <!-- Help URL, Display size [DO NOT TRANSLATE] -->
-    <string name="help_url_display_size" translatable="false"></string>
     <!-- Help URL, Auto brightness [DO NOT TRANSLATE] -->
     <string name="help_url_auto_brightness" translatable="false" />
     <!-- Help URL, Adaptive sleep [DO NOT TRANSLATE] -->
@@ -8524,9 +8493,6 @@
 
     <!-- Sound: Dashboard summary indicating the volume of ringtone when at 0% with vibrate disabled [CHAR LIMIT=100] -->
     <string name="sound_settings_summary_silent">Ringer set to silent</string>
-
-    <!-- Sound: Dashboard summary example used in Setup Wizard preview screen. [CHAR LIMIT=100] -->
-    <string name="sound_settings_example_summary">Ring &amp; notification volume at 80%</string>
 
     <!-- Sound: Title for the option managing media volume. [CHAR LIMIT=30] -->
     <string name="media_volume_option_title">Media volume</string>
@@ -11116,8 +11082,6 @@
     <string name="screen_zoom_short_summary">Make everything bigger or smaller</string>
     <!-- Keywords for setting that controls screen zoom (e.g. how large interface elements appear). [CHAR LIMIT=NONE] -->
     <string name="screen_zoom_keywords">display density, screen zoom, scale, scaling</string>
-    <!-- Summary of screen zoom setting screen. [CHAR LIMIT=NONE] -->
-    <string name="screen_zoom_summary">Make the items on your screen smaller or larger. Some apps on your screen may change position.</string>
     <!-- Title of the screen zoom preview activity. -->
     <string name="screen_zoom_preview_title">Preview</string>
     <!-- Description for the button that makes interface elements smaller. [CHAR_LIMIT=NONE] -->
@@ -11169,8 +11133,6 @@
 
     <!-- Summary of apps [CHAR LIMIT=NONE] -->
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
-    <!-- Example summary of apps used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
-    <string name="apps_summary_example">24 apps installed</string>
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
     <string name="storage_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
@@ -11182,9 +11144,6 @@
     <string name="display_summary">Sleep after <xliff:g id="timeout_description" example="10 minutes">%1$s</xliff:g> of inactivity</string>
     <!-- Summary for Display settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="display_dashboard_summary">Dark theme, font size, brightness</string>
-
-    <!-- Example summary of display used in Setup Wizard preview screen [CHAR LIMIT=NONE] -->
-    <string name="display_summary_example">Sleep after 10 minutes of inactivity</string>
 
     <!-- Summary of memory screen [CHAR LIMIT=NONE] -->
     <string name="memory_summary">Avg <xliff:g id="used_memory" example="1.7GB">%1$s</xliff:g> of <xliff:g id="total_memory" example="2GB">%2$s</xliff:g> memory used</string>
