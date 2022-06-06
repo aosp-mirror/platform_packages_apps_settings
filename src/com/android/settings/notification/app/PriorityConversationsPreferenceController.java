@@ -17,37 +17,25 @@
 package com.android.settings.notification.app;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.service.notification.ConversationChannelWrapper;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.notification.NotificationBackend;
-
-import java.util.Collections;
-import java.util.List;
 
 public class PriorityConversationsPreferenceController extends
         ConversationListPreferenceController {
 
     private static final String KEY = "important_conversations";
-    private List<ConversationChannelWrapper> mConversations;
 
-    public PriorityConversationsPreferenceController(Context context,
-            NotificationBackend backend) {
+    public PriorityConversationsPreferenceController(Context context, NotificationBackend backend) {
         super(context, backend);
     }
 
     @Override
     public String getPreferenceKey() {
         return KEY;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return true;
     }
 
     @Override
@@ -62,15 +50,5 @@ public class PriorityConversationsPreferenceController extends
     @Override
     boolean matchesFilter(ConversationChannelWrapper conversation) {
         return conversation.getNotificationChannel().isImportantConversation();
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        PreferenceCategory pref = (PreferenceCategory) preference;
-        // Load conversations
-        mConversations = mBackend.getConversations(true).getList();
-        Collections.sort(mConversations, mConversationComparator);
-
-        populateList(mConversations, pref);
     }
 }
