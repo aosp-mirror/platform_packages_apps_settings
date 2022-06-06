@@ -16,17 +16,12 @@
 
 package com.android.settings.homepage;
 
-import static android.provider.Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI;
-
 import static com.android.settings.search.actionbar.SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR;
 import static com.android.settingslib.search.SearchIndexable.MOBILE;
 
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -43,7 +38,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.window.embedding.SplitController;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.activityembedding.ActivityEmbeddingUtils;
@@ -57,15 +51,12 @@ import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.net.URISyntaxException;
-
 @SearchIndexable(forTarget = MOBILE)
 public class TopLevelSettings extends DashboardFragment implements SplitLayoutListener,
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TAG = "TopLevelSettings";
     private static final String SAVED_HIGHLIGHT_MIXIN = "highlight_mixin";
-    private static final String SAVED_FIRST_PREFERENCE_CLICK = "first_pref_click";
     private static final String PREF_KEY_SUPPORT = "top_level_support";
 
     private boolean mIsEmbeddingActivityEnabled;
@@ -73,7 +64,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     private int mPaddingHorizontal;
     private boolean mScrollNeeded = true;
     private boolean mFirstStarted = true;
-    private boolean mFirstDuplicateClickCheck = true;
 
     public TopLevelSettings() {
         final Bundle args = new Bundle();
@@ -154,7 +144,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
         boolean activityEmbedded = SplitController.getInstance().isActivityEmbedded(getActivity());
         if (icicle != null) {
-            mFirstDuplicateClickCheck = icicle.getBoolean(SAVED_FIRST_PREFERENCE_CLICK);
             mHighlightMixin = icicle.getParcelable(SAVED_HIGHLIGHT_MIXIN);
             mScrollNeeded = !mHighlightMixin.isActivityEmbedded() && activityEmbedded;
             mHighlightMixin.setActivityEmbedded(activityEmbedded);
@@ -188,7 +177,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(SAVED_FIRST_PREFERENCE_CLICK, mFirstDuplicateClickCheck);
         if (mHighlightMixin != null) {
             outState.putParcelable(SAVED_HIGHLIGHT_MIXIN, mHighlightMixin);
         }
@@ -289,37 +277,13 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     /** Returns whether clicking the specified preference is considered as a duplicate click. */
     public boolean isDuplicateClick(Preference pref) {
-        boolean firstCheck = mFirstDuplicateClickCheck;
-        mFirstDuplicateClickCheck = false;
-        /*
-         * Return false when
-         * 1. The device doesn't support activity embedding
-         * 2. The target preference is not highlighted
-         * 3. The current activity is not embedded
-         */
-        if (mHighlightMixin == null
-                || !TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
-                || !SplitController.getInstance().isActivityEmbedded(getActivity())) {
-            return false;
-        }
-
-        /*
-         * Return true when
-         * 1. This method has been called before
-         * 2. The preference doesn't have a target fragment, ex. Wallpaper and injections
-         */
-        if (!firstCheck || TextUtils.isEmpty(pref.getFragment())) {
-            return true;
-        }
-
-        /*
-         * Returns true when
-         * 1. The right pane fragment is not started by a deep link.
-         * 2. The target fragment equals the right pane fragment
-         */
-        String intentUri = getIntent().getStringExtra(EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_INTENT_URI);
-        return TextUtils.isEmpty(intentUri)
-                || TextUtils.equals(pref.getFragment(), getIntentTargetFragment(intentUri));
+        /* Return true if
+         * 1. the device supports activity embedding, and
+         * 2. the target preference is highlighted, and
+         * 3. the current activity is embedded */
+        return mHighlightMixin != null
+                && TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
+                && SplitController.getInstance().isActivityEmbedded(getActivity());
     }
 
     /** Show/hide the highlight on the menu entry for the search page presence */
@@ -359,27 +323,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         if (mHighlightMixin != null) {
             mHighlightMixin.reloadHighlightMenuKey(getArguments());
         }
-    }
-
-    private String getIntentTargetFragment(String intentUri) {
-        Intent targetIntent;
-        try {
-            targetIntent = Intent.parseUri(intentUri, Intent.URI_INTENT_SCHEME);
-        } catch (URISyntaxException e) {
-            return null;
-        }
-
-        String fragment = targetIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT);
-        if (!TextUtils.isEmpty(fragment)) {
-            return fragment;
-        }
-
-        ActivityInfo info = targetIntent.resolveActivityInfo(getPackageManager(),
-                PackageManager.GET_META_DATA);
-        if (info == null || info.metaData == null) {
-            return null;
-        }
-        return info.metaData.getString(SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
     }
 
     private void iteratePreferences(PreferenceJob job) {
