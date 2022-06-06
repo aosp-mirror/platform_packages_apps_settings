@@ -320,12 +320,17 @@
             android:summary="@string/bluetooth_disable_absolute_volume_summary" />
 
         <SwitchPreference
-            android:key="bluetooth_disable_a2dp_hw_offload"
-            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
+            android:key="bluetooth_enable_leaudio"
+            android:title="@string/bluetooth_enable_leaudio"
+            android:summary="@string/bluetooth_enable_leaudio_summary" />
 
         <SwitchPreference
             android:key="bluetooth_disable_le_audio_hw_offload"
             android:title="@string/bluetooth_disable_le_audio_hw_offload" />
+
+        <SwitchPreference
+            android:key="bluetooth_disable_a2dp_hw_offload"
+            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
 
         <ListPreference
             android:key="bluetooth_select_avrcp_version"
