@@ -6114,14 +6114,8 @@
     <!-- Summary for the low battery state [CHAR LIMIT=NONE] -->
     <string name="low_battery_summary">Low battery</string>
 
-    <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
-    <string name="background_activity_title">Background restriction</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
-    <!-- Summary for the background activity when it is disabled [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_disabled">App not allowed to run in background</string>
-    <!-- TODO: Pending UX review. Summary for the background activity when it is allowlisted [CHAR_LIMIT=120] -->
-    <string name="background_activity_summary_allowlisted">Background usage can\u2019t be restricted</string>
     <!-- TODO: Pending UX review. Title for the warning dialog to show to the user when limiting background activity for an app -->
     <string name="background_activity_warning_dialog_title">Limit background activity?</string>
     <!-- TODO: Pending UX review. Text for the warning dialog to show to the user when limiting background activity for an app -->
@@ -6548,8 +6542,6 @@
 
     <!-- Description for battery usage time for an app, i.e. Used for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_used_for">Used for <xliff:g id="time">^1</xliff:g></string>
-    <!-- Description for battery usage background time for an app, i.e. Active for 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
-    <string name="battery_active_for">Active for <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery screen usage time for an app, i.e. Screen usage 30min. Note: ^1 should be used in all translations [CHAR LIMIT=60] -->
     <string name="battery_screen_usage">Screen usage <xliff:g id="time">^1</xliff:g></string>
     <!-- Description for battery usage info for an app, i.e. 60% used by facebook. [CHAR LIMIT=60] -->
@@ -6564,14 +6556,8 @@
     <string name="battery_full_charge_last">Full charge lasts about</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
     <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage.</string>
-    <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
-    <string name="battery_detail_foreground">While in active use</string>
-    <!-- Title for text that shows the amount of time an app has been running while in the background. [CHAR LIMIT=80] -->
-    <string name="battery_detail_background">While in background</string>
     <!-- Title for battery usage amount by this app. [CHAR LIMIT=80] -->
     <string name="battery_detail_power_usage">Battery usage</string>
-    <!-- Title for the battery usage group, which means all the battery data are calculated 'since full charge' [CHAR LIMIT=40] -->
-    <string name ="battery_detail_info_title">Since full charge</string>
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
@@ -10331,11 +10317,6 @@
     <string name="encryption_interstitial_yes">Yes</string>
     <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
     <string name="encryption_interstitial_no">No</string>
-
-    <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">Restricted</string>
-    <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_false_label">App can use battery in background</string>
 
     <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
     <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
