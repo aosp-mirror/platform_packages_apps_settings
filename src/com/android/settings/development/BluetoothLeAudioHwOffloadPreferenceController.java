@@ -59,7 +59,7 @@ public class BluetoothLeAudioHwOffloadPreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        BluetoothHwOffloadRebootDialog.show(mFragment);
+        BluetoothRebootDialog.show(mFragment);
         mChanged = true;
         return false;
     }
@@ -104,9 +104,9 @@ public class BluetoothLeAudioHwOffloadPreferenceController
     }
 
     /**
-     * Called when the HwOffloadDialog confirm is clicked.
+     * Called when the RebootDialog confirm is clicked.
      */
-    public void onHwOffloadDialogConfirmed() {
+    public void onRebootDialogConfirmed() {
         if (!mChanged) {
             return;
         }
@@ -119,9 +119,9 @@ public class BluetoothLeAudioHwOffloadPreferenceController
     }
 
     /**
-     * Called when the HwOffloadDialog cancel is clicked.
+     * Called when the RebootDialog cancel is clicked.
      */
-    public void onHwOffloadDialogCanceled() {
+    public void onRebootDialogCanceled() {
         mChanged = false;
     }
 }
