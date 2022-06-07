@@ -38,6 +38,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+    android:title="@string/navbar_category">
+
+    <ccom.axiom.settings.preference.SystemSettingSwitchPreference
+        android:key="navigation_bar_gestural_narrow"
+        android:title="@string/gestural_navbar_narrow_title"
+        android:summary="@string/gestural_navbar_narrow_summary"
+        android:defaultValue="false" />
+      </PreferenceCategory>
+
+
+    <PreferenceCategory
         android:key="back_sensitivity_category"
         android:persistent="false"
         android:title="@string/back_sensitivity_dialog_title">
@@ -63,4 +74,3 @@
         android:selectable="false"
         settings:searchable="false"/>
 </PreferenceScreen>
-
