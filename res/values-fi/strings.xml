@@ -319,7 +319,7 @@
     <string name="security_passwords_title" msgid="4154420930973818581">"Yksityisyys"</string>
     <string name="disabled_by_administrator_summary" msgid="5424846182313851124">"Ei käytettävissä"</string>
     <string name="security_status_title" msgid="6958004275337618656">"Suojaustila"</string>
-    <string name="security_dashboard_summary" msgid="7571035662779425918">"Näytön lukitus, Paikanna puhelin, sovellusten tietoturva"</string>
+    <string name="security_dashboard_summary" msgid="7571035662779425918">"Näytön lukitus, Paikanna laite, sovellusten tietoturva"</string>
     <string name="security_settings_face_preference_summary" msgid="6675126437396914838">"Kasvot lisätty"</string>
     <string name="security_settings_face_preference_summary_none" msgid="5952752252122581846">"Ota kasvot käyttöön napauttamalla"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Kasvojentunnistusavaus"</string>
@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sormenjälki lisätty"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Voit nyt käyttää sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Tee myöhemmin"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nosta sormi ja kosketa taas"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Aseta sormenjäljen reuna tunnistimen päälle ja pidä se siinä, ja tee sitten sama toiselle reunalle"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Ohitetaanko sormenjäljen määritys?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Olet valinnut sormenjäljen yhdeksi tavaksi avata puhelimesi lukitus. Jos ohitat tämän nyt, sinun on määritettävä se myöhemmin. Määritys kestää vain noin minuutin."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-koodi suojaa tablettia, jos se katoaa tai varastetaan"</string>
@@ -2259,7 +2261,7 @@
     <string name="app_name_label" msgid="3809910527680143673">"Sovellus"</string>
     <string name="last_time_used_label" msgid="2639712813493534074">"Viimeinen käyttöaika"</string>
     <string name="usage_time_label" msgid="9105343335151559883">"Käyttöaika"</string>
-    <string name="accessibility_settings" msgid="4713215774904704682">"Esteettömyys"</string>
+    <string name="accessibility_settings" msgid="4713215774904704682">"Saavutettavuus"</string>
     <string name="accessibility_settings_title" msgid="6739115703615065716">"Esteettömyysasetukset"</string>
     <string name="accessibility_settings_summary" msgid="2366627644570558503">"Näyttö, käyttö, audio"</string>
     <string name="vision_settings_title" msgid="8919983801864103069">"Näköasetukset"</string>
@@ -3158,7 +3160,7 @@
     <string name="data_usage_tab_3g" msgid="6111070409752123049">"2G-3G"</string>
     <string name="data_usage_list_mobile" msgid="3738130489722964291">"Mobiili"</string>
     <string name="data_usage_list_none" msgid="2091924522549134855">"Ei yhtään"</string>
-    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobiilitiedonsiirto"</string>
+    <string name="data_usage_enable_mobile" msgid="1996943748103310201">"Mobiilidata"</string>
     <string name="data_usage_enable_3g" msgid="2818189799905446932">"2G-3G-tiedonsiirto"</string>
     <string name="data_usage_enable_4g" msgid="1526584080251993023">"4G-tiedonsiirto"</string>
     <string name="data_roaming_enable_mobile" msgid="5745287603577995977">"Roaming"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Latausäänet ja ‑värinä"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Telakointiäänet"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Kosketusäänet"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Näytä aina kuvake värinätilassa ollessa"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Kosketusvärinä"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptinen palaute napauttamiselle, näppäimistölle ja muille toiminnoille"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Telineen kaiutin"</string>
@@ -3676,7 +3679,7 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="7806181124566937214">"Estä näkyvät häiriötekijät"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="7433077540895876672">"Salli visuaaliset signaalit"</string>
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"Piilotettujen ilmoitusten näyttöasetukset"</string>
-    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kun älä häiritse -tila on käytössä"</string>
+    <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"Kun Älä häiritse -tila on käytössä"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"Ei ilmoitusääniä"</string>
     <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"Näet ilmoitukset näytölläsi"</string>
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Puhelin ei anna äänimerkkiä eikä värise ilmoituksen saapuessa."</string>
@@ -5425,7 +5428,7 @@
     <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"Säädä herkkyyttä valitsemalla, kauanko virtapainiketta täytyy painaa"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"Lyhyen ajan"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"Pitkään"</string>
-    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Näytä Wallet"</string>
+    <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"Näytä lompakko"</string>
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"Salli Walletin käyttö lukitusnäytöltä ja pika-asetuksista"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"Näytä laitteiden hallinta"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"Käytä säätimiä laitteen ollessa lukittuna"</string>

@@ -487,14 +487,16 @@
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Følg fingeraftryksikonet"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Bliv ved med at løfte fingeren for at tilføje forskellige dele af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Hver gang fingeraftryksikonet flyttes, skal du holde fingeren på det. På den måde registrere en større del af dit fingeraftryk."</string>
-    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer din fingerspids på aflæseren"</string>
+    <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Placer din fingerspids på sensoren"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Til sidst skal du bruge ydersiderne af din finger"</string>
-    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placer siden af din finger på aflæseren, og hold den nede. Skift derefter til den anden side."</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registrere en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nu kan du bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Vil du springe registrering af fingeraftryk over?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valgt at bruge fingeraftryk som en metode til at låse din telefon op. Hvis du springer det over nu, skal du konfigurere dette senere. Konfigurationen tager kun omkring et minut."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En pinkode beskytter din tablet, hvis den bliver væk eller stjålet"</string>
@@ -1295,8 +1297,8 @@
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Til – ansigtsbaseret"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Aktivér ansigtsgenkendelse"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farver"</string>
-    <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturlig"</string>
-    <string name="color_mode_option_boosted" msgid="4698797857766774289">"Forstærket"</string>
+    <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturlige"</string>
+    <string name="color_mode_option_boosted" msgid="4698797857766774289">"Forstærkede"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"Mættet"</string>
     <string name="color_mode_option_automatic" msgid="2281217686509980870">"Selvjusterende"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"Anvend kun nøjagtige farver"</string>
@@ -1833,7 +1835,7 @@
     <string name="location_category_location_services" msgid="8163798686832434284">"Lokationstjenester"</string>
     <string name="location_title" msgid="5819154746934945021">"Min lokation"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Lokation for arbejdsprofil"</string>
-    <string name="location_app_level_permissions" msgid="907206607664629759">"Placeringstilladelser for apps"</string>
+    <string name="location_app_level_permissions" msgid="907206607664629759">"Adgangstilladelse til lokation for apps"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Lokation er slået fra"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
       <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> ud af <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> app har adgang til din lokation</item>
@@ -2311,7 +2313,7 @@
     <string name="accessibility_preference_magnification_summary" msgid="2875518904115896888">"Zoom ind på skærmen"</string>
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Tryk tre gange for at zoome ind"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Tryk på en knap for at zoome"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Zoom hurtigt ind på skærmen for at forstørre indhold.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Træk med to fingre for at navigere  rundt på skærmen&lt;br/&gt; {3,number,integer}. Knib med to fingre for at zoome ind eller ud&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du midlertidigt ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Hold fingeren nede et vilkårligt sted på skærmen&lt;br/&gt; {2,number,integer}. Træk fingeren for at navigere rundt på skærmen&lt;br/&gt; {3,number,integer}. Løft fingeren for at stoppe forstørrelse"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="2527664482392097865">"Zoom hurtigt ind på skærmen for at forstørre indhold.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Sådan zoomer du ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Tryk på skærmen&lt;br/&gt; {2,number,integer}. Træk med to fingre for at navigere  rundt på skærmen&lt;br/&gt; {3,number,integer}. Spred/knib med to fingre for at zoome ind eller ud&lt;br/&gt; {4,number,integer}. Brug genvejen til at stoppe forstørrelse&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Sådan zoomer du midlertidigt ind:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Brug genvejen til at starte forstørrelse&lt;br/&gt; {1,number,integer}. Hold fingeren nede et vilkårligt sted på skærmen&lt;br/&gt; {2,number,integer}. Træk fingeren for at navigere rundt på skærmen&lt;br/&gt; {3,number,integer}. Løft fingeren for at stoppe forstørrelse"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Når forstørrelse er aktiveret, kan du zoome ind på skærmen.\n\n"<b>"Hvis du vil zoome"</b>", skal du åbne forstørrelse og derefter trykke et vilkårligt sted på skærmen.\n"<ul><li>"Træk med to eller flere fingre for at rulle"</li>\n<li>"Knib sammen med to eller flere fingre for at justere zoomniveauet"</li></ul>\n\n<b>"Hvis du vil zoome midlertidigt"</b>", skal du åbne forstørrelse og holde fingeren nede et vilkårligt sted på skærmen.\n"<ul><li>"Træk for at udforske forskellige dele af skærmen"</li>\n<li>"Løft fingeren for at zoome ud"</li></ul>\n\n"Du kan ikke zoome ind på tastaturet eller navigationslinjen."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Side <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Brug knappen Hjælpefunktioner til at åbne"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibration ved opladning"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Lyde for dockingstation"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Lyd ved berøring"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Vis altid ikonet, når vibration er aktiveret."</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibration ved berøring"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Feedback ved berøring for tryk, tastatur og mere"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dockhøjttaler afspiller"</string>
@@ -4537,7 +4540,7 @@
     <string name="camera_gesture_desc" msgid="7557645057320805328">"Åbn kameraappen ved at dreje håndleddet to gange"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="8264757967127716261">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>
     <string name="camera_double_tap_power_gesture_desc" msgid="1539147023700755155">"Åbn hurtigt kameraet uden at låse skærmen op"</string>
-    <string name="screen_zoom_title" msgid="6928045302654960559">"Visningsstørrelse"</string>
+    <string name="screen_zoom_title" msgid="6928045302654960559">"Skærmstørrelse"</string>
     <string name="screen_zoom_short_summary" msgid="2458636490408833800">"Gør elementerne på skærmen større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"visningstæthed, zoom på skærmen, skala, skalering"</string>
     <string name="screen_zoom_summary" msgid="1362984939045594989">"Gør elementerne på skærmen mindre eller større. Visse apps på din skærm ændrer muligvis placering."</string>
@@ -4874,7 +4877,7 @@
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"Løft for at tjekke din tablet"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"Løft for at tjekke enheden"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"Aktivering af skærm"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Se klokkeslæt, notifikationer og andre oplysninger, når du samler din telefon op."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"Løft din telefon for at se klokkeslæt, notifikationer og andre oplysninger."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"Se klokkeslæt, notifikationer og andre oplysninger, når du samler din tablet op."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"Se klokkeslæt, notifikationer og andre oplysninger, når du samler din enhed op."</string>
     <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"Tryk for at tjekke telefonen"</string>

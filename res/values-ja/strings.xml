@@ -480,7 +480,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"削除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"センサーを指でタッチ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"指をセンサーに当て、振動したら離します。"</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"振動を感じるまでセンサーから指を離さないでください"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"振動を感じるまでセンサーに指を平らに押し当てます"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"指紋認証センサーを長押ししてください"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"指をタッチして離す"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"もう一度"</string>
@@ -488,13 +488,15 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"指紋アイコンの動きに合わせて長押ししてください。これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"指先をセンサーに当ててください"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最後に指の縁の部分を使用してください"</string>
-    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最後に指の端を押し当ててください"</string>
+    <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"指の一方の端をセンサーに押し当て、その後他方の端を押し当てます"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"指紋を使って、スマートフォンのロック解除や本人確認（アプリへのログインなど）を行えるようになりました"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離してからもう一度触れる"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"指紋の設定をスキップしますか？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"スマートフォンのロック解除方法として指紋を選択しています。スキップした場合は、後でセットアップする必要があります。セットアップの所要時間は1分程度です。"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN は紛失・盗難時にタブレットを保護します"</string>
@@ -791,10 +793,10 @@
     <string name="lockpattern_tutorial_continue_label" msgid="1329049481210689408">"次へ"</string>
     <string name="lock_setup" msgid="4622999020926280737">"設定が完了しました。"</string>
     <string name="manage_device_admin" msgid="1044620606203916275">"デバイス管理アプリ"</string>
-    <string name="number_of_device_admins_none" msgid="152926922020437312">"アクティブなアプリはありません"</string>
+    <string name="number_of_device_admins_none" msgid="152926922020437312">"実行中のアプリはありません"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other">有効なアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
-      <item quantity="one">有効なアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
+      <item quantity="other">実行中のアプリ: <xliff:g id="COUNT_1">%d</xliff:g> 個</item>
+      <item quantity="one">実行中のアプリ: <xliff:g id="COUNT_0">%d</xliff:g> 個</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信頼エージェント"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"使用するには、まず画面ロックを設定してください"</string>
@@ -2884,7 +2886,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"ON にする"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーの使用"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"バッテリー セーバーを使用する"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"自動的にON"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"使用しない"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"バッテリー残量が <xliff:g id="PERCENT">%1$s</xliff:g> になったとき"</string>
@@ -3481,7 +3483,7 @@
     <string name="sim_no_inserted_msg" msgid="7272710974813741735">"SIMカードが挿入されていません"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"SIM のステータス"</string>
     <string name="sim_status_title_sim_slot" msgid="4932996839194493313">"SIM ステータス（SIM スロット %1$d）"</string>
-    <string name="sim_call_back_title" msgid="4274099761123657464">"デフォルトのSIMからコールバック"</string>
+    <string name="sim_call_back_title" msgid="4274099761123657464">"デフォルトの SIM からかけ直す"</string>
     <string name="sim_outgoing_call_title" msgid="7759080345748128897">"発信用のSIM"</string>
     <string name="sim_other_call_settings" msgid="5956308869284958883">"その他の通話設定"</string>
     <string name="preferred_network_offload_title" msgid="6453199586512609557">"優先ネットワークオフロード"</string>
@@ -3512,7 +3514,7 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_summary" msgid="2532811870469405527">"Bluetooth、Android Auto、運転モード"</string>
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
-    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC がオフのため使用できません"</string>
+    <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"アプリと通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使ったアプリ、デフォルトのアプリ"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電時の音とバイブレーション"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"ドッキング音"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"タッチ操作音"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"バイブレーション モードのときにアイコンを常に表示"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"タップ操作時のバイブ"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"タップ、キー操作などの触覚フィードバック"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"ホルダースピーカーでの再生"</string>
@@ -5412,7 +5415,7 @@
     <string name="quick_controls_lower" msgid="6675573610027367819">"デバイス コントロール"</string>
     <string name="cards_passes_sentence" msgid="1866311782387946944">"カードとパス"</string>
     <string name="cards_passes_lower" msgid="2429722007109957877">"カードとパス"</string>
-    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押しする"</string>
+    <string name="power_menu_setting_name" msgid="7291642927216934159">"電源ボタンを長押し"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"長押しするとアシスタントが有効になります"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"長押しすると電源ボタン メニューが表示されます"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_no_action" msgid="2831598484771657432">"長押しは無効です"</string>
@@ -5523,7 +5526,7 @@
     <string name="category_name_general" msgid="7737273712848115886">"全般"</string>
     <string name="dark_theme_main_switch_title" msgid="4045147031947562280">"ダークモードを使用"</string>
     <string name="bluetooth_main_switch_title" msgid="8409835540311309632">"Bluetooth を使用"</string>
-    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"ショートカットを使用"</string>
+    <string name="prevent_ringing_main_switch_title" msgid="4726252811262086643">"着信音ミュート用のショートカットを使用する"</string>
     <string name="use_wifi_hotsopt_main_switch_title" msgid="3909731167290690539">"Wi-Fi アクセス ポイントの使用"</string>
     <string name="app_pinning_main_switch_title" msgid="5465506660064032876">"アプリ固定機能を使用"</string>
     <string name="developer_options_main_switch_title" msgid="1720074589554152501">"開発者向けオプションの使用"</string>

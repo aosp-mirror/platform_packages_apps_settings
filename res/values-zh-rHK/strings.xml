@@ -298,8 +298,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"使用位置"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"關閉"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">開 - <xliff:g id="COUNT_1">%1$d</xliff:g> 個應用程式可存取位置資訊</item>
-      <item quantity="one">開 - <xliff:g id="COUNT_0">%1$d</xliff:g> 個應用程式可存取位置資訊</item>
+      <item quantity="other">已開啟 - <xliff:g id="COUNT_1">%1$d</xliff:g> 個應用程式可存取位置資訊</item>
+      <item quantity="one">已開啟 - <xliff:g id="COUNT_0">%1$d</xliff:g> 個應用程式可存取位置資訊</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"正在載入…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"應用程式如可存取附近的裝置，就能判斷已連接裝置的相對位置。"</string>
@@ -488,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"手指重覆按壓，記錄指紋各個部分"</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"每次指紋圖示移動時按住。此操作可擷取您更完整的指紋。"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"將指尖放在感應器上"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最後，請將手指邊緣放上感應器"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"最後記錄手指邊緣指紋"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"將指紋一側放在感應器上並按住，然後轉換另一側"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"此操作可擷取您更完整的指紋"</string>
     <!-- String.format failed for translation -->
@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"已加入指紋"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"現在可使用指紋解鎖手機或驗證身分，例如用來登入應用程式"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"稍後再做"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移開手指，然後再次輕觸感應器"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"將指紋的一側放上感應器並按住，然後再換另一側"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"略過指紋設定？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"您已選擇使用指紋作為唯一的手機解鎖方式。如果您現在略過，將需要稍後設定。設定過程只需約一分鐘。"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"平板電腦遺失或被盜時，PIN 可保護平板電腦中的資料"</string>
@@ -795,8 +797,8 @@
     <string name="manage_device_admin" msgid="1044620606203916275">"裝置管理應用程式"</string>
     <string name="number_of_device_admins_none" msgid="152926922020437312">"沒有使用中的應用程式"</string>
     <plurals name="number_of_device_admins" formatted="false" msgid="2528735319390151989">
-      <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> 個使用中的應用程式</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> 個使用中的應用程式</item>
+      <item quantity="other">有 <xliff:g id="COUNT_1">%d</xliff:g> 個應用程式正在使用</item>
+      <item quantity="one">有 <xliff:g id="COUNT_0">%d</xliff:g> 個應用程式正在使用</item>
     </plurals>
     <string name="manage_trust_agents" msgid="6410149930029992356">"信任代理程式"</string>
     <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"如要使用，請先設定上鎖畫面"</string>
@@ -3646,6 +3648,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充電音效及震動"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"座架插入音效"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"觸控音效"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"在震動模式下一律顯示「震動」圖示"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"觸控震動"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"輕按、鍵盤等操作的觸感反應"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"插座喇叭播放音效"</string>
@@ -3662,7 +3665,7 @@
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"只接收重要聯絡人和應用程式的通知"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"減少干擾"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"開啟「請勿騷擾」模式"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"鬧鐘和媒體音效可中斷"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"鬧鐘和媒體音效可打擾"</string>
     <string name="zen_mode_automation_settings_title" msgid="3709324184191870926">"時間表"</string>
     <string name="zen_mode_delete_automatic_rules" msgid="5020468289267191765">"刪除時間表"</string>
     <string name="zen_mode_schedule_delete" msgid="5383420576833765114">"刪除"</string>
@@ -3731,7 +3734,7 @@
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 小時}other{# 小時}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 分鐘}other{# 分鐘}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{關閉}=1{關閉/系統可自動啟用 1 個時間表}other{關閉/系統可自動開啟 # 個時間表}}"</string>
-    <string name="zen_category_behavior" msgid="3214056473947178507">"可中斷「請勿騷擾」的項目類別"</string>
+    <string name="zen_category_behavior" msgid="3214056473947178507">"可打擾「請勿騷擾」的項目類別"</string>
     <string name="zen_category_people" msgid="8252926021894933047">"使用者"</string>
     <string name="zen_category_apps" msgid="1167374545618451925">"應用程式"</string>
     <string name="zen_category_exceptions" msgid="1316097981052752811">"鬧鐘和其他干擾"</string>
@@ -4082,8 +4085,8 @@
     <string name="zen_mode_schedule_rule_days" msgid="8633770815307716351">"星期幾"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="5636604196262227070">"無"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"每天"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"鬧鐘時間可取代結束時間"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"鬧鐘響起時，系統會關閉日程表"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"鬧鐘時間可繞過結束時間"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"鬧鐘響起時，系統會關閉時間表"</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"「請勿騷擾」行為"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"使用預設設定"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"為此時間表建立自訂設定"</string>
@@ -4092,16 +4095,16 @@
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="6022314482293187463">"<xliff:g id="START">%1$s</xliff:g>至<xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"對話"</string>
-    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"可中斷的對話"</string>
+    <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"可打擾的對話"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"所有對話"</string>
     <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"優先對話"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"無"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{無}=1{1 個對話}other{# 個對話}}"</string>
-    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"誰可以中斷"</string>
+    <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"誰可以打擾"</string>
     <string name="zen_mode_calls_title" msgid="2078578043677037740">"通話"</string>
     <string name="zen_mode_calls" msgid="7653245854493631095">"通話"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"通話"</string>
-    <string name="zen_mode_calls_header" msgid="8379225445095856726">"可中斷的通話"</string>
+    <string name="zen_mode_calls_header" msgid="8379225445095856726">"可打擾的通話"</string>
     <string name="zen_mode_calls_footer" msgid="2008079711083701243">"如要讓允許的通話發出音效，請確保裝置已設定為發出鈴聲。"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"系統會封鎖「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」時段接收的來電。您可以調整設定，讓好友、家人或其他聯絡人聯絡您。"</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"已加星號的聯絡人"</string>
@@ -4110,7 +4113,7 @@
     <string name="zen_mode_messages" msgid="7315084748885170585">"訊息"</string>
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"訊息"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"訊息"</string>
-    <string name="zen_mode_messages_header" msgid="253721635061451577">"可中斷的訊息"</string>
+    <string name="zen_mode_messages_header" msgid="253721635061451577">"可打擾的訊息"</string>
     <string name="zen_mode_messages_footer" msgid="6002468050854126331">"如要讓允許的訊息發出音效，請確保裝置已設定為發出鈴聲。"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"在「<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>」中，收到的訊息會被封鎖。您可以調整設定，讓好友、家人或其他聯絡人聯絡您。"</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"接收所有訊息"</string>
@@ -4148,22 +4151,22 @@
     <string name="zen_mode_bypassing_apps_header" msgid="60083006963906906">"例外可打擾的應用程式"</string>
     <string name="zen_mode_bypassing_apps_add_header" msgid="3201829605075172536">"選擇更多應用程式"</string>
     <string name="zen_mode_bypassing_apps_none" msgid="7944221631721778096">"沒有選取任何應用程式"</string>
-    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"沒有應用程式可中斷"</string>
+    <string name="zen_mode_bypassing_apps_subtext_none" msgid="5128770411598722200">"沒有應用程式可打擾"</string>
     <string name="zen_mode_bypassing_apps_add" msgid="5031919618521327102">"新增應用程式"</string>
     <string name="zen_mode_bypassing_apps_summary_all" msgid="4684544706511555744">"所有通知"</string>
     <string name="zen_mode_bypassing_apps_summary_some" msgid="5315750826830358230">"部分通知"</string>
     <string name="zen_mode_bypassing_apps_footer" msgid="1454862989340760124">"即使您不允許應用程式打擾，所選使用者仍可聯絡您"</string>
-    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{沒有應用程式可中斷}=1{「{app_1}」可中斷}=2{「{app_1}」和「{app_2}」可中斷}=3{「{app_1}」、「{app_2}」和「{app_3}」可中斷}other{「{app_1}」、「{app_2}」和另外 # 個應用程式可中斷}}"</string>
+    <string name="zen_mode_bypassing_apps_subtext" msgid="5258652366929842710">"{count,plural,offset:2 =0{沒有應用程式可打擾}=1{「{app_1}」可打擾}=2{「{app_1}」和「{app_2}」可打擾}=3{「{app_1}」、「{app_2}」和「{app_3}」可打擾}other{「{app_1}」、「{app_2}」和另外 # 個應用程式可打擾}}"</string>
     <string name="zen_mode_bypassing_apps_title" msgid="371050263563164059">"應用程式"</string>
     <string name="zen_mode_bypassing_apps_all_summary" msgid="5197566190120503132">"所有通知"</string>
     <string name="zen_mode_bypassing_apps_some_summary" msgid="1514572070650411509">"部分通知"</string>
-    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"可中斷的通知"</string>
+    <string name="zen_mode_bypassing_app_channels_header" msgid="4011017798712587373">"可打擾的通知"</string>
     <string name="zen_mode_bypassing_app_channels_toggle_all" msgid="1449462656358219116">"允許所有通知"</string>
-    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{全部均不可中斷}=1{「{sound_category_1}」可中斷}=2{「{sound_category_1}」和「{sound_category_2}」可中斷}=3{「{sound_category_1}」、「{sound_category_2}」和「{sound_category_3}」可中斷}other{「{sound_category_1}」、「{sound_category_2}」和另外 # 個音效可中斷}}"</string>
-    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"全部均不可中斷"</string>
-    <string name="zen_mode_people_none" msgid="4613147461974255046">"沒有使用者可中斷"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"部分使用者可中斷"</string>
-    <string name="zen_mode_people_all" msgid="311036110283015205">"所有使用者均可中斷"</string>
+    <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{全部均不可打擾}=1{「{sound_category_1}」可打擾}=2{「{sound_category_1}」和「{sound_category_2}」可打擾}=3{「{sound_category_1}」、「{sound_category_2}」和「{sound_category_3}」可打擾}other{「{sound_category_1}」、「{sound_category_2}」和另外 # 個音效可打擾}}"</string>
+    <string name="zen_mode_sounds_none" msgid="6557474361948269420">"全部均不可打擾"</string>
+    <string name="zen_mode_people_none" msgid="4613147461974255046">"沒有使用者可打擾"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"部分使用者可打擾"</string>
+    <string name="zen_mode_people_all" msgid="311036110283015205">"所有使用者均可打擾"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"重複來電"</string>
     <string name="zen_mode_repeat_callers_title" msgid="8016699240338264781">"允許重複來電者"</string>
     <string name="zen_mode_all_callers" msgid="8104755389401941875">"任何人"</string>

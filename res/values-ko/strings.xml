@@ -480,7 +480,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"삭제"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"센서 터치"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"센서에 손가락을 올리고 진동이 느껴지면 떼세요."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"지문이 센서에 완전히 닿게 손가락을 대고 진동이 느껴질 때까지 기다리세요."</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"지문이 센서에 완전히 닿도록 손가락을 대고 진동이 느껴질 때까지 기다리세요."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"지문 센서를 길게 터치하세요"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"손가락을 뗀 후 다시 터치"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"한 번 더 하세요"</string>
@@ -488,7 +488,7 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"손가락을 뗀 후 다시 터치하여 지문의 다른 부분을 추가하세요."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"지문 아이콘이 움직일 때마다 길게 터치합니다. 이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"센서에 손가락 끝부분을 올리세요"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"마지막으로 손가락 가장자리를 사용하세요."</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"마지막으로 손가락 가장자리를 사용하세요"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"센서에 손가락 한쪽을 올리고 잠시 기다린 후에 다른 쪽을 올리세요"</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"이렇게 하면 지문을 더 많이 캡처할 수 있습니다"</string>
     <!-- String.format failed for translation -->
@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"지문 추가됨"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"이제 지문을 사용하여 휴대전화를 잠금 해제하거나 앱 로그인 등을 위해 본인을 인증할 수 있습니다."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"나중에"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"손가락을 뗀 후 다시 터치하세요"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"지문의 한쪽을 센서에 올리고 잠시 기다린 후 다른 쪽으로 돌리세요"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"지문 설정을 건너뛰시겠습니까?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"지문으로 휴대전화를 잠금 해제하도록 설정했습니다. 지금 건너뛰면 나중에 설정해야 하며 설정에는 약 1분 정도 소요됩니다."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN을 사용하면 태블릿을 분실하거나 도난당했을 때 태블릿을 보호할 수 있습니다."</string>
@@ -2871,13 +2873,13 @@
     <string name="process_dex2oat_label" msgid="1190208677726583153">"앱 최적화"</string>
     <string name="battery_saver" msgid="7737147344510595864">"절전 모드"</string>
     <string name="battery_saver_auto_title" msgid="6789753787070176144">"자동으로 사용 설정"</string>
-    <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"일정 없음"</string>
+    <string name="battery_saver_auto_no_schedule" msgid="5123639867350138893">"없음"</string>
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"사용 습관 기준"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"사용 습관 기준에 따라 사용 설정"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"백분율 기준"</string>
     <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"배터리가 평소의 다음 충전 시간까지 버티지 못할 가능성이 큰 경우 절전 모드가 사용 설정됩니다."</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"<xliff:g id="PERCENT">%1$s</xliff:g> 도달 시 사용 설정"</string>
-    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"일정 설정"</string>
+    <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"절전 모드 예약"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"배터리 수명 연장"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"충전 완료 시 사용 중지"</string>
     <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"휴대전화가 <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> 이상 충전되면 절전 기능을 사용 중지합니다."</string>
@@ -3645,6 +3647,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"충전 소리 및 진동"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"도킹 소리"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"터치음"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"진동 모드일 경우 항상 아이콘 표시"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"터치 진동"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"탭, 키보드 등에 대한 햅틱 반응"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"도크 스피커 재생"</string>

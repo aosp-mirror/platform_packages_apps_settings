@@ -503,6 +503,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Odcisk palca dodany"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Możesz teraz używać odcisku palca do odblokowywania telefonu oraz weryfikacji tożsamości, na przykład podczas logowania się w aplikacjach"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Później"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podnieś i przyłóż ponownie"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umieść na czytniku palec bokiem i przytrzymaj, a następnie obróć na drugi bok"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Pominąć konfigurację odcisku palca?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Chcesz odblokowywać telefon m.in. odciskiem palca. Jeśli nie skonfigurujesz tej funkcji teraz, musisz to zrobić później. Zajmie Ci to około minuty."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Kod PIN ochroni tablet, jeśli zostanie zgubiony lub skradziony"</string>
@@ -1065,7 +1067,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"Randomizowany adres MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"Dodaj urządzenie"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Wyśrodkuj kod QR poniżej, by podłączyć urządzenie do sieci „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Zeskanuj kod QR"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Skaner kodów QR"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Wyśrodkuj kod QR poniżej, by połączyć się z siecią „<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Zeskanuj kod QR i połącz się z siecią Wi-Fi"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Udostępnij Wi‑Fi"</string>
@@ -1330,8 +1332,8 @@
     <string name="search_settings" msgid="7573686516434589771">"Wyszukiwanie"</string>
     <string name="display_settings" msgid="7197750639709493852">"Wyświetlacz"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Autoobracanie ekranu"</string>
-    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Wyłączono"</string>
-    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Włączono"</string>
+    <string name="auto_rotate_option_off" msgid="2788096269396290731">"Wyłączone"</string>
+    <string name="auto_rotate_option_on" msgid="5776678230808498171">"Włączone"</string>
     <string name="auto_rotate_option_face_based" msgid="3438645484087953174">"Włączono – na podstawie twarzy"</string>
     <string name="auto_rotate_switch_face_based" msgid="7824467067774120000">"Włącz wykrywanie twarzy"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Kolory"</string>
@@ -3733,6 +3735,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Dźwięki i wibracje przy ładowaniu"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Dźwięki dokowania"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Dźwięki przy dotknięciu"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Zawsze wyświetlaj ikonę w trybie wibracji"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Wibracja przy dotknięciu"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Reakcja na dotyk – ekran, klawiatura i inne"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Głośnik w doku odtwarza"</string>
@@ -4039,7 +4042,7 @@
     <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"W Androidzie 12 ulepszone powiadomienia zastąpiły dotychczasowe powiadomienia adaptacyjne. Ta funkcja pokazuje sugerowane działania i odpowiedzi oraz porządkuje powiadomienia. \n\nUlepszone powiadomienia mogą czytać całą zawartość powiadomień, w tym informacje osobiste takie jak nazwy kontaktów i treść wiadomości. Funkcja może też zamykać powiadomienia oraz reagować na nie, np. odbierać połączenia telefoniczne i sterować trybem Nie przeszkadzać."</string>
     <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"Zezwolić usłudze <xliff:g id="SERVICE">%1$s</xliff:g> na dostęp do powiadomień?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"Aplikacja <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> będzie mogła czytać wszystkie powiadomienia, w tym dane osobowe takie jak nazwy kontaktów i treść otrzymywanych wiadomości. Będzie też mogła odkładać oraz odrzucać powiadomienia i używać umieszczonych w nich przycisków, włączając w to odbieranie połączeń telefonicznych. \n\nDodatkowo aplikacja będzie mogła włączać i wyłączać tryb Nie przeszkadzać oraz zmieniać powiązane ustawienia."</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"Aplikacja <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> będzie mogła czytać wszystkie powiadomienia, w tym informacje osobiste takie jak nazwy kontaktów i treść otrzymywanych wiadomości. Będzie też mogła odkładać oraz odrzucać powiadomienia i używać umieszczonych w nich przycisków, włączając w to odbieranie połączeń telefonicznych. \n\nDodatkowo aplikacja będzie mogła włączać i wyłączać tryb Nie przeszkadzać oraz zmieniać powiązane ustawienia."</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"Jeśli wyłączysz dostęp do powiadomień dla aplikacji <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, możesz również wyłączyć opcję Nie przeszkadzać."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"Wyłącz"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"Anuluj"</string>
