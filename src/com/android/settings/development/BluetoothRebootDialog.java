@@ -29,22 +29,23 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
- * The a2dp and LE audio offload switch should reboot the device to take effect, the dialog is
- * to ask the user to reboot the device after a2dp or LE audio offload user preference changed
+ * The a2dp/LE audio offload and LE audio feature switch should reboot the device to take effect,
+ * the dialog is to ask the user to reboot the device after a2dp/LE audio offload and LE audio
+ * feature user preference changed
  */
-public class BluetoothHwOffloadRebootDialog extends InstrumentedDialogFragment
+public class BluetoothRebootDialog extends InstrumentedDialogFragment
         implements DialogInterface.OnClickListener {
 
-    public static final String TAG = "BluetoothHwOffloadReboot";
+    public static final String TAG = "BluetoothReboot";
 
     /**
-     * The function to show the HwOffloadReboot Dialog.
+     * The function to show the Reboot Dialog.
      */
     public static void show(DevelopmentSettingsDashboardFragment host) {
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
-            final BluetoothHwOffloadRebootDialog dialog =
-                    new BluetoothHwOffloadRebootDialog();
+            final BluetoothRebootDialog dialog =
+                    new BluetoothRebootDialog();
             dialog.setTargetFragment(host, 0 /* requestCode */);
             dialog.show(manager, TAG);
         }
@@ -69,33 +70,33 @@ public class BluetoothHwOffloadRebootDialog extends InstrumentedDialogFragment
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        final OnHwOffloadDialogListener host =
-                (OnHwOffloadDialogListener) getTargetFragment();
+        final OnRebootDialogListener host =
+                (OnRebootDialogListener) getTargetFragment();
         if (host == null) {
             return;
         }
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            host.onHwOffloadDialogConfirmed();
+            host.onRebootDialogConfirmed();
             PowerManager pm = getContext().getSystemService(PowerManager.class);
             pm.reboot(null);
         } else {
-            host.onHwOffloadDialogCanceled();
+            host.onRebootDialogCanceled();
         }
     }
 
     /**
-     * The interface for the HsOffloadDialogListener to provide the action as the
+     * The interface for the RebootDialogListener to provide the action as the
      * confirmed or canceled clicked.
      */
-    public interface OnHwOffloadDialogListener {
+    public interface OnRebootDialogListener {
         /**
          * Called when the user presses reboot on the warning dialog.
          */
-        void onHwOffloadDialogConfirmed();
+        void onRebootDialogConfirmed();
 
         /**
          * Called when the user presses cancel on the warning dialog.
          */
-        void onHwOffloadDialogCanceled();
+        void onRebootDialogCanceled();
     }
 }
