@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
@@ -47,15 +48,19 @@ import java.util.List;
 
 /** Settings for daltonizer. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
+public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceFragment
         implements DaltonizerRadioButtonPreferenceController.OnChangeListener {
 
     private static final String ENABLED = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED;
     private static final String KEY_PREVIEW = "daltonizer_preview";
-    private static final String KEY_DEUTERANOMALY = "daltonizer_mode_deuteranomaly";
-    private static final String KEY_PROTANOMALY = "daltonizer_mode_protanomaly";
-    private static final String KEY_TRITANOMEALY = "daltonizer_mode_tritanomaly";
-    private static final String KEY_GRAYSCALE = "daltonizer_mode_grayscale";
+    @VisibleForTesting
+    static final String KEY_DEUTERANOMALY = "daltonizer_mode_deuteranomaly";
+    @VisibleForTesting
+    static final String KEY_PROTANOMALY = "daltonizer_mode_protanomaly";
+    @VisibleForTesting
+    static final String KEY_TRITANOMEALY = "daltonizer_mode_tritanomaly";
+    @VisibleForTesting
+    static final String KEY_GRAYSCALE = "daltonizer_mode_grayscale";
     private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
