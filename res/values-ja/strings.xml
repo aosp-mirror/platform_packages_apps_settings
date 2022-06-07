@@ -225,7 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"システムのデフォルト"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"このアプリの言語は [設定] から選択できません。"</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"アプリで利用できない言語の可能性があります。一部のアプリはこの設定に対応していない可能性があります。"</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"ここには、選択した言語に対応するアプリのみが表示されます。"</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"言語の選択に対応しているアプリのみが表示されます。"</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">選択した言語を削除しますか？</item>
       <item quantity="one">選択した言語を削除しますか？</item>
@@ -590,8 +590,8 @@
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"次へ"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="7875826823637114097">"スマートフォンのロック解除に加えて、指紋認証を使用して購入やアプリのアクセスを許可することもできます。"<annotation id="url">"詳細"</annotation></string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"画面ロック オプションは無効です。詳しくは、組織の管理者にお問い合わせください。"</string>
-    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"購入の承認やアプリへのアクセスには、引き続き指紋を使用できます。"</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_1" msgid="294529888220959309">"画面ロック オプションは無効になっています。詳しくは、組織の管理者にお問い合わせください。"</string>
+    <string name="security_fingerprint_disclaimer_lockscreen_disabled_2" msgid="8070829069640846543">"購入やアプリアクセスの許可には指紋を使用できます。"</string>
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"指を離してから、もう一度センサーに触れてください。"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="598502302101068608">"指紋認証センサーを使用できません。修理業者に調整を依頼してください"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"セキュリティの詳細設定"</string>
@@ -638,8 +638,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"このデバイスが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"このスマートフォンが他人に無断で使用されるのを防ぐには、デバイス保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"予備の画面ロック方式を選択してください"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"画面ロックを忘れてしまった場合、IT 管理者はリセットできません。"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"仕事用のロックを別個に設定"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"画面ロックを忘れるとIT管理者もリセットできません。"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"仕事用に別のロックを設定"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"このロックを忘れた場合は、IT 管理者にリセットを依頼してください"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"画面ロックの方法"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"画面ロックの方法"</string>
@@ -1322,8 +1322,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"最大解像度"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"最大解像度ではバッテリー消費量が多くなります。解像度を切り替えると、一部のアプリが再起動することがあります。"</string>
     <string name="color_mode_title" msgid="8666690832113906028">"カラー"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"ナチュラル"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"ブースト"</string>
@@ -2026,9 +2025,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"統一ロックを使用"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"デバイスと同じ画面ロックを使用中"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"アプリを管理"</string>
-    <string name="manageapplications_settings_summary" msgid="848586372489062357">"インストール済みアプリを管理、削除する"</string>
     <string name="applications_settings" msgid="1941993743933425622">"アプリ情報"</string>
-    <string name="applications_settings_summary" msgid="8206066893744768531">"アプリの管理やクイック起動ショートカットのセットアップ"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"アプリの設定"</string>
     <string name="install_applications" msgid="3921609656584369901">"提供元不明のアプリ"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"アプリの提供元をすべて許可する"</string>
@@ -2347,8 +2344,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"サイズとテキストの表示設定がリセットされました"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"ディスプレイのサイズとテキストをリセットしますか？"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"ディスプレイのサイズとテキストの設定をスマートフォンの元の設定にリセットします"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"ディスプレイのサイズとテキストの設定をタブレットの元の設定にリセットします"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"リセット"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"週末の予定は？"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"ビーチに行こうと思っています。一緒にいかがですか？"</string>
@@ -3035,7 +3031,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、バッテリーが長持ちし、デバイスのパフォーマンスが改善します"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ON"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"OFF"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
@@ -4887,8 +4883,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"バッテリー セーバーにより一時的に無効になりました"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"バッテリー セーバーの無効化"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"バッテリー セーバーにより一時的に有効になりました"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"サポートされているアプリもダークモードに切り替わります"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"ダークモードを試す"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"電池が長持ちします"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"クイック設定開発者用タイル"</string>
@@ -5554,7 +5548,7 @@
     <string name="power_menu_power_volume_up_hint" msgid="1733051433583045623">"電源ボタンと緊急通報のメニュー:\n電源ボタンと音量大ボタンを同時に押してください。"</string>
     <string name="power_menu_power_prevent_ringing_hint" msgid="5786494894009727654">"着信音のミュート:\n音量メニューでショートカットを利用できます。"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_title" msgid="1626808509158422185">"長押しの長さ"</string>
-    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"電源ボタンを長押しする長さを調節します"</string>
+    <string name="power_menu_long_press_for_assist_sensitivity_summary" msgid="7550610071666801935">"長さを選択して感度を調整し、電源ボタンを長押しします。"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_low_label" msgid="3430099983480845635">"短い"</string>
     <string name="power_menu_long_press_for_assist_sensitivity_high_label" msgid="2059686170350829156">"長い"</string>
     <string name="lockscreen_privacy_wallet_setting_toggle" msgid="4188327143734192000">"ウォレットを表示"</string>

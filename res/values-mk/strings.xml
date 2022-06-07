@@ -752,7 +752,7 @@
       <item quantity="one">Мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> знак</item>
       <item quantity="other">Мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> знаци</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ако користите само бројки, мора да се долги барем 1 цифра}one{Ако користите само бројки, мора да се долги барем # цифра}other{Ако користите само бројки, мора да се долги барем # цифри}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ако користите само бројки, мора да има барем 1 цифра}one{Ако користите само бројки, мора да има барем # цифра}other{Ако користите само бројки, мора да има барем # цифри}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">PIN-кодот мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> цифра</item>
       <item quantity="other">PIN-кодот мора да содржи барем <xliff:g id="COUNT_1">%d</xliff:g> цифри</item>
@@ -1324,8 +1324,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Полна резолуција"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Полната резолуција повеќе ја троши батеријата. Префрлањето на резолуцијата може да предизвика рестартирање кај некои апликации."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Бои"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природни"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Нагласени"</string>
@@ -2028,9 +2027,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Користи едно заклучување"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Исто како заклучувањето екран на уредот"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Управувај со апликации"</string>
-    <string name="manageapplications_settings_summary" msgid="848586372489062357">"Управувај и отстрани инсталирани апликации"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Информации за апликација"</string>
-    <string name="applications_settings_summary" msgid="8206066893744768531">"Управувај со апликации, постави кратенки за брзо стартување"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Поставки на апликација"</string>
     <string name="install_applications" msgid="3921609656584369901">"Непознати извори"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Дозв. ги сите изв. на аплик."</string>
@@ -2349,8 +2346,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Ресетирани се поставките за големина и текст на екранот"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се ресетираат големината и текстот на екранот?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Вашите поставки за големина и текст на екранот ќе се ресетираат на оригиналните поставки на телефонот"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Вашите поставки за големина и текст на екранот ќе се ресетираат на оригиналните поставки на таблетот"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Ресетирај"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Имате ли планови за викендот?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Одиме на плажа. Сакате да ни се придружите?"</string>
@@ -4889,8 +4885,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Привремено оневозможено поради „Штедачот на батерија“"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Исклучи го „Штедачот на батерија“"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Привремено вклучена поради Штедачот на батерија"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Поддржаните апликации исто така ќе се префрлат на темна тема"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Сфатив"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Испробајте ја темната тема"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Батеријата трае подолго"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Програмерски плочки за брзи поставки"</string>

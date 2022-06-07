@@ -642,8 +642,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"Spriječite da druge osobe koriste ovaj uređaj bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Spriječite da druge osobe koriste ovaj telefon bez vašeg odobrenja tako što ćete aktivirati funkcije za zaštitu uređaja. Odaberite koji način zaključavanja ekrana želite koristiti."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Odaberite rezervni način zaključavanja ekrana"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite lozinku za zaključavanje ekrana, vaš IT administrator je neće moći poništiti."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Postavite zasebno zaključavanje za posao"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Ako zaboravite radnju za zaključavanje ekrana, vaš IT administrator je neće moći poništiti."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Postavite zasebno zaključavanje za poslovne aplikacije"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Ako zaboravite ovo zaključavanje, tražite od IT administratora da ga poništi"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Opcije zaključavanja ekrana"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Opcije zaključavanja ekrana"</string>
@@ -755,7 +755,7 @@
       <item quantity="few">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znaka</item>
       <item quantity="other">Mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> znakova</item>
     </plurals>
-    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ako koristite samo brojeve, mora postojati najmanje 1 cifra}one{Ako koristite samo brojeve, mora postojati najmanje # cifra}few{Ako koristite samo brojeve, moraju postojati najmanje # cifre}other{Ako koristite samo brojeve, mora postojati najmanje # cifara}}"</string>
+    <string name="lockpassword_password_too_short_all_numeric" msgid="4301294924022401502">"{count,plural, =1{Ako koristite samo brojeve, mora imati najmanje 1 cifru}one{Ako koristite samo brojeve, mora imati najmanje # cifru}few{Ako koristite samo brojeve, mora imati najmanje # cifre}other{Ako koristite samo brojeve, mora imati najmanje # cifara}}"</string>
     <plurals name="lockpassword_pin_too_short" formatted="false" msgid="6817086810898414162">
       <item quantity="one">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifru</item>
       <item quantity="few">PIN mora sadržavati najmanje <xliff:g id="COUNT_1">%d</xliff:g> cifre</item>
@@ -1342,8 +1342,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Puna rezolucija"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080 p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440 p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Puna rezolucija troši više baterije. Prebacivanjem rezolucije može uzrokovati ponovo pokretanje nekih aplikacija."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Boje"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Prirodne"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Pojačane"</string>
@@ -2048,9 +2047,7 @@
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Koristi jedno zaključavanje"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Isto kao i zaključavanje ekrana uređaja"</string>
     <string name="manageapplications_settings_title" msgid="9198876415524237657">"Upravljaj aplikacijama"</string>
-    <string name="manageapplications_settings_summary" msgid="848586372489062357">"Upravljanje instaliranim aplikacijama i uklonite ih"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Informacije o aplikaciji"</string>
-    <string name="applications_settings_summary" msgid="8206066893744768531">"Upravljanje aplikacijama, postavljanje prečica za brzo pokretanje"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Postavke aplikacije"</string>
     <string name="install_applications" msgid="3921609656584369901">"Nepoznati izvori"</string>
     <string name="install_applications_title" msgid="7890233747559108106">"Dopusti sve izvore aplikacija"</string>
@@ -2371,8 +2368,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Postavke veličine ekrana i teksta su poništene"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vratiti veličinu ekrana i tekst na zadano?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Vaše preference za veličinu ekrana i tekst će se vratiti na originalne postavke telefona"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Vaše postavke veličine ekrana i teksta će se vratiti na prvobitne postavke tableta"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Vrati na zadano"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Šta planiraš za vikend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Idem na plažu. Želiš li sa mnom?"</string>
@@ -4960,8 +4956,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Privremeno onemogućeno zbog uštede baterije"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Isključi uštedu baterije"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Privremeno uključeno zbog Uštede baterije"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Podržane aplikacije će se također prebaciti na tamnu temu"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Razumijem"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Isprobajte tamnu temu"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Pomaže da se produži vijek trajanja baterije"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Pločice programera za brze postavke"</string>
