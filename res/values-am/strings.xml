@@ -272,7 +272,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> በ<xliff:g id="TRANSITION_DATE">%2$s</xliff:g> ላይ ይጀምራል።"</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>ን ይጠቀማል። <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> ላይ ይጀምራል።"</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>ን ይጠቀማል። <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> ላይ ይጀምራል።"</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>ን ይጠቀማል። ምንም የቀን ብርሃን ቁጠባ ሰዓት የለም።"</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"የቀን ብርሃን ቁጠባዎች ጊዜ"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"መደበኛ ሰዓት"</string>
@@ -3428,9 +3429,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"የተንቀሳቃሽ ስልክ ውሂብ አይገኝም"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"የውሂብ ሲም ለመምረጥ ነካ ያድርጉ"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ለጥሪዎች ሁልጊዜ ይህንን ተጠቀም"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"ለውሂብ ሲም ይምረጡ"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"ለተንቀሳቃሽ ስልክ ውሂብ ሲም ይምረጡ"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"ለኤስኤምኤስ ሲም ይምረጡ"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"የውሂብ ሲም በመቀየር ላይ፣ ይህ እስከ አንድ ደቂቃ ድረስ ሊወስድ ይችላል…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"ለተንቀሳቃሽ ስልክ ውሂብ <xliff:g id="NEW_SIM">%1$s</xliff:g>ን ይጠቀሙ?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"ወደ <xliff:g id="NEW_SIM">%1$s</xliff:g> ከቀየሩ <xliff:g id="OLD_SIM">%2$s</xliff:g> ከእንግዲህ ለተንቀሳቃሽ ስልክ ውሂብ ስራ ላይ አይውልም።"</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g>ን ይጠቀሙ"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"ይደውሉ ከዚህ ጋር"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"ሲም ካርድ ይምረጡ"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"ሲም <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -4797,7 +4801,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"መተግበሪያዎችን ለመቀየር በመነሻ አዝራሩ ላይ ወደ ላይ ይጥረጉ። ሁሉንም መተግበሪያዎች ለማየት እንደገና ወደ ላይ ይጥረጉ። ለመመለስ የተመለስ አአዝራሩን መታ ያድርጉ።"</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"አዲሱን የመነሻ ገጽ አዝራር ይሞክሩ"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"መተግበሪያዎችን ለመቀየር አዲሱን የጣት ምልክት ያብሩ"</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ደህንነት፤ ድንገተኛ ሁኔታ"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"ደህንነት እና ድንገተኛ ሁኔታ"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"የነፍስ አድን ድንገተኛ ጥሪ፣ የሕክምና መረጃ፣ ማንቂያዎች"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"የእጅ ውዝዋዜ ዳሰሳ"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"ወደ መነሻ ለመሄድ ከማያ ገጹ ግርጌ ላይ ወደ ላይ በጣት ይጥረጉ። መተግበሪያዎችን ለመቀየር ከግርጌው ወደ ላይ በጣት ይጥረጉ፣ ይያዙ፣ ከዚያ ይልቀቁ። ለመመለስ ከግራ ወይም ቀኝ ጠርዝ በጣት ይጥረጉ።"</string>
@@ -5234,12 +5238,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"ሲም ይብራ?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ይቀየር?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"ወደ ሲም ካርድ መጠቀም ይቀይሩ?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ን ይጠቀሙ?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"በአንድ ጊዜ አንድ ሲም ብቻ ነው ገባሪ ሊሆን የሚችለው።\n\nወደ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> መቀየር የ<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> አገልግሎትዎን አይሰርዘውም።"</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"በአንድ ጊዜ አንድ የወረደ ሲም ብቻ ነው ገቢር መሆን የሚችለው።\n\nወደ <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> መቀየር የ<xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> አገልግሎትዎን አይሰርዘውም።"</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"በአንድ ጊዜ አንድ ሲም ብቻ ነው ገቢር ሊሆን የሚችለው።\n\nመቀየር የ<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> አገልግሎትዎን አይሰርዘውም።"</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"በአንድ ጊዜ 2 ሲሞችን መጠቀም ይችላሉ። <xliff:g id="CARRIER_NAME">%1$s</xliff:g>ን ለመጠቀም ሌላኛው ሲም ያጥፉ።"</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ይቀይሩ"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>ን ያጥፉ"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"ሲም ማጥፋት አገልግሎትዎን አይሰርዘውም"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"ከአውታረ መረብ ጋር በመገናኘት ላይ…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> በመቀየር ላይ"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"ለጥሪዎች እና መልዕክቶች ወደ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> በመቀየር ላይ…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"አገልግሎት አቅራቢን መቀየር አልተቻለም"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"በስህተት ምክንያት አገልግሎት አቅራቢው መቀየር አልተቻለም።"</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> ይጥፋ?"</string>
@@ -5408,10 +5416,8 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"ለተሸጎጡ መተግበሪያዎች አፈጻጸምን አግድ"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"በቅንብሮች ላይ የማያ ገጽ ተደራቢዎችን ይፍቀዱ"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"የቅንብሮች ማያ ገጾችን ለመደራረብ በሌሎች መተግበሪያዎች ላይ የሚያሳዩ መተግበሪያዎችን ይፍቀዱ"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"የማስመሰያ ሞደምን ፍቀድ"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"ይህ መሣሪያ ለመሣሪያ ሙከራ የማስመሰያ ሞደም አገልግሎትን እንዲያሄድ ይፍቀዱለት። ስልኩን በመደበኛነት ሲጠቀሙ ይህንን አያንቁ"</string>
     <string name="media_controls_title" msgid="403271085636252597">"ሚዲያ"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"ሚዲያ ማጫወቻ ይሰኩ"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"መልሶ ማጫዎትን በፍጥነት ካቆሙበት ለመቀጠል ሚዲያ ማጫወቻን በፈጣን ቅንብሮች ውስጥ ክፍት ሆኖ ይቆያል"</string>
@@ -5548,4 +5554,12 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ከዚህ ስልክ ጋር መገናኘት ይፈልጋል።\n\nከዚህ በፊት ከ<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> ጋር አልተገናኙም።"</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"አታገናኝ"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"አገናኝ"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ስርጭት"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"በአቅራቢያዎ የሚጫወቱ ስርጭቶችን ያዳምጡ"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"በአቅራቢያዎ ባሉ መሣሪያዎች ላይ ሚዲያን ያሰራጩ ወይም የሌላ ሰው ስርጭትን ያዳምጡ"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ስርጭቶች"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"ማዳመጥ"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ስርጭቶችን አግኝ"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ከስርጭት ውጣ"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR ኮድ ቃኝ"</string>
 </resources>

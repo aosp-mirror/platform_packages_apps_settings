@@ -329,8 +329,8 @@
 
     <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>
-    <!-- UI debug setting: Disable Bluetooth LE AUDIO hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE AUDIO hardware offload</string>
+    <!-- UI debug setting: Disable Bluetooth LE audio hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE audio hardware offload</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_title">Restart Device?</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
@@ -339,6 +339,11 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm">Restart</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
+
+    <!-- Setting Checkbox title for enabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <string name="bluetooth_enable_leaudio">Enable Bluetooth LE audio</string>
+    <!-- Summary of checkbox for enabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <string name="bluetooth_enable_leaudio_summary">Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_media_device_title">Media devices</string>
@@ -13496,4 +13501,22 @@
     <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
     <!-- Strings for Dialog connect button -->
     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
+
+    <!-- BT LE Audio Device: Media Broadcast -->
+    <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
+    <!-- The message of the Media Broadcast Dialog for finding broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_find_message">Listen to broadcasts that are playing near you</string>
+    <!-- The message of the Media Broadcast Dialog for broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_broadcast_message">Broadcast media to devices near you, or listen to someone else’s broadcast</string>
+    <!-- The title of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_title">Broadcasts</string>
+    <!-- The summary of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_summary">Listening to</string>
+    <!-- The Button of the action to find broadcasts [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast">Find broadcasts</string>
+    <!-- The Button of the action to leave the broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_leave">Leave broadcast</string>
+    <!-- The Button of the action to scan QR code [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_scan">Scan QR code</string>
 </resources>
