@@ -272,7 +272,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> tarixindən başlayır."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> istifadə edir. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>. tarixində başlayır."</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> istifadə edir. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> tarixindən başlayır."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> istifadə edir. Yay vaxtına keçid olmayacaq."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"Yay vaxtı"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standart vaxt"</string>
@@ -3428,9 +3429,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobil data əlçatmazdır"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Data SIM-ini seçmək üçün tıklayın"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Həmişə bu zənglər üçün istifadə edin"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Data üçün SIM seçin"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Mobil data üçün SIM seçin"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"SMS üçün SIM seçin"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Data SİM-i dəyişdirilir, bu bir neçə dəqiqə çəkə bilər…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Mobil data üçün <xliff:g id="NEW_SIM">%1$s</xliff:g> istifadə edilsin?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"<xliff:g id="NEW_SIM">%1$s</xliff:g> operatoruna keçsəniz, <xliff:g id="OLD_SIM">%2$s</xliff:g> artıq mobil data üçün istifadə olunmayacaq."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g> istifadə edin"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Çağrı üçün SIM:"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"SIM kart seçin"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -4823,7 +4827,7 @@
     <string name="ambient_display_title" product="device" msgid="4164103424628824786">"Cihazı yoxlamaq üçün iki dəfə tıklayın"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Birəlli rejim"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Birəlli rejimi istifadə edin"</string>
-    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Bir əlli rejim qısayolu"</string>
+    <string name="one_handed_mode_shortcut_title" msgid="1847871530184067369">"Birəlli rejim qısayolu"</string>
     <string name="keywords_one_handed" msgid="969440592493034101">"əlçatanlıq"</string>
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Buraya çəkin:"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Bunun üçün qısayoldan istifadə edin:"</string>
@@ -5234,12 +5238,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"SIM aktiv edilsin?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoruna keçilsin?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"SIM kart istifadəsinə keçilsin?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> istifadə edilsin?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Eyni vaxtda yalnız bir SIM aktiv ola bilər.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operatoruna keçdikdə <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> xidməti ləğv edilməyəcək."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Eyni vaxtda yalnız bir endirilmiş SIM aktiv ola bilər.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> operatoruna keçdikdə <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> xidməti ləğv edilməyəcək."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Eyni vaxtda yalnız bir SIM aktiv ola bilər.\n\nDigərinə keçdikdə <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> xidməti ləğv edilməyəcək."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"Eyni vaxtda 2 SIM istifadə edə bilərsiniz. <xliff:g id="CARRIER_NAME">%1$s</xliff:g> istifadə etmək üçün digər SIM\'i deaktiv edin."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoruna keçin"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> cihazını deaktiv edin"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM\'i deaktiv etdikdə xidmət ləğv edilməyəcək"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Şəbəkəyə qoşulur…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoruna keçirsiniz"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Zənglər və mesajlar üçün <xliff:g id="CARRIER_NAME">%1$s</xliff:g> operatoruna keçirilir…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Başqa operatora keçmək mümkün deyil"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"Xəta səbəbi ilə başqa operatora keçmək mümkün deyil."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g> deaktiv edilsin?"</string>
@@ -5408,10 +5416,8 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"Keşlənmiş tətbiqlərin icrası durdurulsun"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"Ayarlarda pəncərəüstü göstərilməyə icazə verilsin"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"Digər tətbiqlərin üzərində görünmək icazəsi olan tətbiqlərə ayarlar üzərində görünmək icazəsi verilsin"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"Əvəzləyici Modemə icazə verin"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"Bu cihaza alət testi üçün Əvəzləyici Modem xidmətini işə salmağa icazə verin. Telefonun normal istifadəsi zamanı bunu aktiv etməyin"</string>
     <string name="media_controls_title" msgid="403271085636252597">"Media"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"Mediapleyer bərkidilsin"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Oxutmanı cəld davam etdirmək üçün media pleyer Sürətli Ayarlarda açıq qalır"</string>
@@ -5548,4 +5554,12 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> bu telefona qoşulmaq istəyir.\n\nDaha öncə <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> cihazına qoşulmamısınız."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Qoşulmayın"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Qoşulun"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Yayım"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Yaxınlığınızda oxudulan yayımları dinləyin"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Yaxınlığınızdakı cihazlara media yayımlayın və ya başqasının yayımını dinləyin"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Yayımlar"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Dinlənilir:"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Yayımları tapın"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Yayımdan çıxın"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR kodu skanlayın"</string>
 </resources>

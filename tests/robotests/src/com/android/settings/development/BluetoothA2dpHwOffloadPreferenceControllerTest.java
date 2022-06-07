@@ -68,7 +68,7 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogConfirmed();
+        mController.onRebootDialogConfirmed();
         final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isTrue();
     }
@@ -80,7 +80,7 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
 
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogConfirmed();
+        mController.onRebootDialogConfirmed();
         final boolean a2dpMode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, true);
         final boolean leAudioMode = SystemProperties
                 .getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
@@ -93,7 +93,7 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
         mController.mChanged = true;
 
-        mController.onHwOffloadDialogCanceled();
+        mController.onRebootDialogCanceled();
         final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isFalse();
     }

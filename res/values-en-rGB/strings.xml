@@ -272,7 +272,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> starts on <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> starts on <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> starts on <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"Uses <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. No daylight savings time."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"British Summer Time (also known as daylight savings time)"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"Standard time"</string>
@@ -382,7 +383,7 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Set up Face Unlock"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern or password to unlock your phone or for authentication in apps."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern or password to unlock your phone or for authentication in apps."</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Use Face Unlock for"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Use Face Unlock to"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"When using Face Unlock"</string>
     <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"Require eyes to be open"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"To unlock the phone, your eyes must be open"</string>
@@ -423,7 +424,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"No, thanks"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"I agree"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Skip fingerprint?"</string>
-    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings."</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in Settings."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"When you see this icon, use your fingerprint for authentication, like when you sign in to apps or approve a purchase"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Bear in mind"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_1" msgid="5824014348182478279">"Using your fingerprint to unlock your phone may be less secure than a strong pattern or PIN"</string>
@@ -487,7 +488,7 @@
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"One more time"</string>
     <string name="security_settings_udfps_enroll_repeat_title_touch_icon" msgid="4096344864386190335">"Follow the fingerprint icon"</string>
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Keep lifting your finger to add the different parts of your fingerprint"</string>
-    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch &amp; hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
+    <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Touch and hold each time the fingerprint icon moves. This helps capture more of your fingerprint."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Place the tip of your finger on the sensor"</string>
     <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Finally, use the edges of your finger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Place the side of your fingerprint on the sensor and hold, then switch to the other side"</string>
@@ -1377,7 +1378,7 @@
     <string name="screen_timeout_title" msgid="785134393520893049">"Screen turns off"</string>
     <string name="screen_timeout_summary" msgid="5558778019594643427">"After <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> of inactivity"</string>
     <string name="wallpaper_settings_title" msgid="5635129851136006383">"Wallpaper"</string>
-    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Wallpaper &amp; style"</string>
+    <string name="style_and_wallpaper_settings_title" msgid="2232042809407308946">"Wallpaper and style"</string>
     <string name="wallpaper_dashboard_summary" msgid="2324472863981057118">"Home, lock screen"</string>
     <string name="wallpaper_settings_summary_default" msgid="7569803705735001813">"Default"</string>
     <string name="wallpaper_settings_summary_custom" msgid="3174561317688848729">"Custom"</string>
@@ -3358,7 +3359,7 @@
     <string name="restriction_menu_reset" msgid="92859464456364092">"Remove restrictions"</string>
     <string name="restriction_menu_change_pin" msgid="2505923323199003718">"Change PIN"</string>
     <string name="help_label" msgid="2896538416436125883">"Help &amp; feedback"</string>
-    <string name="support_summary" msgid="6137136608018134563">"Help articles, phone &amp; chat"</string>
+    <string name="support_summary" msgid="6137136608018134563">"Help articles, phone and chat"</string>
     <string name="user_account_title" msgid="6389636876210834864">"Account for content"</string>
     <string name="user_picture_title" msgid="7176437495107563321">"Photo ID"</string>
     <string name="extreme_threats_title" msgid="1098958631519213856">"Extreme threats"</string>
@@ -3428,9 +3429,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"Mobile data is unavailable"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"Tap to select a data SIM"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"Always use this for calls"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"Select a SIM for data"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"Choose SIM for mobile data"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"Select a SIM for SMS"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"Switching data SIM, this may take up to a minute…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"Use <xliff:g id="NEW_SIM">%1$s</xliff:g> for mobile data?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"If you switch to <xliff:g id="NEW_SIM">%1$s</xliff:g>, <xliff:g id="OLD_SIM">%2$s</xliff:g> will no longer be used for mobile data."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"Use <xliff:g id="NEW_SIM">%1$s</xliff:g>"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"Call with"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"Select a SIM card"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3482,7 +3486,7 @@
     <string name="app_and_notification_dashboard_title" msgid="2861781687031832943">"Apps and notifications"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Recent apps, default apps"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Notification access is not available for apps in the work profile."</string>
-    <string name="account_dashboard_title" msgid="8228773251948253914">"Passwords &amp; accounts"</string>
+    <string name="account_dashboard_title" msgid="8228773251948253914">"Passwords and accounts"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Saved passwords, auto-fill, synced accounts"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"Default apps"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Languages, gestures, time, backup"</string>
@@ -3647,7 +3651,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"When notifications arrive, your phone won’t make a sound or vibrate."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"No visuals or sound from notifications"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"You won’t see or hear notifications"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Your phone won’t show, vibrate or make sound for new or existing notifications. Keep in mind: critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Your phone won’t show, vibrate or make sound for new or existing notifications. Bear in mind: critical notifications for phone activity and status will still appear.\n\nWhen you turn off Do Not Disturb, find missed notifications by swiping down from the top of your screen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Custom"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Enable custom setting"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Remove custom setting"</string>
@@ -4734,7 +4738,7 @@
     <string name="notification_suggestion_title" msgid="6309263655965785411">"Control info on lock screen"</string>
     <string name="notification_suggestion_summary" msgid="7615611244249276113">"Show or hide notification content"</string>
     <string name="page_tab_title_summary" msgid="7188875610123234454">"All"</string>
-    <string name="page_tab_title_support" msgid="3235725053332345773">"Tips &amp; support"</string>
+    <string name="page_tab_title_support" msgid="3235725053332345773">"Tips and support"</string>
     <string name="developer_smallest_width" msgid="632354817870920911">"Smallest width"</string>
     <string name="premium_sms_none" msgid="8737045049886416739">"No installed apps have requested Premium SMS access"</string>
     <string name="premium_sms_warning" msgid="2192300872411073324">"Premium SMS may cost you money and will add up to your mobile bills. If you enable permission for an app, you will be able to send premium SMS using that app."</string>
@@ -4797,7 +4801,7 @@
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"To switch apps, swipe up on the Home button. To see all apps, swipe up again. To go back, tap the back button."</string>
     <string name="swipe_up_to_switch_apps_suggestion_title" msgid="5754081720589900007">"Try the new Home button"</string>
     <string name="swipe_up_to_switch_apps_suggestion_summary" msgid="8885866570559435110">"Turn on the new gesture to switch apps"</string>
-    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Safety &amp; emergency"</string>
+    <string name="emergency_settings_preference_title" msgid="6183455153241187148">"Safety and emergency"</string>
     <string name="emergency_dashboard_summary" msgid="401033951074039302">"Emergency SOS, medical info, alerts"</string>
     <string name="edge_to_edge_navigation_title" msgid="714427081306043819">"Gesture navigation"</string>
     <string name="edge_to_edge_navigation_summary" msgid="8497033810637690561">"To go Home, swipe up from the bottom of the screen. To switch apps, swipe up from the bottom, hold, then release. To go back, swipe from either the left or right edge."</string>
@@ -5234,12 +5238,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"Turn on SIM?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"Switch to using SIM card?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"Use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"Only one SIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"Only one downloaded SIM can be active at a time.\n\nSwitching to <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> won’t cancel your <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g> service."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"Only one SIM can be active at a time.\n\nSwitching won’t cancel your <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g> service."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"You can use two SIMs at a time. To use <xliff:g id="CARRIER_NAME">%1$s</xliff:g>, turn off another SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"Switch to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"Turning off a SIM won’t cancel your service"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"Connecting to network…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"Switching to <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"Switching to <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for calls and messages…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"Can’t switch operator"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"The operator can’t be switched because of an error."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"Turn off <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5546,4 +5554,12 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> wants to connect to this phone.\n\nYou haven’t connected to <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g> before."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"Don’t connect"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"Connect"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"Broadcast"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"Listen to broadcasts that are playing near you"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"Broadcast media to devices near you, or listen to someone else’s broadcast"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"Broadcasts"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"Listening to"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"Find broadcasts"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"Leave broadcast"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"Scan QR code"</string>
 </resources>

@@ -3958,6 +3958,38 @@
                        android:value="true" />
         </activity>
 
+        <activity
+            android:name="Settings$BluetoothBroadcastActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AlertDialog.SimConfirmDialog"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MEDIA_BROADCAST_DIALOG" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothBroadcastsDialog" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity
+            android:name="Settings$BluetoothFindBroadcastsActivity"
+            android:label="@string/bluetooth_find_broadcast_title"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_CONNECT"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.BLUTOOTH_FIND_BROADCASTS_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothFindBroadcastsFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
         <activity android:name=".panel.SettingsPanelActivity"
             android:label="@string/settings_panel_title"
             android:theme="@style/Theme.Panel"
