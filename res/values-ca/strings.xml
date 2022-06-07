@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Ara pots utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Sortir de la configuració de l\'empremta?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Has triat utilitzar la teva empremta digital per desbloquejar el telèfon. Si omets aquest pas ara, hauràs de fer aquesta configuració més endavant. Aquest procés només triga un parell de minuts."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"El PIN protegeix la tauleta si es perd o te la roben"</string>
@@ -2722,7 +2724,7 @@
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"Gestor de bateria"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"Gestiona les aplicacions automàticament"</string>
     <string name="smart_battery_summary" product="default" msgid="1492277404000064998">"Limita l\'ús de bateria de les aplicacions que no utilitzes habitualment"</string>
-    <string name="smart_battery_footer" msgid="8407121907452993645">"Quan el gestor de bateria detecta que hi ha aplicacions que consumeixen molta bateria, t\'ofereix l\'opció de restringir-les. És possible que les aplicacions restringides no funcionin correctament i que en rebis les notificacions amb retard."</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"Quan el gestor de bateria detecta que hi ha aplicacions que estan exhaurint la bateria, t\'ofereix l\'opció de restringir-les. És possible que les aplicacions restringides no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"Aplicacions restringides"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="6059772951505411003">
       <item quantity="other">S\'ha limitat l\'ús de la bateria per a %1$d aplicacions</item>
@@ -2731,9 +2733,9 @@
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"Restringida (<xliff:g id="TIME">%1$s</xliff:g>)"</string>
     <string name="restricted_app_detail_footer" msgid="3495725286882138803">"Aquestes aplicacions tenen restringit l\'ús de la bateria en segon pla. És possible que no funcionin correctament i que en rebis les notificacions amb retard."</string>
     <string name="battery_auto_restriction_title" msgid="827206218118093357">"Utilitza el gestor de bateria"</string>
-    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta quan les aplicacions consumeixen bateria"</string>
-    <string name="battery_manager_summary" msgid="255708681438809287">"S\'està detectant el consum de bateria de les aplicacions"</string>
-    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"S\'està detectant el consum de bateria de les aplicacions"</string>
+    <string name="battery_auto_restriction_summary" msgid="2140896101984815711">"Detecta quan les aplicacions exhaureixen la bateria"</string>
+    <string name="battery_manager_summary" msgid="255708681438809287">"Detecta quan les aplicacions exhaureixen la bateria"</string>
+    <string name="battery_manager_summary_unsupported" msgid="7334173707292807964">"Detecta quan les aplicacions exhaureixen la bateria"</string>
     <string name="battery_manager_off" msgid="673547668722420924">"Desactivat"</string>
     <plurals name="battery_manager_app_restricted" formatted="false" msgid="6714534362166394848">
       <item quantity="other">S\'han restringit %1$d aplicacions</item>
@@ -2819,7 +2821,7 @@
     <string name="battery_sugg_apps_settings" msgid="6527223370162382166">"L\'aplicació pot oferir paràmetres per reduir el consum de la bateria"</string>
     <string name="battery_desc_users" msgid="1959428568888686847">"Bateria utilitzada per l\'usuari"</string>
     <string name="battery_desc_unaccounted" msgid="1649497860893660763">"Ús variat de l\'energia"</string>
-    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"El consum de la bateria és l\'ús d\'energia aproximat i no inclou totes les fonts de descàrrega de la bateria. Altres és la diferència entre el consum d\'energia calculat i la descàrrega real que es detecta a la bateria."</string>
+    <string name="battery_msg_unaccounted" msgid="5647345548624995064">"El consum de la bateria és l\'ús d\'energia aproximat i no inclou totes les fonts d\'exhauriment de la bateria. Altres és la diferència entre el consum d\'energia calculat i l\'exhauriment real que es detecta a la bateria."</string>
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Consum d\'energia comptabilitzat més d\'una vegada"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"En ús durant <xliff:g id="TIME">^1</xliff:g>"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Sons de càrrega i vibració"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sons de la base"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sons en tocar"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Mostra sempre la icona en mode de vibració"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibració en tocar"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Resposta hàptica en tocar, fer servir el teclat i més"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Sons de la base d\'altaveu"</string>
@@ -3965,7 +3968,7 @@
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Vols permetre que <xliff:g id="SERVICE">%1$s</xliff:g> accedeixi al servei RV?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"<xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> es podrà executar quan utilitzis aplicacions en el mode de realitat virtual."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"Amb el dispositiu en mode RV"</string>
-    <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Redueix el desenfocament (recomanat)"</string>
+    <string name="display_vr_pref_low_persistence" msgid="7039841277157739871">"Redueix el desenfocament (opció recomanada)"</string>
     <string name="display_vr_pref_off" msgid="4008841566387432721">"Redueix el parpelleig"</string>
     <string name="picture_in_picture_title" msgid="9001594281840542493">"Pantalla en pantalla"</string>
     <string name="picture_in_picture_empty_text" msgid="9123600661268731579">"Cap de les aplicacions instal·lades no admet pantalla en pantalla"</string>
@@ -4399,14 +4402,14 @@
       <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> s\'està comportant de manera anòmala</item>
     </plurals>
     <plurals name="power_high_usage_title" formatted="false" msgid="8013115866788425817">
-      <item quantity="other">Hi ha aplicacions que consumeixen molta bateria</item>
-      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> consumeix molta bateria</item>
+      <item quantity="other">Hi ha aplicacions que estan exhaurint la bateria</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> està exhaurint la bateria</item>
     </plurals>
     <string name="high_power_filter_on" msgid="447849271630431531">"Sense optimitzar"</string>
     <string name="high_power_on" msgid="8778058701270819268">"Sense optimitzar"</string>
     <string name="high_power_off" msgid="317000444619279018">"Optimitza l\'ús de la bateria"</string>
     <string name="high_power_system" msgid="3966701453644915787">"L\'optimització de la bateria no està disponible"</string>
-    <string name="high_power_desc" msgid="2753076899835765338">"No s\'aplica l\'optimització de la bateria. És possible que es consumeixi més ràpidament."</string>
+    <string name="high_power_desc" msgid="2753076899835765338">"No s\'aplica l\'optimització de la bateria. És possible que s\'exhaureixi més ràpidament."</string>
     <string name="high_power_prompt_title" msgid="2574478825228409124">"Vols permetre que l\'aplicació s\'executi sempre en segon pla?"</string>
     <string name="high_power_prompt_body" msgid="6460557929559616041">"Si permets que <xliff:g id="APP_NAME">%1$s</xliff:g> s\'executi sempre en segon pla, és possible que disminueixi la durada de la bateria. \n\nPots canviar-ho més tard a Configuració &gt; Aplicacions i notificacions."</string>
     <string name="battery_summary" msgid="2491764359695671207">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> d\'ús des de l\'última càrrega completa"</string>
@@ -4494,7 +4497,7 @@
     <string name="zen_access_revoke_warning_dialog_summary" msgid="8689801842914183595">"Se suprimiran totes les regles del mode No molestis creades per aquesta aplicació."</string>
     <string name="ignore_optimizations_on" msgid="6865583039303804932">"No optimitzis la bateria"</string>
     <string name="ignore_optimizations_off" msgid="9186557038453586295">"Optimitza la bateria"</string>
-    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"És possible que la bateria es consumeixi més ràpidament. L\'aplicació ja no té restringit l\'ús de la bateria en segon pla."</string>
+    <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"És possible que la bateria s\'exhaureixi més ràpidament. L\'aplicació ja no té restringit l\'ús de la bateria en segon pla."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Es recomana per allargar la bateria"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"Vols permetre que <xliff:g id="APP">%s</xliff:g> ignori les optimitzacions de la bateria?"</string>
     <string name="app_list_preference_none" msgid="1635406344616653756">"Cap"</string>

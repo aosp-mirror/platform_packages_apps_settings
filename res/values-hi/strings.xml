@@ -284,7 +284,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"टाइम आउट के तुरंत बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ने लॉक न कर रखा हो"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"स्क्रीन बंद होने के <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> ने अनलॉक कर रखा है तो नहीं"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="197365342192696406">"लॉक स्‍क्रीन पर अपनी जानकारी दिखाएं"</string>
-    <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्क्रीन पर टेक्स्ट दिखाएं"</string>
+    <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्क्रीन पर टेक्स्ट जोड़ें"</string>
     <string name="security_enable_widgets_title" msgid="676199714313423099">"शॉर्टकट चालू करें"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="5191637768484254146">"व्यवस्थापक ने अक्षम किया है"</string>
     <string name="trust_lost_locks_screen_title" msgid="4231232144565291276">"भरोसा नहीं रह जाने पर स्क्रीन लॉक करें"</string>
@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फ़िंगरप्रिंट जोड़ा गया"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"अब आप अपना फ़ोन अनलॉक करने के लिए, अपने फ़िंगरप्रिंट का इस्तेमाल कर सकते हैं. इसके अलावा, किसी ऐप्लिकेशन में साइन इन करने या ऐसे और काम करने के दौरान, अपनी पहचान की पुष्टि करने के लिए भी आप अपने फ़िंगरप्रिंट का इस्तेमाल कर सकते हैं"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"इसे बाद में करें"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"हटाएं, फिर दोबारा छुएं"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"पहले अपनी उंगली के एक किनारे को सेंसर पर कुछ देर के लिए रखें और फिर दूसरी तरफ़ से भी ऐसा करें"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"फ़िंगरप्रिंट सेटअप छोड़ें?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"आपने अपने फ़ोन को अनलॉक करने के एक तरीके के रूप में अपने फ़िंगरप्रिंट का उपयोग करने का चुनाव किया है. अगर आप इसे अभी छोड़ते हैं, तो आपको इसे बाद में सेट करना होगा. सेटअप में करीब एक मिनट लगता है."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"अगर आपका टैबलेट खो जाता है या चोरी हो जाता है, तो पिन आपके टैबलेट की सुरक्षा करता है"</string>
@@ -1308,7 +1310,7 @@
     <string name="brightness" msgid="6216871641021779698">"स्क्रीन की रोशनी का लेवल"</string>
     <string name="brightness_title" msgid="5457874893085305155">"स्क्रीन की रोशनी"</string>
     <string name="brightness_summary" msgid="6309641759293018049">"स्‍क्रीन की रोशनी एडजस्ट करें"</string>
-    <string name="auto_brightness_title" msgid="4239324728760986697">"आस-पास की रोशनी के हिसाब से स्क्रीन की चमक"</string>
+    <string name="auto_brightness_title" msgid="4239324728760986697">"आस-पास की लाइट के हिसाब से स्क्रीन की रोशनी"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"आस-पास की रोशनी के हिसाब से स्क्रीन की चमक में बदलाव हाेता है"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"चालू है"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"बंद"</string>
@@ -1327,7 +1329,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"मौजूदा रोशनी के लिए एडजस्ट न करें"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"बढ़ा हुआ बैटरी उपयोग"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"मौजूदा रोशनी के लिए स्क्रीन की चमक का स्तर अनुकूलित करें. इस सुविधा के चालू होने पर, आप अब भी स्क्रीन की रोशनी कुछ समय के लिए एडजस्ट कर सकते हैं."</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"आपकी गतिविधियों और आपके आस-पास मौजूद रोशनी के हिसाब से आपके डिवाइस की स्क्रीन की चमक अपने आप सेट हो जाएगी. आपके आस-पास मौजूद रोशनी के हिसाब से स्क्रीन की चमक अपने आप बदलने वाली इस सुविधा को आप अपनी पसंद के हिसाब से ढाल सकते हैं. ऐसा करने के लिए स्लाइडर को आगे-पीछे करें और मैन्युअल रूप से स्क्रीन की चमक सेट करें."</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"आपकी गतिविधियों और आपके की लाइट के हिसाब से आपके डिवाइस की स्क्रीन की रोशनी अपने-आप सेट हो जाएगी. आपके आस-पास की लाइट के हिसाब से स्क्रीन की रोशनी अपने-आप बदलने वाली इस सुविधा को अपनी पसंद के हिसाब से ढाला जा सकता है. ऐसा करने के लिए स्लाइडर को आगे-पीछे करें और मैन्युअल रूप से स्क्रीन की रोशनी सेट करें."</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"डिसप्ले का वाइट बैलेंस"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"स्मूद डिसप्ले"</string>
@@ -1340,7 +1342,7 @@
     <string name="adaptive_sleep_title_no_permission" msgid="1719759921214237016">"कैमरा ऐक्सेस करने की ज़रूरत है"</string>
     <string name="adaptive_sleep_summary_no_permission" msgid="5822591289468803691">"स्क्रीन चालू रखने की सुविधा का इस्तेमाल करने के लिए, कैमरा ऐक्सेस करने की ज़रूरत होती है. डिवाइस को मनमुताबिक बनाने की सेवाओं की अनुमतियां मैनेज करने के लिए, टैप करें"</string>
     <string name="adaptive_sleep_manage_permission_button" msgid="1404510197847664846">"अनुमतियां मैनेज करें"</string>
-    <string name="adaptive_sleep_description" msgid="1835321775327187860">"जब तक आप स्क्रीन की तरफ़ देखते रहेंगे, स्क्रीन बंद नहीं होगी"</string>
+    <string name="adaptive_sleep_description" msgid="1835321775327187860">"स्क्रीन की तरफ़ देखते रहने तक, स्क्रीन बंद नहीं होगी"</string>
     <string name="adaptive_sleep_privacy" msgid="7664570136417980556">"स्क्रीन चालू रखने की सुविधा, सामने वाले कैमरे का इस्तेमाल करके यह पता लगाती है कि कोई स्क्रीन देख रहा है या नहीं. यह डिवाइस पर काम करती है. इसमें न तो इमेज सेव होती है और न ही Google को भेजी जाती है."</string>
     <string name="adaptive_sleep_contextual_slice_title" msgid="7467588613212629758">"स्क्रीन चालू रखने की सुविधा चालू करें"</string>
     <string name="adaptive_sleep_contextual_slice_summary" msgid="2993867044745446094">"जब तक आप स्क्रीन देख रहें हैं, तब तक स्क्रीन चालू रखें"</string>
@@ -1350,18 +1352,18 @@
     <string name="auto_rotate_summary_no_permission" msgid="1025061139746254554">"चेहरे की पहचान के लिए, कैमरे का ऐक्सेस ज़रूरी है. डिवाइस को मनमुताबिक बनाने की सेवाओं से जुड़ी अनुमतियां मैनेज करने के लिए, टैप करें"</string>
     <string name="auto_rotate_manage_permission_button" msgid="2591146085906382385">"अनुमतियां मैनेज करें"</string>
     <string name="night_display_title" msgid="8532432776487216581">"नाइट लाइट"</string>
-    <string name="night_display_text" msgid="4789324042428095383">"नाइट लाइट आपकी स्क्रीन को हल्का सुनहरा कर देती है. इससे कम रोशनी में अपनी स्क्रीन देखना या पढ़ना आसान हो जाता है. साथ ही, इससे आप आसानी से सो सकते हैं."</string>
+    <string name="night_display_text" msgid="4789324042428095383">"नाइट लाइट आपकी स्क्रीन को हल्का सुनहरा कर देती है. इससे कम रोशनी में भी स्क्रीन देखना या पढ़ना आसान हो जाता है. साथ ही, इससे आसानी से नींद भी आ जाती है."</string>
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"शेड्यूल करें"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"कोई नहीं"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"अपने मुताबिक तय समय पर चालू करें"</string>
     <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"सूर्यास्त से सूर्योदय तक चालू रहती है"</string>
-    <string name="night_display_start_time_title" msgid="2611541851596977786">"शुरू करने का समय"</string>
+    <string name="night_display_start_time_title" msgid="2611541851596977786">"शुरू होने का समय"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"खत्म होने का समय"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"स्थिति"</string>
     <string name="night_display_temperature_title" msgid="857248782470764263">"स्क्रीन की चमक"</string>
     <string name="night_display_summary_off_auto_mode_never" msgid="7406899634169354142">"कभी भी अपने-आप चालू नहीं होगी"</string>
     <string name="night_display_summary_off_auto_mode_custom" msgid="6667008039080687931">"<xliff:g id="ID_1">%1$s</xliff:g> बजे अपने आप चालू हो जाएगा"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"सूर्यास्त होने पर अपने आप चालू हो जाएगा"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"शाम होने पर अपने-आप चालू हो जाएगी"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"कभी भी अपने आप बंद नहीं होगा"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"<xliff:g id="ID_1">%1$s</xliff:g> बजे अपने आप बंद हो जाएगा"</string>
     <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"सूर्योदय होने पर अपने आप बंद हो जाएगा"</string>
@@ -1373,7 +1375,7 @@
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"<xliff:g id="ID_1">%1$s</xliff:g> तक बंद रखें"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"नाइट लाइट इस समय चालू नहीं है"</string>
     <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"सूरज उगने और डूबने का समय पता लगाने के लिए, आपके डिवाइस की जगह की जानकारी की ज़रूरत होती है."</string>
-    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"जगह की सेटिंग"</string>
+    <string name="twilight_mode_launch_location" msgid="7799112373591153956">"जगह की जानकारी की सेटिंग"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"अभी चालू करें"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"अभी बंद करें"</string>
     <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"सूर्योदय तक के लिए चालू करें"</string>
@@ -1385,7 +1387,7 @@
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"अपने मुताबिक तय समय पर चालू करें"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"स्थिति"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"कभी भी अपने-आप चालू नहीं होगी"</string>
-    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"शाम होने पर अपने-आप चालू हो जाएगा"</string>
+    <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"शाम होने पर अपने-आप चालू हो जाएगी"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"<xliff:g id="ID_1">%1$s</xliff:g> पर अपने-आप चालू हो जाएगा"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"कभी भी अपने-आप बंद नहीं होगा"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"सुबह होने पर अपने-आप बंद हो जाएगा"</string>
@@ -1422,8 +1424,8 @@
     <string name="lift_to_wake_title" msgid="8994218158737714046">"सक्रिय करने के लिए उठाएं"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"हमेशा चालू स्क्रीन दिखाएं"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"कब दिखाना है"</string>
-    <string name="doze_title" msgid="1523090408230862316">"सूचनाएं मिलने पर स्क्रीन जगाएं"</string>
-    <string name="doze_summary" msgid="8252867381522942804">"जब स्क्रीन गहरे रंग की हो, तब यह नई सूचनाओं के लिए चालू हो जाती है"</string>
+    <string name="doze_title" msgid="1523090408230862316">"सूचनाएं मिलने पर स्क्रीन चालू करें"</string>
+    <string name="doze_summary" msgid="8252867381522942804">"जब स्क्रीन गहरे रंग की हो, तब यह नई सूचनाएं मिलने पर चालू हो जाती है"</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"समय और जानकारी हमेशा दिखाएं"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"बैटरी खर्च बढ़ाता है"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"टेक्स्ट को बोल्ड करें"</string>
@@ -2446,7 +2448,7 @@
     </plurals>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"ऑडियो में बदलाव करने की सेटिंग"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"शॉर्टकट चालू है"</string>
-    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"बंद है"</string>
+    <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"बंद"</string>
     <string name="accessibility_summary_state_enabled" msgid="1065431632216039369">"चालू है"</string>
     <string name="accessibility_summary_state_disabled" msgid="9173234532752799694">"बंद है"</string>
     <string name="accessibility_summary_state_stopped" msgid="2343602489802623424">"सेवा काम नहीं कर रही. जानकारी पाने के लिए टैप करें."</string>
@@ -3518,7 +3520,7 @@
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हाल ही के ऐप्लिकेशन, डिफ़ॉल्ट ऐप्लिकेशन"</string>
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"वर्क प्रोफ़ाइल चालू होने पर ऐप्लिकेशन से जुड़ी सूचना नहीं देखी जा सकती है."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"पासवर्ड और खाते"</string>
-    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"सेव किए गए पासवर्ड, ऑटोमैटिक भरना, सिंक किए गए खाते"</string>
+    <string name="account_dashboard_default_summary" msgid="1730719656099599488">"सेव किए गए पासवर्ड, अपने-आप भरना, सिंक किए गए खाते"</string>
     <string name="app_default_dashboard_title" msgid="4071015747629103216">"डिफ़ॉल्‍ट ऐप्लिकेशन"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"भाषाएं, जेस्चर, समय, बैकअप"</string>
     <string name="search_results_title" msgid="3360639917793022533">"सेटिंग"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"चार्जिंग की आवाज़ और वाइब्रेशन"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"डॉक करने की ध्वनियां"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"छूने पर आने वाली आवाज़ें"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"वाइब्रेशन मोड के चालू होने का आइकॉन हमेशा दिखाएं"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"छूने पर कंपन (वाइब्रेशन) चालू करें"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"टैप करने, कीबोर्ड पर टाइप करने और दूसरी चीज़ों के लिए हैप्टिक सुझाव चालू करें"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"डॉक स्पीकर चलेगा"</string>
@@ -3678,16 +3681,16 @@
     <string name="zen_mode_restrict_notifications_title" msgid="4169952466106040297">"\'दिखाई न देने वाली सूचनाएं\' दिखाने के लिए विकल्प"</string>
     <string name="zen_mode_restrict_notifications_category" msgid="5870944770935394566">"\'परेशान न करें\' मोड चालू होने पर"</string>
     <string name="zen_mode_restrict_notifications_mute" msgid="6692072837485018287">"सूचनाएं आने पर कोई आवाज़ सुनाई न दे"</string>
-    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"अगर आप यह सेटिंग चुनते हैं, तो आपको डिवाइस की स्क्रीन पर सूचनाएं दिखाई देंगी"</string>
-    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"सूचनाएं मिलने पर आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
+    <string name="zen_mode_restrict_notifications_mute_summary" msgid="966597459849580949">"इस सेटिंग को चुनने से, डिवाइस की स्क्रीन पर सूचनाएं दिखेंगी"</string>
+    <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"सूचनाएं आने पर, आपका फ़ोन आवाज़ या वाइब्रेट नहीं करेगा."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखे और न ही आवाज़ आए"</string>
-    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"अगर आप यह सेटिंग चुनते हैं, तो सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखाई देगा और न ही आवाज़ सुनाई देगी"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"आपका फ़ोन नई या मौजूदा सूचनाएं न तो दिखाएगा और न ही उनके लिए आवाज़ करेगा या वाइब्रेट होगा. ध्यान रखें कि फ़ोन की गतिविधि के लिए ज़रूरी सूचनाएं और स्थिति अब भी दिखाई देंगी.\n\nजब आप \'परेशान न करें\' सेवा को बंद करें, तो आपको स्क्रीन पर सबसे ऊपर से नीचे की ओर स्वाइप करने पर छूटी हुई सूचनाएं दिखाई देंगी."</string>
+    <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"इस सेटिंग को चुनने से, सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखेगा और न ही आवाज़ सुनाई देगी"</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"आपका फ़ोन नई या मौजूदा सूचनाएं न तो दिखाएगा और न ही उनके लिए आवाज़ करेगा या वाइब्रेट होगा. ध्यान रखें कि फ़ोन की गतिविधि के लिए ज़रूरी सूचनाएं और स्थिति अब भी दिखेंगी.\n\nजब आप \'परेशान न करें\' सेवा को बंद करें, तो आपको स्क्रीन पर सबसे ऊपर से नीचे की ओर स्वाइप करने पर छूटी हुई सूचनाएं दिखेंगी."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"पसंद के मुताबिक बनाएं"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"पसंद के मुताबिक बनाई गई सेटिंग चालू करें"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"पसंद के मुताबिक बनाई गई सेटिंग हटाएं"</string>
     <string name="zen_mode_restrict_notifications_summary_muted" msgid="4750213316794189968">"सूचनाएं आने पर कोई आवाज़ सुनाई न दे"</string>
-    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"कुछ सूचनाएं दिखाई नहीं देंगी"</string>
+    <string name="zen_mode_restrict_notifications_summary_custom" msgid="3918461289557316364">"कुछ सरफ़ेस पर सूचनाएं नहीं दिखेंगी"</string>
     <string name="zen_mode_restrict_notifications_summary_hidden" msgid="636494600775773296">"सूचनाएं आने पर न तो स्क्रीन पर कुछ दिखे और न ही कोई आवाज़ सुनाई दे"</string>
     <string name="zen_mode_what_to_block_title" msgid="5692710098205334164">"पसंद के मुताबिक रोक लगाएं"</string>
     <string name="zen_mode_block_effects_screen_on" msgid="8780668375194500987">"स्क्रीन चालू होने पर"</string>
@@ -3724,7 +3727,7 @@
     <string name="zen_mode_sound_summary_on_with_info" msgid="4803606180235742003">"चालू है / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_on" msgid="9077659040104989899">"चालू है"</string>
     <string name="zen_mode_duration_summary_always_prompt" msgid="7658172853423383037">"हर बार पूछें"</string>
-    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"जब तक आप बंद नहीं करते"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="5551992961329998606">"जब तक बंद नहीं की जाती"</string>
     <string name="zen_mode_duration_summary_time_hours" msgid="2602655749780428308">"{count,plural, =1{1 घंटा}one{# घंटा}other{# घंटे}}"</string>
     <string name="zen_mode_duration_summary_time_minutes" msgid="5755536844016835693">"{count,plural, =1{1 मिनट}one{# मिनट}other{# मिनट}}"</string>
     <string name="zen_mode_sound_summary_off" msgid="7350437977839985836">"{count,plural, =0{बंद है}=1{बंद है / 1 शेड्यूल अपने-आप चालू हो सकता है}one{बंद है / # शेड्यूल अपने-आप चालू हो सकता है}other{बंद है / # शेड्यूल अपने-आप चालू हो सकते हैं}}"</string>
@@ -3877,7 +3880,7 @@
       <item quantity="one"><xliff:g id="COUNT_1">%d</xliff:g> अहम बातचीत</item>
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> अहम बातचीत</item>
     </plurals>
-    <string name="important_conversations" msgid="1233893707189659401">"प्राथमिकता वाली बातचीत"</string>
+    <string name="important_conversations" msgid="1233893707189659401">"अहम बातचीत"</string>
     <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"बातचीत सेक्शन में सबसे ऊपर, फ्लोटिंग बबल्स के तौर पर दिखती है"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"बातचीत सेक्शन में सबसे ऊपर दिखाएं"</string>
     <string name="other_conversations" msgid="551178916855139870">"अन्य बातचीत"</string>
@@ -4081,8 +4084,8 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"हर दिन"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"अलार्म, खत्म होने के समय से ज़्यादा देर बज सकता है"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"अलार्म बजने पर शेड्यूल बंद हो जाता है"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"परेशान न करें मोड की सेटिंग"</string>
-    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"डिफ़ॉल्‍ट सेटिंग का इस्तेमाल करें"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"\'परेशान न करें\' मोड की सेटिंग"</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"डिफ़ॉल्‍ट सेटिंग का इस्तेमाल किया जा रहा है"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"इस शेड्यूल के लिए पसंद के मुताबिक सेटिंग बनाएं"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"‘<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>’ के लिए"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
@@ -4091,7 +4094,7 @@
     <string name="zen_mode_conversations_title" msgid="5491912973456026379">"बातचीत"</string>
     <string name="zen_mode_conversations_section_title" msgid="666809483050936026">"वे बातचीत जो \'परेशान न करें\' मोड को बायपास कर सकती हैं"</string>
     <string name="zen_mode_from_all_conversations" msgid="3447000451361857061">"सभी बातचीत"</string>
-    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"प्राथमिकता वाली बातचीत"</string>
+    <string name="zen_mode_from_important_conversations" msgid="528050873364229253">"अहम बातचीत"</string>
     <string name="zen_mode_from_no_conversations" msgid="3924593219855567165">"कोई भी नहीं"</string>
     <string name="zen_mode_conversations_count" msgid="3199310723073707153">"{count,plural, =0{कोई बातचीत नहीं}=1{1 बातचीत}one{# बातचीत}other{# बातचीत}}"</string>
     <string name="zen_mode_people_calls_messages_section_title" msgid="6815202112413762206">"वे कॉल और मैसेज जो \'परेशान न करें\' मोड को बायपास कर सकते हैं"</string>
@@ -4176,9 +4179,9 @@
     <string name="zen_mode_when_never" msgid="2537537280091840672">"कभी नहीं"</string>
     <string name="zen_mode_when_every_night" msgid="9018738747936038166">"हर रात"</string>
     <string name="zen_mode_when_weeknights" msgid="531342225633264368">"प्रति सोम-शुक्र रात"</string>
-    <string name="zen_mode_start_time" msgid="1252665038977523332">"शुरू करने का समय"</string>
+    <string name="zen_mode_start_time" msgid="1252665038977523332">"शुरू होने का समय"</string>
     <string name="zen_mode_end_time" msgid="223502560367331706">"खत्म होने का समय"</string>
-    <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> अगले दिन"</string>
+    <string name="zen_mode_end_time_next_day_summary_format" msgid="419683704068360804">"अगले दिन <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_summary_alarms_only_indefinite" msgid="910047326128154945">"अनिश्‍चित काल के लिए केवल अलार्म को बदलें"</string>
     <plurals name="zen_mode_summary_alarms_only_by_minute" formatted="false" msgid="1900512966361163390">
       <item quantity="one">केवल <xliff:g id="DURATION">%1$d</xliff:g> मिनट के लिए अलार्म को बदलें (<xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g> बजे तक)</item>
@@ -4874,7 +4877,7 @@
     <string name="ambient_display_pickup_title" product="tablet" msgid="8055486872070888377">"टैबलेट देखने के लिए लिफ़्ट करें"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="8980156994848721455">"डिवाइस देखने के लिए लिफ़्ट करें"</string>
     <string name="ambient_display_wake_screen_title" msgid="7637678749035378085">"चालू करने का डिसप्ले"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"समय, सूचनाएं, और दूसरी जानकारी देखने के लिए, अपना फ़ोन उठाएं"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="1087355013674109242">"समय, सूचनाएं, और दूसरी जानकारी देखने के लिए, अपना फ़ोन उठाएं."</string>
     <string name="ambient_display_pickup_summary" product="tablet" msgid="2589556997034530529">"समय, सूचनाएं और दूसरी जानकारी देखने के लिए, अपना टैबलेट इस्तेमाल करें."</string>
     <string name="ambient_display_pickup_summary" product="device" msgid="1916011370011115627">"समय, सूचनाएं और दूसरी जानकारी देखने के लिए, अपना डिवाइस इस्तेमाल करें."</string>
     <string name="ambient_display_tap_screen_title" product="default" msgid="2811332293938467179">"फ़ोन की स्क्रीन देखने के लिए टैप करें"</string>
@@ -5429,8 +5432,8 @@
     <string name="lockscreen_privacy_wallet_summary" msgid="5388868513484652431">"लॉक स्क्रीन और फटाफट सेटिंग से वॉलेट ऐक्सेस करने की अनुमति दें"</string>
     <string name="lockscreen_privacy_controls_setting_toggle" msgid="7445725343949588613">"डिवाइस कंट्रोल दिखाएं"</string>
     <string name="lockscreen_privacy_controls_summary" msgid="6952176547084269909">"स्क्रीन लॉक होने पर कंट्रोल को ऐक्सेस करें"</string>
-    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध होने पर, दो समय क्षेत्र वाली घड़ी दिखाएं"</string>
-    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"दो समय क्षेत्र वाली घड़ी"</string>
+    <string name="lockscreen_double_line_clock_summary" msgid="2916159550425093703">"उपलब्ध होने पर, दो लाइन में समय दिखाएं"</string>
+    <string name="lockscreen_double_line_clock_setting_toggle" msgid="3408639316001688529">"दो लाइन में समय दिखाएं"</string>
     <string name="rtt_settings_title" msgid="7049259598645966354"></string>
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
@@ -5537,7 +5540,7 @@
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"नाइट लाइट सुविधा का इस्तेमाल करें"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"एनएफ़सी का इस्तेमाल करें"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"ज़रूरत के हिसाब से बैटरी का इस्तेमाल करने की सुविधा आज़माएं"</string>
-    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"आस-पास की रोशनी के हिसाब से स्क्रीन की चमक की सुविधा का इस्तेमाल करें"</string>
+    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"आस-पास की लाइट के हिसाब से स्क्रीन की रोशनी की सुविधा का इस्तेमाल करें"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"वाई-फ़ाई कॉलिंग का इस्तेमाल करें"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"सभी ऐप्लिकेशन देखें"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"स्मार्ट फ़ॉरवर्डिंग"</string>

@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte identiteten din, for eksempel når du logger på apper"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft fingeren og trykk igjen"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plasser siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Vil du hoppe over fingeravtrykk-oppsett?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Du har valgt å bruke fingeravtrykket ditt som én måte å låse opp telefonen din på. Hvis du hopper over konfigureringen nå, må du fullføre den senere. Konfigureringen tar bare et par minutter."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En PIN-kode beskytter nettbrettet hvis det blir mistet eller stjålet"</string>
@@ -3635,7 +3637,7 @@
     <string name="keywords_vibrate_for_calls" msgid="1019870409730074899">"Vibrering"</string>
     <string name="vibrate_when_ringing_option_never_vibrate" msgid="6518980907289156517">"Vibrer aldri"</string>
     <string name="vibrate_when_ringing_option_always_vibrate" msgid="968652667232075466">"Vibrer alltid"</string>
-    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrer først, ring så gradvis høyere"</string>
+    <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"Vibrer og ring så gradvis høyere"</string>
     <string name="other_sound_settings" msgid="5468360269346162072">"Andre lyder"</string>
     <string name="spatial_audio_title" msgid="6591051622375191603">"Romlig lyd"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"Tastaturlyd"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Lyd og vibrering ved lading"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Lyd fra dokk"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Berøringslyder"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Vis alltid ikonet når enheten er i vibreringsmodus"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Berøringsvibrering"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Fysisk tilbakemelding for trykk, tastatur med mer"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Avspilling fra dokkhøyttaler"</string>
@@ -3682,7 +3685,7 @@
     <string name="zen_mode_restrict_notifications_mute_footer" msgid="2152115038156049608">"Når du mottar varsler, kommer ikke telefonen til å lage lyd eller vibrere."</string>
     <string name="zen_mode_restrict_notifications_hide" msgid="5997930361607752541">"Ingen lyd- eller visuell varsling"</string>
     <string name="zen_mode_restrict_notifications_hide_summary" msgid="6005445725686969583">"Du verken ser eller hører varsler"</string>
-    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefonen verken viser, vibrerer for eller lager lyd for nye eller eksisterende varsler. Husk at viktige varsler om telefonaktivitet og status fremdeles vises.\n\nNår du slår av «Ikke forstyrr», kan du finne varsler du gikk glipp av, ved å sveipe ned fra toppen av skjermen."</string>
+    <string name="zen_mode_restrict_notifications_hide_footer" msgid="4314772315731485747">"Telefonen verken viser, vibrerer for eller lager lyd for nye eller eksisterende varsler. Husk at viktige varsler om telefonaktivitet og status fremdeles vises.\n\nNår du slår av «Ikke forstyrr», kan du finne varsler du har gått  glipp av, ved å sveipe ned fra toppen av skjermen."</string>
     <string name="zen_mode_restrict_notifications_custom" msgid="5469078057954463796">"Tilpasset"</string>
     <string name="zen_mode_restrict_notifications_enable_custom" msgid="4303255634151330401">"Slå på tilpasset innstilling"</string>
     <string name="zen_mode_restrict_notifications_disable_custom" msgid="5062332754972217218">"Fjern tilpasset innstilling"</string>
@@ -4081,7 +4084,7 @@
     <string name="zen_mode_schedule_rule_days_all" msgid="1583884351893245169">"Hver dag"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarmer kan overstyre sluttider"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Tidsplanen slås av når en alarm ringer"</string>
-    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Atferd for «Ikke forstyrr»"</string>
+    <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Funksjonalitet for «Ikke forstyrr»"</string>
     <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Bruk standardinnstillinger"</string>
     <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Lag egne innstillinger for denne tidsplanen"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"For «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>»"</string>
@@ -4099,7 +4102,7 @@
     <string name="zen_mode_calls" msgid="7653245854493631095">"Anrop"</string>
     <string name="zen_mode_calls_list" msgid="5044730950895749093">"anrop"</string>
     <string name="zen_mode_calls_header" msgid="8379225445095856726">"Anrop som kan forstyrre"</string>
-    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"For å forsikre deg om at tillatte anrop lager lyd, sjekk at enheten er satt til ringing"</string>
+    <string name="zen_mode_calls_footer" msgid="2008079711083701243">"For å forsikre deg om at tillatte anrop lager lyd, sjekk at ringelyd er på for enheten"</string>
     <string name="zen_mode_custom_calls_footer" msgid="6521283204577441053">"Innkommende anrop er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillingene for å la venner, familie eller andre kontakter nå deg."</string>
     <string name="zen_mode_starred_contacts_title" msgid="630299631659575589">"Stjernemerkede kontakter"</string>
     <string name="zen_mode_starred_contacts_summary_contacts" msgid="1629467178444895094">"{count,plural,offset:2 =0{Ingen}=1{{contact_1}}=2{{contact_1} og {contact_2}}=3{{contact_1}, {contact_2} og {contact_3}}other{{contact_1}, {contact_2} og # andre}}"</string>
@@ -4108,7 +4111,7 @@
     <string name="zen_mode_messages_list" msgid="5431014101342361882">"meldinger"</string>
     <string name="zen_mode_messages_title" msgid="1777598523485334405">"Meldinger"</string>
     <string name="zen_mode_messages_header" msgid="253721635061451577">"Meldinger som kan forstyrre"</string>
-    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"For å kontrollere at tillatte meldinger lager lyd, sjekk at enheten er satt til ringing"</string>
+    <string name="zen_mode_messages_footer" msgid="6002468050854126331">"For å forsikre deg om at tillatte meldinger lager lyd, sjekk at ringelyd er på for enheten"</string>
     <string name="zen_mode_custom_messages_footer" msgid="7545180036949550830">"Innkommende meldinger er blokkert for «<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>». Du kan justere innstillingene for å la venner, familie eller andre kontakter nå deg."</string>
     <string name="zen_mode_all_messages_summary" msgid="3756267858343104554">"Alle meldinger kan nå deg"</string>
     <string name="zen_mode_all_calls_summary" msgid="7337907849083824698">"Alle anrop kan nå deg"</string>
@@ -4170,7 +4173,7 @@
     <!-- no translation found for zen_mode_calls_summary_one (1928015516061784276) -->
     <skip />
     <string name="zen_mode_calls_summary_two" msgid="6351563496898410742">"<xliff:g id="CALLER_TYPE_0">%1$s</xliff:g> og <xliff:g id="CALLER_TYPE_1">%2$s</xliff:g>"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Hvis samme person ringer om igjen innen <xliff:g id="MINUTES">%d</xliff:g> minutter"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="4121054819936083025">"Hvis den samme personen ringer om igjen innen <xliff:g id="MINUTES">%d</xliff:g> minutter"</string>
     <string name="zen_mode_behavior_summary_custom" msgid="3126805555852783860">"Tilpasset"</string>
     <string name="zen_mode_when" msgid="5710214762051824755">"Slå på automatisk"</string>
     <string name="zen_mode_when_never" msgid="2537537280091840672">"Aldri"</string>

@@ -302,10 +302,10 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Uporabi lokacijo"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Izklopljeno"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="one">Vklopljeno – dostop do lokacije ima <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija</item>
-      <item quantity="two">Vklopljeno – dostop do lokacije imata <xliff:g id="COUNT_1">%1$d</xliff:g> aplikaciji</item>
-      <item quantity="few">Vklopljeno – dostop do lokacije imajo <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacije</item>
-      <item quantity="other">Vklopljeno – dostop do lokacije ima <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacij</item>
+      <item quantity="one">Vklopljeno – dostop do lokacije ima <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacija.</item>
+      <item quantity="two">Vklopljeno – dostop do lokacije imata <xliff:g id="COUNT_1">%1$d</xliff:g> aplikaciji.</item>
+      <item quantity="few">Vklopljeno – dostop do lokacije imajo <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacije.</item>
+      <item quantity="other">Vklopljeno – dostop do lokacije ima <xliff:g id="COUNT_1">%1$d</xliff:g> aplikacij.</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Nalaganje …"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Aplikacije z dovoljenjem za naprave v bližini lahko določijo relativno lokacijo povezanih naprav."</string>
@@ -505,6 +505,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Prstni odtis je dodan"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Zdaj lahko s prstnim odtisom odklenete telefon ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Pozneje"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Dvignite in se spet dotaknite"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Želite preskočiti nast. prstnega odtisa?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Za odklepanja telefona ste izbrali možnost prstnega odtisa. Če zdaj preskočite, boste to morali nastaviti pozneje. Nastavitev traja samo približno eno minuto."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Koda PIN ščiti tablični računalnik, če ga izgubite ali vam ga ukradejo."</string>
@@ -1467,7 +1469,7 @@
     <string name="doze_title" msgid="1523090408230862316">"Prebudi zaslon ob obvestilih"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Ko zaslon ni osvetljen, se vklopi ob novih obvestilih."</string>
     <string name="doze_always_on_title" msgid="7326245192352868477">"Vedno pokaži uro in informacije"</string>
-    <string name="doze_always_on_summary" msgid="509097829739647852">"Poveča porabo baterije."</string>
+    <string name="doze_always_on_summary" msgid="509097829739647852">"Poveča porabo baterije"</string>
     <string name="force_bold_text" msgid="4620929631102086716">"Krepko besedilo"</string>
     <string name="title_font_size" msgid="570613010306330622">"Velikost pisave"</string>
     <string name="short_summary_font_size" msgid="184712645848458143">"Pomanjšava ali povečava besedila"</string>
@@ -3735,6 +3737,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Zvoki in vibriranje ob polnjenju"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Zvok ob odlaganju v nosilec"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Zvoki dotikov"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Vedno pokaži ikono v načinu vibriranja"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibriranje ob dotiku"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Odziv z vibriranjem ob dotiku, pritisku tipk in drugem"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Zvočnik nosilca je vklopljen"</string>
@@ -3939,9 +3942,9 @@
     <string name="lock_screen_notifs_redact_summary" msgid="1395483766035470612">"Prikaži občutljivo vsebino na zaklenjenem zaslonu."</string>
     <string name="lock_screen_notifs_redact_work" msgid="3833920196569208430">"Občutljiva obvestila za delovni profil"</string>
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"Prikaži občutljivo vsebino delovnega profila na zaklenjenem zaslonu."</string>
-    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Pokaži vso vsebino obvestil."</string>
+    <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"Prikaži vso vsebino obvestil"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"Prikaži občutljivo vsebino samo na odklenjenem zaslonu."</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil."</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"Sploh ne prikazuj obvestil"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"Kaj želite, da je prikazano na zaklenjenem zaslonu?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"Zaklenjen zaslon"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"Pokaži vso vsebino obvestil za delovni profil"</string>
@@ -4190,8 +4193,8 @@
     <string name="zen_mode_schedule_alarm_title" msgid="305237266064819345">"Alarm lahko razveljavi končni čas"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="9162760856136645133">"Razpored se izklopi, ko alarm zazvoni."</string>
     <string name="zen_mode_custom_behavior_title" msgid="92525364576358085">"Vedenje načina »Ne moti«"</string>
-    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Uporabi privzete nastavitve."</string>
-    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Ustvarite nastavitve po meri za ta razpored."</string>
+    <string name="zen_mode_custom_behavior_summary_default" msgid="3259312823717839148">"Uporabi privzete nastavitve"</string>
+    <string name="zen_mode_custom_behavior_summary" msgid="5390522750884328843">"Ustvari nastavitve po meri za ta razpored"</string>
     <string name="zen_mode_custom_behavior_category_title" msgid="7815612569425733764">"Za »<xliff:g id="SCHEDULE_NAME">%1$s</xliff:g>«"</string>
     <string name="summary_divider_text" msgid="8836285171484563986">", "</string>
     <string name="summary_range_symbol_combination" msgid="8447490077794415525">"<xliff:g id="START">%1$s</xliff:g>–<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -5628,7 +5631,7 @@
     <string name="media_controls_resume_title" msgid="855076860336652370">"Pripni predvajalnik predstavnosti"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"Predvajalnik predstavnosti ostane odprt v hitrih nastavitvah, da je omogočeno hitro nadaljevanje predvajanja."</string>
     <string name="media_controls_recommendations_title" msgid="184225835236807677">"Prikaži priporočila glede predstavnosti"</string>
-    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Glede na vašo dejavnost."</string>
+    <string name="media_controls_recommendations_description" msgid="7596498733126824030">"Priporočila temeljijo glede na vašo dejavnost."</string>
     <string name="media_controls_hide_player" msgid="2751439192580884015">"Skrij predvajalnik"</string>
     <string name="media_controls_show_player" msgid="8504571042365814021">"Prikaži predvajalnik"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"predstavnost"</string>

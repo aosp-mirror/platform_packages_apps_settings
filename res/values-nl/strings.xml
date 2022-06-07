@@ -298,8 +298,8 @@
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Locatie gebruiken"</string>
     <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Uit"</string>
     <plurals name="location_settings_summary_location_on" formatted="false" msgid="1019959038518185676">
-      <item quantity="other">Aan: <xliff:g id="COUNT_1">%1$d</xliff:g> apps hebben toegang tot de locatie</item>
-      <item quantity="one">Aan: <xliff:g id="COUNT_0">%1$d</xliff:g> app heeft toegang tot de locatie</item>
+      <item quantity="other">Aan: <xliff:g id="COUNT_1">%1$d</xliff:g> apps hebben locatietoegang</item>
+      <item quantity="one">Aan: <xliff:g id="COUNT_0">%1$d</xliff:g> app heeft locatietoegang</item>
     </plurals>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Laden…"</string>
     <string name="location_settings_footer_general" msgid="1040507068701188821">"Apps met rechten voor apparaten in de buurt kunnen ongeveer inschatten waar verbonden apparaten zijn."</string>
@@ -419,7 +419,7 @@
     <string name="security_settings_fingerprint_enroll_introduction_footer_message_3" product="default" msgid="4757472591076060066">"Je telefoon gebruikt af en toe de recente afbeeldingen van je vingerafdrukken om betere vingerafdrukmodellen te maken."</string>
     <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="8957789840251747092">"Gebruik je vingerafdruk om je telefoon te ontgrendelen of aankopen goed te keuren.\n\nOpmerking: Je kunt je vingerafdruk niet gebruiken om dit apparaat te ontgrendelen. Neem contact op met de beheerder van je organisatie voor meer informatie."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="6086532316718920562">"Annuleren"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nee"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_no_thanks" msgid="6104718999323591180">"Nee, bedankt"</string>
     <string name="security_settings_fingerprint_enroll_introduction_agree" msgid="4068276083536421828">"Ik ga akkoord"</string>
     <string name="setup_fingerprint_enroll_skip_title" msgid="2473807887676247264">"Vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="2412645723804450304">"Het instellen van een vingerafdruk kost slechts een minuut of twee. Als je dit nu overslaat, kun je je vingerafdruk later toevoegen via de instellingen."</string>
@@ -480,7 +480,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Verwijderen"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Raak de sensor aan"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Plaats je vinger op de sensor en til deze op nadat je een trilling hebt gevoeld."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Houd je vinger plat op de sensor totdat je een trilling voelt"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Houd je vinger plat op de sensor totdat je een trilling voelt."</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Raak de vingerafdruksensor aan en houd deze vast"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Raak de sensor opnieuw aan"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Nog een keer"</string>
@@ -488,13 +488,15 @@
     <string name="security_settings_fingerprint_enroll_repeat_message" msgid="5382958363770893577">"Raak de sensor meerdere keren aan om de verschillende delen van je vingerafdruk toe te voegen."</string>
     <string name="security_settings_udfps_enroll_repeat_message" msgid="2213106975297867798">"Tik en houd vast elke keer dat het vingerafdrukicoon beweegt. Zo kan er meer van je vingerafdruk worden geregistreerd."</string>
     <string name="security_settings_udfps_enroll_fingertip_title" msgid="4123142574168831116">"Leg het puntje van je vingertop op de sensor"</string>
-    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Gebruik tot slot de randen van je vinger"</string>
+    <string name="security_settings_udfps_enroll_edge_title" msgid="6137605344819152477">"Scan nu de randen van je vinger"</string>
     <string name="security_settings_udfps_enroll_edge_message" msgid="4455253923746607702">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Zo kan er meer van je vingerafdruk worden geregistreerd"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Vingerafdruk vastleggen: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Vingerafdruk toegevoegd"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Je kunt nu je vingerafdruk gebruiken om je telefoon te ontgrendelen of voor verificatie, bijvoorbeeld als je inlogt bij apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Later doen"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Raak de sensor opnieuw aan"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Leg de zijkant van je vingerafdruk op de sensor en houd vast. Doe dan hetzelfde aan de andere kant."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"Instellen van vingerafdruk overslaan?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Je hebt ervoor gekozen je vingerafdruk te gebruiken als manier om je telefoon te ontgrendelen. Als je dit nu overslaat, moet je het later instellen. Het instellen neemt ongeveer een minuut in beslag."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"Een pincode beschermt de tablet bij verlies of diefstal"</string>
@@ -1354,7 +1356,7 @@
     <string name="night_display_auto_mode_title" msgid="5869128421470824381">"Schema"</string>
     <string name="night_display_auto_mode_never" msgid="2721729920187175239">"Geen"</string>
     <string name="night_display_auto_mode_custom" msgid="3938791496034086916">"Op aangepaste tijd"</string>
-    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Van zonsondergang tot zonsopgang"</string>
+    <string name="night_display_auto_mode_twilight" msgid="4291855156158833997">"Van zonsondergang tot zonsopkomst"</string>
     <string name="night_display_start_time_title" msgid="2611541851596977786">"Begintijd"</string>
     <string name="night_display_end_time_title" msgid="5243112480391192111">"Eindtijd"</string>
     <string name="night_display_status_title" msgid="9006282950657941820">"Status"</string>
@@ -1364,31 +1366,31 @@
     <string name="night_display_summary_off_auto_mode_twilight" msgid="3669132200611324994">"Wordt automatisch aangezet bij zonsondergang"</string>
     <string name="night_display_summary_on_auto_mode_never" msgid="832333009202889350">"Wordt nooit automatisch uitgezet"</string>
     <string name="night_display_summary_on_auto_mode_custom" msgid="2096677025343425755">"Wordt automatisch uitgezet om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Wordt automatisch uitgezet bij zonsopgang"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="8070517472000680361">"Wordt automatisch uitgezet bij zonsopkomst"</string>
     <string name="night_display_activation_on_manual" msgid="7999294858026069365">"Nu aanzetten"</string>
     <string name="night_display_activation_off_manual" msgid="4842907786868153218">"Nu uitzetten"</string>
-    <string name="night_display_activation_on_twilight" msgid="3440889451767582067">"Aanzetten tot zonsopgang"</string>
+    <string name="night_display_activation_on_twilight" msgid="3440889451767582067">"Aanzetten tot zonsopkomst"</string>
     <string name="night_display_activation_off_twilight" msgid="2853594955401726956">"Uitzetten tot zonsondergang"</string>
     <string name="night_display_activation_on_custom" msgid="4951143503599226846">"Aanzetten tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_activation_off_custom" msgid="79965738861100371">"Uitzetten tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="night_display_not_currently_on" msgid="6600205753103093827">"Nachtverlichting staat uit"</string>
-    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Apparaatlocatie is vereist om de tijden voor zonsondergang en zonsopgang te bepalen"</string>
+    <string name="twilight_mode_location_off_dialog_message" msgid="4559150893687124801">"Apparaatlocatie is vereist om de tijden voor zonsondergang en zonsopkomst te bepalen"</string>
     <string name="twilight_mode_launch_location" msgid="7799112373591153956">"Locatie-instellingen"</string>
     <string name="dark_ui_activation_on_manual" msgid="1541006734577325234">"Nu aanzetten"</string>
     <string name="dark_ui_activation_off_manual" msgid="2395333709291250065">"Nu uitzetten"</string>
-    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Aanzetten tot zonsopgang"</string>
+    <string name="dark_ui_activation_on_auto" msgid="4824339634784765049">"Aanzetten tot zonsopkomst"</string>
     <string name="dark_ui_activation_off_auto" msgid="9136717444658505208">"Uitzetten tot zonsondergang"</string>
     <string name="dark_ui_title" msgid="3373976268671557416">"Donkere modus"</string>
     <string name="dark_ui_auto_mode_title" msgid="9027528859262295099">"Schema"</string>
     <string name="dark_ui_auto_mode_never" msgid="3980412582267787662">"Geen"</string>
-    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Van zonsondergang tot zonsopgang"</string>
+    <string name="dark_ui_auto_mode_auto" msgid="6658909029498623375">"Van zonsondergang tot zonsopkomst"</string>
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"Op aangepaste tijd"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"Status"</string>
     <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Wordt nooit automatisch aangezet"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"Wordt automatisch aangezet bij zonsondergang"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"Wordt automatisch aangezet om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Wordt nooit automatisch uitgezet"</string>
-    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Wordt automatisch uitgezet bij zonsopgang"</string>
+    <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Wordt automatisch uitgezet bij zonsopkomst"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Wordt automatisch uitgezet om <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_on_custom" msgid="1889379402860316125">"Aanzetten tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_activation_off_custom" msgid="2192932161592759607">"Uitzetten tot <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -1480,7 +1482,7 @@
     <string name="fcc_equipment_id" msgid="6596668314025646129">"Apparatuur-ID"</string>
     <string name="baseband_version" msgid="2600182227599835857">"Smalbandversie"</string>
     <string name="kernel_version" msgid="3513538109381366881">"Kernel-versie"</string>
-    <string name="build_number" msgid="9009733242117579826">"Build-nummer"</string>
+    <string name="build_number" msgid="9009733242117579826">"Buildnummer"</string>
     <string name="module_version" msgid="1787518340082046658">"Google Play-systeemupdate"</string>
     <string name="device_info_not_available" msgid="4804474466616712326">"Niet beschikbaar"</string>
     <string name="device_status_activity_title" msgid="1812666241137263882">"Status"</string>
@@ -1836,8 +1838,8 @@
     <string name="location_app_level_permissions" msgid="907206607664629759">"Locatierechten voor apps"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"Locatie staat uit"</string>
     <plurals name="location_app_permission_summary_location_on" formatted="false" msgid="8286873148858526214">
-      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps hebben toegang tot de locatie</item>
-      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> apps heeft toegang tot de locatie</item>
+      <item quantity="other"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_2">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_3">%2$d</xliff:g> apps hebben locatietoegang</item>
+      <item quantity="one"> <xliff:g id="PERMITTED_LOCATION_APP_COUNT_0">%1$d</xliff:g> van <xliff:g id="TOTAL_LOCATION_APP_COUNT_1">%2$d</xliff:g> apps heeft locatietoegang</item>
     </plurals>
     <string name="location_category_recent_location_access" msgid="2558063524482178146">"Recente toegang"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"Alles tonen"</string>
@@ -3519,7 +3521,7 @@
     <string name="notification_settings_work_profile" msgid="6076211850526353975">"Toegang tot meldingen is niet beschikbaar voor apps in het werkprofiel."</string>
     <string name="account_dashboard_title" msgid="8228773251948253914">"Wachtwoorden en accounts"</string>
     <string name="account_dashboard_default_summary" msgid="1730719656099599488">"Opgeslagen wachtwoorden, automatisch invullen, gesynchroniseerde accounts"</string>
-    <string name="app_default_dashboard_title" msgid="4071015747629103216">"Standaard apps"</string>
+    <string name="app_default_dashboard_title" msgid="4071015747629103216">"Standaard-apps"</string>
     <string name="system_dashboard_summary" msgid="7400745270362833832">"Talen, gebaren, tijd, back-up"</string>
     <string name="search_results_title" msgid="3360639917793022533">"Instellingen"</string>
     <string name="keywords_wifi" msgid="8156528242318351490">"wifi, wifi-netwerk, netwerkverbinding, internet, draadloos, gegevens, wifi-verbinding"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Oplaadgeluiden en -trillingen"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Dockinggeluiden"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Aanraakgeluiden"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Icoon altijd tonen in trilmodus"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Aanraaktrilling"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Haptische feedback voor tikken, toetsenbord en meer"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Afspelen op dockluidspreker"</string>
@@ -3656,7 +3659,7 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Ondertitel media automatisch"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Geen}=1{1 planning ingesteld}other{# planningen ingesteld}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Niet storen"</string>
-    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Alleen meldingen van belangrijke mensen en apps ontvangen"</string>
+    <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Krijg alleen meldingen van belangrijke mensen en apps"</string>
     <string name="zen_mode_slice_subtitle" msgid="6849372107272604160">"Onderbrekingen beperken"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="7500702838426404527">"Zet Niet storen aan."</string>
     <string name="zen_mode_behavior_alarms_only" msgid="2956938533859578315">"Wekkers en mediageluiden mogen onderbreken"</string>
@@ -4894,9 +4897,9 @@
     <string name="emergency_gesture_number_override_notes" msgid="233018570696200402">"Als je een niet-alarmnummer opgeeft:\n • Je apparaat moet ontgrendeld zijn om SOS te gebruiken.\n • Je gesprek wordt misschien niet beantwoord."</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="2271217256447175017">"Over vingerafdruksensor swipen voor meldingen"</string>
     <string name="fingerprint_gesture_screen_title" msgid="9086261338232806522">"Over vingerafdruk swipen"</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Swipe omlaag over de vingerafdruksensor achter op je telefoon om je meldingen te bekijken."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Swipe omlaag over de vingerafdruksensor achter op je tablet om je meldingen te bekijken."</string>
-    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Swipe omlaag over de vingerafdruksensor achter op je apparaat om je meldingen te bekijken."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="286662791588779673">"Swipe omlaag over de vingerafdruksensor achter op je telefoon om je meldingen te checken."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="8642092907817554454">"Swipe omlaag over de vingerafdruksensor achter op je tablet om je meldingen te checken."</string>
+    <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="3888927017311372398">"Swipe omlaag over de vingerafdruksensor achter op je apparaat om je meldingen te checken."</string>
     <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="2956636269742745449">"Snel meldingen bekijken"</string>
     <string name="gesture_setting_on" msgid="3223448394997988591">"Aan"</string>
     <string name="gesture_setting_off" msgid="3444029475726294919">"Uit"</string>
@@ -5374,7 +5377,7 @@
     <string name="media_output_switch_error_text" msgid="603563475910236831">"Kan niet schakelen. Tik voor opnieuw proberen."</string>
     <string name="wfc_disclaimer_title_text" msgid="4617195934203523503">"Belangrijke informatie"</string>
     <string name="wfc_disclaimer_agree_button_text" msgid="4082872292910770344">"DOORGAAN"</string>
-    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEE"</string>
+    <string name="wfc_disclaimer_disagree_text" msgid="8424457394700137703">"NEE, BEDANKT"</string>
     <string name="wfc_disclaimer_location_title_text" msgid="7913919887475418423">"Locatie"</string>
     <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Je provider kan je locatie verzamelen als je deze service gebruikt voor noodoproepen.\n\nLees het Privacybeleid van je provider voor meer informatie."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Je hebt mogelijk geen toegang meer tot resterende tijd of gegevens. Neem contact op met je provider voordat je doorgaat met verwijderen."</string>

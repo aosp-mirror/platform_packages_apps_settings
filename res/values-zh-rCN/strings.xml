@@ -495,6 +495,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指纹已添加"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"现在您可以使用指纹来解锁手机或验证自己的身份，例如在登录应用时"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"以后再说"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"移开手指，然后再次触摸传感器"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"将指纹的一侧放在传感器上并按住，然后切换到另一侧"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"您已选择使用指纹作为解锁手机的方式之一。如果您现在跳过这项设置，则以后还需要再进行设置。设置过程只需大约一分钟的时间。"</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"平板电脑丢失或被盗时，PIN 码可为其提供保护"</string>
@@ -1298,7 +1300,7 @@
     <string name="color_mode_option_natural" msgid="6192875655101283303">"自然色"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"增强色"</string>
     <string name="color_mode_option_saturated" msgid="3413853820158447300">"饱和色"</string>
-    <string name="color_mode_option_automatic" msgid="2281217686509980870">"自动调节"</string>
+    <string name="color_mode_option_automatic" msgid="2281217686509980870">"自适应"</string>
     <string name="color_mode_summary_natural" msgid="8298840714001791628">"仅使用准确色彩"</string>
     <string name="color_mode_summary_automatic" msgid="8157885594041700275">"在鲜明和准确色彩之间进行调整"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="6413384391658481700">"旋转平板电脑时自动改变浏览模式"</string>
@@ -1308,7 +1310,7 @@
     <string name="brightness" msgid="6216871641021779698">"亮度"</string>
     <string name="brightness_title" msgid="5457874893085305155">"亮度"</string>
     <string name="brightness_summary" msgid="6309641759293018049">"调整屏幕亮度"</string>
-    <string name="auto_brightness_title" msgid="4239324728760986697">"自动调节亮度"</string>
+    <string name="auto_brightness_title" msgid="4239324728760986697">"自适应亮度"</string>
     <string name="auto_brightness_summary" msgid="1737148869232725883">"根据环境调节屏幕亮度"</string>
     <string name="auto_brightness_summary_on" msgid="2748088951224387004">"已开启"</string>
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"已关闭"</string>
@@ -1327,7 +1329,7 @@
     <string name="auto_brightness_off_summary" msgid="4993150980274474226">"不根据环境光线情况调整亮度"</string>
     <string name="auto_brightness_very_high_summary" msgid="2784981315548144255">"这会增加耗电量"</string>
     <string name="auto_brightness_disclaimer" msgid="1868395832774087351">"根据环境光线情况优化亮度。开启此功能后，您仍然可以暂时调整亮度。"</string>
-    <string name="auto_brightness_description" msgid="6807117118142381193">"系统会根据您的环境和活动自动调节屏幕亮度。您可以手动移动滑块，帮助“自动调节亮度”功能了解您偏好的亮度。"</string>
+    <string name="auto_brightness_description" msgid="6807117118142381193">"系统会根据您的环境和活动自动调节屏幕亮度。您可以手动移动滑块，帮助“自适应亮度”功能了解您偏好的亮度。"</string>
     <string name="display_white_balance_title" msgid="2624544323029364713">"显示屏白平衡"</string>
     <string name="display_white_balance_summary" msgid="7625456704950209050"></string>
     <string name="peak_refresh_rate_title" msgid="1878771412897140903">"流畅画面"</string>
@@ -3591,7 +3593,7 @@
     <string name="keywords_face_settings" msgid="1360447094486865058">"面孔"</string>
     <string name="keywords_fingerprint_settings" msgid="7345121109302813358">"指纹, 添加指纹"</string>
     <string name="keywords_biometric_settings" msgid="2173605297939326549">"人脸, 指纹, 添加指纹, face, fingerprint, add fingerprint"</string>
-    <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"降低屏幕亮度, 触摸屏, 电池, 智能亮度, 动态亮度, 自动调节亮度"</string>
+    <string name="keywords_display_auto_brightness" msgid="7162942396941827998">"降低屏幕亮度, 触摸屏, 电池, 智能亮度, 动态亮度, 自适应亮度"</string>
     <string name="keywords_display_adaptive_sleep" msgid="4905300860114643966">"智能、调暗屏幕、休眠、电池、超时、感知、显示、屏幕、闲置"</string>
     <string name="keywords_auto_rotate" msgid="7288697525101837071">"相机、智能、自动屏幕旋转、旋转、翻转、纵向、横向、屏幕方向、垂直、水平"</string>
     <string name="keywords_system_update_settings" msgid="5769003488814164931">"升级, android"</string>
@@ -3643,6 +3645,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"充电提示音和振动"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"基座提示音"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"触摸提示音"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"使用振动模式时一律显示振动图标"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"触摸振动"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"点按、按键等操作的触感反馈"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"基座扬声器播放的音频"</string>
@@ -3938,10 +3941,10 @@
     <string name="no_notification_assistant" msgid="2533323397091834096">"无"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"没有任何已安装的应用请求通知使用权。"</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"授予通知使用权"</string>
-    <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
+    <string name="notification_assistant_security_warning_title" msgid="2972346436050925276">"要向“<xliff:g id="SERVICE">%1$s</xliff:g>”授予通知使用权吗？"</string>
     <string name="notification_assistant_security_warning_summary" msgid="4846559755787348129">"在 Android 12 中，增强型通知功能取代了 Android 自适应通知功能。增强型通知功能可以显示建议的操作和回复，并可将通知整理得井井有条。\n\n增强型通知功能可以访问通知内容，包括联系人名称和消息等个人信息。该功能还可以关闭或响应通知，例如接听来电以及控制勿扰模式。"</string>
-    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向<xliff:g id="SERVICE">%1$s</xliff:g>授予通知使用权吗？"</string>
-    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将可读取所有通知（包括联系人姓名和您收到的消息内容等个人信息），而且还能暂停/关闭通知或触发通知中的按钮（包括接听来电）。\n\n该应用因此还能开启或关闭“勿扰”模式，并可以更改相关设置。"</string>
+    <string name="notification_listener_security_warning_title" msgid="5791700876622858363">"要向“<xliff:g id="SERVICE">%1$s</xliff:g>”授予通知使用权吗？"</string>
+    <string name="notification_listener_security_warning_summary" msgid="3668606006326629153">"“<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>”将可读取所有通知（包括联系人姓名和您收到的消息正文等个人信息），而且还能暂停/关闭通知或触发通知中的操作按钮（包括接听来电）。\n\n另外，此应用还将能开启或关闭勿扰模式，以及更改相关设置。"</string>
     <string name="notification_listener_disable_warning_summary" msgid="8373396293802088961">"如果您停用<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>的通知使用权，勿扰模式的使用权可能也会遭到停用。"</string>
     <string name="notification_listener_disable_warning_confirm" msgid="841492108402184976">"停用"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8802784105045594324">"取消"</string>
@@ -5537,7 +5540,7 @@
     <string name="night_light_main_switch_title" msgid="3428298022467805219">"使用“护眼模式”"</string>
     <string name="nfc_main_switch_title" msgid="6295839988954817432">"使用“NFC”"</string>
     <string name="adaptive_battery_main_switch_title" msgid="3127477920505485813">"使用“自适应电池”"</string>
-    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用“自动调节亮度”"</string>
+    <string name="adaptive_brightness_main_switch_title" msgid="2681666805191642737">"使用“自适应亮度”"</string>
     <string name="wifi_calling_main_switch_title" msgid="4070224008346815634">"使用“WLAN 通话”"</string>
     <string name="default_see_all_apps_title" msgid="7481113230662612178">"查看所有应用"</string>
     <string name="smart_forwarding_title" msgid="8368634861971949799">"智能转接"</string>
@@ -5553,7 +5556,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"缺少电话号码。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"确定"</string>
     <string name="enable_2g_title" msgid="8184757884636162942">"允许启用 2G"</string>
-    <string name="enable_2g_summary" msgid="906487478332145407">"使用 2G 移动网络连接。拨打紧急电话时，2G 网络将始终保持开启状态。"</string>
+    <string name="enable_2g_summary" msgid="906487478332145407">"使用 2G 移动网络连接。您始终都能通过 2G 网络拨打紧急电话。"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"系统会在应用访问您复制的文字、图片或其他内容时显示一条消息"</string>
     <string name="all_apps" msgid="3054120149509114789">"所有应用"</string>

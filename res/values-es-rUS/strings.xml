@@ -480,7 +480,7 @@
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Borrar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Coloca el dedo en el sensor y levántalo cuando sientas una vibración."</string>
-    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Apoya la huella dactilar completamente en el sensor hasta que sientas una vibración"</string>
+    <string name="security_settings_udfps_enroll_start_message" msgid="5032954588171487566">"Mantén toda la huella dactilar en el sensor hasta que notes una vibración"</string>
     <string name="security_settings_fingerprint_enroll_udfps_title" msgid="6665610134560896895">"Mantén presionado el sensor de huellas dactilares"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="9172202128243545021">"Levanta el dedo y vuelve a tocar"</string>
     <string name="security_settings_udfps_enroll_title_one_more_time" msgid="424937043843482410">"Una vez más"</string>
@@ -497,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"Ahora puedes usar tu huella dactilar para desbloquear el teléfono o verificar tu identidad, como cuando accedes a apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"¿Omitir configuración de huella dactilar?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"Decidiste usar la huella dactilar como una de las formas para desbloquear el teléfono. Si omites este paso, tendrás que configurarla más tarde. La configuración tarda un minuto aproximadamente."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"En caso de robo o extravío, un PIN protege la tablet"</string>
@@ -2880,13 +2882,13 @@
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Establecer un programa"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Extender la duración de la batería"</string>
     <string name="battery_saver_sticky_title_new" msgid="5942813274115684599">"Desactivar después de la carga"</string>
-    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"El Ahorro de batería se desactiva cuando el teléfono tiene más del <xliff:g id="NUMBER">^1</xliff:g> <xliff:g id="UNIT">%</xliff:g> de carga"</string>
+    <string name="battery_saver_sticky_description_new" product="default" msgid="492221102651829607">"El Ahorro de batería se desactiva cuando el teléfono tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
     <string name="battery_saver_sticky_description_new" product="tablet" msgid="4566426833434375284">"El Ahorro de batería se desactiva cuando la tablet tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
     <string name="battery_saver_sticky_description_new" product="device" msgid="4128841327359445726">"El Ahorro de batería se desactiva cuando el dispositivo tiene más del <xliff:g id="NUMBER">^1</xliff:g><xliff:g id="UNIT">%</xliff:g> de carga"</string>
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Activar"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar la función Ahorro de batería"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar el Ahorro de batería"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Activar automáticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"con <xliff:g id="PERCENT">%1$s</xliff:g> de batería"</string>
@@ -3645,6 +3647,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"Vibración y sonidos de carga"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Sonidos al conectar"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"Sonidos de teclas y botones"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"Mostrar siempre el ícono en el modo de vibración"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"Vibración táctil"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"Respuesta táctil al presionar, usar el teclado y más"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Reprod. parlantes conector"</string>
@@ -4499,7 +4502,7 @@
     <string name="ignore_optimizations_on_desc" msgid="1280043916460939932">"Es posible que la batería se agote más rápido. La app ya no tendrá restricciones para usar batería en segundo plano."</string>
     <string name="ignore_optimizations_off_desc" msgid="3324571675983286177">"Es recomendable para una mayor duración de la batería"</string>
     <string name="ignore_optimizations_title" msgid="3464172726254542889">"¿Deseas permitir que la aplicación <xliff:g id="APP">%s</xliff:g> ignore las optimizaciones de la batería?"</string>
-    <string name="app_list_preference_none" msgid="1635406344616653756">"Ninguno"</string>
+    <string name="app_list_preference_none" msgid="1635406344616653756">"Ninguna"</string>
     <string name="work_profile_usage_access_warning" msgid="3477719910927319122">"Desactivar el acceso al uso de datos para esta app no evitará que el administrador realice el seguimiento del uso de datos de las apps de tu perfil de trabajo"</string>
     <string name="accessibility_lock_screen_progress" msgid="4597298121698665401">"Caracteres utilizados: <xliff:g id="COUNT_0">%1$d</xliff:g> de <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="draw_overlay" msgid="7902083260500573027">"Mostrar sobre otras apps"</string>
@@ -4791,7 +4794,7 @@
     <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Entendido"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prueba el Tema oscuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Extiende la duración de la batería"</string>
-    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Mosaicos de configuración rápida para programadores"</string>
+    <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Azulejos de configuración rápida para desarrolladores"</string>
     <string name="adb_authorization_timeout_title" msgid="6996844506783749754">"Inhabilitar tiempo de espera de autorización ADB"</string>
     <string name="adb_authorization_timeout_summary" msgid="409931540424019778">"Inhabilita la revocación automática de autorizaciones ADB para sistemas que no se volvieron a conectar dentro de un período predeterminado (7 días) o uno configurado por el usuario (mínimo de 1 día)."</string>
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Seguimiento de Winscope"</string>
