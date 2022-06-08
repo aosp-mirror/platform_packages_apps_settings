@@ -247,10 +247,16 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     }
 
     private String getNavBarGesturalOverlay() {
+        int state = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.NAVIGATION_BAR_IME_SPACE, 0);
         String overlay = NAV_BAR_MODE_GESTURAL_OVERLAY;
-        if (Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.NAVIGATION_BAR_GESTURAL_NARROW, 0) != 0)
-            overlay += "_narrow_back";
+        switch (state) {
+            case 1:  // narrow
+                overlay += "_narrow_back";
+                break;
+            case 2:  // hidden
+                overlay += "_wide_back";
+        }
         return overlay;
     }
 

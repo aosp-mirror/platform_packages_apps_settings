@@ -24,6 +24,30 @@
     settings:keywords="@string/keywords_gesture_navigation_settings">
 
     <PreferenceCategory
+        android:title="@string/navbar_category">
+
+        <!-- <com.android.settings.widget.LabeledSeekBarPreference
+            android:key="gesture_navbar_length_preference"
+            android:title="@string/gesture_navbar_length_title"
+            android:max="4"
+            android:selectable="true"
+            settings:textStart="@string/hide_label"
+            settings:textEnd="@string/long_label"/> -->
+
+        <!-- <com.power.hub.preferences.SecureSettingSwitchPreference
+            android:key="show_back_arrow_gesture"
+            android:title="@string/back_gesture_arrow_message"
+            android:summary="@string/back_gesture_arrow_summary"
+            android:defaultValue="true" /> -->
+
+        <com.axiom.settings.preference.SystemSettingListPreference
+            android:key="navigation_bar_ime_space"
+            android:title="@string/navigation_bar_ime_space_title"
+            android:entries="@array/navigation_bar_ime_space_entries"
+            android:entryValues="@array/navigation_bar_ime_space_values" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="assistant_gesture_category"
         android:persistent="false"
         android:title="@string/assistant_gesture_category_title">
@@ -36,17 +60,6 @@
         />
 
     </PreferenceCategory>
-
-    <PreferenceCategory
-    android:title="@string/navbar_category">
-
-    <ccom.axiom.settings.preference.SystemSettingSwitchPreference
-        android:key="navigation_bar_gestural_narrow"
-        android:title="@string/gestural_navbar_narrow_title"
-        android:summary="@string/gestural_navbar_narrow_summary"
-        android:defaultValue="false" />
-      </PreferenceCategory>
-
 
     <PreferenceCategory
         android:key="back_sensitivity_category"
@@ -66,6 +79,14 @@
             android:max="2"
             settings:textStart="@string/low_label"
             settings:textEnd="@string/high_label"/>
+
+        <com.android.settings.widget.LabeledSeekBarPreference
+            android:key="gesture_back_height"
+            android:title="@string/back_height_message"
+            android:max="3"
+            android:selectable="true"
+            settings:textStart="@string/back_height_low_label"
+            settings:textEnd="@string/back_height_high_label"/>
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference
