@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.app.AppGlobals;
 import android.content.Context;
@@ -36,9 +36,8 @@ import android.os.UserManager;
 import android.util.DebugUtils;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.Utils;
 
 import java.util.ArrayList;
@@ -52,6 +51,7 @@ import java.util.Locale;
  */
 public class BatteryEntry {
 
+    /** The app name and icon in app list. */
     public static final class NameAndIcon {
         public final String mName;
         public final String mPackageName;
@@ -84,10 +84,10 @@ public class BatteryEntry {
 
     static Locale sCurrentLocale = null;
 
-    static private class NameAndIconLoader extends Thread {
+    private static class NameAndIconLoader extends Thread {
         private boolean mAbort = false;
 
-        public NameAndIconLoader() {
+        NameAndIconLoader() {
             super("BatteryUsage Icon Loader");
         }
 
@@ -109,9 +109,9 @@ public class BatteryEntry {
                     be = sRequestQueue.remove(0);
                 }
                 final NameAndIcon nameAndIcon =
-                    BatteryEntry.loadNameAndIcon(
-                        be.mContext, be.getUid(), sHandler, be,
-                        be.mDefaultPackageName, be.mName, be.mIcon);
+                        BatteryEntry.loadNameAndIcon(
+                                be.mContext, be.getUid(), sHandler, be,
+                                be.mDefaultPackageName, be.mName, be.mIcon);
                 if (nameAndIcon != null) {
                     be.mIcon = nameAndIcon.mIcon;
                     be.mName = nameAndIcon.mName;
@@ -121,35 +121,38 @@ public class BatteryEntry {
         }
     }
 
-    private static NameAndIconLoader mRequestThread;
+    private static NameAndIconLoader sRequestThread;
 
+    /** Starts the request queue. */
     public static void startRequestQueue() {
         if (sHandler != null) {
             synchronized (sRequestQueue) {
                 if (!sRequestQueue.isEmpty()) {
-                    if (mRequestThread != null) {
-                        mRequestThread.abort();
+                    if (sRequestThread != null) {
+                        sRequestThread.abort();
                     }
-                    mRequestThread = new NameAndIconLoader();
-                    mRequestThread.setPriority(Thread.MIN_PRIORITY);
-                    mRequestThread.start();
+                    sRequestThread = new NameAndIconLoader();
+                    sRequestThread.setPriority(Thread.MIN_PRIORITY);
+                    sRequestThread.start();
                     sRequestQueue.notify();
                 }
             }
         }
     }
 
+    /** Stops the request queue. */
     public static void stopRequestQueue() {
         synchronized (sRequestQueue) {
-            if (mRequestThread != null) {
-                mRequestThread.abort();
-                mRequestThread = null;
+            if (sRequestThread != null) {
+                sRequestThread.abort();
+                sRequestThread = null;
                 sRequestQueue.clear();
                 sHandler = null;
             }
         }
     }
 
+    /** Clears the UID cache. */
     public static void clearUidCache() {
         sUidCache.clear();
     }
@@ -252,14 +255,14 @@ public class BatteryEntry {
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
         mConsumedPower =
-            powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
-                ? devicePowerMah
-                : devicePowerMah - appsPowerMah;
+                powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
+                        ? devicePowerMah
+                        : devicePowerMah - appsPowerMah;
         mUsageDurationMs = usageDurationMs;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
 
         final NameAndIcon nameAndIcon =
-            getNameAndIconFromPowerComponent(context, powerComponentId);
+                getNameAndIconFromPowerComponent(context, powerComponentId);
         mIconId = nameAndIcon.mIconId;
         mName = nameAndIcon.mName;
         if (mIconId != 0) {
@@ -280,9 +283,9 @@ public class BatteryEntry {
         mIcon = context.getDrawable(mIconId);
         mName = powerComponentName;
         mConsumedPower =
-            powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
-                ? devicePowerMah
-                : devicePowerMah - appsPowerMah;
+                powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
+                        ? devicePowerMah
+                        : devicePowerMah - appsPowerMah;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
     }
 
@@ -354,7 +357,7 @@ public class BatteryEntry {
 
         final PackageManager pm = context.getPackageManager();
         final String[] packages = isSystemUid(uid)
-                ? new String[] {PACKAGE_SYSTEM} : pm.getPackagesForUid(uid);
+                ? new String[]{PACKAGE_SYSTEM} : pm.getPackagesForUid(uid);
         if (packages != null) {
             final String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
@@ -552,8 +555,8 @@ public class BatteryEntry {
             name = context.getResources().getString(R.string.process_network_tethering);
         } else if ("mediaserver".equals(name)) {
             name = context.getResources().getString(R.string.process_mediaserver_label);
-        } else if ("dex2oat".equals(name) || "dex2oat32".equals(name) ||
-                "dex2oat64".equals(name)) {
+        } else if ("dex2oat".equals(name) || "dex2oat32".equals(name)
+                || "dex2oat64".equals(name)) {
             name = context.getResources().getString(R.string.process_dex2oat_label);
         }
         return new NameAndIcon(name, icon, 0 /* iconId */);
@@ -612,7 +615,8 @@ public class BatteryEntry {
         return new NameAndIcon(name, null /* icon */, iconId);
     }
 
-    static boolean isSystemUid(int uid) {
+    /** Whether the uid is system uid. */
+    public static boolean isSystemUid(int uid) {
         return uid == Process.SYSTEM_UID;
     }
 }

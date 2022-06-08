@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,14 +12,11 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -30,6 +28,7 @@ import android.content.Context;
 import android.os.LocaleList;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -40,8 +39,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
@@ -52,8 +51,10 @@ public final class BatteryChartViewTest {
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
-    @Mock private AccessibilityServiceInfo mockAccessibilityServiceInfo;
-    @Mock private AccessibilityManager mockAccessibilityManager;
+    @Mock
+    private AccessibilityServiceInfo mMockAccessibilityServiceInfo;
+    @Mock
+    private AccessibilityManager mMockAccessibilityManager;
 
     @Before
     public void setUp() {
@@ -62,64 +63,64 @@ public final class BatteryChartViewTest {
         mPowerUsageFeatureProvider = mFeatureFactory.powerUsageFeatureProvider;
         mContext = spy(RuntimeEnvironment.application);
         mContext.getResources().getConfiguration().setLocales(
-            new LocaleList(new Locale("en_US")));
+                new LocaleList(new Locale("en_US")));
         mBatteryChartView = new BatteryChartView(mContext);
-        doReturn(mockAccessibilityManager).when(mContext)
-            .getSystemService(AccessibilityManager.class);
-        doReturn("TalkBackService").when(mockAccessibilityServiceInfo).getId();
-        doReturn(Arrays.asList(mockAccessibilityServiceInfo))
-            .when(mockAccessibilityManager)
-            .getEnabledAccessibilityServiceList(anyInt());
+        doReturn(mMockAccessibilityManager).when(mContext)
+                .getSystemService(AccessibilityManager.class);
+        doReturn("TalkBackService").when(mMockAccessibilityServiceInfo).getId();
+        doReturn(Arrays.asList(mMockAccessibilityServiceInfo))
+                .when(mMockAccessibilityManager)
+                .getEnabledAccessibilityServiceList(anyInt());
     }
 
     @Test
     public void testIsAccessibilityEnabled_disable_returnFalse() {
-        doReturn(false).when(mockAccessibilityManager).isEnabled();
+        doReturn(false).when(mMockAccessibilityManager).isEnabled();
         assertThat(BatteryChartView.isAccessibilityEnabled(mContext)).isFalse();
     }
 
     @Test
     public void testIsAccessibilityEnabled_emptyInfo_returnFalse() {
-        doReturn(true).when(mockAccessibilityManager).isEnabled();
+        doReturn(true).when(mMockAccessibilityManager).isEnabled();
         doReturn(new ArrayList<AccessibilityServiceInfo>())
-            .when(mockAccessibilityManager)
-            .getEnabledAccessibilityServiceList(anyInt());
+                .when(mMockAccessibilityManager)
+                .getEnabledAccessibilityServiceList(anyInt());
 
         assertThat(BatteryChartView.isAccessibilityEnabled(mContext)).isFalse();
     }
 
     @Test
     public void testIsAccessibilityEnabled_validServiceId_returnTrue() {
-        doReturn(true).when(mockAccessibilityManager).isEnabled();
+        doReturn(true).when(mMockAccessibilityManager).isEnabled();
         assertThat(BatteryChartView.isAccessibilityEnabled(mContext)).isTrue();
     }
 
     @Test
     public void testSetSelectedIndex_invokesCallback() {
-        final int selectedIndex[] = new int[1];
+        final int[] selectedIndex = new int[1];
         final int expectedIndex = 2;
         mBatteryChartView.mSelectedIndex = 1;
         mBatteryChartView.setOnSelectListener(
-            trapezoidIndex -> {
-                selectedIndex[0] = trapezoidIndex;
-            });
+                trapezoidIndex -> {
+                    selectedIndex[0] = trapezoidIndex;
+                });
 
         mBatteryChartView.setSelectedIndex(expectedIndex);
 
         assertThat(mBatteryChartView.mSelectedIndex)
-            .isEqualTo(expectedIndex);
+                .isEqualTo(expectedIndex);
         assertThat(selectedIndex[0]).isEqualTo(expectedIndex);
     }
 
     @Test
     public void testSetSelectedIndex_sameIndex_notInvokesCallback() {
-        final int selectedIndex[] = new int[1];
+        final int[] selectedIndex = new int[1];
         final int expectedIndex = 1;
         mBatteryChartView.mSelectedIndex = expectedIndex;
         mBatteryChartView.setOnSelectListener(
-            trapezoidIndex -> {
-                selectedIndex[0] = trapezoidIndex;
-            });
+                trapezoidIndex -> {
+                    selectedIndex[0] = trapezoidIndex;
+                });
 
         mBatteryChartView.setSelectedIndex(expectedIndex);
 
@@ -130,7 +131,7 @@ public final class BatteryChartViewTest {
     public void testClickable_isChartGraphSlotsEnabledIsFalse_notClickable() {
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
-            .thenReturn(false);
+                .thenReturn(false);
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isFalse();
@@ -141,8 +142,8 @@ public final class BatteryChartViewTest {
     public void testClickable_accessibilityIsDisabled_clickable() {
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
-            .thenReturn(true);
-        doReturn(false).when(mockAccessibilityManager).isEnabled();
+                .thenReturn(true);
+        doReturn(false).when(mMockAccessibilityManager).isEnabled();
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isTrue();
@@ -153,11 +154,11 @@ public final class BatteryChartViewTest {
     public void testClickable_accessibilityIsEnabledWithoutValidId_clickable() {
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
-            .thenReturn(true);
-        doReturn(true).when(mockAccessibilityManager).isEnabled();
+                .thenReturn(true);
+        doReturn(true).when(mMockAccessibilityManager).isEnabled();
         doReturn(new ArrayList<AccessibilityServiceInfo>())
-            .when(mockAccessibilityManager)
-            .getEnabledAccessibilityServiceList(anyInt());
+                .when(mMockAccessibilityManager)
+                .getEnabledAccessibilityServiceList(anyInt());
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isTrue();
@@ -168,8 +169,8 @@ public final class BatteryChartViewTest {
     public void testClickable_accessibilityIsEnabledWithValidId_notClickable() {
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
-            .thenReturn(true);
-        doReturn(true).when(mockAccessibilityManager).isEnabled();
+                .thenReturn(true);
+        doReturn(true).when(mMockAccessibilityManager).isEnabled();
 
         mBatteryChartView.onAttachedToWindow();
         assertThat(mBatteryChartView.isClickable()).isFalse();
@@ -186,13 +187,13 @@ public final class BatteryChartViewTest {
         mBatteryChartView.setLevels(levels);
         mBatteryChartView.setClickableForce(true);
         when(mPowerUsageFeatureProvider.isChartGraphSlotsEnabled(mContext))
-            .thenReturn(true);
-        doReturn(true).when(mockAccessibilityManager).isEnabled();
+                .thenReturn(true);
+        doReturn(true).when(mMockAccessibilityManager).isEnabled();
         mBatteryChartView.onAttachedToWindow();
         // Ensures the testing environment is correct.
         assertThat(mBatteryChartView.isClickable()).isFalse();
         // Turns off accessibility service.
-        doReturn(false).when(mockAccessibilityManager).isEnabled();
+        doReturn(false).when(mMockAccessibilityManager).isEnabled();
 
         mBatteryChartView.onAttachedToWindow();
 
@@ -202,23 +203,23 @@ public final class BatteryChartViewTest {
     @Test
     public void testOnAttachedToWindow_addAccessibilityStateChangeListener() {
         mBatteryChartView.onAttachedToWindow();
-        verify(mockAccessibilityManager)
-            .addAccessibilityStateChangeListener(mBatteryChartView);
+        verify(mMockAccessibilityManager)
+                .addAccessibilityStateChangeListener(mBatteryChartView);
     }
 
     @Test
     public void testOnDetachedFromWindow_removeAccessibilityStateChangeListener() {
         mBatteryChartView.onAttachedToWindow();
         mBatteryChartView.mHandler.postDelayed(
-            mBatteryChartView.mUpdateClickableStateRun, 1000);
+                mBatteryChartView.mUpdateClickableStateRun, 1000);
 
         mBatteryChartView.onDetachedFromWindow();
 
-        verify(mockAccessibilityManager)
-            .removeAccessibilityStateChangeListener(mBatteryChartView);
+        verify(mMockAccessibilityManager)
+                .removeAccessibilityStateChangeListener(mBatteryChartView);
         assertThat(mBatteryChartView.mHandler.hasCallbacks(
                 mBatteryChartView.mUpdateClickableStateRun))
-            .isFalse();
+                .isFalse();
     }
 
     @Test
@@ -227,8 +228,8 @@ public final class BatteryChartViewTest {
         mBatteryChartView.onAccessibilityStateChanged(/*enabled=*/ true);
 
         verify(mBatteryChartView.mHandler)
-            .removeCallbacks(mBatteryChartView.mUpdateClickableStateRun);
+                .removeCallbacks(mBatteryChartView.mUpdateClickableStateRun);
         verify(mBatteryChartView.mHandler)
-            .postDelayed(mBatteryChartView.mUpdateClickableStateRun, 500L);
+                .postDelayed(mBatteryChartView.mUpdateClickableStateRun, 500L);
     }
 }

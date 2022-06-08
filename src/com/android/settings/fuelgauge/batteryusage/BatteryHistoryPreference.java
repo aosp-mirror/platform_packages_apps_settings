@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.os.BatteryUsageStats;
@@ -29,6 +29,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.UsageView;
 
@@ -38,8 +40,10 @@ import com.android.settings.widget.UsageView;
 public class BatteryHistoryPreference extends Preference {
     private static final String TAG = "BatteryHistoryPreference";
 
-    @VisibleForTesting boolean mHideSummary;
-    @VisibleForTesting BatteryInfo mBatteryInfo;
+    @VisibleForTesting
+    boolean mHideSummary;
+    @VisibleForTesting
+    BatteryInfo mBatteryInfo;
 
     private boolean mIsChartGraphEnabled;
 
@@ -51,16 +55,17 @@ public class BatteryHistoryPreference extends Preference {
     public BatteryHistoryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mIsChartGraphEnabled =
-            FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context)
-                   .isChartGraphEnabled(context);
+                FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context)
+                        .isChartGraphEnabled(context);
         Log.i(TAG, "isChartGraphEnabled: " + mIsChartGraphEnabled);
         setLayoutResource(
-            mIsChartGraphEnabled
-                ? R.layout.battery_chart_graph
-                : R.layout.battery_usage_graph);
+                mIsChartGraphEnabled
+                        ? R.layout.battery_chart_graph
+                        : R.layout.battery_usage_graph);
         setSelectable(false);
     }
 
+    /** Sets the text of bottom summary. */
     public void setBottomSummary(CharSequence text) {
         mSummaryContent = text;
         if (mSummaryView != null) {
@@ -70,6 +75,7 @@ public class BatteryHistoryPreference extends Preference {
         mHideSummary = false;
     }
 
+    /** Hides the bottom summary. */
     public void hideBottomSummary() {
         if (mSummaryView != null) {
             mSummaryView.setVisibility(View.GONE);
@@ -101,7 +107,7 @@ public class BatteryHistoryPreference extends Preference {
         if (mIsChartGraphEnabled) {
             mBatteryChartView = (BatteryChartView) view.findViewById(R.id.battery_chart);
             mBatteryChartView.setCompanionTextView(
-                (TextView) view.findViewById(R.id.companion_text));
+                    (TextView) view.findViewById(R.id.companion_text));
             if (mChartPreferenceController != null) {
                 mChartPreferenceController.setBatteryChartView(mBatteryChartView);
             }
