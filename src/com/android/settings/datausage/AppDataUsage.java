@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.UserHandle;
 import android.telephony.SubscriptionManager;
 import android.util.ArraySet;
@@ -39,6 +40,8 @@ import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -104,6 +107,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     private Context mContext;
     private ArrayList<Long> mCycles;
     private long mSelectedCycle;
+    private boolean mIsLoading;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -140,6 +144,14 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
             }
         }
 
+        if (mAppItem.key > 0 && UserHandle.isApp(mAppItem.key)) {
+            // In case we've been asked data usage for an app, automatically
+            // include data usage of the corresponding SDK sandbox
+            final int appSandboxUid = Process.toSdkSandboxUid(mAppItem.key);
+            if (!mAppItem.uids.get(appSandboxUid)) {
+                mAppItem.addUid(appSandboxUid);
+            }
+        }
         mTotalUsage = findPreference(KEY_TOTAL_USAGE);
         mForegroundUsage = findPreference(KEY_FOREGROUND_USAGE);
         mBackgroundUsage = findPreference(KEY_BACKGROUND_USAGE);
@@ -217,6 +229,16 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     @Override
     public void onResume() {
         super.onResume();
+        // No animations will occur before:
+        //  - LOADER_APP_USAGE_DATA initially updates the cycle
+        //  - updatePrefs() initially updates the preference visibility
+        // This is mainly for the cycle spinner, because when the page is entered from the
+        // AppInfoDashboardFragment, there is no way to know whether the cycle data is available
+        // before finished the async loading.
+        // The animator will be set back if any page updates happens after loading, in
+        // setBackPreferenceListAnimatorIfLoaded().
+        mIsLoading = true;
+        getListView().setItemAnimator(null);
         if (mDataSaverBackend != null) {
             mDataSaverBackend.addListener(this);
         }
@@ -288,7 +310,25 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
         }
     }
 
+    /**
+     * Sets back the preference list's animator if the loading is finished.
+     *
+     * The preference list's animator was temporarily removed before loading in onResume().
+     * When need to update the preference visibility in this page after the loading, adding the
+     * animator back to keeping the usual animations.
+     */
+    private void setBackPreferenceListAnimatorIfLoaded() {
+        if (mIsLoading) {
+            return;
+        }
+        RecyclerView recyclerView = getListView();
+        if (recyclerView.getItemAnimator() == null) {
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+        }
+    }
+
     private void updatePrefs(boolean restrictBackground, boolean unrestrictData) {
+        setBackPreferenceListAnimatorIfLoaded();
         final EnforcedAdmin admin = RestrictedLockUtilsInternal.checkIfMeteredDataRestricted(
                 mContext, mPackageName, UserHandle.getUserId(mAppItem.key));
         if (mRestrictBackground != null) {
@@ -307,6 +347,10 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
     }
 
     private void addUid(int uid) {
+        if (Process.isSdkSandboxUid(uid)) {
+            // For a sandbox process, get the associated app UID
+            uid = Process.getAppUidForSdkSandboxUid(uid);
+        }
         String[] packages = mPackageManager.getPackagesForUid(uid);
         if (packages != null) {
             for (int i = 0; i < packages.length; i++) {
@@ -404,12 +448,8 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                     = NetworkCycleDataForUidLoader.builder(mContext);
                 builder.setRetrieveDetail(true)
                     .setNetworkTemplate(mTemplate);
-                if (mAppItem.category == AppItem.CATEGORY_USER) {
-                    for (int i = 0; i < mAppItem.uids.size(); i++) {
-                        builder.addUid(mAppItem.uids.keyAt(i));
-                    }
-                } else {
-                    builder.addUid(mAppItem.key);
+                for (int i = 0; i < mAppItem.uids.size(); i++) {
+                    builder.addUid(mAppItem.uids.keyAt(i));
                 }
                 if (mCycles != null) {
                     builder.setCycles(mCycles);
@@ -439,6 +479,7 @@ public class AppDataUsage extends DataUsageBaseFragment implements OnPreferenceC
                 } else {
                     bindData(0 /* position */);
                 }
+                mIsLoading = false;
             }
 
             @Override

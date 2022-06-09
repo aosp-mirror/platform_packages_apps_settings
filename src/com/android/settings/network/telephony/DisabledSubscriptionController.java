@@ -22,7 +22,6 @@ import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceCategory;
@@ -53,8 +52,7 @@ public class DisabledSubscriptionController extends TelephonyBasePreferenceContr
     /**
      * Re-initialize the configuration based on subscription id provided
      */
-    public void init(Lifecycle lifecycle, int subId) {
-        lifecycle.addObserver(this);
+    public void init(int subId) {
         mSubId = subId;
     }
 

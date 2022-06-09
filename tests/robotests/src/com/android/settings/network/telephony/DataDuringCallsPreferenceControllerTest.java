@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.network;
+package com.android.settings.network.telephony;
 
 import static android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
@@ -32,11 +32,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
-
-import com.android.settings.network.telephony.DataDuringCallsPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,8 +55,6 @@ public class DataDuringCallsPreferenceControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    private Lifecycle mLifecycle;
-    @Mock
     private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
@@ -74,8 +69,11 @@ public class DataDuringCallsPreferenceControllerTest {
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(mTelephonyManager);
         mSwitchPreference = new SwitchPreference(mContext);
         when(mPreferenceScreen.findPreference(PREF_KEY)).thenReturn(mSwitchPreference);
-        mController = new DataDuringCallsPreferenceController(mContext, PREF_KEY);
-        mController.init(mLifecycle, SUB_ID_1);
+        mController = new DataDuringCallsPreferenceController(mContext, PREF_KEY) {
+            @Override
+            protected boolean hasMobileData() { return true; }
+        };
+        mController.init(SUB_ID_1);
     }
 
     @Test

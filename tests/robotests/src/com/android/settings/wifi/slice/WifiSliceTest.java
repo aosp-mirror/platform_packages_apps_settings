@@ -38,6 +38,7 @@ import androidx.slice.Slice;
 import androidx.slice.SliceItem;
 import androidx.slice.SliceMetadata;
 import androidx.slice.SliceProvider;
+import androidx.slice.core.SliceAction;
 import androidx.slice.core.SliceQuery;
 import androidx.slice.widget.ListContent;
 import androidx.slice.widget.SliceLiveData;
@@ -120,6 +121,11 @@ public class WifiSliceTest {
         final Slice wifiSlice = mWifiSlice.getSlice();
 
         assertThat(wifiSlice).isNotNull();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        final List<SliceAction> toggles = metadata.getToggles();
+
+        assertThat(toggles).hasSize(1);
     }
 
     @Test
@@ -128,18 +134,29 @@ public class WifiSliceTest {
         ShadowWifiSlice.setWifiPermissible(true);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
-
         assertThat(wifiSlice).isNotNull();
+
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        final List<SliceAction> toggles = metadata.getToggles();
+
+        assertThat(toggles).hasSize(1);
     }
 
     @Test
-    public void getWifiSlice_notFromSIPackageAndWithoutWifiPermission_shouldNoSlice() {
+    public void getWifiSlice_notFromSIPackageAndWithoutWifiPermission_shouldReturnNoToggle() {
         when(mPackageManager.getPackagesForUid(USER_ID)).thenReturn(new String[]{"com.test"});
         ShadowWifiSlice.setWifiPermissible(false);
 
         final Slice wifiSlice = mWifiSlice.getSlice();
+        final SliceMetadata metadata = SliceMetadata.from(mContext, wifiSlice);
+        final List<SliceAction> toggles = metadata.getToggles();
 
-        assertThat(wifiSlice).isNull();
+        assertThat(toggles).hasSize(0);
+
+        final int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
+                null /* nonHints */).size();
+        // Title row
+        assertThat(rows).isEqualTo(1);
     }
 
     @Test
@@ -150,7 +167,6 @@ public class WifiSliceTest {
 
         final int rows = SliceQuery.findAll(wifiSlice, FORMAT_SLICE, HINT_LIST_ITEM,
                 null /* nonHints */).size();
-
         // Title row
         assertThat(rows).isEqualTo(1);
     }
