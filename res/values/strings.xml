@@ -1126,6 +1126,8 @@
     <string name="security_settings_fingerprint_enroll_dialog_name_label">Name</string>
     <!-- Button text shown in fingerprint dialog that allows the user to rename a fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_ok">OK</string>
+    <!-- Button text shown in fingerprint dialog that allows the user to try and enroll again[CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_enroll_dialog_try_again">Try again</string>
     <!-- Button text shown in fingerprint dialog that allows the user to delete the fingerprint template [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_dialog_delete">Delete</string>
     <!-- Title shown in fingerprint enrollment dialog to begin enrollment [CHAR LIMIT=29]-->
@@ -1282,9 +1284,9 @@
     <!-- Dialog message for dialog which shows when user touches the icon on the screen, instead of the sensor at the back [CHAR LIMIT=NONE] -->
     <string name="security_settings_fingerprint_enroll_touch_dialog_message">Touch the sensor on the back of your phone. Use your index finger.</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled. [CHAR LIMIT=45] -->
-    <string name="security_settings_fingerprint_enroll_error_dialog_title">Enrollment was not completed</string>
+    <string name="security_settings_fingerprint_enroll_error_dialog_title">Fingerprint setup timed out</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to being idle too long. -->
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">Fingerprint enrollment time limit reached. Try again.</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message">Try again now or set up your fingerprint later in Settings</string>
     <!-- Dialog message for dialog which shows when finger cannot be enrolled due to an internal error or fingerprint can't be read. -->
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message">Fingerprint enrollment didn\'t work. Try again or use a different finger.</string>
     <!-- Button text shown at the end of enrollment that allows the user to add another fingerprint -->
