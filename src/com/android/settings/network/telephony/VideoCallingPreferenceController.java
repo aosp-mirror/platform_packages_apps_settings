@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -129,6 +130,12 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
         return queryImsState(mSubId).isEnabledByUser();
     }
 
+    @VisibleForTesting
+    protected boolean isImsSupported() {
+        return mContext.getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_TELEPHONY_IMS);
+    }
+
     public VideoCallingPreferenceController init(int subId) {
         mSubId = subId;
 
@@ -154,7 +161,7 @@ public class VideoCallingPreferenceController extends TelephonyTogglePreferenceC
             return false;
         }
 
-        return queryImsState(subId).isReadyToVideoCall();
+        return isImsSupported() && queryImsState(subId).isReadyToVideoCall();
     }
 
     @Override

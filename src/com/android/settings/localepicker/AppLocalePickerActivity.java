@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
@@ -38,12 +37,8 @@ import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.appinfo.AppLocaleDetails;
 import com.android.settings.core.SettingsBaseActivity;
 
-/**
- * TODO(b/223503670): Add unit test for AppLocalePickerActivity.
- * A activity to show the locale picker and information page.
- */
 public class AppLocalePickerActivity extends SettingsBaseActivity
-        implements LocalePickerWithRegion.LocaleSelectedListener {
+        implements LocalePickerWithRegion.LocaleSelectedListener, MenuItem.OnActionExpandListener {
     private static final String TAG = AppLocalePickerActivity.class.getSimpleName();
 
     private String mPackageName;
@@ -67,23 +62,25 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
             finish();
             return;
         }
-        int uid = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
-        if (uid == -1) {
-            Log.w(TAG, "Unexpected user id");
-            finish();
+        mContextAsUser = this;
+        if (getIntent().hasExtra(AppInfoBase.ARG_PACKAGE_UID)) {
+            int userId = getIntent().getIntExtra(AppInfoBase.ARG_PACKAGE_UID, -1);
+            if (userId != -1) {
+                UserHandle userHandle = UserHandle.getUserHandleForUid(userId);
+                mContextAsUser = createContextAsUser(userHandle, 0);
+            }
         }
-        UserHandle userHandle = UserHandle.getUserHandleForUid(uid);
-        mContextAsUser = createContextAsUser(userHandle, 0);
 
         setTitle(R.string.app_locale_picker_title);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mLocalePickerWithRegion = LocalePickerWithRegion.createLanguagePicker(
                 mContextAsUser,
-                AppLocalePickerActivity.this,
+                this,
                 false /* translate only */,
-                mPackageName);
-        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName);
+                mPackageName,
+                this);
+        mAppLocaleDetails = AppLocaleDetails.newInstance(mPackageName, mContextAsUser.getUserId());
         mAppLocaleDetailContainer = launchAppLocaleDetailsPage();
         // Launch Locale picker part.
         launchLocalePickerPage();
@@ -108,8 +105,21 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         finish();
     }
 
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem item) {
+        mAppBarLayout.setExpanded(false /*expanded*/, false /*animate*/);
+        return true;
+    }
+
     /** Sets the app's locale to the supplied language tag */
     private void setAppDefaultLocale(String languageTag) {
+        Log.d(TAG, "setAppDefaultLocale: " + languageTag);
         LocaleManager localeManager = mContextAsUser.getSystemService(LocaleManager.class);
         if (localeManager == null) {
             Log.w(TAG, "LocaleManager is null, cannot set default app locale");
@@ -128,8 +138,7 @@ public class AppLocalePickerActivity extends SettingsBaseActivity
         return appLocaleDetailsContainer;
     }
 
-    @VisibleForTesting
-    void launchLocalePickerPage() {
+    private void launchLocalePickerPage() {
         // LocalePickerWithRegion use android.app.ListFragment. Thus, it can not use
         // getSupportFragmentManager() to add this into container.
         android.app.FragmentManager fragmentManager = getFragmentManager();

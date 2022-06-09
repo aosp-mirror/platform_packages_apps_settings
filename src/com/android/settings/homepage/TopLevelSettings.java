@@ -107,6 +107,10 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (isDuplicateClick(preference)) {
+            return true;
+        }
+
         // Register SplitPairRule for SubSettings.
         ActivityEmbeddingRulesController.registerSubSettingsPairRule(getContext(),
                 true /* clearTop */);
@@ -269,6 +273,17 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
         if (mHighlightMixin != null && !TextUtils.equals(prefKey, PREF_KEY_SUPPORT)) {
             mHighlightMixin.setHighlightPreferenceKey(prefKey);
         }
+    }
+
+    /** Returns whether clicking the specified preference is considered as a duplicate click. */
+    public boolean isDuplicateClick(Preference pref) {
+        /* Return true if
+         * 1. the device supports activity embedding, and
+         * 2. the target preference is highlighted, and
+         * 3. the current activity is embedded */
+        return mHighlightMixin != null
+                && TextUtils.equals(pref.getKey(), mHighlightMixin.getHighlightPreferenceKey())
+                && SplitController.getInstance().isActivityEmbedded(getActivity());
     }
 
     /** Show/hide the highlight on the menu entry for the search page presence */

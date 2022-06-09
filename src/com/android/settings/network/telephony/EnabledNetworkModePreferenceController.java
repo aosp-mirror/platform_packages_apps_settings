@@ -28,7 +28,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -80,9 +79,6 @@ public class EnabledNetworkModePreferenceController extends
     @Override
     public int getAvailabilityStatus(int subId) {
         boolean visible;
-        if (!isCallStateIdle()) {
-            return AVAILABLE_UNSEARCHABLE;
-        }
 
         final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -97,6 +93,8 @@ public class EnabledNetworkModePreferenceController extends
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = false;
+        } else if (!isCallStateIdle()) {
+            return AVAILABLE_UNSEARCHABLE;
         } else {
             visible = true;
         }
@@ -164,7 +162,7 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
+    void init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -179,7 +177,6 @@ public class EnabledNetworkModePreferenceController extends
                         updatePreference();
                     });
         }
-        lifecycle.addObserver(this);
     }
 
     private void updatePreference() {

@@ -54,13 +54,13 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class SafetySourceBroadcastReceiverTest {
 
+    private static final String REFRESH_BROADCAST_ID = "REFRESH_BROADCAST_ID";
+
     private Context mApplicationContext;
 
-    @Mock
-    private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
+    @Mock private SafetyCenterManagerWrapper mSafetyCenterManagerWrapper;
 
-    @Mock
-    private LockPatternUtils mLockPatternUtils;
+    @Mock private LockPatternUtils mLockPatternUtils;
 
     @Before
     public void setUp() {
@@ -78,17 +78,6 @@ public class SafetySourceBroadcastReceiverTest {
     }
 
     @Test
-    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNoIntentAction_doesNotSetData() {
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        Intent intent = new Intent().putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
-
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
-
-        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
-                any(), any(), any(), any());
-    }
-
-    @Test
     public void onReceive_onRefresh_whenSafetyCenterIsDisabled_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(false);
         Intent intent =
@@ -96,23 +85,43 @@ public class SafetySourceBroadcastReceiverTest {
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
                         .putExtra(
                                 EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+                                new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
-                any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper, never())
+                .setSafetySourceData(any(), any(), any(), any());
+    }
+
+    @Test
+    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNoIntentAction_doesNotSetData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+
+        verify(mSafetyCenterManagerWrapper, never())
+                .setSafetySourceData(any(), any(), any(), any());
     }
 
     @Test
     public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNullSourceIds_doesNotSetData() {
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        Intent intent = new Intent().setAction(ACTION_REFRESH_SAFETY_SOURCES);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
-                any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper, never())
+                .setSafetySourceData(any(), any(), any(), any());
     }
 
     @Test
@@ -121,12 +130,29 @@ public class SafetySourceBroadcastReceiverTest {
         Intent intent =
                 new Intent()
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
-                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[]{});
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCE_IDS, new String[] {})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
 
-        verify(mSafetyCenterManagerWrapper, never()).setSafetySourceData(
-                any(), any(), any(), any());
+        verify(mSafetyCenterManagerWrapper, never())
+                .setSafetySourceData(any(), any(), any(), any());
+    }
+
+    @Test
+    public void onReceive_onRefresh_whenSafetyCenterIsEnabled_withNoBroadcastId_doesNotSetData() {
+        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
+        Intent intent =
+                new Intent()
+                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
+                        .putExtra(
+                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
+                                new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID});
+
+        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
+
+        verify(mSafetyCenterManagerWrapper, never())
+                .setSafetySourceData(any(), any(), any(), any());
     }
 
     @Test
@@ -137,38 +163,19 @@ public class SafetySourceBroadcastReceiverTest {
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
                         .putExtra(
                                 EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+                                new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
         verify(mSafetyCenterManagerWrapper, times(1))
                 .setSafetySourceData(any(), any(), any(), captor.capture());
 
-        assertThat(captor.getValue()).isEqualTo(
-                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED).build());
-    }
-
-    @Test
-    public void onReceive_onRefreshWithBroadcastId_setsRefreshEventWithBroadcastId() {
-        final String refreshBroadcastId = "REFRESH_BROADCAST_ID";
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        Intent intent =
-                new Intent()
-                        .setAction(ACTION_REFRESH_SAFETY_SOURCES)
-                        .putExtra(
-                                EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID })
-                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, refreshBroadcastId);
-
-        new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
-        ArgumentCaptor<SafetyEvent> captor = ArgumentCaptor.forClass(SafetyEvent.class);
-        verify(mSafetyCenterManagerWrapper, times(1))
-                .setSafetySourceData(any(), any(), any(), captor.capture());
-
-        assertThat(captor.getValue().getRefreshBroadcastId()).isEqualTo(refreshBroadcastId);
-        assertThat(captor.getValue()).isEqualTo(
-                new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
-                        .setRefreshBroadcastId(refreshBroadcastId).build());
+        assertThat(captor.getValue())
+                .isEqualTo(
+                        new SafetyEvent.Builder(SAFETY_EVENT_TYPE_REFRESH_REQUESTED)
+                                .setRefreshBroadcastId(REFRESH_BROADCAST_ID)
+                                .build());
     }
 
     @Test
@@ -179,7 +186,8 @@ public class SafetySourceBroadcastReceiverTest {
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
                         .putExtra(
                                 EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[]{ LockScreenSafetySource.SAFETY_SOURCE_ID });
+                                new String[] {LockScreenSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
@@ -197,7 +205,8 @@ public class SafetySourceBroadcastReceiverTest {
                         .setAction(ACTION_REFRESH_SAFETY_SOURCES)
                         .putExtra(
                                 EXTRA_REFRESH_SAFETY_SOURCE_IDS,
-                                new String[]{ BiometricsSafetySource.SAFETY_SOURCE_ID });
+                                new String[] {BiometricsSafetySource.SAFETY_SOURCE_ID})
+                        .putExtra(EXTRA_REFRESH_SAFETY_SOURCES_BROADCAST_ID, REFRESH_BROADCAST_ID);
 
         new SafetySourceBroadcastReceiver().onReceive(mApplicationContext, intent);
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);

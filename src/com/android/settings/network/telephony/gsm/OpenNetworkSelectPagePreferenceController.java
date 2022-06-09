@@ -26,7 +26,6 @@ import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -48,11 +47,13 @@ public class OpenNetworkSelectPagePreferenceController extends
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
+    private int mCacheOfModeStatus;
 
     public OpenNetworkSelectPagePreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 context.getMainExecutor());
         mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
@@ -96,7 +97,7 @@ public class OpenNetworkSelectPagePreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(mTelephonyManager.getNetworkSelectionMode()
+        preference.setEnabled(mCacheOfModeStatus
                 != TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
 
         Intent intent = new Intent();
@@ -116,16 +117,21 @@ public class OpenNetworkSelectPagePreferenceController extends
         }
     }
 
-    public OpenNetworkSelectPagePreferenceController init(Lifecycle lifecycle, int subId) {
+    /**
+     * Initialization based on given subscription id.
+     **/
+    public OpenNetworkSelectPagePreferenceController init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
-        lifecycle.addObserver(this);
         return this;
     }
 
     @Override
-    public void onNetworkSelectModeChanged() {
-        updateState(mPreference);
+    public void onNetworkSelectModeUpdated(int mode) {
+        mCacheOfModeStatus = mode;
+        if (mPreference != null) {
+            updateState(mPreference);
+        }
     }
 }

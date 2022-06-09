@@ -38,6 +38,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settings.widget.SeekBarPreference;
 
 import org.junit.Before;
@@ -49,9 +50,11 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /** Tests for {@link FloatingMenuTransparencyPreferenceController}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class FloatingMenuTransparencyPreferenceControllerTest {
 
     @Rule
