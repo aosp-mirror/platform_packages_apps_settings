@@ -185,7 +185,6 @@ public class UserSettingsTest {
         mFragment.mGuestCategory = mock(PreferenceCategory.class);
         mFragment.mGuestResetPreference = mock(Preference.class);
         mFragment.mGuestExitPreference = mock(Preference.class);
-        mFragment.mGuestInfoPreference = mock(Preference.class);
     }
 
     @After
