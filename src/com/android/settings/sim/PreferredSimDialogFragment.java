@@ -88,6 +88,11 @@ public class PreferredSimDialogFragment extends SimDialogFragment implements
             return;
         }
 
+        if (dialog == null) {
+            Log.d(TAG, "Dialog is null.");
+            dismiss();
+        }
+
         final SubscriptionInfo info = getPreferredSubscription();
         if (info == null) {
             dismiss();
