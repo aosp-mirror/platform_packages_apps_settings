@@ -421,29 +421,6 @@ public class UserDetailsSettingsTest {
     }
 
     @Test
-    public void initialize_guestSelected_noCallRestriction_shouldSetPhonePreference() {
-        setupSelectedGuest();
-        mUserManager.setIsAdminUser(true);
-
-        mFragment.initialize(mActivity, mArguments);
-
-        verify(mPhonePref).setTitle(R.string.user_enable_calling);
-        verify(mPhonePref).setChecked(true);
-    }
-
-    @Test
-    public void initialize_guestSelected_callRestriction_shouldSetPhonePreference() {
-        setupSelectedGuest();
-        mUserManager.setIsAdminUser(true);
-        mUserManager.addGuestUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS);
-
-        mFragment.initialize(mActivity, mArguments);
-
-        verify(mPhonePref).setTitle(R.string.user_enable_calling);
-        verify(mPhonePref).setChecked(false);
-    }
-
-    @Test
     public void initialize_switchUserDisallowed_shouldSetAdminDisabledOnSwitchPreference() {
         setupSelectedUser();
         mUserCapabilities.mDisallowSwitchUser = true;
