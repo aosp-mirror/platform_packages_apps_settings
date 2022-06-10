@@ -22,11 +22,13 @@ import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccCardInfo;
 import android.telephony.UiccSlotInfo;
 import android.telephony.UiccSlotMapping;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.telephony.uicc.UiccController;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -36,6 +38,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -183,9 +186,27 @@ public class UiccSlotUtil {
      * @param context the application context.
      * @return the esim slot. If the value is -1, there is not the esim.
      */
-    public static int getEsimSlotId(Context context) {
+    public static int getEsimSlotId(Context context, int subId) {
         TelephonyManager telMgr = context.getSystemService(TelephonyManager.class);
+        List<UiccCardInfo> uiccCardInfos = telMgr.getUiccCardsInfo();
         ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(telMgr);
+        SubscriptionManager subscriptionManager = context.getSystemService(
+                SubscriptionManager.class);
+        SubscriptionInfo subInfo = SubscriptionUtil.getSubById(subscriptionManager, subId);
+
+        // checking whether this is the removable esim. If it is, then return the removable slot id.
+        if (subInfo != null && subInfo.isEmbedded()) {
+            for (UiccCardInfo uiccCardInfo : uiccCardInfos) {
+                if (uiccCardInfo.getCardId() == subInfo.getCardId()
+                        && uiccCardInfo.getCardId() > TelephonyManager.UNSUPPORTED_CARD_ID
+                        && uiccCardInfo.isEuicc()
+                        && uiccCardInfo.isRemovable()) {
+                    Log.d(TAG, "getEsimSlotId: This subInfo is removable esim.");
+                    return uiccCardInfo.getPhysicalSlotIndex();
+                }
+            }
+        }
+
         int firstEsimSlot = IntStream.range(0, slotInfos.size())
                 .filter(
                         index -> {
