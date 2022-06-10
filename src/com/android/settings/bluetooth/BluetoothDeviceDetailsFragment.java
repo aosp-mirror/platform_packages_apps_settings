@@ -22,6 +22,7 @@ import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -50,7 +51,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment {
@@ -150,7 +150,6 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         use(BlockingSlicePrefController.class).setSliceUri(sliceEnabled
                 ? featureProvider.getBluetoothDeviceSettingsUri(mCachedDevice.getDevice())
                 : null);
-        updateExtraControlUri(/* viewWidth */ 0);
     }
 
     private void updateExtraControlUri(int viewWidth) {
@@ -162,13 +161,14 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
         String uri = featureProvider.getBluetoothDeviceControlUri(mCachedDevice.getDevice());
         if (!TextUtils.isEmpty(uri)) {
             try {
-                controlUri = Uri.parse(String.format(uri, viewWidth));
-            } catch (IllegalFormatException | NullPointerException exception) {
+                controlUri = Uri.parse(uri + viewWidth);
+            } catch (NullPointerException exception) {
                 Log.d(TAG, "unable to parse uri");
                 controlUri = null;
             }
         }
         use(SlicePreferenceController.class).setSliceUri(sliceEnabled ? controlUri : null);
+        use(SlicePreferenceController.class).onStart();
     }
 
     private final ViewTreeObserver.OnGlobalLayoutListener mOnGlobalLayoutListener =
@@ -179,7 +179,10 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     if (view == null) {
                         return;
                     }
-                    updateExtraControlUri(view.getWidth());
+                    if (view.getWidth() <= 0) {
+                        return;
+                    }
+                    updateExtraControlUri(view.getWidth() - getPaddingSize());
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(
                             mOnGlobalLayoutListener);
                 }
@@ -267,5 +270,18 @@ public class BluetoothDeviceDetailsFragment extends RestrictedDashboardFragment 
                     lifecycle));
         }
         return controllers;
+    }
+
+    private int getPaddingSize() {
+        TypedArray resolvedAttributes =
+                getContext().obtainStyledAttributes(
+                        new int[]{
+                                android.R.attr.listPreferredItemPaddingStart,
+                                android.R.attr.listPreferredItemPaddingEnd
+                        });
+        int width = resolvedAttributes.getDimensionPixelSize(0, 0)
+                + resolvedAttributes.getDimensionPixelSize(1, 0);
+        resolvedAttributes.recycle();
+        return width;
     }
 }
