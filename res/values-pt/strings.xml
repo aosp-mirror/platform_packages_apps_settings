@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permita que seu dispositivo se comunique com dispositivos Bluetooth nas proximidades"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permite que seu smartphone se comunique com dispositivos Bluetooth nas proximidades"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desativar descarga de hardware Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Desativar descarga de hardware Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Desativar descarga de hardware de áudio por Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Reiniciar dispositivo?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Reinicie o dispositivo para mudar essa configuração."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reiniciar"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancelar"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Ativar áudio por Bluetooth LE"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Ativa o recurso de áudio por Bluetooth LE caso o dispositivo tenha suporte para esse tipo de recurso de hardware."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositivos portáteis de mídia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositivos de chamada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Outros dispositivos"</string>
@@ -1323,8 +1325,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Resolução máxima"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"A resolução máxima consome mais bateria. A troca de resolução pode fazer com que alguns apps sejam reiniciados."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Cores"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturais"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Realçadas"</string>
@@ -4856,7 +4857,7 @@
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"corte de tela, entalhe"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Padrão do dispositivo"</string>
     <string name="overlay_toast_failed_to_apply" msgid="4839587811338164960">"Falha ao aplicar sobreposição"</string>
-    <string name="special_access" msgid="1767980727423395147">"Acesso especial a apps"</string>
+    <string name="special_access" msgid="1767980727423395147">"Acesso especial para apps"</string>
     <plurals name="special_access_summary" formatted="false" msgid="4995506406763570815">
       <item quantity="one"><xliff:g id="COUNT">%d</xliff:g> app pode usar dados ilimitados</item>
       <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> apps podem usar dados ilimitados</item>
