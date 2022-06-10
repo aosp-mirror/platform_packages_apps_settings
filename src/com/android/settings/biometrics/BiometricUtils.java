@@ -131,7 +131,7 @@ public class BiometricUtils {
         if (WizardManagerHelper.isAnySetupWizard(activityIntent)) {
             // Default to PIN lock in setup wizard
             Intent intent = new Intent(context, SetupChooseLockGeneric.class);
-            if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            if (StorageManager.isFileEncrypted()) {
                 intent.putExtra(
                         LockPatternUtils.PASSWORD_TYPE_KEY,
                         DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);

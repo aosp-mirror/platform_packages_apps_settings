@@ -79,7 +79,7 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
     @Override
     public void onNavigateNext(View view) {
         // Ensure that all users are unlocked so that we can move their data
-        if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+        if (StorageManager.isFileEncrypted()) {
             for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
                 if (!StorageManager.isUserKeyUnlocked(user.id)) {
                     Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
