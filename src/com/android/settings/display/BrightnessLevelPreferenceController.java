@@ -141,6 +141,7 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
         mDisplayManager.registerDisplayListener(mDisplayListener, mHandler,
                 DisplayManager.EVENT_FLAG_DISPLAY_BRIGHTNESS);
+        updatedSummary(mPreference);
     }
 
     @Override
