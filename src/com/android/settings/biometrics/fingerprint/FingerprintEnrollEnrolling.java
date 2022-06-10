@@ -508,7 +508,6 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
     public void onEnrollmentProgressChange(int steps, int remaining) {
         updateProgress(true /* animate */);
         updateTitleAndDescription();
-        clearError();
         animateFlash();
         if (!mCanAssumeUdfps) {
             mErrorText.removeCallbacks(mTouchAgainRunnable);
@@ -537,6 +536,11 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
 
         int progress = getProgress(
                 mSidecar.getEnrollmentSteps(), mSidecar.getEnrollmentRemaining());
+        // Only clear the error when progress has been made.
+        // TODO (b/234772728) Add tests.
+        if (mProgressBar != null && mProgressBar.getProgress() < progress) {
+            clearError();
+        }
         if (animate) {
             animateProgress(progress);
         } else {
