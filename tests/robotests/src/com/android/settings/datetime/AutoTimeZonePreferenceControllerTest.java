@@ -46,9 +46,7 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
-    @Mock
     private Context mContext;
-    private AutoTimeZonePreferenceController mController;
     private Preference mPreference;
     @Mock
     private TimeManager mTimeManager;
@@ -69,10 +67,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */true, /* autoEnabled= */false);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, true /* isFromSUW */);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(controller.isAvailable()).isFalse();
     }
 
     @Test
@@ -81,10 +79,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */true, /* autoEnabled= */false);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* isFromSUW */);
 
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(controller.isAvailable()).isTrue();
     }
 
     @Test
@@ -93,10 +91,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */false, /* autoEnabled= */false);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(controller.isAvailable()).isFalse();
     }
 
     @Test
@@ -105,10 +103,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */false, /* autoEnabled= */false);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, true /* fromSUW */);
 
-        assertThat(mController.isEnabled()).isFalse();
+        assertThat(controller.isEnabled()).isFalse();
     }
 
     @Test
@@ -117,10 +115,10 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */false, /* autoEnabled= */true);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, true /* fromSUW */);
 
-        assertThat(mController.isEnabled()).isTrue();
+        assertThat(controller.isEnabled()).isTrue();
     }
 
     @Test
@@ -129,15 +127,15 @@ public class AutoTimeZonePreferenceControllerTest {
                 /* autoSupported= */false, /* autoEnabled= */false);
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 
-        assertThat(mController.isEnabled()).isFalse();
+        assertThat(controller.isEnabled()).isFalse();
     }
 
     @Test
     public void testIsEnabled_shouldReadFromTimeManagerConfig() {
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, null /* callback */, false /* fromSUW */);
 
         {
@@ -146,7 +144,7 @@ public class AutoTimeZonePreferenceControllerTest {
                     /* autoSupported= */true, /* autoEnabled= */false);
             when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-            assertThat(mController.isEnabled()).isFalse();
+            assertThat(controller.isEnabled()).isFalse();
         }
 
         {
@@ -155,7 +153,7 @@ public class AutoTimeZonePreferenceControllerTest {
                     /* autoSupported= */true, /* autoEnabled= */true);
             when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
 
-            assertThat(mController.isEnabled()).isTrue();
+            assertThat(controller.isEnabled()).isTrue();
         }
     }
 
@@ -166,10 +164,10 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, mCallback, false /* fromSUW */);
 
-        assertThat(mController.onPreferenceChange(mPreference, true)).isTrue();
+        assertThat(controller.onPreferenceChange(mPreference, true)).isTrue();
         verify(mCallback).updateTimeAndDateDisplay(mContext);
 
         // Check the service was asked to change the configuration correctly.
@@ -184,7 +182,7 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig())
                 .thenReturn(capabilitiesAndConfigAfterUpdate);
 
-        assertThat(mController.isEnabled()).isTrue();
+        assertThat(controller.isEnabled()).isTrue();
     }
 
     @Test
@@ -194,10 +192,10 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
         when(mTimeManager.updateTimeZoneConfiguration(Mockito.any())).thenReturn(true);
 
-        mController = new AutoTimeZonePreferenceController(
+        AutoTimeZonePreferenceController controller = new AutoTimeZonePreferenceController(
                 mContext, mCallback, false /* fromSUW */);
 
-        assertThat(mController.onPreferenceChange(mPreference, false)).isTrue();
+        assertThat(controller.onPreferenceChange(mPreference, false)).isTrue();
         verify(mCallback).updateTimeAndDateDisplay(mContext);
 
         // Check the service was asked to change the configuration correctly.
@@ -212,7 +210,7 @@ public class AutoTimeZonePreferenceControllerTest {
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig())
                 .thenReturn(capabilitiesAndConfigAfterUpdate);
 
-        assertThat(mController.isEnabled()).isFalse();
+        assertThat(controller.isEnabled()).isFalse();
     }
 
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(

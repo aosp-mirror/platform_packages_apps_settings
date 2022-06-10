@@ -16,8 +16,12 @@
 
 package com.android.settings.datetime;
 
+import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.time.TimeCapabilities;
+import android.app.time.TimeManager;
 import android.app.timedetector.ManualTimeSuggestion;
 import android.app.timedetector.TimeDetector;
 import android.content.Context;
@@ -46,13 +50,12 @@ public class DatePreferenceController extends AbstractPreferenceController
     private static final String KEY_DATE = "date";
 
     private final DatePreferenceHost mHost;
-    private final AutoTimePreferenceController mAutoTimePreferenceController;
+    private final TimeManager mTimeManager;
 
-    public DatePreferenceController(Context context, DatePreferenceHost host,
-            AutoTimePreferenceController autoTimePreferenceController) {
+    public DatePreferenceController(Context context, DatePreferenceHost host) {
         super(context);
         mHost = host;
-        mAutoTimePreferenceController = autoTimePreferenceController;
+        mTimeManager = context.getSystemService(TimeManager.class);
     }
 
     @Override
@@ -68,7 +71,8 @@ public class DatePreferenceController extends AbstractPreferenceController
         final Calendar now = Calendar.getInstance();
         preference.setSummary(DateFormat.getLongDateFormat(mContext).format(now.getTime()));
         if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
-            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+            boolean enableManualDateSelection = isEnabled();
+            preference.setEnabled(enableManualDateSelection);
         }
     }
 
@@ -125,5 +129,17 @@ public class DatePreferenceController extends AbstractPreferenceController
                     TimeDetector.createManualTimeSuggestion(when, "Settings: Set date");
             timeDetector.suggestManualTime(manualTimeSuggestion);
         }
+    }
+
+    /**
+     * Returns whether selecting the preference should prompt for the user to enter the date
+     * manually. Exposed as public so that the time controller can easily share the same logic as
+     * the rules are identical for time.
+     */
+    public boolean isEnabled() {
+        TimeCapabilities timeZoneCapabilities =
+                mTimeManager.getTimeCapabilitiesAndConfig().getCapabilities();
+        int suggestManualTimeCapability = timeZoneCapabilities.getSuggestManualTimeCapability();
+        return suggestManualTimeCapability == CAPABILITY_POSSESSED;
     }
 }
