@@ -125,6 +125,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_USER = "user_add";
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
+    private static final String KEY_ENABLE_GUEST_TELEPHONY = "enable_guest_calling";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
     private static final String KEY_TIMEOUT_TO_USER_ZERO = "timeout_to_user_zero_preference";
     private static final String KEY_GUEST_CATEGORY = "guest_category";
@@ -215,6 +216,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController(Utils.FILE_PROVIDER_AUTHORITY);
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
+    private GuestTelephonyPreferenceController mGuestTelephonyPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
     private TimeoutToUserZeroPreferenceController mTimeoutToUserZeroPreferenceController;
@@ -310,6 +312,9 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 activity, KEY_ADD_USER_WHEN_LOCKED);
 
+        mGuestTelephonyPreferenceController = new GuestTelephonyPreferenceController(
+                activity, KEY_ENABLE_GUEST_TELEPHONY);
+
         mRemoveGuestOnExitPreferenceController = new RemoveGuestOnExitPreferenceController(
                 activity, KEY_REMOVE_GUEST_ON_EXIT, this, mHandler);
 
@@ -321,12 +326,16 @@ public class UserSettings extends SettingsPreferenceFragment
 
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
+        mGuestTelephonyPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
         mTimeoutToUserZeroPreferenceController.displayPreference(screen);
 
         screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
+
+        screen.findPreference(mGuestTelephonyPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mGuestTelephonyPreferenceController);
 
         screen.findPreference(mRemoveGuestOnExitPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mRemoveGuestOnExitPreferenceController);
@@ -397,6 +406,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
         mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        mGuestTelephonyPreferenceController.updateState(screen.findPreference(
+                mGuestTelephonyPreferenceController.getPreferenceKey()));
         mTimeoutToUserZeroPreferenceController.updateState(screen.findPreference(
                 mTimeoutToUserZeroPreferenceController.getPreferenceKey()));
         mRemoveGuestOnExitPreferenceController.updateState(screen.findPreference(
@@ -1302,9 +1313,13 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey());
         mAddUserWhenLockedPreferenceController.updateState(addUserOnLockScreen);
 
-        final Preference multiUserTopIntroPrefence = getPreferenceScreen().findPreference(
+        final Preference guestCallPreference = getPreferenceScreen().findPreference(
+                mGuestTelephonyPreferenceController.getPreferenceKey());
+        mGuestTelephonyPreferenceController.updateState(guestCallPreference);
+
+        final Preference multiUserTopIntroPreference = getPreferenceScreen().findPreference(
                 mMultiUserTopIntroPreferenceController.getPreferenceKey());
-        mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPrefence);
+        mMultiUserTopIntroPreferenceController.updateState(multiUserTopIntroPreference);
         mUserListCategory.setVisible(mUserCaps.mUserSwitcherEnabled);
         updateGuestPreferences();
         updateGuestCategory(context, users);
