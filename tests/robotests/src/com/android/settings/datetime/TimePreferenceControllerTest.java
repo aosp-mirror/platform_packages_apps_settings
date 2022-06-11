@@ -41,7 +41,7 @@ public class TimePreferenceControllerTest {
     @Mock
     private TimePreferenceController.TimePreferenceHost mHost;
     @Mock
-    private AutoTimePreferenceController mAutoTimePreferenceController;
+    private DatePreferenceController mDatePreferenceController;
 
     private TimePreferenceController mController;
     private RestrictedPreference mPreference;
@@ -50,7 +50,7 @@ public class TimePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mPreference = new RestrictedPreference(RuntimeEnvironment.application);
-        mController = new TimePreferenceController(mContext, mHost, mAutoTimePreferenceController);
+        mController = new TimePreferenceController(mContext, mHost, mDatePreferenceController);
     }
 
     @Test
@@ -59,22 +59,22 @@ public class TimePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_autoTimeEnabled_shouldDisablePref() {
+    public void updateState_dateEntryDisabled_shouldDisablePref() {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mAutoTimePreferenceController.isEnabled()).thenReturn(true);
+        when(mDatePreferenceController.isEnabled()).thenReturn(false);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
-    public void updateState_autoTimeDisabled_shouldEnablePref() {
+    public void updateState_dateEntryEnabled_shouldEnablePref() {
         // Make sure not disabled by admin.
         mPreference.setDisabledByAdmin(null);
 
-        when(mAutoTimePreferenceController.isEnabled()).thenReturn(false);
+        when(mDatePreferenceController.isEnabled()).thenReturn(true);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
