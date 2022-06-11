@@ -82,12 +82,7 @@ public class SeekBarPreference extends RestrictedPreference
                 com.android.internal.R.layout.preference_widget_seekbar);
         a.recycle();
 
-        a = context.obtainStyledAttributes(
-                attrs, com.android.internal.R.styleable.Preference, defStyleAttr, defStyleRes);
-        final boolean isSelectable = a.getBoolean(
-                com.android.settings.R.styleable.Preference_android_selectable, false);
-        setSelectable(isSelectable);
-        a.recycle();
+        setSelectable(false);
 
         setLayoutResource(layoutResId);
     }
@@ -172,11 +167,6 @@ public class SeekBarPreference extends RestrictedPreference
                 }
             }
         });
-    }
-
-    @Override
-    public CharSequence getSummary() {
-        return null;
     }
 
     @Override
