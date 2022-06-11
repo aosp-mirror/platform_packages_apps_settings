@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,9 +44,6 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     private DarkModeObserver mContentObserver;
     private DarkModeCustomPreferenceController mCustomStartController;
     private DarkModeCustomPreferenceController mCustomEndController;
-    private Runnable mCallback = () -> {
-        updatePreferenceStates();
-    };
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
@@ -60,7 +58,12 @@ public class DarkModeSettingsFragment extends DashboardFragment {
     public void onStart() {
         super.onStart();
         // Listen for changes only while visible.
-        mContentObserver.subscribe(mCallback);
+        mContentObserver.subscribe(() -> {
+            PreferenceScreen preferenceScreen = getPreferenceScreen();
+            mCustomStartController.displayPreference(preferenceScreen);
+            mCustomEndController.displayPreference(preferenceScreen);
+            updatePreferenceStates();
+        });
     }
 
     @Override
