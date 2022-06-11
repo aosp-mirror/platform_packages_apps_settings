@@ -332,7 +332,7 @@ public class SliceBroadcastReceiverTest {
         values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, SliceTestUtils.FAKE_ICON);
         values.put(SlicesDatabaseHelper.IndexColumns.FRAGMENT, SliceTestUtils.FAKE_FRAGMENT_NAME);
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, controllerClass);
-        values.put(SlicesDatabaseHelper.IndexColumns.SLICE_URI, buildUri(key).toSafeString());
+        values.put(SlicesDatabaseHelper.IndexColumns.SLICE_URI, buildUri(key).toString());
         values.put(SlicesDatabaseHelper.IndexColumns.HIGHLIGHT_MENU_RESOURCE,
                 SliceTestUtils.FAKE_HIGHLIGHT_MENU_RES);
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
