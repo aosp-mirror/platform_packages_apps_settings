@@ -49,16 +49,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"SD-kártya törlése"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Előnézet"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Előnézet, <xliff:g id="NUM_PAGES">%2$d</xliff:g>/<xliff:g id="CURRENT_PAGE">%1$d</xliff:g>. oldal"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Kicsinyítheti vagy nagyíthatja a képernyőn megjelenő szöveget."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Kisebb"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Nagyobb"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatikus forgatás használata"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Az arcfelismerés az előlapi kamerát használja az automatikus forgatás pontosságának javításához. A rendszer a képeket semmilyen esetben nem tárolja, és nem is küldi el őket a Google-nak."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Mintaszöveg"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Óz, a csodák csodája"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. fejezet: A csodálatos Smaragdváros"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Dorothyt és barátait még a zöld szemüvegen át is lenyűgözte a csodálatos Város tündöklése. Az utcákat gyönyörű házak sora szegélyezte, melyek zöld márványból készültek, ragyogó smaragdokkal kirakva. Az utak ugyanebből a zöld márványból készültek, az utcaköveket pedig sűrűn rakott smaragdsorok választották el, melyek csak úgy sziporkáztak a napfényben. Az ablaktáblák zöld üvegből voltak, az ég zöldes színben tündökölt a Város fölött, és még a napsugarak is zöld színben játszottak. \n\nRengeteg ember járkált mindenfelé, férfiak, nők, gyerekek, mind zöld ruhákban, zöldes árnyalatú volt a bőrük is. Csodálkozó szemekkel néztek Dorothyra és furcsa kísérőire, és amikor a gyerekek meglátták az Oroszlánt, elszaladtak, és anyjuk mögé bújtak. De senki sem szólt hozzájuk. Az utcán sok bolt állt, és Dorothy észrevette, hogy ezekben is minden zöld. Lehetett kapni zöld cukorkát és zöld pattogatott kukoricát, zöld cipőt, zöld kalapot és mindenféle zöld ruhát. Az egyik helyen egy férfi zöld limonádét árult, és Dorothy látta, hogy a gyerekek zöld pennykkel fizetnek érte. \n\nNem voltak sehol lovak vagy más állatok; az emberek mindent kis zöld kocsikon hordtak, amelyet maguk előtt toltak. Mindenki boldognak, elégedettnek és jómódúnak tűnt."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB-tár"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD-kártya"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -148,11 +142,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Eszköze kommunikálhat a közeli Bluetooth-eszközökkel"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Telefonja kommunikálhat a közeli Bluetooth-eszközökkel"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP hardver tehermentesítésének letiltása"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO hardver tehermentesítésének letiltása"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE audio hardver tehermentesítésének letiltása"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Újraindítja az eszközt?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"A beállítás módosításához újra kell indítania az eszközt."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Újraindítás"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Mégse"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE audio engedélyezése"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Engedélyezi a Bluetooth LE audio funkciót, ha az eszköz támogatja a LE audio hardver működését."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Médiaeszközök"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Hívóeszközök"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Egyéb eszközök"</string>
@@ -367,7 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Arcalapú feloldás engedélyezése"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Engedélyezheti gyermekének, hogy az Arcalapú feloldás funkcióval oldja fel a telefonja zárolását és igazolja személyazonosságát. Erre például akkor kerül sor, amikor alkalmazásokba jelentkezik be, vagy vásárlást hagy jóvá."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Használja arcát a telefon feloldásához vagy vásárlások engedélyezéséhez.\n\nMegjegyzés: Nem használhatja arcát az eszköz feloldására. Ha további információra van szüksége, forduljon szervezete rendszergazdájához."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -457,7 +458,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Amikor gyermeke a Pixel Imprintet használja, a rendszer felhasználja a képeket az ujjlenyomatmodell frissítésére. Az ujjlenyomatmodell elkészítéséhez használt képeket nem, de magát az ujjlenyomatmodellt biztonságosan tárolja a telefon, és az ujjlenyomatmodell sosem kerül ki róla. A feldolgozás teljes mértékben és biztonságos módon a telefonon történik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"A Beállítások menüben bármikor törölheti az ujjlenyomatképeket és -modellt, illetve kikapcsolhatja az ujjlenyomat-alapú feloldást. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön nem törli őket."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ön és gyermeke a Beállításokban bármikor törölheti gyermeke ujjlenyomatképeit és -modelljét, illetve kikapcsolhatja a Feloldás ujjlenyomattal funkciót. A telefon addig tárolja az ujjlenyomatképeket és -modelleket, amíg Ön vagy gyermeke nem törli őket."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonját az Ön szándéka ellenére más is feloldhatja, például ha valaki az ujjához tartja."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonját az Ön szándéka ellenére más is feloldhatja, például ha valaki az ujjához tartja."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Gyermeke telefonját az ő szándéka ellenére valaki más is feloldhatja, például ha valaki az Ön gyermeke ujjához tartja a telefont."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében az ujjlenyomat nem működik."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"A legjobb eredmény érdekében használjon Made for Google tanúsítvánnyal rendelkező kijelzővédőt. Előfordulhat, hogy más kijelzővédők esetében gyermeke ujjlenyomata nem működik."</string>
@@ -507,6 +512,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Az eszközt és az ujjlenyomat-érzékelő helyét ábrázoló illusztráció"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Név"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Törlés"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Érintse meg az érzékelőt"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Helyezze az ujját az érzékelőre, és emelje fel a rezgést követően"</string>
@@ -524,9 +531,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Így az ujjlenyomata nagyobb részét tudja rögzíteni a rendszer."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Ujjlenyomat regisztrálása folyamatban – <xliff:g id="PERCENTAGE">%d</xliff:g> százalék"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Ujjlenyomat hozzáadva"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Mostantól használhatja ujjlenyomatát táblagépe zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Mostantól használhatja ujjlenyomatát eszköze zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Mostantól használhatja ujjlenyomatát telefonja zárolásának feloldásához vagy személyazonossága igazolásához (például amikor alkalmazásokba jelentkezik be)."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Később"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Emelje fel, majd érintse meg újra"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Helyezze az ujja oldalsó részét az érzékelőre, és tartsa lenyomva, majd helyezze az érzékelőre az ujja másik oldalát"</string>
@@ -584,8 +594,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Kész"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hoppá! Az nem az érzékelő"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Érintse meg a hátsó érzékelőt mutatóujjával."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"A rögzítés nincs kész"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Letelt az ujjlenyomat-rögzítés időkorlátja. Próbálja újra."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Az ujjlenyomat regisztrációja nem sikerült. Próbálja újra, vagy próbálkozzon egy másik ujjával."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Még egy hozzáadása"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Következő"</string>
@@ -2684,10 +2696,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> van hátra"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> a feltöltéshez"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Alacsony töltöttség"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Háttérben történő használat korlátozása"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Az alkalmazás háttérben futásának engedélyezése"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Az alkalmazás háttérben futása le van tiltva"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"A háttérben történő használat nem korlátozható"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Korlátozza a háttértevékenységet?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Ha korlátozza az alkalmazások háttértevékenységét, lehetséges, hogy hibásan fognak működni"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Az alkalmazás nem korlátozható, mert nincs beállítva az akkumulátor optimalizálására.\n\nA korlátozáshoz kapcsolja be az akkumulátoroptimalizálást."</string>
@@ -2891,7 +2900,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Túlbecsült energiafogyasztás"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Használat ideje: <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Aktív ennyi ideig: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Képernyőhasználat: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"A(z) <xliff:g id="APP">%2$s</xliff:g> <xliff:g id="PERCENT">%1$s</xliff:g>-ot használt"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"Az akkumulátor teljes töltöttségi szintjének <xliff:g id="PERCENT">%1$s</xliff:g>-a"</string>
@@ -2899,10 +2907,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Utolsó teljes feltöltés"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"A legmagasabb töltöttségi szinttel körülbelül ennyit bír:"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Az akkumulátorhasználati adatok hozzávetőlegesek, és az eszköz használatától függően módosulhatnak."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Aktív használatban"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"Háttérben"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akkuhasználat"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Teljes feltöltés óta"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Akkuhasználat kezelése"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Összesen: <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> a háttérben\naz utolsó teljes feltöltés óta"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Összesen: <xliff:g id="TIME_0">^1</xliff:g> • Háttérben az\nelmúlt 24 óra során: <xliff:g id="TIME_1">^2</xliff:g>"</string>
@@ -3412,11 +3417,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Összes vendégalkalmazás és -adat törlése a vendég módból való kilépéskor"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Törli a vendégtevékenységeket?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Az ebből a vendégmunkamenetből származó alkalmazások és adatok azonnal törlődnek, és az összes jövőbeli, vendég módban végzett tevékenység törlődik minden olyan alkalomkor, amikor kilép a vendég módból"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Hívások engedélyezése"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Hívások és SMS-ek engedélyezése"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Felhasználó törlése"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Engedélyezi a hívásokat?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"A rendszer megosztja a híváslistát ezzel a felhasználóval."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Engedélyezi a hívásokat és SMS-eket?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"A rendszer megosztja az SMS- és híváslistát ezzel a felhasználóval."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Segélyhívási információk"</string>
@@ -3698,7 +3704,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hangerő, rezgés, Ne zavarjanak"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Csengetés: rezgő"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Csengetés: néma"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Csörgetés és értesítések hangereje 80%-on"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Média hangereje"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Átküldés hangereje"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Hívás hangereje"</string>
@@ -4335,8 +4340,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Amellett, hogy biometriai lehetőséggel oldja fel eszköze zárolását, további védelmet jelenthet, ha az eszköz jelszó megadásához köti a rendszerindítást. Amíg az eszköz el nem indul, nem tud hívást, üzenetet és értesítéseket fogadni (így riasztásokat sem).\n\nEz segíti az elvesztett vagy ellopott eszközökön lévő adatok védelmét. Beállítja jelszó kérését az eszköz indítása előtt?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Igen"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Nem"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Korlátozott"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Használhat háttérben"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Kérjen PIN-kódot?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Kérjen mintát?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Kérjen jelszót?"</string>
@@ -4640,7 +4643,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Megjelenített méret"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Minden elem nagyítása vagy kicsinyítése"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"kijelző, sűrűség, képernyő elemeinek mérete, méret, méretezés"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Nagyíthatja vagy kicsinyítheti a képernyőn megjelenő elemeket. Egyes alkalmazások más helyre kerülhetnek a képernyőn."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Előnézet"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Kisebb"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Nagyobb"</string>
@@ -4664,12 +4666,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Bekapcsolva az összes alkalmazásnál"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> telepített alkalmazás"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 telepített alkalmazás"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> felhasznált – <xliff:g id="FREE_SPACE">%2$s</xliff:g> szabad tárhely"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Belső tárhely: Felhasznált: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – Szabad: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Alvó mód bekapcsolása <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitás után"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Sötét téma, betűméret, fényerő"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Alvó mód bekapcsolása 10 perc inaktivitás után"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Átlagosan <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>/<xliff:g id="USED_MEMORY">%1$s</xliff:g> memória használatban"</string>
     <string name="users_summary" msgid="8473589474976307510">"Bejelentkezve mint <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"Alapértelmezett: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>

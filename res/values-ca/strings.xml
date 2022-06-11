@@ -49,16 +49,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Esborra la targeta SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Previsualització"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Previsualització, pàgina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> (<xliff:g id="NUM_PAGES">%2$d</xliff:g> en total)"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Amplia o redueix la mida del text de la pantalla."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Redueix"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Amplia"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Gira automàticament"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La detecció facial utilitza la càmera frontal per millorar la precisió del gir automàtic. Les imatges mai no s\'emmagatzemen ni s\'envien a Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Text de mostra"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"El meravellós mag d\'Oz"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capítol 11: La meravellosa Ciutat Maragda d\'Oz"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Fins i tot amb els ulls protegits per les ulleres verdes, la Dorothy i els seus amics van quedar enlluernats per la brillantor de la meravellosa ciutat. A banda i banda dels carrers es dreçaven cases boniques, totes fetes de marbre verd amb incrustacions de maragdes guspirejants. El terra també era fet del mateix marbre verd, i totes les juntures eren cobertes de rengleres de maragdes, una al costat de l\'altra, que guspirejaven a la llum del sol. Els vidres de les finestres eren verds; i fins i tot el cel, damunt la ciutat, tenia un to verdós, i els raigs del sol eren verds. \n\nPertot es veia molta gent, homes, dones i criatures, vestits tots de verd i amb la pell verdosa. Tothom mirava la Dorothy i els seus companys amb sorpresa i curiositat, i les criatures fugien per amagar-se rere les seves mares quan veien el Lleó; però ningú no els va adreçar la paraula. Pels carrers hi havia moltes botigues i parades, i la Dorothy es fixà que tot el que hi venien era verd: caramels verds, rosetes de blat de moro verdes, sabates verdes, barrets verds i vestits verds de tota mena. En una de les parades, un home venia gasosa verda, i la Dorothy es va adonar que les criatures que en compraven pagaven amb monedes verdes. \n\nSemblava que en tota la ciutat no hi havia cavalls ni animals de cap mena. Els homes transportaven les coses en petits carretons verds, que empenyien davant seu. Tothom semblava feliç, content i pròsper."</string>
-    <string name="font_size_save" msgid="206892409190870726">"D\'acord"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Emmagatzematge USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Targeta SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -148,11 +142,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permet que el dispositiu es comuniqui amb dispositius Bluetooth que estiguin a prop"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permet que el telèfon es comuniqui amb dispositius Bluetooth que estiguin a prop"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Desactiva baixada de maquinari (BT A2DP)"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Desactiva la baixada de maquinari Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Desactiva la baixada de maquinari per Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vols reiniciar-lo?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Has de reiniciar el dispositiu per canviar aquesta opció."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reinicia"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Cancel·la"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Activa Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Activa la funció Bluetooth LE Audio si el dispositiu admet les funcions de maquinari d\'LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispositius multimèdia"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispositius de trucada"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Altres dispositius"</string>
@@ -367,7 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permet el desbloqueig facial"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Utilitza l\'autenticació facial"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Fes servir la cara per desbloquejar el telèfon, autoritzar compres o iniciar la sessió a les aplicacions."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Permet que el teu fill utilitzi la cara per desbloquejar el telèfon o verificar la seva identitat. Ho podrà fer quan iniciï la sessió en aplicacions, aprovi una compra, etc."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utilitza la cara per desbloquejar el telèfon o aprovar compres.\n\nNota: no pots fer servir la cara per desbloquejar aquest dispositiu. Per obtenir més informació, contacta amb l\'administrador de la teva organització."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Fes servir la cara per desbloquejar el telèfon, autoritzar compres o iniciar la sessió a les aplicacions"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -457,7 +458,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Quan fa servir Pixel Imprint, les imatges s\'utilitzen per actualitzar el seu model d\'empremta digital. Les imatges utilitzades per crear-lo no s\'emmagatzemen mai, però el model d\'empremta digital sí que s\'emmagatzema de manera segura i no surt del dispositiu. Tot el procés es fa de manera segura al telèfon."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Pots suprimir les imatges i el model de l\'empremta digital o desactivar el desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al telèfon fins que els suprimeixes."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Tu i el teu fill podeu suprimir les imatges i el model de la seva empremta digital o desactivar Desbloqueig amb empremta digital en qualsevol moment a Configuració. Les imatges i els models d\'empremta digital s\'emmagatzemen al telèfon fins que se suprimeixin."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"El teu telèfon es pot desbloquejar sense voler, per exemple si algú te l\'acosta al dit."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"El teu telèfon es pot desbloquejar sense voler, per exemple si algú te l\'acosta al dit."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"El telèfon del teu fill es pot desbloquejar sense voler, com quan algú li l\'apropi al dit."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que la teva empremta digital no funcioni."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Per obtenir els millors resultats, utilitza un protector de pantalla que tingui la certificació Made For Google. Si utilitzes altres protectors de pantalla, pot ser que l\'empremta digital del teu fill o filla no funcioni."</string>
@@ -507,6 +512,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Il·lustració amb la ubicació del sensor d\'empremtes digitals i de dispositiu"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nom"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"D\'acord"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Suprimeix"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Col·loca el dit al sensor i aixeca\'l quan notis una vibració"</string>
@@ -524,9 +531,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Això ajuda a capturar millor l\'empremta digital"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registre de l\'empremta digital <xliff:g id="PERCENTAGE">%d</xliff:g> per cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"S\'ha afegit l\'empremta digital"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Ara pots utilitzar l\'empremta digital per desbloquejar la tauleta o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Ara pots utilitzar l\'empremta digital per desbloquejar el dispositiu o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Ara pots utilitzar l\'empremta digital per desbloquejar el telèfon o verificar la teva identitat, com ara quan inicies la sessió en aplicacions"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fes-ho més tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Aixeca el dit i toca de nou"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Col·loca un costat del dit al sensor i espera; a continuació, canvia a l\'altre costat"</string>
@@ -584,8 +594,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fet"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Això no és el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor situat a la part posterior amb el dit índex."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"No s\'ha completat el registre"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"S\'ha esgotat el límit de temps per inscriure l\'empremta digital. Torna-ho a provar."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registre de l\'empremta digital no ha funcionat. Torna-ho a provar o fes servir un altre dit."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Afegeix-ne una altra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Següent"</string>
@@ -2684,10 +2696,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Temps restant: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> per completar la càrrega"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Bateria baixa"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Restricció en segon pla"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permet que l\'aplicació s\'executi en segon pla"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"L\'aplicació no es pot executar en segon pla"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"No es pot restringir l\'ús en segon pla"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Vols limitar l\'activitat en segon pla?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si limites l\'activitat en segon pla d\'una aplicació, és possible que no funcioni correctament"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Com que aquesta aplicació no s\'ha configurat per optimitzar la bateria, no pots restringir-la.\n\nPer restringir l\'aplicació, activa l\'optimització de la bateria."</string>
@@ -2891,7 +2900,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Consum d\'energia comptabilitzat més d\'una vegada"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"En ús durant <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Activa durant <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Ús de la pantalla: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> utilitzat per <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> de consum de la bateria"</string>
@@ -2899,10 +2907,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Última càrrega completa"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Durada aproximada de la càrrega completa"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Les dades d\'ús de la bateria són aproximades i poden variar en funció de l\'ús."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Mentre està en ús actiu"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"Mentre està en segon pla"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Ús de la bateria"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Des de la càrrega completa"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestiona l\'ús de la bateria"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\ndes de la darrera càrrega completa"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segon pla\ndurant les 24 darreres hores"</string>
@@ -3412,11 +3417,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Suprimeix totes les aplicacions i dades de la sessió de convidat en sortir d\'aquest mode"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Suprimir l\'activitat de convidat?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les aplicacions i les dades d\'aquesta sessió de convidat se suprimiran ara, i tota l\'activitat de convidat que facis en el futur se suprimirà cada vegada que surtis del mode de convidat"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Activa les trucades telefòniques"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activa les trucades telefòniques i els SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Suprimeix l\'usuari"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Vols activar les trucades telefòniques?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"L\'historial de trucades es compartirà amb aquest usuari."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vols activar les trucades telefòniques i els SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"L\'historial de trucades i d\'SMS es compartirà amb aquest usuari."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informació d\'emergència"</string>
@@ -3698,7 +3704,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibració, No molestis"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Timbre en vibració"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Timbre en silenci"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"El volum de les trucades i notificacions està establert al 80%"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum de multimèdia"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volum emès"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volum de trucada"</string>
@@ -4335,8 +4340,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Per millorar la protecció del dispositiu, a més de fer servir la biometria per desbloquejar-lo, pots configurar-lo perquè sol·liciti una contrasenya abans d\'iniciar-se. Fins que no s\'iniciï, no podrà rebre trucades, missatges ni notificacions, com ara alarmes.\n\nD\'aquesta manera es protegeixen les dades en cas de pèrdua o robatori del dispositiu. Vols que se sol·liciti una contrasenya per iniciar el dispositiu?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Sí"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"No"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Restringida"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"L\'aplicació pot utilitzar bateria en segon pla"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Vols demanar el PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Vols demanar el patró?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Sol·licitar contrasenya?"</string>
@@ -4640,7 +4643,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Mida de visualització"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Amplia-ho o redueix-ho tot"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densitat de pantalla, zoom de pantalla, escala, mida"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Amplia o redueix la mida dels elements de la pantalla. És possible que algunes aplicacions canviïn de posició."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Previsualització"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Redueix"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Amplia"</string>
@@ -4664,12 +4666,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Activades per a totes les aplicacions"</string>
     <string name="apps_summary" msgid="4007416751775414252">"S\'han instal·lat <xliff:g id="COUNT">%1$d</xliff:g> aplicacions"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 aplicacions instal·lades"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilitzat - <xliff:g id="FREE_SPACE">%2$s</xliff:g> lliures"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Emmagatzematge intern: <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilitzat, <xliff:g id="FREE_SPACE">%2$s</xliff:g> lliures"</string>
     <string name="display_summary" msgid="5526061030874717172">"Entra en repòs després de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivitat"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema fosc, cos de font, brillantor"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Entra en repòs després de 10 minuts d\'inactivitat"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Ús mitjà de memòria: <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Sessió iniciada com a <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"Aplicació predeterminada: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>

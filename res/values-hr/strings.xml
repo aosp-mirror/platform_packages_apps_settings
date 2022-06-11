@@ -50,16 +50,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Izbriši SD karticu"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Pregled"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Pregled, stranica <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> od <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Smanjite ili povećajte tekst na zaslonu."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Smanji"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Povećaj"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Koristi automatsko zakretanje"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Prepoznavanje lica koristi prednju kameru radi poboljšanja točnosti automatskog zakretanja. Slike se nikad ne pohranjuju i ne šalju Googleu."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Primjer teksta"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čarobnjak iz Oza"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11. poglavlje: Čudesni Smaragdni Grad čarobnjaka Oza"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Čak i sa zelenim naočalama koje su im štitile oči Dorothy i njezini prijatelji isprva su bili zaslijepljeni sjajem prekrasnoga Grada. Ulicama su se nizale predivne kuće sve izgrađene od zelenog mramora i cijele optočene svjetlucavim smaragdima. Hodali su pločnikom od istog zelenog mramora, a na mjestima gdje su se kameni blokovi spajali nalazili su se redovi gusto postavljenih smaragda koji su svjetlucali na jarkom suncu. Prozori su bili od zelenog stakla, a čak je i nebo iznad Grada imalo zeleni odsjaj i sunčeve su zrake bile zelene boje. \n\nNa ulicama je bilo mnogo ljudi, muškaraca, žena i djece, i svi su bili odjeveni u zeleno i imali zelenkastu put. S čuđenjem su gledali Dorothy i njezinu neobičnu, šaroliku pratnju i sva su se djeca sakrila iza svojih majki kada su ugledala Lava, no nitko im se nije obratio. Mnoge su trgovine bile otvorene na ulicu i Dorothy je mogla vidjeti kako je u njima sve zeleno. Prodavali su se zeleni slatkiši i zelene kokice, kao i zelene cipele, zeleni šeširi i zelena odjeća svakojake vrste. Na jednom je mjestu jedan čovjek prodavao zelenu limunadu, a kad ju je koje dijete kupilo, Dorothy je mogla vidjeti kako je plaća zelenim novčićima. \n\nČinilo se da nije bilo konja niti koje druge životinje, a ljudi su naokolo vozili stvari u malim zelenim kolicima koja su gurali ispred sebe. Svi su se činili sretnima, zadovoljnima i uspješnima."</string>
-    <string name="font_size_save" msgid="206892409190870726">"U redu"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Memorija USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD kartica"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -149,11 +143,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Dopustite uređaju da komunicira s Bluetooth uređajima u blizini"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Dopustite telefonu da komunicira s Bluetooth uređajima u blizini"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogući Bluetooth A2DP hardversko rasterećenje"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Onemogući uklanjanje Bluetooth LE AUDIO hardvera"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogući uklanjanje Bluetooth LE audio hardvera"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Ponovo pokrenuti uređaj?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ponovo pokrenite uređaj da biste promijenili tu postavku."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Ponovo pokreni"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Odustani"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Omogući Bluetooth LE audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Omogućuje audio značajku Bluetooth LE ako uređaj podržava mogućnosti LE audio hardvera."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medijski uređaji"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Uređaji za pozive"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ostali uređaji"</string>
@@ -370,7 +366,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Dopuštanje otključavanja licem"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Autentificirajte se licem"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Licem možete otključati telefon, autorizirati kupnje ili se prijaviti u aplikacije."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Dopustite djetetu da licem otključava telefon ili potvrđuje svoj identitet. To može biti potrebno prilikom prijave u aplikacije, odobravanja kupnje i u drugim situacijama."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Otključajte telefon ili odobrite kupnje svojim licem.\n\nNapomena: ovaj uređaj ne možete otključati licem. Za više informacija obratite se administratoru organizacije."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Licem možete otključati telefon, autorizirati kupnje ili se prijaviti u aplikacije"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -461,7 +462,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Kad koristi Pixel Imprint, slike se upotrebljavaju za ažuriranje modela njegovog otiska prsta. Slike koje se koriste za izradu modela djetetovog otiska prsta nikad se ne pohranjuju, ali se model otiska prsta sigurno pohranjuje na telefonu i nikad se ne šalje s telefona. Sva se obrada vrši sigurno na telefonu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"U postavkama možete izbrisati model i slike otiska prsta ili isključiti otključavanje otiskom prsta kad god želite. Slike i modeli otiska prsta pohranjeni su na telefonu dok ih ne izbrišete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Dijete i vi uvijek možete izbrisati slike i model njegovog otiska prsta ili isključiti otključavanje otiskom prsta u postavkama. Slike i modeli otiska prsta pohranjuju se na telefonu dok se ne izbrišu."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Vaš se telefon može otključati kad to ne namjeravate, na primjer ako ga netko prinese vašem prstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Vaš se telefon može otključati kad to ne namjeravate, na primjer ako ga netko prinese vašem prstu."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Djetetov telefon može se otključati i kad dijete to ne namjerava, na primjer ako ga netko prinese djetetovom prstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Za najbolje rezultate koristite zaštitu zaslona s certifikatom Made for Google. Vaš otisak prsta možda neće funkcionirati s drugim zaštitama zaslona."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Za najbolje rezultate koristite zaštitu zaslona s certifikatom Made for Google. Otisak prsta vašeg djeteta možda neće funkcionirati s drugim zaštitama zaslona."</string>
@@ -511,6 +516,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustracija uređaja i lokacije senzora otiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Naziv"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"U redu"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dodirnite senzor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Stavite prst na senzor i podignite ga kada osjetite vibraciju"</string>
@@ -530,9 +537,12 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisak prsta je dodan"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Sad svojim otiskom prsta možete otključati tablet ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Sad svojim otiskom prsta možete otključati uređaj ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Sad svojim otiskom prsta možete otključati telefon ili potvrditi da ste to vi, na primjer kad se prijavljujete u aplikacije"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Kasnije ću"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Postavite rub prsta na senzor i zadržite ga, a zatim prijeđite na drugu stranu"</string>
@@ -581,7 +591,7 @@
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Preskočiti postavljanje zaporke?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"Preskočiti postavljanje zaporke i lica?"</string>
     <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Preskočiti postavljanje zaporke i otiska prsta?"</string>
-    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Preskočiti postav. zaporke, lica i otiska prsta?"</string>
+    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Preskočiti postavljanje zaporke, lica i otiska prsta?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Preskočiti postavljanje uzorka?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Preskočiti postavljanje uzorka i lica?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Preskočiti postavljanje uzorka i otiska prsta?"</string>
@@ -590,8 +600,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Gotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to nije senzor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kažiprstom dodirnite senzor na stražnjoj strani telefona."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registracija nije dovršena"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Isteklo je vremensko ograničenje za registraciju otiska prsta. Pokušajte ponovo."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija otiska prsta nije uspjela. Pokušajte ponovo ili prislonite neki drugi prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodajte drugi"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Dalje"</string>
@@ -2717,10 +2729,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Preostalo je <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do dovršetka punjenja"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Slaba baterija"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Ograničenje upotrebe u pozadini"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Dopustite rad aplikacije u pozadini"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Aplikaciji nije dopušten rad u pozadini"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Upotreba u pozadini ne može se ograničiti"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Želite li ograničiti pozadinsku aktivnost?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Ako ograničite pozadinsku aktivnost za aplikaciju, možda će se ponašati nepredviđeno"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikacija nije postavljena za optimizaciju baterije, pa je ne možete ograničiti.\n\nZa ograničenje uključite optimizaciju."</string>
@@ -2931,7 +2940,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Previše obračunata potrošnja energije"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Upotrebljava se <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Aktivno <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Upotreba zaslona <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="APP">%2$s</xliff:g> upotrebljava <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> ukupne potrošnje baterije"</string>
@@ -2939,10 +2947,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Posljednje potpuno punjenje"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Potpuna napunjenost traje oko"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Podaci o potrošnji baterije približni su i mogu se promijeniti ovisno o upotrebi."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Dok je u aktivnoj upotrebi"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"Dok radi u pozadini"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Potrošnja baterije"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Od potpunog punjenja"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Upravljanje potrošnjom baterije"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> u pozadini\nod posljednjeg potpunog punjenja"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Ukupno <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> u pozadini\nu posljednja 24 h"</string>
@@ -3456,11 +3461,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Izbriši sve aplikacije i podatke gostujuće sesije prilikom izlaska iz načina rada za goste"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Izbrisati aktivnost gosta?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplikacije i podaci iz ove gostujuće sesije izbrisat će se odmah, a sve buduće aktivnosti gostujuće sesije izbrisat će se svaki put kad napustite način rada za goste."</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Uključi telefonske pozive"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Uključivanje telefonskih poziva i SMS-a"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Brisanje korisnika"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Želite li uključiti telefonske pozive?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Povijest poziva dijelit će se s tim korisnikom."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Želite li uključiti telefonske pozive i SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Povijest poziva i SMS-ova dijelit će se s tim korisnikom."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Podaci za hitne slučajeve"</string>
@@ -3743,7 +3749,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Glasnoća, vibracija, Ne uznemiravaj"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Softver zvona postavljen na vibraciju"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Softver zvona postavljen na nečujno"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Glasnoća zvona i obavijesti na 80%"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Glasnoća medija"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Glasnoća emitiranja"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Glasnoća poziva"</string>
@@ -4390,8 +4395,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Osim otključavanja uređaja upotrebom biometrijskih podataka, ovaj uređaj možete zaštititi i zahtijevanjem zaporke prije pokretanja. Dok se ne pokrene, uređaj ne može primati pozive, poruke ili obavijesti, uključujući alarme.\n\nNa taj se način štite podaci na izgubljenim ili ukradenim uređajima. Postaviti zaporku za pokretanje uređaja?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Da"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Ne"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Ograničeno"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Može trošiti bateriju u pozadini"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Zahtijevanje PIN-a?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Zahtijevanje uzorka?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Zahtijevanje zaporke?"</string>
@@ -4708,7 +4711,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Veličina prikaza"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Povećajte ili smanjite sve"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"prikaz, gustoća, zumiranje zaslona, skalirati, skaliranje"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Smanjite ili povećajte stavke na zaslonu. Neke aplikacije mogu promijeniti položaj na zaslonu."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Pregled"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Smanji"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Povećaj"</string>
@@ -4733,12 +4735,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Uključene za sve aplikacije"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Broj instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"Instalirane su 24 aplikacije"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> iskorišteno – <xliff:g id="FREE_SPACE">%2$s</xliff:g> slobodno"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Interna pohrana: <xliff:g id="PERCENTAGE">%1$s</xliff:g> iskorišteno – <xliff:g id="FREE_SPACE">%2$s</xliff:g> slobodno"</string>
     <string name="display_summary" msgid="5526061030874717172">"Mirovanje nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neaktivnosti"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tamna tema, veličina fonta, svjetlina"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Mirovanje nakon 10 minuta neaktivnosti"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Iskorišteno je prosječno <xliff:g id="USED_MEMORY">%1$s</xliff:g> od <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Prijavljeni ste kao <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"Aplikacija <xliff:g id="APP_NAME">%1$s</xliff:g> je zadana"</string>
@@ -5064,7 +5064,7 @@
     <string name="emergency_gesture_switchbar_title" msgid="7421353963329899514">"Upotreba SOS poziva"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"Najmanje pet puta brzo pritisnite tipku za uključivanje/isključivanje da biste pokrenuli radnje u nastavku"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"Reprodukcija alarma odbrojavanja"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Reproduciraj glasni zvuk pri pokretanju SOS poziva"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"Reproduciraj glasan zvuk pri pokretanju SOS poziva"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"Traženje pomoći"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"Poziv upomoć"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"Telefonski broj za pomoć"</string>

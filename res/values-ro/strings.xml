@@ -50,16 +50,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Ștergeți cardul SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Previzualizare"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Previzualizare, pagina <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> din <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Măriți sau micșorați textul de pe ecran."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Micșorați"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Măriți"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Folosiți rotirea automată"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Detectarea facială folosește camera foto frontală pentru a îmbunătăți precizia rotirii automate. Imaginile nu sunt niciodată stocate sau trimise la Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemplu de text"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Minunatul Vrăjitor din Oz"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Capitolul 11: Minunatul Oraș de Smarald Oz"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Deși purtau ochelarii verzi, Dorothy și prietenii ei fură la început orbiți de strălucirea minunatei cetăți. De-a lungul străzilor se înșiruiau case frumoase din marmură verde, încrustate pretutindeni cu smaralde scânteietoare. Mergeau pe un caldarâm tot din marmură verde, iar în locurile unde blocurile de marmură erau lipite laolaltă, se aflau, unul lângă altul, șiruri de smaralde care străluceau în razele soarelui. Geamurile erau din sticlă verde. Chiar și cerul de deasupra Cetății avea o nuanță verde, iar razele soarelui erau verzui. \n\nPe străzi se plimba multă lume - bărbați, femei și copii - și cu toții erau îmbrăcați în verde și aveau pielea verzuie. Se uitau uimiți la Dorothy și la neobișnuita ei ceată, iar copiii fugeau în toate părțile când îl vedeau pe Leu și se ascundeau în spatele mamelor lor. Însă nimeni nu vorbea cu ei. Pe străzi erau multe dughene, iar Dorothy observă că în ele totul era verde. Se vindeau bomboane verzi și floricele de porumb verde, pantofi verzi, pălării verzi și haine verzi de tot soiul. Într-un loc, cineva vindea limonadă verde, iar niște copii tocmai cumpărau și Dorothy văzu că plăteau cu bănuți verzi. \n\nNu păreau să existe nici cai, nici alte animale. În schimb, oamenii își cărau lucrurile în niște cărucioare verzi, pe care tot ei le împingeau. Cu toții păreau să emane o stare de fericire, de mulțumire și bunăstare."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Stocare USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Card SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -149,11 +143,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Permiteți dispozitivului să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Permiteți telefonului să comunice cu dispozitivele Bluetooth din apropiere"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Dezactivați descărcarea prin hardware cu Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Dezactivați descărcarea prin hardware cu Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Dezactivați descărcarea prin hardware cu Bluetooth LE audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Reporniți dispozitivul?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Trebuie să reporniți dispozitivul pentru a modifica setarea."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Reporniți"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Anulați"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Activați Bluetooth LE audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Activează funcția Bluetooth LE audio dacă dispozitivul acceptă capacitățile de hardware LE audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Dispozitive media"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Dispozitive de apel"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Alte dispozitive"</string>
@@ -370,7 +366,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permiteți deblocarea facială"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Folosiți-vă chipul pentru autentificare"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Folosiți-vă chipul ca să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Permiteți-i copilului dvs. să-și folosească fața pentru a debloca telefonul sau pentru a-și confirma identitatea. Va face această acțiune când se conectează la aplicații, aprobă o achiziție și altele."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Folosiți-vă chipul ca să deblocați telefonul sau să aprobați achiziții.\n\nNotă: nu vă puteți folosi chipul ca să deblocați acest dispozitiv. Pentru informații suplimentare, contactați administratorul organizației."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Folosiți-vă chipul ca să deblocați telefonul, să autorizați achiziții sau să vă conectați la aplicații"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -461,7 +462,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Când folosește Pixel Imprint, imaginile sunt folosite pentru a-i actualiza modelul de amprentă. Imaginile folosite pentru a crea modelul de amprentă al copilului dvs. nu sunt stocate niciodată, dar modelul de amprentă este stocat în siguranță pe telefon și nu părăsește niciodată dispozitivul. Toată procesarea are loc în siguranță pe telefon."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Puteți să ștergeți imaginile amprentelor și modelul de amprentă sau să dezactivați deblocarea cu amprenta oricând din Setări. Imaginile amprentelor și modelul de amprentă sunt stocate pe telefon până când le ștergeți."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Dvs. și copilul dvs. puteți să ștergeți imaginile amprentelor și modelul de amprentă sau să dezactivați Deblocarea cu amprenta oricând din Setări. Imaginile amprentelor și modelele de amprentă sunt stocate pe telefon până când le ștergeți."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonul poate fi deblocat când nu doriți, de exemplu, dacă cineva îl ține în dreptul degetului dvs."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonul poate fi deblocat când nu doriți, de exemplu, dacă cineva îl ține în dreptul degetului dvs."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefonul copilului dvs. poate fi deblocat și când nu dorește, de exemplu, dacă cineva îl ține în dreptul degetului său."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Pentru rezultate optime, folosiți o protecție pentru ecran care este certificată Made for Google. Este posibil ca amprenta să nu funcționeze cu alte protecții pentru ecran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Pentru rezultate optime, folosiți o protecție pentru ecran care este certificată Made for Google. Este posibil ca amprenta copilului să nu funcționeze cu alte protecții pentru ecran."</string>
@@ -511,6 +516,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Imagine cu dispozitivul și poziția senzorului de amprentă"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Denumiți"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Ștergeți"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Atingeți senzorul"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Puneți degetul pe senzor și ridicați-l după ce simțiți o vibrație"</string>
@@ -530,9 +537,12 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Amprentă adăugată"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Acum vă puteți folosi amprenta pentru a vă debloca tableta sau pentru a vă confirma identitatea, de exemplu, când vă conectați la aplicații"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Acum vă puteți folosi amprenta pentru a vă debloca dispozitivul sau pentru a vă confirma identitatea, de exemplu, când vă conectați la aplicații"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Acum vă puteți folosi amprenta pentru a vă debloca telefonul sau pentru a vă confirma identitatea, de exemplu, când vă conectați la aplicații"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Mai târziu"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ridicați, apoi atingeți din nou"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Așezați partea laterală a degetului pe senzor și mențineți, apoi procedați la fel cu cealaltă parte"</string>
@@ -590,8 +600,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Terminat"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hopa, acela nu este senzorul"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Atingeți senzorul de pe spatele telefonului. Folosiți degetul arătător."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Înregistrarea nu a fost finalizată"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Timpul limită pentru înregistrarea amprentei a expirat. Încercați din nou."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Înregistrarea amprentei nu a funcționat. Încercați din nou sau folosiți un alt deget."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Adăugați altă amprentă"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Înainte"</string>
@@ -2717,10 +2729,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Timp rămas: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> până la finalizarea încărcării"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Nivel scăzut al bateriei"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Restricție de fundal"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Permiteți aplicației să ruleze în fundal"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Aplicației nu i se permite să ruleze în fundal"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Utilizarea în fundal nu poate fi restricționată"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limitați activitatea de fundal?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Dacă limitați activitatea de fundal pentru o aplicație, aceasta se poate comporta necorespunzător"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplicația nu optimizează bateria, deci nu o puteți restricționa.\n\nPentru a o restricționa, activați optimizarea bateriei."</string>
@@ -2931,7 +2940,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Consumul supraevaluat al bateriei"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Utilizată <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Activ timp de <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Utilizarea ecranului: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> folosită de <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> din bateria încărcată complet"</string>
@@ -2939,10 +2947,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Ultima încărcare completă"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Încărcarea completă durează aproximativ"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Datele despre utilizarea bateriei sunt aproximative și se pot modifica în funcție de utilizare."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"În timp ce se află în utilizare activă"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"În timp ce se află în fundal"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilizarea bateriei"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"De la încărcarea completă"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gestionați utilizarea bateriei"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal\nde la ultima încărcare completă"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> în total • <xliff:g id="TIME_1">^2</xliff:g> în fundal,\nîn ultimele 24 de ore"</string>
@@ -3456,11 +3461,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Ștergeți toate aplicațiile și datele invitatului când ieșiți din modul pentru invitați"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Ștergeți activitatea invitatului?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplicațiile și datele din această sesiune pentru invitați vor fi șterse acum și toate activitățile viitoare ale invitaților vor fi șterse de fiecare dată când ieșiți din modul pentru invitați"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Activați apelurile telefonice"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activați apelurile telefonice și SMS-urile"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Ștergeți utilizatorul"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Activați apelurile telefonice?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Acest utilizator va avea acces la istoricul apelurilor."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Activați apelurile telefonice și SMS-urile?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Acest utilizator va avea acces la istoricul apelurilor și al SMS-urilor."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informații în caz de urgență"</string>
@@ -3743,7 +3749,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrații, Nu deranja"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Soneria este setată pe vibrații"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Soneria este setată pe silențios"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Volumul pentru sonerie și notificări la 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum media"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volumul proiectării"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volumul apelului"</string>
@@ -4390,8 +4395,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"În plus față de folosirea sistemelor biometrice pentru deblocarea dispozitivului, puteți să protejați și mai bine dispozitivul setând solicitarea parolei înainte de pornire. Pe dispozitiv nu se pot primi apeluri, mesaje sau notificări și nici alarme până când nu este pornit. \n\nAstfel vă puteți proteja datele de pe dispozitivele pierdute sau furate. Doriți să folosiți parola pentru a porni dispozitivul?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Da"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Nu"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Restricționată"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Aplicația poate folosi bateria în fundal"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Solicitați codul PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Solicitați modelul?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Solicitați parola?"</string>
@@ -4708,7 +4711,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Dimensiunea afișării"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Măriți sau micșorați toate elementele de pe ecran"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densitate afișaj, zoom ecran, scară, scalare"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Măriți sau micșorați elementele de pe ecran. Este posibil ca unele aplicații de pe ecran să își schimbe poziția."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Previzualizare"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Micșorați"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Măriți"</string>
@@ -4733,12 +4735,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Activat pentru toate aplicațiile"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> aplicații instalate"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 de aplicații instalate"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Spațiu folosit: <xliff:g id="PERCENTAGE">%1$s</xliff:g>; spațiu liber: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Memorie internă: <xliff:g id="PERCENTAGE">%1$s</xliff:g> folosită - <xliff:g id="FREE_SPACE">%2$s</xliff:g> liberă"</string>
     <string name="display_summary" msgid="5526061030874717172">"Se dezactivează după <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> de inactivitate"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema întunecată, dimensiunea fontului, luminozitate"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Se dezactivează după 10 minute de inactivitate"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Memorie folosită în medie: <xliff:g id="USED_MEMORY">%1$s</xliff:g> din <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"V-ați conectat ca <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> este prestabilită"</string>

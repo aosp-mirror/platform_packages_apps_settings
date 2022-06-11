@@ -49,16 +49,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Tøm SD-kort"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Forhåndsvisning"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Forhåndsvisning – side <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> av <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Gjør teksten på skjermen større eller mindre."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Gjør mindre"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Gjør større"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Bruk automatisk rotasjon"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Ansiktsgjenkjenning bruker frontkameraet til å forbedre nøyaktigheten til automatisk rotasjon. Bilder blir aldri lagret eller sendt til Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Eksempeltekst"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Trollmannen fra Oz"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapittel 11: Den vidunderlige smaragdbyen Oz"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Selv om øynene deres var beskyttet av de grønne brillene, ble Dorothy og vennene hennes overveldet ved synet av denne vidunderlige byen. Langs gatene sto vakre hus bygget av grønn marmor og prydet med skinnende smaragder overalt. De gikk langs et fortau laget av den samme grønne marmoren, og der steinene møttes, var det rader av smaragder som glitret i lyset fra solen. Vindusrutene var av grønt glass, og selv himmelen hadde et grønt skjær over seg. Til og med solstrålene var grønne. \n\nDet var mange mennesker som gikk rundt i byen, både menn, kvinner og barn. Alle var kledd i grønne klær og hadde grønnlig hud. De så undrende på Dorothy og det brokete selskapet hennes. Barna løp og gjemte seg bak mødrene sine da de så Løven, men ingen sa noe til dem. Butikkene i gatene var alle fylt med grønne varer. Grønt godteri og grønt popkorn var til salgs, og det var også utstilt grønne sko, grønne hatter og grønne klær i alle mulige varianter. I én av butikkene solgte en mann grønn limonade, og Dorothy kunne se at barna betalte med grønne mynter. \n\nDet var ingen hester eller andre dyr å se i byen – mennene bar ting i små, grønne vogner som de dyttet foran seg. Alle virket glade, tilfredse og velstående."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB-lagring"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Minnekort"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -148,11 +142,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Tillat at enheten din kommuniserer med Bluetooth-enheter i nærheten"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Tillat at telefonen din kommuniserer med Bluetooth-enheter i nærheten"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Slå av maskinvareavlastning for Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Slå av maskinvareavlastning for Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Slå av maskinvareavlastning for Bluetooth LE-lyd"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vil du starte enheten på nytt?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Du må starte enheten på nytt for å endre denne innstillingen."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Start på nytt"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Avbryt"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Slå på Bluetooth LE-lyd"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Slå på Bluetooth LE-lydfunksjonen hvis enheten støtter maskinvarefunksjoner for LE-lyd."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medieenheter"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Ringeenheter"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Andre enheter"</string>
@@ -367,7 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Tillat ansiktslås"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Bruk ansiktet ditt til å godkjenne"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Bruk ansiktet til å låse opp telefonen, godkjenne kjøp eller logge på apper."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Gi barnet ditt tillatelse til å bruke ansiktet til å låse opp telefonen sin eller bekrefte identiteten sin. Dette skjer når hen logger på apper, godkjenner kjøp med mer."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Bruk ansiktet ditt til å låse opp telefonen eller godta kjøp.\n\nMerk: Du kan ikke bruke ansiktet til å låse opp denne enheten. Ta kontakt med administratoren for organisasjonen din for å få mer informasjon."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Bruk ansiktet til å låse opp telefonen, godkjenne kjøp eller logge på apper"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -457,7 +458,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Når hen bruker Pixel Imprint, brukes bilder til å oppdatere fingeravtrykkmodellen. Bildene som brukes til å lage barnets fingeravtrykkmodell, lagres aldri, men fingeravtrykkmodellen lagres på en sikker måte på telefonen og forlater aldri telefonen. All behandling skjer på en sikker måte på telefonen."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan når som helst slette fingeravtrykkbildene og -modellen din eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til du sletter dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du og barnet ditt kan når som helst slette fingeravtrykkbildene og -modellen til barnet eller slå av opplåsing med fingeravtrykk i innstillingene. Fingeravtrykkbildene og -modellene lagres på telefonen til de slettes."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonen kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonen kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren din."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefonen til barnet ditt kan låses opp selv om det ikke er meningen, for eksempel hvis noen holder den opp mot fingeren til barnet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får best resultater ved å bruke en skjermbeskytter som er Made For Google-sertifisert. Fingeravtrykket til barnet ditt fungerer muligens ikke med andre skjermbeskyttere."</string>
@@ -507,6 +512,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustrasjon med enheten og plasseringen av fingeravtrykksensoren"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Navn"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Slett"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Berør sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Legg fingeren på sensoren, og løft den når du kjenner en vibrasjon"</string>
@@ -524,9 +531,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Dette bidrar til å registrere mer av fingeravtrykket"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrerer fingeravtrykket: <xliff:g id="PERCENTAGE">%d</xliff:g> prosent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeravtrykket er lagt til"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nå kan du bruke fingeravtrykket til å låse opp nettbrettet eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nå kan du bruke fingeravtrykket til å låse opp enheten eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nå kan du bruke fingeravtrykket til å låse opp telefonen eller bekrefte at det er deg, for eksempel når du logger på apper"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gjør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft fingeren og trykk igjen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Plasser siden av fingeravtrykket på sensoren og hold. Bytt deretter til den andre siden."</string>
@@ -584,8 +594,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Ferdig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ops, det er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Berør sensoren på baksiden av telefonen. Bruk pekefingeren."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registreringen er ikke fullført"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Tidsgrensen for registrering av fingeravtrykk er nådd. Prøv på nytt."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering av fingeravtrykket mislyktes. Prøv på nytt, eller bruk en annen finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Legg til ett til"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Neste"</string>
@@ -1322,8 +1334,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Full oppløsning"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Full oppløsning bruker mer batteri. Hvis du endrer oppløsningen, kan det føre til at noen apper starter på nytt."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Farger"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturlig"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Forsterket"</string>
@@ -2345,8 +2356,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Skjermstørrelsen og tekstinnstillingene er tilbakestilt"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vil du tilbakestille visningsstørrelse og tekst?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Innstillingene for visningsstørrelse og tekst blir tilbakestilt til de opprinnelge telefoninnstillingene"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Innstillingene for visningsstørrelse og tekst blir tilbakestilt til de opprinnelige nettbrettinnstillingene"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Tilbakestill"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Har du planer for helgen?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Jeg skal til stranden. Vil du bli med?"</string>
@@ -2686,10 +2696,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"<xliff:g id="REMAIN">%1$s</xliff:g> gjenstår"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"Batteriet er fulladet om <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Lavt batteri"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Bakgrunnsbegrensning"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"La appen kjøre i bakgrunnen"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Appen har ikke tillatelse til å kjøre i bakgrunnen"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Bruk i bakgrunnen kan ikke begrenses"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Vil du begrense bakgrunnsaktivitet?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Hvis du begrenser bakgrunnsaktivitet for en app, kan det oppstå problemer"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Du kan ikke begrense appen siden den ikke er satt til å optimalisere batteriet.\n\nFor å begrense appen, slå på batterioptimalisering."</string>
@@ -2893,7 +2900,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Overberegnet strømforbruk"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Brukt i <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Aktiv i <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Skjermbruk <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> brukt av <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> av total batteribruk"</string>
@@ -2901,10 +2907,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Sist batteriet var fulladet"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Full lading varer omtrent"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Data om batteribruk er omtrentlig og kan endres avhengig av bruk."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Aktiv bruk"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"I bakgrunnen"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Batteribruk"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Siden sist batteriet var fulladet"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Styr batteribruk"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\nsiden sist batteriet var fulladet"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> totalt • <xliff:g id="TIME_1">^2</xliff:g> i bakgrunnen\nde siste 24 timene"</string>
@@ -3414,11 +3417,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Slett alle gjesteapper og -data når du avslutter gjestemodus"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Vil du slette gjesteaktivitet?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Apper og data fra denne gjesteøkten slettes nå, og all fremtidig gjesteaktivitet slettes hver gang du avslutter gjestemodus"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Slå på telefonsamtaler"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Slå på telefonsamtaler og SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Slett brukeren"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Vil du slå på telefonsamtaler?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Anropsloggen deles med denne brukeren."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Vil du slå på telefonsamtaler og SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Anrops- og tekstmeldingsloggen deles med denne brukeren."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nødinformasjon"</string>
@@ -3700,7 +3704,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volum, vibrasjon, ikke forstyrr"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Ringeprogrammet er satt til vibrering"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Ringeprogrammet er satt til stille"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Ringe- og varselvolum er satt til 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medievolum"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Castevolum"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Samtalevolum"</string>
@@ -4337,8 +4340,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"I tillegg til å bruke biometri til å låse opp enheten kan du sikre den enda bedre ved å be om passordet ditt ved oppstart. Enheten kan ikke motta anrop, SMS eller varsler – inkludert alarmer – før den starter.\n\nDette bidrar til å beskytte data på mistede eller stjålne enheter. Vil du kreve passordet for å starte enheten?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Ja"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Nei"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Begrenset"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Appen kan bruke batteri i bakgrunnen"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Vil du kreve PIN-kode?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Vil du kreve mønster?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Vil du kreve passord?"</string>
@@ -4642,7 +4643,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Visningsstørrelse"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Gjør alt større eller mindre"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"skjermtetthet, zoom på skjermen, skala, skalering"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Gjør alt på skjermen større eller mindre. Enkelte apper kan bli flyttet på skjermen."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Forhåndsvisning"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Gjør mindre"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Gjør større"</string>
@@ -4666,12 +4666,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"På for alle apper"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apper er installert"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 apper er installert"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> brukt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Intern lagring: <xliff:g id="PERCENTAGE">%1$s</xliff:g> brukt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig"</string>
     <string name="display_summary" msgid="5526061030874717172">"Hvilemodus etter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> med inaktivitet"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Mørkt tema, skriftstørrelse, lysstyrke"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Hvilemodus etter 10 minutter uten aktivitet"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Gjennomsnittlig er <xliff:g id="USED_MEMORY">%1$s</xliff:g> av <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> minne brukt"</string>
     <string name="users_summary" msgid="8473589474976307510">"Logget på som <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> er angitt som standard"</string>
