@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"तुमच्या डिव्हाइसला जवळपासच्या ब्लूटूथ डिव्हाइससह संवाद साधण्याची अनुमती द्या"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"तुमच्या फोनला जवळपासच्या ब्लूटूथ डिव्हाइसशी संवाद साधण्याची अनुमती द्या"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ब्लूटूथ A2DP हार्डवेअर ऑफलोड बंद करा"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO हार्डवेअर ऑफलोड बंद करा"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ब्लूटूथ LE ऑडिओ हार्डवेअर ऑफलोड बंद करा"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"डिव्हाइस रीस्टार्ट करायचे आहे का?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"हे सेटिंग बदलण्यासाठी तुम्ही तुमचे डिव्हाइस रीस्टार्ट करणे आवश्यक आहे."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रीस्टार्ट करा"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"रद्द करा"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"ब्लूटूथ LE ऑडिओ सुरू करा"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"डिव्हाइसमध्ये LE ऑडिओ हार्डवेअरसंबंधित क्षमतांना सपोर्ट असल्यास, ब्लूटूथ LE ऑडिओ हे वैशिष्‍ट्य सुरू करते."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मीडिया डिव्हाइस"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कॉल डिव्हाइस"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"इतर डिव्हाइस"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"फेस अनलॉकला अनुमती देणे"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"ऑथेंटिकेट करण्यासाठी तुमचा चेहरा वापरा"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी मान्यता देण्यासाठी किंवा ॲप्समध्ये साइन इन करण्यासाठी तुमचा चेहरा वापरा."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"तुमच्या लहान मुलाला त्यांचा फोन अनलॉक करण्यासाठी किंवा ते तेच आहेत याची पडताळणी करण्यासाठी त्यांचा चेहरा वापरण्याची अनुमती द्या. ते अ‍ॅप्समध्ये साइन इन करतात, खरेदीला मान्यता देतात आणि बरेच काही करतात तेव्हा हे होते."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"फोन अनलॉक करण्यासाठी किंवा खरेदींना मंजूरी देण्यासाठी तुमचा चेहरा वापरा.\n\nटीप: तुम्ही हे डिव्हाइस अनलॉक करण्यासाठी तुमचा चेहरा वापरू शकत नाही. अधिक माहितीसाठी, तुमच्या संस्थेच्या प्रशासकाशी संपर्क साधा."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी परवानगी देण्यासाठी किंवा ॲप्सवर साइन इन करण्यासाठी तुमचा चेहरा वापरा"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"ते Pixel Imprint वापरतात तेव्हा, त्यांचे फिंगरप्रिंट मॉडेल अपडेट करण्यासाठी इमेज वापरल्या जातात. तुमच्या लहान मुलाचे फिंगरप्रिंट मॉडेल तयार करण्यासाठी वापरलेल्या इमेज कधीही स्टोअर केल्या जात नाहीत पण, फिंगरप्रिंट मॉडेल फोनवर सुरक्षितरीत्या स्टोअर केले जाते आणि ते फोनमध्येच राहते. फोनवर सर्व प्रक्रिया सुरक्षितरीत्या होते."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"तुम्ही तुमच्या फिंगरप्रिंट इमेज आणि मॉडेल हटवू शकता किंवा सेटिंग्ज मध्ये फिंगरप्रिंट अनलॉक कधीही बंद करू शकता. तुम्ही फिंगरप्रिंट इमेज आणि मॉडेल हे हटवत नाही तोपर्यंत, ते तुमच्या फोनमध्ये स्टोअर केलेले असतात."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"तुम्ही आणि तुमचे लहान मूल त्यांच्या फिंगरप्रिंट इमेज व मॉडेल हटवू शकते किंवा सेटिंग्ज मध्ये फिंगरप्रिंट अनलॉक कधीही बंद करू शकते. फिंगरप्रिंट इमेज आणि मॉडेल हटवली जात नाहीत तोपर्यंत, ती फोनमध्ये स्टोअर केलेली असतात."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"एखाद्या व्यक्तीने तुमच्या बोटावर तुमचा फोन धरल्यास, तुम्हाला तो अनलॉक करायचा नसतानादेखील तो अनलॉक होऊ शकतो."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"एखाद्या व्यक्तीने तुमच्या बोटावर तुमचा फोन धरल्यास, तुम्हाला तो अनलॉक करायचा नसतानादेखील तो अनलॉक होऊ शकतो."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"एखाद्या व्यक्तीने तुमच्या लहान मुलाच्या बोटावर त्यांचा फोन धरल्यास, त्यांना तो अनलॉक करायचा नसतानादेखील तो अनलॉक होऊ शकतो."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"सर्वोत्तम परिणामांसाठी, Google साठी बनवलेले प्रमाणित असलेले स्क्रीन प्रोटेक्टर वापरा. इतर स्क्रीन प्रोटेक्‍टरसह, तुमचे फिंगरप्रिंट कदाचित काम करणार नाही."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"सर्वोत्तम परिणामांसाठी, Google साठी बनवलेले प्रमाणित असलेले स्क्रीन प्रोटेक्टर वापरा. इतर स्क्रीन प्रोटेक्‍टरसह, तुमच्या लहान मुलाचे फिंगरप्रिंट कदाचित काम करणार नाही."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"डिव्हाइस आणि फिंगरप्रिंट सेन्सर स्थानासह चित्रे"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"नाव"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ठीक आहे"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"हटवा"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"सेंसरला स्पर्श करा"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"तुमचे बोट सेन्सरवर ठेवा आणि व्हायब्रेशन जाणवल्यावर काढा"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"यामुळे तुमची फिंगरप्रिंट आणखी स्पष्टपणे कॅप्चर करण्यात मदत होते"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फिंगरप्रिंटची <xliff:g id="PERCENTAGE">%d</xliff:g> टक्के नोंदणी झाली आहे"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फिंगरप्रिंट जोडली"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"तुम्ही ॲप्समध्ये साइन इन करता, तेव्हा तुमचा टॅबलेट अनलॉक करण्यासाठी किंवा ते तुम्हीच आहात याची पडताळणी करण्यासाठी तुम्ही आता तुमची फिंगरप्रिंट वापरू शकता"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"तुम्ही ॲप्समध्ये साइन इन करता, तेव्हा तुमचे डिव्हाइस अनलॉक करण्यासाठी किंवा ते तुम्हीच आहात याची पडताळणी करण्यासाठी तुम्ही आता तुमची फिंगरप्रिंट वापरू शकता"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"तुम्ही ॲप्समध्ये साइन इन करता, तेव्हा तुमचा फोन अनलॉक करण्यासाठी किंवा ते तुम्हीच आहात याची पडताळणी करण्यासाठी तुम्ही आता तुमची फिंगरप्रिंट वापरू शकता"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"हे नंतर करा"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"उचला, त्यानंतर पुन्हा स्पर्श करा"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"तुमची फिंगरप्रिंट घ्यायची असलेली एक बाजू सेन्सरवर ठेवा आणि धरून ठेवा, त्यानंतर दुसऱ्या बाजूवर स्विच करा"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"पूर्ण झाले"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"अरेरे, तो सेन्सर नाही"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तुमच्या फोनच्या मागील बाजूस असलेल्या सेंसरला स्पर्श करा. तुमची तर्जनी वापरा."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"नोंदणी पूर्ण झाली नाही"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"फिंगरप्रिंट नोंदणी वेळ मर्यादा गाठली. पुन्हा प्रयत्न करा."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिंट नोंदणीने कार्य केले नाही. पुन्हा प्रयत्न करा किंवा भिन्न बोट वापरून पहा."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"आणखी एक जोडा"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"पुढील"</string>
