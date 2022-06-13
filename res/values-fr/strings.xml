@@ -49,16 +49,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Formater la carte SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Aperçu"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Aperçu, page <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> sur <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Agrandissez ou réduisez la taille du texte affiché."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Réduire"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Agrandir"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Utiliser la rotation automatique"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"La détection de visages utilise la caméra avant pour améliorer la précision de la rotation automatique. Les images ne sont jamais stockées ni envoyées à Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Exemple de texte"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Le Magicien d\'Oz"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Chapitre 11 : La merveilleuse cité d\'émeraude"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Malgré leurs lunettes vertes, Dorothée et ses amis, au début, furent éblouis par l\'éclat de la Cité merveilleuse. Les rues étaient bordées de maisons splendides, toutes de marbre vert et incrustées d\'émeraudes étincelantes. Ils marchaient sur une chaussée du même marbre, et la jointure des dalles était sertie de rangs serrés d\'émeraudes qui resplendissaient au soleil. Les carreaux aux fenêtres étaient verts, le ciel au-dessus de la Cité avait une teinte verte, et le soleil lui-même lançait des rayons verts. \n\nBeaucoup de gens déambulaient dans les rues, hommes, femmes et enfants ; tous étaient vêtus de vert et avaient le teint verdâtre. Étonnés, ils dévisageaient Dorothée et son étrange escorte, les enfants couraient se cacher derrière leurs mères à la vue du Lion ; mais personne ne leur adressait la parole. Il y avait de nombreuses boutiques et Dorothée remarqua que tout y était vert à l\'intérieur. Tout ce qu\'on y vendait était vert : le sucre candi et le pop-corn, les souliers, les chapeaux et les habits. Dans une boutique, un homme vendait de la limonade verte et Dorothée vit que les enfants payaient avec des sous verts. \n\nIl semblait n\'y avoir ni chevaux, ni animaux d\'aucune espèce ; les hommes transportaient diverses choses dans de petites charrettes vertes qu\'ils poussaient devant eux. Tout le monde avait un air heureux et satisfait, et chacun respirait la prospérité."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Mémoire de stockage USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Carte SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -148,11 +142,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Autoriser l\'appareil à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Autoriser le téléphone à communiquer avec les appareils Bluetooth à proximité"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Désactiver le déchargement du matériel Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Désactiver le déchargement du matériel Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Désactiver le déchargement du matériel Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Redémarrer l\'appareil ?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Vous devez redémarrer l\'appareil pour modifier ce paramètre."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Redémarrer"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Annuler"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Activer le Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Activer la fonctionnalité Bluetooth LE Audio si l\'appareil prend en charge les capacités du matériel LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Périphériques multimédias"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Appareils servant pour les appels"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Autres appareils"</string>
@@ -367,7 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Autoriser le déverr. par reconn. faciale"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Vous authentifier avec votre visage"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Autorisez votre enfant à utiliser son visage pour déverrouiller son téléphone ou valider son identité, par exemple pour se connecter à des applis, approuver un achat, etc."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Utilisez votre visage pour déverrouiller votre téléphone ou approuver des achats.\n\nRemarque : Vous ne pouvez pas utiliser votre visage pour déverrouiller cet appareil. Pour en savoir plus, contactez l\'administrateur de votre organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Utilisez votre visage pour déverrouiller votre téléphone, autoriser des achats ou vous connecter à des applications"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -457,7 +458,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Lorsqu\'il se sert de Pixel Imprint, les images seront utilisées pour mettre à jour le modèle de son empreinte digitale. Les images permettant de créer ce modèle ne sont jamais stockées, mais celui-ci est enregistré de façon sécurisée sur son téléphone sans le quitter. Tous les traitements sont sécurisés sur son téléphone."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"À tout moment dans les paramètres, vous pouvez supprimer les images et le modèle de votre empreinte, ou désactiver Fingerprint Unlock. Les images et le modèle sont stockés sur le téléphone jusqu\'à ce que vous les supprimiez."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"À tout moment dans les paramètres, vous et votre enfant pouvez supprimer les images et le modèle de vos empreintes, ou désactiver le déverrouillage par empreinte digitale. Les images et le modèle de vos empreintes digitales sont stockés sur le téléphone jusqu\'à ce que vous les supprimiez."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Vous pouvez déverrouiller votre téléphone sans le vouloir, par exemple si quelqu\'un le porte à votre doigt."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Vous pouvez déverrouiller votre téléphone sans le vouloir, par exemple si quelqu\'un le porte à votre doigt."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Le téléphone de votre enfant peut être déverrouillé involontairement, par exemple quand quelqu\'un pose le doigt dessus."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. Votre empreinte digitale peut ne pas être reconnue avec d\'autres protections d\'écran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Pour de meilleurs résultats, utilisez une protection d\'écran certifiée Made for Google. L\'empreinte digitale de votre enfant peut ne pas être reconnue avec d\'autres protections d\'écran."</string>
@@ -507,6 +512,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration présentant l\'appareil et la position du lecteur d\'empreintes digitales"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nom"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Supprimer"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Posez le doigt sur le lecteur"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Posez le doigt sur le lecteur et levez-le quand il vibre"</string>
@@ -524,9 +531,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Cela permet de mieux capturer votre empreinte"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Enregistrement de l\'empreinte digitale à <xliff:g id="PERCENTAGE">%d</xliff:g> pour cent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Empreinte digitale ajoutée"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre tablette ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre appareil ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Vous pouvez désormais utiliser votre empreinte digitale pour déverrouiller votre téléphone ou confirmer votre identité, par exemple pour vous connecter à des applis"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Plus tard"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levez le doigt, puis reposez-le"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placez le côté de votre empreinte sur le capteur, maintenez-le, puis passez à l\'autre côté"</string>
@@ -584,8 +594,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"OK"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Petit problème… Il ne s\'agit pas du capteur"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Posez l\'index sur le capteur à l\'arrière du téléphone."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Échec de l\'enregistrement"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Délai d\'enregistrement de l\'empreinte digitale expiré. Veuillez réessayer."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"L\'enregistrement de l\'empreinte digitale n\'a pas fonctionné. Veuillez réessayer ou utiliser un autre doigt."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Ajouter une empreinte"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Suivant"</string>
@@ -1322,8 +1334,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Haute résolution"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"FHD+ 1080p"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"QHD+ 1440p"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"La haute résolution consomme davantage de batterie. Modifier la résolution peut entraîner le redémarrage de certaines applis."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Couleurs"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Naturelles"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Rehaussées"</string>
@@ -1415,11 +1426,11 @@
     <string name="dark_ui_auto_mode_custom" msgid="3800138185265182170">"S\'active à l\'heure choisie"</string>
     <string name="dark_ui_auto_mode_custom_bedtime" msgid="8465023741946439266">"S\'active à l\'heure du coucher"</string>
     <string name="dark_ui_status_title" msgid="3505119141437774329">"État"</string>
-    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Ne s\'active jamais automatiquement"</string>
+    <string name="dark_ui_summary_off_auto_mode_never" msgid="5828281549475697398">"Ne s\'activera jamais automatiquement"</string>
     <string name="dark_ui_summary_off_auto_mode_auto" msgid="6766831395970887213">"S\'active automatiquement au coucher du soleil"</string>
     <string name="dark_ui_summary_off_auto_mode_custom" msgid="1345906088326708376">"S\'active automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_off_auto_mode_custom_bedtime" msgid="7759826673214624622">"S\'active automatiquement à l\'heure du coucher"</string>
-    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Ne jamais désactiver automatiquement"</string>
+    <string name="dark_ui_summary_on_auto_mode_never" msgid="2468597062391435521">"Ne se désactivera jamais automatiquement"</string>
     <string name="dark_ui_summary_on_auto_mode_auto" msgid="5553376115092648636">"Désactiver automatiquement au lever du soleil"</string>
     <string name="dark_ui_summary_on_auto_mode_custom" msgid="2526935680241734784">"Désactiver automatiquement à <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="dark_ui_summary_on_auto_mode_custom_bedtime" msgid="1976993025762551246">"Se désactive automatiquement après l\'heure du coucher"</string>
@@ -2345,8 +2356,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Les paramètres de texte et de taille d\'affichage ont été réinitialisés"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Réinitialiser la taille d\'affichage et le texte ?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Les paramètres d\'origine du téléphone concernant la taille d\'affichage et les préférences de texte seront rétablis"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Les paramètres d\'origine de la tablette concernant la taille d\'affichage et les préférences de texte seront rétablis"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Réinitialiser"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Des projets pour le week-end ?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Je vais à la plage. Tu veux venir ?"</string>
@@ -2686,10 +2696,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Temps restant : <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> avant chargement complet"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Batterie faible"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Restriction en arrière-plan"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Autoriser l\'application à s\'exécuter en arrière-plan"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Application non autorisée à s\'exécuter en arrière-plan"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"L\'utilisation en arrière-plan ne peut pas être restreinte"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Limiter l\'activité en arrière-plan ?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Si vous limitez l\'activité en arrière-plan d\'une application, cela peut provoquer son dysfonctionnement"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Cette appli n\'étant pas configurée pour optimiser batterie, vous ne pouvez pas la limiter.\n\nActivez optimisation batterie."</string>
@@ -2893,7 +2900,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Consommation surestimée"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Durée d\'utilisation : <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Durée d\'activité : <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Utilisation de l\'écran : <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> utilisé(s) par <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> de la batterie"</string>
@@ -2901,10 +2907,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Dernière charge complète"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"La charge complète dure environ"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Les données d\'utilisation de la batterie sont approximatives et peuvent varier."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"En utilisation active"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"En arrière-plan"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Utilisation de la batterie"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Depuis la charge complète"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Gérer l\'utilisation de la batterie"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\ndepuis la dernière charge complète"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> au total • <xliff:g id="TIME_1">^2</xliff:g> en arrière-plan\n au cours des dernières 24 h"</string>
@@ -3414,11 +3417,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Supprimer toutes les applis et données de la session lorsque vous quittez le mode Invité"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Supprimer l\'activité ?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Les applis et données de cette session Invité seront immédiatement supprimées, et toute l\'activité des futures sessions sera supprimée à chaque fois que vous quitterez le mode Invité"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Activer les appels téléphoniques"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Activer les appels téléphoniques et les SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Supprimer un compte utilisateur"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Activer les appels téléphoniques ?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"L\'historique des appels sera partagé avec cet utilisateur."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Activer les appels téléphoniques et les SMS ?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"L\'historique des appels et des SMS sera partagé avec cet utilisateur."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Informations d\'urgence"</string>
@@ -3700,7 +3704,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volume, vibreur, Ne pas déranger"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Sonnerie en mode vibreur"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Sonnerie en mode silencieux"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Volume des sonneries et notifications à 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume des contenus multimédias"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Volume de diffusion"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volume des appels"</string>
@@ -4337,8 +4340,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Vous pouvez renforcer la protection de votre appareil en exigeant, avant qu\'il ne démarre, la saisie de votre mot de passe en plus de l\'authentification biométrique pour le déverrouiller. L\'appareil ne peut alors pas recevoir d\'appels ni de messages, ni émettre de notifications, y compris des alarmes, tant qu\'il n\'a pas démarré.\n\nCela permet de protéger les données de vos appareils en cas de perte ou de vol. Voulez-vous exiger la saisie du mot de passe avant le démarrage de votre appareil ?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Oui"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Non"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Restreinte"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Utilisation en arrière-plan autorisée"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Exiger le code ?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Exiger le schéma ?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Exiger le mot de passe ?"</string>
@@ -4642,7 +4643,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Taille de l\'affichage"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Tout agrandir ou réduire"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"densité d\'affichage, zoom sur l\'écran, échelle, mise à l\'échelle"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Augmenter ou réduire la taille des éléments à l\'écran. Certaines applis pourront changer de place sur l\'écran."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Aperçu"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Réduire"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Agrandir"</string>
@@ -4666,12 +4666,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Activées pour toutes les applications"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> applications installées"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 applications installées"</string>
     <string name="storage_summary" msgid="5903562203143572768">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisés - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Mémoire de stockage interne : <xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisés – <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="display_summary" msgid="5526061030874717172">"Mode veille activé après <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> d\'inactivité"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Thème sombre, taille de police, luminosité"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Mode veille après 10 minutes d\'inactivité"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Utilisation d\'environ <xliff:g id="USED_MEMORY">%1$s</xliff:g> sur <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de mémoire"</string>
     <string name="users_summary" msgid="8473589474976307510">"Connecté en tant que \"<xliff:g id="USER_NAME">%1$s</xliff:g>\""</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> est l\'application par défaut."</string>
