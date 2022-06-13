@@ -148,16 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Թույլատրել սարքին միանալ մոտակայքում գտնվող Bluetooth սարքերին"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Թույլատրել հեռախոսին միանալ մոտակայքում գտնվող Bluetooth սարքերին"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Անջատել Bluetooth A2DP-ի բեռնաթափումը"</string>
-    <!-- no translation found for bluetooth_disable_le_audio_hw_offload (4656853795514691257) -->
-    <skip />
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Անջատել Bluetooth LE Audio-ի սարքակազմային բեռնաթափումը"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Վերագործարկե՞լ սարքը"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Վերագործարկեք սարքը՝ այս կարգավորումը փոխելու համար։"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Վերագործարկել"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Չեղարկել"</string>
-    <!-- no translation found for bluetooth_enable_leaudio (1245004820628723136) -->
-    <skip />
-    <!-- no translation found for bluetooth_enable_leaudio_summary (8066117764037123479) -->
-    <skip />
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Միացնել Bluetooth LE Audio-ն"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Միացնում է Bluetooth LE Audio գործառույթը, եթե սարքն այն աջակցում է։"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Մեդիա սարքեր"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Հեռախոսային սարքեր"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Այլ սարքեր"</string>
@@ -371,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Թույլատրեք դեմքով ապակողպումը"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Օգտագործեք դեմքը՝ նույնականացման համար"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Դեմքի ճանաչման միջոցով ապակողպեք ձեր հեռախոսը, գնումներ կատարեք և մուտք գործեք հավելվածներ:"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Թույլ տվեք ձեր երեխային օգտագործել իր դեմքը՝ հեռախոսն ապակողպելու կամ իր ինքնությունը հաստատելու համար (օր․՝ հավելվածներ մտնելիս կամ որևէ գնում հաստատելիս)։"</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Օգտագործեք ձեր դեմքը՝ հեռախոսն ապակողպելու կամ գնումներ թույլատրելու համար:\n\nՆշում. այս սարքն ապակողպելու համար չեք կարող օգտագործել ձեր դեմքը: Լրացուցիչ տեղեկություններ ստանալու համար դիմեք ձեր կազմակերպության ադմինիստրատորին:"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Դեմքի ճանաչման միջոցով ապակողպեք ձեր հեռախոսը, գնումներ կատարեք և մուտք գործեք հավելվածներ"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -528,9 +530,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Այդպես տվիչն ավելի մեծ մակերեսով կնկարի ձեր մատնահետքը"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Մատնահետքը գրանցվել է <xliff:g id="PERCENTAGE">%d</xliff:g> տոկոսով"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Մատնահետքն ավելացվեց"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Այժմ կարող եք օգտագործել ձեր մատնահետքը՝ պլանշետն ապակողպելու կամ ձեր ինքնությունը հաստատելու համար (օր․՝ հավելվածներում մուտք գործելիս)։"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Այժմ կարող եք օգտագործել ձեր մատնահետքը՝ սարքն ապակողպելու կամ ձեր ինքնությունը հաստատելու համար (օր․՝ հավելվածներում մուտք գործելիս)։"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Այժմ կարող եք օգտագործել ձեր մատնահետքը՝ հեռախոսն ապակողպելու կամ ձեր ինքնությունը հաստատելու համար (օր․՝ հավելվածներում մուտք գործելիս)։"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Ավելի ուշ"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Բարձրացրեք, ապա կրկին հպեք"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Մատի մի կողմը դրեք տվիչի վրա և պահեք, ապա նույնն արեք մյուս կողմով"</string>
