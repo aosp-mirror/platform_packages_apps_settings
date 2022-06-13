@@ -34,6 +34,17 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Preference controller for "Enable 2G"
+ *
+ * <p>
+ * This preference controller is invoked per subscription id, which means toggling 2g is a per-sim
+ * operation. The requested 2g preference is delegated to
+ * {@link TelephonyManager#setAllowedNetworkTypesForReason(int reason, long allowedNetworkTypes)}
+ * with:
+ * <ul>
+ *     <li>{@code reason} {@link TelephonyManager#ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G}.</li>
+ *     <li>{@code allowedNetworkTypes} with set or cleared 2g-related bits, depending on the
+ *     requested preference state. </li>
+ * </ul>
  */
 public class Enable2gPreferenceController extends TelephonyTogglePreferenceController {
 
@@ -76,6 +87,22 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         return this;
     }
 
+    /**
+     * Get the {@link com.android.settings.core.BasePreferenceController.AvailabilityStatus} for
+     * this preference given a {@code subId}.
+     * <p>
+     * A return value of {@link #AVAILABLE} denotes that the 2g status can be updated for this
+     * particular subscription.
+     * We return {@link #AVAILABLE} if the following conditions are met and {@link
+     * #CONDITIONALLY_UNAVAILABLE} otherwise.
+     * <ul>
+     *     <li>The subscription is usable {@link SubscriptionManager#isUsableSubscriptionId}</li>
+     *     <li>The carrier has not opted to disable this preference
+     *     {@link CarrierConfigManager#KEY_HIDE_ENABLE_2G}</li>
+     *     <li>The device supports
+     *     <a href="https://cs.android.com/android/platform/superproject/+/master:hardware/interfaces/radio/1.6/IRadio.hal">Radio HAL version 1.6 or greater</a> </li>
+     * </ul>
+     */
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
@@ -121,6 +148,13 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         return visible ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
+    /**
+     * Return {@code true} if 2g is currently enabled.
+     *
+     * <p><b>NOTE:</b> This method returns the active state of the preference controller and is not
+     * the parameter passed into {@link #setChecked(boolean)}, which is instead the requested future
+     * state.</p>
+     */
     @Override
     public boolean isChecked() {
         long currentlyAllowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -128,6 +162,17 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         return (currentlyAllowedNetworkTypes & BITMASK_2G) != 0;
     }
 
+    /**
+     * Ensure that the modem's allowed network types are configured according to the user's
+     * preference.
+     * <p>
+     * See {@link com.android.settings.core.TogglePreferenceController#setChecked(boolean)} for
+     * details.
+     *
+     * @param isChecked The toggle value that we're being requested to enforce. A value of {@code
+     *                  false} denotes that 2g will be disabled by the modem after this function
+     *                  completes, if it is not already.
+     */
     @Override
     public boolean setChecked(boolean isChecked) {
         if (!SubscriptionManager.isUsableSubscriptionId(mSubId)) {
