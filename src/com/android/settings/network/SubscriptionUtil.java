@@ -475,7 +475,7 @@ public class SubscriptionUtil {
                 .stream()
                 .filter(subInfo -> subInfo.getSubscriptionId() == subId)
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     /**
