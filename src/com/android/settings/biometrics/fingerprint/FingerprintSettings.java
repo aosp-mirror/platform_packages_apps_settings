@@ -799,10 +799,12 @@ public class FingerprintSettings extends SubSettings {
             public Dialog onCreateDialog(Bundle savedInstanceState) {
                 mFp = getArguments().getParcelable(KEY_FINGERPRINT);
                 final String title = getString(R.string.fingerprint_delete_title, mFp.getName());
+                final String message =
+                        getString(R.string.fingerprint_v2_delete_message, mFp.getName());
 
                 mAlertDialog = new AlertDialog.Builder(getActivity())
                         .setTitle(title)
-                        .setMessage(R.string.fingerprint_delete_message)
+                        .setMessage(message)
                         .setPositiveButton(
                                 R.string.security_settings_fingerprint_enroll_dialog_delete,
                                 this /* onClickListener */)
@@ -967,6 +969,10 @@ public class FingerprintSettings extends SubSettings {
                 final boolean isProfileChallengeUser =
                         getArguments().getBoolean("isProfileChallengeUser");
 
+                final String title = getString(R.string.fingerprint_delete_title, mFp.getName());
+                final String message =
+                        getString(R.string.fingerprint_v2_delete_message, mFp.getName());
+
                 DevicePolicyManager devicePolicyManager =
                         getContext().getSystemService(DevicePolicyManager.class);
                 String messageId =
@@ -977,10 +983,12 @@ public class FingerprintSettings extends SubSettings {
                         : R.string.fingerprint_last_delete_message;
 
                 final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.fingerprint_last_delete_title)
+                        .setTitle(title)
                         .setMessage(devicePolicyManager.getResources().getString(
-                                messageId, () -> getContext().getString(defaultMessageId)))
-                        .setPositiveButton(R.string.fingerprint_last_delete_confirm,
+                                messageId,
+                                () ->  message + "\n\n" + getContext().getString(defaultMessageId)))
+                        .setPositiveButton(
+                                R.string.security_settings_fingerprint_enroll_dialog_delete,
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

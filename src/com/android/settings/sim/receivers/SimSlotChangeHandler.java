@@ -294,7 +294,7 @@ public class SimSlotChangeHandler {
             return null;
         }
         for (UiccSlotInfo slotInfo : slotInfos) {
-            if (slotInfo != null && slotInfo.isRemovable() && !slotInfo.getIsEuicc()) {
+            if (slotInfo != null && slotInfo.isRemovable()) {
                 return slotInfo;
             }
         }

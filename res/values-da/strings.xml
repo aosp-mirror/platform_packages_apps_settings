@@ -521,9 +521,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registreres en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Nu kan du bruge dit fingeraftryk til at låse din tablet op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Nu kan du bruge dit fingeraftryk til at låse din enhed op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Nu kan du bruge dit fingeraftryk til at låse din telefon op eller bekræfte din identitet, f.eks. når du logger ind i apps"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
@@ -572,7 +575,7 @@
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"Vil du springe adgangskodekonfiguration over?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"Vil du udelade konfiguration af adgangskode og ansigt?"</string>
     <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"Vil du udelade konfiguration af adgangskode og fingeraftryk?"</string>
-    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Vil du udelade konfiguration af adgangskode, ansigt og fingeraftryk?"</string>
+    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"Vil du udelade at bruge adgangskode, ansigt og fingeraftryk?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"Vil du springe mønsterkonfiguration over?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"Vil du udelade konfiguration af mønster og ansigt?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"Vil du udelade konfiguration af mønster og fingeraftryk?"</string>
@@ -636,7 +639,7 @@
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"Du kan forhindre andre i at bruge denne telefon uden din tilladelse ved at aktivere funktionerne til enhedsbeskyttelse. Vælg den skærmlås, du vil bruge."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Vælg din alternative metode til skærmlåsning"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Din it-administrator kan ikke nulstille en glemt skærmlås."</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Angiv en separat lås for arbejdsapps"</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Angiv en separat arbejdslås"</string>
     <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"Hvis du glemmer denne lås, kan du få din it-administrator til at nulstille den"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Valgmuligheder for skærmlås"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Valgmuligheder for skærmlås"</string>
@@ -3727,15 +3730,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Undertekster til medier"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Telefonens højttaler"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Høretelefoner med ledning"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Lyden fra kompatible medieenheder bliver endnu bedre"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Fra"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Til/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Til/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> og <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Du kan også aktivere rumlig lyd for Bluetooth-enheder."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Indstillinger for tilsluttede enheder"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Ingen}=1{1 tidsplan er angivet}one{# tidsplan er angivet}other{# tidsplaner er angivet}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Forstyr ikke"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Få kun notifikationer fra vigtige personer og apps"</string>
@@ -4879,8 +4879,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Midlertidigt deaktiveret på grund af Batterisparefunktion"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Deaktiver Batterisparefunktion"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Midlertidigt aktiveret af batterisparefunktionen"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Understøttede apps skifter også til mørkt tema"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"OK"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Prøv Mørkt tema"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Forlænger batteritiden"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Felter for udviklere til Kvikmenu"</string>
@@ -5075,7 +5073,7 @@
     <string name="do_disclosure_learn_more_separator" msgid="5714364437437041671">" "</string>
     <string name="learn_more" msgid="3534519107947510952">"Få flere oplysninger"</string>
     <string name="blocked_by_restricted_settings_title" msgid="7334715011474037399">"Begrænset indstilling"</string>
-    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Begrænsede indstillinger tillades for <xliff:g id="APP_NAME">%s</xliff:g>"</string>
+    <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Begrænsede indstillinger tilladt for <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Af hensyn til din sikkerhed er denne indstilling i øjeblikket ikke tilgængelig."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Oplysninger om finansieret enhed"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Din kreditudbyder kan ændre indstillinger og installere software på denne enhed.\n\nHvis du glemmer en betaling, bliver din enhed låst.\n\nKontakt din kreditudbyder for at få flere oplysninger."</string>
@@ -5535,8 +5533,8 @@
     <string name="system_default_app_subtext" msgid="5212055189703164839">"Systemstandard"</string>
     <string name="select_invalid_bug_report_handler_toast_text" msgid="8857326334015386692">"Dette valg er ikke længere gyldigt. Prøv igen."</string>
     <string name="quick_controls_lower" msgid="6675573610027367819">"enhedsstyring"</string>
-    <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort"</string>
-    <string name="cards_passes_lower" msgid="2429722007109957877">"Kort"</string>
+    <string name="cards_passes_sentence" msgid="1866311782387946944">"Kort og billetter"</string>
+    <string name="cards_passes_lower" msgid="2429722007109957877">"kort og billetter"</string>
     <string name="power_menu_setting_name" msgid="7291642927216934159">"Hold afbryderknappen nede"</string>
     <string name="power_menu_summary_long_press_for_assist_enabled" msgid="5322150755041458952">"Hold knappen nede for at åbne Assistent"</string>
     <string name="power_menu_summary_long_press_for_assist_disabled_with_power_menu" msgid="5165714995895517816">"Hold knappen nede for at åbne menuen for afbryderknappen"</string>

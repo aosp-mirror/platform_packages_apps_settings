@@ -225,7 +225,7 @@
     <string name="preference_of_system_locale_summary" msgid="5612241394431188535">"Chaguomsingi la mfumo"</string>
     <string name="desc_no_available_supported_locale" msgid="7883271726226947273">"Chaguo la lugha kwa programu hii halipatikani kwenye Mipangilio."</string>
     <string name="desc_app_locale_disclaimer" msgid="5295933110644789052">"Huenda lugha ikatofautiana na zinazopatikana katika programu. Huenda baadhi ya programu zisiwe na uwezo wa kutumia mipangilio hii."</string>
-    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Programu zinazotumia chaguo la lugha ndizo zinazoonyeshwa hapa."</string>
+    <string name="desc_app_locale_selection_supported" msgid="6149467826636295127">"Programu zinazoruhusu kuteua lugha ndizo zinazoonyeshwa hapa."</string>
     <plurals name="dlg_remove_locales_title" formatted="false" msgid="2845515796732609837">
       <item quantity="other">Ungependa kuondoa lugha zilizochaguliwa?</item>
       <item quantity="one">Ungependa kuondoa lugha iliyochaguliwa?</item>
@@ -521,9 +521,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Hatua hii husaidia kunasa sehemu nyingi za alama ya kidole chako"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Imeandikisha asilimia <xliff:g id="PERCENTAGE">%d</xliff:g> ya alama ya kidole"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Alama ya kidole imeongezwa"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Sasa unaweza kutumia alama ya kidole chako kufungua kompyuta kibao yako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Sasa unaweza kutumia alama ya kidole chako kufungua kifaa chako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Sasa unaweza kutumia alama ya kidole chako kufungua simu yako au kuthibitisha kuwa ni wewe, kama vile unapoingia katika akaunti kwenye programu"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Ongeza baadaye"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Inua, kisha uguse tena"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Weka upande mmoja wa kidole chako kwenye kitambuzi na ushikilie, kisha uweke upande wa pili"</string>
@@ -3727,15 +3730,12 @@
     <string name="live_caption_summary" msgid="2898451867595161809">"Wekea maudhui manukuu kiotomatiki"</string>
     <string name="spatial_audio_speaker" msgid="9145233652433523302">"Spika ya simu"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Vipokea sauti vya kichwani vinavyotumia waya"</string>
-    <!-- no translation found for spatial_audio_text (8201387855375146000) -->
-    <skip />
+    <string name="spatial_audio_text" msgid="8201387855375146000">"Sauti kutoka kwenye maudhui yanayooana huwa murua zaidi"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Imezimwa"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Imewashwa / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Imewashwa / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> na <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <!-- no translation found for spatial_audio_footer_title (8775010547623606088) -->
-    <skip />
-    <!-- no translation found for spatial_audio_footer_learn_more_text (3826811708094366301) -->
-    <skip />
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Pia, unaweza kuwasha kipengele cha Sauti Inayojirekebisha kwa Vifaa vyenye Bluetooth."</string>
+    <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Mipangilio ya vifaa vilivyounganishwa"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{Hamna}=1{Pana ratiba moja}other{Pana ratiba #}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"Usinisumbue"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"Pata arifa za watu na programu muhimu pekee"</string>
@@ -4879,8 +4879,6 @@
     <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Imezimwa kwa muda kwa sababu ya Kiokoa Betri"</string>
     <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Zima kiokoa betri"</string>
     <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Imewashwa kwa muda kwa sababu ya Kiokoa Betri"</string>
-    <string name="dark_ui_settings_dark_summary" msgid="1214821092462388494">"Programu zinazotumika pia zitabadili zitumie mandhari meusi"</string>
-    <string name="dark_ui_settings_dialog_acknowledge" msgid="250437497729953965">"Nimeelewa"</string>
     <string name="dark_theme_slice_title" msgid="4684222119481114062">"Jaribu Mandhari meusi"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Huboresha muda wa matumizi ya betri"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Vigae vya msanidi programu vya mipangilio ya haraka"</string>
