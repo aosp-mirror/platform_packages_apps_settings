@@ -51,16 +51,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Очист. карту SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Переглянути"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Попередній перегляд сторінки <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> з <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Збільшуйте або зменшуйте текст на екрані."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Зменшити"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Збільшити"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Увімкнути автообертання"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Технологія розпізнавання облич використовує фронтальну камеру, щоб підвищувати точність автообертання. Зображення ніколи не зберігаються та не надсилаються на сервери Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Зразок тексту"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Чарівник країни Оз"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11. Дивовижне Смарагдове місто країни Оз"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Навіть крізь зелені скельця окулярів краса дивовижного міста спершу засліпила Дороті та її друзів. Уздовж вулиць височіли будинки із зеленого мармуру, прикрашені блискучими смарагдами. Тротуар також був вимощений плитами із зеленого мармуру, на стиках яких виблискували смарагди. Вікна будинків були із зеленого скла. Навіть небо над містом і промені сонця були зеленими. \n\nНа вулиці прогулювалося багато людей – чоловіків, жінок і дітей. Усі вони носили зелений одяг, а їхня шкіра мала зеленуватий відтінок. Люди з подивом дивилися на Дороті та її чудернацьку компанію, а діти тікали й ховалися за своїми матерями, коли бачили Лева. Проте ніхто не наважився заговорити з ними. У магазинах продавалися товари зеленого кольору: зелені цукерки, зелений попкорн, зелені туфлі, капелюхи й інший одяг. В одній крамниці чоловік торгував зеленим лимонадом, за який діти розплачувалися зеленими монетками. \n\nЗдавалось, у місті немає ні коней, ні інших тварин – чоловіки перевозили речі на невеликих зелених тачках. Усі мали щасливий і задоволений вигляд."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Носій USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Карта SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -150,11 +144,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Дозвольте пристрою обмінюватися даними з пристроями Bluetooth поруч"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Дозвольте телефону обмінюватися даними з пристроями Bluetooth поруч"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Вимкнути розвантаження Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Вимкнути розвантаження Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Вимкнути розвантаження апаратного забезпечення Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Перезапустити?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Щоб змінити це налаштування, перезапустіть пристрій."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Перезапустити"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Скасувати"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Увімкнути Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Вмикає функцію Bluetooth LE Audio, якщо пристрій підтримує апаратні можливості LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Носії"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Пристрої для дзвінків"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Інші пристрої"</string>
@@ -373,7 +369,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозвольте фейсконтроль"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Використовуйте обличчя для автентифікації"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Розблоковуйте телефон, робіть покупки та входьте в додатки за допомогою фейсконтролю."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Дозвольте дитині розблоковувати телефон або підтверджувати особу за допомогою фейсконтролю. Тоді вона зможе входити в додатки, схвалювати покупки тощо."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Розблоковуйте телефон або схвалюйте покупки за допомогою фейсконтролю.\n\nПримітка. Цей пристрій не можна розблокувати таким чином. Щоб дізнатися більше, зв’яжіться з адміністратором своєї організації."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Розблоковуйте телефон, робіть покупки та входьте в додатки за допомогою фейсконтролю"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -465,7 +466,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Коли дитина користується Pixel Imprint, отримані зображення використовуються для оновлення моделі відбитка пальця. Ці зображення ніколи не залишаються на телефоні, але сама модель надійно зберігається та нікуди не передається. Усі процедури обробки безпечно відбуваються на телефоні."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Ви будь-коли можете видалити зображення й модель свого відбитка пальця або вимкнути цю функцію розблокування в налаштуваннях. Зображення й модель відбитка пальця зберігаються на телефоні, поки ви їх не видалите."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Ви та дитина будь-коли можете видалити зображення й модель відбитка пальця або вимкнути цю функцію в налаштуваннях. Зображення й моделі відбитків пальців зберігаються на телефоні, доки ви їх не видалите."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Ваш телефон можна розблокувати навіть тоді, коли ви цього не плануєте. Наприклад, якщо хтось піднесе його до вашого пальця."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Ваш телефон можна розблокувати навіть тоді, коли ви цього не плануєте. Наприклад, якщо хтось піднесе його до вашого пальця."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефон дитини можна розблокувати випадково, наприклад якщо хтось прикладе пристрій до її пальця."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця може не розпізнаватися."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуємо використовувати захисну плівку чи скло, що мають позначку \"Створено для Google\". Якщо вони не матимуть такої позначки, відбиток пальця дитини може не розпізнаватися."</string>
@@ -515,6 +520,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Розташування сканера відбитків пальців на пристрої"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Назва"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ОК"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Видалити"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Торкніться сканера"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Покладіть палець на датчик і заберіть його, коли відчуєте вібрацію"</string>
@@ -532,9 +539,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Це допоможе записати відбиток більшої площі пальця"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Реєстрацію відбитка пальця завершено на стільки відсотків: <xliff:g id="PERCENTAGE">%d</xliff:g>"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Відбиток додано"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Тепер за допомогою відбитка пальця можна розблоковувати планшет або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Тепер за допомогою відбитка пальця можна розблоковувати пристрій або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Тепер за допомогою відбитка пальця можна розблоковувати телефон або підтверджувати свою особу (наприклад, щоб входити в додатки)"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Виконати цю процедуру пізніше"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Підніміть і знову прикладіть палець"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Прикладіть до датчика й трохи потримайте одну сторону кінчика пальця, а потім зробіть те саме з іншою стороною"</string>
@@ -592,8 +602,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Це не датчик"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Торкніться сканера на задній панелі телефона. Прикладіть вказівний палець."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Відбиток не зареєстровано"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Час для реєстрації відбитка пальця минув. Повторіть спробу."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Відбиток не зареєстровано. Повторіть спробу або прикладіть інший палець."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Додати ще"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Далі"</string>
@@ -1362,8 +1374,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Максимальна роздільна здатність"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Коли екран працює з максимальною роздільною здатністю, акумулятор розряджається швидше. Якщо змінити роздільну здатність, деякі додатки можуть перезапуститися."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Кольори"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Природні"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Яскраві"</string>
@@ -2393,8 +2404,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Налаштування масштабу елементів і оформлення тексту скинуто"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Скинути налаштування масштабу й тексту?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Параметри масштабу й тексту буде скинуто до початкових налаштувань телефона"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Параметри масштабу й тексту буде скинуто до початкових налаштувань планшета"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Скинути"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Маєте плани на вихідні?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Їдемо на пляж. Хочете з нами?"</string>
@@ -2748,10 +2758,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Залишилося <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"Залишилося заряджати <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Низький заряд акумулятора"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Обмеження у фоновому режимі"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Дозволити додаткам працювати у фоновому режимі"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Додатку заборонено працювати у фоновому режимі"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Не можна обмежити споживання заряду у фоновому режимі"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Обмежити фонову активність?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Якщо обмежити фонову активність, додаток може працювати неналежним чином"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Оскільки в додатку не передбачено економію заряду акумулятора, його не можна обмежити.\n\nУвімкніть оптимізацію споживання заряду."</string>
@@ -2969,7 +2976,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Переоцінене енергоспоживання"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> мА/год"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Час використання: <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Активний <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Використання екрана: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> заряду використовує додаток <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> усього заряду"</string>
@@ -2977,10 +2983,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Останнє повне заряджання"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Повністю зарядженого акумулятора вистачає на"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Дані про використання заряду акумулятора приблизні та можуть змінюватися залежно від конкретних умов."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Активне використання"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"У фоновому режимі"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Використання заряду"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Після повного заряджання"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Використання заряду"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> усього • <xliff:g id="TIME_1">^2</xliff:g> споживання у фоновому режимі\nз часу останнього повного заряджання"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"<xliff:g id="TIME_0">^1</xliff:g> усього • <xliff:g id="TIME_1">^2</xliff:g> споживання у фоновому режимі\nза останні 24 год"</string>
@@ -3498,11 +3501,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Видалити всі додатки й дані гостя під час виходу з режиму гостя"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Видалити дії в режимі гостя?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Додатки й дані з цього сеансу в режимі гостя буде видалено зараз, а всі майбутні дії гостя видалятимуться під час кожного виходу з цього режиму"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Увімкнути телефонні дзвінки"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Увімкнути телефонні дзвінки й SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Видалити користувача"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Увімкнути телефонні дзвінки?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Цей користувач матиме доступ до історії викликів."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Увімкнути телефонні дзвінки й SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Цей користувач матиме доступ до історії дзвінків і SMS"</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Інформація для екстрених випадків"</string>
@@ -3786,7 +3790,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Гучність, вібросигнал і режим \"Не турбувати\""</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Вібрацію під час дзвінка ввімкнено"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Звук дзвінка вимкнено"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Гучність дзвінків і сповіщень: 80%"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Гучність медіа"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Гучність трансляції"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Гучність розмови"</string>
@@ -4443,8 +4446,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Якщо ви розблоковуєте пристрій за допомогою біометричних даних, можна додатково захистити його, увімкнувши запит пароля перед запуском. Доки пристрій не запуститься, дзвінки, повідомлення, сповіщення й будильники будуть недоступні.\n\nЦе допомагає захистити дані на загублених чи вкрадених пристроях. Запитувати пароль перед запуском пристрою?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Так"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Ні"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Обмежено"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Додаток може використовувати акумулятор у фоновому режимі"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Вводити PIN-код?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Вводити ключ?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Вводити пароль?"</string>
@@ -4774,7 +4775,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Масштаб"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Збільшуйте або зменшуйте масштаб"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"щільність дисплея, масштаб екрана, масштабувати, масштабування"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Збільшуйте або зменшуйте всі елементи на екрані. Деякі додатки можуть зміститися."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Попередній перегляд"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Зменшити"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Збільшити"</string>
@@ -4800,12 +4800,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Увімкнено для всіх додатків"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Установлено додатків: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"Установлено 24 додатки"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Використано: <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Вільно: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Внутрішня пам’ять: використано <xliff:g id="PERCENTAGE">%1$s</xliff:g>, вільно <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Перейти в режим сну після <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> бездіяльності"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Темна тема, розмір шрифту, яскравість"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Перейти в режим сну після 10 хвилин бездіяльності"</string>
     <string name="memory_summary" msgid="8221954450951651735">"У середньому використовується <xliff:g id="USED_MEMORY">%1$s</xliff:g> пам’яті з <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Ви ввійшли як <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> використовується за умовчанням"</string>

@@ -143,7 +143,7 @@
                   android:taskAffinity="com.android.settings.root"
                   android:launchMode="singleTask"
                   android:exported="true"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -159,7 +159,7 @@
                   android:launchMode="singleTask"
                   android:exported="true"
                   android:enabled="false"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout"
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize"
                   android:permission="android.permission.LAUNCH_MULTI_PANE_SETTINGS_DEEP_LINK">
             <intent-filter>
                 <action android:name="android.settings.SETTINGS_EMBED_DEEP_LINK_ACTIVITY" />
@@ -176,7 +176,7 @@
                   android:launchMode="singleTask"
                   android:exported="false"
                   android:excludeFromRecents="true"
-                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout">
+                  android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|smallestScreenSize">
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>

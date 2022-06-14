@@ -49,16 +49,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Изтриване на SD картата"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Визуализация"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Преглед на страница <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> от <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Намаляване или уголемяване на текста на екрана."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Намаляване на размера"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Увеличаване на размера"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Използване на автоматичното завъртане"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Функцията за лицево разпознаване използва предната камера, за да подобри точността на автоматичното завъртане. Изображенията никога не се съхраняват и не се изпращат до Google."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Примерен текст"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Вълшебникът от Оз"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Глава 11: Удивителният изумруден град на Оз"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Макар зелените очила да предпазваха очите им, отначало Дороти и приятелите й бяха заслепени от блясъка на великолепния град. По улиците се редяха красиви къщи, целите изградени от зелен мрамор и обсипани с искрящи изумруди. Групата се движеше по паваж от същия зелен мрамор, като блокчетата бяха свързани с редици от гъсто разположени изумруди, които блестяха на ярката слънчева светлина. Прозорците на къщите бяха със зелени стъкла. Дори небето над града бе обагрено в зелено, а слънчевите лъчи бяха зелени.\n\nРазхождаха се много хора – мъже, жени и деца. Всички бяха облечени в зелени дрехи и имаха зеленикава кожа. Те гледаха Дороти и странните й спътници с учудени погледи, а децата бягаха и се криеха зад майките си, щом видеха Лъва. Но никой не започваше разговор с тях. На улицата имаше много магазини и Дороти забеляза, че всичко в тях е зелено. Продаваха се зелени бонбони и зелени пуканки, всевъзможни зелени обувки, зелени шапки и зелени дрехи. На едно място някакъв мъж продаваше зелена лимонада и Дороти видя, че децата плащат със зелени монети.\n\nНе се виждаха коне или други животни. За пренасяне мъжете използваха малки зелени колички, които бутаха. Всички изглеждаха доволни, щастливи и благоденстващи."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB хранилище"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD карта"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -148,11 +142,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Разрешете на устройството си да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Разрешаване на телефона да се свързва с устройства с Bluetooth в близост"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Деактивиране на разтоварването чрез хардуер на Bluetooth с код A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Деактивиране на разтоварването чрез хардуер на Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Деактивиране на разтоварването чрез хардуер на Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Да се рестартира ли устройството?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"За да промените настройката, трябва да рестартирате устройството си."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Рестартиране"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Отказ"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Активиране на Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Активира функцията Bluetooth LE, ако устройството поддържа хардуер с възможност за LE Audio."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Мултимедийни устройства"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Устройства за обаждания"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Други устройства"</string>
@@ -367,7 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Разрешаване на отключването с лице"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Използване на лицето ви за удостов."</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Използвайте лицето си за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Разрешете на детето си да използва своето лице, за да отключва телефона или да потвърждава самоличността си, например при влизане в приложения, одобряване на покупки и др."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Използвайте лицето си, за да отключвате телефона си или да одобрявате покупки.\n\nЗабележка: Не можете да отключвате това устройство с лицето си. За повече информация се свържете с администратора на организацията си."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Използвайте лицето си за отключване на телефона си, оторизиране на покупки или влизане в приложения."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -457,7 +458,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Изображенията от взаимодействията на детето ви с Pixel Imprint се използват за актуализиране на модела на отпечатъка му. Изображенията, ползвани за създаването на този модел, не се запазват, но той се съхранява надеждно на телефона и никога не го напуска. Цялото обработване се извършва надеждно на телефона."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"По всяко време можете да изтриете изображенията и модела на отпечатъка си или да изключите функцията за отключване с отпечатък от настройките. Изображенията и моделите се съхраняват на телефона ви, докато не ги изтриете."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Вие и детето ви можете по всяко време да изтриете изображенията и модела на отпечатъка му или да изключите функцията за отключване с отпечатък от настройките. Изображенията и моделите се съхраняват на телефона, докато не бъдат изтрити."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Телефонът ви може да бъде отключен неволно, ако например някой го допре до пръста ви."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Телефонът ви може да бъде отключен неволно, ако например някой го допре до пръста ви."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Телефонът на детето ви може да бъде отключен неволно, ако например някой допре устройството до пръста му."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"За най-добри резултати използвайте защитен слой на екрана, който е със сертификат „Създадено за Google“. Отпечатъкът ви може да не работи с други защитни слоеве."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"За най-добри резултати използвайте защитен слой на екрана, който е със сертификат „Създадено за Google“. Отпечатъкът на детето ви може да не работи с други защитни слоеве."</string>
@@ -507,6 +512,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Илюстрация с устройството и местоположението на сензора за отпечатък"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Име"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ОK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Изтриване"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Докоснете сензора"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Поставете пръста си върху сензора и го вдигнете, след като усетите вибриране"</string>
@@ -526,9 +533,12 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечатъкът е добавен"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Вече можете да използвате отпечатъка си, за да отключвате таблета или да потвърждавате самоличността си, например при влизане в приложения"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Вече можете да използвате отпечатъка си, за да отключвате устройството или да потвърждавате самоличността си, например при влизане в приложения"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Вече можете да използвате отпечатъка си, за да отключвате телефона или да потвърждавате самоличността си, например при влизане в приложения"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"По-късно"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Вдигнете пръст и докоснете отново"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Поставете едната страна на пръста си върху сензора и задръжте, след това поставете другата"</string>
@@ -586,8 +596,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ами сега! Това не е сензорът"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"С показалеца си докоснете сензора на гърба на телефона."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Регистрирането не бе завършено"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Времевото ограничение за регистриране на отпечатък бе достигнато. Опитайте отново."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Регистрирането на отпечатък не бе успешно. Опитайте отново или използвайте друг пръст."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Добавяне на друг"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Напред"</string>
@@ -936,7 +948,7 @@
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="3622326550467939809">"Разрешаване на обмен на данни, когато таблетът се докосва до устройство с NFC"</string>
     <string name="nfc_quick_toggle_summary" product="default" msgid="1460871052409162980">"Разрешаване на обмен на данни, когато телефонът се докосва до устройство с NFC"</string>
-    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Включване на КБП"</string>
+    <string name="nfc_disclaimer_title" msgid="3696580694485048039">"Включване на NFC"</string>
     <string name="nfc_disclaimer_content" msgid="8256675597551036207">"Чрез КБП се обменят данни между това устройство и други в близост или целеви такива, като например терминали за плащане, четци за достъп и интерактивни реклами или маркери."</string>
     <string name="nfc_secure_settings_title" msgid="4906958426927741485">"Изискване за отключване на устройството за NFC"</string>
     <string name="nfc_secure_toggle_summary" product="default" msgid="407654335737959071">"Разрешаване на използването на NFC само при отключен екран"</string>
@@ -1324,8 +1336,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Пълна разделителна способност"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p (FHD+)"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p (QHD+)"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Пълната разделителна способност изразходва батерията ви в по-голяма степен. Превключването на разделителната способност може да доведе до рестартирането на някои приложения."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Цветове"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Естествени"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Подсилени"</string>
@@ -2347,8 +2358,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Настройките за размер на текста и елементите на екрана бяха нулирани"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Да се нулира ли размерът на текста и елементите на екрана?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Предпочитанията ви за размера на текста и елементите на екрана ще се нулират към оригиналните настройки на телефона"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Предпочитанията ви за размера на текста и елементите на екрана ще се нулират към оригиналните настройки на таблета"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Нулиране"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Имаш ли планове за уикенда?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Отивам на плажа. Искаш ли да дойдеш?"</string>
@@ -2688,10 +2698,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Остава: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> до зареждане"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Изтощена батерия"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Ограничение за заден план"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Разрешаване приложението да се изпълнява на заден план"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Приложението няма разрешение да се изпълнява на заден план"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Използването на заден план не може да бъде ограничено"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Да се ограничи ли активността на заден план?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Ако ограничите активността на заден за дадено приложение, то може да не функционира правилно"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Тъй като прил. не е зададено да оптимизира батерията, можете да го ограничите.\n\nЗа тази цел първо включете оптим. на батерията."</string>
@@ -2895,7 +2902,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Отчетено в повече захранване"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> мАч"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Използвано за <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Активност в продължение на <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Използване на екрана: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"Използван капацитет от <xliff:g id="APP">%2$s</xliff:g>: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> от общия капацитет на батерията"</string>
@@ -2903,10 +2909,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Последно пълно зареждане"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"След пълно зареждане батерията издържа около"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Данните за батерията са приблизителни и могат да се променят въз основа на използването."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"При активна употреба"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"При работа на заден план"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Използване на батерията"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"След пълно зареждане"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Управление на използването на батерията"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Общо <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> на заден план\nслед последното пълно зареждане"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Общо <xliff:g id="TIME_0">^1</xliff:g> • <xliff:g id="TIME_1">^2</xliff:g> на заден план\nза последните 24 ч"</string>
@@ -3416,11 +3419,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Изтриване на всички приложения и данни при изход от режима на гост"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Изтриване на активността като гост?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Приложенията и данните от тази сесия като гост ще бъдат изтрити сега, а цялата бъдеща активност като гост ще се изтрива всеки път, когато излезете от режима на гост"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Включване на телефонните обаждания"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Включване на тел. обаждания и SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Изтриване на потребителя"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Да се включат ли телефонните обаждания?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Историята на обажданията ще се сподели с този потребител."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Да се включат ли телефонните обаждания и SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Историята на обажданията и SMS съобщенията ще се сподели с този потребител."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Информация за спешни случаи"</string>
@@ -3702,7 +3706,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Сила на звука, вибриране, „Не безпокойте“"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Зададено е вибриране при звънене"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Зададен е тих режим при звънене"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Силата на звука за звъненето и известията е зададена на 80%"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Сила на звука за мултимедия"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Сила на звука при предаване"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Сила на звука за обаждания"</string>
@@ -4339,8 +4342,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"В допълнение към отключването посредством биометрични данни можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането ѝ няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Да"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Не"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Ограничено"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Може да ползва бат. на заден план"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Да се изисква ли ПИН код?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Да се изисква ли фигура?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Да се изисква ли парола?"</string>
@@ -4644,7 +4645,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Екранен размер"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Уголемяване или смаляване на всичко"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"плътност на дисплея, промяна на мащаба на екрана, мащаб, мащабиране"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Намаляване или уголемяване на елементите на екрана. Позицията на някои приложения може да се промени."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Визуализация"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Намаляване на размера"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Увеличаване на размера"</string>
@@ -4668,12 +4668,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Включено за всички приложения"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> приложения са инсталирани"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"24 инсталирани приложения"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Използвано място: <xliff:g id="PERCENTAGE">%1$s</xliff:g>. Свободно място: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Вътрешно хранилище: Използвано място: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – свободно място: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Преминаване в спящ режим след неактивност в продължение на <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тъмна тема, размер на шрифта, яркост"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Преминаване в спящ режим след 10-минутна неактивност"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Използвана памет: Средно <xliff:g id="USED_MEMORY">%1$s</xliff:g> от <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Влезли сте като: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> е стандартното приложение"</string>

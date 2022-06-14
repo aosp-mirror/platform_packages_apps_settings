@@ -51,16 +51,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Smazat kartu SD"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Náhled"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Náhled, stránka <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> z <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Text na obrazovce si můžete zvětšit nebo zmenšit."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Zmenšit"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Zvětšit"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automaticky otáčet obrazovku"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Rozpoznání obličeje používá přední fotoaparát ke zvýšení přesnosti automatického otáčení. Fotky se neukládají ani neodesílají do Googlu."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Ukázkový text"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Čaroděj ze země Oz"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"Kapitola 11: Smaragdové město v zemi Oz"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"I přestože měli oči chráněné zelenými brýlemi, Dorotka a její přátelé byli oslněni krásou celého města. Ulice byly lemovány nádhernými domy ze zeleného mramoru posetého blyštivými smaragdy. Chodníky byly dlážděny stejným druhem zeleného mramoru a jednotlivé dlaždice od sebe dělily řady úzce sázených smaragdů, které se leskly ve slunečním svitu. Okenní tabule byly ze zeleného skla, dokonce i obloha nad městem měla zelený nádech i sluneční paprsky byly zelené. \n\nKolem procházelo mnoho lidí – muži, ženy i děti. Všichni byli zelení a nosili zelené oblečení. Zraky všech se upíraly na Dorotku a její neobvykle různorodé společníky. Když děti zahlédly i Lva, utíkaly se schovat za své maminky. Nikdo se neodvážil na skupinku promluvit. V ulici bylo mnoho obchodů a Dorotka si všimla, že také v nich je všechno zelené. Bonbony, popcorn, boty, klobouky, oblečení všech druhů. Na jednom místě prodávali zelenou limonádu, a když ji děti kupovaly, platily za ni zelenými mincemi. \n\nZdálo se, že ve městě nejsou koně ani jakákoli zvířata. Lidé k převážení věcí používali zelené vozíky, které tlačili před sebou. Všichni vypadali, že jsou spokojeni a daří se jim."</string>
-    <string name="font_size_save" msgid="206892409190870726">"OK"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"Úložiště USB"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"Karta SD"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -150,11 +144,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Povolte zařízení komunikovat se zařízeními Bluetooth v okolí"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Povolte telefonu komunikovat se zařízeními Bluetooth v okolí"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Zakázat hardwarové snížení zátěže Bluetooth (A2DP)"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Zakázat snižování zatížení hardwaru Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Vypnout snižování zatížení zvukového hardwaru Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Restartovat zařízení?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Ke změně nastavení je nutné restartovat zařízení."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Restartovat"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Zrušit"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Zapnout zvuk přes Bluetooth LE"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Zapne funkci zvuku přes Bluetooth LE, pokud zařízení podporuje hardwarové zvukové funkce LE."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Mediální zařízení"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Volání na zařízení"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Ostatní zařízení"</string>
@@ -373,7 +369,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Povolit odemknutí obličejem"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Povolte dítěti používat obličej k odemykání telefonu a ověřování totožnosti. K ověřování dochází při přihlašování do aplikací, schvalování nákupů apod."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Odemykejte telefon a schvalujte nákupy pomocí obličeje.\n\nPoznámka: Obličej nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -465,7 +466,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Když dítě používá Pixel Imprint, snímky slouží k aktualizaci modelu jeho otisku prstu. Snímky použité k vytvoření modelu otisku prstu se nikdy neukládají, ale model otisku prstu je bezpečně uložen v telefonu (a nikdy ho neopouští). Ke zpracování dochází bezpečně v telefonu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"V Nastavení můžete snímky a model otisku prstu kdykoli smazat, případně odemknutí otiskem prstu vypnout. Snímky a modely otisků prstů budou v telefonu uloženy, dokud je nesmažete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"V Nastavení můžete vy nebo vaše dítě snímky a model otisku prstu kdykoli smazat, případně odemknutí otiskem prstu vypnout. Snímky a modely otisků prstů zůstanou v telefonu uloženy, dokud nebudou smazány."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Váš telefon lze odemknout, i když to nezamýšlíte, třeba když ho někdo podrží u vašeho prstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Váš telefon lze odemknout, i když to nezamýšlíte, třeba když ho někdo podrží u vašeho prstu."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefon dítěte lze odemknout, i když to nezamýšlí, třeba když ho někdo podrží u prstu dítěte."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu fungovat."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu dítěte fungovat."</string>
@@ -515,6 +520,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustrace se zařízením a polohou senzoru otisků prstů"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Název"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Smazat"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotkněte se senzoru"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Položte prst na senzor. Zvedněte ho, až zařízení zavibruje."</string>
@@ -532,9 +539,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bude tak zachycena větší část otisku prstu"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Odteď můžete pomocí otisku prstu odemykat tablet nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Odteď můžete pomocí otisku prstu odemykat zařízení nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Odteď můžete pomocí otisku prstu odemykat telefon nebo ověřovat svoji identitu, například při přihlašování do aplikací"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
@@ -592,8 +602,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Jejda, to není senzor."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Dotkněte se senzoru na zadní straně telefonu. Použijte ukazováček."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registrace nebyla dokončena"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Bylo dosaženo časového limitu registrace otisku prstu. Zkuste to znovu."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrace otisku prstu nefungovala. Zkuste to znovu nebo použijte jiný prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Přidat další"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Další"</string>
@@ -1362,8 +1374,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Plné rozlišení"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Plné rozlišení využívá víc baterie. Po přepnutí rozlišení se některé aplikace mohou restartovat."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Barvy"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Přirozené"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Zesílené"</string>
@@ -2393,8 +2404,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Velikost zobrazení a nastavení textu byla resetována"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Resetovat velikost obrazovky a text?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Předvolby velikosti obrazovky a textu se resetují na původní nastavení telefonu"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Předvolby velikosti obrazovky a textu se resetují na původní nastavení tabletu"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Resetovat"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Máš plány na víkend?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Jdu na pláž. Přidáš se?"</string>
@@ -2748,10 +2758,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Zbývá <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> do nabití"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Slabá baterie"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Omezení na pozadí"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Povolit aplikaci spouštění na pozadí"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Aplikace nemá povoleno spouštění na pozadí"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Využití na pozadí omezit nelze"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Omezit aktivitu na pozadí?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Pokud u aplikace omezíte aktivitu na pozadí, může dojít k nepředvídatelnému chování"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Aplikace není nastavena k optimalizaci baterie, nelze ji tedy omezit.\n\nChcete-li ji omezit, nejprve zapněte optimalizaci."</string>
@@ -2969,7 +2976,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Nadhodnocení spotřeby energie"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Využíváno <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Aktivní <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Využití obrazovky: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> bylo použito aplikací <xliff:g id="APP">%2$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> z celkové kapacity baterie"</string>
@@ -2977,10 +2983,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Poslední úplné nabití"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Přibližná výdrž na plné nabití"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Údaje o využití baterie jsou přibližné a mohou se změnit podle způsobu používání."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Při aktivním používání"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"Na pozadí"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Využití baterie"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Od úplného nabití"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Správa využití baterie"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Od posledního nabití\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Celkem <xliff:g id="TIME_0">^1</xliff:g> • Za uplynulých 24 hodin\npoužíváno na pozadí <xliff:g id="TIME_1">^2</xliff:g>"</string>
@@ -3498,11 +3501,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Při ukončení režimu hosta smazat všechny aplikace a data hosta"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Smazat aktivitu hosta?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplikace a data z této relace hosta budou nyní smazány a veškerá budoucí aktivita hostů bude smazána pokaždé, když opustíte režim hosta"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Zapnout telefonní hovory"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Zapnout telefonní hovory a SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Smazání uživatele"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Zapnout telefonní hovory?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"S tímto uživatelem bude sdílena historie hovorů."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Zapnout telefonní hovory a SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"S tímto uživatelem bude sdílena historie hovorů a SMS."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Nouzové informace"</string>
@@ -3786,7 +3790,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Hlasitost, vibrace, režim Nerušit"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Vyzvánění bylo nastaveno na vibrace"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Vyzvánění bylo ztlumeno"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Hlasitost vyzvánění a oznámení je na 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Hlasitost médií"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Hlasitost odesílání"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Hlasitost hovoru"</string>
@@ -4443,8 +4446,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Kromě odemykání pomocí biometrie můžete toto zařízení dále ochránit tím, že před jeho spuštěním bude požadováno heslo. Před spuštěním zařízení nemůže přijímat hovory, zprávy ani oznámení, včetně budíků.\n\nTato funkce pomáhá chránit data ve ztracených nebo ukradených zařízeních. Má být před spuštěním zařízení vyžadováno heslo?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Ano"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Ne"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Omezeno"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Aplikace smí využívat baterii na pozadí"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Požadovat kód PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Požadovat gesto?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Požadovat heslo?"</string>
@@ -4774,7 +4775,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Zobrazovaná velikost"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Všechno zvětšit nebo zmenšit"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"displej, hustota, přiblížení obrazovky, měřítko, zvětšení"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Prvky na obrazovce si můžete zvětšit nebo zmenšit. Ikony některých aplikací na ploše se mohou přemístit."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Náhled"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Zmenšit"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Zvětšit"</string>
@@ -4800,12 +4800,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Zapnuto pro všechny aplikace"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Nainstalované aplikace: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"Nainstalované aplikace: 24"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Využito: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, volné místo: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Interní úložiště: využito <xliff:g id="PERCENTAGE">%1$s</xliff:g> – volné místo: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> nečinnosti přejít do režimu spánku"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tmavý motiv, velikost písma, jas"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Po 10 minutách nečinnosti přejít do režimu spánku"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Přibližné využití paměti: <xliff:g id="USED_MEMORY">%1$s</xliff:g> z <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Jste přihlášeni jako <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"<xliff:g id="APP_NAME">%1$s</xliff:g> – nastaveno jako výchozí"</string>

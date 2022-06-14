@@ -51,16 +51,10 @@
     <string name="sdcard_format" product="default" msgid="3676635435136326182">"Ištrinti SD kortelę"</string>
     <string name="preview_pager_content_description" msgid="3762247188224576303">"Peržiūra"</string>
     <string name="preview_page_indicator_content_description" msgid="2790254666634885865">"Peržiūra, <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> psl. iš <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
-    <string name="font_size_summary" msgid="1296835853522566260">"Sumažinkite arba padidinkite ekrane rodomą tekstą."</string>
     <string name="font_size_make_smaller_desc" msgid="4978038055549590140">"Padaryti mažesnius"</string>
     <string name="font_size_make_larger_desc" msgid="5583046033381722247">"Padaryti didesnius"</string>
     <string name="auto_rotate_settings_primary_switch_title" msgid="3440951924928594520">"Automatinio pasukimo naudojimas"</string>
     <string name="smart_rotate_text_headline" msgid="5878008933992951904">"Veido aptikimo funkcija naudoja priekinį fotoaparatą, kad padidintų automatinio pasukimo tikslumą. Vaizdai niekada neišsaugomi ir nesiunčiami „Google“."</string>
-    <string name="font_size_preview_text_headline" msgid="1173103737980511652">"Pavyzdinis tekstas"</string>
-    <string name="font_size_preview_text_title" msgid="6363561029914452382">"Nuostabusis Ozo šalies burtininkas"</string>
-    <string name="font_size_preview_text_subtitle" msgid="5806349524325544614">"11 skyrius. Nuostabusis Smaragdo miestas"</string>
-    <string name="font_size_preview_text_body" msgid="3323732544011097199">"Netgi žaliais akiniais apsaugoję akis Dorotė ir jos draugai iš pradžių buvo apstulbinti nuostabiojo miesto žvilgesiu. Gatvėse stovėjo gražūs namai, pastatyti iš žalio marmuro ir nusagstyti žvilgančiais smaragdais. Jie ėjo tokiu pačiu žaliu marmuru grįstu šaligatviu, o kvartalų sujungimo vietos buvo papuoštos viena šalia kitos esančiomis saulėje žvilgančių smaragdų eilėmis. Langų stiklai buvo žali, netgi dangaus virš miesto ir saulės spindulių spalva buvo žalia. \n\nMieste buvo daug žmonių (vyrų, moterų ir vaikų), kurie vaikščiojo apsirengę žaliais drabužiais. Jų oda buvo žalsvos spalvos. Į Dorotę ir jos keistą draugiją visi žiūrėjo su nuostaba, o pamatę Liūtą vaikai bėgo tolyn ir slėpėsi už savo mamų, tačiau niekas su jais nešnekėjo. Gatvėse buvo daug parduotuvių, o Dorotė pastebėjo, kad jose viskas taip pat buvo žalios spalvos. Viduje buvo parduodami žali saldainiai ir žali kukurūzų spragėsiai bei įvairūs žali batai, žalios kepurės ir žali drabužiai. Vienoje vietoje vyras siūlė nusipirkti žalio limonado ir Dorotė pastebėjo, kad jį perkantys vaikai atsiskaitė žaliomis monetomis. \n\nMieste nebuvo arklių ar kitų gyvūnų. Vyrai viską vežiojo mažais žaliais priekyje stumiamais vežimais. Visi atrodė laimingi, patenkinti ir turtingi."</string>
-    <string name="font_size_save" msgid="206892409190870726">"Gerai"</string>
     <string name="sdcard_setting" product="nosdcard" msgid="6071836464978826249">"USB atmintinė"</string>
     <string name="sdcard_setting" product="default" msgid="3713462184783824923">"SD kortelė"</string>
     <string name="bluetooth" msgid="8898478620943459654">"Bluetooth"</string>
@@ -150,11 +144,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Leiskite įrenginiui užmegzti ryšį su netoliese esančiais „Bluetooth“ įrenginiais"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Leiskite telefonui užmegzti ryšį su netoliese esančiais „Bluetooth“ įrenginiais"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Išj. „Bluetooth“ A2DP apar. įr. iškelt."</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Išjungti „Bluetooth“ LE AUDIO aparatinės įrangos iškeltį"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Išjungti „Bluetooth LE Audio“ aparatinės įrangos iškeltį"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Paleisti įrenginį iš naujo?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Turite paleisti įrenginį iš naujo, kad galėtumėte pakeisti šį nustatymą."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Paleisti iš naujo"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Atšaukti"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Įgalinti „Bluetooth LE Audio“"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Jei įrenginys palaiko „LE Audio“ aparatinės įrangos galimybes, įgalinama funkcija „Bluetooth LE Audio“."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Laikmenos"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Skambinimo įrenginiai"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Kiti įrenginiai"</string>
@@ -373,7 +369,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Atrakinimo pagal veidą leidimas"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Autentifikavimas naudojant veidą"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Leiskite vaikui atrakinti telefoną ar patvirtinti savo tapatybę pagal veidą. Tai atliekama vaikui prisijungiant prie programų, patvirtinant pirkinį ir pan."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Atrakinkite telefoną ir patvirtinkite pirkimo operacijas veidu.\n\nPastaba: negalite atrakinti šio įrenginio veidu. Norėdami gauti daugiau informacijos, susisiekite su organizacijos administratoriumi."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Naudokite veidą, norėdami atrakinti telefoną, įgalioti pirkimo veiksmus arba prisijungti prie programų"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -465,7 +466,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Naudojant „Pixel Imprint“, vaizdai naudojami kontrolinio kodo modeliui atnaujinti. Vaizdai, kurie naudojami vaiko kontrolinio kodo modeliui kurti, niekada nesaugomi, bet kontrolinio kodo modelis saugiai saugomas telefone ir visada lieka jame. Visas apdorojimo procesas saugiai vykdomas telefone."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Galite bet kada ištrinti kontrolinio kodo vaizdus ir modelį arba išjungti atrakinimo kontroliniu kodu funkciją „Nustatymų“ skiltyje. Kontrolinio kodo vaizdai ir modeliai saugomi telefone, kol juos ištrinate."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Jūs ir jūsų vaikas galite bet kada ištrinti kontrolinio kodo vaizdus ir modelį arba išjungti atrakinimą kontroliniu kodu „Nustatymų“ skiltyje. Kontrolinio kodo vaizdai ir modeliai saugomi telefone, kol ištrinami."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Jūsų telefonas gali būti atrakinamas, kai to neketinate atlikti, pvz., kam nors palaikius jį prie jūsų piršto."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Jūsų telefonas gali būti atrakinamas, kai to neketinate atlikti, pvz., kam nors palaikius jį prie jūsų piršto."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Jūsų vaiko telefonas gali būti atrakinamas, kai vaikas to neketina atlikti, pvz., kam nors palaikius jį prie vaiko piršto."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Kad pasiektumėte geriausių rezultatų, naudokite „Made for Google“ sertifikuotą apsauginį ekrano stiklą. Naudojant kitus apsauginius ekrano stiklus kontrolinis kodas gali neveikti."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Kad pasiektumėte geriausių rezultatų, naudokite „Made for Google“ sertifikuotą apsauginį ekrano stiklą. Naudojant kitus apsauginius ekrano stiklus vaiko kontrolinis kodas gali neveikti."</string>
@@ -515,6 +520,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Įrenginio ir piršto antspaudo jutiklio vietos iliustracija"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Pavadinimas"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Gerai"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Ištrinti"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Palieskite jutiklį"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Uždėkite pirštą ant jutiklio ir pakelkite, kai pajusite vibravimą"</string>
@@ -532,9 +539,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Taip užfiksuojama daugiau piršto atspaudo"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registracija kontroliniu kodu: <xliff:g id="PERCENTAGE">%d</xliff:g> proc."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Kontrolinis kodas pridėtas"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Dabar galite naudoti kontrolinį kodą, kad atrakintumėte planšetinį kompiuterį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Dabar galite naudoti kontrolinį kodą, kad atrakintumėte įrenginį ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Dabar galite naudoti kontrolinį kodą, kad atrakintumėte telefoną ar patvirtintumėte savo tapatybę, pvz., kai prisijungiate prie programų"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Atlikti vėliau"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Patraukite ir vėl prilieskite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Padėkite vieną piršto šoną ant jutiklio ir palaikykite, tada tą patį atlikite su kitu šonu"</string>
@@ -592,8 +602,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Atlikta"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Oi, tai ne jutiklis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Smiliumi palieskite jutiklį tel. užp. dalyje."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registracija neužbaigta"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Pasiektas piršto antspaudo registracijos laiko apribojimas. Bandykite dar kartą."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Nepavyko užregistruoti piršto antspaudo. Bandykite dar kartą arba atlikite tai kitu pirštu."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Pridėti kitą"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Kitas"</string>
@@ -2746,10 +2758,7 @@
     <string name="power_discharge_remaining" msgid="6997529817917076536">"Liko: <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="7046064326172265116">"Liko įkrauti: <xliff:g id="UNTIL_CHARGED">%1$s</xliff:g>"</string>
     <string name="low_battery_summary" msgid="4458925347316501953">"Senka akumuliatorius"</string>
-    <string name="background_activity_title" msgid="8214332017349791380">"Fono ribojimas"</string>
     <string name="background_activity_summary" msgid="3817376868497046016">"Leiskite vykdyti programą fone"</string>
-    <string name="background_activity_summary_disabled" msgid="32459916080651444">"Neleidžiama vykdyti programos fone"</string>
-    <string name="background_activity_summary_allowlisted" msgid="6240154358657454651">"Naudojimo fone negalima apriboti"</string>
     <string name="background_activity_warning_dialog_title" msgid="3449566823290744823">"Apriboti veiklą fone?"</string>
     <string name="background_activity_warning_dialog_text" msgid="8202776985767701095">"Jei apribosite programos veiklą fone, ji gali netinkamai veikti"</string>
     <string name="background_activity_disabled_dialog_text" msgid="4053170297325882494">"Negalite apriboti progr., nes ji nenust. optimiz. akum. naud.\n\nJei norite apr. progr., pirmiausia įj. akum. naud. optimiz."</string>
@@ -2967,7 +2976,6 @@
     <string name="battery_desc_overcounted" msgid="5982079150027267539">"Per daug apskaičiuotos energijos naudojimas"</string>
     <string name="mah" msgid="3604527474433227780">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="6401552215008504483">"Naudojama <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="battery_active_for" msgid="4416277218863232476">"Aktyvi <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="90008745183187461">"Ekrano naudojimas: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="6457305178016189330">"<xliff:g id="PERCENT">%1$s</xliff:g> naudoja „<xliff:g id="APP">%2$s</xliff:g>“"</string>
     <string name="battery_overall_usage" msgid="8940140259734182014">"<xliff:g id="PERCENT">%1$s</xliff:g> visos akumuliatoriaus įkrovos"</string>
@@ -2975,10 +2983,7 @@
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Paskutinis visiškas įkrovimas"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"Visiškai įkrauti trunka apie"</string>
     <string name="battery_footer_summary" msgid="8221691063048377342">"Akumuliatoriaus energijos vartojimo duomenys yra apytiksliai ir gali pasikeisti atsižvelgiant į naudojimą."</string>
-    <string name="battery_detail_foreground" msgid="3312280147931093967">"Aktyviai naudojant"</string>
-    <string name="battery_detail_background" msgid="3333915023706228000">"Kai veikia fone"</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Akumuliatoriaus energijos vartojimas"</string>
-    <string name="battery_detail_info_title" msgid="5896661833554333683">"Nuo visiško įkrovimo"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Tvarkyti akumuliatoriaus naudojimą"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone <xliff:g id="TIME_1">^2</xliff:g>\nnuo pastarojo visiško įkrovimo"</string>
     <string name="battery_total_and_bg_usage_24hr" msgid="2393832614028187281">"Iš viso <xliff:g id="TIME_0">^1</xliff:g> • Naudota fone <xliff:g id="TIME_1">^2</xliff:g>\nper pastarąsias 24 val."</string>
@@ -3496,11 +3501,12 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Išeinant iš svečio režimo ištrinti visas svečio programas ir duomenis"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Ištrinti svečio veiklą?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Šios svečio sesijos programos ir duomenys bus ištrinti dabar, o visa būsima svečio veikla bus ištrinta kiekvieną kartą, kai išeisite iš svečio režimo"</string>
-    <string name="user_enable_calling" msgid="264875360626905535">"Įjungti telefono skambučius"</string>
+    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
+    <skip />
+    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
+    <skip />
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Įjungti telefono skambučius ir SMS"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Naudotojo ištrynimas"</string>
-    <string name="user_enable_calling_confirm_title" msgid="7868894792723368364">"Įjungti telefono skambučius?"</string>
-    <string name="user_enable_calling_confirm_message" msgid="4924965198409050155">"Skambučių istorija bus bendrinama su šiuo naudotoju."</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Įjungti telefono skambučius ir SMS?"</string>
     <string name="user_enable_calling_and_sms_confirm_message" msgid="367792286597449922">"Skambučių ir SMS istorija bus bendrinama su šiuo naudotoju."</string>
     <string name="emergency_info_title" msgid="8233682750953695582">"Kritinės padėties informacija"</string>
@@ -3732,7 +3738,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"darbo iššūkis, darbas, profilis"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"darbo profilis, tvarkomas profilis, suvienodinti, suvienodinimas, darbas, profilis"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"gestai"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"piniginė"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"mokėti, paliesti, mokėjimai"</string>
     <string name="keywords_backup" msgid="707735920706667685">"atsarginė kopija, kurti atsarginę kopiją"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"gestas"</string>
@@ -3784,7 +3790,6 @@
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Garsumas, vibravimas, netrukdymo režimas"</string>
     <string name="sound_settings_summary_vibrate" msgid="7192223433295988890">"Skambutis nustatytas į vibravimą"</string>
     <string name="sound_settings_summary_silent" msgid="746662794579344761">"Skambutis nustatytas į tylų"</string>
-    <string name="sound_settings_example_summary" msgid="8125110691864707925">"Skambučių ir nustatymų garsumas: 80 %"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medijų garsumas"</string>
     <string name="remote_media_volume_option_title" msgid="8760846743943305764">"Perdavimo garsumas"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Skambučio garsumas"</string>
@@ -4441,8 +4446,6 @@
     <string name="encryption_interstitial_message_password_for_biometrics" msgid="1895561539964730123">"Galite dar labiau apsaugoti šį įrenginį, be jam atrakinti naudojamų biometrinių duomenų, pareikalaudami prieš jį paleidžiant įvesti slaptažodį. Kol įrenginys nepaleidžiamas, juo negalima gauti skambučių ar pranešimų, įskaitant signalus.\n\nTai padeda apsaugoti duomenis prarastuose arba pavogtuose įrenginiuose. Reikalauti slaptažodžio paleidžiant įrenginį?"</string>
     <string name="encryption_interstitial_yes" msgid="1948016725089728181">"Taip"</string>
     <string name="encryption_interstitial_no" msgid="3352331535473118487">"Ne"</string>
-    <string name="restricted_true_label" msgid="612852292488747564">"Apribota"</string>
-    <string name="restricted_false_label" msgid="2837053797913490628">"Programa gali eikvoti akumuliatoriaus energiją fone"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8974156384205924887">"Reikalauti PIN kodo?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1587587568721873184">"Reikalauti atr. piešinio?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="2701793623210531836">"Reikalauti slaptažodžio?"</string>
@@ -4772,7 +4775,6 @@
     <string name="screen_zoom_title" msgid="6928045302654960559">"Pateikties dydis"</string>
     <string name="screen_zoom_short_summary" msgid="756254364808639194">"Visų elementų padidinimas arba sumažinimas"</string>
     <string name="screen_zoom_keywords" msgid="5964023524422386592">"ekrano tankis, ekrano mastelio keitimas, mastelis, mastelio nustatymas"</string>
-    <string name="screen_zoom_summary" msgid="1362984939045594989">"Sumažinkite arba padidinkite ekrane rodomus elementus. Gali pasikeisti kai kurių ekrano programų vietos."</string>
     <string name="screen_zoom_preview_title" msgid="5288355628444562735">"Peržiūra"</string>
     <string name="screen_zoom_make_smaller_desc" msgid="2628662648068995971">"Padaryti mažesnius"</string>
     <string name="screen_zoom_make_larger_desc" msgid="7268794713428853139">"Padaryti didesnius"</string>
@@ -4798,12 +4800,10 @@
     </plurals>
     <string name="notification_summary_none" msgid="9179312319023988089">"Įjungta visoms programoms"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Įdiegtų programų: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="apps_summary_example" msgid="6034002063446955592">"Įdiegtos 24 programos"</string>
     <string name="storage_summary" msgid="5903562203143572768">"Naudojama: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, laisvos vietos: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="storage_summary_with_sdcard" msgid="2063780050580228868">"Vidinė saugykla: panaudota: <xliff:g id="PERCENTAGE">%1$s</xliff:g>, laisva: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_summary" msgid="5526061030874717172">"Įjungti miego būseną, jei <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> neatliekama jokių veiksmų"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tamsioji tema, šrifto dydis, šviesumas"</string>
-    <string name="display_summary_example" msgid="4275121979039344438">"Įjungti miego būseną, jei 10 minučių neatliekama jokių veiksmų"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Vid. naudojama atminties: <xliff:g id="USED_MEMORY">%1$s</xliff:g> iš <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="8473589474976307510">"Prisijungta kaip <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="5513009140568552693">"Programa „<xliff:g id="APP_NAME">%1$s</xliff:g>“ yra numatytoji"</string>
