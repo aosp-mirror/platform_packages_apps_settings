@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Cihaza yaxınlıqdakı Bluetooth cihazları ilə əlaqə yaratmaq icazəsi verin"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Telefona yaxınlıqdakı Bluetooth cihazları ilə əlaqə yaratmaq icazəsi verin"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP profilinin aparat boşalması deaktiv edilsin"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO avadanlıq ləğvini deaktiv edin"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE audio avadanlıq ləğvini deaktiv edin"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Cihaz yenidən başladılsın?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Bu ayarı dəyişmək üçün cihazı yenidən başlatmalısınız."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Yenidən başladın"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Ləğv edin"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE audiosunu aktiv edin"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Cihaz LE audio avadanlıqlarını dəstəkləyirsə, Bluetooth LE audio funksiyasını aktivləşdirir."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media cihazları"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Zəng cihazları"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Digər cihazlar"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Üz ilə kiliddən çıxarmaya icazə verin"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Doğrulamaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Övladınızın telefonunu kiliddən çıxarmaq və ya kimliyini doğrulamaq üçün üzündən istifadə etməsinə icazə verin. Bu, tətbiqlərə daxil olmaq, alışı təsdiqləmək kimi hallarda lazım olur."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Telefonu kiliddən çıxarmaq və ya satınalmaları təsdiq etmək üçün üzünüzdən istifadə edin.\n\nQeyd: Bu cihazı kiliddən çıxarmaq üçün üzünüzdən istifadə edə bilməzsiniz. Ətraflı məlumat üçün təşkilat admini ilə əlaqə saxlayın."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Telefonu kiliddən çıxarmaq, satınalmaları doğrulamaq və ya tətbiqlərə daxil olmaq üçün üzünüzdən istifadə edin"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Pixel Imprint istifadə etdikdə, onun barmaq izi modelini güncəlləmək üçün şəkillərdən istifadə olunur. Övladınızın barmaq izi modelini yaratmaq üçün istifadə edilən şəkillər heç vaxt saxlanılmır, lakin barmaq izi modeli telefonda təhlükəsiz qaydada saxlanılır və heç vaxt telefondan başqa yerə göndərilmir. Bütün emal prosesi telefonda təhlükəsiz qaydada baş verir."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Ayarlarda istənilən vaxt barmaq izi şəkilləri və modelinizi silə, yaxud Barmaq izi ilə kiliddən çıxarmanı deaktiv edə bilərsiniz. Barmaq izi şəkilləri və modelləri siz onları silənə qədər telefonunuzda saxlanılır."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Siz və övladınız ayarlarda istənilən vaxt barmaq izi şəkilləri və modelinizi silə, yaxud Barmaq izi ilə kiliddən çıxarmanı deaktiv edə bilərsiniz. Barmaq izi şəkilləri və modelləri onları silənə qədər telefonda saxlanılır."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"İstəmədiyiniz zaman telefonunuzun kilidi açıla bilər, məsələn kimsə onu barmağınıza tutaraq aça bilər."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"İstəmədiyiniz zaman telefonunuzun kilidi açıla bilər, məsələn kimsə onu barmağınıza tutaraq aça bilər."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Övladınız istəmədiyi zaman telefonun kilidi açıla bilər, məsələn kimsə onu övladınızın barmağına tutaraq aça bilər."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Ən yaxşı nəticələr üçün \"Google üçün hazırlanıb\" sertifikatlı ekran qoruyucusu istifadə edin. Digər ekran qoruyucuları ilə barmaq iziniz işləməyə bilər."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Ən yaxşı nəticələr üçün \"Google üçün hazırlanıb\" sertifikatlı ekran qoruyucusu istifadə edin. Digər ekran qoruyucuları ilə uşağınızın barmaq izi işləməyə bilər."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Cihaz və barmaq izi sensoru ilə illustrasiya"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Ad"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Silin"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Sensora toxunun"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Barmağı sensora qoyub titrəmə hiss edənə qədər saxlayın"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bu, barmaq izinizi daha yaxşı çəkməyə kömək edir"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Barmaq izi qeydiyyatı: <xliff:g id="PERCENTAGE">%d</xliff:g> faiz"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Barmaq izi əlavə edildi"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"İndi tətbiqlərə daxil olmaq kimi hallarda planşeti kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"İndi tətbiqlərə daxil olmaq kimi hallarda cihazı kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"İndi tətbiqlərə daxil olmaq kimi hallarda telefonu kiliddən çıxarmaq və ya kimlik doğrulaması üçün barmaq izinizdən istifadə edə bilərsiniz"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Sonraya saxlayın"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Qaldırın və təkrar toxunun"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Barmaq izinizin yan tərəfini sensora yerləşdirib saxlayın, sonra digər tərəfə keçin"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hazırdır"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, bu sensor deyil"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Telefonun arxasındakı sensora toxunun."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Qeydiyyat tamamlanmadı"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Barmaq izi qeydiyyatı üçün vaxt limiti başa çatdı. Yenidən cəhd edin."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Barmaq izi qeydiyyatı işləmədi. Yenidən cəhd edin və ya başqa barmaq istifadə edin."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Başqasını əlavə edin"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Növbəti"</string>
@@ -1321,8 +1339,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Tam ayırdetmə dəqiqliyi"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Tam ayırdetmə dəqiqliyi batareyanızdan daha çox istifadə edir. Ayırdetmə dəqiqliyinin keçirilməsi bəzi tətbiqlərin yenidən başladılmasına səbəb ola bilər."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Rənglər"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Təbii"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Dolğun"</string>
@@ -2346,8 +2363,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Displey ölçüsü və mətn ayarları sıfırlandı"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Displey ölçüsü və mətn sıfırlansın?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Displey ölçüsü və mətn tərcihləriniz telefonun orijinal ayarlarına sıfırlanacaq"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Displey ölçüsü və mətn tərcihləriniz planşetin orijinal ayarlarına sıfırlanacaq"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Sıfırlayın"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Həftə sonu planlarınız var?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Çimərliyə gedirəm. Mənə qoşulmaq istəyirsən?"</string>
