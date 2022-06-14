@@ -61,12 +61,9 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
         mCarrierConfigCache = CarrierConfigCache.getInstance(context);
     }
 
-    public ContactDiscoveryPreferenceController init(FragmentManager fragmentManager, int subId,
-            Lifecycle lifecycle) {
+    void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-        lifecycle.addObserver(this);
-        return this;
     }
 
     @Override
