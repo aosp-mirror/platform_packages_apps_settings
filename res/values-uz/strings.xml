@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Qurilmaga yaqin-atrofdagi Bluetooth qurilmalar bilan ma’lumotlarni almashishi uchun ruxsat berish"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Telefonga yaqin-atrofdagi Bluetooth qurilmalar bilan ma’lumotlarni almashishi uchun ruxsat berish"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Bluetooth A2DP apparat yukini kamaytirish funksiyasini faolsizlantirish"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Bluetooth LE AUDIO qurilmasini tushirishni faolsizlantiring"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Bluetooth LE audio qurilmasini tushirishni faolsizlantirish"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Qurilma qayta ishga tushirilsinmi?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Bu sozlamani oʻzgartirish uchun qurilmani qayta ishga tushiring."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Qayta yoqish"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Bekor qilish"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Bluetooth LE audioni yoqish"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Qurilmada LE audio apparatli taʼminoti boʻlsa, Bluetooth LE audio funksiyasi yoqiladi."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Media qurilmalar"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Chaqiruv qurilmalari"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Boshqa qurilmalar"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Qulfni yuz bilan ochish"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Qurilma qulfini yuzingiz bilan oching"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Telefoningizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ilovalarga kirish uchun yuzingizdan foydalaning."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Farzandingiz yuzi bilan telefonni qulfdan chiqarish yoki shaxsini tasdiqlashiga ruxsat bering. Bu ularning ilovalarga kirishi yoki xaridlarini tasdiqlashi va hokazo holatlarda yuz beradi."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Telefonni qulfdan chiqarish yoki xaridlarni tasdiqlash uchun yuz bilan ochishdan foydalaning.\n\nEslatma: yuz bilan ochishdan bu qurilmada foydalana olmaysiz. Batafsil axborot olish uchun tashkilot administratoriga murojaat qiling."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Telefoningizni qulfdan chiqarish, xaridlarni amalga oshirish yoki ilovalarga kirish uchun yuzingizdan foydalaning"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Pixel Imprint ishlatilganda barmoq izi modeli rasmlar yordamida yaratiladi. Farzandingiz barmoq izi modelini yaratishda ishlatiladigan rasmlar hech qachon saqlanmaydi, lekin barmoq izi modeli telefonda xavfsiz saqlanadi va hech qachon tashqariga yuklanmaydi. Barcha ishlar telefonda xavfsiz amalga oshiriladi."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Istalgan vaqt Sozlamalar orqali barmoq izi rasmlari va modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi rasmlari va modellari telefonda oʻchirilmaguncha saqlanadi."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Siz va farzandingiz istalgan vaqt Sozlamalar orqali barmoq izi modelini oʻchirib tashlashingiz yoki barmoq izi bilan ochishni faolsizlantirishingiz mumkin. Barmoq izi rasmlari va modellari telefonda oʻchirilmaguncha saqlanadi."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefonni sizning ixtiyoringizsiz kimdir uni barmogʻingizga tutgan holda qulfdan chiqarib olishi mumkin."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefonni sizning ixtiyoringizsiz kimdir uni barmogʻingizga tutgan holda qulfdan chiqarib olishi mumkin."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefonni farzandingiz ixtiyorisiz kimdir uning barmogʻiga tutgan holda qulfdan chiqarib olishi mumkin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Eng yaxshi natijalarga erishish uchun Made for Google sertifikatiga ega ekran himoyasidan foydalaning. Boshqa ekran himoyasida barmoq izi ishlamasligi mumkin."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Eng yaxshi natijalarga erishish uchun Made for Google sertifikatiga ega ekran himoyasidan foydalaning. Boshqa ekran himoyasida farzandingizning barmoq izi ishlamasligi mumkin."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ushbu rasmda barmoq izi skaneri qayerda joylashgani ko‘rsatilgan"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nomi"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"O‘chirish"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Sensorga tegining"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Barmoqni skanerga tekkizib, tebranishni his qilguncha bosib turing"</string>
@@ -525,9 +538,12 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Barmoq izi qo‘shildi"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Endi planshetni qulfdan chiqarish yoki ilovaga kirish kabi hisob tekshiruvida barmoq izingizdan foydalanishingiz mumkin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Endi qurilmani qulfdan chiqarish yoki ilovaga kirish kabi hisob tekshiruvida barmoq izingizdan foydalanishingiz mumkin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Endi telefonni qulfdan chiqarish yoki ilovaga kirish kabi hisob tekshiruvida barmoq izingizdan foydalanishingiz mumkin"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Keyinroq bajarish"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Bir necha marta tekkizing"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Barmoq izingizning yonlarini sensorga joylashtiring va tutib turing, keyin boshqa yonga almashtiring"</string>
@@ -585,8 +601,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Tayyor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Obbo, bu sensor emas."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Telefonning orqasida joylashgan sensorga tegining. Ko‘rsatkich barmog‘ingizdan foydalaning."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Barmoq izi qayd qilinmadi"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Barmoq izini kiritish vaqti tugab qoldi. Qayta urinib ko‘ring."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Barmoq izini kiritish amalga oshmadi. Qayta urinib ko‘ring yoki boshqa barmoqdan foydalaning."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Yana qo‘shish"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Keyingisi"</string>
