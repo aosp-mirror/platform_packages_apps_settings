@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"आफ्नो यन्त्रलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"आफ्नो फोनलाई वरपरका ब्लुटुथ यन्त्रहरूसँग सञ्चार गर्न दिनुहोस्"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"ब्लुटुथ A2DP हार्डवेयरको अफलोड असक्षम पारियोस्"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"ब्लुटुथ LE AUDIO हार्डवेयरको अफलोड असक्षम पारियोस्"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"ब्लुटुथ LE अडियो हार्डवेयर अफलोड गर्ने सुविधा अफ गर्नुहोस्"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"डिभाइस रिस्टार्ट गर्ने हो?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"यो सेटिङ बदल्न तपाईंले आफ्नो डिभाइस रिस्टार्ट गर्नु पर्ने हुन्छ।"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"रिस्टार्ट गर्नुहोस्"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"रद्द गर्नुहोस्"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"ब्लुटुथ LE अडियो अन गर्नुहोस्"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"डिभाइसमा LE अडियो हार्डवेयर चलाउन मिल्छ भने ब्लुटुथ LE अडियो सुविधा अन गर्छ।"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"मिडियासम्बन्धी यन्त्रहरू"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"कल गर्ने सुविधा भएका यन्त्रहरू"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"अन्य डिभाइसहरू"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"फेस अनलक प्रयोग गर्न दिनुहोस्"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"प्रमाणीकरण गर्न आफ्नो अनुहार प्रयोग गर्नु…"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"आफ्नो फोन अनलक गर्न, खरिद अधिकार दिन वा एपहरूमा साइन इन गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्।"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"तपाईंका बच्चालाई उनको अनुहार प्रयोग गरी उनको फोन अनलक गर्न वा उनको पहिचान पुष्टि गर्न दिनुहोस्। तपाईंका बच्चा एपमा साइन इन गर्न, खरिद स्वीकृत गर्न र अन्य कुराहरू गर्न उनको अनुहार प्रयोग गर्न सक्छन्।"</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"तपाईंको फोन अनलक वा खरिदहरूको अनुमोदन गर्न आफ्ना अनुहारको प्रयोग गर्नुहोस्।\n\nटिपोट: तपाईं यो डिभाइस अनलक गर्न आफ्नो अनुहारको प्रयोग गर्न सक्नुहुन्न। थप जानकारीका लागि आफ्नो सङ्गठनको प्रशासकसँग सम्पर्क गर्नुहोस्।"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"आफ्नो फोन अनलक गर्न, खरिद अधिकार दिन वा एपहरूमा साइन इन गर्न आफ्नो अनुहार प्रयोग गर्नुहोस्"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"तपाईंका बच्चाले Pixel Imprint प्रयोग गर्दा उनको फिंगरप्रिन्ट मोडेल अपडेट गर्न ती फोटोहरू प्रयोग गरिन्छन्। तपाईंका बच्चाको फिंगरप्रिन्ट मोडेल बनाउन प्रयोग गरिने फोटोहरू कहिल्यै पनि भण्डारण गरिँदैन तर यो फिंगरप्रिन्ट मोडेल यो फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ र कहिल्यै पनि यो फोनबाहेक अन्यत्र पठाइँदैन। यी सबै कारबाही यो फोनमा सुरक्षित तरिकाले गरिन्छ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"तपाईं जुनसुकै बेला सेटिङमा गई आफ्नो फिंगरप्रिन्टका फोटो र मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। फिंगरप्रिन्टका फोटो र मोडेल तपाईंले नमेटाउञ्जेलसम्म तपाईंको फोनमा सुरक्षित तरिकाले भण्डारण गरिन्छ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"तपाईं र तपाईंका बच्चा सेटिङमा गई जुनसुकै बेला उनको फिंगरप्रिन्टका फोटो र मोडेल मेटाउन वा फिंगरप्रिन्ट अनलक अफ गर्न सक्नुहुन्छ। तपाईंले फिंगरप्रिन्टका फोटो र मोडेलहरू नमेटाउन्जेल ती मोडेल र फोटो फोनमा नै भण्डारण गरिन्छन्।"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"तपाईंले अनलक गर्न नचाहेका बेलामा पनि फोन अनलक हुन सक्छ। जस्तै: कसैले तपाईंका औँला फोनको फिंगरप्रिन्ट सेन्सरमा छुवाए भने फोन अनलक हुन सक्छ।"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"तपाईंले अनलक गर्न नचाहेका बेलामा पनि फोन अनलक हुन सक्छ। जस्तै: कसैले तपाईंका औँला फोनको फिंगरप्रिन्ट सेन्सरमा छुवाए भने फोन अनलक हुन सक्छ।"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"तपाईंका बच्चाले अनलक गर्न नचाहेका बेला पनि फोन अनलक हुन सक्छ। जस्तै कसैले तपाईंका बच्चाको औँला फोनको फिंगरप्रिन्ट सेन्सरमा छुवाए भने फोन अनलक हुन सक्छ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"उत्कृष्ट परिणाम प्राप्त गर्न \"Google का लागि बनाइएको\" प्रमाणपत्र प्राप्त स्क्रिन प्रोटेक्टर प्रयोग गर्नुहोस्। तपाईंले अन्य स्क्रिन प्रोटेक्टरहरू हाल्नुभयो भने तपाईंको फिंगरप्रिन्टले काम नगर्न सक्छ।"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"उत्कृष्ट परिणाम प्राप्त गर्न \"Google का लागि बनाइएको\" प्रमाणपत्र प्राप्त स्क्रिन प्रोटेक्टर प्रयोग गर्नुहोस्। तपाईंले अन्य स्क्रिन प्रोटेक्टरहरू हाल्नुभयो भने तपाईंको बच्चाको फिंगरप्रिन्टले काम नगर्न सक्छ।"</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"यन्त्र साथ चित्रण र फिंगरप्रिन्ट सेन्सर स्थान"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"नाम"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ठिक छ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"मेटाउनुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"सेन्सरमा छुनुहोस्"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"सेन्सरमा आफ्नो औंला राख्नुहोस् र भाइब्रेसन भएपछि उठाउनुहोस्"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"यसले तपाईंको फिंगरप्रिन्टको अझ धेरै भाग सेभ गर्न मद्दत गर्छ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"फिंगरप्रिन्ट दर्ता गर्ने कार्य <xliff:g id="PERCENTAGE">%d</xliff:g> पूरा भयो"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"फिंगरप्रिन्ट हालियो"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"तपाईं अब ट्याब्लेट अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"तपाईं अब डिभाइस अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"तपाईं अब फोन अनलक गर्न वा आफ्नो पहिचान पुष्टि गर्न (जस्तै, एपमा साइन इन गर्दा) आफ्नो फिंगरप्रिन्ट प्रयोग गर्न सक्नुहुन्छ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"यो काम पछि गर्नुहोस्‌"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"औँला उठाएर फेरि छुनुहोस्"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"आफ्नो कुनै औँलाको एकतिरको भाग सेन्सरमा राखिरहनुहोस् अनि उक्त औँलाको अर्को भाग पनि सेन्सरमा राखिरहनुहोस्"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"सम्पन्न भयो"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"आच्यौं, त्यो सेन्सर होइन नि त"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"तपाईंको फोनको पछाडि भागमा रहेको सेन्सरमा छुनुहोस्। चोर औंला प्रयोग गर्नुहोस्‌।"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"दर्ता गर्न सकिएन"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"फिंगरप्रिन्ट दर्ताको समय सीमा पुग्यो। पुन: प्रयास गर्नुहोस्।"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"फिंगरप्रिन्ट दर्ता गर्न सकिएन। पुन: प्रयास गर्नुहोस् वा अरू औँलाको प्रयोग गर्नुहोस्।"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"अर्को हाल्नुहोस्"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"अर्को"</string>
@@ -3647,7 +3665,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"कार्य चुनौती, कार्य, प्रोफाइल"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"कार्यको प्रोफाइल, व्यवस्थापन गरिएको प्रोफाइल, एकरूपता ल्याउनु, एकरूपता, कार्य, प्रोफाइल"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"इसाराहरू"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"वालेट"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"भुक्तानी गर्नुहोस्, ट्याप गर्नुहोस्, भुक्तानी"</string>
     <string name="keywords_backup" msgid="707735920706667685">"ब्याकअप, ब्याकअप गर्नुहोस्"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"इसारा"</string>
@@ -3739,7 +3757,7 @@
     <string name="spatial_summary_off" msgid="8272678804629774378">"अफ छ"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"अन छ / <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"अन छ / <xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> र <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
-    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"तपाईं ब्लुटुथ डिभाइसहरूका लागि स्पाटियल अडियो अन गर्न पनि सक्नुहुन्छ।"</string>
+    <string name="spatial_audio_footer_title" msgid="8775010547623606088">"तपाईं ब्लुटुथ डिभाइसहरूका लागि स्पेशियल अडियो अन गर्न पनि सक्नुहुन्छ।"</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"कनेक्ट गरिएका डिभाइसका सेटिङ"</string>
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{कुनै पनि समयतालिका बनाइएको छैन}=1{एउटा समयतालिका बनाइएको छ}other{# वटा समयतालिका बनाइएको छ}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"बाधा नपुऱ्याउनुहोस्"</string>
@@ -4988,7 +5006,7 @@
     <string name="emergency_gesture_entrypoint_summary" msgid="4730874229911208834">"<xliff:g id="APP_NAME">%1$s</xliff:g> ले व्यवस्थापन गरेको"</string>
     <string name="emergency_gesture_screen_summary" msgid="6640521030845132507">"तल दिइएका कारबाहीहरू सुरु गर्न पावर बटन फटाफट ५ वा सोभन्दा बढी पटक थिच्नुहोस्"</string>
     <string name="emergency_gesture_sound_setting_title" msgid="7153948164862156536">"काउन्टडाउन अलार्म बजाइयोस्"</string>
-    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"आपत्कालीन सेवा प्रदान गर्ने निकायमा कल गर्दै गर्दा ठुलो आवाजमा कुनै ध्वनि बजाइयोस्"</string>
+    <string name="emergency_gesture_sound_setting_summary" msgid="6573377104470235173">"आपत्कालीन सेवा प्रदान गर्ने निकायमा कल गर्दै गर्दा ठुलो आवाजमा कुनै साउन्ड बजाइयोस्"</string>
     <string name="emergency_gesture_category_call_for_help_title" msgid="1680040129478289510">"मद्दत प्राप्त गर्न सूचित गर्नुहोस्"</string>
     <string name="emergency_gesture_call_for_help_title" msgid="4969340870836239982">"मद्दत प्राप्त गर्न कल गरियोस्"</string>
     <string name="emergency_gesture_call_for_help_dialog_title" msgid="8901271205171421201">"आपत्‌कालीन अवस्थामा मद्दत प्राप्त गर्न कल गर्नु पर्ने नम्बर"</string>

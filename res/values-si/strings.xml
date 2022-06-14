@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"ඔබගේ උපාංගයට අවට බ්ලූටූත් උපාංග සමඟ සන්නිවේදනයට ඉඩ දෙන්න"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"ඔබගේ දුරකථනයට අවට බ්ලූටූත් උපාංග සමඟ සන්නිවේදනයට ඉඩ දෙන්න"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"බ්ලූටූත් A2DP දෘඪාංග ඕෆ්ලෝඩ් අබල කරන්න"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"බ්ලූටූත් LE AUDIO දෘඪාංග ඕෆ්ලෝඩ් අබල කරන්න"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"බ්ලූටූත් LE AUDIO දෘඪාංග ශ්‍රව්‍ය අබල කරන්න"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"උපාංගය යළි අරඹන්නද?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"මෙම සැකසීම වෙනස් කිරීමට ඔබ ඔබගේ උපාංගය යළි ඇරඹීමට අවශ්‍යයි."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"යළි අරඹන්න"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"අවලංගු කරන්න"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"බ්ලූටූත් LE ශ්‍රව්‍ය සබල කරන්න"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"උපාංගය LE ශ්‍රව්‍ය දෘඪාංග හැකියා සඳහා සහය දක්වන්නේ නම් බ්ලූටූත් LE ශ්‍රව්‍ය විශේෂාංගය සබල කරයි."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"මාධ්‍ය උපාංග"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"ඇමතුම් උපාංග"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"වෙනත් උපාංග"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"මුහුණෙන් අගුලු හැරීම ඉඩ දෙන්න"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"සත්‍යාපනය කිරීමට ඔබේ මුහුණ භාවිතා කරන්න"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ඔබේ දුරකථනය අගුලු හැරීමට, මිලදී ගැනීම්වලට අවසර දීමට, හෝ යෙදුම්වලට පිරීමට ඔබේ මුහුණ භාවිත කරන්න."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"දුරකථනය අගුලු හැරීමට හෝ ඒ ඔවුන් බව සත්‍යාපනය කිරීමට ඔබගේ දරුවාට ඔවුන්ගේ මුහුණ භාවිත කිරීමට ඉඩ දෙන්න. ඔවුන් යෙදුම් වලට පිරීමේදී, මිලදී ගැනීමක් අනුමත කිරීමේදී සහ තවත් දේවලදී මෙය සිදු වේ."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"ඔබේ දුරකථනය අගුලු හැරීමට, හෝ මිලදී ගැනීම් අනුමත කිරීමට ඔබේ මුහුණ භාවිත කරන්න.\n\nසටහන: ඔබට ඔබේ මුහුණ මෙම උපාංගය අගුලු හැරීමට භාවිත කළ නොහැකිය. තව තොරතුරු සඳහා, ඔබේ සංවිධානයෙහි පරිපාලක අමතන්න."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"ඔබේ දුරකථනය අගුලු හැරීමට, මිලදී ගැනීම්වලට අවසර දීමට, හෝ යෙදුම්වලට පිරීමට ඔබේ මුහුණ භාවිත කරන්න."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"ඔවුන් Pixel Imprint භාවිත කරන විට, ඔවුන්ගේ ඇඟිලි සලකුණු ආකෘතිය යාවත්කාලීන කිරීමට රූප භාවිත කෙරේ. ඔබගේ දරුවාගේ ඇඟිලි සලකුණු ආකෘතිය තැනීමට භාවිත කරන රූප කිසි විටක ගබඩා නොකරනු ඇත, නමුත් ඇඟිලි සලකුණු ආකෘතිය දුරකථනයේ ආරක්ෂිතව ගබඩා කර ඇති අතර කිසි විටක දුරකථනය හැර නොයයි. සියලු සැකසීම් දුරකථනයේ ආරක්ෂිතව සිදු වේ."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"ඔබට සැකසීම් තුළ ඕනෑම වේලාවක ඔබගේ ඇඟිලි සලකුණු රූප සහ ආකෘතිය මැකීමට, හෝ ඇඟිලි සලකුණු අගුලු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු රූප සහ මාදිලි ඔබ මකන තෙක් දුරකථනයේ ගබඩා කර ඇත."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"ඔබට සහ ඔබගේ දරුවාට සැකසීම් තුළ ඕනෑම වේලාවක සිය ඇඟිලි සලකුණු රූප සහ ආකෘතිය මැකීමට, හෝ ඇඟිලි සලකුණු අගුලු හැරීම ක්‍රියාවිරහිත කිරීමට හැකිය. ඇඟිලි සලකුණු රූප සහ ආකෘති ඔබ ඒවා මකන තෙක් දුරකථනයේ ගබඩා කර ඇත."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"යම් කෙනෙක් එය ඔබගේ ඇඟිල්ලට තබාගෙන සිටින විට වැනි, ඔබ අදහස් නොකරන විටක ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"යම් කෙනෙක් එය ඔබගේ ඇඟිල්ලට තබාගෙන සිටින විට වැනි, ඔබ අදහස් නොකරන විටක ඔබගේ දුරකථනය අගුලු හැරීමට හැකිය."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"යම් කෙනෙක් එය ඔවුන්ගේ ඇඟිල්ලට තබාගෙන සිටින විට වැනි, ඔවුන් අදහස් නොකරන විටක ඔබගේ දරුවාගේ දුරකථනය අගුලු හැරීමට හැකිය."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"හොඳම ප්‍රතිඵල සඳහා, සහතික කළ Google සඳහා තනන ලද තිර ආරක්ෂකයක් භාවිත කරන්න. වෙනත් තිර ආරක්ෂක සමඟ, ඔබ‍ගේ ඇඟිලි සලකුණ ක්‍රියා නොකරනු ඇත."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"හොඳම ප්‍රතිඵල සඳහා, සහතික කළ Google සඳහා තනන ලද තිර ආරක්ෂකයක් භාවිත කරන්න. වෙනත් තිර ආරක්ෂක සමඟ, ඔබ‍ගේ දරුවාගේ ඇඟිලි සලකුණ ක්‍රියා නොකළ හැකිය."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"උපාංගයේ ඇඟිලි සලකුණු සංවේදකයේ පිහිටීම නිරූපණය"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"නම‍"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"හරි"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"මකන්න"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"සංවේදකය ස්පර්ශ කරන්න"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"ඔබගේ ඇඟිල්ල සංවේදකය මත තබා කම්පනයක් දැනෙන විට ඔසවන්න"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"මෙය ඔබගේ ඇඟිලි සලකුණෙහි වැඩි ප්‍රමාණයක් ග්‍රහණය කර ගැනීමට උපකාරී වේ"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"ඇඟිලි සලකුණ සියයට <xliff:g id="PERCENTAGE">%d</xliff:g>ක් ලියාපදිංචි කරමින්"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"ඇඟිලි සලකුණ එක් කරන ලදී"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"දැන් ඔබට ඔබගේ ටැබ්ලටය අගුලු හැරීමට හෝ ඔබ යෙදුම්වලට පුරන විට වැනි අවස්ථාවල, ඒ ඔබ බව සත්‍යාපනය කිරීමට ඔබගේ ඇඟිලි සලකුණ භාවිත කළ හැකිය"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"දැන් ඔබට ඔබගේ උපාංගය අගුලු හැරීමට හෝ ඔබ යෙදුම්වලට පුරන විට වැනි අවස්ථාවල, ඒ ඔබ බව සත්‍යාපනය සකිරීමට ඔබගේ ඇඟිලි සලකුණ භාවිත කළ හැකිය"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"දැන් ඔබට ඔබගේ දුරකථනය අගුලු හැරීමට හෝ ඔබ යෙදුම්වලට පුරන විට වැනි අවස්ථාවල, ඒ ඔබ බව සත්‍යාපනය සකිරීමට ඔබගේ ඇඟිලි සලකුණ භාවිත කළ හැකිය"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"පසුව එය කරන්න"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ඔසවා, පසුව නැවත ස්පර්ශ කරන්න"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"ඔබගේ ඇඟිලි සලකුණුණෙහි පැත්ත සංවේදකය මත තබා අල්ලාගෙන සිටින්න, අනතුරුව අනෙක් පැත්තට මාරු කරන්න"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"නිමයි"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"අපොයි, එය සංවේදකය නොවෙයි"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"දුරකථනය පිටුපස ඇති සංවේදකය ස්පර්ශ ක. දබරැඟිල්ල භාවිත ක."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"බඳවා ගැනීම අවසන් නොකරන ලදී"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"ඇඟිලි සලකුණ ඇතුළත් කිරිමේ කාල සීමාව ළඟා විය. නැවත උත්සාහ කරන්න."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"ඇඟිලි සලකුණ ඇතුළත් කිරිම ක්‍රියා කළේ නැත. නැවත උත්සාහ කරන්න, නැතහොත් වෙනත් ඇඟිල්ලක් භාවිත කරන්න."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"තවත් එකක් එක් කරන්න"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"මීළඟ"</string>

@@ -150,11 +150,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Omogočite napravi, da komunicira z napravami Bluetooth v bližini"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Omogočite telefonu, da komunicira z napravami Bluetooth v bližini"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Onemogoči prelaganje s strojne opreme za A2DP za Bluetooth"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Onemogoči prelaganje na strojno opremo za Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Onemogoči prelaganje na strojno opremo za Bluetooth LE Audio"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vnovični zagon?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Če želite spremeniti to nastavitev, znova zaženite napravo."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Zaženi znova"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Prekliči"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Omogoči funkcijo Bluetooth LE Audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Omogoči funkcijo Bluetooth LE Audio, če naprava podpira strojne zmogljivosti za zvok z majhno porabo energije."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Predstavnostne naprave"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Klicne naprave"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Druge naprave"</string>
@@ -372,7 +374,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Omogočanje odklepanja z obrazom"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Preverjanje pristnosti z obrazom"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Uporabljajte obraz za odklepanje telefona, odobritev nakupov ali prijavo v aplikacije."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Otroku dovolite, da bo z obrazom odklepal telefon ali potrjeval svojo identiteto. To se zgodi, ko se prijavi v aplikacije, odobri nakup in drugo."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Z obrazom odklenite telefon ali odobrite nakupe.\n\nOpomba: obraza ne morete uporabiti za odklepanje te naprave. Za več informacij se obrnite na skrbnika v organizaciji."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Uporabljajte obraz za odklepanje telefona, odobritev nakupov ali prijavo v aplikacije"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -464,7 +471,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Ko otrok uporablja Pixel Imprint, se model prstnega odtisa posodablja s slikami iz teh interakcij. Slike, iz katerih je ustvarjen model otrokovega prstnega odtisa, se nikoli ne shranijo, model prstnega odtisa pa se varno shrani v telefon in ga nikoli ne zapusti. Celotna obdelava je izvedena varno v telefonu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"V nastavitvah lahko kadar koli izbrišete slike in model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Slike in modeli prstnih odtisov so shranjeni v telefonu, dokler jih ne izbrišete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Vi in otrok lahko v nastavitvah kadar koli izbrišete slike in model prstnega odtisa ali izklopite odklepanje s prstnim odtisom. Slike in modeli prstnega odtisa so shranjeni v telefonu, dokler niso izbrisani."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Telefon lahko odklenete tudi nenamerno, na primer če ga nekdo podrži pred vašim prstom."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Telefon lahko odklenete tudi nenamerno, na primer če ga nekdo podrži pred vašim prstom."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Otrokov telefon je mogoče odkleniti tudi nenamerno, na primer če ga nekdo podrži pred njegovim prstom."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Za najboljše rezultate uporabljajte zaščito zaslona, ki ima potrdilo »Narejeno za Google«. Če uporabljate druge zaščite zaslona, prstni odtis morda ne bo deloval."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Za najboljše rezultate uporabljajte zaščito zaslona, ki ima potrdilo »Narejeno za Google«. Če uporabljate druge zaščite zaslona, otrokov prstni odtis morda ne bo deloval."</string>
@@ -514,6 +525,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustracija z napravo in lokacijo tipala prstnih odtisov"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Ime"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"V redu"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotaknite se tipala"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Prst položite na tipalo in ga dvignite, ko začutite vibriranje."</string>
@@ -533,9 +546,12 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Prstni odtis je dodan"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Zdaj lahko s prstnim odtisom odklenete tablični računalnik ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Zdaj lahko s prstnim odtisom odklenete napravo ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Zdaj lahko s prstnim odtisom odklenete telefon ali potrdite svojo identiteto, na primer ob prijavi v aplikacije."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Pozneje"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Dvignite in se spet dotaknite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Stranski del prstnega odtisa položite na tipalo prstnih odtisov in ga pridržite, nato zamenjajte stran."</string>
@@ -593,8 +609,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Končano"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to ni tipalo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"S kazalcem se dotaknite tipala na hrbtni strani telefona."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Registracija ni bila dokončana"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Dosežena je časovna omejitev za registracijo prstnega odtisa. Poskusite znova."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija prstnega odtisa ni uspela. Poskusite znova ali uporabite drug prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodaj še enega"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Naprej"</string>

@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Anna laitteen viestiä lähellä olevien Bluetooth-laitteiden kanssa"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Anna puhelimen viestiä lähellä olevien Bluetooth-laitteiden kanssa"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Poista käytöstä Bluetooth A2DP ‑laitteiston lähetys"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Poista käytöstä Bluetooth LE AUDIO ‑laitteiston lähetys"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Poista Bluetooth LE ‑audiolaitteiston lähetys käytöstä"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Käynnistetäänkö laite uudelleen?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Laite on käynnistettävä uudelleen asetuksen muuttamiseksi."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Käynnistä uudelleen"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Peru"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Ota Bluetooth LE ‑audio käyttöön"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Ottaa Bluetooth LE ‑audio-ominaisuuden käyttöön, jos laite tukee LE-audiolaitteistoja."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Medialaitteet"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Soittolaitteet"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Muut laitteet"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Salli kasvojentunnistusavaus"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Todennus kasvojen avulla"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Anna lapselle lupa käyttää kasvojaan puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esimerkiksi hänen kirjautuessaan sovelluksiin tai hyväksyessään ostoksen."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Avaa puhelin tai hyväksy ostoksia sormenjäljellä.\n\nHuom. Tämän laitteen lukitusta ei voi avata kasvojentunnistuksella. Saat lisätietoja organisaatiosi järjestelmänvalvojalta."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Voit avata puhelimen, hyväksyä ostoksia tai kirjautua sisään sovelluksiin kasvojen avulla."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Kun lapsi käyttää Pixel Imprintiä, kuvia käytetään sormenjälkimallin päivittämiseen. Lapsen sormenjälkimallin luontiin käytettäviä kuvia ei koskaan säilytetä, mutta itse sormenjälkimalli säilytetään suojatusti puhelimella, eikä se poistu puhelimelta. Kaikki käsittely tapahtuu turvallisesti puhelimella."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Voit poistaa sormenjälkesi kuvat ja mallin tai laittaa sormenjälkilukituksen pois päältä milloin tahansa asetuksista. Sormenjälkesi kuvat ja mallit säilytetään puhelimellasi, kunnes poistat ne."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Sinä ja lapsesi voitte poistaa sormenjälkien kuvat ja mallit tai laittaa sormenjälkiavauksen pois päältä milloin tahansa asetuksista. Sormenjälkien kuvat ja mallit säilytetään puhelimella, kunnes ne poistetaan."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Joku muu voi avata puhelimesi lukituksen haluamattasi, jos puhelin esimerkiksi asetetaan sormeasi vasten."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Joku muu voi avata puhelimesi lukituksen haluamattasi, jos puhelin esimerkiksi asetetaan sormeasi vasten."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Joku muu voi avata lapsesi puhelimen lukituksen hänen haluamattaan pitämällä sitä hänen sormeaan vasten."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Saat parhaan lopputuloksen käyttämällä Made For Google ‑sertifioitua näytönsuojusta. Sormenjälkesi ei välttämättä toimi muiden näytönsuojusten kanssa."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Saat parhaan lopputuloksen käyttämällä Made For Google ‑sertifioitua näytönsuojusta. Lapsesi sormenjälki ei välttämättä toimi muiden näytönsuojusten kanssa."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Laitteen ja sormenjälkianturin sijainnin kuva."</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nimi"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ok"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Poista"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Kosketa tunnistinta"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Aseta sormesi tunnistimelle ja nosta se, kun tunnet värähdyksen"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tämä auttaa tallentamaan suuremman osan sormenjäljestäsi"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Sormenjäljen käyttöönotosta <xliff:g id="PERCENTAGE">%d</xliff:g> prosenttia valmiina"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Sormenjälki lisätty"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Voit nyt käyttää sormenjälkeäsi tabletin lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Voit nyt käyttää sormenjälkeäsi laitteen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Voit nyt käyttää sormenjälkeäsi puhelimen lukituksen avaamiseen tai henkilöllisyyden todentamiseen esim. kirjautuessasi sovelluksiin"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Tee myöhemmin"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Nosta sormi ja kosketa taas"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Aseta sormenjäljen reuna tunnistimen päälle ja pidä se siinä, ja tee sitten sama toiselle reunalle"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Valmis"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hups, anturi ei ole siinä."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kosketa puhelimen takaosan tunnistinta etusormella."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Käyttöönottoa ei suoritettu loppuun"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Sormenjäljen käyttöönoton enimmäisaika ylittyi. Yritä uudelleen."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Sormenjäljen rekisteröinti ei onnistunut. Yritä uudelleen tai käytä eri sormea."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Lisää toinen"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Seuraava"</string>
@@ -1321,8 +1339,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Täysi resoluutio"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p – FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p – QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Täysi resoluutio kuluttaa enemmän akkua. Jotkin sovellukset käynnistyvät uudelleen, kun vaihdat resoluutiota."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Värit"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Luonnollinen"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Tehostettu"</string>
@@ -2346,8 +2363,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Näytön koko ja tekstin asetukset on nollattu"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Nollataanko näytön koko ja teksti?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Näytön koko ja tekstiasetukset nollataan puhelimen alkuperäisiin asetuksiin"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Näytön koko ja tekstiasetukset nollataan tabletin alkuperäisiin asetuksiin"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Nollaa"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Suunnitelmia viikonlopuksi?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Lähden rannalle. Liitytkö seuraan?"</string>
@@ -3649,7 +3665,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"työhaaste, työ, profiili"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"työprofiili, hallinnoitu profiili, yhdistä, yhdistäminen, työ, profiili"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"eleet"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"maksa, napauta, maksut"</string>
     <string name="keywords_backup" msgid="707735920706667685">"varmuuskopiointi, varmuuskopio"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"ele"</string>

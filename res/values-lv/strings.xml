@@ -149,11 +149,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Ļaujiet ierīcei izveidot savienojumu ar tuvumā esošām Bluetooth ierīcēm."</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Ļaujiet tālrunim izveidot savienojumu ar tuvumā esošām Bluetooth ierīcēm."</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Atspējot Bluetooth A2DP aparatūras izlādi"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Atspējot Bluetooth LE AUDIO aparatūras izlādi"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Atspējot Bluetooth LE audio aparatūras izlādi"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Vai restartēt ierīci?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Lai mainītu šo iestatījumu, jums jārestartē ierīce."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Restartēt"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Atcelt"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Iespējot Bluetooth LE audio"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Tiek iespējota Bluetooth LE audio funkcija, ja ierīcē tiek atbalstītas LE audio aparatūras iespējas."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Multivides ierīces"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Zvanīšanas ierīces"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Citas ierīces"</string>
@@ -369,7 +371,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Autorizācijas pēc sejas atļaušana"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Autentificēšana, izmantojot seju"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Varat izmantot seju, lai atbloķētu tālruni, apstiprinātu pirkumus un pierakstītos lietotnēs."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Atļaujiet bērnam izmantot seju, lai atbloķētu tālruni vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs, apstiprinot pirkumu un veicot citas darbības."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Izmantojiet sejas atpazīšanu, lai atbloķētu savu tālruni vai apstiprinātu pirkumus.\n\nPiezīme. Sejas atpazīšanu nevar izmantot šīs ierīces atbloķēšanai. Lai iegūtu plašāku informāciju, sazinieties ar savas organizācijas administratoru."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Varat izmantot seju, lai atbloķētu tālruni, apstiprinātu pirkumus un pierakstītos lietotnēs"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -460,7 +467,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Izmantojot funkciju Pixel Imprint, pirksta nospieduma modeļa atjaunināšanai tiek izmantoti attēli. Jūsu bērna pirksta nospieduma modeļa izveidei izmantotie attēli nekad netiek saglabāti, savukārt pirksta nospieduma modelis tiek droši glabāts bērna tālrunī un vienmēr atrodas tikai tālrunī. Apstrāde tiek veikta drošā veidā un tikai bērna tālrunī."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Jebkurā brīdī iestatījumos varat izdzēst pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirkstu nospiedumu attēli un modeļi tiks glabāti tālrunī, līdz tos izdzēsīsiet."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Iestatījumos jūs un jūsu bērns varat jebkurā laikā dzēst pirksta nospieduma attēlus un modeli vai izslēgt autorizāciju ar pirksta nospiedumu. Pirksta nospieduma attēli un modeļi tiek glabāti tālrunī, līdz tie tiek izdzēsti."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Jūsu tālrunis var tikt nejauši atbloķēts, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Jūsu tālrunis var tikt nejauši atbloķēts, piemēram, ja kāda persona pavērš to pret jūsu pirkstu."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Jūsu bērna tālrunis var tikt nejauši atbloķēts, piemēram, ja kāda persona pavērš to pret bērna pirkstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Lai iegūtu vislabākos rezultātus, izmantojiet ekrāna aizsargplēvi, kam ir “Made for Google” sertifikāts. Ar citām ekrāna aizsargplēvēm jūsu pirksta nospiedums, iespējams, nedarbosies."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Lai iegūtu vislabākos rezultātus, izmantojiet ekrāna aizsargplēvi, kam ir “Made for Google” sertifikāts. Ar citām ekrāna aizsargplēvēm jūsu bērna pirksta nospiedums, iespējams, nedarbosies."</string>
@@ -510,6 +521,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Attēls ar ierīci un pirkstu nospiedumu sensora atrašanās vietu uz tās"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nosaukums"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Labi"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Dzēst"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Pieskarieties sensoram"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Novietojiet pirkstu uz sensora un paceliet to pēc tam, kad sajūtat vibrāciju"</string>
@@ -527,9 +540,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Tādējādi tiks tverts plašāks pirksta nospiedums."</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Pirksta nospieduma reģistrēšana: <xliff:g id="PERCENTAGE">%d</xliff:g> procenti"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Pirksta nospiedums pievienots"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Tagad varat izmantot pirksta nospiedumu, lai atbloķētu planšetdatoru vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Tagad varat izmantot pirksta nospiedumu, lai atbloķētu ierīci vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Tagad varat izmantot pirksta nospiedumu, lai atbloķētu tālruni vai apstiprinātu savu identitāti, piemēram, pierakstoties lietotnēs."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Vēlāk"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Paceliet un vēlreiz pieskarieties"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Novietojiet pirksta sānu uz sensora un turiet, bet pēc tam novietojiet otru pirksta sānu"</string>
@@ -587,8 +603,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Gatavs"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Tas nav sensors!"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Pieskarieties sensoram tālruņa aizmugurē ar rādītājpirkstu."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Reģistrēšana netika pabeigta"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Ir sasniegts pirksta nospieduma reģistrēšanas laika ierobežojums. Mēģiniet vēlreiz."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Neizdevās reģistrēt pirksta nospiedumu. Mēģiniet vēlreiz vai izmantojiet citu pirkstu."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Pievienot citu"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Tālāk"</string>
@@ -1341,8 +1359,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Pilna izšķirtspēja"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"Izmantojot pilnu izšķirtspēju, tiek patērēts vairāk akumulatora enerģijas. Ja mainīsiet izšķirtspēju, noteiktas lietotnes var tikt restartētas."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"Krāsas"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"Dabiska"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"Paspilgtināta"</string>
@@ -2370,8 +2387,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"Attēlojuma lieluma un teksta iestatījumi ir atiestatīti"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"Vai atiestatīt displeja izmērus un tekstu?"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"Jūsu displeja izmēru un teksta preferences tiks atiestatītas uz tālruņa sākotnējiem iestatījumiem."</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"Jūsu displeja izmēru un teksta preferences tiks atiestatītas uz planšetdatora sākotnējiem iestatījumiem."</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"Atiestatīt"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"Vai ir kādi plāni nedēļas nogalei?"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"Es došos uz pludmali. Vai vēlies pievienoties?"</string>

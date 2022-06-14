@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"ከአቅራቢያ ካሉ የብሉቱዝ መሣሪያዎች ጋር መልዕክት ለመለዋወጥ እንዲችል የእርስዎን መሣሪያ ይፍቀዱለት"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"ከአቅራቢያ ካሉ የብሉቱዝ መሣሪያዎች ጋር መልዕክት ለመለዋወጥ እንዲችል የእርስዎን ስልክ ይፍቀዱለት"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"የብሉቱዝ A2DP ሃርድዌር ማራገፍን አሰናክል"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"የብሉቱዝ LE AUDIO ሃርድዌር ማራገፍን ያሰናክሉ።"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"የብሉቱዝ LE ኦዲዮ ሃርድዌር ማራገፍን አሰናክል"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"መሣሪያ ዳግም ይጀምር?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"ይህን ቅንብር ለመለወጥ የእርስዎን መሣሪያ ዳግም ማስጀመር ይኖርብዎታል።"</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"ዳግም ጀምር"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"ይቅር"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"የብሉቱዝ LE ኦዲዮን አንቃ"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"መሣሪያው የLE ኦዲዮ ሃርድዌር ችሎታዎችን የሚደግፍ ከሆነ የብሉቱዝ ኦዲዮ ባህሪን ያነቃል።"</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"የማህደረ መረጃ መሣሪያዎች"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"ወደ መሣሪያዎች ደውል"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"ሌሎች መሣሪያዎች"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"በመልክ መክፈትን ይፍቀዱ"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"ለማረጋገጥ መልክዎን ይጠቀሙ"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም በመለያ ወደ መተግበሪያዎች ለመግባት መልክዎን ይጠቀሙ።"</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"ልጅዎ ስልካቸውን ለመክፈት ወይም እነሱ መሆናቸውን እንዲያረጋግጡ መልካቸው እንዲጠቀሙ ይፍቀዱ። ይህ የሚሆነው ወደ መተግበሪያዎች ሲገቡ፣ ግዢን ሲያጸድቁ እና ሌሎችም ሲያደርጉ ነው"</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"የእርስዎን ስልክ ለመክፈት ወይም ግዢዎችን ለማጽደቅ የእርስዎን ፊት ይጠቀሙ።\n\nማስታወሻ፦ ይህን መሣሪያ ለመክፈት ፊትን መጠቀም አይችሉም። ለተጨማሪ መረጃ፣ የእርስዎን ድርጅት አስተዳዳሪ ያነጋግሩ።"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"ስልክዎን ለመክፈት፣ ግዢዎችን ለመፍቀድ ወይም በመለያ ወደ መተግበሪያዎች ለመግባት መልክዎን ይጠቀሙ"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Pixel Imprintን ሲጠቀሙ ምስሎች የጣት አሻራዎን ሞዴል ለማዘመን ስራ ላይ ይውላሉ። የልጅዎን የጣት አሻራ ሞዴል ለመፍጠር ስራ ላይ የዋሉ ምስሎች በጭራሽ አይከማቹም፣ ነገር ግን የጣት አሻራ ሞዴሉ በስልኩ ላይ ደህንነቱ በተጠበቀ ሁኔታ የሚከማች ሲሆን በጭራሽ ከስልኩ አይወጣም። ሁሉም ሂደቶች በስልኩ ላይ ደህንነቱ በተጠበቀ ሁኔታ ይከሰታል።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"የጣት አሻራዎን ምስሎች እና ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መከፈትን ማጥፋት ይችላሉ። የጣት አሻራ ምስሎች እና ሞዴሎች እስኪሰርዟቸው ድረስ በስልኩ ላይ ይቀመጣሉ።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"እርስዎ እና ልጅዎ የጣት አሻራቸውን ምስሎች እና ሞዴል መሰረዝ ወይም በቅንብሮች ውስጥ በማንኛውም ጊዜ በጣት አሻራ መክፈቻን ማጥፋት ትችላላችሁ። የጣት አሻራ ምስሎች እና ሞዴሎች እስኪሰረዙ ድረስ በስልኩ ላይ ይቀመጣሉ።"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"የእርስዎ ስልክ ለምሳሌ የሆነ ሰው በግድ ወደ እርስዎ ጣት ቢያስጠጋው እርስዎ ሳይፈለጉ ሊከፈት ይችላል።"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"የእርስዎ ስልክ ለምሳሌ የሆነ ሰው በግድ ወደ እርስዎ ጣት ቢያስጠጋው እርስዎ ሳይፈለጉ ሊከፈት ይችላል።"</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"ልጅዎ ሳይፈልጉ ስልካቸው ሊከፈት ይችላል፣ ለምሳሌ የሆነ ሰው ስልኩን ወደ ጣታቸው ቢያስጠጋው።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"ለምርጥ ውጤቶች ለGoogle የተሰራ የተረጋገጠ የማያ ገጽ መከላከያን ይጠቀሙ። በሌሎች የማያ ገጽ መከላከያዎች አማካኝነት የጣት አሻራዎ ላይሰራ ይችላል።"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"ለምርጥ ውጤቶች ለGoogle የተሰራ የተረጋገጠ የማያ ገጽ መከላከያን ይጠቀሙ። በሌሎች የማያ ገጽ መከላከያዎች አማካኝነት የልጅዎ የጣት አሻራ ላይሰራ ይችላል።"</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"ከመሣሪያ እና የጣት አሻራ አነፍናፊ መገኛ አካባቢ መግለጫ ስዕል ጋር"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"ስም"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"እሺ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"ሰርዝ"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"ዳሳሹን ይንኩ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"ጣትዎን በዳሳሹ ላይ ያስቀምጡትና ንዝረት ከተሰማዎት በኋላ ያንሱት"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"ይህ ተጨማሪ የጣት አሻራዎን ክፍል እንዲይዝ ያግዛል"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"የጣት አሻራ <xliff:g id="PERCENTAGE">%d</xliff:g> መቶኛን በመመዝገብ ላይ"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"የጣት አሻራ ታክሏል"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"አሁን የጣት አሻራዎትን የእርስዎን ጡባዊ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"አሁን የጣት አሻራዎትን የእርስዎን መሣሪያ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"አሁን የጣት አሻራዎትን የእርስዎን ስልክ ለመክፈት ወይም ለምሳሌ ወደ መተግበሪያዎች በሚገቡበት ጊዜ እርስዎ መሆንዎትን ለማረጋገጥ ሊጠቀሙበት ይችላሉ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"በኋላ ላይ ያድርጉት"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ያንሱ፣ በመቀጠል መልሰው ይንኩ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"የጣት አሻራዎን ጎን በዳሳሹ ላይ አስቀምጠው ይያዙት፣ ከዚያ ወደ ሌላኛው ጎን ይቀይሩ"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"ተከናውኗል"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"አረግ አረግ፣ አነፍናፊው ያ አይደለም"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"በእርስዎ ስልክ ጀርባ ላይ ያለውን ዳሳሽ ይንኩ። የእርስዎን አመልካች ጣት ይጠቀሙ።"</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"ምዝገባ አልተጠናቀቀም"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"የጣት አሻራ ምዝገባ ጊዜ ገደብ ላይ ተደርሷል። እንደገና ይሞክሩ።"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"የጣት አሻራ ምዝገባ አልሰራም። እንደገና ይሞክሩ ወይም የተለየ ጣት ይጠቀሙ።"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"ሌላ ያክሉ"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ቀጣይ"</string>
@@ -3647,7 +3665,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"የስራ ፈተና፣ ስራ፣ መገለጫ"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"የሥራ መገለጫ፣ የሚተዳደር መገለጫ፣ አዋህድ፣ ውህደት፣ ሥራ፣ መገለጫ"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"የጣት ምልክቶች"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"የኪስ ቦርሳ"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"ይክፈሉ፣ መታ ያድርጉ፣ ክፍያዎች"</string>
     <string name="keywords_backup" msgid="707735920706667685">"ምትኬ"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"የጣት ምልክት"</string>

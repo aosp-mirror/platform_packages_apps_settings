@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"به دستگاهتان اجازه دهید با دستگاه‌های بلوتوث اطراف مرتبط شود"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"به تلفنتان اجازه دهید با دستگاه‌های بلوتوث اطراف مرتبط شود"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"‏غیرفعال کردن انتقال داده ازطریق سخت‌افزار بلوتوث A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"‏غیرفعال کردن تخلیه سخت‌افزار بلوتوث LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"‏غیرفعال کردن تخلیه سخت‌افزار صدای LE بلوتوث"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"دستگاه بازراه‌اندازی شود؟"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"برای تغییر این تنظیم، باید دستگاه را بازراه‌اندازی کنید."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"بازراه‌اندازی"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"لغو"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"‏فعال کردن صدای LE بلوتوث"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"‏اگر دستگاه از قابلیت‌های سخت‌افزار صدای LE پشتیبانی کند، ویژگی صدای LE بلوتوث را فعال می‌کند."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"دستگاه‌های ذخیره‌سازی"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"دستگاه‌های برقراری تماس"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"دستگاه‌های دیگر"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"مجاز کردن «قفل‌گشایی با چهره»"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"از چهره‌تان برای اصالت‌سنجی استفاده کنید"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"به فرزندتان اجازه دهید از چهره‌اش برای قفل‌گشایی تلفن و به‌تأیید رساندن هویتش استفاده کند. تأیید هویت هنگام ورود به سیستم برنامه‌ها، تأیید خرید، و موارد دیگر انجام می‌شود."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"از چهره‌تان برای باز کردن قفل تلفن یا تأیید خریدها استفاده کنید.\n\nتوجه: نمی‌توانید از چهره‌تان برای باز کردن قفل این دستگاه استفاده کنید. برای اطلاعات بیشتر، با سرپرست سیستم سازمانتان تماس بگیرید."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"برای باز کردن قفل تلفنتان، مجاز کردن خریدها یا ورود به سیستم برنامه‌ها، از چهر‌ه‌تان استفاده کنید"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"‏وقتی فرزندتان از Pixel Imprint استفاده می‌کند، مدل اثر انگشت او به‌کمک تصاویر به‌روزرسانی می‌شود. تصاویر استفاده‌شده برای ایجاد مدل اثر انگشت فرزندتان هرگز ذخیره نمی‌شوند، اما مدل اثر انگشت به‌طور ایمن در تلفن ذخیره می‌شود و هرگز از آن خارج نمی‌شود. همه پردازش‌ها به‌طور ایمن در تلفن انجام می‌شود."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"می‌توانید مدل و تصاویر اثر انگشتتان را حذف کنید یا هرزمان خواستید «قفل‌گشایی با اثر انگشت» را در «تنظیمات» خاموش کنید. تا زمانی‌که مدل‌ها و تصاویر اثر انگشت را حذف نکنید، در تلفن ذخیره می‌مانند."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"شما و فرزندتان هرزمان بخواهید می‌توانید مدل و تصاویر اثر انگشت را حذف کنید، یا «قفل‌گشایی با اثر انگشت» را در «تنظیمات» خاموش کنید. تا زمانی‌که مدل‌ها و تصاویر اثر انگشت را حذف نکنید، در تلفن ذخیره می‌مانند."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"ممکن است قفل تلفنتان حتی اگر قصدش را نداشته باشید باز شود، مثلاً اگر فردی تلفن را جلوی انگشتتان نگه دارد."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"ممکن است قفل تلفنتان حتی اگر قصدش را نداشته باشید باز شود، مثلاً اگر فردی تلفن را جلوی انگشتتان نگه دارد."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"قفل تلفن فرزندتان حتی اگر او نخواهد می‌تواند باز شود، مثلاً اگر فردی انگشت فرزندتان را روی حسگر تلفن نگه دارد."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"‏برای بهترین نتیجه، از محافظ صفحه‌نمایشی استفاده کنید که تأییدیه Made for Google داشته باشد. درصورت استفاده از دیگر محافظ‌های صفحه‌نمایش، ممکن است اثر انگشتتان کار نکند."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"‏برای بهترین نتیجه، از محافظ صفحه‌نمایشی استفاده کنید که تأییدیه Made for Google داشته باشد. درصورت استفاده از دیگر محافظ‌های صفحه‌نمایش، ممکن است اثر انگشت فرزندتان کار نکند."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"تصویر دستگاه و مکان حسگر اثر انگشت"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"نام"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"تأیید"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"حذف"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"حسگر را لمس کنید"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"انگشتتان را روی حسگر بگذارید و بعد از احساس لرزش، آن را بردارید"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"این کار کمک می‌کند بخش بیشتری از اثر انگشتتان ثبت شود"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"درحال ثبت اثر انگشت: <xliff:g id="PERCENTAGE">%d</xliff:g> درصد"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"اثر انگشت اضافه شد"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل رایانه لوحی‌تان یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها) استفاده کنید"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل دستگاهتان یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها) استفاده کنید"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"ازاین‌پس می‌توانید از اثر انگشتتان برای باز کردن قفل تلفنتان یا به‌تأیید رساندن هویتتان (مثلاً هنگام ورود به سیستم برنامه‌ها) استفاده کنید"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"بعداً انجام شود"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"بردارید و دوباره لمس کنید"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"یک سمت انگشتتان را روی حسگر قرار دهید و نگه دارید، سپس این کار را با سمت دیگر تکرار کنید"</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"تمام"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"اووه، آن حسگر نیست"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"با استفاده از انگشت اشاره، حسگر را در  پشت تلفن لمس کنید."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"ثبت انجام نشد"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"مهلت ثبت اثر انگشت به‌پایان رسید. دوباره امتحان کنید."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"ثبت اثر انگشت کار نمی‌کند. دوباره امتحان کنید یا از انگشت دیگری استفاده کنید."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"افزودن یک انگشت دیگر"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"بعدی"</string>
@@ -637,9 +655,9 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="8961855222808442301">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این دستگاه استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="8867435145945818970">"با فعال کردن قابلیت‌های حفاظتی دستگاه، نگذارید دیگران بدون اجازه شما از این تلفن استفاده کنند. قفل صفحه موردنظر برای استفاده را انتخاب کنید."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"روش پشتیبان قفل صفحه را انتخاب کنید"</string>
-    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"اگر قفل صفحه را فراموش کنید، سرپرست سیستم نمی‌تواند آن را بازنشانی کند."</string>
+    <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"اگر قفل صفحه را فراموش کنید، سرپرست فناوری اطلاعات نمی‌تواند آن را بازنشانی کند."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"قفل کاری مجزایی تنظیم کنید"</string>
-    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"اگر این قفل را فراموش کردید، از سرپرست سیستم بخواهید آن را بازنشانی کند"</string>
+    <string name="lock_settings_picker_profile_message" msgid="9142379549980873478">"اگر این قفل را فراموش کردید، از سرپرست فناوری اطلاعات بخواهید آن را بازنشانی کند"</string>
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"گزینه‌های قفل صفحه"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"گزینه‌های قفل صفحه"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"قفل صفحه"</string>
@@ -900,7 +918,7 @@
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="4056811727247312473">"حداکثر تعداد دستگاه‌های صوتی بلوتوث متصل را انتخاب کنید"</string>
     <string name="nfc_stack_debuglog_title" msgid="2926748386805740609">"‏گزارش اشکال‌زدایی پشته‌ای NFC"</string>
     <string name="nfc_stack_debuglog_summary" msgid="7333205107551132121">"‏افزایش سطح گزارش‌گیری پشته‌ای NFC"</string>
-    <string name="wifi_display_settings_title" msgid="6451625615274960175">"ارسال محتوا"</string>
+    <string name="wifi_display_settings_title" msgid="6451625615274960175">"پخش محتوا"</string>
     <string name="keywords_wifi_display_settings" msgid="5753883229564422679">"نمایش صفحه نمایش روی دستگاه دیگر"</string>
     <string name="wifi_display_enable_menu_item" msgid="7391841780777318134">"فعال کردن نمایش بی‌سیم"</string>
     <string name="wifi_display_no_devices_found" msgid="7904877793677102805">"هیچ دستگاهی در اطراف پیدا نشد."</string>
@@ -1321,8 +1339,7 @@
     <string name="screen_resolution_option_highest" msgid="9134161136319625840">"وضوح کامل"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"1080p FHD+‎"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"1440p QHD+‎"</string>
-    <!-- no translation found for screen_resolution_footer (6772341522952795647) -->
-    <skip />
+    <string name="screen_resolution_footer" msgid="6772341522952795647">"«وضوح کامل» از شارژ باتری بیشتری استفاده می‌کند. تغییر دادن وضوح ممکن است باعث شود برخی‌از برنامه‌ها بازراه‌اندازی شوند."</string>
     <string name="color_mode_title" msgid="8666690832113906028">"رنگ‌"</string>
     <string name="color_mode_option_natural" msgid="6192875655101283303">"طبیعی"</string>
     <string name="color_mode_option_boosted" msgid="4698797857766774289">"تقویت‌شده"</string>
@@ -2305,7 +2322,7 @@
     <string name="talkback_title" msgid="8756080454514251327">"Talkback"</string>
     <string name="talkback_summary" msgid="5820927220378864281">"صفحه‌خوان در وهله اول برای افراد نابینا و کم‌بینا در نظر گرفته شده است"</string>
     <string name="select_to_speak_summary" msgid="1995285446766920925">"روی موارد موجود در صفحه‌تان ضربه بزنید تا بلند خوانده شوند"</string>
-    <string name="accessibility_captioning_title" msgid="4561871958958925225">"اولویت‌های زیرنویس"</string>
+    <string name="accessibility_captioning_title" msgid="4561871958958925225">"اولویت‌های زیرنویس ناشنوایان"</string>
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"درباره اولویت‌های زیرنویس ناشنوایان"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"درباره اولویت‌های زیرنویس ناشنوایان بیشتر بدانید"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"بزرگ‌نمایی"</string>
@@ -2346,8 +2363,7 @@
     <string name="accessibility_text_reading_reset_message" msgid="824644303661026712">"تنظیمات اندازه نمایش و نوشتار بازنشانی شد"</string>
     <string name="accessibility_text_reading_confirm_dialog_title" msgid="2865331351355690389">"اندازه نمایش و نوشتار بازنشانی شود؟"</string>
     <string name="accessibility_text_reading_confirm_dialog_message" product="default" msgid="517090197003540264">"اندازه نمایش و اولویت‌های نوشتار به تنظیمات اصلی تلفن بازنشانی خواهد شد"</string>
-    <!-- no translation found for accessibility_text_reading_confirm_dialog_message (1291629915534156671) -->
-    <skip />
+    <string name="accessibility_text_reading_confirm_dialog_message" product="tablet" msgid="1291629915534156671">"اندازه نمایش و اولویت‌های نوشتار به تنظیمات اصلی رایانه لوحی بازنشانی خواهد شد"</string>
     <string name="accessibility_text_reading_confirm_dialog_reset_button" msgid="8215800137850243736">"بازنشانی"</string>
     <string name="accessibility_text_reading_conversation_message_1" msgid="7883952203831957831">"برنامه‌ای برای آخر هفته دارید؟"</string>
     <string name="accessibility_text_reading_conversation_message_2" msgid="8112160435318635856">"داریم به ساحل می‌رویم. شما هم می‌آیید؟"</string>
@@ -2511,7 +2527,7 @@
     <string name="accessibility_shortcut_type_hardware" msgid="4834144210432451916">"کلیدهای میزان صدا را نگه‌دارید"</string>
     <string name="accessibility_shortcut_type_triple_tap" msgid="7717524216825494543">"سه ضربه روی صفحه بزنید"</string>
     <string name="accessibility_hearingaid_instruction_continue_button" msgid="3367260988024430722">"ادامه"</string>
-    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"سمعک‌ها"</string>
+    <string name="accessibility_hearingaid_title" msgid="427173678199203191">"سمعک"</string>
     <string name="accessibility_hearingaid_not_connected_summary" msgid="3371427366765435743">"هیچ سمعکی متصل نشده است"</string>
     <string name="accessibility_hearingaid_adding_summary" msgid="999051610528600783">"افزودن سمعک‌ها"</string>
     <string name="accessibility_hearingaid_pair_instructions_title" msgid="2357706801112207624">"مرتبط کردن سمعک"</string>
@@ -3616,7 +3632,7 @@
     <string name="keywords_display_night_display" msgid="4711054330804250058">"صفحه کم‌نور، شب، رنگ‌مایه، شیفت شب، روشنایی، رنگ صفحه، رنگ، رنگ"</string>
     <string name="keywords_display_wallpaper" msgid="8478137541939526564">"پس‌زمینه، شخصی کردن، سفارشی کردن نمایشگر"</string>
     <string name="keywords_display_font_size" msgid="3593317215149813183">"اندازه نوشتار"</string>
-    <string name="keywords_display_cast_screen" msgid="2572331770299149370">"نمایش دادن، ارسال محتوا، نمایش صفحه‌نمایش روی دستگاه دیگر، هم‌رسانی صفحه‌نمایشش، صفحه‌نمایش مشترک، ارسال محتوای صفحه‌نمایش"</string>
+    <string name="keywords_display_cast_screen" msgid="2572331770299149370">"نمایش دادن، پخش محتوا، نمایش صفحه‌نمایش روی دستگاه دیگر، هم‌رسانی صفحه‌نمایشش، صفحه‌نمایش مشترک، پخش محتوای صفحه‌نمایش"</string>
     <string name="keywords_storage" msgid="3004667910133021783">"فضا، دیسک، دیسک سخت، مصرف دستگاه"</string>
     <string name="keywords_battery" msgid="7040323668283600530">"مصرف نیرو، شارژ"</string>
     <string name="keywords_battery_usage" msgid="1763573071014260220">"مشاهده مصرف باتری، مصرف باتری، مصرف انرژی"</string>
@@ -4080,7 +4096,7 @@
     <string name="interact_across_profiles_switch_enabled" msgid="7294719120282287495">"متصل"</string>
     <string name="interact_across_profiles_switch_disabled" msgid="4312196170211463988">"متصل کردن این برنامه‌ها"</string>
     <string name="interact_across_profiles_summary_1" msgid="6093976896137600231">"برنامه‌های متصل از اجازه‌های مشترکی استفاده می‌کنند و می‌توانند به داده‌های یکدیگر دسترسی پیدا کنند."</string>
-    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"برای اینکه داده‌های شخصی با مدیر فناوری اطلاعات هم‌رسانی نشود، تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد داشته باشید."</string>
+    <string name="interact_across_profiles_summary_2" msgid="505748305453633885">"برای اینکه داده‌های شخصی با سرپرست فناوری اطلاعات هم‌رسانی نشود، تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد داشته باشید."</string>
     <string name="interact_across_profiles_summary_3" msgid="444428694843299854">"هرزمان خواستید می‌توانید اتصال برنامه‌ها را در تنظیمات حریم‌خصوصی دستگاه قطع کنید."</string>
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"به برنامه کاری <xliff:g id="NAME">%1$s</xliff:g> برای دسترسی به داده‌های شخصی‌تان اعتماد دارید؟"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"تنها درصورتی برنامه‌ها را متصل کنید که به آن‌ها اعتماد دارید که داده‌های شخصی را با سرپرست فناوری اطلاعاتتان هم‌رسانی نمی‌کنند."</string>
@@ -4523,7 +4539,7 @@
     <string name="share_remote_bugreport_dialog_title" msgid="1575283098565582433">"گزارش اشکال به اشتراک گذاشته شود؟"</string>
     <string name="share_remote_bugreport_dialog_message_finished" msgid="4869053468609007680">"سرپرست فناوری اطلاعات شما برای کمک به عیب‌یابی این دستگاه، گزارش اشکال درخواست کرده است. ممکن است برنامه‌ها و داده‌ها به اشتراک گذاشته شوند."</string>
     <string name="share_remote_bugreport_dialog_message" msgid="8714439220818865391">"سرپرست فناوری اطلاعات شما برای کمک به عیب‌یابی این دستگاه، درخواست گزارش اشکال کرده است. ممکن است برنامه‌ها و داده‌ها به اشتراک گذاشته شوند و سرعت دستگاهتان به‌طور موقت کاهش یابد."</string>
-    <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"این گزارش اشکال با سرپرست فناوری شما هم‌رسانی می‌شود. برای جزئیات بیشتر با او تماس بگیرید."</string>
+    <string name="sharing_remote_bugreport_dialog_message" msgid="3523877008096439251">"این گزارش اشکال با سرپرست فناوری اطلاعات هم‌رسانی می‌شود. برای جزئیات بیشتر با او تماس بگیرید."</string>
     <string name="share_remote_bugreport_action" msgid="7173093464692893276">"اشتراک‌گذاری"</string>
     <string name="decline_remote_bugreport_action" msgid="1276509879613158895">"نپذیرفتن"</string>
     <string name="usb_use_charging_only" msgid="1743303747327057947">"بدون انتقال داده"</string>
@@ -4679,7 +4695,7 @@
     <string name="backup_disabled" msgid="4503062265560959320">"پشتیبان‌گیری غیرفعال است"</string>
     <string name="android_version_summary" msgid="7818952662015042768">"‏به‌روزرسانی‌شده به Android نسخه <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="5404532347171027730">"به‌روزرسانی در دسترس است"</string>
-    <string name="disabled_by_policy_title" msgid="3635622338687810583">"سرپرست سیستم آن را مسدود کرده است"</string>
+    <string name="disabled_by_policy_title" msgid="3635622338687810583">"سرپرست فناوری اطلاعات آن را مسدود کرده است"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="1669689058213728099">"نمی‌توان بلندی صدا را تغییر داد"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="400089720689494562">"امکان برقراری تماس وجود ندارد"</string>
     <string name="disabled_by_policy_title_sms" msgid="8951840850778406831">"امکان ارسال پیامک وجود ندارد"</string>
@@ -4895,7 +4911,7 @@
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"حسگرها خاموش است"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"تنظیمات نمایه کاری"</string>
     <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"جستجوی مخاطبین فهرست کار در برنامه‌های شخصی"</string>
-    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"ممکن است سرپرست سیستم بتواند جستجوها و تماس‌های ورودی‌تان را ببیند"</string>
+    <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"ممکن است سرپرست فناوری اطلاعات بتواند جستجوها و تماس‌های ورودی‌تان را ببیند"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"تقویم بین‌‌نمایه‌ای"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"نمایش رویدادهای کاری در تقویم شخصی"</string>
     <plurals name="hours" formatted="false" msgid="1853396353451635458">
@@ -4925,7 +4941,7 @@
     <string name="double_tap_power_for_camera_title" msgid="7982364144330923683">"باز کردن سریع دوربین"</string>
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"برای باز کردن سریع دوربین، دکمه روشن/خاموش را دو بار فشار دهید. در همه صفحه‌ها کار می‌کند."</string>
     <string name="double_tap_power_for_camera_suggestion_title" msgid="4299496243418753571">"باز کردن سریع دوربین"</string>
-    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"خودگرفت با چرخش دوربین"</string>
+    <string name="double_twist_for_camera_mode_title" msgid="472455236910935684">"خودگرفت با چرخاندن دوربین"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="592503740044744951"></string>
     <string name="double_twist_for_camera_suggestion_title" msgid="8178844037382604158">"سریع‌تر گرفتن خودگرفت"</string>
     <string name="system_navigation_title" msgid="1698862900901417194">"پیمایش سیستمی"</string>
@@ -5508,7 +5524,7 @@
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"ممکن است دسترسی به زمان یا داده‌های باقی‌مانده را از دست بدهید. پیش از برداشتن، با ارائه‌دهنده تماس بگیرید."</string>
     <string name="keywords_content_capture" msgid="7802155522681936956">"ضبط محتوا، محتوای برنامه"</string>
     <string name="content_capture" msgid="868372905432812238">"محتوای برنامه"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"‏به برنامه‌ها برای ارسال محتوا به سیستم Android اجازه داده می‌شود"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"‏به برنامه‌ها برای پخش محتوا به سیستم Android اجازه داده می‌شود"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"ثبت رونوشت حافظه آزاد سیستم"</string>
     <string name="reboot_with_mte_title" msgid="9167242803901899693">"‏راه‌اندازی مجدد با MTE"</string>
     <string name="reboot_with_mte_message" msgid="7675836625682561153">"‏سیستم راه‌اندازی مجدد می‌شود و پس‌از آن، آزمایش کردن با «افزونه‌های نشان‌گذاری حافظه» (MTE) را مجاز می‌کند. MTE می‌تواند بر عملکرد و پایداری سیستم اثر منفی بگذارد. در راه‌اندازی مجدد بعدی، بازنشانی می‌شود."</string>
@@ -5570,7 +5586,7 @@
     <string name="rtt_settings_no_visible" msgid="7440356831140948382"></string>
     <string name="rtt_settings_visible_during_call" msgid="7866181103286073700"></string>
     <string name="rtt_settings_always_visible" msgid="2364173070088756238"></string>
-    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"توقف ارسال محتوا"</string>
+    <string name="media_output_panel_stop_casting_button" msgid="6094875883164119035">"توقف پخش محتوا"</string>
     <string name="volte_5G_limited_title" msgid="5908052268836750629">"‏VoLTE خاموش شود؟"</string>
     <string name="volte_5G_limited_text" msgid="7150583768725182345">"‏این کار اتصال 5G را هم خاموش می‌کند.\nدرحین تماس صوتی، نمی‌توانید از اینترنت استفاده کنید و ممکن است برخی برنامه‌ها کار نکنند."</string>
     <string name="no_5g_in_dsds_text" product="default" msgid="772747677303920132">"‏وقتی از ۲ سیم‌کارت استفاده می‌کنید، این تلفن به 4G محدود می‌شود. "<annotation id="url">"بیشتر بدانید"</annotation></string>

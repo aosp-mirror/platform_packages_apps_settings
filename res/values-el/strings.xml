@@ -148,11 +148,13 @@
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Θα επιτρέπεται στη συσκευή σας να επικοινωνεί με συσκευές Bluetooth σε κοντινή απόσταση"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Θα επιτρέπεται στο τηλέφωνό σας να επικοινωνεί με συσκευές Bluetooth σε κοντινή απόσταση"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Απεν. μείωσ. φόρτ. εξοπλ. Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="3966022676505972908">"Απενεργοποίηση μείωσης φόρτου εξοπλισμού Bluetooth LE AUDIO"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Απενεργοποίηση μείωσης φόρτου εξοπλισμού ήχου Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Επανεκκίνηση συσκευής;"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Πρέπει να επανεκκινηθεί η συσκευή για να αλλάξει η ρύθμιση."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Επανεκκίνηση"</string>
     <string name="bluetooth_disable_hw_offload_dialog_cancel" msgid="3663690305043973720">"Ακύρωση"</string>
+    <string name="bluetooth_enable_leaudio" msgid="1245004820628723136">"Ενεργοποίηση ήχου Bluetooth LE"</string>
+    <string name="bluetooth_enable_leaudio_summary" msgid="8066117764037123479">"Ενεργοποιεί τη λειτουργία ήχου Bluetooth LE αν η συσκευή υποστηρίζει δυνατότητες εξοπλισμού ήχου LE."</string>
     <string name="connected_device_media_device_title" msgid="3783388247594566734">"Συσκευές μέσων"</string>
     <string name="connected_device_call_device_title" msgid="88732390601723608">"Συσκευές κλήσεων"</string>
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Άλλες συσκευές"</string>
@@ -366,7 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Επιτρέπεται το Ξεκλείδωμα με το πρόσωπο"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Χρήση προσώπου για έλεγχο ταυτότητας"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές."</string>
-    <string name="security_settings_face_enroll_introduction_consent_message" msgid="866117500419055444">"Επιτρέψτε στο παιδί σας να χρησιμοποιεί το πρόσωπό του για να ξεκλειδώνει το τηλέφωνό του ή να επαληθεύει την ταυτότητά του. Αυτό συμβαίνει όταν συνδέεται σε εφαρμογές, όταν εγκρίνει μια αγορά και σε άλλες περιπτώσεις."</string>
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
+    <skip />
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Χρησιμοποιήστε το πρόσωπό σας, για να ξεκλειδώνετε το τηλέφωνό σας ή να εγκρίνετε αγορές.\n\nΣημείωση: Δεν μπορείτε να χρησιμοποιήσετε το πρόσωπό σας για να ξεκλειδώσετε αυτήν τη συσκευή. Για περισσότερες πληροφορίες, επικοινωνήστε με τον διαχειριστή του οργανισμού σας."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Χρησιμοποιήστε το πρόσωπό σας για να ξεκλειδώνετε το τηλέφωνό σας, να εξουσιοδοτείτε αγορές ή να συνδέεστε σε εφαρμογές"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -456,7 +463,11 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_3" msgid="5908959250804145997">"Κατά τη χρήση του Pixel Imprint, χρησιμοποιούνται εικόνες για την ενημέρωση του μοντέλου του δακτυλικού του αποτυπώματος. Οι εικόνες που χρησιμοποιούνται για τη δημιουργία του μοντέλου του δακτυλικού αποτυπώματος του παιδιού σας δεν αποθηκεύονται ποτέ, αλλά το μοντέλο δακτυλικού αποτυπώματος αποθηκεύεται με ασφάλεια στο τηλέφωνο και παραμένει αποκλειστικά σε αυτό. Όλη η επεξεργασία πραγματοποιείται με ασφάλεια στο τηλέφωνο."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Μπορείτε να διαγράψετε τις εικόνες και το μοντέλου του δακτυλικού σας αποτυπώματος ή να απενεργοποιήσετε το ξεκλείδωμα με δακτυλικό αποτύπωμα ανά πάσα στιγμή στις Ρυθμίσεις. Οι εικόνες και τα μοντέλα δακτυλικών αποτυπωμάτων αποθηκεύονται με ασφάλεια στο τηλέφωνό σας μέχρι να τα διαγράψετε."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Εσείς και το παιδί σας μπορείτε να διαγράψετε τις εικόνες και το μοντέλο του δακτυλικού του αποτυπώματος ή να απενεργοποιήσετε το ξεκλείδωμα με δακτυλικό αποτύπωμα ανά πάσα στιγμή στις Ρυθμίσεις. Οι εικόνες και τα μοντέλα δακτυλικού αποτυπώματος αποθηκεύονται με ασφάλεια στο τηλέφωνο μέχρι να διαγραφούν."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" msgid="2018885671994058605">"Το τηλέφωνό σας μπορεί να ξεκλειδωθεί ακόμη και όταν δεν το σκοπεύετε, όπως εάν κάποιος το ακουμπήσει στο δάχτυλό σας."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Το τηλέφωνό σας μπορεί να ξεκλειδωθεί ακόμη και όταν δεν το σκοπεύετε, όπως εάν κάποιος το ακουμπήσει στο δάχτυλό σας."</string>
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
+    <skip />
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Το τηλέφωνο του παιδιού σας μπορεί να ξεκλειδωθεί ακόμη και όταν δεν το σκοπεύει, όπως εάν κάποιος το ακουμπήσει στο δάχτυλό του."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Για βέλτιστα αποτελέσματα, χρησιμοποιήστε ένα προστατευτικό οθόνης που έχει την πιστοποίηση Made for Google. Με άλλα προστατευτικά οθόνης ενδέχεται να μην λειτουργεί το δακτυλικό σας αποτύπωμα."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Για βέλτιστα αποτελέσματα, χρησιμοποιήστε ένα προστατευτικό οθόνης που έχει την πιστοποίηση Made for Google. Με άλλα προστατευτικά οθόνης ενδέχεται να μην λειτουργεί το δακτυλικό αποτύπωμα του παιδιού σας."</string>
@@ -506,6 +517,8 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Εικόνα συσκευής και της τοποθεσίας του αισθητήρα δακτυλικού αποτυπώματος"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Όνομα"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"ΟΚ"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Διαγραφή"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Αγγίξτε τον αισθητήρα"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Τοποθετήστε το δάχτυλό σας στον αισθητήρα και ανασηκώστε το μόλις αισθανθείτε μια δόνηση"</string>
@@ -523,9 +536,12 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Με αυτόν τον τρόπο γίνεται καλύτερη λήψη του δακτυλικού σας αποτυπώματος"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Εγγραφή δακτυλικού αποτυπώματος <xliff:g id="PERCENTAGE">%d</xliff:g> τοις εκατό"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Προστέθηκε δακτυλ. αποτύπωμα"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="4372740782513990687">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το tablet σας ή για να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές."</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="6208711210125838327">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε τη συσκευή σας ή να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές"</string>
-    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="4755651286485895622">"Μπορείτε πλέον να χρησιμοποιείτε το δακτυλικό σας αποτύπωμα για να ξεκλειδώνετε το τηλέφωνό σας ή για να επαληθεύετε την ταυτότητά σας, για παράδειγμα, όταν συνδέεστε σε εφαρμογές"</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Αργότερα"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Ανασηκώστε και αγγίξτε ξανά"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Τοποθετήστε τη μία πλευρά του δακτυλικού σας αποτυπώματος στον αισθητήρα και αγγίξτε παρατεταμένα, μετά τοποθετήστε την άλλη πλευρά."</string>
@@ -583,8 +599,10 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Τέλος"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ωχ, αυτό δεν είναι ο αισθητήρας"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Αγγίξτε τον πίσω αισθητήρα με τον δείκτη σας."</string>
-    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="132085362209418770">"Η εγγραφή δεν ολοκληρώθηκε"</string>
-    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="5479647886550695766">"Λήξη χρονικού ορίου εγγραφής δακτυλικών αποτυπωμάτων. Δοκιμάστε ξανά."</string>
+    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
+    <skip />
+    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
+    <skip />
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Αποτυχία εγγραφής δακτυλικού αποτυπώματος. Δοκιμάστε ξανά ή χρησιμοποιήστε ένα άλλο δάκτυλο."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Προσθήκη άλλου"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Επόμενο"</string>
