@@ -433,7 +433,8 @@ public class SettingsActivity extends SettingsBaseActivity
             final UserManager um = getSystemService(UserManager.class);
             final UserInfo userInfo = um.getUserInfo(getUser().getIdentifier());
             if (userInfo.isManagedProfile()) {
-                trampolineIntent.putExtra(EXTRA_USER_HANDLE, getUser());
+                trampolineIntent.setClass(this, DeepLinkHomepageActivityInternal.class)
+                        .putExtra(EXTRA_USER_HANDLE, getUser());
                 startActivityAsUser(trampolineIntent, um.getPrimaryUser().getUserHandle());
             } else {
                 startActivity(trampolineIntent);
@@ -462,6 +463,15 @@ public class SettingsActivity extends SettingsBaseActivity
         // Settings app starts SettingsActivity or SubSetting by itself.
         if (intent.getAction() == null) {
             // Other apps should send deep link intent which matches intent filter of the Activity.
+            return false;
+        }
+
+        // If the activity's launch mode is "singleInstance", it can't be embedded in Settings since
+        // it will be created in a new task.
+        ActivityInfo info = intent.resolveActivityInfo(getPackageManager(),
+                PackageManager.MATCH_DEFAULT_ONLY);
+        if (info.launchMode == ActivityInfo.LAUNCH_SINGLE_INSTANCE) {
+            Log.w(LOG_TAG, "launchMode: singleInstance");
             return false;
         }
 
