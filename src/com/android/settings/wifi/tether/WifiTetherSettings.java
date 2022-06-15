@@ -32,7 +32,6 @@ import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -70,6 +69,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     private WifiTetherPasswordPreferenceController mPasswordPreferenceController;
     private WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     private WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
+    private WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
 
     private WifiManager mWifiManager;
     private boolean mRestartWifiApAfterConfigChange;
@@ -117,6 +117,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
         mMaxCompatibilityPrefController =
                 use(WifiTetherMaximizeCompatibilityPreferenceController.class);
+        mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
     }
 
     @Override
@@ -215,6 +216,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                     securityType);
         }
         mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
+        configBuilder.setAutoShutdownEnabled(
+                mWifiTetherAutoOffPreferenceController.isEnabled());
         return configBuilder.build();
     }
 
