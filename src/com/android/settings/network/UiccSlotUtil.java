@@ -201,7 +201,7 @@ public class UiccSlotUtil {
                         && uiccCardInfo.getCardId() > TelephonyManager.UNSUPPORTED_CARD_ID
                         && uiccCardInfo.isEuicc()
                         && uiccCardInfo.isRemovable()) {
-                    Log.d(TAG, "getEsimSlotId: This subInfo is removable esim.");
+                    Log.d(TAG, "getEsimSlotId: This subInfo is a removable esim.");
                     return uiccCardInfo.getPhysicalSlotIndex();
                 }
             }
