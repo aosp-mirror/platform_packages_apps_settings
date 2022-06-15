@@ -31,7 +31,6 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.annotation.VisibleForTesting;
@@ -39,7 +38,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settings.wifi.details2.WifiNetworkDetailsFragment2;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -124,10 +123,6 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
             actionBar.setHomeButtonEnabled(false);
             actionBar.setDisplayShowHomeEnabled(false);
         }
-
-        // Resize the layout when keyboard opens.
-        getActivity().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return rootView;
     }
@@ -243,6 +238,6 @@ public class ConfigureWifiEntryFragment extends InstrumentedFragment implements 
                         MAX_SCAN_AGE_MILLIS,
                         SCAN_INTERVAL_MILLIS,
                         getArguments().getString(
-                                WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY));
+                                WifiNetworkDetailsFragment2.KEY_CHOSEN_WIFIENTRY_KEY));
     }
 }

@@ -31,11 +31,9 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.provider.Settings;
-import android.widget.Switch;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.widget.MainSwitchPreference;
 
 import org.junit.Before;
@@ -46,20 +44,15 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivityManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class BubbleNotificationPreferenceControllerTest {
 
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
-
-    @Mock
-    private Switch mSwitch;
 
     private BubbleNotificationPreferenceController mController;
     private MainSwitchPreference mPreference;
@@ -109,7 +102,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_true_settingIsOff_flagShouldOn() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, OFF);
 
-        mController.onSwitchChanged(mSwitch, true);
+        mController.onSwitchChanged(null, true);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, OFF)).isEqualTo(ON);
@@ -119,7 +112,7 @@ public class BubbleNotificationPreferenceControllerTest {
     public void onSwitchChanged_false_settingIsOn_flagShouldOff() {
         Settings.Global.putInt(mContext.getContentResolver(), NOTIFICATION_BUBBLES, ON);
 
-        mController.onSwitchChanged(mSwitch, false);
+        mController.onSwitchChanged(null, false);
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 NOTIFICATION_BUBBLES, ON)).isEqualTo(OFF);

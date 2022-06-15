@@ -56,12 +56,16 @@ public class ZenModePeopleSettings extends ZenModeSettingsBase implements Indexa
             Lifecycle lifecycle, Application app, Fragment host, FragmentManager fragmentManager,
             NotificationBackend notificationBackend) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeConversationsImagePreferenceController(context,
+                "zen_mode_conversations_image", lifecycle, notificationBackend));
+        controllers.add(new ZenModeConversationsPreferenceController(context,
+                "zen_mode_conversations", lifecycle));
         controllers.add(new ZenModeCallsPreferenceController(context, lifecycle,
                 "zen_mode_people_calls"));
         controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle,
                 "zen_mode_people_messages"));
-        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle,
-                R.string.zen_mode_people_footer));
+        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle,
+                fragmentManager));
         return controllers;
     }
 

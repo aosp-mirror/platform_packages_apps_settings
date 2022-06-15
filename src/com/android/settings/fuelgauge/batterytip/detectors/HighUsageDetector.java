@@ -21,7 +21,6 @@ import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 import android.content.Context;
 import android.os.BatteryUsageStats;
 import android.os.UidBatteryConsumer;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -42,8 +41,6 @@ import java.util.concurrent.TimeUnit;
  * {@link BatteryTipDetector} since it need the most up-to-date {@code visibleTips}
  */
 public class HighUsageDetector implements BatteryTipDetector {
-    private static final String TAG = "HighUsageDetector";
-
     private BatteryTipPolicy mPolicy;
     private BatteryUsageStats mBatteryUsageStats;
     private final BatteryInfo mBatteryInfo;
@@ -116,10 +113,6 @@ public class HighUsageDetector implements BatteryTipDetector {
 
     @VisibleForTesting
     void parseBatteryData() {
-        try {
-            mBatteryInfo.parseBatteryHistory(mDataParser);
-        } catch (IllegalStateException e) {
-            Log.e(TAG, "parseBatteryData() failed", e);
-        }
+        mBatteryInfo.parseBatteryHistory(mDataParser);
     }
 }

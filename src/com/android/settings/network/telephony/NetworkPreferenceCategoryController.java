@@ -22,6 +22,7 @@ import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 import android.content.Context;
 import android.telephony.SubscriptionManager;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
@@ -68,9 +69,10 @@ public class NetworkPreferenceCategoryController extends PreferenceCategoryContr
         mPreferenceScreen = screen;
     }
 
-    NetworkPreferenceCategoryController init(int subId) {
+    public NetworkPreferenceCategoryController init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
 
+        lifecycle.addObserver(this);
         return this;
     }
 }

@@ -32,7 +32,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -73,8 +73,8 @@ public class DefaultAppPickerFragmentTest {
     @Test
     public void clickPreference_hasConfirmation_shouldShowConfirmation() {
         mFragment.onAttach((Context) mActivity);
-        final SelectorWithWidgetPreference pref =
-                new SelectorWithWidgetPreference(RuntimeEnvironment.application);
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(RuntimeEnvironment.application);
         pref.setKey("TEST");
         doReturn("confirmation_text").when(mFragment)
                 .getConfirmationMessage(any(DefaultAppInfo.class));

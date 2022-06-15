@@ -33,7 +33,6 @@ import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -70,7 +69,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void cardData_insert() {
         final int rowsBeforeInsert = getRowCount();
         mResolver.insert(mUri, generateOneRow());
@@ -80,7 +78,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void cardData_bulkInsert_twoRows() {
         final int rowsBeforeInsert = getRowCount();
         mResolver.bulkInsert(mUri, generateTwoRows());
@@ -91,7 +88,6 @@ public class CardContentProviderTest {
 
     @Test
     @Config(qualifiers = "mcc999")
-    @Ignore
     public void bulkInsert_keepDismissalTimestamp_shouldHaveTimestamp() {
         mResolver.bulkInsert(mUri, generateTwoRowsWithDismissTimestamp());
 
@@ -101,7 +97,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void bulkInsert_notKeepDismissalTimestamp_shouldNotHaveTimestamp() {
         mResolver.bulkInsert(mUri, generateTwoRowsWithDismissTimestamp());
 
@@ -111,7 +106,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void cardData_query() {
         mResolver.insert(mUri, generateOneRow());
         final int count = getRowCount();
@@ -125,7 +119,6 @@ public class CardContentProviderTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    @Ignore
     public void cardData_update() {
         mResolver.insert(mUri, generateOneRow());
 
@@ -138,7 +131,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void insert_isMainThread_shouldEnableStrictMode() {
         ShadowThreadUtils.setIsMainThread(true);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
@@ -149,7 +141,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void query_isMainThread_shouldEnableStrictMode() {
         ShadowThreadUtils.setIsMainThread(true);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
@@ -160,7 +151,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void insert_notMainThread_shouldNotEnableStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);
@@ -171,7 +161,6 @@ public class CardContentProviderTest {
     }
 
     @Test
-    @Ignore
     public void query_notMainThread_shouldNotEnableStrictMode() {
         ShadowThreadUtils.setIsMainThread(false);
         ReflectionHelpers.setStaticField(Build.class, "IS_DEBUGGABLE", true);

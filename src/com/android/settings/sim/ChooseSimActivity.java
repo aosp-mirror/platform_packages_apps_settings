@@ -159,12 +159,11 @@ public class ChooseSimActivity extends Activity
         mSelectedItemIndex = subItem.getId();
         if (mSelectedItemIndex == INDEX_PSIM) {
             Log.i(TAG, "Ready to switch to pSIM slot.");
-            mSwitchToRemovableSlotSidecar.run(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID, null);
+            mSwitchToRemovableSlotSidecar.run(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID);
         } else {
             Log.i(TAG, "Ready to switch to eSIM subscription with index: " + mSelectedItemIndex);
             mSwitchToEuiccSubscriptionSidecar.run(
-                    mEmbeddedSubscriptions.get(mSelectedItemIndex).getSubscriptionId(),
-                    UiccSlotUtil.INVALID_PORT_ID, null);
+                    mEmbeddedSubscriptions.get(mSelectedItemIndex).getSubscriptionId());
         }
     }
 

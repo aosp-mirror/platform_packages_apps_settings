@@ -27,17 +27,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 
-import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class PointerSpeedPreferenceTest {
 
     private Context mContext;

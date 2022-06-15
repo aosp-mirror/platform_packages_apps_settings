@@ -39,6 +39,7 @@ import androidx.slice.builders.ListBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.slices.CustomSliceRegistry;
@@ -116,12 +117,6 @@ public class FlashlightSlice implements CustomSliceable {
         return null;
     }
 
-    @Override
-    public int getSliceHighlightMenuRes() {
-        // no landing page in Settings
-        return NO_RES;
-    }
-
     private static String getCameraId(Context context) throws CameraAccessException {
         final CameraManager cameraManager = context.getSystemService(CameraManager.class);
         final String[] ids = cameraManager.getCameraIdList();
@@ -137,6 +132,7 @@ public class FlashlightSlice implements CustomSliceable {
         return null;
     }
 
+    @VisibleForTesting
     static boolean isFlashlightAvailable(Context context) {
         int defaultAvailability = 0;
         try {

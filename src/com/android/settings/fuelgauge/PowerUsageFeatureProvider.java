@@ -18,13 +18,13 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.SparseIntArray;
 
+import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Feature Provider used in power usage
@@ -54,7 +54,12 @@ public interface PowerUsageFeatureProvider {
     /**
      * Check whether it is type service
      */
-    boolean isTypeService(int uid);
+    boolean isTypeService(BatterySipper sipper);
+
+    /**
+     * Check whether it is type system
+     */
+    boolean isTypeSystem(BatterySipper sipper);
 
     /**
      * Check whether it is type system
@@ -134,37 +139,12 @@ public interface PowerUsageFeatureProvider {
     boolean isChartGraphSlotsEnabled(Context context);
 
     /**
-     * Checks whether adaptive charging feature is supported in this device
-     */
-    boolean isAdaptiveChargingSupported();
-
-    /**
-     * Gets a intent for one time bypass charge limited to resume charging.
-     */
-    Intent getResumeChargeIntent();
-
-    /**
      * Returns battery history data with corresponding timestamp key.
      */
     Map<Long, Map<String, BatteryHistEntry>> getBatteryHistory(Context context);
 
     /**
-     * Returns {@link Uri} to monitor battery history data is update.
+     * Returns {@link List} for hidding applications background usage time.
      */
-    Uri getBatteryHistoryUri();
-
-    /**
-     * Returns {@link Set} for hidding applications background usage time.
-     */
-    Set<CharSequence> getHideBackgroundUsageTimeSet(Context context);
-
-    /**
-     * Returns package names for hidding application in the usage screen.
-     */
-    CharSequence[] getHideApplicationEntries(Context context);
-
-    /**
-     * Returns package names for hidding summary in the usage screen.
-     */
-    CharSequence[] getHideApplicationSummary(Context context);
+    List<CharSequence> getHideBackgroundUsageTimeList(Context context);
 }

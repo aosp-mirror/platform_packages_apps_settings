@@ -302,8 +302,7 @@ public abstract class ActiveSubscriptionsListener
                 mSubscriptionChangeReceiver = getSubscriptionChangeReceiver();
             }
             mContext.registerReceiver(mSubscriptionChangeReceiver,
-                    mSubscriptionChangeIntentFilter, null, new Handler(mLooper),
-                    Context.RECEIVER_EXPORTED_UNAUDITED);
+                    mSubscriptionChangeIntentFilter, null, new Handler(mLooper));
             registerForSubscriptionsChange();
             mCacheState.compareAndSet(STATE_PREPARING, STATE_LISTENING);
             return;

@@ -16,7 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 
 import androidx.preference.PreferenceFragmentCompat;
@@ -71,11 +70,7 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
                 mActionButtons
                         .setButton2Text(R.string.bluetooth_device_context_disconnect)
                         .setButton2Icon(R.drawable.ic_settings_close)
-                        .setButton2OnClickListener(view -> {
-                            mMetricsFeatureProvider.action(mContext,
-                                    SettingsEnums.ACTION_SETTINGS_BLUETOOTH_DISCONNECT);
-                            mCachedDevice.disconnect();
-                        });
+                        .setButton2OnClickListener(view -> mCachedDevice.disconnect());
                 mConnectButtonInitialized = true;
             }
         } else {
@@ -84,11 +79,7 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
                         .setButton2Text(R.string.bluetooth_device_context_connect)
                         .setButton2Icon(R.drawable.ic_add_24dp)
                         .setButton2OnClickListener(
-                                view -> {
-                                    mMetricsFeatureProvider.action(mContext,
-                                            SettingsEnums.ACTION_SETTINGS_BLUETOOTH_CONNECT);
-                                    mCachedDevice.connect();
-                                });
+                                view -> mCachedDevice.connect());
                 mConnectButtonInitialized = true;
             }
         }

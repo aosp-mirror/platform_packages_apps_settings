@@ -16,28 +16,18 @@
 
 package com.android.settings.privacy;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.CONNECTED_WORK_AND_PERSONAL_APPS_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCKED_NOTIFICATION_TITLE;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PRIVACY_POLICY_INFO;
-import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PRIVACY_POLICY_INFO_SUMMARY;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
-import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SearchIndexable
@@ -60,20 +50,8 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        replaceEnterpriseStringTitle("privacy_lock_screen_work_profile_notifications",
-                WORK_PROFILE_LOCKED_NOTIFICATION_TITLE,
-                R.string.locked_work_profile_notification_title);
-        replaceEnterpriseStringTitle("interact_across_profiles_privacy",
-                CONNECTED_WORK_AND_PERSONAL_APPS_TITLE, R.string.interact_across_profiles_title);
-        replaceEnterpriseStringTitle("privacy_work_profile_notifications_category",
-                WORK_PROFILE_NOTIFICATIONS_SECTION_HEADER, R.string.profile_section_header);
-        replaceEnterpriseStringTitle("work_policy_info",
-                WORK_PROFILE_PRIVACY_POLICY_INFO, R.string.work_policy_privacy_settings);
-        replaceEnterpriseStringSummary("work_policy_info",
-                WORK_PROFILE_PRIVACY_POLICY_INFO_SUMMARY,
-                R.string.work_policy_privacy_settings_summary);
+    protected int getPreferenceScreenResId() {
+        return R.xml.privacy_dashboard_settings;
     }
 
     @Override
@@ -84,19 +62,6 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getSettingsLifecycle());
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return getPreferenceScreenResId(getContext());
-    }
-
-    private static int getPreferenceScreenResId(Context context) {
-        if (SafetyCenterManagerWrapper.get().isEnabled(context)) {
-            return R.xml.privacy_advanced_settings;
-        } else {
-            return R.xml.privacy_dashboard_settings;
-        }
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
@@ -117,14 +82,7 @@ public class PrivacyDashboardFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = getPreferenceScreenResId(context);
-                    return Arrays.asList(sir);
-                }
+            new BaseSearchIndexProvider(R.xml.privacy_dashboard_settings) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(

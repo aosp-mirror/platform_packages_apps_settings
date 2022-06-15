@@ -28,7 +28,6 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,7 +40,6 @@ public class PrivateVolumeForgetTest {
             new ActivityTestRule<>(Settings.PrivateVolumeForgetActivity.class, true, true);
 
     @Test
-    @Ignore
     public void test_invalidSetupDoesNotCrashSettings() {
         Context targetContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         Intent intent = new Intent(targetContext, Settings.PrivateVolumeForgetActivity.class);

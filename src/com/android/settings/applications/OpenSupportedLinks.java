@@ -34,13 +34,13 @@ import androidx.preference.PreferenceCategory;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 /**
  * Display the Open Supported Links page. Allow users choose what kind supported links they need.
  */
 public class OpenSupportedLinks extends AppInfoWithHeader implements
-        SelectorWithWidgetPreference.OnClickListener {
+        RadioButtonPreference.OnClickListener {
     private static final String TAG = "OpenSupportedLinks";
     private static final String RADIO_GROUP_KEY = "supported_links_radio_group";
     private static final String FOOTER_KEY = "supported_links_footer";
@@ -60,11 +60,11 @@ public class OpenSupportedLinks extends AppInfoWithHeader implements
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
     @VisibleForTesting
-    SelectorWithWidgetPreference mAllowOpening;
+    RadioButtonPreference mAllowOpening;
     @VisibleForTesting
-    SelectorWithWidgetPreference mAskEveryTime;
+    RadioButtonPreference mAskEveryTime;
     @VisibleForTesting
-    SelectorWithWidgetPreference mNotAllowed;
+    RadioButtonPreference mNotAllowed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class OpenSupportedLinks extends AppInfoWithHeader implements
     }
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+    public void onRadioButtonClicked(RadioButtonPreference preference) {
         final int clickedIndex = preferenceKeyToIndex(preference.getKey());
         if (mCurrentIndex != clickedIndex) {
             mCurrentIndex = clickedIndex;
@@ -110,8 +110,8 @@ public class OpenSupportedLinks extends AppInfoWithHeader implements
         }
     }
 
-    private SelectorWithWidgetPreference makeRadioPreference(String key, int stringId) {
-        final SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(
+    private RadioButtonPreference makeRadioPreference(String key, int stringId) {
+        final RadioButtonPreference pref = new RadioButtonPreference(
                 mPreferenceCategory.getContext());
         pref.setKey(key);
         pref.setTitle(stringId);

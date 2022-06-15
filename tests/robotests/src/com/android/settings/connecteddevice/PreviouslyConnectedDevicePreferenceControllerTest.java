@@ -154,21 +154,15 @@ public class PreviouslyConnectedDevicePreferenceControllerTest {
     }
 
     @Test
-    public void onStart_registerCallback() {
+    public void callbackCanRegisterAndUnregister() {
         // register the callback in onStart()
         mPreConnectedDeviceController.onStart();
 
         verify(mBluetoothDeviceUpdater).registerCallback();
         verify(mDockUpdater).registerCallback();
         verify(mContext).registerReceiver(mPreConnectedDeviceController.mReceiver,
-                mPreConnectedDeviceController.mIntentFilter, Context.RECEIVER_EXPORTED_UNAUDITED);
+                mPreConnectedDeviceController.mIntentFilter);
         verify(mBluetoothDeviceUpdater).refreshPreference();
-    }
-
-    @Test
-    public void onStop_unregisterCallback() {
-        // register it first
-        mContext.registerReceiver(mPreConnectedDeviceController.mReceiver, null);
 
         // unregister the callback in onStop()
         mPreConnectedDeviceController.onStop();

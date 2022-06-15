@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.UNRESTRICTED;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class UnrestrictedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -52,13 +54,12 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, unrestricted states only");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_UNRESTRICTED) {
+            ((RadioButtonPreference) preference).setChecked(true);
+        } else if (mBatteryOptimizeUtils.getAppUsageState() == UNRESTRICTED) {
             Log.d(TAG, "is unrestricted states");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
+            ((RadioButtonPreference) preference).setChecked(true);
         } else {
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
+            ((RadioButtonPreference) preference).setChecked(false);
         }
     }
 
@@ -74,6 +75,12 @@ public class UnrestrictedPreferenceController extends AbstractPreferenceControll
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        return getPreferenceKey().equals(preference.getKey());
+        if (!KEY_UNRESTRICTED_PREF.equals(preference.getKey())) {
+            return false;
+        }
+
+        mBatteryOptimizeUtils.setAppUsageState(UNRESTRICTED);
+        Log.d(TAG, "Set unrestricted");
+        return true;
     }
 }

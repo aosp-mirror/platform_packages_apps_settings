@@ -30,8 +30,6 @@ import androidx.preference.Preference;
 import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import java.util.List;
-
 /**
  * Abstract class for Bluetooth A2DP config dialog controller in developer option.
  */
@@ -84,7 +82,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         }
         writeConfigurationValues(index);
         final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
-        BluetoothDevice activeDevice = getA2dpActiveDevice();
+        BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
         if (activeDevice != null) {
             bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         }
@@ -153,7 +151,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return null;
         }
-        BluetoothDevice activeDevice = getA2dpActiveDevice();
+        BluetoothDevice activeDevice = bluetoothA2dp.getActiveDevice();
         if (activeDevice == null) {
             Log.d(TAG, "Unable to get current codec config. No active device.");
             return null;
@@ -172,13 +170,13 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      *
      * @return Array of {@link BluetoothCodecConfig}.
      */
-    protected List<BluetoothCodecConfig> getSelectableConfigs(BluetoothDevice device) {
+    protected BluetoothCodecConfig[] getSelectableConfigs(BluetoothDevice device) {
         final BluetoothA2dp bluetoothA2dp = mBluetoothA2dp;
         if (bluetoothA2dp == null) {
             return null;
         }
         BluetoothDevice bluetoothDevice =
-                (device != null) ? device : getA2dpActiveDevice();
+                (device != null) ? device : bluetoothA2dp.getActiveDevice();
         if (bluetoothDevice == null) {
             return null;
         }
@@ -195,12 +193,16 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      * @return {@link BluetoothCodecConfig}.
      */
     protected BluetoothCodecConfig getSelectableByCodecType(int codecTypeValue) {
-        BluetoothDevice activeDevice = getA2dpActiveDevice();
+        BluetoothDevice activeDevice = mBluetoothA2dp.getActiveDevice();
         if (activeDevice == null) {
             Log.d(TAG, "Unable to get selectable config. No active device.");
             return null;
         }
-        final List<BluetoothCodecConfig> configs = getSelectableConfigs(activeDevice);
+        final BluetoothCodecConfig[] configs = getSelectableConfigs(activeDevice);
+        if (configs == null) {
+            Log.d(TAG, "Unable to get selectable config. Selectable configs is empty.");
+            return null;
+        }
         for (BluetoothCodecConfig config : configs) {
             if (config.getCodecType() == codecTypeValue) {
                 return config;
@@ -217,20 +219,14 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
      */
     public void onHDAudioEnabled(boolean enabled) {}
 
-    static int getHighestCodec(BluetoothA2dp bluetoothA2dp, BluetoothDevice activeDevice,
-            List<BluetoothCodecConfig> configs) {
+    static int getHighestCodec(BluetoothCodecConfig[] configs) {
         if (configs == null) {
             Log.d(TAG, "Unable to get highest codec. Configs are empty");
             return BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;
         }
-        // If HD audio is not enabled, SBC is the only one available codec.
-        if (bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
-                != BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED) {
-            return BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC;
-        }
         for (int i = 0; i < CODEC_TYPES.length; i++) {
-            for (BluetoothCodecConfig config : configs) {
-                if (config.getCodecType() == CODEC_TYPES[i]) {
+            for (int j = 0; j < configs.length; j++) {
+                if ((configs[j].getCodecType() == CODEC_TYPES[i])) {
                     return CODEC_TYPES[i];
                 }
             }

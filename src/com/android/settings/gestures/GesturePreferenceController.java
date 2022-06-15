@@ -78,11 +78,6 @@ public abstract class GesturePreferenceController extends TogglePreferenceContro
         }
     }
 
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_system;
-    }
-
     protected abstract String getVideoPrefKey();
 
     protected boolean canHandleClicks() {

@@ -19,7 +19,6 @@ package com.android.settings.gestures;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 /**
@@ -50,10 +49,5 @@ public class GestureNavigationSettingsAssistController extends TogglePreferenceC
     public int getAvailabilityStatus() {
         return SystemNavigationPreferenceController.isGestureAvailable(mContext) ? AVAILABLE
                 : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_system;
     }
 }

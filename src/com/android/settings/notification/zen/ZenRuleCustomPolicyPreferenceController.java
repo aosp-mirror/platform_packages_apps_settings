@@ -25,12 +25,12 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class ZenRuleCustomPolicyPreferenceController extends
         AbstractZenCustomRulePreferenceController {
 
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     public ZenRuleCustomPolicyPreferenceController(Context context, Lifecycle lifecycle,
             String key) {

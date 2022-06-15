@@ -34,6 +34,6 @@ public class FirmwareVersionPreferenceController extends BasePreferenceControlle
 
     @Override
     public CharSequence getSummary() {
-        return Build.VERSION.RELEASE_OR_PREVIEW_DISPLAY;
+        return Build.VERSION.RELEASE_OR_CODENAME;
     }
 }

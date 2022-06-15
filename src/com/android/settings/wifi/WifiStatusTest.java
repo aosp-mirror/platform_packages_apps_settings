@@ -125,8 +125,7 @@ public class WifiStatusTest extends Activity {
         mWifiStateFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
         mWifiStateFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
 
-        registerReceiver(mWifiStateReceiver, mWifiStateFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        registerReceiver(mWifiStateReceiver, mWifiStateFilter);
 
         setContentView(R.layout.wifi_status_test);
 
@@ -158,8 +157,7 @@ public class WifiStatusTest extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mWifiStateReceiver, mWifiStateFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        registerReceiver(mWifiStateReceiver, mWifiStateFilter);
     }
 
     @Override

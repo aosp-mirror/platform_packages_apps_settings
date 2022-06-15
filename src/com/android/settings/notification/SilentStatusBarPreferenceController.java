@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
-import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -52,10 +51,5 @@ public class SilentStatusBarPreferenceController extends TogglePreferenceControl
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_notifications;
     }
 }

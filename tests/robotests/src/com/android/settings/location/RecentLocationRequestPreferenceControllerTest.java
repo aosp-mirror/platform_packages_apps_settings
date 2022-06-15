@@ -26,19 +26,14 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
-import android.provider.DeviceConfig;
-import android.provider.Settings;
 
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment;
-import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.location.RecentLocationApps;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +49,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowDeviceConfig.class, ShadowUserManager.class})
+@Config(shadows = {ShadowUserManager.class})
 public class RecentLocationRequestPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
@@ -76,11 +71,6 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController.mRecentLocationApps = spy(new RecentLocationApps(mContext));
     }
 
-    @After
-    public void tearDown() {
-        ShadowDeviceConfig.reset();
-    }
-
     @Test
     public void updateState_whenAppListMoreThanThree_shouldDisplayTopThreeApps() {
         final List<RecentLocationApps.Request> requests = createMockRequest(6);
@@ -89,29 +79,6 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mCategory, times(3)).addPreference(any());
-    }
-
-    @Test
-    public void updateState_whenAppListMoreThanThree_showSystem() {
-        DeviceConfig.setProperty(DeviceConfig.NAMESPACE_PRIVACY,
-                SystemUiDeviceConfigFlags.PROPERTY_LOCATION_INDICATORS_SMALL_ENABLED,
-                Boolean.toString(true),
-                true);
-        when(mController.mRecentLocationApps.getAppListSorted(false))
-                .thenReturn(createMockRequest(2));
-        when(mController.mRecentLocationApps.getAppListSorted(true))
-                .thenReturn(createMockRequest(3));
-
-        mController.displayPreference(mScreen);
-        verify(mCategory, times(2)).addPreference(any());
-
-        Settings.Secure.putInt(
-                mContext.getContentResolver(),
-                Settings.Secure.LOCATION_SHOW_SYSTEM_OPS,
-                1);
-
-        mController.displayPreference(mScreen);
-        verify(mCategory, times(5)).addPreference(any());
     }
 
     @Test

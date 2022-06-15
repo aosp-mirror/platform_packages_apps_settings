@@ -16,10 +16,10 @@
 
 package com.android.settings.nfc;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.nfc.NfcAdapter;
 import android.nfc.cardemulation.ApduServiceInfo;
@@ -28,7 +28,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 
@@ -50,16 +49,6 @@ public class PaymentBackend {
         boolean isDefault;
         public ComponentName componentName;
         public ComponentName settingsComponent;
-        public UserHandle userHandle;
-        public Drawable icon;
-    }
-
-    /**
-     * ComponentName of the payment application and the userId that it belongs to.
-     */
-    public static class PaymentInfo {
-        public ComponentName componentName;
-        public int userId;
     }
 
     private final Context mContext;
@@ -90,58 +79,40 @@ public class PaymentBackend {
 
     public void refresh() {
         PackageManager pm = mContext.getPackageManager();
-        ArrayList<PaymentAppInfo> appInfosAllProfiles = new ArrayList<PaymentAppInfo>();
+        List<ApduServiceInfo> serviceInfos =
+                mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT);
+        ArrayList<PaymentAppInfo> appInfos = new ArrayList<PaymentAppInfo>();
 
-        UserManager um = mContext.createContextAsUser(
-                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
-                .getSystemService(UserManager.class);
-        List<UserHandle> userHandles = um.getEnabledProfiles();
-
-        PaymentInfo defaultAppName = getDefaultPaymentApp();
-        PaymentAppInfo foundDefaultApp = null;
-        for (UserHandle uh : userHandles) {
-            List<ApduServiceInfo> serviceInfosByProfile =
-                    mCardEmuManager.getServices(CardEmulation.CATEGORY_PAYMENT, uh.getIdentifier());
-            if (serviceInfosByProfile == null) continue;
-
-            ArrayList<PaymentAppInfo> appInfos = new ArrayList<PaymentAppInfo>();
-
-            for (ApduServiceInfo service : serviceInfosByProfile) {
-                PaymentAppInfo appInfo = new PaymentAppInfo();
-                appInfo.userHandle = uh;
-                appInfo.label = service.loadLabel(pm);
-                if (appInfo.label == null) {
-                    appInfo.label = service.loadAppLabel(pm);
-                }
-                if (defaultAppName == null) {
-                    appInfo.isDefault = false;
-                } else {
-                    appInfo.isDefault =
-                            service.getComponent().equals(defaultAppName.componentName)
-                            && defaultAppName.userId == uh.getIdentifier();
-                }
-                if (appInfo.isDefault) {
-                    foundDefaultApp = appInfo;
-                }
-                appInfo.componentName = service.getComponent();
-                String settingsActivity = service.getSettingsActivityName();
-                if (settingsActivity != null) {
-                    appInfo.settingsComponent = new ComponentName(
-                            appInfo.componentName.getPackageName(),
-                            settingsActivity);
-                } else {
-                    appInfo.settingsComponent = null;
-                }
-                appInfo.description = service.getDescription();
-                Drawable icon = (service.loadBanner(pm) != null)
-                        ? service.loadBanner(pm) : service.loadIcon(pm);
-                appInfo.icon = pm.getUserBadgedIcon(icon, appInfo.userHandle);
-
-                appInfos.add(appInfo);
-            }
-            appInfosAllProfiles.addAll(appInfos);
+        if (serviceInfos == null) {
+            makeCallbacks();
+            return;
         }
-        mAppInfos = appInfosAllProfiles;
+
+        ComponentName defaultAppName = getDefaultPaymentApp();
+        PaymentAppInfo foundDefaultApp = null;
+        for (ApduServiceInfo service : serviceInfos) {
+            PaymentAppInfo appInfo = new PaymentAppInfo();
+            appInfo.label = service.loadLabel(pm);
+            if (appInfo.label == null) {
+                appInfo.label = service.loadAppLabel(pm);
+            }
+            appInfo.isDefault = service.getComponent().equals(defaultAppName);
+            if (appInfo.isDefault) {
+                foundDefaultApp = appInfo;
+            }
+            appInfo.componentName = service.getComponent();
+            String settingsActivity = service.getSettingsActivityName();
+            if (settingsActivity != null) {
+                appInfo.settingsComponent = new ComponentName(
+                        appInfo.componentName.getPackageName(),
+                        settingsActivity);
+            } else {
+                appInfo.settingsComponent = null;
+            }
+            appInfo.description = service.getDescription();
+            appInfos.add(appInfo);
+        }
+        mAppInfos = appInfos;
         mDefaultAppInfo = foundDefaultApp;
         makeCallbacks();
     }
@@ -170,44 +141,21 @@ public class PaymentBackend {
 
     boolean isForegroundMode() {
         try {
-            return Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.NFC_PAYMENT_FOREGROUND, UserHandle.myUserId()) != 0;
+            return Settings.Secure.getInt(mContext.getContentResolver(),
+                    Settings.Secure.NFC_PAYMENT_FOREGROUND) != 0;
         } catch (SettingNotFoundException e) {
             return false;
         }
     }
 
     void setForegroundMode(boolean foreground) {
-        UserManager um = mContext.createContextAsUser(
-                UserHandle.of(UserHandle.myUserId()), /*flags=*/0)
-                .getSystemService(UserManager.class);
-        List<UserHandle> userHandles = um.getEnabledProfiles();
-        for (UserHandle uh : userHandles) {
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0, uh.getIdentifier());
-        }
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_FOREGROUND, foreground ? 1 : 0);
     }
 
-    PaymentInfo getDefaultPaymentApp() {
-        UserManager um = mContext.createContextAsUser(
-                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
-                .getSystemService(UserManager.class);
-        List<UserHandle> userHandles = um.getEnabledProfiles();
-        for (UserHandle uh : userHandles) {
-            ComponentName defaultApp = getDefaultPaymentApp(uh.getIdentifier());
-            if (defaultApp != null) {
-                PaymentInfo appInfo = new PaymentInfo();
-                appInfo.userId = uh.getIdentifier();
-                appInfo.componentName = defaultApp;
-                return appInfo;
-            }
-        }
-        return null;
-    }
-
-    ComponentName getDefaultPaymentApp(int userId) {
-        String componentString = Settings.Secure.getStringForUser(mContext.getContentResolver(),
-                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT, userId);
+    ComponentName getDefaultPaymentApp() {
+        String componentString = Settings.Secure.getString(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT);
         if (componentString != null) {
             return ComponentName.unflattenFromString(componentString);
         } else {
@@ -216,29 +164,9 @@ public class PaymentBackend {
     }
 
     public void setDefaultPaymentApp(ComponentName app) {
-        setDefaultPaymentApp(app, UserHandle.myUserId());
-    }
-
-    /**
-     *  Set Nfc default payment application
-     */
-    public void setDefaultPaymentApp(ComponentName app, int userId) {
-        UserManager um = mContext.createContextAsUser(
-                UserHandle.of(ActivityManager.getCurrentUser()), /*flags=*/0)
-                .getSystemService(UserManager.class);
-        List<UserHandle> userHandles = um.getEnabledProfiles();
-
-        for (UserHandle uh : userHandles) {
-            if (uh.getIdentifier() == userId) {
-                Settings.Secure.putStringForUser(mContext.getContentResolver(),
-                        Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
-                        app != null ? app.flattenToString() : null, uh.getIdentifier());
-            } else {
-                Settings.Secure.putStringForUser(mContext.getContentResolver(),
-                        Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
-                        null, uh.getIdentifier());
-            }
-        }
+        Settings.Secure.putString(mContext.getContentResolver(),
+                Settings.Secure.NFC_PAYMENT_DEFAULT_COMPONENT,
+                app != null ? app.flattenToString() : null);
         refresh();
     }
 

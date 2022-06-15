@@ -21,7 +21,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.ListPreference;
+import androidx.preference.DropDownPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -31,13 +31,14 @@ import com.android.settings.wifi.WifiDialog2;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
- * A controller that controls whether the Wi-Fi network is mac randomized or not.
+ * {@link AbstractPreferenceController} that controls whether the wifi network is mac randomized
+ * or not
  */
 public class WifiPrivacyPreferenceController2 extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener, WifiDialog2.WifiDialog2Listener {
 
     private static final String KEY_WIFI_PRIVACY = "privacy";
-    private final WifiManager mWifiManager;
+    private WifiManager mWifiManager;
     private WifiEntry mWifiEntry;
     private Preference mPreference;
 
@@ -65,16 +66,16 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
 
     @Override
     public void updateState(Preference preference) {
-        final ListPreference listPreference = (ListPreference) preference;
+        final DropDownPreference dropDownPreference = (DropDownPreference) preference;
         final int randomizationLevel = getRandomizationValue();
         final boolean isSelectable = mWifiEntry.canSetPrivacy();
         preference.setSelectable(isSelectable);
-        listPreference.setValue(Integer.toString(randomizationLevel));
-        updateSummary(listPreference, randomizationLevel);
+        dropDownPreference.setValue(Integer.toString(randomizationLevel));
+        updateSummary(dropDownPreference, randomizationLevel);
 
         // If the preference cannot be selectable, display a temporary network in the summary.
         if (!isSelectable) {
-            listPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
+            dropDownPreference.setSummary(R.string.wifi_privacy_settings_ephemeral_summary);
         }
     }
 
@@ -89,7 +90,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
             mWifiEntry.disconnect(null /* callback */);
             mWifiEntry.connect(null /* callback */);
         }
-        updateSummary((ListPreference) preference, privacy);
+        updateSummary((DropDownPreference) preference, privacy);
         return true;
     }
 
@@ -123,7 +124,7 @@ public class WifiPrivacyPreferenceController2 extends BasePreferenceController i
             ? WifiEntry.PRIVACY_RANDOMIZED_MAC : WifiEntry.PRIVACY_DEVICE_MAC;
     }
 
-    private void updateSummary(ListPreference preference, int macRandomized) {
+    private void updateSummary(DropDownPreference preference, int macRandomized) {
         // Translates value here to set RANDOMIZATION_PERSISTENT as first item in UI for better UX.
         final int prefMacRandomized = translateMacRandomizedValueToPrefValue(macRandomized);
         preference.setSummary(preference.getEntries()[prefMacRandomized]);

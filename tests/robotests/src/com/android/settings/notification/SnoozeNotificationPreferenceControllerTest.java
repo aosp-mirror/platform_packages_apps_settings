@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 import static android.provider.Settings.Secure.SHOW_NOTIFICATION_SNOOZE;
 
 import static com.android.settings.notification.BadgingNotificationPreferenceController.OFF;
@@ -23,16 +24,12 @@ import static com.android.settings.notification.BadgingNotificationPreferenceCon
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.provider.Settings;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +39,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
+import androidx.preference.TwoStatePreference;
 
 @RunWith(RobolectricTestRunner.class)
 public class SnoozeNotificationPreferenceControllerTest {
@@ -57,8 +58,6 @@ public class SnoozeNotificationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        doReturn(mock(DevicePolicyManager.class)).when(mContext)
-                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mController = new SnoozeNotificationPreferenceController(mContext,
                 "key");
         mPreference = new Preference(RuntimeEnvironment.application);

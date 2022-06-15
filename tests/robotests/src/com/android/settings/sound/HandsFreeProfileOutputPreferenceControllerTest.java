@@ -66,7 +66,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {
         ShadowAudioManager.class,
         ShadowBluetoothUtils.class,
@@ -130,7 +129,7 @@ public class HandsFreeProfileOutputPreferenceControllerTest {
         when(mLocalBluetoothProfileManager.getHeadsetProfile()).thenReturn(mHeadsetProfile);
         when(mLocalBluetoothProfileManager.getHearingAidProfile()).thenReturn(mHearingAidProfile);
 
-        mBluetoothManager = mContext.getSystemService(BluetoothManager.class);
+        mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
 
         mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_1));

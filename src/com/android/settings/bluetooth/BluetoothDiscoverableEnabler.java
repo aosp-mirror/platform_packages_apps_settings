@@ -31,8 +31,6 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.BluetoothDiscoverableTimeoutReceiver;
 
-import java.time.Duration;
-
 /**
  * BluetoothDiscoverableEnabler is a helper to manage the "Discoverable"
  * checkbox. It sets/unsets discoverability and keeps track of how much time
@@ -138,8 +136,9 @@ final class BluetoothDiscoverableEnabler implements Preference.OnPreferenceClick
             int timeout = getDiscoverableTimeout();
             long endTimestamp = System.currentTimeMillis() + timeout * 1000L;
             LocalBluetoothPreferences.persistDiscoverableEndTimestamp(mContext, endTimestamp);
-            mBluetoothAdapter.setDiscoverableTimeout(Duration.ofSeconds(timeout));
-            mBluetoothAdapter.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+
+            mBluetoothAdapter
+                    .setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, timeout);
             updateCountdownSummary();
 
             Log.d(TAG, "setEnabled(): enabled = " + enable + "timeout = " + timeout);

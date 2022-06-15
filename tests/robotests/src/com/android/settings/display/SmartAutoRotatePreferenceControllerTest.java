@@ -40,7 +40,6 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResolveInfoBuilder;
-import com.android.settings.testutils.shadow.ShadowDeviceStateRotationLockSettingsManager;
 import com.android.settings.testutils.shadow.ShadowSensorPrivacyManager;
 
 import org.junit.Before;
@@ -54,10 +53,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {
-        ShadowSensorPrivacyManager.class,
-        ShadowDeviceStateRotationLockSettingsManager.class
-})
+@Config(shadows = ShadowSensorPrivacyManager.class)
 public class SmartAutoRotatePreferenceControllerTest {
 
     private static final String PACKAGE_NAME = "package_name";
@@ -99,7 +95,6 @@ public class SmartAutoRotatePreferenceControllerTest {
                 new SmartAutoRotatePreferenceController(mContext, "smart_auto_rotate"));
         when(mController.isCameraLocked()).thenReturn(false);
         when(mController.isPowerSaveMode()).thenReturn(false);
-        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(false);
     }
 
     @Test
@@ -202,16 +197,6 @@ public class SmartAutoRotatePreferenceControllerTest {
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(BasePreferenceController
                 .UNSUPPORTED_ON_DEVICE);
-    }
-
-
-    @Test
-    public void getAvailabilityStatus_deviceStateRotationEnabled_returnsUnsupported() {
-        enableAutoRotationPreference();
-        ShadowDeviceStateRotationLockSettingsManager.setDeviceStateRotationLockEnabled(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
     @Test

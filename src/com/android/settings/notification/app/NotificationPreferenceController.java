@@ -17,19 +17,16 @@
 package com.android.settings.notification.app;
 
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.os.UserHandle.USER_SYSTEM;
 
 import android.annotation.Nullable;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -65,11 +62,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     @Nullable
     protected ShortcutInfo mConversationInfo;
     protected List<String> mPreferenceFilter;
-
-    boolean overrideCanBlock;
-    boolean overrideCanConfigure;
-    boolean overrideCanBlockValue;
-    boolean overrideCanConfigureValue;
 
     public NotificationPreferenceController(Context context, NotificationBackend backend) {
         super(context);
@@ -146,16 +138,10 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelBlockable(NotificationChannel channel) {
-        if (overrideCanBlock) {
-            return overrideCanBlockValue;
-        }
-        if (overrideCanConfigure) {
-            return overrideCanConfigureValue;
-        }
         if (channel != null && mAppRow != null) {
-            boolean locked = mAppRow.lockedImportance;
-            if (locked) {
-                return channel.isBlockable() || channel.getImportance() == IMPORTANCE_NONE;
+            if (channel.isImportanceLockedByCriticalDeviceFunction()
+                    || channel.isImportanceLockedByOEM()) {
+                return channel.getImportance() == IMPORTANCE_NONE;
             }
 
             return channel.isBlockable() || !mAppRow.systemApp
@@ -164,27 +150,9 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
         return false;
     }
 
-    protected boolean isAppBlockable() {
-        if (overrideCanBlock) {
-            return overrideCanBlockValue;
-        }
-        if (overrideCanConfigure) {
-            return overrideCanConfigureValue;
-        }
-        if (mAppRow != null) {
-            boolean systemBlockable = !mAppRow.systemApp || (mAppRow.systemApp && mAppRow.banned);
-            return systemBlockable && !mAppRow.lockedImportance;
-        }
-        return true;
-    }
-
     protected boolean isChannelConfigurable(NotificationChannel channel) {
-        if (overrideCanConfigure) {
-            return overrideCanConfigureValue;
-        }
         if (channel != null && mAppRow != null) {
-            boolean locked = mAppRow.lockedImportance;
-            return !locked || channel.isBlockable();
+            return !channel.isImportanceLockedByOEM();
         }
         return false;
     }
@@ -194,14 +162,8 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelGroupBlockable(NotificationChannelGroup group) {
-        if (overrideCanBlock) {
-            return overrideCanBlockValue;
-        }
-        if (overrideCanConfigure) {
-            return overrideCanConfigureValue;
-        }
         if (group != null && mAppRow != null) {
-            if (!mAppRow.systemApp && !mAppRow.lockedImportance) {
+            if (!mAppRow.systemApp) {
                 return true;
             }
 
@@ -219,16 +181,6 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
             return false;
         }
         return Objects.equals(NotificationChannel.DEFAULT_CHANNEL_ID, mChannel.getId());
-    }
-
-    protected final void setOverrideCanBlock(boolean canBlock) {
-        overrideCanBlock = true;
-        overrideCanBlockValue = canBlock;
-    }
-
-    protected final void setOverrideCanConfigure(boolean canConfigure) {
-        overrideCanConfigure = true;
-        overrideCanConfigureValue = canConfigure;
     }
 
     public static final Comparator<NotificationChannelGroup> CHANNEL_GROUP_COMPARATOR =

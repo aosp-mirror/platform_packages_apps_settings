@@ -190,8 +190,7 @@ public class ChooseLockGenericController {
      * requirements. The lock's visibility ({@link #isScreenLockVisible}) is not considered here.
      */
     public boolean isScreenLockEnabled(ScreenLockType type) {
-        return !mLockPatternUtils.isCredentialsDisabledForUser(mUserId)
-                && type.maxQuality >= upgradeQuality(PASSWORD_QUALITY_UNSPECIFIED);
+        return type.maxQuality >= upgradeQuality(PASSWORD_QUALITY_UNSPECIFIED);
     }
 
     /**

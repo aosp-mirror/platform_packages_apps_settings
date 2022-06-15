@@ -40,7 +40,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +59,7 @@ public class ZenModeVisEffectsCustomPreferenceControllerTest {
     @Mock
     private ZenModeBackend mBackend;
     @Mock
-    private SelectorWithWidgetPreference mPref;
+    private RadioButtonPreference mPref;
     private Context mContext;
     @Mock
     private PreferenceScreen mScreen;

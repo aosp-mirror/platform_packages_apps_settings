@@ -30,7 +30,6 @@ import androidx.fragment.app.Fragment;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.R;
-import com.android.settings.safetycenter.LockScreenSafetySource;
 
 /**
  * An invisible retained worker fragment to track the AsyncWork that saves (and optionally
@@ -111,7 +110,6 @@ abstract class SaveChosenLockWorkerBase extends Fragment {
         if (mUnificationProfileCredential != null) {
             mUnificationProfileCredential.zeroize();
         }
-        LockScreenSafetySource.onLockScreenChange(getContext());
     }
 
     public void setBlocking(boolean blocking) {

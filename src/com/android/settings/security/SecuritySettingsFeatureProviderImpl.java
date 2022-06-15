@@ -28,9 +28,4 @@ public class SecuritySettingsFeatureProviderImpl implements SecuritySettingsFeat
     public String getAlternativeSecuritySettingsFragmentClassname() {
         return null;
     }
-
-    @Override
-    public String getAlternativeAdvancedSettingsCategoryKey() {
-        return null;
-    }
 }

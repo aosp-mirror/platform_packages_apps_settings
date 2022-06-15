@@ -31,7 +31,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -40,7 +40,7 @@ import java.util.Map;
  * This class controls the radio buttons for choosing between different USB functions.
  */
 public class UsbDetailsFunctionsController extends UsbDetailsController
-        implements SelectorWithWidgetPreference.OnClickListener {
+        implements RadioButtonPreference.OnClickListener {
 
     private static final String TAG = "UsbFunctionsCtrl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -83,10 +83,10 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     /**
      * Gets a switch preference for the particular option, creating it if needed.
      */
-    private SelectorWithWidgetPreference getProfilePreference(String key, int titleId) {
-        SelectorWithWidgetPreference pref = mProfilesContainer.findPreference(key);
+    private RadioButtonPreference getProfilePreference(String key, int titleId) {
+        RadioButtonPreference pref = mProfilesContainer.findPreference(key);
         if (pref == null) {
-            pref = new SelectorWithWidgetPreference(mProfilesContainer.getContext());
+            pref = new RadioButtonPreference(mProfilesContainer.getContext());
             pref.setKey(key);
             pref.setTitle(titleId);
             pref.setSingleLineTitle(false);
@@ -108,7 +108,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             // Functions are only available in device mode
             mProfilesContainer.setEnabled(true);
         }
-        SelectorWithWidgetPreference pref;
+        RadioButtonPreference pref;
         for (long option : FUNCTIONS_MAP.keySet()) {
             int title = FUNCTIONS_MAP.get(option);
             pref = getProfilePreference(UsbBackend.usbFunctionsToString(option), title);
@@ -128,7 +128,7 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     }
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+    public void onRadioButtonClicked(RadioButtonPreference preference) {
         final long function = UsbBackend.usbFunctionsFromString(preference.getKey());
         final long previousFunction = mUsbBackend.getCurrentFunctions();
         if (DEBUG) {
@@ -142,8 +142,8 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
             mPreviousFunction = previousFunction;
 
             //Update the UI in advance to make it looks smooth
-            final SelectorWithWidgetPreference prevPref =
-                    (SelectorWithWidgetPreference) mProfilesContainer.findPreference(
+            final RadioButtonPreference prevPref =
+                    (RadioButtonPreference) mProfilesContainer.findPreference(
                             UsbBackend.usbFunctionsToString(mPreviousFunction));
             if (prevPref != null) {
                 prevPref.setChecked(false);

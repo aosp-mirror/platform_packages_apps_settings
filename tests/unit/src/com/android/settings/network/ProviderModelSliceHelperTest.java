@@ -56,7 +56,6 @@ import com.android.settings.wifi.slice.WifiSliceItem;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -166,7 +165,6 @@ public class ProviderModelSliceHelperTest {
         assertThat(testItem).isNull();
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_hasDdsAndActiveNetworkIsNotCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
@@ -183,7 +181,6 @@ public class ProviderModelSliceHelperTest {
         assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_wifiOnhasDdsAndActiveNetworkIsCellular_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
@@ -204,7 +201,6 @@ public class ProviderModelSliceHelperTest {
         assertThat(testRowBuild.getSubtitle()).isEqualTo(expectedSubtitle);
     }
 
-    @Ignore
     @Test
     public void createCarrierRow_noNetworkAvailable_verifyTitleAndSummary() {
         String expectDisplayName = "Name1";
@@ -228,8 +224,9 @@ public class ProviderModelSliceHelperTest {
     public void getMobileDrawable_noCarrierData_getMobileDrawable() throws Throwable {
         mockConnections(false, ServiceState.STATE_OUT_OF_SERVICE, "",
                 false, true);
-        when(mConnectivityManager.getActiveNetwork()).thenReturn(null);
         Drawable expectDrawable = mock(Drawable.class);
+        when(mConnectivityManager.getActiveNetwork()).thenReturn(null);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(false);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(expectDrawable)).isEqualTo(
                 expectDrawable);
@@ -240,8 +237,9 @@ public class ProviderModelSliceHelperTest {
             throws Throwable {
         mockConnections(true, ServiceState.STATE_IN_SERVICE, "", true,
                 true);
-        addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
         Drawable drawable = mock(Drawable.class);
+        addNetworkTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
                 mDrawableWithSignalStrength);
@@ -256,6 +254,7 @@ public class ProviderModelSliceHelperTest {
                 true);
         Drawable drawable = mock(Drawable.class);
         addNetworkTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        when(mTelephonyManager.isDataEnabled()).thenReturn(true);
 
         assertThat(mProviderModelSliceHelper.getMobileDrawable(drawable)).isEqualTo(
                 mDrawableWithSignalStrength);
@@ -305,11 +304,6 @@ public class ProviderModelSliceHelperTest {
         @Override
         public Intent getIntent() {
             return new Intent();
-        }
-
-        @Override
-        public int getSliceHighlightMenuRes() {
-            return NO_RES;
         }
     }
 

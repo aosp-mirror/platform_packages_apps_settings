@@ -48,6 +48,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.widget.SettingsMainSwitchPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.After;
 import org.junit.Before;
@@ -66,6 +67,8 @@ public class MobileNetworkSwitchControllerTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private SubscriptionInfo mSubscription;
+    @Mock
+    private Lifecycle mLifecycle;
 
     private PreferenceScreen mScreen;
     private PreferenceManager mPreferenceManager;
@@ -91,7 +94,7 @@ public class MobileNetworkSwitchControllerTest {
 
         final String key = "prefKey";
         mController = new MobileNetworkSwitchController(mContext, key);
-        mController.init(mSubscription.getSubscriptionId());
+        mController.init(mLifecycle, mSubscription.getSubscriptionId());
 
         if (Looper.myLooper() == null) {
             Looper.prepare();

@@ -16,18 +16,32 @@
 
 package com.android.settings.notification.app;
 
+import android.app.people.IPeopleManager;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.RemoteException;
+import android.service.notification.ConversationChannelWrapper;
+import android.util.Log;
+import android.view.View;
 
-import com.android.settingslib.core.AbstractPreferenceController;
+import androidx.preference.Preference;
 
-class NoConversationsPreferenceController extends AbstractPreferenceController {
+import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
+import com.android.settingslib.widget.LayoutPreference;
 
+public class NoConversationsPreferenceController extends ConversationListPreferenceController {
+
+    private static String TAG = "NoConversationsPC";
     private static final String KEY = "no_conversations";
 
-    private boolean mIsAvailable = false;
+    private IPeopleManager mPs;
+    private int mConversationCount = 0;
 
-    NoConversationsPreferenceController(Context context) {
-        super(context);
+    public NoConversationsPreferenceController(Context context,
+            NotificationBackend backend, IPeopleManager ps) {
+        super(context, backend);
+        mPs = ps;
     }
 
     @Override
@@ -37,10 +51,44 @@ class NoConversationsPreferenceController extends AbstractPreferenceController {
 
     @Override
     public boolean isAvailable() {
-        return mIsAvailable;
+        return true;
     }
 
-    void setAvailable(boolean available) {
-        mIsAvailable = available;
+    @Override
+    Preference getSummaryPreference() {
+        return null;
+    }
+
+    @Override
+    boolean matchesFilter(ConversationChannelWrapper conversation) {
+        return false;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        LayoutPreference pref = (LayoutPreference) preference;
+        // Load conversations
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... unused) {
+                mConversationCount = mBackend.getConversations(false).getList().size();
+                try {
+                    mConversationCount += mPs.getRecentConversations().getList().size();
+                } catch (RemoteException e) {
+                    Log.w(TAG, "Error calling PS", e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void unused) {
+                if (mContext == null) {
+                    return;
+                }
+                pref.findViewById(R.id.onboarding).setVisibility(mConversationCount == 0
+                        ? View.VISIBLE : View.GONE);
+                preference.setVisible(mConversationCount == 0);
+            }
+        }.execute();
     }
 }

@@ -455,13 +455,10 @@ public class ManageApplicationsTest {
         ManageApplications.ApplicationsAdapter adapter = new ManageApplications.ApplicationsAdapter(
                 mState, mFragment, mock(AppFilterItem.class), mock(Bundle.class));
 
-        adapter.rebuild(mSortRecent.getItemId(), false);
+        adapter.rebuild(mSortRecent.getItemId());
         assertThat(mFragment.mSortOrder).isEqualTo(mSortRecent.getItemId());
 
-        adapter.rebuild(mSortFrequent.getItemId(), false);
-        assertThat(mFragment.mSortOrder).isEqualTo(mSortFrequent.getItemId());
-
-        adapter.rebuild(mSortFrequent.getItemId(), true);
+        adapter.rebuild(mSortFrequent.getItemId());
         assertThat(mFragment.mSortOrder).isEqualTo(mSortFrequent.getItemId());
     }
 

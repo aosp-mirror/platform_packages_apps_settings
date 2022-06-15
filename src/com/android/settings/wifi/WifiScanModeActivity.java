@@ -20,30 +20,26 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.WindowManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.wifi.WifiPermissionChecker;
 
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off
  */
 public class WifiScanModeActivity extends FragmentActivity {
     private DialogFragment mDialog;
-    @VisibleForTesting
-    String mApp;
-    @VisibleForTesting
-    WifiPermissionChecker mWifiPermissionChecker;
+    private String mApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +50,13 @@ public class WifiScanModeActivity extends FragmentActivity {
         if (savedInstanceState == null) {
             if (intent != null && WifiManager.ACTION_REQUEST_SCAN_ALWAYS_AVAILABLE
                     .equals(intent.getAction())) {
-                refreshAppLabel();
+                ApplicationInfo ai;
+                mApp = getCallingPackage();
+                try {
+                    PackageManager pm = getPackageManager();
+                    ai = pm.getApplicationInfo(mApp, 0);
+                    mApp = (String)pm.getApplicationLabel(ai);
+                } catch (PackageManager.NameNotFoundException e) { }
             } else {
                 finish();
                 return;
@@ -63,19 +65,6 @@ public class WifiScanModeActivity extends FragmentActivity {
             mApp = savedInstanceState.getString("app");
         }
         createDialog();
-    }
-
-    @VisibleForTesting
-    void refreshAppLabel() {
-        if (mWifiPermissionChecker == null) {
-            mWifiPermissionChecker = new WifiPermissionChecker(this);
-        }
-        String packageName = mWifiPermissionChecker.getLaunchedPackage();
-        if (TextUtils.isEmpty(packageName)) {
-            mApp = null;
-            return;
-        }
-        mApp = Utils.getApplicationLabel(getApplicationContext(), packageName).toString();
     }
 
     private void createDialog() {

@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -29,19 +30,23 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
-import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.HashMap;
 
 public class TopLevelBatteryPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, BatteryPreferenceController {
 
     @VisibleForTesting
     protected boolean mIsBatteryPresent = true;
-    @VisibleForTesting
-    Preference mPreference;
     private final BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    private Preference mPreference;
     private BatteryInfo mBatteryInfo;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
     private String mBatteryStatusLabel;
+
+    @VisibleForTesting
+    protected static HashMap<String, ComponentName> sReplacingActivityMap = new HashMap<>();
 
     public TopLevelBatteryPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -56,6 +61,8 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
             }, true /* shortString */);
         });
 
+        mBatterySettingsFeatureProvider = FeatureFactory.getFactory(context)
+                .getBatterySettingsFeatureProvider(context);
         mBatteryStatusFeatureProvider = FeatureFactory.getFactory(context)
                 .getBatteryStatusFeatureProvider(context);
     }
@@ -70,6 +77,37 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        String prefFrag = preference.getFragment();
+        if (prefFrag == null || prefFrag.isEmpty()) {
+            // Not a redirect, so use the default.
+            return super.handlePreferenceTreeClick(preference);
+        }
+
+        ComponentName currentFragmentName = convertClassPathToComponentName(prefFrag);
+        if (currentFragmentName == null) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+
+        ComponentName replacingActivity;
+        if (sReplacingActivityMap.containsKey(prefFrag)) {
+            replacingActivity = sReplacingActivityMap.get(prefFrag);
+        } else {
+            replacingActivity = mBatterySettingsFeatureProvider.getReplacingActivity(
+                    currentFragmentName);
+            sReplacingActivityMap.put(prefFrag, replacingActivity);
+        }
+
+        if (replacingActivity == null || currentFragmentName.compareTo(replacingActivity) == 0) {
+            return super.handlePreferenceTreeClick(preference);
+        }
+        Intent intent = new Intent();
+        intent.setComponent(currentFragmentName);
+        mContext.startActivity(intent);
+        return true;
     }
 
     @Override
@@ -102,24 +140,12 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
         }
 
         if (batteryStatusUpdate) {
-            setSummaryAsync(info);
+            if (!mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info)) {
+                mBatteryStatusLabel = null; // will generateLabel()
+            }
         }
 
         return (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel;
-    }
-
-    private void setSummaryAsync(BatteryInfo info) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final boolean triggerBatteryStatusUpdate =
-                    mBatteryStatusFeatureProvider.triggerBatteryStatusUpdate(this, info);
-            ThreadUtils.postOnMainThread(() -> {
-                if (!triggerBatteryStatusUpdate) {
-                    mBatteryStatusLabel = null; // will generateLabel()
-                }
-                mPreference.setSummary(
-                        (mBatteryStatusLabel == null) ? generateLabel(info) : mBatteryStatusLabel);
-            });
-        });
     }
 
     private CharSequence generateLabel(BatteryInfo info) {

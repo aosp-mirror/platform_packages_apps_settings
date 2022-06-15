@@ -19,10 +19,11 @@ import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.GameSettingsFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -79,9 +80,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     public ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
     public WifiTrackerLibProvider wifiTrackerLibProvider;
+    public ExtraAppInfoFeatureProvider extraAppInfoFeatureProvider;
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
+    public GameSettingsFeatureProvider gameSettingsFeatureProvider;
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
-    public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -119,9 +121,9 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAwareFeatureProvider = mock(AwareFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
+        extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
-        mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
-        mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
+        gameSettingsFeatureProvider = mock(GameSettingsFeatureProvider.class);
     }
 
     @Override
@@ -225,7 +227,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider() {
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
         return mBluetoothFeatureProvider;
     }
 
@@ -245,17 +247,22 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        return extraAppInfoFeatureProvider;
+    }
+
+    @Override
     public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
         return securitySettingsFeatureProvider;
     }
 
     @Override
-    public AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider() {
-        return mAccessibilitySearchFeatureProvider;
+    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
+        return gameSettingsFeatureProvider;
     }
 
     @Override
-    public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
-        return mAccessibilityMetricsFeatureProvider;
+    public AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider() {
+        return mAccessibilitySearchFeatureProvider;
     }
 }

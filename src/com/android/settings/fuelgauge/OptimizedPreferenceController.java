@@ -16,6 +16,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.OPTIMIZED;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -24,7 +26,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class OptimizedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -49,20 +51,19 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
             Log.d(TAG, "invalid package name, optimized states only");
             preference.setEnabled(true);
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
+            ((RadioButtonPreference) preference).setChecked(true);
             return;
         }
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
+            ((RadioButtonPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_OPTIMIZED) {
+        } else if (mBatteryOptimizeUtils.getAppUsageState() == OPTIMIZED) {
             Log.d(TAG, "is optimized states");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
+            ((RadioButtonPreference) preference).setChecked(true);
         } else {
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
+            ((RadioButtonPreference) preference).setChecked(false);
         }
     }
 
@@ -73,6 +74,12 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        return getPreferenceKey().equals(preference.getKey());
+        if (!KEY_OPTIMIZED_PREF.equals(preference.getKey())) {
+            return false;
+        }
+
+        mBatteryOptimizeUtils.setAppUsageState(OPTIMIZED);
+        Log.d(TAG, "Set optimized");
+        return true;
     }
 }

@@ -28,7 +28,6 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothPairingDialogFragment.BluetoothPairingDialogListener;
-import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfile;
 
@@ -65,7 +64,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private String mDeviceName;
     private LocalBluetoothProfile mPbapClientProfile;
     private boolean mPbapAllowed;
-    private boolean mIsCoordinatedSetMember;
 
     /**
      * Creates an instance of a BluetoothPairingController.
@@ -92,10 +90,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mDeviceName = mBluetoothManager.getCachedDeviceManager().getName(mDevice);
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
-        final CachedBluetoothDevice cachedDevice =
-                mBluetoothManager.getCachedDeviceManager().findDevice(mDevice);
-        mIsCoordinatedSetMember = cachedDevice != null
-                ? cachedDevice.isCoordinatedSetMemberDevice() : false;
     }
 
     @Override
@@ -159,15 +153,6 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      */
     public String getDeviceName() {
         return mDeviceName;
-    }
-
-    /**
-     * A method for querying if the bluetooth device is a LE coordinated set member device.
-     *
-     * @return - A boolean indicating if the device is a CSIP supported device.
-     */
-    public boolean isCoordinatedSetMemberDevice() {
-        return mIsCoordinatedSetMember;
     }
 
     /**
@@ -435,7 +420,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      */
     public void onCancel() {
         Log.d(TAG, "Pairing dialog canceled");
-        mDevice.cancelBondProcess();
+        mDevice.cancelPairing();
     }
 
     /**

@@ -16,6 +16,7 @@
 
 package com.android.settings.localepicker;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,11 +24,8 @@ import android.view.MenuItem;
 
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
-import com.android.settings.R;
-import com.android.settings.core.SettingsBaseActivity;
 
-/** A activity to show the locale picker page. */
-public class LocalePickerWithRegionActivity extends SettingsBaseActivity
+public class LocalePickerWithRegionActivity extends Activity
         implements LocalePickerWithRegion.LocaleSelectedListener {
 
     private static final String PARENT_FRAGMENT_NAME = "localeListEditor";
@@ -36,14 +34,13 @@ public class LocalePickerWithRegionActivity extends SettingsBaseActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(R.string.add_a_language);
 
         final LocalePickerWithRegion selector = LocalePickerWithRegion.createLanguagePicker(
                 this, LocalePickerWithRegionActivity.this, false /* translate only */);
         getFragmentManager()
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.content_frame, selector)
+                .replace(android.R.id.content, selector)
                 .addToBackStack(PARENT_FRAGMENT_NAME)
                 .commit();
     }

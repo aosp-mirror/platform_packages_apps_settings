@@ -29,7 +29,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import com.google.common.primitives.Ints;
 
@@ -40,7 +40,7 @@ import java.util.Map;
  * Controller class that control accessibility time out settings.
  */
 public class AccessibilityTimeoutController extends AbstractPreferenceController implements
-        LifecycleObserver, SelectorWithWidgetPreference.OnClickListener, PreferenceControllerMixin {
+        LifecycleObserver, RadioButtonPreference.OnClickListener, PreferenceControllerMixin {
     static final String CONTENT_TIMEOUT_SETTINGS_SECURE =
             Settings.Secure.ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS;
     static final String CONTROL_TIMEOUT_SETTINGS_SECURE =
@@ -54,7 +54,7 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     private final ContentResolver mContentResolver;
     private final Resources mResources;
     private OnChangeListener mOnChangeListener;
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
     private int mAccessibilityUiTimeoutValue;
 
     public AccessibilityTimeoutController(Context context, Lifecycle lifecycle,
@@ -124,13 +124,13 @@ public class AccessibilityTimeoutController extends AbstractPreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (SelectorWithWidgetPreference)
+        mPreference = (RadioButtonPreference)
                 screen.findPreference(getPreferenceKey());
         mPreference.setOnClickListener(this);
     }
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
+    public void onRadioButtonClicked(RadioButtonPreference preference) {
         int value = getTimeoutValueToKeyMap().get(mPreferenceKey);
         handlePreferenceChange(String.valueOf(value));
         if (mOnChangeListener != null) {

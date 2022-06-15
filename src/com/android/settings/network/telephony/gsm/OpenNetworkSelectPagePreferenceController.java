@@ -19,21 +19,26 @@ package com.android.settings.network.telephony.gsm;
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 import static androidx.lifecycle.Lifecycle.Event.ON_STOP;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.AllowedNetworkTypesListener;
 import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
 
 /**
@@ -47,13 +52,11 @@ public class OpenNetworkSelectPagePreferenceController extends
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private AllowedNetworkTypesListener mAllowedNetworkTypesListener;
-    private int mCacheOfModeStatus;
 
     public OpenNetworkSelectPagePreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
-        mCacheOfModeStatus = TelephonyManager.NETWORK_SELECTION_MODE_UNKNOWN;
         mAllowedNetworkTypesListener = new AllowedNetworkTypesListener(
                 context.getMainExecutor());
         mAllowedNetworkTypesListener.setAllowedNetworkTypesListener(
@@ -97,14 +100,8 @@ public class OpenNetworkSelectPagePreferenceController extends
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        preference.setEnabled(mCacheOfModeStatus
+        preference.setEnabled(mTelephonyManager.getNetworkSelectionMode()
                 != TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
-
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                "com.android.settings.Settings$NetworkSelectActivity");
-        intent.putExtra(Settings.EXTRA_SUB_ID, mSubId);
-        preference.setIntent(intent);
     }
 
     @Override
@@ -117,21 +114,33 @@ public class OpenNetworkSelectPagePreferenceController extends
         }
     }
 
-    /**
-     * Initialization based on given subscription id.
-     **/
-    public OpenNetworkSelectPagePreferenceController init(int subId) {
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
+            final Bundle bundle = new Bundle();
+            bundle.putInt(Settings.EXTRA_SUB_ID, mSubId);
+            new SubSettingLauncher(mContext)
+                    .setDestination(NetworkSelectSettings.class.getName())
+                    .setSourceMetricsCategory(SettingsEnums.MOBILE_NETWORK_SELECT)
+                    .setTitleRes(R.string.choose_network_title)
+                    .setArguments(bundle)
+                    .launch();
+            return true;
+        }
+
+        return false;
+    }
+
+    public OpenNetworkSelectPagePreferenceController init(Lifecycle lifecycle, int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
+        lifecycle.addObserver(this);
         return this;
     }
 
     @Override
-    public void onNetworkSelectModeUpdated(int mode) {
-        mCacheOfModeStatus = mode;
-        if (mPreference != null) {
-            updateState(mPreference);
-        }
+    public void onNetworkSelectModeChanged() {
+        updateState(mPreference);
     }
 }

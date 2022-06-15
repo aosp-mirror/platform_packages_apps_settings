@@ -72,8 +72,6 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
 
     @Override
     public void onExpandButtonClick() {
-        final long startTime = SystemClock.elapsedRealtime();
-
         final PreferenceScreen screen = getPreferenceScreen();
         mHiddenControllerList.stream()
                 .filter(controller -> controller.isAvailable())
@@ -83,11 +81,6 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
                     controller.updateState(preference);
                 });
         super.onExpandButtonClick();
-
-        final long endTime = SystemClock.elapsedRealtime();
-
-        mMetricsFeatureProvider.action(getMetricsCategory(), getMetricsCategory(),
-                0, "onExpandButtonClick", (int)(endTime - startTime));
     }
 
     /*
@@ -102,16 +95,9 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
             return;
         }
 
-        final long startTime = SystemClock.elapsedRealtime();
-
         final PreferenceScreen screen = getPreferenceScreen();
         getPreferenceControllersAsList().forEach(controller ->
                 updateVisiblePreferenceControllers(screen, controller));
-
-        final long endTime = SystemClock.elapsedRealtime();
-
-        mMetricsFeatureProvider.action(getMetricsCategory(), getMetricsCategory(),
-                0, "updatePreferenceStates", (int)(endTime - startTime));
     }
 
     private void updateVisiblePreferenceControllers(PreferenceScreen screen,
@@ -154,8 +140,7 @@ abstract class AbstractMobileNetworkSettings extends RestrictedDashboardFragment
 
         final long endTime = SystemClock.elapsedRealtime();
 
-        mMetricsFeatureProvider.action(getMetricsCategory(), getMetricsCategory(),
-                0, "redrawPreferenceControllers", (int)(endTime - startTime));
+        Log.d(LOG_TAG, "redraw fragment: +" + (endTime - startTime) + "ms");
 
         session.close();
     }

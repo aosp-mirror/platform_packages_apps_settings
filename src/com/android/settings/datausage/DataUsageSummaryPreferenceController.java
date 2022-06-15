@@ -123,13 +123,13 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
         mDataUsageController = null;
     }
 
-    protected void updateConfiguration(Context context,
+    private void updateConfiguration(Context context,
             int subscriptionId, SubscriptionInfo subInfo) {
         final NetworkPolicyManager policyManager =
                 context.getSystemService(NetworkPolicyManager.class);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
-        mDataUsageController = createDataUsageController(context);
+        mDataUsageController = new DataUsageController(context);
         mDataUsageController.setSubscriptionId(subscriptionId);
         mDataInfoController = new DataUsageInfoController();
 
@@ -138,16 +138,12 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
             mDefaultTemplate = DataUsageLib.getMobileTemplate(context, subscriptionId);
         } else if (DataUsageUtils.hasWifiRadio(context)) {
             mDataUsageTemplate = R.string.wifi_data_template;
-            mDefaultTemplate = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
+            mDefaultTemplate = NetworkTemplate.buildTemplateWifi(
+                    NetworkTemplate.WIFI_NETWORKID_ALL, null /* subscriberId */);
         } else {
             mDataUsageTemplate = R.string.ethernet_data_template;
             mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, subscriptionId);
         }
-    }
-
-    @VisibleForTesting
-    DataUsageController createDataUsageController(Context context) {
-        return new DataUsageController(context);
     }
 
     @VisibleForTesting
@@ -191,7 +187,8 @@ public class DataUsageSummaryPreferenceController extends TelephonyBasePreferenc
                 .getSubscriptionPlans(subscriptionId);
     }
 
-    protected SubscriptionInfo getSubscriptionInfo(int subscriptionId) {
+    @VisibleForTesting
+    SubscriptionInfo getSubscriptionInfo(int subscriptionId) {
         if (!mHasMobileData) {
             return null;
         }

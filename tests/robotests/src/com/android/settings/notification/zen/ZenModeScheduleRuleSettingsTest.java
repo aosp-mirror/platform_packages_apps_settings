@@ -18,18 +18,20 @@ package com.android.settings.notification.zen;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.RuntimeEnvironment.application;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Looper;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
 
@@ -39,6 +41,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
 @RunWith(RobolectricTestRunner.class)
@@ -50,31 +53,40 @@ public class ZenModeScheduleRuleSettingsTest {
     @Mock
     private Intent mIntent;
 
-    private ZenModeScheduleRuleSettings mFragment;
+    @Mock
+    private NotificationManager mNotificationManager;
+
+    private TestFragment mFragment;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = ApplicationProvider.getApplicationContext();
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
+        mContext = application;
 
-        Resources res = mContext.getResources();
+        mFragment = spy(new TestFragment());
+        mFragment.onAttach(application);
+
+        doReturn(mActivity).when(mFragment).getActivity();
+
+        Resources res = application.getResources();
+
+        doReturn(res).when(mFragment).getResources();
         when(mActivity.getTheme()).thenReturn(res.newTheme());
         when(mActivity.getIntent()).thenReturn(mIntent);
         when(mActivity.getResources()).thenReturn(res);
         when(mActivity.getMainLooper()).thenReturn(mock(Looper.class));
-
-        mFragment = spy(new ZenModeScheduleRuleSettings());
-        when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFragment.getContext()).thenReturn(mContext);
-        when(mFragment.getResources()).thenReturn(res);
-        mFragment.onAttach(mContext);
     }
 
     @Test
-    public void onAttach_noRuleId_shouldToastAndFinishAndNoCrash() {
+    public void onCreate_noRuleId_shouldToastAndFinishAndNoCrash() {
         final String expected = mContext.getString(R.string.zen_mode_rule_not_found_text);
+
+        mFragment.onCreate(null);
 
         // verify the toast
         assertThat(ShadowToast.getTextOfLatestToast()).isEqualTo(expected);
@@ -83,5 +95,13 @@ public class ZenModeScheduleRuleSettingsTest {
         verify(mActivity).finish();
 
         //should not crash
+    }
+
+    public static class TestFragment extends ZenModeScheduleRuleSettings {
+
+        @Override
+        protected Object getSystemService(final String name) {
+            return null;
+        }
     }
 }

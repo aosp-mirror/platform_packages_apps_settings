@@ -97,7 +97,7 @@ public class SecondaryUserControllerTest {
     public void controllerUpdatesSummaryOfNewPreference() {
         mPrimaryUser.name = TEST_NAME;
         mController.displayPreference(mScreen);
-        mController.setSize(MEGABYTE_IN_BYTES * 10, false /* animate */);
+        mController.setSize(MEGABYTE_IN_BYTES * 10);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
 
         verify(mGroup).addPreference(argumentCaptor.capture());
@@ -114,7 +114,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+                false /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.
@@ -134,7 +134,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+                false /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
@@ -153,7 +153,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+                false /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isTrue();
@@ -172,7 +172,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        true /* isWorkProfileOnly */);
+                true /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
@@ -190,14 +190,14 @@ public class SecondaryUserControllerTest {
 
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+                false /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         assertThat(controllers.get(0) instanceof SecondaryUserController).isFalse();
     }
 
     @Test
-    public void handleResult_noStatsResult_shouldShowCachedData() {
+    public void controllerUpdatesPreferenceOnAcceptingResult() {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
         mController.displayPreference(mScreen);
@@ -211,11 +211,8 @@ public class SecondaryUserControllerTest {
                         MEGABYTE_IN_BYTES * 10,
                         MEGABYTE_IN_BYTES * 10, 0);
         result.put(10, userResult);
-        // Cache size info at first time
-        mController.handleResult(result);
 
-        // Retrieve cache size info if stats result is null
-        mController.handleResult(null);
+        mController.handleResult(result);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mGroup).addPreference(argumentCaptor.capture());
         final Preference preference = argumentCaptor.getValue();
@@ -236,7 +233,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getUsers()).thenReturn(userInfos);
         final List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager,
-                        false /* isWorkProfileOnly */);
+                false /* isWorkProfileOnly */);
 
         assertThat(controllers).hasSize(1);
         // We should have the NoSecondaryUserController.

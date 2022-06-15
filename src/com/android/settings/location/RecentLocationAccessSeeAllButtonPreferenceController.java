@@ -39,7 +39,6 @@ public class RecentLocationAccessSeeAllButtonPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-        mLocationEnabler.refreshLocationMode();
     }
 
     @Override

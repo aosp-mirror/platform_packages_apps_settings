@@ -26,7 +26,6 @@ import androidx.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +38,6 @@ public class PublicVolumeSettingsTest {
             new ActivityTestRule<>(Settings.PublicVolumeSettingsActivity.class, true, true);
 
     @Test
-    @Ignore
     public void test_invalidSetupDoesNotCrashSettings() {
         Intent intent = new Intent();
         intent.setAction(android.provider.Settings.ACTION_INTERNAL_STORAGE_SETTINGS);

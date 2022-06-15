@@ -35,7 +35,6 @@ class SliceTestUtils {
     public static final int FAKE_ICON = 1234;
     public static final String FAKE_FRAGMENT_NAME = FakeIndexProvider.class.getName();
     public static final String FAKE_CONTROLLER_NAME = FakeToggleController.class.getName();
-    public static final int FAKE_HIGHLIGHT_MENU_RES = FakeToggleController.HIGHLIGHT_MENU_RES;
 
 
     public static void insertSliceToDb(Context context, String key) {
@@ -64,7 +63,7 @@ class SliceTestUtils {
                                 : SettingsSliceProvider.SLICE_AUTHORITY)
                         .appendPath(SettingsSlicesContract.PATH_SETTING_ACTION)
                         .appendPath(key)
-                        .build().toString());
+                        .build().toSafeString());
         values.put(SlicesDatabaseHelper.IndexColumns.TITLE, FAKE_TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, FAKE_SUMMARY);
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, FAKE_SCREEN_TITLE);
@@ -76,8 +75,6 @@ class SliceTestUtils {
         values.put(SlicesDatabaseHelper.IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
                 customizedUnavailableSliceSubtitle);
         values.put(SlicesDatabaseHelper.IndexColumns.PUBLIC_SLICE, isPublicSlice);
-        values.put(SlicesDatabaseHelper.IndexColumns.HIGHLIGHT_MENU_RESOURCE,
-                FAKE_HIGHLIGHT_MENU_RES);
 
         db.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
         db.close();

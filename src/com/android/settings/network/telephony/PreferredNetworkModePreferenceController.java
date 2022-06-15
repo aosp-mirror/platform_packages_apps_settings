@@ -26,7 +26,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 /**
@@ -35,18 +34,19 @@ import com.android.settings.network.telephony.TelephonyConstants.TelephonyManage
 public class PreferredNetworkModePreferenceController extends TelephonyBasePreferenceController
         implements ListPreference.OnPreferenceChangeListener {
 
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
     private TelephonyManager mTelephonyManager;
+    private PersistableBundle mPersistableBundle;
     private boolean mIsGlobalCdma;
 
     public PreferredNetworkModePreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
+        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
         boolean visible;
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
@@ -90,7 +90,7 @@ public class PreferredNetworkModePreferenceController extends TelephonyBasePrefe
 
     public void init(int subId) {
         mSubId = subId;
-        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
+        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
 

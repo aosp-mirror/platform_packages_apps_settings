@@ -83,12 +83,6 @@ public abstract class SimDialogFragment extends InstrumentedDialogFragment imple
         }
     }
 
-    @Override
-    public void dismiss() {
-        mChangeListener.stop();
-        super.dismiss();
-    }
-
     public abstract void updateDialog();
 
     @Override

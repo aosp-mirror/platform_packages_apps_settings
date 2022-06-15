@@ -105,11 +105,6 @@ public class AppLaunchSettings extends AppInfoBase implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (mAppEntry == null) {
-            Log.w(TAG, "onCreate: mAppEntry is null, please check the reason!!!");
-            getActivity().finish();
-            return;
-        }
         addPreferencesFromResource(R.xml.installed_app_launch_settings);
         mDomainVerificationManager = mContext.getSystemService(DomainVerificationManager.class);
         initUIComponents();
@@ -367,9 +362,9 @@ public class AppLaunchSettings extends AppInfoBase implements
             final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(LEARN_MORE_URI));
             mContext.startActivity(intent);
         });
-        final String learnMoreText = mContext.getString(
+        final String learnMoreContentDescription = mContext.getString(
                 R.string.footer_learn_more_content_description, getLabelName());
-        footerPreference.setLearnMoreText(learnMoreText);
+        footerPreference.setLearnMoreContentDescription(learnMoreContentDescription);
     }
 
     private String getLabelName() {

@@ -16,15 +16,12 @@ package com.android.settings.core;
 import android.content.Context;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SliceData;
+import com.android.settings.widget.PrimarySwitchPreference;
 import com.android.settings.widget.TwoStateButtonPreference;
-import com.android.settingslib.PrimarySwitchPreference;
-import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
-import com.android.settingslib.widget.MainSwitchPreference;
 
 /**
  * Abstract class that consolidates logic for updating toggle controllers.
@@ -52,16 +49,6 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
      * @return {@code true} if the underlying setting is updated.
      */
     public abstract boolean setChecked(boolean isChecked);
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference instanceof MainSwitchPreference) {
-            ((MainSwitchPreference) preference).addOnSwitchChangeListener((switchView, isChecked) ->
-                    SettingsJankMonitor.detectToggleJank(getPreferenceKey(), switchView));
-        }
-    }
 
     @Override
     public void updateState(Preference preference) {
@@ -102,7 +89,4 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public boolean isPublicSlice() {
         return false;
     }
-
-    @Override
-    public abstract int getSliceHighlightMenuRes();
 }

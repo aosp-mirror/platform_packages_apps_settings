@@ -41,7 +41,6 @@ import androidx.preference.ListPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 import com.android.settings.testutils.ResourcesUtils;
 
@@ -60,7 +59,7 @@ public class PreferredNetworkModePreferenceControllerTest {
     @Mock
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private ServiceState mServiceState;
 
@@ -76,14 +75,15 @@ public class PreferredNetworkModePreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
 
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         doReturn(mServiceState).when(mTelephonyManager).getServiceState();
         mPersistableBundle = new PersistableBundle();
-        doReturn(mPersistableBundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(mPersistableBundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         mPreference = new ListPreference(mContext);
         mController = new PreferredNetworkModePreferenceController(mContext, "mobile_data");

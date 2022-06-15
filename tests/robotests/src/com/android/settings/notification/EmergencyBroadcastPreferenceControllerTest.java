@@ -20,13 +20,10 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
@@ -63,8 +60,6 @@ public class EmergencyBroadcastPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        doReturn(mock(DevicePolicyManager.class)).when(mContext)
-                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mController =

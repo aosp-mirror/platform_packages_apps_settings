@@ -79,8 +79,7 @@ public class AlwaysDiscoverableTest {
         mAlwaysDiscoverable.start();
         assertThat(mBluetoothAdapter.getScanMode())
                 .isEqualTo(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
-        verify(mContext).registerReceiver(eq(mAlwaysDiscoverable), any(),
-                eq(Context.RECEIVER_EXPORTED_UNAUDITED));
+        verify(mContext).registerReceiver(eq(mAlwaysDiscoverable), any());
     }
 
     @Test

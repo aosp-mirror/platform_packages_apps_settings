@@ -17,6 +17,7 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
+import android.net.INetworkStatsService;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.INetworkManagementService;
@@ -28,7 +29,6 @@ import android.telephony.TelephonyManager;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.datausage.lib.DataUsageLib;
 import com.android.settingslib.NetworkPolicyEditor;
 
@@ -51,6 +51,8 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
         TemplatePreference.NetworkServices services = new TemplatePreference.NetworkServices();
         services.mNetworkService = INetworkManagementService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE));
+        services.mStatsService = INetworkStatsService.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         services.mPolicyManager = mContext.getSystemService(NetworkPolicyManager.class);
         services.mPolicyEditor = new NetworkPolicyEditor(services.mPolicyManager);
         services.mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
@@ -64,6 +66,6 @@ public class BillingCyclePreferenceController extends BasePreferenceController {
 
     @Override
     public int getAvailabilityStatus() {
-        return DataUsageUtils.hasMobileData(mContext) ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        return AVAILABLE;
     }
 }

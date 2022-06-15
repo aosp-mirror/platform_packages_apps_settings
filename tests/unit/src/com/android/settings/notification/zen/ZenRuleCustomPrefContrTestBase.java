@@ -35,6 +35,6 @@ abstract class ZenRuleCustomPrefContrTestBase {
 
     void updateControllerZenPolicy(ZenPolicy policy) {
         mRule.setZenPolicy(policy);
-        getController().setIdAndRule(RULE_ID, mRule);
+        getController().onResume(mRule, RULE_ID);
     }
 }

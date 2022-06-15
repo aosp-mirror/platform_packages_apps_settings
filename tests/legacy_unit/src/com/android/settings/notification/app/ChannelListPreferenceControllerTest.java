@@ -43,7 +43,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.NotificationsSentState;
-import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;

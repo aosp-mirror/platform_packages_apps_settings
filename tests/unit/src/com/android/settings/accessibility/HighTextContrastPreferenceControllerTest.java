@@ -19,11 +19,8 @@ package com.android.settings.accessibility;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.os.Looper;
 import android.provider.Settings;
 
-import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -34,13 +31,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-/**
- * Tests for {@link HighTextContrastPreferenceController}.
- */
 @RunWith(AndroidJUnit4.class)
 public class HighTextContrastPreferenceControllerTest {
 
-    private static final String PREF_KEY = "text_contrast";
     private static final int ON = 1;
     private static final int OFF = 0;
     private static final int UNKNOWN = -1;
@@ -48,20 +41,12 @@ public class HighTextContrastPreferenceControllerTest {
     private Context mContext;
     private SwitchPreference mPreference;
     private HighTextContrastPreferenceController mController;
-    private PreferenceScreen mScreen;
 
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
-        if (Looper.myLooper() == null) {
-            Looper.prepare();
-        }
-        final PreferenceManager preferenceManager = new PreferenceManager(mContext);
-        mScreen = preferenceManager.createPreferenceScreen(mContext);
         mPreference = new SwitchPreference(mContext);
-        mPreference.setKey(PREF_KEY);
-        mScreen.addPreference(mPreference);
-        mController = new HighTextContrastPreferenceController(mContext, PREF_KEY);
+        mController = new HighTextContrastPreferenceController(mContext, "text_contrast");
     }
 
     @Test
@@ -105,19 +90,6 @@ public class HighTextContrastPreferenceControllerTest {
     public void setChecked_setFalse_shouldDisableTextContrast() {
         mController.setChecked(false);
 
-        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, UNKNOWN)).isEqualTo(OFF);
-    }
-
-    @Test
-    public void resetState_shouldDisableTextContrast() {
-        mController.displayPreference(mScreen);
-        mController.setChecked(true);
-        mPreference.setChecked(true);
-
-        mController.resetState();
-
-        assertThat(mPreference.isChecked()).isFalse();
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_HIGH_TEXT_CONTRAST_ENABLED, UNKNOWN)).isEqualTo(OFF);
     }

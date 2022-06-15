@@ -18,8 +18,6 @@ package com.android.settings;
 
 import static android.view.HapticFeedbackConstants.CLOCK_TICK;
 
-import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_SLIDER;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -32,12 +30,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.SeekBar;
 
-import com.android.internal.jank.InteractionJankMonitor;
-
 public class PointerSpeedPreference extends SeekBarDialogPreference implements
         SeekBar.OnSeekBarChangeListener {
     private final InputManager mIm;
-    private final InteractionJankMonitor mJankMonitor = InteractionJankMonitor.getInstance();
     private SeekBar mSeekBar;
 
     private int mOldSpeed;
@@ -93,15 +88,11 @@ public class PointerSpeedPreference extends SeekBarDialogPreference implements
 
     public void onStartTrackingTouch(SeekBar seekBar) {
         mTouchInProgress = true;
-        mJankMonitor.begin(InteractionJankMonitor.Configuration.Builder
-                .withView(CUJ_SETTINGS_SLIDER, seekBar)
-                .setTag(getKey()));
     }
 
     public void onStopTrackingTouch(SeekBar seekBar) {
         mTouchInProgress = false;
         mIm.tryPointerSpeed(seekBar.getProgress() + InputManager.MIN_POINTER_SPEED);
-        mJankMonitor.end(CUJ_SETTINGS_SLIDER);
     }
 
     private void onSpeedChanged() {

@@ -18,15 +18,13 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.Date;
+import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class AdminActionPreferenceControllerBaseTest
     extends AdminActionPreferenceControllerTestBase {
 

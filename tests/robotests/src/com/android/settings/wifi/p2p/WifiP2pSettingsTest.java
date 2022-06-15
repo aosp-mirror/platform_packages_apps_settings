@@ -39,7 +39,7 @@ import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.LayoutInflater;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -67,7 +67,7 @@ public class WifiP2pSettingsTest {
 
     private Context mContext;
     private FragmentActivity mActivity;
-    private TestWifiP2pSettings mFragment;
+    private WifiP2pSettings mFragment;
 
     @Mock
     public WifiP2pManager mWifiP2pManager;
@@ -85,10 +85,8 @@ public class WifiP2pSettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        TestWifiP2pSettings.sMockWifiP2pManager = mWifiP2pManager;
-
         mActivity = Robolectric.setupActivity(FragmentActivity.class);
-        mFragment = new TestWifiP2pSettings();
+        mFragment = new WifiP2pSettings();
         mFragment.mWifiP2pManager = mWifiP2pManager;
         doReturn(mChannel).when(mWifiP2pManager).initialize(any(), any(), any());
         FragmentManager fragmentManager = mActivity.getSupportFragmentManager();
@@ -112,30 +110,30 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void onCreateView_withNullBundle_canNotGetValue() {
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, null);
+    public void onActivityCreate_withNullBundle_canNotGetValue() {
+        mFragment.onActivityCreated(null);
 
         assertThat(mFragment.mSelectedWifiPeer).isNull();
     }
 
     @Test
-    public void onCreateView_withDeviceName_shouldGetDeviceName() {
+    public void onActivityCreate_withDeviceName_shouldGetDeviceName() {
         final String fakeDeviceName = "fakename";
         final Bundle bundle = new Bundle();
         bundle.putString(WifiP2pSettings.SAVE_DEVICE_NAME, fakeDeviceName);
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, bundle);
+        mFragment.onActivityCreated(bundle);
 
         assertThat(mFragment.mSavedDeviceName).isEqualTo(fakeDeviceName);
     }
 
     @Test
-    public void onCreateView_withGroupName_shouldGetGroupName() {
+    public void onActivityCreate_withGroupName_shouldGetGroupName() {
         final String fakeGroupName = "fakegroup";
         final Bundle bundle = new Bundle();
         bundle.putString(WifiP2pSettings.SAVE_SELECTED_GROUP, fakeGroupName);
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, bundle);
+        mFragment.onActivityCreated(bundle);
 
         assertThat(mFragment.mSelectedGroupName).isEqualTo(fakeGroupName);
         assertThat(mFragment.mSavedDeviceName).isNull();
@@ -281,7 +279,7 @@ public class WifiP2pSettingsTest {
         final String fakeDeviceName = "fakeName";
         final Bundle bundle = new Bundle();
         bundle.putString(WifiP2pSettings.SAVE_DEVICE_NAME, fakeDeviceName);
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, bundle);
+        mFragment.onActivityCreated(bundle);
         final Dialog dialog = mFragment.onCreateDialog(WifiP2pSettings.DIALOG_RENAME);
 
         mFragment.mRenameListener.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
@@ -294,8 +292,7 @@ public class WifiP2pSettingsTest {
         final String fakeDeviceName = "wrongName***";
         final Bundle bundle = new Bundle();
         bundle.putString(WifiP2pSettings.SAVE_DEVICE_NAME, fakeDeviceName);
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, bundle);
-
+        mFragment.onActivityCreated(bundle);
         final Dialog dialog = mFragment.onCreateDialog(WifiP2pSettings.DIALOG_RENAME);
 
         mFragment.mRenameListener.onClick(dialog, DialogInterface.BUTTON_POSITIVE);
@@ -321,17 +318,11 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void onStop_notLastGroupFormed_shouldCloseChannel() {
-        mFragment.onStop();
-
-        assertThat(mFragment.mChannel).isNull();
-    }
-
-    @Test
     public void peerDiscovery_whenOnPause_shouldStop() {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
     }
 
     @Test
@@ -339,6 +330,7 @@ public class WifiP2pSettingsTest {
         mFragment.onPause();
 
         verify(mWifiP2pManager, times(1)).stopPeerDiscovery(any(), any());
+        assertThat(mFragment.mChannel).isNull();
 
         mFragment.onResume();
         assertThat(mFragment.mChannel).isNotNull();
@@ -402,7 +394,7 @@ public class WifiP2pSettingsTest {
         final String fakeDeviceName = "fakeName";
         final Bundle createBundle = new Bundle();
         createBundle.putString(WifiP2pSettings.SAVE_DEVICE_NAME, fakeDeviceName);
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, createBundle);
+        mFragment.onActivityCreated(createBundle);
         final Bundle outBundle = new Bundle();
         final Dialog dialog = mFragment.onCreateDialog(WifiP2pSettings.DIALOG_RENAME);
 
@@ -438,7 +430,7 @@ public class WifiP2pSettingsTest {
         doReturn(groupList).when(wifiP2pGroupList).getGroupList();
         final Bundle bundle = new Bundle();
         bundle.putString(WifiP2pSettings.SAVE_SELECTED_GROUP, fakeGroupName);
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, bundle);
+        mFragment.onActivityCreated(bundle);
 
         mFragment.onPersistentGroupInfoAvailable(wifiP2pGroupList);
 
@@ -511,20 +503,20 @@ public class WifiP2pSettingsTest {
     }
 
     @Test
-    public void onCreateView_withNullP2pManager_shouldGetP2pManagerAgain() {
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
+    public void onActivityCreate_withNullP2pManager_shouldGetP2pManagerAgain() {
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
         mFragment.mWifiP2pManager = null;
 
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
+        mFragment.onActivityCreated(new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNotNull();
     }
 
     @Test
-    public void onCreateView_withNullChannel_shouldSetP2pManagerNull() {
+    public void onActivityCreate_withNullChannel_shouldSetP2pManagerNull() {
         doReturn(null).when(mWifiP2pManager).initialize(any(), any(), any());
-        mFragment.mChannel = null; // Reset channel to re-test onCreateView flow
-        mFragment.onCreateView(LayoutInflater.from(mContext), null, new Bundle());
+        mFragment.mChannel = null; // Reset channel to re-test onActivityCreated flow
+        mFragment.onActivityCreated(new Bundle());
 
         assertThat(mFragment.mWifiP2pManager).isNull();
     }
@@ -547,14 +539,5 @@ public class WifiP2pSettingsTest {
         wifiP2pDevice.deviceAddress = "testAddress";
         wifiP2pDevice.deviceName = "testName";
         mWifiP2pPeer.device = wifiP2pDevice;
-    }
-
-    public static class TestWifiP2pSettings extends WifiP2pSettings {
-        static WifiP2pManager sMockWifiP2pManager;
-        @Override
-        protected Object getSystemService(final String name) {
-            if (Context.WIFI_P2P_SERVICE.equals(name)) return sMockWifiP2pManager;
-            return getActivity().getSystemService(name);
-        }
     }
 }

@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.Switch;
 
 import androidx.core.content.res.TypedArrayUtils;
@@ -32,10 +31,7 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchBar.OnBeforeCheckedChangeListener;
 import com.android.settingslib.RestrictedPreferenceHelper;
-import com.android.settingslib.core.instrumentation.SettingsJankMonitor;
 import com.android.settingslib.widget.OnMainSwitchChangeListener;
-
-import com.google.android.setupdesign.util.LayoutStyler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +48,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
             new ArrayList<>();
     private final List<OnMainSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
-    private boolean mApplyPartnerCustomizationPaddingStyle;
     private SettingsMainSwitchBar mMainSwitchBar;
     private CharSequence mTitle;
     private EnforcedAdmin mEnforcedAdmin;
@@ -99,12 +94,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
             registerListenerToSwitchBar();
         } else {
             mMainSwitchBar.hide();
-        }
-
-        if (mApplyPartnerCustomizationPaddingStyle) {
-            // TODO(b/232494666): Replace all margins of the root view with the padding
-            final ViewGroup parentView = (ViewGroup) mMainSwitchBar.getParent();
-            LayoutStyler.applyPartnerCustomizationLayoutPaddingStyle(parentView);
         }
     }
 
@@ -154,7 +143,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         super.setChecked(isChecked);
-        SettingsJankMonitor.detectToggleJank(getKey(), switchView);
     }
 
     /**
@@ -211,10 +199,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Set the OnBeforeCheckedChangeListener.
      */
     public void setOnBeforeCheckedChangeListener(OnBeforeCheckedChangeListener listener) {
-        if (!mBeforeCheckedChangeListeners.contains(listener)) {
+        if (mMainSwitchBar == null) {
             mBeforeCheckedChangeListeners.add(listener);
-        }
-        if (mMainSwitchBar != null) {
+        } else {
             mMainSwitchBar.setOnBeforeCheckedChangeListener(listener);
         }
     }
@@ -223,10 +210,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Adds a listener for switch changes
      */
     public void addOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
-        if (!mSwitchChangeListeners.contains(listener)) {
+        if (mMainSwitchBar == null) {
             mSwitchChangeListeners.add(listener);
-        }
-        if (mMainSwitchBar != null) {
+        } else {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
     }
@@ -235,8 +221,9 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
      * Remove a listener for switch changes
      */
     public void removeOnSwitchChangeListener(OnMainSwitchChangeListener listener) {
-        mSwitchChangeListeners.remove(listener);
-        if (mMainSwitchBar != null) {
+        if (mMainSwitchBar == null) {
+            mSwitchChangeListeners.remove(listener);
+        } else {
             mMainSwitchBar.removeOnSwitchChangeListener(listener);
         }
     }
@@ -253,14 +240,6 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         }
     }
 
-    /**
-     * Apples the padding style of the partner's customization. It's used in the SetupWizard.
-     */
-    public void applyPartnerCustomizationPaddingStyle() {
-        mApplyPartnerCustomizationPaddingStyle = true;
-        notifyChanged();
-    }
-
     private void initMainSwitchBar() {
         if (mMainSwitchBar != null) {
             mMainSwitchBar.setTitle(mTitle);
@@ -275,5 +254,7 @@ public class SettingsMainSwitchPreference extends TwoStatePreference implements
         for (OnMainSwitchChangeListener listener : mSwitchChangeListeners) {
             mMainSwitchBar.addOnSwitchChangeListener(listener);
         }
+        mBeforeCheckedChangeListeners.clear();
+        mSwitchChangeListeners.clear();
     }
 }

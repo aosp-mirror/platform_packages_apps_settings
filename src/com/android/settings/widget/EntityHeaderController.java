@@ -74,7 +74,6 @@ public class EntityHeaderController {
     private Lifecycle mLifecycle;
     private RecyclerView mRecyclerView;
     private Drawable mIcon;
-    private int mPrefOrder = -1000;
     private String mIconContentDescription;
     private CharSequence mLabel;
     private CharSequence mSummary;
@@ -215,18 +214,12 @@ public class EntityHeaderController {
     }
 
     public EntityHeaderController setIsInstantApp(boolean isInstantApp) {
-        mIsInstantApp = isInstantApp;
+        this.mIsInstantApp = isInstantApp;
         return this;
     }
 
     public EntityHeaderController setEditListener(View.OnClickListener listener) {
-        mEditOnClickListener = listener;
-        return this;
-    }
-
-    /** Sets this preference order. */
-    public EntityHeaderController setOrder(int order) {
-        mPrefOrder = order;
+        this.mEditOnClickListener = listener;
         return this;
     }
 
@@ -236,7 +229,7 @@ public class EntityHeaderController {
     public LayoutPreference done(Activity activity, Context uiContext) {
         final LayoutPreference pref = new LayoutPreference(uiContext, done(activity));
         // Makes sure it's the first preference onscreen.
-        pref.setOrder(mPrefOrder);
+        pref.setOrder(-1000);
         pref.setSelectable(false);
         pref.setKey(PREF_KEY_APP_HEADER);
         pref.setAllowDividerBelow(true);
@@ -296,8 +289,7 @@ public class EntityHeaderController {
             @Override
             public void onClick(View v) {
                 AppInfoBase.startAppInfoFragment(
-                        AppInfoDashboardFragment.class,
-                        mActivity.getString(R.string.application_info_label),
+                        AppInfoDashboardFragment.class, R.string.application_info_label,
                         mPackageName, mUid, mFragment, 0 /* request */,
                         mMetricsCategory);
             }

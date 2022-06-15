@@ -48,11 +48,6 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
         return KEY;
     }
 
-    void setIdAndRule(String id, AutomaticZenRule rule) {
-        mId = id;
-        mRule = rule;
-    }
-
     @Override
     public boolean isAvailable() {
         return mRule != null && mId != null;
@@ -77,6 +72,11 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
                 // an exception is thrown if you try to add the listener twice
             }
         }
+    }
+
+    public void onResume(AutomaticZenRule rule, String id) {
+        mRule = rule;
+        mId = id;
     }
 
     public void updateState(Preference preference) {

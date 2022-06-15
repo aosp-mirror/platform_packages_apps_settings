@@ -26,19 +26,21 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.net.DataUsageController;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * The controller displays a data usage chart for the specified Wi-Fi network.
  */
 public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPreferenceController {
-    final Set<String> mAllNetworkKeys;
+    final String mNetworkId;
 
-    public WifiDataUsageSummaryPreferenceController(Activity activity, Lifecycle lifecycle,
-            PreferenceFragmentCompat fragment, Set<String> allNetworkKeys) {
+    public WifiDataUsageSummaryPreferenceController(Activity activity,
+            Lifecycle lifecycle, PreferenceFragmentCompat fragment, CharSequence networkId) {
         super(activity, lifecycle, fragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-        mAllNetworkKeys = new HashSet<>(allNetworkKeys);
+
+        if (networkId == null) {
+            mNetworkId = null;
+        } else {
+            mNetworkId = String.valueOf(networkId);
+        }
     }
 
     @Override
@@ -48,11 +50,9 @@ public class WifiDataUsageSummaryPreferenceController extends DataUsageSummaryPr
         }
 
         final DataUsageSummaryPreference mPreference = (DataUsageSummaryPreference) preference;
-        final NetworkTemplate template = new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI)
-                .setWifiNetworkKeys(mAllNetworkKeys).build();
-        if (mDataUsageController == null) {
-            updateConfiguration(mContext, mSubId, getSubscriptionInfo(mSubId));
-        }
+        // TODO(b/126299427): Currently gets data usage of whole Wi-Fi networks, but should get
+        //  specified one.
+        final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(mNetworkId);
         final DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 template);
         mDataInfoController.updateDataLimit(info, mPolicyEditor.getPolicy(template));

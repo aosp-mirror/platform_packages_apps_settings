@@ -18,15 +18,12 @@ package com.android.settings.development.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothA2dp;
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
@@ -46,9 +43,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowBluetoothDevice;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowBluetoothDevice.class})
 public class BluetoothHDAudioPreferenceControllerTest {
@@ -57,8 +51,6 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Mock
     private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -81,7 +73,6 @@ public class BluetoothHDAudioPreferenceControllerTest {
         mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
         mController = new BluetoothHDAudioPreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore, mCallback);
-        mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new SwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
@@ -90,8 +81,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void updateState_noActiveDevice_setDisable() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Collections.emptyList());
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(null);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -100,8 +90,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void updateState_codecSupported_setEnable() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
@@ -112,8 +101,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void updateState_codecNotSupported_setDisable() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_NOT_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
@@ -124,8 +112,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void updateState_codecSupportedAndEnabled_checked() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
@@ -138,8 +125,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void updateState_codecSupportedAndDisabled_notChecked() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
                 mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
@@ -152,8 +138,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_disable_verifyFlow() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         final boolean enabled = false;
         mController.onPreferenceChange(mPreference, enabled);
@@ -166,8 +151,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_enable_verifyFlow() {
-        when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
-                .thenReturn(Arrays.asList(mActiveDevice));
+        when(mBluetoothA2dp.getActiveDevice()).thenReturn(mActiveDevice);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         final boolean enabled = true;
         mController.onPreferenceChange(mPreference, enabled);

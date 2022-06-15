@@ -25,14 +25,16 @@ import android.os.UserManager;
 
 import androidx.annotation.Keep;
 
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
-import com.android.settings.accessibility.AccessibilityMetricsFeatureProviderImpl;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProviderImpl;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProviderImpl;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
+import com.android.settings.applications.GameSettingsFeatureProvider;
+import com.android.settings.applications.GameSettingsFeatureProviderImpl;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
+import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProviderImpl;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.aware.AwareFeatureProviderImpl;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
@@ -103,9 +105,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AwareFeatureProvider mAwareFeatureProvider;
     private FaceFeatureProvider mFaceFeatureProvider;
     private WifiTrackerLibProvider mWifiTrackerLibProvider;
+    private ExtraAppInfoFeatureProvider mExtraAppInfoFeatureProvider;
     private SecuritySettingsFeatureProvider mSecuritySettingsFeatureProvider;
+    private GameSettingsFeatureProvider mGameSettingsFeatureProvider;
     private AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
-    private AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -280,9 +283,10 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider() {
+    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
         if (mBluetoothFeatureProvider == null) {
-            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(getAppContext());
+            mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl(
+                    context.getApplicationContext());
         }
         return mBluetoothFeatureProvider;
     }
@@ -312,6 +316,14 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
+    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
+        if (mExtraAppInfoFeatureProvider == null) {
+            mExtraAppInfoFeatureProvider = new ExtraAppInfoFeatureProviderImpl();
+        }
+        return mExtraAppInfoFeatureProvider;
+    }
+
+    @Override
     public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
         if (mSecuritySettingsFeatureProvider == null) {
             mSecuritySettingsFeatureProvider = new SecuritySettingsFeatureProviderImpl();
@@ -320,18 +332,18 @@ public class FeatureFactoryImpl extends FeatureFactory {
     }
 
     @Override
+    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
+        if (mGameSettingsFeatureProvider == null) {
+            mGameSettingsFeatureProvider = new GameSettingsFeatureProviderImpl();
+        }
+        return mGameSettingsFeatureProvider;
+    }
+
+    @Override
     public AccessibilitySearchFeatureProvider getAccessibilitySearchFeatureProvider() {
         if (mAccessibilitySearchFeatureProvider == null) {
             mAccessibilitySearchFeatureProvider = new AccessibilitySearchFeatureProviderImpl();
         }
         return mAccessibilitySearchFeatureProvider;
-    }
-
-    @Override
-    public AccessibilityMetricsFeatureProvider getAccessibilityMetricsFeatureProvider() {
-        if (mAccessibilityMetricsFeatureProvider == null) {
-            mAccessibilityMetricsFeatureProvider = new AccessibilityMetricsFeatureProviderImpl();
-        }
-        return mAccessibilityMetricsFeatureProvider;
     }
 }

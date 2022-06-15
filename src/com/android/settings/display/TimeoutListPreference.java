@@ -16,8 +16,6 @@
 
 package com.android.settings.display;
 
-import static android.app.admin.DevicePolicyResources.Strings.Settings.OTHER_OPTIONS_DISABLED_BY_ADMIN;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Dialog;
@@ -26,9 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog.Builder;
 
@@ -56,23 +52,9 @@ public class TimeoutListPreference extends RestrictedListPreference {
             DialogInterface.OnClickListener listener) {
         super.onPrepareDialogBuilder(builder, listener);
         if (mAdmin != null) {
-            updateTextOnDialog(builder);
+            builder.setView(R.layout.admin_disabled_other_options_footer);
         } else {
             builder.setView(null);
-        }
-    }
-
-    private void updateTextOnDialog(Builder builder) {
-        LayoutInflater inflater = getContext().getSystemService(LayoutInflater.class);
-        DevicePolicyManager devicePolicyManager = getContext()
-                .getSystemService(DevicePolicyManager.class);
-        View v = inflater.inflate(R.layout.admin_disabled_other_options_footer, null);
-        builder.setView(v);
-        TextView textView = v.findViewById(R.id.admin_disabled_other_options_text);
-        String replacementText = devicePolicyManager.getResources().getString(
-                OTHER_OPTIONS_DISABLED_BY_ADMIN, () -> null);
-        if (replacementText != null) {
-            textView.setText(replacementText);
         }
     }
 

@@ -26,13 +26,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.FetchPackageStorageAsyncLoader;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -49,21 +48,13 @@ public class AppStoragePreferenceController extends AppInfoPreferenceControllerB
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference.setEnabled(AppUtils.isAppInstalled(mAppEntry));
-    }
-
-    @Override
     public void updateState(Preference preference) {
-        if (!AppUtils.isAppInstalled(mAppEntry)) {
-            preference.setSummary("");
-            return;
+        final ApplicationsState.AppEntry entry = mParent.getAppEntry();
+        if (entry != null && entry.info != null) {
+            final boolean isExternal =
+                    (entry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
+            preference.setSummary(getStorageSummary(mLastResult, isExternal));
         }
-
-        final boolean isExternal =
-                (mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0;
-        preference.setSummary(getStorageSummary(mLastResult, isExternal));
     }
 
     @Override
@@ -111,4 +102,5 @@ public class AppStoragePreferenceController extends AppInfoPreferenceControllerB
     @Override
     public void onLoaderReset(Loader<StorageStatsSource.AppStorageStats> loader) {
     }
+
 }

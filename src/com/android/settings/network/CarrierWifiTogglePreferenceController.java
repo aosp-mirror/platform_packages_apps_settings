@@ -22,7 +22,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.wifitrackerlib.WifiPickerTracker;
@@ -38,6 +38,7 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
     protected static final String CARRIER_WIFI_NETWORK_PREF_KEY = "carrier_wifi_network";
 
     protected final Context mContext;
+    protected boolean mIsProviderModelEnabled;
     protected int mSubId;
     protected WifiPickerTrackerHelper mWifiPickerTrackerHelper;
     protected boolean mIsCarrierProvisionWifiEnabled;
@@ -47,6 +48,7 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
             String preferenceKey) {
         super(context, preferenceKey);
         mContext = context;
+        mIsProviderModelEnabled = Utils.isProviderModelEnabled(context);
     }
 
     /** Initialize related properties */
@@ -59,12 +61,15 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mIsProviderModelEnabled) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
         return mIsCarrierProvisionWifiEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
     public boolean isChecked() {
-        return mWifiPickerTrackerHelper.isCarrierNetworkEnabled();
+        return mWifiPickerTrackerHelper.isCarrierNetworkEnabled(mSubId);
     }
 
     @Override
@@ -81,11 +86,6 @@ public class CarrierWifiTogglePreferenceController extends TogglePreferenceContr
         super.displayPreference(screen);
         mCarrierNetworkPreference = screen.findPreference(CARRIER_WIFI_NETWORK_PREF_KEY);
         updateCarrierNetworkPreference();
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_network;
     }
 
     @Override

@@ -24,7 +24,6 @@ import android.content.IntentFilter;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
-import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.util.ArraySet;
 import android.util.Log;
@@ -63,23 +62,23 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     int readySimsCount = getReadySimsCount();
-                    int activePortsCount = getActivePortsCount();
-                    // If the number of ready SIM count and active ports equal to the number of SIMs
+                    int activeSlotsCount = getActiveSlotsCount();
+                    // If the number of ready SIM count and active slots equal to the number of SIMs
                     // need to be activated, the device is successfully switched to multiple active
                     // SIM mode.
-                    if (readySimsCount == mNumOfActiveSim && activePortsCount == mNumOfActiveSim) {
+                    if (readySimsCount == mNumOfActiveSim && activeSlotsCount == mNumOfActiveSim) {
                         Log.i(
                                 TAG,
-                                String.format("%d ports are active and ready.", mNumOfActiveSim));
+                                String.format("%d slots are active and ready.", mNumOfActiveSim));
                         mSimCardStateChangedLatch.countDown();
                         return;
                     }
                     Log.i(
                             TAG,
                             String.format(
-                                    "%d ports are active and %d SIMs are ready. Keep waiting until"
+                                    "%d slots are active and %d SIMs are ready. Keep waiting until"
                                             + " timeout.",
-                                    activePortsCount, readySimsCount));
+                                    activeSlotsCount, readySimsCount));
                 }
             };
 
@@ -163,22 +162,19 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
         return readyCardsCount;
     }
 
-    // Get active port count from {@code TelephonyManager#getUiccSlotsInfo}.
-    private int getActivePortsCount() {
+    // Get active slots count from {@code TelephonyManager#getUiccSlotsInfo}.
+    private int getActiveSlotsCount() {
         UiccSlotInfo[] slotsInfo = mTelephonyManager.getUiccSlotsInfo();
         if (slotsInfo == null) {
             return 0;
         }
-        int activePorts = 0;
+        int activeSlots = 0;
         for (UiccSlotInfo slotInfo : slotsInfo) {
-            for (UiccPortInfo portInfo : slotInfo.getPorts()) {
-                if (slotInfo != null && portInfo.isActive()) {
-                    activePorts++;
-                }
+            if (slotInfo != null && slotInfo.getIsActive()) {
+                activeSlots++;
             }
-
         }
-        return activePorts;
+        return activeSlots;
     }
 
     /** Returns a list of active removable logical slot ids. */
@@ -189,10 +185,8 @@ public class EnableMultiSimSidecar extends AsyncTaskSidecar<Void, Boolean> {
         }
         Set<Integer> activeRemovableLogicalSlotIds = new ArraySet<>();
         for (UiccSlotInfo info : infos) {
-            for (UiccPortInfo portInfo :info.getPorts()) {
-                if (info != null && portInfo.isActive() && info.isRemovable()) {
-                    activeRemovableLogicalSlotIds.add(portInfo.getLogicalSlotIndex());
-                }
+            if (info != null && info.getIsActive() && info.isRemovable()) {
+                activeRemovableLogicalSlotIds.add(info.getLogicalSlotIdx());
             }
         }
         return activeRemovableLogicalSlotIds;

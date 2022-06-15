@@ -41,19 +41,16 @@ public class ParentalControlsUtils {
 
     /**
      * Public version that enables test paths, see
-     * {@link android.hardware.biometrics.ParentalControlsUtilsInternal#getTestComponentName}
+     * {@link android.hardware.biometrics.ParentalControlsUtilsInternal#isTestModeEnabled(Context)}
      * @return non-null EnforcedAdmin if parental consent is required
      */
     public static RestrictedLockUtils.EnforcedAdmin parentConsentRequired(@NonNull Context context,
             @BiometricAuthenticator.Modality int modality) {
 
-        final int userId = UserHandle.myUserId();
-        final UserHandle userHandle = new UserHandle(userId);
-        final ComponentName testComponentName = ParentalControlsUtilsInternal.getTestComponentName(
-                context, userId);
-        if (testComponentName != null) {
+        final UserHandle userHandle = new UserHandle(UserHandle.myUserId());
+        if (ParentalControlsUtilsInternal.isTestModeEnabled(context)) {
             Log.d(TAG, "Requiring consent for test flow");
-            return new RestrictedLockUtils.EnforcedAdmin(testComponentName,
+            return new RestrictedLockUtils.EnforcedAdmin(null /* ComponentName */,
                     UserManager.DISALLOW_BIOMETRIC, userHandle);
         }
 

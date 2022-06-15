@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 
 import com.android.settingslib.net.DataUsageController;
@@ -59,9 +58,8 @@ public class DataUsagePreferenceTest {
     public void setTemplate_noDataUsage_shouldDisablePreference() {
         doReturn(0L).when(mController).getHistoricalUsageLevel(any(NetworkTemplate.class));
 
-        mPreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
-                .setMeteredness(NetworkStats.METERED_YES).build(),
-                5 /* subId */, null /* services */);
+        mPreference.setTemplate(
+                NetworkTemplate.buildTemplateMobileWildcard(), 5 /* subId */, null /* services */);
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setIntent(null);
@@ -71,9 +69,8 @@ public class DataUsagePreferenceTest {
     public void setTemplate_hasDataUsage_shouldNotDisablePreference() {
         doReturn(200L).when(mController).getHistoricalUsageLevel(any(NetworkTemplate.class));
 
-        mPreference.setTemplate(new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE)
-                .setMeteredness(NetworkStats.METERED_YES).build(),
-                5 /* subId */, null /* services */);
+        mPreference.setTemplate(
+                NetworkTemplate.buildTemplateMobileWildcard(), 5 /* subId */, null /* services */);
 
         verify(mPreference, never()).setEnabled(false);
         verify(mPreference).setIntent(any(Intent.class));

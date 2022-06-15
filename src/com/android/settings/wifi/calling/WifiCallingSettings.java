@@ -30,12 +30,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.network.ActiveSubscriptionsListener;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
@@ -53,8 +54,7 @@ import java.util.List;
  * "Wi-Fi Calling settings" screen. This is the container fragment which holds
  * {@link WifiCallingSettingsForSub} fragments.
  */
-public class WifiCallingSettings extends SettingsPreferenceFragment
-        implements HelpResourceProvider {
+public class WifiCallingSettings extends InstrumentedFragment implements HelpResourceProvider {
     private static final String TAG = "WifiCallingSettings";
     private int mConstructionSubId;
     private List<SubscriptionInfo> mSil;
@@ -317,7 +317,17 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         }
 
         // close this fragment
-        finishFragment();
+        finish();
+    }
+
+    protected void finish() {
+        FragmentActivity activity = getActivity();
+        if (activity == null) return;
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            activity.finish();
+        }
     }
 
     protected int [] subscriptionIdList(List<SubscriptionInfo> subInfoList) {

@@ -51,7 +51,9 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
     private final ContentResolver mContentResolver;
     @VisibleForTesting
     final ContentObserver mContentObserver;
-    private SeekBarPreference mPreference;
+
+    @VisibleForTesting
+    SeekBarPreference mPreference;
 
     public FloatingMenuTransparencyPreferenceController(Context context,
             String preferenceKey) {
@@ -81,7 +83,6 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
         mPreference.setMin(getMin());
         mPreference.setHapticFeedbackMode(SeekBarPreference.HAPTIC_FEEDBACK_MODE_ON_ENDS);
 
-        updateAvailabilityStatus();
         updateState(mPreference);
     }
 

@@ -40,7 +40,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settingslib.PrimarySwitchPreference;
+import com.android.settings.widget.PrimarySwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -131,11 +131,9 @@ public class AllInOneTetherPreferenceControllerTest {
 
     @Before
     public void setUp() {
-        mContext = spy(ApplicationProvider.getApplicationContext());
+        mContext = ApplicationProvider.getApplicationContext();
         MockitoAnnotations.initMocks(this);
-        doReturn(null).when(mContext)
-                .getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mController = spy(new AllInOneTetherPreferenceController(mContext, /* key= */ "test"));
+        mController = spy(AllInOneTetherPreferenceController.class);
         ReflectionHelpers.setField(mController, "mContext", mContext);
         ReflectionHelpers.setField(mController, "mBluetoothAdapter", mBluetoothAdapter);
         ReflectionHelpers.setField(mController, "mPreferenceKey", PREF_KEY);

@@ -67,7 +67,6 @@ public class LockscreenDashboardFragmentTest {
                 .thenReturn(mLockPatternUtils);
         mContext = RuntimeEnvironment.application;
         mTestFragment = spy(new TestFragment());
-        doReturn(mContext).when(mTestFragment).getContext();
     }
 
     @Test
@@ -130,14 +129,6 @@ public class LockscreenDashboardFragmentTest {
         assertThat(LockscreenDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext))
                 .doesNotContain("security_lockscreen_settings_screen");
-    }
-
-    @Test
-    public void controlsSettings() {
-        mTestFragment.onAttach(mContext);
-        assertThat(mTestFragment.mControlsContentObserver).isNotNull();
-        mTestFragment.onDetach();
-        assertThat(mTestFragment.mControlsContentObserver).isNull();
     }
 
     public static class TestFragment extends LockscreenDashboardFragment {

@@ -32,7 +32,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.DefaultAppInfo;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -80,8 +80,8 @@ public class RadioButtonPickerFragmentTest {
 
     @Test
     public void displaySingleOption_shouldSelectRadioButton() {
-        final SelectorWithWidgetPreference pref =
-                new SelectorWithWidgetPreference(RuntimeEnvironment.application);
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(RuntimeEnvironment.application);
         when(mScreen.getPreferenceCount()).thenReturn(1);
         when(mScreen.getPreference(0)).thenReturn(pref);
 
@@ -92,8 +92,8 @@ public class RadioButtonPickerFragmentTest {
 
     @Test
     public void clickPreference_shouldConfirm() {
-        final SelectorWithWidgetPreference pref =
-                new SelectorWithWidgetPreference(RuntimeEnvironment.application);
+        final RadioButtonPreference pref =
+                new RadioButtonPreference(RuntimeEnvironment.application);
         pref.setKey("TEST");
 
         mFragment.onRadioButtonClicked(pref);

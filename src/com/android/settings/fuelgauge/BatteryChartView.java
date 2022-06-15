@@ -57,8 +57,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
-    private static final int DEFAULT_TIMESTAMP_COUNT = 4;
-    private static final int TIMESTAMP_GAPS_COUNT = DEFAULT_TIMESTAMP_COUNT - 1;
+    private static final int DEFAULT_TIMESTAMP_COUNT = 5;
     private static final int DIVIDER_COLOR = Color.parseColor("#CDCCC5");
     private static final long UPDATE_STATE_DELAYED_TIME = 500L;
 
@@ -79,14 +78,12 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private boolean mIsSlotsClickabled;
     private String[] mPercentages = getPercentages();
 
-    @VisibleForTesting int mHoveredIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting int mSelectedIndex = SELECTED_INDEX_INVALID;
+    @VisibleForTesting int mSelectedIndex;
     @VisibleForTesting String[] mTimestamps;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
     private int mTrapezoidSolidColor;
-    private int mTrapezoidHoverColor;
     // For drawing the percentage information.
     private int mTextPadding;
     private final Rect mIndent = new Rect();
@@ -94,7 +91,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         new Rect[] {new Rect(), new Rect(), new Rect()};
     // For drawing the timestamp information.
     private final Rect[] mTimestampsBounds =
-        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
+        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect(), new Rect()};
 
     @VisibleForTesting
     Handler mHandler = new Handler();
@@ -110,7 +107,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     Paint mTrapezoidCurvePaint = null;
     private TrapezoidSlot[] mTrapezoidSlots;
     // Records the location to calculate selected index.
-    private float mTouchUpEventX = Float.MIN_VALUE;
+    private MotionEvent mTouchUpEvent;
     private BatteryChartView.OnSelectListener mOnSelectListener;
 
     public BatteryChartView(Context context) {
@@ -201,14 +198,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         if (mTimestamps == null) {
             mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
         }
-        final long timeSlotOffset =
-            DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
+        final long timeSlotOffset = DateUtils.HOUR_IN_MILLIS * 6;
         final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
         for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
             mTimestamps[index] =
                 ConvertUtils.utcToLocalTimeHour(
                     getContext(),
-                    latestTimestamp - (TIMESTAMP_GAPS_COUNT - index) * timeSlotOffset,
+                    latestTimestamp - (4 - index) * timeSlotOffset,
                     is24HourFormat);
         }
         requestLayout();
@@ -256,49 +252,21 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     public boolean onTouchEvent(MotionEvent event) {
         // Caches the location to calculate selected trapezoid index.
         final int action = event.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_UP:
-                mTouchUpEventX = event.getX();
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                mTouchUpEventX = Float.MIN_VALUE; // reset
-                break;
+        if (action == MotionEvent.ACTION_UP) {
+            mTouchUpEvent = MotionEvent.obtain(event);
+        } else if (action == MotionEvent.ACTION_CANCEL) {
+            mTouchUpEvent = null; // reset
         }
         return super.onTouchEvent(event);
     }
 
     @Override
-    public boolean onHoverEvent(MotionEvent event) {
-        final int action = event.getAction();
-        switch (action) {
-            case MotionEvent.ACTION_HOVER_ENTER:
-            case MotionEvent.ACTION_HOVER_MOVE:
-                final int trapezoidIndex = getTrapezoidIndex(event.getX());
-                if (mHoveredIndex != trapezoidIndex) {
-                    mHoveredIndex = trapezoidIndex;
-                    invalidate();
-                }
-                break;
-        }
-        return super.onHoverEvent(event);
-    }
-
-    @Override
-    public void onHoverChanged(boolean hovered) {
-        super.onHoverChanged(hovered);
-        if (!hovered) {
-            mHoveredIndex = SELECTED_INDEX_INVALID; // reset
-            invalidate();
-        }
-    }
-
-    @Override
     public void onClick(View view) {
-        if (mTouchUpEventX == Float.MIN_VALUE) {
+        if (mTouchUpEvent == null) {
             Log.w(TAG, "invalid motion event for onClick() callback");
             return;
         }
-        final int trapezoidIndex = getTrapezoidIndex(mTouchUpEventX);
+        final int trapezoidIndex = getTrapezoidIndex(mTouchUpEvent.getX());
         // Ignores the click event if the level is zero.
         if (trapezoidIndex == SELECTED_INDEX_INVALID
                 || !isValidToDraw(trapezoidIndex)) {
@@ -377,8 +345,6 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         setBackgroundColor(Color.TRANSPARENT);
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
         mTrapezoidColor = Utils.getDisabled(context, mTrapezoidSolidColor);
-        mTrapezoidHoverColor = Utils.getColorAttrDefaultColor(context,
-            com.android.internal.R.attr.colorAccentSecondaryVariant);
         // Initializes the divider line paint.
         final Resources resources = getContext().getResources();
         mDividerWidth = resources.getDimensionPixelSize(R.dimen.chartview_divider_width);
@@ -460,9 +426,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             final float[] xOffsets = new float[DEFAULT_TIMESTAMP_COUNT];
             final float baselineX = mDividerWidth * .5f;
             final float offsetX = mDividerWidth + unitWidth;
-            final int slotBarOffset = (/*total 12 bars*/ 12) / TIMESTAMP_GAPS_COUNT;
             for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
-                xOffsets[index] = baselineX + index * offsetX * slotBarOffset;
+                xOffsets[index] = baselineX + index * offsetX * 3;
             }
             drawTimestamp(canvas, xOffsets);
         }
@@ -474,15 +439,13 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mTimestamps[0],
             xOffsets[0] - mTimestampsBounds[0].left,
             getTimestampY(0), mTextPaint);
-        final int latestIndex = DEFAULT_TIMESTAMP_COUNT - 1;
         // Draws the last timestamp info.
         canvas.drawText(
-            mTimestamps[latestIndex],
-            xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
-                    - mTimestampsBounds[latestIndex].left,
-            getTimestampY(latestIndex), mTextPaint);
+            mTimestamps[4],
+            xOffsets[4] - mTimestampsBounds[4].width() - mTimestampsBounds[4].left,
+            getTimestampY(4), mTextPaint);
         // Draws the rest of timestamp info since it is located in the center.
-        for (int index = 1; index <= DEFAULT_TIMESTAMP_COUNT - 2; index++) {
+        for (int index = 1; index <= 3; index++) {
             canvas.drawText(
                 mTimestamps[index],
                 xOffsets[index] -
@@ -526,9 +489,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                     ? mTrapezoidColor
                     : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
                         ? mTrapezoidSolidColor : mTrapezoidColor;
-            final boolean isHoverState =
-                mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
-            mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
+            mTrapezoidPaint.setColor(trapezoidColor);
 
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
             final float rightTop = round(trapezoidBottom - mLevels[index + 1] * unitHeight);

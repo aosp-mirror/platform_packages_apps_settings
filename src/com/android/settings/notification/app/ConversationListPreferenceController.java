@@ -25,10 +25,8 @@ import android.provider.Settings;
 import android.service.notification.ConversationChannelWrapper;
 import android.text.TextUtils;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoBase;
@@ -40,17 +38,22 @@ import com.android.settingslib.widget.AppPreference;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class ConversationListPreferenceController extends AbstractPreferenceController {
 
-    private static final String SUMMARY_KEY_SUFFIX = "_summary";
-    protected final NotificationBackend mBackend;
-    private PreferenceGroup mPreferenceGroup;
+    private static final String KEY = "all_conversations";
 
-    public ConversationListPreferenceController(Context context, NotificationBackend backend) {
+    protected final NotificationBackend mBackend;
+
+    public ConversationListPreferenceController(Context context,
+            NotificationBackend backend) {
         super(context);
         mBackend = backend;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY;
     }
 
     @Override
@@ -58,55 +61,43 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
         return true;
     }
 
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreferenceGroup = screen.findPreference(getPreferenceKey());
-    }
-
-    /**
-     * Updates the conversation list.
-     * @return true if this controller has content to display.
-     */
-    boolean updateList(List<ConversationChannelWrapper> conversations) {
-        mPreferenceGroup.setVisible(false);
-        mPreferenceGroup.removeAll();
+    protected void populateList(List<ConversationChannelWrapper> conversations,
+            PreferenceGroup containerGroup) {
+        containerGroup.setVisible(false);
+        containerGroup.removeAll();
         if (conversations != null) {
-            populateConversations(conversations);
+            populateConversations(conversations, containerGroup);
         }
 
-        boolean hasContent = mPreferenceGroup.getPreferenceCount() != 0;
-        if (hasContent) {
+        if (containerGroup.getPreferenceCount() != 0) {
             Preference summaryPref = getSummaryPreference();
             if (summaryPref != null) {
-                summaryPref.setKey(getPreferenceKey() + SUMMARY_KEY_SUFFIX);
-                mPreferenceGroup.addPreference(summaryPref);
+                containerGroup.addPreference(summaryPref);
             }
-            mPreferenceGroup.setVisible(true);
+            containerGroup.setVisible(true);
         }
-        return hasContent;
     }
 
     abstract Preference getSummaryPreference();
 
     abstract boolean matchesFilter(ConversationChannelWrapper conversation);
 
-    @VisibleForTesting
-    void populateConversations(List<ConversationChannelWrapper> conversations) {
-        AtomicInteger order = new AtomicInteger(100);
-        conversations.stream()
-                .filter(conversation -> !conversation.getNotificationChannel().isDemoted()
-                        && matchesFilter(conversation))
-                .sorted(mConversationComparator)
-                .map(this::createConversationPref)
-                .forEachOrdered(preference -> {
-                    preference.setOrder(order.getAndIncrement());
-                    mPreferenceGroup.addPreference(preference);
-                });
+    protected void populateConversations(List<ConversationChannelWrapper> conversations,
+            PreferenceGroup containerGroup) {
+        int order = 100;
+        for (ConversationChannelWrapper conversation : conversations) {
+            if (conversation.getNotificationChannel().isDemoted()
+                    || !matchesFilter(conversation)) {
+                continue;
+            }
+            containerGroup.addPreference(createConversationPref(conversation, order++));
+        }
     }
 
-    private Preference createConversationPref(final ConversationChannelWrapper conversation) {
+    protected Preference createConversationPref(final ConversationChannelWrapper conversation,
+            int order) {
         AppPreference pref = new AppPreference(mContext);
+        pref.setOrder(order);
 
         pref.setTitle(getTitle(conversation));
         pref.setSummary(getSummary(conversation));
@@ -155,8 +146,7 @@ public abstract class ConversationListPreferenceController extends AbstractPrefe
                 .setSourceMetricsCategory(SettingsEnums.NOTIFICATION_CONVERSATION_LIST_SETTINGS);
     }
 
-    @VisibleForTesting
-    Comparator<ConversationChannelWrapper> mConversationComparator =
+    protected Comparator<ConversationChannelWrapper> mConversationComparator =
             new Comparator<ConversationChannelWrapper>() {
                 private final Collator sCollator = Collator.getInstance();
                 @Override

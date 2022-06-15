@@ -47,7 +47,6 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -109,7 +108,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testKeyguardNotSecure_shouldFinishWithSetupSkipDialogResultSkip() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -129,7 +127,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testKeyguardSecure_shouldFinishWithFingerprintResultSkip() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -149,7 +146,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testBackKeyPress_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -165,7 +161,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testBackKeyPress_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -178,7 +173,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testCancelClicked_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
 
@@ -196,7 +190,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testCancelClicked_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
 
@@ -210,7 +203,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenPresentBeforeLaunch() {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -223,7 +215,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldSetIntentDataIfLockScreenAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -234,7 +225,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testOnResultFromFindSensor_shouldNotSetIntentDataIfLockScreenNotAdded() {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
@@ -245,7 +235,6 @@ public class SetupFingerprintEnrollIntroductionTest {
     }
 
     @Test
-    @Ignore
     public void testLockPattern() {
         ShadowStorageManager.setIsFileEncryptedNativeOrEmulated(false);
 

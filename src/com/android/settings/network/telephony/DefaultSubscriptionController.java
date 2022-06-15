@@ -26,8 +26,8 @@ import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -61,14 +62,15 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
     private static final ComponentName PSTN_CONNECTION_SERVICE_COMPONENT =
             new ComponentName("com.android.phone",
                     "com.android.services.telephony.TelephonyConnectionService");
-    private boolean mIsRtlMode;
 
     public DefaultSubscriptionController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mManager = context.getSystemService(SubscriptionManager.class);
         mChangeListener = new SubscriptionsChangeListener(context, this);
-        mIsRtlMode = context.getResources().getConfiguration().getLayoutDirection()
-                == View.LAYOUT_DIRECTION_RTL;
+    }
+
+    public void init(Lifecycle lifecycle) {
+        lifecycle.addObserver(this);
     }
 
     /** @return SubscriptionInfo for the default subscription for the service, or null if there
@@ -88,7 +90,12 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        return AVAILABLE;
+        final List<SubscriptionInfo> subs = SubscriptionUtil.getActiveSubscriptions(mManager);
+        if (subs.size() > 1 || Utils.isProviderModelEnabled(mContext)) {
+            return AVAILABLE;
+        } else {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -107,16 +114,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         updateEntries();
-    }
-
-    @Override
-    protected void refreshSummary(Preference preference) {
-        // Currently, cannot use ListPreference.setSummary() when the summary contains user
-        // generated string, because ListPreference.getSummary() is using String.format() to format
-        // the summary when the summary is set by ListPreference.setSummary().
-        if (preference != null) {
-            preference.setSummaryProvider(pref -> getSummary());
-        }
     }
 
     @Override
@@ -161,10 +158,10 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
         final ArrayList<CharSequence> displayNames = new ArrayList<>();
         final ArrayList<CharSequence> subscriptionIds = new ArrayList<>();
 
-        if (subs.size() == 1) {
+        if (Utils.isProviderModelEnabled(mContext) && subs.size() == 1) {
             mPreference.setEnabled(false);
-            mPreference.setSummaryProvider(pref ->
-                    SubscriptionUtil.getUniqueSubscriptionDisplayName(subs.get(0), mContext));
+            mPreference.setSummary(SubscriptionUtil.getUniqueSubscriptionDisplayName(
+                    subs.get(0), mContext));
             return;
         }
 
@@ -189,7 +186,6 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             subscriptionIds.add(Integer.toString(SubscriptionManager.INVALID_SUBSCRIPTION_ID));
         }
 
-        mPreference.setEnabled(true);
         mPreference.setEntries(displayNames.toArray(new CharSequence[0]));
         mPreference.setEntryValues(subscriptionIds.toArray(new CharSequence[0]));
 
@@ -288,9 +284,5 @@ public abstract class DefaultSubscriptionController extends TelephonyBasePrefere
             updateEntries();
             refreshSummary(mPreference);
         }
-    }
-
-    boolean isRtlMode() {
-        return mIsRtlMode;
     }
 }

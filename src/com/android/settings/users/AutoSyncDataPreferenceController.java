@@ -30,7 +30,6 @@ import android.util.Log;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
@@ -46,11 +45,11 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
     private static final String KEY_AUTO_SYNC_ACCOUNT = "auto_sync_account_data";
 
     protected final UserManager mUserManager;
-    private final PreferenceFragmentCompat mParentFragment;
+    private final Fragment mParentFragment;
 
     protected UserHandle mUserHandle;
 
-    public AutoSyncDataPreferenceController(Context context, PreferenceFragmentCompat parent) {
+    public AutoSyncDataPreferenceController(Context context, Fragment parent) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mParentFragment = parent;
@@ -73,9 +72,8 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
             if (ActivityManager.isUserAMonkey()) {
                 Log.d(TAG, "ignoring monkey's attempt to flip sync state");
             } else {
-                ConfirmAutoSyncChangeFragment
-                        .newInstance(checked, mUserHandle.getIdentifier(), getPreferenceKey())
-                        .show(mParentFragment);
+                ConfirmAutoSyncChangeFragment.show(mParentFragment, checked, mUserHandle,
+                        switchPreference);
             }
             return true;
         }
@@ -99,33 +97,34 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
      */
     public static class ConfirmAutoSyncChangeFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {
-        private static final String ARG_ENABLING = "enabling";
-        private static final String ARG_USER_ID = "userId";
-        private static final String ARG_KEY = "key";
+        private static final String SAVE_ENABLING = "enabling";
+        private static final String SAVE_USER_HANDLE = "userHandle";
+        boolean mEnabling;
+        UserHandle mUserHandle;
+        SwitchPreference mPreference;
 
-        static ConfirmAutoSyncChangeFragment newInstance(boolean enabling, int userId, String key) {
-            ConfirmAutoSyncChangeFragment dialogFragment = new ConfirmAutoSyncChangeFragment();
-            Bundle arguments = new Bundle();
-            arguments.putBoolean(ARG_ENABLING, enabling);
-            arguments.putInt(ARG_USER_ID, userId);
-            arguments.putString(ARG_KEY, key);
-            dialogFragment.setArguments(arguments);
-            return dialogFragment;
-        }
+        public static void show(Fragment parent, boolean enabling, UserHandle userHandle,
+                SwitchPreference preference) {
+            if (!parent.isAdded()) return;
 
-        void show(PreferenceFragmentCompat parent) {
-            if (!parent.isAdded()) {
-                return;
-            }
-            setTargetFragment(parent, 0);
-            show(parent.getParentFragmentManager(), TAG_CONFIRM_AUTO_SYNC_CHANGE);
+            final ConfirmAutoSyncChangeFragment dialog = new ConfirmAutoSyncChangeFragment();
+            dialog.mEnabling = enabling;
+            dialog.mUserHandle = userHandle;
+            dialog.setTargetFragment(parent, 0);
+            dialog.mPreference = preference;
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_AUTO_SYNC_CHANGE);
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();
+            if (savedInstanceState != null) {
+                mEnabling = savedInstanceState.getBoolean(SAVE_ENABLING);
+                mUserHandle = (UserHandle) savedInstanceState.getParcelable(SAVE_USER_HANDLE);
+            }
+
             final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            if (!requireArguments().getBoolean(ARG_ENABLING)) {
+            if (!mEnabling) {
                 builder.setTitle(R.string.data_usage_auto_sync_off_dialog_title);
                 builder.setMessage(R.string.data_usage_auto_sync_off_dialog);
             } else {
@@ -140,6 +139,13 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
         }
 
         @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            outState.putBoolean(SAVE_ENABLING, mEnabling);
+            outState.putParcelable(SAVE_USER_HANDLE, mUserHandle);
+        }
+
+        @Override
         public int getMetricsCategory() {
             return SettingsEnums.DIALOG_CONFIRM_AUTO_SYNC_CHANGE;
         }
@@ -147,18 +153,10 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
         @Override
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
-                Bundle arguments = requireArguments();
-                boolean enabling = arguments.getBoolean(ARG_ENABLING);
-                ContentResolver.setMasterSyncAutomaticallyAsUser(enabling,
-                        arguments.getInt(ARG_USER_ID));
-                Fragment targetFragment = getTargetFragment();
-                if (targetFragment instanceof PreferenceFragmentCompat) {
-                    Preference preference =
-                            ((PreferenceFragmentCompat) targetFragment).findPreference(
-                                    arguments.getString(ARG_KEY));
-                    if (preference instanceof SwitchPreference) {
-                        ((SwitchPreference) preference).setChecked(enabling);
-                    }
+                ContentResolver.setMasterSyncAutomaticallyAsUser(mEnabling,
+                        mUserHandle.getIdentifier());
+                if (mPreference != null) {
+                    mPreference.setChecked(mEnabling);
                 }
             }
         }

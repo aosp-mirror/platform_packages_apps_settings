@@ -18,15 +18,16 @@ package com.android.settings.users;
 import android.content.Context;
 import android.os.UserHandle;
 
-import androidx.preference.PreferenceFragmentCompat;
+import androidx.fragment.app.Fragment;
 
 import com.android.settings.Utils;
 
 public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPreferenceController {
 
+    private static final String TAG = "AutoSyncWorkData";
     private static final String KEY_AUTO_SYNC_WORK_ACCOUNT = "auto_sync_work_account_data";
 
-    public AutoSyncWorkDataPreferenceController(Context context, PreferenceFragmentCompat parent) {
+    public AutoSyncWorkDataPreferenceController(Context context, Fragment parent) {
         super(context, parent);
         mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
     }

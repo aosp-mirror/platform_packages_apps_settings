@@ -92,10 +92,7 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
         mContext.unregisterReceiver(mReceiver);
     }
 
-    /**
-     * Get the current location enable state, and update listeners
-     */
-    public void refreshLocationMode() {
+    void refreshLocationMode() {
         final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
         if (Log.isLoggable(TAG, Log.INFO)) {
@@ -106,10 +103,7 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
         }
     }
 
-    /**
-     * Set the device's location enable state
-     */
-    public void setLocationEnabled(boolean enabled) {
+    void setLocationEnabled(boolean enabled) {
         final int currentMode = Settings.Secure.getInt(mContext.getContentResolver(),
             Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
 
@@ -129,10 +123,7 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
         refreshLocationMode();
     }
 
-    /**
-     * Checks if location is enabled, based on mode and restrictions.
-     */
-    public boolean isEnabled(int mode) {
+    boolean isEnabled(int mode) {
         return mode != Settings.Secure.LOCATION_MODE_OFF && !isRestricted();
     }
 
@@ -141,16 +132,13 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
      *
      * @return true if device policy has put a location access lock-down on the managed profile
      */
-    public boolean isManagedProfileRestrictedByBase() {
+    boolean isManagedProfileRestrictedByBase() {
         final UserHandle managedProfile = Utils.getManagedProfile(mUserManager);
         return managedProfile != null
                 && hasShareLocationRestriction(managedProfile.getIdentifier());
     }
 
-    /**
-     * Gets the admin enforcement for location for the current user
-     */
-    public RestrictedLockUtils.EnforcedAdmin getShareLocationEnforcedAdmin(int userId) {
+    RestrictedLockUtils.EnforcedAdmin getShareLocationEnforcedAdmin(int userId) {
         RestrictedLockUtils.EnforcedAdmin admin =  checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_SHARE_LOCATION, userId);
 
@@ -161,10 +149,7 @@ public class LocationEnabler implements LifecycleObserver, OnStart, OnStop {
         return admin;
     }
 
-    /**
-     * Check if the current user has a location restriction
-     */
-    public boolean hasShareLocationRestriction(int userId) {
+    boolean hasShareLocationRestriction(int userId) {
         return RestrictedLockUtilsInternal.hasBaseUserRestriction(
                 mContext, UserManager.DISALLOW_SHARE_LOCATION, userId);
     }

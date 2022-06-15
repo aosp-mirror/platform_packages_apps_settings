@@ -18,11 +18,8 @@ package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -49,8 +46,6 @@ public abstract class CaCertsPreferenceControllerTestBase {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        doReturn(mock(DevicePolicyManager.class)).when(mContext)
-                .getSystemService(Context.DEVICE_POLICY_SERVICE);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = createController();
     }

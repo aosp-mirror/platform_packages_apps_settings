@@ -74,7 +74,7 @@ public class SpecialAppAccessPreferenceController extends BasePreferenceControll
 
     @Override
     public void onStart() {
-        mDataUsageBridge.resume(true /* forceLoadAllApps */);
+        mDataUsageBridge.resume();
     }
 
     @Override

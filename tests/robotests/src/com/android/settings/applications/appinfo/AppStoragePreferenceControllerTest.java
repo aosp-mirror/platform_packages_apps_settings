@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +32,6 @@ import android.os.Bundle;
 
 import androidx.loader.app.LoaderManager;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
 
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -52,8 +52,6 @@ public class AppStoragePreferenceControllerTest {
     private LoaderManager mLoaderManager;
     @Mock
     private AppInfoDashboardFragment mFragment;
-    @Mock
-    private PreferenceScreen mScreen;
 
     private Context mContext;
     private AppStoragePreferenceController mController;
@@ -91,48 +89,10 @@ public class AppStoragePreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_noEntry_preferenceShouldNotEnable() {
-        mController.mAppEntry = null;
-        Preference preference = new Preference(mContext);
-        when(mScreen.findPreference(any())).thenReturn(preference);
-
-        mController.displayPreference(mScreen);
-
-        assertThat(preference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void displayPreference_appIsInstalled_preferenceShouldEnable() {
+    public void updateState_shouldUpdatePreferenceSummary() {
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = new ApplicationInfo();
-        appEntry.info.flags = ApplicationInfo.FLAG_INSTALLED;
-        mController.mAppEntry = appEntry;
-        Preference preference = new Preference(mContext);
-        when(mScreen.findPreference(any())).thenReturn(preference);
-
-        mController.displayPreference(mScreen);
-
-        assertThat(preference.isEnabled()).isTrue();
-    }
-
-    @Test
-    public void displayPreference_appIsNotInstalled_preferenceShouldDisable() {
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = new ApplicationInfo();
-        mController.mAppEntry = appEntry;
-        Preference preference = new Preference(mContext);
-        when(mScreen.findPreference(any())).thenReturn(preference);
-
-        mController.displayPreference(mScreen);
-
-        assertThat(preference.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void updateState_hasAppEntry_shouldUpdatePreferenceSummary() {
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = new ApplicationInfo();
-        mController.mAppEntry = appEntry;
+        when(mFragment.getAppEntry()).thenReturn(appEntry);
         Preference preference = mock(Preference.class);
 
         mController.updateState(preference);
@@ -142,12 +102,12 @@ public class AppStoragePreferenceControllerTest {
 
     @Test
     public void updateState_entryIsNull_shouldNotUpdatePreferenceSummary() {
-        mController.mAppEntry = null;
-        Preference preference = new Preference(mContext);
+        when(mFragment.getAppEntry()).thenReturn(null);
+        Preference preference = mock(Preference.class);
 
         mController.updateState(preference);
 
-        assertThat(preference.getSummary()).isEqualTo("");
+        verify(preference, never()).setSummary(any());
     }
 
     @Test

@@ -16,12 +16,18 @@
 
 package com.android.settings.development;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.provider.Settings;
+import android.widget.Toast;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /**
@@ -29,6 +35,8 @@ import com.android.settings.core.BasePreferenceController;
  * fragment.
  */
 public class AdbDeviceNamePreferenceController extends BasePreferenceController {
+    private static final String TAG = "AdbDeviceNamePrefCtrl";
+
     private String mDeviceName;
 
     public AdbDeviceNamePreferenceController(Context context, String key) {
@@ -55,5 +63,16 @@ public class AdbDeviceNamePreferenceController extends BasePreferenceController 
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
+    }
+
+    @Override
+    public void copy() {
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        clipboard.setPrimaryClip(ClipData.newPlainText("text", mDeviceName));
+
+        final String toast = mContext.getString(R.string.copyable_slice_toast,
+                mDeviceName);
+        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
     }
 }

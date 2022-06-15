@@ -17,7 +17,6 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -29,7 +28,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Drawable.ConstantState;
 import android.os.BatteryConsumer;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -43,10 +41,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
-import org.robolectric.annotation.Resetter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,7 +48,6 @@ import java.util.List;
 import java.util.Locale;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {BatteryDiffEntryTest.ShadowUserHandle.class})
 public final class BatteryDiffEntryTest {
 
     private Context mContext;
@@ -67,12 +60,10 @@ public final class BatteryDiffEntryTest {
     @Mock private Drawable mockBadgedDrawable;
     @Mock private BatteryHistEntry mBatteryHistEntry;
     @Mock private PackageInfo mockPackageInfo;
-    @Mock private ConstantState mockConstantState;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowUserHandle.reset();
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
@@ -140,8 +131,8 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.mName).isEqualTo(expectedName);
-        assertThat(nameAndIcon.mIconId).isEqualTo(R.drawable.ic_settings_aod);
+        assertThat(nameAndIcon.name).isEqualTo(expectedName);
+        assertThat(nameAndIcon.iconId).isEqualTo(R.drawable.ic_settings_aod);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isTrue();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
@@ -166,8 +157,8 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.mName).isEqualTo(expectedName);
-        assertThat(nameAndIcon.mIconId).isEqualTo(0);
+        assertThat(nameAndIcon.name).isEqualTo(expectedName);
+        assertThat(nameAndIcon.iconId).isEqualTo(0);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isTrue();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isTrue();
@@ -195,7 +186,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.mName).isEqualTo(expectedAppLabel);
+        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
         // Verifies the restrictable flag in the cache.
         assertThat(entry.mValidForRestriction).isFalse();
         assertThat(BatteryDiffEntry.sValidForRestriction.get(entry.getKey())).isFalse();
@@ -215,7 +206,7 @@ public final class BatteryDiffEntryTest {
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.mName).isEqualTo(expectedAppLabel);
+        assertThat(nameAndIcon.name).isEqualTo(expectedAppLabel);
     }
 
     @Test
@@ -238,7 +229,6 @@ public final class BatteryDiffEntryTest {
         final ContentValues values = getContentValuesWithType(
             ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
-        mockConstantState(mockDrawable);
 
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, batteryHistEntry);
 
@@ -249,32 +239,20 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testGetAppIcon_uidConsumerForNonOwner_returnDefaultActivityIconWithBadge()
-            throws Exception {
-        ShadowUserHandle.setUid(10);
-        final BatteryDiffEntry entry = createBatteryDiffEntry(mockDrawable);
-        mockConstantState(mockDrawable);
-        mockConstantState(mockBadgedDrawable);
-        doReturn(mockBadgedDrawable).when(mockUserManager)
-            .getBadgedIconForUser(eq(mockDrawable), any());
-
-        entry.mAppIcon = null;
-        assertThat(entry.getAppIcon()).isEqualTo(mockBadgedDrawable);
-    }
-
-    @Test
     public void testGetAppIcon_uidConsumerWithNullIcon_returnDefaultActivityIcon()
             throws Exception {
         final BatteryDiffEntry entry = createBatteryDiffEntry(mockDrawable);
-        mockConstantState(mockDrawable);
+        final int userId = UserHandle.getUserId(1001);
+        doReturn(mockBadgedDrawable).when(mockUserManager)
+            .getBadgedIconForUser(mockDrawable, new UserHandle(userId));
 
         entry.mAppIcon = null;
-        assertThat(entry.getAppIcon()).isEqualTo(mockDrawable);
+        assertThat(entry.getAppIcon()).isEqualTo(mockBadgedDrawable);
         assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
         // Verifies the app label in the cache.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry.getKey());
-        assertThat(nameAndIcon.mIcon).isEqualTo(mockDrawable);
+        assertThat(nameAndIcon.icon).isEqualTo(mockBadgedDrawable);
     }
 
     @Test
@@ -294,22 +272,24 @@ public final class BatteryDiffEntryTest {
     @Test
     public void testClearCache_switchLocale_clearCacheIconAndLabel() throws Exception {
         final int userId = UserHandle.getUserId(1001);
+        doReturn(mockBadgedDrawable).when(mockUserManager)
+            .getBadgedIconForUser(mockDrawable, new UserHandle(userId));
+        doReturn(mockDrawable2).when(mockUserManager)
+            .getBadgedIconForUser(mockDrawable2, new UserHandle(userId));
         Locale.setDefault(new Locale("en_US"));
         final BatteryDiffEntry entry1 = createBatteryDiffEntry(mockDrawable);
-        mockConstantState(mockDrawable);
-        assertThat(entry1.getAppIcon()).isEqualTo(mockDrawable);
+        assertThat(entry1.getAppIcon()).isEqualTo(mockBadgedDrawable);
         // Switch the locale into another one.
         Locale.setDefault(new Locale("zh_TW"));
 
         final BatteryDiffEntry entry2 = createBatteryDiffEntry(mockDrawable2);
 
         // We should get new drawable without caching.
-        mockConstantState(mockDrawable2);
         assertThat(entry2.getAppIcon()).isEqualTo(mockDrawable2);
         // Verifies the cache is updated into the new drawable.
         final BatteryEntry.NameAndIcon nameAndIcon =
             BatteryDiffEntry.sResourceCache.get(entry2.getKey());
-        assertThat(nameAndIcon.mIcon).isEqualTo(mockDrawable2);
+        assertThat(nameAndIcon.icon).isEqualTo(mockDrawable2);
     }
 
     @Test
@@ -349,29 +329,11 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
-    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnFalse() {
+    public void testIsSystemEntry_uidBatteryWithSystemProcess_returnTrue() {
         final BatteryDiffEntry entry =
             createBatteryDiffEntry(
                 ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
                 /*uid=*/ 1230, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isFalse();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithTetheringProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-            createBatteryDiffEntry(
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*uid=*/ BatteryUtils.UID_TETHERING, /*isHidden=*/ false);
-        assertThat(entry.isSystemEntry()).isTrue();
-    }
-
-    @Test
-    public void testIsSystemEntry_uidBatteryWithRemovedAppsProcess_returnTrue() {
-        final BatteryDiffEntry entry =
-            createBatteryDiffEntry(
-                ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
-                /*uid=*/ BatteryUtils.UID_REMOVED_APPS, /*isHidden=*/ false);
         assertThat(entry.isSystemEntry()).isTrue();
     }
 
@@ -477,35 +439,5 @@ public final class BatteryDiffEntryTest {
         doReturn(new String[] {"com.a.b.c"}).when(mockPackageManager)
             .getPackagesForUid(1001);
         return createBatteryDiffEntry(10, batteryHistEntry);
-    }
-
-    private void mockConstantState(Drawable drawable) {
-        doReturn(mockConstantState).when(drawable).getConstantState();
-        doReturn(drawable).when(mockConstantState).newDrawable();
-    }
-
-    @Implements(UserHandle.class)
-    public static class ShadowUserHandle {
-        // Sets the default as thte OWNER role.
-        private static int sUid = 0;
-
-        public static void setUid(int uid) {
-            sUid = uid;
-        }
-
-        @Implementation
-        public static int myUserId() {
-            return sUid;
-        }
-
-        @Implementation
-        public static int getUserId(int userId) {
-            return sUid;
-        }
-
-        @Resetter
-        public static void reset() {
-            sUid = 0;
-        }
     }
 }

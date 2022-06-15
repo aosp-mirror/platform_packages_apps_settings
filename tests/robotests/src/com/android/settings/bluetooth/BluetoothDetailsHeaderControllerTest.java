@@ -37,7 +37,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -47,7 +46,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 @Config(shadows = {ShadowEntityHeaderController.class, ShadowDeviceConfig.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
 

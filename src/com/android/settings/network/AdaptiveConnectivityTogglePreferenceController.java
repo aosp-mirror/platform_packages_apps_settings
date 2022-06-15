@@ -22,7 +22,6 @@ import android.provider.Settings;
 
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.widget.SettingsMainSwitchPreferenceController;
 
 /**
@@ -62,10 +61,5 @@ public class AdaptiveConnectivityTogglePreferenceController extends
                 isChecked ? 1 : 0);
         mWifiManager.setWifiScoringEnabled(isChecked);
         return true;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_network;
     }
 }

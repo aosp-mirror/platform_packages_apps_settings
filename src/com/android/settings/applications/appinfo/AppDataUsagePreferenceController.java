@@ -17,10 +17,8 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
-import android.net.NetworkStats;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
-import android.os.Process;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 
@@ -36,7 +34,6 @@ import com.android.settings.Utils;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageUtils;
 import com.android.settingslib.AppItem;
-import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -63,7 +60,6 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference.setEnabled(AppUtils.isAppInstalled(mAppEntry));
     }
 
     @Override
@@ -92,19 +88,11 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
     @Override
     public Loader<List<NetworkCycleDataForUid>> onCreateLoader(int id, Bundle args) {
         final NetworkTemplate template = getTemplate(mContext);
-        final int uid = mParent.getAppEntry().info.uid;
-
-        final NetworkCycleDataForUidLoader.Builder builder =
-                NetworkCycleDataForUidLoader.builder(mContext);
-        builder.setRetrieveDetail(false)
-               .setNetworkTemplate(template);
-
-        builder.addUid(uid);
-        if (Process.isApplicationUid(uid)) {
-            // Also add in network usage for the app's SDK sandbox
-            builder.addUid(Process.toSdkSandboxUid(uid));
-        }
-        return builder.build();
+        return NetworkCycleDataForUidLoader.builder(mContext)
+            .addUid(mParent.getAppEntry().info.uid)
+            .setRetrieveDetail(false)
+            .setNetworkTemplate(template)
+            .build();
     }
 
     @Override
@@ -148,13 +136,13 @@ public class AppDataUsagePreferenceController extends AppInfoPreferenceControlle
 
     private static NetworkTemplate getTemplate(Context context) {
         if (DataUsageUtils.hasReadyMobileRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_MOBILE).setMeteredness(
-                    NetworkStats.METERED_YES).build();
+            return NetworkTemplate.buildTemplateMobileWildcard();
         }
         if (DataUsageUtils.hasWifiRadio(context)) {
-            return new NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build();
+            return NetworkTemplate.buildTemplateWifi(NetworkTemplate.WIFI_NETWORKID_ALL,
+                    null /* subscriberId */);
         }
-        return new NetworkTemplate.Builder(NetworkTemplate.MATCH_ETHERNET).build();
+        return NetworkTemplate.buildTemplateEthernet();
     }
 
     @VisibleForTesting

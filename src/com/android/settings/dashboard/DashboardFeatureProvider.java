@@ -47,9 +47,9 @@ public interface DashboardFeatureProvider {
      * Binds preference to data provided by tile and gets dynamic data observers.
      *
      * @param activity If tile contains intent to launch, it will be launched from this activity
-     * @param fragment The fragment that the preference will be bound to
      * @param forceRoundedIcon Whether or not injected tiles from other packages should be forced to
      * rounded icon.
+     * @param sourceMetricsCategory The context (source) from which an action is performed
      * @param pref The preference to bind data
      * @param tile The binding data
      * @param key They key for preference. If null, we will generate one from tile data
@@ -58,7 +58,7 @@ public interface DashboardFeatureProvider {
      * @return The list of dynamic data observers
      */
     List<DynamicDataObserver> bindPreferenceToTileAndGetObservers(FragmentActivity activity,
-            DashboardFragment fragment, boolean forceRoundedIcon, Preference pref, Tile tile,
+            boolean forceRoundedIcon, int sourceMetricsCategory, Preference pref, Tile tile,
             String key, int baseOrder);
 
     /**

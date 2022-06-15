@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryDefenderTip;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 
@@ -33,7 +34,7 @@ public class BatteryDefenderDetector implements BatteryTipDetector {
     @Override
     public BatteryTip detect() {
         final int state =
-                mBatteryInfo.isOverheated
+                BatteryUtils.isBatteryDefenderOn(mBatteryInfo)
                     ? BatteryTip.StateType.NEW
                     : BatteryTip.StateType.INVISIBLE;
         return new BatteryDefenderTip(state);

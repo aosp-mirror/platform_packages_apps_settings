@@ -53,10 +53,10 @@ import java.util.Locale;
 public class BatteryEntry {
 
     public static final class NameAndIcon {
-        public final String mName;
-        public final String mPackageName;
-        public final Drawable mIcon;
-        public final int mIconId;
+        public final String name;
+        public final String packageName;
+        public final Drawable icon;
+        public final int iconId;
 
         public NameAndIcon(String name, Drawable icon, int iconId) {
             this(name, /*packageName=*/ null, icon, iconId);
@@ -64,10 +64,10 @@ public class BatteryEntry {
 
         public NameAndIcon(
                 String name, String packageName, Drawable icon, int iconId) {
-            this.mName = name;
-            this.mIcon = icon;
-            this.mIconId = iconId;
-            this.mPackageName = packageName;
+            this.name = name;
+            this.icon = icon;
+            this.iconId = iconId;
+            this.packageName = packageName;
         }
     }
 
@@ -111,11 +111,11 @@ public class BatteryEntry {
                 final NameAndIcon nameAndIcon =
                     BatteryEntry.loadNameAndIcon(
                         be.mContext, be.getUid(), sHandler, be,
-                        be.mDefaultPackageName, be.mName, be.mIcon);
+                        be.mDefaultPackageName, be.name, be.icon);
                 if (nameAndIcon != null) {
-                    be.mIcon = nameAndIcon.mIcon;
-                    be.mName = nameAndIcon.mName;
-                    be.mDefaultPackageName = nameAndIcon.mPackageName;
+                    be.icon = nameAndIcon.icon;
+                    be.name = nameAndIcon.name;
+                    be.mDefaultPackageName = nameAndIcon.packageName;
                 }
             }
         }
@@ -169,27 +169,27 @@ public class BatteryEntry {
     private long mTimeInForegroundMs;
     private long mTimeInBackgroundMs;
 
-    public String mName;
-    public Drawable mIcon;
-    public int mIconId;
-    public double mPercent;
+    public String name;
+    public Drawable icon;
+    public int iconId; // For passing to the detail screen.
+    public double percent;
     private String mDefaultPackageName;
     private double mConsumedPower;
 
     static class UidToDetail {
-        String mName;
-        String mPackageName;
-        Drawable mIcon;
+        String name;
+        String packageName;
+        Drawable icon;
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um,
-            BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
+            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
             String packageName) {
         this(context, handler, um, batteryConsumer, isHidden, uid, packages, packageName, true);
     }
 
     public BatteryEntry(Context context, Handler handler, UserManager um,
-            BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
+            @NonNull BatteryConsumer batteryConsumer, boolean isHidden, int uid, String[] packages,
             String packageName, boolean loadDataInBackground) {
         sHandler = handler;
         mContext = context;
@@ -209,8 +209,7 @@ public class BatteryEntry {
                 if (packages != null && packages.length == 1) {
                     mDefaultPackageName = packages[0];
                 } else {
-                    mDefaultPackageName = isSystemUid(uid)
-                            ? PACKAGE_SYSTEM : uidBatteryConsumer.getPackageWithHighestDrain();
+                    mDefaultPackageName = uidBatteryConsumer.getPackageWithHighestDrain();
                 }
             }
             if (mDefaultPackageName != null) {
@@ -218,11 +217,11 @@ public class BatteryEntry {
                 try {
                     ApplicationInfo appInfo =
                             pm.getApplicationInfo(mDefaultPackageName, 0 /* no flags */);
-                    mName = pm.getApplicationLabel(appInfo).toString();
+                    name = pm.getApplicationLabel(appInfo).toString();
                 } catch (NameNotFoundException e) {
                     Log.d(TAG, "PackageManager failed to retrieve ApplicationInfo for: "
                             + mDefaultPackageName);
-                    mName = mDefaultPackageName;
+                    name = mDefaultPackageName;
                 }
             }
             getQuickNameIconForUid(uid, packages, loadDataInBackground);
@@ -236,10 +235,10 @@ public class BatteryEntry {
             mConsumedPower = batteryConsumer.getConsumedPower();
             final NameAndIcon nameAndIcon = getNameAndIconFromUserId(
                     context, ((UserBatteryConsumer) batteryConsumer).getUserId());
-            mIcon = nameAndIcon.mIcon;
-            mName = nameAndIcon.mName;
+            icon = nameAndIcon.icon;
+            name = nameAndIcon.name;
         } else {
-            throw new IllegalArgumentException("Unsupported: " + batteryConsumer);
+            throw new IllegalArgumentException("Unsupported battery consumer: " + batteryConsumer);
         }
     }
 
@@ -258,12 +257,11 @@ public class BatteryEntry {
         mUsageDurationMs = usageDurationMs;
         mConsumerType = ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY;
 
-        final NameAndIcon nameAndIcon =
-            getNameAndIconFromPowerComponent(context, powerComponentId);
-        mIconId = nameAndIcon.mIconId;
-        mName = nameAndIcon.mName;
-        if (mIconId != 0) {
-            mIcon = context.getDrawable(mIconId);
+        final NameAndIcon nameAndIcon = getNameAndIconFromPowerComponent(context, powerComponentId);
+        iconId = nameAndIcon.iconId;
+        name = nameAndIcon.name;
+        if (iconId != 0) {
+            icon = context.getDrawable(iconId);
         }
     }
 
@@ -276,9 +274,9 @@ public class BatteryEntry {
         mIsHidden = false;
         mPowerComponentId = powerComponentId;
 
-        mIconId = R.drawable.ic_power_system;
-        mIcon = context.getDrawable(mIconId);
-        mName = powerComponentName;
+        iconId = R.drawable.ic_power_system;
+        icon = context.getDrawable(iconId);
+        name = powerComponentName;
         mConsumedPower =
             powerComponentId == BatteryConsumer.POWER_COMPONENT_SCREEN
                 ? devicePowerMah
@@ -287,11 +285,14 @@ public class BatteryEntry {
     }
 
     public Drawable getIcon() {
-        return mIcon;
+        return icon;
     }
 
+    /**
+     * Gets the application name
+     */
     public String getLabel() {
-        return mName;
+        return name;
     }
 
     @ConvertUtils.ConsumerType
@@ -316,18 +317,18 @@ public class BatteryEntry {
         final String uidString = Integer.toString(uid);
         if (sUidCache.containsKey(uidString)) {
             UidToDetail utd = sUidCache.get(uidString);
-            mDefaultPackageName = utd.mPackageName;
-            mName = utd.mName;
-            mIcon = utd.mIcon;
+            mDefaultPackageName = utd.packageName;
+            name = utd.name;
+            icon = utd.icon;
             return;
         }
 
         if (packages == null || packages.length == 0) {
-            final NameAndIcon nameAndIcon = getNameAndIconFromUid(mContext, mName, uid);
-            mIcon = nameAndIcon.mIcon;
-            mName = nameAndIcon.mName;
+            final NameAndIcon nameAndIcon = getNameAndIconFromUid(mContext, name, uid);
+            icon = nameAndIcon.icon;
+            name = nameAndIcon.name;
         } else {
-            mIcon = mContext.getPackageManager().getDefaultActivityIcon();
+            icon = mContext.getPackageManager().getDefaultActivityIcon();
         }
 
         // Avoids post the loading icon and label in the background request.
@@ -338,7 +339,9 @@ public class BatteryEntry {
         }
     }
 
-    /** Loads the app label and icon image and stores into the cache. */
+    /**
+     * Loads the app label and icon image and stores into the cache.
+     */
     public static NameAndIcon loadNameAndIcon(
             Context context,
             int uid,
@@ -353,8 +356,13 @@ public class BatteryEntry {
         }
 
         final PackageManager pm = context.getPackageManager();
-        final String[] packages = isSystemUid(uid)
-                ? new String[] {PACKAGE_SYSTEM} : pm.getPackagesForUid(uid);
+        final String[] packages;
+        if (uid == Process.SYSTEM_UID) {
+            packages = new String[] {PACKAGE_SYSTEM};
+        } else {
+            packages = pm.getPackagesForUid(uid);
+        }
+
         if (packages != null) {
             final String[] packageLabels = new String[packages.length];
             System.arraycopy(packages, 0, packageLabels, 0, packages.length);
@@ -392,7 +400,7 @@ public class BatteryEntry {
                 // Look for an official name for this UID.
                 for (String pkgName : packages) {
                     try {
-                        final PackageInfo pi = ipm.getPackageInfo(pkgName, 0, userId);
+                        final PackageInfo pi = ipm.getPackageInfo(pkgName, 0 /* no flags */, userId);
                         if (pi == null) {
                             Log.d(TAG, "Retrieving null package info for package "
                                     + pkgName + ", user " + userId);
@@ -424,9 +432,9 @@ public class BatteryEntry {
         }
 
         UidToDetail utd = new UidToDetail();
-        utd.mName = name;
-        utd.mIcon = icon;
-        utd.mPackageName = defaultPackageName;
+        utd.name = name;
+        utd.icon = icon;
+        utd.packageName = defaultPackageName;
 
         sUidCache.put(uidString, utd);
         if (handler != null) {
@@ -435,7 +443,9 @@ public class BatteryEntry {
         return new NameAndIcon(name, defaultPackageName, icon, /*iconId=*/ 0);
     }
 
-    /** Returns a string that uniquely identifies this battery consumer. */
+    /**
+     * Returns a string that uniquely identifies this battery consumer.
+     */
     public String getKey() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return Integer.toString(mUid);
@@ -446,17 +456,23 @@ public class BatteryEntry {
         }
     }
 
-    /** Returns true if the entry is hidden from the battery usage summary list. */
+    /**
+     * Returns true if the entry is hidden from the battery usage summary list.
+     */
     public boolean isHidden() {
         return mIsHidden;
     }
 
-    /** Returns true if this entry describes an app (UID). */
+    /**
+     * Returns true if this entry describes an app (UID)
+     */
     public boolean isAppEntry() {
         return mBatteryConsumer instanceof UidBatteryConsumer;
     }
 
-    /** Returns true if this entry describes a User. */
+    /**
+     * Returns true if this entry describes a User.
+     */
     public boolean isUserEntry() {
         if (mBatteryConsumer instanceof UserBatteryConsumer) {
             return true;
@@ -479,7 +495,9 @@ public class BatteryEntry {
         return mUid;
     }
 
-    /** Returns foreground foreground time/ms that is attributed to this entry. */
+    /**
+     * Returns foreground foreground time (in milliseconds) that is attributed to this entry.
+     */
     public long getTimeInForegroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return mTimeInForegroundMs;
@@ -488,7 +506,9 @@ public class BatteryEntry {
         }
     }
 
-    /** Returns background activity time/ms that is attributed to this entry. */
+    /**
+     * Returns background activity time (in milliseconds) that is attributed to this entry.
+     */
     public long getTimeInBackgroundMs() {
         if (mBatteryConsumer instanceof UidBatteryConsumer) {
             return mTimeInBackgroundMs;
@@ -522,7 +542,9 @@ public class BatteryEntry {
         }
     }
 
-    /** Gets name and icon resource from UserBatteryConsumer userId. */
+    /**
+     * Gets name and icon resource from UserBatteryConsumer userId.
+     */
     public static NameAndIcon getNameAndIconFromUserId(
             Context context, final int userId) {
         UserManager um = context.getSystemService(UserManager.class);
@@ -540,16 +562,14 @@ public class BatteryEntry {
         return new NameAndIcon(name, icon, 0 /* iconId */);
     }
 
-    /** Gets name and icon resource from UidBatteryConsumer uid. */
+    /**
+     * Gets name and icon resource from UidBatteryConsumer uid.
+     */
     public static NameAndIcon getNameAndIconFromUid(
             Context context, String name, final int uid) {
         Drawable icon = context.getDrawable(R.drawable.ic_power_system);
         if (uid == 0) {
             name = context.getResources().getString(R.string.process_kernel_label);
-        } else if (uid == BatteryUtils.UID_REMOVED_APPS) {
-            name = context.getResources().getString(R.string.process_removed_apps);
-        } else if (uid == BatteryUtils.UID_TETHERING) {
-            name = context.getResources().getString(R.string.process_network_tethering);
         } else if ("mediaserver".equals(name)) {
             name = context.getResources().getString(R.string.process_mediaserver_label);
         } else if ("dex2oat".equals(name) || "dex2oat32".equals(name) ||
@@ -559,7 +579,9 @@ public class BatteryEntry {
         return new NameAndIcon(name, icon, 0 /* iconId */);
     }
 
-    /** Gets name and icon resource from BatteryConsumer power component ID. */
+    /**
+     * Gets name and icon resource from BatteryConsumer power component ID.
+     */
     public static NameAndIcon getNameAndIconFromPowerComponent(
             Context context, @BatteryConsumer.PowerComponent int powerComponentId) {
         String name;
@@ -603,16 +625,11 @@ public class BatteryEntry {
                 iconId = R.drawable.ic_settings_phone_idle;
                 break;
             default:
-                Log.w(TAG, "unknown attribute:" + DebugUtils.constantToString(
-                        BatteryConsumer.class, "POWER_COMPONENT_", powerComponentId));
-                name = null;
+                name = DebugUtils.constantToString(BatteryConsumer.class, "POWER_COMPONENT_",
+                        powerComponentId);
                 iconId = R.drawable.ic_power_system;
                 break;
         }
         return new NameAndIcon(name, null /* icon */, iconId);
-    }
-
-    static boolean isSystemUid(int uid) {
-        return uid == Process.SYSTEM_UID;
     }
 }

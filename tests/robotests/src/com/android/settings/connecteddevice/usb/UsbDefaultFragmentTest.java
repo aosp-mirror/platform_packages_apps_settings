@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -182,7 +183,7 @@ public class UsbDefaultFragmentTest {
 
     @Test
     public void onTetheringStarted_currentFunctionsIsRndis_setsRndisAsDefaultUsbFunctions() {
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+        mFragment.mCurrentFunctions = UsbManager.FUNCTION_RNDIS;
 
         mFragment.mOnStartTetheringCallback.onTetheringStarted();
 
@@ -191,7 +192,7 @@ public class UsbDefaultFragmentTest {
 
     @Test
     public void onTetheringStarted_currentFunctionsIsNcm_setsNcmAsDefaultUsbFunctions() {
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NCM);
+        mFragment.mCurrentFunctions = UsbManager.FUNCTION_NCM;
 
         mFragment.mOnStartTetheringCallback.onTetheringStarted();
 
@@ -203,13 +204,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedRndis_shouldSetRndis() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_RNDIS);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_RNDIS);
     }
 
@@ -217,12 +216,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedNone_shouldSetNone() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_NONE);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_NONE);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NONE);
     }
 
@@ -230,13 +228,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedMtp_shouldSetMtp() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_MTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
+                UsbManager.FUNCTION_MTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MTP);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_MTP);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MTP);
     }
 
@@ -244,13 +240,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedPtp_shouldSetPtp() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_PTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_PTP);
+                UsbManager.FUNCTION_PTP, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_PTP);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_PTP);
     }
 
@@ -258,13 +252,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedMidi_shouldSetMidi() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_MIDI, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MIDI);
+                UsbManager.FUNCTION_MIDI, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_MIDI);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_MIDI);
     }
 
@@ -272,13 +264,11 @@ public class UsbDefaultFragmentTest {
     public void onPause_receivedNcm_setsNcm() {
         mFragment.mIsStartTethering = true;
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected */ true,
-                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NCM);
+                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         mFragment.onPause();
 
-        verify(mUsbBackend).setDefaultUsbFunctions(UsbManager.FUNCTION_NCM);
+        verify(mUsbBackend, times(2)).setDefaultUsbFunctions(UsbManager.FUNCTION_NCM);
         assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NCM);
     }
 
@@ -287,11 +277,9 @@ public class UsbDefaultFragmentTest {
         when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
 
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
                 any(),
@@ -303,11 +291,9 @@ public class UsbDefaultFragmentTest {
         when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_NCM);
 
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected */ false,
-                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected */ true,
-                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mTetheringManager).startTethering(eq(TetheringManager.TETHERING_USB),
                 any(),
@@ -319,8 +305,7 @@ public class UsbDefaultFragmentTest {
         when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
 
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
                 any(),
@@ -333,35 +318,14 @@ public class UsbDefaultFragmentTest {
         when(mUsbBackend.getDefaultUsbFunctions()).thenReturn(UsbManager.FUNCTION_RNDIS);
 
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
         mFragment.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
+                UsbManager.FUNCTION_RNDIS, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
 
         verify(mTetheringManager, never()).startTethering(eq(TetheringManager.TETHERING_USB),
                 any(),
                 eq(mFragment.mOnStartTetheringCallback));
     }
-
-    @Test
-    public void onUsbConnectionChanged_usbConfiguredIsTrue_updatesCurrentFunctions() {
-        mFragment.mCurrentFunctions = UsbManager.FUNCTION_NONE;
-        mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected= */ true,
-                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ true);
-        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NCM);
-    }
-
-    @Test
-    public void onUsbConnectionChanged_usbConfiguredIsFalse_doesNotUpdateCurrentFunctions() {
-        mFragment.mCurrentFunctions = UsbManager.FUNCTION_NONE;
-        mFragment.mUsbConnectionListener.onUsbConnectionChanged(/* connected= */ true,
-                UsbManager.FUNCTION_NCM, POWER_ROLE_SINK, DATA_ROLE_DEVICE,
-                /* isUsbConfigured= */ false);
-        assertThat(mFragment.mCurrentFunctions).isEqualTo(UsbManager.FUNCTION_NONE);
-    }
-
 
     public static class TestFragment extends UsbDefaultFragment {
         public final PreferenceScreen mScreen;

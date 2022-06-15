@@ -111,8 +111,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
         mSavedDockUpdater.registerCallback();
-        mContext.registerReceiver(mReceiver, mIntentFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        mContext.registerReceiver(mReceiver, mIntentFilter);
         mBluetoothDeviceUpdater.refreshPreference();
     }
 

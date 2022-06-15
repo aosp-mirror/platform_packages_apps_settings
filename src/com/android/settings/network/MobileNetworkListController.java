@@ -16,8 +16,6 @@
 
 package com.android.settings.network;
 
-import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
-
 import static androidx.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static androidx.lifecycle.Lifecycle.Event.ON_RESUME;
 
@@ -36,6 +34,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -46,12 +45,7 @@ import java.util.Map;
  * This populates the entries on a page which lists all available mobile subscriptions. Each entry
  * has the name of the subscription with some subtext giving additional detail, and clicking on the
  * entry brings you to a details page for that network.
- *
- * @deprecated This class will be removed in Android U, use
- * {@link NetworkProviderSimsCategoryController} and
- * {@link NetworkProviderDownloadedSimsCategoryController} instead.
  */
-@Deprecated
 public class MobileNetworkListController extends AbstractPreferenceController implements
         LifecycleObserver, SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
     private static final String TAG = "MobileNetworkListCtlr";
@@ -138,8 +132,7 @@ public class MobileNetworkListController extends AbstractPreferenceController im
                         && !SubscriptionUtil.showToggleForPhysicalSim(mSubscriptionManager)) {
                     SubscriptionUtil.startToggleSubscriptionDialogActivity(mContext, subId, true);
                 } else {
-                    final Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
-                    intent.setPackage(SETTINGS_PACKAGE_NAME);
+                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
                     intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
                     mContext.startActivity(intent);
                 }

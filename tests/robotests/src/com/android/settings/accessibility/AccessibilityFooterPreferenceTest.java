@@ -71,15 +71,4 @@ public final class AccessibilityFooterPreferenceTest {
                 android.R.id.title);
         assertThat(summaryView.getMovementMethod()).isInstanceOf(MovementMethod.class);
     }
-
-    @Test
-    public void onBindViewHolder_setLinkEnabled_expectSummaryViewIsNonFocusable() {
-        mAccessibilityFooterPreference.setLinkEnabled(true);
-
-        mAccessibilityFooterPreference.onBindViewHolder(mPreferenceViewHolder);
-
-        final TextView summaryView = (TextView) mPreferenceViewHolder.findViewById(
-                android.R.id.title);
-        assertThat(summaryView.isFocusable()).isFalse();
-    }
 }

@@ -17,6 +17,8 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.BatteryOptimizeUtils.AppUsageState.RESTRICTED;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -25,7 +27,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 public class RestrictedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -53,14 +55,13 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, disable pref");
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
+            ((RadioButtonPreference) preference).setChecked(false);
             preference.setEnabled(false);
-        } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
-                == BatteryOptimizeUtils.MODE_RESTRICTED) {
+        } else if (mBatteryOptimizeUtils.getAppUsageState() == RESTRICTED) {
             Log.d(TAG, "is restricted states");
-            ((SelectorWithWidgetPreference) preference).setChecked(true);
+            ((RadioButtonPreference) preference).setChecked(true);
         } else {
-            ((SelectorWithWidgetPreference) preference).setChecked(false);
+            ((RadioButtonPreference) preference).setChecked(false);
         }
     }
 
@@ -76,6 +77,12 @@ public class RestrictedPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        return getPreferenceKey().equals(preference.getKey());
+        if (!KEY_RESTRICTED_PREF.equals(preference.getKey())) {
+            return false;
+        }
+
+        mBatteryOptimizeUtils.setAppUsageState(RESTRICTED);
+        Log.d(TAG, "Set restricted");
+        return true;
     }
 }

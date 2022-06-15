@@ -34,7 +34,6 @@ import androidx.annotation.Nullable;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.bluetooth.BluetoothCallback;
-import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.LocalMediaManager;
 import com.android.settingslib.media.MediaDevice;
@@ -127,7 +126,7 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
     }
 
     @Nullable
-    public MediaController getActiveLocalMediaController() {
+    MediaController getActiveLocalMediaController() {
         return MediaOutputUtils.getActiveLocalMediaController(mContext.getSystemService(
                 MediaSessionManager.class));
     }
@@ -157,21 +156,12 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
         return mMediaDevices;
     }
 
-    public MediaDevice getCurrentConnectedMediaDevice() {
+    MediaDevice getCurrentConnectedMediaDevice() {
         return mLocalMediaManager.getCurrentConnectedDevice();
     }
 
-    public String getPackageName() {
+    String getPackageName() {
         return mPackageName;
-    }
-
-    public boolean isDeviceBroadcasting() {
-        LocalBluetoothLeBroadcast broadcast =
-                mLocalBluetoothManager.getProfileManager().getLeAudioBroadcastProfile();
-        if (broadcast == null) {
-            return false;
-        }
-        return broadcast.isEnabled(null);
     }
 
     private class DevicesChangedBroadcastReceiver extends BroadcastReceiver {

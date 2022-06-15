@@ -37,7 +37,6 @@ import android.telephony.TelephonyManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedPreference;
 
@@ -59,7 +58,7 @@ public class ApnPreferenceControllerTest {
     @Mock
     private SubscriptionManager mSubscriptionManager;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
 
     private ApnPreferenceController mController;
     private RestrictedPreference mPreference;
@@ -72,7 +71,8 @@ public class ApnPreferenceControllerTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
+                mCarrierConfigManager);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -81,6 +81,7 @@ public class ApnPreferenceControllerTest {
         mController = new ApnPreferenceController(mContext, "mobile_data");
         mController.init(SUB_ID);
         mController.setPreference(mPreference);
+        mController.mCarrierConfigManager = mCarrierConfigManager;
         mPreference.setKey(mController.getPreferenceKey());
     }
 
@@ -89,7 +90,7 @@ public class ApnPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL, false);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -99,7 +100,7 @@ public class ApnPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_CDMA).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL, true);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -109,7 +110,7 @@ public class ApnPreferenceControllerTest {
         doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL, true);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -117,7 +118,7 @@ public class ApnPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_carrierConfigNull_returnUnavailable() {
         doReturn(TelephonyManager.PHONE_TYPE_GSM).when(mTelephonyManager).getPhoneType();
-        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(null);
+        when(mCarrierConfigManager.getConfigForSubId(SUB_ID)).thenReturn(null);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
@@ -128,7 +129,7 @@ public class ApnPreferenceControllerTest {
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putBoolean(CarrierConfigManager.KEY_APN_EXPAND_BOOL, true);
         bundle.putBoolean(CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL, true);
-        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }

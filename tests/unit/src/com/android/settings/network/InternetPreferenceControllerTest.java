@@ -101,8 +101,7 @@ public class InternetPreferenceControllerTest {
     public void onResume_shouldRegisterCallback() {
         mController.onResume();
 
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class),
-                any(int.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
         verify(mConnectivityManager).registerNetworkCallback(
                 any(NetworkRequest.class),
                 any(ConnectivityManager.NetworkCallback.class),

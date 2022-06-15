@@ -21,7 +21,6 @@ import static android.provider.Settings.Secure.DOZE_TAP_SCREEN_GESTURE;
 import android.annotation.UserIdInt;
 import android.content.Context;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 
@@ -75,10 +74,8 @@ public class TapScreenGesturePreferenceController extends GesturePreferenceContr
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        boolean success = Settings.Secure.putInt(mContext.getContentResolver(),
-                DOZE_TAP_SCREEN_GESTURE, isChecked ? 1 : 0);
-        SystemProperties.set("persist.sys.tap_gesture", isChecked ? "1" : "0");
-        return success;
+        return Settings.Secure.putInt(mContext.getContentResolver(), DOZE_TAP_SCREEN_GESTURE,
+                isChecked ? 1 : 0);
     }
 
     private AmbientDisplayConfiguration getAmbientConfig() {

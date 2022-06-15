@@ -78,7 +78,7 @@ public class ContextualCardsFragmentTest {
         mFragment.onStart();
 
         verify(mActivity).registerReceiver(eq(mFragment.mKeyEventReceiver),
-                any(IntentFilter.class), eq(Context.RECEIVER_EXPORTED));
+                any(IntentFilter.class));
         verify(mActivity).registerReceiver(eq(mFragment.mScreenOffReceiver),
                 any(IntentFilter.class));
     }

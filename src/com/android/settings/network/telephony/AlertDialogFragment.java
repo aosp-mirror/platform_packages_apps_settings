@@ -16,13 +16,12 @@
 
 package com.android.settings.network.telephony;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.FragmentActivity;
 
 /** Fragment to show an alert dialog which only has the positive button. */
 public class AlertDialogFragment extends BaseDialogFragment
@@ -38,13 +37,13 @@ public class AlertDialogFragment extends BaseDialogFragment
      * @param title
      * @param msg
      */
-    public static void show(FragmentActivity activity, String title, String msg) {
+    public static void show(Activity activity, String title, String msg) {
         AlertDialogFragment fragment = new AlertDialogFragment();
         Bundle arguments = new Bundle();
         arguments.putString(ARG_TITLE, title);
         arguments.putString(ARG_MSG, msg);
         fragment.setArguments(arguments);
-        fragment.show(activity.getSupportFragmentManager(), TAG);
+        fragment.show(activity.getFragmentManager(), TAG);
     }
 
     @Override
@@ -56,7 +55,7 @@ public class AlertDialogFragment extends BaseDialogFragment
         if (!TextUtils.isEmpty(getArguments().getString(ARG_MSG))) {
             builder.setMessage(getArguments().getString(ARG_MSG));
         }
-        return builder.create();
+        return builder.show();
     }
 
     @Override

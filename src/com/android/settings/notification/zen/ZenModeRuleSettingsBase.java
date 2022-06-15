@@ -16,8 +16,6 @@
 
 package com.android.settings.notification.zen;
 
-import static android.app.NotificationManager.EXTRA_AUTOMATIC_RULE_ID;
-
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -45,6 +43,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     private final String CUSTOM_BEHAVIOR_KEY = "zen_custom_setting";
 
+    protected Context mContext;
     protected boolean mDisableListeners;
     protected AutomaticZenRule mRule;
     protected String mId;
@@ -59,8 +58,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     abstract protected void updateControlsInternal();
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreate(Bundle icicle) {
+        mContext = getActivity();
 
         final Intent intent = getActivity().getIntent();
         if (DEBUG) Log.d(TAG, "onCreate getIntent()=" + intent);
@@ -72,26 +71,17 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
         mId = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_ID);
         if (mId == null) {
-            mId = intent.getStringExtra(EXTRA_AUTOMATIC_RULE_ID);
-            if (mId == null) {
-                Log.w(TAG, "rule id is null");
-                toastAndFinish();
-                return;
-            }
-        }
-
-        if (DEBUG) Log.d(TAG, "mId=" + mId);
-        refreshRuleOrFinish();
-    }
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        if (isFinishingOrDestroyed()) {
+            Log.w(TAG, "rule id is null");
+            toastAndFinish();
             return;
         }
 
+        if (DEBUG) Log.d(TAG, "mId=" + mId);
+        if (refreshRuleOrFinish()) {
+            return;
+        }
+
+        super.onCreate(icicle);
         mCustomBehaviorPreference = getPreferenceScreen().findPreference(CUSTOM_BEHAVIOR_KEY);
         mCustomBehaviorPreference.setOnPreferenceClickListener(
                 new Preference.OnPreferenceClickListener() {
@@ -138,12 +128,15 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected void updateHeader() {
         final PreferenceScreen screen = getPreferenceScreen();
 
+        mSwitch.onResume(mRule, mId);
         mSwitch.displayPreference(screen);
         updatePreference(mSwitch);
 
+        mHeader.onResume(mRule, mId);
         mHeader.displayPreference(screen);
         updatePreference(mHeader);
 
+        mActionButtons.onResume(mRule, mId);
         mActionButtons.displayPreference(screen);
         updatePreference(mActionButtons);
     }
@@ -164,9 +157,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     private boolean refreshRuleOrFinish() {
         mRule = getZenRule();
         if (DEBUG) Log.d(TAG, "mRule=" + mRule);
-        mHeader.setRule(mRule);
-        mSwitch.setIdAndRule(mId, mRule);
-        mActionButtons.setIdAndRule(mId, mRule);
         if (!setRule(mRule)) {
             toastAndFinish();
             return true;

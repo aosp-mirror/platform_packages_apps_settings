@@ -58,17 +58,12 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
     final static String EXTRA_IS_SPECIFIED_SSID =
         "com.android.settings.wifi.extra.REQUEST_IS_FOR_SINGLE_NETWORK";
 
-    @VisibleForTesting
-    NetworkRequestDialogBaseFragment mDialogFragment;
-    @VisibleForTesting
-    boolean mIsSpecifiedSsid;
-    @VisibleForTesting
-    boolean mShowingErrorDialog;
-    @VisibleForTesting
-    ProgressDialog mProgressDialog;
-
+    @VisibleForTesting NetworkRequestDialogBaseFragment mDialogFragment;
     private NetworkRequestUserSelectionCallback mUserSelectionCallback;
+    private boolean mIsSpecifiedSsid;
+    private boolean mShowingErrorDialog;
     private WifiConfiguration mMatchedConfig;
+    @VisibleForTesting ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,8 +103,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
         mDialogFragment.show(getSupportFragmentManager(), TAG);
     }
 
-    @VisibleForTesting
-    void dismissDialogs() {
+    private void dismissDialogs() {
         if (mDialogFragment != null) {
             mDialogFragment.dismiss();
             mDialogFragment = null;
@@ -180,9 +174,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
             return;
         }
 
-        if (mDialogFragment != null) {
-            mDialogFragment.onUserSelectionCallbackRegistration(userSelectionCallback);
-        }
+        mDialogFragment.onUserSelectionCallbackRegistration(userSelectionCallback);
     }
 
     @Override
@@ -209,9 +201,7 @@ public class NetworkRequestDialogActivity extends FragmentActivity implements
             return;
         }
 
-        if (mDialogFragment != null) {
-            mDialogFragment.onMatch(scanResults);
-        }
+        mDialogFragment.onMatch(scanResults);
     }
 
     @Override

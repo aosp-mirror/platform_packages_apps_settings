@@ -171,7 +171,8 @@ public class LeaseInfoListView extends ListActivity {
             holder.appIcon.setImageDrawable(appIcon);
             holder.leasePackageName.setText(lease.getPackageName());
             holder.leaseDescription.setText(getDescriptionString(lease));
-            holder.leaseExpiry.setText(formatExpiryTime(lease.getExpiryTimeMillis()));
+            holder.leaseExpiry.setText(getString(R.string.accessor_expires_text,
+                    SharedDataUtils.formatTime(lease.getExpiryTimeMillis())));
             return convertView;
         }
 
@@ -189,14 +190,6 @@ public class LeaseInfoListView extends ListActivity {
                 }
             }
             return description;
-        }
-
-        private String formatExpiryTime(long expiryTimeMillis) {
-            if (expiryTimeMillis == 0) {
-                return getString(R.string.accessor_never_expires_text);
-            }
-            return getString(R.string.accessor_expires_text,
-                    SharedDataUtils.formatTime(expiryTimeMillis));
         }
     }
 }

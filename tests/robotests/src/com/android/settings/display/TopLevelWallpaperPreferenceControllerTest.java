@@ -29,7 +29,6 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
 
 import com.google.common.collect.Lists;
 
@@ -44,7 +43,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {SettingsShadowResources.class, ShadowActivityEmbeddingUtils.class})
+@Config(shadows = {SettingsShadowResources.class})
 public class TopLevelWallpaperPreferenceControllerTest {
     private static final String TEST_KEY = "test_key";
 
@@ -205,32 +204,18 @@ public class TopLevelWallpaperPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_embeddingActivityDisabled_launchWithTaskFlag() {
-        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false);
+    public void handlePreferenceTreeClick_launchClearTask() {
+        mShadowPackageManager.setResolveInfosForIntent(
+                mWallpaperIntent, Lists.newArrayList());
         mShadowPackageManager.setResolveInfosForIntent(
                 mStylesAndWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
+
         Preference preference = new Preference(mContext);
         preference.setKey(TEST_KEY);
 
         mController.handlePreferenceTreeClick(preference);
 
-        int flags = Shadows.shadowOf(mContext).getNextStartedActivityForResult().intent.getFlags();
-        assertThat((flags & Intent.FLAG_ACTIVITY_NEW_TASK) != 0).isTrue();
-        assertThat((flags & Intent.FLAG_ACTIVITY_CLEAR_TASK) != 0).isTrue();
-    }
-
-    @Test
-    public void handlePreferenceTreeClick_embeddingActivityEnabled_launchWithoutTaskFlag() {
-        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
-        mShadowPackageManager.setResolveInfosForIntent(
-                mStylesAndWallpaperIntent, Lists.newArrayList(mock(ResolveInfo.class)));
-        Preference preference = new Preference(mContext);
-        preference.setKey(TEST_KEY);
-
-        mController.handlePreferenceTreeClick(preference);
-
-        int flags = Shadows.shadowOf(mContext).getNextStartedActivityForResult().intent.getFlags();
-        assertThat((flags & Intent.FLAG_ACTIVITY_NEW_TASK) != 0).isFalse();
-        assertThat((flags & Intent.FLAG_ACTIVITY_CLEAR_TASK) != 0).isFalse();
+        assertThat((Shadows.shadowOf(mContext).getNextStartedActivityForResult()
+                .intent.getFlags() & Intent.FLAG_ACTIVITY_CLEAR_TASK) != 0).isTrue();
     }
 }

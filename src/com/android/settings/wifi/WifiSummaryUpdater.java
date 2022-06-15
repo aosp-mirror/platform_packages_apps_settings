@@ -76,8 +76,7 @@ public final class WifiSummaryUpdater extends SummaryUpdater {
         if (register) {
             mWifiTracker.fetchInitialState();
             notifyChangeIfNeeded();
-            mContext.registerReceiver(mReceiver, INTENT_FILTER,
-                    Context.RECEIVER_EXPORTED_UNAUDITED);
+            mContext.registerReceiver(mReceiver, INTENT_FILTER);
         } else {
             mContext.unregisterReceiver(mReceiver);
         }

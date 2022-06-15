@@ -50,7 +50,6 @@ public class SlicesDatabaseAccessor {
             IndexColumns.CONTROLLER,
             IndexColumns.SLICE_TYPE,
             IndexColumns.UNAVAILABLE_SLICE_SUBTITLE,
-            IndexColumns.HIGHLIGHT_MENU_RESOURCE,
     };
 
     private final Context mContext;
@@ -164,8 +163,6 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
         final String unavailableSliceSubtitle = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.UNAVAILABLE_SLICE_SUBTITLE));
-        final int highlightMenuRes = cursor.getInt(
-                cursor.getColumnIndex(IndexColumns.HIGHLIGHT_MENU_RESOURCE));
 
         if (isIntentOnly) {
             sliceType = SliceData.SliceType.INTENT;
@@ -183,7 +180,6 @@ public class SlicesDatabaseAccessor {
                 .setUri(uri)
                 .setSliceType(sliceType)
                 .setUnavailableSliceSubtitle(unavailableSliceSubtitle)
-                .setHighlightMenuRes(highlightMenuRes)
                 .build();
     }
 

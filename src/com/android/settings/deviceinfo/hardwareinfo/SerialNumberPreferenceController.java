@@ -21,6 +21,7 @@ import android.os.Build;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.slices.Sliceable;
 
 public class SerialNumberPreferenceController extends BasePreferenceController {
 
@@ -37,6 +38,12 @@ public class SerialNumberPreferenceController extends BasePreferenceController {
     @Override
     public boolean useDynamicSliceSummary() {
         return true;
+    }
+
+    @Override
+    public void copy() {
+        Sliceable.setCopyContent(mContext, getSummary(),
+                mContext.getText(R.string.status_serial_number));
     }
 
     @Override

@@ -25,7 +25,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.applications.ApplicationsState;
 
 /*
  * Abstract base controller for the app detail preferences that refresh the state when the app state
@@ -36,7 +35,6 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
 
     protected AppInfoDashboardFragment mParent;
     protected Preference mPreference;
-    protected ApplicationsState.AppEntry mAppEntry;
 
     private final Class<? extends SettingsPreferenceFragment> mDetailFragmentClass;
 
@@ -74,12 +72,10 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
     public void setParentFragment(AppInfoDashboardFragment parent) {
         mParent = parent;
         parent.addToCallbackList(this);
-        mAppEntry = mParent.getAppEntry();
     }
 
     /**
      * Gets the fragment class to be launched when the preference is clicked.
-     *
      * @return the fragment to launch
      */
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
@@ -88,10 +84,10 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
 
     /**
      * Gets any extras that should be passed to the fragment class when the preference is clicked.
-     *
      * @return a bundle of extras to include in the launch intent
      */
     protected Bundle getArguments() {
         return null;
     }
+
 }

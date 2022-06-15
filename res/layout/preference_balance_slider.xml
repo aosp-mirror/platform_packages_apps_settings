@@ -45,7 +45,6 @@
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:textColor="?android:attr/textColorPrimary"
                 android:ellipsize="marquee"
-                android:hyphenationFrequency="normalFast"
                 android:fadingEdge="horizontal"/>
             <LinearLayout
                 android:id="@android:id/widget_frame"
@@ -65,7 +64,7 @@
                 android:id="@*android:id/seekbar"
                 android:minHeight="?android:attr/listPreferredItemHeightSmall"
                 android:paddingStart="0dp"
-                android:paddingEnd="0dp"
+                android:paddingEnd="12dp"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

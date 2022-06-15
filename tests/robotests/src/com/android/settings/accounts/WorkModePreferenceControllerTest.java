@@ -18,7 +18,6 @@ package com.android.settings.accounts;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -108,7 +107,7 @@ public class WorkModePreferenceControllerTest {
     @Test
     public void onStart_shouldRegisterReceiver() {
         mController.onStart();
-        verify(mContext).registerReceiver(eq(mController.mReceiver), any(), anyInt());
+        verify(mContext).registerReceiver(eq(mController.mReceiver), any());
     }
 
     @Test

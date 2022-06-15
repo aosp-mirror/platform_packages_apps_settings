@@ -23,7 +23,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,14 +39,14 @@ public class OneHandedActionShowNotificationPrefControllerTest {
     private Context mContext;
     private OneHandedSettingsUtils mUtils;
     private OneHandedActionShowNotificationPrefController mController;
-    private SelectorWithWidgetPreference mPreference;
+    private RadioButtonPreference mPreference;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUtils = new OneHandedSettingsUtils(mContext);
         mController = new OneHandedActionShowNotificationPrefController(mContext, KEY);
-        mPreference = new SelectorWithWidgetPreference(mContext);
+        mPreference = new RadioButtonPreference(mContext);
         OneHandedSettingsUtils.setUserId(UserHandle.myUserId());
     }
 

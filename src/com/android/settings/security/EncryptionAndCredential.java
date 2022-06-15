@@ -20,6 +20,7 @@ import static com.android.settings.security.EncryptionStatusPreferenceController
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -95,7 +96,9 @@ public class EncryptionAndCredential extends DashboardFragment {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return true;
+                    final UserManager um = (UserManager) context.getSystemService(
+                            Context.USER_SERVICE);
+                    return um.isAdminUser();
                 }
             };
 }

@@ -22,7 +22,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +38,6 @@ import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.dock.DockUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +52,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowApplicationPackageManager.class, ShadowBluetoothAdapter.class})
+@Config(shadows = ShadowApplicationPackageManager.class)
 public class ConnectedDeviceGroupControllerTest {
 
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
@@ -205,18 +203,4 @@ public class ConnectedDeviceGroupControllerTest {
                 AVAILABLE_UNSEARCHABLE);
     }
 
-    @Test
-    public void init_noBluetoothAndUsbFeature_doesNotCrash() {
-        DashboardFragment fragment = mock(DashboardFragment.class);
-        when(fragment.getContext()).thenReturn(mContext);
-        when(mPreferenceScreen.findPreference(anyString())).thenReturn(mPreferenceGroup);
-        mPackageManager.setSystemFeature(PackageManager.FEATURE_BLUETOOTH, false);
-        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_ACCESSORY, false);
-        mPackageManager.setSystemFeature(PackageManager.FEATURE_USB_HOST, false);
-
-        mConnectedDeviceGroupController.init(fragment);
-        mConnectedDeviceGroupController.displayPreference(mPreferenceScreen);
-        mConnectedDeviceGroupController.onStart();
-        mConnectedDeviceGroupController.onStop();
-    }
 }

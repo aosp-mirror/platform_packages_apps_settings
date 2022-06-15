@@ -23,7 +23,6 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.R;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -74,11 +73,6 @@ public abstract class VolumeSeekBarPreferenceController extends
         if (mPreference != null) {
             mPreference.onActivityPause();
         }
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_sound;
     }
 
     @Override

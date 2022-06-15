@@ -19,12 +19,12 @@ package com.android.settings.wifi;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
@@ -35,18 +35,15 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.wifi.NetworkRequestErrorDialogFragment.ERROR_DIALOG_TYPE;
-import com.android.wifitrackerlib.WifiPickerTracker;
+import com.android.settingslib.wifi.WifiTracker;
+import com.android.settingslib.wifi.WifiTrackerFactory;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -63,26 +60,25 @@ public class NetworkRequestDialogActivityTest {
     private static final String TEST_SSID = "testssid";
     private static final String TEST_CAPABILITY = "wep";
 
-    @Rule
-    public MockitoRule mRule = MockitoJUnit.rule();
-    @Mock
-    WifiManager mWifiManager;
-    @Mock
-    NetworkRequestUserSelectionCallback mNetworkRequestUserSelectionCallback;
-
     NetworkRequestDialogActivity mActivity;
-    List<ScanResult> mScanResults = new ArrayList<>();
+    WifiManager mWifiManager;
+    Context mContext;
 
     @Before
     public void setUp() {
-        FakeFeatureFactory fakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        when(fakeFeatureFactory.wifiTrackerLibProvider.createWifiPickerTracker(
-                any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
-                .thenReturn(mock(WifiPickerTracker.class));
-        mScanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
+        MockitoAnnotations.initMocks(this);
 
-        mActivity = spy(Robolectric.setupActivity(NetworkRequestDialogActivity.class));
-        when(mActivity.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        mContext = spy(RuntimeEnvironment.application);
+
+        WifiTracker wifiTracker = mock(WifiTracker.class);
+        WifiTrackerFactory.setTestingWifiTracker(wifiTracker);
+
+        NetworkRequestDialogActivity activity =
+            Robolectric.setupActivity(NetworkRequestDialogActivity.class);
+        mActivity = spy(activity);
+
+        mWifiManager = mock(WifiManager.class);
+        when(mActivity.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
     }
 
     @Test
@@ -172,7 +168,10 @@ public class NetworkRequestDialogActivityTest {
     public void specifiedSsid_onMatch_shouldShowDialogFragment() {
         startSpecifiedActivity();
 
-        mActivity.onMatch(mScanResults);
+        final List<ScanResult> scanResults = new ArrayList<>();
+        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
+
+        mActivity.onMatch(scanResults);
 
         assertThat(mActivity.mProgressDialog).isNull();
         assertThat(mActivity.mDialogFragment).isNotNull();
@@ -193,7 +192,9 @@ public class NetworkRequestDialogActivityTest {
     public void onUserSelectionConnectFailure_shouldShowDialogFragment() {
         WifiConfiguration wifiConfiguration = mock(WifiConfiguration.class);
         startSpecifiedActivity();
-        mActivity.onMatch(mScanResults);
+        final List<ScanResult> scanResults = new ArrayList<>();
+        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
+        mActivity.onMatch(scanResults);
 
         mActivity.onUserSelectionConnectFailure(wifiConfiguration);
 
@@ -203,9 +204,13 @@ public class NetworkRequestDialogActivityTest {
 
     @Test
     public void onClickConnectButton_shouldShowProgressDialog() {
+        NetworkRequestUserSelectionCallback networkRequestUserSelectionCallback = mock(
+                NetworkRequestUserSelectionCallback.class);
         startSpecifiedActivity();
-        mActivity.onMatch(mScanResults);
-        mActivity.onUserSelectionCallbackRegistration(mNetworkRequestUserSelectionCallback);
+        final List<ScanResult> scanResults = new ArrayList<>();
+        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
+        mActivity.onMatch(scanResults);
+        mActivity.onUserSelectionCallbackRegistration(networkRequestUserSelectionCallback);
 
         mActivity.onClickConnectButton();
 
@@ -216,7 +221,9 @@ public class NetworkRequestDialogActivityTest {
     @Test
     public void onCancel_shouldCloseAllUI() {
         startSpecifiedActivity();
-        mActivity.onMatch(mScanResults);
+        final List<ScanResult> scanResults = new ArrayList<>();
+        scanResults.add(getScanResult(TEST_SSID, TEST_CAPABILITY));
+        mActivity.onMatch(scanResults);
 
         mActivity.onCancel();
 
@@ -231,21 +238,5 @@ public class NetworkRequestDialogActivityTest {
         mActivity.onUserSelectionConnectFailure(config);
 
         verify(mActivity).finish();
-    }
-
-    @Test
-    public void onUserSelectionCallbackRegistration_dismissDialogsAndDialogIsNull_shouldNotCrash() {
-        mActivity.dismissDialogs();
-
-        mActivity.onUserSelectionCallbackRegistration(mNetworkRequestUserSelectionCallback);
-    }
-
-    @Test
-    public void onMatch_dismissDialogsAndDialogIsNull_shouldNotCrash() {
-        mActivity.mIsSpecifiedSsid = false;
-        mActivity.mShowingErrorDialog = false;
-        mActivity.dismissDialogs();
-
-        mActivity.onMatch(mScanResults);
     }
 }

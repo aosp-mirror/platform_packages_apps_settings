@@ -106,9 +106,4 @@ public class AlwaysOnDisplaySlice implements CustomSliceable {
     public Intent getIntent() {
         return null;
     }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
-    }
 }

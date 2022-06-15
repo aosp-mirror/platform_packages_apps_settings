@@ -29,7 +29,7 @@ import android.content.Context;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class ZenRulePreferenceControllerTest {
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
-    private SelectorWithWidgetPreference mMockPref;
+    private RadioButtonPreference mMockPref;
     @Mock
     private PreferenceScreen mScreen;
 
@@ -78,7 +78,7 @@ public class ZenRulePreferenceControllerTest {
         assertTrue(mController.mRule == null);
         assertTrue(mController.mId == null);
 
-        mController.setIdAndRule(id, rule);
+        mController.onResume(rule, id);
 
         assertEquals(mController.mId, id);
         assertEquals(mController.mRule, rule);

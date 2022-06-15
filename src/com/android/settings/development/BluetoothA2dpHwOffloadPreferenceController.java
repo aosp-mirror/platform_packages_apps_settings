@@ -16,12 +16,9 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothLeAudioHwOffloadPreferenceController.LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
-
 import android.content.Context;
 import android.os.SystemProperties;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
@@ -37,9 +34,6 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
     static final String A2DP_OFFLOAD_DISABLED_PROPERTY = "persist.bluetooth.a2dp_offload.disabled";
     static final String A2DP_OFFLOAD_SUPPORTED_PROPERTY = "ro.bluetooth.a2dp_offload.supported";
 
-    @VisibleForTesting
-    boolean mChanged = false;
-
     public BluetoothA2dpHwOffloadPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
         super(context);
@@ -53,8 +47,7 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        BluetoothHwOffloadRebootDialog.show(mFragment);
-        mChanged = true;
+        BluetoothA2dpHwOffloadRebootDialog.show(mFragment, this);
         return false;
     }
 
@@ -92,26 +85,10 @@ public class BluetoothA2dpHwOffloadPreferenceController extends DeveloperOptions
         return offloadSupported ? !offloadDisabled : true;
     }
 
-    /**
-     * Called when the HwOffloadDialog confirm is clicked.
-     */
-    public void onHwOffloadDialogConfirmed() {
-        if (!mChanged) {
-            return;
-        }
+    public void onA2dpHwDialogConfirmed() {
         final boolean offloadDisabled =
                 SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(!offloadDisabled));
-        if (offloadDisabled) {
-            SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
-                    Boolean.toString(!offloadDisabled));
-        }
     }
 
-    /**
-     * Called when the HwOffloadDialog cancel is clicked.
-     */
-    public void onHwOffloadDialogCanceled() {
-        mChanged = false;
-    }
 }

@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.os.Handler;
 import android.provider.Settings;
 import android.uwb.UwbManager;
 import android.uwb.UwbManager.AdapterStateCallback;
@@ -53,23 +52,17 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
     @VisibleForTesting
     private final BroadcastReceiver mAirplaneModeChangedReceiver;
     private final Executor mExecutor;
-    private final Handler mHandler;
     private Preference mPreference;
 
     public UwbPreferenceController(Context context, String key) {
         super(context, key);
         mExecutor = Executors.newSingleThreadExecutor();
-        mHandler = new Handler(context.getMainLooper());
-        if (isUwbSupportedOnDevice()) {
-            mUwbManager = context.getSystemService(UwbManager.class);
-        }
+        mUwbManager = context.getSystemService(UwbManager.class);
         mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         mAirplaneModeChangedReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                mAirplaneModeOn = Settings.Global.getInt(mContext.getContentResolver(),
-                        Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
                 updateState(mPreference);
             }
         };
@@ -119,8 +112,6 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
 
     @Override
     public void onStateChanged(int state, int reason) {
-        Runnable runnable = () -> updateState(mPreference);
-        mHandler.post(runnable);
     }
 
     /** Called when activity starts being displayed to user. */
@@ -161,11 +152,6 @@ public class UwbPreferenceController extends TogglePreferenceController implemen
         } else {
             return mContext.getResources().getString(R.string.uwb_settings_summary);
         }
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_connected_devices;
     }
 }
 

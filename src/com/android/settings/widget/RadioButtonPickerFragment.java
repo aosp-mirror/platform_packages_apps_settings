@@ -38,7 +38,7 @@ import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.widget.SelectorWithWidgetPreference;
+import com.android.settingslib.widget.RadioButtonPreference;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFragment implements
-        SelectorWithWidgetPreference.OnClickListener {
+        RadioButtonPreference.OnClickListener {
 
     @VisibleForTesting
     static final String EXTRA_FOR_WORK = "for_work";
@@ -110,7 +110,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     protected abstract int getPreferenceScreenResId();
 
     @Override
-    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
+    public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
         onRadioButtonConfirmed(selectedKey);
     }
@@ -150,7 +150,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     /**
      * A chance for subclasses to bind additional things to the preference.
      */
-    public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
+    public void bindPreferenceExtra(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
     }
 
@@ -175,8 +175,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
 
         final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
-            final SelectorWithWidgetPreference nonePref =
-                    new SelectorWithWidgetPreference(getPrefContext());
+            final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
             if (customLayoutResId > 0) {
                 nonePref.setLayoutResource(customLayoutResId);
             }
@@ -188,8 +187,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
         if (candidateList != null) {
             for (CandidateInfo info : candidateList) {
-                SelectorWithWidgetPreference pref =
-                        new SelectorWithWidgetPreference(getPrefContext());
+                RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
                 if (customLayoutResId > 0) {
                     pref.setLayoutResource(customLayoutResId);
                 }
@@ -204,7 +202,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
     }
 
-    public SelectorWithWidgetPreference bindPreference(SelectorWithWidgetPreference pref,
+    public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
         pref.setIcon(Utils.getSafeIcon(info.loadIcon()));
@@ -223,9 +221,8 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             final int count = screen.getPreferenceCount();
             for (int i = 0; i < count; i++) {
                 final Preference pref = screen.getPreference(i);
-                if (pref instanceof SelectorWithWidgetPreference) {
-                    final SelectorWithWidgetPreference radioPref =
-                            (SelectorWithWidgetPreference) pref;
+                if (pref instanceof RadioButtonPreference) {
+                    final RadioButtonPreference radioPref = (RadioButtonPreference) pref;
                     final boolean newCheckedState = TextUtils.equals(pref.getKey(), selectedKey);
                     if (radioPref.isChecked() != newCheckedState) {
                         radioPref.setChecked(TextUtils.equals(pref.getKey(), selectedKey));
@@ -240,8 +237,8 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         // If there is only 1 thing on screen, select it.
         if (screen != null && screen.getPreferenceCount() == 1) {
             final Preference onlyPref = screen.getPreference(0);
-            if (onlyPref instanceof SelectorWithWidgetPreference) {
-                ((SelectorWithWidgetPreference) onlyPref).setChecked(true);
+            if (onlyPref instanceof RadioButtonPreference) {
+                ((RadioButtonPreference) onlyPref).setChecked(true);
             }
         }
     }

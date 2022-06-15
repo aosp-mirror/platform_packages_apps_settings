@@ -23,10 +23,6 @@ import com.android.internal.jank.InteractionJankMonitor;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-/**
- * @deprecated use {@link com.android.settingslib.testutils.shadow.ShadowInteractionJankMonitor}
- */
-@Deprecated
 @Implements(InteractionJankMonitor.class)
 public class ShadowInteractionJankMonitor {
 

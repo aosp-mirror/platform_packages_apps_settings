@@ -19,7 +19,6 @@ package com.android.settings.sim.smartForwarding;
 import static com.android.settings.sim.smartForwarding.SmartForwardingUtils.TAG;
 
 import android.telephony.CallForwardingInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -38,29 +37,17 @@ public class DisableSmartForwardingTask implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < tm.getActiveModemCount(); i++) {
-            int subId = getSubId(i);
-            if (callWaitingStatus != null
-                    && subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            if (callWaitingStatus != null) {
                 Log.d(TAG, "Restore call waiting to " + callWaitingStatus[i]);
-                tm.createForSubscriptionId(subId)
-                        .setCallWaitingEnabled(callWaitingStatus[i], null, null);
+                tm.setCallWaitingEnabled(callWaitingStatus[i], null, null);
             }
 
             if (callForwardingInfo != null
                     && callForwardingInfo[i] != null
-                    && subId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                Log.d(TAG, "Restore call forwarding to " + callForwardingInfo[i]);
-                tm.createForSubscriptionId(subId)
-                        .setCallForwarding(callForwardingInfo[i], null, null);
+                    && callForwardingInfo[i].getTimeoutSeconds() > 0) {
+                Log.d(TAG, "Restore call waiting to " + callForwardingInfo);
+                tm.setCallForwarding(callForwardingInfo[i], null, null);
             }
         }
-    }
-
-    private int getSubId(int slotIndex) {
-        int[] subId = SubscriptionManager.getSubId(slotIndex);
-        if (subId != null && subId.length > 0) {
-            return subId[0];
-        }
-        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 }

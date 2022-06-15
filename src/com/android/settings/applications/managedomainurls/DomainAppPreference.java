@@ -17,32 +17,30 @@
 package com.android.settings.applications.managedomainurls;
 
 import android.content.Context;
-import android.content.pm.verify.domain.DomainVerificationManager;
-import android.content.pm.verify.domain.DomainVerificationUserState;
-import android.graphics.drawable.Drawable;
-
-import androidx.preference.PreferenceViewHolder;
+import android.content.pm.PackageManager;
+import android.os.UserHandle;
+import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.R;
-import com.android.settings.applications.intentpicker.IntentPickerUtils;
-import com.android.settingslib.applications.AppUtils;
+import com.android.settings.Utils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.AppPreference;
 
 public class DomainAppPreference extends AppPreference {
 
-    private Drawable mCacheIcon;
-
     private final AppEntry mEntry;
-    private final DomainVerificationManager mDomainVerificationManager;
+    private final PackageManager mPm;
+    private final IconDrawableFactory mIconDrawableFactory;
 
-    public DomainAppPreference(final Context context, AppEntry entry) {
+    public DomainAppPreference(final Context context, IconDrawableFactory iconFactory,
+            AppEntry entry) {
         super(context);
-        mDomainVerificationManager = context.getSystemService(DomainVerificationManager.class);
+        mIconDrawableFactory = iconFactory;
+        mPm = context.getPackageManager();
         mEntry = entry;
         mEntry.ensureLabel(getContext());
-        mCacheIcon = AppUtils.getIconFromCache(mEntry);
+
         setState();
     }
 
@@ -57,38 +55,27 @@ public class DomainAppPreference extends AppPreference {
 
     private void setState() {
         setTitle(mEntry.label);
-
-        if (mCacheIcon != null) {
-            setIcon(mCacheIcon);
-        } else {
-            setIcon(R.drawable.empty_icon);
-        }
+        setIcon(mIconDrawableFactory.getBadgedIcon(mEntry.info));
         setSummary(getDomainsSummary(mEntry.info.packageName));
     }
 
     private CharSequence getDomainsSummary(String packageName) {
-        return getContext().getText(isLinkHandlingAllowed(packageName)
-                ? R.string.app_link_open_always : R.string.app_link_open_never);
-    }
-
-    private boolean isLinkHandlingAllowed(String packageName) {
-        final DomainVerificationUserState userState =
-                IntentPickerUtils.getDomainVerificationUserState(mDomainVerificationManager,
-                        packageName);
-        return userState == null ? false : userState.isLinkHandlingAllowed();
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        if (mCacheIcon == null) {
-            ThreadUtils.postOnBackgroundThread(() -> {
-                final Drawable icon = AppUtils.getIcon(getContext(), mEntry);
-                ThreadUtils.postOnMainThread(() -> {
-                    setIcon(icon);
-                    mCacheIcon = icon;
-                });
-            });
+        // If the user has explicitly said "no" for this package, that's the
+        // string we should show.
+        int domainStatus =
+                mPm.getIntentVerificationStatusAsUser(packageName, UserHandle.myUserId());
+        if (domainStatus == PackageManager.INTENT_FILTER_DOMAIN_VERIFICATION_STATUS_NEVER) {
+            return getContext().getText(R.string.domain_urls_summary_none);
         }
-        super.onBindViewHolder(view);
+        // Otherwise, ask package manager for the domains for this package,
+        // and show the first one (or none if there aren't any).
+        final ArraySet<String> result = Utils.getHandledDomains(mPm, packageName);
+        if (result.isEmpty()) {
+            return getContext().getText(R.string.domain_urls_summary_none);
+        } else if (result.size() == 1) {
+            return getContext().getString(R.string.domain_urls_summary_one, result.valueAt(0));
+        } else {
+            return getContext().getString(R.string.domain_urls_summary_some, result.valueAt(0));
+        }
     }
 }

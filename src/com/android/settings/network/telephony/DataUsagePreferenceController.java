@@ -56,7 +56,6 @@ public class DataUsagePreferenceController extends TelephonyBasePreferenceContro
     @Override
     public int getAvailabilityStatus(int subId) {
         return (SubscriptionManager.isValidSubscriptionId(subId))
-                && DataUsageUtils.hasMobileData(mContext)
                 ? AVAILABLE
                 : AVAILABLE_UNSEARCHABLE;
     }

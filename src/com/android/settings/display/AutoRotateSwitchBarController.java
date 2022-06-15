@@ -18,77 +18,85 @@ package com.android.settings.display;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.widget.Switch;
 
 import com.android.internal.view.RotationPolicy;
-import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.SettingsMainSwitchPreferenceController;
+import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
+import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 /**
- * The main switch controller for auto-rotate.
+ * The switch controller for the location.
  */
-public class AutoRotateSwitchBarController extends SettingsMainSwitchPreferenceController implements
+public class AutoRotateSwitchBarController implements OnMainSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop {
 
+    private final SettingsMainSwitchBar mSwitchBar;
+    private final Context mContext;
+    private boolean mValidListener;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-    private RotationPolicy.RotationPolicyListener mRotationPolicyListener;
 
-    public AutoRotateSwitchBarController(Context context, String key) {
-        super(context, key);
+    public AutoRotateSwitchBarController(Context context, SettingsMainSwitchBar switchBar,
+            Lifecycle lifecycle) {
+        mSwitchBar = switchBar;
+        mContext = context;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
-    @Override
-    public int getAvailabilityStatus() {
-        return RotationPolicy.isRotationLockToggleVisible(mContext)
-                && !DeviceStateAutoRotationHelper.isDeviceStateRotationEnabled(mContext)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
     public void onStart() {
-        if (mRotationPolicyListener == null) {
-            mRotationPolicyListener = new RotationPolicy.RotationPolicyListener() {
-                @Override
-                public void onChange() {
-                    if (mSwitchPreference != null) {
-                        updateState(mSwitchPreference);
-                    }
-                }
-            };
+        if (!mValidListener) {
+            mSwitchBar.addOnSwitchChangeListener(this);
+            mValidListener = true;
         }
-        RotationPolicy.registerRotationPolicyListener(mContext,
-                mRotationPolicyListener);
+        onChange();
     }
 
     @Override
     public void onStop() {
-        if (mRotationPolicyListener != null) {
-            RotationPolicy.unregisterRotationPolicyListener(mContext, mRotationPolicyListener);
+        if (mValidListener) {
+            mSwitchBar.removeOnSwitchChangeListener(this);
+            mValidListener = false;
         }
     }
 
+    /**
+     * Listens to the state change of the rotation primary switch.
+     */
     @Override
-    public boolean isChecked() {
-        return !RotationPolicy.isRotationLocked(mContext);
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        setRotationLock(isChecked);
     }
 
-    @Override
-    public boolean setChecked(boolean isChecked) {
+
+    protected void onChange() {
+        final boolean isEnabled = !RotationPolicy.isRotationLocked(mContext);
+        if (isEnabled != mSwitchBar.isChecked()) {
+            // set listener to null so that that code below doesn't trigger onCheckedChanged()
+            if (mValidListener) {
+                mSwitchBar.removeOnSwitchChangeListener(this);
+            }
+            mSwitchBar.setChecked(isEnabled);
+            if (mValidListener) {
+                mSwitchBar.addOnSwitchChangeListener(this);
+            }
+        }
+    }
+
+    private boolean setRotationLock(boolean isChecked) {
         final boolean isLocked = !isChecked;
         mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_ROTATE_ROTATE_MASTER_TOGGLE,
-                isLocked);
+                isChecked);
         RotationPolicy.setRotationLock(mContext, isLocked);
         return true;
-    }
-
-    @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_display;
     }
 
 }

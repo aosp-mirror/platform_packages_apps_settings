@@ -267,8 +267,7 @@ public class ApnSettings extends RestrictedSettingsFragment
             return;
         }
 
-        getActivity().registerReceiver(mReceiver, mIntentFilter,
-                Context.RECEIVER_EXPORTED_UNAUDITED);
+        getActivity().registerReceiver(mReceiver, mIntentFilter);
 
         restartPhoneStateListener(mSubId);
 
@@ -302,7 +301,7 @@ public class ApnSettings extends RestrictedSettingsFragment
 
     @Override
     public EnforcedAdmin getRestrictionEnforcedAdmin() {
-        final UserHandle user = UserHandle.of(mUserManager.getProcessUserId());
+        final UserHandle user = UserHandle.of(mUserManager.getUserHandle());
         if (mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS, user)
                 && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
                         user)) {
@@ -323,8 +322,6 @@ public class ApnSettings extends RestrictedSettingsFragment
         final StringBuilder where =
                 new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND "
                 + "user_visible!=0");
-        // Remove Emergency type, users should not mess with that
-        where.append(" AND NOT (type='emergency')");
 
         if (mHideImsApn) {
             where.append(" AND NOT (type='ims')");
@@ -467,9 +464,6 @@ public class ApnSettings extends RestrictedSettingsFragment
     }
 
     private boolean restoreDefaultApn() {
-        // Callback of data connection change could be some noise during the stage of restore.
-        mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
-
         showDialog(DIALOG_RESTORE_DEFAULTAPN);
         mRestoreDefaultApnMode = true;
 
@@ -520,7 +514,6 @@ public class ApnSettings extends RestrictedSettingsFragment
                         getResources().getString(
                                 R.string.restore_default_apn_completed),
                         Toast.LENGTH_LONG).show();
-                    restartPhoneStateListener(mSubId);
                     break;
             }
         }

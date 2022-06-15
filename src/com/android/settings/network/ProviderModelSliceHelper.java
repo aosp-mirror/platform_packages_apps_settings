@@ -140,7 +140,7 @@ public class ProviderModelSliceHelper {
             numLevels += 1;
         }
         return MobileNetworkUtils.getSignalStrengthIcon(mContext, level, numLevels,
-                NO_CELL_DATA_TYPE_ICON, false);
+                NO_CELL_DATA_TYPE_ICON, !mTelephonyManager.isDataEnabled());
     }
 
     /**

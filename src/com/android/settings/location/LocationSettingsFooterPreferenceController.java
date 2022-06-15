@@ -107,7 +107,7 @@ public class LocationSettingsFooterPreferenceController extends LocationBasePref
         if (mFooterPreference != null) {
             mFooterPreference.setTitle(Html.fromHtml(footerString));
             mFooterPreference.setLearnMoreAction(v -> openLocationLearnMoreLink());
-            mFooterPreference.setLearnMoreText(mContext.getString(
+            mFooterPreference.setLearnMoreContentDescription(mContext.getString(
                     R.string.location_settings_footer_learn_more_content_description));
         }
     }

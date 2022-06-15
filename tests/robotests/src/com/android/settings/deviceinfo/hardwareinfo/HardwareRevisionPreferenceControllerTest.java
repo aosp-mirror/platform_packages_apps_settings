@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,69 +11,51 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License
  */
 
 package com.android.settings.deviceinfo.hardwareinfo;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.when;
-
+import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.res.Resources;
-
-import androidx.test.core.app.ApplicationProvider;
-
-import com.android.settings.R;
+import android.os.SystemProperties;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowSystemProperties;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowSystemProperties.class})
 public class HardwareRevisionPreferenceControllerTest {
 
-    @Rule
-    public final MockitoRule mockito = MockitoJUnit.rule();
-    @Spy
-    private final Context mContext = ApplicationProvider.getApplicationContext();
-    @Mock
-    private Resources mResources;
-
+    private Context mContext;
     private HardwareRevisionPreferenceController mController;
 
     @Before
     public void setUp() {
-        ShadowSystemProperties.override("ro.boot.hardware.revision", "robolectric");
-        when(mContext.getResources()).thenReturn(mResources);
+        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new HardwareRevisionPreferenceController(mContext,
                 "hardware_info_device_revision");
     }
 
     @Test
-    public void getAvailabilityStatus_available() {
-        when(mResources.getBoolean(R.bool.config_show_device_model)).thenReturn(true);
+    public void copy_shouldCopyHardwareRevisionToClipboard() {
+        final String fakeHardwareVer = "FakeVer1.0";
+        SystemProperties.set("ro.boot.hardware.revision", fakeHardwareVer);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
-    }
+        mController.copy();
 
-    @Test
-    public void getAvailabilityStatus_unsupported() {
-        when(mResources.getBoolean(R.bool.config_show_device_model)).thenReturn(false);
+        final ClipboardManager clipboard = (ClipboardManager) mContext.getSystemService(
+                CLIPBOARD_SERVICE);
+        final CharSequence data = clipboard.getPrimaryClip().getItemAt(0).getText();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(data.toString()).isEqualTo(fakeHardwareVer);
     }
 }

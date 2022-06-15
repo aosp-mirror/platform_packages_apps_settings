@@ -40,7 +40,7 @@ public class ShadowLockPatternUtils {
     private static Map<Integer, Integer> sUserToProfileComplexityMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToMetricsMap = new HashMap<>();
     private static Map<Integer, PasswordMetrics> sUserToProfileMetricsMap = new HashMap<>();
-    private static Map<Integer, Boolean> sUserToIsSecureMap = new HashMap<>();
+
 
     @Resetter
     public static void reset() {
@@ -48,7 +48,6 @@ public class ShadowLockPatternUtils {
         sUserToProfileComplexityMap.clear();
         sUserToMetricsMap.clear();
         sUserToProfileMetricsMap.clear();
-        sUserToIsSecureMap.clear();
         sDeviceEncryptionEnabled = false;
     }
 
@@ -58,16 +57,8 @@ public class ShadowLockPatternUtils {
     }
 
     @Implementation
-    protected boolean isSecure(int userId) {
-        Boolean isSecure = sUserToIsSecureMap.get(userId);
-        if (isSecure == null) {
-            return true;
-        }
-        return isSecure;
-    }
-
-    public static void setIsSecure(int userId, boolean isSecure) {
-        sUserToIsSecureMap.put(userId, isSecure);
+    protected boolean isSecure(int id) {
+        return true;
     }
 
     @Implementation
@@ -153,13 +144,4 @@ public class ShadowLockPatternUtils {
         sUserToProfileMetricsMap.put(UserHandle.myUserId(), metrics);
     }
 
-    @Implementation
-    public boolean isLockScreenDisabled(int userId) {
-        return false;
-    }
-
-    @Implementation
-    public boolean isSeparateProfileChallengeEnabled(int userHandle) {
-        return false;
-    }
 }

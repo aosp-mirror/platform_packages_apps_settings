@@ -68,11 +68,6 @@ public class BluetoothScanningMainSwitchPreferenceController extends TogglePrefe
     }
 
     @Override
-    public int getSliceHighlightMenuRes() {
-        return R.string.menu_key_location;
-    }
-
-    @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
         if (isChecked != isChecked()) {
             setChecked(isChecked);

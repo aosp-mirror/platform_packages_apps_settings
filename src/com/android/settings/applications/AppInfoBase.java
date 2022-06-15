@@ -219,7 +219,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         }
     }
 
-    public static void startAppInfoFragment(Class<?> fragment, String title,
+    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
             String pkg, int uid, Fragment source, int request, int sourceMetricsCategory) {
         final Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
@@ -228,7 +228,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         new SubSettingLauncher(source.getContext())
                 .setDestination(fragment.getName())
                 .setSourceMetricsCategory(sourceMetricsCategory)
-                .setTitleText(title)
+                .setTitleRes(titleRes)
                 .setArguments(args)
                 .setUserHandle(new UserHandle(UserHandle.getUserId(uid)))
                 .setResultListener(source, request)

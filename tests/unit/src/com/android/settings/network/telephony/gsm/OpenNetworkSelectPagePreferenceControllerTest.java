@@ -29,6 +29,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -58,6 +59,8 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
     private ServiceState mServiceState;
     @Mock
     private SubscriptionInfo mSubscriptionInfo;
+    @Mock
+    private Lifecycle mLifecycle;
 
     private PersistableBundle mCarrierConfig;
     private OpenNetworkSelectPagePreferenceController mController;
@@ -90,18 +93,15 @@ public class OpenNetworkSelectPagePreferenceControllerTest {
 
         mPreference = new Preference(mContext);
         mController = new OpenNetworkSelectPagePreferenceController(mContext,
-                "open_network_select") {
-            @Override
-            public void updateState(Preference preference) {
-                super.updateState(mPreference);
-            }
-        };
-        mController.init(SUB_ID);
+                "open_network_select");
+        mController.init(mLifecycle, SUB_ID);
     }
 
     @Test
     public void updateState_modeAuto_disabled() {
-        mController.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
+        when(mTelephonyManager.getNetworkSelectionMode()).thenReturn(
+                TelephonyManager.NETWORK_SELECTION_MODE_AUTO);
+
         mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();

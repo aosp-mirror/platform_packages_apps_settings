@@ -40,7 +40,6 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.android.settings.network.CarrierConfigCache;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -61,7 +60,7 @@ public class DataServiceSetupPreferenceControllerTest {
     @Mock
     private TelephonyManager mInvalidTelephonyManager;
     @Mock
-    private CarrierConfigCache mCarrierConfigCache;
+    private CarrierConfigManager mCarrierConfigManager;
 
     private PersistableBundle mCarrierConfig;
     private DataServiceSetupPreferenceController mController;
@@ -74,7 +73,7 @@ public class DataServiceSetupPreferenceControllerTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
+        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(mCarrierConfigManager);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
         doReturn(mInvalidTelephonyManager).when(mTelephonyManager).createForSubscriptionId(
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
@@ -82,7 +81,7 @@ public class DataServiceSetupPreferenceControllerTest {
                 Settings.Global.SETUP_PREPAID_DATA_SERVICE_URL, SETUP_URL);
 
         mCarrierConfig = new PersistableBundle();
-        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
+        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
 
         mPreference = new RestrictedPreference(mContext);
         mController = new DataServiceSetupPreferenceController(mContext, "data_service_setup");

@@ -17,7 +17,6 @@
 package com.android.settings.dashboard.profileselector;
 import androidx.fragment.app.Fragment;
 
-import com.android.settings.R;
 import com.android.settings.accounts.AccountPersonalDashboardFragment;
 import com.android.settings.accounts.AccountWorkProfileDashboardFragment;
 
@@ -32,10 +31,5 @@ public class ProfileSelectAccountFragment extends ProfileSelectFragment {
                 new AccountPersonalDashboardFragment(),
                 new AccountWorkProfileDashboardFragment()
         };
-    }
-
-    @Override
-    protected int getPreferenceScreenResId() {
-        return R.xml.accounts_dashboard_settings_header;
     }
 }

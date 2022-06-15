@@ -290,7 +290,7 @@ public class ProviderModelSlice extends WifiSlice {
         final String screenTitle = mContext.getText(R.string.provider_internet_settings).toString();
         return SliceBuilderUtils.buildSearchResultPageIntent(mContext,
                 NetworkProviderSettings.class.getName(), "" /* key */, screenTitle,
-                SettingsEnums.SLICE, this)
+                SettingsEnums.SLICE)
                 .setClassName(mContext.getPackageName(), SubSettings.class.getName())
                 .setData(getUri());
     }

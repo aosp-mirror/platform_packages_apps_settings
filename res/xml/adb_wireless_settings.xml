@@ -42,8 +42,7 @@
     <!-- Pairing methods category -->
     <PreferenceCategory
         android:key="adb_pairing_methods_category"
-        android:layout="@layout/preference_category_no_label"
-        settings:allowDividerAbove="true">
+        android:layout="@layout/preference_category_no_label">
         <!-- qrcode scanner -->
         <Preference
             android:key="adb_pair_method_qrcode_pref"
@@ -53,7 +52,6 @@
             settings:controller="com.android.settings.development.AdbQrCodePreferenceController"/>
         <Preference
             android:key="adb_pair_method_code_pref"
-            android:icon="@drawable/ic_password"
             android:title="@string/adb_pair_method_code_title"
             android:summary="@string/adb_pair_method_code_summary"/>
     </PreferenceCategory>
@@ -61,8 +59,7 @@
     <!-- Paired devices list -->
     <PreferenceCategory
         android:key="adb_paired_devices_category"
-        android:title="@string/adb_paired_devices_title"
-        settings:allowDividerAbove="true"/>
+        android:title="@string/adb_paired_devices_title"/>
 
     <!-- Off message: Shown only in the off state -->
     <PreferenceCategory

@@ -32,9 +32,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
  * are two or more active mobile subscriptions. It shows an overview of available network
  * connections with an entry for wifi (if connected) and an entry for each subscription.
  *
- * @deprecated This class will be removed in Android U, there is no networks header anymore.
+ * TODO(tomhsu) when provider model is completed, this class will be replaced
+ * by {@link NetworkMobileProviderController}
  */
-@Deprecated
 public class MultiNetworkHeaderController extends BasePreferenceController implements
         WifiConnectionPreferenceController.UpdateListener,
         SubscriptionsPreferenceController.UpdateListener {

@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -83,10 +82,6 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
         ssidScannerButton.setOnClickListener(this);
         mUIController = new WifiConfigController2(this, rootView, null, getMode());
 
-        // Resize the layout when keyboard opens.
-        getActivity().getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
         return rootView;
     }
 
@@ -114,8 +109,7 @@ public class AddNetworkFragment extends InstrumentedFragment implements WifiConf
             final String ssid = ssidEditText.getText().toString();
 
             // Launch QR code scanner to join a network.
-            startActivityForResult(
-                    WifiDppUtils.getEnrolleeQrCodeScannerIntent(view.getContext(), ssid),
+            startActivityForResult(WifiDppUtils.getEnrolleeQrCodeScannerIntent(ssid),
                     REQUEST_CODE_WIFI_DPP_ENROLLEE_QR_CODE_SCANNER);
         }
     }
