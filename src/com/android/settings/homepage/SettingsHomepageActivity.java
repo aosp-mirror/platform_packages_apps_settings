@@ -436,7 +436,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
         // To prevent launchDeepLinkIntentToRight again for configuration change.
         intent.setAction(null);
 
-        targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        targetIntent.removeFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         targetIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
         // Sender of intent may want to send intent extra data to the destination of targetIntent.
