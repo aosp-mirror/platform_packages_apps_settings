@@ -19,6 +19,7 @@ package com.android.settings.display;
 import static com.android.settings.display.ScreenResolutionController.FHD_WIDTH;
 import static com.android.settings.display.ScreenResolutionController.QHD_WIDTH;
 
+import android.annotation.Nullable;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.res.Resources;
@@ -34,6 +35,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.display.DisplayDensityUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
@@ -48,7 +50,6 @@ import java.util.Set;
 /** Preference fragment used for switch screen resolution */
 @SearchIndexable
 public class ScreenResolutionFragment extends RadioButtonPickerFragment {
-
     private static final String TAG = "ScreenResolution";
 
     private Resources mResources;
@@ -60,6 +61,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private String[] mScreenResolutionSummaries;
 
     private IllustrationPreference mImagePreference;
+    private DensityRestorer mDensityRestorer;
 
     @Override
     public void onAttach(Context context) {
@@ -74,6 +76,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 mResources.getStringArray(R.array.config_screen_resolution_summaries_strings);
         mResolutions = getAllSupportedResolution();
         mImagePreference = new IllustrationPreference(context);
+        mDensityRestorer = new DensityRestorer(context);
     }
 
     @Override
@@ -151,16 +154,21 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
     /** Using display manager to set the display mode. */
     @VisibleForTesting
-    public void setDisplayMode(int width) {
+    public void setDisplayMode(final int width) {
+        if (width == getDisplayMode().getPhysicalWidth()) {
+            return;
+        }
+
+        mDensityRestorer.startObserve();
         mDefaultDisplay.setUserPreferredDisplayMode(getPreferMode(width));
     }
 
     /** Get the key corresponding to the resolution. */
     @VisibleForTesting
     String getKeyForResolution(int width) {
-        return width == FHD_WIDTH ? mScreenResolutionOptions[FHD_INDEX]
-                : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX]
-                : null;
+        return width == FHD_WIDTH
+                ? mScreenResolutionOptions[FHD_INDEX]
+                : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX] : null;
     }
 
     @Override
@@ -171,7 +179,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     }
 
     @Override
-    protected boolean setDefaultKey(String key) {
+    protected boolean setDefaultKey(final String key) {
         if (mScreenResolutionOptions[FHD_INDEX].equals(key)) {
             setDisplayMode(FHD_WIDTH);
 
@@ -236,10 +244,6 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.screen_resolution_settings) {
-
-                boolean mIsFHDSupport = false;
-                boolean mIsQHDSupport = false;
-
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     ScreenResolutionController mController =
@@ -247,4 +251,76 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                     return mController.checkSupportedResolutions();
                 }
             };
+
+    private static final class DensityRestorer implements DisplayManager.DisplayListener {
+        private final @Nullable Context mContext;
+        private int mDefaultDensity;
+        private int mCurrentIndex;
+
+        DensityRestorer(Context context) {
+            mContext = context;
+        }
+
+        public void startObserve() {
+            if (mContext == null) {
+                return;
+            }
+
+            final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
+            final int currentIndex = density.getCurrentIndex();
+            final int defaultDensity = density.getDefaultDensity();
+
+            if (density.getValues()[mCurrentIndex] == density.getDefaultDensity()) {
+                return;
+            }
+
+            mDefaultDensity = defaultDensity;
+            mCurrentIndex = currentIndex;
+            final DisplayManager dm = mContext.getSystemService(DisplayManager.class);
+            dm.registerDisplayListener(this, null);
+        }
+
+        public void stopObserve() {
+            if (mContext == null) {
+                return;
+            }
+
+            final DisplayManager dm = mContext.getSystemService(DisplayManager.class);
+            dm.unregisterDisplayListener(this);
+        }
+
+        @Override
+        public void onDisplayAdded(int displayId) {}
+
+        @Override
+        public void onDisplayRemoved(int displayId) {}
+
+        @Override
+        public void onDisplayChanged(int displayId) {
+            if (displayId != Display.DEFAULT_DISPLAY) {
+                return;
+            }
+
+            restoreDensity();
+        }
+
+        private void restoreDensity() {
+            if (mContext == null) {
+                return;
+            }
+
+            final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
+            if (density.getDefaultDensity() == mDefaultDensity) {
+                return;
+            }
+
+            if (density.getValues()[mCurrentIndex] != density.getDefaultDensity()) {
+                DisplayDensityUtils.setForcedDisplayDensity(
+                        Display.DEFAULT_DISPLAY, density.getValues()[mCurrentIndex]);
+            }
+
+            mDefaultDensity = density.getDefaultDensity();
+            stopObserve();
+        }
+    }
 }

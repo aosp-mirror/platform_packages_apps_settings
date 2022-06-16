@@ -17,13 +17,16 @@
 package com.android.settings.wifi.dpp;
 
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.provider.Settings;
+import android.util.EventLog;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
@@ -116,6 +119,13 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
 
     @Override
     protected void handleIntent(Intent intent) {
+        if (isGuestUser(getApplicationContext())) {
+            Log.e(TAG, "Guest user is not allowed to configure Wi-Fi!");
+            EventLog.writeEvent(0x534e4554, "224772890", -1 /* UID */, "User is a guest");
+            finish();
+            return;
+        }
+
         String action = intent != null ? intent.getAction() : null;
         if (action == null) {
             finish();
@@ -185,7 +195,8 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
         }
     }
 
-    private void showQrCodeScannerFragment() {
+    @VisibleForTesting
+    void showQrCodeScannerFragment() {
         WifiDppQrCodeScannerFragment fragment =
                 (WifiDppQrCodeScannerFragment) mFragmentManager.findFragmentByTag(
                         WifiDppUtils.TAG_FRAGMENT_QR_CODE_SCANNER);
@@ -383,5 +394,12 @@ public class WifiDppConfiguratorActivity extends WifiDppBaseActivity implements
         }
 
         return null;
+    }
+
+    private static boolean isGuestUser(Context context) {
+        if (context == null) return false;
+        final UserManager userManager = context.getSystemService(UserManager.class);
+        if (userManager == null) return false;
+        return userManager.isGuestUser();
     }
 }
