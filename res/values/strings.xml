@@ -813,6 +813,12 @@
     <!-- Introduction detail message shown in face enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_message">Use your face to unlock your phone, authorize purchases, or sign in to apps.</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default">Allow your child to use their face to unlock their phone</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet">Allow your child to use their face to unlock their tablet</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device">Allow your child to use their face to unlock their device</string>
+    <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message" product="default">Using your child\u2019s face to unlock their phone may be less secure than a strong pattern or PIN.</string>
     <!-- Introduction detail message shown in face enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
     <string name="security_settings_face_enroll_introduction_consent_message" product="tablet">Using your child\u2019s face to unlock their tablet may be less secure than a strong pattern or PIN.</string>
@@ -833,6 +839,8 @@
     <!-- Message on the face enrollment introduction page that provides information about what could cause the phone to unlock when asking for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_consent_looking"></string>
     <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone. [CHAR LIMIT=NONE] -->
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure"></string>
+    <!-- Message on the face enrollment introduction page that provides information about the relative security of face for unlocking the phone for parental consent. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_less_secure"></string>
     <!-- Message on the face enrollment introduction page that provides information about how to require eyes to be open for Face Unlock. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_enroll_introduction_info_gaze"></string>
@@ -8465,7 +8473,7 @@
     <string name="keywords_font_size">text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement</string>
 
     <!-- List of synonyms for the always show time and info [CHAR LIMIT=NONE] -->
-    <string name="keywords_always_show_time_info">always on display</string>
+    <string name="keywords_always_show_time_info">always on display, AOD</string>
 
     <!-- Option title for the default sound, context based on screen -->
     <string name="default_sound">Default sound</string>
