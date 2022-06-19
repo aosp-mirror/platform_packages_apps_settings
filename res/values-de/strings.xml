@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Gesichtsentsperrung zulassen"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Per Gesichtserkennung authentifizieren"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Smartphones zu verwenden"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Tablets zu verwenden"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Du kannst deinem Kind erlauben, sein Gesicht zum Entsperren des Geräts zu verwenden"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Das Entsperren des Smartphones deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Das Entsperren des Tablets deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Das Entsperren des Geräts deines Kindes mit seinem Gesicht kann weniger sicher sein als ein starkes Muster oder eine starke PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Du kannst die Entsperrung per Gesichtserkennung verwenden, um dein Smartphone zu entsperren oder Käufe zu autorisieren.\n\nHinweis: Dieses Gerät kannst du nicht per Gesichtserkennung entsperren. Weitere Informationen erhältst du vom Administrator deiner Organisation."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Verwende die Entsperrung per Gesichtserkennung, um dein Smartphone zu entsperren, Käufe zu autorisieren oder dich in Apps anzumelden"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kannst jederzeit die Aufnahmen und das Modell deines Fingerabdrucks löschen oder das Entsperren per Fingerabdruck in den Einstellungen deaktivieren. Aufnahmen und Modelle von Fingerabdrücken werden auf deinem Gerät gespeichert, bis du sie löschst."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du und dein Kind könnt jederzeit die Aufnahmen der Fingerabdrücke und das erstellte Fingerabdruckmodell löschen oder die Funktion „Entsperrung per Fingerabdruck“ in den Einstellungen deaktivieren. Aufnahmen von Fingerabdrücken und Fingerabdruckmodelle bleiben auf dem Smartphone gespeichert, bis sie gelöscht werden."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Es kann passieren, dass dein Smartphone unbeabsichtigt entsperrt wird, wenn es z. B. von jemandem gegen deinen Finger gehalten wird."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Es kann passieren, dass dein Tablet entsperrt wird, wenn du es nicht möchtest, z. B. wenn es von jemandem gegen deinen Finger gehalten wird."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Es kann passieren, dass dein Gerät entsperrt wird, wenn du es nicht möchtest, z. B. wenn es von jemandem gegen deinen Finger gehalten wird."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Das Smartphone deines Kindes kann entsperrt werden, selbst wenn es das nicht beabsichtigt. Dazu kann es z. B. an seinen Finger gehalten werden."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der das Zertifikat „Made for Google“ hat. Bei anderen Displayschutzfolien wird dein Fingerabdruck möglicherweise nicht erkannt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Die besten Ergebnisse erzielst du mit einem Displayschutz, der das Zertifikat „Made for Google“ hat. Bei anderen Displayschutzfolien wird der Fingerabdruck deines Kindes möglicherweise nicht erkannt."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Abbildung mit Gerät und Position des Fingerabdrucksensors"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Name"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ok"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Noch einmal versuchen"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Löschen"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Sensor berühren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Lege deinen Finger auf den Sensor und hebe ihn an, wenn du eine Vibration spürst."</string>
@@ -538,12 +536,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingerabdruck hinzugefügt"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Die Entsperrung per Fingerabdruck wird immer besser, je öfter du sie zum Entsperren deines Tablets oder zur Bestätigung deiner Identität in Apps nutzt"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Die Entsperrung per Fingerabdruck wird immer besser, je öfter du sie zum Entsperren deines Geräts oder zur Bestätigung deiner Identität in Apps nutzt"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Die Entsperrung per Fingerabdruck wird immer besser, je öfter du sie zum Entsperren deines Smartphones oder zur Bestätigung deiner Identität in Apps nutzt"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Später"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Hebe den Finger an und lege ihn dann noch mal auf den Sensor"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Halte nacheinander beide Seiten der Fingerkuppe einen Moment lang auf den Sensor"</string>
@@ -601,10 +596,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Fertig"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Das ist nicht der Sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Sensor auf Rückseite mit Zeigefinger berühren."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Zeitüberschreitung bei Fingerabdruckeinrichtung"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Du kannst es entweder jetzt noch einmal versuchen oder den Fingerabdruck später in den Einstellungen einrichten"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Fehler bei Fingerabdruckregistrierung. Versuche es erneut oder verwende einen anderen Finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Weiteren hinzufügen"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Weiter"</string>

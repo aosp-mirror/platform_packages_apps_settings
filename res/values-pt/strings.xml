@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permitir Desbloqueio facial"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Usar seu rosto para autenticar"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Use seu rosto para desbloquear o smartphone, autorizar compras ou fazer login em apps."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Permita que a criança use o rosto para desbloquear o smartphone"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Permita que a criança use o rosto para desbloquear o tablet"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Permita que a criança use o rosto para desbloquear o dispositivo"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Usar o rosto da criança para desbloquear o smartphone pode ser menos seguro do que um padrão ou PIN forte."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Usar o rosto da criança para desbloquear o tablet pode ser menos seguro do que um padrão ou PIN forte."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Usar o rosto da criança para desbloquear o dispositivo pode ser menos seguro do que um padrão ou PIN forte."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Use seu rosto para desbloquear o smartphone ou aprovar compras.\n\nObservação: não é possível usar seu rosto para desbloquear este dispositivo. Para mais informações, entre em contato com o administrador da organização."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Use seu rosto para desbloquear o smartphone, autorizar compras ou fazer login em apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Você pode excluir as imagens e o modelo da impressão digital ou desativar o Desbloqueio por impressão digital a qualquer momento nas configurações. As imagens e os modelos de impressão digital são armazenados no smartphone até serem excluídos."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Você e a criança podem excluir as imagens e o modelo de impressão digital dela ou desativar o Desbloqueio por impressão digital a qualquer momento nas Configurações. As imagens e os modelos de impressão digital ficam armazenados no smartphone até serem excluídos."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"O smartphone pode ser desbloqueado mesmo se não for sua intenção. Por exemplo, se alguém colocar seu dedo no sensor."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"O tablet poderá ser desbloqueado mesmo se essa não for sua intenção. Por exemplo, se alguém colocar seu dedo no sensor."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"O dispositivo poderá ser desbloqueado mesmo se essa não for sua intenção. Por exemplo, se alguém colocar seu dedo no sensor."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"O smartphone da criança poderá ser desbloqueado mesmo quando essa não for a intenção. Por exemplo, se alguém levar o leitor ao dedo dela."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Para conseguir melhores resultados, use uma película com certificação Made For Google. Sua impressão digital pode não funcionar com outras películas."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para conseguir melhores resultados, use uma película com certificação Made For Google. A impressão digital da criança pode não funcionar com outras películas."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustração mostrando a localização do sensor de impressão digital no dispositivo"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nome"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Ok"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Tentar novamente"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Excluir"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toque no sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Encoste o dedo no sensor e, após sentir uma vibração, tire o dedo"</string>
@@ -538,12 +536,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Impressão digital adicionada"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o tablet ou confirmar sua identidade em apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o dispositivo ou confirmar sua identidade em apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"O Desbloqueio por impressão digital melhora sempre que é usado para desbloquear o smartphone ou confirmar sua identidade em apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Fazer isso depois"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Tire o dedo e toque novamente"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Coloque a lateral da sua impressão digital no sensor e mantenha o dedo parado por alguns instantes. Depois, mude para o outro lado"</string>
@@ -601,10 +596,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Concluído"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Opa, este não é o sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toque no sensor na parte traseira do smartphone. Use o dedo indicador."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"A configuração da impressão digital expirou"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Tente novamente ou configure a impressão digital mais tarde nas configurações"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"O registro da impressão digital não funcionou. Tente novamente ou use um dedo diferente."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Adicionar outra"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Próxima"</string>

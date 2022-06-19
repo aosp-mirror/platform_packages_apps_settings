@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Tillad ansigtslås"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Tillad, at dit barn bruger ansigtet til at låse sin telefon op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Tillad, at dit barn bruger ansigtet til at låse sin tablet op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Tillad, at dit barn bruger ansigtet til at låse sin enhed op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Lås din telefon op eller godkend køb ved hjælp af dit ansigt.\n\nBemærk! Du kan ikke bruge dit ansigt til at låse denne enhed op. Kontakt administratoren for din organisation for at få flere oplysninger."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Du kan til enhver tid slette dine fingeraftryksbilleder og din fingeraftryksmodel eller deaktivere Oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og fingeraftryksmodellen gemmes på telefonen, indtil du sletter dem."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Du og dit barn kan til enhver tid slette barnets billeder og model eller deaktivere oplåsning med fingeraftryk i Indstillinger. Fingeraftryksbilleder og -modeller gemmes på telefonen, indtil de slettes."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Din telefon kan blive låst op, når det ikke er meningen, f.eks. hvis nogen holder din finger op mod den."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Din tablet kan blive låst op utilsigtet, f.eks. hvis nogen holder din finger op mod den."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Din enhed kan blive låst op utilsigtet, f.eks. hvis nogen holder din finger op mod den."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Dit barns telefon kan låses op, når det ikke er meningen, f.eks. hvis nogen holder den op mod dit barns finger."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Du får de bedste resultater ved at bruge en skærmbeskytter, der er Made For Google-certificeret. Dit barns fingeraftryk virker muligvis ikke med andre skærmbeskyttere."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Illustration med enhed og lokation af fingeraftrykslæser"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Navn"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Prøv igen"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Slet"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Tryk på sensoren"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Placer fingeren på sensoren, og løft, når du mærker en vibration"</string>
@@ -536,12 +534,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"På den måde registreres en større del af dit fingeraftryk"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Scanning af fingeraftryk: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingeraftryk tilføjet"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din tablet op eller bekræfte din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din enhed op eller bekræfte din identitet i apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Oplåsning med fingeraftryk forbedres, jo oftere du bruger funktionen til at låse din telefon op eller bekræfte din identitet i apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gør det senere"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Løft, og tryk igen"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Placer siden af din finger på sensoren, og hold den nede. Skift derefter til den anden side."</string>
@@ -599,10 +594,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Udfør"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Hov! Dette er ikke sensoren"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Tryk på sensoren bagpå med pegefingeren."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Konfigurationen af fingeraftryk fik timeout"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Prøv igen nu, eller konfigurer fingeraftryk senere under Indstillinger"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrering af fingeraftryk virkede ikke. Prøv igen, eller brug en anden finger."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Tilføj endnu et"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Næste"</string>
@@ -5100,11 +5093,11 @@
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Af hensyn til din sikkerhed er denne indstilling i øjeblikket ikke tilgængelig."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Oplysninger om finansieret enhed"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Din kreditudbyder kan ændre indstillinger og installere software på denne enhed.\n\nHvis du glemmer en betaling, bliver din enhed låst.\n\nKontakt din kreditudbyder for at få flere oplysninger."</string>
-    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Hvis din enhed er finansieret, kan du ikke:"</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Hvis din enhed er købt på afbetaling, kan du ikke:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Installere apps uden for Play Butik"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Genstarte din enhed i sikker tilstand"</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Føje flere brugere til din enhed"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Skift dato, klokkeslæt og tidszoner"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Skifte dato, klokkeslæt og tidszoner"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Bruge Indstillinger for udviklere"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Din kreditudbyder kan:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Få adgang til dit IMEI-nummer"</string>
@@ -5117,7 +5110,7 @@
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Få adgang til apps, der tillades af kreditudbyderen"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Når du har betalt det fulde beløb:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Fjernes alle begrænsninger fra enheden"</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Kan du afinstallere kreditorappen"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Du kan afinstallere kreditorappen"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Kameraapp</item>
       <item quantity="other">Kameraapps</item>

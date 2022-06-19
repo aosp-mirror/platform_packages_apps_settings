@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Leyfa andlitslás"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Notaðu andlitið til að staðfesta"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Notaðu andlitið til að taka símann úr lás, heimila kaup eða skrá þig inn í forrit."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Leyfa barninu að nota andlitið til að opna símann"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Leyfa barninu að nota andlitið til að opna spjaldtölvuna"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Leyfa barninu að nota andlitið til að opna tækið"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Óvíst er að öruggara sé að nota andlit barnsins til að taka símann úr lás heldur en að nota sterkt mynstur eða PIN-númer."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Óvíst er að öruggara sé að nota andlit barnsins til að taka spjaldtölvuna úr lás heldur en að nota sterkt mynstur eða PIN-númer."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Óvíst er að öruggara sé að nota andlit barnsins til að taka tækið úr lás heldur en að nota sterkt mynstur eða PIN-númer."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Notaðu andlitið til að taka símann þinn úr lás eða staðfesta kaup.\n\nAthugaðu: Þú getur ekki notað andlitið til að opna þetta tæki. Hafðu samband við kerfisstjóra fyrirtækisins þíns til að fá frekari upplýsingar."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Notaðu andlitið til að taka símann úr lás, heimila kaup eða skrá þig inn í forrit."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Þú getur eytt fingrafaramyndunum og -líkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafaramyndir og -líkön eru geymd á öruggan hátt í símanum þar til þeim er eytt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Þú og barnið þitt getið eytt fingrafarsmyndunum og -líkaninu eða slökkt á fingrafarskenni hvenær sem er í stillingunum. Fingrafaramyndir og -líkön eru geymd á öruggan hátt í símanum þar til þeim er eytt."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Síminn gæti opnast óvart, til dæmis ef einhver heldur honum að fingrinum á þér."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Spjaldtölvan gæti opnast án þess að þú ætlir þér það, til dæmis ef einhver heldur henni að fingrinum á þér."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Tækið gæti opnast án þess að þú ætlir þér það, til dæmis ef einhver heldur því að fingrinum á þér."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Sími barnsins kann að opnast án þess að það hafi verið ætlun þess, t.d. ef einhver heldur símanum að fingri þess."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Best er að nota skjávörn sem er vottuð með merkinu „Hannað fyrir Google“. Óvíst er að hægt sé að nota fingrafarið með öðrum skjávörnum."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Best er að nota skjávörn sem er vottuð með merkinu „Hannað fyrir Google“. Óvíst er að barnið geti notað fingrafarið með öðrum skjávörnum."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Teikning af tæki og staðsetningu fingrafaraskynjara"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Heiti"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Í lagi"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Reyna aftur"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Eyða"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Snertu lesarann"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Settu fingurinn á skynjarann og lyftu honum þegar þú finnur titring"</string>
@@ -536,12 +534,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Þannig er hægt að mynda fingrafarið þitt betur"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Skráir fingrafar <xliff:g id="PERCENTAGE">%d</xliff:g> prósent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Fingrafari bætt við"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Fingrafarskenni verður betra því oftar sem þú notar það til að taka spjaldtölvuna þína úr lás eða staðfesta hver þú ert í forritum"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Fingrafarskenni verður betra því oftar sem þú notar það til að taka tækið þitt úr lás eða staðfesta hver þú ert í forritum"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Fingrafarskenni verður betra því oftar sem þú notar það til að taka símann þinn úr lás eða staðfesta hver þú ert í forritum"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Gera þetta seinna"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Lyftu og snertu svo aftur"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Settu hlið fingrafarsins á fingrafaralesarann og haltu fingrinum þar. Skiptu svo yfir á hina hliðina"</string>
@@ -599,10 +594,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Lokið"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Úbbs, þetta er ekki skynjarinn"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Snertu lesarann aftan á símanum. Notaðu vísifingur."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Fingrafarsuppsetning rann út á tíma"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Reyndu aftur núna eða settu upp fingrafar síðar í stillingum"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Skráning fingrafars virkaði ekki. Reyndu aftur eða notaðu annan fingur."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Bæta öðru við"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Áfram"</string>
@@ -1877,7 +1870,7 @@
     <string name="mobile_connect_to_internet" msgid="8162654404357069060">"Tengdu tækið við netið"</string>
     <string name="location_category_recent_location_requests" msgid="2205900488782832082">"Nýlegar staðsetningarbeiðnir"</string>
     <string name="location_recent_location_requests_see_all" msgid="7918405176741692524">"Sjá allt"</string>
-    <string name="location_category_location_services" msgid="8163798686832434284">"Staðsetningarþjónustur"</string>
+    <string name="location_category_location_services" msgid="8163798686832434284">"Staðsetningar­þjónustur"</string>
     <string name="location_title" msgid="5819154746934945021">"Staðsetningin mín"</string>
     <string name="managed_profile_location_switch_title" msgid="1265007506385460066">"Staðsetning vinnusniðs"</string>
     <string name="location_app_level_permissions" msgid="907206607664629759">"Staðsetningarheimildir forrits"</string>
@@ -1897,8 +1890,8 @@
     <string name="location_scanning_wifi_always_scanning_description" msgid="6236055656376931306">"Leyfa forritum og þjónustu að leita að Wi-Fi netum hvenær sem er, jafnvel þegar slökkt er á Wi-Fi. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"Bluetooth-leit"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"Leyfa forritum og þjónustu að leita að nálægum tækjum hvenær sem er, jafnvel þegar slökkt er á Bluetooth. Sem dæmi er hægt að nota þetta til að bæta eiginleika og þjónustu sem byggja á staðsetningu."</string>
-    <string name="location_services_preference_title" msgid="604317859531782159">"Staðsetningarþjónustur"</string>
-    <string name="location_services_screen_title" msgid="5640002489976602476">"Staðsetningarþjónus­tur"</string>
+    <string name="location_services_preference_title" msgid="604317859531782159">"Staðsetningar­þjónustur"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"Staðsetningar­þjónus­tur"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Staðsetningarþjónustur fyrir vinnuna"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Nota staðsetningu til að stilla tímabelti"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Staðsetningar tækis krafist"</string>
@@ -2372,7 +2365,7 @@
     <string name="accessibility_screen_magnification_short_summary" msgid="2207048420669939150">"Ýtt þrisvar til að auka aðdrátt"</string>
     <string name="accessibility_screen_magnification_navbar_short_summary" msgid="4885018322430052037">"Ýttu á hnapp til að stækka"</string>
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Auktu aðdráttinn á skjánum til að stækka efnið"</string>
-    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Gerðu eftirfarandi til að auka aðdrátt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {1,number,integer}. Ýttu á skjáinn&lt;br/&gt; {2,number,integer}. Dragðu 2 fingur til að ferðast um skjáinn&lt;br/&gt; {3,number,integer}. Færðu tvo fingur saman til að stilla aðdráttinn&lt;br/&gt; {4,number,integer}. Notaðu flýtileið til að hætta stækkun&lt;br/&gt;&lt;br/&gt; Til að auka aðdrátt tímabundið:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gakktu úr skugga um að stækkunaraðferðin sé stillt til að birtast á öllum skjánum&lt;br/&gt; {1,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {2,number,integer}. Haltu fingri hvar sem er á skjánum&lt;br/&gt; {3,number,integer}. Dragðu fingurinn til að ferðast um skjáinn&lt;br/&gt; {4,number,integer}. Lyftu fingri til að hætta stækkun"</string>
+    <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Gerðu eftirfarandi til að auka aðdrátt:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {1,number,integer}. Ýttu á skjáinn&lt;br/&gt; {2,number,integer}. Dragðu 2 fingur til að ferðast um skjáinn&lt;br/&gt; {3,number,integer}. Færðu tvo fingur saman til að stilla aðdráttinn&lt;br/&gt; {4,number,integer}. Notaðu flýtileið til að hætta stækkun&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Til að auka aðdrátt tímabundið:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Gakktu úr skugga um að stækkunaraðferðin sé stillt til að birtast á öllum skjánum&lt;br/&gt; {1,number,integer}. Notaðu flýtileið til að hefja stækkun&lt;br/&gt; {2,number,integer}. Haltu fingri hvar sem er á skjánum&lt;br/&gt; {3,number,integer}. Dragðu fingurinn til að ferðast um skjáinn&lt;br/&gt; {4,number,integer}. Lyftu fingri til að hætta stækkun"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"Þegar kveikt er á stækkun geturðu aukið aðdráttinn á skjánum.\n\n"<b>"Til að stækka"</b>" skaltu hefja stækkun og ýta svo hvar sem er á skjáinn.\n"<ul><li>"Dragðu með tveimur eða fleiri fingrum til að fletta"</li>\n<li>"Færðu tvo eða fleiri fingur saman til að stilla aðdrátt"</li></ul>\n\n<b>"Til að stækka tímabundið"</b>" skaltu hefja stækkun og halda síðan fingri hvar sem er á skjánum.\n"<ul><li>"Dragðu til að fara um skjáinn"</li>\n<li>"Lyftu fingrinum til að minnka aðdrátt"</li></ul>\n\n"Þú getur ekki stækkað á lyklaborðinu eða yfirlitsstikunni."</string>
     <string name="accessibility_tutorial_pager" msgid="8461939455728454061">"Síða <xliff:g id="CURRENT_PAGE">%1$d</xliff:g> af <xliff:g id="NUM_PAGES">%2$d</xliff:g>"</string>
     <string name="accessibility_tutorial_dialog_title_button" msgid="4681164949716215131">"Notaðu aðgengishnappinn til að opna"</string>
@@ -5101,23 +5094,23 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Upplýsingar um fjármögnuð tæki"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Lánveitandi þinn getur breytt stillingum og sett upp hugbúnað í þessu tæki.\n\nEf þú missir úr greiðslu verður tækinu þínu læst.\n\n Lánveitandinn veitir nánari upplýsingar."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ef tækið er kostað geturðu ekki:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Settu upp forrit sem eru ekki í Play Store"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Sett upp forrit sem eru ekki í Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Endurræstu tækið þitt í öruggri stillingu"</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Bæta mörgum notendum við tækið"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Breyttu dagsetningu, tíma og tímabeltum"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Bætt mörgum notendum við tækið"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Breytt dagsetningu, tíma og tímabeltum"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Notað forritunarkosti"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Lánveitandinn þinn getur:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Náðu í IMEI-númerið þitt"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Náð í IMEI-númerið þitt"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Núllstillt tækið þitt"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ef tækið er læst geturðu aðeins notað það til að:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Hringt neyðarsímtöl"</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Farðu yfir kerfisupplýsingar á borð við dagsetningu, tíma, stöðu kerfis og rafhlöðu"</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Kveiktu eða slökktu á tækinu"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Hringja neyðarsímtöl"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Fara yfir kerfisupplýsingar á borð við dagsetningu, tíma, stöðu kerfis og rafhlöðu"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Kveikja eða slökkva á tækinu"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Skoða tilkynningar og SMS-skilaboð"</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Fáðu aðgang að forritum sem lánveitandinn leyfir"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Fá aðgang að forritum sem lánveitandinn leyfir"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Þegar þú hefur greitt alla upphæðina:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Allar takmarkanir hafa verið fjarlægðar úr tækinu"</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Þú getur fjarlægt forrit lánveitanda"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Hafa allar takmarkanir verið fjarlægðar úr tækinu"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Geturðu fjarlægt forrit lánveitanda"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Myndavélarforrit</item>
       <item quantity="other">Myndavélarforrit</item>
