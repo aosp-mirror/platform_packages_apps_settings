@@ -21,12 +21,18 @@ import android.app.PendingIntent;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccPortInfo;
+import android.telephony.UiccSlotInfo;
+import android.telephony.UiccSlotMapping;
 import android.telephony.euicc.EuiccManager;
 import android.util.Log;
 
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.telephony.EuiccOperationSidecar;
 
+import com.google.common.collect.ImmutableList;
+
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +48,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     private int mPort;
     private SubscriptionInfo mRemovedSubInfo;
     private boolean mIsDuringSimSlotMapping;
+    private List<SubscriptionInfo> mActiveSubInfos;
 
     /** Returns a SwitchToEuiccSubscriptionSidecar sidecar instance. */
     public static SwitchToEuiccSubscriptionSidecar get(FragmentManager fm) {
@@ -85,6 +92,7 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         setState(State.RUNNING, Substate.UNUSED);
         mCallbackIntent = createCallbackIntent();
         mSubId = subscriptionId;
+
         int targetSlot = getTargetSlot();
         if (targetSlot < 0) {
             Log.d(TAG, "There is no esim, the TargetSlot is " + targetSlot);
@@ -92,20 +100,37 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
             return;
         }
 
+        SubscriptionManager subscriptionManager = getContext().getSystemService(
+                SubscriptionManager.class);
+        mActiveSubInfos = SubscriptionUtil.getActiveSubscriptions(subscriptionManager);
+
         // To check whether the esim slot's port is active. If yes, skip setSlotMapping. If no,
         // set this slot+port into setSimSlotMapping.
-        mPort = (port < 0) ? getTargetPortId(removedSubInfo) : port;
+        mPort = (port < 0) ? getTargetPortId(targetSlot, removedSubInfo) : port;
         mRemovedSubInfo = removedSubInfo;
         Log.d(TAG,
-                String.format("set esim into the SubId%d Slot%d:Port%d",
+                String.format("Set esim into the SubId%d Physical Slot%d:Port%d",
                         mSubId, targetSlot, mPort));
-
-        if (mTelephonyManager.isMultiSimEnabled() && removedSubInfo != null
-                && removedSubInfo.isEmbedded()) {
-            // In DSDS mode+MEP, if the replaced esim is active, then it should be disabled esim
-            // profile before changing SimSlotMapping process.
-            // Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
-            // The SimSlotMapping is ready, then to execute activate/inactivate esim.
+        if (mSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            // If the subId is INVALID_SUBSCRIPTION_ID, disable the esim (the default esim slot
+            // which is selected by the framework).
+            switchToSubscription();
+        } else if ((mTelephonyManager.isMultiSimEnabled() && removedSubInfo != null
+                && removedSubInfo.isEmbedded())
+                || isEsimEnabledAtTargetSlotPort(targetSlot, mPort)) {
+            // Case 1: In DSDS mode+MEP, if the replaced esim is active, then the replaced esim
+            // should be disabled before changing SimSlotMapping process.
+            //
+            // Case 2: If the user enables the esim A on the target slot:port which is active
+            // and there is an active esim B on target slot:port, then the settings disables the
+            // esim B before the settings enables the esim A on the target slot:port.
+            //
+            // Step:
+            // 1) Disables the replaced esim.
+            // 2) Switches the SimSlotMapping if the target slot:port is not active.
+            // 3) Enables the target esim.
+            // Note: Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
+            Log.d(TAG, "Disable the enabled esim before the settings enables the target esim");
             mIsDuringSimSlotMapping = true;
             mEuiccManager.switchToSubscription(SubscriptionManager.INVALID_SUBSCRIPTION_ID, mPort,
                     mCallbackIntent);
@@ -114,10 +139,22 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
     }
 
-    private int getTargetPortId(SubscriptionInfo removedSubInfo) {
-        if (!mTelephonyManager.isMultiSimEnabled() || !isMultipleEnabledProfilesSupported()) {
-            // In the 'SS mode' or 'DSDS+no MEP', the port is 0.
+    private int getTargetPortId(int physicalEsimSlotIndex, SubscriptionInfo removedSubInfo) {
+        if (!isMultipleEnabledProfilesSupported(physicalEsimSlotIndex)) {
+            Log.d(TAG, "The slotId" + physicalEsimSlotIndex + " is no MEP, port is 0");
             return 0;
+        }
+
+        if (!mTelephonyManager.isMultiSimEnabled()) {
+            // In the 'SS mode'
+            // If there is the esim slot is active, the port is from the current esim slot.
+            // If there is no esim slot in device, then the esim's port is 0.
+            Collection<UiccSlotMapping> uiccSlotMappings = mTelephonyManager.getSimSlotMapping();
+            Log.d(TAG, "In SS mode, the UiccSlotMapping: " + uiccSlotMappings);
+            return uiccSlotMappings.stream()
+                    .filter(i -> i.getPhysicalSlotIndex() == physicalEsimSlotIndex)
+                    .mapToInt(i -> i.getPortIndex())
+                    .findFirst().orElse(0);
         }
 
         // In the 'DSDS+MEP', if the removedSubInfo is esim, then the port is
@@ -136,11 +173,12 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         // port is 0.
 
         int port = 0;
-        SubscriptionManager subscriptionManager = getContext().getSystemService(
-                SubscriptionManager.class);
+        if(mActiveSubInfos == null){
+            Log.d(TAG, "mActiveSubInfos is null.");
+            return port;
+        }
         List<SubscriptionInfo> activeEsimSubInfos =
-                SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
-                        .stream()
+                mActiveSubInfos.stream()
                         .filter(i -> i.isEmbedded())
                         .sorted(Comparator.comparingInt(SubscriptionInfo::getPortIndex))
                         .collect(Collectors.toList());
@@ -153,7 +191,31 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
     }
 
     private int getTargetSlot() {
-        return UiccSlotUtil.getEsimSlotId(getContext());
+        return UiccSlotUtil.getEsimSlotId(getContext(), mSubId);
+    }
+
+    private boolean isEsimEnabledAtTargetSlotPort(int physicalSlotIndex, int portIndex) {
+        int logicalSlotId = getLogicalSlotIndex(physicalSlotIndex, portIndex);
+        if (logicalSlotId == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            return false;
+        }
+        return mActiveSubInfos != null
+                && mActiveSubInfos.stream()
+                .anyMatch(i -> i.isEmbedded() && i.getSimSlotIndex() == logicalSlotId);
+    }
+
+    private int getLogicalSlotIndex(int physicalSlotIndex, int portIndex) {
+        ImmutableList<UiccSlotInfo> slotInfos = UiccSlotUtil.getSlotInfos(mTelephonyManager);
+        if (slotInfos != null && physicalSlotIndex >= 0 && physicalSlotIndex < slotInfos.size()
+                && slotInfos.get(physicalSlotIndex) != null) {
+            for (UiccPortInfo portInfo : slotInfos.get(physicalSlotIndex).getPorts()) {
+                if (portInfo.getPortIndex() == portIndex) {
+                    return portInfo.getLogicalSlotIndex();
+                }
+            }
+        }
+
+        return SubscriptionManager.INVALID_SIM_SLOT_INDEX;
     }
 
     private void onSwitchSlotSidecarStateChange() {
@@ -171,14 +233,11 @@ public class SwitchToEuiccSubscriptionSidecar extends EuiccOperationSidecar {
         }
     }
 
-    private boolean isMultipleEnabledProfilesSupported() {
+    private boolean isMultipleEnabledProfilesSupported(int physicalEsimSlotIndex) {
         List<UiccCardInfo> cardInfos = mTelephonyManager.getUiccCardsInfo();
-        if (cardInfos == null) {
-            Log.w(TAG, "UICC cards info list is empty.");
-            return false;
-        }
-        return cardInfos.stream().anyMatch(
-                cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
+        return cardInfos.stream()
+                .anyMatch(cardInfo -> cardInfo.getPhysicalSlotIndex() == physicalEsimSlotIndex
+                        && cardInfo.isMultipleEnabledProfilesSupported());
     }
 
     private void switchToSubscription() {
