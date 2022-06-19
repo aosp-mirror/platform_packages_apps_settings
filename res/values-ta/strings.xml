@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"முகம் காட்டித் திறத்தல் அம்சத்தை அனுமதித்தல்"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"அங்கீகரிக்க, முகத்தைப் பயன்படுத்தலாம்"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"மொபைலை அன்லாக் செய்ய, வாங்குதல்களை அங்கீகரிக்க &amp; ஆப்ஸில் உள்நுழைய, உங்கள் முகத்தைப் பயன்படுத்தலாம்."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்தி மொபைலை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்தி டேப்லெட்டை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்திச் சாதனத்தை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் மொபைலை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் டேப்லெட்டை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் சாதனத்தை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"மொபைலை அன்லாக் செய்யவும் பொருட்கள் வாங்குவதை அங்கீகரிக்கவும் உங்கள் முகத்தைப் பயன்படுத்தவும். \n\nகவனத்திற்கு: இந்தச் சாதனத்தை அன்லாக் செய்ய உங்கள் முகத்தைப் பயன்படுத்த இயலாது. மேலும் தகவலுக்கு உங்கள் நிறுவனத்தின் நிர்வாகியைத் தொடர்புகொள்ளவும்."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"மொபைலை அன்லாக் செய்ய, வாங்குதல்களை அங்கீகரிக்க &amp; ஆப்ஸில் உள்நுழைய, உங்கள் முகத்தைப் பயன்படுத்தலாம்"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -3648,7 +3649,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"பணிச்சுமை, பணி, சுயவிவரம்"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"பணிக் கணக்கு, நிர்வகிக்கப்படும் சுயவிவரம், ஒருங்கிணை, ஒருங்கிணைத்தல், பணி, சுயவிவரம்"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"சைகைகள்"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"வாலட்"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"கட்டணம் செலுத்தவும், தட்டவும், கட்டணம் செலுத்துதல்"</string>
     <string name="keywords_backup" msgid="707735920706667685">"காப்புப்பிரதி, காப்புப் பிரதி"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"சைகை"</string>

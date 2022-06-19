@@ -149,8 +149,8 @@
     <string name="bluetooth_pref_summary" product="tablet" msgid="3506962706611366830">"Zezwól tabletowi na komunikowanie się z urządzeniami Bluetooth w pobliżu"</string>
     <string name="bluetooth_pref_summary" product="device" msgid="2192027516577675587">"Zezwól urządzeniu na komunikowanie się z urządzeniami Bluetooth w pobliżu"</string>
     <string name="bluetooth_pref_summary" product="default" msgid="768958961865499804">"Zezwól telefonowi na komunikowanie się z urządzeniami Bluetooth w pobliżu"</string>
-    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Wyłącz odciążanie sprzętu Bluetooth A2DP"</string>
-    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Wyłącz przejmowanie obciążenia sprzętu audio Bluetooth LE"</string>
+    <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"Wyłącz sprzętowe odciążanie Bluetooth A2DP"</string>
+    <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"Wyłącz sprzętowe odciążanie audio Bluetooth LE"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"Uruchomić urządzenie ponownie?"</string>
     <string name="bluetooth_disable_hw_offload_dialog_message" msgid="1524373895333698779">"Aby zmienić to ustawienie, musisz ponownie uruchomić urządzenie."</string>
     <string name="bluetooth_disable_hw_offload_dialog_confirm" msgid="5594859658551707592">"Uruchom ponownie"</string>
@@ -374,12 +374,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Zezwól na rozpoznawanie twarzy"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Użyj własnej twarzy do uwierzytelniania"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Używaj rozpoznawania twarzy do odblokowywania telefonu, autoryzowania zakupów i logowania się w aplikacjach."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Zezwalaj na odblokowywanie telefonu przez dziecko za pomocą rozpoznawania twarzy"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Zezwalaj na odblokowywanie tabletu przez dziecko za pomocą rozpoznawania twarzy"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Zezwalaj na odblokowywanie urządzenia przez dziecko za pomocą rozpoznawania twarzy"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Odblokowywanie telefonu dziecka skanem jego twarzy może być mniej bezpieczne niż trudny wzór czy kod PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Odblokowywanie tabletu dziecka skanem jego twarzy może być mniej bezpieczne niż trudny wzór czy kod PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Odblokowywanie urządzenia dziecka skanem jego twarzy może być mniej bezpieczne niż trudny wzór czy kod PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Odblokowuj telefon i zatwierdzaj zakupy za pomocą funkcji rozpoznawania twarzy.\n\nUwaga: nie możesz odblokowywać tego urządzenia za pomocą funkcji rozpoznawania twarzy. Więcej informacji uzyskasz od administratora swojej organizacji."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Używaj rozpoznawania twarzy do odblokowywania telefonu, autoryzowania zakupów i logowania się w aplikacjach"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -387,6 +387,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5258,8 +5259,8 @@
     <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Włączanie i wyłączanie urządzenia"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Wyświetlanie powiadomień i SMS-ów"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Uzyskiwanie dostępu do aplikacji dozwolonych przez operatora udzielającego kredytu"</string>
-    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Po zapłaceniu pełnej kwoty możesz wykonywać te czynności:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Wszystkie ograniczenia zostały usunięte z urządzenia"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Po zapłaceniu pełnej kwoty:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Wszystkie ograniczenia zostaną usunięte z urządzenia"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Możesz odinstalować aplikację kredytodawcy"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="few">Aplikacje Aparat</item>

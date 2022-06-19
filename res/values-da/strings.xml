@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Tillad ansigtslås"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Brug dit ansigt til godkendelse"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Tillad, at dit barn bruger ansigtet til at låse sin telefon op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Tillad, at dit barn bruger ansigtet til at låse sin tablet op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Tillad, at dit barn bruger ansigtet til at låse sin enhed op"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"En ansigtslås kan være mindre sikker end et stærkt mønster eller en stærk pinkode."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Lås din telefon op eller godkend køb ved hjælp af dit ansigt.\n\nBemærk! Du kan ikke bruge dit ansigt til at låse denne enhed op. Kontakt administratoren for din organisation for at få flere oplysninger."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Brug dit ansigt til at låse din telefon op, godkende køb og logge ind i apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5083,11 +5084,11 @@
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Af hensyn til din sikkerhed er denne indstilling i øjeblikket ikke tilgængelig."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Oplysninger om finansieret enhed"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Din kreditudbyder kan ændre indstillinger og installere software på denne enhed.\n\nHvis du glemmer en betaling, bliver din enhed låst.\n\nKontakt din kreditudbyder for at få flere oplysninger."</string>
-    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Hvis din enhed er finansieret, kan du ikke:"</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Hvis din enhed er købt på afbetaling, kan du ikke:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Installere apps uden for Play Butik"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Genstarte din enhed i sikker tilstand"</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Føje flere brugere til din enhed"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Skift dato, klokkeslæt og tidszoner"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Skifte dato, klokkeslæt og tidszoner"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Bruge Indstillinger for udviklere"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Din kreditudbyder kan:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Få adgang til dit IMEI-nummer"</string>
@@ -5100,7 +5101,7 @@
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Få adgang til apps, der tillades af kreditudbyderen"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Når du har betalt det fulde beløb:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Fjernes alle begrænsninger fra enheden"</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Kan du afinstallere kreditorappen"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Du kan afinstallere kreditorappen"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Kameraapp</item>
       <item quantity="other">Kameraapps</item>

@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Arcalapú feloldás engedélyezése"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Arc használata hitelesítéshez"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Engedélyezheti gyermekének, hogy az arcával oldja fel a telefonja zárolását."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Engedélyezheti gyermekének, hogy az arcával oldja fel a táblagépe zárolását."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Engedélyezheti gyermekének, hogy az arcával oldja fel az eszköze zárolását."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Ha gyermeke az arcát használja a telefon feloldásához, az kevésbé biztonságos lehet, mint egy erős minta vagy PIN-kód."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Ha gyermeke az arcát használja a táblagép feloldásához, az kevésbé biztonságos lehet, mint egy erős minta vagy PIN-kód."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Ha gyermeke az arcát használja az eszköz feloldásához, az kevésbé biztonságos lehet, mint egy erős minta vagy PIN-kód."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Használja arcát a telefon feloldásához vagy vásárlások engedélyezéséhez.\n\nMegjegyzés: Nem használhatja arcát az eszköz feloldására. Ha további információra van szüksége, forduljon szervezete rendszergazdájához."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Használja arcát telefonja feloldásához, vásárlások engedélyezéséhez és alkalmazásokba való bejelentkezéshez"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5084,22 +5085,22 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Információk a finanszírozott eszközről"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"A hitelező módosíthatja az eszköz beállításait, és szoftvereket telepíthet rá.\n\nHa elmulaszt egy kifizetést, eszközét zároljuk.\n\nTovábbi információért forduljon a hitelezőhöz."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Finanszírozott eszközön a következőket nem teheti meg:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"alkalmazásokat tölthet le a Play Áruházon kívülről."</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Alkalmazások letöltése a Play Áruházon kívülről"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Az eszköz újraindítása csökkentett módban"</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"több felhasználót adhat hozzá az eszközhöz;"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Több felhasználó hozzáadása az eszközhöz"</string>
     <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Dátum, időpont és időzónák módosítása"</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"fejlesztői beállításokat használhat;"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Fejlesztői beállítások használata"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"A hitelezője a következőket teheti:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Hozzáférhet az IMEI-számhoz"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"hozzáférhet az IMEI-számhoz;"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"visszaállíthatja a gyári beállításokat."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ha eszköze zárolva van, akkor csak a következőkhöz használhatja:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"segélyhívásokat indíthat;"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Segélyhívások indítása"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Rendszeradatok (például dátum, idő, hálózatállapot és akkumulátor) megtekintése"</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Az eszköz be- vagy kikapcsolása"</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"értesítéseket és SMS-eket tekinthet meg."</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Hozzáférhet a hitelező által engedélyezett alkalmazásokhoz"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"be- vagy kikapcsolhatja az eszközt;"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Értesítések és SMS-ek megtekintése"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Hozzáférés a hitelező által engedélyezett alkalmazásokhoz"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"A teljes összeg kifizetése után:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"A rendszer minden korlátozást megszüntetett az eszközön"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"A rendszer minden korlátozást megszüntet az eszközön"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Eltávolíthatja a hitelezői alkalmazást"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">Kameraalkalmazások</item>
