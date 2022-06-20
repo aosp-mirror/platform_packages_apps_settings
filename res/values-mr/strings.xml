@@ -368,6 +368,9 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"फेस अनलॉकला अनुमती देणे"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"ऑथेंटिकेट करण्यासाठी तुमचा चेहरा वापरा"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"तुमचा फोन अनलॉक करण्यासाठी, खरेदी मान्यता देण्यासाठी किंवा ॲप्समध्ये साइन इन करण्यासाठी तुमचा चेहरा वापरा."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"तुमच्या लहान मुलाला त्यांचा फोन अनलॉक करण्यासाठी त्यांचा चेहरा वापरण्याची अनुमती द्या"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"तुमच्या लहान मुलाला त्यांचा टॅबलेट अनलॉक करण्यासाठी त्यांचा चेहरा वापरण्याची अनुमती द्या"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"तुमच्या लहान मुलाला त्यांचे डिव्हाइस अनलॉक करण्यासाठी त्यांचा चेहरा वापरण्याची अनुमती द्या"</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"तुमच्‍या लहान मुलाचा फोन अनलॉक करण्‍यासाठी त्याचा चेहरा वापरणे हे क्लिष्ट पॅटर्न किंवा पिनपेक्षा कमी सुरक्षित असू शकते."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"तुमच्‍या लहान मुलाचा टॅबलेट अनलॉक करण्‍यासाठी त्याचा चेहरा वापरणे हे क्लिष्ट पॅटर्न किंवा पिनपेक्षा कमी सुरक्षित असू शकते."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"तुमच्‍या लहान मुलाचे डिव्‍हाइस अनलॉक करण्‍यासाठी त्याचा चेहरा वापरणे हे क्लिष्ट पॅटर्न किंवा पिनपेक्षा कमी सुरक्षित असू शकते."</string>
@@ -378,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5082,20 +5086,20 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"फायनान्स केलेल्या डिव्हाइसची माहिती"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"तुमचा क्रेडिट पुरवठादार या डिव्हाइसवरील सेटिंग्ज बदलू शकतो आणि सॉफ्टवेअर इंस्टॉल करू शकतो.\n\nतुम्ही पेमेंट न केल्यास, तुमचे डिव्हाइस लॉक केले जाईल.\n\nअधिक जाणून घेण्यासाठी, तुमच्या क्रेडिट पुरवठादाराशी संपर्क साधा."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"डिव्हाइस कर्जावर घेतलेले असल्यास, तुम्ही हे करू शकत नाही:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store च्या बाहेरील ॲप्स इंस्टॉल करा"</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"तुमचे डिव्हाइस सुरक्षित मोडमध्ये रीबूट करा"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store च्या बाहेरील ॲप्स इंस्टॉल करणे"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"तुमचे डिव्हाइस सुरक्षित मोडमध्ये रीबूट करणे"</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"तुमच्या डिव्हाइसवर एकाहून अधिक वापरकर्ते जोडणे"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"तारीख, वेळ आणि टाइम झोन बदला"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"तारीख, वेळ आणि टाइम झोन बदलणे"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"डेव्हलपर पर्याय वापरणे"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"तुमचा क्रेडिट पुरवठादार हे करू शकतो:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"तुमचा IMEI नंबर अ‍ॅक्सेस करा"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"तुमचा IMEI नंबर अ‍ॅक्सेस करणे"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"तुमचे डिव्हाइस फॅक्टरी रीसेट करणे"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"तुमचे डिव्हाइस लॉक असल्यास, तुम्ही ते फक्त पुढील गोष्टींसाठी वापरू शकता:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"आणीबाणी कॉल करणे"</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"तारीख, वेळ, नेटवर्कची स्थिती आणि बॅटरी यांसारखी सिस्टीमशी संबंधित माहिती पहा"</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"तुमचे डिव्हाइस सुरू किंवा बंद करा"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"तारीख, वेळ, नेटवर्कची स्थिती आणि बॅटरी यांसारखी सिस्टीमशी संबंधित माहिती पाहणे"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"तुमचे डिव्हाइस सुरू किंवा बंद करणे"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"सूचना &amp; एसएमएस पाहणे"</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"क्रेडिट पुरवठादाराने अनुमती दिलेली ॲप्स अ‍ॅक्सेस करा"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"क्रेडिट पुरवठादाराने अनुमती दिलेली ॲप्स अ‍ॅक्सेस करणे"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"तुम्ही संपूर्ण रक्कम दिल्यानंतर:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"डिव्हाइसमधून सर्व निर्बंध काढून टाकले आहेत"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"तुम्ही क्रेडिटर अ‍ॅप अनइंस्टॉल करू शकता"</string>
