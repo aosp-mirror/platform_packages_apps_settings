@@ -374,12 +374,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Разрешите фейсконтроль"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Разблокируйте устройство при помощи распознавания лица"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Используйте фейсконтроль для разблокировки телефона, подтверждения покупок и входа в приложения."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Разрешите ребенку разблокировать его телефон с помощью фейсконтроля."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Разрешите ребенку разблокировать его планшет с помощью фейсконтроля."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Разрешите ребенку разблокировать его устройство с помощью фейсконтроля."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Распознавание лица на телефоне вашего ребенка может обеспечивать менее надежную защиту, чем графический ключ или PIN-код."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Распознавание лица на планшете вашего ребенка может обеспечивать менее надежную защиту, чем графический ключ или PIN-код."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Распознавание лица на устройстве вашего ребенка может обеспечивать менее надежную защиту, чем графический ключ или PIN-код."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Разблокируйте телефон и подтверждайте покупки с помощью фейсконтроля.\n\nВнимание! Для разблокировки этого устройства фейсконтроль использовать нельзя. За подробной информацией обратитесь к администратору."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Используйте фейсконтроль для разблокировки телефона, подтверждения покупок и входа в приложения."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -387,6 +387,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5242,25 +5243,25 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Приложению \"<xliff:g id="APP_NAME">%s</xliff:g>\" разрешен доступ к настройкам."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"В целях безопасности доступ к этой функции пока ограничен."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация о купленном в кредит устройстве"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитор может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь к кредитору."</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваша кредитная организация может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь в кредитную организацию."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Если устройство приобретено в кредит, вы не можете:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)."</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим."</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство."</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве."</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика."</string>
-    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваш кредитор может:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства."</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваша кредитная организация может:"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Сбрасывать настройки вашего устройства."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Если устройство заблокировано, вы можете только:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы."</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи."</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство."</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS."</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитором."</string>
-    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен, вы сможете:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства сняты."</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы можете удалить приложение, установленное кредитором."</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитной организацией"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства будут сняты"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы сможете удалить приложение кредитной организации"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Камеры</item>
       <item quantity="few">Камеры</item>

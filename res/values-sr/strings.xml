@@ -371,6 +371,9 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Дозволите откључавање лицем"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Потврдите идентитет лицем"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Откључавајте телефон, одобравајте куповине или се пријављујте у апликације помоћу лица."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Дозволите детету да користи откључавање телефона лицем"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Дозволите детету да користи откључавање таблета лицем"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Дозволите детету да користи откључавање уређаја лицем"</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Коришћење лица детета за откључавање телефона може да буде мање безбедно од јаког шаблона или PIN-а."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Коришћење лица детета за откључавање таблета може да буде мање безбедно од јаког шаблона или PIN-а."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Коришћење лица детета за откључавање уређаја може да буде мање безбедно од јаког шаблона или PIN-а."</string>
@@ -381,6 +384,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5160,20 +5164,20 @@
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Ово подешавање је тренутно недоступно ради ваше безбедности."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информације о финансираном уређају"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Добављач кредита може да мења подешавања и инсталира софтвер на овом уређају.\n\nАко пропустите плаћање, уређај ће се закључати.\n\nДа бисте сазнали више, обратите се добављачу кредита."</string>
-    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ако је уређај финансиран, не можете:"</string>
+    <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ако је уређај финансиран, ове функције неће бити доступне:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Инсталирајте апликације изван Play продавнице"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Рестартујте уређај у безбедном режиму"</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"додали више корисника на уређај"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Додајте више корисника на уређај"</string>
     <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Промените датум, време и временске зоне"</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"користи опције за програмере"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Kористиte опције за програмере"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Добављач кредита може да:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Приступите IMEI броју"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"ресетује уређај на фабричка подешавања"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ако је уређај закључан, можете да га користите да бисте:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"упућује хитне позиве"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Упућујте хитне позиве"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Прегледајте информације система попут датума, времена, статуса мреже и батерије"</string>
     <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Укључите или искључите уређај"</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"прегледали обавештења и SMS-ове"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Прегледајте обавештења и SMS-ове"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Приступите апликацијама које дозвољава добављач кредита"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Када платите комплетан износ:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Сва ограничења се уклањају са уређаја"</string>

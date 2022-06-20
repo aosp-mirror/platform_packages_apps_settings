@@ -368,6 +368,9 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"ഫെയ്‌സ് അൺലോക്ക് അനുവദിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"പരിശോധിച്ചുറപ്പിക്കലിനായി നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"ഫോൺ അൺലോക്ക് ചെയ്യാനോ വാങ്ങലുകൾ അംഗീകരിക്കാനോ ആപ്പുകളിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ നിങ്ങളുടെ മുഖം ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ഫോൺ അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"സ്വന്തം മുഖം ഉപയോഗിച്ച് ഉപകരണം അൺലോക്ക് ചെയ്യാൻ നിങ്ങളുടെ കുട്ടിയെ അനുവദിക്കുക"</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"നിങ്ങളുടെ കുട്ടിയുടെ മുഖം ഉപയോഗിച്ച് അവരുടെ ഫോൺ അൺലോക്ക് ചെയ്യുന്നത്, ശക്തമായ പാറ്റേൺ അല്ലെങ്കിൽ പിൻ ഉപയോഗിച്ച് അൺലോക്ക് ചെയ്യുന്നത് പോലുള്ള സുരക്ഷ നൽകുന്നില്ല."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"നിങ്ങളുടെ കുട്ടിയുടെ മുഖം ഉപയോഗിച്ച് അവരുടെ ടാബ്‌ലെറ്റ് അൺലോക്ക് ചെയ്യുന്നത്, ശക്തമായ പാറ്റേൺ അല്ലെങ്കിൽ പിൻ ഉപയോഗിച്ച് അൺലോക്ക് ചെയ്യുന്നത് പോലുള്ള സുരക്ഷ നൽകുന്നില്ല."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"നിങ്ങളുടെ കുട്ടിയുടെ മുഖം ഉപയോഗിച്ച് അവരുടെ ഉപകരണം അൺലോക്ക് ചെയ്യുന്നത്, ശക്തമായ പാറ്റേൺ അല്ലെങ്കിൽ പിൻ ഉപയോഗിച്ച് അൺലോക്ക് ചെയ്യുന്നത് പോലുള്ള സുരക്ഷ നൽകുന്നില്ല."</string>
@@ -378,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5081,13 +5085,13 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"ഫിനാൻസ് ചെയ്‌ത ഉപകരണത്തിന്റെ വിവരങ്ങൾ"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"നിങ്ങളുടെ ക്രെഡിറ്റ് ദാതാവിന് ഈ ഉപകരണത്തിൽ ക്രമീകരണം മാറ്റാനും സോഫ്റ്റ്‌വെയർ ഇൻസ്‌റ്റാൾ ചെയ്യാനുമാകും.\n\nനിങ്ങൾ ഒരു പേയ്മെന്റ് മുടക്കിയാൽ, നിങ്ങളുടെ ഉപകരണം ലോക്ക് ചെയ്യും.\n\nകൂടുതലറിയാൻ, നിങ്ങളുടെ ക്രെഡിറ്റ് ദാതാവിനെ കോൺടാക്റ്റ് ചെയ്യുക."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"ഉപകരണം ഫിനാൻസ് ചെയ്തിട്ടുണ്ടെങ്കിൽ, ഇവ ചെയ്യാനാകില്ല:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store-ന് പുറത്ത് നിന്നുള്ള ആപ്പുകൾ ഇൻസ്‌റ്റാൾ ചെയ്യുക"</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"നിങ്ങളുടെ ഉപകരണം സുരക്ഷിത മോഡിലേക്ക് റീബൂട്ട് ചെയ്യുക"</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"നിങ്ങളുടെ ഉപകരണത്തിലേക്ക് ഒന്നിലധികം ഉപയോക്താക്കളെ ചേർക്കുക"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"തീയതി, സമയം, സമയമേഖലകൾ എന്നിവ മാറ്റുക"</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ഡെവലപ്പർ ഓപ്ഷനുകൾ ഉപയോഗിക്കുക"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store-ന് പുറത്ത് നിന്നുള്ള ആപ്പുകൾ ഇൻസ്‌റ്റാൾ ചെയ്യാൻ"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"നിങ്ങളുടെ ഉപകരണം സുരക്ഷിത മോഡിലേക്ക് റീബൂട്ട് ചെയ്യാൻ"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"നിങ്ങളുടെ ഉപകരണത്തിലേക്ക് ഒന്നിലധികം ഉപയോക്താക്കളെ ചേർക്കാൻ"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"തീയതി, സമയം, സമയമേഖലകൾ എന്നിവ മാറ്റാൻ"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ഡെവലപ്പർ ഓപ്ഷനുകൾ ഉപയോഗിക്കാൻ"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ക്രെഡിറ്റ് ദാതാവിന് ഇവ ചെയ്യാനാകും:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"നിങ്ങളുടെ IMEI ആക്‌സസ് ചെയ്യുക"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"നിങ്ങളുടെ IMEI ആക്‌സസ് ചെയ്യാൻ"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"ഉപകരണം ഫാക്‌ടറി റീസെറ്റ് ചെയ്യുക"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"ഉപകരണം ലോക്ക് ആണെങ്കിൽ, നിങ്ങൾക്കത് ഇനിപ്പറയുന്നവയ്ക്ക് മാത്രമേ ഉപയോഗിക്കാനാകൂ:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"എമർജൻസി കോളുകൾ ചെയ്യുക"</string>
@@ -5096,7 +5100,7 @@
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"അറിയിപ്പുകളും ടെക്‌സ്‌റ്റ് മെസേജുകളും കാണുക"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"ക്രെഡിറ്റ് ദാതാവ് അനുവദിച്ച ആപ്പുകൾ ആക്‌സസ് ചെയ്യുക"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"നിങ്ങൾ മുഴുവൻ തുകയും അടച്ച് കഴിഞ്ഞാൽ:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"ഉപകരണത്തിൽ നിന്ന് എല്ലാ നിയന്ത്രണങ്ങളും നീക്കി"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"ഉപകരണത്തിൽ നിന്ന് എല്ലാ നിയന്ത്രണങ്ങളും നീക്കും"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"നിങ്ങൾക്ക് ക്രെഡിറ്റർ ആപ്പ് അൺഇൻസ്‌റ്റാൾ ചെയ്യാം"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">Camera ആപ്പുകൾ</item>

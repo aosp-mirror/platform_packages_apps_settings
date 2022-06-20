@@ -368,6 +368,9 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Benarkan buka kunci wajah"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Gunakan wajah untuk membuat pengesahan"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Gunakan wajah anda untuk membuka kunci telefon, membenarkan pembelian atau log masuk ke apl."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Benarkan anak anda menggunakan wajah mereka untuk membuka kunci telefon mereka"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Benarkan anak anda menggunakan wajah mereka untuk membuka kunci tablet mereka"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Benarkan anak anda menggunakan wajah mereka untuk membuka kunci peranti mereka"</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Menggunakan wajah anak anda untuk membuka kunci telefon mereka mungkin kurang selamat berbanding dengan corak atau PIN yang kukuh."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Menggunakan wajah anak anda untuk membuka kunci tablet mereka mungkin kurang selamat berbanding dengan corak atau PIN yang kukuh."</string>
     <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Menggunakan wajah anak anda untuk membuka kunci peranti mereka mungkin kurang selamat berbanding dengan corak atau PIN yang kukuh."</string>
@@ -378,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -5081,20 +5085,20 @@
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Maklumat peranti dibiaya"</string>
     <string name="financed_privacy_intro" msgid="5458393846604867947">"Pembekal kredit anda boleh mengubah tetapan dan memasang perisian pada peranti ini.\n\nJika anda terlepas pembayaran, peranti anda akan dikunci.\n\nUntuk mengetahui lebih lanjut, hubungi pembekal kredit anda."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Jika peranti anda dibiayai, anda tidak boleh:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Pasang apl dari sumber luar Play Store"</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"But semula peranti anda ke dalam mod selamat"</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Tambah berbilang pengguna pada peranti anda"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Tukar tarikh, masa dan zon waktu"</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Gunakan pilihan pembangun"</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Memasang apl daripada sumber luar Play Store"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Membuat but semula peranti anda dalam mod selamat"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Menambah berbilang pengguna pada peranti anda"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Menukar tarikh, masa dan zon waktu"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Menggunakan pilihan Pembangun"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Pembekal kredit anda boleh:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Akses nombor IMEI anda"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Mengakses nombor IMEI anda"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Buat tetapan semula kilang pada peranti anda"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Jika peranti anda dikunci, anda hanya boleh menggunakan peranti untuk:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Buat panggilan kecemasan"</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Lihat maklumat sistem seperti tarikh, masa, status rangkaian dan bateri"</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Hidupkan atau matikan peranti anda"</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Lihat pemberitahuan &amp; mesej teks"</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Akses apl yang dibenarkan oleh pembekal kredit"</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Membuat panggilan kecemasan"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Melihat maklumat sistem seperti tarikh, masa, status rangkaian dan bateri"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Menghidupkan atau mematikan peranti anda"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Melihat pemberitahuan &amp; mesej teks"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Mengakses apl yang dibenarkan oleh pembekal kredit"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Setelah anda membayar jumlah penuh:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Semua sekatan dialih keluar daripada peranti"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Anda boleh menyahpasang apl pemiutang"</string>
