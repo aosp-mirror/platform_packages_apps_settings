@@ -1,17 +1,19 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.annotation.IntDef;
 import android.content.ContentValues;
@@ -46,7 +48,7 @@ public final class ConvertUtils {
     private static final String TAG = "ConvertUtils";
     private static final Map<String, BatteryHistEntry> EMPTY_BATTERY_MAP = new HashMap<>();
     private static final BatteryHistEntry EMPTY_BATTERY_HIST_ENTRY =
-        new BatteryHistEntry(new ContentValues());
+            new BatteryHistEntry(new ContentValues());
     // Maximum total time value for each slot cumulative data at most 2 hours.
     private static final float TOTAL_TIME_THRESHOLD = DateUtils.HOUR_IN_MILLIS * 2;
 
@@ -64,21 +66,24 @@ public final class ConvertUtils {
     public static final String FAKE_PACKAGE_NAME = "fake_package";
 
     @IntDef(prefix = {"CONSUMER_TYPE"}, value = {
-        CONSUMER_TYPE_UNKNOWN,
-        CONSUMER_TYPE_UID_BATTERY,
-        CONSUMER_TYPE_USER_BATTERY,
-        CONSUMER_TYPE_SYSTEM_BATTERY,
+            CONSUMER_TYPE_UNKNOWN,
+            CONSUMER_TYPE_UID_BATTERY,
+            CONSUMER_TYPE_USER_BATTERY,
+            CONSUMER_TYPE_SYSTEM_BATTERY,
     })
     @Retention(RetentionPolicy.SOURCE)
-    public static @interface ConsumerType {}
+    public static @interface ConsumerType {
+    }
 
     public static final int CONSUMER_TYPE_UNKNOWN = 0;
     public static final int CONSUMER_TYPE_UID_BATTERY = 1;
     public static final int CONSUMER_TYPE_USER_BATTERY = 2;
     public static final int CONSUMER_TYPE_SYSTEM_BATTERY = 3;
 
-    private ConvertUtils() {}
+    private ConvertUtils() {
+    }
 
+    /** Converts to content values */
     public static ContentValues convert(
             BatteryEntry entry,
             BatteryUsageStats batteryUsageStats,
@@ -91,25 +96,25 @@ public final class ConvertUtils {
         if (entry != null && batteryUsageStats != null) {
             values.put(BatteryHistEntry.KEY_UID, Long.valueOf(entry.getUid()));
             values.put(BatteryHistEntry.KEY_USER_ID,
-                Long.valueOf(UserHandle.getUserId(entry.getUid())));
+                    Long.valueOf(UserHandle.getUserId(entry.getUid())));
             values.put(BatteryHistEntry.KEY_APP_LABEL, entry.getLabel());
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME,
-                entry.getDefaultPackageName());
+                    entry.getDefaultPackageName());
             values.put(BatteryHistEntry.KEY_IS_HIDDEN, Boolean.valueOf(entry.isHidden()));
             values.put(BatteryHistEntry.KEY_TOTAL_POWER,
-                Double.valueOf(batteryUsageStats.getConsumedPower()));
+                    Double.valueOf(batteryUsageStats.getConsumedPower()));
             values.put(BatteryHistEntry.KEY_CONSUME_POWER,
-                Double.valueOf(entry.getConsumedPower()));
+                    Double.valueOf(entry.getConsumedPower()));
             values.put(BatteryHistEntry.KEY_PERCENT_OF_TOTAL,
-                Double.valueOf(entry.mPercent));
+                    Double.valueOf(entry.mPercent));
             values.put(BatteryHistEntry.KEY_FOREGROUND_USAGE_TIME,
-                Long.valueOf(entry.getTimeInForegroundMs()));
+                    Long.valueOf(entry.getTimeInForegroundMs()));
             values.put(BatteryHistEntry.KEY_BACKGROUND_USAGE_TIME,
-                Long.valueOf(entry.getTimeInBackgroundMs()));
+                    Long.valueOf(entry.getTimeInBackgroundMs()));
             values.put(BatteryHistEntry.KEY_DRAIN_TYPE,
-                Integer.valueOf(entry.getPowerComponentId()));
+                    Integer.valueOf(entry.getPowerComponentId()));
             values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-                Integer.valueOf(entry.getConsumerType()));
+                    Integer.valueOf(entry.getConsumerType()));
         } else {
             values.put(BatteryHistEntry.KEY_PACKAGE_NAME, FAKE_PACKAGE_NAME);
         }
@@ -126,7 +131,7 @@ public final class ConvertUtils {
     public static String utcToLocalTime(Context context, long timestamp) {
         final Locale locale = getLocale(context);
         final String pattern =
-            DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
+                DateFormat.getBestDateTimePattern(locale, "MMM dd,yyyy HH:mm:ss");
         return DateFormat.format(pattern, timestamp).toString();
     }
 
@@ -159,18 +164,18 @@ public final class ConvertUtils {
         final int timestampStride = 2;
         for (int index = 0; index < timeSlotSize; index++) {
             final Long currentTimestamp =
-                Long.valueOf(batteryHistoryKeys[index * timestampStride]);
+                    Long.valueOf(batteryHistoryKeys[index * timestampStride]);
             final Long nextTimestamp =
-                Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
+                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 1]);
             final Long nextTwoTimestamp =
-                Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
+                    Long.valueOf(batteryHistoryKeys[index * timestampStride + 2]);
             // Fetches BatteryHistEntry data from corresponding time slot.
             final Map<String, BatteryHistEntry> currentBatteryHistMap =
-                batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
+                    batteryHistoryMap.getOrDefault(currentTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
+                    batteryHistoryMap.getOrDefault(nextTimestamp, EMPTY_BATTERY_MAP);
             final Map<String, BatteryHistEntry> nextTwoBatteryHistMap =
-                batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
+                    batteryHistoryMap.getOrDefault(nextTwoTimestamp, EMPTY_BATTERY_MAP);
             // We should not get the empty list since we have at least one fake data to record
             // the battery level and status in each time slot, the empty list is used to
             // represent there is no enough data to apply interpolation arithmetic.
@@ -195,27 +200,27 @@ public final class ConvertUtils {
             // Calculates all packages diff usage data in a specific time slot.
             for (String key : allBatteryHistEntryKeys) {
                 final BatteryHistEntry currentEntry =
-                    currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                        currentBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
                 final BatteryHistEntry nextEntry =
-                    nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                        nextBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
                 final BatteryHistEntry nextTwoEntry =
-                    nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
+                        nextTwoBatteryHistMap.getOrDefault(key, EMPTY_BATTERY_HIST_ENTRY);
                 // Cumulative values is a specific time slot for a specific app.
                 long foregroundUsageTimeInMs =
-                    getDiffValue(
-                        currentEntry.mForegroundUsageTimeInMs,
-                        nextEntry.mForegroundUsageTimeInMs,
-                        nextTwoEntry.mForegroundUsageTimeInMs);
+                        getDiffValue(
+                                currentEntry.mForegroundUsageTimeInMs,
+                                nextEntry.mForegroundUsageTimeInMs,
+                                nextTwoEntry.mForegroundUsageTimeInMs);
                 long backgroundUsageTimeInMs =
-                    getDiffValue(
-                        currentEntry.mBackgroundUsageTimeInMs,
-                        nextEntry.mBackgroundUsageTimeInMs,
-                        nextTwoEntry.mBackgroundUsageTimeInMs);
+                        getDiffValue(
+                                currentEntry.mBackgroundUsageTimeInMs,
+                                nextEntry.mBackgroundUsageTimeInMs,
+                                nextTwoEntry.mBackgroundUsageTimeInMs);
                 double consumePower =
-                    getDiffValue(
-                        currentEntry.mConsumePower,
-                        nextEntry.mConsumePower,
-                        nextTwoEntry.mConsumePower);
+                        getDiffValue(
+                                currentEntry.mConsumePower,
+                                nextEntry.mConsumePower,
+                                nextTwoEntry.mConsumePower);
                 // Excludes entry since we don't have enough data to calculate.
                 if (foregroundUsageTimeInMs == 0
                         && backgroundUsageTimeInMs == 0
@@ -223,14 +228,14 @@ public final class ConvertUtils {
                     continue;
                 }
                 final BatteryHistEntry selectedBatteryEntry =
-                    selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
+                        selectBatteryHistEntry(currentEntry, nextEntry, nextTwoEntry);
                 if (selectedBatteryEntry == null) {
                     continue;
                 }
                 // Forces refine the cumulative value since it may introduce deviation
                 // error since we will apply the interpolation arithmetic.
                 final float totalUsageTimeInMs =
-                    foregroundUsageTimeInMs + backgroundUsageTimeInMs;
+                        foregroundUsageTimeInMs + backgroundUsageTimeInMs;
                 if (totalUsageTimeInMs > TOTAL_TIME_THRESHOLD) {
                     final float ratio = TOTAL_TIME_THRESHOLD / totalUsageTimeInMs;
                     if (DEBUG) {
@@ -240,19 +245,19 @@ public final class ConvertUtils {
                                 currentEntry));
                     }
                     foregroundUsageTimeInMs =
-                        Math.round(foregroundUsageTimeInMs * ratio);
+                            Math.round(foregroundUsageTimeInMs * ratio);
                     backgroundUsageTimeInMs =
-                        Math.round(backgroundUsageTimeInMs * ratio);
+                            Math.round(backgroundUsageTimeInMs * ratio);
                     consumePower = consumePower * ratio;
                 }
                 totalConsumePower += consumePower;
                 batteryDiffEntryList.add(
-                    new BatteryDiffEntry(
-                        context,
-                        foregroundUsageTimeInMs,
-                        backgroundUsageTimeInMs,
-                        consumePower,
-                        selectedBatteryEntry));
+                        new BatteryDiffEntry(
+                                context,
+                                foregroundUsageTimeInMs,
+                                backgroundUsageTimeInMs,
+                                consumePower,
+                                selectedBatteryEntry));
             }
             // Sets total consume power data into all BatteryDiffEntry in the same slot.
             for (BatteryDiffEntry diffEntry : batteryDiffEntryList) {
@@ -282,9 +287,9 @@ public final class ConvertUtils {
                 } else {
                     // Sums up some fields data into the existing one.
                     oldBatteryDiffEntry.mForegroundUsageTimeInMs +=
-                        entry.mForegroundUsageTimeInMs;
+                            entry.mForegroundUsageTimeInMs;
                     oldBatteryDiffEntry.mBackgroundUsageTimeInMs +=
-                        entry.mBackgroundUsageTimeInMs;
+                            entry.mBackgroundUsageTimeInMs;
                     oldBatteryDiffEntry.mConsumePower += entry.mConsumePower;
                 }
                 totalConsumePower += entry.mConsumePower;
@@ -318,7 +323,7 @@ public final class ConvertUtils {
                 if (packageName != null
                         && !backgroundUsageTimeHideList.isEmpty()
                         && backgroundUsageTimeHideList.contains(packageName)) {
-                  entry.mBackgroundUsageTimeInMs = 0;
+                    entry.mBackgroundUsageTimeInMs = 0;
                 }
             }
         }
@@ -342,7 +347,7 @@ public final class ConvertUtils {
             return entry2;
         } else {
             return entry3 != null && entry3 != EMPTY_BATTERY_HIST_ENTRY
-                ? entry3 : null;
+                    ? entry3 : null;
         }
     }
 
@@ -352,8 +357,8 @@ public final class ConvertUtils {
             return Locale.getDefault();
         }
         final LocaleList locales =
-            context.getResources().getConfiguration().getLocales();
+                context.getResources().getConfiguration().getLocales();
         return locales != null && !locales.isEmpty() ? locales.get(0)
-            : Locale.getDefault();
+                : Locale.getDefault();
     }
 }

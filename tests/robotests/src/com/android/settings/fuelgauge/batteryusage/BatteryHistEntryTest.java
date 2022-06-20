@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -38,7 +38,7 @@ import java.util.TimeZone;
 public final class BatteryHistEntryTest {
 
     @Mock
-    private BatteryEntry mockBatteryEntry;
+    private BatteryEntry mMockBatteryEntry;
     @Mock
     private BatteryUsageStats mBatteryUsageStats;
 
@@ -50,33 +50,33 @@ public final class BatteryHistEntryTest {
     @Test
     public void testConstructor_contentValues_returnsExpectedResult() {
         final int expectedType = 3;
-        when(mockBatteryEntry.getUid()).thenReturn(1001);
-        when(mockBatteryEntry.getLabel()).thenReturn("Settings");
-        when(mockBatteryEntry.getDefaultPackageName())
-            .thenReturn("com.google.android.settings.battery");
-        when(mockBatteryEntry.isHidden()).thenReturn(true);
+        when(mMockBatteryEntry.getUid()).thenReturn(1001);
+        when(mMockBatteryEntry.getLabel()).thenReturn("Settings");
+        when(mMockBatteryEntry.getDefaultPackageName())
+                .thenReturn("com.google.android.settings.battery");
+        when(mMockBatteryEntry.isHidden()).thenReturn(true);
         when(mBatteryUsageStats.getConsumedPower()).thenReturn(5.1);
-        when(mockBatteryEntry.getConsumedPower()).thenReturn(1.1);
-        mockBatteryEntry.mPercent = 0.3;
-        when(mockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
-        when(mockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
-        when(mockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
-        when(mockBatteryEntry.getConsumerType())
-            .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+        when(mMockBatteryEntry.getConsumedPower()).thenReturn(1.1);
+        mMockBatteryEntry.mPercent = 0.3;
+        when(mMockBatteryEntry.getTimeInForegroundMs()).thenReturn(1234L);
+        when(mMockBatteryEntry.getTimeInBackgroundMs()).thenReturn(5689L);
+        when(mMockBatteryEntry.getPowerComponentId()).thenReturn(expectedType);
+        when(mMockBatteryEntry.getConsumerType())
+                .thenReturn(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         final ContentValues values =
-            ConvertUtils.convert(
-                mockBatteryEntry,
-                mBatteryUsageStats,
-                /*batteryLevel=*/ 12,
-                /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
-                /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
-                /*bootTimestamp=*/ 101L,
-                /*timestamp=*/ 10001L);
+                ConvertUtils.convert(
+                        mMockBatteryEntry,
+                        mBatteryUsageStats,
+                        /*batteryLevel=*/ 12,
+                        /*batteryStatus=*/ BatteryManager.BATTERY_STATUS_FULL,
+                        /*batteryHealth=*/ BatteryManager.BATTERY_HEALTH_COLD,
+                        /*bootTimestamp=*/ 101L,
+                        /*timestamp=*/ 10001L);
 
         assertBatteryHistEntry(
-            new BatteryHistEntry(values),
-            /*drainType=*/ expectedType,
-            /*percentOfTotal=*/ mockBatteryEntry.mPercent);
+                new BatteryHistEntry(values),
+                /*drainType=*/ expectedType,
+                /*percentOfTotal=*/ mMockBatteryEntry.mPercent);
     }
 
     @Test
@@ -88,22 +88,22 @@ public final class BatteryHistEntryTest {
     @Test
     public void testConstructor_cursor_returnsExpectedResult() {
         assertBatteryHistEntry(
-            createBatteryHistEntry(
-                /*bootTimestamp=*/ 101L,
-                /*timestamp=*/ 10001L,
-                /*totalPower=*/ 5.1,
-                /*consumePower=*/ 1.1,
-                /*foregroundUsageTimeInMs=*/ 1234L,
-                /*backgroundUsageTimeInMs=*/ 5689L,
-                /*batteryLevel=*/ 12),
-            /*drainType=*/ 3,
-            /*percentOfTotal=*/ 0.3);
+                createBatteryHistEntry(
+                        /*bootTimestamp=*/ 101L,
+                        /*timestamp=*/ 10001L,
+                        /*totalPower=*/ 5.1,
+                        /*consumePower=*/ 1.1,
+                        /*foregroundUsageTimeInMs=*/ 1234L,
+                        /*backgroundUsageTimeInMs=*/ 5689L,
+                        /*batteryLevel=*/ 12),
+                /*drainType=*/ 3,
+                /*percentOfTotal=*/ 0.3);
     }
 
     @Test
     public void testGetKey_consumerUidType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
-            ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+                ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
         values.put(BatteryHistEntry.KEY_UID, 3);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
@@ -113,7 +113,7 @@ public final class BatteryHistEntryTest {
     @Test
     public void testGetKey_consumerUserType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
-            ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
+                ConvertUtils.CONSUMER_TYPE_USER_BATTERY);
         values.put(BatteryHistEntry.KEY_USER_ID, 2);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
@@ -123,7 +123,7 @@ public final class BatteryHistEntryTest {
     @Test
     public void testGetKey_consumerSystemType_returnExpectedString() {
         final ContentValues values = getContentValuesWithType(
-            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+                ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         values.put(BatteryHistEntry.KEY_DRAIN_TYPE, 1);
         final BatteryHistEntry batteryHistEntry = new BatteryHistEntry(values);
 
@@ -133,31 +133,31 @@ public final class BatteryHistEntryTest {
     @Test
     public void testIsAppEntry_returnExpectedResult() {
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isAppEntry())
-            .isFalse();
+                .isFalse();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isAppEntry())
-            .isFalse();
+                .isFalse();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isAppEntry())
-            .isTrue();
+                .isTrue();
     }
 
     @Test
     public void testIsUserEntry_returnExpectedResult() {
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isUserEntry())
-            .isFalse();
+                .isFalse();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isUserEntry())
-            .isTrue();
+                .isTrue();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isUserEntry())
-            .isFalse();
+                .isFalse();
     }
 
     @Test
     public void testIsSystemEntry_returnExpectedResult() {
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY).isSystemEntry())
-            .isTrue();
+                .isTrue();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_USER_BATTERY).isSystemEntry())
-            .isFalse();
+                .isFalse();
         assertThat(createEntry(ConvertUtils.CONSUMER_TYPE_UID_BATTERY).isSystemEntry())
-            .isFalse();
+                .isFalse();
     }
 
     @Test
@@ -167,39 +167,39 @@ public final class BatteryHistEntryTest {
         final long lowerTimestamp = 100L;
         final double ratio = 0.5;
         final BatteryHistEntry lowerHistEntry = createBatteryHistEntry(
-            /*bootTimestamp=*/ 1000L,
-            lowerTimestamp,
-            /*totalPower=*/ 50,
-            /*consumePower=*/ 10,
-            /*foregroundUsageTimeInMs=*/ 100,
-            /*backgroundUsageTimeInMs=*/ 200,
-            /*batteryLevel=*/ 90);
+                /*bootTimestamp=*/ 1000L,
+                lowerTimestamp,
+                /*totalPower=*/ 50,
+                /*consumePower=*/ 10,
+                /*foregroundUsageTimeInMs=*/ 100,
+                /*backgroundUsageTimeInMs=*/ 200,
+                /*batteryLevel=*/ 90);
         final BatteryHistEntry upperHistEntry = createBatteryHistEntry(
-            /*bootTimestamp=*/ 1200L,
-            upperTimestamp,
-            /*totalPower=*/ 80,
-            /*consumePower=*/ 20,
-            /*foregroundUsageTimeInMs=*/ 200,
-            /*backgroundUsageTimeInMs=*/ 300,
-            /*batteryLevel=*/ 80);
+                /*bootTimestamp=*/ 1200L,
+                upperTimestamp,
+                /*totalPower=*/ 80,
+                /*consumePower=*/ 20,
+                /*foregroundUsageTimeInMs=*/ 200,
+                /*backgroundUsageTimeInMs=*/ 300,
+                /*batteryLevel=*/ 80);
 
         final BatteryHistEntry newEntry =
-            BatteryHistEntry.interpolate(
-                slotTimestamp,
-                upperTimestamp,
-                ratio,
-                lowerHistEntry,
-                upperHistEntry);
+                BatteryHistEntry.interpolate(
+                        slotTimestamp,
+                        upperTimestamp,
+                        ratio,
+                        lowerHistEntry,
+                        upperHistEntry);
 
         assertBatteryHistEntry(
-            newEntry, 3, upperHistEntry.mPercentOfTotal,
-            /*bootTimestamp=*/ 1200 - 100,
-            /*timestamp=*/ slotTimestamp,
-            /*totalPower=*/ 50 + 0.5 * (80 - 50),
-            /*consumePower=*/ 10 + 0.5 * (20 - 10),
-            /*foregroundUsageTimeInMs=*/ Math.round(100 + 0.5 * (200 - 100)),
-            /*backgroundUsageTimeInMs=*/ Math.round(200 + 0.5 * (300 - 200)),
-            /*batteryLevel=*/ (int) Math.round(90 + 0.5 * (80 - 90)));
+                newEntry, 3, upperHistEntry.mPercentOfTotal,
+                /*bootTimestamp=*/ 1200 - 100,
+                /*timestamp=*/ slotTimestamp,
+                /*totalPower=*/ 50 + 0.5 * (80 - 50),
+                /*consumePower=*/ 10 + 0.5 * (20 - 10),
+                /*foregroundUsageTimeInMs=*/ Math.round(100 + 0.5 * (200 - 100)),
+                /*backgroundUsageTimeInMs=*/ Math.round(200 + 0.5 * (300 - 200)),
+                /*batteryLevel=*/ (int) Math.round(90 + 0.5 * (80 - 90)));
     }
 
     @Test
@@ -209,31 +209,31 @@ public final class BatteryHistEntryTest {
         final long lowerTimestamp = 100L;
         final double ratio = 0.5;
         final BatteryHistEntry upperHistEntry = createBatteryHistEntry(
-            /*bootTimestamp=*/ 1200L,
-            upperTimestamp,
-            /*totalPower=*/ 80,
-            /*consumePower=*/ 20,
-            /*foregroundUsageTimeInMs=*/ 200,
-            /*backgroundUsageTimeInMs=*/ 300,
-            /*batteryLevel=*/ 80);
+                /*bootTimestamp=*/ 1200L,
+                upperTimestamp,
+                /*totalPower=*/ 80,
+                /*consumePower=*/ 20,
+                /*foregroundUsageTimeInMs=*/ 200,
+                /*backgroundUsageTimeInMs=*/ 300,
+                /*batteryLevel=*/ 80);
 
         final BatteryHistEntry newEntry =
-            BatteryHistEntry.interpolate(
-                slotTimestamp,
-                upperTimestamp,
-                ratio,
-                /*lowerHistEntry=*/ null,
-                upperHistEntry);
+                BatteryHistEntry.interpolate(
+                        slotTimestamp,
+                        upperTimestamp,
+                        ratio,
+                        /*lowerHistEntry=*/ null,
+                        upperHistEntry);
 
         assertBatteryHistEntry(
-            newEntry, 3, upperHistEntry.mPercentOfTotal,
-            /*bootTimestamp=*/ 1200 - 100,
-            /*timestamp=*/ slotTimestamp,
-            /*totalPower=*/ 0.5 * 80,
-            /*consumePower=*/ 0.5 * 20,
-            /*foregroundUsageTimeInMs=*/ Math.round(0.5 * 200),
-            /*backgroundUsageTimeInMs=*/ Math.round(0.5 * 300),
-            /*batteryLevel=*/ upperHistEntry.mBatteryLevel);
+                newEntry, 3, upperHistEntry.mPercentOfTotal,
+                /*bootTimestamp=*/ 1200 - 100,
+                /*timestamp=*/ slotTimestamp,
+                /*totalPower=*/ 0.5 * 80,
+                /*consumePower=*/ 0.5 * 20,
+                /*foregroundUsageTimeInMs=*/ Math.round(0.5 * 200),
+                /*backgroundUsageTimeInMs=*/ Math.round(0.5 * 300),
+                /*batteryLevel=*/ upperHistEntry.mBatteryLevel);
     }
 
     private static BatteryHistEntry createEntry(int consumerType) {
@@ -243,21 +243,21 @@ public final class BatteryHistEntryTest {
     private static ContentValues getContentValuesWithType(int consumerType) {
         final ContentValues values = new ContentValues();
         values.put(BatteryHistEntry.KEY_CONSUMER_TYPE,
-            Integer.valueOf(consumerType));
+                Integer.valueOf(consumerType));
         return values;
     }
 
     private void assertBatteryHistEntry(
             BatteryHistEntry entry, int drainType, double percentOfTotal) {
         assertBatteryHistEntry(
-            entry, drainType, percentOfTotal,
-            /*bootTimestamp=*/ 101L,
-            /*timestamp=*/ 10001L,
-            /*totalPower=*/ 5.1,
-            /*consumePower=*/ 1.1,
-            /*foregroundUsageTimeInMs=*/ 1234L,
-            /*backgroundUsageTimeInMs=*/ 5689L,
-            /*batteryLevel=*/ 12);
+                entry, drainType, percentOfTotal,
+                /*bootTimestamp=*/ 101L,
+                /*timestamp=*/ 10001L,
+                /*totalPower=*/ 5.1,
+                /*consumePower=*/ 1.1,
+                /*foregroundUsageTimeInMs=*/ 1234L,
+                /*backgroundUsageTimeInMs=*/ 5689L,
+                /*batteryLevel=*/ 12);
     }
 
     private void assertBatteryHistEntry(
@@ -276,7 +276,7 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mUserId).isEqualTo(UserHandle.getUserId(1001));
         assertThat(entry.mAppLabel).isEqualTo("Settings");
         assertThat(entry.mPackageName)
-            .isEqualTo("com.google.android.settings.battery");
+                .isEqualTo("com.google.android.settings.battery");
         assertThat(entry.mIsHidden).isTrue();
         assertThat(entry.mBootTimestamp).isEqualTo(bootTimestamp);
         assertThat(entry.mTimestamp).isEqualTo(timestamp);
@@ -288,12 +288,12 @@ public final class BatteryHistEntryTest {
         assertThat(entry.mBackgroundUsageTimeInMs).isEqualTo(backgroundUsageTimeInMs);
         assertThat(entry.mDrainType).isEqualTo(drainType);
         assertThat(entry.mConsumerType)
-            .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
+                .isEqualTo(ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY);
         assertThat(entry.mBatteryLevel).isEqualTo(batteryLevel);
         assertThat(entry.mBatteryStatus)
-            .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
+                .isEqualTo(BatteryManager.BATTERY_STATUS_FULL);
         assertThat(entry.mBatteryHealth)
-            .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
+                .isEqualTo(BatteryManager.BATTERY_HEALTH_COLD);
     }
 
     private BatteryHistEntry createBatteryHistEntry(
@@ -305,7 +305,7 @@ public final class BatteryHistEntryTest {
             long backgroundUsageTimeInMs,
             int batteryLevel) {
         final MatrixCursor cursor = new MatrixCursor(
-            new String[] {
+            new String[]{
                 BatteryHistEntry.KEY_UID,
                 BatteryHistEntry.KEY_USER_ID,
                 BatteryHistEntry.KEY_APP_LABEL,
@@ -325,7 +325,7 @@ public final class BatteryHistEntryTest {
                 BatteryHistEntry.KEY_BATTERY_STATUS,
                 BatteryHistEntry.KEY_BATTERY_HEALTH});
         cursor.addRow(
-            new Object[] {
+            new Object[]{
                 Long.valueOf(1001),
                 Long.valueOf(UserHandle.getUserId(1001)),
                 "Settings",

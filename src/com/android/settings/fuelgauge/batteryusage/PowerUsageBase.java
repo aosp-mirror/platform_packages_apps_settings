@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
@@ -23,7 +23,6 @@ import android.os.BatteryUsageStats;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
-import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -31,6 +30,8 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
+import com.android.settings.fuelgauge.BatteryUtils;
 
 /**
  * Common base class for things that need to show the battery usage graph.
@@ -99,6 +100,7 @@ public abstract class PowerUsageBase extends DashboardFragment {
     }
 
     protected abstract void refreshUi(@BatteryUpdateType int refreshType);
+
     protected abstract boolean isBatteryHistoryNeeded();
 
     protected void updatePreference(BatteryHistoryPreference historyPref) {

@@ -45,7 +45,6 @@ import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserHandle;
-import android.util.Pair;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
@@ -54,6 +53,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;

@@ -1,17 +1,19 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -117,14 +119,14 @@ public class BatteryHistEntry {
     }
 
     private BatteryHistEntry(
-          BatteryHistEntry fromEntry,
-          long bootTimestamp,
-          long timestamp,
-          double totalPower,
-          double consumePower,
-          long foregroundUsageTimeInMs,
-          long backgroundUsageTimeInMs,
-          int batteryLevel) {
+            BatteryHistEntry fromEntry,
+            long bootTimestamp,
+            long timestamp,
+            double totalPower,
+            double consumePower,
+            long foregroundUsageTimeInMs,
+            long backgroundUsageTimeInMs,
+            int batteryLevel) {
         mUid = fromEntry.mUid;
         mUserId = fromEntry.mUserId;
         mAppLabel = fromEntry.mAppLabel;
@@ -186,28 +188,28 @@ public class BatteryHistEntry {
     @Override
     public String toString() {
         final String recordAtDateTime =
-            ConvertUtils.utcToLocalTime(/*context=*/ null, mTimestamp);
+                ConvertUtils.utcToLocalTime(/*context=*/ null, mTimestamp);
         final StringBuilder builder = new StringBuilder()
-            .append("\nBatteryHistEntry{")
-            .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
-                  mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
-            .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
-                  recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
-            .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
-                  mPercentOfTotal, mTotalPower, mConsumePower,
-                  Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
-                  Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
-            .append(String.format("\n\tdrainType=%d|consumerType=%d",
-                  mDrainType, mConsumerType))
-            .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
-                  mBatteryLevel, mBatteryStatus, mBatteryHealth));
+                .append("\nBatteryHistEntry{")
+                .append(String.format("\n\tpackage=%s|label=%s|uid=%d|userId=%d|isHidden=%b",
+                        mPackageName, mAppLabel, mUid, mUserId, mIsHidden))
+                .append(String.format("\n\ttimestamp=%s|zoneId=%s|bootTimestamp=%d",
+                        recordAtDateTime, mZoneId, Duration.ofMillis(mBootTimestamp).getSeconds()))
+                .append(String.format("\n\tusage=%f|total=%f|consume=%f|elapsedTime=%d|%d",
+                        mPercentOfTotal, mTotalPower, mConsumePower,
+                        Duration.ofMillis(mForegroundUsageTimeInMs).getSeconds(),
+                        Duration.ofMillis(mBackgroundUsageTimeInMs).getSeconds()))
+                .append(String.format("\n\tdrainType=%d|consumerType=%d",
+                        mDrainType, mConsumerType))
+                .append(String.format("\n\tbattery=%d|status=%d|health=%d\n}",
+                        mBatteryLevel, mBatteryStatus, mBatteryHealth));
         return builder.toString();
     }
 
     private int getInteger(ContentValues values, String key) {
         if (values != null && values.containsKey(key)) {
             return values.getAsInteger(key);
-        };
+        }
         mIsValidEntry = false;
         return 0;
     }
@@ -298,21 +300,21 @@ public class BatteryHistEntry {
             BatteryHistEntry lowerHistEntry,
             BatteryHistEntry upperHistEntry) {
         final double totalPower = interpolate(
-            lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
-            upperHistEntry.mTotalPower,
-            ratio);
+                lowerHistEntry == null ? 0 : lowerHistEntry.mTotalPower,
+                upperHistEntry.mTotalPower,
+                ratio);
         final double consumePower = interpolate(
-            lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
-            upperHistEntry.mConsumePower,
-            ratio);
+                lowerHistEntry == null ? 0 : lowerHistEntry.mConsumePower,
+                upperHistEntry.mConsumePower,
+                ratio);
         final double foregroundUsageTimeInMs = interpolate(
-            lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs,
-            upperHistEntry.mForegroundUsageTimeInMs,
-            ratio);
+                lowerHistEntry == null ? 0 : lowerHistEntry.mForegroundUsageTimeInMs,
+                upperHistEntry.mForegroundUsageTimeInMs,
+                ratio);
         final double backgroundUsageTimeInMs = interpolate(
-            lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs,
-            upperHistEntry.mBackgroundUsageTimeInMs,
-            ratio);
+                lowerHistEntry == null ? 0 : lowerHistEntry.mBackgroundUsageTimeInMs,
+                upperHistEntry.mBackgroundUsageTimeInMs,
+                ratio);
         // Checks whether there is any abnoaml cases!
         if (upperHistEntry.mConsumePower < consumePower
                 || upperHistEntry.mForegroundUsageTimeInMs < foregroundUsageTimeInMs
@@ -324,22 +326,22 @@ public class BatteryHistEntry {
             }
         }
         final double batteryLevel =
-            lowerHistEntry == null
-                ? upperHistEntry.mBatteryLevel
-                : interpolate(
-                    lowerHistEntry.mBatteryLevel,
-                    upperHistEntry.mBatteryLevel,
-                    ratio);
+                lowerHistEntry == null
+                        ? upperHistEntry.mBatteryLevel
+                        : interpolate(
+                                lowerHistEntry.mBatteryLevel,
+                                upperHistEntry.mBatteryLevel,
+                                ratio);
         return new BatteryHistEntry(
-            upperHistEntry,
-            /*bootTimestamp=*/ upperHistEntry.mBootTimestamp
+                upperHistEntry,
+                /*bootTimestamp=*/ upperHistEntry.mBootTimestamp
                 - (upperTimestamp - slotTimestamp),
-            /*timestamp=*/ slotTimestamp,
-            totalPower,
-            consumePower,
-            Math.round(foregroundUsageTimeInMs),
-            Math.round(backgroundUsageTimeInMs),
-            (int) Math.round(batteryLevel));
+                /*timestamp=*/ slotTimestamp,
+                totalPower,
+                consumePower,
+                Math.round(foregroundUsageTimeInMs),
+                Math.round(backgroundUsageTimeInMs),
+                (int) Math.round(batteryLevel));
     }
 
     private static double interpolate(double v1, double v2, double ratio) {
