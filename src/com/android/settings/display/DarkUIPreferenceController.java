@@ -23,10 +23,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.PowerManager;
-import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -39,7 +37,6 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class DarkUIPreferenceController extends TogglePreferenceController implements
         LifecycleObserver, OnStart, OnStop {
 
-    public static final String DARK_MODE_PREFS = "dark_mode_prefs";
     public static final String PREF_DARK_MODE_DIALOG_SEEN = "dark_mode_dialog_seen";
     public static final int DIALOG_SEEN = 1;
 
@@ -48,9 +45,6 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     private UiModeManager mUiModeManager;
     private PowerManager mPowerManager;
-    private Context mContext;
-
-    private Fragment mFragment;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -61,7 +55,6 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     public DarkUIPreferenceController(Context context, String key) {
         super(context, key);
-        mContext = context;
         mUiModeManager = context.getSystemService(UiModeManager.class);
         mPowerManager = context.getSystemService(PowerManager.class);
     }
@@ -86,25 +79,12 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        final boolean dialogSeen =
-                Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.DARK_MODE_DIALOG_SEEN, 0) == DIALOG_SEEN;
-        if (!dialogSeen && isChecked) {
-            showDarkModeDialog();
-        }
         return mUiModeManager.setNightModeActivated(isChecked);
     }
 
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_display;
-    }
-
-    private void showDarkModeDialog() {
-        final DarkUIInfoDialogFragment frag = new DarkUIInfoDialogFragment();
-        if (mFragment != null && mFragment.getFragmentManager() != null) {
-            frag.show(mFragment.getFragmentManager(), getClass().getName());
-        }
     }
 
     @VisibleForTesting
@@ -131,11 +111,6 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
     public void onStart() {
         mContext.registerReceiver(mReceiver,
                 new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
-    }
-
-    // used by AccessibilitySettings
-    public void setParentFragment(Fragment fragment) {
-        mFragment = fragment;
     }
 
     @Override

@@ -201,7 +201,8 @@ public class ResetNetwork extends InstrumentedFragment {
                     name = record.getNumber();
                 }
                 if (TextUtils.isEmpty(name)) {
-                    name = record.getCarrierName().toString();
+                    CharSequence carrierName = record.getCarrierName();
+                    name = TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
                 }
                 if (TextUtils.isEmpty(name)) {
                     name = String.format("MCC:%s MNC:%s Slot:%s Id:%s", record.getMcc(),
