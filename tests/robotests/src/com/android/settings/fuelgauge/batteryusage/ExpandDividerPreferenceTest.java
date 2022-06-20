@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -74,7 +73,7 @@ public final class ExpandDividerPreferenceTest {
 
     @Test
     public void testOnClick_switchExpandStateAndInvokeCallback() {
-        final boolean[] isExpandedArray = new boolean[] {false};
+        final boolean[] isExpandedArray = new boolean[]{false};
         mExpandDividerPreference.mImageView = mImageView;
         mExpandDividerPreference.setOnExpandListener(
                 isExpanded -> isExpandedArray[0] = isExpanded);
@@ -94,7 +93,7 @@ public final class ExpandDividerPreferenceTest {
 
     @Test
     public void testSetIsExpanded_updateStateButNotInvokeCallback() {
-        final boolean[] isExpandedArray = new boolean[] {false};
+        final boolean[] isExpandedArray = new boolean[]{false};
         mExpandDividerPreference.mImageView = mImageView;
         mExpandDividerPreference.setOnExpandListener(
                 isExpanded -> isExpandedArray[0] = isExpanded);

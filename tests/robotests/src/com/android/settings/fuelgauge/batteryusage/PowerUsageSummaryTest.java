@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
-import static com.android.settings.fuelgauge.PowerUsageSummary.BATTERY_INFO_LOADER;
-import static com.android.settings.fuelgauge.PowerUsageSummary.KEY_BATTERY_ERROR;
-import static com.android.settings.fuelgauge.PowerUsageSummary.KEY_BATTERY_USAGE;
+import static com.android.settings.fuelgauge.batteryusage.PowerUsageSummary.BATTERY_INFO_LOADER;
+import static com.android.settings.fuelgauge.batteryusage.PowerUsageSummary.KEY_BATTERY_ERROR;
+import static com.android.settings.fuelgauge.batteryusage.PowerUsageSummary.KEY_BATTERY_USAGE;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -44,6 +44,8 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.XmlTestUtils;
@@ -55,6 +57,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -74,6 +77,7 @@ public class PowerUsageSummaryTest {
     public static void beforeClass() {
         sAdditionalBatteryInfoIntent = new Intent("com.example.app.ADDITIONAL_BATTERY_INFO");
     }
+
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -111,7 +115,7 @@ public class PowerUsageSummaryTest {
                 .thenReturn(sAdditionalBatteryInfoIntent);
         when(mFeatureFactory.powerUsageFeatureProvider.isChartGraphEnabled(mRealContext))
                 .thenReturn(true);
-        mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
+        mFragment.mBatteryUtils = Mockito.spy(new BatteryUtils(mRealContext));
         ReflectionHelpers.setField(mFragment, "mVisibilityLoggerMixin", mVisibilityLoggerMixin);
         ReflectionHelpers.setField(mFragment, "mBatteryBroadcastReceiver",
                 mBatteryBroadcastReceiver);
