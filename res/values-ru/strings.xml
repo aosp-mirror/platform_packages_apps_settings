@@ -529,12 +529,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Так отпечаток пальца будет более точным"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Процент выполнения задачи по добавлению отпечатка пальца: <xliff:g id="PERCENTAGE">%d</xliff:g>."</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Отпечаток добавлен"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на планшете, тем лучше она будет работать."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на устройстве, тем лучше она будет работать."</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Чем чаще вы будете пользоваться разблокировкой по отпечатку пальца на телефоне, тем лучше она будет работать."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Не сейчас"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Поднимите палец и снова приложите его к сканеру"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Наклоните палец вбок, приложите к датчику и удерживайте. Затем наклоните палец в противоположную сторону и повторите действия."</string>
@@ -5236,25 +5233,25 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Приложению \"<xliff:g id="APP_NAME">%s</xliff:g>\" разрешен доступ к настройкам."</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"В целях безопасности доступ к этой функции пока ограничен."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Информация о купленном в кредит устройстве"</string>
-    <string name="financed_privacy_intro" msgid="5458393846604867947">"Кредитор может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь к кредитору."</string>
+    <string name="financed_privacy_intro" msgid="5458393846604867947">"Ваша кредитная организация может изменять настройки устройства и устанавливать на него ПО.\n\nЕсли вы пропустите платеж, ваше устройство будет заблокировано.\n\nЗа дополнительной информацией обращайтесь в кредитную организацию."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Если устройство приобретено в кредит, вы не можете:"</string>
-    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)."</string>
-    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим."</string>
-    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство."</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве."</string>
-    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика."</string>
-    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваш кредитор может:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства."</string>
+    <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Устанавливать сторонние приложения (не из Google Play)"</string>
+    <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Переводить устройство в безопасный режим"</string>
+    <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Добавлять несколько пользователей на устройство"</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Изменять время, дату и часовой пояс на устройстве"</string>
+    <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Использовать режим разработчика"</string>
+    <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Ваша кредитная организация может:"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Получать доступ к IMEI-коду устройства"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Сбрасывать настройки вашего устройства."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Если устройство заблокировано, вы можете только:"</string>
-    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы."</string>
-    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи."</string>
-    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство."</string>
-    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS."</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитором."</string>
-    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен, вы сможете:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства сняты."</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы можете удалить приложение, установленное кредитором."</string>
+    <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Совершать экстренные вызовы"</string>
+    <string name="financed_privacy_system_info" msgid="4158031444108708927">"Просматривать системную информацию, такую как дата, время, статус сети и заряд батареи"</string>
+    <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Включать и выключать устройство"</string>
+    <string name="financed_privacy_notifications" msgid="5932303271274089968">"Просматривать уведомления и SMS"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Использовать приложения, разрешенные кредитной организацией"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Когда кредит будет погашен:"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Все ограничения на использование устройства будут сняты"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Вы сможете удалить приложение кредитной организации"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Камеры</item>
       <item quantity="few">Камеры</item>
