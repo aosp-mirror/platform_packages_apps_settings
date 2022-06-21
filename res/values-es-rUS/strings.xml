@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Permitir el uso del desbloqueo facial"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Usa tu rostro para autenticarte"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Usa tu rostro para desbloquear el teléfono, autorizar compras o acceder a las apps."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Permite que tu hijo desbloquee su teléfono con el rostro"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Permite que tu hijo desbloquee su tablet con el rostro"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Permite que tu hijo desbloquee su dispositivo con el rostro"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Usar el desbloqueo facial para que tu hijo acceda a su teléfono puede ser menos seguro que usar un buen patrón o un PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Usar el desbloqueo facial para que tu hijo acceda a su tablet puede ser menos seguro que usar un buen patrón o un PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Usar el desbloqueo facial para que tu hijo acceda a su dispositivo puede ser menos seguro que usar un buen patrón o un PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Usa tu rostro para desbloquear el teléfono o aprobar compras.\n\nNota: No puedes usarlo para desbloquear este dispositivo. Si quieres obtener más detalles, comunícate con el administrador de la organización."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Usa tu rostro para desbloquear el teléfono, autorizar compras o acceder a las apps"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"Puedes borrar las imágenes de tu huella dactilar y el modelo, o bien desactivar el desbloqueo con huella dactilar en cualquier momento desde la Configuración. Los modelos y las imágenes de la huella dactilar se almacenan en el teléfono hasta que los borras."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Tu hijo y tú pueden borrar el modelo y las imágenes de su huella dactilar, así como desactivar la función Desbloqueo con huellas dactilares en cualquier momento desde Configuración. Los modelos y las imágenes de la huella se almacenan en el teléfono hasta que se borran."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Tu teléfono se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tu tablet se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien la sostiene frente a tu dedo."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Tu dispositivo se puede desbloquear aunque no lo desees, por ejemplo, cuando alguien lo sostiene frente a tu dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"El teléfono de tu hijo puede desbloquearse sin que así lo quisiera, por ejemplo, porque alguien se lo acercó al dedo."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Para obtener los mejores resultados, usa un protector de pantalla que tenga certificación Made for Google. Es posible que tu huella dactilar no funcione con otros protectores."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Para obtener los mejores resultados, usa un protector de pantalla que tenga certificación Made for Google. Es posible que la huella dactilar de tu hijo no funcione con otros protectores."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustración del dispositivo y la ubicación del sensor de huellas dactilares"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Nombre"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"Aceptar"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Reintentar"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Borrar"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Toca el sensor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Coloca el dedo en el sensor y levántalo cuando sientas una vibración."</string>
@@ -538,12 +536,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Se agregó la huella dactilar"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"El Desbloqueo con huellas dactilares mejora a medida que lo usas para desbloquear la tablet o verificar tu identidad en apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"El Desbloqueo con huellas dactilares mejora a medida que lo usas para desbloquear el dispositivo o verificar tu identidad en apps"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"El Desbloqueo con huellas dactilares mejora a medida que lo usas para desbloquear el teléfono o verificar tu identidad en apps"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Más tarde"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Levanta el dedo y vuelve a tocar"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Apoya un lado de tu huella dactilar en el sensor y mantén presionado. Luego, cambia de lado."</string>
@@ -601,10 +596,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Listo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ese no es el sensor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Toca el sensor en la parte posterior del teléfono con el dedo índice."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Tiempo para conf. huella dactilar agotado"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Vuelve a intentarlo o hazlo más tarde en Configuración"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"El registro de huellas dactilares no funcionó. Vuelve a intentarlo o usa otro dedo."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Agregar otra huella digital"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Siguiente"</string>
@@ -5106,17 +5099,17 @@
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Instalar apps por fuera de Play Store"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Reiniciar el dispositivo de modo seguro"</string>
     <string name="financed_privacy_multi_users" msgid="1727194928477613081">"Agregar varios usuarios al dispositivo"</string>
-    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Cambia las zonas horarias, la fecha y la hora."</string>
+    <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"Cambiar las zonas horarias, la fecha y la hora"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"Usar opciones para desarrolladores"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"El proveedor de crédito puede:"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Accede a tu número de IMEI"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"Acceder a tu número de IMEI"</string>
     <string name="financed_privacy_factory_reset" msgid="8915355477801723433">"Restablecer config. de fábrica del disp."</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Si se bloquea el dispositivo, podrás usarlo solo para lo siguiente:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"Realizar llamadas de emergencia"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"Ver información del sistema, como la fecha, la hora, el estado de la red y la batería"</string>
     <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"Apagar o encender el dispositivo"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Ver notificaciones y mensajes de texto"</string>
-    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Accede a las apps permitidas por el proveedor de crédito"</string>
+    <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Acceder a las apps permitidas por el proveedor de crédito"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Cuando pagues el monto completo, podrás hacer lo siguiente:"</string>
     <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Se quitan todas las restricciones del dispositivo"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Puedes desinstalar la app del acreedor"</string>

@@ -368,12 +368,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"முகம் காட்டித் திறத்தல் அம்சத்தை அனுமதித்தல்"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"அங்கீகரிக்க, முகத்தைப் பயன்படுத்தலாம்"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"மொபைலை அன்லாக் செய்ய, வாங்குதல்களை அங்கீகரிக்க &amp; ஆப்ஸில் உள்நுழைய, உங்கள் முகத்தைப் பயன்படுத்தலாம்."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்தி மொபைலை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்தி டேப்லெட்டை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"உங்கள் பிள்ளை தனது முகத்தைப் பயன்படுத்திச் சாதனத்தை அன்லாக் செய்ய அனுமதிக்கவும்"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் மொபைலை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் டேப்லெட்டை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"உங்கள் பிள்ளையின் முகத்தைப் பயன்படுத்தி அவர்களின் சாதனத்தை அன்லாக் செய்வது வலுவான பேட்டர்னையோ பின்னையோ பயன்படுத்துவதைவிட பாதுகாப்பு குறைவானதாக இருக்கலாம்."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"மொபைலை அன்லாக் செய்யவும் பொருட்கள் வாங்குவதை அங்கீகரிக்கவும் உங்கள் முகத்தைப் பயன்படுத்தவும். \n\nகவனத்திற்கு: இந்தச் சாதனத்தை அன்லாக் செய்ய உங்கள் முகத்தைப் பயன்படுத்த இயலாது. மேலும் தகவலுக்கு உங்கள் நிறுவனத்தின் நிர்வாகியைத் தொடர்புகொள்ளவும்."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"மொபைலை அன்லாக் செய்ய, வாங்குதல்களை அங்கீகரிக்க &amp; ஆப்ஸில் உள்நுழைய, உங்கள் முகத்தைப் பயன்படுத்தலாம்"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -381,6 +381,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -464,10 +465,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"அமைப்புகளில் எப்போது வேண்டுமானாலும் கைரேகைப் படங்களையும் பதிவையும் நீக்கலாம், ‘கைரேகை அன்லாக்’ அம்சத்தை முடக்கலாம். கைரேகைப் படங்களையும் பதிவுகளையும் நீங்கள் நீக்கும்வரை உங்கள் மொபைலில் அவை பாதுகாப்பாகச் சேமிக்கப்படும்."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"அமைப்புகளில் எப்போது வேண்டுமானாலும் நீங்களும் உங்கள் பிள்ளையும் அவரின் கைரேகைப் படங்களையும் பதிவுகளையும் நீக்கலாம், கைரேகை அன்லாக் அம்சத்தை முடக்கலாம். நீக்கப்படும் வரை கைரேகைப் படங்களும் பதிவுகளும் மொபைலிலேயே சேமிக்கப்பட்டிருக்கும்."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"மொபைலை அன்லாக் செய்யும் எண்ணம் உங்களுக்கு இல்லாதபோதும் அது திறக்கக்கூடும். உதாரணமாக, வேறொருவர் உங்கள் விரலில் மொபைல் சென்சாரை வைத்துத் திறக்கலாம்."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"டேப்லெட்டை அன்லாக் செய்யும் எண்ணம் உங்களுக்கு இல்லாதபோதும் அது அன்லாக் செய்யப்படலாம் (வேறொருவர் உங்கள் விரலுக்கு அருகில் டேப்லெட்டைப் பிடித்திருப்பது போன்ற சமயங்களில்)."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"சாதனத்தை அன்லாக் செய்யும் எண்ணம் உங்களுக்கு இல்லாதபோதும் அது அன்லாக் செய்யப்படலாம் (வேறொருவர் உங்கள் விரலுக்கு அருகில் மொபைலைப் பிடித்திருப்பது போன்ற சமயங்களில்)."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"மொபைலை அன்லாக் செய்யும் எண்ணம் உங்கள் பிள்ளைக்கு இல்லாதபோதும் அது அன்லாக் ஆகக்கூடும். உதாரணமாக, வேறொருவர் உங்கள் பிள்ளையின் விரலுக்கு நேரே மொபைலைக் காட்டி அதை அன்லாக் செய்யலாம்."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"சிறந்த முடிவுகளுக்கு, Made for Google சான்றளிக்கப்பட்ட ஸ்கிரீன் கார்டைப் பயன்படுத்துங்கள். உங்கள் கைரேகை மற்ற ஸ்கிரீன் கார்டுகளுடன் பொருந்தாமல் போகக்கூடும்."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"சிறந்த முடிவுகளுக்கு, Made for Google சான்றளிக்கப்பட்ட ஸ்கிரீன் கார்டைப் பயன்படுத்துங்கள். உங்கள் பிள்ளையின் கைரேகை மற்ற ஸ்கிரீன் கார்டுகளுடன் பொருந்தாமல் போகக்கூடும்."</string>
@@ -517,8 +516,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"சாதனத்தில் கைரேகை சென்சார் அமைந்துள்ள இடத்தின் விளக்கப்படம்"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"பெயர்"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"சரி"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"மீண்டும் முயல்க"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"நீக்கு"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"சென்சாரைத் தொடவும்"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"விரலை சென்சாரில் வைத்து, அதிர்வை உணர்ந்த பின்னர் விரலை எடுக்கவும்"</string>
@@ -536,12 +534,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"இது உங்கள் கைரேகையைத் துல்லியமாகப் பதிவுசெய்ய உதவும்"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"கைரேகை <xliff:g id="PERCENTAGE">%d</xliff:g> சதவீதம் பதிவுசெய்யப்பட்டது"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"கைரேகை சேர்க்கப்பட்டது"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"உங்கள் டேப்லெட்டை அன்லாக் செய்வதற்கோ ஆப்ஸைப் பயன்படுத்துவது நீங்கள்தான் என்பதை உறுதிசெய்வதற்கோ \'கைரேகை அன்லாக்\' அம்சத்தை எந்தளவிற்கு அதிகமாகப் பயன்படுத்துகிறீர்களோ அந்தளவிற்கு அந்த அம்சம் மேம்படும்"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"உங்கள் சாதனத்தை அன்லாக் செய்வதற்கோ ஆப்ஸைப் பயன்படுத்துவது நீங்கள்தான் என்பதை உறுதிசெய்வதற்கோ \'கைரேகை அன்லாக்\' அம்சத்தை எந்தளவிற்கு அதிகமாகப் பயன்படுத்துகிறீர்களோ அந்தளவிற்கு அந்த அம்சம் மேம்படும்"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"உங்கள் மொபைலை அன்லாக் செய்வதற்கோ ஆப்ஸைப் பயன்படுத்துவது நீங்கள்தான் என்பதை உறுதிசெய்வதற்கோ \'கைரேகை அன்லாக்\' அம்சத்தை எந்தளவிற்கு அதிகமாகப் பயன்படுத்துகிறீர்களோ அந்தளவிற்கு அந்த அம்சம் மேம்படும்"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"இப்போது வேண்டாம்"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"விரலை எடுத்துவிட்டு, மீண்டும் தொடவும்"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"உங்கள் விரலின் விளிம்புப் பகுதியை சென்சாரின் ஒரு பக்கத்தில் வைத்துப் பிடித்திருந்து, பிறகு மற்றொரு பக்கத்திற்கு மாற்றவும்"</string>
@@ -599,10 +594,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"முடிந்தது"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"அச்சச்சோ, அது சென்சார் இல்லை"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"ஆள்காட்டி விரலால் சென்சாரைத் தொடவும்."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"கைரேகை அமைவுக்கான நேரம் முடிந்துவிட்டது"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"இப்போதே மீண்டும் முயற்சி செய்யவும் அல்லது அமைப்புகளில் உங்கள் கைரேகையைப் பின்னர் அமைக்கவும்"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"கைரேகையைப் பதிவுசெய்ய முடியவில்லை. மீண்டும் முயற்சிக்கவும் அல்லது வேறு விரலைப் பயன்படுத்தவும்."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"மற்றொன்றைச் சேர்"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"அடுத்து"</string>
@@ -3665,7 +3658,7 @@
     <string name="keywords_profile_challenge" msgid="5135555521652143612">"பணிச்சுமை, பணி, சுயவிவரம்"</string>
     <string name="keywords_unification" msgid="2677472004971453468">"பணிக் கணக்கு, நிர்வகிக்கப்படும் சுயவிவரம், ஒருங்கிணை, ஒருங்கிணைத்தல், பணி, சுயவிவரம்"</string>
     <string name="keywords_gesture" msgid="3456930847450080520">"சைகைகள்"</string>
-    <string name="keywords_wallet" msgid="3757421969956996972">"வாலட்"</string>
+    <string name="keywords_wallet" msgid="3757421969956996972">"Wallet"</string>
     <string name="keywords_payment_settings" msgid="6268791289277000043">"கட்டணம் செலுத்தவும், தட்டவும், கட்டணம் செலுத்துதல்"</string>
     <string name="keywords_backup" msgid="707735920706667685">"காப்புப்பிரதி, காப்புப் பிரதி"</string>
     <string name="keywords_assist_gesture_launch" msgid="7710762655355161924">"சைகை"</string>

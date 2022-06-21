@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -67,34 +67,41 @@ public class PowerGaugePreference extends AppPreference {
         mShowAnomalyIcon = false;
     }
 
+    /** Sets the content description. */
     public void setContentDescription(String name) {
         mContentDescription = name;
         notifyChanged();
     }
 
+    /** Sets the percent of total. */
     public void setPercent(double percentOfTotal) {
         mProgress = Utils.formatPercentage(percentOfTotal, true);
         notifyChanged();
     }
 
+    /** Gets the percent of total. */
     public String getPercent() {
         return mProgress.toString();
     }
 
+    /** Sets the subtitle. */
     public void setSubtitle(CharSequence subtitle) {
         mProgress = subtitle;
         notifyChanged();
     }
 
+    /** Gets the subtitle. */
     public CharSequence getSubtitle() {
         return mProgress;
     }
 
+    /** Sets whether to show anomaly icon */
     public void shouldShowAnomalyIcon(boolean showAnomalyIcon) {
         mShowAnomalyIcon = showAnomalyIcon;
         notifyChanged();
     }
 
+    /** Gets whether to show anomaly icon */
     public boolean showAnomalyIcon() {
         return mShowAnomalyIcon;
     }

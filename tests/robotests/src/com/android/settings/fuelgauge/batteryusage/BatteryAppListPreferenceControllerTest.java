@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -35,6 +35,7 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -81,9 +82,9 @@ public class BatteryAppListPreferenceControllerTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {});
+        when(mUserManager.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[]{});
         when(mFeatureFactory.powerUsageFeatureProvider.getHideApplicationSummary(mContext))
-                .thenReturn(new String[] {"com.android.googlequicksearchbox"});
+                .thenReturn(new String[]{"com.android.googlequicksearchbox"});
 
         mPreference = new PowerGaugePreference(mContext);
 
