@@ -190,7 +190,7 @@ public class BatteryUtils {
      * Returns true if the specified battery consumer should be excluded from
      * battery consumption lists, either short or full.
      */
-    boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
+    public boolean shouldHideUidBatteryConsumerUnconditionally(UidBatteryConsumer consumer,
             String[] packages) {
         final int uid = consumer.getUid();
         return uid == UID_TETHERING

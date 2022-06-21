@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,8 +32,10 @@ public class ExpandDividerPreference extends Preference {
     @VisibleForTesting
     static final String PREFERENCE_KEY = "expandable_divider";
 
-    @VisibleForTesting TextView mTextView;
-    @VisibleForTesting ImageView mImageView;
+    @VisibleForTesting
+    TextView mTextView;
+    @VisibleForTesting
+    ImageView mImageView;
     private OnExpandListener mOnExpandListener;
 
     private boolean mIsExpanded = false;
@@ -42,6 +43,7 @@ public class ExpandDividerPreference extends Preference {
 
     /** A callback listener for expand state is changed by users. */
     public interface OnExpandListener {
+        /** Callback function for expand state is changed by users. */
         void onExpand(boolean isExpanded);
     }
 

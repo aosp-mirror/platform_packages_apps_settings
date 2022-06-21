@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,11 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,8 +34,8 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
-import android.util.SparseArray;
 import android.util.Log;
+import android.util.SparseArray;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -48,6 +47,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -72,6 +73,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 20;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final String MEDIASERVER_PACKAGE_NAME = "mediaserver";
+    private static final String NOT_AVAILABLE = "not_available";
 
     @VisibleForTesting
     PreferenceGroup mAppListGroup;
@@ -230,7 +232,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         if (sConfig.shouldShowBatteryAttributionList(mContext)) {
             final int dischargePercentage = getDischargePercentage(batteryUsageStats);
             final List<BatteryEntry> usageList =
-                getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ true);
+                    getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ true);
             final double totalPower = batteryUsageStats.getConsumedPower();
             final int numSippers = usageList.size();
             for (int i = 0; i < numSippers; i++) {
@@ -292,7 +294,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
         final int dischargePercentage = getDischargePercentage(batteryUsageStats);
         final List<BatteryEntry> usageList =
-            getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ false);
+                getCoalescedUsageList(showAllApps, /*loadDataInBackground=*/ false);
         final double totalPower = batteryUsageStats.getConsumedPower();
         for (int i = 0; i < usageList.size(); i++) {
             final BatteryEntry entry = usageList.get(i);
@@ -458,8 +460,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     private void cacheRemoveAllPrefs(PreferenceGroup group) {
         mPreferenceCache = new ArrayMap<>();
-        final int N = group.getPreferenceCount();
-        for (int i = 0; i < N; i++) {
+        final int n = group.getPreferenceCount();
+        for (int i = 0; i < n; i++) {
             Preference p = group.getPreference(i);
             if (TextUtils.isEmpty(p.getKey())) {
                 continue;
@@ -563,7 +565,6 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     }
 
     private void addNotAvailableMessage() {
-        final String NOT_AVAILABLE = "not_available";
         Preference notAvailable = getCachedPreference(NOT_AVAILABLE);
         if (notAvailable == null) {
             notAvailable = new Preference(mPrefContext);

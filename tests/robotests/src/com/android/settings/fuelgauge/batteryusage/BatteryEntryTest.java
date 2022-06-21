@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -37,7 +37,8 @@ import android.os.UserBatteryConsumer;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.BatteryEntry.NameAndIcon;
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.BatteryEntry.NameAndIcon;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -62,31 +63,36 @@ public class BatteryEntryTest {
     private static final String HIGH_DRAIN_PACKAGE = "com.android.test.screen";
     private static final String ANDROID_PACKAGE = "android";
 
-    @Rule public MockitoRule mocks = MockitoJUnit.rule();
+    @Rule
+    public MockitoRule mocks = MockitoJUnit.rule();
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
     private Context mContext;
-    @Mock private Handler mockHandler;
-    @Mock private PackageManager mockPackageManager;
-    @Mock private UserManager mockUserManager;
-    @Mock private UidBatteryConsumer mUidBatteryConsumer;
+    @Mock
+    private Handler mMockHandler;
+    @Mock
+    private PackageManager mMockPackageManager;
+    @Mock
+    private UserManager mMockUserManager;
+    @Mock
+    private UidBatteryConsumer mUidBatteryConsumer;
 
     @Before
     public void stubContextToReturnMockPackageManager() {
         mContext = spy(RuntimeEnvironment.application);
-        when(mMockContext.getPackageManager()).thenReturn(mockPackageManager);
+        when(mMockContext.getPackageManager()).thenReturn(mMockPackageManager);
     }
 
     @Before
     public void stubPackageManagerToReturnAppPackageAndName() throws NameNotFoundException {
-        when(mockPackageManager.getApplicationInfo(anyString(), eq(0) /* no flags */))
+        when(mMockPackageManager.getApplicationInfo(anyString(), eq(0) /* no flags */))
                 .thenAnswer(invocation -> {
                     ApplicationInfo info = new ApplicationInfo();
                     info.packageName = invocation.getArgument(0);
                     return info;
                 });
-        when(mockPackageManager.getApplicationLabel(any(ApplicationInfo.class)))
+        when(mMockPackageManager.getApplicationLabel(any(ApplicationInfo.class)))
                 .thenAnswer(invocation -> LABEL_PREFIX
                         + ((ApplicationInfo) invocation.getArgument(0)).packageName);
     }
@@ -96,7 +102,7 @@ public class BatteryEntryTest {
         UidBatteryConsumer consumer = mock(UidBatteryConsumer.class);
         when(consumer.getUid()).thenReturn(APP_UID);
         when(consumer.getPackageWithHighestDrain()).thenReturn(highDrainPackage);
-        return new BatteryEntry(mMockContext, mockHandler, mockUserManager,
+        return new BatteryEntry(mMockContext, mMockHandler, mMockUserManager,
                 consumer, false, APP_UID, packages, packageName);
     }
 
@@ -111,7 +117,7 @@ public class BatteryEntryTest {
     private BatteryEntry createUserBatteryConsumer(int userId) {
         UserBatteryConsumer consumer = mock(UserBatteryConsumer.class);
         when(consumer.getUserId()).thenReturn(userId);
-        return new BatteryEntry(mMockContext, mockHandler, mockUserManager,
+        return new BatteryEntry(mMockContext, mMockHandler, mMockUserManager,
                 consumer, false, 0, null, null);
     }
 
@@ -127,7 +133,7 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForApp_shouldSetLabelAsPackageName_whenPackageCannotBeFound()
             throws Exception {
-        when(mockPackageManager.getApplicationInfo(APP_DEFAULT_PACKAGE_NAME, 0 /* no flags */))
+        when(mMockPackageManager.getApplicationInfo(APP_DEFAULT_PACKAGE_NAME, 0 /* no flags */))
                 .thenThrow(new NameNotFoundException());
 
         BatteryEntry entry = createBatteryEntryForApp(null, APP_DEFAULT_PACKAGE_NAME, null);
@@ -137,7 +143,7 @@ public class BatteryEntryTest {
 
     @Test
     public void batteryEntryForApp_shouldSetHighestDrainPackage_whenPackagesCannotBeFoundForUid() {
-        when(mockPackageManager.getPackagesForUid(APP_UID)).thenReturn(null);
+        when(mMockPackageManager.getPackagesForUid(APP_UID)).thenReturn(null);
 
         BatteryEntry entry = createBatteryEntryForApp(null, null, HIGH_DRAIN_PACKAGE);
 
@@ -147,7 +153,7 @@ public class BatteryEntryTest {
     @Test
     public void batteryEntryForApp_shouldSetHighestDrainPackage_whenMultiplePackagesFoundForUid() {
         BatteryEntry entry = createBatteryEntryForApp(
-                new String[] {APP_DEFAULT_PACKAGE_NAME, "package2", "package3"}, null,
+                new String[]{APP_DEFAULT_PACKAGE_NAME, "package2", "package3"}, null,
                 HIGH_DRAIN_PACKAGE);
 
         assertThat(entry.getLabel()).isEqualTo(LABEL_PREFIX + HIGH_DRAIN_PACKAGE);
@@ -176,8 +182,8 @@ public class BatteryEntryTest {
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_FOREGROUND))
                 .thenReturn(100L);
 
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, mUidBatteryConsumer, false, 0, null, null);
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mMockHandler,
+                mMockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInForegroundMs()).isEqualTo(100L);
     }
@@ -195,8 +201,8 @@ public class BatteryEntryTest {
         when(mUidBatteryConsumer.getTimeInStateMs(UidBatteryConsumer.STATE_BACKGROUND))
                 .thenReturn(100L);
 
-        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mockHandler,
-                mockUserManager, mUidBatteryConsumer, false, 0, null, null);
+        final BatteryEntry entry = new BatteryEntry(RuntimeEnvironment.application, mMockHandler,
+                mMockUserManager, mUidBatteryConsumer, false, 0, null, null);
 
         assertThat(entry.getTimeInBackgroundMs()).isEqualTo(100L);
     }
@@ -247,7 +253,7 @@ public class BatteryEntryTest {
 
     @Test
     public void getKey_UserBatteryConsumer_returnUserId() {
-        doReturn(mockUserManager).when(mMockContext).getSystemService(UserManager.class);
+        doReturn(mMockUserManager).when(mMockContext).getSystemService(UserManager.class);
         final BatteryEntry entry = createUserBatteryConsumer(2);
         final String key = entry.getKey();
         assertThat(key).isEqualTo("U|2");
@@ -256,8 +262,8 @@ public class BatteryEntryTest {
     @Test
     public void getNameAndIconFromUserId_nullUserInfo_returnDefaultNameAndIcon() {
         final int userId = 1001;
-        doReturn(mockUserManager).when(mContext).getSystemService(UserManager.class);
-        doReturn(null).when(mockUserManager).getUserInfo(userId);
+        doReturn(mMockUserManager).when(mContext).getSystemService(UserManager.class);
+        doReturn(null).when(mMockUserManager).getUserInfo(userId);
 
         final NameAndIcon nameAndIcon = BatteryEntry.getNameAndIconFromUserId(
                 mContext, userId);

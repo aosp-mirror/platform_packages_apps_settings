@@ -1,21 +1,23 @@
 /*
- * Copyright (C) 2021 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package com.android.settings.fuelgauge;
-
-import static java.lang.Math.round;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.Utils.formatPercentage;
+
+import static java.lang.Math.round;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
@@ -37,8 +39,8 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
@@ -54,7 +56,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         AccessibilityManager.AccessibilityStateChangeListener {
     private static final String TAG = "BatteryChartView";
     private static final List<String> ACCESSIBILITY_SERVICE_NAMES =
-        Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
+            Arrays.asList("SwitchAccessService", "TalkBackService", "JustSpeakService");
 
     private static final int DEFAULT_TRAPEZOID_COUNT = 12;
     private static final int DEFAULT_TIMESTAMP_COUNT = 4;
@@ -68,6 +70,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
     /** A callback listener for selected group index is updated. */
     public interface OnSelectListener {
+        /** The callback function for selected group index is updated. */
         void onSelect(int trapezoidIndex);
     }
 
@@ -79,9 +82,12 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private boolean mIsSlotsClickabled;
     private String[] mPercentages = getPercentages();
 
-    @VisibleForTesting int mHoveredIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting int mSelectedIndex = SELECTED_INDEX_INVALID;
-    @VisibleForTesting String[] mTimestamps;
+    @VisibleForTesting
+    int mHoveredIndex = SELECTED_INDEX_INVALID;
+    @VisibleForTesting
+    int mSelectedIndex = SELECTED_INDEX_INVALID;
+    @VisibleForTesting
+    String[] mTimestamps;
 
     // Colors for drawing the trapezoid shape and dividers.
     private int mTrapezoidColor;
@@ -91,10 +97,10 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private int mTextPadding;
     private final Rect mIndent = new Rect();
     private final Rect[] mPercentageBounds =
-        new Rect[] {new Rect(), new Rect(), new Rect()};
+            new Rect[]{new Rect(), new Rect(), new Rect()};
     // For drawing the timestamp information.
     private final Rect[] mTimestampsBounds =
-        new Rect[] {new Rect(), new Rect(), new Rect(), new Rect()};
+            new Rect[]{new Rect(), new Rect(), new Rect(), new Rect()};
 
     @VisibleForTesting
     Handler mHandler = new Handler();
@@ -202,14 +208,15 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             mTimestamps = new String[DEFAULT_TIMESTAMP_COUNT];
         }
         final long timeSlotOffset =
-            DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
+                DateUtils.HOUR_IN_MILLIS * (/*total 24 hours*/ 24 / TIMESTAMP_GAPS_COUNT);
         final boolean is24HourFormat = DateFormat.is24HourFormat(getContext());
         for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
             mTimestamps[index] =
-                ConvertUtils.utcToLocalTimeHour(
-                    getContext(),
-                    latestTimestamp - (TIMESTAMP_GAPS_COUNT - index) * timeSlotOffset,
-                    is24HourFormat);
+                    ConvertUtils.utcToLocalTimeHour(
+                            getContext(),
+                            latestTimestamp - (TIMESTAMP_GAPS_COUNT - index)
+                                    * timeSlotOffset,
+                            is24HourFormat);
         }
         requestLayout();
     }
@@ -221,8 +228,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         if (mTextPaint != null) {
             for (int index = 0; index < mPercentages.length; index++) {
                 mTextPaint.getTextBounds(
-                    mPercentages[index], 0, mPercentages[index].length(),
-                    mPercentageBounds[index]);
+                        mPercentages[index], 0, mPercentages[index].length(),
+                        mPercentageBounds[index]);
             }
             // Updates the indent configurations.
             mIndent.top = mPercentageBounds[0].height();
@@ -232,8 +239,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
                 int maxHeight = 0;
                 for (int index = 0; index < DEFAULT_TIMESTAMP_COUNT; index++) {
                     mTextPaint.getTextBounds(
-                        mTimestamps[index], 0, mTimestamps[index].length(),
-                        mTimestampsBounds[index]);
+                            mTimestamps[index], 0, mTimestamps[index].length(),
+                            mTimestampsBounds[index]);
                     maxHeight = Math.max(maxHeight, mTimestampsBounds[index].height());
                 }
                 mIndent.bottom = maxHeight + round(mTextPadding * 1.5f);
@@ -318,14 +325,14 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         super.onAttachedToWindow();
         updateClickableState();
         mContext.getSystemService(AccessibilityManager.class)
-            .addAccessibilityStateChangeListener(/*listener=*/ this);
+                .addAccessibilityStateChangeListener(/*listener=*/ this);
     }
 
     @Override
     public void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mContext.getSystemService(AccessibilityManager.class)
-            .removeAccessibilityStateChangeListener(/*listener=*/ this);
+                .removeAccessibilityStateChangeListener(/*listener=*/ this);
         mHandler.removeCallbacks(mUpdateClickableStateRun);
     }
 
@@ -336,16 +343,16 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         // We should delay it a while since accessibility manager will spend
         // some times to bind with new enabled accessibility services.
         mHandler.postDelayed(
-            mUpdateClickableStateRun, UPDATE_STATE_DELAYED_TIME);
+                mUpdateClickableStateRun, UPDATE_STATE_DELAYED_TIME);
     }
 
     private void updateClickableState() {
         final Context context = mContext;
         mIsSlotsClickabled =
-            FeatureFactory.getFactory(context)
-                    .getPowerUsageFeatureProvider(context)
-                    .isChartGraphSlotsEnabled(context)
-            && !isAccessibilityEnabled(context);
+                FeatureFactory.getFactory(context)
+                        .getPowerUsageFeatureProvider(context)
+                        .isChartGraphSlotsEnabled(context)
+                        && !isAccessibilityEnabled(context);
         Log.d(TAG, "isChartGraphSlotsEnabled:" + mIsSlotsClickabled);
         setClickable(isClickable());
         // Initializes the trapezoid curve paint for non-clickable case.
@@ -378,7 +385,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTrapezoidSolidColor = Utils.getColorAccentDefaultColor(context);
         mTrapezoidColor = Utils.getDisabled(context, mTrapezoidSolidColor);
         mTrapezoidHoverColor = Utils.getColorAttrDefaultColor(context,
-            com.android.internal.R.attr.colorAccentSecondaryVariant);
+                com.android.internal.R.attr.colorAccentSecondaryVariant);
         // Initializes the divider line paint.
         final Resources resources = getContext().getResources();
         mDividerWidth = resources.getDimensionPixelSize(R.dimen.chartview_divider_width);
@@ -398,8 +405,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
         mTrapezoidPaint.setColor(mTrapezoidSolidColor);
         mTrapezoidPaint.setStyle(Paint.Style.FILL);
         mTrapezoidPaint.setPathEffect(
-            new CornerPathEffect(
-                resources.getDimensionPixelSize(R.dimen.chartview_trapezoid_radius)));
+                new CornerPathEffect(
+                        resources.getDimensionPixelSize(R.dimen.chartview_trapezoid_radius)));
         // Initializes for drawing text information.
         mTextPadding = resources.getDimensionPixelSize(R.dimen.chartview_text_padding);
     }
@@ -414,7 +421,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
 
         // Draws the center divider line for 50% curve.
         final float availableSpace =
-            height - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
+                height - mDividerWidth * 2 - mTrapezoidVOffset - mDividerHeight;
         offsetY = mIndent.top + mDividerWidth + availableSpace * .5f;
         canvas.drawLine(0, offsetY, width, offsetY, mDividerPaint);
         drawPercentage(canvas, /*index=*/ 1, offsetY);
@@ -428,10 +435,11 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private void drawPercentage(Canvas canvas, int index, float offsetY) {
         if (mTextPaint != null) {
             canvas.drawText(
-                mPercentages[index],
-                getWidth() - mPercentageBounds[index].width() - mPercentageBounds[index].left,
-                offsetY + mPercentageBounds[index].height() *.5f,
-                mTextPaint);
+                    mPercentages[index],
+                    getWidth() - mPercentageBounds[index].width()
+                            - mPercentageBounds[index].left,
+                    offsetY + mPercentageBounds[index].height() * .5f,
+                    mTextPaint);
         }
     }
 
@@ -471,31 +479,32 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     private void drawTimestamp(Canvas canvas, float[] xOffsets) {
         // Draws the 1st timestamp info.
         canvas.drawText(
-            mTimestamps[0],
-            xOffsets[0] - mTimestampsBounds[0].left,
-            getTimestampY(0), mTextPaint);
+                mTimestamps[0],
+                xOffsets[0] - mTimestampsBounds[0].left,
+                getTimestampY(0), mTextPaint);
         final int latestIndex = DEFAULT_TIMESTAMP_COUNT - 1;
         // Draws the last timestamp info.
         canvas.drawText(
-            mTimestamps[latestIndex],
-            xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
-                    - mTimestampsBounds[latestIndex].left,
-            getTimestampY(latestIndex), mTextPaint);
+                mTimestamps[latestIndex],
+                xOffsets[latestIndex] - mTimestampsBounds[latestIndex].width()
+                        - mTimestampsBounds[latestIndex].left,
+                getTimestampY(latestIndex), mTextPaint);
         // Draws the rest of timestamp info since it is located in the center.
         for (int index = 1; index <= DEFAULT_TIMESTAMP_COUNT - 2; index++) {
             canvas.drawText(
-                mTimestamps[index],
-                xOffsets[index] -
-                    (mTimestampsBounds[index].width() - mTimestampsBounds[index].left) * .5f,
-                getTimestampY(index), mTextPaint);
+                    mTimestamps[index],
+                    xOffsets[index]
+                            - (mTimestampsBounds[index].width() - mTimestampsBounds[index].left)
+                            * .5f,
+                    getTimestampY(index), mTextPaint);
 
         }
     }
 
     private int getTimestampY(int index) {
         return getHeight() - mTimestampsBounds[index].height()
-            + (mTimestampsBounds[index].height() + mTimestampsBounds[index].top)
-            + round(mTextPadding * 1.5f);
+                + (mTimestampsBounds[index].height() + mTimestampsBounds[index].top)
+                + round(mTextPadding * 1.5f);
     }
 
     private void drawTrapezoids(Canvas canvas) {
@@ -504,8 +513,8 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             return;
         }
         final float trapezoidBottom =
-            getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
-                - mTrapezoidVOffset;
+                getHeight() - mIndent.bottom - mDividerHeight - mDividerWidth
+                        - mTrapezoidVOffset;
         final float availableSpace = trapezoidBottom - mDividerWidth * .5f - mIndent.top;
         final float unitHeight = availableSpace / 100f;
         // Draws all trapezoid shapes into the canvas.
@@ -522,12 +531,12 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             }
             // Configures the trapezoid paint color.
             final int trapezoidColor =
-                !mIsSlotsClickabled
-                    ? mTrapezoidColor
-                    : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
-                        ? mTrapezoidSolidColor : mTrapezoidColor;
+                    !mIsSlotsClickabled
+                            ? mTrapezoidColor
+                            : mSelectedIndex == index || mSelectedIndex == SELECTED_INDEX_ALL
+                                    ? mTrapezoidSolidColor : mTrapezoidColor;
             final boolean isHoverState =
-                mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
+                    mIsSlotsClickabled && mHoveredIndex == index && isValidToDraw(mHoveredIndex);
             mTrapezoidPaint.setColor(isHoverState ? mTrapezoidHoverColor : trapezoidColor);
 
             final float leftTop = round(trapezoidBottom - mLevels[index] * unitHeight);
@@ -546,7 +555,7 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
             // Generates path for non-clickable trapezoid curve.
             if (mTrapezoidCurvePaint != null) {
                 if (trapezoidCurvePath == null) {
-                    trapezoidCurvePath= new Path();
+                    trapezoidCurvePath = new Path();
                     trapezoidCurvePath.moveTo(mTrapezoidSlots[index].mLeft, leftTop);
                 } else {
                     trapezoidCurvePath.lineTo(mTrapezoidSlots[index].mLeft, leftTop);
@@ -582,23 +591,23 @@ public class BatteryChartView extends AppCompatImageView implements View.OnClick
     }
 
     private static String[] getPercentages() {
-        return new String[] {
-            formatPercentage(/*percentage=*/ 100, /*round=*/ true),
-            formatPercentage(/*percentage=*/ 50, /*round=*/ true),
-            formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
+        return new String[]{
+                formatPercentage(/*percentage=*/ 100, /*round=*/ true),
+                formatPercentage(/*percentage=*/ 50, /*round=*/ true),
+                formatPercentage(/*percentage=*/ 0, /*round=*/ true)};
     }
 
     @VisibleForTesting
     static boolean isAccessibilityEnabled(Context context) {
         final AccessibilityManager accessibilityManager =
-            context.getSystemService(AccessibilityManager.class);
+                context.getSystemService(AccessibilityManager.class);
         if (!accessibilityManager.isEnabled()) {
             return false;
         }
         final List<AccessibilityServiceInfo> serviceInfoList =
-            accessibilityManager.getEnabledAccessibilityServiceList(
-                AccessibilityServiceInfo.FEEDBACK_SPOKEN
-                    | AccessibilityServiceInfo.FEEDBACK_GENERIC);
+                accessibilityManager.getEnabledAccessibilityServiceList(
+                        AccessibilityServiceInfo.FEEDBACK_SPOKEN
+                                | AccessibilityServiceInfo.FEEDBACK_GENERIC);
         for (AccessibilityServiceInfo info : serviceInfoList) {
             for (String serviceName : ACCESSIBILITY_SERVICE_NAMES) {
                 final String serviceId = info.getId();
