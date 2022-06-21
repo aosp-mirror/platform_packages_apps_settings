@@ -366,12 +366,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Dopuštanje otključavanja licem"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Autentificirajte se licem"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Licem možete otključati telefon, autorizirati kupnje ili se prijaviti u aplikacije."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Dopustite djetetu da licem otključava telefon svoj telefon"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Dopustite djetetu da licem otključava telefon svoj tablet"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Dopustite djetetu da licem otključava telefon svoj uređaj"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Otključavanje djetetovog telefona pomoću njegovog lica može biti manje sigurno od složenog uzorka ili PIN-a."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Otključavanje djetetovog tableta pomoću njegovog lica može biti manje sigurno od složenog uzorka ili PIN-a."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Otključavanje djetetovog uređaja pomoću njegovog lica može biti manje sigurno od složenog uzorka ili PIN-a."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Otključajte telefon ili odobrite kupnje svojim licem.\n\nNapomena: ovaj uređaj ne možete otključati licem. Za više informacija obratite se administratoru organizacije."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Licem možete otključati telefon, autorizirati kupnje ili se prijaviti u aplikacije"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -379,6 +379,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -463,10 +464,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"U postavkama možete izbrisati model i slike otiska prsta ili isključiti otključavanje otiskom prsta kad god želite. Slike i modeli otiska prsta pohranjeni su na telefonu dok ih ne izbrišete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"Dijete i vi uvijek možete izbrisati slike i model njegovog otiska prsta ili isključiti otključavanje otiskom prsta u postavkama. Slike i modeli otiska prsta pohranjuju se na telefonu dok se ne izbrišu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Vaš se telefon može otključati kad to ne namjeravate, na primjer ako ga netko prinese vašem prstu."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Vaš se tablet može otključati kad to ne namjeravate, na primjer ako ga netko prinese vašem prstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Vaš se uređaj može otključati kad to ne namjeravate, na primjer ako ga netko prinese vašem prstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Djetetov telefon može se otključati i kad dijete to ne namjerava, na primjer ako ga netko prinese djetetovom prstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Za najbolje rezultate koristite zaštitu zaslona s certifikatom Made for Google. Vaš otisak prsta možda neće funkcionirati s drugim zaštitama zaslona."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Za najbolje rezultate koristite zaštitu zaslona s certifikatom Made for Google. Otisak prsta vašeg djeteta možda neće funkcionirati s drugim zaštitama zaslona."</string>
@@ -516,8 +515,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustracija uređaja i lokacije senzora otiska prsta"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Naziv"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"U redu"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Pokušajte ponovo"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Izbriši"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dodirnite senzor"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Stavite prst na senzor i podignite ga kada osjetite vibraciju"</string>
@@ -537,12 +535,9 @@
     <!-- no translation found for security_settings_udfps_enroll_progress_a11y_message (6183535114682369699) -->
     <skip />
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisak prsta je dodan"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Otključavanje otiskom prsta poboljšava se što ga više upotrebljavate za otključavanje tableta ili potvrdu identiteta u aplikacijama"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Otključavanje otiskom prsta poboljšava se što ga više upotrebljavate za otključavanje uređaja ili potvrdu identiteta u aplikacijama"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Otključavanje otiskom prsta poboljšava se što ga više upotrebljavate za otključavanje telefona ili potvrdu identiteta u aplikacijama"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Kasnije ću"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Podignite i ponovo dodirnite"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Postavite rub prsta na senzor i zadržite ga, a zatim prijeđite na drugu stranu"</string>
@@ -600,10 +595,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Gotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Ups, to nije senzor"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Kažiprstom dodirnite senzor na stražnjoj strani telefona."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Vrijeme za postavljanje otiska prsta je isteklo"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Pokušajte ponovo odmah ili ga postavite kasnije u postavkama"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registracija otiska prsta nije uspjela. Pokušajte ponovo ili prislonite neki drugi prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Dodajte drugi"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Dalje"</string>
@@ -3461,10 +3454,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Izbriši sve aplikacije i podatke gostujuće sesije prilikom izlaska iz načina rada za goste"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Izbrisati aktivnost gosta?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Aplikacije i podaci iz ove gostujuće sesije izbrisat će se odmah, a sve buduće aktivnosti gostujuće sesije izbrisat će se svaki put kad napustite način rada za goste."</string>
-    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
-    <skip />
-    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
-    <skip />
+    <string name="enable_guest_calling" msgid="8300355036005240911">"Dopustite gostu upotrebu telefona"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"Povijest poziva dijelit će se s gostom"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"Uključivanje telefonskih poziva i SMS-a"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"Brisanje korisnika"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"Želite li uključiti telefonske pozive i SMS?"</string>
@@ -3743,7 +3734,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, napredni pozivi, 5g pozivi"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"dodaj jezik, dodajte jezik"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"veličina teksta, velika slova, veliki font, veliki tekst, slabovidnost, povećati tekst, povećalo fonta, povećanje fonta"</string>
-    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"uvijek uključen zaslon"</string>
+    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"Zadani zvuk"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Glasnoća zvona i obavijesti na <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Glasnoća, vibracija, Ne uznemiravaj"</string>
@@ -5161,7 +5153,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Ograničene postavke dopuštene su za aplikaciju <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Radi vaše sigurnosti ova je postavka trenutačno nedostupna."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Informacije o uređaju na pretplatu"</string>
-    <string name="financed_privacy_intro" msgid="7836497475568741579">"Vaš operater može promijeniti postavke i instalirati softver na ovom uređaju tijekom postavljanja.\n\nAko propustite uplatu, operater može zaključati uređaj i promijeniti postavke.\n\nDa biste saznali više, obratite se operateru."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Vaš vjerovnik može promijeniti postavke i instalirati softver na ovom uređaju tijekom postavljanja.\n\nAko propustite uplatu, vjerovnik može zaključati uređaj i promijeniti postavke.\n\nDa biste saznali više, obratite se vjerovniku."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Ako ste kupili uređaj na rate, nije vam dostupno sljedeće:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"instaliranje aplikacija koje nisu iz Trgovine Play"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"ponovno pokretanje uređaja u sigurnom načinu rada"</string>
@@ -5170,7 +5162,7 @@
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"upotreba opcija za razvojne programere"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"Vašem operateru dostupno je sljedeće:"</string>
     <string name="financed_privacy_IMEI" msgid="1852413860963824799">"pristup vašem IMEI broju"</string>
-    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"Ako se pojavi pogreška, vratite uređaj na tvorničke postavke"</string>
+    <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"vraćanje uređaja na tvorničke postavke u slučaju pogreške"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"Ako se uređaj zaključa, možete ga koristiti samo za sljedeće:"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"upućivanje hitnih poziva"</string>
     <string name="financed_privacy_system_info" msgid="4158031444108708927">"pregled podataka o sustavu kao što su datum, vrijeme, mrežni status i stanje baterije"</string>
@@ -5178,8 +5170,8 @@
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"pregled obavijesti i tekstnih poruka"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"pristup aplikacijama koje dopušta operater"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Nakon što platite cijeli iznos:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"S uređaja se uklanjaju sva ograničenja."</string>
-    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Možete deinstalirati aplikaciju operatera."</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"sva ograničenja se uklanjaju s uređaja"</string>
+    <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"deinstaliranje aplikacije vjerovnika"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="one">Aplikacija za snimanje</item>
       <item quantity="few">Aplikacije za snimanje</item>

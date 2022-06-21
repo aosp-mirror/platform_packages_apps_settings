@@ -363,12 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"မျက်နှာပြ လော့ခ်ဖွင့်ခြင်းကိုခွင့်ပြုရန်"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"အထောက်အထားစိစစ်ရန် သင့်မျက်နှာသုံးပါ"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"သင့်ဖုန်းကိုလော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန် သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုပါ။"</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"သင့်ကလေးက သူ့ဖုန်းကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"သင့်ကလေးက သူ့တက်ဘလက်ကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"သင့်ကလေးက သူ့စက်ကို လော့ခ်ဖွင့်ရန်အတွက် သူ၏မျက်နှာကို သုံးခွင့်ပြုပါ"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"ကလေး၏ဖုန်းကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"ကလေး၏တက်ဘလက်ကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"ကလေး၏စက်ကို လော့ခ်ဖွင့်ရန် သူ့မျက်နှာသုံးခြင်းသည် အားကောင်းသည့် ပုံစံ (သို့) ပင်နံပါတ်လောက် မလုံခြုံပါ။"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"သင့်ဖုန်းကို လော့ခ်ဖွင့်ရန် သို့မဟုတ် ဝယ်ယူမှုများကို ခွင့်ပြုပေးရန် သင့်မျက်နှာကို အသုံးပြုပါ။\n\nမှတ်ချက်- ဤစက်ပစ္စည်းကို လော့ခ်ဖွင့်ရန် သင့်မျက်နှာကို အသုံးပြု၍ မရနိုင်ပါ။ အသေးစိတ်အချက်များအတွက် သင့်အဖွဲ့အစည်း၏ စီမံခန့်ခွဲသူကို ဆက်သွယ်ပါ။"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"သင့်ဖုန်းကိုလော့ခ်ဖွင့်ရန်၊ ဝယ်ယူမှုများကို အတည်ပြုရန် သို့မဟုတ် အက်ပ်များသို့ လက်မှတ်ထိုးဝင်ရန် သင့်မျက်နှာကို အသုံးပြုပါ"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -376,6 +376,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -459,10 +460,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"‘ဆက်တင်များ’ တွင် သင့်လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံးသော့ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို သင်မဖျက်မချင်း ဖုန်းတွင်သိမ်းထားသည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"သင်နှင့် သင့်ကလေးက ဆက်တင်များတွင် လက်ဗွေပုံများနှင့် နမူနာကို ဖျက်ခြင်း (သို့) ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ကို ပိတ်ခြင်းတို့ အချိန်မရွေး လုပ်နိုင်သည်။ လက်ဗွေပုံနှင့် နမူနာများကို မဖျက်မချင်း ဖုန်းတွင် သိမ်းထားသည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်ဖုန်းကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်တက်ဘလက်ကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"တစ်စုံတစ်ယောက်က သင့်လက်ချောင်းရှေ့တွင် သင့်စက်ကို ကိုင်ထားခြင်းကဲ့သို့ သင်မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"တစ်စုံတစ်ယောက်က သင့်ကလေး၏ဖုန်းကို သူ၏လက်ချောင်းရှေ့တွင် ကိုင်ထားခြင်းကဲ့သို့ သူ မရည်ရွယ်သည့်အချိန်တွင် ၎င်းကို လော့ခ်ဖွင့်နိုင်သည်။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"အကောင်းဆုံးရလဒ်များအတွက် ‘Google အတွက် ပြုလုပ်ထားသည်’ လက်မှတ်ရ ဖန်သားပြင် အကာအကွယ်ကို သုံးနိုင်သည်။ အခြားဖန်သားပြင် အကာအကွယ်များသုံးပါက သင်၏လက်ဗွေ အလုပ်မလုပ်နိုင်ပါ။"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"အကောင်းဆုံးရလဒ်များအတွက် Google အတွက် ပြုလုပ်ထားသည့် လက်မှတ်ရ ဖန်သားပြင် အကာအကွယ်သုံးနိုင်သည်။ အခြားဖန်သားပြင် အကာအကွယ်များသုံးပါက သင့်ကလေး၏လက်ဗွေ အလုပ်မလုပ်နိုင်ပါ။"</string>
@@ -512,8 +511,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"စက်နှင့် လက်ဗွေအာရုံခံကိရိယာကို တည်နေရာနှင့်အတူ သရုပ်ဖော်ပုံ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"အမည်"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"ထပ်စမ်းကြည့်ရန်"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"ဖျက်ရန်"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"အာရုံခံကိရိယာကို ထိပါ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"သင့်လက်ချောင်းကို အာရုံခံကိရိယာပေါ်သို့ တင်လိုက်ပြီး တုန်ခါမှုကို ခံစားရချိန်တွင် ပြန်ရုပ်လိုက်ပါ"</string>
@@ -531,12 +529,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"၎င်းက သင့်လက်ဗွေကို ပိုမိုဖမ်းယူပေးသည်"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"လက်ဗွေ စာရင်းသွင်းခြင်း <xliff:g id="PERCENTAGE">%d</xliff:g> ရာခိုင်နှုန်း"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"လက်ဗွေကို ထည့်ပြီးပါပြီ"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"သင့်တက်ဘလက်ဖွင့်ရာတွင် (သို့) အက်ပ်များ၌ သင်ဖြစ်ကြောင်းအတည်ပြုရာတွင် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ပိုသုံးပါက ၎င်းပိုမိုတိုးတက်လာသည်"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"သင့်စက်ဖွင့်ရာတွင် (သို့) အက်ပ်များ၌ သင်ဖြစ်ကြောင်းအတည်ပြုရာတွင် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ပိုသုံးပါက ၎င်းပိုမိုတိုးတက်လာသည်"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"သင့်ဖုန်းဖွင့်ရာတွင် (သို့) အက်ပ်များ၌ သင်ဖြစ်ကြောင်းအတည်ပြုရာတွင် ‘လက်ဗွေသုံး လော့ခ်ဖွင့်ခြင်း’ ပိုသုံးပါက ၎င်းပိုမိုတိုးတက်လာသည်"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"နောက်မှလုပ်ရန်"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"ဖယ်ပြီး ပြန်ထိပါ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"အာရုံခံကိရိယာပေါ်တွင် သင့်လက်ဗွေ၏ဘေးခြမ်းကို တင်ပြီးဖိထားပါ။ ထို့နောက် အခြားတစ်ဘက်သို့ ပြောင်းပါ"</string>
@@ -594,10 +589,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"ပြီးပါပြီ"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"အိုး။ ဒါ အာရုံခံကိရိယာမဟုတ်ဘူး"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"သင့်ဖုန်း ကျောဘက်ရှိ အာရုံခံကိရိယာကို ထိပါ။ လက်ညှိုးကို အသုံးပြုပါ။"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"လက်ဗွေစနစ်ထည့်သွင်းချိန် ကုန်သွားပါပြီ"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"ယခုထပ်စမ်းကြည့်ပါ (သို့) ‘ဆက်တင်များ’ တွင် လက်ဗွေကို နောက်မှ စနစ်ထည့်သွင်းပါ"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"လက်ဗွေထည့်သွင်းမှု အဆင်မပြေပါ။ အခြားလက်ချောင်းကို သုံးပါ သို့မဟုတ် ထပ်စမ်းကြည့်ပါ။"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"နောက်တစ်ခု ထည့်ရန်"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"ရှေ့သို့"</string>
@@ -3417,10 +3410,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ဧည့်သည်မုဒ်မှ ထွက်ချိန်တွင် ဧည့်သည်အက်ပ်နှင့် ဒေတာအားလုံးကို ဖျက်ရန်"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ဧည့်သည်လုပ်ဆောင်ချက် ဖျက်မလား။"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"ဤဧည့်သည် စက်ရှင်မှ အက်ပ်နှင့် ဒေတာများကို ယခုဖျက်လိုက်မည်ဖြစ်ပြီး လာမည့်ဧည့်သည် လုပ်ဆောင်ချက်အားလုံးကို ဧည့်သည်မုဒ်မှ ထွက်ချိန်တိုင်းတွင် ဖျက်လိုက်ပါမည်"</string>
-    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
-    <skip />
-    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
-    <skip />
+    <string name="enable_guest_calling" msgid="8300355036005240911">"ဧည့်သည်ကို ဖုန်းသုံးခွင့်ပြုရန်"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"ခေါ်ဆိုမှုမှတ်တမ်းကို ဧည့်သည်အသုံးပြုသူနှင့် မျှဝေမည်"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"ဖုန်းခေါ်ဆိုမှုနှင့် SMS ဖွင့်မည်"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"အသုံးပြုသူကို ဖျက်ပါ"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"ဖုန်းခေါ်ဆိုမှုများ&amp; SMS ကို ဖွင့်မည်လား။"</string>
@@ -3698,7 +3689,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g၊ vonr၊ အဆင့်မြင့် ဖုန်းခေါ်ဆိုမှု၊ 5g ဖုန်းခေါ်ဆိုမှု"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"ဘာသာစကားထည့်ရန်၊ ဘာသာစကားတစ်ခုကို ထည့်ပါ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"စာသားအရွယ်အစား၊ ပုံနှိပ်အကြီး၊ ဖောင့်အကြီး၊ စာသားအကြီး၊ အမြင်အာရုံချို့တဲ့ခြင်း၊ စာသားကို ပိုကြီးအောင်လုပ်ခြင်း၊ ဖောင့်ပိုကြီးအောင် ချဲ့ခြင်း၊ ဖောင့် ပုံကြီးချဲ့ခြင်း"</string>
-    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"အမြဲတမ်းပွင့်နေသည့် ဖန်သားပြင်"</string>
+    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"ပုံသေ အသံ"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"မြည်သံနှင့် အကြောင်းကြားချက် အသံ <xliff:g id="PERCENTAGE">%1$s</xliff:g> ရှိသည်"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"အသံအတိုးအကျယ်၊ တုန်ခါမှု၊ မနှောင့်ယှက်ရ"</string>
@@ -5079,7 +5071,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"ကန့်သတ်ဆက်တင်များကို <xliff:g id="APP_NAME">%s</xliff:g> အတွက် ခွင့်ပြုပြီးပြီ"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"သင့်လုံခြုံရေးအတွက် ဤဆက်တင်ကို ယခု အသုံးမပြုနိုင်ပါ။"</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"အရစ်ကျဝယ်ယူထားသော စက်ပစ္စည်း၏အချက်အလက်"</string>
-    <string name="financed_privacy_intro" msgid="7836497475568741579">"သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူသည် စနစ်ထည့်သွင်းမှုအတွင်း ဤစက်တွင် ဆက်တင်များပြောင်းပြီး ဆော့ဖ်ဝဲထည့်သွင်းနိုင်သည်။\n\nငွေပေးချေမှု မပြုမိပါလျှင် သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူက သင့်စက်ကိုလော့ခ်ချပြီး စက်ဆက်တင်များကို ပြောင်းနိုင်သည်။\n\nပိုမိုလေ့လာရန် သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူကို ဆက်သွယ်နိုင်သည်။"</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူသည် စနစ်ထည့်သွင်းချိန်တွင် ဤစက်၏ ဆက်တင်များကိုပြောင်းပြီး ဆော့ဖ်ဝဲထည့်သွင်းနိုင်သည်။\n\nငွေပေးချေမှု မပြုမိပါလျှင် သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူက သင့်စက်ကိုလော့ခ်ချပြီး စက်ဆက်တင်များကို ပြောင်းနိုင်သည်။\n\nပိုမိုလေ့လာရန် သင်၏ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူကို ဆက်သွယ်ပါ။"</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"စက်ကို အရစ်ကျဝယ်ယူထားပါက အောက်ပါတို့ကိုမလုပ်နိုင်ပါ-"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Play Store ပြင်ပမှ အက်ပ်များထည့်သွင်းခြင်း"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"စက်ကို အန္တရာယ်ကင်းမှု စနစ်သို့သွားရန် ပြန်လည်စတင်ခြင်း"</string>
@@ -5087,7 +5079,7 @@
     <string name="financed_privacy_config_date_time" msgid="8567370445374984365">"ရက်စွဲ၊ အချိန်နှင့် ဒေသစံတော်ချိန်များ ပြောင်းခြင်း"</string>
     <string name="financed_privacy_developer_options" msgid="7602001474669831672">"ဆော့ဖ်ဝဲရေးသူရွေးစရာများကို သုံးခြင်း"</string>
     <string name="financed_privacy_credit_provider_capabilities_category" msgid="8737902277892987998">"ခရက်ဒစ်ဝန်ဆောင်မှုပေးသူ လုပ်နိုင်သည်များ-"</string>
-    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"သင့် IMEI နံပါတ် သုံးခြင်း"</string>
+    <string name="financed_privacy_IMEI" msgid="1852413860963824799">"သင့် IMEI နံပါတ် သုံးနိုင်သည်"</string>
     <string name="financed_privacy_factory_reset" msgid="5505016667590160732">"တစ်ခုခုမှားသွားပါက သင်၏စက်ကို စက်ရုံထုတ်အတိုင်း ပြင်ဆင်သတ်မှတ်နိုင်သည်"</string>
     <string name="financed_privacy_locked_mode_category" msgid="3708288398912647751">"စက်ကို လော့ခ်ချထားပါက အောက်ပါတို့အတွက်သာ သုံးနိုင်သည်-"</string>
     <string name="financed_privacy_emergency_calls" msgid="1108183987142736497">"အရေးပေါ်ဖုန်းခေါ်ခြင်း"</string>
@@ -5095,8 +5087,8 @@
     <string name="financed_privacy_turn_on_off_device" msgid="3331566753152790571">"စက်ဖွင့်ခြင်း (သို့) ပိတ်ခြင်း"</string>
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"အကြောင်းကြားချက်နှင့် မိုဘိုင်းမက်ဆေ့ဂျ်များ ကြည့်ခြင်း"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"ခရက်ဒစ် ဝန်ဆောင်မှုပေးသူက ခွင့်ပြုထားသည့် အက်ပ်များသုံးခြင်း"</string>
-    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"ကျသင့်ငွေအပြည့်အဝ ပေးချေပြီးနောက် ရရှိမည်များ-"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"သင့်စက်မှ ကန့်သတ်ချက်များအားလုံး ဖယ်ရှားခြင်း"</string>
+    <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"ကျသင့်ငွေအပြည့်အဝ ပေးချေပြီးပါက-"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"သင့်စက်မှ ကန့်သတ်ချက်များအားလုံး ဖယ်ရှားသည်"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"ခရက်ဒစ်ပေးသည့်အက်ပ်ကို ဖယ်ရှားနိုင်သည်"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">ကင်မရာအက်ပ်များ</item>

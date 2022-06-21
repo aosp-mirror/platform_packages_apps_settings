@@ -363,12 +363,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"顔認証の許可"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"顔で認証"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます。"</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"お子様に、顔認証を使ってスマートフォンのロック解除を行うことを許可します"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"お子様に、顔認証を使ってタブレットのロック解除を行うことを許可します"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"お子様に、顔認証を使ってデバイスのロック解除を行うことを許可します"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"お子様の顔認証によるスマートフォンのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"お子様の顔認証によるタブレットのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"お子様の顔認証によるデバイスのロック解除は、複雑なパターンや PIN よりも安全面で劣る可能性があります。"</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"顔を使って、スマートフォンのロック解除や購入の承認を行います。\n\n注: 顔を使ってこのデバイスのロックを解除することはできません。詳しくは、組織の管理者にお問い合わせください。"</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"顔認証を使用して、スマートフォンのロック解除、購入の許可、アプリへのログインを行うことができます"</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -376,6 +376,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -459,10 +460,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"いつでも [設定] で指紋の画像やモデルを削除したり、指紋認証を OFF にしたりできます。指紋の画像とモデルは、削除するまでデバイスに保存されたままになります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"あなたとお子様はいつでも [設定] で指紋の画像や指紋モデルを削除したり指紋認証を OFF にしたりできます。指紋の画像と指紋モデルは、削除するまでスマートフォンに保存されたままになります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"あなたの指にスマートフォンを近づけられた場合など、意図せずスマートフォンのロックが解除されることがあります。"</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"あなたの指にタブレットを近づけられた場合など、意図せずタブレットのロックが解除されることがあります。"</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"あなたの指にデバイスを近づけられた場合など、意図せずデバイスのロックが解除されることがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"お子様の指にスマートフォンを近づけられた場合など、意図せずお子様のスマートフォンのロックが解除されることがあります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。これ以外の画面保護シートを使うと、指紋が認識されない可能性があります。"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"最適な結果を得るには、Made For Google 認定の画面保護シートを使用してください。これ以外の画面保護シートを使うと、お子様の指紋が認識されない可能性があります。"</string>
@@ -512,8 +511,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"デバイスの指紋認証センサーの位置を示した図"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"名前"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"再試行"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"削除"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"センサーを指でタッチ"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"指をセンサーに当て、振動したら離します。"</string>
@@ -531,12 +529,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"これで指紋を正しく登録できるようになります。"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"指紋の登録中: <xliff:g id="PERCENTAGE">%d</xliff:g> パーセント"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"指紋の登録完了"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"指紋認証は、タブレットのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"指紋認証は、デバイスのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"指紋認証は、スマートフォンのロック解除やアプリの本人確認に使用する回数が増えるにつれて、精度が向上します"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"後で行う"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"指を離して、もう一度タッチ"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"指紋をセンサーに当てて長押しし、指を離してから別の部分を当ててください"</string>
@@ -594,10 +589,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"完了"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"これはセンサーではありません"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"スマートフォンの背面にある指紋センサーを人差し指でタッチしてください。"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"指紋の設定がタイムアウトしました"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"今すぐもう一度指紋を設定してみるか、後から [設定] で設定してください"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"指紋を登録できませんでした。もう一度試すか、別の指を使用してください。"</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"別の指紋を登録"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"次へ"</string>
@@ -3417,10 +3410,8 @@
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"ゲストモードの終了時にゲストのすべてのアプリとデータを削除します"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"ゲストのアクティビティを削除しますか？"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"今回のゲスト セッションのアプリとデータが今すぐ削除され、今後のゲストのアクティビティはすべて、ゲストモードを終了するたびに削除されます"</string>
-    <!-- no translation found for enable_guest_calling (8300355036005240911) -->
-    <skip />
-    <!-- no translation found for enable_guest_calling_summary (4748224917641204782) -->
-    <skip />
+    <string name="enable_guest_calling" msgid="8300355036005240911">"スマートフォンの利用をゲストに許可する"</string>
+    <string name="enable_guest_calling_summary" msgid="4748224917641204782">"発信履歴がゲストユーザーと共有されます。"</string>
     <string name="user_enable_calling_sms" msgid="8546430559552381324">"通話とSMSをON"</string>
     <string name="user_remove_user" msgid="8468203789739693845">"ユーザーの削除"</string>
     <string name="user_enable_calling_and_sms_confirm_title" msgid="4041510268838725520">"通話とSMSをONにしますか？"</string>
@@ -3698,7 +3689,8 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, 拡張 通信, 5G 通信"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"言語を追加, 追加 言語"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"テキスト サイズ, 大きい 活字, 大きい フォント, 大きい テキスト, ロー ビジョン, 切り替え テキスト 大きく, フォント 大きく, フォント 拡大"</string>
-    <string name="keywords_always_show_time_info" msgid="9120590185763264666">"常に表示状態のディスプレイ"</string>
+    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
+    <skip />
     <string name="default_sound" msgid="6604374495015245195">"デフォルトの通知音"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"着信音と通知の音量: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、バイブレーション、サイレント モード"</string>
