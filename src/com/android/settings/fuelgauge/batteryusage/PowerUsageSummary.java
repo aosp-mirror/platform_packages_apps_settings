@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (C) 2022 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.fuelgauge;
+package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
 
@@ -34,6 +34,11 @@ import androidx.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.fuelgauge.BatteryHeaderPreferenceController;
+import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryInfoLoader;
+import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -255,9 +260,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
     void initPreference() {
         mBatteryUsagePreference = findPreference(KEY_BATTERY_USAGE);
         mBatteryUsagePreference.setSummary(
-                mPowerFeatureProvider.isChartGraphEnabled(getContext()) ?
-                        getString(R.string.advanced_battery_preference_summary_with_hours) :
-                        getString(R.string.advanced_battery_preference_summary));
+                mPowerFeatureProvider.isChartGraphEnabled(getContext())
+                        ? getString(R.string.advanced_battery_preference_summary_with_hours)
+                        : getString(R.string.advanced_battery_preference_summary));
 
         mHelpPreference = findPreference(KEY_BATTERY_ERROR);
         mHelpPreference.setVisible(false);
