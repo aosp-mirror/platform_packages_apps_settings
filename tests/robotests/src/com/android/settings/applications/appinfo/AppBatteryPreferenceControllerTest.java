@@ -40,8 +40,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.BatteryDiffEntry;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batteryusage.BatteryDiffEntry;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;

@@ -374,12 +374,12 @@
     <string name="security_settings_face_enroll_consent_introduction_title" msgid="3942331854413767814">"Povolit odemknutí obličejem"</string>
     <string name="security_settings_face_enroll_introduction_title_unlock_disabled" msgid="5903924766168353113">"Ověření pomocí obličeje"</string>
     <string name="security_settings_face_enroll_introduction_message" msgid="3015751486939484934">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (5164079708894687560) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (4155504156661531649) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_introduction_consent_message (7233598320061107964) -->
-    <skip />
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="default" msgid="3708441779746110890">"Povolte dítěti používat obličej k odemykání telefonu"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="tablet" msgid="8406386084543310653">"Povolte dítěti používat obličej k odemykání tabletu"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message_0" product="device" msgid="5001499879151444125">"Povolte dítěti používat obličej k odemykání zařízení"</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="default" msgid="5164079708894687560">"Odemykání telefonu dítěte obličejem může být méně bezpečné než silné gesto nebo PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="tablet" msgid="4155504156661531649">"Odemykání tabletu dítěte obličejem může být méně bezpečné než silné gesto nebo PIN."</string>
+    <string name="security_settings_face_enroll_introduction_consent_message" product="device" msgid="7233598320061107964">"Odemykání zařízení dítěte obličejem může být méně bezpečné než silné gesto nebo PIN."</string>
     <string name="security_settings_face_enroll_introduction_message_unlock_disabled" msgid="5841976283789481311">"Odemykejte telefon a schvalujte nákupy pomocí obličeje.\n\nPoznámka: Obličej nelze použít k odemykání tohoto zařízení. Další informace vám poskytne administrátor vaší organizace."</string>
     <string name="security_settings_face_enroll_introduction_message_setup" msgid="765965418187421753">"Odemykejte telefon, autorizujte nákupy a přihlašujte se do aplikací."</string>
     <string name="security_settings_face_enroll_introduction_info_title" msgid="7120796118179406944"></string>
@@ -387,6 +387,7 @@
     <string name="security_settings_face_enroll_introduction_info_consent_glasses" msgid="6303917184145586880"></string>
     <string name="security_settings_face_enroll_introduction_info_looking" msgid="6502109133251718131"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_looking" msgid="1911530177804950718"></string>
+    <string name="security_settings_face_enroll_introduction_info_consent_less_secure" msgid="1803349736039164986"></string>
     <string name="security_settings_face_enroll_introduction_info_less_secure" msgid="6496505354480525745"></string>
     <string name="security_settings_face_enroll_introduction_info_gaze" msgid="143556725395884850"></string>
     <string name="security_settings_face_enroll_introduction_info_consent_gaze" msgid="6301647369911879888"></string>
@@ -472,10 +473,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_4" msgid="3948305045484131665">"V Nastavení můžete snímky a model otisku prstu kdykoli smazat, případně odemknutí otiskem prstu vypnout. Snímky a modely otisků prstů budou v telefonu uloženy, dokud je nesmažete."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_4" msgid="4983770600405797515">"V Nastavení můžete vy nebo vaše dítě snímky a model otisku prstu kdykoli smazat, případně odemknutí otiskem prstu vypnout. Snímky a modely otisků prstů zůstanou v telefonu uloženy, dokud nebudou smazány."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="default" msgid="2018885671994058605">"Váš telefon lze odemknout, i když to nezamýšlíte, třeba když ho někdo podrží u vašeho prstu."</string>
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (7390208617531513381) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_v2_enroll_introduction_footer_message_5 (1662571028234764290) -->
-    <skip />
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="tablet" msgid="7390208617531513381">"Tablet se může odemknout, aniž byste to chtěli, například když ho někdo podrží u vašeho prstu."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_5" product="device" msgid="1662571028234764290">"Zařízení se může odemknout, aniž byste to chtěli, například když ho někdo podrží u vašeho prstu."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_5" msgid="8356551505082794682">"Telefon dítěte lze odemknout, i když to nezamýšlí, třeba když ho někdo podrží u prstu dítěte."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu fungovat."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Nejlepších výsledků dosáhnete s ochranou displeje, která má certifikát Made for Google. S ostatními ochranami displeje nemusí otisk prstu dítěte fungovat."</string>
@@ -525,8 +524,7 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="3065850549419750523">"Ilustrace se zařízením a polohou senzoru otisků prstů"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7298812463228440333">"Název"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4074335979239208021">"OK"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_dialog_try_again (8117874972945407006) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_dialog_try_again" msgid="8117874972945407006">"Zkusit znovu"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="6027141901007342389">"Smazat"</string>
     <string name="security_settings_fingerprint_enroll_start_title" msgid="7391368057800077604">"Dotkněte se senzoru"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="5010227772754175346">"Položte prst na senzor. Zvedněte ho, až zařízení zavibruje."</string>
@@ -544,12 +542,9 @@
     <string name="security_settings_udfps_enroll_repeat_a11y_message" msgid="2785464357615568197">"Bude tak zachycena větší část otisku prstu"</string>
     <string name="security_settings_udfps_enroll_progress_a11y_message" msgid="6183535114682369699">"Registrace otisku prstu: <xliff:g id="PERCENTAGE">%d</xliff:g> procent"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"Otisk byl přidán"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (5918110416185820480) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (2989276789236025675) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_v2_message (6506437402392739879) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="tablet" msgid="5918110416185820480">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení tabletu nebo ověření identity v aplikacích"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="device" msgid="2989276789236025675">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení zařízení nebo ověření identity v aplikacích"</string>
+    <string name="security_settings_fingerprint_enroll_finish_v2_message" product="default" msgid="6506437402392739879">"Odemknutí otiskem prstu se zdokonaluje, čím častěji ho používáte k odemčení telefonu nebo ověření identity v aplikacích"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"Později"</string>
     <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"Zvedněte prst a dotkněte se znovu"</string>
     <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"Umístěte boční stranu prstu na snímač a podržte ho, poté ho „překulte“ na druhou stranu"</string>
@@ -607,10 +602,8 @@
     <string name="security_settings_fingerprint_enroll_done" msgid="9198775984215057337">"Hotovo"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="5742429501012827526">"Jejda, to není senzor."</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="7172969336386036998">"Dotkněte se senzoru na zadní straně telefonu. Použijte ukazováček."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_error_dialog_title (8582267776559099046) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_error_timeout_dialog_message (467965101751652156) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="8582267776559099046">"Časový limit nastavení otisku prstu vypršel"</string>
+    <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="467965101751652156">"Zkuste to znovu nebo otisk prstu nastavte později v Nastavení"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="6068935528640241271">"Registrace otisku prstu nefungovala. Zkuste to znovu nebo použijte jiný prst."</string>
     <string name="fingerprint_enroll_button_add" msgid="6652490687672815760">"Přidat další"</string>
     <string name="fingerprint_enroll_button_next" msgid="1034110123277869532">"Další"</string>
