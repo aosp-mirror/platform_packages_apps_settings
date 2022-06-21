@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 import static com.android.settings.ChangeIds.CHANGE_RESTRICT_SAW_INTENT;
@@ -63,6 +64,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Filter;
@@ -1654,9 +1656,12 @@ public class ManageApplications extends InstrumentedFragment
             private int mScrollState = SCROLL_STATE_IDLE;
             private boolean mDelayNotifyDataChange;
             private ApplicationsAdapter mAdapter;
+            private InputMethodManager mInputMethodManager;
 
             public OnScrollListener(ApplicationsAdapter adapter) {
                 mAdapter = adapter;
+                mInputMethodManager = mAdapter.mContext.getSystemService(
+                                InputMethodManager.class);
             }
 
             @Override
@@ -1665,6 +1670,12 @@ public class ManageApplications extends InstrumentedFragment
                 if (mScrollState == SCROLL_STATE_IDLE && mDelayNotifyDataChange) {
                     mDelayNotifyDataChange = false;
                     mAdapter.notifyDataSetChanged();
+                } else if (mScrollState == SCROLL_STATE_DRAGGING) {
+                    // Hide keyboard when user start scrolling
+                    if (mInputMethodManager != null && mInputMethodManager.isActive()) {
+                        mInputMethodManager.hideSoftInputFromWindow(recyclerView.getWindowToken(),
+                                0);
+                    }
                 }
             }
 
