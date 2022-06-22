@@ -70,8 +70,8 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
     mPreference.setEntryValues(R.array.bluetooth_max_connected_audio_devices_values);
     // Retrieve default max connected audio devices to a test controlled value
     try {
-      Resources res = mSpyContext.getPackageManager().getResourcesForApplication("com.android.bluetooth.services");
-      TEST_MAX_CONNECTED_AUDIO_DEVICES = res.getInteger(res.getIdentifier("config_bluetooth_max_connected_audio_devices", "integer", "com.android.bluetooth.services"));
+      Resources res = mSpyContext.getPackageManager().getResourcesForApplication("com.android.bluetooth");
+      TEST_MAX_CONNECTED_AUDIO_DEVICES = res.getInteger(res.getIdentifier("config_bluetooth_max_connected_audio_devices", "integer", "com.android.bluetooth"));
     } catch (PackageManager.NameNotFoundException e) {
       e.printStackTrace();
     }
