@@ -264,7 +264,10 @@ public class SettingsActivity extends SettingsBaseActivity
 
         super.onCreate(savedState);
         Log.d(LOG_TAG, "Starting onCreate");
+        createUiFromIntent(savedState, intent);
+    }
 
+    protected void createUiFromIntent(Bundle savedState, Intent intent) {
         long startTime = System.currentTimeMillis();
 
         final FeatureFactory factory = FeatureFactory.getFactory(this);
