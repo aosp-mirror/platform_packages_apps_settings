@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,17 +59,21 @@ public class AccessibilitySettingsForSetupWizard extends DashboardFragment
     private static final String SELECT_TO_SPEAK_PREFERENCE = "select_to_speak_preference";
 
     // Package names and service names used to identify screen reader and SelectToSpeak services.
-    private static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
-    private static final String SCREEN_READER_SERVICE_NAME =
+    @VisibleForTesting
+    static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    @VisibleForTesting
+    static final String SCREEN_READER_SERVICE_NAME =
             "com.google.android.marvin.talkback.TalkBackService";
-    private static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
-    private static final String SELECT_TO_SPEAK_SERVICE_NAME =
+    @VisibleForTesting
+    static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    @VisibleForTesting
+    static final String SELECT_TO_SPEAK_SERVICE_NAME =
             "com.google.android.accessibility.selecttospeak.SelectToSpeakService";
 
     // Preference controls.
-    private Preference mDisplayMagnificationPreference;
-    private RestrictedPreference mScreenReaderPreference;
-    private RestrictedPreference mSelectToSpeakPreference;
+    protected Preference mDisplayMagnificationPreference;
+    protected RestrictedPreference mScreenReaderPreference;
+    protected RestrictedPreference mSelectToSpeakPreference;
 
     @Override
     public int getMetricsCategory() {
