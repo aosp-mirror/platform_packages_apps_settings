@@ -68,6 +68,7 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.homepage.SliceDeepLinkHomepageActivity;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.PasswordUtils;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -149,6 +150,8 @@ public class SettingsActivity extends SettingsBaseActivity
      * Set true when the deep link intent is from a slice
      */
     public static final String EXTRA_IS_FROM_SLICE = "is_from_slice";
+
+    public static final String EXTRA_INITIAL_CALLING_PACKAGE = "initial_calling_package";
 
     /**
      * Personal or Work profile tab of {@link ProfileSelectFragment}
@@ -399,6 +402,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private void launchHomepageForTwoPaneDeepLink(Intent intent) {
+        intent.putExtra(EXTRA_INITIAL_CALLING_PACKAGE, PasswordUtils.getCallingAppPackageName(
+                getActivityToken()));
         final Intent trampolineIntent;
         if (intent.getBooleanExtra(EXTRA_IS_FROM_SLICE, false)) {
             // Get menu key for slice deep link case.
@@ -457,6 +462,17 @@ public class SettingsActivity extends SettingsBaseActivity
         }
 
         return true;
+    }
+
+    /** Returns the initial calling package name that launches the activity. */
+    public String getInitialCallingPackage() {
+        String callingPackage = PasswordUtils.getCallingAppPackageName(getActivityToken());
+        if (!TextUtils.equals(callingPackage, getPackageName())) {
+            return callingPackage;
+        }
+
+        String initialCallingPackage = getIntent().getStringExtra(EXTRA_INITIAL_CALLING_PACKAGE);
+        return TextUtils.isEmpty(initialCallingPackage) ? callingPackage : initialCallingPackage;
     }
 
     /** Returns the initial fragment name that the activity will launch. */
