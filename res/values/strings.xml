@@ -606,7 +606,7 @@
     <!-- Date & time setting screen setting switch title: whether the system clock (Unix epoch time) should be determined automatically [CHAR LIMIT=100] -->
     <string name="date_time_auto">Set time automatically</string>
     <!-- Date & time setting screen setting switch title: whether the time zone should be determined automatically [CHAR LIMIT=100]  -->
-    <string name="zone_auto_title">Set time zone automatically</string>
+    <string name="zone_auto_title">Set automatically</string>
     <!-- Date & time setting screen setting option summary text for the automatic 24 hour setting checkbox [CHAR LIMIT=100] -->
     <string name="date_time_24hour_auto">Use locale default</string>
     <!-- Date & time setting screen setting check box title [CHAR LIMIT=30] -->
@@ -4254,7 +4254,7 @@
     <string name="managed_profile_location_services">Location services for work</string>
 
     <!-- [CHAR LIMIT=60] Date&Time settings screen, toggle button title -->
-    <string name="location_time_zone_detection_toggle_title">Use location to set time zone</string>
+    <string name="location_time_zone_detection_toggle_title">Use location</string>
     <!-- [CHAR LIMIT=60] Date&Time settings screen, title of the dialog shown when user tries to
          enable GeoTZ when Location toggle is off. -->
     <string name="location_time_zone_detection_location_is_off_dialog_title">Device location needed</string>
@@ -4280,6 +4280,8 @@
     <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is not
          allowed for the user, e.g. because of device policy -->
     <string name="location_time_zone_detection_not_allowed">Location time zone detection changes are not allowed</string>
+    <!-- [CHAR LIMIT=NONE] Location settings screen, summary when location time zone detection is enabled. -->
+    <string name="location_time_zone_detection_auto_is_on">Location may be used to set time zone</string>
 
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
