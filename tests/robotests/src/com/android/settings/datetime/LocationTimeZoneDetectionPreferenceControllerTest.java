@@ -150,7 +150,8 @@ public class LocationTimeZoneDetectionPreferenceControllerTest {
                 new TimeZoneCapabilitiesAndConfig(capabilities, configuration);
 
         when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
-        assertThat(mController.getSummary().toString()).isEmpty();
+        assertThat(mController.getSummary()).isEqualTo(
+                mContext.getString(R.string.location_time_zone_detection_auto_is_on));
     }
 
     @Test

@@ -174,7 +174,7 @@ public class LocationTimeZoneDetectionPreferenceController
             // If capability is possessed, toggle status already tells all the information needed.
             // Returning null will make previous text stick on toggling.
             // See AbstractPreferenceController#refreshSummary.
-            return "";
+            summaryResId = R.string.location_time_zone_detection_auto_is_on;
         } else {
             // This is unexpected: getAvailabilityStatus() should ensure that the UI element isn't
             // even shown for known cases, or the capability is unknown.

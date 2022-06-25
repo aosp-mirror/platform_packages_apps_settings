@@ -639,13 +639,17 @@ public class FingerprintEnrollEnrolling extends BiometricsEnrollEnrolling {
             new Animator.AnimatorListener() {
 
                 @Override
-                public void onAnimationStart(Animator animation) { }
+                public void onAnimationStart(Animator animation) {
+                    startIconAnimation();
+                }
 
                 @Override
                 public void onAnimationRepeat(Animator animation) { }
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
+                    stopIconAnimation();
+
                     if (mProgressBar.getProgress() >= PROGRESS_BAR_MAX) {
                         mProgressBar.postDelayed(mDelayedFinishRunnable, getFinishDelay());
                     }
