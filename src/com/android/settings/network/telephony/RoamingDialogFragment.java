@@ -72,7 +72,9 @@ public class RoamingDialogFragment extends InstrumentedDialogFragment implements
                 .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setPositiveButton(android.R.string.yes, this)
                 .setNegativeButton(android.R.string.no, this);
-        return builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
     }
 
     @Override
