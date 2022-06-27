@@ -64,6 +64,7 @@ public class SeekBarPreference extends RestrictedPreference
     private CharSequence mOverrideSeekBarStateDescription;
     private CharSequence mSeekBarContentDescription;
     private CharSequence mSeekBarStateDescription;
+    private OnSeekBarChangeListener mOnSeekBarChangeListener;
 
     public SeekBarPreference(
             Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -99,6 +100,14 @@ public class SeekBarPreference extends RestrictedPreference
 
     public SeekBarPreference(Context context) {
         this(context, null);
+    }
+
+    /**
+     * A callback that notifies clients when the seekbar progress level has been
+     * changed. See {@link OnSeekBarChangeListener} for more info.
+     */
+    public void setOnSeekBarChangeListener(OnSeekBarChangeListener listener) {
+        mOnSeekBarChangeListener = listener;
     }
 
     public void setShouldBlink(boolean shouldBlink) {
@@ -301,6 +310,9 @@ public class SeekBarPreference extends RestrictedPreference
         if (fromUser && (mContinuousUpdates || !mTrackingTouch)) {
             syncProgress(seekBar);
         }
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onProgressChanged(seekBar, progress, fromUser);
+        }
     }
 
     @Override
@@ -309,6 +321,9 @@ public class SeekBarPreference extends RestrictedPreference
         mJankMonitor.begin(InteractionJankMonitor.Configuration.Builder
                 .withView(CUJ_SETTINGS_SLIDER, seekBar)
                 .setTag(getKey()));
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onStartTrackingTouch(seekBar);
+        }
     }
 
     @Override
@@ -316,6 +331,9 @@ public class SeekBarPreference extends RestrictedPreference
         mTrackingTouch = false;
         if (seekBar.getProgress() != mProgress) {
             syncProgress(seekBar);
+        }
+        if (mOnSeekBarChangeListener != null) {
+            mOnSeekBarChangeListener.onStopTrackingTouch(seekBar);
         }
         mJankMonitor.end(CUJ_SETTINGS_SLIDER);
     }
