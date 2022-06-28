@@ -70,7 +70,7 @@ public class AppsPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private AppsPreferenceController mController;
-    private List<UsageStats> mUsageStats;
+    private List<RecentAppStatsMixin.UsageStatsWrapper> mUsageStats;
     private PreferenceCategory mRecentAppsCategory;
     private PreferenceCategory mGeneralCategory;
     private Preference mSeeAllPref;
@@ -147,15 +147,15 @@ public class AppsPreferenceControllerTest {
         final UsageStats stat3 = new UsageStats();
         stat1.mLastTimeUsed = System.currentTimeMillis();
         stat1.mPackageName = "pkg.class";
-        mUsageStats.add(stat1);
+        mUsageStats.add(statsWrapperOf(stat1));
 
         stat2.mLastTimeUsed = System.currentTimeMillis();
         stat2.mPackageName = "pkg.class2";
-        mUsageStats.add(stat2);
+        mUsageStats.add(statsWrapperOf(stat2));
 
         stat3.mLastTimeUsed = System.currentTimeMillis();
         stat3.mPackageName = "pkg.class3";
-        mUsageStats.add(stat3);
+        mUsageStats.add(statsWrapperOf(stat3));
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
@@ -163,5 +163,10 @@ public class AppsPreferenceControllerTest {
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mAppEntry);
         mAppEntry.info = mApplicationInfo;
+    }
+
+    private static RecentAppStatsMixin.UsageStatsWrapper statsWrapperOf(
+            UsageStats stats) {
+        return new RecentAppStatsMixin.UsageStatsWrapper(stats, /* userId= */ 0);
     }
 }
