@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /** Preference fragment used for switch screen resolution */
 @SearchIndexable
@@ -61,7 +62,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private String[] mScreenResolutionSummaries;
 
     private IllustrationPreference mImagePreference;
-    private DensityRestorer mDensityRestorer;
+    private DisplayObserver mDisplayObserver;
 
     @Override
     public void onAttach(Context context) {
@@ -76,7 +77,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 mResources.getStringArray(R.array.config_screen_resolution_summaries_strings);
         mResolutions = getAllSupportedResolution();
         mImagePreference = new IllustrationPreference(context);
-        mDensityRestorer = new DensityRestorer(context);
+        mDisplayObserver = new DisplayObserver(context);
     }
 
     @Override
@@ -155,11 +156,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     /** Using display manager to set the display mode. */
     @VisibleForTesting
     public void setDisplayMode(final int width) {
-        if (width == getDisplayMode().getPhysicalWidth()) {
-            return;
-        }
-
-        mDensityRestorer.startObserve();
+        mDisplayObserver.startObserve();
         mDefaultDisplay.setUserPreferredDisplayMode(getPreferMode(width));
     }
 
@@ -171,6 +168,13 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 : width == QHD_WIDTH ? mScreenResolutionOptions[QHD_INDEX] : null;
     }
 
+    /** Get the width corresponding to the resolution key. */
+    int getWidthForResoluitonKey(String key) {
+        return mScreenResolutionOptions[FHD_INDEX].equals(key)
+                ? FHD_WIDTH
+                : mScreenResolutionOptions[QHD_INDEX].equals(key) ? QHD_WIDTH : -1;
+    }
+
     @Override
     protected String getDefaultKey() {
         int physicalWidth = getDisplayMode().getPhysicalWidth();
@@ -180,15 +184,26 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
 
     @Override
     protected boolean setDefaultKey(final String key) {
-        if (mScreenResolutionOptions[FHD_INDEX].equals(key)) {
-            setDisplayMode(FHD_WIDTH);
-
-        } else if (mScreenResolutionOptions[QHD_INDEX].equals(key)) {
-            setDisplayMode(QHD_WIDTH);
+        int width = getWidthForResoluitonKey(key);
+        if (width < 0) {
+          return false;
         }
 
+        setDisplayMode(width);
         updateIllustrationImage(mImagePreference);
+
         return true;
+    }
+
+    @Override
+    public void onRadioButtonClicked(SelectorWithWidgetPreference selected) {
+        String selectedKey = selected.getKey();
+        int selectedWidth = getWidthForResoluitonKey(selectedKey);
+        if (!mDisplayObserver.setPendingResolutionChange(selectedWidth)) {
+          return;
+        }
+
+        super.onRadioButtonClicked(selected);
     }
 
     /** Update the resolution image according display mode. */
@@ -252,12 +267,13 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 }
             };
 
-    private static final class DensityRestorer implements DisplayManager.DisplayListener {
+    private static final class DisplayObserver implements DisplayManager.DisplayListener {
         private final @Nullable Context mContext;
         private int mDefaultDensity;
         private int mCurrentIndex;
+        private AtomicInteger mPreviousWidth = new AtomicInteger(-1);
 
-        DensityRestorer(Context context) {
+        DisplayObserver(Context context) {
             mContext = context;
         }
 
@@ -301,26 +317,59 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
                 return;
             }
 
+            if (!isDensityChanged() || !isResolutionChangeApplied()) {
+              return;
+            }
+
             restoreDensity();
+            stopObserve();
         }
 
         private void restoreDensity() {
-            if (mContext == null) {
-                return;
-            }
-
             final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
-            if (density.getDefaultDensity() == mDefaultDensity) {
-                return;
-            }
-
             if (density.getValues()[mCurrentIndex] != density.getDefaultDensity()) {
                 DisplayDensityUtils.setForcedDisplayDensity(
                         Display.DEFAULT_DISPLAY, density.getValues()[mCurrentIndex]);
             }
 
             mDefaultDensity = density.getDefaultDensity();
-            stopObserve();
+        }
+
+        private boolean isDensityChanged() {
+            final DisplayDensityUtils density = new DisplayDensityUtils(mContext);
+            if (density.getDefaultDensity() == mDefaultDensity) {
+                return false;
+            }
+
+            return true;
+        }
+
+        private int getCurrentWidth() {
+            final DisplayManager dm = mContext.getSystemService(DisplayManager.class);
+            return dm.getDisplay(Display.DEFAULT_DISPLAY).getMode().getPhysicalWidth();
+        }
+
+        private boolean setPendingResolutionChange(int selectedWidth) {
+            int currentWidth = getCurrentWidth();
+
+            if (selectedWidth == currentWidth) {
+              return false;
+            }
+            if (mPreviousWidth.get() != -1 && !isResolutionChangeApplied()) {
+              return false;
+            }
+
+            mPreviousWidth.set(currentWidth);
+
+            return true;
+        }
+
+        private boolean isResolutionChangeApplied() {
+            if (mPreviousWidth.get() == getCurrentWidth()) {
+              return false;
+            }
+
+            return true;
         }
     }
 }
