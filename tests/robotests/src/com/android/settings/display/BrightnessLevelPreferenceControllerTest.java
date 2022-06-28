@@ -136,6 +136,21 @@ public class BrightnessLevelPreferenceControllerTest {
     }
 
     @Test
+    public void onStart_shouldSetSummary() {
+        BrightnessLevelPreferenceController controller =
+                new BrightnessLevelPreferenceController(mContext, null);
+        controller.displayPreference(mScreen);
+
+        controller.onStop();
+        when(mDisplay.getBrightnessInfo()).thenReturn(
+                new BrightnessInfo(0.5f, 0.0f, 1.0f, BrightnessInfo.HIGH_BRIGHTNESS_MODE_OFF,
+                        0.5f, BrightnessInfo.BRIGHTNESS_MAX_REASON_NONE));
+        controller.onStart();
+
+        verify(mPreference).setSummary("87%");
+    }
+
+    @Test
     public void updateState_inVrMode_shouldSetSummaryToVrBrightness() {
         doReturn(true).when(mController).isInVrMode();
         System.putFloat(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR_FLOAT, 0.6f);
@@ -153,7 +168,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         when(mDisplay.getBrightnessInfo()).thenReturn(
                 new BrightnessInfo(0.1f, 0.0f, 1.0f, BrightnessInfo.HIGH_BRIGHTNESS_MODE_OFF,
-                    0.5f));
+                    0.5f, BrightnessInfo.BRIGHTNESS_MAX_REASON_NONE));
 
         mController.updateState(mPreference);
 
@@ -168,7 +183,7 @@ public class BrightnessLevelPreferenceControllerTest {
 
         when(mDisplay.getBrightnessInfo()).thenReturn(
                 new BrightnessInfo(0.5f, 0.0f, 1.0f, BrightnessInfo.HIGH_BRIGHTNESS_MODE_OFF,
-                    0.5f));
+                    0.5f, BrightnessInfo.BRIGHTNESS_MAX_REASON_NONE));
 
         mController.updateState(mPreference);
 

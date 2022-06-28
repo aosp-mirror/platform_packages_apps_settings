@@ -13,6 +13,10 @@
  */
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ALWAYS_ON_VPN_DEVICE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.ALWAYS_ON_VPN_PERSONAL_PROFILE;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 
 import androidx.preference.Preference;
@@ -27,18 +31,29 @@ public class AlwaysOnVpnCurrentUserPreferenceController
 
     private static final String KEY_ALWAYS_ON_VPN_PRIMARY_USER = "always_on_vpn_primary_user";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;
+    private final DevicePolicyManager mDevicePolicyManager;
 
     public AlwaysOnVpnCurrentUserPreferenceController(Context context) {
         super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
+        mDevicePolicyManager = context.getSystemService(DevicePolicyManager.class);
     }
 
     @Override
     public void updateState(Preference preference) {
-        preference.setTitle(mFeatureProvider.isInCompMode()
-                ? R.string.enterprise_privacy_always_on_vpn_personal
-                : R.string.enterprise_privacy_always_on_vpn_device);
+        if (mFeatureProvider.isInCompMode()) {
+            preference.setTitle(
+                    mDevicePolicyManager.getResources().getString(
+                            ALWAYS_ON_VPN_PERSONAL_PROFILE,
+                            () -> mContext.getString(
+                                    R.string.enterprise_privacy_always_on_vpn_personal)));
+        } else {
+            preference.setTitle(
+                    mDevicePolicyManager.getResources().getString(ALWAYS_ON_VPN_DEVICE,
+                            () -> mContext.getString(
+                                    R.string.enterprise_privacy_always_on_vpn_device)));
+        }
     }
 
     @Override

@@ -13,26 +13,14 @@
  */
 package com.android.settings.datausage;
 
-import android.annotation.NonNull;
-import android.app.usage.NetworkStats;
 import android.content.Context;
-import android.net.NetworkPolicy;
-import android.net.NetworkPolicyManager;
-import android.text.format.DateUtils;
-import android.util.Pair;
-import android.util.Range;
 import android.widget.AdapterView;
 
-import com.android.net.module.util.NetworkStatsUtils;
 import com.android.settings.Utils;
-import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.NetworkCycleData;
-import com.android.settingslib.widget.settingsspinner.SettingsSpinnerAdapter;
+import com.android.settingslib.widget.SettingsSpinnerAdapter;
 
-import java.time.ZonedDateTime;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem> {
 
@@ -45,7 +33,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         mSpinner = spinner;
         mListener = listener;
         mSpinner.setAdapter(this);
-        mSpinner.setOnItemSelectedListener(mListener);
     }
 
     /**
@@ -65,135 +52,22 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         return 0;
     }
 
-    protected static long getTotalBytesForTimeRange(List<NetworkStats.Bucket> stats,
-            Range<Long> range) {
-        long bytes = 0L;
-        for (NetworkStats.Bucket bucket : stats) {
-            final Range<Long> bucketSpan = new Range<>(
-                    bucket.getStartTimeStamp(), bucket.getEndTimeStamp());
-            // Only record bytes that overlapped with the given time range. For partially
-            // overlapped bucket, record rational bytes assuming the traffic is uniform
-            // distributed within the bucket.
-            try {
-                final Range<Long> overlapped = range.intersect(bucketSpan);
-                final long totalOfBucket = bucket.getRxBytes() + bucket.getTxBytes();
-                bytes += NetworkStatsUtils.multiplySafeByRational(totalOfBucket,
-                        overlapped.getUpper() - overlapped.getLower(),
-                        bucketSpan.getUpper() - bucketSpan.getLower());
-            } catch (IllegalArgumentException e) {
-                // Range disjoint, ignore.
-                continue;
-            }
-        }
-        return bytes;
-    }
-
-    @NonNull
-    private Range getTimeRangeOf(@NonNull List<NetworkStats.Bucket> stats) {
-        long start = Long.MAX_VALUE;
-        long end = Long.MIN_VALUE;
-        for (NetworkStats.Bucket bucket : stats) {
-            start = Math.min(start, bucket.getStartTimeStamp());
-            end = Math.max(end, bucket.getEndTimeStamp());
-        }
-        return new Range(start, end);
-    }
-
-    /**
-     * Rebuild list based on {@link NetworkPolicy} and available
-     * {@link List<NetworkStats.Bucket>} data. Always selects the newest item,
-     * updating the inspection range on chartData.
-     */
-    @Deprecated
-    public boolean updateCycleList(NetworkPolicy policy, ChartData chartData) {
-        // stash away currently selected cycle to try restoring below
-        final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
-                mSpinner.getSelectedItem();
+    void setInitialCycleList(List<Long> cycles, long selectedCycle) {
         clear();
-
-        final Context context = getContext();
-
-        long historyStart;
-        long historyEnd;
-        try {
-            final Range<Long> historyTimeRange = getTimeRangeOf(chartData.network);
-            historyStart = historyTimeRange.getLower();
-            historyEnd = historyTimeRange.getUpper();
-        } catch (IllegalArgumentException e) {
-            // Empty history.
-            final long now = System.currentTimeMillis();
-            historyStart = now;
-            historyEnd = now + 1;
-        }
-
-        boolean hasCycles = false;
-        if (policy != null) {
-            final Iterator<Pair<ZonedDateTime, ZonedDateTime>> it = NetworkPolicyManager
-                    .cycleIterator(policy);
-            while (it.hasNext()) {
-                final Pair<ZonedDateTime, ZonedDateTime> cycle = it.next();
-                final long cycleStart = cycle.first.toInstant().toEpochMilli();
-                final long cycleEnd = cycle.second.toInstant().toEpochMilli();
-
-                final boolean includeCycle;
-                if (chartData != null) {
-                    final long bytesInCycle = getTotalBytesForTimeRange(chartData.network,
-                            new Range<>(cycleStart, cycleEnd));
-                    includeCycle = bytesInCycle > 0;
-                } else {
-                    includeCycle = true;
-                }
-
-                if (includeCycle) {
-                    add(new CycleAdapter.CycleItem(context, cycleStart, cycleEnd));
-                    hasCycles = true;
-                }
+        for (int i = 0; i < cycles.size() - 1; i++) {
+            add(new CycleAdapter.CycleItem(getContext(), cycles.get(i + 1), cycles.get(i)));
+            if (cycles.get(i) == selectedCycle) {
+                mSpinner.setSelection(i);
             }
         }
-
-        if (!hasCycles) {
-            // no policy defined cycles; show entry for each four-week period
-            long cycleEnd = historyEnd;
-            while (cycleEnd > historyStart) {
-                final long cycleStart = cycleEnd - (DateUtils.WEEK_IN_MILLIS * 4);
-
-                final boolean includeCycle;
-                if (chartData != null) {
-                    final long bytesInCycle = getTotalBytesForTimeRange(chartData.network,
-                            new Range<>(cycleStart, cycleEnd));
-                    includeCycle = bytesInCycle > 0;
-                } else {
-                    includeCycle = true;
-                }
-
-                if (includeCycle) {
-                    add(new CycleAdapter.CycleItem(context, cycleStart, cycleEnd));
-                }
-                cycleEnd = cycleStart;
-            }
-        }
-
-        // force pick the current cycle (first item)
-        if (getCount() > 0) {
-            final int position = findNearestPosition(previousItem);
-            mSpinner.setSelection(position);
-
-            // only force-update cycle when changed; skipping preserves any
-            // user-defined inspection region.
-            final CycleAdapter.CycleItem selectedItem = getItem(position);
-            if (!Objects.equals(selectedItem, previousItem)) {
-                mListener.onItemSelected(null, null, position, 0);
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
      * Rebuild list based on network data. Always selects the newest item,
      * updating the inspection range on chartData.
      */
-    public boolean updateCycleList(List<? extends NetworkCycleData> cycleData) {
+    public void updateCycleList(List<? extends NetworkCycleData> cycleData) {
+        mSpinner.setOnItemSelectedListener(mListener);
         // stash away currently selected cycle to try restoring below
         final CycleAdapter.CycleItem previousItem = (CycleAdapter.CycleItem)
                 mSpinner.getSelectedItem();
@@ -208,16 +82,7 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         if (getCount() > 0) {
             final int position = findNearestPosition(previousItem);
             mSpinner.setSelection(position);
-
-            // only force-update cycle when changed; skipping preserves any
-            // user-defined inspection region.
-            final CycleAdapter.CycleItem selectedItem = getItem(position);
-            if (!Objects.equals(selectedItem, previousItem)) {
-                mListener.onItemSelected(null, null, position, 0);
-                return false;
-            }
         }
-        return true;
     }
 
     /**
@@ -227,10 +92,6 @@ public class CycleAdapter extends SettingsSpinnerAdapter<CycleAdapter.CycleItem>
         public CharSequence label;
         public long start;
         public long end;
-
-        public CycleItem(CharSequence label) {
-            this.label = label;
-        }
 
         public CycleItem(Context context, long start, long end) {
             this.label = Utils.formatDateRange(context, start, end);

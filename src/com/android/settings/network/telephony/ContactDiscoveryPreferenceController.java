@@ -35,6 +35,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionUtil;
 
 /**
@@ -47,7 +48,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
             Telephony.SimInfo.COLUMN_IMS_RCS_UCE_ENABLED);
 
     private ImsManager mImsManager;
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private ContentObserver mUceSettingObserver;
     private FragmentManager mFragmentManager;
 
@@ -57,15 +58,12 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
     public ContactDiscoveryPreferenceController(Context context, String key) {
         super(context, key);
         mImsManager = mContext.getSystemService(ImsManager.class);
-        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
     }
 
-    public ContactDiscoveryPreferenceController init(FragmentManager fragmentManager, int subId,
-            Lifecycle lifecycle) {
+    void init(FragmentManager fragmentManager, int subId) {
         mFragmentManager = fragmentManager;
         mSubId = subId;
-        lifecycle.addObserver(this);
-        return this;
     }
 
     @Override
@@ -96,7 +94,7 @@ public class ContactDiscoveryPreferenceController extends TelephonyTogglePrefere
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        PersistableBundle bundle = mCarrierConfigManager.getConfigForSubId(subId);
+        PersistableBundle bundle = mCarrierConfigCache.getConfigForSubId(subId);
         boolean shouldShowPresence = bundle != null
                 && (bundle.getBoolean(
                 CarrierConfigManager.KEY_USE_RCS_PRESENCE_BOOL, false /*default*/)

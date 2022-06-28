@@ -100,11 +100,11 @@ public class AccessibilityFooterPreferenceControllerTest {
     }
 
     @Test
-    public void setupHelpLink_setCorrectHelpLinkAndContentDescription() {
+    public void setupHelpLink_setCorrectHelpLinkAndLearnMoreText() {
         mController.setupHelpLink(TEST_HELP_ID, TEST_CONTENT_DESCRIPTION);
 
         assertThat(mController.getHelpResource()).isEqualTo(TEST_HELP_ID);
-        assertThat(mController.getLearnMoreContentDescription())
+        assertThat(mController.getLearnMoreText())
                 .isEqualTo(TEST_CONTENT_DESCRIPTION);
     }
 
@@ -120,5 +120,17 @@ public class AccessibilityFooterPreferenceControllerTest {
         assertThat(learnMoreView.getContentDescription()).isNull();
         assertThat(learnMoreView.getVisibility()).isEqualTo(View.GONE);
         assertThat(mPreference.isLinkEnabled()).isFalse();
+    }
+
+    @Test
+    public void onBindViewHolder_setHelpResource_expectSummaryViewIsNonFocusable() {
+        mController.setupHelpLink(R.string.help_url_timeout, TEST_CONTENT_DESCRIPTION);
+        mController.displayPreference(mScreen);
+
+        mPreference.onBindViewHolder(mPreferenceViewHolder);
+
+        final TextView summaryView = (TextView) mPreferenceViewHolder
+                .findViewById(android.R.id.title);
+        assertThat(summaryView.isFocusable()).isFalse();
     }
 }

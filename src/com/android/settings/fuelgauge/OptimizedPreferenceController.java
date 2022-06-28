@@ -24,7 +24,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class OptimizedPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
@@ -49,20 +49,20 @@ public class OptimizedPreferenceController extends AbstractPreferenceController
         if (!mBatteryOptimizeUtils.isValidPackageName()) {
             Log.d(TAG, "invalid package name, optimized states only");
             preference.setEnabled(true);
-            ((RadioButtonPreference) preference).setChecked(true);
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
             return;
         }
 
         if (mBatteryOptimizeUtils.isSystemOrDefaultApp()) {
             Log.d(TAG, "is system or default app, disable pref");
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
             preference.setEnabled(false);
         } else if (mBatteryOptimizeUtils.getAppOptimizationMode()
                 == BatteryOptimizeUtils.MODE_OPTIMIZED) {
             Log.d(TAG, "is optimized states");
-            ((RadioButtonPreference) preference).setChecked(true);
+            ((SelectorWithWidgetPreference) preference).setChecked(true);
         } else {
-            ((RadioButtonPreference) preference).setChecked(false);
+            ((SelectorWithWidgetPreference) preference).setChecked(false);
         }
     }
 

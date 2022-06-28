@@ -16,9 +16,12 @@
 
 package com.android.settings.bugreporthandler;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_PROFILE_APP_SUBTEXT;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_APP_SUBTEXT;
 import static android.provider.Settings.ACTION_BUGREPORT_HANDLER_SETTINGS;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +29,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -35,13 +37,12 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.FooterPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,7 +170,7 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
 
 
     @Override
-    public void bindPreferenceExtra(RadioButtonPreference pref,
+    public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
         super.bindPreferenceExtra(pref, key, info, defaultKey, systemDefaultKey);
         pref.setAppendixVisibility(View.GONE);
@@ -191,10 +192,15 @@ public class BugReportHandlerPicker extends DefaultAppPickerFragment {
             return "";
         }
         final UserInfo userInfo = mUserManager.getUserInfo(handlerUser);
+        DevicePolicyManager devicePolicyManager =
+                context.getSystemService(DevicePolicyManager.class);
+
         if (userInfo != null && userInfo.isManagedProfile()) {
-            return context.getString(R.string.work_profile_app_subtext);
+            return devicePolicyManager.getResources().getString(WORK_PROFILE_APP_SUBTEXT,
+                    () -> context.getString(R.string.work_profile_app_subtext));
         }
-        return context.getString(R.string.personal_profile_app_subtext);
+        return devicePolicyManager.getResources().getString(PERSONAL_PROFILE_APP_SUBTEXT,
+                () -> context.getString(R.string.personal_profile_app_subtext));
     }
 
     private static class BugreportHandlerAppInfo extends DefaultAppInfo {

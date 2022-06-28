@@ -21,12 +21,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.Indexable;
-import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,9 @@ import java.util.List;
 public class FlashlightHandleActivity extends Activity implements Indexable {
 
     public static final String EXTRA_FALLBACK_TO_HOMEPAGE = "fallback_to_homepage";
+
+    private static final String TAG = "FlashlightActivity";
+    private static final String DATA_KEY = "flashlight";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +73,20 @@ public class FlashlightHandleActivity extends Activity implements Indexable {
                     data.intentTargetPackage = context.getPackageName();
                     data.intentTargetClass = FlashlightHandleActivity.class.getName();
                     data.intentAction = Intent.ACTION_MAIN;
-                    data.key = "flashlight";
+                    data.key = DATA_KEY;
                     result.add(data);
 
                     return result;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    if (!FlashlightSlice.isFlashlightAvailable(context)) {
+                        Log.i(TAG, "Flashlight is unavailable");
+                        keys.add(DATA_KEY);
+                    }
+                    return keys;
                 }
             };
 }

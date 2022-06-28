@@ -24,12 +24,6 @@ import com.android.settings.core.BasePreferenceController;
 
 public class ScreenPinningPreferenceController extends BasePreferenceController {
 
-    private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
-
-    public ScreenPinningPreferenceController(Context context) {
-        this(context, KEY_SCREEN_PINNING);
-    }
-
     public ScreenPinningPreferenceController(Context context, String key) {
         super(context, key);
     }
@@ -37,7 +31,7 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
     @Override
     public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(R.bool.config_show_screen_pinning_settings)
-                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override

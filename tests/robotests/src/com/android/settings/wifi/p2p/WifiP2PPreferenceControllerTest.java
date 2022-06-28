@@ -22,23 +22,23 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.LocationManager;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.os.UserManager;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -57,11 +57,14 @@ public class WifiP2PPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private WifiManager mWifiManager;
     @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Bundle mBundle;
+
+    @Mock
     private PreferenceScreen mScreen;
     @Mock
     private Preference mWifiDirectPreference;
-    @Mock
-    private LocationManager mLocationManager;
 
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
@@ -74,8 +77,11 @@ public class WifiP2PPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mWifiDirectPreference);
-        when(mContext.getSystemService(eq(Service.LOCATION_SERVICE))).thenReturn(mLocationManager);
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
+        when(mUserManager.getUserRestrictions()).thenReturn(mBundle);
+        when(mWifiManager.isWifiEnabled()).thenReturn(true);
         mController = new WifiP2pPreferenceController(mContext, mLifecycle, mWifiManager);
+        mController.mIsWifiDirectAllow = true;
     }
 
     @Test
@@ -86,21 +92,19 @@ public class WifiP2PPreferenceControllerTest {
     @Test
     public void testOnResume_shouldRegisterListener() {
         mLifecycle.handleLifecycleEvent(ON_RESUME);
-        verify(mContext, times(2)).registerReceiver(
-                any(BroadcastReceiver.class), any(IntentFilter.class));
+        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
     public void testOnPause_shouldUnregisterListener() {
         mLifecycle.handleLifecycleEvent(ON_RESUME);
         mLifecycle.handleLifecycleEvent(ON_PAUSE);
-        verify(mContext, times(2)).unregisterReceiver(any(BroadcastReceiver.class));
+        verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 
     @Test
     public void testWifiStateChange_shouldToggleEnabledState() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
-        when(mLocationManager.isLocationEnabled()).thenReturn(true);
 
         //Sets the preferences.
         mController.displayPreference(mScreen);
@@ -118,7 +122,6 @@ public class WifiP2PPreferenceControllerTest {
     @Test
     public void testDisplayPreference_shouldToggleEnabledState() {
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
-        when(mLocationManager.isLocationEnabled()).thenReturn(true);
         mController.displayPreference(mScreen);
         verify(mWifiDirectPreference).setEnabled(true);
 
@@ -127,21 +130,26 @@ public class WifiP2PPreferenceControllerTest {
         verify(mWifiDirectPreference).setEnabled(false);
 
         when(mWifiManager.isWifiEnabled()).thenReturn(true);
-        when(mLocationManager.isLocationEnabled()).thenReturn(false);
         mController.displayPreference(mScreen);
-        verify(mWifiDirectPreference, times(2)).setEnabled(false);
+        verify(mWifiDirectPreference).setEnabled(false);
     }
 
     @Test
-    public void updateState_withLocationDisabled_preferenceShouldBeDisable() {
-        when(mWifiManager.isWifiEnabled()).thenReturn(true);
-        when(mLocationManager.isLocationEnabled()).thenReturn(true);
-        Intent fakeIntent = new Intent();
-        mController.displayPreference(mScreen);
-        verify(mWifiDirectPreference).setEnabled(true);
+    public void displayPreference_wifiDirectNotAllowed_shouldDisable() {
+        mController.mIsWifiDirectAllow = false;
 
-        when(mLocationManager.isLocationEnabled()).thenReturn(false);
-        mController.mLocationReceiver.onReceive(mContext, fakeIntent);
+        mController.displayPreference(mScreen);
+
         verify(mWifiDirectPreference).setEnabled(false);
+        verify(mWifiDirectPreference).setSummary(R.string.not_allowed_by_ent);
+    }
+
+    @Test
+    public void displayPreference_wifiDirectNotAllowed_shouldEnable() {
+        mController.mIsWifiDirectAllow = true;
+
+        mController.displayPreference(mScreen);
+
+        verify(mWifiDirectPreference).setEnabled(true);
     }
 }

@@ -88,6 +88,7 @@ public class UserDetailsSettingsTest {
     private static final String KEY_ENABLE_TELEPHONY = "enable_calling";
     private static final String KEY_REMOVE_USER = "remove_user";
     private static final String KEY_APP_AND_CONTENT_ACCESS = "app_and_content_access";
+    private static final String KEY_APP_COPYING = "app_copying";
 
     private static final int DIALOG_CONFIRM_REMOVE = 1;
 
@@ -104,6 +105,8 @@ public class UserDetailsSettingsTest {
     private Preference mRemoveUserPref;
     @Mock
     private Preference mAppAndContentAccessPref;
+    @Mock
+    private Preference mAppCopyingPref;
 
     private FragmentActivity mActivity;
     private Context mContext;
@@ -144,6 +147,7 @@ public class UserDetailsSettingsTest {
         doReturn(mRemoveUserPref).when(mFragment).findPreference(KEY_REMOVE_USER);
         doReturn(mAppAndContentAccessPref)
                 .when(mFragment).findPreference(KEY_APP_AND_CONTENT_ACCESS);
+        doReturn(mAppCopyingPref).when(mFragment).findPreference(KEY_APP_COPYING);
     }
 
     @After
@@ -369,7 +373,7 @@ public class UserDetailsSettingsTest {
         mFragment.initialize(mActivity, mArguments);
 
         verify(mRemoveUserPref).setOnPreferenceClickListener(mFragment);
-        verify(mRemoveUserPref).setTitle(R.string.user_exit_guest_title);
+        verify(mRemoveUserPref).setTitle(com.android.settingslib.R.string.guest_exit_guest);
         verify(mFragment, never()).removePreference(KEY_REMOVE_USER);
     }
 

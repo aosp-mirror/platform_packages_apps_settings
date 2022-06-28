@@ -66,6 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 @Config(shadows = ShadowAlertDialogCompat.class)
 public class RenameMobileNetworkDialogFragmentTest {
 

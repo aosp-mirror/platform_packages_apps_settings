@@ -16,6 +16,6 @@
 
 package com.android.settings.homepage;
 
-/** Activity for other apps to launch Settings deep link page */
+/** Activity for other apps to launch a Settings deep link page */
 public class DeepLinkHomepageActivity extends SettingsHomepageActivity {
 }

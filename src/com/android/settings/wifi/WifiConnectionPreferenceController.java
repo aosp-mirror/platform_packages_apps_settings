@@ -37,7 +37,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wifi.WifiEntryPreference;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 

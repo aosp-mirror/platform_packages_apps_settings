@@ -43,7 +43,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -147,7 +147,7 @@ public class WebViewAppPickerTest {
                 mContext.getPackageManager(),
                 createApplicationInfo(PACKAGE_NAME), "disabled");
 
-        RadioButtonPreference preference = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
         mPicker.bindPreference(preference, PACKAGE_NAME, webviewAppInfo, null);
         mPicker.bindPreferenceExtra(preference, PACKAGE_NAME, webviewAppInfo, null, null);
         verify(preference, times(1)).setEnabled(eq(false));
@@ -161,7 +161,7 @@ public class WebViewAppPickerTest {
                 mContext.getPackageManager(),
                 createApplicationInfo(PACKAGE_NAME), disabledReason);
 
-        RadioButtonPreference preference = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
         mPicker.bindPreference(preference, PACKAGE_NAME, webviewAppInfo, null);
         mPicker.bindPreferenceExtra(preference, PACKAGE_NAME, webviewAppInfo, null, null);
         verify(preference, times(1)).setEnabled(eq(true));
@@ -175,7 +175,7 @@ public class WebViewAppPickerTest {
                 mContext.getPackageManager(),
                 createApplicationInfo(PACKAGE_NAME), disabledReason);
 
-        RadioButtonPreference preference = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
         mPicker.bindPreference(preference, PACKAGE_NAME, webviewAppInfo, null);
         mPicker.bindPreferenceExtra(preference, PACKAGE_NAME, webviewAppInfo, null, null);
         verify(preference, times(1)).setSummary(eq(disabledReason));
@@ -189,7 +189,7 @@ public class WebViewAppPickerTest {
                 mContext.getPackageManager(),
                 createApplicationInfo(PACKAGE_NAME), null);
 
-        RadioButtonPreference preference = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference preference = mock(SelectorWithWidgetPreference.class);
         mPicker.bindPreference(preference, PACKAGE_NAME, webviewAppInfo, null);
         mPicker.bindPreferenceExtra(preference, PACKAGE_NAME, webviewAppInfo, null, null);
         verify(preference, never()).setSummary(any());
@@ -314,7 +314,8 @@ public class WebViewAppPickerTest {
                 mContext.getPackageManager(),
                 createApplicationInfo(PACKAGE_NAME), "" /* disabledReason */);
 
-        final RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
+        final SelectorWithWidgetPreference mockPreference =
+                mock(SelectorWithWidgetPreference.class);
         mPicker.bindPreference(mockPreference, PACKAGE_NAME, webviewAppInfo, null);
         mPicker.bindPreferenceExtra(
                 mockPreference, PACKAGE_NAME, webviewAppInfo, null, null);
@@ -339,7 +340,7 @@ public class WebViewAppPickerTest {
                 .thenReturn(Collections.singletonList(createApplicationInfo(PACKAGE_NAME)));
         when(mWvusWrapper.setWebViewProvider(eq(PACKAGE_NAME))).thenReturn(true);
 
-        RadioButtonPreference defaultPackagePref = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference defaultPackagePref = mock(SelectorWithWidgetPreference.class);
         when(defaultPackagePref.getKey()).thenReturn(PACKAGE_NAME);
         mPicker.onRadioButtonClicked(defaultPackagePref);
 
@@ -353,7 +354,7 @@ public class WebViewAppPickerTest {
                 .thenReturn(Collections.singletonList(createApplicationInfo(PACKAGE_NAME)));
         when(mWvusWrapper.setWebViewProvider(eq(PACKAGE_NAME))).thenReturn(false);
 
-        RadioButtonPreference defaultPackagePref = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference defaultPackagePref = mock(SelectorWithWidgetPreference.class);
         when(defaultPackagePref.getKey()).thenReturn(PACKAGE_NAME);
         mPicker.onRadioButtonClicked(defaultPackagePref);
 

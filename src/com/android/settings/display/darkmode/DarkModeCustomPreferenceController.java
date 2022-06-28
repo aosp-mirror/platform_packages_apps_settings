@@ -15,20 +15,18 @@
 
 package com.android.settings.display.darkmode;
 
-import android.app.Dialog;
+import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
+
 import android.app.TimePickerDialog;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.text.TextUtils;
+
 import androidx.preference.Preference;
-import androidx.preference.PreferenceScreen;
+
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.dashboard.DashboardFragment;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
 
 /**
  * Controller for custom mode night mode time settings
@@ -36,7 +34,6 @@ import static android.app.UiModeManager.MODE_NIGHT_CUSTOM;
 public class DarkModeCustomPreferenceController extends BasePreferenceController {
     private static final String START_TIME_KEY = "dark_theme_start_time";
     private static final String END_TIME_KEY = "dark_theme_end_time";
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
     private final UiModeManager mUiModeManager;
     private TimeFormatter mFormat;
     private DarkModeSettingsFragment mFragmet;
@@ -64,7 +61,10 @@ public class DarkModeCustomPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mUiModeManager.getNightMode() == MODE_NIGHT_CUSTOM
+                && mUiModeManager.getNightModeCustomType()
+                == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
+                ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     public TimePickerDialog getDialog() {
@@ -89,11 +89,6 @@ public class DarkModeCustomPreferenceController extends BasePreferenceController
 
     @Override
     protected void refreshSummary(Preference preference) {
-        if (mUiModeManager.getNightMode() != MODE_NIGHT_CUSTOM) {
-            preference.setVisible(false);
-            return;
-        }
-        preference.setVisible(true);
         final LocalTime time;
         if (TextUtils.equals(getPreferenceKey(), START_TIME_KEY)) {
             time = mUiModeManager.getCustomNightModeStart();

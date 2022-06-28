@@ -20,6 +20,7 @@ import android.app.Application;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.homepage.SettingsHomepageActivity;
+import com.android.settingslib.applications.AppIconCacheManager;
 
 import java.lang.ref.WeakReference;
 
@@ -43,5 +44,11 @@ public class SettingsApplication extends Application {
 
     public SettingsHomepageActivity getHomeActivity() {
         return mHomeActivity.get();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        AppIconCacheManager.getInstance().release();
     }
 }

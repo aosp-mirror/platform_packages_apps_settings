@@ -29,7 +29,7 @@
             settings:keywords="@string/keywords_lock_screen_notif"/>
 
         <SwitchPreference
-            android:key="security_dispaly_lockscreen_bypass"
+            android:key="security_display_lockscreen_bypass"
             android:title="@string/lockscreen_bypass_title"
             android:summary="@string/lockscreen_bypass_summary"
             settings:searchable="false"
@@ -52,10 +52,22 @@
             settings:controller="com.android.settings.display.WalletPrivacyPreferenceController" />
 
         <SwitchPreference
+            android:key="lock_screen_show_qr_scanner"
+            android:title="@string/lockscreen_privacy_qr_code_scanner_setting_toggle"
+            android:summary="@string/lockscreen_privacy_qr_code_scanner_summary"
+            settings:controller="com.android.settings.display.QRCodeScannerPreferenceController" />
+
+        <SwitchPreference
             android:key="lockscreen_privacy_controls_switch"
             android:title="@string/lockscreen_privacy_controls_setting_toggle"
             android:summary="@string/lockscreen_privacy_controls_summary"
             settings:controller="com.android.settings.display.ControlsPrivacyPreferenceController" />
+
+        <SwitchPreference
+            android:key="lockscreen_trivial_controls_switch"
+            android:title="@string/lockscreen_trivial_controls_setting_toggle"
+            android:summary="@string/lockscreen_trivial_controls_summary"
+            settings:controller="com.android.settings.display.ControlsTrivialPrivacyPreferenceController"/>
 
         <SwitchPreference
             android:key="lockscreen_double_line_clock_switch"
@@ -67,12 +79,14 @@
     <PreferenceCategory
         android:key="ambient_display_category_when_to_show"
         android:title="@string/ambient_display_category_triggers"
+        settings:controller="com.android.settings.display.AmbientDisplayWhenToShowPreferenceController"
         android:order="1000">
 
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="ambient_display_always_on"
             android:title="@string/doze_always_on_title"
             android:summary="@string/doze_always_on_summary"
+            settings:keywords="@string/keywords_always_show_time_info"
             settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController"
             settings:userRestriction="no_ambient_display" />
 

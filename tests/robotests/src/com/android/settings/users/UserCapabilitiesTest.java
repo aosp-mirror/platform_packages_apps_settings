@@ -18,13 +18,19 @@ package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -32,16 +38,24 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowUserManager.class})
+@Config(shadows = {ShadowUserManager.class, ShadowDevicePolicyManager.class,
+        SettingsShadowResources.class})
 public class UserCapabilitiesTest {
 
     private Context mContext;
     private ShadowUserManager mUserManager;
+    private ShadowDevicePolicyManager mDpm;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mUserManager = ShadowUserManager.getShadow();
+        mDpm = ShadowDevicePolicyManager.getShadow();
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -84,5 +98,42 @@ public class UserCapabilitiesTest {
         userCapabilities.updateAddUserCapabilities(mContext);
 
         assertThat(userCapabilities.mUserSwitcherEnabled).isTrue();
+    }
+
+    @Test
+    @Ignore
+    public void restrictedProfile_enabled() {
+        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mDpm.setDeviceOwner(null);
+        SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.mCanAddRestrictedProfile).isTrue();
+    }
+
+    @Test
+    public void restrictedProfile_configNotSet() {
+        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mDpm.setDeviceOwner(null);
+        SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, false);
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.mCanAddRestrictedProfile).isFalse();
+    }
+
+    @Test
+    public void restrictedProfile_deviceIsManaged() {
+        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, true);
+        mDpm.setDeviceOwner(new ComponentName("test", "test"));
+        SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.mCanAddRestrictedProfile).isFalse();
+    }
+
+    @Test
+    public void restrictedProfile_typeNotEnabled() {
+        mUserManager.setUserTypeEnabled(UserManager.USER_TYPE_FULL_RESTRICTED, false);
+        mDpm.setDeviceOwner(null);
+        SettingsShadowResources.overrideResource(R.bool.config_offer_restricted_profiles, true);
+        final UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        assertThat(userCapabilities.mCanAddRestrictedProfile).isFalse();
     }
 }

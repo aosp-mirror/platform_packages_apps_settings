@@ -16,10 +16,16 @@
 
 package com.android.settings.location;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCATION_SWITCH_TITLE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
@@ -63,6 +69,8 @@ public class LocationSettings extends DashboardFragment implements
 
     private LocationSwitchBarController mSwitchBarController;
     private LocationEnabler mLocationEnabler;
+    private RecentLocationAccessPreferenceController mController;
+    private ContentObserver mContentObserver;
 
     @Override
     public int getMetricsCategory() {
@@ -79,6 +87,16 @@ public class LocationSettings extends DashboardFragment implements
         mSwitchBarController = new LocationSwitchBarController(activity, switchBar,
                 getSettingsLifecycle());
         mLocationEnabler = new LocationEnabler(getContext(), this, getSettingsLifecycle());
+        mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                mController.updateShowSystem();
+            }
+        };
+        getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(
+                        Settings.Secure.LOCATION_SHOW_SYSTEM_OPS), /* notifyForDescendants= */
+                false, mContentObserver);
     }
 
     @Override
@@ -86,15 +104,30 @@ public class LocationSettings extends DashboardFragment implements
         super.onAttach(context);
 
         use(AppLocationPermissionPreferenceController.class).init(this);
-        use(RecentLocationAccessPreferenceController.class).init(this);
+        mController = use(RecentLocationAccessPreferenceController.class);
+        mController.init(this);
         use(RecentLocationAccessSeeAllButtonPreferenceController.class).init(this);
         use(LocationForWorkPreferenceController.class).init(this);
         use(LocationSettingsFooterPreferenceController.class).init(this);
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getContentResolver().unregisterContentObserver(mContentObserver);
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.location_settings;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        replaceEnterpriseStringTitle("managed_profile_location_switch",
+                WORK_PROFILE_LOCATION_SWITCH_TITLE, R.string.managed_profile_location_switch_title);
     }
 
     @Override

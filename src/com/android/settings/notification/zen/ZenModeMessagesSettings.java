@@ -21,6 +21,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.notification.NotificationBackend;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -44,10 +45,9 @@ public class ZenModeMessagesSettings extends ZenModeSettingsBase {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeSendersImagePreferenceController(context,
-                "zen_mode_messages_image", lifecycle, true));
         controllers.add(new ZenModePrioritySendersPreferenceController(context,
-                "zen_mode_settings_category_messages", lifecycle, true));
+                "zen_mode_settings_category_messages", lifecycle, true,
+                new NotificationBackend()));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(
                 context, lifecycle, R.string.zen_mode_messages_footer));
         return controllers;

@@ -19,6 +19,7 @@ package com.android.settings.testutils.shadow;
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 
 import android.accounts.Account;
+import android.annotation.UserIdInt;
 import android.content.ContentResolver;
 import android.content.SyncAdapterType;
 import android.database.Cursor;
@@ -76,8 +77,12 @@ public class ShadowContentResolver {
 
     @Implementation
     protected static boolean getMasterSyncAutomaticallyAsUser(int userId) {
-        return sMasterSyncAutomatically.containsKey(userId)
-                ? sMasterSyncAutomatically.get(userId) : true;
+        return sMasterSyncAutomatically.getOrDefault(userId, true);
+    }
+
+    @Implementation
+    protected static void setMasterSyncAutomaticallyAsUser(boolean sync, @UserIdInt int userId) {
+        sMasterSyncAutomatically.put(userId, sync);
     }
 
     public static void setSyncAdapterTypes(SyncAdapterType[] syncAdapterTypes) {

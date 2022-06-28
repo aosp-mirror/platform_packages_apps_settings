@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.om.IOverlayManager;
 import android.content.om.OverlayInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -41,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilityGestureNavigationTutorial;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -48,9 +50,10 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.utils.CandidateInfoExtra;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.search.SearchIndexable;
+import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.widget.IllustrationPreference;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +135,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             return;
         }
         for (CandidateInfo info : candidateList) {
-            RadioButtonPreference pref =
-                    new RadioButtonPreference(getPrefContext());
+            SelectorWithWidgetPreference pref =
+                    new SelectorWithWidgetPreference(getPrefContext());
             bindPreference(pref, info.getKey(), info, defaultKey);
             bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
             screen.addPreference(pref);
@@ -142,7 +145,7 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
     }
 
     @Override
-    public void bindPreferenceExtra(RadioButtonPreference pref,
+    public void bindPreferenceExtra(SelectorWithWidgetPreference pref,
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
         if (!(info instanceof CandidateInfoExtra)) {
             return;
@@ -150,9 +153,18 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
 
         pref.setSummary(((CandidateInfoExtra) info).loadSummary());
 
-        if (info.getKey() == KEY_SYSTEM_NAV_GESTURAL) {
+        if (KEY_SYSTEM_NAV_GESTURAL.equals(info.getKey())) {
             pref.setExtraWidgetOnClickListener((v) -> startActivity(new Intent(
                     GestureNavigationSettingsFragment.GESTURE_NAVIGATION_SETTINGS)));
+        }
+
+        if (KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey()) || KEY_SYSTEM_NAV_3BUTTONS.equals(
+                info.getKey())) {
+            pref.setExtraWidgetOnClickListener((v) ->
+                    new SubSettingLauncher(getContext())
+                            .setDestination(ButtonNavigationSettingsFragment.class.getName())
+                            .setSourceMetricsCategory(SettingsEnums.SETTINGS_GESTURE_SWIPE_UP)
+                            .launch());
         }
     }
 
@@ -309,6 +321,39 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     return SystemNavigationPreferenceController.isGestureAvailable(context);
+                }
+
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
+                        boolean enabled) {
+                    final Resources res = context.getResources();
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_GESTURAL_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.edge_to_edge_navigation_title);
+                        data.key = KEY_SYSTEM_NAV_GESTURAL;
+                        result.add(data);
+                    }
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_2BUTTON_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.swipe_up_to_switch_apps_title);
+                        data.key = KEY_SYSTEM_NAV_2BUTTONS;
+                        result.add(data);
+                    }
+
+                    if (SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
+                            NAV_BAR_MODE_3BUTTON_OVERLAY)) {
+                        SearchIndexableRaw data = new SearchIndexableRaw(context);
+                        data.title = res.getString(R.string.legacy_navigation_title);
+                        data.key = KEY_SYSTEM_NAV_3BUTTONS;
+                        result.add(data);
+                    }
+
+                    return result;
                 }
             };
 

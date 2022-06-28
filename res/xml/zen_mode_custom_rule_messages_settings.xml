@@ -23,16 +23,7 @@
     <PreferenceCategory
         android:title="@string/zen_mode_settings_category"
         android:key="zen_mode_settings_category_messages">
-        <!-- Messages -->
-        <ListPreference
-            android:key="zen_mode_messages"
-            android:title="@string/zen_mode_messages"
-            android:entries="@array/zen_mode_contacts_messages_entries"
-            android:entryValues="@array/zen_mode_contacts_values"/>
-
-        <Preference
-            android:key="zen_mode_starred_contacts_messages"
-            android:title="@string/zen_mode_starred_contacts_title"/>
+        <!-- selector preferences added here by ZenRulePrioritySendersPreferenceController -->
     </PreferenceCategory>
 
     <com.android.settingslib.widget.FooterPreference/>

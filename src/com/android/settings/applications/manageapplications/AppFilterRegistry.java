@@ -21,6 +21,7 @@ import androidx.annotation.IntDef;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAlarmsAndRemindersBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateLocaleBridge;
 import com.android.settings.applications.AppStateManageExternalStorageBridge;
 import com.android.settings.applications.AppStateMediaManagementAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
@@ -54,6 +55,7 @@ public class AppFilterRegistry {
             FILTER_APPS_BLOCKED,
             FILTER_ALARMS_AND_REMINDERS,
             FILTER_APPS_MEDIA_MANAGEMENT,
+            FILTER_APPS_LOCALE,
     })
     @interface FilterType {
     }
@@ -79,14 +81,15 @@ public class AppFilterRegistry {
     public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
     public static final int FILTER_ALARMS_AND_REMINDERS = 18;
     public static final int FILTER_APPS_MEDIA_MANAGEMENT = 19;
-    // Next id: 20. If you add an entry here, length of mFilters should be updated
+    public static final int FILTER_APPS_LOCALE = 20;
+    // Next id: 21. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[20];
+        mFilters = new AppFilterItem[21];
 
         // High power allowlist, on
         mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
@@ -203,7 +206,15 @@ public class AppFilterRegistry {
                 AppStateMediaManagementAppsBridge.FILTER_MEDIA_MANAGEMENT_APPS,
                 FILTER_APPS_MEDIA_MANAGEMENT,
                 R.string.media_management_apps_title);
+
+        // Apps that can configurate appication's locale.
+        mFilters[FILTER_APPS_LOCALE] = new AppFilterItem(
+                AppStateLocaleBridge.FILTER_APPS_LOCALE,
+                FILTER_APPS_LOCALE,
+                R.string.app_locale_picker_title);
     }
+
+
 
     public static AppFilterRegistry getInstance() {
         if (sRegistry == null) {
@@ -235,6 +246,8 @@ public class AppFilterRegistry {
                 return FILTER_ALARMS_AND_REMINDERS;
             case ManageApplications.LIST_TYPE_MEDIA_MANAGEMENT_APPS:
                 return FILTER_APPS_MEDIA_MANAGEMENT;
+            case ManageApplications.LIST_TYPE_APPS_LOCALE:
+                return FILTER_APPS_LOCALE;
             default:
                 return FILTER_APPS_ALL;
         }

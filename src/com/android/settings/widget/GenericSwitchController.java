@@ -20,6 +20,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;

@@ -22,6 +22,11 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_LOW;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_MEDIUM;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK_ACTION;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE;
 
 import static com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragment.RESULT_FINISHED;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_CALLER_APP_NAME;
@@ -29,7 +34,6 @@ import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_D
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_IS_CALLING_APP_ADMIN;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_REQUESTED_MIN_COMPLEXITY;
 
-import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -65,7 +69,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.settings.EncryptionInterstitial;
 import com.android.settings.EventLogTags;
-import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -74,8 +77,10 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.safetycenter.LockScreenSafetySource;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.widget.FooterPreference;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -343,9 +348,14 @@ public class ChooseLockGeneric extends SettingsActivity {
                 // it's an update.
                 updateExistingLock = mLockPatternUtils.isSeparateProfileChallengeEnabled(mUserId);
                 if (updateExistingLock) {
-                    getActivity().setTitle(R.string.lock_settings_picker_update_profile_lock_title);
+                    getActivity().setTitle(mDpm.getResources().getString(
+                            LOCK_SETTINGS_UPDATE_PROFILE_LOCK_TITLE,
+                            () -> getString(
+                                    R.string.lock_settings_picker_update_profile_lock_title)));
                 } else {
-                    getActivity().setTitle(R.string.lock_settings_picker_new_profile_lock_title);
+                    getActivity().setTitle(mDpm.getResources().getString(
+                            LOCK_SETTINGS_NEW_PROFILE_LOCK_TITLE,
+                            () -> getString(R.string.lock_settings_picker_new_profile_lock_title)));
                 }
             } else {
                 updateExistingLock = mLockPatternUtils.isSecure(mUserId);
@@ -394,31 +404,11 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
             } else {
                 if (mIsManagedProfile) {
-                    textView.setText(R.string.lock_settings_picker_profile_message);
+                    textView.setText(mDpm.getResources().getString(
+                            WORK_PROFILE_SCREEN_LOCK_SETUP_MESSAGE,
+                            () -> getString(R.string.lock_settings_picker_profile_message)));
                 } else {
-                    int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
-                    if (mController.isScreenLockRestrictedByAdmin()
-                            && profileUserId != UserHandle.USER_NULL) {
-                        final StringBuilder description = new StringBuilder(getText(
-                                R.string.lock_settings_picker_admin_restricted_personal_message));
-                        final LinkifyUtils.OnClickListener clickListener = () -> {
-                            final Bundle extras = new Bundle();
-                            extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
-                            if (mUserPassword != null) {
-                                extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
-                                        mUserPassword);
-                            }
-                            new SubSettingLauncher(getActivity())
-                                    .setDestination(ChooseLockGenericFragment.class.getName())
-                                    .setSourceMetricsCategory(getMetricsCategory())
-                                    .setArguments(extras)
-                                    .launch();
-                            finish();
-                        };
-                        LinkifyUtils.linkify(textView, description, clickListener);
-                    } else {
-                        textView.setText("");
-                    }
+                    textView.setText("");
                 }
             }
         }
@@ -623,10 +613,43 @@ public class ChooseLockGeneric extends SettingsActivity {
         protected void addPreferences() {
             addPreferencesFromResource(R.xml.security_settings_picker);
 
-            final Preference footer = findPreference(KEY_LOCK_SETTINGS_FOOTER);
+            int profileUserId = Utils.getManagedProfileId(mUserManager, mUserId);
+            final FooterPreference footer = findPreference(KEY_LOCK_SETTINGS_FOOTER);
             if (!TextUtils.isEmpty(mCallerAppName) && !mIsCallingAppAdmin) {
                 footer.setVisible(true);
                 footer.setTitle(getFooterString());
+            } else if (!mForFace && !mForBiometrics && !mForFingerprint && !mIsManagedProfile
+                    && mController.isScreenLockRestrictedByAdmin()
+                    && profileUserId != UserHandle.USER_NULL) {
+                final StringBuilder description = new StringBuilder(
+                        mDpm.getResources().getString(
+                                WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK,
+                                () -> getString(
+                                R.string.lock_settings_picker_admin_restricted_personal_message)));
+                footer.setVisible(true);
+                footer.setTitle(description);
+
+                final StringBuilder setLockText = new StringBuilder(
+                        mDpm.getResources().getString(
+                                WORK_PROFILE_IT_ADMIN_CANT_RESET_SCREEN_LOCK_ACTION,
+                                () -> getString(
+                          R.string.lock_settings_picker_admin_restricted_personal_message_action)));
+                View.OnClickListener setLockClickListener = (v) -> {
+                    final Bundle extras = new Bundle();
+                    extras.putInt(Intent.EXTRA_USER_ID, profileUserId);
+                    if (mUserPassword != null) {
+                        extras.putParcelable(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                mUserPassword);
+                    }
+                    new SubSettingLauncher(getActivity())
+                            .setDestination(ChooseLockGenericFragment.class.getName())
+                            .setSourceMetricsCategory(getMetricsCategory())
+                            .setArguments(extras)
+                            .launch();
+                    finish();
+                };
+                footer.setLearnMoreText(setLockText);
+                footer.setLearnMoreAction(setLockClickListener);
             } else {
                 footer.setVisible(false);
             }
@@ -852,6 +875,7 @@ public class ChooseLockGeneric extends SettingsActivity {
                 }
                 mLockPatternUtils.setLockScreenDisabled(disabled, mUserId);
                 getActivity().setResult(Activity.RESULT_OK);
+                LockScreenSafetySource.onLockScreenChange(getContext());
                 finish();
             }
         }

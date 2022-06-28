@@ -16,14 +16,16 @@
 
 package com.android.settings.wifi;
 
+import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MAX;
+import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_MIN;
+import static com.android.wifitrackerlib.WifiEntry.WIFI_LEVEL_UNREACHABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +39,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.wifitrackerlib.MergedCarrierEntry;
 import com.android.wifitrackerlib.WifiEntry;
@@ -47,6 +50,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -57,10 +61,12 @@ public class WifiPickerTrackerHelperTest {
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
+    @Spy
+    Context mContext = ApplicationProvider.getApplicationContext();
     @Mock
     public WifiManager mWifiManager;
     @Mock
-    public CarrierConfigManager mCarrierConfigManager;
+    public CarrierConfigCache mCarrierConfigCache;
     @Mock
     public WifiPickerTracker mWifiPickerTracker;
     @Mock
@@ -75,12 +81,10 @@ public class WifiPickerTrackerHelperTest {
 
     @Before
     public void setUp() {
-        final Context context = spy(ApplicationProvider.getApplicationContext());
-        when(context.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
-        when(context.getSystemService(CarrierConfigManager.class))
-                .thenReturn(mCarrierConfigManager);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
         mCarrierConfig = new PersistableBundle();
-        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(mCarrierConfig);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.wifiTrackerLibProvider
@@ -88,7 +92,9 @@ public class WifiPickerTrackerHelperTest {
                         any(), any(), any(), any(), any(), anyLong(), anyLong(), any()))
                 .thenReturn(mWifiPickerTracker);
         mWifiPickerTrackerHelper = new WifiPickerTrackerHelper(mock(Lifecycle.class),
-                context, null);
+                mContext, null);
+        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
+        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
     }
 
     @Test
@@ -108,7 +114,7 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void isCarrierNetworkProvisionEnabled_getNullConfig_returnFalse() {
-        doReturn(null).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        when(mCarrierConfigCache.getConfigForSubId(SUB_ID)).thenReturn(null);
 
         assertThat(mWifiPickerTrackerHelper.isCarrierNetworkProvisionEnabled(SUB_ID)).isFalse();
     }
@@ -128,21 +134,17 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void isCarrierNetworkEnabled_returnCorrect() {
-        doReturn(true).when(mWifiManager).isCarrierNetworkOffloadEnabled(SUB_ID, true /* merged */);
+        when(mMergedCarrierEntry.isEnabled()).thenReturn(true);
 
-        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled(SUB_ID)).isTrue();
+        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled()).isTrue();
 
-        doReturn(false).when(mWifiManager)
-                .isCarrierNetworkOffloadEnabled(SUB_ID, true /* merged */);
+        when(mMergedCarrierEntry.isEnabled()).thenReturn(false);
 
-        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled(SUB_ID)).isFalse();
+        assertThat(mWifiPickerTrackerHelper.isCarrierNetworkEnabled()).isFalse();
     }
 
     @Test
     public void setCarrierNetworkEnabled_shouldSetCorrect() {
-        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
-        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
-
         mWifiPickerTrackerHelper.setCarrierNetworkEnabled(true);
 
         verify(mMergedCarrierEntry).setEnabled(true);
@@ -154,7 +156,6 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void setCarrierNetworkEnabled_mergedCarrierEntryIsNull_shouldNotSet() {
-        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
         when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(null);
 
         mWifiPickerTrackerHelper.setCarrierNetworkEnabled(true);
@@ -168,8 +169,6 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void connectCarrierNetwork_returnTrueAndConnect() {
-        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
-        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
         when(mMergedCarrierEntry.canConnect()).thenReturn(true);
 
         assertThat(mWifiPickerTrackerHelper.connectCarrierNetwork(mConnectCallback)).isTrue();
@@ -178,7 +177,6 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void connectCarrierNetwork_mergedCarrierEntryIsNull_returnFalse() {
-        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
         when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(null);
 
         assertThat(mWifiPickerTrackerHelper.connectCarrierNetwork(mConnectCallback)).isFalse();
@@ -186,11 +184,32 @@ public class WifiPickerTrackerHelperTest {
 
     @Test
     public void connectCarrierNetwork_canConnectIsFalse_returnFalseAndNeverConnect() {
-        mWifiPickerTrackerHelper.setWifiPickerTracker(mWifiPickerTracker);
-        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(mMergedCarrierEntry);
         when(mMergedCarrierEntry.canConnect()).thenReturn(false);
 
         assertThat(mWifiPickerTrackerHelper.connectCarrierNetwork(mConnectCallback)).isFalse();
         verify(mMergedCarrierEntry, never()).connect(mConnectCallback);
+    }
+
+    @Test
+    public void getCarrierNetworkLevel_mergedCarrierEntryIsNull_returnMinLevel() {
+        when(mWifiPickerTracker.getMergedCarrierEntry()).thenReturn(null);
+
+        assertThat(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).isEqualTo(WIFI_LEVEL_MIN);
+    }
+
+    @Test
+    public void getCarrierNetworkLevel_getUnreachableLevel_returnMinLevel() {
+        when(mMergedCarrierEntry.getLevel()).thenReturn(WIFI_LEVEL_UNREACHABLE);
+
+        assertThat(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).isEqualTo(WIFI_LEVEL_MIN);
+    }
+
+    @Test
+    public void getCarrierNetworkLevel_getAvailableLevel_returnSameLevel() {
+        for (int level = WIFI_LEVEL_MIN; level <= WIFI_LEVEL_MAX; level++) {
+            when(mMergedCarrierEntry.getLevel()).thenReturn(level);
+
+            assertThat(mWifiPickerTrackerHelper.getCarrierNetworkLevel()).isEqualTo(level);
+        }
     }
 }

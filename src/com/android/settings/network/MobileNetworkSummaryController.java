@@ -36,7 +36,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.helper.SubscriptionAnnotation;
-import com.android.settings.network.telephony.MobileNetworkActivity;
+import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AddPreference;
 import com.android.settingslib.Utils;
@@ -190,12 +190,8 @@ public class MobileNetworkSummaryController extends AbstractPreferenceController
                 SubscriptionAnnotation info = subs.get(0);
                 if (info.getSubInfo().isEmbedded() || info.isActive()
                         || mStatusCache.isPhysicalSimDisableSupport()) {
-                    final Intent intent = new Intent(mContext, MobileNetworkActivity.class);
-                    intent.putExtra(Settings.EXTRA_SUB_ID, info.getSubscriptionId());
-                    // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
-                    MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(mContext, intent,
-                            null);
-                    mContext.startActivity(intent);
+                    MobileNetworkUtils.launchMobileNetworkSettings(mContext,
+                            info.getSubInfo());
                     return true;
                 }
 

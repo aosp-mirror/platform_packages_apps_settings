@@ -16,6 +16,10 @@
 
 package com.android.settings.enterprise;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.PERSONAL_CATEGORY_HEADER;
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_CATEGORY_HEADER;
+
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -123,14 +127,20 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
         if (!mEnterprisePrivacyFeatureProvider.isInCompMode() && mUsers.size() == 1) {
             createPreferences(prefContext, screen, mApps.get(0));
         } else {
+            DevicePolicyManager devicePolicyManager =
+                    mContext.getSystemService(DevicePolicyManager.class);
             for (int i = 0; i < mUsers.size(); i++) {
                 final UserInfo userInfo = mUsers.get(i);
                 final PreferenceCategory category = new PreferenceCategory(prefContext);
                 screen.addPreference(category);
                 if (userInfo.isManagedProfile()) {
-                    category.setTitle(R.string.category_work);
+                    category.setTitle(devicePolicyManager.getResources().getString(
+                            WORK_CATEGORY_HEADER,
+                            () -> mContext.getString(R.string.category_work)));
                 } else {
-                    category.setTitle(R.string.category_personal);
+                    category.setTitle(devicePolicyManager.getResources().getString(
+                            PERSONAL_CATEGORY_HEADER,
+                            () -> mContext.getString(R.string.category_personal)));
                 }
                 category.setOrder(i);
                 createPreferences(prefContext, category, mApps.get(i));

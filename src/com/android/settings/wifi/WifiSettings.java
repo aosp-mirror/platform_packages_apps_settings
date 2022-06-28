@@ -75,7 +75,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.wifi.LongPressWifiEntryPreference;
 import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectCallback;

@@ -20,13 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
+
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settings.network.CarrierConfigCache;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +39,7 @@ import org.mockito.MockitoAnnotations;
 @RunWith(AndroidJUnit4.class)
 public class CarrierSettingsVersionPreferenceControllerTest {
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
 
     private CarrierSettingsVersionPreferenceController mController;
     private int mSubscriptionId = 1234;
@@ -46,21 +48,21 @@ public class CarrierSettingsVersionPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         Context context = spy(ApplicationProvider.getApplicationContext());
-        when(context.getSystemService(CarrierConfigManager.class)).thenReturn(mCarrierConfigManager);
+        CarrierConfigCache.setTestInstance(context, mCarrierConfigCache);
         mController = new CarrierSettingsVersionPreferenceController(context, "mock_key");
         mController.init(mSubscriptionId);
     }
 
     @Test
     public void getSummary_nullConfig_noCrash() {
-        doReturn(null).when(mCarrierConfigManager).getConfigForSubId(mSubscriptionId);
+        doReturn(null).when(mCarrierConfigCache).getConfigForSubId(mSubscriptionId);
 
         assertThat(mController.getSummary()).isNull();
     }
 
     @Test
     public void getSummary_nullVersionString_noCrash() {
-        doReturn(new PersistableBundle()).when(mCarrierConfigManager)
+        doReturn(new PersistableBundle()).when(mCarrierConfigCache)
                 .getConfigForSubId(mSubscriptionId);
         assertThat(mController.getSummary()).isNull();
     }
@@ -70,7 +72,7 @@ public class CarrierSettingsVersionPreferenceControllerTest {
         final PersistableBundle bundle = new PersistableBundle();
         bundle.putString(CarrierConfigManager.KEY_CARRIER_CONFIG_VERSION_STRING,
                 "test_version_123");
-        doReturn(bundle).when(mCarrierConfigManager).getConfigForSubId(mSubscriptionId);
+        doReturn(bundle).when(mCarrierConfigCache).getConfigForSubId(mSubscriptionId);
 
         assertThat(mController.getSummary()).isEqualTo("test_version_123");
     }

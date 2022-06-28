@@ -16,21 +16,22 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settingslib.bluetooth.BluetoothBroadcastUtils;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
 
@@ -52,11 +53,12 @@ public class BluetoothFindBroadcastsHeaderController extends BluetoothDetailsCon
     LinearLayout mBtnBroadcastLayout;
     Button mBtnLeaveBroadcast;
     Button mBtnScanQrCode;
-
+    BluetoothFindBroadcastsFragment mBluetoothFindBroadcastsFragment;
     public BluetoothFindBroadcastsHeaderController(Context context,
-            PreferenceFragmentCompat fragment, CachedBluetoothDevice device, Lifecycle lifecycle,
-            LocalBluetoothManager bluetoothManager) {
+            BluetoothFindBroadcastsFragment fragment, CachedBluetoothDevice device,
+            Lifecycle lifecycle, LocalBluetoothManager bluetoothManager) {
         super(context, fragment, device, lifecycle);
+        mBluetoothFindBroadcastsFragment = fragment;
     }
 
     @Override
@@ -101,20 +103,41 @@ public class BluetoothFindBroadcastsHeaderController extends BluetoothDetailsCon
             mBtnFindBroadcast.setVisibility(View.VISIBLE);
             mBtnBroadcastLayout.setVisibility(View.GONE);
         }
+
+        mBtnLeaveBroadcast.setEnabled(false);
+        if (mBluetoothFindBroadcastsFragment != null && mCachedDevice != null) {
+            LocalBluetoothLeBroadcastAssistant broadcastAssistant =
+                    mBluetoothFindBroadcastsFragment.getLeBroadcastAssistant();
+            if (broadcastAssistant != null
+                    && broadcastAssistant.getConnectionStatus(mCachedDevice.getDevice())
+                    == BluetoothProfile.STATE_CONNECTED) {
+                mBtnLeaveBroadcast.setEnabled(true);
+            }
+        }
     }
 
     private void scanBroadcastSource() {
-        // TODO(b/228258236) : Call the LocalBluetoothLeBroadcastAssistant
-        //  to start searching for source
+        // TODO(b/231543455) : Using the BluetoothDeviceUpdater to refactor it.
+        if (mBluetoothFindBroadcastsFragment == null) {
+            return;
+        }
+        mBluetoothFindBroadcastsFragment.scanBroadcastSource();
     }
 
     private void leaveBroadcastSession() {
-        // TODO(b/228258236) : Call the LocalBluetoothLeBroadcastAssistant
-        //  to leave the broadcast session
+        if (mBluetoothFindBroadcastsFragment == null) {
+            return;
+        }
+        mBluetoothFindBroadcastsFragment.leaveBroadcastSession();
     }
 
     private void launchQrCodeScanner() {
-        // TODO(b/228259065) : Launch the QR code scanner page by intent
+        final Intent intent = new Intent(mContext, QrCodeScanModeActivity.class);
+        intent.setAction(BluetoothBroadcastUtils.ACTION_BLUETOOTH_LE_AUDIO_QR_CODE_SCANNER)
+                .putExtra(BluetoothBroadcastUtils.EXTRA_BLUETOOTH_SINK_IS_GROUP, true)
+                .putExtra(BluetoothBroadcastUtils.EXTRA_BLUETOOTH_DEVICE_SINK,
+                        mCachedDevice.getDevice());
+        mContext.startActivity(intent);
     }
 
     @Override
@@ -127,5 +150,12 @@ public class BluetoothFindBroadcastsHeaderController extends BluetoothDetailsCon
     @Override
     public String getPreferenceKey() {
         return KEY_BROADCAST_HEADER;
+    }
+
+    /**
+     * Updates the UI
+     */
+    public void refreshUi() {
+        updateHeaderLayout();
     }
 }

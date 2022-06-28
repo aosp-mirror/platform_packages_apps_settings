@@ -54,7 +54,6 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
     private static final String ARG_BATTERY_TIP = "battery_tip";
     private static final String ARG_METRICS_KEY = "metrics_key";
-    private static final double CHARGE_LIMIT_LEVEL = 0.8f;
 
     @VisibleForTesting
     BatteryTip mBatteryTip;
@@ -146,8 +145,9 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
             case BatteryTip.TipType.BATTERY_DEFENDER:
                 mMetricsFeatureProvider.action(context,
                         SettingsEnums.ACTION_TIP_BATTERY_DEFENDER, mMetricsKey);
+                final double chargeLimitLevel = 0.8f;
                 final String percentage =
-                        NumberFormat.getPercentInstance().format(CHARGE_LIMIT_LEVEL);
+                        NumberFormat.getPercentInstance().format(chargeLimitLevel);
                 final String message = context.getString(
                         R.string.battery_tip_limited_temporarily_dialog_msg, percentage);
                 final boolean isPluggedIn = isPluggedIn();

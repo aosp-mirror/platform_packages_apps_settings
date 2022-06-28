@@ -227,7 +227,8 @@ public class WirelessDebuggingFragment extends DashboardFragment
     public void onResume() {
         super.onResume();
 
-        getActivity().registerReceiver(mReceiver, mIntentFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     @Override

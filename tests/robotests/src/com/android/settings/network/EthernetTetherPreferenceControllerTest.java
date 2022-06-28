@@ -32,6 +32,7 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,6 +73,7 @@ public class EthernetTetherPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void lifecycle_shouldRegisterReceiverOnStart() {
         mController.onStart();
 

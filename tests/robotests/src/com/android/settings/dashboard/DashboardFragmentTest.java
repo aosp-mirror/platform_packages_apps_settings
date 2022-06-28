@@ -48,7 +48,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.slices.BlockingSlicePrefController;
 import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
@@ -141,6 +141,21 @@ public class DashboardFragmentTest {
                 (TestPreferenceController.class);
 
         assertThat(controller1).isSameInstanceAs(retrievedController);
+    }
+
+    @Test
+    public void useAll_returnsAllControllersOfType() {
+        final TestPreferenceController controller1 = new TestPreferenceController(mContext);
+        final TestPreferenceController controller2 = new TestPreferenceController(mContext);
+        final SubTestPreferenceController controller3 = new SubTestPreferenceController(mContext);
+        mTestFragment.addPreferenceController(controller1);
+        mTestFragment.addPreferenceController(controller2);
+        mTestFragment.addPreferenceController(controller3);
+
+        final List<TestPreferenceController> retrievedControllers = mTestFragment.useAll(
+                TestPreferenceController.class);
+
+        assertThat(retrievedControllers).containsExactly(controller1, controller2);
     }
 
     @Test
@@ -360,6 +375,13 @@ public class DashboardFragmentTest {
         }
     }
 
+    public static class SubTestPreferenceController extends TestPreferenceController {
+
+        private SubTestPreferenceController(Context context) {
+            super(context);
+        }
+    }
+
     private static class TestFragment extends DashboardFragment {
 
         private final PreferenceManager mPreferenceManager;
@@ -368,7 +390,6 @@ public class DashboardFragmentTest {
         private final ContentResolver mContentResolver;
 
         public final PreferenceScreen mScreen;
-        private boolean mIsParalleled;
 
         public TestFragment(Context context) {
             mContext = context;
@@ -376,7 +397,6 @@ public class DashboardFragmentTest {
             mScreen = mock(PreferenceScreen.class);
             mContentResolver = mock(ContentResolver.class);
             mControllers = new ArrayList<>();
-            mIsParalleled = true;
 
             when(mPreferenceManager.getContext()).thenReturn(mContext);
             ReflectionHelpers.setField(
@@ -423,13 +443,6 @@ public class DashboardFragmentTest {
             return mContentResolver;
         }
 
-        protected boolean isParalleledControllers() {
-            return mIsParalleled;
-        }
-
-        void setUsingControllerEnhancement(boolean isParalleled) {
-            mIsParalleled = isParalleled;
-        }
     }
 
     private static class TestDynamicDataObserver extends DynamicDataObserver {

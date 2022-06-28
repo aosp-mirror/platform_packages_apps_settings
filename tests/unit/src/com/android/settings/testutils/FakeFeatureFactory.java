@@ -23,8 +23,6 @@ import com.android.settings.accessibility.AccessibilityMetricsFeatureProvider;
 import com.android.settings.accessibility.AccessibilitySearchFeatureProvider;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
-import com.android.settings.applications.GameSettingsFeatureProvider;
-import com.android.settings.applications.appinfo.ExtraAppInfoFeatureProvider;
 import com.android.settings.aware.AwareFeatureProvider;
 import com.android.settings.biometrics.face.FaceFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
@@ -81,9 +79,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public ContextualCardFeatureProvider mContextualCardFeatureProvider;
 
     public WifiTrackerLibProvider wifiTrackerLibProvider;
-    public ExtraAppInfoFeatureProvider extraAppInfoFeatureProvider;
     public SecuritySettingsFeatureProvider securitySettingsFeatureProvider;
-    public GameSettingsFeatureProvider gameSettingsFeatureProvider;
     public AccessibilitySearchFeatureProvider mAccessibilitySearchFeatureProvider;
     public AccessibilityMetricsFeatureProvider mAccessibilityMetricsFeatureProvider;
 
@@ -123,9 +119,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         mAwareFeatureProvider = mock(AwareFeatureProvider.class);
         mFaceFeatureProvider = mock(FaceFeatureProvider.class);
         wifiTrackerLibProvider = mock(WifiTrackerLibProvider.class);
-        extraAppInfoFeatureProvider = mock(ExtraAppInfoFeatureProvider.class);
         securitySettingsFeatureProvider = mock(SecuritySettingsFeatureProvider.class);
-        gameSettingsFeatureProvider = mock(GameSettingsFeatureProvider.class);
         mAccessibilitySearchFeatureProvider = mock(AccessibilitySearchFeatureProvider.class);
         mAccessibilityMetricsFeatureProvider = mock(AccessibilityMetricsFeatureProvider.class);
     }
@@ -231,7 +225,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public BluetoothFeatureProvider getBluetoothFeatureProvider(Context context) {
+    public BluetoothFeatureProvider getBluetoothFeatureProvider() {
         return mBluetoothFeatureProvider;
     }
 
@@ -251,18 +245,8 @@ public class FakeFeatureFactory extends FeatureFactory {
     }
 
     @Override
-    public ExtraAppInfoFeatureProvider getExtraAppInfoFeatureProvider() {
-        return extraAppInfoFeatureProvider;
-    }
-
-    @Override
     public SecuritySettingsFeatureProvider getSecuritySettingsFeatureProvider() {
         return securitySettingsFeatureProvider;
-    }
-
-    @Override
-    public GameSettingsFeatureProvider getGameSettingsFeatureProvider() {
-        return gameSettingsFeatureProvider;
     }
 
     @Override

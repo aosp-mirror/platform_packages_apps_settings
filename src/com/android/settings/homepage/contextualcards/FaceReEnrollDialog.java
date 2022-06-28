@@ -30,6 +30,7 @@ import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.biometrics.face.FaceUpdater;
 import com.android.settings.homepage.contextualcards.slices.FaceSetupSlice;
 
 /**
@@ -43,6 +44,7 @@ public class FaceReEnrollDialog extends AlertActivity implements
     private static final String BIOMETRIC_ENROLL_ACTION = "android.settings.BIOMETRIC_ENROLL";
 
     private FaceManager mFaceManager;
+    private FaceUpdater mFaceUpdater;
     /**
      * The type of re-enrollment that has been requested,
      * see {@link Settings.Secure#FACE_UNLOCK_RE_ENROLL} for more details.
@@ -67,6 +69,7 @@ public class FaceReEnrollDialog extends AlertActivity implements
         alertParams.mPositiveButtonListener = this;
 
         mFaceManager = Utils.getFaceManagerOrNull(getApplicationContext());
+        mFaceUpdater = new FaceUpdater(getApplicationContext(), mFaceManager);
 
         final Context context = getApplicationContext();
         mReEnrollType = FaceSetupSlice.getReEnrollSetting(context, getUserId());
@@ -96,7 +99,7 @@ public class FaceReEnrollDialog extends AlertActivity implements
         if (mFaceManager == null || !mFaceManager.hasEnrolledTemplates(userId)) {
             finish();
         }
-        mFaceManager.remove(new Face("", 0, 0), userId, new FaceManager.RemovalCallback() {
+        mFaceUpdater.remove(new Face("", 0, 0), userId, new FaceManager.RemovalCallback() {
             @Override
             public void onRemovalError(Face face, int errMsgId, CharSequence errString) {
                 super.onRemovalError(face, errMsgId, errString);

@@ -35,10 +35,10 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 public class PreventRingingGesturePreferenceController extends AbstractPreferenceController
-        implements RadioButtonPreference.OnClickListener, LifecycleObserver,
+        implements SelectorWithWidgetPreference.OnClickListener, LifecycleObserver,
         OnResume, OnPause, PreferenceControllerMixin {
 
     @VisibleForTesting
@@ -54,9 +54,9 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     @VisibleForTesting
     PreferenceCategory mPreferenceCategory;
     @VisibleForTesting
-    RadioButtonPreference mVibratePref;
+    SelectorWithWidgetPreference mVibratePref;
     @VisibleForTesting
-    RadioButtonPreference mMutePref;
+    SelectorWithWidgetPreference mMutePref;
 
     private SettingObserver mSettingObserver;
 
@@ -100,7 +100,7 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference preference) {
+    public void onRadioButtonClicked(SelectorWithWidgetPreference preference) {
         int preventRingingSetting = keyToSetting(preference.getKey());
         if (preventRingingSetting != Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.VOLUME_HUSH_GESTURE, Settings.Secure.VOLUME_HUSH_VIBRATE)) {
@@ -157,8 +157,9 @@ public class PreventRingingGesturePreferenceController extends AbstractPreferenc
         }
     }
 
-    private RadioButtonPreference makeRadioPreference(String key, int titleId) {
-        RadioButtonPreference pref = new RadioButtonPreference(mPreferenceCategory.getContext());
+    private SelectorWithWidgetPreference makeRadioPreference(String key, int titleId) {
+        SelectorWithWidgetPreference pref = new SelectorWithWidgetPreference(
+                mPreferenceCategory.getContext());
         pref.setKey(key);
         pref.setTitle(titleId);
         pref.setOnClickListener(this);

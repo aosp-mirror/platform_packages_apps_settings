@@ -41,13 +41,14 @@ public class ConversationNotificationSettings extends NotificationSettings {
     @Override
     public void onResume() {
         super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null
-                || mConversationInfo == null) {
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
             Log.w(TAG, "Missing package or uid or packageinfo or channel");
             finish();
             return;
         }
-        getActivity().setTitle(mConversationInfo.getLabel());
+        getActivity().setTitle(mConversationInfo == null
+                ? mChannel.getName()
+                : mConversationInfo.getLabel());
 
         for (NotificationPreferenceController controller : mControllers) {
             controller.onResume(mAppRow, mChannel, mChannelGroup, mConversationDrawable,

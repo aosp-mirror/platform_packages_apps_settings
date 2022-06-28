@@ -20,12 +20,10 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.View;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreferenceHelper;
 import com.android.settingslib.widget.AppPreference;
@@ -55,7 +53,6 @@ public class RestrictedAppPreference extends AppPreference {
     }
 
     private void initialize(AttributeSet attrs, String userRestriction) {
-        setWidgetLayoutResource(R.layout.restricted_icon);
         mHelper = new RestrictedPreferenceHelper(getContext(), this, attrs);
         this.userRestriction = userRestriction;
     }
@@ -64,10 +61,6 @@ public class RestrictedAppPreference extends AppPreference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         mHelper.onBindViewHolder(holder);
-        final View restrictedIcon = holder.findViewById(R.id.restricted_icon);
-        if (restrictedIcon != null) {
-            restrictedIcon.setVisibility(isDisabledByAdmin() ? View.VISIBLE : View.GONE);
-        }
     }
 
     @Override

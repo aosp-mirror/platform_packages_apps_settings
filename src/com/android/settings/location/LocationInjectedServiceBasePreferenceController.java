@@ -99,7 +99,8 @@ public abstract class LocationInjectedServiceBasePreferenceController
             };
         }
         mContext.registerReceiver(
-                mInjectedSettingsReceiver, INTENT_FILTER_INJECTED_SETTING_CHANGED);
+                mInjectedSettingsReceiver, INTENT_FILTER_INJECTED_SETTING_CHANGED,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     /** @OnLifecycleEvent(ON_PAUSE) */

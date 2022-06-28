@@ -28,12 +28,14 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
@@ -45,6 +47,7 @@ import org.robolectric.annotation.Config;
 public class TopLevelBatteryPreferenceControllerTest {
     private Context mContext;
     private TopLevelBatteryPreferenceController mController;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
 
     @Before
     public void setUp() {
@@ -70,6 +73,7 @@ public class TopLevelBatteryPreferenceControllerTest {
     }
 
     @Test
+    @Ignore
     public void convertClassPathToComponentName_emptyStringInput_returnsNull() {
         assertThat(mController.convertClassPathToComponentName("")).isNull();
     }

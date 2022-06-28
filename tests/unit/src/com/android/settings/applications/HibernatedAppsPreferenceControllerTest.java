@@ -23,26 +23,16 @@ import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.usage.IUsageStatsManager;
-import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.apphibernation.AppHibernationManager;
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
-import android.content.res.Resources;
 import android.os.Looper;
-import android.os.RemoteException;
 import android.provider.DeviceConfig;
 
 import androidx.preference.Preference;
@@ -57,14 +47,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-
 @RunWith(AndroidJUnit4.class)
 public class HibernatedAppsPreferenceControllerTest {
 
-    public static final String HIBERNATED_PACKAGE_NAME = "hibernated_package";
-    public static final String AUTO_REVOKED_PACKAGE_NAME = "auto_revoked_package";
-    public static final String PERMISSION = "permission";
     @Mock
     PackageManager mPackageManager;
     @Mock
@@ -98,7 +83,7 @@ public class HibernatedAppsPreferenceControllerTest {
         mPreferenceScreen.addPreference(preference);
 
         mController = new HibernatedAppsPreferenceController(mContext, KEY,
-                command -> command.run(), command -> command.run());
+                command -> command.run());
     }
 
     @Test
@@ -107,80 +92,5 @@ public class HibernatedAppsPreferenceControllerTest {
                 "false", true);
 
         assertThat((mController).getAvailabilityStatus()).isNotEqualTo(AVAILABLE);
-    }
-
-    @Test
-    public void getSummary_getsRightCountForHibernatedPackage() {
-        final PackageInfo hibernatedPkg = getHibernatedPackage();
-        when(mPackageManager.getInstalledPackages(anyInt())).thenReturn(
-                Arrays.asList(hibernatedPkg, new PackageInfo()));
-        when(mContext.getResources()).thenReturn(mock(Resources.class));
-
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-
-        verify(mContext.getResources()).getQuantityString(anyInt(), eq(1), eq(1));
-    }
-
-    @Test
-    public void getSummary_getsRightCountForUnusedAutoRevokedPackage() {
-        final PackageInfo autoRevokedPkg = getAutoRevokedPackage();
-        when(mPackageManager.getInstalledPackages(anyInt())).thenReturn(
-                Arrays.asList(autoRevokedPkg, new PackageInfo()));
-        when(mContext.getResources()).thenReturn(mock(Resources.class));
-
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-
-        verify(mContext.getResources()).getQuantityString(anyInt(), eq(1), eq(1));
-    }
-
-    @Test
-    public void getSummary_getsRightCountForUsedAutoRevokedPackage() {
-        final PackageInfo usedAutoRevokedPkg = getAutoRevokedPackage();
-        setAutoRevokedPackageUsageStats();
-        when(mPackageManager.getInstalledPackages(anyInt())).thenReturn(
-                Arrays.asList(usedAutoRevokedPkg, new PackageInfo()));
-        when(mContext.getResources()).thenReturn(mock(Resources.class));
-
-        mController.displayPreference(mPreferenceScreen);
-        mController.onResume();
-
-        verify(mContext.getResources()).getQuantityString(anyInt(), eq(0), eq(0));
-    }
-
-    private PackageInfo getHibernatedPackage() {
-        final PackageInfo pi = new PackageInfo();
-        pi.packageName = HIBERNATED_PACKAGE_NAME;
-        pi.requestedPermissions = new String[] {PERMISSION};
-        when(mAppHibernationManager.getHibernatingPackagesForUser())
-                .thenReturn(Arrays.asList(pi.packageName));
-        when(mPackageManager.getPermissionFlags(
-                pi.requestedPermissions[0], pi.packageName, mContext.getUser()))
-                .thenReturn(PackageManager.FLAG_PERMISSION_AUTO_REVOKED);
-        return pi;
-    }
-
-    private PackageInfo getAutoRevokedPackage() {
-        final PackageInfo pi = new PackageInfo();
-        pi.packageName = AUTO_REVOKED_PACKAGE_NAME;
-        pi.requestedPermissions = new String[] {PERMISSION};
-        when(mPackageManager.getPermissionFlags(
-                pi.requestedPermissions[0], pi.packageName, mContext.getUser()))
-                .thenReturn(PackageManager.FLAG_PERMISSION_AUTO_REVOKED);
-        return pi;
-    }
-
-    private void setAutoRevokedPackageUsageStats() {
-        final UsageStats us = new UsageStats();
-        us.mPackageName = AUTO_REVOKED_PACKAGE_NAME;
-        us.mLastTimeVisible = System.currentTimeMillis();
-        try {
-            when(mIUsageStatsManager.queryUsageStats(
-                    anyInt(), anyLong(), anyLong(), anyString(), anyInt()))
-                    .thenReturn(new ParceledListSlice(Arrays.asList(us)));
-        } catch (RemoteException e) {
-            // no-op
-        }
     }
 }

@@ -21,12 +21,18 @@ import android.graphics.fonts.FontStyle;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.instrumentation.SettingsStatsLog;
 
 /** PreferenceController for displaying all text in bold. */
-public class FontWeightAdjustmentPreferenceController extends TogglePreferenceController {
+public class FontWeightAdjustmentPreferenceController extends TogglePreferenceController implements
+        TextReadingResetController.ResetStateListener {
     static final int BOLD_TEXT_ADJUSTMENT =
             FontStyle.FONT_WEIGHT_BOLD - FontStyle.FONT_WEIGHT_NORMAL;
+
+    @EntryPoint
+    private int mEntryPoint;
 
     public FontWeightAdjustmentPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -45,6 +51,12 @@ public class FontWeightAdjustmentPreferenceController extends TogglePreferenceCo
 
     @Override
     public boolean setChecked(boolean isChecked) {
+        SettingsStatsLog.write(
+                SettingsStatsLog.ACCESSIBILITY_TEXT_READING_OPTIONS_CHANGED,
+                AccessibilityStatsLogUtils.convertToItemKeyName(getPreferenceKey()),
+                isChecked ? 1 : 0,
+                AccessibilityStatsLogUtils.convertToEntryPoint(mEntryPoint));
+
         return Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.FONT_WEIGHT_ADJUSTMENT, (isChecked ? BOLD_TEXT_ADJUSTMENT : 0));
     }
@@ -52,5 +64,19 @@ public class FontWeightAdjustmentPreferenceController extends TogglePreferenceCo
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_accessibility;
+    }
+
+    @Override
+    public void resetState() {
+        setChecked(false);
+    }
+
+    /**
+     * The entry point is used for logging.
+     *
+     * @param entryPoint from which settings page
+     */
+    void setEntryPoint(@EntryPoint int entryPoint) {
+        mEntryPoint = entryPoint;
     }
 }

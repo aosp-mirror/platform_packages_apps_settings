@@ -30,7 +30,7 @@ Copyright (C) 2021 The Android Open Source Project
         android:selectable="false"
         settings:searchable="false"
         settings:controller="com.android.settings.deviceinfo.storage.StorageUsageProgressBarPreferenceController"/>
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
         android:key="toggle_asm"
         android:title="@string/automatic_storage_manager_preference_title"

@@ -56,6 +56,7 @@ import android.telephony.TelephonyManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.ims.MockWfcQueryImsState;
 
 import org.junit.Before;
@@ -92,7 +93,7 @@ public class MobileNetworkUtilsTest {
     @Mock
     private ResolveInfo mResolveInfo;
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private ConnectivityManager mConnectivityManager;
     @Mock
@@ -117,11 +118,9 @@ public class MobileNetworkUtilsTest {
         when(mTelephonyManager.createForSubscriptionId(SUB_ID_2)).thenReturn(mTelephonyManager2);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
-        when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
-                mCarrierConfigManager);
-
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         mCarrierConfig = new PersistableBundle();
-        when(mCarrierConfigManager.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
+        when(mCarrierConfigCache.getConfigForSubId(SUB_ID_1)).thenReturn(mCarrierConfig);
 
         mNetwork = mock(Network.class, CALLS_REAL_METHODS);
         when(mContext.getSystemService(ConnectivityManager.class)).thenReturn(mConnectivityManager);
@@ -264,7 +263,7 @@ public class MobileNetworkUtilsTest {
 
     @Test
     public void shouldSpeciallyUpdateGsmCdma_supportTdscdma_returnFalse() {
-        when(mCarrierConfigManager.getConfig()).thenReturn(mCarrierConfig);
+        when(mCarrierConfigCache.getConfig()).thenReturn(mCarrierConfig);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_WORLD_MODE_ENABLED_BOOL, true);
         mCarrierConfig.putBoolean(CarrierConfigManager.KEY_SUPPORT_TDSCDMA_BOOL, true);
 

@@ -16,6 +16,8 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.FACE_UNLOCK_DISABLED;
+
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.Intent;
@@ -221,8 +223,11 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     }
 
     @Override
-    protected int getDescriptionResDisabledByAdmin() {
-        return R.string.security_settings_face_enroll_introduction_message_unlock_disabled;
+    protected String getDescriptionDisabledByAdmin() {
+        DevicePolicyManager devicePolicyManager = getSystemService(DevicePolicyManager.class);
+        return devicePolicyManager.getResources().getString(
+                FACE_UNLOCK_DISABLED,
+                () -> getString(R.string.security_settings_face_enroll_introduction_message_unlock_disabled));
     }
 
     @Override

@@ -17,6 +17,8 @@
 // TODO (b/35202196): move this class out of the root of the package.
 package com.android.settings.password;
 
+import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LOCK_ATTEMPTS_FAILED;
+
 import static com.android.settings.Utils.SETTINGS_PACKAGE_NAME;
 
 import android.annotation.Nullable;
@@ -152,6 +154,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             mForgotButton.setOnClickListener(v -> {
                 final Intent intent = new Intent();
                 intent.setClassName(SETTINGS_PACKAGE_NAME, ForgotPasswordActivity.class.getName());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Intent.EXTRA_USER_ID, mUserId);
                 getActivity().startActivity(intent);
                 getActivity().finish();
@@ -242,14 +245,18 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             // Last try
             final String title = getActivity().getString(
                     R.string.lock_last_attempt_before_wipe_warning_title);
-            final int messageId = getLastTryErrorMessage(userType);
-            LastTryDialog.show(fragmentManager, title, messageId,
+            final String overrideMessageId = getLastTryOverrideErrorMessageId(userType);
+            final int defaultMessageId = getLastTryDefaultErrorMessage(userType);
+            final String message = mDevicePolicyManager.getResources().getString(
+                    overrideMessageId, () -> getString(defaultMessageId));
+            LastTryDialog.show(fragmentManager, title, message,
                     android.R.string.ok, false /* dismiss */);
         } else {
             // Device, profile, or secondary user is wiped
-            final int messageId = getWipeMessage(userType);
-            LastTryDialog.show(fragmentManager, null /* title */, messageId,
-                    R.string.lock_failed_attempts_now_wiping_dialog_dismiss, true /* dismiss */);
+            final String message = getWipeMessage(userType);
+            LastTryDialog.show(fragmentManager, null /* title */, message,
+                    com.android.settingslib.R.string.failed_attempts_now_wiping_dialog_dismiss,
+                    true /* dismiss */);
         }
     }
 
@@ -265,16 +272,21 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         }
     }
 
-    protected abstract int getLastTryErrorMessage(int userType);
+    protected abstract String getLastTryOverrideErrorMessageId(int userType);
+    protected abstract int getLastTryDefaultErrorMessage(int userType);
 
-    private int getWipeMessage(int userType) {
+    private String getWipeMessage(int userType) {
         switch (userType) {
             case USER_TYPE_PRIMARY:
-                return R.string.lock_failed_attempts_now_wiping_device;
+                return getString(com.android.settingslib
+                        .R.string.failed_attempts_now_wiping_device);
             case USER_TYPE_MANAGED_PROFILE:
-                return R.string.lock_failed_attempts_now_wiping_profile;
+                return mDevicePolicyManager.getResources().getString(
+                        WORK_PROFILE_LOCK_ATTEMPTS_FAILED,
+                        () -> getString(com.android.settingslib
+                                .R.string.failed_attempts_now_wiping_profile));
             case USER_TYPE_SECONDARY:
-                return R.string.lock_failed_attempts_now_wiping_user;
+                return getString(com.android.settingslib.R.string.failed_attempts_now_wiping_user);
             default:
                 throw new IllegalArgumentException("Unrecognized user type:" + userType);
         }
@@ -310,7 +322,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         private static final String ARG_BUTTON = "button";
         private static final String ARG_DISMISS = "dismiss";
 
-        static boolean show(FragmentManager from, String title, int message, int button,
+        static boolean show(FragmentManager from, String title, String message, int button,
                 boolean dismiss) {
             LastTryDialog existent = (LastTryDialog) from.findFragmentByTag(TAG);
             if (existent != null && !existent.isRemoving()) {
@@ -318,7 +330,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
             }
             Bundle args = new Bundle();
             args.putString(ARG_TITLE, title);
-            args.putInt(ARG_MESSAGE, message);
+            args.putString(ARG_MESSAGE, message);
             args.putInt(ARG_BUTTON, button);
             args.putBoolean(ARG_DISMISS, dismiss);
 
@@ -348,7 +360,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Dialog dialog = new AlertDialog.Builder(getActivity())
                     .setTitle(getArguments().getString(ARG_TITLE))
-                    .setMessage(getArguments().getInt(ARG_MESSAGE))
+                    .setMessage(getArguments().getString(ARG_MESSAGE))
                     .setPositiveButton(getArguments().getInt(ARG_BUTTON), null)
                     .create();
             dialog.setCanceledOnTouchOutside(false);

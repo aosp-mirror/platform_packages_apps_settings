@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.SparseIntArray;
 
-import com.android.internal.os.BatterySipper;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.Map;
@@ -55,12 +54,7 @@ public interface PowerUsageFeatureProvider {
     /**
      * Check whether it is type service
      */
-    boolean isTypeService(BatterySipper sipper);
-
-    /**
-     * Check whether it is type system
-     */
-    boolean isTypeSystem(BatterySipper sipper);
+    boolean isTypeService(int uid);
 
     /**
      * Check whether it is type system

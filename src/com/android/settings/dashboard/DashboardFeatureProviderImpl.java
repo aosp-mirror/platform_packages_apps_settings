@@ -65,7 +65,7 @@ import com.android.settings.dashboard.profileselector.ProfileSelectDialog;
 import com.android.settings.homepage.TopLevelHighlightMixin;
 import com.android.settings.homepage.TopLevelSettings;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.PrimarySwitchPreference;
+import com.android.settingslib.PrimarySwitchPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.ActivityTile;
 import com.android.settingslib.drawer.CategoryKey;
@@ -171,22 +171,26 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                     intent.setAction(action);
                 }
                 // Register the rule for injected apps.
-                ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
-                        mContext,
-                        new ComponentName(tile.getPackageName(), tile.getComponentName()),
-                        action,
-                        true /* clearTop */);
+                if (fragment instanceof TopLevelSettings) {
+                    ActivityEmbeddingRulesController.registerTwoPanePairRuleForSettingsHome(
+                            mContext,
+                            new ComponentName(tile.getPackageName(), tile.getComponentName()),
+                            action,
+                            true /* clearTop */);
+                }
                 pref.setOnPreferenceClickListener(preference -> {
                     TopLevelHighlightMixin highlightMixin = null;
+                    boolean isDuplicateClick = false;
                     if (fragment instanceof TopLevelSettings
                             && ActivityEmbeddingUtils.isEmbeddingActivityEnabled(mContext)) {
                         // Highlight the preference whenever it's clicked
                         final TopLevelSettings topLevelSettings = (TopLevelSettings) fragment;
-                        topLevelSettings.setHighlightPreferenceKey(key);
                         highlightMixin = topLevelSettings.getHighlightMixin();
+                        isDuplicateClick = topLevelSettings.isDuplicateClick(preference);
+                        topLevelSettings.setHighlightPreferenceKey(key);
                     }
                     launchIntentOrSelectProfile(activity, tile, intent, sourceMetricsCategory,
-                            highlightMixin);
+                            highlightMixin, isDuplicateClick);
                     return true;
                 });
             }
@@ -219,7 +223,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                         SettingsEnums.DASHBOARD_SUMMARY)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, SettingsEnums.DASHBOARD_SUMMARY,
-                /* highlightMixin= */ null);
+                /* highlightMixin= */ null, /* isDuplicateClick= */ false);
     }
 
     private DynamicDataObserver createDynamicDataObserver(String method, Uri uri, Preference pref) {
@@ -233,13 +237,13 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             public void onDataChanged() {
                 switch (method) {
                     case METHOD_GET_DYNAMIC_TITLE:
-                        refreshTitle(uri, pref);
+                        refreshTitle(uri, pref, this);
                         break;
                     case METHOD_GET_DYNAMIC_SUMMARY:
-                        refreshSummary(uri, pref);
+                        refreshSummary(uri, pref, this);
                         break;
                     case METHOD_IS_CHECKED:
-                        refreshSwitch(uri, pref);
+                        refreshSwitch(uri, pref, this);
                         break;
                 }
             }
@@ -260,19 +264,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_TITLE_URI,
                     METHOD_GET_DYNAMIC_TITLE);
-            refreshTitle(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_TITLE, uri, preference);
         }
         return null;
     }
 
-    private void refreshTitle(Uri uri, Preference preference) {
+    private void refreshTitle(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String titleFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_TITLE);
             if (!TextUtils.equals(titleFromUri, preference.getTitle())) {
-                ThreadUtils.postOnMainThread(() -> preference.setTitle(titleFromUri));
+                observer.post(() -> preference.setTitle(titleFromUri));
             }
         });
     }
@@ -289,19 +292,18 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
 
             final Uri uri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SUMMARY_URI,
                     METHOD_GET_DYNAMIC_SUMMARY);
-            refreshSummary(uri, preference);
             return createDynamicDataObserver(METHOD_GET_DYNAMIC_SUMMARY, uri, preference);
         }
         return null;
     }
 
-    private void refreshSummary(Uri uri, Preference preference) {
+    private void refreshSummary(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final String summaryFromUri = TileUtils.getTextFromUri(
                     mContext, uri, providerMap, META_DATA_PREFERENCE_SUMMARY);
             if (!TextUtils.equals(summaryFromUri, preference.getSummary())) {
-                ThreadUtils.postOnMainThread(() -> preference.setSummary(summaryFromUri));
+                observer.post(() -> preference.setSummary(summaryFromUri));
             }
         });
     }
@@ -321,7 +323,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         final Uri isCheckedUri = TileUtils.getCompleteUri(tile, META_DATA_PREFERENCE_SWITCH_URI,
                 METHOD_IS_CHECKED);
         setSwitchEnabled(preference, false);
-        refreshSwitch(isCheckedUri, preference);
         return createDynamicDataObserver(METHOD_IS_CHECKED, isCheckedUri, preference);
     }
 
@@ -348,12 +349,12 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         });
     }
 
-    private void refreshSwitch(Uri uri, Preference preference) {
+    private void refreshSwitch(Uri uri, Preference preference, DynamicDataObserver observer) {
         ThreadUtils.postOnBackgroundThread(() -> {
             final Map<String, IContentProvider> providerMap = new ArrayMap<>();
             final boolean checked = TileUtils.getBooleanFromUri(mContext, uri, providerMap,
                     EXTRA_SWITCH_CHECKED_STATE);
-            ThreadUtils.postOnMainThread(() -> {
+            observer.post(() -> {
                 setSwitchChecked(preference, checked);
                 setSwitchEnabled(preference, true);
             });
@@ -423,6 +424,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     private void setPreferenceIcon(Preference preference, Tile tile, boolean forceRoundedIcon,
             String iconPackage, Icon icon) {
         Drawable iconDrawable = icon.loadDrawable(preference.getContext());
+        if (iconDrawable == null) {
+            Log.w(TAG, "Set null preference icon for: " + iconPackage);
+            preference.setIcon(null);
+            return;
+        }
         if (TextUtils.equals(tile.getCategory(), CategoryKey.CATEGORY_HOMEPAGE)) {
             iconDrawable.setTint(Utils.getHomepageIconColor(preference.getContext()));
         } else if (forceRoundedIcon && !TextUtils.equals(mContext.getPackageName(), iconPackage)) {
@@ -434,36 +440,45 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     private void launchIntentOrSelectProfile(FragmentActivity activity, Tile tile, Intent intent,
-            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin) {
+            int sourceMetricCategory, TopLevelHighlightMixin highlightMixin,
+            boolean isDuplicateClick) {
         if (!isIntentResolvable(intent)) {
             Log.w(TAG, "Cannot resolve intent, skipping. " + intent);
             return;
         }
         ProfileSelectDialog.updateUserHandlesIfNeeded(mContext, tile);
-        mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
-
-        //TODO(b/201970810): Add test cases.
-        if (tile.isNewTask(mContext)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
 
         if (tile.userHandle == null || tile.isPrimaryProfileOnly()) {
-            activity.startActivity(intent);
+            if (!isDuplicateClick) {
+                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                activity.startActivity(intent);
+            }
         } else if (tile.userHandle.size() == 1) {
-            activity.startActivityAsUser(intent, tile.userHandle.get(0));
+            if (!isDuplicateClick) {
+                mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                activity.startActivityAsUser(intent, tile.userHandle.get(0));
+            }
         } else {
             final UserHandle userHandle = intent.getParcelableExtra(EXTRA_USER);
             if (userHandle != null && tile.userHandle.contains(userHandle)) {
-                activity.startActivityAsUser(intent, userHandle);
+                if (!isDuplicateClick) {
+                    mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                    activity.startActivityAsUser(intent, userHandle);
+                }
                 return;
             }
 
             final List<UserHandle> resolvableUsers = getResolvableUsers(intent, tile);
             if (resolvableUsers.size() == 1) {
-                activity.startActivityAsUser(intent, resolvableUsers.get(0));
+                if (!isDuplicateClick) {
+                    mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
+                    activity.startActivityAsUser(intent, resolvableUsers.get(0));
+                }
                 return;
             }
 
+            // Show the profile select dialog regardless of the duplicate click.
+            mMetricsFeatureProvider.logStartedIntent(intent, sourceMetricCategory);
             ProfileSelectDialog.show(activity.getSupportFragmentManager(), tile,
                     sourceMetricCategory, /* onShowListener= */ highlightMixin,
                     /* onDismissListener= */ highlightMixin,

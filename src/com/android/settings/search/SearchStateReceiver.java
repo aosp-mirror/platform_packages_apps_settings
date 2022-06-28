@@ -20,9 +20,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.SettingsApplication;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.homepage.SettingsHomepageActivity;
 
 /**
@@ -36,6 +38,11 @@ public class SearchStateReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        if (FeatureFlagUtils.isEnabled(context, FeatureFlags.SETTINGS_SEARCH_ALWAYS_EXPAND)) {
+            // Not needed to show/hide the highlight when search is full screen
+            return;
+        }
+
         if (intent == null) {
             Log.w(TAG, "Null intent");
             return;

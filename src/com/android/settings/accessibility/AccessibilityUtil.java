@@ -46,7 +46,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.StringJoiner;
 
 /** Provides utility methods to accessibility settings only. */
-final class AccessibilityUtil {
+public final class AccessibilityUtil {
 
     private AccessibilityUtil(){}
 
@@ -103,6 +103,17 @@ final class AccessibilityUtil {
         int SOFTWARE = 1; // 1 << 0
         int HARDWARE = 2; // 1 << 1
         int TRIPLETAP = 4; // 1 << 2
+    }
+
+    /**
+     * Denotes the quick setting tooltip type.
+     *
+     * {@code GUIDE_TO_EDIT} for QS tiles that need to be added by editing.
+     * {@code GUIDE_TO_DIRECT_USE} for QS tiles that have been auto-added already.
+     */
+    public @interface QuickSettingsTooltipType {
+        int GUIDE_TO_EDIT = 0;
+        int GUIDE_TO_DIRECT_USE = 1;
     }
 
     /** Denotes the accessibility enabled status */
@@ -422,5 +433,16 @@ final class AccessibilityUtil {
      */
     public static boolean isSystemApp(@NonNull AccessibilityServiceInfo info) {
         return info.getResolveInfo().serviceInfo.applicationInfo.isSystemApp();
+    }
+
+    /**
+     * Bypasses the timeout restriction if volume key shortcut assigned.
+     *
+     * @param context the current context.
+     */
+    public static void skipVolumeShortcutDialogTimeoutRestriction(Context context) {
+        Settings.Secure.putInt(context.getContentResolver(),
+                Settings.Secure.SKIP_ACCESSIBILITY_SHORTCUT_DIALOG_TIMEOUT_RESTRICTION, /*
+                    true */ 1);
     }
 }

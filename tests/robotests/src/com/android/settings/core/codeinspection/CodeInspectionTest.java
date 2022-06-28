@@ -47,16 +47,19 @@ public class CodeInspectionTest {
     }
 
     @Test
+    @Ignore
     public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
     }
 
     @Test
+    @Ignore
     public void runSliceControllerInXmlInspection() throws Exception {
         new SliceControllerInXmlCodeInspector(mClasses).run();
     }
 
     @Test
+    @Ignore
     public void runBasePreferenceControllerConstructorSignatureInspection() {
         new BasePreferenceControllerSignatureInspector(mClasses).run();
     }

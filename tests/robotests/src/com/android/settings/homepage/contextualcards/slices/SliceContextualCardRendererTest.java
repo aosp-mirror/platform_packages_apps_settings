@@ -26,18 +26,24 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.slice.builders.ListBuilder;
+import androidx.slice.builders.SliceAction;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 import androidx.slice.widget.SliceLiveData;
+
 
 import com.android.settings.R;
 import com.android.settings.homepage.contextualcards.ContextualCard;
@@ -285,13 +291,32 @@ public class SliceContextualCardRendererTest {
     }
 
     private ContextualCard buildContextualCard(Uri sliceUri) {
-        final Slice slice = new ContextualWifiSlice(mActivity).getSlice();
+        final Slice slice = buildSlice();
         return new ContextualCard.Builder()
                 .setName("test_name")
                 .setCardType(ContextualCard.CardType.SLICE)
                 .setSliceUri(sliceUri)
                 .setViewType(VIEW_TYPE_FULL_WIDTH)
                 .setSlice(slice)
+                .build();
+    }
+
+    private Slice buildSlice() {
+        final String title = "test_title";
+        final IconCompat icon = IconCompat.createWithResource(mActivity, R.drawable.empty_icon);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(
+                mActivity,
+                title.hashCode() /* requestCode */,
+                new Intent("test action"),
+                PendingIntent.FLAG_IMMUTABLE);
+        final SliceAction action
+                = SliceAction.createDeeplink(pendingIntent, icon, ListBuilder.SMALL_IMAGE, title);
+        return new ListBuilder(mActivity, TEST_SLICE_URI, ListBuilder.INFINITY)
+                .addRow(new ListBuilder.RowBuilder()
+                        .addEndItem(icon, ListBuilder.ICON_IMAGE)
+                        .setTitle(title)
+                        .setPrimaryAction(action))
+                .addAction(SliceAction.createToggle(pendingIntent, null /* actionTitle */, true))
                 .build();
     }
 }

@@ -1,0 +1,35 @@
+<!--
+  Copyright 2022 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <com.android.settingslib.widget.AdaptiveIconShapeDrawable
+            android:width="@dimen/accessibility_icon_size"
+            android:height="@dimen/accessibility_icon_size"
+            android:color="@color/accessibility_feature_background"/>
+    </item>
+    <item android:gravity="center">
+        <vector
+            android:width="@dimen/accessibility_icon_foreground_size"
+            android:height="@dimen/accessibility_icon_foreground_size"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:fillColor="@android:color/white"
+                android:pathData="M10,18v-4L8,14v-2q0,-1.65 1.175,-2.825Q10.35,8 12,8q1.65,0 2.825,1.175Q16,10.35 16,12v2h-2v4h2.8q0.5,0 0.85,-0.35t0.35,-0.85L18,12q0,-2.5 -1.75,-4.25T12,6Q9.5,6 7.75,7.75T6,12v4.8q0,0.5 0.35,0.85t0.85,0.35zM5,21q-0.825,0 -1.413,-0.587Q3,19.825 3,19L3,5q0,-0.825 0.587,-1.413Q4.175,3 5,3h14q0.825,0 1.413,0.587Q21,4.175 21,5v14q0,0.825 -0.587,1.413Q19.825,21 19,21zM5,19h14L19,5L5,5v14zM5,19L5,5v14z"/>
+        </vector>
+    </item>
+</layer-list>

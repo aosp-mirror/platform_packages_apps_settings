@@ -28,7 +28,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.ListPreference;
@@ -37,12 +36,16 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.network.AllowedNetworkTypesListener;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.SubscriptionsChangeListener;
+import com.android.settings.network.telephony.NetworkModeChoicesProto.EnabledNetworks;
+import com.android.settings.network.telephony.NetworkModeChoicesProto.UiOptions;
 import com.android.settings.network.telephony.TelephonyConstants.TelephonyManagerConstants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -58,7 +61,7 @@ public class EnabledNetworkModePreferenceController extends
     private Preference mPreference;
     private PreferenceScreen mPreferenceScreen;
     private TelephonyManager mTelephonyManager;
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     private PreferenceEntriesBuilder mBuilder;
     private SubscriptionsChangeListener mSubscriptionsListener;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -67,7 +70,7 @@ public class EnabledNetworkModePreferenceController extends
     public EnabledNetworkModePreferenceController(Context context, String key) {
         super(context, key);
         mSubscriptionsListener = new SubscriptionsChangeListener(context, this);
-        mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         if (mTelephonyCallback == null) {
             mTelephonyCallback = new PhoneCallStateTelephonyCallback();
         }
@@ -76,14 +79,12 @@ public class EnabledNetworkModePreferenceController extends
     @Override
     public int getAvailabilityStatus(int subId) {
         boolean visible;
-        if (!isCallStateIdle()) {
-            return AVAILABLE_UNSEARCHABLE;
-        }
 
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             visible = false;
-        } else if (carrierConfig == null) {
+        } else if (carrierConfig == null
+                || !CarrierConfigManager.isConfigForIdentifiedCarrier(carrierConfig)) {
             visible = false;
         } else if (carrierConfig.getBoolean(
                 CarrierConfigManager.KEY_HIDE_CARRIER_NETWORK_SETTINGS_BOOL)
@@ -92,6 +93,8 @@ public class EnabledNetworkModePreferenceController extends
             visible = false;
         } else if (carrierConfig.getBoolean(CarrierConfigManager.KEY_WORLD_PHONE_BOOL)) {
             visible = false;
+        } else if (!isCallStateIdle()) {
+            return AVAILABLE_UNSEARCHABLE;
         } else {
             visible = true;
         }
@@ -159,7 +162,7 @@ public class EnabledNetworkModePreferenceController extends
         return false;
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
+    void init(int subId) {
         mSubId = subId;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(mSubId);
@@ -174,7 +177,6 @@ public class EnabledNetworkModePreferenceController extends
                         updatePreference();
                     });
         }
-        lifecycle.addObserver(this);
     }
 
     private void updatePreference() {
@@ -186,23 +188,8 @@ public class EnabledNetworkModePreferenceController extends
         }
     }
 
-    enum EnabledNetworks {
-        ENABLED_NETWORKS_UNKNOWN,
-        ENABLED_NETWORKS_CDMA_CHOICES,
-        ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES,
-        ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES,
-        ENABLED_NETWORKS_TDSCDMA_CHOICES,
-        ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES,
-        ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES,
-        ENABLED_NETWORKS_EXCEPT_GSM_CHOICES,
-        ENABLED_NETWORKS_EXCEPT_LTE_CHOICES,
-        ENABLED_NETWORKS_4G_CHOICES,
-        ENABLED_NETWORKS_CHOICES,
-        PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE
-    }
-
     private final class PreferenceEntriesBuilder {
-        private CarrierConfigManager mCarrierConfigManager;
+        private CarrierConfigCache mCarrierConfigCache;
         private Context mContext;
         private TelephonyManager mTelephonyManager;
 
@@ -221,7 +208,7 @@ public class EnabledNetworkModePreferenceController extends
         PreferenceEntriesBuilder(Context context, int subId) {
             this.mContext = context;
             this.mSubId = subId;
-            mCarrierConfigManager = mContext.getSystemService(CarrierConfigManager.class);
+            mCarrierConfigCache = CarrierConfigCache.getInstance(context);
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubId);
             updateConfig();
@@ -229,7 +216,7 @@ public class EnabledNetworkModePreferenceController extends
 
         public void updateConfig() {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
-            final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
             mAllowed5gNetworkType = checkSupportedRadioBitmask(
                     mTelephonyManager.getAllowedNetworkTypesForReason(
                             TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_CARRIER),
@@ -250,152 +237,149 @@ public class EnabledNetworkModePreferenceController extends
         }
 
         void setPreferenceEntries() {
+            mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
+            final boolean display2gOptions = carrierConfig
+                    .getBoolean(CarrierConfigManager.KEY_PREFER_2G_BOOL);
             clearAllEntries();
-            String[] entryValues;
-            int[] entryValuesInt;
-            switch (getEnabledNetworkType()) {
+            UiOptions.Builder uiOptions = UiOptions.newBuilder();
+            uiOptions.setType(getEnabledNetworkType());
+            switch (uiOptions.getType()) {
                 case ENABLED_NETWORKS_CDMA_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_cdma_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 4) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_CDMA_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
-                    addLteEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
-                    add1xEntry(entryValuesInt[2]);
-                    addGlobalEntry(entryValuesInt[3]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_cdma_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAndLteEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add1xEntry)
+                            .addFormat(UiOptions.PresentFormat.addGlobalEntry);
                     break;
                 case ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_cdma_no_lte_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 2) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_CDMA_NO_LTE_CHOICES index error.");
-                    }
-                    add3gEntry(entryValuesInt[0]);
-                    add1xEntry(entryValuesInt[1]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_cdma_no_lte_values)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add1xEntry);
                     break;
                 case ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_cdma_only_lte_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 2) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_CDMA_ONLY_LTE_CHOICES index error.");
-                    }
-                    addLteEntry(entryValuesInt[0]);
-                    addGlobalEntry(entryValuesInt[1]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_cdma_only_lte_values)
+                            .addFormat(UiOptions.PresentFormat.addLteEntry)
+                            .addFormat(UiOptions.PresentFormat.addGlobalEntry);
                     break;
                 case ENABLED_NETWORKS_TDSCDMA_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_tdscdma_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_TDSCDMA_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
-                    addLteEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_tdscdma_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAndLteEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_except_gsm_lte_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 1) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_EXCEPT_GSM_LTE_CHOICES index error.");
-                    }
-                    add3gEntry(entryValuesInt[0]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_except_gsm_lte_values)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_except_gsm_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 2) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_EXCEPT_GSM_4G_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
-                    add4gEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_except_gsm_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAnd4gEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_GSM_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_except_gsm_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 2) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_EXCEPT_GSM_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
-                    addLteEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_except_gsm_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAndLteEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry);
                     break;
                 case ENABLED_NETWORKS_EXCEPT_LTE_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_except_lte_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 2) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_EXCEPT_LTE_CHOICES index error.");
-                    }
-                    add3gEntry(entryValuesInt[0]);
-                    add2gEntry(entryValuesInt[1]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_except_lte_values)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case ENABLED_NETWORKS_4G_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
-                        throw new IllegalArgumentException(
-                                "ENABLED_NETWORKS_4G_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(
-                            entryValuesInt[0]));
-                    add4gEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAnd4gEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case ENABLED_NETWORKS_CHOICES:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.enabled_networks_values);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
-                        throw new IllegalArgumentException("ENABLED_NETWORKS_CHOICES index error.");
-                    }
-                    add5gEntry(addNrToLteNetworkType(entryValuesInt[0]));
-                    addLteEntry(entryValuesInt[0]);
-                    add3gEntry(entryValuesInt[1]);
-                    add2gEntry(entryValuesInt[2]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.enabled_networks_values)
+                            .addFormat(UiOptions.PresentFormat.add5gAndLteEntry)
+                            .addFormat(UiOptions.PresentFormat.add3gEntry)
+                            .addFormat(UiOptions.PresentFormat.add2gEntry);
                     break;
                 case PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE:
-                    entryValues = getResourcesForSubId().getStringArray(
-                            R.array.preferred_network_mode_values_world_mode);
-                    entryValuesInt = Stream.of(entryValues).mapToInt(Integer::parseInt).toArray();
-                    if (entryValuesInt.length < 3) {
-                        throw new IllegalArgumentException(
-                                "PREFERRED_NETWORK_MODE_CHOICES_WORLD_MODE index error.");
-                    }
-                    addGlobalEntry(entryValuesInt[0]);
-
-                    addCustomEntry(
-                            getResourcesForSubId().getString(
-                                    R.string.network_world_mode_cdma_lte),
-                            entryValuesInt[1]);
-                    addCustomEntry(
-                            getResourcesForSubId().getString(
-                                    R.string.network_world_mode_gsm_lte),
-                            entryValuesInt[2]);
+                    uiOptions = uiOptions
+                            .setChoices(R.array.preferred_network_mode_values_world_mode)
+                            .addFormat(UiOptions.PresentFormat.addGlobalEntry)
+                            .addFormat(UiOptions.PresentFormat.addWorldModeCdmaEntry)
+                            .addFormat(UiOptions.PresentFormat.addWorldModeGsmEntry);
                     break;
                 default:
                     throw new IllegalArgumentException("Not supported enabled network types.");
             }
+
+            String[] entryValues = getResourcesForSubId().getStringArray(uiOptions.getChoices());
+            final int[] entryValuesInt = Stream.of(entryValues)
+                    .mapToInt(Integer::parseInt).toArray();
+            final List<UiOptions.PresentFormat> formatList = uiOptions.getFormatList();
+            if (entryValuesInt.length < formatList.size()) {
+                throw new IllegalArgumentException(
+                        uiOptions.getType().name() + " index error.");
+            }
+            // Compose options based on given values and formats.
+            IntStream.range(0, formatList.size()).forEach(entryIndex -> {
+                switch (formatList.get(entryIndex)) {
+                case add1xEntry:
+                    if (display2gOptions) {
+                        add1xEntry(entryValuesInt[entryIndex]);
+                    }
+                    break;
+                case add2gEntry:
+                    if (display2gOptions) {
+                        add2gEntry(entryValuesInt[entryIndex]);
+                    }
+                    break;
+                case add3gEntry:
+                    add3gEntry(entryValuesInt[entryIndex]);
+                    break;
+                case addGlobalEntry:
+                    addGlobalEntry(entryValuesInt[entryIndex]);
+                    break;
+                case addWorldModeCdmaEntry:
+                    addCustomEntry(
+                            getResourcesForSubId().getString(
+                                    R.string.network_world_mode_cdma_lte),
+                            entryValuesInt[entryIndex]);
+                    break;
+                case addWorldModeGsmEntry:
+                    addCustomEntry(
+                            getResourcesForSubId().getString(
+                                    R.string.network_world_mode_gsm_lte),
+                            entryValuesInt[entryIndex]);
+                    break;
+                case add4gEntry:
+                    add4gEntry(entryValuesInt[entryIndex]);
+                    break;
+                case addLteEntry:
+                    addLteEntry(entryValuesInt[entryIndex]);
+                    break;
+                case add5gEntry:
+                    add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                    break;
+                case add5gAnd4gEntry:
+                    add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                    add4gEntry(entryValuesInt[entryIndex]);
+                    break;
+                case add5gAndLteEntry:
+                    add5gEntry(addNrToLteNetworkType(entryValuesInt[entryIndex]));
+                    addLteEntry(entryValuesInt[entryIndex]);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not supported ui options format.");
+                }
+            });
         }
 
         private int getPreferredNetworkMode() {
@@ -413,7 +397,7 @@ public class EnabledNetworkModePreferenceController extends
         private EnabledNetworks getEnabledNetworkType() {
             EnabledNetworks enabledNetworkType = EnabledNetworks.ENABLED_NETWORKS_UNKNOWN;
             final int phoneType = mTelephonyManager.getPhoneType();
-            final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(mSubId);
+            final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(mSubId);
 
             if (phoneType == TelephonyManager.PHONE_TYPE_CDMA) {
                 final int lteForced = android.provider.Settings.Global.getInt(

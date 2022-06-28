@@ -29,7 +29,7 @@
         android:order="-40"
         settings:controller="com.android.settings.network.MultiNetworkHeaderController"/>
 
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.wifi.WifiSettings"
         android:key="main_toggle_wifi"
         android:title="@string/wifi_settings"
@@ -40,7 +40,7 @@
         <intent
             android:action="android.settings.WIFI_SETTINGS"
             android:targetClass="Settings$WifiSettingsActivity" />
-    </com.android.settings.widget.PrimarySwitchPreference>
+    </com.android.settingslib.PrimarySwitchPreference>
 
     <com.android.settings.widget.AddPreference
         android:key="mobile_network_list"
@@ -80,7 +80,7 @@
         settings:userRestriction="no_config_tethering"
         settings:useAdminDisabledSummary="true" />
 
-    <com.android.settings.widget.PrimarySwitchPreference
+    <com.android.settingslib.PrimarySwitchPreference
         android:fragment="com.android.settings.AllInOneTetherSettings"
         android:key="all_tether_settings"
         android:title="@string/tether_settings_title_all"

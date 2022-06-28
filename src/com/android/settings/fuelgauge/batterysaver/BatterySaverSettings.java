@@ -83,7 +83,6 @@ public class BatterySaverSettings extends DashboardFragment {
     void addHelpLink() {
         FooterPreference pref = getPreferenceScreen().findPreference(KEY_FOOTER_PREFERENCE);
         if (pref != null) {
-            pref.setSelectable(false);
             pref.setLearnMoreAction(v -> {
                 mMetricsFeatureProvider.action(getContext(),
                         SettingsEnums.ACTION_APP_BATTERY_LEARN_MORE);
@@ -91,7 +90,7 @@ public class BatterySaverSettings extends DashboardFragment {
                         getString(R.string.help_url_battery_saver_settings),
                         /*backupContext=*/ ""), /*requestCode=*/ 0);
             });
-            pref.setLearnMoreContentDescription(getString(R.string.battery_saver_link_a11y));
+            pref.setLearnMoreText(getString(R.string.battery_saver_link_a11y));
         }
     }
 }

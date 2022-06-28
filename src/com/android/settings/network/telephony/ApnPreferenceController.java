@@ -32,6 +32,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.apn.ApnSettings;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
@@ -46,19 +47,19 @@ public class ApnPreferenceController extends TelephonyBasePreferenceController i
         LifecycleObserver, OnStart, OnStop {
 
     @VisibleForTesting
-    CarrierConfigManager mCarrierConfigManager;
+    CarrierConfigCache mCarrierConfigCache;
     private Preference mPreference;
     private DpcApnEnforcedObserver mDpcApnEnforcedObserver;
 
     public ApnPreferenceController(Context context, String key) {
         super(context, key);
-        mCarrierConfigManager = context.getSystemService(CarrierConfigManager.class);
+        mCarrierConfigCache = CarrierConfigCache.getInstance(context);
         mDpcApnEnforcedObserver = new DpcApnEnforcedObserver(new Handler(Looper.getMainLooper()));
     }
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subId);
+        final PersistableBundle carrierConfig = mCarrierConfigCache.getConfigForSubId(subId);
         final boolean isCdmaApn = MobileNetworkUtils.isCdmaOptions(mContext, subId)
                 && carrierConfig != null
                 && carrierConfig.getBoolean(CarrierConfigManager.KEY_SHOW_APN_SETTING_CDMA_BOOL);

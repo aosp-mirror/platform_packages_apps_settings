@@ -33,7 +33,7 @@ public class AccessibilityButtonFooterPreferenceController extends
     }
 
     @Override
-    protected String getLearnMoreContentDescription() {
+    protected String getLearnMoreText() {
         return mContext.getString(
             R.string.accessibility_button_gesture_footer_learn_more_content_description);
     }
@@ -50,9 +50,10 @@ public class AccessibilityButtonFooterPreferenceController extends
         final int titleResource = AccessibilityUtil.isGestureNavigateEnabled(mContext)
                 ? R.string.accessibility_button_gesture_description
                 : R.string.accessibility_button_description;
+        final CharSequence footerText = mContext.getText(titleResource);
         final AccessibilityFooterPreference footerPreference =
                 screen.findPreference(getPreferenceKey());
-        footerPreference.setTitle(titleResource);
+        footerPreference.setTitle(footerText);
         super.displayPreference(screen);
     }
 }

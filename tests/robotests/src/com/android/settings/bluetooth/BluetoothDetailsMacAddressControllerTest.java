@@ -21,11 +21,13 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settingslib.widget.FooterPreference;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
+@Ignore
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsMacAddressController mController;
 

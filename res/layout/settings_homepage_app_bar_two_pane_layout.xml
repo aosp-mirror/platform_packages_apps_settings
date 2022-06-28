@@ -17,30 +17,21 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/app_bar_content"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginHorizontal="@dimen/homepage_app_bar_margin_horizontal_two_pane"
+    android:padding="@dimen/homepage_app_bar_padding_two_pane"
+    android:orientation="horizontal"
+    android:background="@drawable/homepage_app_bar_background">
 
-    <FrameLayout
-        android:id="@+id/two_pane_suggestion_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <include layout="@layout/search_bar_two_pane_version"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <include layout="@layout/search_bar_two_pane_version"/>
-
-        <ImageView
-            android:id="@+id/account_avatar_two_pane_version"
-            android:layout_width="@dimen/avatar_length"
-            android:layout_height="@dimen/avatar_length"
-            android:layout_gravity="center"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/search_bar_account_avatar_content_description"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/account_avatar_two_pane_version"
+        android:layout_width="@dimen/avatar_length"
+        android:layout_height="@dimen/avatar_length"
+        android:layout_gravity="center"
+        android:contentDescription="@string/search_bar_account_avatar_content_description"/>
 
 </LinearLayout>

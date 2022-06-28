@@ -145,10 +145,16 @@ public final class CellInfoUtil {
         final CellIdentity cid = getCellIdentity(cellInfo);
         String mcc = getCellIdentityMcc(cid);
         String mnc = getCellIdentityMnc(cid);
+        CharSequence alphaLong = null;
+        CharSequence alphaShort = null;
+        if (cid != null) {
+            alphaLong = cid.getOperatorAlphaLong();
+            alphaShort = cid.getOperatorAlphaShort();
+        }
         return String.format(
                 "{CellType = %s, isRegistered = %b, mcc = %s, mnc = %s, alphaL = %s, alphaS = %s}",
                 cellType, cellInfo.isRegistered(), mcc, mnc,
-                cid.getOperatorAlphaLong(), cid.getOperatorAlphaShort());
+                alphaLong, alphaShort);
     }
 
     /**

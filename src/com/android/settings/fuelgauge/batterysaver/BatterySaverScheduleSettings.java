@@ -40,7 +40,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.fuelgauge.BatterySaverUtils;
 import com.android.settingslib.widget.CandidateInfo;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import com.google.common.collect.Lists;
 
@@ -150,8 +150,8 @@ public class BatterySaverScheduleSettings extends RadioButtonPickerFragment {
     }
 
     @Override
-    public void bindPreferenceExtra(RadioButtonPreference pref, String key, CandidateInfo info,
-            String defaultKey, String systemDefaultKey) {
+    public void bindPreferenceExtra(SelectorWithWidgetPreference pref, String key,
+            CandidateInfo info, String defaultKey, String systemDefaultKey) {
         final BatterySaverScheduleCandidateInfo candidateInfo =
                 (BatterySaverScheduleCandidateInfo) info;
         final CharSequence summary = candidateInfo.getSummary();

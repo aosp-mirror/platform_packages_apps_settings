@@ -31,6 +31,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Tests for {@link FontWeightAdjustmentPreferenceController}.
+ */
 @RunWith(AndroidJUnit4.class)
 public class FontWeightAdjustmentPreferenceControllerTest {
     private static final int ON = FontWeightAdjustmentPreferenceController.BOLD_TEXT_ADJUSTMENT;
@@ -87,6 +90,16 @@ public class FontWeightAdjustmentPreferenceControllerTest {
     @Test
     public void setChecked_setFalse_shouldDisableBoldText() {
         mController.setChecked(false);
+
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF)).isEqualTo(OFF);
+    }
+
+    @Test
+    public void resetState_shouldDisableBoldText() {
+        mController.setChecked(true);
+
+        mController.resetState();
 
         assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.FONT_WEIGHT_ADJUSTMENT, OFF)).isEqualTo(OFF);

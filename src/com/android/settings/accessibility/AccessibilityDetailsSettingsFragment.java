@@ -21,6 +21,7 @@ import static com.android.internal.accessibility.AccessibilityShortcutController
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
+import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
@@ -49,6 +50,7 @@ import java.util.Set;
 public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
 
     private final static String TAG = "A11yDetailsSettings";
+    private AppOpsManager mAppOps;
 
     @Override
     public int getMetricsCategory() {
@@ -58,6 +60,8 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAppOps = getActivity().getSystemService(AppOpsManager.class);
 
         // In case the Intent doesn't have component name, go to a11y services list.
         final String extraComponentName = getActivity().getIntent().getStringExtra(
@@ -127,10 +131,11 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         }
 
         // In case this accessibility service isn't permitted, go to a11y services list.
-        if (!isServiceAllowed(componentName.getPackageName())) {
+        if (!isServiceAllowed(info.getResolveInfo().serviceInfo.applicationInfo.uid,
+                componentName.getPackageName())) {
             Log.w(TAG,
                     "openAccessibilityDetailsSettingsAndFinish: target accessibility service is"
-                            + "prohibited by Device Admin.");
+                            + "prohibited by Device Admin or App Op.");
             return false;
         }
         openSubSettings(ToggleAccessibilityServicePreferenceFragment.class.getName(),
@@ -148,11 +153,23 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
     }
 
     @VisibleForTesting
-    boolean isServiceAllowed(String packageName) {
+    boolean isServiceAllowed(int uid, String packageName) {
         final DevicePolicyManager dpm = getContext().getSystemService(DevicePolicyManager.class);
         final List<String> permittedServices = dpm.getPermittedAccessibilityServices(
                 UserHandle.myUserId());
-        return (permittedServices == null || permittedServices.contains(packageName));
+        if (permittedServices != null && !permittedServices.contains(packageName)) {
+            return false;
+        }
+        try {
+            final int mode = mAppOps.noteOpNoThrow(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS,
+                    uid, packageName);
+            final boolean ecmEnabled = getContext().getResources().getBoolean(
+                    com.android.internal.R.bool.config_enhancedConfirmationModeEnabled);
+            return !ecmEnabled || mode == AppOpsManager.MODE_ALLOWED;
+        } catch (Exception e) {
+            // Fallback in case if app ops is not available in testing.
+            return true;
+        }
     }
 
     private AccessibilityServiceInfo getAccessibilityServiceInfo(ComponentName componentName) {
@@ -206,11 +223,26 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
             extras.putString(AccessibilitySettings.EXTRA_SETTINGS_COMPONENT_NAME,
                     new ComponentName(packageName, settingsClassName).flattenToString());
         }
+
+        final String tileServiceClassName = info.getTileServiceName();
+        if (!TextUtils.isEmpty(tileServiceClassName)) {
+            extras.putString(AccessibilitySettings.EXTRA_TILE_SERVICE_COMPONENT_NAME,
+                    new ComponentName(packageName, tileServiceClassName).flattenToString());
+        }
+
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
         extras.putInt(AccessibilitySettings.EXTRA_ANIMATED_IMAGE_RES, info.getAnimatedImageRes());
 
         final String htmlDescription = info.loadHtmlDescription(getActivity().getPackageManager());
         extras.putString(AccessibilitySettings.EXTRA_HTML_DESCRIPTION, htmlDescription);
+
+        final CharSequence intro = info.loadIntro(getActivity().getPackageManager());
+        extras.putCharSequence(AccessibilitySettings.EXTRA_INTRO, intro);
+
+        // We will log nonA11yTool status from PolicyWarningUIController; others none.
+        extras.putLong(AccessibilitySettings.EXTRA_TIME_FOR_LOGGING,
+                getActivity().getIntent().getLongExtra(
+                        AccessibilitySettings.EXTRA_TIME_FOR_LOGGING, 0));
         return extras;
     }
 

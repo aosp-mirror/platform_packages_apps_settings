@@ -59,7 +59,8 @@ public abstract class BaseNfcEnabler {
             return;
         }
         handleNfcStateChanged(mNfcAdapter.getAdapterState());
-        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mContext.registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     public void pause() {

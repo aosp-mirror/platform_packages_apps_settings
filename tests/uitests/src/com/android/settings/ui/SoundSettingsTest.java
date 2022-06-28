@@ -153,14 +153,6 @@ public class SoundSettingsTest extends InstrumentationTestCase {
                     "Touch sounds", Settings.System.SOUND_EFFECTS_ENABLED));
     }
 
-    @MediumTest
-    public void testOtherSoundsVibrateOnTap() throws Exception {
-        loadOtherSoundsPage();
-        assertTrue("Vibrate on tap not toggled",
-                    mHelper.verifyToggleSetting(SettingsType.SYSTEM, PAGE,
-                    "Vibrate on tap", Settings.System.HAPTIC_FEEDBACK_ENABLED));
-    }
-
     private void loadOtherSoundsPage() throws Exception {
         launchSoundSettings();
         mHelper.scrollVert(false);

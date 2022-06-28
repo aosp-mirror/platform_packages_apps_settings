@@ -25,7 +25,6 @@ import android.os.Looper;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.preference.Preference;
@@ -33,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.network.MobileDataContentObserver;
 import com.android.settings.network.SubscriptionsChangeListener;
 
@@ -51,10 +51,9 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         super(context, preferenceKey);
     }
 
-    public void init(Lifecycle lifecycle, int subId) {
+    void init(int subId) {
         this.mSubId = subId;
         mManager = mContext.getSystemService(TelephonyManager.class).createForSubscriptionId(subId);
-        lifecycle.addObserver(this);
     }
 
     @OnLifecycleEvent(ON_RESUME)
@@ -102,10 +101,16 @@ public class DataDuringCallsPreferenceController extends TelephonyTogglePreferen
         return true;
     }
 
+    @VisibleForTesting
+    protected boolean hasMobileData() {
+        return DataUsageUtils.hasMobileData(mContext);
+    }
+
     @Override
     public int getAvailabilityStatus(int subId) {
         if (!SubscriptionManager.isValidSubscriptionId(subId)
-                || SubscriptionManager.getDefaultDataSubscriptionId() == subId) {
+                || SubscriptionManager.getDefaultDataSubscriptionId() == subId
+                || (!hasMobileData())) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return AVAILABLE;

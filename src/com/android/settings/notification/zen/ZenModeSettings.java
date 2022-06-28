@@ -18,6 +18,7 @@ package com.android.settings.notification.zen;
 
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CALLS;
+import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_CONVERSATIONS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA;
 import static android.app.NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES;
@@ -116,6 +117,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 PRIORITY_CATEGORY_MEDIA,
                 PRIORITY_CATEGORY_SYSTEM,
                 PRIORITY_CATEGORY_MESSAGES,
+                PRIORITY_CATEGORY_CONVERSATIONS,
                 PRIORITY_CATEGORY_EVENTS,
                 PRIORITY_CATEGORY_REMINDERS,
                 PRIORITY_CATEGORY_CALLS,
@@ -168,12 +170,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
         String getMessagesSettingSummary(Policy policy) {
             List<String> enabledCategories = getEnabledCategories(policy,
-                    category -> PRIORITY_CATEGORY_MESSAGES == category, false);
+                    category -> PRIORITY_CATEGORY_MESSAGES == category
+                           || PRIORITY_CATEGORY_CONVERSATIONS == category, true);
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
                 return mContext.getString(R.string.zen_mode_none_messages);
-            } else {
+            } else if (numCategories == 1) {
                 return enabledCategories.get(0);
+            } else {
+                // While this string name seems like a slight misnomer: it's borrowing the analogous
+                // calls-summary functionality to combine two permissions.
+                return mContext.getString(R.string.zen_mode_calls_summary_two,
+                        enabledCategories.get(0),
+                        enabledCategories.get(1));
             }
         }
 
@@ -250,6 +259,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                         continue;
                     }
 
+                    // For conversations, only the "priority conversations" setting is relevant; any
+                    // other setting is subsumed by the messages-specific messaging.
+                    if (category == Policy.PRIORITY_CATEGORY_CONVERSATIONS
+                            && isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CONVERSATIONS)
+                            && policy.priorityConversationSenders
+                                    != Policy.CONVERSATION_SENDERS_IMPORTANT) {
+                        continue;
+                    }
+
                     enabledCategories.add(getCategory(category, policy, isFirst));
                 }
             }
@@ -282,10 +300,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             } else if (category == Policy.PRIORITY_CATEGORY_MESSAGES) {
                 if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
                     return mContext.getString(R.string.zen_mode_from_anyone);
-                } else if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_CONTACTS){
+                } else if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_CONTACTS) {
                     return mContext.getString(R.string.zen_mode_from_contacts);
                 } else {
                     return mContext.getString(R.string.zen_mode_from_starred);
+                }
+            } else if (category == Policy.PRIORITY_CATEGORY_CONVERSATIONS
+                    && policy.priorityConversationSenders
+                            == Policy.CONVERSATION_SENDERS_IMPORTANT) {
+                if (isFirst) {
+                    return mContext.getString(R.string.zen_mode_from_important_conversations);
+                } else {
+                    return mContext.getString(
+                            R.string.zen_mode_from_important_conversations_second);
                 }
             } else if (category == Policy.PRIORITY_CATEGORY_EVENTS) {
                 if (isFirst) {

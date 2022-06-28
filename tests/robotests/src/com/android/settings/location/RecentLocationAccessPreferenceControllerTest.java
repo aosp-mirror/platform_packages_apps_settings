@@ -19,9 +19,12 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -34,12 +37,15 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.shadow.ShadowDeviceConfig;
 import com.android.settingslib.applications.RecentAppOpsAccess;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
@@ -106,5 +112,21 @@ public class RecentLocationAccessPreferenceControllerTest {
         assertThat(details.getText()).isEqualTo(
                 mContext.getText(R.string.location_recent_location_access_view_details));
         assertThat(details.hasOnClickListeners()).isTrue();
+    }
+
+    /** Verifies the title text, details text are correct, and the click listener is set. */
+    @Test
+    public void updateState_showSystemAccess() {
+        doReturn(ImmutableList.of(
+                new RecentAppOpsAccess.Access("app", UserHandle.CURRENT, null, "app", "", 0)))
+                .when(mRecentLocationApps).getAppListSorted(false);
+        doReturn(new ArrayList<>()).when(mRecentLocationApps).getAppListSorted(true);
+        mController.displayPreference(mScreen);
+        mController.updateState(mLayoutPreference);
+        verify(mLayoutPreference).addPreference(Mockito.any());
+
+        Settings.Secure.putInt(
+                mContext.getContentResolver(), Settings.Secure.LOCATION_SHOW_SYSTEM_OPS, 1);
+        verify(mLayoutPreference, Mockito.times(1)).addPreference(Mockito.any());
     }
 }

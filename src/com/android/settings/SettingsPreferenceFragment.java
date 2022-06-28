@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,6 +55,7 @@ import com.android.settingslib.search.Indexable;
 import com.android.settingslib.widget.LayoutPreference;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.UUID;
 
@@ -63,12 +65,13 @@ import java.util.UUID;
 public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceFragment
         implements DialogCreatable, HelpResourceProvider, Indexable {
 
-    private static final String TAG = "SettingsPreference";
+    private static final String TAG = "SettingsPreferenceFragment";
 
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
     private static final int ORDER_FIRST = -1;
 
+    protected DevicePolicyManager mDevicePolicyManager;
     private SettingsDialogFragment mDialogFragment;
     // Cache the content resolver for async callbacks
     private ContentResolver mContentResolver;
@@ -122,9 +125,19 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     private boolean mPreferenceHighlighted = false;
 
     @Override
+    public void onAttach(Context context) {
+        if (shouldSkipForInitialSUW() && !WizardManagerHelper.isDeviceProvisioned(getContext())) {
+            Log.w(TAG, "Skip " + getClass().getSimpleName() + " before SUW completed.");
+            finish();
+        }
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         if (icicle != null) {
             mPreferenceHighlighted = icicle.getBoolean(SAVE_HIGHLIGHTED_KEY);
         }
@@ -265,6 +278,16 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     protected boolean isPreferenceExpanded(Preference preference) {
         return ((mAdapter == null)
                 || (mAdapter.getPreferenceAdapterPosition(preference) != RecyclerView.NO_POSITION));
+    }
+
+    /**
+     * Whether UI should be skipped in the initial SUW flow.
+     *
+     * @return {@code true} when UI should be skipped in the initial SUW flow.
+     * {@code false} when UI should not be skipped in the initial SUW flow.
+     */
+    protected boolean shouldSkipForInitialSUW() {
+        return false;
     }
 
     protected void onDataSetChanged() {
@@ -707,5 +730,36 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     protected boolean isFinishingOrDestroyed() {
         final Activity activity = getActivity();
         return activity == null || activity.isFinishing() || activity.isDestroyed();
+    }
+
+    protected void replaceEnterprisePreferenceScreenTitle(String overrideKey, int resource) {
+        getActivity().setTitle(mDevicePolicyManager.getResources().getString(
+                overrideKey, () -> getString(resource)));
+    }
+
+    protected void replaceEnterpriseStringSummary(
+            String preferenceKey, String overrideKey, int resource) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference == null) {
+            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
+            return;
+        }
+
+        preference.setSummary(
+                mDevicePolicyManager.getResources().getString(overrideKey,
+                        () -> getString(resource)));
+    }
+
+    protected void replaceEnterpriseStringTitle(
+            String preferenceKey, String overrideKey, int resource) {
+        Preference preference = findPreference(preferenceKey);
+        if (preference == null) {
+            Log.d(TAG, "Could not find enterprise preference " + preferenceKey);
+            return;
+        }
+
+        preference.setTitle(
+                mDevicePolicyManager.getResources().getString(overrideKey,
+                        () -> getString(resource)));
     }
 }

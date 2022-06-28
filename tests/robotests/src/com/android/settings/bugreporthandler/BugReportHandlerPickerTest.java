@@ -39,7 +39,7 @@ import android.util.Pair;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.widget.RadioButtonPreference;
+import com.android.settingslib.widget.SelectorWithWidgetPreference;
 
 import org.junit.After;
 import org.junit.Before;
@@ -138,7 +138,7 @@ public class BugReportHandlerPickerTest {
         when(mBugReportHandlerUtil.setCurrentBugReportHandlerAppAndUser(any(), eq(PACKAGE_NAME),
                 eq(USER_ID))).thenReturn(true);
 
-        RadioButtonPreference defaultPackagePref = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference defaultPackagePref = mock(SelectorWithWidgetPreference.class);
         when(defaultPackagePref.getKey()).thenReturn(
                 BugReportHandlerPicker.getKey(PACKAGE_NAME, USER_ID));
         mPicker.onRadioButtonClicked(defaultPackagePref);
@@ -157,7 +157,7 @@ public class BugReportHandlerPickerTest {
         when(mBugReportHandlerUtil.setCurrentBugReportHandlerAppAndUser(any(), eq(PACKAGE_NAME),
                 eq(USER_ID))).thenReturn(false);
 
-        RadioButtonPreference defaultPackagePref = mock(RadioButtonPreference.class);
+        SelectorWithWidgetPreference defaultPackagePref = mock(SelectorWithWidgetPreference.class);
         when(defaultPackagePref.getKey()).thenReturn(
                 BugReportHandlerPicker.getKey(PACKAGE_NAME, USER_ID));
         mPicker.onRadioButtonClicked(defaultPackagePref);

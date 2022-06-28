@@ -47,7 +47,7 @@ public class ProfileSelectManageApplications extends ProfileSelectFragment {
     }
 
     @Override
-    int getTitleResId() {
+    public int getTitleResId() {
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
         final Bundle args = getArguments();

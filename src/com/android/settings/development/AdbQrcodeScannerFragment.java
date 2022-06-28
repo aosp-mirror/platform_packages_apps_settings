@@ -189,7 +189,8 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         restartCamera();
 
         mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
-        getActivity().registerReceiver(mReceiver, mIntentFilter);
+        getActivity().registerReceiver(mReceiver, mIntentFilter,
+                Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     @Override

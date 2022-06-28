@@ -30,7 +30,6 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiManager;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.telephony.AccessNetworkConstants;
 import android.telephony.NetworkRegistrationInfo;
 import android.telephony.ServiceState;
@@ -41,7 +40,6 @@ import android.telephony.TelephonyDisplayInfo;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.util.ArraySet;
-import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArrayMap;
@@ -55,7 +53,6 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.network.telephony.DataConnectivityListener;
-import com.android.settings.network.telephony.MobileNetworkActivity;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.network.telephony.SignalStrengthListener;
 import com.android.settings.network.telephony.TelephonyDisplayInfoListener;
@@ -67,6 +64,7 @@ import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.mobile.TelephonyIcons;
 import com.android.settingslib.net.SignalStrengthUtil;
+import com.android.wifitrackerlib.WifiEntry;
 
 import java.util.Collections;
 import java.util.List;
@@ -195,7 +193,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSignalStrengthListener.pause();
         mTelephonyDisplayInfoListener.pause();
         unRegisterReceiver();
-        resetProviderPreferenceSummary();
     }
 
     @Override
@@ -235,10 +232,10 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
                 connectCarrierNetwork();
                 return true;
             });
-
-            mSubsGearPref.setOnGearClickListener(p ->
-                    startMobileNetworkActivity(mContext, subInfo.getSubscriptionId()));
         }
+
+        mSubsGearPref.setOnGearClickListener(p ->
+                MobileNetworkUtils.launchMobileNetworkSettings(mContext, subInfo));
 
         if (!(mContext.getSystemService(UserManager.class)).isAdminUser()) {
             mSubsGearPref.setGearEnabled(false);
@@ -277,25 +274,30 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         String result = mSubsPrefCtrlInjector.getNetworkType(
                 mContext, mConfig, mTelephonyDisplayInfo, subId, isCarrierNetworkActive);
         if (mSubsPrefCtrlInjector.isActiveCellularNetwork(mContext) || isCarrierNetworkActive) {
-            Log.i(TAG, "Active cellular network or active carrier network.");
-            result = mContext.getString(R.string.preference_summary_default_combination,
-                    mContext.getString(R.string.mobile_data_connection_active), result);
+            if (result.isEmpty()) {
+                result = mContext.getString(R.string.mobile_data_connection_active);
+            } else {
+                result = mContext.getString(R.string.preference_summary_default_combination,
+                        mContext.getString(R.string.mobile_data_connection_active), result);
+            }
         } else if (!isDataInService) {
             result = mContext.getString(R.string.mobile_data_no_connection);
         }
         return Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY);
     }
 
-    private Drawable getIcon(int subId) {
+    @VisibleForTesting
+    Drawable getIcon(int subId) {
         final TelephonyManager tmForSubId = mTelephonyManager.createForSubscriptionId(subId);
         final SignalStrength strength = tmForSubId.getSignalStrength();
         int level = (strength == null) ? 0 : strength.getLevel();
         int numLevels = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
         boolean isCarrierNetworkActive = isCarrierNetworkActive();
-        if (shouldInflateSignalStrength(subId) || isCarrierNetworkActive) {
-            level = isCarrierNetworkActive
-                    ? SignalStrength.NUM_SIGNAL_STRENGTH_BINS
-                    : (level + 1);
+        if (isCarrierNetworkActive) {
+            level = getCarrierNetworkLevel();
+            numLevels = WifiEntry.WIFI_LEVEL_MAX + 1;
+        } else if (shouldInflateSignalStrength(subId)) {
+            level += 1;
             numLevels += 1;
         }
 
@@ -326,21 +328,6 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         }
 
         return icon;
-    }
-
-    private void resetProviderPreferenceSummary() {
-        if (mSubsGearPref == null) {
-            return;
-        }
-        mSubsGearPref.setSummary("");
-    }
-
-    private static void startMobileNetworkActivity(Context context, int subId) {
-        final Intent intent = new Intent(context, MobileNetworkActivity.class);
-        intent.putExtra(Settings.EXTRA_SUB_ID, subId);
-        // MobileNetworkActivity is singleTask, set SplitPairRule to show in 2-pane.
-        MobileNetworkTwoPaneUtils.registerTwoPaneForMobileNetwork(context, intent, null);
-        context.startActivity(intent);
     }
 
     @VisibleForTesting
@@ -475,7 +462,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onTelephonyDisplayInfoChanged(TelephonyDisplayInfo telephonyDisplayInfo) {
+    public void onTelephonyDisplayInfoChanged(int subId,
+            TelephonyDisplayInfo telephonyDisplayInfo) {
+        if (subId != mSubsPrefCtrlInjector.getDefaultDataSubscriptionId()) {
+            return;
+        }
         mTelephonyDisplayInfo = telephonyDisplayInfo;
         update();
     }
@@ -501,6 +492,11 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
     boolean isCarrierNetworkActive() {
         return mWifiPickerTrackerHelper != null
                 && mWifiPickerTrackerHelper.isCarrierNetworkActive();
+    }
+
+    private int getCarrierNetworkLevel() {
+        if (mWifiPickerTrackerHelper == null) return WifiEntry.WIFI_LEVEL_MIN;
+        return mWifiPickerTrackerHelper.getCarrierNetworkLevel();
     }
 
     /**

@@ -112,7 +112,8 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         if (intent != null && mBatteryListener != null) {
             if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
                 final String batteryLevel = Utils.getBatteryPercentage(intent);
-                final String batteryStatus = Utils.getBatteryStatus(mContext, intent);
+                final String batteryStatus =
+                        Utils.getBatteryStatus(mContext, intent, /* compactStatus= */ false);
                 final int batteryHealth = intent.getIntExtra(
                         BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 if (!Utils.isBatteryPresent(intent)) {

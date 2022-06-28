@@ -21,32 +21,36 @@
     android:title="@string/accessibility_control_timeout_preference_title"
     android:persistent="false" >
 
+    <com.android.settingslib.widget.TopIntroPreference
+        android:key="accessibility_control_timeout_intro"
+        android:persistent="false"
+        android:title="@string/accessibility_control_timeout_preference_intro_text" />
+
     <com.android.settingslib.widget.IllustrationPreference
         android:key="accessibility_control_timeout_banner"
         settings:lottie_rawRes="@raw/accessibility_timeout_banner"/>
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_default"
         android:title="@string/accessibility_timeout_default"
-        settings:allowDividerAbove="true"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_10secs"
         android:title="@string/accessibility_timeout_10secs"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_30secs"
         android:title="@string/accessibility_timeout_30secs"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_1min"
         android:title="@string/accessibility_timeout_1min"
         android:persistent="false" />
 
-    <com.android.settingslib.widget.RadioButtonPreference
+    <com.android.settingslib.widget.SelectorWithWidgetPreference
         android:key="accessibility_control_timeout_2mins"
         android:title="@string/accessibility_timeout_2mins"
         android:persistent="false" />

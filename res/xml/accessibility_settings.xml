@@ -37,14 +37,22 @@
         android:title="@string/display_category_title">
 
         <Preference
-            android:fragment="com.android.settings.accessibility.TextAndDisplayFragment"
-            android:key="text_and_display_preference_screen"
-            android:icon="@drawable/ic_text_and_display"
+            android:fragment="com.android.settings.accessibility.TextReadingPreferenceFragment"
+            android:icon="@drawable/ic_adaptive_font_download"
+            android:key="text_reading_options"
             android:persistent="false"
-            android:title="@string/accessibility_text_and_display_title"
+            android:title="@string/accessibility_text_reading_options_title"
+            settings:controller="com.android.settings.accessibility.TextReadingFragmentForA11ySettingsController"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.ColorAndMotionFragment"
+            android:key="color_and_motion"
+            android:icon="@drawable/ic_color_and_motion"
+            android:persistent="false"
+            android:title="@string/accessibility_color_and_motion_title"
             settings:searchable="true"/>
 
-        <com.android.settings.widget.PrimarySwitchPreference
+        <com.android.settingslib.PrimarySwitchPreference
             android:fragment="com.android.settings.accessibility.ToggleReduceBrightColorsPreferenceFragment"
             android:key="reduce_bright_colors_preference"
             android:icon="@drawable/ic_reduce_bright_colors"
@@ -52,16 +60,6 @@
             android:title="@string/reduce_bright_colors_preference_title"
             settings:keywords="@string/keywords_reduce_bright_colors"
             settings:controller="com.android.settings.accessibility.ReduceBrightColorsPreferenceController"/>
-
-        <com.android.settings.display.darkmode.DarkModePreference
-            android:key="dark_ui_mode_accessibility"
-            android:icon="@drawable/ic_dark_ui"
-            android:title="@string/dark_ui_mode"
-            android:fragment="com.android.settings.display.darkmode.DarkModeSettingsFragment"
-            android:widgetLayout="@null"
-            settings:widgetLayout="@null"
-            settings:controller="com.android.settings.display.DarkUIPreferenceController"
-            settings:searchable="false"/>
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
@@ -100,7 +98,9 @@
             android:icon="@drawable/ic_vibration"
             android:persistent="false"
             android:title="@string/accessibility_vibration_settings_title"
-            settings:controller="com.android.settings.accessibility.VibrationPreferenceController"/>
+            settings:controller="com.android.settings.accessibility.VibrationPreferenceController"
+            settings:keywords="@string/keywords_vibration"
+            android:summary="@string/accessibility_vibration_settings_summary"/>
 
     </PreferenceCategory>
 
@@ -140,6 +140,16 @@
         android:key="audio_category"
         android:persistent="false"
         android:title="@string/audio_category_title">
+
+        <SwitchPreference
+            android:key="toggle_audio_description"
+            android:persistent="false"
+            android:icon="@drawable/ic_audio_description"
+            android:summary="@string/accessibility_audio_description_summary"
+            android:title="@string/accessibility_toggle_audio_description_preference_title"
+            settings:keywords="@string/keywords_audio_description"
+            settings:searchable="true"
+            settings:controller="com.android.settings.accessibility.AudioDescriptionPreferenceController"/>
 
         <Preference
             android:key="hearing_aid_preference"

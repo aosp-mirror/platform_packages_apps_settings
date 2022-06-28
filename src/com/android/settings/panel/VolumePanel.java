@@ -26,31 +26,45 @@ import static com.android.settings.slices.CustomSliceRegistry.VOLUME_CALL_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_MEDIA_URI;
 import static com.android.settings.slices.CustomSliceRegistry.VOLUME_RINGER_URI;
 
+import android.app.Activity;
 import android.app.settings.SettingsEnums;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 
 import com.android.settings.R;
+import com.android.settings.bluetooth.Utils;
+import com.android.settingslib.bluetooth.A2dpProfile;
+import com.android.settingslib.bluetooth.BluetoothUtils;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 import com.android.settingslib.media.MediaOutputConstants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * Panel data class for Volume settings.
  */
 public class VolumePanel implements PanelContent, LifecycleObserver {
+    private static final String TAG = "VolumePanel";
 
     private final Context mContext;
 
     private PanelContentCallback mCallback;
+    private LocalBluetoothProfileManager mProfileManager;
+    private int mControlSliceWidth;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -67,6 +81,29 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
     private VolumePanel(Context context) {
         mContext = context.getApplicationContext();
+        if (context instanceof Activity) {
+            int panelWidth =
+                    ((Activity) context).getWindowManager().getCurrentWindowMetrics().getBounds()
+                            .width();
+            // The control slice width = panel width - two left and right horizontal paddings
+            mControlSliceWidth = panelWidth - context.getResources().getDimensionPixelSize(
+                    R.dimen.panel_slice_Horizontal_padding) * 2;
+        }
+
+        final FutureTask<LocalBluetoothManager> localBtManagerFutureTask = new FutureTask<>(
+                // Avoid StrictMode ThreadPolicy violation
+                () -> Utils.getLocalBtManager(mContext));
+        LocalBluetoothManager localBluetoothManager;
+        try {
+            localBtManagerFutureTask.run();
+            localBluetoothManager = localBtManagerFutureTask.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.w(TAG, "Error getting LocalBluetoothManager.");
+            return;
+        }
+        if (localBluetoothManager != null) {
+            mProfileManager = localBluetoothManager.getProfileManager();
+        }
     }
 
     /** Invoked when the panel is resumed. */
@@ -74,7 +111,7 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     public void onResume() {
         final IntentFilter filter = new IntentFilter();
         filter.addAction(MediaOutputConstants.ACTION_CLOSE_PANEL);
-        mContext.registerReceiver(mReceiver, filter);
+        mContext.registerReceiver(mReceiver, filter, Context.RECEIVER_EXPORTED_UNAUDITED);
     }
 
     /** Invoked when the panel is paused. */
@@ -94,6 +131,11 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
 
         uris.add(REMOTE_MEDIA_SLICE_URI);
         uris.add(VOLUME_MEDIA_URI);
+        Uri controlUri = getExtraControlUri();
+        if (controlUri != null) {
+            Log.d(TAG, "add extra control slice");
+            uris.add(controlUri);
+        }
         uris.add(MEDIA_OUTPUT_INDICATOR_SLICE_URI);
         uris.add(VOLUME_CALL_URI);
         uris.add(VOLUME_RINGER_URI);
@@ -119,5 +161,32 @@ public class VolumePanel implements PanelContent, LifecycleObserver {
     @Override
     public void registerCallback(PanelContentCallback callback) {
         mCallback = callback;
+    }
+
+    private Uri getExtraControlUri() {
+        Uri controlUri = null;
+        final BluetoothDevice bluetoothDevice = findActiveDevice();
+        if (bluetoothDevice != null) {
+            final String uri = BluetoothUtils.getControlUriMetaData(bluetoothDevice);
+            if (!TextUtils.isEmpty(uri)) {
+                try {
+                    controlUri = Uri.parse(uri + mControlSliceWidth);
+                } catch (NullPointerException exception) {
+                    Log.d(TAG, "unable to parse uri");
+                    controlUri = null;
+                }
+            }
+        }
+        return controlUri;
+    }
+
+    private BluetoothDevice findActiveDevice() {
+        if (mProfileManager != null) {
+            final A2dpProfile a2dpProfile = mProfileManager.getA2dpProfile();
+            if (a2dpProfile != null) {
+                return a2dpProfile.getActiveDevice();
+            }
+        }
+        return null;
     }
 }

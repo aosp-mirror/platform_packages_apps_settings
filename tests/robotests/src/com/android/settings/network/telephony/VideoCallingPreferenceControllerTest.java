@@ -31,6 +31,7 @@ import android.telephony.ims.ProvisioningManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.network.CarrierConfigCache;
 import com.android.settings.network.ims.MockVolteQueryImsState;
 import com.android.settings.network.ims.MockVtQueryImsState;
 
@@ -51,7 +52,7 @@ public class VideoCallingPreferenceControllerTest {
     @Mock
     private ProvisioningManager mProvisioningManager;
     @Mock
-    private CarrierConfigManager mCarrierConfigManager;
+    private CarrierConfigCache mCarrierConfigCache;
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
@@ -69,14 +70,13 @@ public class VideoCallingPreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mTelephonyManager).when(mContext).getSystemService(TelephonyManager.class);
-        doReturn(mCarrierConfigManager).when(mContext)
-                .getSystemService(CarrierConfigManager.class);
+        CarrierConfigCache.setTestInstance(mContext, mCarrierConfigCache);
         doReturn(mTelephonyManager).when(mTelephonyManager).createForSubscriptionId(SUB_ID);
 
         mCarrierConfig = new PersistableBundle();
         mCarrierConfig.putBoolean(
                 CarrierConfigManager.KEY_IGNORE_DATA_ENABLED_CHANGED_FOR_VIDEO_CALLS, true);
-        doReturn(mCarrierConfig).when(mCarrierConfigManager).getConfigForSubId(SUB_ID);
+        doReturn(mCarrierConfig).when(mCarrierConfigCache).getConfigForSubId(SUB_ID);
 
         mQueryImsState = new MockVtQueryImsState(mContext, SUB_ID);
         mQueryImsState.setIsEnabledByUser(true);
@@ -89,6 +89,7 @@ public class VideoCallingPreferenceControllerTest {
         mController.init(SUB_ID);
         doReturn(mQueryImsState).when(mController).queryImsState(anyInt());
         doReturn(mQueryVoLteState).when(mController).queryVoLteState(anyInt());
+        doReturn(true).when(mController).isImsSupported();
         mPreference.setKey(mController.getPreferenceKey());
 
         mQueryImsState.setIsEnabledByPlatform(true);

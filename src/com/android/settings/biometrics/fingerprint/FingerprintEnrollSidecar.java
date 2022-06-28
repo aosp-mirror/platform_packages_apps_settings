@@ -22,7 +22,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.biometrics.BiometricEnrollSidecar;
 
 /**
@@ -31,13 +30,13 @@ import com.android.settings.biometrics.BiometricEnrollSidecar;
 public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
     private static final String TAG = "FingerprintEnrollSidecar";
 
-    private FingerprintManager mFingerprintManager;
+    private FingerprintUpdater mFingerprintUpdater;
     private @FingerprintManager.EnrollReason int mEnrollReason;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mFingerprintManager = Utils.getFingerprintManagerOrNull(activity);
+        mFingerprintUpdater = new FingerprintUpdater(activity);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class FingerprintEnrollSidecar extends BiometricEnrollSidecar {
             return;
         }
 
-        mFingerprintManager.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
+        mFingerprintUpdater.enroll(mToken, mEnrollmentCancel, mUserId, mEnrollmentCallback,
                 mEnrollReason);
     }
 

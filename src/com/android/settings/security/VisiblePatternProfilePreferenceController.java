@@ -126,6 +126,8 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
 
     @Override
     public void onResume() {
-        mPreference.setVisible(isAvailable());
+        if (mPreference != null) {
+            mPreference.setVisible(isAvailable());
+        }
     }
 }
