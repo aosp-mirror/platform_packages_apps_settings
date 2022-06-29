@@ -184,7 +184,8 @@ public abstract class BiometricEnrollBase extends InstrumentedActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()) {
+        if (!isChangingConfigurations() && shouldFinishWhenBackgrounded()
+                && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
             setResult(RESULT_TIMEOUT);
             finish();
         }
