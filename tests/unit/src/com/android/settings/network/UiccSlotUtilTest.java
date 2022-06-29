@@ -25,7 +25,9 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.telephony.UiccCardInfo;
 import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.telephony.UiccSlotMapping;
@@ -50,12 +52,17 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class UiccSlotUtilTest {
-    private Context mContext;
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private SubscriptionManager mSubscriptionManager;
 
     private static final int ESIM_PHYSICAL_SLOT = 0;
     private static final int PSIM_PHYSICAL_SLOT = 1;
+
+    private Context mContext;
+    private List<SubscriptionInfo> mSubscriptionInfoList = new ArrayList<>();
+    private List<UiccCardInfo> mUiccCardInfo = new ArrayList<>();
 
     @Before
     public void setUp() {
@@ -63,6 +70,10 @@ public class UiccSlotUtilTest {
 
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
+        when(mTelephonyManager.getUiccCardsInfo()).thenReturn(mUiccCardInfo);
+
+        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
+        when(mSubscriptionManager.getAllSubscriptionInfoList()).thenReturn(mSubscriptionInfoList);
     }
 
     @Test
@@ -88,16 +99,48 @@ public class UiccSlotUtilTest {
     public void getEsimSlotId_twoSimSlotsDeviceAndEsimIsSlot0_returnTheCorrectEsimSlot() {
         when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
                 twoSimSlotsDeviceActiveEsimActivePsim());
-        int testSlot = UiccSlotUtil.getEsimSlotId(mContext);
+
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext, 0);
 
         assertThat(testSlot).isEqualTo(0);
+    }
+
+    @Test
+    public void getEsimSlotId_simIsRemovableEsimAndRemovableEsimIsSlot1_returnRemovableEsimSlot1() {
+        int subId = 0;
+        int cardId = 0;
+        mSubscriptionInfoList.add(createSubscriptionInfo(subId,-1, -1, true, cardId));
+        mUiccCardInfo.add(createUiccCardInfo(true, 3, 0, false, -1, -1));
+        mUiccCardInfo.add(createUiccCardInfo(true, cardId, 1, true, -1, -1));
+        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
+                twoSimSlotsDeviceActiveEsimActiveRemovableEsim());
+
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext, subId);
+
+        assertThat(testSlot).isEqualTo(1);
+    }
+
+    @Test
+    public void getEsimSlotId_simIsRemovableEsimAndTwoRemovableSlots_returnRemovableEsimSlot1() {
+        int subId = 0;
+        int cardId = 0;
+        mSubscriptionInfoList.add(createSubscriptionInfo(subId,-1, -1, true, cardId));
+        mUiccCardInfo.add(createUiccCardInfo(false, 4, 0, true, -1, -1));
+        mUiccCardInfo.add(createUiccCardInfo(true, cardId, 1, true, -1, -1));
+        when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
+                twoSimSlotsDeviceActivePsimActiveRemovableEsim());
+
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext, subId);
+
+        assertThat(testSlot).isEqualTo(1);
     }
 
     @Test
     public void getEsimSlotId_twoSimSlotsDeviceAndEsimIsSlot1_returnTheCorrectEsimSlot() {
         when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
                 twoSimSlotsDeviceActivePsimActiveEsim());
-        int testSlot = UiccSlotUtil.getEsimSlotId(mContext);
+
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext, 0);
 
         assertThat(testSlot).isEqualTo(1);
     }
@@ -106,7 +149,8 @@ public class UiccSlotUtilTest {
     public void getEsimSlotId_noEimSlotDevice_returnTheCorrectEsimSlot() {
         when(mTelephonyManager.getUiccSlotsInfo()).thenReturn(
                 oneSimSlotDeviceActivePsim());
-        int testSlot = UiccSlotUtil.getEsimSlotId(mContext);
+
+        int testSlot = UiccSlotUtil.getEsimSlotId(mContext, 0);
 
         assertThat(testSlot).isEqualTo(-1);
     }
@@ -612,11 +656,36 @@ public class UiccSlotUtilTest {
     }
 
     private SubscriptionInfo createSubscriptionInfo(int logicalSlotIndex, int portIndex) {
+        return createSubscriptionInfo(0, logicalSlotIndex, portIndex, true, 25);
+    }
+
+    private SubscriptionInfo createSubscriptionInfo(int subId, int logicalSlotIndex, int portIndex,
+            boolean isEmbedded, int cardId) {
         return new SubscriptionInfo(
-                0, "", logicalSlotIndex, "", "", 0, 0, "", 0, null, "", "", "",
-                true /* isEmbedded */,
-                null, "", 25,
+                subId, "",
+                logicalSlotIndex, "", "", 0, 0, "", 0, null, "", "", "",
+                isEmbedded /* isEmbedded */,
+                null, "",
+                cardId,
                 false, null, false, 0, 0, 0, null, null, true, portIndex);
+    }
+
+    private UiccCardInfo createUiccCardInfo(boolean isEuicc, int cardId, int physicalSlotIndex,
+            boolean isRemovable, int logicalSlotIndex, int portIndex) {
+        return new UiccCardInfo(
+                isEuicc /* isEuicc */,
+                cardId /* cardId */,
+                null /* eid */,
+                physicalSlotIndex /* physicalSlotIndex */,
+                isRemovable /* isRemovable */,
+                false /* isMultipleEnabledProfileSupported */,
+                Collections.singletonList(
+                        new UiccPortInfo(
+                                "123451234567890" /* iccId */,
+                                portIndex /* portIdx */,
+                                logicalSlotIndex /* logicalSlotIdx */,
+                                true /* isActive */)
+                ));
     }
 
     private List<SubscriptionInfo> createActiveSubscriptionInfoListOneSim(int logicalSlotIndex,
@@ -727,6 +796,18 @@ public class UiccSlotUtilTest {
         return new UiccSlotInfo[]{
                 createUiccSlotInfo(false, true, 0, true),
                 createUiccSlotInfo(true, false, 1, true)};
+    }
+
+    private UiccSlotInfo[] twoSimSlotsDeviceActiveEsimActiveRemovableEsim() {
+        return new UiccSlotInfo[]{
+                createUiccSlotInfo(true, false, 0, true),
+                createUiccSlotInfo(true, true, 1, true)};
+    }
+
+    private UiccSlotInfo[] twoSimSlotsDeviceActivePsimActiveRemovableEsim() {
+        return new UiccSlotInfo[]{
+                createUiccSlotInfo(false, true, 0, true),
+                createUiccSlotInfo(true, true, 1, true)};
     }
 
     private UiccSlotInfo[] twoSimSlotsDeviceActiveEsimActivePsim() {

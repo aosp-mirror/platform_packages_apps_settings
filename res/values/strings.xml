@@ -329,8 +329,8 @@
 
     <!-- UI debug setting: Disable Bluetooth A2DP hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_a2dp_hw_offload">Disable Bluetooth A2DP hardware offload</string>
-    <!-- UI debug setting: Disable Bluetooth LE AUDIO hardware offload [CHAR LIMIT=none] -->
-    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE AUDIO hardware offload</string>
+    <!-- UI debug setting: Disable Bluetooth LE audio hardware offload [CHAR LIMIT=none] -->
+    <string name="bluetooth_disable_le_audio_hw_offload">Disable Bluetooth LE audio hardware offload</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_title">Restart Device?</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
@@ -339,6 +339,11 @@
     <string name="bluetooth_disable_hw_offload_dialog_confirm">Restart</string>
     <!-- UI debug setting: Disable Bluetooth hardware offload [CHAR LIMIT=none] -->
     <string name="bluetooth_disable_hw_offload_dialog_cancel">Cancel</string>
+
+    <!-- Setting Checkbox title for enabling Bluetooth LE Audio feature. [CHAR LIMIT=40] -->
+    <string name="bluetooth_enable_leaudio">Enable Bluetooth LE audio</string>
+    <!-- Summary of checkbox for enabling Bluetooth LE audio [CHAR LIMIT=none]-->
+    <string name="bluetooth_enable_leaudio_summary">Enables Bluetooth LE audio feature if the device supports LE audio hardware capabilities.</string>
 
     <!-- Title for Bluetooth device group with media capability group [CHAR LIMIT=none]-->
     <string name="connected_device_media_device_title">Media devices</string>
@@ -1088,6 +1093,10 @@
     <string name="security_settings_fingerprint_enroll_finish_message">Now you can use your fingerprint to unlock your phone or verify it\u2019s you, like when you sign in to apps</string>
     <!-- Button text to skip enrollment of fingerprint [CHAR LIMIT=40] -->
     <string name="security_settings_fingerprint_enroll_enrolling_skip">Do it later</string>
+    <!-- Accessibility message for fingerprint enrollment asking the user to place the tip of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_tip_fingerprint_help">Lift, then touch again</string>
+    <!-- Accessibility message for fingerprint enrollment asking the user to place the sides of their finger on the fingerprint sensor [CHAR LIMIT=NONE] -->
+    <string name="security_settings_udfps_side_fingerprint_help">Place the side of your fingerprint on the sensor and hold, then switch to the other side</string>
     <!-- Title of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=40] -->
     <string name="setup_fingerprint_enroll_enrolling_skip_title">Skip fingerprint setup?</string>
     <!-- Content of the dialog shown when the user tries to skip fingerprint setup, asking them to confirm the action [CHAR LIMIT=NONE] -->
@@ -8348,6 +8357,9 @@
     <!-- Sound: Other sounds: Title for the option enabling touch sounds. [CHAR LIMIT=30] -->
     <string name="touch_sounds_title">Touch sounds</string>
 
+    <!-- Sound: Other sounds: Title for the option enabling the vibrate icon. [CHAR LIMIT=50] -->
+    <string name="vibrate_icon_title">Always show icon when in vibrate mode</string>
+
     <!-- Sound: Other sounds: Title for the option enabling haptic feedback on touch. [CHAR LIMIT=30] -->
     <string name="vibrate_on_touch_title">Touch vibration</string>
 
@@ -11307,11 +11319,6 @@
     <!-- Text for the setting on whether you can type text into notifications without unlocking the device. -->
     <string name="lockscreen_remote_input">If device is locked, prevent typing replies or other text in notifications</string>
 
-    <string-array name="bytes_picker_sizes" translatable="false">
-        <item>@*android:string/megabyteShort</item>
-        <item>@*android:string/gigabyteShort</item>
-    </string-array>
-
     <!-- [CHAR LIMIT=30] Label for setting to control the default spell checker -->
     <string name="default_spell_checker">Default spell checker</string>
 
@@ -13501,4 +13508,22 @@
     <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
     <!-- Strings for Dialog connect button -->
     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
+
+    <!-- BT LE Audio Device: Media Broadcast -->
+    <!-- The title of the Media Broadcast Dialog [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_title">Broadcast</string>
+    <!-- The message of the Media Broadcast Dialog for finding broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_find_message">Listen to broadcasts that are playing near you</string>
+    <!-- The message of the Media Broadcast Dialog for broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_broadcast_dialog_broadcast_message">Broadcast media to devices near you, or listen to someone else’s broadcast</string>
+    <!-- The title of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_title">Broadcasts</string>
+    <!-- The summary of the Media Find Broadcast activity [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_summary">Listening to</string>
+    <!-- The Button of the action to find broadcasts [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast">Find broadcasts</string>
+    <!-- The Button of the action to leave the broadcast [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_leave">Leave broadcast</string>
+    <!-- The Button of the action to scan QR code [CHAR LIMIT=none] -->
+    <string name="bluetooth_find_broadcast_button_scan">Scan QR code</string>
 </resources>

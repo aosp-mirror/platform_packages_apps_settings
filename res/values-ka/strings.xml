@@ -272,7 +272,8 @@
     <string name="zone_change_to_from_dst" msgid="686451769985774294">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> იწყება რიცხვში: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_exemplar_location_and_offset" msgid="2186042522225153092">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
     <string name="zone_info_offset_and_name" msgid="3960192548990990152">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
-    <string name="zone_info_footer" msgid="7004693956837388129">"იყენებს <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>-ს. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> იწყება <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>-ში."</string>
+    <string name="zone_info_footer_first_sentence" msgid="1326664252091302458">"გამოიყენება <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="SECOND_SENTENCE">%2$s</xliff:g>"</string>
+    <string name="zone_info_footer_second_sentence" msgid="6472889173541729110">"<xliff:g id="DST_TIME_TYPE">%1$s</xliff:g> იწყება რიცხვში: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
     <string name="zone_info_footer_no_dst" msgid="8399585343328811158">"იყენებს <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>-ს. არ იცავს ზაფხულის/ზამთრის დროს."</string>
     <string name="zone_time_type_dst" msgid="9189689342265305808">"ზაფხულის/ზამთრის დრო"</string>
     <string name="zone_time_type_standard" msgid="6865420715430680352">"სტანდარტული დრო"</string>
@@ -280,7 +281,7 @@
     <string name="zone_menu_by_offset" msgid="1257702747474426745">"UTC  წანაცვლებით არჩევა"</string>
     <string name="date_picker_title" msgid="646573308567782578">"თარიღი"</string>
     <string name="time_picker_title" msgid="1784236407401743393">"დრო"</string>
-    <string name="lock_after_timeout" msgid="8682769000437403444">"ჩაკეტვა ეკრანის ჩაქრ. შემდეგ"</string>
+    <string name="lock_after_timeout" msgid="8682769000437403444">"ჩაკეტვა ჩაქრობის შემდეგ"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"ლოდინის დროის დასრულებისთანავე, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>-ის მიერ"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> ლოდინის დროის შემდეგ, როდესაც არ არის განბლოკილი <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>-ის მიერ"</string>
@@ -382,9 +383,9 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"სახით განბლოკვის პარამეტრების დაყენება"</string>
     <string name="security_settings_face_enroll_improve_face_alert_body" msgid="2670118180411127323">"წაშალეთ სახის ამჟამინდელი მოდელი სახით განბლოკვის ხელახლა დასაყენებლად.\n\nთქვენი სახის მოდელი სამუდამოდ და უსაფრთხოდ წაიშლება.\n\nწაშლის შემდეგ, ტელეფონის განსაბლოკად ან აპებში ავტორიზაციისთვის PIN-კოდი, ნიმუში ან პაროლი დაგჭირდებათ."</string>
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" msgid="2469599074650327489">"წაშალეთ სახის ამჟამინდელი მოდელი სახით განბლოკვის ხელახლა დასაყენებლად.\n\nთქვენი სახის მოდელი სამუდამოდ და უსაფრთხოდ წაიშლება.\n\nწაშლის შემდეგ, ტელეფონის განსაბლოკად ან აპებში ავტორიზაციისთვის ანაბეჭდი, PIN-კოდი, ნიმუში ან პაროლი დაგჭირდებათ."</string>
-    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"სახით განბლ. მიზანი:"</string>
+    <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"სახით განბლოკვის გამოყენება:"</string>
     <string name="security_settings_face_settings_preferences_category" msgid="7628929873407280453">"სახით განბლოკვის გამოყენებისას"</string>
-    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"თვალები გახელილი უნდა გქონდეთ"</string>
+    <string name="security_settings_face_settings_require_attention" msgid="4395309855914391104">"გახელილი თვალები აუცილებელია"</string>
     <string name="security_settings_face_settings_require_attention_details" msgid="2546230511769544074">"ტელეფონის განსაბლოკად თვალები გახელილი უნდა გქონდეთ"</string>
     <string name="security_settings_face_settings_require_confirmation" msgid="6603039421004198334">"დადასტურების ყოველთვის მოთხოვნა"</string>
     <string name="security_settings_face_settings_require_confirmation_details" msgid="3498729789625461914">"აპებში სახით განბლოკვის გამოყენებისას, ყოველთვის მოითხოვეთ დადასტურება"</string>
@@ -451,8 +452,8 @@
     <string name="security_settings_biometric_preference_summary_both_fp_single" msgid="684409535278676426">"სახე და თითის ანაბეჭდი დამატებულია"</string>
     <string name="biometric_settings_intro" msgid="4263069383955676756">"სახით და ანაბეჭდით განბლოკვას რომ დააყენებთ, ტელეფონი მოგთხოვთ თითის ანაბეჭდს, როცა პირბადეს ატარებთ ან ბნელ სივრცეში ხართ"</string>
     <string name="biometric_settings_category_ways_to_unlock" msgid="3384767901580915266">"განბლოკვის ხერხები"</string>
-    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"განბლოკეთ თქვენი ტელეფონი"</string>
-    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"დაადასტურეთ ვინაობა აპებში"</string>
+    <string name="biometric_settings_use_biometric_unlock_phone" msgid="8180914579885804358">"თქვენი ტელეფონის განსაბლოკად"</string>
+    <string name="biometric_settings_use_biometric_for_apps" msgid="6201168728906364189">"აპებში ვინაობის დასადასტურებლად"</string>
     <string name="biometric_settings_use_face_preference_summary" msgid="1821648836899408477">"სახის მეშვეობით"</string>
     <string name="biometric_settings_use_fingerprint_preference_summary" msgid="6077762097826050165">"თთის ანაბეჭდის მეშვეობით"</string>
     <string name="biometric_settings_use_face_or_fingerprint_preference_summary" msgid="3029102492674234728">"სახის ან თითის ანაბეჭდის მეშვეობით"</string>
@@ -496,6 +497,8 @@
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="3606325177406951457">"თითის ანაბეჭდი დამატებულია"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="3469254005423998143">"ახლა უკვე შეგიძლიათ თითის ანაბეჭდით ტელეფონის განბლოკვა ან ვინაობის დადასტურება, როცა აპებში შედიხართ"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3004786457919122854">"მოგვიანებით გაკეთება"</string>
+    <string name="security_settings_udfps_tip_fingerprint_help" msgid="7580784640741217494">"აიღეთ თითი, შემდეგ კი ხელახლა შეეხეთ"</string>
+    <string name="security_settings_udfps_side_fingerprint_help" msgid="2567232481013195191">"დაადეთ თითის ცალი მხარე სენსორს და გააჩერეთ ცოტა ხნით, შემდეგ კი დაადეთ მეორე მხარე"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="352947044008973812">"გსურთ თითის ანაბეჭდის დაყენ. გამოტოვება?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="4876965433600560365">"თქვენ აირჩიეთ თითის ანაბეჭდის გამოყენება ტელეფონის განბლოკვის ერთ-ერთ მეთოდად. თუ ამას ახლა გამოტოვებთ, მისი დაყენება მოგვიანებით მოგიწევთ. დაყენებას დაახლოებით ერთი წუთი სჭირდება."</string>
     <string name="lock_screen_pin_skip_message" product="tablet" msgid="4938798234214623521">"PIN-კოდი დაიცავს ტაბლეტს, თუ ის დაიკარგება ან მას მოგპარავენ"</string>
@@ -541,7 +544,7 @@
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"გამოტოვებთ პაროლის დაყენებას?"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"გსურთ, გამოტოვოთ პაროლის და სახის დაყენება?"</string>
     <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"გსურთ, გამოტოვოთ პაროლის და თითის ანაბეჭდის დაყენება?"</string>
-    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"გსურთ, გამოტოვოთ პაროლის, სახის და თითის ანაბეჭდის დაყენება?"</string>
+    <string name="lock_screen_password_skip_biometrics_title" msgid="900281322095862009">"გამოვტოვოთ პაროლის, სახის და თითის ანაბეჭდის დაყენება?"</string>
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"გამოტოვებთ ნიმუშის დაყენებას?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"გსურთ, გამოტოვოთ განმბლოკავი ნიმუშის და სახის დაყენება?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"გსურთ, გამოტოვოთ განმბლოკავი ნიმუშის და თითის ანაბეჭდის დაყენება?"</string>
@@ -3428,9 +3431,12 @@
     <string name="sim_cellular_data_unavailable" msgid="4653591727755387534">"მობილური ინტერნეტი მიუწვდომელია"</string>
     <string name="sim_cellular_data_unavailable_summary" msgid="6505871722911347881">"შეეხეთ მობილური ინტერნეტისთვის SIM-ის ასარჩევად"</string>
     <string name="sim_calls_always_use" msgid="967857230039768111">"ზარებისთვის მუდამ ამის გამოყენება"</string>
-    <string name="select_sim_for_data" msgid="1577092784244587369">"მობილური ინტერნეტისთვის SIM-ის არჩევა"</string>
+    <string name="select_sim_for_data" msgid="2642305487659432499">"აირჩიეთ SIM მობილური ინტერნეტისთვის"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"აირჩიეთ SIM ბარათი SMS-ისთვის"</string>
     <string name="data_switch_started" msgid="6292759843974720112">"მიმდინარეობს მონაცემების SIM-ზე გადართვა, ამას შესაძლოა ერთ წუთამდე დასჭირდეს…"</string>
+    <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"გამოიყენებთ <xliff:g id="NEW_SIM">%1$s</xliff:g>-ს მობილური ინტერნეტისთვის?"</string>
+    <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"თუ <xliff:g id="NEW_SIM">%1$s</xliff:g>-ზე გადაერთვებით, <xliff:g id="OLD_SIM">%2$s</xliff:g> აღარ იქნება გამოყენებული მობილური ინტერნეტისთვის."</string>
+    <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"<xliff:g id="NEW_SIM">%1$s</xliff:g>-ის გამოყენება"</string>
     <string name="select_sim_for_calls" msgid="7843107015635189868">"დარეკვა SIM-ით:"</string>
     <string name="sim_select_card" msgid="1226182454109919045">"აირჩიეთ SIM ბარათი"</string>
     <string name="sim_card_number_title" msgid="4728780444646439845">"SIM <xliff:g id="CARD_NUMBER">%1$d</xliff:g>"</string>
@@ -3608,6 +3614,7 @@
     <string name="charging_sounds_title" msgid="5261683808537783668">"დატენის ხმები და ვიბრაცია"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"Docking ხმები"</string>
     <string name="touch_sounds_title" msgid="2200734041857425078">"შეხების ხმები"</string>
+    <string name="vibrate_icon_title" msgid="1281100105045362530">"ყოველთვის გამოჩნდეს ხატულა ვიბრაციის რეჟიმში"</string>
     <string name="vibrate_on_touch_title" msgid="9105544449810547716">"ვიბრაცია შეხებისას"</string>
     <string name="vibrate_on_touch_summary" msgid="664831333409399440">"შეხებადი რეაქცია, კლავიატურა და სხვა"</string>
     <string name="dock_audio_media_title" msgid="6474579339356398330">"Dock სპიკერები უკრავს"</string>
@@ -3800,10 +3807,10 @@
     <string name="silent_notifications_status_bar" msgid="6113307620588767516">"ჩუმი შეტყობინებების დამალვა სტატუსის ზოლში"</string>
     <string name="notification_pulse_title" msgid="8013178454646671529">"სინათლის ციმციმი"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"კონფიდენციალურობა"</string>
-    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"ჩაკეტილი ეკრანის გამოტოვება"</string>
-    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"განბლოკვის შემდეგ გადადით ბოლოს გამოყენებულ ეკრანზე"</string>
+    <string name="lockscreen_bypass_title" msgid="6519964196744088573">"ჩაკეტილი ეკრანის გამოსატოვებლად"</string>
+    <string name="lockscreen_bypass_summary" msgid="464277506200346748">"განბლოკვის შემდეგ ბოლოს გამოყენებულ ეკრანზე გადასვლა"</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"ჩაკეტილი ეკრანი, დაბლოკილი ეკრანი, გამოტოვება, გვერდის ავლა"</string>
-    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"როცა სამსახურის პროფილი დაბლოკილია"</string>
+    <string name="locked_work_profile_notification_title" msgid="279367321791301499">"დაბლოკილი სამს.პროფილისას"</string>
     <string name="lock_screen_notifs_title" msgid="3412042692317304449">"შეტყობინებები ჩაკეტილ ეკრანზე"</string>
     <string name="lock_screen_notifs_show_all" msgid="1300418674456749664">"მიმოწერების, ნაგულისხმევისა და ჩუმის ჩვენება"</string>
     <string name="lock_screen_notifs_show_alerting" msgid="6584682657382684566">"ჩუმი მიმოწერებისა და შეტყობინებების დამალვა"</string>
@@ -3814,7 +3821,7 @@
     <string name="lock_screen_notifs_redact_work_summary" msgid="3238238380405430156">"სამსახურის პროფილის სენსიტიური კონტენტის ჩვენება, როცა ჩაკეტილია"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6540443483088311328">"შეტყობინების მთელი შინაარსის ჩვენება"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7837303171531166789">"სენსიტიური კონტენტი მარტო განბლოკილზე"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"არ მაჩვენო შეტყობინება"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="3388290397947365744">"შეტყობინებები საერთოდ არ გამოჩნდეს"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="4688399629301178487">"როგორ გსურთ, გამოჩნდეს ჩაკეტილი ეკრანი?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1360388192096354315">"ჩაკეტილი ეკრანი"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="8373401288962523946">"სამსახურის შეტყობინებების მთელი კონტენტის ჩვენება"</string>
@@ -3925,8 +3932,8 @@
     <string name="notif_listener_excluded_app_summary" msgid="2914567678047195396">"პარამეტრების შეცვლა თითოეული აპისთვის, რომელიც შეტყობინებებს გზავნის"</string>
     <string name="notif_listener_excluded_app_screen_title" msgid="8636196723227432994">"მოწყობილობაზე ნაჩვენები აპები"</string>
     <string name="notif_listener_not_migrated" msgid="6265206376374278226">"ამ აპს არ აქვს გაძლიერებული პარამეტრების მხარდაჭერა"</string>
-    <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტუალური რეალობის დამხმარე სერვისები"</string>
-    <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური სერვისის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
+    <string name="vr_listeners_title" msgid="4960357292472540964">"ვირტ. რეალობის დამხმარე სერვისები"</string>
+    <string name="no_vr_listeners" msgid="8442646085375949755">"ვირტუალური რეალობის დამხმარე სერვისად გაშვება არცერთ დაინსტალირებულ აპს არ მოუთხოვია."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"გსურთ ვირტუალური რეალობის სერვისისთვის <xliff:g id="SERVICE">%1$s</xliff:g>-ზე წვდომის დაშვება?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"თქვენ მიერ აპლიკაციების ვირტუალური რეალობის რეჟიმში გამოყენებისას <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> გაშვებას შეძლებს."</string>
     <string name="display_vr_pref_title" msgid="4850474436291113569">"VR რეჟიმში ყოფნისას"</string>
@@ -3952,7 +3959,7 @@
     <string name="interact_across_profiles_consent_dialog_title" msgid="8530621211216508681">"ანდობთ სამსახურის აპ „<xliff:g id="NAME">%1$s</xliff:g>“-ს თქვენ პერსონალურ მონაცემებს?"</string>
     <string name="interact_across_profiles_consent_dialog_summary" msgid="3949870271562055048">"აპები მხოლოდ იმ შემთხვევაში დააკავშირეთ, თუ იცით, რომ ამით თქვენი პერსონალური მონაცემები თქვენს IT ადმინისტრატორთან არ გაზიარდება."</string>
     <string name="interact_across_profiles_consent_dialog_app_data_title" msgid="8436318876213958940">"აპის მონაცემები"</string>
-    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"ამ აპს შეუძლია მონაცემებზე წვდომა, რომლებიც შენს პერსონალურ აპში „<xliff:g id="NAME">%1$s</xliff:g>“ ინახება."</string>
+    <string name="interact_across_profiles_consent_dialog_app_data_summary" msgid="6057019384328088311">"ამ აპს შეუძლია მონაცემებზე წვდომა, რომლებიც თქვენს პერსონალურ აპში „<xliff:g id="NAME">%1$s</xliff:g>“ ინახება."</string>
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"ნებართვები"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"ამ აპს შეუძლია თქვენი პერსონალური აპის „<xliff:g id="NAME">%1$s</xliff:g>“ ნებართვების გამოყენება, როგორიცაა მდებარეობაზე, მეხსიერებაზე ან კონტაქტებზე წვდომა."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"დაკავშირებული აპები არ არის"</string>
@@ -4758,7 +4765,7 @@
     <string name="winscope_trace_quick_settings_title" msgid="4104768565053226689">"Winscope-ის კვალის მიდევნება"</string>
     <string name="sensors_off_quick_settings_title" msgid="8472151847125917167">"სენსორების გამორთვა"</string>
     <string name="managed_profile_settings_title" msgid="3400923723423564217">"სამსახურის პროფილის პარამეტრები"</string>
-    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"სამსახურის კატალოგის კონტაქტების ძიება პირადი აპებში"</string>
+    <string name="managed_profile_contact_search_title" msgid="6562061740814513737">"სამსახურის კატალოგის კონტაქტების ძიება პირად აპებში"</string>
     <string name="managed_profile_contact_search_summary" msgid="4974727886709219105">"თქვენს ძიებებსა და შემომავალ ზარებს შეიძლება თქვენი IT ადმინისტრატორი ხედავდეს"</string>
     <string name="cross_profile_calendar_title" msgid="7570277841490216947">"პროფილებსშორისი კალენდარი"</string>
     <string name="cross_profile_calendar_summary" msgid="8856185206722860069">"პერსონალურ კალენდარში სამსახურის მოვლენების ჩვენება"</string>
@@ -5234,12 +5241,16 @@
     <string name="sim_action_enable_sub_dialog_title_without_carrier_name" msgid="4842051610633654278">"გსურთ SIM-ის ჩართვა?"</string>
     <string name="sim_action_switch_sub_dialog_title" msgid="9180969453358718635">"გსურთ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა?"</string>
     <string name="sim_action_switch_psim_dialog_title" msgid="5613177333235213024">"გსურთ SIM ბარათის გამოყენებაზე გადართვა?"</string>
+    <string name="sim_action_switch_sub_dialog_mep_title" msgid="933856847099933004">"გსურთ, გამოიყენოთ <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
     <string name="sim_action_switch_sub_dialog_text" msgid="2091834911153293004">"ყოველ ჯერზე მხოლოდ ერთი SIM ბარათი შეიძლება იყოს აქტიური.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-ის სერვისს არ გააუქმებს."</string>
     <string name="sim_action_switch_sub_dialog_text_downloaded" msgid="1396320209544698027">"ყოველ ჯერზე მხოლოდ ერთი ჩამოტვირთული SIM ბარათი შეიძლება იყოს აქტიური.\n\n<xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა <xliff:g id="FROM_CARRIER_NAME">%2$s</xliff:g>-ის სერვისს არ გააუქმებს."</string>
     <string name="sim_action_switch_sub_dialog_text_single_sim" msgid="6188750682431170845">"ყოველ ჯერზე მხოლოდ ერთი SIM ბარათი შეიძლება იყოს აქტიური.\n\nგადართვა <xliff:g id="TO_CARRIER_NAME">%1$s</xliff:g>-ის სერვისს არ გააუქმებს."</string>
+    <string name="sim_action_switch_sub_dialog_mep_text" msgid="8348764755143679582">"ერთდროულად 2 SIM-ის გამოყენება შეგიძლიათ. <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ის გამოსაყენელად გამორთეთ მეორე SIM."</string>
     <string name="sim_action_switch_sub_dialog_confirm" msgid="1901181581944638961">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა"</string>
+    <string name="sim_action_switch_sub_dialog_carrier_list_item_for_turning_off" msgid="5392037608705799522">"გამორთვა: <xliff:g id="CARRIER_NAME">%1$s</xliff:g>"</string>
+    <string name="sim_action_switch_sub_dialog_info_outline_for_turning_off" msgid="1617619100229136888">"SIM-ის გამორთვით თქვენი სერვისი არ გაუქმდება"</string>
     <string name="sim_action_enabling_sim_without_carrier_name" msgid="2706862823501979981">"მიმდინარეობს ქსელთან დაკავშირება…"</string>
-    <string name="sim_action_switch_sub_dialog_progress" msgid="8341013572582875574">"მიმდინარეობს <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა"</string>
+    <string name="sim_action_switch_sub_dialog_progress" msgid="4718412054243793310">"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>-ზე გადართვა ზარებისა და შეტყობინებებისთვის…"</string>
     <string name="sim_action_enable_sim_fail_title" msgid="1765646238941015899">"ოპერატორის გადართვა ვერ მოხერხდა"</string>
     <string name="sim_action_enable_sim_fail_text" msgid="4781863235721417544">"ოპერატორის გადართვა ვერ მოხერხდა წარმოქმნილი შეცდომის გამო."</string>
     <string name="privileged_action_disable_sub_dialog_title" msgid="3298942357601334418">"გამოირთოს <xliff:g id="CARRIER_NAME">%1$s</xliff:g>?"</string>
@@ -5408,10 +5419,8 @@
     <string name="cached_apps_freezer" msgid="1057519579761550350">"აღსრულების შეჩერება ქეშირებული აპებისთვის"</string>
     <string name="overlay_settings_title" msgid="1032863083496396365">"პარამეტრებზე ეკრანის გადაფარვის დაშვება"</string>
     <string name="overlay_settings_summary" msgid="2745336273786148166">"პარამეტრების ეკრანების გადაფარვის დაშვება აპებისთვის, რომლებსაც სხვა აპების ზემოდან გამოჩენა შეუძლია"</string>
-    <!-- no translation found for allow_mock_modem (3832264806530479214) -->
-    <skip />
-    <!-- no translation found for allow_mock_modem_summary (9097416612748005374) -->
-    <skip />
+    <string name="allow_mock_modem" msgid="3832264806530479214">"სიმულაციური მოდემის დაშვება"</string>
+    <string name="allow_mock_modem_summary" msgid="9097416612748005374">"დაუშვით ამ მოწყობილობაზე სიმულაციური მოდემის სერვისის გაშვება ინსტრუმენტული ტესტირებისთვის. ნუ ჩართავთ მას ტელეფონის ნორმალური გამოყენების დროს"</string>
     <string name="media_controls_title" msgid="403271085636252597">"მედია"</string>
     <string name="media_controls_resume_title" msgid="855076860336652370">"მედია დამკვრელის ჩამაგრება"</string>
     <string name="media_controls_resume_description" msgid="3163482266454802097">"დაკვრის სწრაფად გასაგრძელებლად მედია დამკვრელი გახსნილი დარჩება სწრაფ პარამეტრებში"</string>
@@ -5548,4 +5557,12 @@
     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>-ს ამ ტელეფონთან დაკავშირება სურს.\n\nაქამდე <xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>-ს არ დაკავშირებიხართ."</string>
     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"არ დაუკავშირდეს"</string>
     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"დაკავშირება"</string>
+    <string name="bluetooth_broadcast_dialog_title" msgid="9172775308463135884">"ტრანსლაცია"</string>
+    <string name="bluetooth_broadcast_dialog_find_message" msgid="6621660851669953883">"მოუსმინეთ ტრანსლაციებს თქვენთან ახლოს"</string>
+    <string name="bluetooth_broadcast_dialog_broadcast_message" msgid="6198264676009094495">"მოახდინეთ მედიის ახლომდებარე მოწყობილობებზე ტრანსლაცია ან მოუსმინეთ სხვა პირის ტრანსლაციას"</string>
+    <string name="bluetooth_find_broadcast_title" msgid="5385985218699831970">"ტრანსლაციები"</string>
+    <string name="bluetooth_find_broadcast_summary" msgid="3907899428626210673">"უსმენთ"</string>
+    <string name="bluetooth_find_broadcast" msgid="1768337775649457586">"ტრანსლაციის პოვნა"</string>
+    <string name="bluetooth_find_broadcast_button_leave" msgid="7881206581147104908">"ტრანსლაციის დატოვება"</string>
+    <string name="bluetooth_find_broadcast_button_scan" msgid="3995664694641895189">"QR კოდის სკანირება"</string>
 </resources>
