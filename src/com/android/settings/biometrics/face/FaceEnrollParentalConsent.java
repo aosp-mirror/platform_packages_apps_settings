@@ -53,11 +53,7 @@ public class FaceEnrollParentalConsent extends FaceEnrollIntroduction {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String text =
-                getText(R.string.security_settings_face_enroll_introduction_consent_message_0)
-                + "\n\n"
-                + getText(R.string.security_settings_face_enroll_introduction_consent_message);
-        setDescriptionText(text);
+        setDescriptionText(R.string.security_settings_face_enroll_introduction_consent_message_0);
     }
 
     @Override

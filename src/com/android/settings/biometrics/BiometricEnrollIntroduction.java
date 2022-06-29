@@ -24,6 +24,7 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -302,7 +303,8 @@ public abstract class BiometricEnrollIntroduction extends BiometricEnrollBase
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO(b/229924331): Add tests for the enrollment flows.
+        Log.d(TAG,
+                "onActivityResult(requestCode=" + requestCode + ", resultCode=" + resultCode + ")");
         final boolean cameFromMultiBioFpAuthAddAnother =
                 requestCode == BiometricUtils.REQUEST_ADD_ANOTHER
                 && BiometricUtils.isMultiBiometricFingerprintEnrollmentFlow(this);
