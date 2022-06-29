@@ -74,7 +74,8 @@ public abstract class BiometricsEnrollEnrolling extends BiometricEnrollBase
                 getSupportFragmentManager()
                         .beginTransaction().remove(mSidecar).commitAllowingStateLoss();
             }
-            if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
+            if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                    && !BiometricUtils.isAnyMultiBiometricFlow(this)) {
                 setResult(RESULT_TIMEOUT);
             }
             finish();
