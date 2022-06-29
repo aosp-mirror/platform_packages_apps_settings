@@ -333,6 +333,8 @@ public class BiometricEnrollActivity extends InstrumentedActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d(TAG,
+                "onActivityResult(requestCode=" + requestCode + ", resultCode=" + resultCode + ")");
         // single enrollment is handled entirely by the launched activity
         // this handles multi enroll or if parental consent is required
         if (mParentalConsentHelper != null) {

@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
@@ -47,6 +48,9 @@ import java.util.List;
  */
 public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
         BiometricEnrollSidecar.Listener {
+
+
+    private static final String TAG = "FingerprintEnrollFindSensor";
 
     @Nullable
     private FingerprintFindSensorAnimation mAnimation;
@@ -294,6 +298,8 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG,
+                "onActivityResult(requestCode=" + requestCode + ", resultCode=" + resultCode + ")");
         boolean enrolledFingerprint = false;
         if (data != null) {
             enrolledFingerprint = data.getBooleanExtra(EXTRA_FINISHED_ENROLL_FINGERPRINT, false);
