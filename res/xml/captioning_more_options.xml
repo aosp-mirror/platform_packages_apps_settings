@@ -22,8 +22,8 @@
 
     <com.android.settings.accessibility.LocalePreference
         android:key="captioning_locale"
-        android:summary="%s"
-        android:title="@string/captioning_locale" />
+        android:title="@string/captioning_locale"
+        settings:controller="com.android.settings.accessibility.CaptionLocalePreferenceController"/>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="captioning_more_options_footer"
