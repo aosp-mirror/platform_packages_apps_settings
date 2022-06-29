@@ -54,8 +54,7 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
 
     @Override
     public int getMetricsCategory() {
-        // TODO(b/225117454): Need to update SettingsEnums later
-        return SettingsEnums.ACCESSIBILITY;
+        return SettingsEnums.DIALOG_ACCESSIBILITY_HEARING_AID_PAIR_ANOTHER;
     }
 
     @NonNull
@@ -82,7 +81,7 @@ public class HearingAidPairingDialogFragment extends InstrumentedDialogFragment 
     private void positiveButtonListener() {
         new SubSettingLauncher(getActivity())
                 .setDestination(BluetoothPairingDetail.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
+                .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 }
