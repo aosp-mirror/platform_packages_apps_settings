@@ -100,7 +100,7 @@
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"受信済みファイル"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth は OFF です"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"タップして ON にします"</string>
-    <string name="device_picker" msgid="2427027896389445414">"Bluetoothデバイスの選択"</string>
+    <string name="device_picker" msgid="2427027896389445414">"Bluetooth デバイスの選択"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が Bluetooth を ON にしようとしています"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"「<xliff:g id="APP_NAME">%1$s</xliff:g>」が Bluetooth を OFF にしようとしています"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"アプリが Bluetooth を ON にしようとしています"</string>
@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"日時の設定"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"日付、時刻、タイムゾーン、フォーマットを設定する"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"日時を自動的に設定"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"タイムゾーンを自動的に設定"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"自動設定"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"言語 / 地域で一般的な形式を使用する"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24時間表示"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24時間表示"</string>
@@ -1888,7 +1888,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"位置情報サービス"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"位置情報サービス"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"仕事用プロファイル向けの位置情報サービス"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"タイムゾーンの設定に位置情報を使用"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"位置情報の使用"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"デバイスの位置情報が必要"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"位置情報を使用してタイムゾーンを設定するには、位置情報を ON にしてから、タイムゾーンの設定を更新してください"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置情報の設定"</string>
@@ -1897,6 +1897,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置情報によるタイムゾーン検出は無効です"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"位置情報によるタイムゾーン検出はサポートされていません"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"位置情報によるタイムゾーン検出は変更できません"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"タイムゾーンの設定に位置情報が使用されることがあります"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Wi-Fi/モバイル接続時の位置情報"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Googleの位置情報サービスで現在地をすばやく推定することをアプリに許可します。匿名の現在地データが収集され、Googleに送信されます。"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Wi-Fiで検出される現在地"</string>
@@ -2941,7 +2942,7 @@
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"普段の充電パターンを基に自動で ON"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"普段の充電パターンを基に自動で ON にします"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"残量に応じて自動で ON"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"次回のいつもの充電前に電池が切れる可能性がある場合、バッテリー セーバーが ON になります"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"次回のいつもの充電前にバッテリーが切れる可能性がある場合、バッテリー セーバーが ON になります"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"<xliff:g id="PERCENT">%1$s</xliff:g> で ON"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"スケジュールの設定"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"電池を長持ちさせる"</string>
@@ -3012,6 +3013,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"完全な起動ワードと対話"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"シンプルな音声認識"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"この音声入力サービスを使用すると、常時音声監視を実行し、音声対応アプリの管理をユーザーに代わって行えるようになります。これは<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>の一部です。このサービスの使用を有効にしますか？"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"デバイス上の認識の設定"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"デバイス上の認識"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"デバイス上の音声認識"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"優先するエンジン"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"エンジンの設定"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"音声の速度と高さ"</string>
@@ -3029,7 +3033,7 @@
     <string name="vpn_settings_single_insecure_multiple_total" msgid="6107225844641301139">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="vpn_settings_multiple_insecure_multiple_total" msgid="1706236062478680488">"安全ではない VPN: <xliff:g id="VPN_COUNT">%d</xliff:g> 件"</string>
     <string name="adaptive_connectivity_title" msgid="7464959640138428192">"接続の自動調整"</string>
-    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、電池が長持ちし、デバイスのパフォーマンスが改善します"</string>
+    <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"ネットワーク接続を自動的に管理することで、バッテリーが長持ちし、デバイスのパフォーマンスが改善します"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"ON"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"OFF"</string>
     <string name="credentials_title" msgid="7535942196886123656">"認証情報ストレージ"</string>
@@ -3689,8 +3693,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, 拡張 通信, 5G 通信"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"言語を追加, 追加 言語"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"テキスト サイズ, 大きい 活字, 大きい フォント, 大きい テキスト, ロー ビジョン, 切り替え テキスト 大きく, フォント 大きく, フォント 拡大"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"常に表示状態のディスプレイ, AOD"</string>
     <string name="default_sound" msgid="6604374495015245195">"デフォルトの通知音"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"着信音と通知の音量: <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"音量、バイブレーション、サイレント モード"</string>
@@ -4485,7 +4488,7 @@
     <string name="memory_avg_desc" msgid="2632995851138152303">"平均: <xliff:g id="MEMORY">%1$s</xliff:g>"</string>
     <string name="memory_use_running_format" msgid="4376086847362492613">"<xliff:g id="MEMORY">%1$s</xliff:g>/<xliff:g id="RUNNING">%2$s</xliff:g>"</string>
     <string name="process_format" msgid="4239069158701023623">"<xliff:g id="APP_NAME">%1$s</xliff:g>（<xliff:g id="COUNT">%2$d</xliff:g>）"</string>
-    <string name="high_power_apps" msgid="5623152700992102510">"電池の最適化"</string>
+    <string name="high_power_apps" msgid="5623152700992102510">"バッテリーの最適化"</string>
     <string name="additional_battery_info" msgid="3104208543623068714">"使用状況に関する通知"</string>
     <string name="show_all_apps" msgid="4490719452453223082">"デバイス全体での使用状況を表示"</string>
     <string name="hide_extra_apps" msgid="7313907836289865123">"アプリの使用状況を表示"</string>
