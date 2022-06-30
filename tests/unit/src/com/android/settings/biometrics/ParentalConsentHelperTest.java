@@ -82,7 +82,7 @@ public class ParentalConsentHelperTest {
     }
 
     @Test
-    public void testLaunchNext_face_and_fingerprint_all_consent() {
+    public void testLaunchNext__fingerprint_all_consent() {
         testLaunchNext(
                 true /* requireFace */, true /* grantFace */,
                 true /* requireFingerprint */, true /* grantFace */,
@@ -158,12 +158,12 @@ public class ParentalConsentHelperTest {
             boolean requireFingerprint, boolean grantFingerprint,
             long gkpw) {
         final List<Pair<String, Boolean>> expectedLaunches = new ArrayList<>();
-        if (requireFace) {
-            expectedLaunches.add(new Pair(FaceEnrollParentalConsent.class.getName(), grantFace));
-        }
         if (requireFingerprint) {
             expectedLaunches.add(
                     new Pair(FingerprintEnrollParentalConsent.class.getName(), grantFingerprint));
+        }
+        if (requireFace) {
+            expectedLaunches.add(new Pair(FaceEnrollParentalConsent.class.getName(), grantFace));
         }
 
         // initial consent status

@@ -51,7 +51,7 @@ public class HearingAidDialogFragment extends InstrumentedDialogFragment {
     private void launchBluetoothAddDeviceSetting() {
         new SubSettingLauncher(getActivity())
                 .setDestination(BluetoothPairingDetail.class.getName())
-                .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY)
+                .setSourceMetricsCategory(getMetricsCategory())
                 .launch();
     }
 }

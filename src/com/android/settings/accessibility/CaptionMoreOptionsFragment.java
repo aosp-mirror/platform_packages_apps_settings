@@ -17,13 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.view.accessibility.CaptioningManager;
-
-import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -32,29 +25,13 @@ import com.android.settingslib.search.SearchIndexable;
 
 /** Settings fragment containing more options of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionMoreOptionsFragment extends DashboardFragment
-        implements Preference.OnPreferenceChangeListener {
+public class CaptionMoreOptionsFragment extends DashboardFragment {
 
     private static final String TAG = "CaptionMoreOptionsFragment";
-    private static final String PREF_LOCALE = "captioning_locale";
-
-    private CaptioningManager mCaptioningManager;
-    private LocalePreference mLocale;
 
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_CAPTION_MORE_OPTIONS;
-    }
-
-    @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
-
-        mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
-
-        initializeAllPreferences();
-        updateAllPreferences();
-        installUpdateListeners();
     }
 
     @Override
@@ -65,30 +42,6 @@ public class CaptionMoreOptionsFragment extends DashboardFragment
     @Override
     protected String getLogTag() {
         return TAG;
-    }
-
-    private void initializeAllPreferences() {
-        mLocale = (LocalePreference) findPreference(PREF_LOCALE);
-    }
-
-    private void installUpdateListeners() {
-        mLocale.setOnPreferenceChangeListener(this);
-    }
-
-    private void updateAllPreferences() {
-        final String rawLocale = mCaptioningManager.getRawLocale();
-        mLocale.setValue(rawLocale == null ? "" : rawLocale);
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        final ContentResolver cr = getActivity().getContentResolver();
-        if (mLocale == preference) {
-            Settings.Secure.putString(
-                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_LOCALE, (String) value);
-        }
-
-        return true;
     }
 
     @Override
