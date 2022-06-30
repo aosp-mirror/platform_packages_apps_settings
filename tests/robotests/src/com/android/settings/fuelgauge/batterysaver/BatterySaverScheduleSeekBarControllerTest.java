@@ -3,8 +3,8 @@ package com.android.settings.fuelgauge.batterysaver;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.ContentResolver;
@@ -15,6 +15,8 @@ import android.provider.Settings.Global;
 
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +24,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInteractionJankMonitor.class})
 public class BatterySaverScheduleSeekBarControllerTest {
 
     private Context mContext;
@@ -64,10 +68,10 @@ public class BatterySaverScheduleSeekBarControllerTest {
 
     @Test
     public void updateSeekBar_percentageMode_hasCorrectProperties() {
-        final CharSequence expectedTitle = "5%";
+        final CharSequence expectedTitle = "10%";
         Settings.Global.putInt(mResolver, Global.AUTOMATIC_POWER_SAVE_MODE,
                 PowerManager.POWER_SAVE_MODE_TRIGGER_PERCENTAGE);
-        Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 5);
+        Settings.Global.putInt(mResolver, Global.LOW_POWER_MODE_TRIGGER_LEVEL, 10);
         mController.updateSeekBar();
 
         assertThat(mController.mSeekBarPreference.isVisible()).isTrue();

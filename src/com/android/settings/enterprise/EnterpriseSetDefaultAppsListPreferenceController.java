@@ -134,11 +134,11 @@ public class EnterpriseSetDefaultAppsListPreferenceController extends
                 final PreferenceCategory category = new PreferenceCategory(prefContext);
                 screen.addPreference(category);
                 if (userInfo.isManagedProfile()) {
-                    category.setTitle(devicePolicyManager.getString(
+                    category.setTitle(devicePolicyManager.getResources().getString(
                             WORK_CATEGORY_HEADER,
                             () -> mContext.getString(R.string.category_work)));
                 } else {
-                    category.setTitle(devicePolicyManager.getString(
+                    category.setTitle(devicePolicyManager.getResources().getString(
                             PERSONAL_CATEGORY_HEADER,
                             () -> mContext.getString(R.string.category_personal)));
                 }

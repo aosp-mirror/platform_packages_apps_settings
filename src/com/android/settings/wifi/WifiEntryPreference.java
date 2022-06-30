@@ -25,6 +25,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import androidx.preference.PreferenceViewHolder;
 import com.android.settingslib.R;
 import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.WifiUtils;
+import com.android.wifitrackerlib.BaseWifiTracker;
 import com.android.wifitrackerlib.WifiEntry;
 
 /**
@@ -94,6 +96,12 @@ public class WifiEntryPreference extends Preference implements WifiEntry.WifiEnt
     @Override
     public void onBindViewHolder(final PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        if (BaseWifiTracker.isVerboseLoggingEnabled()) {
+            TextView summary = (TextView) view.findViewById(android.R.id.summary);
+            if (summary != null) {
+                summary.setMaxLines(100);
+            }
+        }
         final Drawable drawable = getIcon();
         if (drawable != null) {
             drawable.setLevel(mLevel);

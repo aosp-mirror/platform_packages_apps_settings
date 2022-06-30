@@ -18,7 +18,6 @@ package com.android.settings.notification.zen;
 
 import static com.android.settings.notification.zen.ZenPrioritySendersHelper.UNKNOWN;
 
-import android.app.AutomaticZenRule;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.service.notification.ZenPolicy;
@@ -79,8 +78,8 @@ public class ZenRulePrioritySendersPreferenceController
     }
 
     @Override
-    public void onResume(AutomaticZenRule rule, String id) {
-        super.onResume(rule, id);
+    public void onResume() {
+        super.onResume();
         if (mIsMessages) {
             updateChannelCounts();
         }

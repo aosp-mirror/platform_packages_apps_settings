@@ -52,16 +52,16 @@ class PrivacyPreferenceControllerHelper {
 
         final String organizationName = mFeatureProvider.getDeviceOwnerOrganizationName();
         if (organizationName == null) {
-            preference.setSummary(mDevicePolicyManager.getString(
+            preference.setSummary(mDevicePolicyManager.getResources().getString(
                     MANAGED_DEVICE_INFO_SUMMARY,
                     () -> mContext.getString(
                             R.string.enterprise_privacy_settings_summary_generic)));
         } else {
-            preference.setSummary(mDevicePolicyManager
-                    .getString(MANAGED_DEVICE_INFO_SUMMARY_WITH_NAME,
-                            () -> mContext.getResources().getString(
-                                    R.string.enterprise_privacy_settings_summary_with_name,
-                                    organizationName), organizationName));
+            preference.setSummary(mDevicePolicyManager.getResources().getString(
+                    MANAGED_DEVICE_INFO_SUMMARY_WITH_NAME,
+                    () -> mContext.getResources().getString(
+                            R.string.enterprise_privacy_settings_summary_with_name,
+                            organizationName), organizationName));
         }
     }
 

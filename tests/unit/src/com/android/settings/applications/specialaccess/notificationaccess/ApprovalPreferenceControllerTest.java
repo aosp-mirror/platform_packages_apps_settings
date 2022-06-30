@@ -18,12 +18,15 @@ package com.android.settings.applications.specialaccess.notificationaccess;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.AppOpsManager;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,12 +34,12 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,6 +57,8 @@ public class ApprovalPreferenceControllerTest {
     private ApprovalPreferenceController mController;
     @Mock
     NotificationManager mNm;
+    @Mock
+    AppOpsManager mAppOpsManager;
     @Mock
     PackageManager mPm;
     PackageInfo mPkgInfo;
@@ -75,15 +80,47 @@ public class ApprovalPreferenceControllerTest {
         mController.setNm(mNm);
         mController.setParent(mFragment);
         mController.setPkgInfo(mPkgInfo);
+
     }
 
     @Test
     public void updateState_checked() {
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_ALLOWED);
         when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
-        SwitchPreference pref = new SwitchPreference(mContext);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
+                mContext);
+        pref.setAppOps(mAppOpsManager);
 
         mController.updateState(pref);
         assertThat(pref.isChecked()).isTrue();
+        assertThat(pref.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void restrictedSettings_appOpsDisabled() {
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_ERRORED);
+        when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(false);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
+                mContext);
+        pref.setAppOps(mAppOpsManager);
+
+        mController.updateState(pref);
+        assertThat(pref.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void restrictedSettings_serviceAlreadyEnabled() {
+        when(mAppOpsManager.noteOpNoThrow(anyInt(), anyInt(), anyString())).thenReturn(
+                AppOpsManager.MODE_ERRORED);
+        when(mNm.isNotificationListenerAccessGranted(mCn)).thenReturn(true);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(
+                mContext);
+        pref.setAppOps(mAppOpsManager);
+
+        mController.updateState(pref);
+        assertThat(pref.isEnabled()).isTrue();
     }
 
     @Test

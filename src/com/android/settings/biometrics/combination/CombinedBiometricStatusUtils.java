@@ -20,7 +20,6 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.FaceManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
 
 import androidx.annotation.Nullable;
 
@@ -35,17 +34,18 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  */
 public class CombinedBiometricStatusUtils {
 
-    private final int mUserId = UserHandle.myUserId();
+    private final int mUserId;
     private final Context mContext;
     @Nullable
     FingerprintManager mFingerprintManager;
     @Nullable
     FaceManager mFaceManager;
 
-    public CombinedBiometricStatusUtils(Context context) {
+    public CombinedBiometricStatusUtils(Context context, int userId) {
         mContext = context;
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
         mFaceManager = Utils.getFaceManagerOrNull(context);
+        mUserId = userId;
     }
 
     /**
@@ -53,6 +53,13 @@ public class CombinedBiometricStatusUtils {
      */
     public boolean isAvailable() {
         return Utils.hasFingerprintHardware(mContext) && Utils.hasFaceHardware(mContext);
+    }
+
+    /**
+     * Returns whether at least one face template or fingerprint has been enrolled.
+     */
+    public boolean hasEnrolled() {
+        return hasEnrolledFingerprints() || hasEnrolledFace();
     }
 
     /**
@@ -84,8 +91,7 @@ public class CombinedBiometricStatusUtils {
     public String getSummary() {
         final int numFingerprintsEnrolled = mFingerprintManager != null
                 ? mFingerprintManager.getEnrolledFingerprints(mUserId).size() : 0;
-        final boolean faceEnrolled = mFaceManager != null
-                && mFaceManager.hasEnrolledTemplates(mUserId);
+        final boolean faceEnrolled = hasEnrolledFace();
 
         if (faceEnrolled && numFingerprintsEnrolled > 1) {
             return mContext.getString(
@@ -103,6 +109,14 @@ public class CombinedBiometricStatusUtils {
             return mContext.getString(
                     R.string.security_settings_biometric_preference_summary_none_enrolled);
         }
+    }
+
+    private boolean hasEnrolledFingerprints() {
+        return mFingerprintManager != null && mFingerprintManager.hasEnrolledFingerprints(mUserId);
+    }
+
+    private boolean hasEnrolledFace() {
+        return mFaceManager != null && mFaceManager.hasEnrolledTemplates(mUserId);
     }
 
     /**

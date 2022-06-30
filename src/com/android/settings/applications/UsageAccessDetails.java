@@ -97,7 +97,8 @@ public class UsageAccessDetails extends AppInfoWithHeader implements OnPreferenc
                     new AlertDialog.Builder(getContext())
                             .setIcon(com.android.internal.R.drawable.ic_dialog_alert_material)
                             .setTitle(android.R.string.dialog_alert_title)
-                            .setMessage(mDpm.getString(WORK_PROFILE_DISABLE_USAGE_ACCESS_WARNING,
+                            .setMessage(mDpm.getResources().getString(
+                                    WORK_PROFILE_DISABLE_USAGE_ACCESS_WARNING,
                                     () -> getString(R.string.work_profile_usage_access_warning)))
                             .setPositiveButton(R.string.okay, null)
                             .show();

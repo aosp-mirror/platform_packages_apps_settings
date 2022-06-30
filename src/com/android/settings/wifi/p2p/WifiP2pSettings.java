@@ -47,6 +47,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -199,7 +200,10 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View root = super.onCreateView(inflater, container, savedInstanceState);
+
         final Activity activity = getActivity();
         if (mWifiP2pManager == null) {
             mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
@@ -332,8 +336,7 @@ public class WifiP2pSettings extends DashboardFragment
                 }
             }
         };
-
-        super.onActivityCreated(savedInstanceState);
+        return root;
     }
 
     @Override
@@ -353,6 +356,7 @@ public class WifiP2pSettings extends DashboardFragment
             mWifiP2pManager.requestDeviceInfo(mChannel, WifiP2pSettings.this);
             mIsIgnoreInitConnectionInfoCallback = false;
             mWifiP2pManager.requestNetworkInfo(mChannel, networkInfo -> {
+                if (mChannel == null) return;
                 mWifiP2pManager.requestConnectionInfo(mChannel, wifip2pinfo -> {
                     if (!mIsIgnoreInitConnectionInfoCallback) {
                         if (networkInfo.isConnected()) {
@@ -375,13 +379,20 @@ public class WifiP2pSettings extends DashboardFragment
         super.onPause();
         if (mWifiP2pManager != null && mChannel != null) {
             mWifiP2pManager.stopPeerDiscovery(mChannel, null);
+        }
+        getActivity().unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mWifiP2pManager != null && mChannel != null) {
             if (!mLastGroupFormed) {
                 // Close the channel when p2p doesn't connected.
                 mChannel.close();
                 mChannel = null;
             }
         }
-        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -511,7 +522,7 @@ public class WifiP2pSettings extends DashboardFragment
             final LayoutInflater layoutInflater = LayoutInflater.from(getPrefContext());
             final View root = layoutInflater.inflate(R.layout.dialog_edittext, null /* root */);
             mDeviceNameText = root.findViewById(R.id.edittext);
-            mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(30)});
+            mDeviceNameText.setFilters(new InputFilter[] {new InputFilter.LengthFilter(22)});
             if (mSavedDeviceName != null) {
                 mDeviceNameText.setText(mSavedDeviceName);
                 mDeviceNameText.setSelection(mSavedDeviceName.length());

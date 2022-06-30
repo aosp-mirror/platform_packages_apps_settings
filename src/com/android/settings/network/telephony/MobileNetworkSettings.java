@@ -37,6 +37,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Settings.MobileNetworkActivity;
+import com.android.settings.SettingsActivity;
 import com.android.settings.datausage.BillingCyclePreferenceController;
 import com.android.settings.datausage.DataUsageSummaryPreferenceController;
 import com.android.settings.network.ActiveSubscriptionsListener;
@@ -54,6 +55,7 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
@@ -174,14 +176,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         if (dataUsageSummaryPreferenceController != null) {
             dataUsageSummaryPreferenceController.init(mSubId);
         }
-        use(CallsDefaultSubscriptionController.class).init(getLifecycle());
-        use(SmsDefaultSubscriptionController.class).init(getLifecycle());
-        use(MobileNetworkSwitchController.class).init(getLifecycle(), mSubId);
+        use(MobileNetworkSwitchController.class).init(mSubId);
         use(CarrierSettingsVersionPreferenceController.class).init(mSubId);
         use(BillingCyclePreferenceController.class).init(mSubId);
         use(MmsMessagePreferenceController.class).init(mSubId);
-        use(DataDuringCallsPreferenceController.class).init(getLifecycle(), mSubId);
-        use(DisabledSubscriptionController.class).init(getLifecycle(), mSubId);
+        use(DataDuringCallsPreferenceController.class).init(mSubId);
+        use(DisabledSubscriptionController.class).init(mSubId);
         use(DeleteSimProfilePreferenceController.class).init(mSubId, this,
                 REQUEST_CODE_DELETE_SUBSCRIPTION);
         use(DisableSimFooterPreferenceController.class).init(mSubId);
@@ -195,7 +195,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
         use(CarrierPreferenceController.class).init(mSubId);
         use(DataUsagePreferenceController.class).init(mSubId);
         use(PreferredNetworkModePreferenceController.class).init(mSubId);
-        use(EnabledNetworkModePreferenceController.class).init(getLifecycle(), mSubId);
+        use(EnabledNetworkModePreferenceController.class).init(mSubId);
         use(DataServiceSetupPreferenceController.class).init(mSubId);
         use(Enable2gPreferenceController.class).init(mSubId);
         use(CarrierWifiTogglePreferenceController.class).init(getLifecycle(), mSubId);
@@ -204,12 +204,12 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                 use(WifiCallingPreferenceController.class).init(mSubId);
 
         final OpenNetworkSelectPagePreferenceController openNetworkSelectPagePreferenceController =
-                use(OpenNetworkSelectPagePreferenceController.class).init(getLifecycle(), mSubId);
+                use(OpenNetworkSelectPagePreferenceController.class).init(mSubId);
         final AutoSelectPreferenceController autoSelectPreferenceController =
                 use(AutoSelectPreferenceController.class)
-                        .init(getLifecycle(), mSubId)
+                        .init(mSubId)
                         .addListener(openNetworkSelectPagePreferenceController);
-        use(NetworkPreferenceCategoryController.class).init(getLifecycle(), mSubId)
+        use(NetworkPreferenceCategoryController.class).init(mSubId)
                 .setChildren(Arrays.asList(autoSelectPreferenceController));
         mCdmaSystemSelectPreferenceController = use(CdmaSystemSelectPreferenceController.class);
         mCdmaSystemSelectPreferenceController.init(getPreferenceManager(), mSubId);
@@ -229,8 +229,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
                 .addListener(videoCallingPreferenceController);
         use(Enhanced4gAdvancedCallingPreferenceController.class).init(mSubId)
                 .addListener(videoCallingPreferenceController);
-        use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId,
-                getLifecycle());
+        use(ContactDiscoveryPreferenceController.class).init(getParentFragmentManager(), mSubId);
         use(NrAdvancedCallingPreferenceController.class).init(mSubId);
     }
 
@@ -275,17 +274,37 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings {
             Log.d(LOG_TAG, "Callback during onResume()");
             return;
         }
+
+        final SubscriptionInfo subInfo = SubscriptionUtil
+                .getSubscriptionOrDefault(getContext(), mSubId);
+
+        if (subInfo != null) {
+            /**
+             * Update the title when SIM stats got changed
+             */
+            final Consumer<Activity> renameTitle = activity -> {
+                if (activity != null && !activity.isFinishing()) {
+                    if (activity instanceof SettingsActivity) {
+                        final CharSequence displayName = SubscriptionUtil
+                                .getUniqueSubscriptionDisplayName(subInfo, activity);
+                        ((SettingsActivity)activity).setTitle(displayName);
+                    }
+                }
+            };
+
+            ThreadUtils.postOnMainThread(() -> renameTitle.accept(getActivity()));
+        }
+
         mActiveSubscriptionsListenerCount++;
         if (mActiveSubscriptionsListenerCount != 1) {
             return;
         }
 
-        if (SubscriptionUtil.getSubscriptionOrDefault(getContext(), mSubId) == null) {
-            finishFragment();
-            return;
-        }
-
         ThreadUtils.postOnMainThread(() -> {
+            if (subInfo == null) {
+                finishFragment();
+                return;
+            }
             mActiveSubscriptionsListenerCount = 0;
             redrawPreferenceControllers();
         });

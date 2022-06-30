@@ -16,6 +16,8 @@
 package com.android.settings.applications;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.util.Log;
 
 import com.android.settingslib.applications.ApplicationsState;
@@ -33,16 +35,19 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
     private static final String TAG = AppStateLocaleBridge.class.getSimpleName();
 
     private final Context mContext;
+    private final List<ResolveInfo> mListInfos;
 
     public AppStateLocaleBridge(Context context, ApplicationsState appState,
             Callback callback) {
         super(appState, callback);
         mContext = context;
+        mListInfos = context.getPackageManager().queryIntentActivities(
+                AppLocaleUtil.LAUNCHER_ENTRY_INTENT, PackageManager.GET_META_DATA);
     }
 
     @Override
     protected void updateExtraInfo(AppEntry app, String packageName, int uid) {
-        app.extraInfo = AppLocaleUtil.canDisplayLocaleUi(mContext, app)
+        app.extraInfo = AppLocaleUtil.canDisplayLocaleUi(mContext, app.info.packageName, mListInfos)
                 ? Boolean.TRUE : Boolean.FALSE;
     }
 
@@ -51,7 +56,8 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
         final List<AppEntry> allApps = mAppSession.getAllApps();
         for (int i = 0; i < allApps.size(); i++) {
             AppEntry app = allApps.get(i);
-            app.extraInfo = AppLocaleUtil.canDisplayLocaleUi(mContext, app)
+            app.extraInfo =
+                    AppLocaleUtil.canDisplayLocaleUi(mContext, app.info.packageName, mListInfos)
                     ? Boolean.TRUE : Boolean.FALSE;
         }
     }
@@ -66,12 +72,10 @@ public class AppStateLocaleBridge extends AppStateBaseBridge {
                 @Override
                 public boolean filterApp(AppEntry entry) {
                     if (entry.extraInfo == null) {
-                        Log.d(TAG, "No extra info.");
+                        Log.d(TAG, "[" + entry.info.packageName + "]" + " has No extra info.");
                         return false;
                     }
                     return (Boolean) entry.extraInfo;
                 }
             };
-
-
 }

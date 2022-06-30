@@ -163,10 +163,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         String accessibilityTitle =
                 isWorkProfile
-                        ? devicePolicyManager.getString(ACCESSIBILITY_WORK_ACCOUNT_TITLE,
+                        ? devicePolicyManager.getResources().getString(
+                                ACCESSIBILITY_WORK_ACCOUNT_TITLE,
                                 () -> getString(R.string.accessibility_work_account_title,
                                         currentTitle), currentTitle)
-                                : devicePolicyManager.getString(
+                                : devicePolicyManager.getResources().getString(
                                         ACCESSIBILITY_PERSONAL_ACCOUNT_TITLE,
                                         () -> getString(
                                                 R.string.accessibility_personal_account_title,

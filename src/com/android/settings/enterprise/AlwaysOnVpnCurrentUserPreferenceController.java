@@ -44,13 +44,13 @@ public class AlwaysOnVpnCurrentUserPreferenceController
     public void updateState(Preference preference) {
         if (mFeatureProvider.isInCompMode()) {
             preference.setTitle(
-                    mDevicePolicyManager.getString(
+                    mDevicePolicyManager.getResources().getString(
                             ALWAYS_ON_VPN_PERSONAL_PROFILE,
                             () -> mContext.getString(
                                     R.string.enterprise_privacy_always_on_vpn_personal)));
         } else {
             preference.setTitle(
-                    mDevicePolicyManager.getString(ALWAYS_ON_VPN_DEVICE,
+                    mDevicePolicyManager.getResources().getString(ALWAYS_ON_VPN_DEVICE,
                             () -> mContext.getString(
                                     R.string.enterprise_privacy_always_on_vpn_device)));
         }

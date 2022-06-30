@@ -390,7 +390,6 @@ public class DashboardFragmentTest {
         private final ContentResolver mContentResolver;
 
         public final PreferenceScreen mScreen;
-        private boolean mIsParalleled;
 
         public TestFragment(Context context) {
             mContext = context;
@@ -398,7 +397,6 @@ public class DashboardFragmentTest {
             mScreen = mock(PreferenceScreen.class);
             mContentResolver = mock(ContentResolver.class);
             mControllers = new ArrayList<>();
-            mIsParalleled = true;
 
             when(mPreferenceManager.getContext()).thenReturn(mContext);
             ReflectionHelpers.setField(
@@ -445,13 +443,6 @@ public class DashboardFragmentTest {
             return mContentResolver;
         }
 
-        protected boolean isParalleledControllers() {
-            return mIsParalleled;
-        }
-
-        void setUsingControllerEnhancement(boolean isParalleled) {
-            mIsParalleled = isParalleled;
-        }
     }
 
     private static class TestDynamicDataObserver extends DynamicDataObserver {

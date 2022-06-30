@@ -21,6 +21,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +40,6 @@ import java.util.stream.Collectors;
  * Controller for the dream picker where the user can select a screensaver.
  */
 public class DreamPickerController extends BasePreferenceController {
-    private static final String KEY = "dream_picker";
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -48,21 +48,16 @@ public class DreamPickerController extends BasePreferenceController {
     private DreamInfo mActiveDream;
     private DreamAdapter mAdapter;
 
-    public DreamPickerController(Context context) {
-        this(context, DreamBackend.getInstance(context));
+    public DreamPickerController(Context context, String key) {
+        this(context, key, DreamBackend.getInstance(context));
     }
 
-    public DreamPickerController(Context context, DreamBackend backend) {
-        super(context, KEY);
+    public DreamPickerController(Context context, String key, DreamBackend backend) {
+        super(context, key);
         mBackend = backend;
         mDreamInfos = mBackend.getDreamInfos();
         mActiveDream = getActiveDreamInfo(mDreamInfos);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY;
     }
 
     @Override
@@ -79,6 +74,8 @@ public class DreamPickerController extends BasePreferenceController {
                         .map(DreamItem::new)
                         .collect(Collectors.toList()));
 
+        mAdapter.setEnabled(mBackend.isEnabled());
+
         final LayoutPreference pref = screen.findPreference(getPreferenceKey());
         if (pref == null) {
             return;
@@ -89,6 +86,14 @@ public class DreamPickerController extends BasePreferenceController {
                 new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mAdapter != null) {
+            mAdapter.setEnabled(preference.isEnabled());
+        }
     }
 
     @Nullable
@@ -126,10 +131,9 @@ public class DreamPickerController extends BasePreferenceController {
         public void onItemClicked() {
             mActiveDream = mDreamInfo;
             mBackend.setActiveDream(mDreamInfo.componentName);
-            mMetricsFeatureProvider.action(
-                    mContext,
-                    SettingsEnums.ACTION_DREAM_SELECT_TYPE,
-                    mDreamInfo.componentName.flattenToString());
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.PAGE_UNKNOWN,
+                    mDreamInfo.componentName.flattenToString(), 1);
         }
 
         @Override
@@ -144,7 +148,7 @@ public class DreamPickerController extends BasePreferenceController {
 
         @Override
         public boolean isActive() {
-            if (mActiveDream == null) {
+            if (!mAdapter.getEnabled() || mActiveDream == null) {
                 return false;
             }
             return mDreamInfo.componentName.equals(mActiveDream.componentName);

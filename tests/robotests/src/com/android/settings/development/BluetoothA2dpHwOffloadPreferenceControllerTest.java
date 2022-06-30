@@ -18,6 +18,8 @@ package com.android.settings.development;
 
 import static com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController
         .A2DP_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.BluetoothLeAudioHwOffloadPreferenceController
+        .LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -62,15 +64,37 @@ public class BluetoothA2dpHwOffloadPreferenceControllerTest {
     }
 
     @Test
-    public void onA2dpHwDialogConfirmed_shouldChangeProperty() {
+    public void onA2dpHwDialogConfirmedAsA2dpOffloadDisabled_shouldChangeProperty() {
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+        mController.mChanged = true;
 
-        mController.onA2dpHwDialogConfirmed();
+        mController.onHwOffloadDialogConfirmed();
         final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         assertThat(mode).isTrue();
+    }
 
-        mController.onA2dpHwDialogConfirmed();
-        final boolean mode2 = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
-        assertThat(mode2).isFalse();
+    @Test
+    public void onA2dpHwDialogConfirmedAsA2dpOffloadEnabled_shouldChangeProperty() {
+        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
+
+        mController.mChanged = true;
+
+        mController.onHwOffloadDialogConfirmed();
+        final boolean a2dpMode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, true);
+        final boolean leAudioMode = SystemProperties
+                .getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
+        assertThat(a2dpMode).isFalse();
+        assertThat(leAudioMode).isFalse();
+    }
+
+    @Test
+    public void onA2dpHwDialogCanceled_shouldNotChangeProperty() {
+        SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(false));
+        mController.mChanged = true;
+
+        mController.onHwOffloadDialogCanceled();
+        final boolean mode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+        assertThat(mode).isFalse();
     }
 }

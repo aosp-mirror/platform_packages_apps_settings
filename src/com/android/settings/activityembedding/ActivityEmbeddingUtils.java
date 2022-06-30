@@ -16,6 +16,7 @@
 
 package com.android.settings.activityembedding;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.FeatureFlagUtils;
@@ -33,6 +34,8 @@ public class ActivityEmbeddingUtils {
     // The smallest value of the smallest-width (sw) of the window in any rotation when
     // the split should be used.
     private static final float MIN_SMALLEST_SCREEN_SPLIT_WIDTH_DP = 600f;
+    // The minimum width of the activity to show the regular homepage layout.
+    private static final float MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP = 380f;
     private static final String TAG = "ActivityEmbeddingUtils";
 
     /** Get the smallest pixel value of width of the window when the split should be used. */
@@ -70,5 +73,12 @@ public class ActivityEmbeddingUtils {
         Log.d(TAG, "isSplitSupported = " + isSplitSupported);
 
         return isFlagEnabled && isSplitSupported;
+    }
+
+    /** Whether to show the regular or simplified homepage layout. */
+    public static boolean isRegularHomepageLayout(Activity activity) {
+        DisplayMetrics dm = activity.getResources().getDisplayMetrics();
+        return dm.widthPixels >= (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, MIN_REGULAR_HOMEPAGE_LAYOUT_WIDTH_DP, dm);
     }
 }

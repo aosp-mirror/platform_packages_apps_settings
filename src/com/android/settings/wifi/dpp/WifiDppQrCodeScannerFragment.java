@@ -37,6 +37,7 @@ import android.os.Process;
 import android.os.SimpleClock;
 import android.os.SystemClock;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -56,8 +57,9 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.wifi.qrcode.QrCamera;
-import com.android.settings.wifi.qrcode.QrDecorateView;
+import com.android.settingslib.qrcode.QrCamera;
+import com.android.settingslib.qrcode.QrDecorateView;
+import com.android.settingslib.wifi.WifiPermissionChecker;
 import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
@@ -119,6 +121,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
     private WifiPickerTracker mWifiPickerTracker;
     private HandlerThread mWorkerThread;
+    private WifiPermissionChecker mWifiPermissionChecker;
 
     private final Handler mHandler = new Handler() {
         @Override
@@ -168,10 +171,18 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                     break;
 
                 case MESSAGE_SCAN_ZXING_WIFI_FORMAT_SUCCESS:
+                    final Context context = getContext();
+                    if (context == null) {
+                        // Context may be null if the message is received after the Activity has
+                        // been destroyed
+                        Log.d(TAG, "Scan success but context is null");
+                        return;
+                    }
+
                     // We may get 2 WifiConfiguration if the QR code has no password in it,
                     // one for open network and one for enhanced open network.
                     final WifiManager wifiManager =
-                            getContext().getSystemService(WifiManager.class);
+                            context.getSystemService(WifiManager.class);
                     final WifiNetworkConfig qrCodeWifiNetworkConfig =
                             (WifiNetworkConfig)msg.obj;
                     final List<WifiConfiguration> qrCodeWifiConfigurations =
@@ -185,6 +196,9 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                         if (id == -1) {
                             continue;
                         }
+
+                        if (!canConnectWifi(qrCodeWifiConfiguration.SSID)) return;
+
                         wifiManager.enableNetwork(id, /* attemptConnect */ false);
                         // WifiTracker only contains a hidden SSID Wi-Fi network if it's saved.
                         // We can't check if a hidden SSID Wi-Fi network is reachable in advance.
@@ -256,6 +270,21 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             }
         }
         return false;
+    }
+
+    @VisibleForTesting
+    boolean canConnectWifi(String ssid) {
+        final List<WifiEntry> wifiEntries = mWifiPickerTracker.getWifiEntries();
+        for (WifiEntry wifiEntry : wifiEntries) {
+            if (!TextUtils.equals(wifiEntry.getSsid(), sanitizeSsid(ssid))) continue;
+
+            if (!wifiEntry.canConnect()) {
+                Log.w(TAG, "Wi-Fi is not allowed to connect by your organization. SSID:" + ssid);
+                showErrorMessageAndRestartCamera(R.string.not_allowed_by_ent);
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -334,6 +363,15 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         super();
 
         mIsConfiguratorMode = true;
+    }
+
+    public WifiDppQrCodeScannerFragment(WifiPickerTracker wifiPickerTracker,
+            WifiPermissionChecker wifiPermissionChecker) {
+        super();
+
+        mIsConfiguratorMode = true;
+        mWifiPickerTracker = wifiPickerTracker;
+        mWifiPermissionChecker = wifiPermissionChecker;
     }
 
     /**
@@ -567,7 +605,8 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         message.sendToTarget();
     }
 
-    private void showErrorMessageAndRestartCamera(@StringRes int messageResId) {
+    @VisibleForTesting
+    void showErrorMessageAndRestartCamera(@StringRes int messageResId) {
         final Message message = mHandler.obtainMessage(MESSAGE_SHOW_ERROR_MESSAGE,
                 getString(messageResId));
         message.arg1 = ARG_RESTART_CAMERA;
@@ -595,6 +634,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
                 if (wifiConfig.networkId == newNetworkId) {
                     mLatestStatusCode = WifiDppUtils.EASY_CONNECT_EVENT_SUCCESS;
                     mEnrolleeWifiConfiguration = wifiConfig;
+                    if (!canConnectWifi(wifiConfig.SSID)) return;
                     wifiManager.connect(wifiConfig, WifiDppQrCodeScannerFragment.this);
                     return;
                 }
@@ -690,6 +730,28 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         resultIntent.putExtra(KEY_WIFI_CONFIGURATION, mEnrolleeWifiConfiguration);
 
         final Activity hostActivity = getActivity();
+        if (hostActivity == null) return;
+        if (mWifiPermissionChecker == null) {
+            mWifiPermissionChecker = new WifiPermissionChecker(hostActivity);
+        }
+
+        if (!mWifiPermissionChecker.canAccessWifiState()) {
+            Log.w(TAG, "Calling package does not have ACCESS_WIFI_STATE permission for result.");
+            EventLog.writeEvent(0x534e4554, "187176859",
+                    mWifiPermissionChecker.getLaunchedPackage(), "no ACCESS_WIFI_STATE permission");
+            hostActivity.finish();
+            return;
+        }
+
+        if (!mWifiPermissionChecker.canAccessFineLocation()) {
+            Log.w(TAG, "Calling package does not have ACCESS_FINE_LOCATION permission for result.");
+            EventLog.writeEvent(0x534e4554, "187176859",
+                    mWifiPermissionChecker.getLaunchedPackage(),
+                    "no ACCESS_FINE_LOCATION permission");
+            hostActivity.finish();
+            return;
+        }
+
         hostActivity.setResult(Activity.RESULT_OK, resultIntent);
         hostActivity.finish();
     }

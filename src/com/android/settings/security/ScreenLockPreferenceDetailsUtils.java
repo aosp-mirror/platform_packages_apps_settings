@@ -46,16 +46,14 @@ public class ScreenLockPreferenceDetailsUtils {
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileChallengeUserId;
     private final UserManager mUm;
-    private final int mSourceMetricsCategory;
 
-    public ScreenLockPreferenceDetailsUtils(Context context, int sourceMetricsCategory) {
+    public ScreenLockPreferenceDetailsUtils(Context context) {
         mContext = context;
         mUm = context.getSystemService(UserManager.class);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
-        mSourceMetricsCategory = sourceMetricsCategory;
     }
 
     /**
@@ -100,17 +98,17 @@ public class ScreenLockPreferenceDetailsUtils {
     /**
      * Launches the {@link ScreenLockSettings}.
      */
-    public void openScreenLockSettings() {
-        mContext.startActivity(getLaunchScreenLockSettingsIntent());
+    public void openScreenLockSettings(int sourceMetricsCategory) {
+        mContext.startActivity(getLaunchScreenLockSettingsIntent(sourceMetricsCategory));
     }
 
     /**
      * Returns {@link Intent} to launch the {@link ScreenLockSettings}.
      */
-    public Intent getLaunchScreenLockSettingsIntent() {
+    public Intent getLaunchScreenLockSettingsIntent(int sourceMetricsCategory) {
         return new SubSettingLauncher(mContext)
                 .setDestination(ScreenLockSettings.class.getName())
-                .setSourceMetricsCategory(mSourceMetricsCategory)
+                .setSourceMetricsCategory(sourceMetricsCategory)
                 .toIntent();
     }
 
@@ -120,13 +118,13 @@ public class ScreenLockPreferenceDetailsUtils {
      *
      * @return true if the {@link ChooseLockGenericFragment} is launching.
      */
-    public boolean openChooseLockGenericFragment() {
+    public boolean openChooseLockGenericFragment(int sourceMetricsCategory) {
         final Intent quietModeDialogIntent = getQuietModeDialogIntent();
         if (quietModeDialogIntent != null) {
             mContext.startActivity(quietModeDialogIntent);
             return false;
         }
-        mContext.startActivity(getChooseLockGenericFragmentIntent());
+        mContext.startActivity(getChooseLockGenericFragmentIntent(sourceMetricsCategory));
         return true;
     }
 
@@ -137,10 +135,10 @@ public class ScreenLockPreferenceDetailsUtils {
      * to disable the Quiet Mode, otherwise returns {@link Intent} to launch
      * {@link ChooseLockGenericFragment}.
      */
-    public Intent getLaunchChooseLockGenericFragmentIntent() {
+    public Intent getLaunchChooseLockGenericFragmentIntent(int sourceMetricsCategory) {
         final Intent quietModeDialogIntent = getQuietModeDialogIntent();
         return quietModeDialogIntent != null ? quietModeDialogIntent
-                : getChooseLockGenericFragmentIntent();
+                : getChooseLockGenericFragmentIntent(sourceMetricsCategory);
     }
 
     private Intent getQuietModeDialogIntent() {
@@ -159,10 +157,10 @@ public class ScreenLockPreferenceDetailsUtils {
         return null;
     }
 
-    private Intent getChooseLockGenericFragmentIntent() {
+    private Intent getChooseLockGenericFragmentIntent(int sourceMetricsCategory) {
         return new SubSettingLauncher(mContext)
                 .setDestination(ChooseLockGenericFragment.class.getName())
-                .setSourceMetricsCategory(mSourceMetricsCategory)
+                .setSourceMetricsCategory(sourceMetricsCategory)
                 .setTransitionType(SettingsTransitionHelper.TransitionType.TRANSITION_SLIDE)
                 .toIntent();
     }

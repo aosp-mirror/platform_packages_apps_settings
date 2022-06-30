@@ -20,6 +20,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.atLeast;
@@ -31,6 +33,7 @@ import static java.util.Collections.singletonList;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.accessibilityservice.AccessibilityShortcutInfo;
+import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -55,6 +58,7 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.search.SearchIndexableRaw;
 
 import org.junit.Before;
@@ -84,14 +88,13 @@ public class AccessibilitySettingsTest {
     private static final String PACKAGE_NAME = "com.android.test";
     private static final String CLASS_NAME = PACKAGE_NAME + ".test_a11y_service";
     private static final ComponentName COMPONENT_NAME = new ComponentName(PACKAGE_NAME, CLASS_NAME);
-    private static final int ON = 1;
-    private static final int OFF = 0;
     private static final String EMPTY_STRING = "";
     private static final String DEFAULT_SUMMARY = "default summary";
     private static final String DEFAULT_DESCRIPTION = "default description";
     private static final String DEFAULT_LABEL = "default label";
     private static final Boolean SERVICE_ENABLED = true;
     private static final Boolean SERVICE_DISABLED = false;
+
     @Rule
     public final MockitoRule mocks = MockitoJUnit.rule();
     @Spy
@@ -110,6 +113,10 @@ public class AccessibilitySettingsTest {
     @Mock
     private PreferenceManager mPreferenceManager;
     private ShadowAccessibilityManager mShadowAccessibilityManager;
+    @Mock
+    private AppOpsManager mAppOpsManager;
+
+    private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
@@ -121,6 +128,11 @@ public class AccessibilitySettingsTest {
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         mContext.setTheme(R.style.Theme_AppCompat);
+        when(mContext.getSystemService(AppOpsManager.class)).thenReturn(mAppOpsManager);
+        when(mAppOpsManager.noteOpNoThrow(eq(AppOpsManager.OP_ACCESS_RESTRICTED_SETTINGS),
+                anyInt(), anyString())).thenReturn(AppOpsManager.MODE_ALLOWED);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        when(mFragment.getSettingsLifecycle()).thenReturn(mLifecycle);
     }
 
     @Test
@@ -236,37 +248,6 @@ public class AccessibilitySettingsTest {
                 mServiceInfo, SERVICE_ENABLED);
 
         assertThat(description).isEqualTo(DEFAULT_DESCRIPTION);
-    }
-
-    @Test
-    public void createAccessibilityServicePreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        final List<AccessibilityServiceInfo> infoList = new ArrayList<>(
-                singletonList(mServiceInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityServicePreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
-    }
-
-    @Test
-    public void createAccessibilityActivityPreferenceList_hasOneInfo_containsSameKey() {
-        final String key = COMPONENT_NAME.flattenToString();
-        final AccessibilitySettings.RestrictedPreferenceHelper helper =
-                new AccessibilitySettings.RestrictedPreferenceHelper(mContext);
-        setMockAccessibilityShortcutInfo(mShortcutInfo);
-        final List<AccessibilityShortcutInfo> infoList = new ArrayList<>(
-                singletonList(mShortcutInfo));
-
-        final List<RestrictedPreference> preferenceList =
-                helper.createAccessibilityActivityPreferenceList(infoList);
-        RestrictedPreference preference = preferenceList.get(0);
-
-        assertThat(preference.getKey()).isEqualTo(key);
     }
 
     @Test

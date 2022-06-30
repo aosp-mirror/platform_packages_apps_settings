@@ -31,7 +31,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -90,29 +89,23 @@ public class HapticFeedbackTogglePreferenceControllerTest {
         assertThat(mPreference.isChecked()).isTrue();
     }
 
-
     @Test
-    public void updateState_ringerModeUpdates_shouldPreserveSettingAndDisplaySummary() {
+    public void updateState_ringerModeUpdates_shouldNotAffectSettings() {
         updateSetting(Settings.System.HAPTIC_FEEDBACK_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_NORMAL);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
-        assertThat(mPreference.getSummary()).isNull();
         assertThat(mPreference.isEnabled()).isTrue();
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_SILENT);
         mController.updateState(mPreference);
-        assertThat(mPreference.isChecked()).isFalse();
-        assertThat(mPreference.getSummary()).isNotNull();
-        assertThat(mPreference.getSummary().toString()).isEqualTo(mContext.getString(
-                R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary));
-        assertThat(mPreference.isEnabled()).isFalse();
+        assertThat(mPreference.isChecked()).isTrue();
+        assertThat(mPreference.isEnabled()).isTrue();
 
         when(mAudioManager.getRingerModeInternal()).thenReturn(AudioManager.RINGER_MODE_VIBRATE);
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isTrue();
-        assertThat(mPreference.getSummary()).isNull();
         assertThat(mPreference.isEnabled()).isTrue();
     }
 

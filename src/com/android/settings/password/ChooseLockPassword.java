@@ -18,13 +18,13 @@ package com.android.settings.password;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_NONE;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PASSWORD_RECENTLY_USED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.PIN_RECENTLY_USED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.REENTER_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.SET_WORK_PROFILE_PIN_HEADER;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import static com.android.internal.widget.LockPatternUtils.CREDENTIAL_TYPE_NONE;
 import static com.android.internal.widget.PasswordValidationError.CONTAINS_INVALID_CHARACTERS;
@@ -39,6 +39,7 @@ import static com.android.internal.widget.PasswordValidationError.NOT_ENOUGH_UPP
 import static com.android.internal.widget.PasswordValidationError.RECENTLY_USED;
 import static com.android.internal.widget.PasswordValidationError.TOO_LONG;
 import static com.android.internal.widget.PasswordValidationError.TOO_SHORT;
+import static com.android.internal.widget.PasswordValidationError.TOO_SHORT_WHEN_ALL_NUMERIC;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_CREDENTIAL;
 import static com.android.settings.password.ChooseLockSettingsHelper.EXTRA_KEY_UNIFICATION_PROFILE_ID;
 
@@ -91,6 +92,7 @@ import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
+import com.android.settingslib.utils.StringUtil;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -389,7 +391,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(alphaHintForBiometrics);
                     } else if (isProfile) {
-                        return context.getSystemService(DevicePolicyManager.class)
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(alphaHintOverrideForProfile,
                                         () -> context.getString(alphaHintForProfile));
                     } else {
@@ -403,7 +405,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     } else if (type == TYPE_BIOMETRIC) {
                         return context.getString(numericHintForBiometrics);
                     } else if (isProfile) {
-                        return context.getSystemService(DevicePolicyManager.class)
+                        return context.getSystemService(DevicePolicyManager.class).getResources()
                                 .getString(numericHintOverrideForProfile,
                                         () -> context.getString(numericHintForProfile));
                     } else {
@@ -834,6 +836,11 @@ public class ChooseLockPassword extends SettingsActivity {
                                         : R.plurals.lockpassword_pin_too_short,
                                 error.requirement, error.requirement));
                         break;
+                    case TOO_SHORT_WHEN_ALL_NUMERIC:
+                        messages.add(
+                                StringUtil.getIcuPluralsString(getContext(), error.requirement,
+                                        R.string.lockpassword_password_too_short_all_numeric));
+                        break;
                     case TOO_LONG:
                         messages.add(getResources().getQuantityString(
                                 mIsAlphaMode
@@ -848,11 +855,11 @@ public class ChooseLockPassword extends SettingsActivity {
                         DevicePolicyManager devicePolicyManager =
                                 getContext().getSystemService(DevicePolicyManager.class);
                         if (mIsAlphaMode) {
-                            messages.add(devicePolicyManager.getString(
+                            messages.add(devicePolicyManager.getResources().getString(
                                     PASSWORD_RECENTLY_USED,
                                     () -> getString(R.string.lockpassword_password_recently_used)));
                         } else {
-                            messages.add(devicePolicyManager.getString(
+                            messages.add(devicePolicyManager.getResources().getString(
                                     PIN_RECENTLY_USED,
                                     () -> getString(R.string.lockpassword_pin_recently_used)));
                         }

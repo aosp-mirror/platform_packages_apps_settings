@@ -29,13 +29,9 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.BulletSpan;
-import android.text.style.ClickableSpan;
 import android.text.style.RelativeSizeSpan;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -58,7 +54,7 @@ public class DefaultPaymentSettings extends DefaultAppPickerFragment {
 
     private PaymentBackend mPaymentBackend;
     private List<PaymentAppInfo> mAppInfos;
-    private Preference mFooterPreference;
+    private FooterPreference mFooterPreference;
 
     @Override
     public int getMetricsCategory() {
@@ -143,7 +139,8 @@ public class DefaultPaymentSettings extends DefaultAppPickerFragment {
             CandidateInfo info, String defaultKey, String systemDefaultKey) {
         final NfcPaymentCandidateInfo candidateInfo = (NfcPaymentCandidateInfo) info;
         if (candidateInfo.isManagedProfile()) {
-            pref.setSummary("Work");
+            final String textWork = getContext().getString(R.string.nfc_work_text);
+            pref.setSummary(textWork);
         }
     }
 
@@ -248,31 +245,12 @@ public class DefaultPaymentSettings extends DefaultAppPickerFragment {
     }
 
     private void setupFooterPreference() {
-        final String textNfcDefaultPaymentFooter = getResources().getString(
-                R.string.nfc_default_payment_footer);
-        final String textMoreDetails = getResources().getString(R.string.nfc_more_details);
-
-        final SpannableString spannableString = new SpannableString(
-                textNfcDefaultPaymentFooter + System.lineSeparator()
-                + System.lineSeparator() + textMoreDetails);
-        final ClickableSpan clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Intent howItWorksIntent = new Intent(getActivity(), HowItWorks.class);
-                startActivity(howItWorksIntent);
-            }
-        };
-
-        if (textNfcDefaultPaymentFooter != null && textMoreDetails != null) {
-            spannableString.setSpan(clickableSpan, textNfcDefaultPaymentFooter.length() + 1,
-                    textNfcDefaultPaymentFooter.length() + textMoreDetails.length() + 2,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-
         mFooterPreference = new FooterPreference(getContext());
-        mFooterPreference.setLayoutResource(R.layout.preference_footer);
-        mFooterPreference.setTitle(spannableString);
-        mFooterPreference.setSelectable(false);
+        mFooterPreference.setTitle(getResources().getString(R.string.nfc_default_payment_footer));
         mFooterPreference.setIcon(R.drawable.ic_info_outline_24dp);
+        mFooterPreference.setLearnMoreAction(v -> {
+            final Intent howItWorksIntent = new Intent(getActivity(), HowItWorks.class);
+            getContext().startActivity(howItWorksIntent);
+        });
     }
 }

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2022 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/entity_header"
+    style="@style/EntityHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/entity_header_title"
+        style="@style/TextAppearance.EntityHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="false"
+        android:ellipsize="marquee"
+        android:textDirection="locale"/>
+
+    <TextView
+        android:id="@+id/entity_header_summary"
+        style="@style/TextAppearance.EntityHeaderSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:singleLine="false"
+        android:ellipsize="marquee"
+        android:textDirection="locale"/>
+
+    <ImageView
+        android:id="@+id/entity_header_icon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="24dp"
+        android:scaleType="fitCenter"
+        android:antialias="true"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/bt_battery_case"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/le_bluetooth_battery_start_margin"
+            android:layout_marginTop="@dimen/le_bluetooth_battery_top_margin"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:focusable="true">
+            <TextView
+                style="@style/TextAppearance.EntityHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:ellipsize="end"
+                android:textDirection="locale"
+                android:text="@string/bluetooth_middle_name"
+                android:textSize="@dimen/advanced_bluetooth_header_title_text_size"/>
+            <TextView
+                android:id="@+id/bt_battery_case_summary"
+                style="@style/TextAppearance.EntityHeaderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/le_bluetooth_summary_start_margin"
+                android:minWidth="@dimen/le_bluetooth_summary_min_width"
+                android:padding="@dimen/le_bluetooth_summary_padding"
+                android:drawablePadding="@dimen/le_bluetooth_summary_drawable_padding"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bt_battery_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/le_bluetooth_battery_start_margin"
+            android:layout_marginTop="@dimen/le_bluetooth_battery_top_margin"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:focusable="true">
+            <TextView
+                style="@style/TextAppearance.EntityHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:ellipsize="end"
+                android:textDirection="locale"
+                android:text="@string/bluetooth_left_name"
+                android:textSize="@dimen/advanced_bluetooth_header_title_text_size"/>
+            <TextView
+                android:id="@+id/bt_battery_left_summary"
+                style="@style/TextAppearance.EntityHeaderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/le_bluetooth_summary_start_margin"
+                android:minWidth="@dimen/le_bluetooth_summary_min_width"
+                android:padding="@dimen/le_bluetooth_summary_padding"
+                android:drawablePadding="@dimen/le_bluetooth_summary_drawable_padding"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bt_battery_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/le_bluetooth_battery_start_margin"
+            android:layout_marginTop="@dimen/le_bluetooth_battery_top_margin"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:focusable="true">
+            <TextView
+                style="@style/TextAppearance.EntityHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start|center_vertical"
+                android:ellipsize="end"
+                android:textDirection="locale"
+                android:text="@string/bluetooth_right_name"
+                android:textSize="@dimen/advanced_bluetooth_header_title_text_size"/>
+            <TextView
+                android:id="@+id/bt_battery_right_summary"
+                style="@style/TextAppearance.EntityHeaderSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/le_bluetooth_summary_start_margin"
+                android:minWidth="@dimen/le_bluetooth_summary_min_width"
+                android:padding="@dimen/le_bluetooth_summary_padding"
+                android:drawablePadding="@dimen/le_bluetooth_summary_drawable_padding"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

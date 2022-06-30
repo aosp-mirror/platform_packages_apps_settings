@@ -180,10 +180,11 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
                                 | AuthenticatorException e) {
                             // handled below
                             Log.w(TAG, "Remove account error: " + e);
-                            RemoveAccountFailureDialog.show(getTargetFragment());
                         }
                         Log.i(TAG, "failed: " + failed);
-                        if (!failed) {
+                        if (failed) {
+                            RemoveAccountFailureDialog.show(getTargetFragment());
+                        } else {
                             targetActivity.finish();
                         }
                     }, null, mUserHandle);
@@ -217,6 +218,7 @@ public class RemoveAccountPreferenceController extends AbstractPreferenceControl
             return new AlertDialog.Builder(context)
                     .setTitle(R.string.remove_account_label)
                     .setMessage(getContext().getSystemService(DevicePolicyManager.class)
+                            .getResources()
                             .getString(REMOVE_ACCOUNT_FAILED_ADMIN_RESTRICTION,
                                     () -> getString(R.string.remove_account_failed)))
                     .setPositiveButton(android.R.string.ok, null)

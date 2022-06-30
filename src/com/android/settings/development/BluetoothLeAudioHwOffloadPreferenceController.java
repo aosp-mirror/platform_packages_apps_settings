@@ -1,0 +1,127 @@
+/*
+ * Copyright 2022 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.development;
+
+import static com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController.A2DP_OFFLOAD_SUPPORTED_PROPERTY;
+
+import android.content.Context;
+import android.os.SystemProperties;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
+import androidx.preference.SwitchPreference;
+
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+/**
+ * Preference controller to control Bluetooth LE audio offload
+ */
+public class BluetoothLeAudioHwOffloadPreferenceController
+        extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+
+    private static final String PREFERENCE_KEY = "bluetooth_disable_le_audio_hw_offload";
+    private final DevelopmentSettingsDashboardFragment mFragment;
+
+    static final String LE_AUDIO_OFFLOAD_DISABLED_PROPERTY =
+            "persist.bluetooth.leaudio_offload.disabled";
+    static final String LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY =
+            "ro.bluetooth.leaudio_offload.supported";
+
+    @VisibleForTesting
+    boolean mChanged = false;
+
+    public BluetoothLeAudioHwOffloadPreferenceController(Context context,
+            DevelopmentSettingsDashboardFragment fragment) {
+        super(context);
+        mFragment = fragment;
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return PREFERENCE_KEY;
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        BluetoothHwOffloadRebootDialog.show(mFragment);
+        mChanged = true;
+        return false;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        final boolean offloadSupported =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
+                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+        if (offloadSupported) {
+            final boolean offloadDisabled =
+                    SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
+            ((SwitchPreference) mPreference).setChecked(offloadDisabled);
+        } else {
+            mPreference.setEnabled(false);
+            ((SwitchPreference) mPreference).setChecked(true);
+        }
+    }
+
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
+        final boolean offloadSupported =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
+                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+        if (offloadSupported) {
+            ((SwitchPreference) mPreference).setChecked(true);
+            SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, "true");
+        }
+    }
+
+    /**
+     * Check if the le audio offload setting is default value.
+     */
+    public boolean isDefaultValue() {
+        final boolean offloadSupported =
+                SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false)
+                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+        final boolean offloadDisabled =
+                    SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
+        return offloadSupported ? offloadDisabled : true;
+    }
+
+    /**
+     * Called when the HwOffloadDialog confirm is clicked.
+     */
+    public void onHwOffloadDialogConfirmed() {
+        if (!mChanged) {
+            return;
+        }
+
+        final boolean offloadDisabled =
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
+                false);
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
+                Boolean.toString(!offloadDisabled));
+    }
+
+    /**
+     * Called when the HwOffloadDialog cancel is clicked.
+     */
+    public void onHwOffloadDialogCanceled() {
+        mChanged = false;
+    }
+}

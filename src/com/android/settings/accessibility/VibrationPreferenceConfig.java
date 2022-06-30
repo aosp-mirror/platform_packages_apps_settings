@@ -49,6 +49,8 @@ public abstract class VibrationPreferenceConfig {
      * all device vibrations.
      */
     public static final String MAIN_SWITCH_SETTING_KEY = Settings.System.VIBRATE_ON;
+    private static final VibrationEffect PREVIEW_VIBRATION_EFFECT =
+            VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK);
 
     protected final ContentResolver mContentResolver;
     private final AudioManager mAudioManager;
@@ -56,14 +58,22 @@ public abstract class VibrationPreferenceConfig {
     private final String mSettingKey;
     private final String mRingerModeSilentSummary;
     private final int mDefaultIntensity;
-    private final VibrationAttributes mVibrationAttributes;
+    private final VibrationAttributes mPreviewVibrationAttributes;
 
     /** Returns true if the user setting for enabling device vibrations is enabled. */
     public static boolean isMainVibrationSwitchEnabled(ContentResolver contentResolver) {
         return Settings.System.getInt(contentResolver, MAIN_SWITCH_SETTING_KEY, ON) == ON;
     }
 
-    public VibrationPreferenceConfig(Context context, String settingKey, int vibrationUsage) {
+    /** Play a vibration effect with intensity just selected by the user. */
+    public static void playVibrationPreview(Vibrator vibrator,
+            @VibrationAttributes.Usage int vibrationUsage) {
+        vibrator.vibrate(PREVIEW_VIBRATION_EFFECT,
+                createPreviewVibrationAttributes(vibrationUsage));
+    }
+
+    public VibrationPreferenceConfig(Context context, String settingKey,
+            @VibrationAttributes.Usage int vibrationUsage) {
         mContentResolver = context.getContentResolver();
         mVibrator = context.getSystemService(Vibrator.class);
         mAudioManager = context.getSystemService(AudioManager.class);
@@ -71,9 +81,7 @@ public abstract class VibrationPreferenceConfig {
                 R.string.accessibility_vibration_setting_disabled_for_silent_mode_summary);
         mSettingKey = settingKey;
         mDefaultIntensity = mVibrator.getDefaultVibrationIntensity(vibrationUsage);
-        mVibrationAttributes = new VibrationAttributes.Builder()
-                .setUsage(vibrationUsage)
-                .build();
+        mPreviewVibrationAttributes = createPreviewVibrationAttributes(vibrationUsage);
     }
 
     /** Returns the setting key for this setting preference. */
@@ -118,14 +126,23 @@ public abstract class VibrationPreferenceConfig {
 
     /** Play a vibration effect with intensity just selected by the user. */
     public void playVibrationPreview() {
-        mVibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_CLICK),
-                mVibrationAttributes);
+        mVibrator.vibrate(PREVIEW_VIBRATION_EFFECT, mPreviewVibrationAttributes);
     }
 
     private boolean isRingerModeSilent() {
         // AudioManager.isSilentMode() also returns true when ringer mode is VIBRATE.
         // The vibration preferences are only disabled when the ringer mode is SILENT.
         return mAudioManager.getRingerModeInternal() == AudioManager.RINGER_MODE_SILENT;
+    }
+
+    private static VibrationAttributes createPreviewVibrationAttributes(
+            @VibrationAttributes.Usage int vibrationUsage) {
+        return new VibrationAttributes.Builder()
+                .setUsage(vibrationUsage)
+                // Enforce fresh settings to be applied for the preview vibration, as they
+                // are played immediately after the new user values are set.
+                .setFlags(VibrationAttributes.FLAG_INVALIDATE_SETTINGS_CACHE)
+                .build();
     }
 
     /** {@link ContentObserver} for a setting described by a {@link VibrationPreferenceConfig}. */

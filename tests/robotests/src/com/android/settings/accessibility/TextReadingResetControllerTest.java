@@ -16,10 +16,10 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.TextReadingResetController.ResetStateListener;
-
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -29,7 +29,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.widget.LayoutPreference;
 
 import org.junit.Before;
@@ -39,21 +38,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Tests for {@link TextReadingResetController}.
  */
 @RunWith(RobolectricTestRunner.class)
 public class TextReadingResetControllerTest {
-    private static final String TEST_KEY = "test";
     private static final String RESET_KEY = "reset";
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private final View mResetView = new View(mContext);
-    private final List<ResetStateListener> mListeners = new ArrayList<>();
     private TextReadingResetController mResetController;
-    private TestPreferenceController mPreferenceController;
+
+    @Mock
+    private View.OnClickListener mOnResetButtonClickListener;
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -64,10 +60,8 @@ public class TextReadingResetControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
-        mPreferenceController = new TestPreferenceController(mContext, TEST_KEY);
-        mListeners.add(mPreferenceController);
-        mResetController = new TextReadingResetController(mContext, RESET_KEY, mListeners);
+        mResetController = new TextReadingResetController(mContext, RESET_KEY,
+                mOnResetButtonClickListener);
     }
 
     @Test
@@ -80,40 +74,17 @@ public class TextReadingResetControllerTest {
     }
 
     @Test
-    public void triggerResetState_success() {
+    public void clickResetButtonAfterDisplayPreference_verifyClickListener() {
         setupResetButton();
 
         mResetController.displayPreference(mPreferenceScreen);
         mResetView.callOnClick();
 
-        assertThat(mPreferenceController.isReset()).isTrue();
+        verify(mOnResetButtonClickListener).onClick(any(View.class));
     }
 
     private void setupResetButton() {
         when(mPreferenceScreen.findPreference(RESET_KEY)).thenReturn(mLayoutPreference);
         when(mLayoutPreference.findViewById(R.id.reset_button)).thenReturn(mResetView);
-    }
-
-    private static class TestPreferenceController extends BasePreferenceController implements
-            ResetStateListener {
-        private boolean mIsReset = false;
-
-        TestPreferenceController(Context context, String preferenceKey) {
-            super(context, preferenceKey);
-        }
-
-        @Override
-        public void resetState() {
-            mIsReset = true;
-        }
-
-        @Override
-        public int getAvailabilityStatus() {
-            return AVAILABLE;
-        }
-
-        boolean isReset() {
-            return mIsReset;
-        }
     }
 }

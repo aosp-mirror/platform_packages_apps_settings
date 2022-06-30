@@ -24,13 +24,19 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +50,8 @@ public class BiometricNavigationUtilsTest {
 
     private static final String SETTINGS_CLASS_NAME = "SettingsClassName";
     private static final String EXTRA_KEY = "EXTRA_KEY";
+    private static final ComponentName COMPONENT_NAME = new ComponentName("package", "class");
+    private static final int ADMIN_USER_ID = 2;
 
     @Mock
     private UserManager mUserManager;
@@ -56,11 +64,11 @@ public class BiometricNavigationUtilsTest {
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         doNothing().when(mContext).startActivity(any());
-        mBiometricNavigationUtils = new BiometricNavigationUtils();
+        mBiometricNavigationUtils = new BiometricNavigationUtils(UserHandle.myUserId());
     }
 
     @Test
-    public void openBiometricSettings_quietMode_launchesQuiteModeDialog() {
+    public void launchBiometricSettings_quietMode_launchesQuiteModeDialog() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
 
         mBiometricNavigationUtils.launchBiometricSettings(mContext, SETTINGS_CLASS_NAME,
@@ -70,7 +78,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
-    public void openBiometricSettings_quietMode_returnsFalse() {
+    public void launchBiometricSettings_quietMode_returnsFalse() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
@@ -78,7 +86,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
-    public void openBiometricSettings_noQuietMode_emptyExtras_launchesFragmentWithoutExtras() {
+    public void launchBiometricSettings_noQuietMode_emptyExtras_launchesFragmentWithoutExtras() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         mBiometricNavigationUtils.launchBiometricSettings(
@@ -88,7 +96,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
-    public void openBiometricSettings_noQuietMode_emptyExtras_returnsTrue() {
+    public void launchBiometricSettings_noQuietMode_emptyExtras_returnsTrue() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
@@ -96,7 +104,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
-    public void openBiometricSettings_noQuietMode_withExtras_launchesFragmentWithExtras() {
+    public void launchBiometricSettings_noQuietMode_withExtras_launchesFragmentWithExtras() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         final Bundle extras = createNotEmptyExtras();
@@ -106,11 +114,77 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
-    public void openBiometricSettings_noQuietMode_withExtras_returnsTrue() {
+    public void launchBiometricSettings_noQuietMode_withExtras_returnsTrue() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
 
         assertThat(mBiometricNavigationUtils.launchBiometricSettings(
                 mContext, SETTINGS_CLASS_NAME, createNotEmptyExtras())).isTrue();
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_quietMode_returnsQuiteModeDialogIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, null /* enforcedAdmin */, Bundle.EMPTY);
+
+        assertQuietModeDialogIntent(intent);
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_noQuietMode_emptyExtras_returnsSettingsIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, null /* enforcedAdmin */, Bundle.EMPTY);
+
+        assertSettingsPageIntent(intent, false /* shouldContainExtras */);
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_noQuietMode_withExtras_returnsSettingsIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, null /* enforcedAdmin */, createNotEmptyExtras());
+
+        assertSettingsPageIntent(intent, true /* shouldContainExtras */);
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_whenDisabledByAdmin_quietMode_returnsBlockedIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
+        final EnforcedAdmin enforcedAdmin = new EnforcedAdmin(
+                COMPONENT_NAME, UserHandle.of(ADMIN_USER_ID));
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, enforcedAdmin, Bundle.EMPTY);
+
+        assertBlockedByAdminDialogIntent(intent);
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_whenDisabledByAdmin_emptyExtras_returnsBlockedIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+        final EnforcedAdmin enforcedAdmin = new EnforcedAdmin(
+                COMPONENT_NAME, UserHandle.of(ADMIN_USER_ID));
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, enforcedAdmin, Bundle.EMPTY);
+
+        assertBlockedByAdminDialogIntent(intent);
+    }
+
+    @Test
+    public void getBiometricSettingsIntent_whenDisabledByAdmin_withExtras_returnsBlockedIntent() {
+        when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
+        final EnforcedAdmin enforcedAdmin = new EnforcedAdmin(
+                COMPONENT_NAME, UserHandle.of(ADMIN_USER_ID));
+
+        final Intent intent = mBiometricNavigationUtils.getBiometricSettingsIntent(
+                mContext, SETTINGS_CLASS_NAME, enforcedAdmin, Bundle.EMPTY);
+
+        assertBlockedByAdminDialogIntent(intent);
     }
 
     private Bundle createNotEmptyExtras() {
@@ -124,10 +198,21 @@ public class BiometricNavigationUtilsTest {
         verify(mContext).startActivity(intentCaptor.capture());
 
         Intent intent = intentCaptor.getValue();
+        assertQuietModeDialogIntent(intent);
+    }
+
+    private void assertQuietModeDialogIntent(Intent intent) {
         assertThat(intent.getComponent().getPackageName())
                 .isEqualTo("android");
         assertThat(intent.getComponent().getClassName())
                 .isEqualTo("com.android.internal.app.UnlaunchableAppActivity");
+    }
+
+    private void assertBlockedByAdminDialogIntent(Intent intent) {
+        assertThat(intent.getAction()).isEqualTo(Settings.ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
+        assertThat(
+                (ComponentName) intent.getParcelableExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN))
+                .isEqualTo(COMPONENT_NAME);
     }
 
     private void assertSettingsPageLaunchRequested(boolean shouldContainExtras) {
@@ -135,6 +220,10 @@ public class BiometricNavigationUtilsTest {
         verify(mContext).startActivity(intentCaptor.capture());
 
         Intent intent = intentCaptor.getValue();
+        assertSettingsPageIntent(intent, shouldContainExtras);
+    }
+
+    private void assertSettingsPageIntent(Intent intent, boolean shouldContainExtras) {
         assertThat(intent.getComponent().getPackageName())
                 .isEqualTo("com.android.settings");
         assertThat(intent.getComponent().getClassName())

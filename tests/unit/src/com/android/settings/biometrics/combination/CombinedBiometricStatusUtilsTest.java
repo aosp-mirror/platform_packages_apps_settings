@@ -56,8 +56,8 @@ public class CombinedBiometricStatusUtilsTest {
 
     private static final ComponentName COMPONENT_NAME =
             new ComponentName("package", "class");
-    private static final UserHandle USER_HANDLE = new UserHandle(UserHandle.myUserId());
-
+    private static final int USER_ID = UserHandle.myUserId();
+    private static final UserHandle USER_HANDLE = new UserHandle(USER_ID);
 
     @Mock
     private PackageManager mPackageManager;
@@ -85,7 +85,8 @@ public class CombinedBiometricStatusUtilsTest {
         when(mApplicationContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
                 .thenReturn(mDevicePolicyManager);
         when(mApplicationContext.getSystemService(Context.FACE_SERVICE)).thenReturn(mFaceManager);
-        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(mApplicationContext);
+        mCombinedBiometricStatusUtils = new CombinedBiometricStatusUtils(
+                mApplicationContext, USER_ID);
     }
 
     @Test
@@ -118,6 +119,54 @@ public class CombinedBiometricStatusUtilsTest {
         when(mFaceManager.isHardwareDetected()).thenReturn(true);
 
         assertThat(mCombinedBiometricStatusUtils.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withoutFingerprintHardware_withoutFaceHardware_returnsFalse() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
+        when(mFaceManager.isHardwareDetected()).thenReturn(false);
+
+        assertThat(mCombinedBiometricStatusUtils.hasEnrolled()).isFalse();
+    }
+
+    @Test
+    public void hasEnrolled_withoutFingerprintEnroll_withoutFaceEnroll_returnsFalse() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        assertThat(mCombinedBiometricStatusUtils.hasEnrolled()).isFalse();
+    }
+
+    @Test
+    public void hasEnrolled_withoutFingerprintEnroll_withFaceEnroll_returnsTrue() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(false);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+
+        assertThat(mCombinedBiometricStatusUtils.hasEnrolled()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withFingerprintEnroll_withoutFaceEnroll_returnsTrue() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
+
+        assertThat(mCombinedBiometricStatusUtils.hasEnrolled()).isTrue();
+    }
+
+    @Test
+    public void hasEnrolled_withFingerprintEnroll_withFaceEnroll_returnsTrue() {
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
+        when(mFaceManager.isHardwareDetected()).thenReturn(true);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+        when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(true);
+
+        assertThat(mCombinedBiometricStatusUtils.hasEnrolled()).isTrue();
     }
 
     @Test

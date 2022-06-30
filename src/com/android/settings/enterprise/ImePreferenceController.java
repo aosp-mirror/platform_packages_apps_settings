@@ -41,7 +41,7 @@ public class ImePreferenceController extends AbstractPreferenceController implem
     @Override
     public void updateState(Preference preference) {
         preference.setSummary(
-                mContext.getSystemService(DevicePolicyManager.class)
+                mContext.getSystemService(DevicePolicyManager.class).getResources()
                         .getString(ADMIN_ACTION_SET_INPUT_METHOD_NAME, () ->
                                 mContext.getResources().getString(
                                         R.string.enterprise_privacy_input_method_name,

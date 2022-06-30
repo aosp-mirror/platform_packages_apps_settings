@@ -23,26 +23,23 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import androidx.preference.Preference;
+import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Ignore
 public class WhenToDreamPreferenceControllerTest {
 
     private WhenToDreamPreferenceController mController;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private DreamBackend mBackend;
@@ -50,6 +47,7 @@ public class WhenToDreamPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new WhenToDreamPreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }

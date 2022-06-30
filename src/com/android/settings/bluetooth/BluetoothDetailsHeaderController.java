@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -53,7 +54,10 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice());
+        boolean hasLeAudio = mCachedDevice.getConnectableProfiles()
+                .stream()
+                .anyMatch(profile -> profile.getProfileId() == BluetoothProfile.LE_AUDIO);
+        return !Utils.isAdvancedDetailsHeader(mCachedDevice.getDevice()) && !hasLeAudio;
     }
 
     @Override
@@ -71,10 +75,8 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
         if (TextUtils.isEmpty(summaryText)) {
             // If first summary is unavailable, not to show second summary.
             mHeaderController.setSecondSummary((CharSequence)null);
-        } else {
-            // If both the hearing aids are connected, two device status should be shown.
-            mHeaderController.setSecondSummary(mDeviceManager.getSubDeviceSummary(mCachedDevice));
         }
+
         mHeaderController.setLabel(mCachedDevice.getName());
         mHeaderController.setIcon(pair.first);
         mHeaderController.setIconContentDescription(pair.second);

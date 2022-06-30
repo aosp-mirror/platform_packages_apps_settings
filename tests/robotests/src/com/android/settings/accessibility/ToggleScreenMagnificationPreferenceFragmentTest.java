@@ -36,6 +36,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -101,6 +102,8 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
     private FragmentActivity mActivity;
     @Mock
     private ContentResolver mContentResolver;
+    @Mock
+    private PackageManager mPackageManager;
 
     @Before
     public void setUpTestFragment() {
@@ -110,6 +113,7 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
         mFragment = spy(new TestToggleScreenMagnificationPreferenceFragment(mContext));
         mResources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(mResources);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mFragment.getContext().getResources()).thenReturn(mResources);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
@@ -334,9 +338,25 @@ public class ToggleScreenMagnificationPreferenceFragmentTest {
 
     @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
     @Test
-    public void onCreateView_notSupportsMagnificationArea_settingsPreferenceIsNull() {
+    public void onCreateView_magnificationAreaNotSupported_settingsPreferenceIsNull() {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_magnification_area))
+                .thenReturn(false);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION))
+                .thenReturn(true);
+
+        mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);
+
+        assertThat(mFragment.mSettingsPreference).isNull();
+    }
+
+    @Ignore("Ignore it since a NPE is happened in ShadowWindowManagerGlobal. (Ref. b/214161063)")
+    @Test
+    public void onCreateView_windowMagnificationNotSupported_settingsPreferenceIsNull() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_magnification_area))
+                .thenReturn(true);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION))
                 .thenReturn(false);
 
         mFragment.onCreateView(LayoutInflater.from(mContext), mock(ViewGroup.class), Bundle.EMPTY);

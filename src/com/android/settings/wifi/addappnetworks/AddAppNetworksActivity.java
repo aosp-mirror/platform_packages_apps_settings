@@ -56,8 +56,6 @@ public class AddAppNetworksActivity extends FragmentActivity {
     final Bundle mBundle = new Bundle();
     @VisibleForTesting
     IActivityManager mActivityManager = ActivityManager.getService();
-    @VisibleForTesting
-    boolean mIsAddWifiConfigAllow;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +72,6 @@ public class AddAppNetworksActivity extends FragmentActivity {
         window.setGravity(Gravity.BOTTOM);
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT);
-
-        mIsAddWifiConfigAllow = WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(this);
     }
 
     @Override
@@ -90,7 +86,7 @@ public class AddAppNetworksActivity extends FragmentActivity {
 
     @VisibleForTesting
     protected boolean showAddNetworksFragment() {
-        if (!mIsAddWifiConfigAllow) {
+        if (!isAddWifiConfigAllow()) {
             Log.d(TAG, "Not allowed by Enterprise Restriction");
             return false;
         }
@@ -128,5 +124,10 @@ public class AddAppNetworksActivity extends FragmentActivity {
             return null;
         }
         return packageName;
+    }
+
+    @VisibleForTesting
+    boolean isAddWifiConfigAllow() {
+        return WifiEnterpriseRestrictionUtils.isAddWifiConfigAllowed(this);
     }
 }

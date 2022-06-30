@@ -107,12 +107,6 @@ public class SettingsSliceProvider extends SliceProvider {
             "com.android.settings.slice.action.SLIDER_CHANGED";
 
     /**
-     * Action passed for copy data for the Copyable Slices.
-     */
-    public static final String ACTION_COPY =
-            "com.android.settings.slice.action.COPY";
-
-    /**
      * Intent Extra passed for the key identifying the Setting Slice.
      */
     public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";

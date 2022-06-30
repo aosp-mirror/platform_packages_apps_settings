@@ -192,7 +192,8 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
      */
     public void startUnification() {
         // Confirm profile lock
-        final String title = mDpm.getString(WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE,
+        final String title = mDpm.getResources().getString(
+                WORK_PROFILE_SET_UNLOCK_LAUNCH_PICKER_TITLE,
                 () -> mContext.getString(R.string.unlock_set_unlock_launch_picker_title_profile));
         final ChooseLockSettingsHelper.Builder builder =
                 new ChooseLockSettingsHelper.Builder(mHost.getActivity(), mHost);

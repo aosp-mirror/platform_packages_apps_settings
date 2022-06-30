@@ -67,7 +67,7 @@ public class AccessibilityQuickSettingsTooltipWindowTest {
     @Test
     public void initTooltipView_atMostAvailableTextWidth() {
         final String quickSettingsTooltipsContent = mContext.getString(
-                R.string.accessibility_service_qs_tooltips_content, TEST_PACKAGE_NAME);
+                R.string.accessibility_service_qs_tooltip_content, TEST_PACKAGE_NAME);
         mTooltipView.setup(quickSettingsTooltipsContent, TEST_RES_ID);
 
         final int getMaxWidth = mTooltipView.getAvailableWindowWidth();

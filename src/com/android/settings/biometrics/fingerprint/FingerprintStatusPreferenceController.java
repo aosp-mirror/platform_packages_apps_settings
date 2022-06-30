@@ -58,7 +58,7 @@ public class FingerprintStatusPreferenceController extends BiometricStatusPrefer
         super(context, key);
         mFingerprintManager = Utils.getFingerprintManagerOrNull(context);
         mFingerprintStatusUtils =
-                new FingerprintStatusUtils(context, mFingerprintManager);
+                new FingerprintStatusUtils(context, mFingerprintManager, getUserId());
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);

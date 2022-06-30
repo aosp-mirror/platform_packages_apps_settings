@@ -31,6 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.text.TextUtils;
 import android.util.ArraySet;
 
 import androidx.annotation.VisibleForTesting;
@@ -66,6 +67,8 @@ public class PlatformCompatDashboard extends DashboardFragment {
 
     private AndroidBuildClassifier mAndroidBuildClassifier = new AndroidBuildClassifier();
 
+    private boolean mShouldStartAppPickerOnResume = true;
+
     @VisibleForTesting
     String mSelectedApp;
 
@@ -98,12 +101,66 @@ public class PlatformCompatDashboard extends DashboardFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
         try {
             mChanges = getPlatformCompat().listUIChanges();
         } catch (RemoteException e) {
             throw new RuntimeException("Could not list changes!", e);
+        }
+        if (icicle != null) {
+            mShouldStartAppPickerOnResume = false;
+            mSelectedApp = icicle.getString(COMPAT_APP);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_COMPAT_CHANGE_APP) {
+            mShouldStartAppPickerOnResume = false;
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    mSelectedApp = data.getAction();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    if (TextUtils.isEmpty(mSelectedApp)) {
+                        finish();
+                    }
+                    break;
+                case AppPicker.RESULT_NO_MATCHING_APPS:
+                    mSelectedApp = null;
+                    break;
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isFinishingOrDestroyed()) {
+            return;
+        }
+        if (!mShouldStartAppPickerOnResume) {
+            if (TextUtils.isEmpty(mSelectedApp)) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.platform_compat_dialog_title_no_apps)
+                        .setMessage(R.string.platform_compat_dialog_text_no_apps)
+                        .setPositiveButton(R.string.okay, (dialog, which) -> finish())
+                        .setOnDismissListener(dialog -> finish())
+                        .setCancelable(false)
+                        .show();
+                return;
+            }
+            try {
+                final ApplicationInfo applicationInfo = getApplicationInfo();
+                addPreferences(applicationInfo);
+                return;
+            } catch (PackageManager.NameNotFoundException e) {
+                mShouldStartAppPickerOnResume = true;
+                mSelectedApp = null;
+            }
         }
         startAppPicker();
     }
@@ -112,31 +169,6 @@ public class PlatformCompatDashboard extends DashboardFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(COMPAT_APP, mSelectedApp);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_COMPAT_CHANGE_APP) {
-            if (resultCode == Activity.RESULT_OK) {
-                mSelectedApp = data.getAction();
-                try {
-                    final ApplicationInfo applicationInfo = getApplicationInfo();
-                    addPreferences(applicationInfo);
-                } catch (PackageManager.NameNotFoundException e) {
-                    startAppPicker();
-                }
-            } else if (resultCode == AppPicker.RESULT_NO_MATCHING_APPS) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.platform_compat_dialog_title_no_apps)
-                        .setMessage(R.string.platform_compat_dialog_text_no_apps)
-                        .setPositiveButton(R.string.okay, (dialog, which) -> finish())
-                        .setOnDismissListener(dialog -> finish())
-                        .setCancelable(false)
-                        .show();
-            }
-            return;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void addPreferences(ApplicationInfo applicationInfo) {

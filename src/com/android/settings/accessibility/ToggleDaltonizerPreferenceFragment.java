@@ -106,10 +106,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     private void updateFooterPreference() {
         final String title = getPrefContext()
                 .getString(R.string.accessibility_daltonizer_about_title);
-        final String learnMoreContentDescription = getPrefContext()
+        final String learnMoreText = getPrefContext()
                 .getString(R.string.accessibility_daltonizer_footer_learn_more_content_description);
         mFooterPreferenceController.setIntroductionTitle(title);
-        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreContentDescription);
+        mFooterPreferenceController.setupHelpLink(getHelpResource(), learnMoreText);
         mFooterPreferenceController.displayPreference(getPreferenceScreen());
     }
 
@@ -166,6 +166,11 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
 
     @Override
     protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        final boolean isEnabled = Settings.Secure.getInt(getContentResolver(), ENABLED, OFF) == ON;
+        if (enabled == isEnabled) {
+            return;
+        }
+
         if (enabled) {
             showQuickSettingsTooltipIfNeeded(QuickSettingsTooltipType.GUIDE_TO_DIRECT_USE);
         }
@@ -185,8 +190,8 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    protected void updateShortcutTitle(ShortcutPreference shortcutPreference) {
-        shortcutPreference.setTitle(R.string.accessibility_daltonizer_shortcut_title);
+    protected CharSequence getShortcutTitle() {
+        return getText(R.string.accessibility_daltonizer_shortcut_title);
     }
 
     @Override
@@ -201,8 +206,10 @@ public final class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePrefe
     }
 
     @Override
-    CharSequence getTileName() {
-        return getText(R.string.accessibility_display_daltonizer_preference_title);
+    CharSequence getTileTooltipContent(@QuickSettingsTooltipType int type) {
+        return getText(type == QuickSettingsTooltipType.GUIDE_TO_EDIT
+                ? R.string.accessibility_color_correction_qs_tooltip_content
+                : R.string.accessibility_color_correction_auto_added_qs_tooltip_content);
     }
 
     @Override

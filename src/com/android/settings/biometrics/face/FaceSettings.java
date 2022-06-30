@@ -162,9 +162,9 @@ public class FaceSettings extends DashboardFragment {
 
         if (mUserManager.getUserInfo(mUserId).isManagedProfile()) {
             getActivity().setTitle(
-                    mDevicePolicyManager.getString(FACE_SETTINGS_FOR_WORK_TITLE, () ->
-                    getActivity().getResources().getString(
-                    R.string.security_settings_face_profile_preference_title)));
+                    mDevicePolicyManager.getResources().getString(FACE_SETTINGS_FOR_WORK_TITLE,
+                            () -> getActivity().getResources().getString(
+                                    R.string.security_settings_face_profile_preference_title)));
         }
 
         mLockscreenController = Utils.isMultipleBiometricsSupported(context)

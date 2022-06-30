@@ -40,7 +40,7 @@ public class BatterySaverScheduleRadioButtonsController {
     public static final String KEY_NO_SCHEDULE = "key_battery_saver_no_schedule";
     public static final String KEY_ROUTINE = "key_battery_saver_routine";
     public static final String KEY_PERCENTAGE = "key_battery_saver_percentage";
-    public static final int TRIGGER_LEVEL_MIN = 5;
+    public static final int TRIGGER_LEVEL_MIN = 10;
 
     private Context mContext;
     private BatterySaverScheduleSeekBarController mSeekBarController;

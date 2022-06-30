@@ -16,7 +16,6 @@
 
 package com.android.settings.password;
 
-import static android.app.admin.DevicePolicyResources.Strings.UNDEFINED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PASSWORD_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.CONFIRM_WORK_PROFILE_PIN_HEADER;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_CONFIRM_PASSWORD;
@@ -25,6 +24,7 @@ import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROF
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_LAST_PIN_ATTEMPT_BEFORE_WIPE;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PASSWORD_REQUIRED;
 import static android.app.admin.DevicePolicyResources.Strings.Settings.WORK_PROFILE_PIN_REQUIRED;
+import static android.app.admin.DevicePolicyResources.UNDEFINED;
 
 import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
@@ -39,7 +39,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -256,12 +255,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
             if (mIsManagedProfile) {
                 if (mIsAlpha) {
-                    return mDevicePolicyManager.getString(
+                    return mDevicePolicyManager.getResources().getString(
                             CONFIRM_WORK_PROFILE_PASSWORD_HEADER,
                             () -> getString(
                                     R.string.lockpassword_confirm_your_work_password_header));
                 }
-                return mDevicePolicyManager.getString(
+                return mDevicePolicyManager.getResources().getString(
                         CONFIRM_WORK_PROFILE_PIN_HEADER,
                         () -> getString(R.string.lockpassword_confirm_your_work_pin_header));
             }
@@ -278,7 +277,7 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             // Map boolean flags to an index by isStrongAuth << 2 + isManagedProfile << 1 + isAlpha.
             int index = ((isStrongAuthRequired ? 1 : 0) << 2) + ((mIsManagedProfile ? 1 : 0) << 1)
                     + (mIsAlpha ? 1 : 0);
-            return mDevicePolicyManager.getString(
+            return mDevicePolicyManager.getResources().getString(
                     DETAIL_TEXT_OVERRIDES[index], () -> getString(DETAIL_TEXTS[index]));
         }
 
@@ -484,11 +483,6 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                         public void onChecked(boolean matched, int timeoutMs) {
                             mPendingLockCheck = null;
                             if (matched && isInternalActivity() && mReturnCredentials) {
-                                // TODO: get rid of EXTRA_KEY_TYPE, since EXTRA_KEY_PASSWORD already
-                                // distinguishes beteween PIN and password.
-                                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_TYPE,
-                                                mIsAlpha ? StorageManager.CRYPT_TYPE_PASSWORD
-                                                         : StorageManager.CRYPT_TYPE_PIN);
                                 intent.putExtra(
                                         ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, credential);
                             }

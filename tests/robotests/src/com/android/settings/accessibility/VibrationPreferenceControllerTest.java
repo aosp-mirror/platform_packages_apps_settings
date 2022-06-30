@@ -26,8 +26,13 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.provider.Settings;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,10 +45,14 @@ import org.robolectric.RobolectricTestRunner;
 public class VibrationPreferenceControllerTest {
 
     private static final String PREFERENCE_KEY = "preference_key";
+    private static final int OFF = 0;
+    private static final int ON = 1;
 
     @Mock private Vibrator mVibrator;
+    @Mock private PreferenceScreen mScreen;
 
     private Context mContext;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
@@ -54,16 +63,14 @@ public class VibrationPreferenceControllerTest {
 
     @Test
     public void verifyConstants() {
-        VibrationPreferenceController controller =
-                new VibrationPreferenceController(mContext, PREFERENCE_KEY);
+        VibrationPreferenceController controller = createPreferenceController();
         assertThat(controller.getPreferenceKey()).isEqualTo(PREFERENCE_KEY);
     }
 
     @Test
     public void getAvailabilityStatus_noVibrator_returnUnsupportedOnDevice() {
         when(mVibrator.hasVibrator()).thenReturn(false);
-        VibrationPreferenceController controller =
-                new VibrationPreferenceController(mContext, PREFERENCE_KEY);
+        VibrationPreferenceController controller = createPreferenceController();
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }
@@ -71,9 +78,52 @@ public class VibrationPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus_withVibrator_returnAvailable() {
         when(mVibrator.hasVibrator()).thenReturn(true);
-        VibrationPreferenceController controller =
-                new VibrationPreferenceController(mContext, PREFERENCE_KEY);
+        VibrationPreferenceController controller = createPreferenceController();
 
         assertThat(controller.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getSummary_vibrateSettingNotSet_returnsOnText() {
+        when(mVibrator.hasVibrator()).thenReturn(true);
+        Settings.System.putString(mContext.getContentResolver(), Settings.System.VIBRATE_ON,
+                /* value= */ null);
+        VibrationPreferenceController controller = createPreferenceController();
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_vibration_settings_state_on));
+    }
+
+    @Test
+    public void getSummary_vibrateSettingOn_returnsOnText() {
+        when(mVibrator.hasVibrator()).thenReturn(true);
+        Settings.System.putInt(mContext.getContentResolver(), Settings.System.VIBRATE_ON, ON);
+        VibrationPreferenceController controller = createPreferenceController();
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_vibration_settings_state_on));
+    }
+
+    @Test
+    public void getSummary_vibrateSettingOff_returnsOffText() {
+        when(mVibrator.hasVibrator()).thenReturn(true);
+        Settings.System.putInt(mContext.getContentResolver(), Settings.System.VIBRATE_ON, OFF);
+        VibrationPreferenceController controller = createPreferenceController();
+        controller.updateState(mPreference);
+
+        assertThat(mPreference.getSummary().toString()).isEqualTo(
+                mContext.getString(R.string.accessibility_vibration_settings_state_off));
+    }
+
+    private VibrationPreferenceController createPreferenceController() {
+        VibrationPreferenceController controller =
+                new VibrationPreferenceController(mContext, PREFERENCE_KEY);
+        mPreference = new Preference(mContext);
+        mPreference.setSummary("Test summary");
+        when(mScreen.findPreference(controller.getPreferenceKey())).thenReturn(mPreference);
+        controller.displayPreference(mScreen);
+        return controller;
     }
 }

@@ -16,22 +16,22 @@
 
 package com.android.settings;
 
+import static android.provider.Settings.ACTION_PRIVACY_SETTINGS;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.ims.ImsRcsManager;
 import android.text.TextUtils;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.biometrics.face.FaceSettings;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
-import com.android.settings.network.SubscriptionUtil;
-import com.android.settings.network.telephony.MobileNetworkUtils;
+import com.android.settings.network.MobileNetworkIntentConverter;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settings.security.SecuritySettingsFeatureProvider;
@@ -50,6 +50,8 @@ public class Settings extends SettingsActivity {
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CreateShortcutActivity extends SettingsActivity { /* empty */ }
     public static class FaceSettingsActivity extends SettingsActivity { /* empty */ }
+    /** Container for {@link FaceSettings} to use with a pre-defined task affinity. */
+    public static class FaceSettingsInternalActivity extends SettingsActivity { /* empty */ }
     public static class FingerprintSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricSettingsActivity extends SettingsActivity { /* empty */ }
     public static class CombinedBiometricProfileSettingsActivity extends SettingsActivity { /* empty */ }
@@ -108,8 +110,6 @@ public class Settings extends SettingsActivity {
     public static class InputMethodAndSubtypeEnablerActivity extends SettingsActivity { /* empty */ }
     public static class SpellCheckersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class LocalePickerActivity extends SettingsActivity { /* empty */ }
-    /** Activity for the App locale details settings. */
-    public static class AppLocalePickerActivity extends SettingsActivity { /* empty */ }
     public static class LanguageAndInputSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DarkThemeSettingsActivity extends SettingsActivity { /* empty */ }
@@ -213,7 +213,8 @@ public class Settings extends SettingsActivity {
         /** Redirects to SafetyCenter if enabled. */
         @VisibleForTesting
         public void handleSafetyCenterRedirection() {
-            if (SafetyCenterManagerWrapper.get().isEnabled(this)) {
+            if (ACTION_PRIVACY_SETTINGS.equals(getIntent().getAction())
+                    && SafetyCenterManagerWrapper.get().isEnabled(this)) {
                 try {
                     startActivity(new Intent(Intent.ACTION_SAFETY_CENTER));
                     finish();
@@ -223,6 +224,7 @@ public class Settings extends SettingsActivity {
             }
         }
     }
+    public static class PrivacyControlsActivity extends SettingsActivity { /* empty */ }
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity {
         @Override
@@ -271,6 +273,7 @@ public class Settings extends SettingsActivity {
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PremiumSmsAccessActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class TurnScreenOnSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppPictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenAccessDetailSettingsActivity extends SettingsActivity {}
@@ -293,6 +296,7 @@ public class Settings extends SettingsActivity {
     public static class AppBubbleNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAssistantSettingsActivity extends SettingsActivity{ /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
+    public static class NotificationReviewPermissionsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -356,46 +360,44 @@ public class Settings extends SettingsActivity {
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedConnectedDeviceActivity extends SettingsActivity { /* empty */ }
     public static class BluetoothDeviceDetailActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothBroadcastActivity extends SettingsActivity { /* empty */ }
+    public static class BluetoothFindBroadcastsActivity extends SettingsActivity { /* empty */ }
     public static class WifiCallingDisclaimerActivity extends SettingsActivity { /* empty */ }
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
     public static class MobileNetworkActivity extends SettingsActivity {
 
+        public static final String TAG = "MobileNetworkActivity";
         public static final String EXTRA_MMS_MESSAGE = "mms_message";
         public static final String EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN =
                 "show_capability_discovery_opt_in";
 
+        private MobileNetworkIntentConverter mIntentConverter;
+
+        /**
+         * Override of #onNewIntent() requires Activity to have "singleTop" launch mode within
+         * AndroidManifest.xml
+         */
         @Override
-        public Intent getIntent() {
-            final Intent intent = new Intent(super.getIntent());
-            int subId = intent.getIntExtra(android.provider.Settings.EXTRA_SUB_ID,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-            SubscriptionInfo subInfo = SubscriptionUtil.getSubscriptionOrDefault(
-                    getApplicationContext(), subId);
-            CharSequence title = SubscriptionUtil.getUniqueSubscriptionDisplayName(
-                    subInfo, getApplicationContext());
-            intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
-            intent.putExtra(android.provider.Settings.EXTRA_SUB_ID, subId);
-            if (android.provider.Settings.ACTION_MMS_MESSAGE_SETTING.equals(intent.getAction())) {
-                // highlight "mms_message" preference.
-                intent.putExtra(EXTRA_FRAGMENT_ARG_KEY, EXTRA_MMS_MESSAGE);
-            }
+        protected void onNewIntent(Intent intent) {
+            super.onNewIntent(intent);
 
-            if (doesIntentContainOptInAction(intent)) {
-                intent.putExtra(EXTRA_SHOW_CAPABILITY_DISCOVERY_OPT_IN,
-                        maybeShowContactDiscoveryDialog(subId));
-            }
+            Log.d(TAG, "Starting onNewIntent");
 
-            return intent;
+            createUiFromIntent(null /* savedState */, convertIntent(intent));
         }
 
-        private boolean maybeShowContactDiscoveryDialog(int subId) {
-            // If this activity was launched using ACTION_SHOW_CAPABILITY_DISCOVERY_OPT_IN, show the
-            // associated dialog only if the opt-in has not been granted yet.
-            return MobileNetworkUtils.isContactDiscoveryVisible(getApplicationContext(), subId)
-                    // has the user already enabled this configuration?
-                    && !MobileNetworkUtils.isContactDiscoveryEnabled(
-                            getApplicationContext(), subId);
+        @Override
+        public Intent getIntent() {
+            return convertIntent(super.getIntent());
+        }
+
+        private Intent convertIntent(Intent copyFrom) {
+            if (mIntentConverter == null) {
+                mIntentConverter = new MobileNetworkIntentConverter(this);
+            }
+            Intent intent = mIntentConverter.apply(copyFrom);
+            return (intent == null) ? copyFrom : intent;
         }
 
         public static boolean doesIntentContainOptInAction(Intent intent) {

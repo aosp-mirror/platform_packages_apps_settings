@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
+import java.util.List;
 /**
  * Activity which concludes fingerprint enrollment.
  */
@@ -55,7 +57,7 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_finish);
         setHeaderText(R.string.security_settings_fingerprint_enroll_finish_title);
-        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_message);
+        setDescriptionText(R.string.security_settings_fingerprint_enroll_finish_v2_message);
 
         mFooterBarMixin = getLayout().getMixin(FooterBarMixin.class);
         mFooterBarMixin.setSecondaryButton(
@@ -92,10 +94,11 @@ public class FingerprintEnrollFinish extends BiometricEnrollBase {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
         boolean hideAddAnother = false;
         if (fpm != null) {
+            final List<FingerprintSensorPropertiesInternal> props =
+                    fpm.getSensorPropertiesInternal();
+            int maxEnrollments = props.get(0).maxEnrollmentsPerUser;
             int enrolled = fpm.getEnrolledFingerprints(mUserId).size();
-            int max = getResources().getInteger(
-                    com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
-            hideAddAnother = enrolled >= max;
+            hideAddAnother = enrolled >= maxEnrollments;
         }
         if (hideAddAnother) {
             // Don't show "Add" button if too many fingerprints already added

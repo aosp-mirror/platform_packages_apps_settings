@@ -208,9 +208,9 @@ public class DevelopmentSettingsDashboardFragmentTest {
         assertThat(dialog).isNotNull();
         ShadowAlertDialogCompat shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog);
         assertThat(shadowDialog.getTitle()).isEqualTo(
-                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_title));
+                mContext.getString(R.string.bluetooth_disable_hw_offload_dialog_title));
         assertThat(shadowDialog.getMessage()).isEqualTo(
-                mContext.getString(R.string.bluetooth_disable_a2dp_hw_offload_dialog_message));
+                mContext.getString(R.string.bluetooth_disable_hw_offload_dialog_message));
     }
 
     @Test
