@@ -36,8 +36,8 @@
     <com.android.settings.widget.SettingsMainSwitchPreference
         android:key="captioning_preference_switch"
         android:persistent="false"
-        android:summary="@string/accessibility_caption_primary_switch_summary"
-        android:title="@string/accessibility_caption_primary_switch_title" />
+        android:title="@string/accessibility_caption_primary_switch_title"
+        settings:controller="com.android.settings.accessibility.CaptionTogglePreferenceController"/>
 
     <Preference
         android:fragment="com.android.settings.accessibility.CaptionAppearanceFragment"
