@@ -273,7 +273,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Подешавање датума и времена"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Подешавање датума, времена, временске зоне и формата"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Подеси време аутоматски"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Подеси временску зону аутоматски"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Подеси аутоматски"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Користи подразумевану вредност за локалитет"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"24-часовни формат"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Користи 24-часовни формат"</string>
@@ -1910,7 +1910,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Услуге локације"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Услуге локације"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Услуге локације за посао"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Користи локацију за подешавање временске зоне"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Користи локацију"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Потребна је локација уређаја"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Да бисте подесили временску зону помоћу локације, укључите локацију, па ажурирајте подешавања временске зоне"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Подешавања локације"</string>
@@ -1919,6 +1919,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Откривање временске зоне локације је онемогућено"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Откривање временске зоне локације није подржано"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Промене откривања временске зоне локације нису дозвољене"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Локација може да се користи за подешавање временске зоне"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Локац. на основу WiFi и моб. мреже"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Нека апл. користе Google-ову услугу лоцирања за брже одређивање локације. Анонимни подаци о локацији прикупљаће се и слати Google-у."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Локација се одређује помоћу WiFi-а"</string>
@@ -3050,6 +3051,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Цела актуелна реч и интеракција"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Једноставан говор у текст"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Ова услуга гласовног уноса ће моћи уместо вас да обавља константно гласовно праћење и контролише апликације у којима је омогућен глас. Она је део апликације <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Желите ли да омогућите коришћење ове услуге?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Подешавања препознавања на уређају"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Препознавање на уређају"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Препознавање говора на уређају"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Жељени механизам"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Подешавања механизма"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Брзина и јачина говора"</string>
@@ -3732,8 +3736,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, напредно позивање, 5g позивање"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"додај језик, додајте језик"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"величина текста, велика слова, велик фонт, велик текст, слабовидост, повећање текста, увећавање фонта, повећање фонта"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"увек укључен екран, AOD"</string>
     <string name="default_sound" msgid="6604374495015245195">"Подразумевани звук"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Јачина звука за звоно и обавештења је на <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Јачина звука, вибрација, Не узнемиравај"</string>

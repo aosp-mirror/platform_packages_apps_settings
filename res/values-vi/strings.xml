@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Đặt ngày giờ"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Đặt ngày, giờ, múi giờ &amp; định dạng"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Tự động đặt giờ"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Tự động đặt múi giờ"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Đặt tự động"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Sử dụng định dạng của địa phương"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Định dạng 24 giờ"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Sử dụng định dạng 24 giờ"</string>
@@ -741,7 +741,7 @@
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất một mã PIN hoặc mật khẩu mạnh. Nếu không, ứng dụng này có thể không hoạt động như mong đợi"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất một mã PIN hoặc mật khẩu mới. Nếu không, ứng dụng này có thể không hoạt động như mong đợi"</string>
     <string name="unlock_footer_low_complexity_requested" msgid="2517656037576567971">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất một hình mở khóa, mã PIN hoặc mật khẩu mới. Nếu không, ứng dụng này có thể không hoạt động như mong đợi"</string>
-    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất khóa màn hình mới"</string>
+    <string name="unlock_footer_none_complexity_requested" msgid="8534900170428140529">"<xliff:g id="APP_NAME">%1$s</xliff:g> đề xuất phương thức khóa màn hình mới"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="6874652886647631418">"Thử lại. Lần thử <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g>/<xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="7450322567217745999">"Dữ liệu của bạn sẽ bị xóa"</string>
     <string name="lock_last_pattern_attempt_before_wipe_device" msgid="5816668400104558952">"Nếu bạn nhập hình mở khóa không chính xác vào lần thử tiếp theo, dữ liệu trên thiết bị này sẽ bị xóa"</string>
@@ -1326,7 +1326,7 @@
     <string name="auto_rotate_summary_a11y" msgid="1505094100328581685">"Khi bạn chuyển điện thoại giữa chế độ dọc và chế độ ngang"</string>
     <string name="screen_resolution_title" msgid="2690518693139811486">"Độ phân giải màn hình"</string>
     <string name="screen_resolution_option_high" msgid="2617496842852992853">"Độ phân giải cao"</string>
-    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Độ phân giải cao"</string>
+    <string name="screen_resolution_option_highest" msgid="9134161136319625840">"Độ phân giải đầy đủ"</string>
     <string name="screen_resolution_summary_high" msgid="5611896959631297437">"FHD+ 1080p"</string>
     <string name="screen_resolution_summary_highest" msgid="2609112310453953756">"QHD+ 1440p"</string>
     <string name="screen_resolution_footer" msgid="6772341522952795647">"Chế độ độ phân giải cao sử dụng nhiều pin hơn. Việc chuyển đổi độ phân giải của bạn có thể khiến một số ứng dụng khởi động lại."</string>
@@ -1890,7 +1890,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Dịch vụ vị trí"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Dịch vụ vị trí"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Dịch vụ vị trí cho công việc"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Sử dụng thông tin vị trí để đặt múi giờ"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Dùng thông tin vị trí"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Cần có thông tin vị trí của thiết bị"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Để đặt múi giờ bằng thông tin vị trí của bạn, hãy bật dịch vụ vị trí rồi cập nhật chế độ cài đặt múi giờ"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Cài đặt vị trí"</string>
@@ -1899,6 +1899,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Tùy chọn Phát hiện múi giờ theo vị trí bị tắt"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"Tùy chọn Phát hiện múi giờ theo vị trí không được hỗ trợ"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Không được phép thay đổi tùy chọn Phát hiện múi giờ theo vị trí"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Vị trí có thể dùng để đặt múi giờ"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Vị trí Wi‑Fi và mạng di động"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Cho phép ứng dụng dùng DV vị trí của Google để ước đoán vị trí nhanh hơn. Dữ liệu vị trí ẩn danh sẽ được thu thập và gửi tới Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Vị trí được xác định bằng Wi‑Fi"</string>
@@ -3014,6 +3015,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Tương tác và từ nóng đầy đủ"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Lời nói thành văn bản đơn giản"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Dịch vụ nhập bằng giọng nói này có thể thực hiện theo dõi bằng giọng nói luôn bật và kiểm soát các ứng dụng hỗ trợ giọng nói thay mặt cho bạn. Dịch vụ này đến từ <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Cho phép sử dụng dịch vụ này?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Cài đặt nhận dạng trên thiết bị"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Nhận dạng trên thiết bị"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Nhận dạng giọng nói trên thiết bị"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Công cụ ưu tiên"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Cài đặt công cụ"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Tốc độ lời nói và cao độ"</string>
@@ -3691,8 +3695,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"vo5g, vonr, tính năng gọi nâng cao, gọi qua 5g"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"thêm ngôn ngữ, thêm một ngôn ngữ"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"cỡ chữ, bản in lớn, phông chữ lớn, chữ lớn, thị lực kém, tăng cỡ chữ, tăng kích cỡ phông chữ, phóng to phông chữ"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"màn hình luôn bật, AOD"</string>
     <string name="default_sound" msgid="6604374495015245195">"Âm thanh mặc định"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Âm lượng chuông và thông báo ở mức <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Âm lượng, rung, Không làm phiền"</string>
@@ -5073,7 +5076,7 @@
     <string name="toast_allows_restricted_settings_successfully" msgid="1219116121291466102">"Đã cho phép <xliff:g id="APP_NAME">%s</xliff:g> sử dụng các chế độ cài đặt bị hạn chế"</string>
     <string name="blocked_by_restricted_settings_content" msgid="3628660029601161080">"Để đảm bảo an toàn cho bạn, chế độ cài đặt này hiện bị vô hiệu hoá."</string>
     <string name="financed_privacy_settings" msgid="2575114436197204145">"Thông tin về thiết bị trả góp"</string>
-    <string name="financed_privacy_intro" msgid="7836497475568741579">"Tổ chức tín dụng có thể thay đổi các chế độ cài đặt và cài đặt phần mềm trên thiết bị này trong quá trình thiết lập.\n\nNếu bạn chưa thanh toán, tổ chức tín dụng có thể khoá thiết bị của bạn và thay đổi các chế độ cài đặt thiết bị.\n\nĐể tìm hiểu thêm, hãy liên hệ với tổ chức tín dụng."</string>
+    <string name="financed_privacy_intro" msgid="7836497475568741579">"Tổ chức tín dụng có thể thay đổi các chế độ cài đặt và cài đặt phần mềm trên thiết bị này trong quá trình thiết lập.\n\nNếu không thanh toán đúng hạn, tổ chức tín dụng có thể khoá thiết bị của bạn và thay đổi các chế độ cài đặt thiết bị.\n\nĐể tìm hiểu thêm, hãy liên hệ với tổ chức tín dụng."</string>
     <string name="financed_privacy_restrictions_category" msgid="2472659467919651602">"Nếu mua trả góp thiết bị, bạn không thể:"</string>
     <string name="financed_privacy_install_apps" msgid="7381718005710210851">"Cài đặt các ứng dụng không phải của Cửa hàng Play"</string>
     <string name="financed_privacy_safe_mode" msgid="5362149445732602578">"Khởi động lại thiết bị ở chế độ an toàn"</string>
@@ -5090,7 +5093,7 @@
     <string name="financed_privacy_notifications" msgid="5932303271274089968">"Xem thông báo và tin nhắn văn bản"</string>
     <string name="financed_privacy_allowlisted_apps" msgid="8333040812194879963">"Truy cập các ứng dụng được tổ chức tín dụng cho phép"</string>
     <string name="financed_privacy_fully_paid_category" msgid="9221763928564246923">"Sau khi bạn trả toàn bộ phí:"</string>
-    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Tất cả các hạn chế đều bị xoá khỏi thiết bị"</string>
+    <string name="financed_privacy_restrictions_removed" msgid="3182636815294595072">"Tất cả các hạn chế đều được dỡ bỏ khỏi thiết bị"</string>
     <string name="financed_privacy_uninstall_creditor_app" msgid="6339004120497310705">"Bạn có thể gỡ cài đặt ứng dụng của tổ chức tín dụng"</string>
     <plurals name="default_camera_app_title" formatted="false" msgid="8112432929729136399">
       <item quantity="other">Ứng dụng Máy ảnh</item>
