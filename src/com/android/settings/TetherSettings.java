@@ -324,13 +324,13 @@ public class TetherSettings extends RestrictedSettingsFragment
 
 
         mStartTetheringCallback = new OnStartTetheringCallback(this);
-        mTetheringEventCallback = new TetheringEventCallback();
+        mTetheringEventCallback = new TetheringEventCallback(this);
         mTm.registerTetheringEventCallback(r -> mHandler.post(r), mTetheringEventCallback);
 
         mMassStorageActive = Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         registerReceiver();
 
-        mEthernetListener = new EthernetListener();
+        mEthernetListener = new EthernetListener(this);
         if (mEm != null)
             mEm.addInterfaceStateListener(r -> mHandler.post(r), mEthernetListener);
 
@@ -640,25 +640,56 @@ public class TetherSettings extends RestrictedSettingsFragment
         }
     }
 
-    private final class TetheringEventCallback implements TetheringManager.TetheringEventCallback {
+    private static final class TetheringEventCallback implements
+            TetheringManager.TetheringEventCallback {
+        final WeakReference<TetherSettings> mTetherSettings;
+
+        TetheringEventCallback(TetherSettings settings) {
+            mTetherSettings = new WeakReference<>(settings);
+        }
+
         @Override
         public void onTetheredInterfacesChanged(List<String> interfaces) {
-            Log.d(TAG, "onTetheredInterfacesChanged() interfaces : " + interfaces.toString());
-            String[] tethered = interfaces.toArray(new String[interfaces.size()]);
-            updateUsbState(tethered);
-            updateBluetoothAndEthernetState(tethered);
+            final TetherSettings tetherSettings = mTetherSettings.get();
+            if (tetherSettings == null) {
+                return;
+            }
+            tetherSettings.onTetheredInterfacesChanged(interfaces);
         }
     }
 
-    private final class EthernetListener implements EthernetManager.InterfaceStateListener {
+    void onTetheredInterfacesChanged(List<String> interfaces) {
+        Log.d(TAG, "onTetheredInterfacesChanged() interfaces : " + interfaces.toString());
+        final String[] tethered = interfaces.toArray(new String[interfaces.size()]);
+        updateUsbState(tethered);
+        updateBluetoothAndEthernetState(tethered);
+    }
+
+    private static final class EthernetListener implements EthernetManager.InterfaceStateListener {
+        final WeakReference<TetherSettings> mTetherSettings;
+
+        EthernetListener(TetherSettings settings) {
+            mTetherSettings = new WeakReference<>(settings);
+        }
+
+        @Override
         public void onInterfaceStateChanged(@NonNull String iface, int state, int role,
                 @NonNull IpConfiguration configuration) {
-            if (state == EthernetManager.STATE_LINK_UP) {
-                mAvailableInterfaces.add(iface);
-            } else {
-                mAvailableInterfaces.remove(iface);
+            final TetherSettings tetherSettings = mTetherSettings.get();
+            if (tetherSettings == null) {
+                return;
             }
-            updateBluetoothAndEthernetState();
+            tetherSettings.onInterfaceStateChanged(iface, state, role, configuration);
         }
+    }
+
+    void onInterfaceStateChanged(@NonNull String iface, int state, int role,
+            @NonNull IpConfiguration configuration) {
+        if (state == EthernetManager.STATE_LINK_UP) {
+            mAvailableInterfaces.add(iface);
+        } else {
+            mAvailableInterfaces.remove(iface);
+        }
+        updateBluetoothAndEthernetState();
     }
 }
