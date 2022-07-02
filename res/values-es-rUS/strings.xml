@@ -100,7 +100,7 @@
     <string name="bluetooth_show_received_files" msgid="685424727760622632">"Archivos recibidos"</string>
     <string name="bluetooth_devices_card_off_title" msgid="1320149821945129127">"Bluetooth desactivado"</string>
     <string name="bluetooth_devices_card_off_summary" msgid="2276527382891105858">"Presiona para activarlo"</string>
-    <string name="device_picker" msgid="2427027896389445414">"Elegir dispositivo"</string>
+    <string name="device_picker" msgid="2427027896389445414">"Elegir dispositivo Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="1529030199895339199">"<xliff:g id="APP_NAME">%1$s</xliff:g> quiere activar la conexión Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="1879788777942714761">"<xliff:g id="APP_NAME">%1$s</xliff:g> quiere desactivar la conexión Bluetooth"</string>
     <string name="bluetooth_ask_enablement_no_name" msgid="5091401961637405417">"Una app quiere activar la conexión Bluetooth"</string>
@@ -271,7 +271,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"Configurar fecha y hora"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"Establecer fecha, hora, zona horaria y formatos"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"Establecer la hora automáticamente"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"Establecer la zona horaria automáticamente"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"Establecer automáticamente"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar configuración regional predeterminada"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"Formato de 24 horas"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Formato de 24 horas"</string>
@@ -1890,7 +1890,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"Servicios de ubicación"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"Servicios de ubicación"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"Servicios de ubicación para el trabajo"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"Usa tu ubicación para configurar la zona horaria"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"Usar ubicación"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"Se necesita la ubicación del dispositivo"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"Para configurar la zona horaria con tu ubicación, activa la ubicación y, luego, actualiza la configuración de zona horaria"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"Configuración de la ubicación"</string>
@@ -1899,6 +1899,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"Se inhabilitó la detección de la zona horaria de la ubicación"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"La detección de la zona horaria de la ubicación no es compatible"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"No se permiten los cambios de detección de la zona horaria de la ubicación"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"Se puede usar la ubicación para configurar la zona horaria"</string>
     <string name="location_network_based" msgid="5247042890080021887">"Ubicación de Wi-Fi y red móvil"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"Permitir que aplicaciones usen el servicio de ubicación de Google para calcular tu ubicación (se enviarán datos anónimos a Google)"</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"Ubicación determinada por Wi-Fi"</string>
@@ -2901,7 +2902,7 @@
     <string name="battery_detail_since_full_charge" msgid="5650946565524184582">"Desglose desde la última carga completa"</string>
     <string name="battery_last_full_charge" msgid="8308424441475063956">"Última carga completa"</string>
     <string name="battery_full_charge_last" msgid="465146408601016923">"La carga completa dura aproximadamente"</string>
-    <string name="battery_footer_summary" msgid="8221691063048377342">"Los datos sobre la duración de la batería son aproximados y pueden cambiar en función del uso."</string>
+    <string name="battery_footer_summary" msgid="8221691063048377342">"Los datos sobre el uso de batería son aproximados y pueden cambiar en función del uso."</string>
     <string name="battery_detail_power_usage" msgid="1492926471397355477">"Uso de la batería"</string>
     <string name="battery_detail_manage_title" msgid="7910805419446927887">"Administrar el uso de la batería"</string>
     <string name="battery_total_and_bg_usage" msgid="8266478675516886819">"<xliff:g id="TIME_0">^1</xliff:g> en total • <xliff:g id="TIME_1">^2</xliff:g> en segundo plano\ndesde la última carga completa"</string>
@@ -2959,7 +2960,7 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"con <xliff:g id="PERCENT">%1$s</xliff:g> de batería"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Porcentaje de batería"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostrar el porcentaje de la batería en la barra de estado"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostrar el porcentaje de batería en la barra de estado"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nivel de batería en las últimas 24 h"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Cuánta batería se consumió en las últimas 24 h por app"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso del sistema en las últimas 24 h"</string>
@@ -3014,6 +3015,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"Interacción y palabra clave completa"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"Voz a texto simple"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Este servicio de entrada de voz puede supervisar que siempre esté activada la voz y controlar en tu nombre las aplicaciones que pueden utilizar la entrada de voz. Procede de <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. ¿Quieres habilitar el uso de este servicio?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"Configuración de reconocimiento integrada en el dispositivo"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Reconocimiento integrado en el dispositivo"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Reconocimiento de voz integrado en el dispositivo"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Motor preferido"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Configuración del motor"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"Velocidad y tono de la voz"</string>
@@ -3691,8 +3695,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"Vo5G, VoNR, llamadas avanzadas, llamadas 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"agregar idioma, agregar un idioma"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"tamaño del texto, letra grande, fuente grande, texto grande, visión reducida, agrandar el texto, agrandar la fuente, agrandamiento de la fuente"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"pantalla siempre activa, PSA"</string>
     <string name="default_sound" msgid="6604374495015245195">"Sonido predeterminado"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"Volumen de tono y notificaciones al <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"Volumen, vibración, No interrumpir"</string>

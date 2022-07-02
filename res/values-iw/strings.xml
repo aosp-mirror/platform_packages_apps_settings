@@ -275,7 +275,7 @@
     <string name="date_and_time_settings_title_setup_wizard" msgid="1841717199409629742">"הגדרת תאריך ושעה"</string>
     <string name="date_and_time_settings_summary" msgid="334967758944498010">"הגדרת תאריך, שעה, אזור זמן ופורמטים"</string>
     <string name="date_time_auto" msgid="4239202185055225869">"הגדרת זמן באופן אוטומטי"</string>
-    <string name="zone_auto_title" msgid="3993580453604839924">"הגדרת אזור זמן באופן אוטומטי"</string>
+    <string name="zone_auto_title" msgid="5141692422373097957">"הגדרה באופן אוטומטי"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"לפי ברירת המחדל באזור"</string>
     <string name="date_time_24hour_title" msgid="1445056824481243600">"פורמט 24 שעות"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"פורמט 24 שעות"</string>
@@ -1934,7 +1934,7 @@
     <string name="location_services_preference_title" msgid="604317859531782159">"שירותי מיקום"</string>
     <string name="location_services_screen_title" msgid="5640002489976602476">"שירותי מיקום"</string>
     <string name="managed_profile_location_services" msgid="8172092734138341880">"שירותי מיקום לעבודה"</string>
-    <string name="location_time_zone_detection_toggle_title" msgid="6518338597250564260">"שימוש במיקום לקביעת אזור הזמן"</string>
+    <string name="location_time_zone_detection_toggle_title" msgid="6478751613645015287">"שימוש במיקום"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_title" msgid="231698690198001146">"יש צורך בנתוני המיקום של המכשיר"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_message" msgid="5846316326139169523">"כדי להגדיר את אזור הזמן באמצעות המיקום שלך, יש להפעיל את המיקום ולאחר מכן לעדכן את הגדרות אזור הזמן"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"הגדרות מיקום"</string>
@@ -1943,6 +1943,7 @@
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"זיהוי אזור הזמן של המיקום מושבת"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"אין תמיכה בזיהוי אזור הזמן של המיקום"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"אין לבצע שינויים בזיהוי אזור הזמן של המיקום"</string>
+    <string name="location_time_zone_detection_auto_is_on" msgid="8797434659844659323">"ייתכן שייעשה שימוש במיקום כדי להגדיר את אזור הזמן"</string>
     <string name="location_network_based" msgid="5247042890080021887">"‏מיקום רשת Wi-Fi ורשת סלולרית"</string>
     <string name="location_neighborhood_level" msgid="3668890550358558267">"‏מאפשרים לאפליקציות להשתמש בשירות המיקום של Google כדי להעריך את מיקומך מהר יותר. נתוני מיקום אנונימיים ייאספו ויישלחו אל Google."</string>
     <string name="location_neighborhood_level_wifi" msgid="6227393490651891977">"‏המיקום נקבע באמצעות Wi-Fi"</string>
@@ -3090,6 +3091,9 @@
     <string name="voice_interactor_preference_summary" msgid="3942881638813452880">"שירות מלא של אינטראקציה ומילות הפעלה"</string>
     <string name="voice_recognizer_preference_summary" msgid="9195427725367463336">"שירות פשוט של דיבור לטקסט"</string>
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"שירות הקלט הקולי הזה יוכל לקיים ניטור תמידי של קול ולשלוט בשמך באפליקציות בעלות תכונות הפעלה קולית. מקורו באפליקציה <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. האם להפעיל את השימוש בשירות הזה?"</string>
+    <string name="on_device_recognition_settings" msgid="6503160369314598069">"הגדרות זיהוי במכשיר"</string>
+    <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"זיהוי במכשיר"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"זיהוי דיבור במכשיר"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"מנוע מועדף"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"הגדרות מנוע"</string>
     <string name="tts_sliders_title" msgid="6901146958648426181">"קצב הדיבור וגובה הקול"</string>
@@ -3777,8 +3781,7 @@
     <string name="keywords_nr_advanced_calling" msgid="4157823099610141014">"‏Vo5G,‏ VoNR,‏ שיחות מתקדמות, התקשרות באמצעות 5G"</string>
     <string name="keywords_add_language" msgid="1882751300359939436">"הוספת שפה, להוסיף שפה"</string>
     <string name="keywords_font_size" msgid="1643198841815006447">"גודל הטקסט, אותיות גדולות, גופן גדול, טקסט גדול, לקוי ראייה, הגדלת טקסט, מגדיל טקסט"</string>
-    <!-- no translation found for keywords_always_show_time_info (645658129239452778) -->
-    <skip />
+    <string name="keywords_always_show_time_info" msgid="645658129239452778">"‏תצוגה תמידית, AOD"</string>
     <string name="default_sound" msgid="6604374495015245195">"צליל ברירת מחדל"</string>
     <string name="sound_settings_summary" msgid="944761906531715109">"עוצמת הקול של צלצול והתראות ברמה של <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="sound_dashboard_summary" msgid="6574444810552643312">"עוצמת קול, רטט ומצב \'נא לא להפריע\'"</string>
