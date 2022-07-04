@@ -455,6 +455,36 @@ public class AddAppNetworksFragmentTest {
                 AddAppNetworksFragment.MESSAGE_SHOW_SAVE_FAILED)).isTrue();
     }
 
+    @Test
+    public void uiConfigurationItem_putCrToDisplayedSsid_shouldRemoveCr() {
+        String testSsid = "\r" + FAKE_NEW_WPA_SSID + "\r";
+
+        AddAppNetworksFragment.UiConfigurationItem item =
+                new AddAppNetworksFragment.UiConfigurationItem(testSsid, null, 0, 0);
+
+        assertThat(item.mDisplayedSsid).isEqualTo(FAKE_NEW_WPA_SSID);
+    }
+
+    @Test
+    public void uiConfigurationItem_putLfToDisplayedSsid_shouldRemoveLf() {
+        String testSsid = "\n" + FAKE_NEW_WPA_SSID + "\n";
+
+        AddAppNetworksFragment.UiConfigurationItem item =
+                new AddAppNetworksFragment.UiConfigurationItem(testSsid, null, 0, 0);
+
+        assertThat(item.mDisplayedSsid).isEqualTo(FAKE_NEW_WPA_SSID);
+    }
+
+    @Test
+    public void uiConfigurationItem_putCrLfToDisplayedSsid_shouldRemoveCrLf() {
+        String testSsid = "\r\n" + FAKE_NEW_WPA_SSID + "\r\n";
+
+        AddAppNetworksFragment.UiConfigurationItem item =
+                new AddAppNetworksFragment.UiConfigurationItem(testSsid, null, 0, 0);
+
+        assertThat(item.mDisplayedSsid).isEqualTo(FAKE_NEW_WPA_SSID);
+    }
+
     private void setUpOneScannedNetworkWithScanedLevel4() {
         final ArrayList list = new ArrayList<>();
         list.add(mWifiEntry);
