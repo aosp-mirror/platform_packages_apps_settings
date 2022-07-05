@@ -26,7 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -111,7 +111,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         ReflectionHelpers.setField(mAdapter, "mHighlightRequested", false);
         mAdapter.requestHighlight(mRoot, null /* recyclerView */,  mock(AppBarLayout.class));
 
-        verifyZeroInteractions(mRoot);
+        verifyNoInteractions(mRoot);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         when(mFragment.getArguments()).thenReturn(null);
         when(mFragment.getPreferenceScreen()).thenReturn(screen);
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
-        verifyZeroInteractions(screen);
+        verifyNoInteractions(screen);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class HighlightablePreferenceGroupAdapterTest {
         HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
 
         verify(mFragment).getInitialExpandedChildCount();
-        verifyZeroInteractions(screen);
+        verifyNoInteractions(screen);
     }
 
     @Test
