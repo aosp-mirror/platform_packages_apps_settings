@@ -65,7 +65,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.homepage.TopLevelHighlightMixin;
+import com.android.settings.homepage.TopLevelSettings;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils;
+import com.android.settings.testutils.shadow.ShadowSplitController;
 import com.android.settings.testutils.shadow.ShadowTileUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -542,6 +547,64 @@ public class DashboardFeatureProviderImplTest {
                 .isEqualTo(MetricsEvent.SETTINGS_GESTURES);
     }
 
+    /** This test is for large screen devices Activity embedding. */
+    @Test
+    @Config(shadows = {ShadowActivityEmbeddingUtils.class, ShadowSplitController.class})
+    public void bindPreference_clickHighlightedPreference_shouldNotStartActivity() {
+        ShadowSplitController.setIsActivityEmbedded(true);
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
+        mFeatureFactory.searchFeatureProvider = new SearchFeatureProviderImpl();
+
+        String clickPrefKey = "highlight_pref_key";
+        String highlightMixinPrefKey = "highlight_pref_key";
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
+        Preference preference = new Preference(RuntimeEnvironment.application);
+        Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+
+        TopLevelSettings largeScreenTopLevelSettings = new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey, true /* activityEmbedded */));
+        largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
+
+        mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,
+                mForceRoundedIcon, preference, tile, clickPrefKey, Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        assertThat(shadowActivity.getNextStartedActivityForResult()).isEqualTo(null);
+    }
+
+    /** This test is for large screen devices Activity embedding. */
+    @Test
+    @Config(shadows = {ShadowActivityEmbeddingUtils.class, ShadowSplitController.class})
+    public void bindPreference_clickNotHighlightedPreference_shouldStartActivity() {
+        ShadowSplitController.setIsActivityEmbedded(true);
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true);
+        mFeatureFactory.searchFeatureProvider = new SearchFeatureProviderImpl();
+
+        String clickPrefKey = "not_highlight_pref_key";
+        String highlightMixinPrefKey = "highlight_pref_key";
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class).get();
+        Preference preference = new Preference(RuntimeEnvironment.application);
+        Tile tile = new ActivityTile(mActivityInfo, CategoryKey.CATEGORY_HOMEPAGE);
+        mActivityInfo.metaData.putString(META_DATA_PREFERENCE_KEYHINT, "key");
+        mActivityInfo.metaData.putString("com.android.settings.intent.action", "TestAction");
+        tile.userHandle = null;
+
+        TopLevelSettings largeScreenTopLevelSettings = new TopLevelSettings(
+                new TestTopLevelHighlightMixin(highlightMixinPrefKey, true /* activityEmbedded */));
+        largeScreenTopLevelSettings.setHighlightPreferenceKey(clickPrefKey);
+
+        mImpl.bindPreferenceToTileAndGetObservers(activity, largeScreenTopLevelSettings,
+                mForceRoundedIcon, preference, tile, clickPrefKey, Preference.DEFAULT_ORDER);
+        preference.performClick();
+
+        Intent launchIntent = Shadows.shadowOf(activity).getNextStartedActivityForResult().intent;
+        assertThat(launchIntent.getAction()).isEqualTo("TestAction");
+    }
+
     @Test
     public void clickPreference_withUnresolvableIntent_shouldNotLaunchAnything() {
         ReflectionHelpers.setField(
@@ -692,6 +755,21 @@ public class DashboardFeatureProviderImplTest {
         @Override
         protected String getLogTag() {
             return "TestFragment";
+        }
+    }
+
+    private static class TestTopLevelHighlightMixin extends TopLevelHighlightMixin {
+        private final String mHighlightPreferenceKey;
+
+        TestTopLevelHighlightMixin(String highlightPreferenceKey,
+                boolean activityEmbedded) {
+            super(activityEmbedded);
+            mHighlightPreferenceKey = highlightPreferenceKey;
+        }
+
+        @Override
+        public String getHighlightPreferenceKey() {
+            return mHighlightPreferenceKey;
         }
     }
 }
