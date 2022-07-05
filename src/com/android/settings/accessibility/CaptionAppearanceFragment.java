@@ -24,10 +24,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
-import android.view.View;
 import android.view.accessibility.CaptioningManager;
 
 import androidx.preference.ListPreference;
@@ -35,18 +32,14 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 
-import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.accessibility.AccessibilityUtils;
 import com.android.settingslib.search.SearchIndexable;
-import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /** Settings fragment containing font style of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
@@ -54,7 +47,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         implements OnPreferenceChangeListener, OnValueChangedListener {
 
     private static final String TAG = "CaptionAppearanceFragment";
-    private static final String PREF_CAPTION_PREVIEW = "caption_preview";
     private static final String PREF_BACKGROUND_COLOR = "captioning_background_color";
     private static final String PREF_BACKGROUND_OPACITY = "captioning_background_opacity";
     private static final String PREF_FOREGROUND_COLOR = "captioning_foreground_color";
@@ -68,13 +60,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
     private static final String PREF_PRESET = "captioning_preset";
     private static final String PREF_CUSTOM = "custom";
 
-    /* WebVtt specifies line height as 5.3% of the viewport height. */
-    private static final float LINE_HEIGHT_RATIO = 0.0533f;
-
     private CaptioningManager mCaptioningManager;
-    private SubtitleView mPreviewText;
-    private View mPreviewWindow;
-    private View mPreviewViewport;
 
     // Standard options.
     private ListPreference mFontSize;
@@ -96,18 +82,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
 
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
-    private final View.OnLayoutChangeListener mLayoutChangeListener =
-            new View.OnLayoutChangeListener() {
-                @Override
-                public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                        int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    // Remove the listener once the callback is triggered.
-                    mPreviewViewport.removeOnLayoutChangeListener(this);
-                    mHandler.post(() ->refreshPreviewText());
-                }
-            };
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE;
@@ -123,7 +97,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         updateAllPreferences();
         refreshShowingCustom();
         installUpdateListeners();
-        refreshPreviewText();
     }
 
     @Override
@@ -136,83 +109,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
         return TAG;
     }
 
-    private void refreshPreviewText() {
-        final Context context = getActivity();
-        if (context == null) {
-            // We've been destroyed, abort!
-            return;
-        }
-
-        final SubtitleView preview = mPreviewText;
-        if (preview != null) {
-            final int styleId = mCaptioningManager.getRawUserStyle();
-            applyCaptionProperties(mCaptioningManager, preview, mPreviewViewport, styleId);
-
-            final Locale locale = mCaptioningManager.getLocale();
-            if (locale != null) {
-                final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
-                        context, locale, R.string.captioning_preview_text);
-                preview.setText(localizedText);
-            } else {
-                preview.setText(R.string.captioning_preview_text);
-            }
-
-            final CaptioningManager.CaptionStyle style = mCaptioningManager.getUserStyle();
-            if (style.hasWindowColor()) {
-                mPreviewWindow.setBackgroundColor(style.windowColor);
-            } else {
-                final CaptioningManager.CaptionStyle defStyle =
-                        CaptioningManager.CaptionStyle.DEFAULT;
-                mPreviewWindow.setBackgroundColor(defStyle.windowColor);
-            }
-        }
-    }
-
-    /**
-     * Updates font style of captioning properties for preview screen.
-     *
-     * @param manager caption manager
-     * @param previewText preview text
-     * @param previewWindow preview window
-     * @param styleId font style id
-     */
-    public static void applyCaptionProperties(CaptioningManager manager, SubtitleView previewText,
-            View previewWindow, int styleId) {
-        previewText.setStyle(styleId);
-
-        final Context context = previewText.getContext();
-        final ContentResolver cr = context.getContentResolver();
-        final float fontScale = manager.getFontScale();
-        if (previewWindow != null) {
-            // Assume the viewport is clipped with a 16:9 aspect ratio.
-            final float virtualHeight = Math.max(9 * previewWindow.getWidth(),
-                    16 * previewWindow.getHeight()) / 16.0f;
-            previewText.setTextSize(virtualHeight * LINE_HEIGHT_RATIO * fontScale);
-        } else {
-            final float textSize = context.getResources().getDimension(
-                    R.dimen.caption_preview_text_size);
-            previewText.setTextSize(textSize * fontScale);
-        }
-
-        final Locale locale = manager.getLocale();
-        if (locale != null) {
-            final CharSequence localizedText = AccessibilityUtils.getTextForLocale(
-                    context, locale, R.string.captioning_preview_characters);
-            previewText.setText(localizedText);
-        } else {
-            previewText.setText(R.string.captioning_preview_characters);
-        }
-    }
-
     private void initializeAllPreferences() {
-        final LayoutPreference captionPreview = findPreference(PREF_CAPTION_PREVIEW);
-
-        mPreviewText = captionPreview.findViewById(R.id.preview_text);
-
-        mPreviewWindow = captionPreview.findViewById(R.id.preview_window);
-
-        mPreviewViewport = captionPreview.findViewById(R.id.preview_viewport);
-        mPreviewViewport.addOnLayoutChangeListener(mLayoutChangeListener);
 
         final Resources res = getResources();
         final int[] presetValues = res.getIntArray(R.array.captioning_preset_selector_values);
@@ -400,8 +297,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         } else if (mEdgeType == preference) {
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE, value);
         }
-
-        refreshPreviewText();
         enableCaptioningManager();
     }
 
@@ -411,13 +306,11 @@ public class CaptionAppearanceFragment extends DashboardFragment
         if (mTypeface == preference) {
             Settings.Secure.putString(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
-            refreshPreviewText();
             enableCaptioningManager();
         } else if (mFontSize == preference) {
             Settings.Secure.putFloat(
                     cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
                     Float.parseFloat((String) value));
-            refreshPreviewText();
             enableCaptioningManager();
         }
 
