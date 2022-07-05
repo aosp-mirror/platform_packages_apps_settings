@@ -16,16 +16,17 @@
 
 package com.android.settings.accessibility;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 
-import androidx.preference.PreferenceScreen;
+import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,37 +38,36 @@ import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 
 /**
- * Tests for {@link TextReadingResetController}.
+ * Tests for {@link TextReadingResetPreference}.
  */
 @RunWith(RobolectricTestRunner.class)
-public class TextReadingResetControllerTest {
-    private static final String RESET_KEY = "reset";
+public class TextReadingResetPreferenceTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
-    private TextReadingResetController mResetController;
     private TextReadingResetPreference mResetPreference;
+    private PreferenceViewHolder mHolder;
+    private View mButtonView;
 
     @Rule
     public final MockitoRule mMockitoRule = MockitoJUnit.rule();
 
     @Mock
-    private View.OnClickListener mOnResetButtonClickListener;
-
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    private View.OnClickListener mOnResetClickListener;
 
     @Before
     public void setUp() {
-        mResetController = new TextReadingResetController(mContext, RESET_KEY,
-                mOnResetButtonClickListener);
-        mResetPreference = spy(new TextReadingResetPreference(mContext, /* attrs= */ null));
-
-        when(mPreferenceScreen.findPreference(RESET_KEY)).thenReturn(mResetPreference);
+        mResetPreference = new TextReadingResetPreference(mContext, /* attrs= */ null);
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final View view = inflater.inflate(mResetPreference.getLayoutResource(),
+                        new FrameLayout(mContext), false);
+        mHolder = PreferenceViewHolder.createInstanceForTests(view);
+        mButtonView = view.findViewById(R.id.reset_button);
     }
 
     @Test
-    public void displayResetPreference_verifyResetClickListener() {
-        mResetController.displayPreference(mPreferenceScreen);
+    public void setResetListener_success() {
+        mResetPreference.setOnResetClickListener(mOnResetClickListener);
+        mResetPreference.onBindViewHolder(mHolder);
 
-        verify(mResetPreference).setOnResetClickListener(any(View.OnClickListener.class));
+        assertThat(mButtonView.hasOnClickListeners()).isTrue();
     }
 }
