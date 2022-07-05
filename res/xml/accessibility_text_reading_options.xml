@@ -57,9 +57,8 @@
         android:summary="@string/accessibility_toggle_high_text_contrast_preference_summary"
         android:title="@string/accessibility_toggle_high_text_contrast_preference_title" />
 
-    <com.android.settingslib.widget.LayoutPreference
+    <com.android.settings.accessibility.TextReadingResetPreference
         android:key="reset"
-        android:layout="@layout/accessibility_text_reading_reset_button"
         android:persistent="false"
         android:selectable="false" />
 </PreferenceScreen>
