@@ -30,8 +30,8 @@ import static com.android.settings.notification.zen.ZenPrioritySendersHelper.KEY
 import static com.android.settings.notification.zen.ZenPrioritySendersHelper.KEY_NONE;
 import static com.android.settings.notification.zen.ZenPrioritySendersHelper.UNKNOWN;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
