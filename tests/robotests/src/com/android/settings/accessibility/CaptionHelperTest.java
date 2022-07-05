@@ -16,10 +16,16 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
 
@@ -100,5 +106,27 @@ public class CaptionHelperTest {
                 /* styleId= */ 0);
 
         verify(mSubtitleView).setText(text);
+    }
+
+    @Test
+    public void enableCaptioningManager_shouldSetCaptionEnabled() {
+        when(mCaptioningManager.isEnabled()).thenReturn(false);
+
+        mCaptionHelper.setEnabled(true);
+
+        final boolean isCaptionEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF) == ON;
+        assertThat(isCaptionEnabled).isTrue();
+    }
+
+    @Test
+    public void disableCaptioningManager_shouldSetCaptionDisabled() {
+        when(mCaptioningManager.isEnabled()).thenReturn(true);
+
+        mCaptionHelper.setEnabled(false);
+
+        final boolean isCaptionEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, OFF) == ON;
+        assertThat(isCaptionEnabled).isFalse();
     }
 }

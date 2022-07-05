@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-
 import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,9 +25,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
 
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
@@ -38,13 +33,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /** Settings fragment containing font style of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptionAppearanceFragment extends DashboardFragment
-        implements OnPreferenceChangeListener, OnValueChangedListener {
+        implements OnValueChangedListener {
 
     private static final String TAG = "CaptionAppearanceFragment";
     private static final String PREF_BACKGROUND_COLOR = "captioning_background_color";
@@ -55,19 +47,16 @@ public class CaptionAppearanceFragment extends DashboardFragment
     private static final String PREF_WINDOW_OPACITY = "captioning_window_opacity";
     private static final String PREF_EDGE_COLOR = "captioning_edge_color";
     private static final String PREF_EDGE_TYPE = "captioning_edge_type";
-    private static final String PREF_FONT_SIZE = "captioning_font_size";
-    private static final String PREF_TYPEFACE = "captioning_typeface";
     private static final String PREF_PRESET = "captioning_preset";
     private static final String PREF_CUSTOM = "custom";
 
     private CaptioningManager mCaptioningManager;
+    private CaptionHelper mCaptionHelper;
 
     // Standard options.
-    private ListPreference mFontSize;
     private PresetPreference mPreset;
 
     // Custom options.
-    private ListPreference mTypeface;
     private ColorPreference mForegroundColor;
     private ColorPreference mForegroundOpacity;
     private EdgeTypePreference mEdgeType;
@@ -80,8 +69,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
 
     private boolean mShowingCustom;
 
-    private final List<Preference> mPreferenceList = new ArrayList<>();
-
     @Override
     public int getMetricsCategory() {
         return SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE;
@@ -92,6 +79,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
         super.onCreatePreferences(savedInstanceState, rootKey);
 
         mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
+        mCaptionHelper = new CaptionHelper(getContext());
 
         initializeAllPreferences();
         updateAllPreferences();
@@ -117,12 +105,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         mPreset = (PresetPreference) findPreference(PREF_PRESET);
         mPreset.setValues(presetValues);
         mPreset.setTitles(presetTitles);
-
-        mFontSize = (ListPreference) findPreference(PREF_FONT_SIZE);
-
-        // Initialize the preference list
-        mPreferenceList.add(mFontSize);
-        mPreferenceList.add(mPreset);
 
         mCustom = (PreferenceCategory) findPreference(PREF_CUSTOM);
         mShowingCustom = true;
@@ -168,7 +150,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         mWindowOpacity.setValues(opacityValues);
 
         mEdgeType = (EdgeTypePreference) mCustom.findPreference(PREF_EDGE_TYPE);
-        mTypeface = (ListPreference) mCustom.findPreference(PREF_TYPEFACE);
     }
 
     private void installUpdateListeners() {
@@ -181,17 +162,11 @@ public class CaptionAppearanceFragment extends DashboardFragment
         mWindowColor.setOnValueChangedListener(this);
         mWindowOpacity.setOnValueChangedListener(this);
         mEdgeType.setOnValueChangedListener(this);
-
-        mTypeface.setOnPreferenceChangeListener(this);
-        mFontSize.setOnPreferenceChangeListener(this);
     }
 
     private void updateAllPreferences() {
         final int preset = mCaptioningManager.getRawUserStyle();
         mPreset.setValue(preset);
-
-        final float fontSize = mCaptioningManager.getFontScale();
-        mFontSize.setValue(Float.toString(fontSize));
 
         final ContentResolver cr = getContentResolver();
         final CaptioningManager.CaptionStyle attrs = CaptioningManager.CaptionStyle.getCustomStyle(
@@ -210,9 +185,6 @@ public class CaptionAppearanceFragment extends DashboardFragment
         final int windowColor = attrs.hasWindowColor() ? attrs.windowColor
                 : CaptioningManager.CaptionStyle.COLOR_UNSPECIFIED;
         parseColorOpacity(mWindowColor, mWindowOpacity, windowColor);
-
-        final String rawTypeface = attrs.mRawTypeface;
-        mTypeface.setValue(rawTypeface == null ? "" : rawTypeface);
     }
 
     /**
@@ -297,32 +269,7 @@ public class CaptionAppearanceFragment extends DashboardFragment
         } else if (mEdgeType == preference) {
             Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE, value);
         }
-        enableCaptioningManager();
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        final ContentResolver cr = getActivity().getContentResolver();
-        if (mTypeface == preference) {
-            Settings.Secure.putString(
-                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_TYPEFACE, (String) value);
-            enableCaptioningManager();
-        } else if (mFontSize == preference) {
-            Settings.Secure.putFloat(
-                    cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_FONT_SCALE,
-                    Float.parseFloat((String) value));
-            enableCaptioningManager();
-        }
-
-        return true;
-    }
-
-    private void enableCaptioningManager() {
-        if (mCaptioningManager.isEnabled()) {
-            return;
-        }
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, ON);
+        mCaptionHelper.setEnabled(true);
     }
 
     @Override

@@ -16,7 +16,11 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
+import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+
 import android.content.Context;
+import android.provider.Settings;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
 
@@ -43,6 +47,29 @@ public class CaptionHelper {
     public CaptionHelper(Context context) {
         mContext = context;
         mCaptioningManager = context.getSystemService(CaptioningManager.class);
+    }
+
+    /**
+     * Sets the user's preferred captioning enabled state.
+     *
+     * @param enabled Whether to enable or disable captioning manager.
+     */
+    public void setEnabled(boolean enabled) {
+        if (isEnabled() == enabled) {
+            return;
+        }
+
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED, enabled ? ON : OFF);
+    }
+
+    /**
+     * Gets if the captioning manager is enabled.
+     *
+     * @return True if the captioning manager is enabled, false otherwise.
+     */
+    public boolean isEnabled() {
+        return mCaptioningManager.isEnabled();
     }
 
     /**
