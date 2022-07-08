@@ -17,10 +17,18 @@
 package com.android.settings;
 
 import android.app.Application;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.provider.Settings;
+import android.util.FeatureFlagUtils;
+
+import androidx.window.embedding.SplitController;
 
 import com.android.settings.activityembedding.ActivityEmbeddingRulesController;
 import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settingslib.applications.AppIconCacheManager;
+
+import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -33,9 +41,14 @@ public class SettingsApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        final ActivityEmbeddingRulesController controller =
-                new ActivityEmbeddingRulesController(this);
-        controller.initRules();
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlagUtils.SETTINGS_SUPPORT_LARGE_SCREEN)
+                && SplitController.getInstance().isSplitSupported()) {
+            if (WizardManagerHelper.isUserSetupComplete(this)) {
+                new ActivityEmbeddingRulesController(this).initRules();
+            } else {
+                new DeviceProvisionedObserver().registerContentObserver();
+            }
+        }
     }
 
     public void setHomeActivity(SettingsHomepageActivity homeActivity) {
@@ -50,5 +63,31 @@ public class SettingsApplication extends Application {
     public void onLowMemory() {
         super.onLowMemory();
         AppIconCacheManager.getInstance().release();
+    }
+
+    private class DeviceProvisionedObserver extends ContentObserver {
+        private final Uri mDeviceProvisionedUri = Settings.Secure.getUriFor(
+                Settings.Secure.USER_SETUP_COMPLETE);
+
+        DeviceProvisionedObserver() {
+            super(null /* handler */);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri, int flags) {
+            if (!mDeviceProvisionedUri.equals(uri)) {
+                return;
+            }
+
+            SettingsApplication.this.getContentResolver().unregisterContentObserver(this);
+            new ActivityEmbeddingRulesController(SettingsApplication.this).initRules();
+        }
+
+        public void registerContentObserver() {
+            SettingsApplication.this.getContentResolver().registerContentObserver(
+                    mDeviceProvisionedUri,
+                    false /* notifyForDescendants */,
+                    this);
+        }
     }
 }
