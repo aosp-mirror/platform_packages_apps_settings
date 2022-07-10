@@ -61,9 +61,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
 
     private static final String TAG = "ToggleAccessibilityServicePreferenceFragment";
     private static final String KEY_HAS_LOGGED = "has_logged";
-    private AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
-
-    private static final String EMPTY_STRING = "";
+    private final AtomicBoolean mIsDialogShown = new AtomicBoolean(/* initialValue= */ false);
 
     private Dialog mWarningDialog;
     private ComponentName mTileComponentName;
@@ -85,7 +83,7 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater infalter) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Do not call super. We don't want to see the "Help & feedback" option on this page so as
         // not to confuse users who think they might be able to send feedback about a specific
         // accessibility service from this page.
@@ -126,11 +124,6 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (mStartTimeMillsForLogging > 0) {
             outState.putBoolean(KEY_HAS_LOGGED, mDisabledStateLogged);
@@ -148,10 +141,8 @@ public class ToggleAccessibilityServicePreferenceFragment extends
         AccessibilityUtils.setAccessibilityServiceState(getPrefContext(), toggledService, enabled);
     }
 
-    // IMPORTANT: Refresh the info since there are dynamically changing
-    // capabilities. For
-    // example, before JellyBean MR2 the user was granting the explore by touch
-    // one.
+    // IMPORTANT: Refresh the info since there are dynamically changing capabilities. For
+    // example, before JellyBean MR2 the user was granting the explore by touch one.
     @Nullable
     AccessibilityServiceInfo getAccessibilityServiceInfo() {
         final List<AccessibilityServiceInfo> infos = AccessibilityManager.getInstance(
@@ -452,6 +443,17 @@ public class ToggleAccessibilityServicePreferenceFragment extends
     public void onStop() {
         super.onStop();
         unregisterPackageRemoveReceiver();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 
     private void onAllowButtonFromEnableToggleClicked() {

@@ -49,9 +49,11 @@ import java.util.List;
 
 /** Fragment for providing open activity button. */
 public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeaturePreferenceFragment {
-    private static final String TAG = "LaunchA11yActivity";
+
+    private static final String TAG = "LaunchAccessibilityActivityPreferenceFragment";
     private static final String EMPTY_STRING = "";
     protected static final String KEY_LAUNCH_PREFERENCE = "launch_preference";
+
     private ComponentName mTileComponentName;
 
     @Override
@@ -70,10 +72,10 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-
         // Init new preference to replace the switch preference instead.
         initLaunchPreference();
+
+        final View view = super.onCreateView(inflater, container, savedInstanceState);
         removePreference(KEY_USE_SERVICE_PREFERENCE);
         return view;
     }
@@ -173,6 +175,7 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
     /** Customizes the order by preference key. */
     protected List<String> getPreferenceOrderList() {
         final List<String> lists = new ArrayList<>();
+        lists.add(KEY_TOP_INTRO_PREFERENCE);
         lists.add(KEY_ANIMATED_IMAGE);
         lists.add(KEY_LAUNCH_PREFERENCE);
         lists.add(KEY_GENERAL_CATEGORY);
@@ -229,5 +232,16 @@ public class LaunchAccessibilityActivityPreferenceFragment extends ToggleFeature
         }
 
         return settingsIntent;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        // TODO(b/171272809): Add back when controllers move to static type
+        return 0;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
     }
 }
