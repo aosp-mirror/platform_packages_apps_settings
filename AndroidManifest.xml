@@ -249,12 +249,14 @@
             android:name=".Settings$MobileNetworkActivity"
             android:label="@string/network_settings_title"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTop"
             android:exported="true">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.network.telephony.MobileNetworkSettings"/>
             <intent-filter android:priority="1">
                 <!-- Displays the MobileNetworkActivity and opt-in dialog for capability discovery. -->
+                <!-- Please sync with a list created within MobileNetworkIntentConverter.java -->
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.telephony.ims.action.SHOW_CAPABILITY_DISCOVERY_OPT_IN" />
                 <action android:name="android.settings.NETWORK_OPERATOR_SETTINGS" />
                 <action android:name="android.settings.DATA_ROAMING_SETTINGS" />
