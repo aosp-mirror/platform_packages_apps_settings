@@ -54,40 +54,47 @@
 
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_foreground_color"
-            android:title="@string/captioning_foreground_color"/>
+            android:title="@string/captioning_foreground_color"
+            settings:controller="com.android.settings.accessibility.CaptionForegroundColorController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_foreground_color"
             android:key="captioning_foreground_opacity"
-            android:title="@string/captioning_foreground_opacity"/>
+            android:title="@string/captioning_foreground_opacity"
+            settings:controller="com.android.settings.accessibility.CaptionForegroundOpacityController"/>
 
         <com.android.settings.accessibility.EdgeTypePreference
             android:key="captioning_edge_type"
-            android:title="@string/captioning_edge_type"/>
+            android:title="@string/captioning_edge_type"
+            settings:controller="com.android.settings.accessibility.CaptionEdgeTypeController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_edge_type"
             android:key="captioning_edge_color"
-            android:title="@string/captioning_edge_color"/>
+            android:title="@string/captioning_edge_color"
+            settings:controller="com.android.settings.accessibility.CaptionEdgeColorController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_background_color"
-            android:title="@string/captioning_background_color"/>
+            android:title="@string/captioning_background_color"
+            settings:controller="com.android.settings.accessibility.CaptionBackgroundColorController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_background_color"
             android:key="captioning_background_opacity"
-            android:title="@string/captioning_background_opacity"/>
+            android:title="@string/captioning_background_opacity"
+            settings:controller="com.android.settings.accessibility.CaptionBackgroundOpacityController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:key="captioning_window_color"
-            android:title="@string/captioning_window_color"/>
+            android:title="@string/captioning_window_color"
+            settings:controller="com.android.settings.accessibility.CaptionWindowColorController"/>
 
         <com.android.settings.accessibility.ColorPreference
             android:dependency="captioning_window_color"
             android:key="captioning_window_opacity"
-            android:title="@string/captioning_window_opacity"/>
-
+            android:title="@string/captioning_window_opacity"
+            settings:controller="com.android.settings.accessibility.CaptionWindowOpacityController"/>
     </PreferenceCategory>
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
