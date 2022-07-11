@@ -186,4 +186,19 @@ public class CaptionHelper {
         final CaptionStyle attrs = CaptionStyle.getCustomStyle(mContentResolver);
         return attrs.edgeType;
     }
+
+    /**
+     * Sets the caption raw user style.
+     *
+     * @param type The caption raw user style
+     */
+    public void setRawUserStyle(int type) {
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, type);
+    }
+
+    /** Returns the caption raw user style.*/
+    public int getRawUserStyle() {
+        return mCaptioningManager.getRawUserStyle();
+    }
 }

@@ -38,7 +38,8 @@
 
     <com.android.settings.accessibility.PresetPreference
         android:key="captioning_preset"
-        android:title="@string/captioning_preset"/>
+        android:title="@string/captioning_preset"
+        settings:controller="com.android.settings.accessibility.CaptionPresetController"/>
 
     <PreferenceCategory
         android:key="custom"

@@ -17,40 +17,41 @@
 package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.accessibility.CaptioningManager;
+import android.view.accessibility.CaptioningManager.CaptionStyle;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
-import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.Arrays;
+import java.util.List;
+
 /** Settings fragment containing font style of captioning properties. */
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
-public class CaptionAppearanceFragment extends DashboardFragment
-        implements OnValueChangedListener {
+public class CaptionAppearanceFragment extends DashboardFragment {
 
     private static final String TAG = "CaptionAppearanceFragment";
-    private static final String PREF_PRESET = "captioning_preset";
-    private static final String PREF_CUSTOM = "custom";
+    @VisibleForTesting
+    static final String PREF_CUSTOM = "custom";
+    @VisibleForTesting
+    static final List<String> CAPTIONING_FEATURE_KEYS = Arrays.asList(
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET
+    );
 
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    @VisibleForTesting
+    AccessibilitySettingsContentObserver mSettingsContentObserver;
     private CaptioningManager mCaptioningManager;
-    private CaptionHelper mCaptionHelper;
-
-    // Standard options.
-    private PresetPreference mPreset;
-
-    // Custom options.
     private PreferenceCategory mCustom;
-
-    private boolean mShowingCustom;
 
     @Override
     public int getMetricsCategory() {
@@ -60,14 +61,24 @@ public class CaptionAppearanceFragment extends DashboardFragment
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-
-        mCaptioningManager = (CaptioningManager) getSystemService(Context.CAPTIONING_SERVICE);
-        mCaptionHelper = new CaptionHelper(getContext());
-
-        initializeAllPreferences();
-        updateAllPreferences();
+        mCaptioningManager = getContext().getSystemService(CaptioningManager.class);
+        mSettingsContentObserver = new AccessibilitySettingsContentObserver(mHandler);
+        mSettingsContentObserver.registerKeysToObserverCallback(CAPTIONING_FEATURE_KEYS,
+                key -> refreshShowingCustom());
+        mCustom = findPreference(PREF_CUSTOM);
         refreshShowingCustom();
-        installUpdateListeners();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mSettingsContentObserver.register(getContext().getContentResolver());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getContext().getContentResolver().unregisterContentObserver(mSettingsContentObserver);
     }
 
     @Override
@@ -80,53 +91,15 @@ public class CaptionAppearanceFragment extends DashboardFragment
         return TAG;
     }
 
-    private void initializeAllPreferences() {
-
-        final Resources res = getResources();
-        final int[] presetValues = res.getIntArray(R.array.captioning_preset_selector_values);
-        final String[] presetTitles = res.getStringArray(R.array.captioning_preset_selector_titles);
-        mPreset = (PresetPreference) findPreference(PREF_PRESET);
-        mPreset.setValues(presetValues);
-        mPreset.setTitles(presetTitles);
-
-        mCustom = (PreferenceCategory) findPreference(PREF_CUSTOM);
-        mShowingCustom = true;
-    }
-
-    private void installUpdateListeners() {
-        mPreset.setOnValueChangedListener(this);
-    }
-
-    private void updateAllPreferences() {
-        final int preset = mCaptioningManager.getRawUserStyle();
-        mPreset.setValue(preset);
-    }
-
-    private void refreshShowingCustom() {
-        final boolean customPreset =
-                mPreset.getValue() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
-        if (!customPreset && mShowingCustom) {
-            getPreferenceScreen().removePreference(mCustom);
-            mShowingCustom = false;
-        } else if (customPreset && !mShowingCustom) {
-            getPreferenceScreen().addPreference(mCustom);
-            mShowingCustom = true;
-        }
-    }
-
-    @Override
-    public void onValueChanged(ListDialogPreference preference, int value) {
-        final ContentResolver cr = getActivity().getContentResolver();
-        if (mPreset == preference) {
-            Settings.Secure.putInt(cr, Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, value);
-            refreshShowingCustom();
-        }
-        mCaptionHelper.setEnabled(true);
-    }
-
     @Override
     public int getHelpResource() {
         return R.string.help_url_caption;
+    }
+
+    private void refreshShowingCustom() {
+        final boolean isCustomPreset =
+                mCaptioningManager.getRawUserStyle() == CaptionStyle.PRESET_CUSTOM;
+        mCustom.setVisible(isCustomPreset);
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

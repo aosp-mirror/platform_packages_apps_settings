@@ -24,6 +24,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.view.View;
@@ -61,12 +62,14 @@ public class CaptionHelperTest {
     private View mPreviewWindow;
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
+    private ContentResolver mContentResolver;
     private CaptionHelper mCaptionHelper;
 
     @Before
     public void setUp() {
         when(mContext.getSystemService(CaptioningManager.class)).thenReturn(mCaptioningManager);
         mCaptionHelper = new CaptionHelper(mContext);
+        mContentResolver = mContext.getContentResolver();
     }
 
     @Test
@@ -169,5 +172,14 @@ public class CaptionHelperTest {
 
         final int edgeType = mCaptionHelper.getEdgeType();
         assertThat(edgeType).isEqualTo(CaptionStyle.EDGE_TYPE_OUTLINE);
+    }
+
+    @Test
+    public void setRawUserStyle_shouldReturnSpecificStyle() {
+        mCaptionHelper.setRawUserStyle(CaptionStyle.PRESET_CUSTOM);
+
+        final int style = Settings.Secure.getInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_CAPTIONING_PRESET, 0);
+        assertThat(style).isEqualTo(CaptionStyle.PRESET_CUSTOM);
     }
 }
