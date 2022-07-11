@@ -22,6 +22,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -102,8 +103,8 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         if (subInfo == null) {
             return "";
         }
-        final String carrierName = subInfo.getCarrierName().toString();
-        return carrierName;
+        CharSequence carrierName = subInfo.getCarrierName();
+        return TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
     }
 
     @Override
