@@ -137,6 +137,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        onProcessArguments(getArguments());
         // Restore the user shortcut type and tooltip.
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(KEY_SAVED_USER_SHORTCUT_TYPE)) {
@@ -182,9 +184,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // Need to be called as early as possible. Protected variables will be assigned here.
-        onProcessArguments(getArguments());
-
         initTopIntroPreference();
         initAnimatedImagePreference();
         initToggleServiceSwitchPreference();
@@ -202,6 +201,8 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
             removeDialog(DialogEnums.EDIT_SHORTCUT);
             mShortcutPreference.setSummary(getShortcutTypeSummary(getPrefContext()));
         };
+
+        updatePreferenceOrder();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -234,8 +235,6 @@ public abstract class ToggleFeaturePreferenceFragment extends DashboardFragment
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final SettingsMainSwitchBar switchBar = activity.getSwitchBar();
         switchBar.hide();
-
-        updatePreferenceOrder();
 
         // Reshow tooltip when activity recreate, such as rotate device.
         if (mNeedsQSTooltipReshow) {
